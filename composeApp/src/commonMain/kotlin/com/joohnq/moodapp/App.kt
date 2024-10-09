@@ -3,17 +3,14 @@ package com.joohnq.moodapp
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
-import com.joohnq.moodapp.welcome.WelcomeScreen
-import org.koin.compose.KoinApplication
-import org.koin.dsl.module
+import com.joohnq.moodapp.onboarding.OnboardingScreen
+import org.koin.compose.KoinContext
 
 @Composable
 fun App() {
-    KoinApplication(application = {
-        modules(module{})
-    }) {
+    KoinContext {
         MaterialTheme {
-            Navigator(screen = WelcomeScreen())
+            Navigator(screen = OnboardingScreen())
         }
     }
 }

@@ -1,11 +1,10 @@
 package com.joohnq.moodapp.di
 
-//import org.koin.dsl.module
-//
-//fun commonModule() = module{
-//
-//}
-//
-//fun platformModule() = module{
-//
-//}
+import org.koin.core.module.Module
+import org.koin.dsl.module
+
+expect val platformModule: Module
+
+val sharedModule = module {
+
+}

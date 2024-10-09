@@ -31,6 +31,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -51,9 +54,10 @@ kotlin {
             implementation(libs.voyager.koin)
 
             implementation(libs.koin.compose)
-            (libs.koin.core)
+            api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
             implementation("co.touchlab:stately-common:2.0.5")
             implementation("co.touchlab:stately-concurrent-collections:2.0.6")
         }

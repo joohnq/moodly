@@ -72,4 +72,8 @@ object Colors{
     val Purple30 = Color(0xFFa18fff)
     val Purple20 = Color(0xFFcbc2ff)
     val Purple10 = Color(0xFFedebff)
+
+    val Alpha100 = Color(0xFF706A65)
+    val Alpha48 = Color(0xFF938F8C)
+    val Alpha32 = Color(0xFFB7B4B2)
 }

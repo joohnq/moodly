@@ -24,9 +24,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.CustomTextStyle
+import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.Drawables
-import com.joohnq.moodapp.ButtonWithArrowRight
+import com.joohnq.moodapp.components.ButtonWithArrowRight
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

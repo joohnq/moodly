@@ -1,6 +1,8 @@
-package com.joohnq.moodapp
+package com.joohnq.moodapp.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -17,6 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.entities.IconProps
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -50,12 +55,20 @@ fun ButtonTextWithIcon(
 }
 
 @Composable
-fun ButtonWithIcon(modifier: Modifier, icon: IconProps, colors: ButtonColors, onClick: () -> Unit) {
+fun ButtonWithIcon(
+    modifier: Modifier,
+    icon: IconProps,
+    colors: ButtonColors,
+    borderStroke: BorderStroke,
+    onClick: () -> Unit
+) {
     Button(
         modifier = modifier,
         colors = colors,
         shape = CircleShape,
-        onClick = onClick
+        onClick = onClick,
+        contentPadding = PaddingValues(0.dp),
+        border = borderStroke
     ) {
         Icon(
             painter = painterResource(icon.icon),
@@ -85,7 +98,7 @@ fun ButtonWithArrowRight(text: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun ButtonWithArrowOpen(onClick: () -> Unit){
+fun ButtonWithArrowOpen(onClick: () -> Unit) {
     ButtonWithIcon(
         modifier = Modifier.size(48.dp),
         colors = ButtonColors(
@@ -97,8 +110,9 @@ fun ButtonWithArrowOpen(onClick: () -> Unit){
         icon = IconProps(
             icon = Drawables.Icons.ArrowOpen,
             tint = Colors.Brown80,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
         ),
+        borderStroke = BorderStroke(1.5.dp, color = Colors.Brown80),
         onClick = onClick
     )
 }

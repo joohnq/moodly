@@ -3,7 +3,6 @@ package com.joohnq.moodapp.welcome
 import androidx.annotation.ColorLong
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,11 +32,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.CustomTextStyle
 import com.joohnq.moodapp.Drawables
-import com.joohnq.moodapp.getPlatform
+import com.joohnq.moodapp.ScreenDimensions
+import com.joohnq.moodapp.components.CustomTextStyle
+import com.joohnq.moodapp.components.TextWithBackground
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 
 @Composable
 fun MockScreen(
@@ -51,6 +52,7 @@ fun MockScreen(
     @ColorLong spanColor: Color,
     onNext: () -> Unit
 ) {
+    val screenDimensions: ScreenDimensions = koinInject()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -77,16 +79,14 @@ fun MockScreen(
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = getPlatform().statusBarHeight.dp),
+                    .padding(top = screenDimensions.statusBarHeight.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
+                TextWithBackground(
                     "Step $step",
-                    modifier = Modifier
-                        .border(2.dp, color = Colors.Brown80, shape = CircleShape)
-                        .background(color = Colors.Transparent, shape = CircleShape)
-                        .padding(vertical = 9.dp, horizontal = 16.dp),
-                    style = CustomTextStyle.TextStyleWelcomeScreenIndicatorIndex().copy(color = Colors.Brown80)
+                    borderColor = Colors.Brown80,
+                    backgroundColor = Colors.Transparent,
+                    textColor = Colors.Brown80
                 )
             }
             Column(
@@ -113,7 +113,10 @@ fun MockScreen(
                             withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitle()) {
                                 append(firstTitle)
                             }
-                        withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitleWord().copy(color = spanColor)) {
+                        withStyle(
+                            style = CustomTextStyle.TextStyleWelcomeScreenTitleWord()
+                                .copy(color = spanColor)
+                        ) {
                             append(span)
                         }
                         if (secondTitle != null)

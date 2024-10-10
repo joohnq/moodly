@@ -28,13 +28,12 @@ import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.printLn
 import com.joohnq.moodapp.toDegrees
-import com.joohnq.moodapp.toPositive
 import com.joohnq.moodapp.toRadians
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-fun findIndexInRange(value: Int, ranges: List<Map<Int, Int>>): Int {
+private fun findIndexInRange(value: Int, ranges: List<Map<Int, Int>>): Int {
     for ((index, range) in ranges.withIndex()) {
         val (start, end) = range.entries.first().toPair()
 
@@ -46,36 +45,39 @@ fun findIndexInRange(value: Int, ranges: List<Map<Int, Int>>): Int {
 }
 
 @Composable
-fun InfiniteCarousel(moods: List<Mood>, selectedMood: Int) {
-    var rotation by remember { mutableStateOf(0f) }
-    val painterResources: List<VectorPainter> = moods.map {
-        rememberVectorPainter(it.imageVector)
-    }
+fun MoodRoulette(moods: List<Mood>, setSelectedMood: (Int) -> Unit) {
+    val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Mood.TargetVectorPainter)
     val totalSlices = moods.size
     val limitedAngle = 360f * (PI / 180) // 6,283185307179586
+    val limitedAngleForSlice =
+        limitedAngle / totalSlices // 0,6283185307179586 // 0,3141592653589793(HALF)
+    val initialRotation by remember { mutableStateOf(((limitedAngle / 4) - (limitedAngleForSlice / 2)).toFloat()) }
+    var rotation by remember { mutableStateOf(initialRotation) } // (6,283185307179586 / 4) - (0,6283185307179586 / 2) INITIAL VALUE = 1.2566371 LIKE 0
+    // 6,283185307179586 - 1,2566371 MAX VALUE = 5,02654820718 // RANGE = 5,02654820718 - 1,2566371 = 3,7699111072
     val sliceAngle = limitedAngle / totalSlices // 0,6283185307179586
-    var rounds by remember { mutableStateOf(0.0) }
-    var roundsDecimals by remember { mutableStateOf(0.0) }
-    var currentPosition by remember { mutableStateOf(18) }
+    var currentPosition by remember { mutableStateOf(0) }
+    var r by remember { mutableStateOf(0f) }
+
     val range = listOf(
-        mapOf(0 to 36),
-        mapOf(37 to 72),
-        mapOf(73 to 108),
-        mapOf(109 to 144),
-        mapOf(145 to 180),
-        mapOf(181 to 216),
-        mapOf(217 to 252),
-        mapOf(253 to 288),
-        mapOf(289 to 324),
-        mapOf(325 to 360)
+        mapOf(-18 to 18),
+        mapOf(19 to 54),
+        mapOf(55 to 90),
+        mapOf(91 to 126),
+        mapOf(127 to 162),
+        mapOf(163 to 198),
+        mapOf(199 to 234),
+        mapOf(235 to 270),
+        mapOf(271 to 306),
+        mapOf(307 to 342)
     )
 
     LaunchedEffect(currentPosition) {
         val index = findIndexInRange(currentPosition, range)
+        setSelectedMood(index)
         printLn {
             printLn("currentPosition $currentPosition")
-//            printLn("index ${index + 2}")
+            printLn("index $index")
         }
     }
 
@@ -84,32 +86,20 @@ fun InfiniteCarousel(moods: List<Mood>, selectedMood: Int) {
             .fillMaxSize()
             .scale(1.5f)
             .pointerInput(Unit) {
-                detectDragGestures { _, dragAmount ->
-                    if (dragAmount.x < 0) {
+                detectDragGestures(onDragEnd = { printLn("End") }) { _, dragAmount ->
+                    printLn {
                         rotation += dragAmount.x * 0.005f
-                        printLn("rotation+ $rotation")
-                        rounds = rotation / limitedAngle.toPositive()
-                        printLn("rounds+ $rounds")
-                        roundsDecimals = rounds - rounds.toInt()
-                        printLn("roundsDecimals+ $roundsDecimals")
-                        currentPosition =
-                            (((roundsDecimals * 10) * 36) + 18).toInt().coerceIn(0, 360)
-                        printLn("-----------")
-                    } else {
-                        rotation += dragAmount.x.toPositive() * -0.005f
-                        printLn("rotation- $rotation")
-                        rounds = rotation / limitedAngle
-                        printLn("rounds- $rounds")
-                        roundsDecimals = rounds - rounds.toInt()
-                        printLn("roundsDecimals- $roundsDecimals")
-                        currentPosition =
-                            (360 - (((roundsDecimals * 10) * 36) - 18)).toInt().coerceIn(0, 360)
+                        r = rotation - initialRotation
+                        printLn("r $r")
+                        val percent = r % limitedAngle
+                        printLn("percent $percent")
+                        val angle =
+                            if (percent < 0) (percent * -1 * 360 / limitedAngle) else (360 - (percent * 360 / limitedAngle))
+                        currentPosition = angle.toInt()
+                            .coerceIn(0, 360)
+                        if (percent < 0) (percent * -1 * 360 / limitedAngle).toInt()
+                            .coerceIn(0, 360) else (360 - (percent * 360 / limitedAngle))
                         printLn("currentPosition $currentPosition")
-                        printLn("-----------")
-
-                        //Se for ficando negativo que tem que aumentar 0 - 360
-                        // Se for ficando positivo tem que diminuir 360 - 0
-                        //Tem q começar com 18 graus e começar no index 2
                     }
                 }
             }
@@ -132,8 +122,6 @@ fun DrawScope.drawPizza(
 ) {
     for (i in moods.indices) {
         val startAngle = rotation + sliceAngle * i
-//        printLn("startAngle$startAngle")
-//        printLn("----------")
         val mood = moods[i]
         drawSlice(
             color = mood.backgroundColor,

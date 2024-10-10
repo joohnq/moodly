@@ -13,11 +13,10 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.components.ButtonWithArrowOpen
 import com.joohnq.moodapp.components.CustomTextStyle
-import com.joohnq.moodapp.components.InfiniteCarousel
+import com.joohnq.moodapp.components.MoodRoulette
 import com.joohnq.moodapp.components.MoodFace
 import com.joohnq.moodapp.components.TextWithBackground
 import com.joohnq.moodapp.entities.Mood
@@ -45,22 +44,27 @@ fun Double.toDp(): Dp =
 @Composable
 @Preview
 fun OnboardingMoodRateScreen() {
-    val mood = remember { Mood.Neutral }
     val moods =
-        remember { listOf(Mood.Depressed, Mood.Sad, Mood.Neutral, Mood.Happy, Mood.Overjoyed) }
-    val selectedMood = remember { mutableStateOf(2) }
-    val range = listOf(
-        mapOf(0 to 36),
-        mapOf(37 to 72),
-        mapOf(73 to 108),
-        mapOf(109 to 144),
-        mapOf(145 to 180),
-        mapOf(181 to 216),
-        mapOf(217 to 252),
-        mapOf(253 to 288),
-        mapOf(289 to 324),
-        mapOf(325 to 360)
-    )
+        remember {
+            listOf(
+                Mood.Neutral,
+                Mood.Happy,
+                Mood.Overjoyed,
+                Mood.Depressed,
+                Mood.Sad,
+                Mood.Neutral,
+                Mood.Happy,
+                Mood.Overjoyed,
+                Mood.Depressed,
+                Mood.Sad,
+            )
+        }
+    val (mood, setMood) = remember { mutableStateOf<Mood>(Mood.Neutral) }
+    val (selectedMood, setSelectedMood) = remember { mutableStateOf(2) }
+
+    LaunchedEffect(selectedMood) {
+        setMood(moods[selectedMood])
+    }
 
     Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Colors.Brown10) { padding ->
         Column(
@@ -105,18 +109,7 @@ fun OnboardingMoodRateScreen() {
     BoxWithConstraints {
         val screenWidth = maxWidth
         val screenHeight = maxHeight
-//        printLn("maxWidth $maxWidth") // 392
-//        printLn("maxHeight $maxHeight") // 781
-//        printLn("--------------")
-
-        val carouselOffset = screenHeight - (screenWidth / 2)// 2214 - (1080 / 2) = 1404
-//    printLn("screenDimensions.width = " + screenDimensions.width)
-//    printLn("screenDimensions.width.dp = " + screenDimensions.width.toDp())
-//    printLn("screenDimensions.height = " + screenDimensions.height)
-//    printLn("screenDimensions.height.dp = " + screenDimensions.height.toDp())
-//    printLn("screenDimensions.carouselOffset = $carouselOffset")
-//    printLn("screenDimensions.carouselOffset.dp = " + carouselOffset.toDp())
-//    printLn("--------------")
+        val carouselOffset = screenHeight - (screenWidth / 2)
 
         Box(
             modifier = Modifier
@@ -124,7 +117,7 @@ fun OnboardingMoodRateScreen() {
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            InfiniteCarousel(moods + moods, selectedMood.value)
+            MoodRoulette(moods, setSelectedMood = setSelectedMood)
         }
     }
 }

@@ -7,7 +7,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,6 +16,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
@@ -45,7 +45,7 @@ private fun findIndexInRange(value: Int, ranges: List<Map<Int, Int>>): Int {
 }
 
 @Composable
-fun MoodRoulette(moods: List<Mood>, setSelectedMood: (Int) -> Unit) {
+fun MoodRoulette(moods: List<Mood>, selectedMood: Int, setSelectedMood: (Int) -> Unit) {
     val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Mood.TargetVectorPainter)
     val totalSlices = moods.size
@@ -53,11 +53,13 @@ fun MoodRoulette(moods: List<Mood>, setSelectedMood: (Int) -> Unit) {
     val limitedAngleForSlice =
         limitedAngle / totalSlices // 0,6283185307179586 // 0,3141592653589793(HALF)
     val initialRotation by remember { mutableStateOf(((limitedAngle / 4) - (limitedAngleForSlice / 2)).toFloat()) }
-    var rotation by remember { mutableStateOf(initialRotation) } // (6,283185307179586 / 4) - (0,6283185307179586 / 2) INITIAL VALUE = 1.2566371 LIKE 0
+    var rotation by remember { mutableStateOf(0f) } // (6,283185307179586 / 4) - (0,6283185307179586 / 2) INITIAL VALUE = 1.2566371 LIKE 0
+    var percent by remember { mutableStateOf(0.0) } // (6,283185307179586 / 4) - (0,6283185307179586 / 2) INITIAL VALUE = 1.2566371 LIKE 0
     // 6,283185307179586 - 1,2566371 MAX VALUE = 5,02654820718 // RANGE = 5,02654820718 - 1,2566371 = 3,7699111072
     val sliceAngle = limitedAngle / totalSlices // 0,6283185307179586
     var currentPosition by remember { mutableStateOf(0) }
     var r by remember { mutableStateOf(0f) }
+    var currentIndex by remember { mutableStateOf(selectedMood) }
 
     val range = listOf(
         mapOf(-18 to 18),
@@ -72,35 +74,30 @@ fun MoodRoulette(moods: List<Mood>, setSelectedMood: (Int) -> Unit) {
         mapOf(307 to 342)
     )
 
-    LaunchedEffect(currentPosition) {
-        val index = findIndexInRange(currentPosition, range)
-        setSelectedMood(index)
-        printLn {
-            printLn("currentPosition $currentPosition")
-            printLn("index $index")
-        }
-    }
+    val range2 = mutableListOf<Triple<Float, Float, Float>>()
 
     Canvas(
         modifier = Modifier
             .fillMaxSize()
             .scale(1.5f)
             .pointerInput(Unit) {
-                detectDragGestures(onDragEnd = { printLn("End") }) { _, dragAmount ->
+                detectDragGestures(onDragEnd = {
+                }) { change, dragAmount ->
                     printLn {
                         rotation += dragAmount.x * 0.005f
                         r = rotation - initialRotation
-                        printLn("r $r")
-                        val percent = r % limitedAngle
-                        printLn("percent $percent")
+                        percent = r % limitedAngle
                         val angle =
                             if (percent < 0) (percent * -1 * 360 / limitedAngle) else (360 - (percent * 360 / limitedAngle))
                         currentPosition = angle.toInt()
                             .coerceIn(0, 360)
                         if (percent < 0) (percent * -1 * 360 / limitedAngle).toInt()
                             .coerceIn(0, 360) else (360 - (percent * 360 / limitedAngle))
-                        printLn("currentPosition $currentPosition")
+                        val index = findIndexInRange(currentPosition, range)
+                        setSelectedMood(index)
+                        currentIndex = index
                     }
+                    change.consume()
                 }
             }
     ) {
@@ -109,7 +106,18 @@ fun MoodRoulette(moods: List<Mood>, setSelectedMood: (Int) -> Unit) {
             rotation,
             painterResources + painterResources,
             moods
-        )
+        ) { startAngle ->
+            val initialAngle = startAngle - initialRotation
+            val endAngle = initialAngle + limitedAngleForSlice
+            range2.add(
+                Triple(
+                    initialAngle,
+                    (initialAngle + (limitedAngleForSlice / 2)).toFloat(),
+                    endAngle.toFloat()
+                )
+            )
+        }
+        drawCenterCircle(radius = 270f, backgroundColor = Colors.Alpha15)
         drawCenterCircle(targetVectorPainter)
     }
 }
@@ -118,13 +126,15 @@ fun DrawScope.drawPizza(
     sliceAngle: Float,
     rotation: Float,
     painterResources: List<VectorPainter>,
-    moods: List<Mood>
+    moods: List<Mood>,
+    onAddMood: (Float) -> Unit = {}
 ) {
     for (i in moods.indices) {
         val startAngle = rotation + sliceAngle * i
         val mood = moods[i]
         drawSlice(
-            color = mood.backgroundColor,
+            color = mood.color,
+            backgroundColor = mood.backgroundColor,
             startAngle = toDegrees(startAngle.toDouble()).toFloat(),
             sweepAngle = toDegrees(sliceAngle.toDouble()).toFloat(),
             useCenter = true,
@@ -132,11 +142,13 @@ fun DrawScope.drawPizza(
             size = size,
             vectorPainter = painterResources[i]
         )
+        onAddMood(startAngle)
     }
 }
 
 fun DrawScope.drawSlice(
     color: Color,
+    backgroundColor: Color,
     startAngle: Float,
     sweepAngle: Float,
     useCenter: Boolean,
@@ -153,7 +165,7 @@ fun DrawScope.drawSlice(
     val iconY = centerY + (radius * sin(angleInRadians)).toFloat() - iconSize.height / 2
 
     drawArc(
-        color = color,
+        color = backgroundColor,
         startAngle = startAngle,
         sweepAngle = sweepAngle,
         useCenter = useCenter,
@@ -163,7 +175,7 @@ fun DrawScope.drawSlice(
     drawIntoCanvas {
         translate(left = iconX, top = iconY - 20f) {
             with(vectorPainter) {
-                draw(iconSize)
+                draw(size = iconSize, colorFilter = ColorFilter.tint(color))
             }
         }
     }
@@ -189,4 +201,14 @@ fun DrawScope.drawCenterCircle(vectorPainter: VectorPainter, iconSize: Size = Si
             }
         }
     }
+}
+
+fun DrawScope.drawCenterCircle(radius: Float, backgroundColor: Color) {
+    val center = Offset(size.width / 2, size.height / 2)
+
+    drawCircle(
+        color = backgroundColor,
+        radius = radius,
+        center = center
+    )
 }

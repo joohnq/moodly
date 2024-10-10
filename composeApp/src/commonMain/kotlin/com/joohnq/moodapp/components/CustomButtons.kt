@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
@@ -26,6 +28,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ButtonTextWithIcon(
+    modifier: Modifier = Modifier,
     text: String,
     icon: IconProps,
     colors: ButtonColors,
@@ -33,7 +36,7 @@ fun ButtonTextWithIcon(
     onClick: () -> Unit
 ) {
     Button(
-        modifier = Modifier.height(56.dp),
+        modifier = modifier.height(56.dp),
         colors = colors,
         shape = shape,
         onClick = onClick
@@ -80,8 +83,9 @@ fun ButtonWithIcon(
 }
 
 @Composable
-fun ButtonWithArrowRight(text: String, onClick: () -> Unit) {
+fun ButtonWithArrowRight(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
     ButtonTextWithIcon(
+        modifier = modifier,
         text = text,
         colors = ButtonDefaults.buttonColors(
             containerColor = Colors.Brown80,
@@ -115,4 +119,25 @@ fun ButtonWithArrowOpen(onClick: () -> Unit) {
         borderStroke = BorderStroke(1.5.dp, color = Colors.Brown80),
         onClick = onClick
     )
+}
+
+@Composable
+fun ButtonWithText(
+    modifier: Modifier = Modifier,
+    text: String,
+    colors: ButtonColors,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth().height(56.dp),
+        shape = CircleShape,
+        colors = colors
+    ) {
+        Text(
+            text,
+            style = CustomTextStyle.TextStyleWelcomeScreenButton(),
+            textAlign = TextAlign.Center
+        )
+    }
 }

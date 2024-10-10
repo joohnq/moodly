@@ -34,7 +34,6 @@ object CustomTextStyle {
     @Composable
     fun TextStyleWelcomeScreenButton() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
-        color = Colors.White,
         fontSize = 18.sp
     )
 

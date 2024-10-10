@@ -24,9 +24,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.components.ButtonWithArrowRight
+import com.joohnq.moodapp.components.CustomTextStyle
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -70,7 +70,7 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
-        ButtonWithArrowRight("Get Started", onGetStarted)
+        ButtonWithArrowRight(text = "Get Started", onClick = onGetStarted)
         Spacer(modifier = Modifier.height(30.dp))
         Row(
             horizontalArrangement = Arrangement.Center,

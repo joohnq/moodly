@@ -15,6 +15,7 @@ import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
 import moodapp.composeapp.generated.resources.mood_overjoyed
 import moodapp.composeapp.generated.resources.mood_sad
+import moodapp.composeapp.generated.resources.onboarding_sought_professional_help_image
 import moodapp.composeapp.generated.resources.welcome_community_image
 import moodapp.composeapp.generated.resources.welcome_first_screen_image
 import moodapp.composeapp.generated.resources.welcome_health_state_image
@@ -33,6 +34,8 @@ object Drawables {
         val WelcomeIntelligentImage = Res.drawable.welcome_intelligent_image
         val WelcomeResourcesImage = Res.drawable.welcome_resources_image
         val WelcomeCommunityImage = Res.drawable.welcome_community_image
+
+        val OnboardingSoughtProfessionalHelp = Res.drawable.onboarding_sought_professional_help_image
     }
 
     object Mood {

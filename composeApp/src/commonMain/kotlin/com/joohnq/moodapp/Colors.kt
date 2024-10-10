@@ -76,4 +76,5 @@ object Colors{
     val Alpha100 = Color(0xFF706A65)
     val Alpha48 = Color(0xFF938F8C)
     val Alpha32 = Color(0xFFB7B4B2)
+    val Alpha15 = Color(0x26000000)
 }

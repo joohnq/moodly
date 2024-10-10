@@ -23,16 +23,16 @@ sealed class Mood(
             image = Drawables.Mood.Depressed,
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = "Depressed",
-            backgroundColor = Colors.Purple20,
-            color = Colors.Purple80
+            backgroundColor = Colors.Purple30,
+            color = Colors.Purple50
         )
 
     data object Sad : Mood(
         image = Drawables.Mood.Sad,
         imageVector = Drawables.Mood.SadVectorPainter,
         text = "Sad",
-        backgroundColor = Colors.Orange30,
-        color = Colors.Orange80
+        backgroundColor = Colors.Orange40,
+        color = Colors.Orange70
     )
 
     data object Neutral :
@@ -40,7 +40,7 @@ sealed class Mood(
             image = Drawables.Mood.Neutral,
             imageVector = Drawables.Mood.NeutralVectorPainter,
             text = "Neutral",
-            backgroundColor = Colors.Brown40,
+            backgroundColor = Colors.Brown60,
             color = Colors.Brown80
         )
 
@@ -48,8 +48,8 @@ sealed class Mood(
         image = Drawables.Mood.Happy,
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = "Happy",
-        backgroundColor = Colors.Yellow20,
-        color = Colors.Yellow80
+        backgroundColor = Colors.Yellow40,
+        color = Colors.Yellow70
     )
 
     data object Overjoyed :
@@ -57,7 +57,7 @@ sealed class Mood(
             image = Drawables.Mood.Overjoyed,
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = "Overjoyed",
-            backgroundColor = Colors.Green30,
-            color = Colors.Green80
+            backgroundColor = Colors.Green50,
+            color = Colors.Green70
         )
 }

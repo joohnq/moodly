@@ -133,8 +133,8 @@ fun DrawScope.drawPizza(
         val startAngle = rotation + sliceAngle * i
         val mood = moods[i]
         drawSlice(
-            color = mood.color,
-            backgroundColor = mood.backgroundColor,
+            color = mood.rouletteFaceColor,
+            backgroundColor = mood.rouletteBackgroundColor,
             startAngle = toDegrees(startAngle.toDouble()).toFloat(),
             sweepAngle = toDegrees(sliceAngle.toDouble()).toFloat(),
             useCenter = true,

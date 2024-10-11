@@ -73,10 +73,22 @@ object CustomTextStyle {
     )
 
     @Composable
-    fun TextStyleOnboardingScreenMood () = TextStyle(
+    fun TextStyleOnboardingScreenMood() = TextStyle(
         fontFamily = FontFamily.Urbanist.SemiBold(),
         color = Colors.Alpha100,
         fontSize = 20.sp,
         textAlign = TextAlign.Center
+    )
+
+    @Composable
+    fun TextStyleOnboardingSleepQualityTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 18.sp,
+    )
+
+    @Composable
+    fun TextStyleOnboardingSleepQualitySubTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 12.sp,
     )
 }

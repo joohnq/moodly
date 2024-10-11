@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -69,7 +71,8 @@ fun OnboardingMoodRateScreen() {
 
     Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Colors.Brown10) { padding ->
         Column(
-            modifier = Modifier.padding(padding).fillMaxSize().padding(horizontal = 16.dp),
+            modifier = Modifier.padding(padding).fillMaxSize().padding(horizontal = 16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             OnboardingTopBar(1)
@@ -84,7 +87,10 @@ fun OnboardingMoodRateScreen() {
                 style = CustomTextStyle.TextStyleOnboardingScreenMood()
             )
             Spacer(modifier = Modifier.height(24.dp))
-            MoodFace(mood)
+            MoodFace(
+                modifier = Modifier.size(120.dp),
+                mood = mood,
+            )
             Spacer(modifier = Modifier.height(24.dp))
             ButtonWithArrowRight(
                 text = "Next",

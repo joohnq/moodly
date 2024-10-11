@@ -6,7 +6,7 @@ import org.jetbrains.compose.resources.DrawableResource
 
 data class IconProps(
     val icon: DrawableResource,
-    val tint: Color,
-    val modifier: Modifier,
+    val tint: Color = Color.Unspecified,
+    val modifier: Modifier = Modifier,
     val contentDescription: String? = null
 )

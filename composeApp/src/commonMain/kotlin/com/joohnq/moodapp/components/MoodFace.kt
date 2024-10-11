@@ -13,16 +13,16 @@ import com.joohnq.moodapp.entities.Mood
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MoodFace(mood: Mood) {
+fun MoodFace(modifier: Modifier = Modifier, mood: Mood) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.size(120.dp)
+        modifier = modifier
             .background(color = mood.backgroundColor, shape = CircleShape)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
-            modifier = Modifier.size(120.dp),
+            modifier = modifier,
             tint = mood.color
         )
     }
@@ -33,13 +33,13 @@ fun MoodFaceRoulette(mood: Mood) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.size(150.dp)
-            .background(color = mood.backgroundColor)
+            .background(color = mood.rouletteBackgroundColor)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
             modifier = Modifier.size(120.dp),
-            tint = mood.color
+            tint = mood.rouletteFaceColor
         )
     }
 }

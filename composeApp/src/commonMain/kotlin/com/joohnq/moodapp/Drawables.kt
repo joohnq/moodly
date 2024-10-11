@@ -10,6 +10,11 @@ import com.joohnq.moodapp.icons.Target
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_open
+import moodapp.composeapp.generated.resources.ic_check
+import moodapp.composeapp.generated.resources.ic_close
+import moodapp.composeapp.generated.resources.ic_question
+import moodapp.composeapp.generated.resources.ic_question
+import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.mood_depressed
 import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
@@ -26,6 +31,10 @@ object Drawables {
     object Icons {
         val ArrowOpen = Res.drawable.ic_arrow_open
         val Arrow = Res.drawable.ic_arrow
+        val Check = Res.drawable.ic_check
+        val Close = Res.drawable.ic_close
+        val Question = Res.drawable.ic_question
+        val Resize = Res.drawable.ic_resize
     }
 
     object Images {

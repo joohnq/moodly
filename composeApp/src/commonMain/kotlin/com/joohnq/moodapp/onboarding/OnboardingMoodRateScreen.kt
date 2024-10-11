@@ -21,8 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -32,15 +30,11 @@ import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.components.MoodFace
 import com.joohnq.moodapp.components.MoodRoulette
 import com.joohnq.moodapp.entities.Mood
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.mood_rate_desc
+import moodapp.composeapp.generated.resources.mood_rate_title
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-@Composable
-fun Int.toDp(): Dp =
-    with(LocalDensity.current) { this@toDp.toDp() }
-
-@Composable
-fun Double.toDp(): Dp =
-    this@toDp.toInt().toDp()
 
 @Composable
 @Preview
@@ -78,12 +72,12 @@ fun OnboardingMoodRateScreen() {
             OnboardingTopBar(1)
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                "How would you describe your mood?",
+                stringResource(Res.string.mood_rate_title),
                 style = CustomTextStyle.TextStyleOnboardingScreenTitle()
             )
             Spacer(modifier = Modifier.height(48.dp))
             Text(
-                "I Feel ${mood.text}",
+                stringResource(Res.string.mood_rate_desc, mood.text),
                 style = CustomTextStyle.TextStyleOnboardingScreenMood()
             )
             Spacer(modifier = Modifier.height(24.dp))

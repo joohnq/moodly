@@ -33,13 +33,21 @@ import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.components.ButtonWithArrowRight
 import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.components.TextRadioButton
-import com.joohnq.moodapp.entities.Mood
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.continue_word
+import moodapp.composeapp.generated.resources.indeterminate
+import moodapp.composeapp.generated.resources.no
+import moodapp.composeapp.generated.resources.sought_professional_help_title
+import moodapp.composeapp.generated.resources.yes
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
-sealed class OnboardingSoughtProfessionalHelpOptions(val text: String) {
-    data object Yes : OnboardingSoughtProfessionalHelpOptions("Yes")
-    data object No : OnboardingSoughtProfessionalHelpOptions("No")
-    data object Indeterminate : OnboardingSoughtProfessionalHelpOptions("Indeterminate")
+sealed class OnboardingSoughtProfessionalHelpOptions(open val text: StringResource) {
+    data object Yes : OnboardingSoughtProfessionalHelpOptions(Res.string.yes)
+    data object No : OnboardingSoughtProfessionalHelpOptions(Res.string.no)
+    data object Indeterminate :
+        OnboardingSoughtProfessionalHelpOptions(Res.string.indeterminate)
 }
 
 class OnboardingSoughtProfessionalHelp : Screen {
@@ -67,7 +75,10 @@ class OnboardingSoughtProfessionalHelp : Screen {
             containerColor = Colors.Brown10,
             modifier = Modifier.fillMaxSize()
         ) { padding ->
-            Column(modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize().verticalScroll(rememberScrollState())) {
+            Column(
+                modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
                 OnboardingTopBar(2)
                 Spacer(modifier = Modifier.height(32.dp))
                 Image(
@@ -78,7 +89,7 @@ class OnboardingSoughtProfessionalHelp : Screen {
                 )
                 Spacer(modifier = Modifier.height(48.dp))
                 Text(
-                    "Have you sought \n professional help before?",
+                    stringResource(Res.string.sought_professional_help_title),
                     style = CustomTextStyle.TextStyleOnboardingScreenTitle()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -89,7 +100,7 @@ class OnboardingSoughtProfessionalHelp : Screen {
                     options.forEach { option ->
                         TextRadioButton(
                             modifier = Modifier.weight(1f),
-                            text = option.text,
+                            text = stringResource(option.text),
                             selected = selectedOption == option,
                             selectedBackground = Colors.Green50,
                             selectedContent = Colors.White,
@@ -104,7 +115,7 @@ class OnboardingSoughtProfessionalHelp : Screen {
                 if (isContinueButtonVisible)
                     ButtonWithArrowRight(
                         modifier = Modifier.fillMaxWidth(),
-                        text = "Continue",
+                        text = stringResource(Res.string.continue_word),
                         onClick = { navigator.push(OnboardingExperiencingPhysicalSymptoms()) })
             }
         }

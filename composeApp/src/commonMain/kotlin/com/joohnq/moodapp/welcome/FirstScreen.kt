@@ -27,7 +27,16 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.components.ButtonWithArrowRight
 import com.joohnq.moodapp.components.CustomTextStyle
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.already_have_an_account
+import moodapp.composeapp.generated.resources.first_screen_desc
+import moodapp.composeapp.generated.resources.first_screen_second_title
+import moodapp.composeapp.generated.resources.first_screen_title
+import moodapp.composeapp.generated.resources.first_screen_title_word
+import moodapp.composeapp.generated.resources.get_started
+import moodapp.composeapp.generated.resources.sign_in
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
@@ -41,20 +50,20 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
                 withStyle(
                     style = CustomTextStyle.TextStyleWelcomeScreenTitle()
                 ) {
-                    append("Welcome to the ultimate \n")
+                    append(stringResource(Res.string.first_screen_title))
                 }
                 withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitleWord()) {
-                    append("freud ")
+                    append(stringResource(Res.string.first_screen_title_word))
                 }
                 withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitle()) {
-                    append("UI Kit!")
+                    append(stringResource(Res.string.first_screen_second_title))
                 }
             },
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            "Your mindful mental health AI companion for everyone, anywhere ",
+            stringResource(Res.string.first_screen_desc),
             style = CustomTextStyle.TextStyleWelcomeScreenSubTitle(),
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -70,13 +79,16 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
-        ButtonWithArrowRight(text = "Get Started", onClick = onGetStarted)
+        ButtonWithArrowRight(text = stringResource(Res.string.get_started), onClick = onGetStarted)
         Spacer(modifier = Modifier.height(30.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Already have an account?", style = CustomTextStyle.TextStyleWelcomeScreenText())
+            Text(
+                text = stringResource(Res.string.already_have_an_account),
+                style = CustomTextStyle.TextStyleWelcomeScreenText()
+            )
             Button(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Colors.Transparent,
@@ -85,7 +97,7 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
                 contentPadding = PaddingValues(5.dp),
                 onClick = onSignIn
             ) {
-                Text("Sign In", style = CustomTextStyle.TextStyleWelcomeScreenButton2())
+                Text(text = stringResource(Res.string.sign_in), style = CustomTextStyle.TextStyleWelcomeScreenButton2())
             }
         }
     }

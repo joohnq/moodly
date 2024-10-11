@@ -36,8 +36,11 @@ import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.ScreenDimensions
 import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.components.TextWithBackground
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.step
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @Composable
@@ -83,7 +86,7 @@ fun MockScreen(
                 contentAlignment = Alignment.Center
             ) {
                 TextWithBackground(
-                    "Step $step",
+                    stringResource(Res.string.step, step),
                     borderColor = Colors.Brown80,
                     backgroundColor = Colors.Transparent,
                     textColor = Colors.Brown80

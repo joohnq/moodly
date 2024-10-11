@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoodApp</string>
+    <string name="community_first_title">Loving &amp; Supporting</string>
+    <string name="community_span">Community</string>
+    <string name="four">Four</string>
+    <string name="first_screen_title">Welcome to the ultimate </string>
+    <string name="first_screen_title_word">freud </string>
+    <string name="first_screen_second_title">UI Kit!</string>
+    <string name="first_screen_desc">Your mindful mental health AI companion for everyone, anywhere</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="one">One</string>
+    <string name="health_state_first_title">Personalize Your Mental \n</string>
+    <string name="health_state_second_title">With AI</string>
+    <string name="health_state_span">Health State </string>
+    <string name="two">Two</string>
+    <string name="intelligent_first_second_title">Mood Tracking &amp; Emotion Insights</string>
+    <string name="intelligent_first_span">Intelligent </string>
+    <string name="step">Step %1$s</string>
+    <string name="experiencing_physical_symptoms_title">Are you experiencing any physical symptoms of distress?</string>
+    <string name="select_one_answer">Select one answer</string>
+    <string name="continue_word">Continue</string>
+    <string name="mood_rate_title">How would you describe your mood?</string>
+    <string name="mood_rate_desc">I Feel %1$s</string>
+    <string name="sleep_quality_title">How would you rate your sleep quality?</string>
+    <string name="excellent">Excellent</string>
+    <string name="seven_nine_hours">7 - 9 HOURS</string>
+    <string name="good">Good</string>
+    <string name="six_seven_hours">6 - 7 HOURS</string>
+    <string name="fair">Fair</string>
+    <string name="five_hours">5 HOURS</string>
+    <string name="poor">Poor</string>
+    <string name="three_four_hours">3 - 4 HOURS</string>
+    <string name="worst">Worst</string>
+    <string name="minus_three_hours"> &lt; 3 HOURS</string>
+    <string name="indeterminate">Indeterminate</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="sought_professional_help_title">Have you sought professional help before?</string>
+    <string name="assessments">Assessments</string>
+    <string name="page_of">%1$s of %2$d</string>
+    <string name="depressed">Depressed</string>
+    <string name="sad">Sad</string>
+    <string name="neutral">Neutral</string>
+    <string name="happy">Happy</string>
+    <string name="overjoyed">Overjoyed</string>
+    <string name="yes_very_painful">Yes, Very Painful.</string>
+    <string name="no_physical_pain">No Physical Pain At All.</string>
+    <string name="yes_but_just_a_bit">Yes, But just a bit</string>
+    <string name="three">Three</string>
+    <string name="resource_first_title">Mind"ful </string>
+    <string name="resource_span">Resources </string>
+    <string name="resource_second_title">That Makes
+ You Happy</string>
+</resources>

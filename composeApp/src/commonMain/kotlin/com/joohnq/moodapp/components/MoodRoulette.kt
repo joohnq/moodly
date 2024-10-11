@@ -27,8 +27,8 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.printLn
-import com.joohnq.moodapp.toDegrees
-import com.joohnq.moodapp.toRadians
+import com.joohnq.moodapp.helper.toDegrees
+import com.joohnq.moodapp.helper.toRadians
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin

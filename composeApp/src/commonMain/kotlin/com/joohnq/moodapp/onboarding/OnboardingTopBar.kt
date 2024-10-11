@@ -15,6 +15,11 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.components.ButtonWithArrowOpen
 import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.components.TextWithBackground
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.assessments
+import moodapp.composeapp.generated.resources.page_of
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingTopBar(page: Int){
@@ -27,12 +32,12 @@ fun OnboardingTopBar(page: Int){
             ButtonWithArrowOpen {}
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                "Assessments",
+                stringResource(Res.string.assessments),
                 style = CustomTextStyle.TextStyleOnboardingScreenSession()
             )
         }
         TextWithBackground(
-            "$page of 7",
+            stringResource(Res.string.page_of, page, 7),
             borderColor = Colors.Transparent,
             backgroundColor = Colors.Brown20,
             textColor = Colors.Brown60

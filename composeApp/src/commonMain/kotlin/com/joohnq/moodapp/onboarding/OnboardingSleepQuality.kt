@@ -8,16 +8,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SliderColors
-import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,9 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.joohnq.moodapp.Colors
@@ -39,21 +33,19 @@ import com.joohnq.moodapp.components.SliderComponents
 import com.joohnq.moodapp.components.VerticalSlider
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.moods
-
-@OptIn(ExperimentalMaterial3Api::class)
-fun Modifier.progress(
-    sliderState: SliderState,
-    height: Dp,
-    shape: Shape = CircleShape
-) = this
-    // Compute the fraction based on the slider's current value.
-    // We do this by dividing the current value by the total value.
-    // However, the start value might not always be 0, so we need to
-    // subtract the start value from both the current value and the total value.
-    .fillMaxWidth(fraction = (sliderState.value - sliderState.valueRange.start) / (sliderState.valueRange.endInclusive - sliderState.valueRange.start))
-    .heightIn(min = height)
-    .clip(shape)
-
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.excellent
+import moodapp.composeapp.generated.resources.fair
+import moodapp.composeapp.generated.resources.five_hours
+import moodapp.composeapp.generated.resources.poor
+import moodapp.composeapp.generated.resources.good
+import moodapp.composeapp.generated.resources.minus_three_hours
+import moodapp.composeapp.generated.resources.seven_nine_hours
+import moodapp.composeapp.generated.resources.six_seven_hours
+import moodapp.composeapp.generated.resources.sleep_quality_title
+import moodapp.composeapp.generated.resources.three_four_hours
+import moodapp.composeapp.generated.resources.worst
+import org.jetbrains.compose.resources.stringResource
 
 class OnboardingSleepQuality : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -92,7 +84,7 @@ class OnboardingSleepQuality : Screen {
                 OnboardingTopBar(4)
                 Spacer(modifier = Modifier.height(40.dp))
                 Text(
-                    "How would you rate your sleep quality?",
+                    stringResource(Res.string.sleep_quality_title),
                     style = CustomTextStyle.TextStyleOnboardingScreenTitle()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -106,60 +98,60 @@ class OnboardingSleepQuality : Screen {
                     ) {
                         Column {
                             Text(
-                                "Excellent",
+                                stringResource(Res.string.excellent),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
                                     .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
                             )
                             Text(
-                                "7 - 9 HOURS",
+                                stringResource(Res.string.seven_nine_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
                                     .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
                             )
                         }
                         Column {
                             Text(
-                                "Good",
+                                stringResource(Res.string.good),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
                                     .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
                             )
                             Text(
-                                "6 - 7 HOURS",
+                                stringResource(Res.string.six_seven_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
                                     .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
                             )
                         }
                         Column {
                             Text(
-                                "Fair",
+                                stringResource(Res.string.fair),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
                                     .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
                             )
                             Text(
-                                "5 HOURS",
+                                stringResource(Res.string.five_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
                                     .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
                             )
                         }
                         Column {
                             Text(
-                                "Poor",
+                                stringResource(Res.string.poor),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
                                     .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
                             )
                             Text(
-                                "7 - 9 HOURS",
+                                stringResource(Res.string.three_four_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
                                     .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
                             )
                         }
                         Column {
                             Text(
-                                "Worst",
+                                stringResource(Res.string.worst),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
                                     .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
                             )
                             Text(
-                                "< 3 HOURS",
+                                stringResource(Res.string.minus_three_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
                                     .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
                             )

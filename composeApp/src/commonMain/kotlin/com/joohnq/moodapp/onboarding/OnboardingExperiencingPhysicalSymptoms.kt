@@ -28,35 +28,15 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.components.ButtonWithArrowRight
 import com.joohnq.moodapp.components.CustomTextStyle
 import com.joohnq.moodapp.components.IconAndTextRadioButton
-import com.joohnq.moodapp.entities.IconProps
-
-sealed class OnboardingExperiencingPhysicalSymptomsOptions(val text: String, val icon: IconProps) {
-    data object YesVeryPainful : OnboardingExperiencingPhysicalSymptomsOptions(
-        text = "Yes, Very Painful.", icon = IconProps(
-            icon = Drawables.Icons.Check,
-        )
-    )
-
-    data object No : OnboardingExperiencingPhysicalSymptomsOptions(
-        text = "No Physical Pain At All.",
-        icon = IconProps(icon = Drawables.Icons.Close)
-    )
-
-    data object YesJustABit : OnboardingExperiencingPhysicalSymptomsOptions(
-        text = "Yes, But just a bit",
-        icon = IconProps(icon = Drawables.Icons.Question)
-    )
-
-    data object Indeterminate :
-        OnboardingExperiencingPhysicalSymptomsOptions(
-            text = "Indeterminate",
-            icon = IconProps(icon = Drawables.Icons.Question)
-        )
-}
+import com.joohnq.moodapp.onboarding.state.OnboardingExperiencingPhysicalSymptomsOptions
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.continue_word
+import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
+import moodapp.composeapp.generated.resources.select_one_answer
+import org.jetbrains.compose.resources.stringResource
 
 class OnboardingExperiencingPhysicalSymptoms : Screen {
     @Composable
@@ -92,12 +72,12 @@ class OnboardingExperiencingPhysicalSymptoms : Screen {
                 OnboardingTopBar(3)
                 Spacer(modifier = Modifier.height(40.dp))
                 Text(
-                    "Are you experiencing any physical symptoms of distress?",
+                    text = stringResource(Res.string.experiencing_physical_symptoms_title),
                     style = CustomTextStyle.TextStyleOnboardingScreenTitle()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
-                    "Select one answer",
+                    text = stringResource(Res.string.select_one_answer),
                     style = CustomTextStyle.TextStyleOnboardingScreenMood(),
                     textAlign = TextAlign.Center
                 )
@@ -110,7 +90,7 @@ class OnboardingExperiencingPhysicalSymptoms : Screen {
                         IconAndTextRadioButton(
                             modifier = Modifier,
                             paddingValues = PaddingValues(vertical = 20.dp, horizontal = 16.dp),
-                            text = option.text,
+                            text = stringResource(option.text),
                             icon = option.icon.copy(modifier = Modifier.size(24.dp)),
                             selected = selectedOption == option,
                             selectedBackground = Colors.Green50,
@@ -126,7 +106,7 @@ class OnboardingExperiencingPhysicalSymptoms : Screen {
                 if (isContinueButtonVisible)
                     ButtonWithArrowRight(
                         modifier = Modifier.fillMaxWidth(),
-                        text = "Continue",
+                        text = stringResource(Res.string.continue_word),
                         onClick = { navigator.push(OnboardingSleepQuality()) })
             }
         }

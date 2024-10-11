@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
-import com.joohnq.moodapp.onboarding.progress
 import org.jetbrains.compose.resources.painterResource
 
 object SliderComponents {

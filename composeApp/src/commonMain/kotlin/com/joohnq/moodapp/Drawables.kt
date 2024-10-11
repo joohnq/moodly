@@ -1,12 +1,12 @@
 package com.joohnq.moodapp
 
-import com.joohnq.moodapp.icons.MoodDepressed
-import com.joohnq.moodapp.icons.MoodHappy
-import com.joohnq.moodapp.icons.MoodNeutral
-import com.joohnq.moodapp.icons.MoodOverjoyed
-import com.joohnq.moodapp.icons.MoodSad
-import com.joohnq.moodapp.icons.MoodSad
-import com.joohnq.moodapp.icons.Target
+import com.joohnq.moodapp.view.icons.MoodDepressed
+import com.joohnq.moodapp.view.icons.MoodHappy
+import com.joohnq.moodapp.view.icons.MoodNeutral
+import com.joohnq.moodapp.view.icons.MoodOverjoyed
+import com.joohnq.moodapp.view.icons.MoodSad
+import com.joohnq.moodapp.view.icons.MoodSad
+import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_open

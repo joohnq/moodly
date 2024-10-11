@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MoodApp</string>
-    <string name="community_first_title">Loving &amp; Supporting</string>
+    <string name="community_first_title">Loving &amp; Supporting </string>
     <string name="community_span">Community</string>
     <string name="four">Four</string>
     <string name="first_screen_title">Welcome to the ultimate </string>
@@ -50,8 +50,7 @@
     <string name="no_physical_pain">No Physical Pain At All.</string>
     <string name="yes_but_just_a_bit">Yes, But just a bit</string>
     <string name="three">Three</string>
-    <string name="resource_first_title">Mind"ful </string>
+    <string name="resource_first_title">Mindful </string>
     <string name="resource_span">Resources </string>
-    <string name="resource_second_title">That Makes
- You Happy</string>
+    <string name="resource_second_title">That Makes You Happy</string>
 </resources>

@@ -27,41 +27,44 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.CustomColors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.CustomTextStyle
-import com.joohnq.moodapp.view.components.IconAndTextRadioButton
-import com.joohnq.moodapp.view.onboarding.state.OnboardingExperiencingPhysicalSymptomsOptions
+import com.joohnq.moodapp.view.components.IconAndTextRadioButtonColors
+import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
+import com.joohnq.moodapp.view.components.OnboardingTopBar
+import com.joohnq.moodapp.view.onboarding.state.PhysicalSymptomsOptions
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
 import moodapp.composeapp.generated.resources.select_one_answer
 import org.jetbrains.compose.resources.stringResource
 
-class OnboardingExperiencingPhysicalSymptoms : Screen {
+class PhysicalSymptomsScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         var selectedOption by remember {
-            mutableStateOf<OnboardingExperiencingPhysicalSymptomsOptions>(
-                OnboardingExperiencingPhysicalSymptomsOptions.Indeterminate
+            mutableStateOf<PhysicalSymptomsOptions>(
+                PhysicalSymptomsOptions.Indeterminate
             )
         }
         val options = remember {
             listOf(
-                OnboardingExperiencingPhysicalSymptomsOptions.YesVeryPainful,
-                OnboardingExperiencingPhysicalSymptomsOptions.No,
-                OnboardingExperiencingPhysicalSymptomsOptions.YesJustABit
+                PhysicalSymptomsOptions.YesVeryPainful,
+                PhysicalSymptomsOptions.No,
+                PhysicalSymptomsOptions.YesJustABit
             )
         }
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible =
-                selectedOption != OnboardingExperiencingPhysicalSymptomsOptions.Indeterminate
+                selectedOption != PhysicalSymptomsOptions.Indeterminate
         }
+
         Scaffold(
-            containerColor = Colors.Brown10,
+            containerColor = CustomColors.Brown10,
             modifier = Modifier.fillMaxSize()
         ) { padding ->
             Column(
@@ -87,17 +90,21 @@ class OnboardingExperiencingPhysicalSymptoms : Screen {
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     options.forEach { option ->
-                        IconAndTextRadioButton(
-                            modifier = Modifier,
-                            paddingValues = PaddingValues(vertical = 20.dp, horizontal = 16.dp),
+                        IconAndTextRadioButtonHorizontal(
+                            modifier = Modifier.fillMaxWidth(),
+                            paddingValues = PaddingValues(all = 16.dp),
                             text = stringResource(option.text),
                             icon = option.icon.copy(modifier = Modifier.size(24.dp)),
                             selected = selectedOption == option,
-                            selectedBackground = Colors.Green50,
-                            selectedContent = Colors.White,
-                            unSelectedContent = Colors.Brown80,
-                            unSelectedBackground = Colors.White,
+                            iconAndTextRadioButtonColors = IconAndTextRadioButtonColors(
+                                selectedBackgroundColor = CustomColors.Green50,
+                                selectedContentColor = CustomColors.White,
+                                unSelectedContentColor = CustomColors.Brown80,
+                                unSelectedBackgroundColor = CustomColors.White,
+                                selectedBorderColor = CustomColors.Green50Alpha25,
+                            ),
                             shape = RoundedCornerShape(20.dp),
+                            textStyle = CustomTextStyle.TextStyleWelcomeScreenButton(),
                             onClick = { selectedOption = option }
                         )
                     }
@@ -107,7 +114,7 @@ class OnboardingExperiencingPhysicalSymptoms : Screen {
                     ButtonWithArrowRight(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.continue_word),
-                        onClick = { navigator.push(OnboardingSleepQuality()) })
+                        onClick = { navigator.push(SleepQualityScreen()) })
             }
         }
     }

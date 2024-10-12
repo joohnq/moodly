@@ -28,51 +28,42 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.CustomTextStyle
+import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.TextRadioButton
+import com.joohnq.moodapp.view.onboarding.state.ProfessionalHelpOptions
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
-import moodapp.composeapp.generated.resources.indeterminate
-import moodapp.composeapp.generated.resources.no
 import moodapp.composeapp.generated.resources.sought_professional_help_title
-import moodapp.composeapp.generated.resources.yes
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-sealed class OnboardingSoughtProfessionalHelpOptions(open val text: StringResource) {
-    data object Yes : OnboardingSoughtProfessionalHelpOptions(Res.string.yes)
-    data object No : OnboardingSoughtProfessionalHelpOptions(Res.string.no)
-    data object Indeterminate :
-        OnboardingSoughtProfessionalHelpOptions(Res.string.indeterminate)
-}
-
-class OnboardingSoughtProfessionalHelp : Screen {
+class ProfessionalHelpScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         var selectedOption by remember {
-            mutableStateOf<OnboardingSoughtProfessionalHelpOptions>(
-                OnboardingSoughtProfessionalHelpOptions.Indeterminate
+            mutableStateOf<ProfessionalHelpOptions>(
+                ProfessionalHelpOptions.Indeterminate
             )
         }
         val options = remember {
             listOf(
-                OnboardingSoughtProfessionalHelpOptions.Yes,
-                OnboardingSoughtProfessionalHelpOptions.No
+                ProfessionalHelpOptions.Yes,
+                ProfessionalHelpOptions.No
             )
         }
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible =
-                selectedOption != OnboardingSoughtProfessionalHelpOptions.Indeterminate
+                selectedOption != ProfessionalHelpOptions.Indeterminate
         }
         Scaffold(
-            containerColor = Colors.Brown10,
+            containerColor = CustomColors.Brown10,
             modifier = Modifier.fillMaxSize()
         ) { padding ->
             Column(
@@ -82,7 +73,7 @@ class OnboardingSoughtProfessionalHelp : Screen {
                 OnboardingTopBar(2)
                 Spacer(modifier = Modifier.height(32.dp))
                 Image(
-                    painter = painterResource(Drawables.Images.OnboardingSoughtProfessionalHelp),
+                    painter = painterResource(CustomDrawables.Images.OnboardingSoughtProfessionalHelp),
                     contentDescription = null,
                     modifier = Modifier.widthIn(max = 300.dp).fillMaxWidth().aspectRatio(1f)
                         .align(alignment = Alignment.CenterHorizontally)
@@ -102,10 +93,10 @@ class OnboardingSoughtProfessionalHelp : Screen {
                             modifier = Modifier.weight(1f),
                             text = stringResource(option.text),
                             selected = selectedOption == option,
-                            selectedBackground = Colors.Green50,
-                            selectedContent = Colors.White,
-                            unSelectedContent = Colors.Brown80,
-                            unSelectedBackground = Colors.White,
+                            selectedBackground = CustomColors.Green50,
+                            selectedContent = CustomColors.White,
+                            unSelectedContent = CustomColors.Brown80,
+                            unSelectedBackground = CustomColors.White,
                             shape = CircleShape,
                             onClick = { selectedOption = option }
                         )
@@ -116,7 +107,7 @@ class OnboardingSoughtProfessionalHelp : Screen {
                     ButtonWithArrowRight(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.continue_word),
-                        onClick = { navigator.push(OnboardingExperiencingPhysicalSymptoms()) })
+                        onClick = { navigator.push(PhysicalSymptomsScreen()) })
             }
         }
     }

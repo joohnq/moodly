@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import com.joohnq.moodapp.view.entities.Mood
 import com.joohnq.moodapp.utils.printLn
 import com.joohnq.moodapp.helper.toDegrees
@@ -47,7 +47,7 @@ private fun findIndexInRange(value: Int, ranges: List<Map<Int, Int>>): Int {
 @Composable
 fun MoodRoulette(moods: List<Mood>, selectedMood: Int, setSelectedMood: (Int) -> Unit) {
     val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.imageVector) }
-    val targetVectorPainter = rememberVectorPainter(Drawables.Mood.TargetVectorPainter)
+    val targetVectorPainter = rememberVectorPainter(CustomDrawables.Mood.TargetVectorPainter)
     val totalSlices = moods.size
     val limitedAngle = 360f * (PI / 180) // 6,283185307179586
     val limitedAngleForSlice =
@@ -117,7 +117,7 @@ fun MoodRoulette(moods: List<Mood>, selectedMood: Int, setSelectedMood: (Int) ->
                 )
             )
         }
-        drawCenterCircle(radius = 270f, backgroundColor = Colors.Alpha15)
+        drawCenterCircle(radius = 270f, backgroundColor = CustomColors.Alpha15)
         drawCenterCircle(targetVectorPainter)
     }
 }
@@ -186,7 +186,7 @@ fun DrawScope.drawCenterCircle(vectorPainter: VectorPainter, iconSize: Size = Si
     val radius = 250f
 
     drawCircle(
-        color = Colors.Brown10,
+        color = CustomColors.Brown10,
         radius = radius,
         center = center
     )

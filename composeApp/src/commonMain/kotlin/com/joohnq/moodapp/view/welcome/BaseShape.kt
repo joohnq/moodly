@@ -31,8 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import com.joohnq.moodapp.ScreenDimensions
 import com.joohnq.moodapp.view.components.CustomTextStyle
 import com.joohnq.moodapp.view.components.TextWithBackground
@@ -87,9 +87,9 @@ fun MockScreen(
             ) {
                 TextWithBackground(
                     stringResource(Res.string.step, step),
-                    borderColor = Colors.Brown80,
-                    backgroundColor = Colors.Transparent,
-                    textColor = Colors.Brown80
+                    borderColor = CustomColors.Brown80,
+                    backgroundColor = CustomColors.Transparent,
+                    textColor = CustomColors.Brown80
                 )
             }
             Column(
@@ -97,7 +97,7 @@ fun MockScreen(
                     .fillMaxWidth()
                     .fillMaxHeight(0.45f)
                     .background(
-                        color = Colors.White,
+                        color = CustomColors.White,
                     )
                     .padding(vertical = 32.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -105,8 +105,8 @@ fun MockScreen(
                 LinearProgressIndicator(
                     progress = { 0.25f * index },
                     modifier = Modifier.width(180.dp).height(8.dp),
-                    color = Colors.Brown80,
-                    trackColor = Colors.Brown20,
+                    color = CustomColors.Brown80,
+                    trackColor = CustomColors.Brown20,
                     strokeCap = StrokeCap.Round,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -134,14 +134,14 @@ fun MockScreen(
                 Button(
                     modifier = Modifier.size(80.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Colors.Brown80,
-                        contentColor = Colors.White
+                        containerColor = CustomColors.Brown80,
+                        contentColor = CustomColors.White
                     ),
                     shape = CircleShape,
                     onClick = onNext
                 ) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.Arrow),
+                        painter = painterResource(CustomDrawables.Icons.Arrow),
                         contentDescription = null,
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)

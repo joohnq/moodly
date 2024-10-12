@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import org.jetbrains.compose.resources.painterResource
 
 object SliderComponents {
@@ -25,16 +25,16 @@ object SliderComponents {
             modifier = Modifier
                 .size(64.dp)
                 .background(
-                    color = Colors.Orange40,
+                    color = CustomColors.Orange40,
                     shape = CircleShape
                 ),
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                painter = painterResource(Drawables.Icons.Resize),
+                painter = painterResource(CustomDrawables.Icons.Resize),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
-                tint = Colors.White
+                tint = CustomColors.White
             )
         }
     }
@@ -44,14 +44,14 @@ object SliderComponents {
     fun SleepQualityTrack(sliderState: SliderState) {
         Box(
             modifier = Modifier
-                .background(color = Colors.Brown20, shape = CircleShape)
+                .background(color = CustomColors.Brown20, shape = CircleShape)
                 .height(16.dp).fillMaxWidth().padding(0.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             Box(
                 modifier = Modifier
                     .progress(sliderState = sliderState, height = 16.dp)
-                    .background(color = Colors.Orange50)
+                    .background(color = CustomColors.Orange50)
             )
         }
     }

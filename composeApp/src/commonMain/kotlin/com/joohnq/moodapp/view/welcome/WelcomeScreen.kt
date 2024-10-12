@@ -11,8 +11,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.onboarding.OnboardingScreen
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
@@ -26,7 +26,7 @@ class WelcomeScreen : Screen {
         val scope = rememberCoroutineScope()
         val onNext: () -> Unit =
             { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } }
-        Scaffold(containerColor = Colors.White) { _ ->
+        Scaffold(containerColor = CustomColors.White) { _ ->
             HorizontalPager(
                 pagerState,
             ) { page ->
@@ -41,7 +41,7 @@ class WelcomeScreen : Screen {
                     3 -> ResourcesScreen(onNext = onNext)
                     4 -> CommunityScreen(onNext = {
                         userPreferenceViewModel.setSkipWelcomeScreen()
-                        navigator.push(OnboardingScreen())
+                        navigator.push(MoodRateScreen())
                     })
                 }
             }

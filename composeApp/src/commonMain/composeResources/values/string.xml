@@ -53,4 +53,9 @@
     <string name="resource_first_title">Mindful </string>
     <string name="resource_span">Resources </string>
     <string name="resource_second_title">That Makes You Happy</string>
+    <string name="medications_supplements_title">Are you taking any medications or supplements?</string>
+    <string name="prescribed_medications">Prescribed Medications</string>
+    <string name="over_the_counter_supplements">Over the Counter Supplements</string>
+    <string name="im_not_taking_any">I'm Not Taking Any</string>
+    <string name="prefer_not_to_say">Prefer Not To Say</string>
 </resources>

@@ -2,8 +2,8 @@ package com.joohnq.moodapp.view.entities
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import moodapp.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -24,55 +24,55 @@ sealed class Mood(
 ) {
     data object Depressed :
         Mood(
-            image = Drawables.Mood.Depressed,
-            imageVector = Drawables.Mood.DepressedVectorPainter,
+            image = CustomDrawables.Mood.Depressed,
+            imageVector = CustomDrawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
-            rouletteBackgroundColor = Colors.Purple30,
-            rouletteFaceColor = Colors.Purple50,
-            backgroundColor = Colors.Purple30,
-            color = Colors.Purple80
+            rouletteBackgroundColor = CustomColors.Purple30,
+            rouletteFaceColor = CustomColors.Purple50,
+            backgroundColor = CustomColors.Purple30,
+            color = CustomColors.Purple80
         )
 
     data object Sad : Mood(
-        image = Drawables.Mood.Sad,
-        imageVector = Drawables.Mood.SadVectorPainter,
+        image = CustomDrawables.Mood.Sad,
+        imageVector = CustomDrawables.Mood.SadVectorPainter,
         text = Res.string.sad,
-        rouletteBackgroundColor = Colors.Orange40,
-        rouletteFaceColor = Colors.Orange70,
-        backgroundColor = Colors.Orange40,
-        color = Colors.Orange80
+        rouletteBackgroundColor = CustomColors.Orange40,
+        rouletteFaceColor = CustomColors.Orange70,
+        backgroundColor = CustomColors.Orange40,
+        color = CustomColors.Orange80
     )
 
     data object Neutral :
         Mood(
-            image = Drawables.Mood.Neutral,
-            imageVector = Drawables.Mood.NeutralVectorPainter,
+            image = CustomDrawables.Mood.Neutral,
+            imageVector = CustomDrawables.Mood.NeutralVectorPainter,
             text = Res.string.neutral,
-            rouletteBackgroundColor = Colors.Brown60,
-            rouletteFaceColor = Colors.Brown80,
-            backgroundColor = Colors.Brown40,
-            color = Colors.Brown80
+            rouletteBackgroundColor = CustomColors.Brown60,
+            rouletteFaceColor = CustomColors.Brown80,
+            backgroundColor = CustomColors.Brown40,
+            color = CustomColors.Brown80
         )
 
     data object Happy : Mood(
-        image = Drawables.Mood.Happy,
-        imageVector = Drawables.Mood.HappyVectorPainter,
+        image = CustomDrawables.Mood.Happy,
+        imageVector = CustomDrawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
-        rouletteBackgroundColor = Colors.Yellow40,
-        rouletteFaceColor = Colors.Yellow70,
-        backgroundColor = Colors.Yellow40,
-        color = Colors.Yellow80
+        rouletteBackgroundColor = CustomColors.Yellow40,
+        rouletteFaceColor = CustomColors.Yellow70,
+        backgroundColor = CustomColors.Yellow40,
+        color = CustomColors.Yellow80
     )
 
     data object Overjoyed :
         Mood(
-            image = Drawables.Mood.Overjoyed,
-            imageVector = Drawables.Mood.OverjoyedVectorPainter,
+            image = CustomDrawables.Mood.Overjoyed,
+            imageVector = CustomDrawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
-            rouletteBackgroundColor = Colors.Green50,
-            rouletteFaceColor = Colors.Green70,
-            backgroundColor = Colors.Green50,
-            color = Colors.Green80
+            rouletteBackgroundColor = CustomColors.Green50,
+            rouletteFaceColor = CustomColors.Green70,
+            backgroundColor = CustomColors.Green50,
+            color = CustomColors.Green80
         )
 }
 

@@ -23,8 +23,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.CustomTextStyle
 import moodapp.composeapp.generated.resources.Res
@@ -71,10 +71,10 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
             Box(
                 modifier = Modifier
                     .size(300.dp)
-                    .background(color = Colors.White, shape = CircleShape)
+                    .background(color = CustomColors.White, shape = CircleShape)
             )
             Image(
-                painter = painterResource(Drawables.Images.WelcomeFirstScreenImage),
+                painter = painterResource(CustomDrawables.Images.WelcomeFirstScreenImage),
                 contentDescription = null,
             )
         }
@@ -91,8 +91,8 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
             )
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Colors.Transparent,
-                    contentColor = Colors.Orange40
+                    containerColor = CustomColors.Transparent,
+                    contentColor = CustomColors.Orange40
                 ),
                 contentPadding = PaddingValues(5.dp),
                 onClick = onSignIn

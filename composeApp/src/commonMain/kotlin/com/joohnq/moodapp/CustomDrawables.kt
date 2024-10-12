@@ -5,14 +5,15 @@ import com.joohnq.moodapp.view.icons.MoodHappy
 import com.joohnq.moodapp.view.icons.MoodNeutral
 import com.joohnq.moodapp.view.icons.MoodOverjoyed
 import com.joohnq.moodapp.view.icons.MoodSad
-import com.joohnq.moodapp.view.icons.MoodSad
 import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_open
 import moodapp.composeapp.generated.resources.ic_check
 import moodapp.composeapp.generated.resources.ic_close
-import moodapp.composeapp.generated.resources.ic_question
+import moodapp.composeapp.generated.resources.ic_medicine
+import moodapp.composeapp.generated.resources.ic_drug_store
+import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
 import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.mood_depressed
@@ -27,7 +28,7 @@ import moodapp.composeapp.generated.resources.welcome_health_state_image
 import moodapp.composeapp.generated.resources.welcome_intelligent_image
 import moodapp.composeapp.generated.resources.welcome_resources_image
 
-object Drawables {
+object CustomDrawables {
     object Icons {
         val ArrowOpen = Res.drawable.ic_arrow_open
         val Arrow = Res.drawable.ic_arrow
@@ -35,6 +36,9 @@ object Drawables {
         val Close = Res.drawable.ic_close
         val Question = Res.drawable.ic_question
         val Resize = Res.drawable.ic_resize
+        val Medicine = Res.drawable.ic_medicine
+        val DrugStore = Res.drawable.ic_drug_store
+        val Nothing = Res.drawable.ic_nothing
     }
 
     object Images {

@@ -26,9 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.CustomColors
 import com.joohnq.moodapp.view.components.CustomTextStyle
 import com.joohnq.moodapp.view.components.MoodFace
+import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.SliderComponents
 import com.joohnq.moodapp.view.components.VerticalSlider
 import com.joohnq.moodapp.view.entities.Mood
@@ -47,7 +48,7 @@ import moodapp.composeapp.generated.resources.three_four_hours
 import moodapp.composeapp.generated.resources.worst
 import org.jetbrains.compose.resources.stringResource
 
-class OnboardingSleepQuality : Screen {
+class SleepQualityScreen : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
@@ -55,16 +56,16 @@ class OnboardingSleepQuality : Screen {
         var sliderValue by remember { mutableStateOf(0f) }
 
         val sliderColors = SliderColors(
-            thumbColor = Colors.Orange40,
-            activeTickColor = Colors.Orange40,
-            inactiveTickColor = Colors.Brown20,
-            activeTrackColor = Colors.Orange40,
-            inactiveTrackColor = Colors.Brown20,
-            disabledThumbColor = Colors.Brown20,
-            disabledActiveTrackColor = Colors.Orange40,
-            disabledActiveTickColor = Colors.Orange40,
-            disabledInactiveTrackColor = Colors.Brown20,
-            disabledInactiveTickColor = Colors.Brown20
+            thumbColor = CustomColors.Orange40,
+            activeTickColor = CustomColors.Orange40,
+            inactiveTickColor = CustomColors.Brown20,
+            activeTrackColor = CustomColors.Orange40,
+            inactiveTrackColor = CustomColors.Brown20,
+            disabledThumbColor = CustomColors.Brown20,
+            disabledActiveTrackColor = CustomColors.Orange40,
+            disabledActiveTickColor = CustomColors.Orange40,
+            disabledInactiveTrackColor = CustomColors.Brown20,
+            disabledInactiveTickColor = CustomColors.Brown20
         )
 
         LaunchedEffect(sliderValue) {
@@ -73,7 +74,7 @@ class OnboardingSleepQuality : Screen {
         }
 
         Scaffold(
-            containerColor = Colors.Brown10,
+            containerColor = CustomColors.Brown10,
             modifier = Modifier.fillMaxSize()
         ) { padding ->
             Column(
@@ -100,60 +101,60 @@ class OnboardingSleepQuality : Screen {
                             Text(
                                 stringResource(Res.string.excellent),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
-                                    .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Overjoyed) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                             Text(
                                 stringResource(Res.string.seven_nine_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
-                                    .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Overjoyed) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                         }
                         Column {
                             Text(
                                 stringResource(Res.string.good),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
-                                    .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Happy) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                             Text(
                                 stringResource(Res.string.six_seven_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
-                                    .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Happy) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                         }
                         Column {
                             Text(
                                 stringResource(Res.string.fair),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
-                                    .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Neutral) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                             Text(
                                 stringResource(Res.string.five_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
-                                    .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Neutral) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                         }
                         Column {
                             Text(
                                 stringResource(Res.string.poor),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
-                                    .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Sad) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                             Text(
                                 stringResource(Res.string.three_four_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
-                                    .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Sad) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                         }
                         Column {
                             Text(
                                 stringResource(Res.string.worst),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualityTitle()
-                                    .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Depressed) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                             Text(
                                 stringResource(Res.string.minus_three_hours),
                                 style = CustomTextStyle.TextStyleOnboardingSleepQualitySubTitle()
-                                    .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
+                                    .copy(color = if (selectedMood != Mood.Depressed) CustomColors.Alpha48 else CustomColors.Brown80)
                             )
                         }
                     }

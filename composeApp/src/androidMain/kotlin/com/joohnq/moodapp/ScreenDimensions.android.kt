@@ -7,5 +7,5 @@ import android.util.DisplayMetrics
 
 actual class ScreenDimensions(context: Context): ScreenDimensionsInterface {
     private val displayMetrics: DisplayMetrics = context.resources.displayMetrics
-    actual override val statusBarHeight: Int = 0
+    actual override val statusBarHeight: Int = 20
 }

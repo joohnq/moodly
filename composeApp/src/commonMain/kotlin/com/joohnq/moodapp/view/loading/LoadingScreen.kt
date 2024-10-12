@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.CustomColors
 import com.joohnq.moodapp.model.entities.UserPreferences
-import com.joohnq.moodapp.view.onboarding.OnboardingScreen
+import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -30,11 +30,11 @@ class LoadingScreen : Screen {
         val userPreferences: UserPreferences? by userPreferenceViewModel.userPreferences.collectAsState()
 
         LaunchedEffect(userPreferences) {
-            navigator.push(if (userPreferences?.skipWelcomeScreen == true) OnboardingScreen() else WelcomeScreen())
+            navigator.push(if (userPreferences?.skipWelcomeScreen == true) MoodRateScreen() else WelcomeScreen())
         }
 
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = Colors.Brown60, strokeWidth = 6.dp, strokeCap = StrokeCap.Round)
+            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = CustomColors.Brown60, strokeWidth = 6.dp, strokeCap = StrokeCap.Round)
         }
     }
 }

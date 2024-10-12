@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,14 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.components.ButtonWithArrowOpen
-import com.joohnq.moodapp.view.components.CustomTextStyle
-import com.joohnq.moodapp.view.components.TextWithBackground
+import com.joohnq.moodapp.CustomColors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
 import moodapp.composeapp.generated.resources.page_of
-import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -38,9 +34,9 @@ fun OnboardingTopBar(page: Int){
         }
         TextWithBackground(
             stringResource(Res.string.page_of, page, 7),
-            borderColor = Colors.Transparent,
-            backgroundColor = Colors.Brown20,
-            textColor = Colors.Brown60
+            borderColor = CustomColors.Transparent,
+            backgroundColor = CustomColors.Brown20,
+            textColor = CustomColors.Brown60
         )
     }
 }

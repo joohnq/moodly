@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.CustomDrawables
 import com.joohnq.moodapp.view.entities.IconProps
 import org.jetbrains.compose.resources.painterResource
 
@@ -88,13 +88,13 @@ fun ButtonWithArrowRight(modifier: Modifier = Modifier, text: String, onClick: (
         modifier = modifier,
         text = text,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Colors.Brown80,
-            contentColor = Colors.White
+            containerColor = CustomColors.Brown80,
+            contentColor = CustomColors.White
         ),
         shape = CircleShape,
         icon = IconProps(
-            icon = Drawables.Icons.Arrow,
-            tint = Colors.White,
+            icon = CustomDrawables.Icons.Arrow,
+            tint = CustomColors.White,
             modifier = Modifier.size(24.dp)
         ),
         onClick = onClick
@@ -106,17 +106,17 @@ fun ButtonWithArrowOpen(onClick: () -> Unit) {
     ButtonWithIcon(
         modifier = Modifier.size(48.dp),
         colors = ButtonColors(
-            containerColor = Colors.Transparent,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Transparent,
-            disabledContentColor = Colors.Brown80
+            containerColor = CustomColors.Transparent,
+            contentColor = CustomColors.Brown80,
+            disabledContainerColor = CustomColors.Transparent,
+            disabledContentColor = CustomColors.Brown80
         ),
         icon = IconProps(
-            icon = Drawables.Icons.ArrowOpen,
-            tint = Colors.Brown80,
+            icon = CustomDrawables.Icons.ArrowOpen,
+            tint = CustomColors.Brown80,
             modifier = Modifier.size(24.dp),
         ),
-        borderStroke = BorderStroke(1.5.dp, color = Colors.Brown80),
+        borderStroke = BorderStroke(1.5.dp, color = CustomColors.Brown80),
         onClick = onClick
     )
 }

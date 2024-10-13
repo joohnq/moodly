@@ -28,7 +28,7 @@ import moodapp.composeapp.generated.resources.welcome_health_state_image
 import moodapp.composeapp.generated.resources.welcome_intelligent_image
 import moodapp.composeapp.generated.resources.welcome_resources_image
 
-object CustomDrawables {
+object Drawables {
     object Icons {
         val ArrowOpen = Res.drawable.ic_arrow_open
         val Arrow = Res.drawable.ic_arrow

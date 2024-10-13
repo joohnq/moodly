@@ -2,7 +2,7 @@ package com.joohnq.moodapp
 
 import androidx.compose.ui.graphics.Color
 
-object CustomColors{
+object Colors{
     val Brown100 = Color(0xFF372315)
     val Brown90 = Color(0xFF372315)
     val Brown80 = Color(0xFF4f4322)
@@ -78,4 +78,6 @@ object CustomColors{
     val Alpha32 = Color(0xFFB7B4B2)
     val Alpha15 = Color(0x26000000)
     val Green50Alpha25 = Color(0xFFE0E3CF)
+    val Orange40Alpha25 = Color(0xFFFFDFD2)
+    val Brown80Alpha25 = Color(0xFFCCC4BF)
 }

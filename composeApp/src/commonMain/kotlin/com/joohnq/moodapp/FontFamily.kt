@@ -16,7 +16,7 @@ import moodapp.composeapp.generated.resources.urbanist_semi_bold
 import moodapp.composeapp.generated.resources.urbanist_thin
 import org.jetbrains.compose.resources.Font
 
-object CustomFontFamily {
+object FontFamily {
     object Urbanist {
         @Composable
         fun Black() =

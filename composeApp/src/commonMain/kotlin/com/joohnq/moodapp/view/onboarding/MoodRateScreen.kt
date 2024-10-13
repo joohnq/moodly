@@ -2,16 +2,13 @@ package com.joohnq.moodapp.view.onboarding
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,12 +23,11 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.CustomTextStyle
+import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
-import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.entities.Mood
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
@@ -42,9 +38,10 @@ class MoodRateScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        SideEffect {
-            navigator.push(MedicationsSupplementsScreen())
-        }
+
+//        SideEffect {
+//            navigator.push(ExpressionAnalysisScreen())
+//        }
 
         val moods =
             remember {
@@ -68,34 +65,33 @@ class MoodRateScreen : Screen {
             mood = moods[selectedMood]
         }
 
-        Scaffold(modifier = Modifier.fillMaxSize(), containerColor = CustomColors.Brown10) { padding ->
-            Column(
-                modifier = Modifier.padding(padding).fillMaxSize().padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                OnboardingTopBar(1)
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    stringResource(Res.string.mood_rate_title),
-                    style = CustomTextStyle.TextStyleOnboardingScreenTitle()
-                )
-                Spacer(modifier = Modifier.height(48.dp))
-                Text(
-                    stringResource(Res.string.mood_rate_desc, stringResource(mood.text)),
-                    style = CustomTextStyle.TextStyleOnboardingScreenMood()
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-                MoodFace(
-                    modifier = Modifier.size(120.dp),
-                    mood = mood,
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-                ButtonWithArrowRight(
-                    text = "Next",
-                    onClick = { navigator.push(ProfessionalHelpScreen()) })
-            }
+        OnboardingBaseComponent(
+            page = 1,
+            title = Res.string.mood_rate_title,
+            isContinueButtonVisible = false,
+            onContinue = { },
+        ) {
+            Text(
+                stringResource(Res.string.mood_rate_desc, stringResource(mood.text)),
+                style = TextStyles.TextStyleOnboardingScreenMood()
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            MoodFace(
+                modifier = Modifier.size(120.dp),
+                mood = mood,
+            )
+            Spacer(modifier = Modifier.height(24.dp))
         }
+
+        Box(modifier = Modifier.fillMaxSize().padding(all = 16.dp), contentAlignment = Alignment.CenterEnd) {
+            ButtonWithArrowRight(
+                modifier = Modifier.size(60.dp), colors = ButtonDefaults.buttonColors(
+                    containerColor = Colors.Brown80,
+                    contentColor = Colors.White
+                ), onClick = { navigator.push(ProfessionalHelpScreen()) }
+            )
+        }
+
         BoxWithConstraints {
             val screenWidth = maxWidth
             val screenHeight = maxHeight

@@ -1,6 +1,6 @@
-package com.joohnq.moodapp.view.onboarding.state
+package com.joohnq.moodapp.view.onboarding.options
 
-import com.joohnq.moodapp.CustomDrawables
+import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.indeterminate
@@ -12,23 +12,23 @@ import org.jetbrains.compose.resources.StringResource
 sealed class PhysicalSymptomsOptions(val text: StringResource, val icon: IconProps) {
     data object YesVeryPainful : PhysicalSymptomsOptions(
         text = Res.string.yes_very_painful, icon = IconProps(
-            icon = CustomDrawables.Icons.Check,
+            icon = Drawables.Icons.Check,
         )
     )
 
     data object No : PhysicalSymptomsOptions(
         text = Res.string.no_physical_pain,
-        icon = IconProps(icon = CustomDrawables.Icons.Close)
+        icon = IconProps(icon = Drawables.Icons.Close)
     )
 
     data object YesJustABit : PhysicalSymptomsOptions(
         text =Res.string.yes_but_just_a_bit,
-        icon = IconProps(icon = CustomDrawables.Icons.Question)
+        icon = IconProps(icon = Drawables.Icons.Question)
     )
 
     data object Indeterminate :
         PhysicalSymptomsOptions(
             text = Res.string.indeterminate,
-            icon = IconProps(icon = CustomDrawables.Icons.Question)
+            icon = IconProps(icon = Drawables.Icons.Question)
         )
 }

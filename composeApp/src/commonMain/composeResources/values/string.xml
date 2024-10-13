@@ -36,8 +36,8 @@
     <string name="worst">Worst</string>
     <string name="minus_three_hours"> &lt; 3 HOURS</string>
     <string name="indeterminate">Indeterminate</string>
-    <string name="yes">yes</string>
-    <string name="no">no</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="sought_professional_help_title">Have you sought professional help before?</string>
     <string name="assessments">Assessments</string>
     <string name="page_of">%1$s of %2$d</string>
@@ -58,4 +58,18 @@
     <string name="over_the_counter_supplements">Over the Counter Supplements</string>
     <string name="im_not_taking_any">I'm Not Taking Any</string>
     <string name="prefer_not_to_say">Prefer Not To Say</string>
+    <string name="stress_rate_title">How would you rate your stress level?</string>
+    <string name="stress_rate_desc">You Are Exremely Stressed Out.</string>
+    <string name="you_are_not_stressed_out">You Are Not Stressed Out</string>
+    <string name="you_are_a_little_stressed_out">You Are A Little Stressed Out</string>
+    <string name="you_are_neutral">You Are Neutral</string>
+    <string name="you_are_very_stressed_out">You Are Very Stressed Out</string>
+    <string name="you_are_extremely_stressed_out">You Are Extremely Stressed Out</string>
+    <string name="one_number">1</string>
+    <string name="two_number">2</string>
+    <string name="three_number">3</string>
+    <string name="four_number">4</string>
+    <string name="five_number">5</string>
+    <string name="expression_analysis_title">Expression Analysis</string>
+    <string name="expression_analysis_desc">Freely write down anything that's on your mind. Dr Freud.ai is here to listen...</string>
 </resources>

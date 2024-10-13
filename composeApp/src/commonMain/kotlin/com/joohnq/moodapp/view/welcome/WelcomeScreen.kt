@@ -11,7 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class WelcomeScreen : Screen {
         val scope = rememberCoroutineScope()
         val onNext: () -> Unit =
             { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } }
-        Scaffold(containerColor = CustomColors.White) { _ ->
+        Scaffold(containerColor = Colors.White) { _ ->
             HorizontalPager(
                 pagerState,
             ) { page ->

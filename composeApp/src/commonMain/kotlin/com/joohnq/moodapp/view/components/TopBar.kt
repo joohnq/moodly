@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.Colors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
 import moodapp.composeapp.generated.resources.page_of
@@ -29,14 +29,14 @@ fun OnboardingTopBar(page: Int){
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 stringResource(Res.string.assessments),
-                style = CustomTextStyle.TextStyleOnboardingScreenSession()
+                style = TextStyles.OnboardingScreenSession()
             )
         }
         TextWithBackground(
             stringResource(Res.string.page_of, page, 7),
-            borderColor = CustomColors.Transparent,
-            backgroundColor = CustomColors.Brown20,
-            textColor = CustomColors.Brown60
+            borderColor = Colors.Transparent,
+            backgroundColor = Colors.Brown20,
+            textColor = Colors.Brown60
         )
     }
 }

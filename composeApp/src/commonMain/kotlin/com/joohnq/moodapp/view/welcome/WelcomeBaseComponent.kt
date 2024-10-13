@@ -14,10 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,10 +28,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joohnq.moodapp.CustomColors
-import com.joohnq.moodapp.CustomDrawables
+import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.ScreenDimensions
-import com.joohnq.moodapp.view.components.CustomTextStyle
+import com.joohnq.moodapp.view.components.ButtonWithArrowRight
+import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TextWithBackground
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.step
@@ -87,9 +84,9 @@ fun MockScreen(
             ) {
                 TextWithBackground(
                     stringResource(Res.string.step, step),
-                    borderColor = CustomColors.Brown80,
-                    backgroundColor = CustomColors.Transparent,
-                    textColor = CustomColors.Brown80
+                    borderColor = Colors.Brown80,
+                    backgroundColor = Colors.Transparent,
+                    textColor = Colors.Brown80
                 )
             }
             Column(
@@ -97,7 +94,7 @@ fun MockScreen(
                     .fillMaxWidth()
                     .fillMaxHeight(0.45f)
                     .background(
-                        color = CustomColors.White,
+                        color = Colors.White,
                     )
                     .padding(vertical = 32.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -105,25 +102,25 @@ fun MockScreen(
                 LinearProgressIndicator(
                     progress = { 0.25f * index },
                     modifier = Modifier.width(180.dp).height(8.dp),
-                    color = CustomColors.Brown80,
-                    trackColor = CustomColors.Brown20,
+                    color = Colors.Brown80,
+                    trackColor = Colors.Brown20,
                     strokeCap = StrokeCap.Round,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     text = buildAnnotatedString {
                         if (firstTitle != null)
-                            withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitle()) {
+                            withStyle(style = TextStyles.WelcomeScreenTitle()) {
                                 append(firstTitle)
                             }
                         withStyle(
-                            style = CustomTextStyle.TextStyleWelcomeScreenTitleWord()
+                            style = TextStyles.WelcomeScreenTitleWord()
                                 .copy(color = spanColor)
                         ) {
                             append(span)
                         }
                         if (secondTitle != null)
-                            withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitle()) {
+                            withStyle(style = TextStyles.WelcomeScreenTitle()) {
                                 append(secondTitle)
                             }
                     },
@@ -131,22 +128,12 @@ fun MockScreen(
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Button(
-                    modifier = Modifier.size(80.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = CustomColors.Brown80,
-                        contentColor = CustomColors.White
-                    ),
-                    shape = CircleShape,
-                    onClick = onNext
-                ) {
-                    Icon(
-                        painter = painterResource(CustomDrawables.Icons.Arrow),
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+                ButtonWithArrowRight(
+                    modifier = Modifier.size(60.dp), colors = ButtonDefaults.buttonColors(
+                        containerColor = Colors.Brown80,
+                        contentColor = Colors.White
+                    ), onClick = onNext
+                )
             }
         }
     }

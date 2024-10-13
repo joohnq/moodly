@@ -18,6 +18,6 @@ fun TextWithBackground(text: String, borderColor: Color, backgroundColor: Color,
             .border(2.dp, color = borderColor, shape = CircleShape)
             .background(color = backgroundColor, shape = CircleShape)
             .padding(vertical = 9.dp, horizontal = 16.dp),
-        style = CustomTextStyle.TextStyleWelcomeScreenIndicatorIndex().copy(color = textColor)
+        style = TextStyles.WelcomeScreenIndicatorIndex().copy(color = textColor)
     )
 }

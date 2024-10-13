@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding.state
+package com.joohnq.moodapp.view.onboarding.options
 
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.indeterminate

@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.CustomColors
+import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
@@ -34,7 +34,7 @@ class LoadingScreen : Screen {
         }
 
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = CustomColors.Brown60, strokeWidth = 6.dp, strokeCap = StrokeCap.Round)
+            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = Colors.Brown60, strokeWidth = 6.dp, strokeCap = StrokeCap.Round)
         }
     }
 }

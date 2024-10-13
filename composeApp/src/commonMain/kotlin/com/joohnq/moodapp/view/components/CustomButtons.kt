@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.CustomColors
-import com.joohnq.moodapp.CustomDrawables
+import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
 import org.jetbrains.compose.resources.painterResource
 
@@ -45,7 +45,7 @@ fun ButtonTextWithIcon(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text, style = CustomTextStyle.TextStyleWelcomeScreenButton())
+            Text(text, style = TextStyles.WelcomeScreenButton())
             Spacer(modifier = Modifier.width(12.dp))
             Icon(
                 painter = painterResource(icon.icon),
@@ -62,7 +62,7 @@ fun ButtonWithIcon(
     modifier: Modifier,
     icon: IconProps,
     colors: ButtonColors,
-    borderStroke: BorderStroke,
+    borderStroke: BorderStroke? = null,
     onClick: () -> Unit
 ) {
     Button(
@@ -88,13 +88,13 @@ fun ButtonWithArrowRight(modifier: Modifier = Modifier, text: String, onClick: (
         modifier = modifier,
         text = text,
         colors = ButtonDefaults.buttonColors(
-            containerColor = CustomColors.Brown80,
-            contentColor = CustomColors.White
+            containerColor = Colors.Brown80,
+            contentColor = Colors.White
         ),
         shape = CircleShape,
         icon = IconProps(
-            icon = CustomDrawables.Icons.Arrow,
-            tint = CustomColors.White,
+            icon = Drawables.Icons.Arrow,
+            tint = Colors.White,
             modifier = Modifier.size(24.dp)
         ),
         onClick = onClick
@@ -106,17 +106,17 @@ fun ButtonWithArrowOpen(onClick: () -> Unit) {
     ButtonWithIcon(
         modifier = Modifier.size(48.dp),
         colors = ButtonColors(
-            containerColor = CustomColors.Transparent,
-            contentColor = CustomColors.Brown80,
-            disabledContainerColor = CustomColors.Transparent,
-            disabledContentColor = CustomColors.Brown80
+            containerColor = Colors.Transparent,
+            contentColor = Colors.Brown80,
+            disabledContainerColor = Colors.Transparent,
+            disabledContentColor = Colors.Brown80
         ),
         icon = IconProps(
-            icon = CustomDrawables.Icons.ArrowOpen,
-            tint = CustomColors.Brown80,
+            icon = Drawables.Icons.ArrowOpen,
+            tint = Colors.Brown80,
             modifier = Modifier.size(24.dp),
         ),
-        borderStroke = BorderStroke(1.5.dp, color = CustomColors.Brown80),
+        borderStroke = BorderStroke(1.5.dp, color = Colors.Brown80),
         onClick = onClick
     )
 }
@@ -136,8 +136,27 @@ fun ButtonWithText(
     ) {
         Text(
             text,
-            style = CustomTextStyle.TextStyleWelcomeScreenButton(),
+            style = TextStyles.WelcomeScreenButton(),
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Composable
+fun ButtonWithArrowRight(
+    modifier: Modifier = Modifier,
+    colors: ButtonColors,
+    onClick: () -> Unit
+){
+    ButtonWithIcon(
+        modifier = modifier,
+        colors = colors,
+        borderStroke = null,
+        icon = IconProps(
+            icon = Drawables.Icons.Arrow,
+            tint = colors.contentColor,
+            modifier = Modifier.size(24.dp)
+        ),
+        onClick = onClick
+    )
 }

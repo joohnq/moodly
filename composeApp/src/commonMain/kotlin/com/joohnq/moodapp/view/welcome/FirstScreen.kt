@@ -23,10 +23,10 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.CustomColors
-import com.joohnq.moodapp.CustomDrawables
+import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.CustomTextStyle
+import com.joohnq.moodapp.view.components.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.already_have_an_account
 import moodapp.composeapp.generated.resources.first_screen_desc
@@ -48,14 +48,14 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
         Text(
             text = buildAnnotatedString {
                 withStyle(
-                    style = CustomTextStyle.TextStyleWelcomeScreenTitle()
+                    style = TextStyles.WelcomeScreenTitle()
                 ) {
                     append(stringResource(Res.string.first_screen_title))
                 }
-                withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitleWord()) {
+                withStyle(style = TextStyles.WelcomeScreenTitleWord()) {
                     append(stringResource(Res.string.first_screen_title_word))
                 }
-                withStyle(style = CustomTextStyle.TextStyleWelcomeScreenTitle()) {
+                withStyle(style = TextStyles.WelcomeScreenTitle()) {
                     append(stringResource(Res.string.first_screen_second_title))
                 }
             },
@@ -64,17 +64,17 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             stringResource(Res.string.first_screen_desc),
-            style = CustomTextStyle.TextStyleWelcomeScreenSubTitle(),
+            style = TextStyles.WelcomeScreenSubTitle(),
         )
         Spacer(modifier = Modifier.height(32.dp))
         Box(contentAlignment = Alignment.Center) {
             Box(
                 modifier = Modifier
                     .size(300.dp)
-                    .background(color = CustomColors.White, shape = CircleShape)
+                    .background(color = Colors.White, shape = CircleShape)
             )
             Image(
-                painter = painterResource(CustomDrawables.Images.WelcomeFirstScreenImage),
+                painter = painterResource(Drawables.Images.WelcomeFirstScreenImage),
                 contentDescription = null,
             )
         }
@@ -87,17 +87,17 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
         ) {
             Text(
                 text = stringResource(Res.string.already_have_an_account),
-                style = CustomTextStyle.TextStyleWelcomeScreenText()
+                style = TextStyles.WelcomeScreenText()
             )
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = CustomColors.Transparent,
-                    contentColor = CustomColors.Orange40
+                    containerColor = Colors.Transparent,
+                    contentColor = Colors.Orange40
                 ),
                 contentPadding = PaddingValues(5.dp),
                 onClick = onSignIn
             ) {
-                Text(text = stringResource(Res.string.sign_in), style = CustomTextStyle.TextStyleWelcomeScreenButton2())
+                Text(text = stringResource(Res.string.sign_in), style = TextStyles.WelcomeScreenButton2())
             }
         }
     }

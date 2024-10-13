@@ -50,7 +50,7 @@ fun TextRadioButton(
     ) {
         Text(
             text = text,
-            style = CustomTextStyle.TextStyleWelcomeScreenButton()
+            style = TextStyles.WelcomeScreenButton()
         )
     }
 }

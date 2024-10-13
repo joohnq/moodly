@@ -1,6 +1,6 @@
-package com.joohnq.moodapp.view.onboarding.state
+package com.joohnq.moodapp.view.onboarding.options
 
-import com.joohnq.moodapp.CustomDrawables
+import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.im_not_taking_any
@@ -13,29 +13,29 @@ import org.jetbrains.compose.resources.StringResource
 sealed class MedicationsSupplementsOptions(val text: StringResource, val icon: IconProps) {
     data object PrescribedMedications : MedicationsSupplementsOptions(
         text = Res.string.prescribed_medications, icon = IconProps(
-            icon = CustomDrawables.Icons.Medicine,
+            icon = Drawables.Icons.Medicine,
         )
     )
 
     data object OverTheCounterSupplements : MedicationsSupplementsOptions(
         text = Res.string.over_the_counter_supplements,
-        icon = IconProps(icon = CustomDrawables.Icons.DrugStore)
+        icon = IconProps(icon = Drawables.Icons.DrugStore)
     )
 
     data object ImNotTakingAny : MedicationsSupplementsOptions(
         text =Res.string.im_not_taking_any,
-        icon = IconProps(icon = CustomDrawables.Icons.Nothing)
+        icon = IconProps(icon = Drawables.Icons.Nothing)
     )
 
     data object PreferNotToSay :
         MedicationsSupplementsOptions(
             text = Res.string.prefer_not_to_say,
-            icon = IconProps(icon = CustomDrawables.Icons.Close)
+            icon = IconProps(icon = Drawables.Icons.Close)
         )
 
     data object Indeterminate :
         MedicationsSupplementsOptions(
             text = Res.string.indeterminate,
-            icon = IconProps(icon = CustomDrawables.Icons.Question)
+            icon = IconProps(icon = Drawables.Icons.Question)
         )
 }

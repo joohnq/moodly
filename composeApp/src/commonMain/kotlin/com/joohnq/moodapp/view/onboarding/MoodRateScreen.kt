@@ -12,7 +12,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -73,7 +72,7 @@ class MoodRateScreen : Screen {
         ) {
             Text(
                 stringResource(Res.string.mood_rate_desc, stringResource(mood.text)),
-                style = TextStyles.TextStyleOnboardingScreenMood()
+                style = TextStyles.OnboardingScreenMood()
             )
             Spacer(modifier = Modifier.height(24.dp))
             MoodFace(

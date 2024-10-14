@@ -3,9 +3,10 @@ package com.joohnq.moodapp.view.onboarding
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +25,12 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SliderComponents
+import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.VerticalSlider
 import com.joohnq.moodapp.view.entities.Mood
-import com.joohnq.moodapp.view.entities.moods
+import com.joohnq.moodapp.view.entities.MoodSaver
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.excellent
 import moodapp.composeapp.generated.resources.fair
@@ -49,8 +50,18 @@ class SleepQualityScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        var selectedMood by remember { mutableStateOf<Mood>(Mood.Depressed) }
-        var sliderValue by remember { mutableStateOf(0f) }
+        val moods =
+            rememberSaveable {
+                listOf(
+                    Mood.Overjoyed,
+                    Mood.Happy,
+                    Mood.Neutral,
+                    Mood.Sad,
+                    Mood.Depressed
+                )
+            }
+        var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Depressed) }
+        var sliderValue by rememberSaveable { mutableStateOf(0f) }
 
         val sliderColors = SliderColors(
             thumbColor = Colors.Orange40,
@@ -73,11 +84,13 @@ class SleepQualityScreen : Screen {
         OnboardingBaseComponent(
             page = 4,
             title = Res.string.sleep_quality_title,
+            isContinueButtonVisible = true,
             onContinue = { navigator.push(MedicationsSupplementsScreen()) },
+            onBack = { navigator.pop() }
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 50.dp)
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize().height(400.dp)
             ) {
                 Column(
                     modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
@@ -155,7 +168,7 @@ class SleepQualityScreen : Screen {
                 Column(
                     modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.End
                 ) {
                     moods.forEach { mood ->
                         Column {
@@ -167,6 +180,7 @@ class SleepQualityScreen : Screen {
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

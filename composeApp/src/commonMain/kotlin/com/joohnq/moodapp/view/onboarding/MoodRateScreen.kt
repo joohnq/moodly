@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,10 +23,11 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
+import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.entities.Mood
+import com.joohnq.moodapp.view.entities.MoodSaver
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title
@@ -37,52 +37,31 @@ class MoodRateScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-
-//        SideEffect {
-//            navigator.push(ExpressionAnalysisScreen())
-//        }
-
-        val moods =
-            remember {
-                listOf(
-                    Mood.Neutral,
-                    Mood.Happy,
-                    Mood.Overjoyed,
-                    Mood.Depressed,
-                    Mood.Sad,
-                    Mood.Neutral,
-                    Mood.Happy,
-                    Mood.Overjoyed,
-                    Mood.Depressed,
-                    Mood.Sad,
-                )
-            }
-        var mood by remember { mutableStateOf<Mood>(Mood.Neutral) }
-        var selectedMood by remember { mutableStateOf(0) }
-
-        LaunchedEffect(selectedMood) {
-            mood = moods[selectedMood]
-        }
+        var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Neutral) }
 
         OnboardingBaseComponent(
             page = 1,
             title = Res.string.mood_rate_title,
             isContinueButtonVisible = false,
+            onBack = { navigator.pop() },
             onContinue = { },
         ) {
             Text(
-                stringResource(Res.string.mood_rate_desc, stringResource(mood.text)),
+                stringResource(Res.string.mood_rate_desc, stringResource(selectedMood.text)),
                 style = TextStyles.OnboardingScreenMood()
             )
             Spacer(modifier = Modifier.height(24.dp))
             MoodFace(
                 modifier = Modifier.size(120.dp),
-                mood = mood,
+                mood = selectedMood,
             )
             Spacer(modifier = Modifier.height(24.dp))
         }
 
-        Box(modifier = Modifier.fillMaxSize().padding(all = 16.dp), contentAlignment = Alignment.CenterEnd) {
+        Box(
+            modifier = Modifier.fillMaxSize().padding(all = 16.dp),
+            contentAlignment = Alignment.CenterEnd
+        ) {
             ButtonWithArrowRight(
                 modifier = Modifier.size(60.dp), colors = ButtonDefaults.buttonColors(
                     containerColor = Colors.Brown80,
@@ -102,11 +81,7 @@ class MoodRateScreen : Screen {
                     .offset(y = carouselOffset),
                 contentAlignment = Alignment.TopCenter
             ) {
-                MoodRoulette(
-                    moods = moods,
-                    selectedMood = selectedMood,
-                    setSelectedMood = { selectedMood = it }
-                )
+                MoodRoulette { selectedMood = it }
             }
         }
     }

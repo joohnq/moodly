@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.onboarding.options.StressRateOptions
+import com.joohnq.moodapp.view.onboarding.options.StressRateOptionsSaver
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
@@ -33,7 +35,11 @@ class StressRateScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        var selectedOption by remember { mutableStateOf<StressRateOptions>(StressRateOptions.Three) }
+        var selectedOption by rememberSaveable(stateSaver = StressRateOptionsSaver) {
+            mutableStateOf(
+                StressRateOptions.Three
+            )
+        }
         val options = remember {
             listOf(
                 StressRateOptions.One,
@@ -47,7 +53,8 @@ class StressRateScreen : Screen {
         OnboardingBaseComponent(
             page = 6,
             title = Res.string.stress_rate_title,
-            onContinue = { navigator.push(StressRateScreen()) },
+            onBack = { navigator.pop() },
+            onContinue = { navigator.push(ExpressionAnalysisScreen()) },
         ) {
             Text(
                 stringResource(selectedOption.value),

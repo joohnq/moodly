@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.OnboardingTopBar
+import com.joohnq.moodapp.view.components.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
 import org.jetbrains.compose.resources.DrawableResource
@@ -33,6 +35,7 @@ fun OnboardingBaseComponent(
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
     onContinue: () -> Unit,
+    onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
     Scaffold(
@@ -40,13 +43,13 @@ fun OnboardingBaseComponent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize(),
+            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OnboardingTopBar(page)
+            OnboardingTopBar(page = page, onBack = onBack)
             Spacer(modifier = Modifier.height(32.dp))
-            if (image != null)
-            {
+            if (image != null) {
                 Image(
                     painter = painterResource(image),
                     contentDescription = null,
@@ -62,12 +65,14 @@ fun OnboardingBaseComponent(
             Spacer(modifier = Modifier.height(24.dp))
             content()
             Spacer(modifier = Modifier.height(16.dp))
-            if (isContinueButtonVisible)
+            if (isContinueButtonVisible) {
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(Res.string.continue_word),
                     onClick = onContinue
                 )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -22,10 +23,11 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonColors
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
+import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions
+import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptionsSaver
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
 import moodapp.composeapp.generated.resources.select_one_answer
@@ -36,8 +38,8 @@ class PhysicalSymptomsScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
-        var selectedOption by remember {
-            mutableStateOf<PhysicalSymptomsOptions>(
+        var selectedOption by rememberSaveable(stateSaver = PhysicalSymptomsOptionsSaver) {
+            mutableStateOf(
                 PhysicalSymptomsOptions.Indeterminate
             )
         }
@@ -58,8 +60,9 @@ class PhysicalSymptomsScreen : Screen {
             page = 3,
             title = Res.string.experiencing_physical_symptoms_title,
             isContinueButtonVisible = isContinueButtonVisible,
+            onBack = { navigator.pop() },
             onContinue = { navigator.push(SleepQualityScreen()) },
-        ){
+        ) {
             Text(
                 text = stringResource(Res.string.select_one_answer),
                 style = TextStyles.OnboardingScreenMood(),
@@ -90,6 +93,7 @@ class PhysicalSymptomsScreen : Screen {
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,6 +20,7 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptions
+import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptionsSaver
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.jetbrains.compose.resources.stringResource
@@ -28,12 +30,12 @@ class ProfessionalHelpScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
-        var selectedOption by remember {
-            mutableStateOf<ProfessionalHelpOptions>(
+        var selectedOption by rememberSaveable(stateSaver = ProfessionalHelpOptionsSaver) {
+            mutableStateOf(
                 ProfessionalHelpOptions.Indeterminate
             )
         }
-        val options = remember {
+        val options = rememberSaveable {
             listOf(
                 ProfessionalHelpOptions.Yes,
                 ProfessionalHelpOptions.No
@@ -50,8 +52,9 @@ class ProfessionalHelpScreen : Screen {
             image = Drawables.Images.OnboardingSoughtProfessionalHelp,
             title = Res.string.sought_professional_help_title,
             isContinueButtonVisible = isContinueButtonVisible,
+            onBack = { navigator.pop() },
             onContinue = { navigator.push(PhysicalSymptomsScreen()) },
-        ){
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)

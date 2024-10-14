@@ -36,6 +36,7 @@ class ExpressionAnalysisScreen : Screen {
         OnboardingBaseComponent(
             page = 7,
             title = Res.string.expression_analysis_title,
+            onBack = { navigator.pop() },
             onContinue = { navigator.push(ExpressionAnalysisScreen()) },
         ) {
             Text(

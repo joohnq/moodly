@@ -18,14 +18,14 @@ import moodapp.composeapp.generated.resources.page_of
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingTopBar(page: Int){
+fun OnboardingTopBar(page: Int, onBack: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen {}
+            ButtonWithArrowOpen(onClick = onBack)
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 stringResource(Res.string.assessments),

@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,7 +28,7 @@ object SliderComponents {
                 .background(
                     color = Colors.Orange40,
                     shape = CircleShape
-                ),
+                ).border(4.dp, color = Colors.Orange40Alpha25, shape = CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(

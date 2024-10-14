@@ -33,13 +33,13 @@ fun MoodFaceRoulette(mood: Mood) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.size(150.dp)
-            .background(color = mood.rouletteBackgroundColor)
+            .background(color = mood.backgroundColor)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
             modifier = Modifier.size(120.dp),
-            tint = mood.rouletteFaceColor
+            tint = mood.color
         )
     }
 }

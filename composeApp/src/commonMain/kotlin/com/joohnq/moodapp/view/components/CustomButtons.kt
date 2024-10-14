@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -24,7 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
+import com.joohnq.moodapp.view.onboarding.options.StressRateOptions
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ButtonTextWithIcon(
@@ -45,7 +48,10 @@ fun ButtonTextWithIcon(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text, style = TextStyles.WelcomeScreenButton())
+            Text(
+                text,
+                style = TextStyles.WelcomeScreenButton()
+            )
             Spacer(modifier = Modifier.width(12.dp))
             Icon(
                 painter = painterResource(icon.icon),
@@ -83,7 +89,11 @@ fun ButtonWithIcon(
 }
 
 @Composable
-fun ButtonWithArrowRight(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun ButtonWithArrowRight(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
     ButtonTextWithIcon(
         modifier = modifier,
         text = text,
@@ -116,7 +126,10 @@ fun ButtonWithArrowOpen(onClick: () -> Unit) {
             tint = Colors.Brown80,
             modifier = Modifier.size(24.dp),
         ),
-        borderStroke = BorderStroke(1.5.dp, color = Colors.Brown80),
+        borderStroke = BorderStroke(
+            1.5.dp,
+            color = Colors.Brown80
+        ),
         onClick = onClick
     )
 }
@@ -147,7 +160,7 @@ fun ButtonWithArrowRight(
     modifier: Modifier = Modifier,
     colors: ButtonColors,
     onClick: () -> Unit
-){
+) {
     ButtonWithIcon(
         modifier = modifier,
         colors = colors,
@@ -159,4 +172,31 @@ fun ButtonWithArrowRight(
         ),
         onClick = onClick
     )
+}
+
+@Composable
+fun StressRateButton(
+    modifier: Modifier = Modifier,
+    isSelected: Boolean,
+    option: StressRateOptions,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = modifier.aspectRatio(1f),
+        onClick = onClick,
+        colors = ButtonColors(
+            containerColor = if (isSelected) Colors.Orange40 else Colors.White,
+            contentColor = if (isSelected) Colors.White else Colors.Brown80,
+            disabledContainerColor = if (isSelected) Colors.Orange40 else Colors.White,
+            disabledContentColor = if (isSelected) Colors.White else Colors.Brown80
+        ),
+        border = if (isSelected) BorderStroke(
+            color = Colors.Orange40Alpha25,
+            width = 4.dp
+        ) else null,
+        shape = CircleShape,
+        contentPadding = PaddingValues(0.dp),
+    ) {
+        Text(text = stringResource(option.value))
+    }
 }

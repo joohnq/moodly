@@ -2,12 +2,9 @@ package com.joohnq.moodapp.view.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,9 +19,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.components.IconAndTextRadioButtonColors
-import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
+import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions
 import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptionsSaver
@@ -74,23 +69,10 @@ class PhysicalSymptomsScreen : Screen {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 options.forEach { option ->
-                    IconAndTextRadioButtonHorizontal(
-                        modifier = Modifier.fillMaxWidth(),
-                        paddingValues = PaddingValues(all = 16.dp),
-                        text = stringResource(option.text),
-                        icon = option.icon.copy(modifier = Modifier.size(24.dp)),
+                    PhysicalSymptomsRadioButton(
+                        option = option,
                         selected = selectedOption == option,
-                        iconAndTextRadioButtonColors = IconAndTextRadioButtonColors(
-                            selectedBackgroundColor = Colors.Green50,
-                            selectedContentColor = Colors.White,
-                            unSelectedContentColor = Colors.Brown80,
-                            unSelectedBackgroundColor = Colors.White,
-                            selectedBorderColor = Colors.Green50Alpha25,
-                        ),
-                        shape = RoundedCornerShape(20.dp),
-                        textStyle = TextStyles.WelcomeScreenButton(),
-                        onClick = { selectedOption = option }
-                    )
+                    ) { selectedOption = option }
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))

@@ -5,10 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
@@ -22,8 +26,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.entities.IconAndTextRadioButtonColors
 import com.joohnq.moodapp.view.entities.IconProps
+import com.joohnq.moodapp.view.onboarding.options.MedicationsSupplementsOptions
+import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions
+import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptions
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TextRadioButton(
@@ -35,7 +45,7 @@ fun TextRadioButton(
     unSelectedBackground: Color,
     unSelectedContent: Color,
     shape: Shape,
-    onClick: (String) -> Unit
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier.fillMaxWidth().height(56.dp),
@@ -46,7 +56,7 @@ fun TextRadioButton(
             disabledContainerColor = if (selected) selectedBackground else unSelectedBackground,
             disabledContentColor = if (selected) selectedContent else unSelectedContent
         ),
-        onClick = { onClick(text) }
+        onClick = onClick
     ) {
         Text(
             text = text,
@@ -65,7 +75,7 @@ fun IconAndTextRadioButtonHorizontal(
     iconAndTextRadioButtonColors: IconAndTextRadioButtonColors,
     shape: Shape,
     textStyle: TextStyle,
-    onClick: (String) -> Unit
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier,
@@ -80,7 +90,8 @@ fun IconAndTextRadioButtonHorizontal(
             color = iconAndTextRadioButtonColors.selectedBorderColor,
             width = 4.dp
         ) else null,
-        onClick = { onClick(text) }
+        contentPadding = PaddingValues(0.dp),
+        onClick = onClick
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -104,7 +115,7 @@ fun IconAndTextRadioButtonHorizontal(
             }
             RadioButton(
                 selected = selected,
-                onClick = { onClick(text) },
+                onClick = onClick,
                 colors = RadioButtonDefaults.colors(
                     selectedColor = iconAndTextRadioButtonColors.selectedContentColor,
                     unselectedColor = iconAndTextRadioButtonColors.unSelectedContentColor,
@@ -113,14 +124,6 @@ fun IconAndTextRadioButtonHorizontal(
         }
     }
 }
-
-data class IconAndTextRadioButtonColors(
-    val selectedBackgroundColor: Color,
-    val selectedContentColor: Color,
-    val selectedBorderColor: Color,
-    val unSelectedBackgroundColor: Color,
-    val unSelectedContentColor: Color,
-)
 
 @Composable
 fun IconAndTextRadioButtonVertical(
@@ -132,7 +135,7 @@ fun IconAndTextRadioButtonVertical(
     iconAndTextRadioButtonColors: IconAndTextRadioButtonColors,
     shape: Shape,
     textStyle: TextStyle,
-    onClick: (String) -> Unit
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier,
@@ -148,7 +151,7 @@ fun IconAndTextRadioButtonVertical(
             width = 4.dp
         ) else null,
         contentPadding = PaddingValues(0.dp),
-        onClick = { onClick(text) }
+        onClick = onClick
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -167,4 +170,76 @@ fun IconAndTextRadioButtonVertical(
             )
         }
     }
+}
+
+@Composable
+fun PhysicalSymptomsRadioButton(
+    modifier: Modifier = Modifier,
+    option: PhysicalSymptomsOptions,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    IconAndTextRadioButtonHorizontal(
+        modifier = modifier.fillMaxWidth(),
+        paddingValues = PaddingValues(all = 16.dp),
+        text = stringResource(option.text),
+        icon = option.icon.copy(modifier = Modifier.size(24.dp)),
+        selected = selected,
+        iconAndTextRadioButtonColors = IconAndTextRadioButtonColors(
+            selectedBackgroundColor = Colors.Green50,
+            selectedContentColor = Colors.White,
+            unSelectedContentColor = Colors.Brown80,
+            unSelectedBackgroundColor = Colors.White,
+            selectedBorderColor = Colors.Green50Alpha25,
+        ),
+        shape = RoundedCornerShape(20.dp),
+        textStyle = TextStyles.WelcomeScreenButton(),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun MedicationsSupplementsRadioButton(
+    modifier: Modifier = Modifier,
+    option: MedicationsSupplementsOptions,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    IconAndTextRadioButtonVertical(
+        modifier = modifier.fillMaxSize().aspectRatio(1f),
+        paddingValues = PaddingValues(all = 16.dp),
+        text = stringResource(option.text),
+        icon = option.icon.copy(modifier = Modifier.size(24.dp)),
+        selected = selected,
+        iconAndTextRadioButtonColors = IconAndTextRadioButtonColors(
+            selectedBackgroundColor = Colors.Green50,
+            selectedContentColor = Colors.White,
+            unSelectedContentColor = Colors.Brown80,
+            unSelectedBackgroundColor = Colors.White,
+            selectedBorderColor = Colors.Green50Alpha25,
+        ),
+        shape = RoundedCornerShape(20.dp),
+        textStyle = TextStyles.OnboardingMedicationsGridItem(),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun ProfessionalHelpRadioButton(
+    modifier: Modifier = Modifier,
+    option: ProfessionalHelpOptions,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    TextRadioButton(
+        modifier = modifier,
+        text = stringResource(option.text),
+        selected = selected,
+        selectedBackground = Colors.Green50,
+        selectedContent = Colors.White,
+        unSelectedContent = Colors.Brown80,
+        unSelectedBackground = Colors.White,
+        shape = CircleShape,
+        onClick = onClick
+    )
 }

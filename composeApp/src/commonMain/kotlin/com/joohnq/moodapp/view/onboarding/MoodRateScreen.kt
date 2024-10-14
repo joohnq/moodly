@@ -71,13 +71,11 @@ class MoodRateScreen : Screen {
         }
 
         BoxWithConstraints {
-            val screenWidth = maxWidth
-            val screenHeight = maxHeight
-            val carouselOffset = screenHeight - (screenWidth / 2) + 60.dp
+            val carouselOffset = maxHeight - (maxWidth / 2) + 60.dp
 
             Box(
                 modifier = Modifier
-                    .size(screenWidth)
+                    .size(maxWidth)
                     .offset(y = carouselOffset),
                 contentAlignment = Alignment.TopCenter
             ) {

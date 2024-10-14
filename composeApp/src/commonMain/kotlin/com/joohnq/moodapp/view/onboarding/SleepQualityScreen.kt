@@ -10,12 +10,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SliderColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -25,10 +25,13 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
+import com.joohnq.moodapp.view.components.SliderColors
 import com.joohnq.moodapp.view.components.SliderComponents
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.VerticalSlider
+import com.joohnq.moodapp.view.entities.DoubleTextOption
 import com.joohnq.moodapp.view.entities.Mood
 import com.joohnq.moodapp.view.entities.MoodSaver
 import moodapp.composeapp.generated.resources.Res
@@ -43,6 +46,7 @@ import moodapp.composeapp.generated.resources.six_seven_hours
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import moodapp.composeapp.generated.resources.three_four_hours
 import moodapp.composeapp.generated.resources.worst
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 class SleepQualityScreen : Screen {
@@ -62,19 +66,30 @@ class SleepQualityScreen : Screen {
             }
         var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Depressed) }
         var sliderValue by rememberSaveable { mutableStateOf(0f) }
-
-        val sliderColors = SliderColors(
-            thumbColor = Colors.Orange40,
-            activeTickColor = Colors.Orange40,
-            inactiveTickColor = Colors.Brown20,
-            activeTrackColor = Colors.Orange40,
-            inactiveTrackColor = Colors.Brown20,
-            disabledThumbColor = Colors.Brown20,
-            disabledActiveTrackColor = Colors.Orange40,
-            disabledActiveTickColor = Colors.Orange40,
-            disabledInactiveTrackColor = Colors.Brown20,
-            disabledInactiveTickColor = Colors.Brown20
-        )
+        val textOption = remember {
+            listOf(
+                DoubleTextOption(
+                    firstText = Res.string.excellent,
+                    secondText = Res.string.seven_nine_hours,
+                ),
+                DoubleTextOption(
+                    firstText = Res.string.good,
+                    secondText = Res.string.six_seven_hours,
+                ),
+                DoubleTextOption(
+                    firstText = Res.string.fair,
+                    secondText = Res.string.five_hours,
+                ),
+                DoubleTextOption(
+                    firstText = Res.string.poor,
+                    secondText = Res.string.three_four_hours,
+                ),
+                DoubleTextOption(
+                    firstText = Res.string.worst,
+                    secondText = Res.string.minus_three_hours,
+                ),
+            )
+        }
 
         LaunchedEffect(sliderValue) {
             val i = sliderValue.toInt() / 25
@@ -92,68 +107,17 @@ class SleepQualityScreen : Screen {
             Row(
                 modifier = Modifier.fillMaxSize().height(400.dp)
             ) {
+                val textColor = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80
+
                 Column(
                     modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column {
-                        Text(
-                            stringResource(Res.string.excellent),
-                            style = TextStyles.OnboardingSleepQualityTitle()
-                                .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
-                        )
-                        Text(
-                            stringResource(Res.string.seven_nine_hours),
-                            style = TextStyles.OnboardingSleepQualitySubTitle()
-                                .copy(color = if (selectedMood != Mood.Overjoyed) Colors.Alpha48 else Colors.Brown80)
-                        )
-                    }
-                    Column {
-                        Text(
-                            stringResource(Res.string.good),
-                            style = TextStyles.OnboardingSleepQualityTitle()
-                                .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
-                        )
-                        Text(
-                            stringResource(Res.string.six_seven_hours),
-                            style = TextStyles.OnboardingSleepQualitySubTitle()
-                                .copy(color = if (selectedMood != Mood.Happy) Colors.Alpha48 else Colors.Brown80)
-                        )
-                    }
-                    Column {
-                        Text(
-                            stringResource(Res.string.fair),
-                            style = TextStyles.OnboardingSleepQualityTitle()
-                                .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
-                        )
-                        Text(
-                            stringResource(Res.string.five_hours),
-                            style = TextStyles.OnboardingSleepQualitySubTitle()
-                                .copy(color = if (selectedMood != Mood.Neutral) Colors.Alpha48 else Colors.Brown80)
-                        )
-                    }
-                    Column {
-                        Text(
-                            stringResource(Res.string.poor),
-                            style = TextStyles.OnboardingSleepQualityTitle()
-                                .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
-                        )
-                        Text(
-                            stringResource(Res.string.three_four_hours),
-                            style = TextStyles.OnboardingSleepQualitySubTitle()
-                                .copy(color = if (selectedMood != Mood.Sad) Colors.Alpha48 else Colors.Brown80)
-                        )
-                    }
-                    Column {
-                        Text(
-                            stringResource(Res.string.worst),
-                            style = TextStyles.OnboardingSleepQualityTitle()
-                                .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
-                        )
-                        Text(
-                            stringResource(Res.string.minus_three_hours),
-                            style = TextStyles.OnboardingSleepQualitySubTitle()
-                                .copy(color = if (selectedMood != Mood.Depressed) Colors.Alpha48 else Colors.Brown80)
+                    textOption.forEach {
+                        DoubleText(
+                            firstText = it.firstText,
+                            secondText = it.secondText,
+                            color = textColor
                         )
                     }
                 }
@@ -163,7 +127,7 @@ class SleepQualityScreen : Screen {
                     setSliderValue = { sliderValue = it },
                     thumb = { SliderComponents.SleepQualityThumb() },
                     track = { SliderComponents.SleepQualityTrack(it) },
-                    sliderColors = sliderColors
+                    sliderColors = SliderColors()
                 )
                 Column(
                     modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),

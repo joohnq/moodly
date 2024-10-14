@@ -24,6 +24,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.onboarding.options.StressRateOptions
 import com.joohnq.moodapp.view.onboarding.options.StressRateOptionsSaver
@@ -66,25 +67,11 @@ class StressRateScreen : Screen {
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 options.forEach { option ->
-                    val isSelected = selectedOption == option
-                    Button(
-                        modifier = Modifier.weight(1f).aspectRatio(1f),
-                        onClick = { selectedOption = option },
-                        colors = ButtonColors(
-                            containerColor = if (isSelected) Colors.Orange40 else Colors.White,
-                            contentColor = if (isSelected) Colors.White else Colors.Brown80,
-                            disabledContainerColor = if (isSelected) Colors.Orange40 else Colors.White,
-                            disabledContentColor = if (isSelected) Colors.White else Colors.Brown80
-                        ),
-                        border = if (isSelected) BorderStroke(
-                            color = Colors.Orange40Alpha25,
-                            width = 4.dp
-                        ) else null,
-                        shape = CircleShape,
-                        contentPadding = PaddingValues(0.dp),
-                    ) {
-                        Text(text = stringResource(option.value))
-                    }
+                    StressRateButton(
+                        modifier = Modifier.weight(1f),
+                        option = option,
+                        isSelected = selectedOption == option
+                    ){ selectedOption = option }
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))

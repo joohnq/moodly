@@ -18,6 +18,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptions
 import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptionsSaver
@@ -60,17 +61,11 @@ class ProfessionalHelpScreen : Screen {
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 options.forEach { option ->
-                    TextRadioButton(
+                    ProfessionalHelpRadioButton(
                         modifier = Modifier.weight(1f),
-                        text = stringResource(option.text),
+                        option = option,
                         selected = selectedOption == option,
-                        selectedBackground = Colors.Green50,
-                        selectedContent = Colors.White,
-                        unSelectedContent = Colors.Brown80,
-                        unSelectedBackground = Colors.White,
-                        shape = CircleShape,
-                        onClick = { selectedOption = option }
-                    )
+                    ) { selectedOption = option }
                 }
             }
         }

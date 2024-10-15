@@ -126,4 +126,11 @@ object TextStyles {
         fontSize = 30.sp,
         color = Colors.Alpha100
     )
+
+    @Composable
+    fun CompilingDataTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 30.sp,
+        color = Colors.White
+    )
 }

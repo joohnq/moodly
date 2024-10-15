@@ -3,7 +3,6 @@ package com.joohnq.moodapp.view.onboarding
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -16,25 +15,23 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
-import com.joohnq.moodapp.view.components.TextRadioButton
-import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptions
-import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptionsSaver
+import com.joohnq.moodapp.view.entities.ProfessionalHelpOptions
+import com.joohnq.moodapp.view.entities.ProfessionalHelpOptionsSaver
+import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
-import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 class ProfessionalHelpScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
+        val userViewModel: UserViewModel = koinInject()
         var selectedOption by rememberSaveable(stateSaver = ProfessionalHelpOptionsSaver) {
-            mutableStateOf(
-                ProfessionalHelpOptions.Indeterminate
-            )
+            mutableStateOf(null)
         }
         val options = rememberSaveable {
             listOf(
@@ -44,8 +41,7 @@ class ProfessionalHelpScreen : Screen {
         }
 
         LaunchedEffect(selectedOption) {
-            isContinueButtonVisible =
-                selectedOption != ProfessionalHelpOptions.Indeterminate
+            isContinueButtonVisible = selectedOption != null
         }
 
         OnboardingBaseComponent(
@@ -54,7 +50,10 @@ class ProfessionalHelpScreen : Screen {
             title = Res.string.sought_professional_help_title,
             isContinueButtonVisible = isContinueButtonVisible,
             onBack = { navigator.pop() },
-            onContinue = { navigator.push(PhysicalSymptomsScreen()) },
+            onContinue = {
+                userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
+                navigator.push(PhysicalSymptomsScreen())
+            },
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

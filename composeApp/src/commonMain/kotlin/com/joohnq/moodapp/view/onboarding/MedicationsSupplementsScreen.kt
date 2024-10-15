@@ -19,33 +19,29 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
-import com.joohnq.moodapp.view.onboarding.options.MedicationsSupplementsOptions
-import com.joohnq.moodapp.view.onboarding.options.MedicationsSupplementsOptionsSaver
+import com.joohnq.moodapp.view.entities.MedicationsSupplements
+import com.joohnq.moodapp.view.entities.MedicationsSupplementsSaver
+import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
+import org.koin.compose.koinInject
 
 class MedicationsSupplementsScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
-        var selectedOption by rememberSaveable(stateSaver = MedicationsSupplementsOptionsSaver) {
-            mutableStateOf(
-                MedicationsSupplementsOptions.Indeterminate
-            )
+        val userViewModel: UserViewModel = koinInject()
+        var selectedOption by rememberSaveable(stateSaver = MedicationsSupplementsSaver) {
+            mutableStateOf(null)
         }
         val options = rememberSaveable {
-            listOf(
-                MedicationsSupplementsOptions.OverTheCounterSupplements,
-                MedicationsSupplementsOptions.PrescribedMedications,
-                MedicationsSupplementsOptions.ImNotTakingAny,
-                MedicationsSupplementsOptions.PreferNotToSay
-            )
+            MedicationsSupplements.getAll()
         }
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible =
-                selectedOption != MedicationsSupplementsOptions.Indeterminate
+                selectedOption != null
         }
 
         OnboardingBaseComponent(
@@ -53,7 +49,12 @@ class MedicationsSupplementsScreen : Screen {
             title = Res.string.medications_supplements_title,
             isContinueButtonVisible = isContinueButtonVisible,
             onBack = { navigator.pop() },
-            onContinue = { navigator.push(StressRateScreen()) },
+            onContinue = {
+                userViewModel.setUserMedicationsSupplements(
+                    selectedOption ?: MedicationsSupplements.PreferNotToSay
+                )
+                navigator.push(StressRateScreen())
+            },
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -62,7 +63,7 @@ class MedicationsSupplementsScreen : Screen {
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(options) { option ->
+                items(options) { option: MedicationsSupplements ->
                     MedicationsSupplementsRadioButton(
                         option = option,
                         selected = selectedOption == option,

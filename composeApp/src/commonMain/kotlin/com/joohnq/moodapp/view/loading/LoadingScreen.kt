@@ -16,25 +16,48 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.view.onb.OnbScreen
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
+import com.joohnq.moodapp.view.state.UiState
+import com.joohnq.moodapp.view.state.fold
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.koinInject
 
 class LoadingScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
-        val userPreferences: UserPreferences? by userPreferenceViewModel.userPreferences.collectAsState()
+        val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
+        val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
 
         LaunchedEffect(userPreferences) {
-            navigator.push(if (userPreferences?.skipWelcomeScreen == true) MoodRateScreen() else WelcomeScreen())
+            userPreferences.fold(
+                onSuccess = {
+                    navigator.push(
+                        if (!it.skipWelcomeScreen) {
+                            WelcomeScreen()
+                        } else if (!it.skipOnboardingScreen) {
+                            MoodRateScreen()
+                        } else {
+                            OnbScreen()
+                        }
+                    )
+                }
+            )
         }
 
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(modifier = Modifier.size(50.dp), color = Colors.Brown60, strokeWidth = 6.dp, strokeCap = StrokeCap.Round)
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(50.dp),
+                color = Colors.Brown60,
+                strokeWidth = 6.dp,
+                strokeCap = StrokeCap.Round
+            )
         }
     }
 }

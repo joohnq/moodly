@@ -1,9 +1,10 @@
 package com.joohnq.moodapp.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -12,30 +13,35 @@ import kotlinx.coroutines.launch
 class UserPreferenceViewModel(
     private val userPreferencesDAO: UserPreferencesDAO,
     private val ioDispatcher: CoroutineDispatcher
-) : ViewModel() {
+) : ScreenModel {
     private val _userPreferences:
-            MutableStateFlow<UserPreferences?> = MutableStateFlow(null)
-    val userPreferences: MutableStateFlow<UserPreferences?> = _userPreferences
+            MutableStateFlow<UiState<UserPreferences>> = MutableStateFlow(UiState.Idle)
+    val userPreferences: MutableStateFlow<UiState<UserPreferences>> = _userPreferences
 
-    fun getUserPreferences() {
-        viewModelScope.launch(ioDispatcher)  {
+    fun getUserPreferences() =
+        screenModelScope.launch(ioDispatcher) {
+            _userPreferences.value = UiState.Loading
             userPreferencesDAO.getUserPreferences().catch {
-                it.printStackTrace()
+                _userPreferences.value = UiState.Error(it.message.toString())
             }.collect {
-                _userPreferences.value = it
+                _userPreferences.value = UiState.Success(it)
             }
         }
-    }
 
-    fun initUserPreferences() {
-        viewModelScope.launch(ioDispatcher) {
+    fun initUserPreferences() =
+        screenModelScope.launch(ioDispatcher) {
             userPreferencesDAO.insertUserPreferences()
         }
-    }
 
-    fun setSkipWelcomeScreen() {
-        viewModelScope.launch(ioDispatcher) {
+    fun setSkipWelcomeScreen() =
+        screenModelScope.launch(ioDispatcher) {
             userPreferencesDAO.setSkipWelcomeScreen()
+            getUserPreferences()
         }
-    }
+
+    fun setSkipOnboardingScreen() =
+        screenModelScope.launch(ioDispatcher) {
+            userPreferencesDAO.setSkipOnboardingScreen()
+            getUserPreferences()
+        }
 }

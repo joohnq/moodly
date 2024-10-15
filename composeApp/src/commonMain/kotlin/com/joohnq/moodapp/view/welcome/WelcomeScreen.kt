@@ -15,13 +15,14 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 class WelcomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
+        val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
         val pagerState = rememberPagerState(0) { 5 }
         val scope = rememberCoroutineScope()
         val onNext: () -> Unit =

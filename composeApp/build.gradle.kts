@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    kotlin("plugin.serialization") version "2.0.20"
+    id("io.realm.kotlin") version "1.16.0"
 }
 
 kotlin {
@@ -37,6 +39,8 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            compileOnly("io.realm.kotlin:library-base:1.16.0")
+//            implementation(libs.room.runtime.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -66,6 +70,12 @@ kotlin {
 
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.serialization.json)
+
+            implementation("io.realm.kotlin:library-base:1.16.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
         }
     }
 }
@@ -112,6 +122,7 @@ room{
 }
 
 dependencies {
+    implementation(libs.androidx.benchmark.common)
     ksp(libs.room.compiler)
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)

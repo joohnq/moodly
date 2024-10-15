@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -22,22 +25,30 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.utils.Log
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.entities.Mood
 import com.joohnq.moodapp.view.entities.MoodSaver
+import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 class MoodRateScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Neutral) }
+        val moodsViewModel: MoodsViewModel = koinInject()
+
+        SideEffect {
+            moodsViewModel.getMoods()
+        }
 
         OnboardingBaseComponent(
             page = 1,
@@ -47,7 +58,10 @@ class MoodRateScreen : Screen {
             onContinue = { },
         ) {
             Text(
-                stringResource(Res.string.mood_rate_desc, stringResource(selectedMood.text)),
+                stringResource(
+                    Res.string.mood_rate_desc,
+                    stringResource(selectedMood.text)
+                ),
                 style = TextStyles.OnboardingScreenMood()
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -63,10 +77,15 @@ class MoodRateScreen : Screen {
             contentAlignment = Alignment.CenterEnd
         ) {
             ButtonWithArrowRight(
-                modifier = Modifier.size(60.dp), colors = ButtonDefaults.buttonColors(
+                modifier = Modifier.size(60.dp),
+                colors = ButtonDefaults.buttonColors(
                     containerColor = Colors.Brown80,
                     contentColor = Colors.White
-                ), onClick = { navigator.push(ProfessionalHelpScreen()) }
+                ),
+                onClick = {
+                    moodsViewModel.setCurrentMood(selectedMood)
+                    navigator.push(ProfessionalHelpScreen())
+                }
             )
         }
 

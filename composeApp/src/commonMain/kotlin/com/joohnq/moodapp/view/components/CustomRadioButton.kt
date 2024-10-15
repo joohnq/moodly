@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.entities.IconAndTextRadioButtonColors
 import com.joohnq.moodapp.view.entities.IconProps
-import com.joohnq.moodapp.view.onboarding.options.MedicationsSupplementsOptions
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions
-import com.joohnq.moodapp.view.onboarding.options.ProfessionalHelpOptions
+import com.joohnq.moodapp.view.entities.MedicationsSupplements
+import com.joohnq.moodapp.view.entities.PhysicalSymptoms
+import com.joohnq.moodapp.view.entities.ProfessionalHelpOptions
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -175,7 +175,7 @@ fun IconAndTextRadioButtonVertical(
 @Composable
 fun PhysicalSymptomsRadioButton(
     modifier: Modifier = Modifier,
-    option: PhysicalSymptomsOptions,
+    option: PhysicalSymptoms,
     selected: Boolean,
     onClick: () -> Unit
 ) {
@@ -201,7 +201,7 @@ fun PhysicalSymptomsRadioButton(
 @Composable
 fun MedicationsSupplementsRadioButton(
     modifier: Modifier = Modifier,
-    option: MedicationsSupplementsOptions,
+    option: MedicationsSupplements,
     selected: Boolean,
     onClick: () -> Unit
 ) {

@@ -2,6 +2,8 @@ package com.joohnq.moodapp.view.entities
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.DrawableResource
 
 data class IconProps(

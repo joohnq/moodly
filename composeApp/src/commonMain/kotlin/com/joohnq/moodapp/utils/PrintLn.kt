@@ -1,10 +1,10 @@
 package com.joohnq.moodapp.utils
 
-fun printLn(item: Any) {
+fun Log(item: Any) {
     println("MoodAppLogCat $item")
 }
 
-fun printLn(content: () -> Unit) {
+fun Log(content: () -> Unit) {
     content()
     println("----------")
 }

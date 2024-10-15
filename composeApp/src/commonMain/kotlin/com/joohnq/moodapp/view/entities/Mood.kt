@@ -5,19 +5,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions.Indeterminate
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions.No
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions.YesJustABit
-import com.joohnq.moodapp.view.onboarding.options.PhysicalSymptomsOptions.YesVeryPainful
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.depressed
+import moodapp.composeapp.generated.resources.happy
+import moodapp.composeapp.generated.resources.neutral
+import moodapp.composeapp.generated.resources.overjoyed
+import moodapp.composeapp.generated.resources.sad
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import moodapp.composeapp.generated.resources.depressed
-import moodapp.composeapp.generated.resources.sad
-import moodapp.composeapp.generated.resources.neutral
-import moodapp.composeapp.generated.resources.happy
-import moodapp.composeapp.generated.resources.overjoyed
 
 sealed class Mood(
     val id: String,
@@ -26,6 +23,7 @@ sealed class Mood(
     val text: StringResource,
     val backgroundColor: Color,
     val color: Color,
+    val healthLevel: Float
 ) {
     data object Depressed :
         Mood(
@@ -34,7 +32,8 @@ sealed class Mood(
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
             backgroundColor = Colors.Purple30,
-            color = Colors.Purple90
+            color = Colors.Purple90,
+            healthLevel = 20f
         )
 
     data object Sad : Mood(
@@ -43,7 +42,8 @@ sealed class Mood(
         imageVector = Drawables.Mood.SadVectorPainter,
         text = Res.string.sad,
         backgroundColor = Colors.Orange40,
-        color = Colors.Orange90
+        color = Colors.Orange90,
+        healthLevel = 40f
     )
 
     data object Neutral :
@@ -53,7 +53,8 @@ sealed class Mood(
             imageVector = Drawables.Mood.NeutralVectorPainter,
             text = Res.string.neutral,
             backgroundColor = Colors.Brown60,
-            color = Colors.Brown90
+            color = Colors.Brown90,
+            healthLevel = 60f
         )
 
     data object Happy : Mood(
@@ -62,7 +63,8 @@ sealed class Mood(
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
         backgroundColor = Colors.Yellow40,
-        color = Colors.Yellow90
+        color = Colors.Yellow90,
+        healthLevel = 80f
     )
 
     data object Overjoyed :
@@ -72,7 +74,8 @@ sealed class Mood(
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
             backgroundColor = Colors.Green50,
-            color = Colors.Green90
+            color = Colors.Green90,
+            healthLevel = 100f
         )
 
     companion object {
@@ -90,6 +93,14 @@ sealed class Mood(
             OverjoyedId -> Overjoyed
             else -> throw IllegalArgumentException("Unknown mood: $src")
         }
+
+        fun getAll(): List<Mood> = listOf(
+            Depressed,
+            Sad,
+            Neutral,
+            Happy,
+            Overjoyed
+        )
     }
 }
 

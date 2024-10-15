@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.view.entities.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -23,4 +23,7 @@ interface UserPreferencesDAO {
 
     @Query("UPDATE user_preferences SET skip_welcome_screen = :skipWelcomeScreen WHERE id = :id")
     suspend fun setSkipWelcomeScreen(skipWelcomeScreen: Boolean = true, id: String = "1")
+
+    @Query("UPDATE user_preferences SET skip_onboarding_screen = :skipOnboardingScreen WHERE id = :id")
+    suspend fun setSkipOnboardingScreen(skipOnboardingScreen: Boolean = true, id: String = "1")
 }

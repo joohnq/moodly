@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
-import com.joohnq.moodapp.view.onboarding.options.StressRateOptions
+import com.joohnq.moodapp.view.entities.StressLevel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -178,7 +178,7 @@ fun ButtonWithArrowRight(
 fun StressRateButton(
     modifier: Modifier = Modifier,
     isSelected: Boolean,
-    option: StressRateOptions,
+    option: StressLevel,
     onClick: () -> Unit
 ) {
     Button(

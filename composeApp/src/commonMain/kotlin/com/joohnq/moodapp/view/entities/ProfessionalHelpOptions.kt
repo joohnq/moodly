@@ -8,20 +8,20 @@ import moodapp.composeapp.generated.resources.no
 import moodapp.composeapp.generated.resources.yes
 import org.jetbrains.compose.resources.StringResource
 
-@Serializable
+
 sealed class ProfessionalHelpOptions(
     val id: String,
-    @Contextual val text: StringResource,
+    val text: StringResource,
     val value: Boolean? = null
 ) {
-    @Serializable
+    
     data object Yes : ProfessionalHelpOptions(
         id = "1",
         text = Res.string.yes,
         value = true
     )
 
-    @Serializable
+    
     data object No : ProfessionalHelpOptions(
         id = "0",
         text = Res.string.no,

@@ -16,7 +16,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.model.UserPreferences
 import com.joohnq.moodapp.view.onb.OnbScreen
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.view.state.UiState

@@ -1,44 +1,37 @@
 package com.joohnq.moodapp.model
 
-import androidx.room.ConstructedBy
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabase.Builder
-import androidx.room.RoomDatabaseConstructor
-import androidx.room.TypeConverters
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.joohnq.moodapp.model.dao.MoodsDAO
-import com.joohnq.moodapp.model.dao.UserDAO
-import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.view.entities.MoodDb
-import com.joohnq.moodapp.view.entities.MoodDbConverters
-import com.joohnq.moodapp.view.entities.User
-import com.joohnq.moodapp.view.entities.UserConverters
-import com.joohnq.moodapp.view.entities.UserPreferences
+import io.realm.kotlin.Realm
+import io.realm.kotlin.ext.asFlow
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.types.TypedRealmObject
+import kotlinx.coroutines.flow.catch
 
-@Database(
-    entities = [MoodDb::class, User::class, UserPreferences::class],
-    version = 1
-)
-@ConstructedBy(MyDatabaseConstructor::class)
-@TypeConverters(MoodDbConverters::class, UserConverters::class)
-abstract class MyDatabase : RoomDatabase() {
-    abstract fun moodsDAO(): MoodsDAO
-    abstract fun userDAO(): UserDAO
-    abstract fun userPreferencesDAO(): UserPreferencesDAO
+suspend inline fun <reified T : TypedRealmObject> Realm.flowGetAll(
+    crossinline onCatch: (Throwable) -> Unit,
+    crossinline block: (List<T>) -> Unit
+) {
+    val result = query<T>().find().asFlow()
+    result.catch {
+        onCatch(it)
+    }.collect { results ->
+        val items = results.list.map { it }
+        block(items)
+    }
 }
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object MyDatabaseConstructor : RoomDatabaseConstructor<MyDatabase> {
-    override fun initialize(): MyDatabase
-}
+suspend inline fun <reified T : TypedRealmObject> Realm.flowGetTheOne(): T? {
+    val result = query<T>(
+        "id == $0",
+        "1"
+    ).first().find()?.asFlow()
 
-fun getMyDatabase(
-    builder: Builder<MyDatabase>,
-    bundledSQLiteDriver: BundledSQLiteDriver
-): MyDatabase {
-    return builder
-        .setDriver(bundledSQLiteDriver)
-//        .setQueryCoroutineContext(Dispatchers.IO)
-        .build()
+    var r: T? = null
+
+    result?.catch {
+        throw Throwable(it.message.toString())
+    }?.collect { item ->
+        r = item.obj
+    }
+
+    return r
 }

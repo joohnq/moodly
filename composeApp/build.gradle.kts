@@ -6,10 +6,10 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.room)
+    alias(libs.plugins.realm)
     kotlin("plugin.serialization") version "2.0.20"
-    id("io.realm.kotlin") version "1.16.0"
 }
 
 kotlin {
@@ -68,14 +68,14 @@ kotlin {
             implementation(libs.stately.common)
             implementation(libs.stately.concurrent.collections)
 
-            implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
+//            implementation(libs.room.runtime)
+//            implementation(libs.sqlite.bundled)
 
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation("io.realm.kotlin:library-base:1.16.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+            implementation(libs.kotlin.realm)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }
@@ -117,15 +117,15 @@ android {
     }
 }
 
-room{
-    schemaDirectory("$projectDir/schemas")
-}
+//room{
+//    schemaDirectory("$projectDir/schemas")
+//}
 
 dependencies {
     implementation(libs.androidx.benchmark.common)
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
+//    ksp(libs.room.compiler)
+//    add("kspAndroid", libs.room.compiler)
+//    add("kspIosSimulatorArm64", libs.room.compiler)
+//    add("kspIosX64", libs.room.compiler)
+//    add("kspIosArm64", libs.room.compiler)
 }

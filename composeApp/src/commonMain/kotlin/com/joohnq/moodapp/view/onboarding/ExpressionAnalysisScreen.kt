@@ -38,7 +38,6 @@ class ExpressionAnalysisScreen : Screen {
             onContinue = {
                 moodsViewModel.setCurrentMoodDescription(desc)
                 moodsViewModel.insertCurrentMood()
-                moodsViewModel.resetCurrentMood()
                 userPreferencesViewModel.setSkipOnboardingScreen()
                 navigator.push(OnbScreen())
             },

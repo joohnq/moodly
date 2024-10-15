@@ -16,41 +16,41 @@ import moodapp.composeapp.generated.resources.three_four_hours
 import moodapp.composeapp.generated.resources.worst
 import org.jetbrains.compose.resources.StringResource
 
-@Serializable
+
 sealed class SleepQuality(
     val id: String,
-    @Contextual val firstText: StringResource,
-    @Contextual val secondText: StringResource,
+    val firstText: StringResource,
+    val secondText: StringResource,
 ) {
-    @Serializable
+    
     data object Excellent : SleepQuality(
         id = ExcellentId,
         firstText = Res.string.excellent,
         secondText = Res.string.seven_nine_hours
     )
 
-    @Serializable
+    
     data object Good : SleepQuality(
         id = GoodId,
         firstText = Res.string.good,
         secondText = Res.string.six_seven_hours
     )
 
-    @Serializable
+    
     data object Fair : SleepQuality(
         id = FairId,
         firstText = Res.string.fair,
         secondText = Res.string.five_hours
     )
 
-    @Serializable
+    
     data object Poor : SleepQuality(
         id = PoorId,
         firstText = Res.string.poor,
         secondText = Res.string.three_four_hours
     )
 
-    @Serializable
+    
     data object Worst : SleepQuality(
         id = WorstId,
         firstText = Res.string.worst,

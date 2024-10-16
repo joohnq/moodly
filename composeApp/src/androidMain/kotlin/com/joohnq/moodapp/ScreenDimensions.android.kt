@@ -3,9 +3,7 @@
 package com.joohnq.moodapp
 
 import android.content.Context
-import android.util.DisplayMetrics
 
-actual class ScreenDimensions(context: Context): ScreenDimensionsInterface {
-    private val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+actual class ScreenDimensions(context: Context) : ScreenDimensionsInterface {
     actual override val statusBarHeight: Int = 20
 }

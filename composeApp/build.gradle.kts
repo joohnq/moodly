@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -9,7 +10,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
     kotlin("plugin.serialization") version "2.0.20"
-    id("io.realm.kotlin") version "1.16.0"
 }
 
 kotlin {
@@ -19,6 +19,8 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+
+    jvm("desktop")
 
     listOf(
         iosX64(),
@@ -33,14 +35,14 @@ kotlin {
     }
 
     sourceSets {
+        val desktopMain by getting
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            compileOnly("io.realm.kotlin:library-base:1.16.0")
-//            implementation(libs.room.runtime.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -60,7 +62,6 @@ kotlin {
             implementation(libs.voyager.bottom.sheet.navigator)
             implementation(libs.voyager.koin)
 
-            implementation(libs.koin.compose)
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -74,8 +75,11 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation("io.realm.kotlin:library-base:1.16.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+            implementation(libs.kotlinx.coroutines.core)
+        }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
@@ -112,9 +116,6 @@ android {
     buildFeatures {
         compose = true
     }
-    dependencies {
-        debugImplementation(compose.uiTooling)
-    }
 }
 
 room{
@@ -128,4 +129,19 @@ dependencies {
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
+    debugImplementation(compose.uiTooling)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 }
+
+compose.desktop {
+    application {
+        mainClass = "com.joohnq.moodapp.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "com.joohnq.moodapp"
+            packageVersion = "1.0.0"
+        }
+    }
+}
+

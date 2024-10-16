@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,7 +38,7 @@ class StressRateScreen : Screen {
                 StressLevel.Three
             )
         }
-        val options = remember { StressLevel.getAll() }
+        val options: List<StressLevel> = remember { StressLevel.getAll() }
 
         OnboardingBaseComponent(
             page = 6,
@@ -57,7 +58,7 @@ class StressRateScreen : Screen {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                options.forEach { option: StressLevel ->
+                options.forEach<StressLevel> { option: StressLevel ->
                     StressRateButton(
                         modifier = Modifier.weight(1f),
                         option = option,

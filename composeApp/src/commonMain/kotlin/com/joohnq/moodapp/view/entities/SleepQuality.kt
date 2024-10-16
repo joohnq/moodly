@@ -73,7 +73,7 @@ sealed class SleepQuality(
             else -> throw IllegalArgumentException("Unknown sleep quality option: $src")
         }
 
-        fun getAll() = listOf(
+        fun getAll(): List<SleepQuality> = listOf(
             Excellent,
             Good,
             Fair,

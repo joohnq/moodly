@@ -78,7 +78,7 @@ sealed class StressLevel(
             else -> throw IllegalArgumentException("Unknown stress rate option: $src")
         }
 
-        fun getAll() = listOf(
+        fun getAll(): List<StressLevel> = listOf(
             One,
             Two,
             Three,

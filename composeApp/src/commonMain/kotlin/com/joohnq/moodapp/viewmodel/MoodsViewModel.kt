@@ -3,8 +3,8 @@ package com.joohnq.moodapp.viewmodel
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.joohnq.moodapp.model.dao.MoodsDAO
-import com.joohnq.moodapp.view.entities.MoodDb
 import com.joohnq.moodapp.view.entities.Mood
+import com.joohnq.moodapp.view.entities.MoodDb
 import com.joohnq.moodapp.view.entities.SleepQuality
 import com.joohnq.moodapp.view.entities.StressLevel
 import com.joohnq.moodapp.view.state.UiState
@@ -41,12 +41,15 @@ class MoodsViewModel(
         _currentMood.value = currentMood.value?.copy(stressLevel = stressLevel)
     }
 
-    fun insertCurrentMood() = try {
-        screenModelScope.launch(dispatcherIo) {
-            moodsDAO.insertMood(currentMood.value ?: return@launch)
+    suspend fun insertCurrentMood(): Boolean {
+        try {
+            if (currentMood.value == null)
+                moodsDAO.insertMood(currentMood.value ?: return false)
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 
 

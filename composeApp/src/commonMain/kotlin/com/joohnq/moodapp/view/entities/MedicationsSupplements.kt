@@ -62,7 +62,7 @@ sealed class MedicationsSupplements(
             else -> throw IllegalArgumentException("Unknown medications supplements option: $src")
         }
 
-        fun getAll() = listOf(
+        fun getAll(): List<MedicationsSupplements> = listOf(
             PrescribedMedications,
             OverTheCounterSupplements,
             ImNotTakingAny,

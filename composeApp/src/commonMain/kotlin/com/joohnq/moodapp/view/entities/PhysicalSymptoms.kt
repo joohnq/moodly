@@ -50,7 +50,7 @@ sealed class PhysicalSymptoms(
             else -> throw IllegalArgumentException("Unknown physical symptoms: $src")
         }
 
-        fun getAll() = listOf(YesVeryPainful, No, YesJustABit)
+        fun getAll(): List<PhysicalSymptoms> = listOf(YesVeryPainful, No, YesJustABit)
     }
 }
 

@@ -16,34 +16,45 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.entities.User
 import com.joohnq.moodapp.view.entities.UserPreferences
-import com.joohnq.moodapp.view.onb.OnbScreen
+import com.joohnq.moodapp.view.home.HomeScreen
+import com.joohnq.moodapp.view.onboarding.GetUserNameScreen
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.fold
+import com.joohnq.moodapp.view.state.onSuccess
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
+import com.joohnq.moodapp.viewmodel.UserViewModel
 import org.koin.compose.koinInject
 
 class LoadingScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val userViewModel: UserViewModel = koinInject()
         val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
         val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
+        val user: UiState<User> by userViewModel.user.collectAsState()
 
         LaunchedEffect(userPreferences) {
             userPreferences.fold(
-                onSuccess = {
-                    navigator.push(
-                        if (!it.skipWelcomeScreen) {
-                            WelcomeScreen()
-                        } else if (!it.skipOnboardingScreen) {
-                            MoodRateScreen()
-                        } else {
-                            OnbScreen()
+                onSuccess = { userPreferences ->
+                    val screen = when (true) {
+                        userPreferences.skipWelcomeScreen -> WelcomeScreen()
+                        userPreferences.skipOnboardingScreen -> MoodRateScreen()
+                        else -> {
+                            var screen: Screen = GetUserNameScreen()
+                            user.onSuccess { user ->
+                                if (user.name.isNotEmpty()) {
+                                    screen = HomeScreen()
+                                }
+                            }
+                            screen
                         }
-                    )
+                    }
+                    navigator.push(screen)
                 }
             )
         }

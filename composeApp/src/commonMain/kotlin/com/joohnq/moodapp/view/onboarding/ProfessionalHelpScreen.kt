@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -20,6 +21,8 @@ import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
 import com.joohnq.moodapp.view.entities.ProfessionalHelpOptions
 import com.joohnq.moodapp.view.entities.ProfessionalHelpOptionsSaver
 import com.joohnq.moodapp.viewmodel.UserViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
@@ -27,6 +30,8 @@ import org.koin.compose.koinInject
 class ProfessionalHelpScreen : Screen {
     @Composable
     override fun Content() {
+        val scope = rememberCoroutineScope()
+        val ioDispatcher: CoroutineDispatcher = koinInject()
         val navigator = LocalNavigator.currentOrThrow
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         val userViewModel: UserViewModel = koinInject()
@@ -50,9 +55,16 @@ class ProfessionalHelpScreen : Screen {
             title = Res.string.sought_professional_help_title,
             isContinueButtonVisible = isContinueButtonVisible,
             onBack = { navigator.pop() },
-            onContinue = {
-                userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
-                navigator.push(PhysicalSymptomsScreen())
+            onContinue = { onSomethingWentWrong ->
+                scope.launch(ioDispatcher) {
+                    val res = userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
+                    if (!res) {
+                        onSomethingWentWrong()
+                        return@launch
+                    }
+
+                    navigator.push(PhysicalSymptomsScreen())
+                }
             },
         ) {
             Row(

@@ -11,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -22,6 +23,8 @@ import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
 import com.joohnq.moodapp.view.entities.MedicationsSupplements
 import com.joohnq.moodapp.view.entities.MedicationsSupplementsSaver
 import com.joohnq.moodapp.viewmodel.UserViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.koin.compose.koinInject
@@ -35,9 +38,11 @@ class MedicationsSupplementsScreen : Screen {
         var selectedOption by rememberSaveable(stateSaver = MedicationsSupplementsSaver) {
             mutableStateOf(null)
         }
-        val options = rememberSaveable {
+        val options: List<MedicationsSupplements> = remember {
             MedicationsSupplements.getAll()
         }
+        val scope = rememberCoroutineScope()
+        val ioDispatcher: CoroutineDispatcher = koinInject()
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible =
@@ -49,11 +54,17 @@ class MedicationsSupplementsScreen : Screen {
             title = Res.string.medications_supplements_title,
             isContinueButtonVisible = isContinueButtonVisible,
             onBack = { navigator.pop() },
-            onContinue = {
-                userViewModel.setUserMedicationsSupplements(
-                    selectedOption ?: MedicationsSupplements.PreferNotToSay
-                )
-                navigator.push(StressRateScreen())
+            onContinue = { onSomethingWentWrong ->
+                scope.launch(ioDispatcher) {
+                    val res = userViewModel.setUserMedicationsSupplements(
+                        selectedOption ?: MedicationsSupplements.PreferNotToSay
+                    )
+                    if (!res) {
+                        onSomethingWentWrong()
+                        return@launch
+                    }
+                    navigator.push(StressRateScreen())
+                }
             },
         ) {
             LazyVerticalGrid(

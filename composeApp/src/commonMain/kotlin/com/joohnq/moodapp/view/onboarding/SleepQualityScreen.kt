@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -33,6 +34,7 @@ import com.joohnq.moodapp.view.entities.Mood
 import com.joohnq.moodapp.view.entities.SleepQuality
 import com.joohnq.moodapp.view.entities.SleepQualitySaver
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import org.koin.compose.koinInject
@@ -41,12 +43,13 @@ class SleepQualityScreen : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
+
         val navigator = LocalNavigator.currentOrThrow
         val moods = remember { Mood.getAll().reversed() }
         val moodsViewModel: MoodsViewModel = koinInject()
-        var selectedSleepQuality by rememberSaveable(stateSaver = SleepQualitySaver) { mutableStateOf(SleepQuality.Worst) }
+        var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQualitySaver) { mutableStateOf(SleepQuality.Worst) }
         var sliderValue by rememberSaveable { mutableStateOf(0f) }
-        val sleepQualityOption = remember { SleepQuality.getAll() }
+        val sleepQualityOption: List<SleepQuality> = remember { SleepQuality.getAll() }
 
         LaunchedEffect(sliderValue) {
             val i = sliderValue.toInt() / 25
@@ -73,7 +76,7 @@ class SleepQualityScreen : Screen {
                 ) {
                     sleepQualityOption.forEach { sleepQuality: SleepQuality ->
                         val textColor =
-                            if (selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Alpha100
+                            if (selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
 
                         DoubleText(
                             firstText = sleepQuality.firstText,

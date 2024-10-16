@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,6 +17,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -45,10 +47,6 @@ class MoodRateScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Neutral) }
         val moodsViewModel: MoodsViewModel = koinInject()
-
-        SideEffect {
-            moodsViewModel.getMoods()
-        }
 
         OnboardingBaseComponent(
             page = 1,

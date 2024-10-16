@@ -39,9 +39,10 @@ class UserPreferenceViewModel(
             getUserPreferences()
         }
 
-    fun setSkipOnboardingScreen() =
-        screenModelScope.launch(ioDispatcher) {
-            userPreferencesDAO.setSkipOnboardingScreen()
-            getUserPreferences()
-        }
+    suspend fun setSkipOnboardingScreen(): Boolean = try {
+        userPreferencesDAO.setSkipOnboardingScreen()
+        true
+    }catch (e: Exception){
+        false
+    }
 }

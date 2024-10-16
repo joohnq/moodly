@@ -12,8 +12,12 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,12 +25,34 @@ import com.joohnq.moodapp.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.TextStyles
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
+import moodapp.composeapp.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
+
+@Composable
+fun onContinueWith(
+    onSomethingWentWrong: () -> Unit,
+    block: suspend () -> Boolean,
+    onSuccess: () -> Unit
+) {
+    val scope = rememberCoroutineScope()
+    val ioDispatcher: CoroutineDispatcher = koinInject()
+    scope.launch(ioDispatcher) {
+        val res = block()
+        if (!res) {
+            onSomethingWentWrong()
+            return@launch
+        }
+        onSuccess()
+    }
+}
 
 @Composable
 fun OnboardingBaseComponent(
@@ -34,11 +60,21 @@ fun OnboardingBaseComponent(
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
-    onContinue: () -> Unit,
+    onContinue: (() -> Unit) -> Unit,
     onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
+    val snackBarState = remember { SnackbarHostState() }
+    val somethingWentWrongText = stringResource(Res.string.something_went_wrong)
+    val scope = rememberCoroutineScope()
+
+    fun onSomethingWentWrong(): () -> Unit = {
+        scope.launch {
+            snackBarState.showSnackbar(somethingWentWrongText)
+        }
+    }
     Scaffold(
+        snackbarHost = { SnackbarHost(snackBarState) },
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize()
     ) { padding ->
@@ -47,7 +83,10 @@ fun OnboardingBaseComponent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OnboardingTopBar(page = page, onBack = onBack)
+            OnboardingTopBar(
+                page = page,
+                onBack = onBack
+            )
             Spacer(modifier = Modifier.height(32.dp))
             if (image != null) {
                 Image(
@@ -69,7 +108,7 @@ fun OnboardingBaseComponent(
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(Res.string.continue_word),
-                    onClick = onContinue
+                    onClick = { onContinue(::onSomethingWentWrong) }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }

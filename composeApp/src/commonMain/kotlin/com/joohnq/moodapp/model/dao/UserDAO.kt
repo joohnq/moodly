@@ -15,4 +15,7 @@ interface UserDAO {
 
     @Query("UPDATE user SET medications_supplements = :medicationsSupplements WHERE id = :id")
     suspend fun setUserMedicationsSupplements(medicationsSupplements: MedicationsSupplements, id: String = "1")
+
+    @Query("UPDATE user SET name = :name WHERE id = :id")
+    suspend fun setUserName(name: String, id: String = "1")
 }

@@ -1,5 +1,6 @@
 package com.joohnq.moodapp
 
+import com.joohnq.moodapp.view.icons.LogoImageVector
 import com.joohnq.moodapp.view.icons.MoodDepressed
 import com.joohnq.moodapp.view.icons.MoodHappy
 import com.joohnq.moodapp.view.icons.MoodNeutral
@@ -11,12 +12,15 @@ import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_open
 import moodapp.composeapp.generated.resources.ic_check
 import moodapp.composeapp.generated.resources.ic_close
-import moodapp.composeapp.generated.resources.ic_medicine
 import moodapp.composeapp.generated.resources.ic_drug_store
+import moodapp.composeapp.generated.resources.ic_medicine
 import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
 import moodapp.composeapp.generated.resources.ic_resize
+import moodapp.composeapp.generated.resources.logo
+import moodapp.composeapp.generated.resources.ic_warning
 import moodapp.composeapp.generated.resources.mood_depressed
+import moodapp.composeapp.generated.resources.ic_user
 import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
 import moodapp.composeapp.generated.resources.mood_overjoyed
@@ -39,6 +43,9 @@ object Drawables {
         val Medicine = Res.drawable.ic_medicine
         val DrugStore = Res.drawable.ic_drug_store
         val Nothing = Res.drawable.ic_nothing
+        val Logo = Res.drawable.logo
+        val User = Res.drawable.ic_user
+        val Warning = Res.drawable.ic_warning
     }
 
     object Images {
@@ -48,7 +55,8 @@ object Drawables {
         val WelcomeResourcesImage = Res.drawable.welcome_resources_image
         val WelcomeCommunityImage = Res.drawable.welcome_community_image
 
-        val OnboardingSoughtProfessionalHelp = Res.drawable.onboarding_sought_professional_help_image
+        val OnboardingSoughtProfessionalHelp =
+            Res.drawable.onboarding_sought_professional_help_image
     }
 
     object Mood {
@@ -66,6 +74,4 @@ object Drawables {
 
         val TargetVectorPainter = Target
     }
-
-
 }

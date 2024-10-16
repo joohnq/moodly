@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.database
+package com.joohnq.moodapp.model.database
 
 import androidx.room.Room
 import androidx.room.RoomDatabase

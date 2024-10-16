@@ -75,7 +75,7 @@ object TextStyles {
     @Composable
     fun OnboardingScreenMood() = TextStyle(
         fontFamily = FontFamily.Urbanist.SemiBold(),
-        color = Colors.Alpha100,
+        color = Colors.Brown100Alpha64,
         fontSize = 20.sp,
         textAlign = TextAlign.Center
     )
@@ -116,7 +116,7 @@ object TextStyles {
     fun ExpressionAnalysisDesc() = TextStyle(
         fontFamily = FontFamily.Urbanist.Medium(),
         fontSize = 16.sp,
-        color = Colors.Alpha100,
+        color = Colors.Brown100Alpha64,
         textAlign = TextAlign.Center
     )
 
@@ -124,7 +124,7 @@ object TextStyles {
     fun ExpressionAnalysisTextField() = TextStyle(
         fontFamily = FontFamily.Urbanist.SemiBold(),
         fontSize = 30.sp,
-        color = Colors.Alpha100
+        color = Colors.Brown100Alpha64
     )
 
     @Composable
@@ -132,5 +132,25 @@ object TextStyles {
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 30.sp,
         color = Colors.White
+    )
+
+    @Composable
+    fun TextFieldLabel() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 14.sp,
+        color = Colors.Brown80
+    )
+
+    @Composable
+    fun TextFieldText() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 16.sp,
+    )
+
+    @Composable
+    fun TextFieldErrorText() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 12.sp,
+        color = Colors.Orange40
     )
 }

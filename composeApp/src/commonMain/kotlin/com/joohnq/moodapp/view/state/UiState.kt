@@ -20,3 +20,30 @@ fun <T> UiState<T>.fold(
         is UiState.Idle -> onIdle()
     }
 }
+
+fun <T> UiState<T>.onSuccess(
+    onSuccess: (T) -> Unit = {},
+) {
+    when (this) {
+        is UiState.Success -> onSuccess(this.data)
+        else -> {}
+    }
+}
+
+fun <T> UiState<T>.onLoading(
+    onLoading: () -> Unit
+) {
+    when (this) {
+        is UiState.Loading -> onLoading()
+        else -> {}
+    }
+}
+
+fun <T> UiState<T>.onError(
+    onError: (String) -> Unit
+) {
+    when (this) {
+        is UiState.Error -> onError(this.message)
+        else -> {}
+    }
+}

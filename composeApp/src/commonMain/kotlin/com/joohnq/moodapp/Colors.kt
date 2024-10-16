@@ -73,11 +73,13 @@ object Colors{
     val Purple20 = Color(0xFFcbc2ff)
     val Purple10 = Color(0xFFedebff)
 
-    val Alpha100 = Color(0xFF706A65)
-    val Alpha48 = Color(0xFF938F8C)
-    val Alpha32 = Color(0xFFB7B4B2)
+    val Brown100Alpha64 = Color(0xa3372315)
+    val Brown100Alpha48 = Color(0x7a372315)
+    val Brown100Alpha32 = Color(0x52372315)
     val Alpha15 = Color(0x26000000)
     val Green50Alpha25 = Color(0xFFE0E3CF)
     val Brown80Alpha25 = Color(0xFFCCC4BF)
     val Orange40Alpha25 = Color(0xFFFAD7C8)
+
+    val CardShadow = Color(0x0d4b3425)
 }

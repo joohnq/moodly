@@ -72,4 +72,6 @@
     <string name="five_number">5</string>
     <string name="expression_analysis_title">Expression Analysis</string>
     <string name="expression_analysis_desc">Freely write down anything that's on your mind. Dr Freud.ai is here to listen...</string>
+    <string name="how_we_can_call_you">How We Can Call You?</string>
+    <string name="something_went_wrong">Something Went Wrong. Try Again or Contact Support.</string>
 </resources>

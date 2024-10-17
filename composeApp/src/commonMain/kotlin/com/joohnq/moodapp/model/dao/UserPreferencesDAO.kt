@@ -26,4 +26,7 @@ interface UserPreferencesDAO {
 
     @Query("UPDATE user_preferences SET skip_onboarding_screen = :skipOnboardingScreen WHERE id = :id")
     suspend fun setSkipOnboardingScreen(skipOnboardingScreen: Boolean = true, id: String = "1")
+
+    @Query("UPDATE user_preferences SET skip_get_user_name_screen = :skipGetUserNameScreen WHERE id = :id")
+    suspend fun setSkipGetUserNameScreen(skipGetUserNameScreen: Boolean = true, id: String = "1")
 }

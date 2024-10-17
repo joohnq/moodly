@@ -81,24 +81,5 @@ fun FirstScreen(onGetStarted: () -> Unit, onSignIn: () -> Unit) {
         Spacer(modifier = Modifier.height(32.dp))
         ButtonWithArrowRight(text = stringResource(Res.string.get_started), onClick = onGetStarted)
         Spacer(modifier = Modifier.height(30.dp))
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(Res.string.already_have_an_account),
-                style = TextStyles.WelcomeScreenText()
-            )
-            Button(
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Colors.Transparent,
-                    contentColor = Colors.Orange40
-                ),
-                contentPadding = PaddingValues(5.dp),
-                onClick = onSignIn
-            ) {
-                Text(text = stringResource(Res.string.sign_in), style = TextStyles.WelcomeScreenButton2())
-            }
-        }
     }
 }

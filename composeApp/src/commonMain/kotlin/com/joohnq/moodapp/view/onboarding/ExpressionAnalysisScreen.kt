@@ -45,7 +45,7 @@ class ExpressionAnalysisScreen : Screen {
                     moodsViewModel.resetCurrentMood()
                     val res2 = userPreferencesViewModel.setSkipOnboardingScreen()
                     if (!res2) onSomethingWentWrong()
-                    navigator.push(HomeScreen())
+                    navigator.push(GetUserNameScreen())
                 }
             },
         ) {

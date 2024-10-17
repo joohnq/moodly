@@ -28,21 +28,29 @@ class UserPreferenceViewModel(
             }
         }
 
-    fun initUserPreferences() =
-        screenModelScope.launch(ioDispatcher) {
-            userPreferencesDAO.insertUserPreferences()
-        }
+    fun initUserPreferences() = screenModelScope.launch(ioDispatcher) {
+        userPreferencesDAO.insertUserPreferences()
+    }
 
-    fun setSkipWelcomeScreen() =
-        screenModelScope.launch(ioDispatcher) {
-            userPreferencesDAO.setSkipWelcomeScreen()
-            getUserPreferences()
-        }
+    suspend fun setSkipWelcomeScreen(): Boolean = try {
+        userPreferencesDAO.setSkipWelcomeScreen()
+        true
+    } catch (e: Exception) {
+        false
+    }
 
     suspend fun setSkipOnboardingScreen(): Boolean = try {
         userPreferencesDAO.setSkipOnboardingScreen()
         true
-    }catch (e: Exception){
+    } catch (e: Exception) {
+        false
+    }
+
+
+    suspend fun setSkipGetUserNameScreen(): Boolean = try {
+        userPreferencesDAO.setSkipGetUserNameScreen()
+        true
+    } catch (e: Exception) {
         false
     }
 }

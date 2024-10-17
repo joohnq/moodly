@@ -3,6 +3,7 @@ package com.joohnq.moodapp.view.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -43,6 +45,7 @@ import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.home.HomeScreen
+import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -59,11 +62,13 @@ class GetUserNameScreen : Screen {
         var name by remember { mutableStateOf("") }
         var nameError by remember { mutableStateOf("") }
         val focusManager: FocusManager = LocalFocusManager.current
-        val userViewModel: UserViewModel = koinInject()
         val scope = rememberCoroutineScope()
         val ioDispatcher: CoroutineDispatcher = koinInject()
         val navigator = LocalNavigator.currentOrThrow
         val snackBarState = remember { SnackbarHostState() }
+        val userViewModel: UserViewModel = koinInject()
+        val userPreferencesViewModel: UserPreferenceViewModel = koinInject()
+
         BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
             Box(
                 modifier = Modifier
@@ -87,7 +92,7 @@ class GetUserNameScreen : Screen {
             Scaffold(
                 containerColor = Colors.Brown10,
                 snackbarHost = { SnackbarHost(hostState = snackBarState) },
-                modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp)
+                modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp, bottom = 20.dp)
                     .pointerInput(Unit) {
                         detectTapGestures(onTap = {
                             focusManager.clearFocus()
@@ -99,22 +104,26 @@ class GetUserNameScreen : Screen {
                         .padding(horizontal = 16.dp)
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState()),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = stringResource(Res.string.how_we_can_call_you),
-                        style = TextStyles.OnboardingScreenTitle()
-                    )
-                    Spacer(modifier = Modifier.height(48.dp))
-                    UserNameTextField(
-                        name = name,
-                        errorText = nameError,
-                        onValueChange = {
-                            name = it
-                            nameError = ""
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = stringResource(Res.string.how_we_can_call_you),
+                            style = TextStyles.OnboardingScreenTitle(),
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(48.dp))
+                        UserNameTextField(
+                            name = name,
+                            errorText = nameError,
+                            onValueChange = {
+                                name = it
+                                nameError = ""
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
                     ButtonWithArrowRight(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Continue"
@@ -128,6 +137,8 @@ class GetUserNameScreen : Screen {
                                     snackBarState.showSnackbar("Something went wrong")
                                     return@launch
                                 }
+
+                                val res2 = userPreferencesViewModel.setSkipGetUserNameScreen()
 
                                 navigator.push(HomeScreen())
                             } catch (e: Exception) {

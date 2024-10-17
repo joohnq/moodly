@@ -1,5 +1,10 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.DeprecatedTargetPresetApi
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -9,7 +14,9 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    kotlin("plugin.serialization") version "2.0.20"
+    alias(libs.plugins.test.resources)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -77,6 +84,16 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines.core)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.truthish)
+            implementation(compose.uiTest)
+            implementation(libs.test.resources)
+            implementation(libs.koin.core)
+            implementation(libs.koin.test)
+            implementation("app.cash.turbine:turbine:1.2.0")
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
@@ -118,19 +135,31 @@ android {
     }
 }
 
-room{
+room {
     schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
     implementation(libs.androidx.benchmark.common)
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
+    implementation(libs.kotlinx.coroutines.core)
     debugImplementation(compose.uiTooling)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    ksp(libs.room.compiler)
+    add(
+        "kspAndroid",
+        libs.room.compiler
+    )
+    add(
+        "kspIosSimulatorArm64",
+        libs.room.compiler
+    )
+    add(
+        "kspIosX64",
+        libs.room.compiler
+    )
+    add(
+        "kspIosArm64",
+        libs.room.compiler
+    )
 }
 
 compose.desktop {
@@ -138,10 +167,13 @@ compose.desktop {
         mainClass = "com.joohnq.moodapp.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(
+                TargetFormat.Dmg,
+                TargetFormat.Msi,
+                TargetFormat.Deb
+            )
             packageName = "com.joohnq.moodapp"
             packageVersion = "1.0.0"
         }
     }
 }
-

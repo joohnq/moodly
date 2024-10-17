@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7e270342af4f50ee76f316f15fe148b4",
+    "identityHash": "2d1f52fb8f63beec6eab202db30f8c8d",
     "entities": [
       {
         "tableName": "moods",
@@ -92,7 +92,7 @@
       },
       {
         "tableName": "user_preferences",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `skip_welcome_screen` INTEGER NOT NULL, `skip_onboarding_screen` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `skip_welcome_screen` INTEGER NOT NULL, `skip_onboarding_screen` INTEGER NOT NULL, `skip_get_user_name_screen` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -111,6 +111,12 @@
             "columnName": "skip_onboarding_screen",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "skipGetUserNameScreen",
+            "columnName": "skip_get_user_name_screen",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -123,7 +129,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7e270342af4f50ee76f316f15fe148b4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2d1f52fb8f63beec6eab202db30f8c8d')"
     ]
   }
 }

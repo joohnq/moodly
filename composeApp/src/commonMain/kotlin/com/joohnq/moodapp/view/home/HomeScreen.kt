@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onb
+package com.joohnq.moodapp.view.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +19,7 @@ import com.joohnq.moodapp.utils.Log
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import org.koin.compose.koinInject
 
-class OnbScreen : Screen {
+class HomeScreen : Screen {
     @Composable
     override fun Content() {
         val moodsViewModel: MoodsViewModel = koinInject()

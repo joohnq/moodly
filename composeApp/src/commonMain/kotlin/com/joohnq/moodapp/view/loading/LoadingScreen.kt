@@ -22,7 +22,6 @@ import com.joohnq.moodapp.view.home.HomeScreen
 import com.joohnq.moodapp.view.onboarding.GetUserNameScreen
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.fold
 import com.joohnq.moodapp.view.state.onSuccess
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -33,30 +32,19 @@ class LoadingScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val userViewModel: UserViewModel = koinInject()
         val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
         val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
-        val user: UiState<User> by userViewModel.user.collectAsState()
 
         LaunchedEffect(userPreferences) {
-            userPreferences.fold(
-                onSuccess = { userPreferences ->
-                    val screen = when (true) {
-                        userPreferences.skipWelcomeScreen -> WelcomeScreen()
-                        userPreferences.skipOnboardingScreen -> MoodRateScreen()
-                        else -> {
-                            var screen: Screen = GetUserNameScreen()
-                            user.onSuccess { user ->
-                                if (user.name.isNotEmpty()) {
-                                    screen = HomeScreen()
-                                }
-                            }
-                            screen
-                        }
-                    }
-                    navigator.push(screen)
+            userPreferences.onSuccess { userPreferences ->
+                val screen = when (true) {
+                    !userPreferences.skipWelcomeScreen -> WelcomeScreen()
+                    !userPreferences.skipOnboardingScreen -> MoodRateScreen()
+                    !userPreferences.skipGetUserNameScreen -> GetUserNameScreen()
+                    else -> HomeScreen()
                 }
-            )
+                navigator.push(screen)
+            }
         }
 
         Box(

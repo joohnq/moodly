@@ -10,13 +10,13 @@ import moodapp.composeapp.generated.resources.yes_but_just_a_bit
 import moodapp.composeapp.generated.resources.yes_very_painful
 import org.jetbrains.compose.resources.StringResource
 
-@Serializable
+
 sealed class PhysicalSymptoms(
     val id: String,
-    @Contextual val text: StringResource,
-    @Contextual val icon: IconProps
+    val text: StringResource,
+    val icon: IconProps
 ) {
-    @Serializable
+    
     data object YesVeryPainful : PhysicalSymptoms(
         id = YesVeryPainfulId,
         text = Res.string.yes_very_painful, icon = IconProps(
@@ -24,14 +24,14 @@ sealed class PhysicalSymptoms(
         )
     )
 
-    @Serializable
+    
     data object No : PhysicalSymptoms(
         id = NoId,
         text = Res.string.no_physical_pain,
         icon = IconProps(icon = Drawables.Icons.Close)
     )
 
-    @Serializable
+    
     data object YesJustABit : PhysicalSymptoms(
         id = YesJustABitId,
         text = Res.string.yes_but_just_a_bit,

@@ -3,6 +3,7 @@ package com.joohnq.moodapp.viewmodel
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.joohnq.moodapp.model.dao.MoodsDAO
+import com.joohnq.moodapp.view.entities.MoodDb
 import com.joohnq.moodapp.view.entities.Mood
 import com.joohnq.moodapp.view.entities.MoodDb
 import com.joohnq.moodapp.view.entities.SleepQuality
@@ -26,10 +27,6 @@ class MoodsViewModel(
             MutableStateFlow<UiState<List<MoodDb>>> = MutableStateFlow(UiState.Idle)
     val moods: MutableStateFlow<UiState<List<MoodDb>>> = _moods
 
-    /*
-    * Set the onboarding current mood, based on mood rate roulette
-    * Tested
-    * */
     fun setCurrentMood(mood: Mood) {
         _currentMood.value = currentMood.value?.copy(mood = mood) ?: MoodDb(mood = mood)
     }
@@ -40,7 +37,6 @@ class MoodsViewModel(
     * */
     fun setCurrentMoodSleepQuality(sleepQuality: SleepQuality) {
         _currentMood.value = currentMood.value?.copy(sleepQuality = sleepQuality)
-            ?: MoodDb(sleepQuality = sleepQuality)
     }
 
     /*
@@ -48,8 +44,7 @@ class MoodsViewModel(
     * Tested
     * */
     fun setCurrentMoodDescription(description: String) {
-        _currentMood.value =
-            currentMood.value?.copy(description = description) ?: MoodDb(description = description)
+        _currentMood.value = currentMood.value?.copy(description = description)
     }
 
     /*
@@ -57,23 +52,15 @@ class MoodsViewModel(
    * Tested
    * */
     fun setCurrentMoodStressLevel(stressLevel: StressLevel) {
-        _currentMood.value =
-            currentMood.value?.copy(stressLevel = stressLevel) ?: MoodDb(stressLevel = stressLevel)
+        _currentMood.value = currentMood.value?.copy(stressLevel = stressLevel)
     }
 
-    /*
-    * Insert the current mood on database
-    * Tested
-    * */
-    suspend fun insertCurrentMood(): Boolean {
-        try {
-            if (currentMood.value == null) throw Exception("No mood to save")
-            moodsDAO.insertMood(currentMood.value!!)
-            return true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return false
+    fun insertCurrentMood() = try {
+        screenModelScope.launch(dispatcherIo) {
+            moodsDAO.insertMood(currentMood.value ?: return@launch)
         }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 
     /*
@@ -81,7 +68,6 @@ class MoodsViewModel(
     * Tested
     * */
     fun getMoods() = screenModelScope.launch(dispatcherIo) {
-        _moods.value = UiState.Loading
         moodsDAO.getMoods().catch {
             _moods.value = UiState.Error(it.message.toString())
         }.collect {

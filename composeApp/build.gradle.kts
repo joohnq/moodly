@@ -69,6 +69,7 @@ kotlin {
             implementation(libs.voyager.bottom.sheet.navigator)
             implementation(libs.voyager.koin)
 
+            implementation(libs.koin.compose)
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -92,7 +93,7 @@ kotlin {
             implementation(libs.test.resources)
             implementation(libs.koin.core)
             implementation(libs.koin.test)
-            implementation("app.cash.turbine:turbine:1.2.0")
+            implementation(libs.turbine)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

@@ -16,13 +16,13 @@ import moodapp.composeapp.generated.resources.you_are_not_stressed_out
 import moodapp.composeapp.generated.resources.you_are_very_stressed_out
 import org.jetbrains.compose.resources.StringResource
 
-@Serializable
+
 sealed class StressLevel(
     val id: String,
-    @Contextual val value: StringResource,
-    @Contextual val text: StringResource
+    val value: StringResource,
+    val text: StringResource
 ) {
-    @Serializable
+    
     data object One :
         StressLevel(
             id = OneId,
@@ -30,7 +30,7 @@ sealed class StressLevel(
             text = Res.string.you_are_not_stressed_out
         )
 
-    @Serializable
+    
     data object Two :
         StressLevel(
             id = TwoId,
@@ -38,7 +38,7 @@ sealed class StressLevel(
             text = Res.string.you_are_a_little_stressed_out
         )
 
-    @Serializable
+    
     data object Three :
         StressLevel(
             id = ThreeId,
@@ -46,7 +46,7 @@ sealed class StressLevel(
             text = Res.string.you_are_neutral
         )
 
-    @Serializable
+    
     data object Four :
         StressLevel(
             id = FourId,
@@ -54,7 +54,7 @@ sealed class StressLevel(
             text = Res.string.you_are_very_stressed_out
         )
 
-    @Serializable
+    
     data object Five :
         StressLevel(
             id = FiveId,

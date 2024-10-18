@@ -1,11 +1,9 @@
 @file:OptIn(ExperimentalForeignApi::class)
 
-package com.joohnq.moodapp
+package com.joohnq.moodapp.view
 
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.useContents
 import platform.UIKit.UIApplication
-import platform.UIKit.UIScreen
 
 actual class ScreenDimensions: ScreenDimensionsInterface {
     @OptIn(ExperimentalForeignApi::class)

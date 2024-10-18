@@ -1,13 +1,14 @@
 package com.joohnq.moodapp.di
 
-import com.joohnq.moodapp.model.MoodDb
-import com.joohnq.moodapp.model.User
-import com.joohnq.moodapp.model.UserPreferences
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.joohnq.moodapp.model.MyDatabase
+import com.joohnq.moodapp.model.dao.StatsRecordDAO
+import com.joohnq.moodapp.model.dao.UserDAO
+import com.joohnq.moodapp.model.dao.UserPreferencesDAO
+import com.joohnq.moodapp.model.getMyDatabase
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.koin.core.module.Module
@@ -21,14 +22,23 @@ val sharedModule = module {
     singleOf(::UserPreferenceViewModel)
     singleOf(::MoodsViewModel)
     singleOf(::UserViewModel)
-    single<RealmConfiguration> {
-        RealmConfiguration.create(
-            schema = setOf(
-                User::class,
-                MoodDb::class,
-                UserPreferences::class
-            )
-        )
+    singleOf(::BundledSQLiteDriver)
+    single<UserPreferencesDAO> {
+        getMyDatabase(
+            get(),
+            get()
+        ).userPreferencesDAO()
     }
-    single<Realm> { Realm.open(get()) }
+    single<StatsRecordDAO> {
+        getMyDatabase(
+            get(),
+            get()
+        ).moodsDAO()
+    }
+    single<UserDAO> {
+        getMyDatabase(
+            get(),
+            get()
+        ).userDAO()
+    }
 }

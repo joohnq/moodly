@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
 import moodapp.composeapp.generated.resources.page_of

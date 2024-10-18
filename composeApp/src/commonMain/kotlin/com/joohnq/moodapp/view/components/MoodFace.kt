@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.entities.Mood
+import com.joohnq.moodapp.model.entities.Mood
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

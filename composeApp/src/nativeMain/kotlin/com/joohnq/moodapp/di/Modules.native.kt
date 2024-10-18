@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.di
 
 import androidx.room.RoomDatabase
-import com.joohnq.moodapp.ScreenDimensions
+import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.model.database.getMyDatabase
 import com.joohnq.moodapp.model.MyDatabase
 import org.koin.core.module.Module

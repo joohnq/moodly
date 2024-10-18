@@ -21,11 +21,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.TextStyles
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
@@ -34,25 +33,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
-
-@Composable
-fun onContinueWith(
-    onSomethingWentWrong: () -> Unit,
-    block: suspend () -> Boolean,
-    onSuccess: () -> Unit
-) {
-    val scope = rememberCoroutineScope()
-    val ioDispatcher: CoroutineDispatcher = koinInject()
-    scope.launch(ioDispatcher) {
-        val res = block()
-        if (!res) {
-            onSomethingWentWrong()
-            return@launch
-        }
-        onSuccess()
-    }
-}
 
 @Composable
 fun OnboardingBaseComponent(

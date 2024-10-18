@@ -3,7 +3,7 @@ package com.joohnq.moodapp.viewmodel
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

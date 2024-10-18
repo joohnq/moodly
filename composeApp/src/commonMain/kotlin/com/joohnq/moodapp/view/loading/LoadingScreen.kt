@@ -12,12 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.view.entities.User
-import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.home.HomeScreen
 import com.joohnq.moodapp.view.onboarding.GetUserNameScreen
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
@@ -25,13 +22,11 @@ import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.onSuccess
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import com.joohnq.moodapp.viewmodel.UserViewModel
 import org.koin.compose.koinInject
 
-class LoadingScreen : Screen {
+class LoadingScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
         val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
 

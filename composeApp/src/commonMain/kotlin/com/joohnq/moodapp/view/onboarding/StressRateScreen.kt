@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,22 +17,21 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.entities.StressLevel
-import com.joohnq.moodapp.view.entities.StressLevelSaver
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class StressRateScreen : Screen {
+class StressRateScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         val moodsViewModel: MoodsViewModel = koinInject()
-        var selectedOption by rememberSaveable(stateSaver = StressLevelSaver) {
+        var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
             mutableStateOf(
                 StressLevel.Three
             )
@@ -58,7 +56,7 @@ class StressRateScreen : Screen {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                options.forEach<StressLevel> { option: StressLevel ->
+                options.forEach { option: StressLevel ->
                     StressRateButton(
                         modifier = Modifier.weight(1f),
                         option = option,

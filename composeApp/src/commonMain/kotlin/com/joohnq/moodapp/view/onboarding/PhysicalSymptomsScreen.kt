@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,10 +20,10 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.joohnq.moodapp.model.entities.PhysicalSymptoms
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.entities.PhysicalSymptoms
-import com.joohnq.moodapp.view.entities.PhysicalSymptomsSaver
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -34,18 +33,16 @@ import moodapp.composeapp.generated.resources.select_one_answer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class PhysicalSymptomsScreen : Screen {
+class PhysicalSymptomsScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         val userViewModel: UserViewModel = koinInject()
-        var selectedOption by rememberSaveable(stateSaver = PhysicalSymptomsSaver) {
+        var selectedOption by rememberSaveable(stateSaver = PhysicalSymptoms.getSaver()) {
             mutableStateOf(null)
         }
         val options: List<PhysicalSymptoms> = remember { PhysicalSymptoms.getAll() }
-        val scope = rememberCoroutineScope()
-        val ioDispatcher: CoroutineDispatcher = koinInject()
+
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible = selectedOption != null
         }

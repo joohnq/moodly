@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
-import com.joohnq.moodapp.view.entities.UserPreferences
+import com.joohnq.moodapp.model.DatabaseConstants
+import com.joohnq.moodapp.model.entities.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserPreferencesDAO {
-    @Query("SELECT * FROM user_preferences WHERE id = :id")
+    @Query("SELECT * FROM ${DatabaseConstants.USER_PREFERENCES_DATABASE} WHERE id = :id")
     fun getUserPreferences(id: String = "1"): Flow<UserPreferences>
 
     @Upsert
@@ -21,12 +22,12 @@ interface UserPreferencesDAO {
         userPreferences: UserPreferences = UserPreferences()
     )
 
-    @Query("UPDATE user_preferences SET skip_welcome_screen = :skipWelcomeScreen WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_PREFERENCES_DATABASE} SET ${DatabaseConstants.SKIP_WELCOME_SCREEN} = :skipWelcomeScreen WHERE id = :id")
     suspend fun setSkipWelcomeScreen(skipWelcomeScreen: Boolean = true, id: String = "1")
 
-    @Query("UPDATE user_preferences SET skip_onboarding_screen = :skipOnboardingScreen WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_PREFERENCES_DATABASE} SET ${DatabaseConstants.SKIP_ONBOARDING_SCREEN} = :skipOnboardingScreen WHERE id = :id")
     suspend fun setSkipOnboardingScreen(skipOnboardingScreen: Boolean = true, id: String = "1")
 
-    @Query("UPDATE user_preferences SET skip_get_user_name_screen = :skipGetUserNameScreen WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_PREFERENCES_DATABASE} SET ${DatabaseConstants.SKIP_GET_USER_NAME_SCREEN} = :skipGetUserNameScreen WHERE id = :id")
     suspend fun setSkipGetUserNameScreen(skipGetUserNameScreen: Boolean = true, id: String = "1")
 }

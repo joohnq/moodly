@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,18 +35,15 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.home.HomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.how_we_can_call_you
@@ -55,16 +51,13 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class GetUserNameScreen : Screen {
+class GetUserNameScreen : BasicScreen() {
     @Composable
     @Preview
-    override fun Content() {
+    override fun Init() {
         var name by remember { mutableStateOf("") }
         var nameError by remember { mutableStateOf("") }
         val focusManager: FocusManager = LocalFocusManager.current
-        val scope = rememberCoroutineScope()
-        val ioDispatcher: CoroutineDispatcher = koinInject()
-        val navigator = LocalNavigator.currentOrThrow
         val snackBarState = remember { SnackbarHostState() }
         val userViewModel: UserViewModel = koinInject()
         val userPreferencesViewModel: UserPreferenceViewModel = koinInject()
@@ -139,6 +132,11 @@ class GetUserNameScreen : Screen {
                                 }
 
                                 val res2 = userPreferencesViewModel.setSkipGetUserNameScreen()
+
+                                if (!res2) {
+                                    snackBarState.showSnackbar("Something went wrong")
+                                    return@launch
+                                }
 
                                 navigator.push(HomeScreen())
                             } catch (e: Exception) {

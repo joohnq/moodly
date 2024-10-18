@@ -8,10 +8,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.helper.toDegrees
 import com.joohnq.moodapp.helper.toRadians
-import com.joohnq.moodapp.view.entities.Mood
+import com.joohnq.moodapp.model.entities.Mood
 import kotlin.math.cos
 import kotlin.math.sin
 

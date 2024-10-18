@@ -8,42 +8,29 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.model.entities.ProfessionalHelp
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
-import com.joohnq.moodapp.view.entities.ProfessionalHelpOptions
-import com.joohnq.moodapp.view.entities.ProfessionalHelpOptionsSaver
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
 
-class ProfessionalHelpScreen : Screen {
+class ProfessionalHelpScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val scope = rememberCoroutineScope()
-        val ioDispatcher: CoroutineDispatcher = koinInject()
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         val userViewModel: UserViewModel = koinInject()
-        var selectedOption by rememberSaveable(stateSaver = ProfessionalHelpOptionsSaver) {
+        var selectedOption by rememberSaveable(stateSaver = ProfessionalHelp.getSaver()) {
             mutableStateOf(null)
         }
-        val options = rememberSaveable {
-            listOf(
-                ProfessionalHelpOptions.Yes,
-                ProfessionalHelpOptions.No
-            )
-        }
+        val options = remember { ProfessionalHelp.getAll() }
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible = selectedOption != null

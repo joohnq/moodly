@@ -28,8 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.ScreenDimensions
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TextWithBackground

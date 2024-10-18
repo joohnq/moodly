@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.home.HomeScreen
@@ -23,12 +24,9 @@ import moodapp.composeapp.generated.resources.expression_analysis_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class ExpressionAnalysisScreen : Screen {
+class ExpressionAnalysisScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val scope = rememberCoroutineScope()
-        val io: CoroutineDispatcher = koinInject()
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         val moodsViewModel: MoodsViewModel = koinInject()
         val userPreferencesViewModel: UserPreferenceViewModel = koinInject()
         var desc by remember { mutableStateOf("") }
@@ -39,7 +37,7 @@ class ExpressionAnalysisScreen : Screen {
             onBack = navigator::pop,
             onContinue = { onSomethingWentWrong ->
                 moodsViewModel.setCurrentMoodDescription(desc)
-                scope.launch(io) {
+                scope.launch(ioDispatcher) {
                     val res = moodsViewModel.insertCurrentMood()
                     if (!res) onSomethingWentWrong()
                     moodsViewModel.resetCurrentMood()

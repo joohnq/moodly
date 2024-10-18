@@ -1,8 +1,7 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.material3.SliderColors
-import androidx.compose.runtime.Composable
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
 
 fun SliderColors(): SliderColors = SliderColors(
     thumbColor = Colors.Orange40,

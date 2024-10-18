@@ -11,38 +11,28 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import com.joohnq.moodapp.model.entities.MedicationsSupplements
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
-import com.joohnq.moodapp.view.entities.MedicationsSupplements
-import com.joohnq.moodapp.view.entities.MedicationsSupplementsSaver
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.koin.compose.koinInject
 
-class MedicationsSupplementsScreen : Screen {
+class MedicationsSupplementsScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         var isContinueButtonVisible by remember { mutableStateOf(false) }
         val userViewModel: UserViewModel = koinInject()
-        var selectedOption by rememberSaveable(stateSaver = MedicationsSupplementsSaver) {
+        var selectedOption by rememberSaveable(stateSaver = MedicationsSupplements.getSaver()) {
             mutableStateOf(null)
         }
-        val options: List<MedicationsSupplements> = remember {
-            MedicationsSupplements.getAll()
-        }
-        val scope = rememberCoroutineScope()
-        val ioDispatcher: CoroutineDispatcher = koinInject()
+        val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
 
         LaunchedEffect(selectedOption) {
             isContinueButtonVisible =

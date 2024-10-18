@@ -1,6 +1,5 @@
-package com.joohnq.moodapp
+package com.joohnq.moodapp.view.constants
 
-import com.joohnq.moodapp.view.icons.LogoImageVector
 import com.joohnq.moodapp.view.icons.MoodDepressed
 import com.joohnq.moodapp.view.icons.MoodHappy
 import com.joohnq.moodapp.view.icons.MoodNeutral

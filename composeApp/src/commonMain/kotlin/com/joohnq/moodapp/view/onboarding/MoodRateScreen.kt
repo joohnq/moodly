@@ -9,31 +9,22 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.utils.Log
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
 import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.entities.Mood
-import com.joohnq.moodapp.view.entities.MoodSaver
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
@@ -41,11 +32,10 @@ import moodapp.composeapp.generated.resources.mood_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class MoodRateScreen : Screen {
+class MoodRateScreen : BasicScreen() {
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        var selectedMood by rememberSaveable(stateSaver = MoodSaver) { mutableStateOf(Mood.Neutral) }
+    override fun Init() {
+        var selectedMood by rememberSaveable(stateSaver = Mood.getSaver()) { mutableStateOf(Mood.Neutral) }
         val moodsViewModel: MoodsViewModel = koinInject()
 
         OnboardingBaseComponent(

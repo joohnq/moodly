@@ -14,9 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.components.TextStyles
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 class CompilingDataScreen : Screen {
     @Composable

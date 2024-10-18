@@ -1,12 +1,10 @@
-package com.joohnq.moodapp.view.entities
+package com.joohnq.moodapp.model.entities
 
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.depressed
 import moodapp.composeapp.generated.resources.happy
@@ -27,7 +25,7 @@ sealed class Mood(
 ) {
     data object Depressed :
         Mood(
-            id = DepressedId,
+            id = DEPRESSED,
             image = Drawables.Mood.Depressed,
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
@@ -37,7 +35,7 @@ sealed class Mood(
         )
 
     data object Sad : Mood(
-        id = SadId,
+        id = SAD,
         image = Drawables.Mood.Sad,
         imageVector = Drawables.Mood.SadVectorPainter,
         text = Res.string.sad,
@@ -48,7 +46,7 @@ sealed class Mood(
 
     data object Neutral :
         Mood(
-            id = NeutralID,
+            id = NEUTRAL,
             image = Drawables.Mood.Neutral,
             imageVector = Drawables.Mood.NeutralVectorPainter,
             text = Res.string.neutral,
@@ -58,7 +56,7 @@ sealed class Mood(
         )
 
     data object Happy : Mood(
-        id = HappyId,
+        id = HAPPY,
         image = Drawables.Mood.Happy,
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
@@ -69,7 +67,7 @@ sealed class Mood(
 
     data object Overjoyed :
         Mood(
-            id = OverjoyedId,
+            id = OVERJOYED,
             image = Drawables.Mood.Overjoyed,
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
@@ -79,20 +77,22 @@ sealed class Mood(
         )
 
     companion object {
-        const val DepressedId = "0"
-        const val SadId = "1"
-        const val NeutralID = "2"
-        const val HappyId = "3"
-        const val OverjoyedId = "4"
+        const val DEPRESSED = "0"
+        const val SAD = "1"
+        const val NEUTRAL = "2"
+        const val HAPPY = "3"
+        const val OVERJOYED = "4"
 
-        fun valueOf(src: String): Mood = when (src) {
-            DepressedId -> Depressed
-            SadId -> Sad
-            NeutralID -> Neutral
-            HappyId -> Happy
-            OverjoyedId -> Overjoyed
+        fun toValue(src: String): Mood = when (src) {
+            DEPRESSED -> Depressed
+            SAD -> Sad
+            NEUTRAL -> Neutral
+            HAPPY -> Happy
+            OVERJOYED -> Overjoyed
             else -> throw IllegalArgumentException("Unknown mood: $src")
         }
+
+        fun fromValue(mood: Mood?): String = mood?.id.toString()
 
         fun getAll(): List<Mood> = listOf(
             Depressed,
@@ -101,11 +101,10 @@ sealed class Mood(
             Happy,
             Overjoyed
         )
+
+        fun getSaver(): Saver<Mood, String> = Saver(
+            save = { fromValue(it) },
+            restore = { toValue(it) }
+        )
     }
 }
-
-
-val MoodSaver = Saver<Mood, String>(
-    save = { opt -> opt.id },
-    restore = { name -> Mood.valueOf(name) }
-)

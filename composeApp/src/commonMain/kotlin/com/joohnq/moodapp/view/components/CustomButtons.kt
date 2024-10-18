@@ -22,10 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.entities.IconProps
-import com.joohnq.moodapp.view.entities.StressLevel
+import com.joohnq.moodapp.model.entities.StressLevel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

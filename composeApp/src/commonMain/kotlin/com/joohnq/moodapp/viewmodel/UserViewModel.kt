@@ -2,13 +2,12 @@ package com.joohnq.moodapp.viewmodel
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import com.joohnq.moodapp.model.dao.UserDAO
-import com.joohnq.moodapp.view.entities.MedicationsSupplements
-import com.joohnq.moodapp.view.entities.PhysicalSymptoms
-import com.joohnq.moodapp.view.entities.User
+import com.joohnq.moodapp.model.entities.MedicationsSupplements
+import com.joohnq.moodapp.model.entities.PhysicalSymptoms
+import com.joohnq.moodapp.model.entities.User
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class UserViewModel(
     private val userDAO: UserDAO,

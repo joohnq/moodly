@@ -15,39 +15,36 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.joohnq.moodapp.Colors
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.model.entities.SleepQuality
+import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SliderColors
 import com.joohnq.moodapp.view.components.SliderComponents
 import com.joohnq.moodapp.view.components.VerticalSlider
-import com.joohnq.moodapp.view.entities.Mood
-import com.joohnq.moodapp.view.entities.SleepQuality
-import com.joohnq.moodapp.view.entities.SleepQualitySaver
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import org.koin.compose.koinInject
 
-class SleepQualityScreen : Screen {
+class SleepQualityScreen : BasicScreen() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    override fun Content() {
-
-        val navigator = LocalNavigator.currentOrThrow
+    override fun Init() {
         val moods = remember { Mood.getAll().reversed() }
         val moodsViewModel: MoodsViewModel = koinInject()
-        var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQualitySaver) { mutableStateOf(SleepQuality.Worst) }
+        var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
+            mutableStateOf(
+                SleepQuality.Worst
+            )
+        }
         var sliderValue by rememberSaveable { mutableStateOf(0f) }
         val sleepQualityOption: List<SleepQuality> = remember { SleepQuality.getAll() }
 

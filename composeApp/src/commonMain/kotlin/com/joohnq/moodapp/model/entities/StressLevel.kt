@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.entities
+package com.joohnq.moodapp.model.entities
 
 import androidx.compose.runtime.saveable.Saver
 import kotlinx.serialization.Contextual
@@ -16,67 +16,69 @@ import moodapp.composeapp.generated.resources.you_are_not_stressed_out
 import moodapp.composeapp.generated.resources.you_are_very_stressed_out
 import org.jetbrains.compose.resources.StringResource
 
-
+@Serializable
 sealed class StressLevel(
     val id: String,
-    val value: StringResource,
-    val text: StringResource
+    @Contextual val value: StringResource,
+    @Contextual val text: StringResource
 ) {
-    
+    @Serializable
     data object One :
         StressLevel(
-            id = OneId,
+            id = ONE,
             value = Res.string.one_number,
             text = Res.string.you_are_not_stressed_out
         )
 
-    
+    @Serializable
     data object Two :
         StressLevel(
-            id = TwoId,
+            id = TWO,
             value = Res.string.two_number,
             text = Res.string.you_are_a_little_stressed_out
         )
 
-    
+    @Serializable
     data object Three :
         StressLevel(
-            id = ThreeId,
+            id = THREE,
             value = Res.string.three_number,
             text = Res.string.you_are_neutral
         )
 
-    
+    @Serializable
     data object Four :
         StressLevel(
-            id = FourId,
+            id = FOUR,
             value = Res.string.four_number,
             text = Res.string.you_are_very_stressed_out
         )
 
-    
+    @Serializable
     data object Five :
         StressLevel(
-            id = FiveId,
+            id = FIVE,
             value = Res.string.five_number,
             text = Res.string.you_are_extremely_stressed_out
         )
 
     companion object {
-        const val OneId = "0"
-        const val TwoId = "1"
-        const val ThreeId = "2"
-        const val FourId = "3"
-        const val FiveId = "4"
+        const val ONE = "1"
+        const val TWO = "2"
+        const val THREE = "3"
+        const val FOUR = "4"
+        const val FIVE = "5"
 
-        fun valueOf(src: String): StressLevel = when (src) {
-            OneId -> One
-            TwoId -> Two
-            ThreeId -> Three
-            FourId -> Four
-            FiveId -> Five
+        fun toValue(src: String): StressLevel = when (src) {
+            ONE -> One
+            TWO -> Two
+            THREE -> Three
+            FOUR -> Four
+            FIVE -> Five
             else -> throw IllegalArgumentException("Unknown stress rate option: $src")
         }
+
+        fun fromValue(stressLevel: StressLevel?): String = stressLevel?.id.toString()
 
         fun getAll(): List<StressLevel> = listOf(
             One,
@@ -85,10 +87,10 @@ sealed class StressLevel(
             Four,
             Five
         )
+
+        fun getSaver(): Saver<StressLevel, String> = Saver(
+            save = { fromValue(it) },
+            restore = { toValue(it) }
+        )
     }
 }
-
-val StressLevelSaver = Saver<StressLevel, String>(
-    save = { opt -> opt.id },
-    restore = { name -> StressLevel.valueOf(name) }
-)

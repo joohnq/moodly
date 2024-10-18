@@ -1,8 +1,8 @@
 package com.joohnq.moodapp.view.welcome
 
 import androidx.compose.runtime.Composable
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.community_first_title
 import moodapp.composeapp.generated.resources.community_span

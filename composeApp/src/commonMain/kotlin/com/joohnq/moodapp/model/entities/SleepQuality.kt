@@ -1,6 +1,7 @@
-package com.joohnq.moodapp.view.entities
+package com.joohnq.moodapp.model.entities
 
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -16,62 +17,64 @@ import moodapp.composeapp.generated.resources.three_four_hours
 import moodapp.composeapp.generated.resources.worst
 import org.jetbrains.compose.resources.StringResource
 
-
+@Serializable
 sealed class SleepQuality(
     val id: String,
-    val firstText: StringResource,
-    val secondText: StringResource,
+    @Contextual val firstText: StringResource,
+    @Contextual val secondText: StringResource,
 ) {
-    
+    @Serializable
     data object Excellent : SleepQuality(
-        id = ExcellentId,
+        id = EXCELLENT,
         firstText = Res.string.excellent,
         secondText = Res.string.seven_nine_hours
     )
 
-    
+    @Serializable
     data object Good : SleepQuality(
-        id = GoodId,
+        id = GOOD,
         firstText = Res.string.good,
         secondText = Res.string.six_seven_hours
     )
 
-    
+    @Serializable
     data object Fair : SleepQuality(
-        id = FairId,
+        id = FAIR,
         firstText = Res.string.fair,
         secondText = Res.string.five_hours
     )
 
-    
+    @Serializable
     data object Poor : SleepQuality(
-        id = PoorId,
+        id = POOR,
         firstText = Res.string.poor,
         secondText = Res.string.three_four_hours
     )
 
-    
+    @Serializable
     data object Worst : SleepQuality(
-        id = WorstId,
+        id = WORST,
         firstText = Res.string.worst,
         secondText = Res.string.minus_three_hours
     )
 
     companion object {
-        const val ExcellentId = "0"
-        const val GoodId = "1"
-        const val FairId = "2"
-        const val PoorId = "3"
-        const val WorstId = "4"
+        const val EXCELLENT = "0"
+        const val GOOD = "1"
+        const val FAIR = "2"
+        const val POOR = "3"
+        const val WORST = "4"
 
-        fun valueOf(src: String): SleepQuality = when (src) {
-            "0" -> Excellent
-            "1" -> Good
-            "2" -> Fair
-            "3" -> Poor
-            "4" -> Worst
+        fun toValue(src: String): SleepQuality = when (src) {
+            EXCELLENT -> Excellent
+            GOOD -> Good
+            FAIR -> Fair
+            POOR -> Poor
+            WORST -> Worst
             else -> throw IllegalArgumentException("Unknown sleep quality option: $src")
         }
+
+        fun fromValue(sleepQuality: SleepQuality?): String = sleepQuality?.id.toString()
 
         fun getAll(): List<SleepQuality> = listOf(
             Excellent,
@@ -80,10 +83,10 @@ sealed class SleepQuality(
             Poor,
             Worst
         )
+
+        fun getSaver(): Saver<SleepQuality, String> = Saver(
+            save = { fromValue(it) },
+            restore = { toValue(it) }
+        )
     }
 }
-
-val SleepQualitySaver = Saver<SleepQuality, String>(
-    save = { opt -> opt.id },
-    restore = { name -> SleepQuality.valueOf(name) }
-)

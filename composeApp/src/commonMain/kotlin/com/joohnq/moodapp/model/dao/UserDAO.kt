@@ -2,20 +2,21 @@ package com.joohnq.moodapp.model.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.joohnq.moodapp.view.entities.MedicationsSupplements
-import com.joohnq.moodapp.view.entities.PhysicalSymptoms
+import com.joohnq.moodapp.model.DatabaseConstants
+import com.joohnq.moodapp.model.entities.MedicationsSupplements
+import com.joohnq.moodapp.model.entities.PhysicalSymptoms
 
 @Dao
 interface UserDAO {
-    @Query("UPDATE user SET sought_help = :soughtHelp WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_DATABASE} SET ${DatabaseConstants.SOUGHT_HELP} = :soughtHelp WHERE id = :id")
     suspend fun setUserSoughtHelp(soughtHelp: Boolean, id: String = "1")
 
-    @Query("UPDATE user SET physical_symptoms = :physicalSymptoms WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_DATABASE} SET ${DatabaseConstants.PHYSICAL_SYMPTOMS} = :physicalSymptoms WHERE id = :id")
     suspend fun setUserPhysicalPain(physicalSymptoms: PhysicalSymptoms, id: String = "1")
 
-    @Query("UPDATE user SET medications_supplements = :medicationsSupplements WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_DATABASE} SET ${DatabaseConstants.MEDICATIONS_SUPPLEMENTS} = :medicationsSupplements WHERE id = :id")
     suspend fun setUserMedicationsSupplements(medicationsSupplements: MedicationsSupplements, id: String = "1")
 
-    @Query("UPDATE user SET name = :name WHERE id = :id")
+    @Query("UPDATE ${DatabaseConstants.USER_DATABASE} SET name = :name WHERE id = :id")
     suspend fun setUserName(name: String, id: String = "1")
 }

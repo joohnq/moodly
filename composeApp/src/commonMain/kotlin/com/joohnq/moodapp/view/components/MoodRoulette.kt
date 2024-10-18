@@ -1,7 +1,6 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -14,9 +13,9 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.Drawables
-import com.joohnq.moodapp.view.entities.Mood
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.model.entities.Mood
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt

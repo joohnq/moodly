@@ -7,29 +7,20 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import com.joohnq.moodapp.Colors
-import com.joohnq.moodapp.utils.Log
+import com.joohnq.moodapp.view.BasicScreen
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import org.koin.compose.koinInject
 
-class HomeScreen : Screen {
+class HomeScreen : BasicScreen() {
     @Composable
-    override fun Content() {
+    override fun Init() {
         val moodsViewModel: MoodsViewModel = koinInject()
-        val moods by moodsViewModel.moods.collectAsState()
 
         SideEffect { moodsViewModel.getMoods() }
-
-        LaunchedEffect(moods){
-            Log(moods)
-        }
 
         Scaffold(
             containerColor = Colors.Brown10,

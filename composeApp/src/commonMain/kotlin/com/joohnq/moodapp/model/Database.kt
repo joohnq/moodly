@@ -1,37 +1,46 @@
 package com.joohnq.moodapp.model
 
-import io.realm.kotlin.Realm
-import io.realm.kotlin.ext.asFlow
-import io.realm.kotlin.ext.query
-import io.realm.kotlin.types.TypedRealmObject
-import kotlinx.coroutines.flow.catch
+import androidx.room.ConstructedBy
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.RoomDatabase.Builder
+import androidx.room.RoomDatabaseConstructor
+import androidx.room.TypeConverters
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.joohnq.moodapp.model.converters.StatsRecordConverter
+import com.joohnq.moodapp.model.converters.UserConverter
+import com.joohnq.moodapp.model.dao.StatsRecordDAO
+import com.joohnq.moodapp.model.dao.UserDAO
+import com.joohnq.moodapp.model.dao.UserPreferencesDAO
+import com.joohnq.moodapp.model.entities.StatsRecord
+import com.joohnq.moodapp.model.entities.User
+import com.joohnq.moodapp.model.entities.UserPreferences
 
-suspend inline fun <reified T : TypedRealmObject> Realm.flowGetAll(
-    crossinline onCatch: (Throwable) -> Unit,
-    crossinline block: (List<T>) -> Unit
-) {
-    val result = query<T>().find().asFlow()
-    result.catch {
-        onCatch(it)
-    }.collect { results ->
-        val items = results.list.map { it }
-        block(items)
-    }
+@Database(
+    entities = [StatsRecord::class, User::class, UserPreferences::class],
+    version = 1
+)
+@ConstructedBy(MyDatabaseConstructor::class)
+@TypeConverters(
+    StatsRecordConverter::class,
+    UserConverter::class,
+)
+abstract class MyDatabase : RoomDatabase() {
+    abstract fun moodsDAO(): StatsRecordDAO
+    abstract fun userDAO(): UserDAO
+    abstract fun userPreferencesDAO(): UserPreferencesDAO
 }
 
-suspend inline fun <reified T : TypedRealmObject> Realm.flowGetTheOne(): T? {
-    val result = query<T>(
-        "id == $0",
-        "1"
-    ).first().find()?.asFlow()
+@Suppress("NO_ACTUAL_FOR_EXPECT")
+expect object MyDatabaseConstructor : RoomDatabaseConstructor<MyDatabase> {
+    override fun initialize(): MyDatabase
+}
 
-    var r: T? = null
-
-    result?.catch {
-        throw Throwable(it.message.toString())
-    }?.collect { item ->
-        r = item.obj
-    }
-
-    return r
+fun getMyDatabase(
+    builder: Builder<MyDatabase>,
+    bundledSQLiteDriver: BundledSQLiteDriver
+): MyDatabase {
+    return builder
+        .setDriver(bundledSQLiteDriver)
+        .build()
 }

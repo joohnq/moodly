@@ -36,6 +36,7 @@ class UserPreferenceViewModel(
         userPreferencesDAO.setSkipWelcomeScreen()
         true
     } catch (e: Exception) {
+        e.printStackTrace()
         false
     }
 
@@ -43,6 +44,7 @@ class UserPreferenceViewModel(
         userPreferencesDAO.setSkipOnboardingScreen()
         true
     } catch (e: Exception) {
+        e.printStackTrace()
         false
     }
 
@@ -51,6 +53,7 @@ class UserPreferenceViewModel(
         userPreferencesDAO.setSkipGetUserNameScreen()
         true
     } catch (e: Exception) {
+        e.printStackTrace()
         false
     }
 }

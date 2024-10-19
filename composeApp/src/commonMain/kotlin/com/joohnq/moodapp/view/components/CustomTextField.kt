@@ -39,6 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 fun ExpressionAnalysisTextField(text: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = text,
+        singleLine = true,
         onValueChange = onValueChange,
         label = null,
         shape = RoundedCornerShape(20.dp),

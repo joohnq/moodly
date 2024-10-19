@@ -35,13 +35,16 @@ class ExpressionAnalysisScreen : BasicScreen() {
             page = 7,
             title = Res.string.expression_analysis_title,
             onBack = navigator::pop,
+            isContinueButtonVisible = desc.isNotEmpty(),
             onContinue = { onSomethingWentWrong ->
                 moodsViewModel.setCurrentMoodDescription(desc)
                 scope.launch(ioDispatcher) {
                     val res = moodsViewModel.insertCurrentMood()
+                    println("res: $res")
                     if (!res) onSomethingWentWrong()
                     moodsViewModel.resetCurrentMood()
                     val res2 = userPreferencesViewModel.setSkipOnboardingScreen()
+                    println("res2: $res2")
                     if (!res2) onSomethingWentWrong()
                     navigator.push(GetUserNameScreen())
                 }

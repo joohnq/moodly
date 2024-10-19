@@ -32,6 +32,8 @@ class LoadingScreen : BasicScreen() {
 
         LaunchedEffect(userPreferences) {
             userPreferences.onSuccess { userPreferences ->
+                println("userPreferences: $userPreferences")
+
                 val screen = when (true) {
                     !userPreferences.skipWelcomeScreen -> WelcomeScreen()
                     !userPreferences.skipOnboardingScreen -> MoodRateScreen()

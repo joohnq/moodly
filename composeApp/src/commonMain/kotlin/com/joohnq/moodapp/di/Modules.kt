@@ -23,22 +23,16 @@ val sharedModule = module {
     singleOf(::MoodsViewModel)
     singleOf(::UserViewModel)
     singleOf(::BundledSQLiteDriver)
+    single<MyDatabase> {
+        getMyDatabase(get(), get(), get())
+    }
     single<UserPreferencesDAO> {
-        getMyDatabase(
-            get(),
-            get()
-        ).userPreferencesDAO()
+        get<MyDatabase>().userPreferencesDAO()
     }
     single<StatsRecordDAO> {
-        getMyDatabase(
-            get(),
-            get()
-        ).moodsDAO()
+        get<MyDatabase>().moodsDAO()
     }
     single<UserDAO> {
-        getMyDatabase(
-            get(),
-            get()
-        ).userDAO()
+        get<MyDatabase>().userDAO()
     }
 }

@@ -15,10 +15,13 @@ import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 import com.joohnq.moodapp.model.entities.StatsRecord
 import com.joohnq.moodapp.model.entities.User
 import com.joohnq.moodapp.model.entities.UserPreferences
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 
 @Database(
     entities = [StatsRecord::class, User::class, UserPreferences::class],
-    version = 1
+    version = DatabaseConstants.DATABASE_VERSION
 )
 @ConstructedBy(MyDatabaseConstructor::class)
 @TypeConverters(
@@ -38,9 +41,11 @@ expect object MyDatabaseConstructor : RoomDatabaseConstructor<MyDatabase> {
 
 fun getMyDatabase(
     builder: Builder<MyDatabase>,
-    bundledSQLiteDriver: BundledSQLiteDriver
+    bundledSQLiteDriver: BundledSQLiteDriver,
+    ioDispatcher: CoroutineDispatcher
 ): MyDatabase {
     return builder
         .setDriver(bundledSQLiteDriver)
+        .setQueryCoroutineContext(ioDispatcher)
         .build()
 }

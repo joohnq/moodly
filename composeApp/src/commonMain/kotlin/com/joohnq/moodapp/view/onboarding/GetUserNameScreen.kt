@@ -118,7 +118,7 @@ class GetUserNameScreen : BasicScreen() {
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     ButtonWithArrowRight(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                         text = "Continue"
                     ) {
                         focusManager.clearFocus()
@@ -127,14 +127,14 @@ class GetUserNameScreen : BasicScreen() {
                                 if (name.isEmpty()) throw Exception("Name is required")
                                 val res: Boolean = userViewModel.setUserName(name)
                                 if (!res) {
-                                    snackBarState.showSnackbar("Something went wrong")
+                                    snackBarState.showSnackbar("Something went wrong 1")
                                     return@launch
                                 }
 
                                 val res2 = userPreferencesViewModel.setSkipGetUserNameScreen()
 
                                 if (!res2) {
-                                    snackBarState.showSnackbar("Something went wrong")
+                                    snackBarState.showSnackbar("Something went wrong 2")
                                     return@launch
                                 }
 

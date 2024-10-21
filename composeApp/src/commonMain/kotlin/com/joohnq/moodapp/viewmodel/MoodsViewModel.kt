@@ -66,13 +66,10 @@ class MoodsViewModel(
     * */
     suspend fun insertCurrentMood(): Boolean {
         try {
-            if (currentMood.value == null) throw Exception("No mood to save")
-            println(currentMood.value)
-            statsRecordDAO.insertMood(currentMood.value!!)
+            statsRecordDAO.insertMood(currentMood.value ?: throw Exception("No mood to save"))
             return true
         } catch (e: Exception) {
             e.printStackTrace()
-            println("erro")
             return false
         }
     }

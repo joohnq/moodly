@@ -10,6 +10,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
+suspend fun executeWithBoolean(block: suspend () -> Unit) = try {
+    block()
+    true
+} catch (e: Exception) {
+    e.printStackTrace()
+    false
+}
+
 class UserPreferenceViewModel(
     private val userPreferencesDAO: UserPreferencesDAO,
     private val ioDispatcher: CoroutineDispatcher
@@ -18,6 +26,10 @@ class UserPreferenceViewModel(
             MutableStateFlow<UiState<UserPreferences>> = MutableStateFlow(UiState.Idle)
     val userPreferences: MutableStateFlow<UiState<UserPreferences>> = _userPreferences
 
+    /*
+   * Get the user preferences from database
+   *  Tested
+   * */
     fun getUserPreferences() =
         screenModelScope.launch(ioDispatcher) {
             _userPreferences.value = UiState.Loading
@@ -28,32 +40,31 @@ class UserPreferenceViewModel(
             }
         }
 
-    fun initUserPreferences() = screenModelScope.launch(ioDispatcher) {
-        userPreferencesDAO.insertUserPreferences()
-    }
+    /*
+   * Initialize the user preferences database when firstly launch the app
+   * Tested
+   * */
+    suspend fun initUserPreferences(): Boolean =
+        executeWithBoolean(userPreferencesDAO::insertUserPreferences)
 
-    suspend fun setSkipWelcomeScreen(): Boolean = try {
-        userPreferencesDAO.setSkipWelcomeScreen()
-        true
-    } catch (e: Exception) {
-        e.printStackTrace()
-        false
-    }
+    /*
+   * Set the skip welcome screen to true when already pass from the welcome screens flow
+   * Tested
+   * */
+    suspend fun setSkipWelcomeScreen(): Boolean = executeWithBoolean(userPreferencesDAO::setSkipWelcomeScreen)
 
-    suspend fun setSkipOnboardingScreen(): Boolean = try {
-        userPreferencesDAO.setSkipOnboardingScreen()
-        true
-    } catch (e: Exception) {
-        e.printStackTrace()
-        false
-    }
+    /*
+  * Set the skip onboarding screen to true when already pass from the onboarding screens flow
+  * Tested
+  * */
+    suspend fun setSkipOnboardingScreen(): Boolean =
+        executeWithBoolean(userPreferencesDAO::setSkipOnboardingScreen)
 
+    /*
+  * Set the skip get user screen to true when already get the user name
+  * Tested
+  * */
+    suspend fun setSkipGetUserNameScreen(): Boolean =
+        executeWithBoolean(userPreferencesDAO::setSkipGetUserNameScreen)
 
-    suspend fun setSkipGetUserNameScreen(): Boolean = try {
-        userPreferencesDAO.setSkipGetUserNameScreen()
-        true
-    } catch (e: Exception) {
-        e.printStackTrace()
-        false
-    }
 }

@@ -4,6 +4,7 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -62,14 +63,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.navigation.compose)
-            implementation("io.github.aakira:napier:2.7.1")
-
-//            implementation(libs.voyager.navigator)
-//            implementation(libs.voyager.tab.navigator)
-//            implementation(libs.voyager.transitions)
-//            implementation(libs.voyager.screenmodel)
-//            implementation(libs.voyager.bottom.sheet.navigator)
-//            implementation(libs.voyager.koin)
+            implementation(libs.napier)
 
             // Koin
             api(libs.koin.core)
@@ -141,6 +135,7 @@ room{
 
 dependencies {
     implementation(libs.androidx.benchmark.common)
+    implementation(libs.androidx.ui.test.junit4.desktop)
     ksp(libs.room.compiler)
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)

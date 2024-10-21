@@ -15,33 +15,35 @@ class UserViewModel(
     private val _user: MutableStateFlow<UiState<User>> = MutableStateFlow(UiState.Idle)
     val user: StateFlow<UiState<User>> = _user
 
-    suspend fun setUserSoughtHelp(soughtHelp: Boolean) = try {
+    /*
+    * Insert in the database if the user already sought professional help
+    * Tested
+    * */
+    suspend fun setUserSoughtHelp(soughtHelp: Boolean) = executeWithBoolean {
         userDAO.setUserSoughtHelp(soughtHelp)
-        true
-    } catch (e: Exception) {
-        false
     }
 
-    suspend fun setUserPhysicalPain(physicalPain: PhysicalSymptoms) =
-        try {
-            userDAO.setUserPhysicalPain(physicalPain)
-            true
-        } catch (e: Exception) {
-            false
-        }
+    /*
+    * Insert in the database if the user is experiencing physical pain
+    * Tested
+    * */
+    suspend fun setUserPhysicalPain(physicalPain: PhysicalSymptoms) = executeWithBoolean {
+        userDAO.setUserPhysicalPain(physicalPain)
+    }
 
+    /*
+   * Insert in the database if the user is taking any medications or supplements
+   * Tested
+   * */
     suspend fun setUserMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Boolean =
-        try {
+        executeWithBoolean {
             userDAO.setUserMedicationsSupplements(medicationsSupplements)
-            true
-        } catch (e: Exception) {
-            false
         }
 
-    suspend fun setUserName(name: String): Boolean = try {
-        userDAO.setUserName(name)
-        true
-    } catch (e: Exception) {
-        false
-    }
+    /*
+  * Insert in the database the user name
+  * Tested
+  * */
+    suspend fun setUserName(name: String): Boolean =
+        executeWithBoolean { userDAO.setUserName(name) }
 }

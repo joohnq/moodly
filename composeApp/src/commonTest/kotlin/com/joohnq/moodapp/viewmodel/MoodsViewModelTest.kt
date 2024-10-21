@@ -11,6 +11,7 @@ import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
+import dev.mokkery.verifySuspend
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -54,7 +55,7 @@ class MoodsViewModelTest {
      * test if the parameter value mood has been added to _currentMood successfully
      */
     @Test
-    fun testSetCurrentMoodTest() {
+    fun testSetCurrentMood() {
         // Given
         val mood: Mood = Mood.Sad
 
@@ -73,7 +74,7 @@ class MoodsViewModelTest {
      * test if the parameter value sleep quality has been added to _currentMood successfully
      */
     @Test
-    fun setCurrentMoodSleepQualityTest() {
+    fun setCurrentMoodSleepQuality() {
         // Given
         val sleepQuality: SleepQuality = SleepQuality.Fair
 
@@ -92,7 +93,7 @@ class MoodsViewModelTest {
      * test if the parameter value description has been added to _currentMood successfully
      */
     @Test
-    fun setCurrentMoodDescriptionTest() {
+    fun setCurrentMoodDescription() {
         // Given
         val description = "Lorem Description"
 
@@ -111,7 +112,7 @@ class MoodsViewModelTest {
      * test if the parameter value stress level has been added to _currentMood successfully
      */
     @Test
-    fun setCurrentMoodStressLevelTest() {
+    fun setCurrentMoodStressLevel() {
         // Given
         val stressLevel: StressLevel = StressLevel.Three
 
@@ -133,10 +134,11 @@ class MoodsViewModelTest {
     fun `test insertCurrentMood with a not null mood should return true`() = runTest {
         // Given
         val statsRecord = StatsRecord(mood = Mood.Happy)
-        moodsViewModel.setCurrentMoodForTesting(statsRecord)
         statsRecordDAO = mock<StatsRecordDAO> {
-            everySuspend { statsRecordDAO.insertMood(any()) } returns Unit
+            everySuspend { insertMood(any()) } returns Unit
         }
+        moodsViewModel = MoodsViewModel(statsRecordDAO, testDispatcher)
+        moodsViewModel.setCurrentMoodForTesting(statsRecord)
 
         // When
         val res = moodsViewModel.insertCurrentMood()
@@ -144,25 +146,28 @@ class MoodsViewModelTest {
         // Then
         assertThat(moodsViewModel.currentMood.value?.mood).isNotNull()
         assertThat(res).isEqualTo(true)
+
+        verifySuspend { statsRecordDAO.insertMood(statsRecord) }
     }
 
     /**
      * Test InsertCurrentMood
-     * test insertCurrentMood with a null mood in moodDb, should return false
+     * test insertCurrentMood with a null current mood, should return false
      */
     @Test
-    fun `test insertCurrentMood with a null mood should return true`() = runTest {
+    fun `test insertCurrentMood with a null mood should return false`() = runTest {
         // Given
         statsRecordDAO = mock<StatsRecordDAO> {
-            everySuspend { statsRecordDAO.insertMood(any()) } returns Unit
+            everySuspend { insertMood(any()) } returns Unit
         }
+        moodsViewModel = MoodsViewModel(statsRecordDAO, testDispatcher)
 
         // When
         val res = moodsViewModel.insertCurrentMood()
 
         // Then
         assertThat(moodsViewModel.currentMood.value).isNull()
-        assertThat(res).isEqualTo(false)
+        assertThat(res).isFalse()
     }
 
     /**
@@ -202,6 +207,8 @@ class MoodsViewModelTest {
             assertThat(states[1]).isEqualTo(UiState.Loading)
             assertThat(states[2]).isEqualTo(UiState.Success(mockMoods))
 
+            verifySuspend { statsRecordDAO.getMoods() }
+
             job.cancel()
         }
 
@@ -239,6 +246,8 @@ class MoodsViewModelTest {
             assertThat(states[1]).isEqualTo(UiState.Loading)
             assertThat(states[2]).isEqualTo(UiState.Error(exception))
             assertThat((states[2] as UiState.Error).message).isEqualTo(exception)
+
+            verifySuspend { statsRecordDAO.getMoods() }
 
             job.cancel()
         }

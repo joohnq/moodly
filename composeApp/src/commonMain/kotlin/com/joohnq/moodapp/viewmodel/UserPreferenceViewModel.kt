@@ -10,14 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-suspend fun executeWithBoolean(block: suspend () -> Unit) = try {
-    block()
-    true
-} catch (e: Exception) {
-    e.printStackTrace()
-    false
-}
-
 class UserPreferenceViewModel(
     private val userPreferencesDAO: UserPreferencesDAO,
     private val ioDispatcher: CoroutineDispatcher

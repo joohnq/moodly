@@ -4,8 +4,8 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.entities.Mood
-import com.joohnq.moodapp.model.entities.StatsRecord
 import com.joohnq.moodapp.model.entities.SleepQuality
+import com.joohnq.moodapp.model.entities.StatsRecord
 import com.joohnq.moodapp.model.entities.StressLevel
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -48,7 +48,8 @@ class MoodsViewModel(
     * */
     fun setCurrentMoodDescription(description: String) {
         _currentMood.value =
-            currentMood.value?.copy(description = description) ?: StatsRecord(description = description)
+            currentMood.value?.copy(description = description)
+                ?: StatsRecord(description = description)
     }
 
     /*
@@ -57,21 +58,16 @@ class MoodsViewModel(
    * */
     fun setCurrentMoodStressLevel(stressLevel: StressLevel) {
         _currentMood.value =
-            currentMood.value?.copy(stressLevel = stressLevel) ?: StatsRecord(stressLevel = stressLevel)
+            currentMood.value?.copy(stressLevel = stressLevel)
+                ?: StatsRecord(stressLevel = stressLevel)
     }
 
     /*
     * Insert the current mood on database
     * Tested
     * */
-    suspend fun insertCurrentMood(): Boolean {
-        try {
-            statsRecordDAO.insertMood(currentMood.value ?: throw Exception("No mood to save"))
-            return true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return false
-        }
+    suspend fun insertCurrentMood(): Boolean = executeWithBoolean {
+        statsRecordDAO.insertMood(currentMood.value ?: throw Exception("No mood to save"))
     }
 
     /*

@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -9,7 +12,8 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    kotlin("plugin.serialization") version "2.0.20"
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -77,6 +81,16 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines.core)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.truthish)
+            implementation(compose.uiTest)
+            implementation(libs.test.resources)
+            implementation(libs.koin.core)
+            implementation(libs.koin.test)
+            implementation(libs.turbine)
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
@@ -85,7 +99,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.moodapp"
+    namespace = libs.versions.android.packageName.get()
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -93,11 +107,11 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.joohnq.moodapp"
+        applicationId = libs.versions.android.packageName.get()
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.android.versionCode.get().toInt()
+        versionName = libs.versions.android.versionName.get()
     }
     packaging {
         resources {
@@ -130,17 +144,17 @@ dependencies {
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
     debugImplementation(compose.uiTooling)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation(libs.kotlinx.coroutines.core)
 }
 
 compose.desktop {
     application {
-        mainClass = "com.joohnq.moodapp.MainKt"
+        mainClass = "${libs.versions.android.packageName.get()}.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.moodapp"
-            packageVersion = "1.0.0"
+            packageName = libs.versions.android.packageName.get()
+            packageVersion = libs.versions.android.versionName.get()
         }
     }
 }

@@ -4,7 +4,7 @@ android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
 android-versionCode = "1"
-android-versionName = "1.0"
+android-versionName = "1.0.0"
 android-packageName = "com.joohnq.moodapp"
 androidx-activityCompose = "1.9.3"
 androidx-lifecycle = "2.8.2"
@@ -19,6 +19,7 @@ resources = "0.9.0"
 statelyCommon = "2.0.5"
 statelyConcurrentCollections = "2.1.0"
 truthish = "1.0.1"
+turbine = "1.2.0"
 voyager = "1.0.0"
 room = "2.7.0-alpha10"
 ksp = "2.0.21-1.0.25"
@@ -44,6 +45,7 @@ test-resources = { module = "com.goncalossilva:resources", version.ref = "resour
 stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
 stately-concurrent-collections = { module = "co.touchlab:stately-concurrent-collections", version.ref = "statelyConcurrentCollections" }
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }

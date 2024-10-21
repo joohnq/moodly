@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package com.joohnq.moodapp.view.welcome
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -29,8 +27,10 @@ import org.koin.compose.viewmodel.koinViewModel
 object WelcomeScreenObject
 
 @Composable
-fun WelcomeScreen(onNavigateToMoodRateScreen: () -> Unit) {
-    val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
+fun WelcomeScreen(
+    onNavigateToMoodRateScreen: () -> Unit = {},
+    userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
+) {
     val pagerState = rememberPagerState(0) { 5 }
     val snackBarState = remember { SnackbarHostState() }
     val somethingWentWrong = stringResource(Res.string.something_went_wrong)

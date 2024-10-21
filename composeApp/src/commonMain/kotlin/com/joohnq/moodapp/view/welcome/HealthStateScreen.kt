@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.welcome
 
 import androidx.compose.runtime.Composable
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
@@ -21,6 +22,7 @@ fun HealthStateScreen(onNext: () -> Unit) {
         secondTitle = stringResource(Res.string.health_state_second_title),
         span = stringResource(Res.string.health_state_span),
         spanColor = Colors.Green50,
+        testTag = TestConstants.WELCOME_SCREEN_HEALTH_STATE,
         onNext = onNext
     )
 }

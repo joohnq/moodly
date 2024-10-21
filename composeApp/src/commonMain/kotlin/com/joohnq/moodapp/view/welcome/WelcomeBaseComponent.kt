@@ -23,11 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
@@ -50,12 +52,14 @@ fun MockScreen(
     span: String,
     secondTitle: String? = null,
     @ColorLong spanColor: Color,
+    testTag: String,
     onNext: () -> Unit
 ) {
     val screenDimensions: ScreenDimensions = koinInject()
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .testTag(testTag)
     ) {
         Box(
             modifier = Modifier
@@ -129,7 +133,7 @@ fun MockScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 ButtonWithArrowRight(
-                    modifier = Modifier.size(60.dp), colors = ButtonDefaults.buttonColors(
+                    modifier = Modifier.size(60.dp).testTag(TestConstants.WELCOME_NEXT_BUTTON + step), colors = ButtonDefaults.buttonColors(
                         containerColor = Colors.Brown80,
                         contentColor = Colors.White
                     ), onClick = onNext

@@ -26,6 +26,7 @@ import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.TextStyles
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.something_went_wrong
@@ -33,6 +34,9 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+
+@Serializable
+object OnboardingScreenObject
 
 @Composable
 fun OnboardingBaseComponent(

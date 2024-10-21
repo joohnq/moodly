@@ -17,7 +17,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace
@@ -37,11 +39,11 @@ object MoodRateScreenObject
 
 @Composable
 fun MoodRateScreen(
-    onGoBack: () -> Unit,
-    onNavigateToProfessionalHelp: () -> Unit
+    onGoBack: () -> Unit = {},
+    onNavigateToProfessionalHelp: () -> Unit = {},
+    moodsViewModel: MoodsViewModel = koinViewModel()
 ) {
     var selectedMood by rememberSaveable(stateSaver = Mood.getSaver()) { mutableStateOf(Mood.Neutral) }
-    val moodsViewModel: MoodsViewModel = koinViewModel()
 
     OnboardingBaseComponent(
         page = 1,
@@ -82,7 +84,7 @@ fun MoodRateScreen(
         )
     }
 
-    BoxWithConstraints {
+    BoxWithConstraints(modifier = Modifier.testTag(TestConstants.ONBOARDING_ROULETTE)) {
         val carouselOffset = maxHeight - (maxWidth / 2) + 60.dp
 
         Box(

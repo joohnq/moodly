@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.welcome
 
 import androidx.compose.runtime.Composable
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
@@ -19,6 +20,7 @@ fun IntelligentScreen(onNext: () -> Unit) {
         secondTitle = stringResource(Res.string.intelligent_first_second_title),
         span = stringResource(Res.string.intelligent_first_span),
         spanColor = Colors.Orange50,
+        testTag = TestConstants.WELCOME_SCREEN_INTELLIGENT,
         onNext = onNext
     )
 }

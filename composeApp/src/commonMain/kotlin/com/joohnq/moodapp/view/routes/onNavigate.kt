@@ -6,6 +6,7 @@ import com.joohnq.moodapp.view.onboarding.ExpressionAnalysisScreenObject
 import com.joohnq.moodapp.view.onboarding.GetUserNameScreenObject
 import com.joohnq.moodapp.view.onboarding.MedicationsSupplementsScreenObject
 import com.joohnq.moodapp.view.onboarding.MoodRateScreenObject
+import com.joohnq.moodapp.view.onboarding.OnboardingScreenObject
 import com.joohnq.moodapp.view.onboarding.PhysicalSymptomsScreenObject
 import com.joohnq.moodapp.view.onboarding.ProfessionalHelpScreenObject
 import com.joohnq.moodapp.view.onboarding.SleepQualityScreenObject
@@ -20,8 +21,8 @@ fun NavController.onNavigateToWelcomeScreen() {
     navigate(WelcomeScreenObject)
 }
 
-fun NavController.onNavigateToMoodRateScreen() {
-    navigate(MoodRateScreenObject)
+fun NavController.onNavigateToOnboardingScreen() {
+    navigate(OnboardingScreenObject)
 }
 
 fun NavController.onNavigateToGetUserNameScreen() {

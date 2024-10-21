@@ -13,30 +13,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.constants.Colors
+import kotlinx.serialization.Serializable
 
-class CompilingDataScreen : Screen {
-    @Composable
-    override fun Content() {
-        Scaffold(
-            containerColor = Colors.Orange40,
-            modifier = Modifier.fillMaxSize()
-        ) { padding ->
-            Column(
-                modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Column {
-                    Text(
-                        "Compiling Data",
-                        textAlign = TextAlign.Center,
-                        style = TextStyles.CompilingDataTitle()
-                    )
-                }
+@Serializable
+object CompilingDataScreen
+
+@Composable
+fun CompilingData() {
+    Scaffold(
+        containerColor = Colors.Orange40,
+        modifier = Modifier.fillMaxSize()
+    ) { padding ->
+        Column(
+            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Column {
+                Text(
+                    "Compiling Data",
+                    textAlign = TextAlign.Center,
+                    style = TextStyles.CompilingDataTitle()
+                )
             }
         }
     }

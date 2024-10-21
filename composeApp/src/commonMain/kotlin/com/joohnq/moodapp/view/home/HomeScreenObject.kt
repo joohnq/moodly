@@ -10,27 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import org.koin.compose.koinInject
+import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
-class HomeScreen : BasicScreen() {
-    @Composable
-    override fun Init() {
-        val moodsViewModel: MoodsViewModel = koinViewModel()
+@Serializable
+object HomeScreenObject
 
-        SideEffect { moodsViewModel.getMoods() }
+@Composable
+fun HomeScreen() {
+    val moodsViewModel: MoodsViewModel = koinViewModel()
 
-        Scaffold(
-            containerColor = Colors.Brown10,
-            modifier = Modifier.fillMaxSize()
-        ) { padding ->
-            Column(
-                modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-            ) {}
-        }
+    SideEffect { moodsViewModel.getMoods() }
+
+    Scaffold(
+        containerColor = Colors.Brown10,
+        modifier = Modifier.fillMaxSize()
+    ) { padding ->
+        Column(
+            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {}
     }
 }

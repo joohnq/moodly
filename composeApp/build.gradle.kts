@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.navigation.compose)
+            implementation("io.github.aakira:napier:2.7.1")
 
 //            implementation(libs.voyager.navigator)
 //            implementation(libs.voyager.tab.navigator)

@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.joohnq.moodapp.model.DatabaseConstants
-import com.joohnq.moodapp.view.onboarding.GetUserNameScreen
 import kotlinx.serialization.Serializable
 
 @Entity(tableName = DatabaseConstants.USER_PREFERENCES_DATABASE)

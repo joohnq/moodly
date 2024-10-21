@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.state.UiState
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -27,8 +28,10 @@ class UserPreferenceViewModel(
             _userPreferences.value = UiState.Loading
             userPreferencesDAO.getUserPreferences().catch {
                 _userPreferences.value = UiState.Error(it.message.toString())
+                println("erro:" + userPreferences.value.toString())
             }.collect {
                 _userPreferences.value = UiState.Success(it)
+                println("success:" +userPreferences.value.toString())
             }
         }
 

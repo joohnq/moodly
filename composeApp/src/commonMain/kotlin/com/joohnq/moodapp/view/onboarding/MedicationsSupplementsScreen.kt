@@ -23,12 +23,13 @@ import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class MedicationsSupplementsScreen : BasicScreen() {
     @Composable
     override fun Init() {
         var isContinueButtonVisible by remember { mutableStateOf(false) }
-        val userViewModel: UserViewModel = koinInject()
+        val userViewModel: UserViewModel = koinViewModel()
         var selectedOption by rememberSaveable(stateSaver = MedicationsSupplements.getSaver()) {
             mutableStateOf(null)
         }

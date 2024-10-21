@@ -26,11 +26,12 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class StressRateScreen : BasicScreen() {
     @Composable
     override fun Init() {
-        val moodsViewModel: MoodsViewModel = koinInject()
+        val moodsViewModel: MoodsViewModel = koinViewModel()
         var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
             mutableStateOf(
                 StressLevel.Three

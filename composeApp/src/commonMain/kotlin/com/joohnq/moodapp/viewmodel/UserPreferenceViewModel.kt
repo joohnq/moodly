@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.viewmodel
 
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.state.UiState
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class UserPreferenceViewModel(
     private val userPreferencesDAO: UserPreferencesDAO,
     private val ioDispatcher: CoroutineDispatcher
-) : ScreenModel {
+) : ViewModel() {
     private val _userPreferences:
             MutableStateFlow<UiState<UserPreferences>> = MutableStateFlow(UiState.Idle)
     val userPreferences: MutableStateFlow<UiState<UserPreferences>> = _userPreferences
@@ -23,7 +23,7 @@ class UserPreferenceViewModel(
    *  Tested
    * */
     fun getUserPreferences() =
-        screenModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(ioDispatcher) {
             _userPreferences.value = UiState.Loading
             userPreferencesDAO.getUserPreferences().catch {
                 _userPreferences.value = UiState.Error(it.message.toString())
@@ -43,7 +43,8 @@ class UserPreferenceViewModel(
    * Set the skip welcome screen to true when already pass from the welcome screens flow
    * Tested
    * */
-    suspend fun setSkipWelcomeScreen(): Boolean = executeWithBoolean(userPreferencesDAO::setSkipWelcomeScreen)
+    suspend fun setSkipWelcomeScreen(): Boolean =
+        executeWithBoolean(userPreferencesDAO::setSkipWelcomeScreen)
 
     /*
   * Set the skip onboarding screen to true when already pass from the onboarding screens flow

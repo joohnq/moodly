@@ -10,8 +10,11 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.joohnq.moodapp.view.constants.Colors
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.BasicScreen
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.onboarding.MoodRateScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.launch
@@ -19,11 +22,12 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class WelcomeScreen : BasicScreen() {
     @Composable
     override fun Init() {
-        val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
+        val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
         val pagerState = rememberPagerState(0) { 5 }
         val snackBarState = remember { SnackbarHostState() }
         val somethingWentWrong = stringResource(Res.string.something_went_wrong)
@@ -31,12 +35,17 @@ class WelcomeScreen : BasicScreen() {
         val onNext: () -> Unit =
             { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } }
 
-        Scaffold(snackbarHost = { SnackbarHost(hostState = snackBarState) },containerColor = Colors.White) { _ ->
+        Scaffold(
+            snackbarHost = { SnackbarHost(hostState = snackBarState) },
+            containerColor = Colors.White
+        ) { _ ->
             HorizontalPager(
                 pagerState,
+                modifier = Modifier.testTag(TestConstants.WELCOME_SCREEN_HORIZONTAL_PAGER),
+                key = { it }
             ) { page ->
                 when (page) {
-                    0 -> FirstScreen(onGetStarted = onNext,)
+                    0 -> FirstScreen(onGetStarted = onNext)
                     1 -> HealthStateScreen(onNext = onNext)
                     2 -> IntelligentScreen(onNext = onNext)
                     3 -> ResourcesScreen(onNext = onNext)

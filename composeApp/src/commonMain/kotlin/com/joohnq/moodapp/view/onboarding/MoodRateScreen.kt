@@ -31,12 +31,13 @@ import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class MoodRateScreen : BasicScreen() {
     @Composable
     override fun Init() {
         var selectedMood by rememberSaveable(stateSaver = Mood.getSaver()) { mutableStateOf(Mood.Neutral) }
-        val moodsViewModel: MoodsViewModel = koinInject()
+        val moodsViewModel: MoodsViewModel = koinViewModel()
 
         OnboardingBaseComponent(
             page = 1,

@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.viewmodel
 
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.model.entities.SleepQuality
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class MoodsViewModel(
     private val statsRecordDAO: StatsRecordDAO,
     private val ioDispatcher: CoroutineDispatcher
-) : ScreenModel {
+) : ViewModel() {
     private val _currentMood:
             MutableStateFlow<StatsRecord?> = MutableStateFlow(null)
     val currentMood: MutableStateFlow<StatsRecord?> = _currentMood
@@ -74,7 +74,7 @@ class MoodsViewModel(
     * Get all moods from database
     * Tested
     * */
-    fun getMoods() = screenModelScope.launch(ioDispatcher) {
+    fun getMoods() = viewModelScope.launch(ioDispatcher) {
         _moods.value = UiState.Loading
         statsRecordDAO.getMoods().catch {
             _moods.value = UiState.Error(it.message.toString())

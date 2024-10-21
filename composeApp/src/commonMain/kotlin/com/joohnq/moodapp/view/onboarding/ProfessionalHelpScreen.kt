@@ -21,12 +21,13 @@ import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class ProfessionalHelpScreen : BasicScreen() {
     @Composable
     override fun Init() {
         var isContinueButtonVisible by remember { mutableStateOf(false) }
-        val userViewModel: UserViewModel = koinInject()
+        val userViewModel: UserViewModel = koinViewModel()
         var selectedOption by rememberSaveable(stateSaver = ProfessionalHelp.getSaver()) {
             mutableStateOf(null)
         }

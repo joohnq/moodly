@@ -8,10 +8,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.helper.toDegrees
 import com.joohnq.moodapp.helper.toRadians
 import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.view.constants.Colors
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -27,8 +27,8 @@ fun DrawScope.drawRoulette(
         drawSlice(
             color = moods[i].color,
             backgroundColor = moods[i].backgroundColor,
-            startAngle = toDegrees(startAngle.toDouble()).toFloat(),
-            sweepAngle = toDegrees(sliceAngle.toDouble()).toFloat(),
+            startAngle = startAngle.toDegrees().toFloat(),
+            sweepAngle = sliceAngle.toDegrees().toFloat(),
             useCenter = true,
             topLeft = Offset(0f, 0f),
             size = size,
@@ -51,7 +51,7 @@ fun DrawScope.drawSlice(
     val centerX = topLeft.x + size.width / 2
     val centerY = topLeft.y + size.height / 2
     val radius = size.width / 2 * 0.7
-    val angleInRadians = toRadians((startAngle + sweepAngle / 2).toDouble())
+    val angleInRadians = (startAngle + sweepAngle / 2).toRadians()
     val iconX = centerX + (radius * cos(angleInRadians)).toFloat() - iconSize.width / 2
     val iconY = centerY + (radius * sin(angleInRadians)).toFloat() - iconSize.height / 2
 

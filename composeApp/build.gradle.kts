@@ -58,28 +58,30 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.navigation.compose)
 
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.tab.navigator)
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.screenmodel)
-            implementation(libs.voyager.bottom.sheet.navigator)
-            implementation(libs.voyager.koin)
+//            implementation(libs.voyager.navigator)
+//            implementation(libs.voyager.tab.navigator)
+//            implementation(libs.voyager.transitions)
+//            implementation(libs.voyager.screenmodel)
+//            implementation(libs.voyager.bottom.sheet.navigator)
+//            implementation(libs.voyager.koin)
 
+            // Koin
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
+            // Koin need these dependencies
             implementation(libs.stately.common)
             implementation(libs.stately.concurrent.collections)
 
+            // Room and SQLite
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
-
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-
-            implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

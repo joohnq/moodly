@@ -23,12 +23,13 @@ import moodapp.composeapp.generated.resources.expression_analysis_desc
 import moodapp.composeapp.generated.resources.expression_analysis_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class ExpressionAnalysisScreen : BasicScreen() {
     @Composable
     override fun Init() {
-        val moodsViewModel: MoodsViewModel = koinInject()
-        val userPreferencesViewModel: UserPreferenceViewModel = koinInject()
+        val moodsViewModel: MoodsViewModel = koinViewModel()
+        val userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
         var desc by remember { mutableStateOf("") }
 
         OnboardingBaseComponent(

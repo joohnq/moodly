@@ -15,6 +15,7 @@ kotlinxCoroutinesAndroid = "1.9.0"
 kotlinxCoroutinesCore = "1.9.0"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.7.3"
+navigationCompose = "2.8.0-alpha10"
 resources = "0.9.0"
 statelyCommon = "2.0.5"
 statelyConcurrentCollections = "2.1.0"
@@ -41,6 +42,7 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinCore" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 test-resources = { module = "com.goncalossilva:resources", version.ref = "resources" }
 stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
 stately-concurrent-collections = { module = "co.touchlab:stately-concurrent-collections", version.ref = "statelyConcurrentCollections" }

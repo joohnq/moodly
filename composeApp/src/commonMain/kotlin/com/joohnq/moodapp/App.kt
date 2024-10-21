@@ -11,13 +11,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import org.koin.compose.KoinContext
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun App() {
     KoinContext {
         val scope = rememberCoroutineScope()
         val ioDispatcher: CoroutineDispatcher = koinInject()
-        val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
+        val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
 
         SideEffect {
             scope.launch(ioDispatcher) {

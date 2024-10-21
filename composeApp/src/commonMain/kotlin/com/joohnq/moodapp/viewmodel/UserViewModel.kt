@@ -1,6 +1,6 @@
 package com.joohnq.moodapp.viewmodel
 
-import cafe.adriel.voyager.core.model.ScreenModel
+import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.entities.MedicationsSupplements
 import com.joohnq.moodapp.model.entities.PhysicalSymptoms
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class UserViewModel(
     private val userDAO: UserDAO,
-) : ScreenModel {
+) : ViewModel() {
     private val _user: MutableStateFlow<UiState<User>> = MutableStateFlow(UiState.Idle)
     val user: StateFlow<UiState<User>> = _user
 

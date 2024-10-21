@@ -23,11 +23,12 @@ import com.joohnq.moodapp.view.state.onSuccess
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class LoadingScreen : BasicScreen() {
     @Composable
     override fun Init() {
-        val userPreferenceViewModel: UserPreferenceViewModel = koinInject()
+        val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
         val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
 
         LaunchedEffect(userPreferences) {

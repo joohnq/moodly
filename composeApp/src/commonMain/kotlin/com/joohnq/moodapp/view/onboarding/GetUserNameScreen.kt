@@ -50,6 +50,7 @@ import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class GetUserNameScreen : BasicScreen() {
     @Composable
@@ -59,8 +60,8 @@ class GetUserNameScreen : BasicScreen() {
         var nameError by remember { mutableStateOf("") }
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
-        val userViewModel: UserViewModel = koinInject()
-        val userPreferencesViewModel: UserPreferenceViewModel = koinInject()
+        val userViewModel: UserViewModel = koinViewModel()
+        val userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
 
         BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
             Box(

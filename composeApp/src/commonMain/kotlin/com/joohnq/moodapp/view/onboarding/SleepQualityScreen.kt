@@ -33,13 +33,14 @@ import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class SleepQualityScreen : BasicScreen() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Init() {
         val moods = remember { Mood.getAll().reversed() }
-        val moodsViewModel: MoodsViewModel = koinInject()
+        val moodsViewModel: MoodsViewModel = koinViewModel()
         var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
             mutableStateOf(
                 SleepQuality.Worst

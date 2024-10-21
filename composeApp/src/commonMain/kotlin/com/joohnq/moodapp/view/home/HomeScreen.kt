@@ -14,11 +14,12 @@ import com.joohnq.moodapp.view.BasicScreen
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 class HomeScreen : BasicScreen() {
     @Composable
     override fun Init() {
-        val moodsViewModel: MoodsViewModel = koinInject()
+        val moodsViewModel: MoodsViewModel = koinViewModel()
 
         SideEffect { moodsViewModel.getMoods() }
 

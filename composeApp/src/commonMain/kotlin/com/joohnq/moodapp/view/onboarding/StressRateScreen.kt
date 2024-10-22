@@ -14,25 +14,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.StressLevel
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object StressRateScreenObject
-
 @Composable
 fun StressRateScreen(
-    onGoBack: () -> Unit,
-    onNavigateToExpressionAnalysis: () -> Unit
+    navigation: NavController = rememberNavController(),
+    moodsViewModel: MoodsViewModel = koinViewModel()
 ) {
-    val moodsViewModel: MoodsViewModel = koinViewModel()
     var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
         mutableStateOf(
             StressLevel.Three
@@ -43,10 +41,10 @@ fun StressRateScreen(
     OnboardingBaseComponent(
         page = 6,
         title = Res.string.stress_rate_title,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         onContinue = {
             moodsViewModel.setCurrentMoodStressLevel(selectedOption)
-            onNavigateToExpressionAnalysis()
+            navigation.onNavigateToExpressionAnalysis()
         },
     ) {
         Text(

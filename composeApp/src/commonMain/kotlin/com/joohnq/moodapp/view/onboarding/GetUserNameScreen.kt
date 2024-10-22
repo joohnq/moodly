@@ -35,18 +35,20 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
@@ -54,17 +56,16 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object GetUserNameScreenObject
-
 @Composable
-fun GetUserNameScreen(onNavigateToHomeScreen: () -> Unit) {
+fun GetUserNameScreen(
+    navigation: NavController = rememberNavController(),
+    userViewModel: UserViewModel = koinViewModel(),
+    userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
+) {
     var name by remember { mutableStateOf("") }
     var nameError by remember { mutableStateOf("") }
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = remember { SnackbarHostState() }
-    val userViewModel: UserViewModel = koinViewModel()
-    val userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
     val scope = rememberCoroutineScope()
     val ioDispatcher: CoroutineDispatcher = koinInject()
 
@@ -148,7 +149,7 @@ fun GetUserNameScreen(onNavigateToHomeScreen: () -> Unit) {
                             }
 
                             withContext(Dispatchers.Main) {
-                                onNavigateToHomeScreen()
+                                navigation.onNavigateToHomeScreen()
                             }
                         } catch (e: Exception) {
                             nameError = e.message ?: ""

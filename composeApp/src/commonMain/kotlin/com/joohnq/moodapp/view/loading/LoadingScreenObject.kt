@@ -13,23 +13,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
+import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
+import com.joohnq.moodapp.view.routes.onNavigateToMoodRateScreen
+import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
 import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.onSuccess
+import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object LoadingScreenObject
 
 @Composable
 fun LoadingScreen(
-    onNavigateToWelcomeScreen: () -> Unit,
-    onNavigateToMoodRateScreen: () -> Unit,
-    onNavigateToGetUserNameScreen: () -> Unit,
-    onNavigateToHomeScreen: () -> Unit
+    navigation: NavController = rememberNavController()
 ) {
     val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
     val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
@@ -43,10 +43,10 @@ fun LoadingScreen(
         userPreferences.onSuccess { userPreferences ->
             println("rodou2")
             when (false) {
-                userPreferences.skipWelcomeScreen -> onNavigateToWelcomeScreen()
-                userPreferences.skipOnboardingScreen -> onNavigateToMoodRateScreen()
-                userPreferences.skipGetUserNameScreen -> onNavigateToGetUserNameScreen()
-                else -> onNavigateToHomeScreen()
+                userPreferences.skipWelcomeScreen -> navigation.onNavigateToWelcomeScreen()
+                userPreferences.skipOnboardingScreen -> navigation.onNavigateToMoodRateScreen()
+                userPreferences.skipGetUserNameScreen -> navigation.onNavigateToGetUserNameScreen()
+                else -> navigation.onNavigateToHomeScreen()
             }
         }
     }

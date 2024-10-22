@@ -20,6 +20,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.model.entities.SleepQuality
 import com.joohnq.moodapp.view.components.DoubleText
@@ -28,23 +30,19 @@ import com.joohnq.moodapp.view.components.SliderColors
 import com.joohnq.moodapp.view.components.SliderComponents
 import com.joohnq.moodapp.view.components.VerticalSlider
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToMedicationsSupplements
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object SleepQualityScreenObject
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SleepQualityScreen(
-    onGoBack: () -> Unit,
-    onNavigateToMedicationsSupplements: () -> Unit
+    navigation: NavController = rememberNavController(),
+    moodsViewModel: MoodsViewModel = koinViewModel()
 ) {
     val moods = remember { Mood.getAll().reversed() }
-    val moodsViewModel: MoodsViewModel = koinViewModel()
     var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
         mutableStateOf(
             SleepQuality.Worst
@@ -62,10 +60,10 @@ fun SleepQualityScreen(
         page = 4,
         title = Res.string.sleep_quality_title,
         isContinueButtonVisible = true,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         onContinue = {
             moodsViewModel.setCurrentMoodSleepQuality(selectedSleepQuality)
-            onNavigateToMedicationsSupplements()
+            navigation.onNavigateToMedicationsSupplements()
         },
     ) {
         Spacer(modifier = Modifier.height(20.dp))

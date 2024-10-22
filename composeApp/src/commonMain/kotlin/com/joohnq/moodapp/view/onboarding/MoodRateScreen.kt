@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
@@ -26,21 +28,17 @@ import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToProfessionalHelp
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object MoodRateScreenObject
-
 @Composable
 fun MoodRateScreen(
-    onGoBack: () -> Unit = {},
-    onNavigateToProfessionalHelp: () -> Unit = {},
+    navigation: NavController = rememberNavController(),
     moodsViewModel: MoodsViewModel = koinViewModel()
 ) {
     var selectedMood by rememberSaveable(stateSaver = Mood.getSaver()) { mutableStateOf(Mood.Neutral) }
@@ -49,7 +47,7 @@ fun MoodRateScreen(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         onContinue = { },
     ) {
         Text(
@@ -79,7 +77,7 @@ fun MoodRateScreen(
             ),
             onClick = {
                 moodsViewModel.setCurrentMood(selectedMood)
-                onNavigateToProfessionalHelp()
+                navigation.onNavigateToProfessionalHelp()
             }
         )
     }

@@ -14,12 +14,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.routes.onNavigateToMoodScreen
+import com.joohnq.moodapp.view.routes.onNavigateToMoodRateScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -28,8 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object WelcomeScreenObject
+
 
 @Composable
 fun WelcomeScreen(
@@ -67,7 +65,7 @@ fun WelcomeScreen(
                             return@launch
                         }
                         withContext(Dispatchers.Main) {
-                            navigation.onNavigateToMoodScreen()
+                            navigation.onNavigateToMoodRateScreen()
                         }
                     }
                 })

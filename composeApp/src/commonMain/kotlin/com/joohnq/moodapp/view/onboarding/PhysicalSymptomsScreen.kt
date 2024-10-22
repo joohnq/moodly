@@ -17,15 +17,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.PhysicalSymptoms
 import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.routes.onNavigateToSleepQuality
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
 import moodapp.composeapp.generated.resources.select_one_answer
@@ -33,16 +35,12 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object PhysicalSymptomsScreenObject
-
 @Composable
 fun PhysicalSymptomsScreen(
-    onGoBack: () -> Unit,
-    onNavigateToSleepQuality: () -> Unit
+    navigation: NavController = rememberNavController(),
+    userViewModel: UserViewModel = koinViewModel()
 ) {
     var isContinueButtonVisible by remember { mutableStateOf(false) }
-    val userViewModel: UserViewModel = koinViewModel()
     var selectedOption by rememberSaveable(stateSaver = PhysicalSymptoms.getSaver()) {
         mutableStateOf(null)
     }
@@ -58,7 +56,7 @@ fun PhysicalSymptomsScreen(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = isContinueButtonVisible,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         onContinue = { onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
                 val res =
@@ -69,7 +67,7 @@ fun PhysicalSymptomsScreen(
                 }
 
                 withContext(Dispatchers.Main) {
-                    onNavigateToSleepQuality()
+                    navigation.onNavigateToSleepQuality()
                 }
             }
         },

@@ -7,15 +7,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.expression_analysis_desc
 import moodapp.composeapp.generated.resources.expression_analysis_title
@@ -23,16 +25,12 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object ExpressionAnalysisScreenObject
-
 @Composable
 fun ExpressionAnalysisScreen(
-    onGoBack: () -> Unit,
-    onNavigateToGetUserName: () -> Unit
+    navigation: NavController = rememberNavController(),
+    moodsViewModel: MoodsViewModel = koinViewModel(),
+    userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
 ) {
-    val moodsViewModel: MoodsViewModel = koinViewModel()
-    val userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
     var desc by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     val ioDispatcher: CoroutineDispatcher = koinInject()
@@ -40,7 +38,7 @@ fun ExpressionAnalysisScreen(
     OnboardingBaseComponent(
         page = 7,
         title = Res.string.expression_analysis_title,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         isContinueButtonVisible = desc.isNotEmpty(),
         onContinue = { onSomethingWentWrong ->
             moodsViewModel.setCurrentMoodDescription(desc)
@@ -51,7 +49,7 @@ fun ExpressionAnalysisScreen(
                 val res2 = userPreferencesViewModel.setSkipOnboardingScreen()
                 if (!res2) onSomethingWentWrong()
                 withContext(Dispatchers.Main) {
-                    onNavigateToGetUserName()
+                    navigation.onNavigateToGetUserNameScreen()
                 }
             }
         },

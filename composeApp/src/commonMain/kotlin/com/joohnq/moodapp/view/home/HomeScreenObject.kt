@@ -10,18 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
-@Serializable
-object HomeScreenObject
-
 @Composable
-fun HomeScreen() {
-    val moodsViewModel: MoodsViewModel = koinViewModel()
-
+fun HomeScreen(
+    navigation: NavController = rememberNavController(),
+    moodsViewModel: MoodsViewModel = koinViewModel()
+) {
     SideEffect { moodsViewModel.getMoods() }
 
     Scaffold(

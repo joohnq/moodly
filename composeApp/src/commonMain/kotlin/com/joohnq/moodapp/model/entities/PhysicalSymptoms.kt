@@ -21,7 +21,8 @@ sealed class PhysicalSymptoms(
     @Serializable
     data object YesVeryPainful : PhysicalSymptoms(
         id = YES_VERY_PAINFUL,
-        text = Res.string.yes_very_painful, icon = IconProps(
+        text = Res.string.yes_very_painful,
+        icon = IconProps(
             icon = Drawables.Icons.Check,
         )
     )

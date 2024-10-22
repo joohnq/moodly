@@ -19,9 +19,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.model.entities.SleepQuality
 import com.joohnq.moodapp.view.components.DoubleText
@@ -86,7 +88,7 @@ fun SleepQualityScreen(
                 }
             }
             VerticalSlider(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).testTag(TestConstants.SLEEP_QUALITY_SLIDER),
                 sliderValue = sliderValue,
                 setSliderValue = { sliderValue = it },
                 thumb = { SliderComponents.SleepQualityThumb() },

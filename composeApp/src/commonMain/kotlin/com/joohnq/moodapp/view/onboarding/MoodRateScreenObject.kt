@@ -72,7 +72,7 @@ fun MoodRateScreen(
         contentAlignment = Alignment.CenterEnd
     ) {
         ButtonWithArrowRight(
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Colors.Brown80,
                 contentColor = Colors.White

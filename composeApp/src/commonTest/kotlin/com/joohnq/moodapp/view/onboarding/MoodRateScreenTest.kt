@@ -12,7 +12,6 @@ import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
-import kotlinx.coroutines.Dispatchers
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -22,7 +21,6 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class MoodRateScreenTest : KoinTest {
-
     @BeforeTest
     fun setUp() {
         startKoin {
@@ -74,9 +72,7 @@ class MoodRateScreenTest : KoinTest {
     @Test
     fun testRouletteToRight() = runComposeUiTest {
         setContent {
-            MoodRateScreen(
-                moodsViewModel = get<MoodsViewModel>()
-            )
+            MoodRateScreen(moodsViewModel = get())
         }
 
         val roulette = onNodeWithTag(TestConstants.ONBOARDING_ROULETTE)

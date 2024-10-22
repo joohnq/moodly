@@ -7,8 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
@@ -58,6 +61,6 @@ fun ExpressionAnalysisScreen(
             stringResource(Res.string.expression_analysis_desc),
             style = TextStyles.ExpressionAnalysisDesc()
         )
-        ExpressionAnalysisTextField(desc) { desc = it }
+        ExpressionAnalysisTextField(modifier = Modifier.testTag(TestConstants.TEXT_INPUT),desc) { desc = it }
     }
 }

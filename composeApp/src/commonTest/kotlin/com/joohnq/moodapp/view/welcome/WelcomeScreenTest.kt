@@ -75,11 +75,11 @@ class WelcomeScreenTest : KoinTest {
 
         firstScreenButton.performClick()
         onNodeWithText("Step One").assertExists()
-        onNodeWithTag(TestConstants.WELCOME_NEXT_BUTTON + "One").performClick()
+        onNodeWithTag(TestConstants.NEXT_BUTTON + "One").performClick()
         onNodeWithText("Step Two").assertExists()
-        onNodeWithTag(TestConstants.WELCOME_NEXT_BUTTON + "Two").performClick()
+        onNodeWithTag(TestConstants.NEXT_BUTTON + "Two").performClick()
         onNodeWithText("Step Three").assertExists()
-        onNodeWithTag(TestConstants.WELCOME_NEXT_BUTTON + "Three").performClick()
+        onNodeWithTag(TestConstants.NEXT_BUTTON + "Three").performClick()
         onNodeWithText("Step Four").assertExists()
     }
 }

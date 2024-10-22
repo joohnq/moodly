@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.view.welcome
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
@@ -11,11 +10,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToMoodScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.something_went_wrong
@@ -28,7 +33,7 @@ object WelcomeScreenObject
 
 @Composable
 fun WelcomeScreen(
-    onNavigateToMoodRateScreen: () -> Unit = {},
+    navigation: NavController = rememberNavController(),
     userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
 ) {
     val pagerState = rememberPagerState(0) { 5 }
@@ -61,7 +66,9 @@ fun WelcomeScreen(
                             snackBarState.showSnackbar(somethingWentWrong)
                             return@launch
                         }
-                        onNavigateToMoodRateScreen()
+                        withContext(Dispatchers.Main) {
+                            navigation.onNavigateToMoodScreen()
+                        }
                     }
                 })
             }

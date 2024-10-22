@@ -20,7 +20,9 @@ import com.joohnq.moodapp.model.entities.MedicationsSupplements
 import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
@@ -63,7 +65,10 @@ fun MedicationsSupplementsScreen(
                     onSomethingWentWrong()
                     return@launch
                 }
-                onNavigateToStressRate()
+
+                withContext(Dispatchers.Main) {
+                    onNavigateToStressRate()
+                }
             }
         },
     ) {

@@ -133,7 +133,7 @@ fun MockScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 ButtonWithArrowRight(
-                    modifier = Modifier.size(60.dp).testTag(TestConstants.WELCOME_NEXT_BUTTON + step), colors = ButtonDefaults.buttonColors(
+                    modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON + step), colors = ButtonDefaults.buttonColors(
                         containerColor = Colors.Brown80,
                         contentColor = Colors.White
                     ), onClick = onNext

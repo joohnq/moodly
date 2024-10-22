@@ -13,6 +13,10 @@ import com.joohnq.moodapp.view.onboarding.SleepQualityScreenObject
 import com.joohnq.moodapp.view.onboarding.StressRateScreenObject
 import com.joohnq.moodapp.view.welcome.WelcomeScreenObject
 
+fun NavController.onNavigateToMoodScreen() {
+    navigate(MoodRateScreenObject)
+}
+
 fun NavController.onNavigateToHomeScreen() {
     navigate(HomeScreenObject)
 }

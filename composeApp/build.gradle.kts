@@ -137,12 +137,12 @@ dependencies {
     implementation(libs.androidx.benchmark.common)
     implementation(libs.androidx.ui.test.junit4.desktop)
     ksp(libs.room.compiler)
+    debugImplementation(compose.uiTooling)
+    implementation(libs.kotlinx.coroutines.core)
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
-    debugImplementation(compose.uiTooling)
-    implementation(libs.kotlinx.coroutines.core)
 }
 
 compose.desktop {

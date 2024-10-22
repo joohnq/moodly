@@ -22,7 +22,9 @@ import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
@@ -66,7 +68,9 @@ fun PhysicalSymptomsScreen(
                     return@launch
                 }
 
-                onNavigateToSleepQuality()
+                withContext(Dispatchers.Main) {
+                    onNavigateToSleepQuality()
+                }
             }
         },
     ) {

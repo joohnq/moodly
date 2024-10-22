@@ -105,7 +105,8 @@ fun ButtonWithArrowRight(
         icon = IconProps(
             icon = Drawables.Icons.Arrow,
             tint = Colors.White,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
+            contentDescription = "Continue"
         ),
         onClick = onClick
     )
@@ -125,6 +126,7 @@ fun ButtonWithArrowOpen(onClick: () -> Unit) {
             icon = Drawables.Icons.ArrowOpen,
             tint = Colors.Brown80,
             modifier = Modifier.size(24.dp),
+            contentDescription = "Go Back"
         ),
         borderStroke = BorderStroke(
             1.5.dp,
@@ -168,7 +170,8 @@ fun ButtonWithArrowRight(
         icon = IconProps(
             icon = Drawables.Icons.Arrow,
             tint = colors.contentColor,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
+            contentDescription = "Go Next"
         ),
         onClick = onClick
     )

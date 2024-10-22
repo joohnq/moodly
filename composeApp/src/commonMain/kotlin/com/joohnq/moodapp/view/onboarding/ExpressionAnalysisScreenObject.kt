@@ -12,7 +12,9 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.expression_analysis_desc
@@ -44,13 +46,13 @@ fun ExpressionAnalysisScreen(
             moodsViewModel.setCurrentMoodDescription(desc)
             scope.launch(ioDispatcher) {
                 val res = moodsViewModel.insertCurrentMood()
-                println("res: $res")
                 if (!res) onSomethingWentWrong()
                 moodsViewModel.resetCurrentMood()
                 val res2 = userPreferencesViewModel.setSkipOnboardingScreen()
-                println("res2: $res2")
                 if (!res2) onSomethingWentWrong()
-                onNavigateToGetUserName()
+                withContext(Dispatchers.Main) {
+                    onNavigateToGetUserName()
+                }
             }
         },
     ) {

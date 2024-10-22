@@ -13,12 +13,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.ProfessionalHelp
 import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
@@ -30,11 +35,10 @@ object ProfessionalHelpScreenObject
 
 @Composable
 fun ProfessionalHelpScreen(
-    onGoBack: () -> Unit,
-    onNavigateToPhysicalSymptoms: () -> Unit
+    navigation: NavController = rememberNavController(),
+    userViewModel: UserViewModel = koinViewModel()
 ) {
     var isContinueButtonVisible by remember { mutableStateOf(false) }
-    val userViewModel: UserViewModel = koinViewModel()
     var selectedOption by rememberSaveable(stateSaver = ProfessionalHelp.getSaver()) {
         mutableStateOf(null)
     }
@@ -51,7 +55,7 @@ fun ProfessionalHelpScreen(
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
         isContinueButtonVisible = isContinueButtonVisible,
-        onBack = onGoBack,
+        onBack = navigation::popBackStack,
         onContinue = { onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
                 val res = userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
@@ -59,8 +63,9 @@ fun ProfessionalHelpScreen(
                     onSomethingWentWrong()
                     return@launch
                 }
-
-                onNavigateToPhysicalSymptoms()
+                withContext(Dispatchers.Main) {
+                    navigation.onNavigateToPhysicalSymptoms()
+                }
             }
         },
     ) {

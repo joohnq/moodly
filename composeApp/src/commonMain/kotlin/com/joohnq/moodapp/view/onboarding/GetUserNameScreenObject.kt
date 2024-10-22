@@ -35,16 +35,17 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
-import com.joohnq.moodapp.view.home.HomeScreen
+import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.how_we_can_call_you
@@ -105,7 +106,10 @@ fun GetUserNameScreen(onNavigateToHomeScreen: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
                         text = stringResource(Res.string.how_we_can_call_you),
                         style = TextStyles.OnboardingScreenTitle(),
@@ -143,7 +147,9 @@ fun GetUserNameScreen(onNavigateToHomeScreen: () -> Unit) {
                                 return@launch
                             }
 
-                            onNavigateToHomeScreen()
+                            withContext(Dispatchers.Main) {
+                                onNavigateToHomeScreen()
+                            }
                         } catch (e: Exception) {
                             nameError = e.message ?: ""
                         }

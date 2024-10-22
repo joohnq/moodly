@@ -75,9 +75,7 @@ fun App() {
                     )
                 }
                 composable<WelcomeScreenObject> {
-                    WelcomeScreen(
-                        onNavigateToMoodRateScreen = navController::onNavigateToOnboardingScreen
-                    )
+                    WelcomeScreen(navigation = navController)
                 }
                 navigation<OnboardingScreenObject>(startDestination = MoodRateScreenObject) {
                     composable<MoodRateScreenObject> {
@@ -87,10 +85,7 @@ fun App() {
                         )
                     }
                     composable<ProfessionalHelpScreenObject> {
-                        ProfessionalHelpScreen(
-                            onGoBack = navController::popBackStack,
-                            onNavigateToPhysicalSymptoms = navController::onNavigateToPhysicalSymptoms
-                        )
+                        ProfessionalHelpScreen(navigation = navController)
                     }
                     composable<PhysicalSymptomsScreenObject> {
                         PhysicalSymptomsScreen(

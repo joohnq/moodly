@@ -20,7 +20,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.OnboardingTopBar
@@ -90,7 +92,7 @@ fun OnboardingBaseComponent(
             Spacer(modifier = Modifier.height(16.dp))
             if (isContinueButtonVisible) {
                 ButtonWithArrowRight(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
                     text = stringResource(Res.string.continue_word),
                     onClick = { onContinue(::onSomethingWentWrong) }
                 )

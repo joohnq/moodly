@@ -10,4 +10,7 @@ object TestConstants {
     const val CONTINUE_BUTTON = "CONTINUE_BUTTON"
 
     const val ONBOARDING_ROULETTE = "ONBOARDING_ROULETTE"
+
+    const val SLEEP_QUALITY_SLIDER = "SLEEP_QUALITY_SLIDER"
+    const val TEXT_INPUT = "TEXT_INPUT"
 }

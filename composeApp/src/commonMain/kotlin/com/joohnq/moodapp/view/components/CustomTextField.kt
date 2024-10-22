@@ -36,14 +36,14 @@ import com.joohnq.moodapp.view.constants.Drawables
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ExpressionAnalysisTextField(text: String, onValueChange: (String) -> Unit) {
+fun ExpressionAnalysisTextField(modifier: Modifier = Modifier, text: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = text,
         singleLine = true,
         onValueChange = onValueChange,
         label = null,
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
             .heightIn(min = 250.dp).border(

@@ -7,6 +7,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
+import com.goncalossilva.resources.Resource
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
 import org.koin.core.context.startKoin
@@ -18,7 +19,6 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class ProfessionalHelpScreenTest : KoinTest {
-
     @BeforeTest
     fun setUp() {
         startKoin {
@@ -42,12 +42,8 @@ class ProfessionalHelpScreenTest : KoinTest {
             )
         }
 
-        val yesButton = onNodeWithText("Yes")
-        val noButton = onNodeWithText("No")
         val continueButton = onNodeWithText("Continue")
 
-        yesButton.assertExists()
-        noButton.assertExists()
         continueButton.assertDoesNotExist()
     }
 

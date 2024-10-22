@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.ProfessionalHelp
 import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
 import com.joohnq.moodapp.view.constants.Drawables
@@ -30,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ProfessionalHelpScreen(
-    navigation: NavController,
+    navigation: NavController = rememberNavController(),
     userViewModel: UserViewModel = koinViewModel()
 ) {
     var isContinueButtonVisible by remember { mutableStateOf(false) }

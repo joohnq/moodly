@@ -34,10 +34,7 @@ fun HealthJournalComponent(modifier: Modifier = Modifier, mouthMood: List<StatsR
             Box(
                 modifier = Modifier.fillMaxSize()
                     .background(color = background, shape = RoundedCornerShape(4.dp)).size(18.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(index.plus(1).toString(), style = TextStyles.HealthJournalDay())
-            }
+            )
         }
     }
 }

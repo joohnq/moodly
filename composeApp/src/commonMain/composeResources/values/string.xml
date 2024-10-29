@@ -74,4 +74,11 @@
     <string name="expression_analysis_desc">Freely write down anything that's on your mind. Dr Freud.ai is here to listen...</string>
     <string name="how_we_can_call_you">How We Can Call You?</string>
     <string name="something_went_wrong">Something Went Wrong. Try Again or Contact Support.</string>
+    <string name="mindful_journal">Mindful Journal</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="level_one_zen">Level 1 (Zen)</string>
+    <string name="level_two_calm">Level 2 (Calm)</string>
+    <string name="level_three_normal">Level 3 (Normal)</string>
+    <string name="level_four_irritated">Level 4 (Irritated)</string>
+    <string name="level_five_angry">Level 5 (Angry)</string>
 </resources>

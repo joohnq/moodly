@@ -1,7 +1,8 @@
 package com.joohnq.moodapp.model.entities
 
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.ui.graphics.Color
+import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -22,40 +23,58 @@ sealed class SleepQuality(
     val id: String,
     @Contextual val firstText: StringResource,
     @Contextual val secondText: StringResource,
+    @Contextual val backgroundColor: Color,
+    @Contextual val color: Color,
+    val level: Int
 ) {
     @Serializable
     data object Excellent : SleepQuality(
         id = EXCELLENT,
         firstText = Res.string.excellent,
-        secondText = Res.string.seven_nine_hours
+        secondText = Res.string.seven_nine_hours,
+        backgroundColor = Colors.Green10,
+        color = Colors.Green50,
+        level = 5
     )
 
     @Serializable
     data object Good : SleepQuality(
         id = GOOD,
         firstText = Res.string.good,
-        secondText = Res.string.six_seven_hours
+        secondText = Res.string.six_seven_hours,
+        backgroundColor = Colors.Yellow10,
+        color = Colors.Yellow50,
+        level = 4
     )
 
     @Serializable
     data object Fair : SleepQuality(
         id = FAIR,
         firstText = Res.string.fair,
-        secondText = Res.string.five_hours
+        secondText = Res.string.five_hours,
+        backgroundColor = Colors.Brown20,
+        color = Colors.Brown80,
+        level = 3
     )
 
     @Serializable
     data object Poor : SleepQuality(
         id = POOR,
         firstText = Res.string.poor,
-        secondText = Res.string.three_four_hours
+        secondText = Res.string.three_four_hours,
+        backgroundColor = Colors.Orange10,
+        color = Colors.Orange50,
+        level = 2
     )
 
     @Serializable
     data object Worst : SleepQuality(
         id = WORST,
         firstText = Res.string.worst,
-        secondText = Res.string.minus_three_hours
+        secondText = Res.string.minus_three_hours,
+        backgroundColor = Colors.Purple10,
+        color = Colors.Purple40,
+        level = 1
     )
 
     companion object {

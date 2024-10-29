@@ -1,23 +1,15 @@
 package com.joohnq.moodapp.view.onboarding
 
-import androidx.compose.ui.semantics.SemanticsActions
-import androidx.compose.ui.semantics.progressBarRangeInfo
-import androidx.compose.ui.semantics.requestFocus
-import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertValueEquals
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performSemanticsAction
-import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import androidx.compose.ui.test.swipeLeft
-import androidx.compose.ui.test.swipeRight
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
@@ -29,7 +21,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class SleepQualityScreenTest : KoinTest {
+class GetUserNameScreenTest : KoinTest {
     @BeforeTest
     fun setUp() {
         startKoin {
@@ -46,21 +38,38 @@ class SleepQualityScreenTest : KoinTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun `test if the continue button is not displayed initially`() = runComposeUiTest {
+    fun `test text field`() = runComposeUiTest {
         setContent {
-            SleepQualityScreen(
-                moodsViewModel = get(),
+            GetUserNameScreen(
+                userViewModel = get(),
+                userPreferencesViewModel = get(),
             )
         }
 
-        val slider = onNodeWithTag(TestConstants.SLEEP_QUALITY_SLIDER)
+        val textField = onNodeWithTag(TestConstants.TEXT_INPUT)
 
-        slider.assertIsDisplayed()
-        slider.performTouchInput {
-            swipeLeft()
+        textField.performTextInput("Hello, World!")
+
+        textField.assertTextEquals("Hello, World!")
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun `test text field with error`() = runComposeUiTest {
+        setContent {
+            GetUserNameScreen(
+                userViewModel = get(),
+                userPreferencesViewModel = get(),
+            )
         }
-        onNodeWithTag(TestConstants.SLEEP_QUALITY_SLIDER).performTouchInput {
-            swipeLeft()
-        }
+
+        val textField = onNodeWithTag(TestConstants.TEXT_INPUT)
+        val continueButton = onNodeWithText("Continue")
+
+        continueButton.performClick()
+
+        textField.performTextInput("")
+        textField.assertTextEquals("")
+        onNodeWithText("Name is required").assertExists()
     }
 }

@@ -14,7 +14,11 @@ import moodapp.composeapp.generated.resources.ic_close
 import moodapp.composeapp.generated.resources.ic_drug_store
 import moodapp.composeapp.generated.resources.ic_calendar
 import moodapp.composeapp.generated.resources.ic_document
+import moodapp.composeapp.generated.resources.ic_document_health
+import moodapp.composeapp.generated.resources.ic_happy_face
+import moodapp.composeapp.generated.resources.ic_head
 import moodapp.composeapp.generated.resources.ic_heart
+import moodapp.composeapp.generated.resources.ic_hospital_bed
 import moodapp.composeapp.generated.resources.ic_medicine
 import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
@@ -53,6 +57,10 @@ object Drawables {
         val Heart = Res.drawable.ic_heart
         val Document = Res.drawable.ic_document
         val SadFace = Res.drawable.ic_sad_face
+        val DocumentHealth = Res.drawable.ic_document_health
+        val HospitalBed = Res.drawable.ic_hospital_bed
+        val HappyFace = Res.drawable.ic_happy_face
+        val Head = Res.drawable.ic_head
     }
 
     object Images {

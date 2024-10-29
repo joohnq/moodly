@@ -25,7 +25,7 @@ fun FreudScoreComponent(
 ) {
     Box(contentAlignment = Alignment.Center, modifier = modifier) {
         CircularProgressIndicator(
-            progress = { 0.75f },
+            progress = { freudScore.score.toFloat() / 100 },
             modifier = Modifier.fillMaxSize(),
             color = Colors.Green10,
             strokeWidth = 10.dp,

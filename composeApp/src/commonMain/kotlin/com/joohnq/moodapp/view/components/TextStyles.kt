@@ -211,4 +211,25 @@ object TextStyles {
         fontSize = 9.sp,
         color = Colors.Purple40
     )
+
+    @Composable
+    fun MindfulTrackerCardTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 18.sp,
+        color = Colors.Brown80
+    )
+
+    @Composable
+    fun MindfulTrackerCardSubtitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 14.sp,
+        color = Colors.Brown100Alpha64
+    )
+
+    @Composable
+    fun SleepQualityOption() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 12.sp,
+        color = Colors.Brown80
+    )
 }

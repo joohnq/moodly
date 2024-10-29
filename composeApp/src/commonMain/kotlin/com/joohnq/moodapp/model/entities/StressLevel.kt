@@ -1,11 +1,18 @@
 package com.joohnq.moodapp.model.entities
 
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.ui.graphics.Color
+import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.five_number
 import moodapp.composeapp.generated.resources.four_number
+import moodapp.composeapp.generated.resources.level_five_angry
+import moodapp.composeapp.generated.resources.level_four_irritated
+import moodapp.composeapp.generated.resources.level_one_zen
+import moodapp.composeapp.generated.resources.level_three_normal
+import moodapp.composeapp.generated.resources.level_two_calm
 import moodapp.composeapp.generated.resources.one_number
 import moodapp.composeapp.generated.resources.three_number
 import moodapp.composeapp.generated.resources.two_number
@@ -20,14 +27,22 @@ import org.jetbrains.compose.resources.StringResource
 sealed class StressLevel(
     val id: String,
     @Contextual val value: StringResource,
-    @Contextual val text: StringResource
+    @Contextual val text: StringResource,
+    @Contextual val subtitle: StringResource,
+    @Contextual val color: Color,
+    @Contextual val backgroundColor: Color,
+    val level: Int
 ) {
     @Serializable
     data object One :
         StressLevel(
             id = ONE,
             value = Res.string.one_number,
-            text = Res.string.you_are_not_stressed_out
+            text = Res.string.you_are_not_stressed_out,
+            subtitle = Res.string.level_one_zen,
+            level = 1,
+            color = Colors.Green50,
+            backgroundColor = Colors.Green10
         )
 
     @Serializable
@@ -35,7 +50,11 @@ sealed class StressLevel(
         StressLevel(
             id = TWO,
             value = Res.string.two_number,
-            text = Res.string.you_are_a_little_stressed_out
+            text = Res.string.you_are_a_little_stressed_out,
+            subtitle = Res.string.level_two_calm,
+            level = 2,
+            color = Colors.Green50,
+            backgroundColor = Colors.Green10
         )
 
     @Serializable
@@ -43,7 +62,11 @@ sealed class StressLevel(
         StressLevel(
             id = THREE,
             value = Res.string.three_number,
-            text = Res.string.you_are_neutral
+            text = Res.string.you_are_neutral,
+            subtitle = Res.string.level_three_normal,
+            level = 3,
+            color = Colors.Brown80,
+            backgroundColor = Colors.Brown40
         )
 
     @Serializable
@@ -51,7 +74,11 @@ sealed class StressLevel(
         StressLevel(
             id = FOUR,
             value = Res.string.four_number,
-            text = Res.string.you_are_very_stressed_out
+            text = Res.string.you_are_very_stressed_out,
+            subtitle = Res.string.level_four_irritated,
+            level = 4,
+            color = Colors.Orange80,
+            backgroundColor = Colors.Orange20
         )
 
     @Serializable
@@ -59,7 +86,11 @@ sealed class StressLevel(
         StressLevel(
             id = FIVE,
             value = Res.string.five_number,
-            text = Res.string.you_are_extremely_stressed_out
+            text = Res.string.you_are_extremely_stressed_out,
+            subtitle = Res.string.level_five_angry,
+            level = 5,
+            color = Colors.Purple50,
+            backgroundColor = Colors.Purple10
         )
 
     companion object {

@@ -3,24 +3,49 @@ package com.joohnq.moodapp.view.routes
 import androidx.navigation.NavController
 import com.joohnq.moodapp.view.Screens
 
-fun NavController.onNavigateToMoodRateScreen() {
-    navigate(Screens.OnboardingScreenGraph.MoodRateScreen)
-}
-
 fun NavController.onNavigateToHomeScreen() {
-    navigate(Screens.HomeScreen)
+    navigate(Screens.HomeScreen) {
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
 }
 
 fun NavController.onNavigateToWelcomeScreen() {
-    navigate(Screens.WelcomeScreen)
+    navigate(Screens.WelcomeScreen){
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
 }
 
 fun NavController.onNavigateToOnboardingScreen() {
-    navigate(Screens.OnboardingScreenGraph)
+    navigate(Screens.OnboardingScreenGraph) {
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
 }
 
 fun NavController.onNavigateToGetUserNameScreen() {
-    navigate(Screens.OnboardingScreenGraph.GetUserNameScreen)
+    navigate(Screens.GetUserNameScreen) {
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
+}
+
+fun NavController.onNavigateToCompilingData() {
+    navigate(Screens.CompilingDataScreen){
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
 }
 
 fun NavController.onNavigateToProfessionalHelp() {

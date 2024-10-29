@@ -9,9 +9,6 @@ object Screens {
         object ExpressionAnalysisScreen
 
         @Serializable
-        object GetUserNameScreen
-
-        @Serializable
         object MedicationsSupplementsScreen
 
         @Serializable
@@ -35,6 +32,12 @@ object Screens {
 
     @Serializable
     object WelcomeScreen
+
+    @Serializable
+    object GetUserNameScreen
+
+    @Serializable
+    object CompilingDataScreen
 
     @Serializable
     object HomeScreen

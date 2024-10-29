@@ -21,7 +21,7 @@ sealed class Mood(
     val text: StringResource,
     val backgroundColor: Color,
     val color: Color,
-    val healthLevel: Float
+    val healthLevel: Int
 ) {
     data object Depressed :
         Mood(
@@ -31,7 +31,7 @@ sealed class Mood(
             text = Res.string.depressed,
             backgroundColor = Colors.Purple30,
             color = Colors.Purple90,
-            healthLevel = 20f
+            healthLevel = 20
         )
 
     data object Sad : Mood(
@@ -41,7 +41,7 @@ sealed class Mood(
         text = Res.string.sad,
         backgroundColor = Colors.Orange40,
         color = Colors.Orange90,
-        healthLevel = 40f
+        healthLevel = 40
     )
 
     data object Neutral :
@@ -52,7 +52,7 @@ sealed class Mood(
             text = Res.string.neutral,
             backgroundColor = Colors.Brown60,
             color = Colors.Brown90,
-            healthLevel = 60f
+            healthLevel = 60
         )
 
     data object Happy : Mood(
@@ -62,7 +62,7 @@ sealed class Mood(
         text = Res.string.happy,
         backgroundColor = Colors.Yellow40,
         color = Colors.Yellow90,
-        healthLevel = 80f
+        healthLevel = 80
     )
 
     data object Overjoyed :
@@ -73,15 +73,15 @@ sealed class Mood(
             text = Res.string.overjoyed,
             backgroundColor = Colors.Green50,
             color = Colors.Green90,
-            healthLevel = 100f
+            healthLevel = 100
         )
 
     companion object {
-        const val DEPRESSED = "0"
-        const val SAD = "1"
-        const val NEUTRAL = "2"
-        const val HAPPY = "3"
-        const val OVERJOYED = "4"
+        private const val DEPRESSED = "0"
+        private const val SAD = "1"
+        private const val NEUTRAL = "2"
+        private const val HAPPY = "3"
+        private const val OVERJOYED = "4"
 
         fun toValue(src: String): Mood = when (src) {
             DEPRESSED -> Depressed

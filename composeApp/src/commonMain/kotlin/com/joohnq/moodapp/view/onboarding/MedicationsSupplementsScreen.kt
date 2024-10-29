@@ -30,6 +30,7 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun MedicationsSupplementsScreen(
@@ -56,10 +57,13 @@ fun MedicationsSupplementsScreen(
         onBack = navigation::popBackStack,
         onContinue = { onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
-                val res = userViewModel.setUserMedicationsSupplements(
-                    selectedOption ?: MedicationsSupplements.PreferNotToSay
-                )
-                if (!res) {
+                val res = runCatching {
+                    userViewModel.setUserMedicationsSupplements(
+                        selectedOption ?: MedicationsSupplements.PreferNotToSay
+                    )
+                }
+
+                if (res.isFailure) {
                     onSomethingWentWrong()
                     return@launch
                 }

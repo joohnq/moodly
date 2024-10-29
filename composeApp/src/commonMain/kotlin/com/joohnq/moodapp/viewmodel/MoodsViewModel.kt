@@ -25,6 +25,10 @@ class MoodsViewModel(
             MutableStateFlow<UiState<List<StatsRecord>>> = MutableStateFlow(UiState.Idle)
     val moods: MutableStateFlow<UiState<List<StatsRecord>>> = _moods
 
+    private val _monthlyMoods:
+            MutableStateFlow<UiState<List<StatsRecord>>> = MutableStateFlow(UiState.Idle)
+    val monthlyMoods: MutableStateFlow<UiState<List<StatsRecord>>> = _monthlyMoods
+
     /*
     * Set the onboarding current mood, based on mood rate roulette
     * Tested
@@ -94,5 +98,15 @@ class MoodsViewModel(
     /* Used in testing to mock the currentMood value */
     fun setCurrentMoodForTesting(statsRecord: StatsRecord) {
         _currentMood.value = statsRecord
+    }
+
+    fun getMonthlyMoods() = viewModelScope.launch(ioDispatcher) {
+        _monthlyMoods.value = UiState.Loading
+        try {
+            val moods = statsRecordDAO.getMonthlyMoods()
+            _monthlyMoods.value = UiState.Success(moods)
+        }catch (e: Exception){
+            _monthlyMoods.value = UiState.Error(e.message.toString())
+        }
     }
 }

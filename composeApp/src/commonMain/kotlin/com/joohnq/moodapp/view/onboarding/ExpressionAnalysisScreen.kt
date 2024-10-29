@@ -17,6 +17,7 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
+import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun ExpressionAnalysisScreen(
     navigation: NavController = rememberNavController(),
     moodsViewModel: MoodsViewModel = koinViewModel(),
+    userViewModel: UserViewModel = koinViewModel(),
     userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
 ) {
     var desc by remember { mutableStateOf("") }
@@ -46,14 +48,20 @@ fun ExpressionAnalysisScreen(
         onContinue = { onSomethingWentWrong ->
             moodsViewModel.setCurrentMoodDescription(desc)
             scope.launch(ioDispatcher) {
-                val res = moodsViewModel.insertCurrentMood()
-                if (!res) onSomethingWentWrong()
-                moodsViewModel.resetCurrentMood()
-                val res2 = userPreferencesViewModel.setSkipOnboardingScreen()
-                if (!res2) onSomethingWentWrong()
+                val res = runCatching {
+                    moodsViewModel.insertCurrentMood() &&
+                            userPreferencesViewModel.setSkipOnboardingScreen()
+                }
+
+                if (res.isFailure) {
+                    onSomethingWentWrong()
+                    return@launch
+                }
+
                 withContext(Dispatchers.Main) {
                     navigation.onNavigateToGetUserNameScreen()
                 }
+                moodsViewModel.resetCurrentMood()
             }
         },
     ) {
@@ -61,6 +69,9 @@ fun ExpressionAnalysisScreen(
             stringResource(Res.string.expression_analysis_desc),
             style = TextStyles.ExpressionAnalysisDesc()
         )
-        ExpressionAnalysisTextField(modifier = Modifier.testTag(TestConstants.TEXT_INPUT),desc) { desc = it }
+        ExpressionAnalysisTextField(
+            modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
+            desc
+        ) { desc = it }
     }
 }

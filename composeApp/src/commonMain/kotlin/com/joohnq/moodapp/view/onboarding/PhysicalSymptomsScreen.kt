@@ -34,6 +34,7 @@ import moodapp.composeapp.generated.resources.select_one_answer
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun PhysicalSymptomsScreen(
@@ -59,9 +60,11 @@ fun PhysicalSymptomsScreen(
         onBack = navigation::popBackStack,
         onContinue = { onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
-                val res =
+                val res = runCatching {
                     userViewModel.setUserPhysicalPain(selectedOption ?: PhysicalSymptoms.No)
-                if (!res) {
+                }
+
+                if (res.isFailure) {
                     onSomethingWentWrong()
                     return@launch
                 }

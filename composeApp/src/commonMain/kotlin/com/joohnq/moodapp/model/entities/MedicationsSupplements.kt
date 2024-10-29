@@ -50,10 +50,10 @@ sealed class MedicationsSupplements(
         )
 
     companion object {
-        const val PRESCRIBED_MEDICATIONS = "0"
-        const val OVER_THE_COUNTER_SUPPLEMENTS = "1"
-        const val IM_NOT_TAKING_ANY = "2"
-        const val PREFER_NOT_TO_SAY = "3"
+        private const val PRESCRIBED_MEDICATIONS = "0"
+        private const val OVER_THE_COUNTER_SUPPLEMENTS = "1"
+        private const val IM_NOT_TAKING_ANY = "2"
+        private const val PREFER_NOT_TO_SAY = "3"
 
         fun toValue(src: String): MedicationsSupplements = when (src) {
             PRESCRIBED_MEDICATIONS -> PrescribedMedications

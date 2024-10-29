@@ -33,16 +33,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
+import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -50,11 +52,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun GetUserNameScreen(
@@ -118,6 +122,7 @@ fun GetUserNameScreen(
                     )
                     Spacer(modifier = Modifier.height(48.dp))
                     UserNameTextField(
+                        modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
                         name = name,
                         errorText = nameError,
                         onValueChange = {
@@ -129,30 +134,25 @@ fun GetUserNameScreen(
                 }
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                    text = "Continue"
+                    text = stringResource(Res.string.continue_word)
                 ) {
                     focusManager.clearFocus()
+                    if (name.trim().isEmpty()) {
+                        nameError = "Name is required"
+                    }
+
                     scope.launch(ioDispatcher) {
-                        try {
-                            if (name.isEmpty()) throw Exception("Name is required")
-                            val res: Boolean = userViewModel.setUserName(name)
-                            if (!res) {
-                                snackBarState.showSnackbar("Something went wrong 1")
-                                return@launch
-                            }
+                        val result = runCatching {
+                            userViewModel.setUserName(name) &&
+                                    userPreferencesViewModel.setSkipGetUserNameScreen()
+                        }
+                        if (result.isFailure) {
+                            snackBarState.showSnackbar("Something went wrong")
+                            return@launch
+                        }
 
-                            val res2 = userPreferencesViewModel.setSkipGetUserNameScreen()
-
-                            if (!res2) {
-                                snackBarState.showSnackbar("Something went wrong 2")
-                                return@launch
-                            }
-
-                            withContext(Dispatchers.Main) {
-                                navigation.onNavigateToHomeScreen()
-                            }
-                        } catch (e: Exception) {
-                            nameError = e.message ?: ""
+                        withContext(Dispatchers.Main) {
+                            navigation.onNavigateToCompilingData()
                         }
                     }
                 }

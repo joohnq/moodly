@@ -59,11 +59,11 @@ sealed class SleepQuality(
     )
 
     companion object {
-        const val EXCELLENT = "0"
-        const val GOOD = "1"
-        const val FAIR = "2"
-        const val POOR = "3"
-        const val WORST = "4"
+        private const val EXCELLENT = "0"
+        private const val GOOD = "1"
+        private const val FAIR = "2"
+        private const val POOR = "3"
+        private const val WORST = "4"
 
         fun toValue(src: String): SleepQuality = when (src) {
             EXCELLENT -> Excellent

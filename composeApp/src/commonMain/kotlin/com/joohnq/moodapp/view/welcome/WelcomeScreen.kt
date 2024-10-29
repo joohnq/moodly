@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.routes.onNavigateToMoodRateScreen
+import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -65,7 +65,7 @@ fun WelcomeScreen(
                             return@launch
                         }
                         withContext(Dispatchers.Main) {
-                            navigation.onNavigateToMoodRateScreen()
+                            navigation.onNavigateToOnboardingScreen()
                         }
                     }
                 })

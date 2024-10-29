@@ -42,9 +42,9 @@ sealed class PhysicalSymptoms(
     )
 
     companion object {
-        const val YES_VERY_PAINFUL = "0"
-        const val NO_PHYSICAL_PAIN = "1"
-        const val YES_JUST_A_BIT = "2"
+        private const val YES_VERY_PAINFUL = "0"
+        private const val NO_PHYSICAL_PAIN = "1"
+        private const val YES_JUST_A_BIT = "2"
 
         fun toValue(src: String): PhysicalSymptoms = when (src) {
             YES_VERY_PAINFUL -> YesVeryPainful

@@ -15,4 +15,7 @@ interface StatsRecordDAO {
 
     @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE}")
     fun getMoods(): Flow<List<StatsRecord>>
+
+    @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE} ORDER BY date DESC LIMIT 30")
+    suspend fun getMonthlyMoods(): List<StatsRecord>
 }

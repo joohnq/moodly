@@ -28,6 +28,8 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.compose.viewmodel.koinNavViewModel as getViewModel
 
 @Composable
 fun ProfessionalHelpScreen(
@@ -52,14 +54,18 @@ fun ProfessionalHelpScreen(
         title = Res.string.sought_professional_help_title,
         isContinueButtonVisible = isContinueButtonVisible,
         onBack = navigation::popBackStack,
-        onContinue = { onSomethingWentWrong ->
+        onContinue = {onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
-                val res = userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
-                if (!res) {
+                val res = runCatching {
+                    userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
+                }
+
+                if(res.isFailure) {
                     onSomethingWentWrong()
                     return@launch
                 }
-                withContext(Dispatchers.Main) {
+
+               withContext(Dispatchers.Main) {
                     navigation.onNavigateToPhysicalSymptoms()
                 }
             }

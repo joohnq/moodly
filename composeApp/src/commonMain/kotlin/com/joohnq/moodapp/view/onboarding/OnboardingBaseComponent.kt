@@ -23,12 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.OnboardingTopBar
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.something_went_wrong
@@ -36,8 +35,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-
-
 
 @Composable
 fun OnboardingBaseComponent(

@@ -153,4 +153,62 @@ object TextStyles {
         fontSize = 12.sp,
         color = Colors.Orange40
     )
+
+    @Composable
+    fun HomeTopBarDate() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 12.sp,
+        color = Colors.Brown100Alpha64
+    )
+
+    @Composable
+    fun HomeTopBarName() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 30.sp,
+        color = Colors.Brown80
+    )
+
+    @Composable
+    fun HomeTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 18.sp,
+        color = Colors.Brown80
+    )
+
+    @Composable
+    fun HomeMetricTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 16.sp,
+        color = Colors.White
+    )
+
+    @Composable
+    fun FreudScore() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 24.sp,
+        color = Colors.White,
+        textAlign = TextAlign.Center
+    )
+
+    @Composable
+    fun FreudTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 14.sp,
+        color = Colors.Green20,
+        textAlign = TextAlign.Center
+    )
+
+    @Composable
+    fun MoodComponentText() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 24.sp,
+        color = Colors.White
+    )
+
+    @Composable
+    fun HealthJournalDay() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 9.sp,
+        color = Colors.Purple40
+    )
 }

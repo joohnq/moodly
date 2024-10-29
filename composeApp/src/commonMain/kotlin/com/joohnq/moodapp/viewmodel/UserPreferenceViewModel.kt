@@ -28,10 +28,8 @@ class UserPreferenceViewModel(
             _userPreferences.value = UiState.Loading
             userPreferencesDAO.getUserPreferences().catch {
                 _userPreferences.value = UiState.Error(it.message.toString())
-                println("erro:" + userPreferences.value.toString())
             }.collect {
                 _userPreferences.value = UiState.Success(it)
-                println("success:" +userPreferences.value.toString())
             }
         }
 

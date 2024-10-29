@@ -17,9 +17,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
-import com.joohnq.moodapp.view.routes.onNavigateToMoodRateScreen
+import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
@@ -39,14 +40,12 @@ fun LoadingScreen(
     }
 
     LaunchedEffect(userPreferences) {
-        println("rodou")
         userPreferences.onSuccess { userPreferences ->
-            println("rodou2")
             when (false) {
                 userPreferences.skipWelcomeScreen -> navigation.onNavigateToWelcomeScreen()
-                userPreferences.skipOnboardingScreen -> navigation.onNavigateToMoodRateScreen()
+                userPreferences.skipOnboardingScreen -> navigation.onNavigateToOnboardingScreen()
                 userPreferences.skipGetUserNameScreen -> navigation.onNavigateToGetUserNameScreen()
-                else -> navigation.onNavigateToHomeScreen()
+                else -> navigation.onNavigateToCompilingData()
             }
         }
     }

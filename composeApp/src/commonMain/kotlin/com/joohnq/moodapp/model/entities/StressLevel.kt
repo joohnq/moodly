@@ -63,11 +63,11 @@ sealed class StressLevel(
         )
 
     companion object {
-        const val ONE = "1"
-        const val TWO = "2"
-        const val THREE = "3"
-        const val FOUR = "4"
-        const val FIVE = "5"
+        private const val ONE = "1"
+        private const val TWO = "2"
+        private const val THREE = "3"
+        private const val FOUR = "4"
+        private const val FIVE = "5"
 
         fun toValue(src: String): StressLevel = when (src) {
             ONE -> One

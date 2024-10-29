@@ -1,12 +1,14 @@
 package com.joohnq.moodapp.view.state
 
+import androidx.compose.runtime.Composable
+
 sealed class UiState<out T> {
     data object Loading : UiState<Nothing>()
     data class Success<T>(val data: T) : UiState<T>()
     data class Error(val message: String) : UiState<Nothing>()
     data object Idle : UiState<Nothing>()
 
-    companion object{
+    companion object {
         fun <T> UiState<T>.fold(
             onLoading: () -> Unit = {},
             onIdle: () -> Unit = {},
@@ -14,18 +16,35 @@ sealed class UiState<out T> {
             onError: (String) -> Unit = {}
         ) {
             when (this) {
-                is UiState.Loading -> onLoading()
-                is UiState.Success -> onSuccess(this.data)
-                is UiState.Error -> onError(this.message)
-                is UiState.Idle -> onIdle()
+                is Loading -> onLoading()
+                is Success -> onSuccess(this.data)
+                is Error -> onError(this.message)
+                is Idle -> onIdle()
             }
         }
+
+        @Composable
+        fun <T> UiState<T>.onSuccessComposable(
+            onSuccess: @Composable (T) -> Unit = {},
+        ) {
+            when (this) {
+                is Success -> onSuccess(this.data)
+                else -> {}
+            }
+        }
+
+        @Composable
+        fun <T> UiState<T>.getValueOrNull(): T? =
+            when (this) {
+                is Success -> this.data
+                else -> null
+            }
 
         fun <T> UiState<T>.onSuccess(
             onSuccess: (T) -> Unit = {},
         ) {
             when (this) {
-                is UiState.Success -> onSuccess(this.data)
+                is Success -> onSuccess(this.data)
                 else -> {}
             }
         }
@@ -34,7 +53,7 @@ sealed class UiState<out T> {
             onLoading: () -> Unit
         ) {
             when (this) {
-                is UiState.Loading -> onLoading()
+                is Loading -> onLoading()
                 else -> {}
             }
         }
@@ -43,7 +62,7 @@ sealed class UiState<out T> {
             onError: (String) -> Unit
         ) {
             when (this) {
-                is UiState.Error -> onError(this.message)
+                is Error -> onError(this.message)
                 else -> {}
             }
         }

@@ -36,10 +36,13 @@ import com.joohnq.moodapp.view.constants.Drawables
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ExpressionAnalysisTextField(modifier: Modifier = Modifier, text: String, onValueChange: (String) -> Unit) {
+fun ExpressionAnalysisTextField(
+    modifier: Modifier = Modifier,
+    text: String,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
         value = text,
-        singleLine = true,
         onValueChange = onValueChange,
         label = null,
         shape = RoundedCornerShape(20.dp),
@@ -64,6 +67,7 @@ fun ExpressionAnalysisTextField(modifier: Modifier = Modifier, text: String, onV
 
 @Composable
 fun TextFieldWithLabelAndDoubleBorder(
+    modifier: Modifier = Modifier,
     label: String,
     placeholder: String,
     name: String,
@@ -108,7 +112,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                 value = name,
                 isError = errorText.isNotEmpty(),
                 onValueChange = onValueChange,
-                modifier = Modifier.fillMaxWidth().height(56.dp)
+                modifier = modifier.fillMaxWidth().height(56.dp)
                     .onFocusChanged { focusState ->
                         isFocused = focusState.isFocused
                     }.focusRequester(focusRequester),
@@ -164,11 +168,13 @@ fun TextFieldWithLabelAndDoubleBorder(
 
 @Composable
 fun UserNameTextField(
+    modifier: Modifier = Modifier,
     name: String,
     errorText: String,
     onValueChange: (String) -> Unit
 ) {
     TextFieldWithLabelAndDoubleBorder(
+        modifier = modifier,
         label = "Name",
         placeholder = "Enter your name...",
         name = name,

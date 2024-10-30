@@ -3,8 +3,8 @@ package com.joohnq.moodapp.view.routes
 import androidx.navigation.NavController
 import com.joohnq.moodapp.view.Screens
 
-fun NavController.onNavigateToHomeScreen() {
-    navigate(Screens.HomeScreen) {
+fun NavController.onNavigateToHomeGraph() {
+    navigate(Screens.HomeGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -22,7 +22,7 @@ fun NavController.onNavigateToWelcomeScreen() {
 }
 
 fun NavController.onNavigateToOnboardingScreen() {
-    navigate(Screens.OnboardingScreenGraph) {
+    navigate(Screens.OnboardingGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -49,25 +49,25 @@ fun NavController.onNavigateToCompilingData() {
 }
 
 fun NavController.onNavigateToProfessionalHelp() {
-    navigate(Screens.OnboardingScreenGraph.ProfessionalHelpScreen)
+    navigate(Screens.OnboardingGraph.ProfessionalHelpScreen)
 }
 
 fun NavController.onNavigateToPhysicalSymptoms() {
-    navigate(Screens.OnboardingScreenGraph.PhysicalSymptomsScreen)
+    navigate(Screens.OnboardingGraph.PhysicalSymptomsScreen)
 }
 
 fun NavController.onNavigateToSleepQuality() {
-    navigate(Screens.OnboardingScreenGraph.SleepQualityScreen)
+    navigate(Screens.OnboardingGraph.SleepQualityScreen)
 }
 
 fun NavController.onNavigateToMedicationsSupplements() {
-    navigate(Screens.OnboardingScreenGraph.MedicationsSupplementsScreen)
+    navigate(Screens.OnboardingGraph.MedicationsSupplementsScreen)
 }
 
 fun NavController.onNavigateToStressRate() {
-    navigate(Screens.OnboardingScreenGraph.StressRateScreen)
+    navigate(Screens.OnboardingGraph.StressRateScreen)
 }
 
 fun NavController.onNavigateToExpressionAnalysis() {
-    navigate(Screens.OnboardingScreenGraph.ExpressionAnalysisScreen)
+    navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
 }

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.joohnq.moodapp.view.Screens
-import com.joohnq.moodapp.view.loading.CompilingData
+import com.joohnq.moodapp.view.loading.CompilingDataScreen
 import com.joohnq.moodapp.view.loading.LoadingScreen
 import com.joohnq.moodapp.view.onboarding.GetUserNameScreen
 import com.joohnq.moodapp.view.welcome.WelcomeScreen
@@ -44,7 +44,7 @@ fun CentralNavigation(
             )
         }
         composable<Screens.CompilingDataScreen> {
-            CompilingData(
+            CompilingDataScreen(
                 navigation = navController,
                 moodsViewModel = moodsViewModel,
                 userViewModel = userViewModel,

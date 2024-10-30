@@ -20,17 +20,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
+import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import org.koin.compose.viewmodel.koinNavViewModel
-import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CompilingData(
+fun CompilingDataScreen(
     navigation: NavController,
     moodsViewModel: MoodsViewModel = koinNavViewModel(),
     userViewModel: UserViewModel = koinNavViewModel()
@@ -45,7 +44,7 @@ fun CompilingData(
 
     LaunchedEffect(monthlyMoods, user) {
         when (monthlyMoods is UiState.Success && user is UiState.Success) {
-            true -> navigation.onNavigateToHomeScreen()
+            true -> navigation.onNavigateToHomeGraph()
             else -> Unit
         }
     }

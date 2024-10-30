@@ -19,14 +19,12 @@ import com.joohnq.moodapp.model.entities.UserPreferences
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
-import com.joohnq.moodapp.view.routes.onNavigateToHomeScreen
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import org.koin.compose.viewmodel.koinViewModel
-
 
 @Composable
 fun LoadingScreen(

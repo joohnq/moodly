@@ -14,8 +14,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.runtime.Composable
@@ -42,7 +40,10 @@ fun AppBottomNavigation(navController: NavController) {
             BottomScreens.Journaling,
         )
     }
-    Box(contentAlignment = Alignment.BottomCenter, propagateMinConstraints = true) {
+    Box(
+        contentAlignment = Alignment.BottomCenter,
+        modifier = Modifier.fillMaxSize()
+    ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -88,7 +89,7 @@ fun AppBottomNavigation(navController: NavController) {
                 )
             }
         }
-        Box(modifier = Modifier.padding(bottom = 60.dp)) {
+        Box(modifier = Modifier.padding(bottom = 60.dp).background(color = Colors.Transparent)) {
             with(BottomScreens.Add) {
                 Button(
                     contentPadding = PaddingValues(0.dp),

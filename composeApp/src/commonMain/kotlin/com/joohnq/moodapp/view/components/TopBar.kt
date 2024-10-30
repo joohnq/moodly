@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.model.entities.User
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
@@ -52,8 +51,7 @@ fun OnboardingTopBar(page: Int, onBack: () -> Unit) {
 }
 
 @Composable
-fun HomeTopBar(modifier: Modifier = Modifier, user: User, date: String) {
-    val userName = user.name
+fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
     Column(
         modifier = Modifier.fillMaxSize().background(
             color = Colors.White, shape = RoundedCornerShape(

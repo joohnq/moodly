@@ -1,11 +1,15 @@
 package com.joohnq.moodapp.view.graph
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -43,28 +47,33 @@ fun HomeNavGraph(
 
     Scaffold(
         containerColor = Colors.Brown10,
-        bottomBar = {
-            AppBottomNavigation(navController = navController)
-        }
-    ) { paddingValues ->
+    ) {
+        val padding = PaddingValues(
+            top = it.calculateTopPadding(),
+            bottom = it.calculateBottomPadding() + 100.dp,
+            start = it.calculateStartPadding(LayoutDirection.Ltr),
+            end = it.calculateEndPadding(LayoutDirection.Rtl)
+        )
         NavHost(
             navController = navController,
             startDestination = Screens.HomeGraph.HomeScreen,
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         ) {
             composable<Screens.HomeGraph.HomeScreen> {
                 HomeScreen(
+                    padding = padding,
                     navController = navController,
                     moodsViewModel = moodsViewModel,
                     userViewModel = userViewModel,
                 )
             }
             composable<Screens.HomeGraph.AddMoodScreen> {
-                AddMoodScreen()
+                AddMoodScreen( padding = padding,)
             }
             composable<Screens.HomeGraph.JournalingScreen> {
-                JournalingScreen()
+                JournalingScreen( padding = padding,)
             }
         }
+        AppBottomNavigation(navController = navController)
     }
 }

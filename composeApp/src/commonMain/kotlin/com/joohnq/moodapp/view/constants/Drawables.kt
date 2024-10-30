@@ -7,6 +7,9 @@ import com.joohnq.moodapp.view.icons.MoodOverjoyed
 import com.joohnq.moodapp.view.icons.MoodSad
 import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.ic_add
+import moodapp.composeapp.generated.resources.shape_bottom_navigation
+import moodapp.composeapp.generated.resources.ic_chat
 import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_open
 import moodapp.composeapp.generated.resources.ic_check
@@ -18,6 +21,7 @@ import moodapp.composeapp.generated.resources.ic_document_health
 import moodapp.composeapp.generated.resources.ic_happy_face
 import moodapp.composeapp.generated.resources.ic_head
 import moodapp.composeapp.generated.resources.ic_heart
+import moodapp.composeapp.generated.resources.ic_home
 import moodapp.composeapp.generated.resources.ic_hospital_bed
 import moodapp.composeapp.generated.resources.ic_medicine
 import moodapp.composeapp.generated.resources.ic_nothing
@@ -61,6 +65,9 @@ object Drawables {
         val HospitalBed = Res.drawable.ic_hospital_bed
         val HappyFace = Res.drawable.ic_happy_face
         val Head = Res.drawable.ic_head
+        val Add = Res.drawable.ic_add
+        val Home = Res.drawable.ic_home
+        val Chat = Res.drawable.ic_chat
     }
 
     object Images {
@@ -88,5 +95,9 @@ object Drawables {
         val OverjoyedVectorPainter = MoodOverjoyed
 
         val TargetVectorPainter = Target
+    }
+
+    object Shape{
+        val BottomNavigation = Res.drawable.shape_bottom_navigation
     }
 }

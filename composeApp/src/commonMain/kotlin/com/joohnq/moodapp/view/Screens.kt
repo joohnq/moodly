@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 object Screens {
     @Serializable
-    object OnboardingScreenGraph{
+    object OnboardingGraph{
         @Serializable
         object ExpressionAnalysisScreen
 
@@ -40,5 +40,14 @@ object Screens {
     object CompilingDataScreen
 
     @Serializable
-    object HomeScreen
+    object HomeGraph{
+        @Serializable
+        object HomeScreen
+
+        @Serializable
+        object AddMoodScreen
+
+        @Serializable
+        object JournalingScreen
+    }
 }

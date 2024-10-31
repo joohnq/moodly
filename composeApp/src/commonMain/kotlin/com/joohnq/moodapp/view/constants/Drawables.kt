@@ -7,6 +7,7 @@ import com.joohnq.moodapp.view.icons.MoodOverjoyed
 import com.joohnq.moodapp.view.icons.MoodSad
 import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.freud_score_background
 import moodapp.composeapp.generated.resources.ic_add
 import moodapp.composeapp.generated.resources.shape_bottom_navigation
 import moodapp.composeapp.generated.resources.ic_chat
@@ -76,6 +77,8 @@ object Drawables {
         val WelcomeIntelligentImage = Res.drawable.welcome_intelligent_image
         val WelcomeResourcesImage = Res.drawable.welcome_resources_image
         val WelcomeCommunityImage = Res.drawable.welcome_community_image
+
+        val FreudScoreBackground = Res.drawable.freud_score_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image

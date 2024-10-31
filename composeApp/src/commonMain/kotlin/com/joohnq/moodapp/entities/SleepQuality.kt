@@ -1,7 +1,8 @@
-package com.joohnq.moodapp.model.entities
+package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
+import com.joohnq.moodapp.entities.palette.SleepQualityPalette
 import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
@@ -20,11 +21,9 @@ import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class SleepQuality(
-    val id: String,
+    val id: Int,
     @Contextual val firstText: StringResource,
     @Contextual val secondText: StringResource,
-    @Contextual val backgroundColor: Color,
-    @Contextual val color: Color,
     val level: Int
 ) {
     @Serializable
@@ -32,8 +31,6 @@ sealed class SleepQuality(
         id = EXCELLENT,
         firstText = Res.string.excellent,
         secondText = Res.string.seven_nine_hours,
-        backgroundColor = Colors.Green10,
-        color = Colors.Green50,
         level = 5
     )
 
@@ -42,8 +39,6 @@ sealed class SleepQuality(
         id = GOOD,
         firstText = Res.string.good,
         secondText = Res.string.six_seven_hours,
-        backgroundColor = Colors.Yellow10,
-        color = Colors.Yellow50,
         level = 4
     )
 
@@ -52,8 +47,6 @@ sealed class SleepQuality(
         id = FAIR,
         firstText = Res.string.fair,
         secondText = Res.string.five_hours,
-        backgroundColor = Colors.Brown20,
-        color = Colors.Brown80,
         level = 3
     )
 
@@ -62,8 +55,6 @@ sealed class SleepQuality(
         id = POOR,
         firstText = Res.string.poor,
         secondText = Res.string.three_four_hours,
-        backgroundColor = Colors.Orange10,
-        color = Colors.Orange50,
         level = 2
     )
 
@@ -72,19 +63,17 @@ sealed class SleepQuality(
         id = WORST,
         firstText = Res.string.worst,
         secondText = Res.string.minus_three_hours,
-        backgroundColor = Colors.Purple10,
-        color = Colors.Purple40,
         level = 1
     )
 
     companion object {
-        private const val EXCELLENT = "0"
-        private const val GOOD = "1"
-        private const val FAIR = "2"
-        private const val POOR = "3"
-        private const val WORST = "4"
+        private const val EXCELLENT = 5
+        private const val GOOD = 4
+        private const val FAIR = 3
+        private const val POOR = 2
+        private const val WORST = 1
 
-        fun toValue(src: String): SleepQuality = when (src) {
+        fun toValue(src: Int): SleepQuality = when (src) {
             EXCELLENT -> Excellent
             GOOD -> Good
             FAIR -> Fair
@@ -93,7 +82,7 @@ sealed class SleepQuality(
             else -> throw IllegalArgumentException("Unknown sleep quality option: $src")
         }
 
-        fun fromValue(sleepQuality: SleepQuality?): String = sleepQuality?.id.toString()
+        fun fromValue(sleepQuality: SleepQuality?): Int = sleepQuality?.id ?: -1
 
         fun getAll(): List<SleepQuality> = listOf(
             Excellent,
@@ -103,9 +92,20 @@ sealed class SleepQuality(
             Worst
         )
 
-        fun getSaver(): Saver<SleepQuality, String> = Saver(
+        fun getSaver(): Saver<SleepQuality, Int> = Saver(
             save = { fromValue(it) },
             restore = { toValue(it) }
         )
+
+        fun getPalette(value: SleepQuality): SleepQualityPalette = when (value) {
+            Excellent -> SleepQualityPalette(
+                backgroundColor = Colors.Green10,
+                color = Colors.Green50
+            )
+            Good -> SleepQualityPalette(backgroundColor = Colors.Yellow10, color = Colors.Yellow50)
+            Fair -> SleepQualityPalette(backgroundColor = Colors.Brown20, color = Colors.Brown80)
+            Poor -> SleepQualityPalette(backgroundColor = Colors.Orange10, color = Colors.Orange50)
+            Worst -> SleepQualityPalette(backgroundColor = Colors.Purple10, color = Colors.Purple40)
+        }
     }
 }

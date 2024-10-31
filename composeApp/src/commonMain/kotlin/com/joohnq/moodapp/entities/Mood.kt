@@ -1,8 +1,9 @@
-package com.joohnq.moodapp.model.entities
+package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.joohnq.moodapp.entities.palette.MoodPalette
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
@@ -19,8 +20,6 @@ sealed class Mood(
     val image: DrawableResource,
     val imageVector: ImageVector,
     val text: StringResource,
-    val backgroundColor: Color,
-    val color: Color,
     val healthLevel: Int
 ) {
     data object Depressed :
@@ -29,8 +28,6 @@ sealed class Mood(
             image = Drawables.Mood.Depressed,
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
-            backgroundColor = Colors.Purple30,
-            color = Colors.Purple90,
             healthLevel = 20
         )
 
@@ -39,8 +36,6 @@ sealed class Mood(
         image = Drawables.Mood.Sad,
         imageVector = Drawables.Mood.SadVectorPainter,
         text = Res.string.sad,
-        backgroundColor = Colors.Orange40,
-        color = Colors.Orange90,
         healthLevel = 40
     )
 
@@ -50,8 +45,6 @@ sealed class Mood(
             image = Drawables.Mood.Neutral,
             imageVector = Drawables.Mood.NeutralVectorPainter,
             text = Res.string.neutral,
-            backgroundColor = Colors.Brown60,
-            color = Colors.Brown90,
             healthLevel = 60
         )
 
@@ -60,8 +53,6 @@ sealed class Mood(
         image = Drawables.Mood.Happy,
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
-        backgroundColor = Colors.Yellow40,
-        color = Colors.Yellow90,
         healthLevel = 80
     )
 
@@ -71,8 +62,6 @@ sealed class Mood(
             image = Drawables.Mood.Overjoyed,
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
-            backgroundColor = Colors.Green50,
-            color = Colors.Green90,
             healthLevel = 100
         )
 
@@ -106,5 +95,47 @@ sealed class Mood(
             save = { fromValue(it) },
             restore = { toValue(it) }
         )
+
+        fun getPalette(value: Mood): MoodPalette = when (value) {
+            Overjoyed -> MoodPalette(
+                faceBackgroundColor = Colors.Green50,
+                faceColor = Colors.Green90,
+                color = Colors.Green10,
+                subColor = Colors.Green40,
+                backgroundColor = Colors.Green50
+            )
+
+            Happy -> MoodPalette(
+                faceBackgroundColor = Colors.Yellow40,
+                faceColor = Colors.Yellow90,
+                color = Colors.Yellow10,
+                subColor = Colors.Yellow40,
+                backgroundColor = Colors.Yellow50
+            )
+
+            Neutral -> MoodPalette(
+                faceBackgroundColor = Colors.Brown60,
+                faceColor = Colors.Brown90,
+                color = Colors.Brown20,
+                subColor = Colors.Brown40,
+                backgroundColor = Colors.Brown70
+            )
+
+            Sad -> MoodPalette(
+                faceBackgroundColor = Colors.Orange40,
+                faceColor = Colors.Orange90,
+                color = Colors.Orange10,
+                subColor = Colors.Orange30,
+                backgroundColor = Colors.Orange40
+            )
+
+            Depressed -> MoodPalette(
+                faceBackgroundColor = Colors.Purple30,
+                faceColor = Colors.Purple90,
+                color = Colors.Purple10,
+                subColor = Colors.Purple30,
+                backgroundColor = Colors.Purple40
+            )
+        }
     }
 }

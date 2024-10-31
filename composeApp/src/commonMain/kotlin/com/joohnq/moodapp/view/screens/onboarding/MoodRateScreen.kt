@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace

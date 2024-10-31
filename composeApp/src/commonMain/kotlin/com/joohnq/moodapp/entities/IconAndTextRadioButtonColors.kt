@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.entities
+package com.joohnq.moodapp.entities
 
 import androidx.compose.ui.graphics.Color
 

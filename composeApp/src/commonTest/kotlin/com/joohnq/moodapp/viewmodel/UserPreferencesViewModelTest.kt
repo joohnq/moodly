@@ -2,8 +2,8 @@ package com.joohnq.moodapp.viewmodel
 
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.model.entities.StatsRecord
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.entities.UserPreferences
 import com.joohnq.moodapp.view.state.UiState
 import com.varabyte.truthish.assertThat
 import dev.mokkery.answering.returns

@@ -1,10 +1,10 @@
 package com.joohnq.moodapp.viewmodel
 
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
-import com.joohnq.moodapp.model.entities.Mood
-import com.joohnq.moodapp.model.entities.StatsRecord
-import com.joohnq.moodapp.model.entities.SleepQuality
-import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.entities.SleepQuality
+import com.joohnq.moodapp.entities.StressLevel
 import com.varabyte.truthish.assertThat
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend

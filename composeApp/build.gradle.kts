@@ -78,6 +78,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.navigation)
+            implementation(libs.lifecycle.viewmodel)
 
             // Koin need these dependencies
             implementation(libs.stately.common)

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
-import com.joohnq.moodapp.model.entities.FreudScore
-import com.joohnq.moodapp.model.entities.StatsRecord
+import com.joohnq.moodapp.entities.FreudScore
+import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

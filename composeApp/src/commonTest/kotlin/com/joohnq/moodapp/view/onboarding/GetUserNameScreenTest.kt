@@ -13,6 +13,7 @@ import androidx.compose.ui.test.runComposeUiTest
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
+import com.joohnq.moodapp.view.screens.onboarding.GetUserNameScreen
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest

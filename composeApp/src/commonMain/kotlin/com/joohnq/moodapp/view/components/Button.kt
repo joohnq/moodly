@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -19,13 +18,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.entities.IconProps
-import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.entities.Icon
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -33,7 +32,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ButtonTextWithIcon(
     modifier: Modifier = Modifier,
     text: String,
-    icon: IconProps,
+    icon: Icon,
     colors: ButtonColors,
     shape: Shape,
     onClick: () -> Unit
@@ -66,7 +65,7 @@ fun ButtonTextWithIcon(
 @Composable
 fun ButtonWithIcon(
     modifier: Modifier,
-    icon: IconProps,
+    icon: Icon,
     colors: ButtonColors,
     borderStroke: BorderStroke? = null,
     onClick: () -> Unit
@@ -102,7 +101,7 @@ fun ButtonWithArrowRight(
             contentColor = Colors.White
         ),
         shape = CircleShape,
-        icon = IconProps(
+        icon = Icon(
             icon = Drawables.Icons.Arrow,
             tint = Colors.White,
             modifier = Modifier.size(24.dp),
@@ -113,48 +112,31 @@ fun ButtonWithArrowRight(
 }
 
 @Composable
-fun ButtonWithArrowOpen(onClick: () -> Unit) {
+fun ButtonWithArrowOpen(
+    color: Color,
+    backgroundColor: Color = Colors.Transparent,
+    onClick: () -> Unit
+) {
     ButtonWithIcon(
         modifier = Modifier.size(48.dp),
         colors = ButtonColors(
-            containerColor = Colors.Transparent,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Transparent,
-            disabledContentColor = Colors.Brown80
+            containerColor = backgroundColor,
+            contentColor = color,
+            disabledContainerColor = backgroundColor,
+            disabledContentColor = color
         ),
-        icon = IconProps(
+        icon = Icon(
             icon = Drawables.Icons.ArrowOpen,
-            tint = Colors.Brown80,
+            tint = color,
             modifier = Modifier.size(24.dp),
             contentDescription = "Go Back"
         ),
         borderStroke = BorderStroke(
             1.5.dp,
-            color = Colors.Brown80
+            color = color
         ),
         onClick = onClick
     )
-}
-
-@Composable
-fun ButtonWithText(
-    modifier: Modifier = Modifier,
-    text: String,
-    colors: ButtonColors,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth().height(56.dp),
-        shape = CircleShape,
-        colors = colors
-    ) {
-        Text(
-            text,
-            style = TextStyles.WelcomeScreenButton(),
-            textAlign = TextAlign.Center
-        )
-    }
 }
 
 @Composable
@@ -167,7 +149,7 @@ fun ButtonWithArrowRight(
         modifier = modifier,
         colors = colors,
         borderStroke = null,
-        icon = IconProps(
+        icon = Icon(
             icon = Drawables.Icons.Arrow,
             tint = colors.contentColor,
             modifier = Modifier.size(24.dp),

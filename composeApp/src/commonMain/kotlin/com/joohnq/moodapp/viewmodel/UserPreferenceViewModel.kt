@@ -3,7 +3,7 @@ package com.joohnq.moodapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.entities.UserPreferences
 import com.joohnq.moodapp.view.state.UiState
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher

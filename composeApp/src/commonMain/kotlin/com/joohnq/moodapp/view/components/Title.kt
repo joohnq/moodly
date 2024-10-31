@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeTitle(text: String) {
+fun Title(text: String) {
     Column {
         Spacer(modifier = Modifier.height(32.dp))
         Text(

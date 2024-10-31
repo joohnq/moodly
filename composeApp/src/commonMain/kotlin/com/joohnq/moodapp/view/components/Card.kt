@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.constants.Colors
@@ -33,12 +33,13 @@ fun MindfulTrackerCardRow(
     backgroundColor: Color,
     title: StringResource,
     subtitle: StringResource,
-    content: @Composable (modifier: Modifier) -> Unit
+    content: @Composable (modifier: Modifier) -> Unit,
+    onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            .background(color = Colors.White, shape = shape).padding(16.dp),
+            .background(color = Colors.White, shape = shape).clickable { onClick() }.padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -59,7 +60,7 @@ fun MindfulTrackerCardRow(
                     tint = color
                 )
             }
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(20.dp))
             Column(modifier = Modifier) {
                 Text(text = stringResource(title), style = TextStyles.MindfulTrackerCardTitle())
                 Spacer(modifier = Modifier.height(5.dp))
@@ -82,12 +83,13 @@ fun MindfulTrackerCardColumn(
     backgroundColor: Color,
     title: StringResource,
     subtitle: StringResource,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
+    onClick: () -> Unit
 ) {
     val shape = RoundedCornerShape(24.dp)
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            .background(color = Colors.White, shape = shape).padding(16.dp),
+            .background(color = Colors.White, shape = shape).clickable { onClick() }.padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -105,7 +107,7 @@ fun MindfulTrackerCardColumn(
                 tint = color
             )
         }
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(20.dp))
         Column {
             Text(text = stringResource(title), style = TextStyles.MindfulTrackerCardTitle())
             Spacer(modifier = Modifier.height(8.dp))
@@ -114,6 +116,47 @@ fun MindfulTrackerCardColumn(
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = stringResource(subtitle), style = TextStyles.MindfulTrackerCardSubtitle())
+        }
+    }
+}
+
+@Composable
+fun MindfulTrackerCardColumn(
+    icon: DrawableResource,
+    color: Color,
+    backgroundColor: Color,
+    title: StringResource,
+    content: @Composable () -> Unit,
+    onClick: () -> Unit
+) {
+    val shape = RoundedCornerShape(24.dp)
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+            .background(color = Colors.White, shape = shape).clickable { onClick() }.padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Box(
+            modifier = Modifier.background(
+                color = backgroundColor,
+                shape = shape
+            ).size(64.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(icon),
+                contentDescription = stringResource(title),
+                modifier = Modifier.size(24.dp),
+                tint = color
+            )
+        }
+        Spacer(modifier = Modifier.width(20.dp))
+        Column {
+            Text(text = stringResource(title), style = TextStyles.MindfulTrackerCardTitle())
+            Spacer(modifier = Modifier.height(8.dp))
+            Box(modifier = Modifier.fillMaxWidth()) {
+                content()
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.ui.test.swipeLeft
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
+import com.joohnq.moodapp.view.screens.welcome.WelcomeScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

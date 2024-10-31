@@ -22,16 +22,18 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.HomeTitle
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItem
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.UiState.Companion.foldComposable
+import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
@@ -41,7 +43,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FreudScoreScreenUi(
     freudScore: FreudScore,
-    statsRecords: UiState<List<StatsRecord>>
+    statsRecords: UiState<List<StatsRecord>>,
+    onGoBack: () -> Unit = {},
 ) {
     val freudScorePalette = FreudScore.getPalette(freudScore)
     Column {
@@ -60,31 +63,27 @@ fun FreudScoreScreenUi(
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TopBarLight(Res.string.freud_score, onBack = {})
+                TopBarLight(Res.string.freud_score, onGoBack = onGoBack)
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
                 Text(text = stringResource(freudScore.title), style = TextStyles.FreudScreenTitle())
                 Spacer(modifier = Modifier.height(60.dp))
             }
         }
-        HomeTitle("Mental Score History")
-        statsRecords.foldComposable(
-            onLoading = {
-
-            },
-            onSuccess = { statsRecords ->
-                LazyColumn {
-                    items(statsRecords) { statsRecord ->
-                        MentalScoreHistoryItem(statsRecord) {}
-                    }
+        Title("Mental Score History")
+        statsRecords.onSuccessComposable { statsRecords ->
+            LazyColumn {
+                items(statsRecords) { statsRecord ->
+                    MentalScoreHistoryItem(statsRecord) {}
                 }
             }
-        )
+        }
     }
 }
 
 @Composable
 fun FreudScoreScreen(
+    navController: NavController = rememberNavController(),
     padding: PaddingValues = PaddingValues(0.dp),
     moodsViewModel: MoodsViewModel = sharedViewModel(),
 ) {
@@ -92,7 +91,8 @@ fun FreudScoreScreen(
     val statsRecords by moodsViewModel.statsRecords.collectAsState()
     FreudScoreScreenUi(
         freudScore = freudScore,
-        statsRecords
+        statsRecords,
+        onGoBack = navController::popBackStack
     )
 }
 

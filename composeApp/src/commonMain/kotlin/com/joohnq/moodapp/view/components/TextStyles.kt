@@ -232,4 +232,42 @@ object TextStyles {
         fontSize = 12.sp,
         color = Colors.Brown80
     )
+
+    @Composable
+    fun MindfulTrackerCardMood() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 10.sp,
+    )
+
+    @Composable
+    fun TopBar() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 20.sp,
+    )
+
+    @Composable
+    fun FreudScreenScore() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 128.sp,
+        color = Colors.White
+    )
+
+    @Composable
+    fun FreudScreenTitle() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 20.sp,
+        color = Colors.White
+    )
+
+    @Composable
+    fun ExtraBoldXL() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 20.sp
+    )
+
+    @Composable
+    fun SmLabel() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 12.sp
+    )
 }

@@ -8,38 +8,63 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.view.constants.Colors
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MoodFace(modifier: Modifier = Modifier, mood: Mood) {
+    val moodPalette = Mood.getPalette(mood)
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = mood.backgroundColor, shape = CircleShape)
+            .background(color = moodPalette.faceBackgroundColor, shape = CircleShape)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
             modifier = modifier,
-            tint = mood.color
+            tint = moodPalette.faceColor
+        )
+    }
+}
+
+@Composable
+fun MoodFace(
+    modifier: Modifier = Modifier,
+    mood: Mood,
+    tint: Color,
+    backgroundColor: Color = Colors.Transparent
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .background(color = backgroundColor, shape = CircleShape)
+    ) {
+        Icon(
+            painter = painterResource(mood.image),
+            contentDescription = null,
+            modifier = modifier,
+            tint = tint
         )
     }
 }
 
 @Composable
 fun MoodFaceRoulette(mood: Mood) {
+    val moodPalette = Mood.getPalette(mood)
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.size(150.dp)
-            .background(color = mood.backgroundColor)
+            .background(color = moodPalette.faceBackgroundColor)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
             modifier = Modifier.size(120.dp),
-            tint = mood.color
+            tint = moodPalette.faceColor
         )
     }
 }

@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.model.entities.ProfessionalHelp
+import com.joohnq.moodapp.entities.ProfessionalHelp
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
 import com.joohnq.moodapp.view.constants.Drawables

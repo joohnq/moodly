@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles

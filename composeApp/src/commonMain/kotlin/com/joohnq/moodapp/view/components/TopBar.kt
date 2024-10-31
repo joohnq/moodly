@@ -17,36 +17,34 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.assessments
-import moodapp.composeapp.generated.resources.page_of
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingTopBar(page: Int, onBack: () -> Unit) {
+fun TopBarDark(
+    text: StringResource,
+    onBack: () -> Unit,
+    content: (@Composable () -> Unit)? = null
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(onClick = onBack)
+            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onBack)
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                stringResource(Res.string.assessments),
+                stringResource(text),
                 style = TextStyles.OnboardingScreenSession()
             )
         }
-        TextWithBackground(
-            stringResource(Res.string.page_of, page, 7),
-            borderColor = Colors.Transparent,
-            backgroundColor = Colors.Brown20,
-            textColor = Colors.Brown60
-        )
+        content?.let { it() }
     }
 }
 
@@ -78,5 +76,28 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
         Text(
             text = "Hi, $userName", style = TextStyles.HomeTopBarName()
         )
+    }
+}
+
+@Composable
+fun TopBarLight(
+    text: StringResource,
+    onGoBack: () -> Unit,
+    content: (@Composable () -> Unit)? = null
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = stringResource(text),
+                style = TextStyles.TopBar().copy(color = Color.White)
+            )
+        }
+        content?.let { it() }
     }
 }

@@ -1,8 +1,7 @@
-package com.joohnq.moodapp.model.entities
+package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.entities.IconProps
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -15,14 +14,14 @@ import org.jetbrains.compose.resources.StringResource
 sealed class PhysicalSymptoms(
     val id: String,
     @Contextual val text: StringResource,
-    @Contextual val icon: IconProps
+    @Contextual val icon: Icon
 ) {
 
     @Serializable
     data object YesVeryPainful : PhysicalSymptoms(
         id = YES_VERY_PAINFUL,
         text = Res.string.yes_very_painful,
-        icon = IconProps(
+        icon = Icon(
             icon = Drawables.Icons.Check,
         )
     )
@@ -31,14 +30,14 @@ sealed class PhysicalSymptoms(
     data object No : PhysicalSymptoms(
         id = NO_PHYSICAL_PAIN,
         text = Res.string.no_physical_pain,
-        icon = IconProps(icon = Drawables.Icons.Close)
+        icon = Icon(icon = Drawables.Icons.Close)
     )
 
     @Serializable
     data object YesJustABit : PhysicalSymptoms(
         id = YES_JUST_A_BIT,
         text = Res.string.yes_but_just_a_bit,
-        icon = IconProps(icon = Drawables.Icons.Question)
+        icon = Icon(icon = Drawables.Icons.Question)
     )
 
     companion object {

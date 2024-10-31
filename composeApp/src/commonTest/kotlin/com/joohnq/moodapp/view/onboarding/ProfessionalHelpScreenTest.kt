@@ -10,6 +10,7 @@ import androidx.compose.ui.test.runComposeUiTest
 import com.goncalossilva.resources.Resource
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
+import com.joohnq.moodapp.view.screens.onboarding.ProfessionalHelpScreen
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest

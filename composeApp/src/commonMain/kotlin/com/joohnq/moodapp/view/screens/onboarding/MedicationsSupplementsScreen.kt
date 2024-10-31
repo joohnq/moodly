@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,7 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.model.entities.MedicationsSupplements
+import com.joohnq.moodapp.entities.MedicationsSupplements
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
 import com.joohnq.moodapp.view.routes.onNavigateToStressRate
 import com.joohnq.moodapp.viewmodel.UserViewModel
@@ -29,13 +30,12 @@ import kotlinx.coroutines.withContext
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.koin.compose.koinInject
-import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun MedicationsSupplementsScreen(
     navigation: NavController = rememberNavController(),
-    userViewModel: UserViewModel = koinViewModel()
+    userViewModel: UserViewModel = sharedViewModel()
 ) {
     var isContinueButtonVisible by remember { mutableStateOf(false) }
     var selectedOption by rememberSaveable(stateSaver = MedicationsSupplements.getSaver()) {

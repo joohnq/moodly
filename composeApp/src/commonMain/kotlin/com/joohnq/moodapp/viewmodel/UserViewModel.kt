@@ -3,9 +3,9 @@ package com.joohnq.moodapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.model.dao.UserDAO
-import com.joohnq.moodapp.model.entities.MedicationsSupplements
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
-import com.joohnq.moodapp.model.entities.User
+import com.joohnq.moodapp.entities.MedicationsSupplements
+import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

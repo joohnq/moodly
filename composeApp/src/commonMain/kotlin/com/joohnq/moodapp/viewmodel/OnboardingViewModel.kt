@@ -2,10 +2,10 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
-import com.joohnq.moodapp.model.entities.Mood
-import com.joohnq.moodapp.model.entities.SleepQuality
-import com.joohnq.moodapp.model.entities.StatsRecord
-import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.entities.SleepQuality
+import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 

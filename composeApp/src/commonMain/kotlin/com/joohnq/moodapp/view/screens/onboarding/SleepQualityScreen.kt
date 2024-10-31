@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.model.entities.Mood
-import com.joohnq.moodapp.model.entities.SleepQuality
+import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace

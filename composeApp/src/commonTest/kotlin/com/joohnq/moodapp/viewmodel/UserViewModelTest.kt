@@ -1,8 +1,8 @@
 package com.joohnq.moodapp.viewmodel
 
 import com.joohnq.moodapp.model.dao.UserDAO
-import com.joohnq.moodapp.model.entities.MedicationsSupplements
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.MedicationsSupplements
+import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.varabyte.truthish.assertThat
 import dev.mokkery.answering.returns
 import dev.mokkery.answering.throws

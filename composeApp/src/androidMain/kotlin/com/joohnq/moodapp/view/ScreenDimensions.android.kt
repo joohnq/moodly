@@ -6,4 +6,5 @@ import android.content.Context
 
 actual class ScreenDimensions(context: Context) : ScreenDimensionsInterface {
     actual override val statusBarHeight: Int = 20
+    actual override val moodRatePadding: Int = -20
 }

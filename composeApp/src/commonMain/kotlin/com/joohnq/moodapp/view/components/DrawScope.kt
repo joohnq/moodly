@@ -10,11 +10,10 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
 import com.joohnq.moodapp.helper.toDegrees
 import com.joohnq.moodapp.helper.toRadians
-import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.view.constants.Colors
 import kotlin.math.cos
 import kotlin.math.sin
-
 
 fun DrawScope.drawRoulette(
     sliceAngle: Float,
@@ -24,9 +23,10 @@ fun DrawScope.drawRoulette(
 ) {
     for (i in moods.indices) {
         val startAngle = rotation + sliceAngle * i
+        val moodColor = Mood.getPalette(moods[i])
         drawSlice(
-            color = moods[i].color,
-            backgroundColor = moods[i].backgroundColor,
+            color = moodColor.faceColor,
+            backgroundColor = moodColor.faceBackgroundColor,
             startAngle = startAngle.toDegrees().toFloat(),
             sweepAngle = sliceAngle.toDegrees().toFloat(),
             useCenter = true,
@@ -72,7 +72,7 @@ fun DrawScope.drawSlice(
     }
 }
 
-fun DrawScope.drawCenterCircle(vectorPainter: VectorPainter, iconSize: Size = Size(55.5f, 84f)) {
+fun DrawScope.drawCenterCircle(vectorPainter: VectorPainter, extraPadding: Int, iconSize: Size = Size(55.5f, 84f)) {
     val center = Offset(size.width / 2, size.height / 2)
     val radius = 250f
 
@@ -85,7 +85,7 @@ fun DrawScope.drawCenterCircle(vectorPainter: VectorPainter, iconSize: Size = Si
     drawIntoCanvas {
         translate(
             left = center.x - (iconSize.width / 2),
-            top = (size.height / 4) - 20f
+            top = (size.height / 4) - extraPadding
         ) {
             with(vectorPainter) {
                 draw(iconSize)

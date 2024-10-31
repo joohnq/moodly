@@ -27,11 +27,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.entities.IconAndTextRadioButtonColors
-import com.joohnq.moodapp.view.entities.IconProps
-import com.joohnq.moodapp.model.entities.MedicationsSupplements
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
-import com.joohnq.moodapp.model.entities.ProfessionalHelp
+import com.joohnq.moodapp.entities.IconAndTextRadioButtonColors
+import com.joohnq.moodapp.entities.Icon
+import com.joohnq.moodapp.entities.MedicationsSupplements
+import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.ProfessionalHelp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -70,7 +70,7 @@ fun IconAndTextRadioButtonHorizontal(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     text: String,
-    icon: IconProps,
+    icon: Icon,
     selected: Boolean,
     iconAndTextRadioButtonColors: IconAndTextRadioButtonColors,
     shape: Shape,
@@ -130,7 +130,7 @@ fun IconAndTextRadioButtonVertical(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     text: String,
-    icon: IconProps,
+    icon: Icon,
     selected: Boolean,
     iconAndTextRadioButtonColors: IconAndTextRadioButtonColors,
     shape: Shape,

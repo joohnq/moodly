@@ -11,6 +11,7 @@ import androidx.compose.ui.test.swipeRight
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
+import com.joohnq.moodapp.view.screens.onboarding.MoodRateScreen
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

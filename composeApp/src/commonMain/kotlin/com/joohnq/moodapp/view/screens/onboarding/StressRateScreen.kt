@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles

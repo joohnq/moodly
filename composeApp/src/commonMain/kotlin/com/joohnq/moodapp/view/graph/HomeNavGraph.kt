@@ -13,15 +13,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.view.components.AppBottomNavigation
+import com.joohnq.moodapp.view.components.BottomNavigation
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
 import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
 import com.joohnq.moodapp.view.screens.home.HomeScreen
-import com.joohnq.moodapp.view.screens.mood.MoodScreen
 import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
+import com.joohnq.moodapp.view.screens.mood.MoodScreen
 
 fun NavGraphBuilder.homeNavGraph() {
     composable<Screens.HomeGraph> {
@@ -60,7 +60,7 @@ fun HomeNavGraph() {
                 JournalingScreen(padding = padding)
             }
             composable<Screens.HomeGraph.FreudScoreScreen> {
-                FreudScoreScreen(padding = padding)
+                FreudScoreScreen(padding = padding, navController = navController)
             }
             composable<Screens.HomeGraph.MoodScreen> {
                 MoodScreen(padding = padding)
@@ -69,6 +69,6 @@ fun HomeNavGraph() {
                 HealthJournalScreen(padding = padding)
             }
         }
-        AppBottomNavigation(navController = navController)
+        BottomNavigation(navController = navController)
     }
 }

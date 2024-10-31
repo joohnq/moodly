@@ -29,12 +29,13 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.joohnq.moodapp.entities.BottomScreens
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun AppBottomNavigation(navController: NavController = rememberNavController()) {
+fun BottomNavigation(navController: NavController = rememberNavController()) {
     val bottomScreens = remember {
         listOf(
             BottomScreens.Home,

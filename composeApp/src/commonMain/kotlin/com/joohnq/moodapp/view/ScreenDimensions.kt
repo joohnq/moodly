@@ -4,8 +4,10 @@ package com.joohnq.moodapp.view
 
 interface ScreenDimensionsInterface{
     val statusBarHeight: Int
+    val moodRatePadding: Int
 }
 
 expect class ScreenDimensions: ScreenDimensionsInterface {
     override val statusBarHeight: Int
+    override val moodRatePadding: Int
 }

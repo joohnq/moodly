@@ -1,8 +1,7 @@
-package com.joohnq.moodapp.model.entities
+package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.entities.IconProps
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -16,13 +15,13 @@ import org.jetbrains.compose.resources.StringResource
 sealed class MedicationsSupplements(
     val id: String,
     @Contextual val text: StringResource,
-    @Contextual val icon: IconProps
+    @Contextual val icon: Icon
 ) {
     @Serializable
     data object PrescribedMedications : MedicationsSupplements(
         id = PRESCRIBED_MEDICATIONS,
         text = Res.string.prescribed_medications,
-        icon = IconProps(
+        icon = Icon(
             icon = Drawables.Icons.Medicine,
         )
     )
@@ -31,14 +30,14 @@ sealed class MedicationsSupplements(
     data object OverTheCounterSupplements : MedicationsSupplements(
         id = OVER_THE_COUNTER_SUPPLEMENTS,
         text = Res.string.over_the_counter_supplements,
-        icon = IconProps(icon = Drawables.Icons.DrugStore)
+        icon = Icon(icon = Drawables.Icons.DrugStore)
     )
 
     @Serializable
     data object ImNotTakingAny : MedicationsSupplements(
         id = IM_NOT_TAKING_ANY,
         text = Res.string.im_not_taking_any,
-        icon = IconProps(icon = Drawables.Icons.Nothing)
+        icon = Icon(icon = Drawables.Icons.Nothing)
     )
 
     @Serializable
@@ -46,7 +45,7 @@ sealed class MedicationsSupplements(
         MedicationsSupplements(
             id = PREFER_NOT_TO_SAY,
             text = Res.string.prefer_not_to_say,
-            icon = IconProps(icon = Drawables.Icons.Close)
+            icon = Icon(icon = Drawables.Icons.Close)
         )
 
     companion object {

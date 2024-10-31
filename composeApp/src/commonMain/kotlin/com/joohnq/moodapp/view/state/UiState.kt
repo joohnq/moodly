@@ -24,6 +24,21 @@ sealed class UiState<out T> {
         }
 
         @Composable
+        fun <T> UiState<T>.foldComposable(
+            onLoading: @Composable () -> Unit = {},
+            onIdle: @Composable () -> Unit = {},
+            onSuccess: @Composable (T) -> Unit = {},
+            onError: @Composable (String) -> Unit = {}
+        ) {
+            when (this) {
+                is Loading -> onLoading()
+                is Success -> onSuccess(this.data)
+                is Error -> onError(this.message)
+                is Idle -> onIdle()
+            }
+        }
+
+        @Composable
         fun <T> UiState<T>.onSuccessComposable(
             onSuccess: @Composable (T) -> Unit = {},
         ) {

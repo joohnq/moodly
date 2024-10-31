@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.components
+package com.joohnq.moodapp.entities
 
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.constants.Drawables

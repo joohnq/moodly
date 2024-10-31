@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.loading
+package com.joohnq.moodapp.view.screens.loading
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
@@ -30,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun LoadingScreen(
     navigation: NavController = rememberNavController()
 ) {
-    val userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
+    val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
     val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
 
     SideEffect {

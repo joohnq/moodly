@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.view.routes
 
 import androidx.navigation.NavController
-import com.joohnq.moodapp.view.Screens
+import com.joohnq.moodapp.view.screens.Screens
 
 fun NavController.onNavigateToHomeGraph() {
     navigate(Screens.HomeGraph) {
@@ -70,4 +70,16 @@ fun NavController.onNavigateToStressRate() {
 
 fun NavController.onNavigateToExpressionAnalysis() {
     navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
+}
+
+fun NavController.onNavigateToFreudScore() {
+    navigate(Screens.HomeGraph.FreudScoreScreen)
+}
+
+fun NavController.onNavigateToMood() {
+    navigate(Screens.HomeGraph.MoodScreen)
+}
+
+fun NavController.onNavigateToHealthJournal() {
+    navigate(Screens.HomeGraph.HealthJournalScreen)
 }

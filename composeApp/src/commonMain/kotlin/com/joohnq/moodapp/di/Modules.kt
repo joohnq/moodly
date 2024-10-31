@@ -7,6 +7,7 @@ import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 import com.joohnq.moodapp.model.getMyDatabase
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,9 +21,10 @@ expect val platformModule: Module
 
 val sharedModule = module {
     singleOf(Dispatchers::IO)
-    viewModelOf(::UserPreferenceViewModel)
-    viewModelOf(::MoodsViewModel)
-    viewModelOf(::UserViewModel)
+    singleOf(::UserPreferenceViewModel)
+    singleOf(::OnboardingViewModel)
+    singleOf(::MoodsViewModel)
+    singleOf(::UserViewModel)
     singleOf(::BundledSQLiteDriver)
     single<MyDatabase> {
         getMyDatabase(get(), get(), get())

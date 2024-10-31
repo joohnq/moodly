@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view
+package com.joohnq.moodapp.view.screens
 
 import kotlinx.serialization.Serializable
 
@@ -49,5 +49,14 @@ object Screens {
 
         @Serializable
         object JournalingScreen
+
+        @Serializable
+        object FreudScoreScreen
+
+        @Serializable
+        object MoodScreen
+
+        @Serializable
+        object HealthJournalScreen
     }
 }

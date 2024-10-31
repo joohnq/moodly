@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.model.entities.Mood
 import com.joohnq.moodapp.model.entities.SleepQuality
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SliderColors
@@ -34,6 +35,7 @@ import com.joohnq.moodapp.view.components.VerticalSlider
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToMedicationsSupplements
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 import org.koin.compose.viewmodel.koinViewModel
@@ -42,7 +44,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun SleepQualityScreen(
     navigation: NavController = rememberNavController(),
-    moodsViewModel: MoodsViewModel = koinViewModel()
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val moods = remember { Mood.getAll().reversed() }
     var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
@@ -64,7 +66,7 @@ fun SleepQualityScreen(
         isContinueButtonVisible = true,
         onBack = navigation::popBackStack,
         onContinue = {
-            moodsViewModel.setCurrentMoodSleepQuality(selectedSleepQuality)
+            onboardingViewModel.setStatsRecordSleepQuality(selectedSleepQuality)
             navigation.onNavigateToMedicationsSupplements()
         },
     ) {

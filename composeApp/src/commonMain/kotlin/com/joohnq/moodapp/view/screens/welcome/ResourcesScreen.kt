@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.welcome
+package com.joohnq.moodapp.view.screens.welcome
 
 import androidx.compose.runtime.Composable
 import com.joohnq.moodapp.constants.TestConstants

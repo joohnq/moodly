@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.welcome
+package com.joohnq.moodapp.view.screens.welcome
 
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -27,12 +28,10 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-
-
 @Composable
 fun WelcomeScreen(
     navigation: NavController = rememberNavController(),
-    userPreferenceViewModel: UserPreferenceViewModel = koinViewModel()
+    userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
 ) {
     val pagerState = rememberPagerState(0) { 5 }
     val snackBarState = remember { SnackbarHostState() }

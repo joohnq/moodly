@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.loading
+package com.joohnq.moodapp.view.screens.loading
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,16 +34,16 @@ fun CompilingDataScreen(
     moodsViewModel: MoodsViewModel = koinNavViewModel(),
     userViewModel: UserViewModel = koinNavViewModel()
 ) {
-    val monthlyMoods by moodsViewModel.monthlyMoods.collectAsState()
+    val statsRecords by moodsViewModel.statsRecords.collectAsState()
     val user by userViewModel.user.collectAsState()
 
     SideEffect {
-        moodsViewModel.getMonthlyMoods()
+        moodsViewModel.getMoods()
         userViewModel.getUser()
     }
 
-    LaunchedEffect(monthlyMoods, user) {
-        when (monthlyMoods is UiState.Success && user is UiState.Success) {
+    LaunchedEffect(statsRecords, user) {
+        when (statsRecords is UiState.Success && user is UiState.Success) {
             true -> navigation.onNavigateToHomeGraph()
             else -> Unit
         }

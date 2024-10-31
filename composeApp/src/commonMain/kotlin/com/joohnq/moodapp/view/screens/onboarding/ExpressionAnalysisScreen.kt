@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,12 +12,12 @@ import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,14 +27,12 @@ import moodapp.composeapp.generated.resources.expression_analysis_desc
 import moodapp.composeapp.generated.resources.expression_analysis_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ExpressionAnalysisScreen(
     navigation: NavController = rememberNavController(),
-    moodsViewModel: MoodsViewModel = koinViewModel(),
-    userViewModel: UserViewModel = koinViewModel(),
-    userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
+    userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
 ) {
     var desc by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
@@ -46,10 +44,10 @@ fun ExpressionAnalysisScreen(
         onBack = navigation::popBackStack,
         isContinueButtonVisible = desc.isNotEmpty(),
         onContinue = { onSomethingWentWrong ->
-            moodsViewModel.setCurrentMoodDescription(desc)
+            onboardingViewModel.setStatsRecordDescription(desc)
             scope.launch(ioDispatcher) {
                 val res = runCatching {
-                    moodsViewModel.insertCurrentMood() &&
+                    onboardingViewModel.insertOnboardingStatsRecord() &&
                             userPreferencesViewModel.setSkipOnboardingScreen()
                 }
 
@@ -61,7 +59,7 @@ fun ExpressionAnalysisScreen(
                 withContext(Dispatchers.Main) {
                     navigation.onNavigateToGetUserNameScreen()
                 }
-                moodsViewModel.resetCurrentMood()
+                onboardingViewModel.resetStatsRecord()
             }
         },
     ) {

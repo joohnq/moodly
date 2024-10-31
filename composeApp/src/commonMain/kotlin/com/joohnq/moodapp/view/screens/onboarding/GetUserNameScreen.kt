@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
@@ -57,14 +58,12 @@ import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun GetUserNameScreen(
     navigation: NavController = rememberNavController(),
-    userViewModel: UserViewModel = koinViewModel(),
-    userPreferencesViewModel: UserPreferenceViewModel = koinViewModel()
+    userViewModel: UserViewModel = sharedViewModel(),
+    userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
 ) {
     var name by remember { mutableStateOf("") }
     var nameError by remember { mutableStateOf("") }

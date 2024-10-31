@@ -1,6 +1,6 @@
 @file:OptIn(FormatStringsInDatetimeFormats::class)
 
-package com.joohnq.moodapp
+package com.joohnq.moodapp.helper
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
@@ -16,6 +16,11 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 
 object DatetimeHelper {
+    fun getLocalDate(): LocalDate {
+        val currentMoment = Clock.System.now()
+        return currentMoment.toLocalDateTime(TimeZone.currentSystemDefault()).date
+    }
+
     fun getDateTime(): String {
         val currentMoment = Clock.System.now()
         val dateTime = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
@@ -39,4 +44,9 @@ object DatetimeHelper {
         return firstDayOfNextMonth.dayOfMonth
     }
 
+    fun getDayOfMonth(date: LocalDate): String = date.dayOfMonth.toString()
+
+    fun getMonthNameAbbrev(date: LocalDate): String = date.format(LocalDate.Format {
+        monthName(MonthNames.ENGLISH_ABBREVIATED)
+    })
 }

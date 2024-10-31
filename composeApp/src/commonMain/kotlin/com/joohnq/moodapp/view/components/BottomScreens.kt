@@ -1,5 +1,6 @@
-package com.joohnq.moodapp.view
+package com.joohnq.moodapp.view.components
 
+import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.constants.Drawables
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable

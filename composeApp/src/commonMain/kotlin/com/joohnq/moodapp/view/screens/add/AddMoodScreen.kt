@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.journaling
+package com.joohnq.moodapp.view.screens.add
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Text
@@ -6,6 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun JournalingScreen(padding: PaddingValues = PaddingValues(0.dp)) {
-    Text("JournalingScreen")
+fun AddMoodScreen(padding: PaddingValues = PaddingValues(0.dp)) {
+    Text("AddMoodScreen")
 }

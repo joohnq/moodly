@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,10 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.model.entities.StressLevel
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
@@ -29,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun StressRateScreen(
     navigation: NavController = rememberNavController(),
-    moodsViewModel: MoodsViewModel = koinViewModel()
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
         mutableStateOf(
@@ -43,7 +45,7 @@ fun StressRateScreen(
         title = Res.string.stress_rate_title,
         onBack = navigation::popBackStack,
         onContinue = {
-            moodsViewModel.setCurrentMoodStressLevel(selectedOption)
+            onboardingViewModel.setStatsRecordStressLevel(selectedOption)
             navigation.onNavigateToExpressionAnalysis()
         },
     ) {

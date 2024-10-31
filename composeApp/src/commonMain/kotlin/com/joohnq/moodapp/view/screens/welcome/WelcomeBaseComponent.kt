@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.welcome
+package com.joohnq.moodapp.view.screens.welcome
 
 import androidx.annotation.ColorLong
 import androidx.compose.foundation.Image

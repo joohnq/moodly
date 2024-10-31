@@ -1,11 +1,8 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,37 +12,36 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
-import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.routes.onNavigateToSleepQuality
+import com.joohnq.moodapp.model.entities.ProfessionalHelp
+import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
+import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
-import moodapp.composeapp.generated.resources.select_one_answer
-import org.jetbrains.compose.resources.stringResource
+import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.compose.viewmodel.koinNavViewModel as getViewModel
 
 @Composable
-fun PhysicalSymptomsScreen(
+fun ProfessionalHelpScreen(
     navigation: NavController = rememberNavController(),
-    userViewModel: UserViewModel = koinViewModel()
+    userViewModel: UserViewModel = sharedViewModel()
 ) {
     var isContinueButtonVisible by remember { mutableStateOf(false) }
-    var selectedOption by rememberSaveable(stateSaver = PhysicalSymptoms.getSaver()) {
+    var selectedOption by rememberSaveable(stateSaver = ProfessionalHelp.getSaver()) {
         mutableStateOf(null)
     }
-    val options: List<PhysicalSymptoms> = remember { PhysicalSymptoms.getAll() }
+    val options = remember { ProfessionalHelp.getAll() }
     val scope = rememberCoroutineScope()
     val ioDispatcher: CoroutineDispatcher = koinInject()
 
@@ -54,44 +50,39 @@ fun PhysicalSymptomsScreen(
     }
 
     OnboardingBaseComponent(
-        page = 3,
-        title = Res.string.experiencing_physical_symptoms_title,
+        page = 2,
+        image = Drawables.Images.OnboardingSoughtProfessionalHelp,
+        title = Res.string.sought_professional_help_title,
         isContinueButtonVisible = isContinueButtonVisible,
         onBack = navigation::popBackStack,
-        onContinue = { onSomethingWentWrong ->
+        onContinue = {onSomethingWentWrong ->
             scope.launch(ioDispatcher) {
                 val res = runCatching {
-                    userViewModel.setUserPhysicalPain(selectedOption ?: PhysicalSymptoms.No)
+                    userViewModel.setUserSoughtHelp(selectedOption?.value ?: false)
                 }
 
-                if (res.isFailure) {
+                if(res.isFailure) {
                     onSomethingWentWrong()
                     return@launch
                 }
 
-                withContext(Dispatchers.Main) {
-                    navigation.onNavigateToSleepQuality()
+               withContext(Dispatchers.Main) {
+                    navigation.onNavigateToPhysicalSymptoms()
                 }
             }
         },
     ) {
-        Text(
-            text = stringResource(Res.string.select_one_answer),
-            style = TextStyles.OnboardingScreenMood(),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(40.dp))
-        Column(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            options.forEach { option: PhysicalSymptoms ->
-                PhysicalSymptomsRadioButton(
+            options.forEach { option ->
+                ProfessionalHelpRadioButton(
+                    modifier = Modifier.weight(1f),
                     option = option,
                     selected = selectedOption == option,
                 ) { selectedOption = option }
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
     }
 }

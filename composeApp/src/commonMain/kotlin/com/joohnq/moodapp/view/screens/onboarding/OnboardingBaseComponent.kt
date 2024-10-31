@@ -1,7 +1,8 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,7 @@ fun OnboardingBaseComponent(
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
-    onContinue: (() -> Unit) -> Unit,
+    onContinue: (() -> Unit) -> Unit = {},
     onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {

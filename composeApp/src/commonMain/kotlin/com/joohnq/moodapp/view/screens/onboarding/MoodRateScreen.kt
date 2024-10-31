@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.onboarding
+package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -22,25 +22,28 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.model.entities.Mood
+import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToProfessionalHelp
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
 fun MoodRateScreen(
     navigation: NavController = rememberNavController(),
-    moodsViewModel: MoodsViewModel = koinViewModel()
+    onboardingViewModel: OnboardingViewModel = sharedViewModel()
 ) {
+    val screenDimensions: ScreenDimensions = koinInject()
     var selectedMood by rememberSaveable(stateSaver = Mood.getSaver()) { mutableStateOf(Mood.Neutral) }
 
     OnboardingBaseComponent(
@@ -48,7 +51,6 @@ fun MoodRateScreen(
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
         onBack = navigation::popBackStack,
-        onContinue = { },
     ) {
         Text(
             stringResource(
@@ -75,11 +77,10 @@ fun MoodRateScreen(
                 containerColor = Colors.Brown80,
                 contentColor = Colors.White
             ),
-            onClick = {
-                moodsViewModel.setCurrentMood(selectedMood)
-                navigation.onNavigateToProfessionalHelp()
-            }
-        )
+        ) {
+            onboardingViewModel.setStatsRecordMood(selectedMood)
+            navigation.onNavigateToProfessionalHelp()
+        }
     }
 
     BoxWithConstraints(modifier = Modifier.testTag(TestConstants.ONBOARDING_ROULETTE)) {
@@ -91,7 +92,7 @@ fun MoodRateScreen(
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            MoodRoulette { selectedMood = it }
+            MoodRoulette(paddingBottom = screenDimensions.moodRatePadding) { selectedMood = it }
         }
     }
 }

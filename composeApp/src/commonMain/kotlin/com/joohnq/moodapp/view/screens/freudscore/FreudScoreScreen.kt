@@ -1,7 +1,6 @@
 package com.joohnq.moodapp.view.screens.freudscore
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,10 +18,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.model.entities.FreudScore
-import com.joohnq.moodapp.model.entities.StatsRecord
+import com.joohnq.moodapp.entities.FreudScore
+import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.HomeTitle
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItem
@@ -35,22 +36,25 @@ import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun FreudScoreScreenUi(
     freudScore: FreudScore,
     statsRecords: UiState<List<StatsRecord>>
 ) {
+    val freudScorePalette = FreudScore.getPalette(freudScore)
     Column {
         Box(
             modifier = Modifier.fillMaxWidth().wrapContentSize()
-                .background(color = freudScore.backgroundColor),
+                .background(color = freudScorePalette.backgroundColor),
         ) {
-            Image(
-                painter = painterResource(Drawables.Images.FreudScoreBackground),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.matchParentSize()
+            Box(
+                modifier = Modifier.matchParentSize().paint(
+                    painter = painterResource(Drawables.Images.FreudScoreBackground),
+                    contentScale = ContentScale.FillBounds,
+                    colorFilter = ColorFilter.tint(color = freudScorePalette.subColor)
+                )
             )
             Column(
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
@@ -59,7 +63,7 @@ fun FreudScoreScreenUi(
                 TopBarLight(Res.string.freud_score, onBack = {})
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
-                Text(text = freudScore.title, style = TextStyles.FreudScreenTitle())
+                Text(text = stringResource(freudScore.title), style = TextStyles.FreudScreenTitle())
                 Spacer(modifier = Modifier.height(60.dp))
             }
         }
@@ -97,6 +101,62 @@ fun FreudScoreScreen(
 fun FreudScoreScreenPreview() {
     FreudScoreScreenUi(
         freudScore = FreudScore.fromScore(80),
+        statsRecords = UiState.Success(
+            listOf(
+                StatsRecord.init()
+                    .copy(description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun FreudScoreScreenPreview2() {
+    FreudScoreScreenUi(
+        freudScore = FreudScore.fromScore(60),
+        statsRecords = UiState.Success(
+            listOf(
+                StatsRecord.init()
+                    .copy(description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun FreudScoreScreenPreview3() {
+    FreudScoreScreenUi(
+        freudScore = FreudScore.fromScore(40),
+        statsRecords = UiState.Success(
+            listOf(
+                StatsRecord.init()
+                    .copy(description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun FreudScoreScreenPreview4() {
+    FreudScoreScreenUi(
+        freudScore = FreudScore.fromScore(20),
+        statsRecords = UiState.Success(
+            listOf(
+                StatsRecord.init()
+                    .copy(description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun FreudScoreScreenPreview5() {
+    FreudScoreScreenUi(
+        freudScore = FreudScore.fromScore(0),
         statsRecords = UiState.Success(
             listOf(
                 StatsRecord.init()

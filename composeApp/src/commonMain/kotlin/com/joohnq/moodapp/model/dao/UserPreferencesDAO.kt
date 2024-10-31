@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
 import com.joohnq.moodapp.model.DatabaseConstants
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.entities.UserPreferences
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,7 +19,7 @@ interface UserPreferencesDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertUserPreferences(
-        userPreferences: UserPreferences = UserPreferences()
+        userPreferences: UserPreferences = UserPreferences.init()
     )
 
     @Query("UPDATE ${DatabaseConstants.USER_PREFERENCES_DATABASE} SET ${DatabaseConstants.SKIP_WELCOME_SCREEN} = :skipWelcomeScreen WHERE id = :id")

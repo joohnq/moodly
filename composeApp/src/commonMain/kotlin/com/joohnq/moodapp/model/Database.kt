@@ -12,9 +12,9 @@ import com.joohnq.moodapp.model.converters.UserConverter
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import com.joohnq.moodapp.model.entities.StatsRecord
-import com.joohnq.moodapp.model.entities.User
-import com.joohnq.moodapp.model.entities.UserPreferences
+import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.entities.User
+import com.joohnq.moodapp.entities.UserPreferences
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

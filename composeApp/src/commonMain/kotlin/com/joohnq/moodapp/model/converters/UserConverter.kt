@@ -1,8 +1,8 @@
 package com.joohnq.moodapp.model.converters
 
 import androidx.room.TypeConverter
-import com.joohnq.moodapp.model.entities.MedicationsSupplements
-import com.joohnq.moodapp.model.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.MedicationsSupplements
+import com.joohnq.moodapp.entities.PhysicalSymptoms
 
 class UserConverter {
     @TypeConverter

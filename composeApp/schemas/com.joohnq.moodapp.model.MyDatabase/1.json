@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e0ee5300bcc46bad94f9f98d2215be51",
+    "identityHash": "c9154d88c7c0280aa5493b3e5008cdb7",
     "entities": [
       {
         "tableName": "StatsRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `sleep_quality` TEXT NOT NULL, `stress_level` TEXT NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `sleep_quality` INTEGER NOT NULL, `stress_level` INTEGER NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -23,13 +23,13 @@
           {
             "fieldPath": "sleepQuality",
             "columnName": "sleep_quality",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "stressLevel",
             "columnName": "stress_level",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -96,12 +96,12 @@
       },
       {
         "tableName": "UserPreferences",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `skip_welcome_screen` INTEGER NOT NULL, `skip_onboarding_screen` INTEGER NOT NULL, `skip_get_user_name_screen` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `skip_welcome_screen` INTEGER NOT NULL, `skip_onboarding_screen` INTEGER NOT NULL, `skip_get_user_name_screen` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -133,7 +133,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e0ee5300bcc46bad94f9f98d2215be51')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c9154d88c7c0280aa5493b3e5008cdb7')"
     ]
   }
 }

@@ -1,7 +1,5 @@
 package com.joohnq.moodapp.model
 
-import com.joohnq.moodapp.model.entities.SleepQuality
-
 object DatabaseConstants {
     const val USER_DATABASE = "User"
     const val STATS_RECORD_DATABASE = "StatsRecord"

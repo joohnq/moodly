@@ -13,7 +13,7 @@ interface StatsRecordDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMood(statsRecord: StatsRecord)
 
-    @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE}")
+    @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE} ORDER BY date ASC")
     fun getMoods(): Flow<List<StatsRecord>>
 
     @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE} ORDER BY date DESC LIMIT 30")

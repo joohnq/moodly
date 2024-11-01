@@ -43,6 +43,8 @@ import moodapp.composeapp.generated.resources.welcome_first_screen_image
 import moodapp.composeapp.generated.resources.welcome_health_state_image
 import moodapp.composeapp.generated.resources.welcome_intelligent_image
 import moodapp.composeapp.generated.resources.welcome_resources_image
+import moodapp.composeapp.generated.resources.mood_background
+import moodapp.composeapp.generated.resources.ic_arrow_chevron
 
 object Drawables {
     object Icons {
@@ -69,6 +71,7 @@ object Drawables {
         val Add = Res.drawable.ic_add
         val Home = Res.drawable.ic_home
         val Chat = Res.drawable.ic_chat
+        val ArrowChevron = Res.drawable.ic_arrow_chevron
     }
 
     object Images {
@@ -79,6 +82,7 @@ object Drawables {
         val WelcomeCommunityImage = Res.drawable.welcome_community_image
 
         val FreudScoreBackground = Res.drawable.freud_score_background
+        val MoodBackground = Res.drawable.mood_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image

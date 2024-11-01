@@ -14,18 +14,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.view.constants.Colors
 
 @Composable
 fun HealthJournalComponent(modifier: Modifier = Modifier, mouthMood: List<StatsRecord?>) {
-    if (mouthMood.size > 31 || mouthMood.size < 28) return
+    val dayOfWeek = DatetimeHelper.weekDayByMonth(DatetimeHelper.getLocalDate())
     LazyVerticalGrid(
         modifier = modifier.wrapContentSize(),
         columns = GridCells.Fixed(7),
         horizontalArrangement = Arrangement.spacedBy(3.dp),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
-        itemsIndexed(mouthMood) {index: Int, statsRecord: StatsRecord? ->
+        items(dayOfWeek + 1) {
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .background(color = Colors.Purple30, shape = RoundedCornerShape(4.dp))
+                    .size(18.dp),
+            )
+        }
+        itemsIndexed(mouthMood) { i: Int, statsRecord: StatsRecord? ->
             val background = if (statsRecord == null) Colors.Purple20 else Colors.Purple10
             Box(
                 modifier = Modifier.fillMaxSize()

@@ -51,20 +51,3 @@ fun MoodFace(
         )
     }
 }
-
-@Composable
-fun MoodFaceRoulette(mood: Mood) {
-    val moodPalette = Mood.getPalette(mood)
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.size(150.dp)
-            .background(color = moodPalette.faceBackgroundColor)
-    ) {
-        Icon(
-            painter = painterResource(mood.image),
-            contentDescription = null,
-            modifier = Modifier.size(120.dp),
-            tint = moodPalette.faceColor
-        )
-    }
-}

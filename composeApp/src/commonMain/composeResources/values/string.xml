@@ -81,7 +81,7 @@
     <string name="level_three_normal">Level 3 (Normal)</string>
     <string name="level_four_irritated">Level 4 (Irritated)</string>
     <string name="level_five_angry">Level 5 (Angry)</string>
-    <string name="health_jornal">Health Jornal</string>
+    <string name="health_journal">Health Journal</string>
     <string name="mood">Mood</string>
     <string name="freud_score">Freud Score</string>
     <string name="mood_tracker">Mood Tracker</string>
@@ -90,4 +90,7 @@
     <string name="stable">Stable</string>
     <string name="at_risk">At-Risk</string>
     <string name="unhealthy">Unhealthy</string>
+    <string name="your_mood_is">Your mood is</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

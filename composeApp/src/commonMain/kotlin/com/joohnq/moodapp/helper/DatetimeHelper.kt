@@ -4,6 +4,7 @@ package com.joohnq.moodapp.helper
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
@@ -11,9 +12,9 @@ import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
-import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.until
 
 object DatetimeHelper {
     fun getLocalDate(): LocalDate {
@@ -36,17 +37,19 @@ object DatetimeHelper {
         })
     }
 
-    fun getCurrentMonthDaysCount(
-        date: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+    fun monthDaysCount(
+        date: LocalDate
     ): Int {
-        val firstDayOfNextMonth = date.plus(1, DateTimeUnit.MONTH)
-        val lastDayOfCurrentMonth = firstDayOfNextMonth.minus(1, DateTimeUnit.DAY)
-        return firstDayOfNextMonth.dayOfMonth
+        val start = LocalDate(date.year, date.month, 1)
+        val end = start.plus(1, DateTimeUnit.MONTH)
+        return start.until(end, DateTimeUnit.DAY)
     }
 
-    fun getDayOfMonth(date: LocalDate): String = date.dayOfMonth.toString()
+    fun dayOfMonth(date: LocalDate): String = date.dayOfMonth.toString()
 
-    fun getMonthNameAbbrev(date: LocalDate): String = date.format(LocalDate.Format {
+    fun monthNameAbbrev(date: LocalDate): String = date.format(LocalDate.Format {
         monthName(MonthNames.ENGLISH_ABBREVIATED)
     })
+
+    fun weekDayByMonth(date: LocalDate): Int = LocalDate(date.year, date.month, 1).dayOfWeek.ordinal
 }

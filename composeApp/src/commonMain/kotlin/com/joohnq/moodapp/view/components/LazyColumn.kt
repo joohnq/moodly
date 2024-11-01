@@ -125,7 +125,7 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
     ) {
 
     }
-    Spacer(modifier = Modifier.height(30.dp))
+    Spacer(modifier = Modifier.height(16.dp))
     MindfulTrackerCardColumn(
         icon = Drawables.Icons.HappyFace,
         color = Colors.Brown80,
@@ -137,14 +137,14 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                     val moodPalette = Mood.getPalette(mood)
                     Box(
                         modifier = Modifier.background(
-                            color = moodPalette.color,
+                            color = moodPalette.backgroundColor,
                             shape = CircleShape
                         ).padding(vertical = 8.dp, horizontal = 12.dp),
                     ) {
                         Text(
                             text = stringResource(mood.text),
                             style = TextStyles.MindfulTrackerCardMood().copy(
-                                color = moodPalette.backgroundColor
+                                color = moodPalette.color
                             )
                         )
                     }

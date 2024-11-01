@@ -17,7 +17,7 @@ import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.home.action.HomeAction
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
-import moodapp.composeapp.generated.resources.health_jornal
+import moodapp.composeapp.generated.resources.health_journal
 import moodapp.composeapp.generated.resources.mood
 import org.jetbrains.compose.resources.stringResource
 
@@ -47,8 +47,8 @@ fun MentalHealthMetrics(
                     backgroundColor = freudScorePalette.subColor,
                     progress = { freudScore.score.toFloat() / 100 },
                 ) {
-                    Text(text = freudScore.score.toString(), style = TextStyles.FreudScore())
-                    Text(text = stringResource(freudScore.title), style = TextStyles.FreudTitle())
+                    Text(text = freudScore.score.toString(), style = TextStyles.FreudScore(), color = freudScorePalette.color)
+                    Text(text = stringResource(freudScore.title), style = TextStyles.FreudTitle(), color = freudScorePalette.color)
                 }
             }
         }
@@ -68,8 +68,8 @@ fun MentalHealthMetrics(
         }
         item {
             MentalHealthMetricItem(
-                title = Res.string.health_jornal,
-                icon = Drawables.Icons.DocumentHealth,
+                title = Res.string.health_journal,
+                icon = Drawables.Icons.Document,
                 backgroundColor = Colors.Purple30,
                 onClick = { onAction(HomeAction.OnNavigateToHealthJournal) }
             ) {

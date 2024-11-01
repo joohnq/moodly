@@ -48,6 +48,6 @@ class MoodsViewModel(
     }
 
     private fun getHealthJournal(statsRecords: List<StatsRecord>) {
-        _healthJournal.value = MoodsManager.getHealthJournal(statsRecords)
+        _healthJournal.value = MoodsManager.getHealthJournal(statsRecords = statsRecords)
     }
 }

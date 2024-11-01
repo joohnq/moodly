@@ -70,15 +70,15 @@ fun MentalHealthMetricItem(
 }
 
 @Composable
-fun MentalScoreHistoryItem(statsRecord: StatsRecord, onClick: () -> Unit) {
-    val day = remember { DatetimeHelper.getDayOfMonth(statsRecord.date) }
-    val monthNameAbbrev = remember { DatetimeHelper.getMonthNameAbbrev(statsRecord.date) }
+fun MentalScoreHistoryItem(statsRecord: StatsRecord, onClick: (StatsRecord) -> Unit) {
+    val day = remember { DatetimeHelper.dayOfMonth(statsRecord.date) }
+    val monthNameAbbrev = remember { DatetimeHelper.monthNameAbbrev(statsRecord.date) }
     val moodPalette = remember { Mood.getPalette(statsRecord.mood) }
     Row(
         modifier = Modifier.fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .background(color = Colors.Brown10, shape = RoundedCornerShape(24.dp))
-            .clickable { onClick() }
+            .background(color = Colors.White, shape = RoundedCornerShape(24.dp))
+            .clickable { onClick(statsRecord) }
             .padding(16.dp).height(64.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -126,8 +126,8 @@ fun MentalScoreHistoryItem(statsRecord: StatsRecord, onClick: () -> Unit) {
         }
         CircularProgressWithText(
             modifier = Modifier.size(64.dp),
-            color = moodPalette.backgroundColor,
-            backgroundColor = moodPalette.color,
+            color = moodPalette.color,
+            backgroundColor = moodPalette.backgroundColor,
             progress = { statsRecord.mood.healthLevel / 100f },
         ) {
             Text(

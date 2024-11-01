@@ -70,7 +70,7 @@ fun OnboardingBaseComponent(
         ) {
             TopBarDark(
                 text = Res.string.assessments,
-                onBack = onBack
+                onGoBack = onBack
             ){
                 TextWithBackground(
                     stringResource(Res.string.page_of, page, 7),

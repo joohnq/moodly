@@ -7,7 +7,7 @@ import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
-import moodapp.composeapp.generated.resources.health_jornal
+import moodapp.composeapp.generated.resources.health_journal
 import moodapp.composeapp.generated.resources.mood
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -35,7 +35,7 @@ sealed class MentalMetric(
     data class HealthJournal(override val content: @Composable (Modifier) -> Unit = {}) :
         MentalMetric(
             id = HEALTH_JOURNAL,
-            title = Res.string.health_jornal,
+            title = Res.string.health_journal,
             icon = Drawables.Icons.Document,
             content = content
         )

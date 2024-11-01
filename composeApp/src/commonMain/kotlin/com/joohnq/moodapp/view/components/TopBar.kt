@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun TopBarDark(
     text: StringResource,
-    onBack: () -> Unit,
+    onGoBack: () -> Unit,
     content: (@Composable () -> Unit)? = null
 ) {
     Row(
@@ -37,7 +37,7 @@ fun TopBarDark(
         modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onBack)
+            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 stringResource(text),

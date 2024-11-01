@@ -136,6 +136,7 @@ sealed class StressLevel(
             FOUR -> Colors.Orange50
             else -> Colors.Orange50
         }
+
         fun getBushBackgroundColor(id: Int): Color = when (id) {
             ONE -> Colors.Green10
             TWO -> Colors.Yellow10

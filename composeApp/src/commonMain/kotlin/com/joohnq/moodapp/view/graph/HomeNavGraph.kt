@@ -13,8 +13,11 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.components.BottomNavigation
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
@@ -22,6 +25,7 @@ import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
 import com.joohnq.moodapp.view.screens.home.HomeScreen
 import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
+import kotlin.reflect.typeOf
 
 fun NavGraphBuilder.homeNavGraph() {
     composable<Screens.HomeGraph> {
@@ -35,12 +39,12 @@ fun HomeNavGraph() {
 
     Scaffold(
         containerColor = Colors.Brown10,
-    ) {
+    ) { scaffoldPadding ->
         val padding = PaddingValues(
-            top = it.calculateTopPadding(),
-            bottom = it.calculateBottomPadding() + 100.dp,
-            start = it.calculateStartPadding(LayoutDirection.Ltr),
-            end = it.calculateEndPadding(LayoutDirection.Rtl)
+            top = scaffoldPadding.calculateTopPadding(),
+            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
+            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
+            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
         )
         NavHost(
             navController = navController,
@@ -60,10 +64,22 @@ fun HomeNavGraph() {
                 JournalingScreen(padding = padding)
             }
             composable<Screens.HomeGraph.FreudScoreScreen> {
-                FreudScoreScreen(padding = padding, navController = navController)
+                FreudScoreScreen(
+                    padding = padding,
+                    onGoBack = navController::popBackStack,
+                    onClickOnItem = navController::onNavigateToMood
+                )
             }
-            composable<Screens.HomeGraph.MoodScreen> {
-                MoodScreen(padding = padding)
+            composable<Screens.HomeGraph.MoodScreen>(
+                typeMap = mapOf(typeOf<StatsRecord>() to StatsRecord.navType()),
+            ) { navBackStackEntry ->
+                val statsRecord =
+                    navBackStackEntry.toRoute<Screens.HomeGraph.MoodScreen>().statsRecord
+                MoodScreen(
+                    padding = padding,
+                    statsRecord = statsRecord,
+                    onGoBack = navController::popBackStack
+                )
             }
             composable<Screens.HomeGraph.HealthJournalScreen> {
                 HealthJournalScreen(padding = padding)

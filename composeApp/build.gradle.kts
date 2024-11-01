@@ -87,6 +87,8 @@ kotlin {
             // Room and SQLite
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation("com.eygraber:uri-kmp:0.0.18")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

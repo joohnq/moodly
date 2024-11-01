@@ -5,9 +5,15 @@ package com.joohnq.moodapp.view
 interface ScreenDimensionsInterface{
     val statusBarHeight: Int
     val moodRatePadding: Int
+    val osType: OSType
+}
+
+enum class OSType {
+    IOS, ANDROID, DESKTOP
 }
 
 expect class ScreenDimensions: ScreenDimensionsInterface {
     override val statusBarHeight: Int
     override val moodRatePadding: Int
+    override val osType: OSType
 }

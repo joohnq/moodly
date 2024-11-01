@@ -32,6 +32,7 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
@@ -45,6 +46,7 @@ fun FreudScoreScreenUi(
     freudScore: FreudScore,
     statsRecords: UiState<List<StatsRecord>>,
     onGoBack: () -> Unit = {},
+    onClickOnItem: (StatsRecord) -> Unit = {}
 ) {
     val freudScorePalette = FreudScore.getPalette(freudScore)
     Column {
@@ -74,7 +76,7 @@ fun FreudScoreScreenUi(
         statsRecords.onSuccessComposable { statsRecords ->
             LazyColumn {
                 items(statsRecords) { statsRecord ->
-                    MentalScoreHistoryItem(statsRecord) {}
+                    MentalScoreHistoryItem(statsRecord, onClick = onClickOnItem)
                 }
             }
         }
@@ -83,16 +85,18 @@ fun FreudScoreScreenUi(
 
 @Composable
 fun FreudScoreScreen(
-    navController: NavController = rememberNavController(),
     padding: PaddingValues = PaddingValues(0.dp),
     moodsViewModel: MoodsViewModel = sharedViewModel(),
+    onGoBack: () -> Unit,
+    onClickOnItem: (StatsRecord) -> Unit
 ) {
     val freudScore by moodsViewModel.freudScore.collectAsState()
     val statsRecords by moodsViewModel.statsRecords.collectAsState()
     FreudScoreScreenUi(
         freudScore = freudScore,
         statsRecords,
-        onGoBack = navController::popBackStack
+        onGoBack = onGoBack,
+        onClickOnItem = onClickOnItem
     )
 }
 

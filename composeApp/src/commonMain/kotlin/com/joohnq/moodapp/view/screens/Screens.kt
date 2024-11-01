@@ -1,10 +1,11 @@
 package com.joohnq.moodapp.view.screens
 
+import com.joohnq.moodapp.entities.StatsRecord
 import kotlinx.serialization.Serializable
 
 object Screens {
     @Serializable
-    object OnboardingGraph{
+    object OnboardingGraph {
         @Serializable
         object ExpressionAnalysisScreen
 
@@ -40,7 +41,7 @@ object Screens {
     object CompilingDataScreen
 
     @Serializable
-    object HomeGraph{
+    object HomeGraph {
         @Serializable
         object HomeScreen
 
@@ -54,7 +55,9 @@ object Screens {
         object FreudScoreScreen
 
         @Serializable
-        object MoodScreen
+        data class MoodScreen(
+            val statsRecord: StatsRecord
+        )
 
         @Serializable
         object HealthJournalScreen

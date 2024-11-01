@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.routes
 
 import androidx.navigation.NavController
+import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.screens.Screens
 
 fun NavController.onNavigateToHomeGraph() {
@@ -13,7 +14,7 @@ fun NavController.onNavigateToHomeGraph() {
 }
 
 fun NavController.onNavigateToWelcomeScreen() {
-    navigate(Screens.WelcomeScreen){
+    navigate(Screens.WelcomeScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -40,7 +41,7 @@ fun NavController.onNavigateToGetUserNameScreen() {
 }
 
 fun NavController.onNavigateToCompilingData() {
-    navigate(Screens.CompilingDataScreen){
+    navigate(Screens.CompilingDataScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -76,8 +77,8 @@ fun NavController.onNavigateToFreudScore() {
     navigate(Screens.HomeGraph.FreudScoreScreen)
 }
 
-fun NavController.onNavigateToMood() {
-    navigate(Screens.HomeGraph.MoodScreen)
+fun NavController.onNavigateToMood(statsRecord: StatsRecord) {
+    navigate(Screens.HomeGraph.MoodScreen(statsRecord))
 }
 
 fun NavController.onNavigateToHealthJournal() {

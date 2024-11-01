@@ -194,7 +194,6 @@ object TextStyles {
     fun FreudTitle() = TextStyle(
         fontFamily = FontFamily.Urbanist.SemiBold(),
         fontSize = 14.sp,
-        color = Colors.Green20,
         textAlign = TextAlign.Center
     )
 
@@ -269,5 +268,17 @@ object TextStyles {
     fun SmLabel() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 12.sp
+    )
+
+    @Composable
+    fun BoldXL() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 20.sp
+    )
+
+    @Composable
+    fun ExtraBold2XL() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 72.sp
     )
 }

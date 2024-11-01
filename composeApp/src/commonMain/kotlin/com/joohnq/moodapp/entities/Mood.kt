@@ -1,11 +1,12 @@
 package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.joohnq.moodapp.entities.palette.MoodPalette
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.depressed
 import moodapp.composeapp.generated.resources.happy
@@ -15,13 +16,15 @@ import moodapp.composeapp.generated.resources.sad
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
+@Serializable
 sealed class Mood(
     val id: String,
-    val image: DrawableResource,
-    val imageVector: ImageVector,
-    val text: StringResource,
+    @Contextual val image: DrawableResource,
+    @Contextual val imageVector: ImageVector,
+    @Contextual val text: StringResource,
     val healthLevel: Int
 ) {
+    @Serializable
     data object Depressed :
         Mood(
             id = DEPRESSED,
@@ -31,6 +34,7 @@ sealed class Mood(
             healthLevel = 20
         )
 
+    @Serializable
     data object Sad : Mood(
         id = SAD,
         image = Drawables.Mood.Sad,
@@ -39,6 +43,7 @@ sealed class Mood(
         healthLevel = 40
     )
 
+    @Serializable
     data object Neutral :
         Mood(
             id = NEUTRAL,
@@ -48,6 +53,7 @@ sealed class Mood(
             healthLevel = 60
         )
 
+    @Serializable
     data object Happy : Mood(
         id = HAPPY,
         image = Drawables.Mood.Happy,
@@ -56,6 +62,7 @@ sealed class Mood(
         healthLevel = 80
     )
 
+    @Serializable
     data object Overjoyed :
         Mood(
             id = OVERJOYED,
@@ -100,41 +107,41 @@ sealed class Mood(
             Overjoyed -> MoodPalette(
                 faceBackgroundColor = Colors.Green50,
                 faceColor = Colors.Green90,
-                color = Colors.Green10,
+                backgroundColor = Colors.Green10,
                 subColor = Colors.Green40,
-                backgroundColor = Colors.Green50
+                color = Colors.Green50
             )
 
             Happy -> MoodPalette(
                 faceBackgroundColor = Colors.Yellow40,
                 faceColor = Colors.Yellow90,
-                color = Colors.Yellow10,
+                backgroundColor = Colors.Yellow10,
                 subColor = Colors.Yellow40,
-                backgroundColor = Colors.Yellow50
+                color = Colors.Yellow50
             )
 
             Neutral -> MoodPalette(
                 faceBackgroundColor = Colors.Brown60,
                 faceColor = Colors.Brown90,
-                color = Colors.Brown20,
+                backgroundColor = Colors.Brown20,
                 subColor = Colors.Brown40,
-                backgroundColor = Colors.Brown70
+                color = Colors.Brown70
             )
 
             Sad -> MoodPalette(
                 faceBackgroundColor = Colors.Orange40,
                 faceColor = Colors.Orange90,
-                color = Colors.Orange10,
+                backgroundColor = Colors.Orange10,
                 subColor = Colors.Orange30,
-                backgroundColor = Colors.Orange40
+                color = Colors.Orange40
             )
 
             Depressed -> MoodPalette(
                 faceBackgroundColor = Colors.Purple30,
                 faceColor = Colors.Purple90,
-                color = Colors.Purple10,
+                backgroundColor = Colors.Purple10,
                 subColor = Colors.Purple30,
-                backgroundColor = Colors.Purple40
+                color = Colors.Purple40
             )
         }
     }

@@ -55,6 +55,13 @@ sealed class UiState<out T> {
                 else -> null
             }
 
+        @Composable
+        fun <T> UiState<T>.getValue(): T =
+            when (this) {
+                is Success -> this.data
+                else -> throw IllegalStateException("UiState is not Success")
+            }
+
         fun <T> UiState<T>.onSuccess(
             onSuccess: (T) -> Unit = {},
         ) {

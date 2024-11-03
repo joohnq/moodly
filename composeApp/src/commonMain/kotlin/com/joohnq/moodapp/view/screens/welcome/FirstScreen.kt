@@ -73,7 +73,7 @@ fun FirstScreen(onGetStarted: () -> Unit) {
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
-        ButtonWithArrowRight(text = stringResource(Res.string.get_started), onClick = onGetStarted)
+        ButtonWithArrowRight(text = Res.string.get_started, onClick = onGetStarted)
         Spacer(modifier = Modifier.height(30.dp))
     }
 }

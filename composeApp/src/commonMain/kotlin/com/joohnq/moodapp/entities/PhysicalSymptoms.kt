@@ -23,6 +23,7 @@ sealed class PhysicalSymptoms(
         text = Res.string.yes_very_painful,
         icon = Icon(
             icon = Drawables.Icons.Check,
+            contentDescription = Res.string.yes_very_painful
         )
     )
 
@@ -30,14 +31,20 @@ sealed class PhysicalSymptoms(
     data object No : PhysicalSymptoms(
         id = NO_PHYSICAL_PAIN,
         text = Res.string.no_physical_pain,
-        icon = Icon(icon = Drawables.Icons.Close)
+        icon = Icon(
+            icon = Drawables.Icons.Close,
+            contentDescription = Res.string.no_physical_pain
+        )
     )
 
     @Serializable
     data object YesJustABit : PhysicalSymptoms(
         id = YES_JUST_A_BIT,
         text = Res.string.yes_but_just_a_bit,
-        icon = Icon(icon = Drawables.Icons.Question)
+        icon = Icon(
+            icon = Drawables.Icons.Question,
+            contentDescription = Res.string.yes_but_just_a_bit
+        )
     )
 
     companion object {

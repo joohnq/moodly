@@ -133,7 +133,7 @@ fun GetUserNameScreen(
                 }
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                    text = stringResource(Res.string.continue_word)
+                    text = Res.string.continue_word
                 ) {
                     focusManager.clearFocus()
                     if (name.trim().isEmpty()) {

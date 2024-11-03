@@ -23,6 +23,7 @@ sealed class MedicationsSupplements(
         text = Res.string.prescribed_medications,
         icon = Icon(
             icon = Drawables.Icons.Medicine,
+            contentDescription = Res.string.prescribed_medications
         )
     )
 
@@ -30,14 +31,20 @@ sealed class MedicationsSupplements(
     data object OverTheCounterSupplements : MedicationsSupplements(
         id = OVER_THE_COUNTER_SUPPLEMENTS,
         text = Res.string.over_the_counter_supplements,
-        icon = Icon(icon = Drawables.Icons.DrugStore)
+        icon = Icon(
+            icon = Drawables.Icons.DrugStore,
+            contentDescription = Res.string.over_the_counter_supplements
+        )
     )
 
     @Serializable
     data object ImNotTakingAny : MedicationsSupplements(
         id = IM_NOT_TAKING_ANY,
         text = Res.string.im_not_taking_any,
-        icon = Icon(icon = Drawables.Icons.Nothing)
+        icon = Icon(
+            icon = Drawables.Icons.Nothing,
+            contentDescription = Res.string.im_not_taking_any
+        )
     )
 
     @Serializable
@@ -45,7 +52,10 @@ sealed class MedicationsSupplements(
         MedicationsSupplements(
             id = PREFER_NOT_TO_SAY,
             text = Res.string.prefer_not_to_say,
-            icon = Icon(icon = Drawables.Icons.Close)
+            icon = Icon(
+                icon = Drawables.Icons.Close,
+                contentDescription = Res.string.prefer_not_to_say
+            )
         )
 
     companion object {

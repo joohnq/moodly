@@ -26,12 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.entities.IconAndTextRadioButtonColors
 import com.joohnq.moodapp.entities.Icon
+import com.joohnq.moodapp.entities.IconAndTextRadioButtonColors
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.entities.ProfessionalHelp
+import com.joohnq.moodapp.view.constants.Colors
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -104,7 +104,7 @@ fun IconAndTextRadioButtonHorizontal(
             ) {
                 Icon(
                     painter = painterResource(icon.icon),
-                    contentDescription = icon.contentDescription,
+                    contentDescription = stringResource(icon.contentDescription),
                     tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor,
                     modifier = icon.modifier
                 )
@@ -160,7 +160,7 @@ fun IconAndTextRadioButtonVertical(
         ) {
             Icon(
                 painter = painterResource(icon.icon),
-                contentDescription = icon.contentDescription,
+                contentDescription = stringResource(icon.contentDescription),
                 tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor,
                 modifier = icon.modifier
             )

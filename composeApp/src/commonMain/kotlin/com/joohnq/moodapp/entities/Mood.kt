@@ -109,7 +109,12 @@ sealed class Mood(
                 faceColor = Colors.Green90,
                 backgroundColor = Colors.Green10,
                 subColor = Colors.Green40,
-                color = Colors.Green50
+                color = Colors.Green50,
+                moodScreenBackgroundColor = Colors.Green50,
+                moodScreenInactiveColor = Colors.Green50,
+                moodScreenTraceColor = Colors.Green50,
+                moodScreenMoodFaceBackgroundColor = Colors.Green30,
+                moodScreenMoodFaceColor = Colors.Green80,
             )
 
             Happy -> MoodPalette(
@@ -117,7 +122,12 @@ sealed class Mood(
                 faceColor = Colors.Yellow90,
                 backgroundColor = Colors.Yellow10,
                 subColor = Colors.Yellow40,
-                color = Colors.Yellow50
+                color = Colors.Yellow50,
+                moodScreenBackgroundColor = Colors.Yellow40,
+                moodScreenInactiveColor = Colors.Yellow60,
+                moodScreenTraceColor = Colors.Yellow60,
+                moodScreenMoodFaceBackgroundColor = Colors.Yellow20,
+                moodScreenMoodFaceColor = Colors.Yellow80,
             )
 
             Neutral -> MoodPalette(
@@ -125,7 +135,12 @@ sealed class Mood(
                 faceColor = Colors.Brown90,
                 backgroundColor = Colors.Brown20,
                 subColor = Colors.Brown40,
-                color = Colors.Brown70
+                color = Colors.Brown70,
+                moodScreenBackgroundColor = Colors.Brown60,
+                moodScreenInactiveColor = Colors.Brown80,
+                moodScreenTraceColor = Colors.Brown80,
+                moodScreenMoodFaceBackgroundColor = Colors.Brown40,
+                moodScreenMoodFaceColor = Colors.Brown80,
             )
 
             Sad -> MoodPalette(
@@ -133,7 +148,12 @@ sealed class Mood(
                 faceColor = Colors.Orange90,
                 backgroundColor = Colors.Orange10,
                 subColor = Colors.Orange30,
-                color = Colors.Orange40
+                color = Colors.Orange40,
+                moodScreenBackgroundColor = Colors.Orange40,
+                moodScreenInactiveColor = Colors.Orange60,
+                moodScreenTraceColor = Colors.Orange60,
+                moodScreenMoodFaceBackgroundColor = Colors.Orange30,
+                moodScreenMoodFaceColor = Colors.Orange80,
             )
 
             Depressed -> MoodPalette(
@@ -141,7 +161,12 @@ sealed class Mood(
                 faceColor = Colors.Purple90,
                 backgroundColor = Colors.Purple10,
                 subColor = Colors.Purple30,
-                color = Colors.Purple40
+                color = Colors.Purple40,
+                moodScreenBackgroundColor = Colors.Purple30,
+                moodScreenInactiveColor = Colors.Purple50,
+                moodScreenTraceColor = Colors.Purple40,
+                moodScreenMoodFaceBackgroundColor = Colors.Purple20,
+                moodScreenMoodFaceColor = Colors.Purple80,
             )
         }
     }

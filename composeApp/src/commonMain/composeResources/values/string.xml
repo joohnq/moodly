@@ -59,7 +59,7 @@
     <string name="im_not_taking_any">I'm Not Taking Any</string>
     <string name="prefer_not_to_say">Prefer Not To Say</string>
     <string name="stress_rate_title">How would you rate your stress level?</string>
-    <string name="stress_rate_desc">You Are Exremely Stressed Out.</string>
+    <string name="stress_rate_desc">You Are Extremely Stressed Out.</string>
     <string name="you_are_not_stressed_out">You Are Not Stressed Out</string>
     <string name="you_are_a_little_stressed_out">You Are A Little Stressed Out</string>
     <string name="you_are_neutral">You Are Neutral</string>
@@ -93,4 +93,9 @@
     <string name="your_mood_is">Your mood is</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="hey_name">Hey %1$s</string>
+    <string name="how_are_you_feeling_this_day">How are you feeling this day?</string>
+    <string name="go_back">Go Back</string>
+    <string name="go_next">Go Next</string>
+    <string name="set_mood">Set Mood</string>
 </resources>

@@ -101,7 +101,7 @@ fun MoodScreenUi(
                                 icon = Drawables.Icons.ArrowChevron,
                                 modifier = Modifier.size(24.dp),
                                 tint = moodPalette.color,
-                                contentDescription = stringResource(Res.string.previous)
+                                contentDescription = Res.string.previous
                             ),
                             colors = ButtonColors(
                                 containerColor = Colors.Transparent,
@@ -119,7 +119,7 @@ fun MoodScreenUi(
                                 icon = Drawables.Icons.ArrowChevron,
                                 modifier = Modifier.size(24.dp).rotate(180f),
                                 tint = moodPalette.color,
-                                contentDescription = stringResource(Res.string.next)
+                                contentDescription = Res.string.next
                             ),
                             colors = ButtonColors(
                                 containerColor = Colors.Transparent,

@@ -21,17 +21,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.entities.Icon
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.entities.Icon
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.continue_word
+import moodapp.composeapp.generated.resources.go_back
+import moodapp.composeapp.generated.resources.go_next
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ButtonTextWithIcon(
     modifier: Modifier = Modifier,
-    text: String,
+    text: StringResource,
     icon: Icon,
     colors: ButtonColors,
     shape: Shape,
@@ -48,13 +53,13 @@ fun ButtonTextWithIcon(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text,
+                stringResource(text),
                 style = TextStyles.WelcomeScreenButton()
             )
             Spacer(modifier = Modifier.width(12.dp))
             Icon(
                 painter = painterResource(icon.icon),
-                contentDescription = icon.contentDescription,
+                contentDescription = stringResource(icon.contentDescription),
                 tint = icon.tint,
                 modifier = icon.modifier
             )
@@ -80,7 +85,7 @@ fun ButtonWithIcon(
     ) {
         Icon(
             painter = painterResource(icon.icon),
-            contentDescription = icon.contentDescription,
+            contentDescription = stringResource(icon.contentDescription),
             tint = icon.tint,
             modifier = icon.modifier
         )
@@ -90,7 +95,7 @@ fun ButtonWithIcon(
 @Composable
 fun ButtonWithArrowRight(
     modifier: Modifier = Modifier,
-    text: String,
+    text: StringResource,
     onClick: () -> Unit
 ) {
     ButtonTextWithIcon(
@@ -105,7 +110,31 @@ fun ButtonWithArrowRight(
             icon = Drawables.Icons.Arrow,
             tint = Colors.White,
             modifier = Modifier.size(24.dp),
-            contentDescription = "Continue"
+            contentDescription = Res.string.continue_word
+        ),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun ButtonWithCheck(
+    modifier: Modifier = Modifier,
+    text: StringResource,
+    onClick: () -> Unit
+) {
+    ButtonTextWithIcon(
+        modifier = modifier,
+        text = text,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Colors.White,
+            contentColor = Colors.Brown80
+        ),
+        shape = CircleShape,
+        icon = Icon(
+            icon = Drawables.Icons.Check,
+            tint = Colors.Brown80,
+            modifier = Modifier.size(24.dp),
+            contentDescription = text
         ),
         onClick = onClick
     )
@@ -129,7 +158,7 @@ fun ButtonWithArrowOpen(
             icon = Drawables.Icons.ArrowOpen,
             tint = color,
             modifier = Modifier.size(24.dp),
-            contentDescription = "Go Back"
+            contentDescription = Res.string.go_back
         ),
         borderStroke = BorderStroke(
             1.5.dp,
@@ -153,7 +182,7 @@ fun ButtonWithArrowRight(
             icon = Drawables.Icons.Arrow,
             tint = colors.contentColor,
             modifier = Modifier.size(24.dp),
-            contentDescription = "Go Next"
+            contentDescription = Res.string.go_next
         ),
         onClick = onClick
     )

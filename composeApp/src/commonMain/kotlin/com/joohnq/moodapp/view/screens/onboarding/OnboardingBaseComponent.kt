@@ -99,7 +99,7 @@ fun OnboardingBaseComponent(
             if (isContinueButtonVisible) {
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    text = stringResource(Res.string.continue_word),
+                    text = Res.string.continue_word,
                     onClick = { onContinue(::onSomethingWentWrong) }
                 )
                 Spacer(modifier = Modifier.height(16.dp))

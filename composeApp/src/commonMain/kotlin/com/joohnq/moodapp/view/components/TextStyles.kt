@@ -281,4 +281,22 @@ object TextStyles {
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 72.sp
     )
+
+    @Composable
+    fun SemiBoldXL() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 20.sp
+    )
+
+    @Composable
+    fun SemiBold2XL() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 24.sp
+    )
+
+    @Composable
+    fun ExtraBoldMd() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 36.sp
+    )
 }

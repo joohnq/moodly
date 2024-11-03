@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.entities.BottomScreens
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.screens.Screens
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -95,7 +96,15 @@ fun BottomNavigation(navController: NavController = rememberNavController()) {
             with(BottomScreens.Add) {
                 Button(
                     contentPadding = PaddingValues(0.dp),
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(Screens.HomeGraph.AddMoodScreen) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
                     modifier = Modifier.size(64.dp)
                         .background(color = Colors.Green50, shape = CircleShape),
                     colors = ButtonColors(

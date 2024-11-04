@@ -1,11 +1,20 @@
 package com.joohnq.moodapp.view.routes
 
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.screens.AddMoodScreen
+import com.joohnq.moodapp.view.screens.CompilingDataScreen
+import com.joohnq.moodapp.view.screens.FreudScoreScreen
+import com.joohnq.moodapp.view.screens.GetUserNameScreen
+import com.joohnq.moodapp.view.screens.HealthJournalScreen
+import com.joohnq.moodapp.view.screens.HomeGraph
+import com.joohnq.moodapp.view.screens.MoodScreen
+import com.joohnq.moodapp.view.screens.OnboardingGraph
+import com.joohnq.moodapp.view.screens.WelcomeScreen
 
 fun NavController.onNavigateToHomeGraph() {
-    navigate(Screens.HomeGraph) {
+    navigate(HomeGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -14,7 +23,7 @@ fun NavController.onNavigateToHomeGraph() {
 }
 
 fun NavController.onNavigateToWelcomeScreen() {
-    navigate(Screens.WelcomeScreen) {
+    navigate(WelcomeScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -23,7 +32,7 @@ fun NavController.onNavigateToWelcomeScreen() {
 }
 
 fun NavController.onNavigateToOnboardingScreen() {
-    navigate(Screens.OnboardingGraph) {
+    navigate(OnboardingGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -32,7 +41,7 @@ fun NavController.onNavigateToOnboardingScreen() {
 }
 
 fun NavController.onNavigateToGetUserNameScreen() {
-    navigate(Screens.GetUserNameScreen) {
+    navigate(GetUserNameScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -41,7 +50,7 @@ fun NavController.onNavigateToGetUserNameScreen() {
 }
 
 fun NavController.onNavigateToCompilingData() {
-    navigate(Screens.CompilingDataScreen) {
+    navigate(CompilingDataScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -50,37 +59,57 @@ fun NavController.onNavigateToCompilingData() {
 }
 
 fun NavController.onNavigateToProfessionalHelp() {
-    navigate(Screens.OnboardingGraph.ProfessionalHelpScreen)
+    navigate(OnboardingGraph.ProfessionalHelpScreen)
 }
 
 fun NavController.onNavigateToPhysicalSymptoms() {
-    navigate(Screens.OnboardingGraph.PhysicalSymptomsScreen)
+    navigate(OnboardingGraph.PhysicalSymptomsScreen)
 }
 
 fun NavController.onNavigateToSleepQuality() {
-    navigate(Screens.OnboardingGraph.SleepQualityScreen)
+    navigate(OnboardingGraph.SleepQualityScreen)
 }
 
 fun NavController.onNavigateToMedicationsSupplements() {
-    navigate(Screens.OnboardingGraph.MedicationsSupplementsScreen)
+    navigate(OnboardingGraph.MedicationsSupplementsScreen)
 }
 
 fun NavController.onNavigateToStressRate() {
-    navigate(Screens.OnboardingGraph.StressRateScreen)
+    navigate(OnboardingGraph.StressRateScreen)
 }
 
 fun NavController.onNavigateToExpressionAnalysis() {
-    navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
+    navigate(OnboardingGraph.ExpressionAnalysisScreen)
 }
 
 fun NavController.onNavigateToFreudScore() {
-    navigate(Screens.HomeGraph.FreudScoreScreen)
+    navigate(FreudScoreScreen)
 }
 
 fun NavController.onNavigateToMood(statsRecord: StatsRecord) {
-    navigate(Screens.HomeGraph.MoodScreen(statsRecord))
+    navigate(MoodScreen(statsRecord))
 }
 
 fun NavController.onNavigateToHealthJournal() {
-    navigate(Screens.HomeGraph.HealthJournalScreen)
+    navigate(HealthJournalScreen)
+}
+
+fun NavController.onNavigateToAddMood() {
+    navigate(AddMoodScreen) {
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+fun NavController.onNavigateToRoute(route: Any) {
+    navigate(route) {
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
 }

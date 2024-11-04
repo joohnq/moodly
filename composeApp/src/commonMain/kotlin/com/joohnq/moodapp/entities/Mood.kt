@@ -22,7 +22,8 @@ sealed class Mood(
     @Contextual val image: DrawableResource,
     @Contextual val imageVector: ImageVector,
     @Contextual val text: StringResource,
-    val healthLevel: Int
+    val healthLevel: Int,
+    val palette: MoodPalette
 ) {
     @Serializable
     data object Depressed :
@@ -31,7 +32,19 @@ sealed class Mood(
             image = Drawables.Mood.Depressed,
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
-            healthLevel = 20
+            healthLevel = 20,
+            palette = MoodPalette(
+                faceBackgroundColor = Colors.Purple30,
+                faceColor = Colors.Purple90,
+                backgroundColor = Colors.Purple10,
+                subColor = Colors.Purple30,
+                color = Colors.Purple40,
+                moodScreenBackgroundColor = Colors.Purple30,
+                moodScreenInactiveColor = Colors.Purple50,
+                moodScreenTraceColor = Colors.Purple40,
+                moodScreenMoodFaceBackgroundColor = Colors.Purple20,
+                moodScreenMoodFaceColor = Colors.Purple80,
+            )
         )
 
     @Serializable
@@ -40,7 +53,19 @@ sealed class Mood(
         image = Drawables.Mood.Sad,
         imageVector = Drawables.Mood.SadVectorPainter,
         text = Res.string.sad,
-        healthLevel = 40
+        healthLevel = 40,
+        palette = MoodPalette(
+            faceBackgroundColor = Colors.Orange40,
+            faceColor = Colors.Orange90,
+            backgroundColor = Colors.Orange10,
+            subColor = Colors.Orange30,
+            color = Colors.Orange40,
+            moodScreenBackgroundColor = Colors.Orange40,
+            moodScreenInactiveColor = Colors.Orange60,
+            moodScreenTraceColor = Colors.Orange60,
+            moodScreenMoodFaceBackgroundColor = Colors.Orange30,
+            moodScreenMoodFaceColor = Colors.Orange80,
+        )
     )
 
     @Serializable
@@ -50,7 +75,19 @@ sealed class Mood(
             image = Drawables.Mood.Neutral,
             imageVector = Drawables.Mood.NeutralVectorPainter,
             text = Res.string.neutral,
-            healthLevel = 60
+            healthLevel = 60,
+            palette = MoodPalette(
+                faceBackgroundColor = Colors.Brown60,
+                faceColor = Colors.Brown90,
+                backgroundColor = Colors.Brown20,
+                subColor = Colors.Brown40,
+                color = Colors.Brown70,
+                moodScreenBackgroundColor = Colors.Brown60,
+                moodScreenInactiveColor = Colors.Brown80,
+                moodScreenTraceColor = Colors.Brown80,
+                moodScreenMoodFaceBackgroundColor = Colors.Brown40,
+                moodScreenMoodFaceColor = Colors.Brown80,
+            )
         )
 
     @Serializable
@@ -59,7 +96,19 @@ sealed class Mood(
         image = Drawables.Mood.Happy,
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
-        healthLevel = 80
+        healthLevel = 80,
+        palette = MoodPalette(
+            faceBackgroundColor = Colors.Yellow40,
+            faceColor = Colors.Yellow90,
+            backgroundColor = Colors.Yellow10,
+            subColor = Colors.Yellow40,
+            color = Colors.Yellow50,
+            moodScreenBackgroundColor = Colors.Yellow40,
+            moodScreenInactiveColor = Colors.Yellow60,
+            moodScreenTraceColor = Colors.Yellow60,
+            moodScreenMoodFaceBackgroundColor = Colors.Yellow20,
+            moodScreenMoodFaceColor = Colors.Yellow80,
+        )
     )
 
     @Serializable
@@ -69,7 +118,19 @@ sealed class Mood(
             image = Drawables.Mood.Overjoyed,
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
-            healthLevel = 100
+            healthLevel = 100,
+            palette = MoodPalette(
+                faceBackgroundColor = Colors.Green50,
+                faceColor = Colors.Green90,
+                backgroundColor = Colors.Green10,
+                subColor = Colors.Green40,
+                color = Colors.Green50,
+                moodScreenBackgroundColor = Colors.Green50,
+                moodScreenInactiveColor = Colors.Green50,
+                moodScreenTraceColor = Colors.Green50,
+                moodScreenMoodFaceBackgroundColor = Colors.Green30,
+                moodScreenMoodFaceColor = Colors.Green80,
+            )
         )
 
     companion object {
@@ -102,72 +163,5 @@ sealed class Mood(
             save = { fromValue(it) },
             restore = { toValue(it) }
         )
-
-        fun getPalette(value: Mood): MoodPalette = when (value) {
-            Overjoyed -> MoodPalette(
-                faceBackgroundColor = Colors.Green50,
-                faceColor = Colors.Green90,
-                backgroundColor = Colors.Green10,
-                subColor = Colors.Green40,
-                color = Colors.Green50,
-                moodScreenBackgroundColor = Colors.Green50,
-                moodScreenInactiveColor = Colors.Green50,
-                moodScreenTraceColor = Colors.Green50,
-                moodScreenMoodFaceBackgroundColor = Colors.Green30,
-                moodScreenMoodFaceColor = Colors.Green80,
-            )
-
-            Happy -> MoodPalette(
-                faceBackgroundColor = Colors.Yellow40,
-                faceColor = Colors.Yellow90,
-                backgroundColor = Colors.Yellow10,
-                subColor = Colors.Yellow40,
-                color = Colors.Yellow50,
-                moodScreenBackgroundColor = Colors.Yellow40,
-                moodScreenInactiveColor = Colors.Yellow60,
-                moodScreenTraceColor = Colors.Yellow60,
-                moodScreenMoodFaceBackgroundColor = Colors.Yellow20,
-                moodScreenMoodFaceColor = Colors.Yellow80,
-            )
-
-            Neutral -> MoodPalette(
-                faceBackgroundColor = Colors.Brown60,
-                faceColor = Colors.Brown90,
-                backgroundColor = Colors.Brown20,
-                subColor = Colors.Brown40,
-                color = Colors.Brown70,
-                moodScreenBackgroundColor = Colors.Brown60,
-                moodScreenInactiveColor = Colors.Brown80,
-                moodScreenTraceColor = Colors.Brown80,
-                moodScreenMoodFaceBackgroundColor = Colors.Brown40,
-                moodScreenMoodFaceColor = Colors.Brown80,
-            )
-
-            Sad -> MoodPalette(
-                faceBackgroundColor = Colors.Orange40,
-                faceColor = Colors.Orange90,
-                backgroundColor = Colors.Orange10,
-                subColor = Colors.Orange30,
-                color = Colors.Orange40,
-                moodScreenBackgroundColor = Colors.Orange40,
-                moodScreenInactiveColor = Colors.Orange60,
-                moodScreenTraceColor = Colors.Orange60,
-                moodScreenMoodFaceBackgroundColor = Colors.Orange30,
-                moodScreenMoodFaceColor = Colors.Orange80,
-            )
-
-            Depressed -> MoodPalette(
-                faceBackgroundColor = Colors.Purple30,
-                faceColor = Colors.Purple90,
-                backgroundColor = Colors.Purple10,
-                subColor = Colors.Purple30,
-                color = Colors.Purple40,
-                moodScreenBackgroundColor = Colors.Purple30,
-                moodScreenInactiveColor = Colors.Purple50,
-                moodScreenTraceColor = Colors.Purple40,
-                moodScreenMoodFaceBackgroundColor = Colors.Purple20,
-                moodScreenMoodFaceColor = Colors.Purple80,
-            )
-        }
     }
 }

@@ -23,10 +23,10 @@ fun DrawScope.drawRoulette(
 ) {
     for (i in moods.indices) {
         val startAngle = rotation + sliceAngle * i
-        val moodColor = Mood.getPalette(moods[i])
+        val mood = moods[i]
         drawSlice(
-            color = moodColor.faceColor,
-            backgroundColor = moodColor.faceBackgroundColor,
+            color = mood.palette.faceColor,
+            backgroundColor = mood.palette.faceBackgroundColor,
             startAngle = startAngle.toDegrees().toFloat(),
             sweepAngle = sliceAngle.toDegrees().toFloat(),
             useCenter = true,

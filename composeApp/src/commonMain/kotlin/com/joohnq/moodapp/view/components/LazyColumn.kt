@@ -34,19 +34,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTracker: List<Mood>) {
-    val sleepQualityPalette = SleepQuality.getPalette(sleepQuality)
-
     MindfulTrackerCardRow(
         icon = Drawables.Icons.HospitalBed,
-        color = sleepQualityPalette.color,
-        backgroundColor = sleepQualityPalette.backgroundColor,
+        color = sleepQuality.palette.color,
+        backgroundColor = sleepQuality.palette.backgroundColor,
         title = sleepQuality.firstText,
         subtitle = sleepQuality.secondText,
         content = {
             CircularProgressWithText(
                 modifier = Modifier.size(56.dp),
-                color = sleepQualityPalette.color,
-                backgroundColor = sleepQualityPalette.backgroundColor,
+                color = sleepQuality.palette.color,
+                backgroundColor = sleepQuality.palette.backgroundColor,
                 progress = { sleepQuality.level * 0.2f },
             ) {
                 Text(
@@ -96,8 +94,8 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
     Spacer(modifier = Modifier.height(16.dp))
     MindfulTrackerCardColumn(
         icon = Drawables.Icons.Head,
-        color = StressLevel.getBushColor(stressLevel.level),
-        backgroundColor = StressLevel.getBushBackgroundColor(stressLevel.level),
+        color = stressLevel.brush.color,
+        backgroundColor =stressLevel.brush.backgroundColor,
         title = Res.string.stress_level,
         subtitle = stressLevel.subtitle,
         content = {
@@ -107,7 +105,7 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                     for (i in 1..5) {
                         val isSelected = i <= stressLevel.level
                         val background = if (isSelected) Modifier.background(
-                            brush = Brush.linearGradient(StressLevel.getBrushes(i)),
+                            brush = Brush.linearGradient(stressLevel.brush.gradient),
                             shape = CircleShape
                         )
                         else Modifier.background(
@@ -134,17 +132,16 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
         content = {
             Row(modifier = Modifier.fillMaxWidth()) {
                 for (mood in moodTracker) {
-                    val moodPalette = Mood.getPalette(mood)
                     Box(
                         modifier = Modifier.background(
-                            color = moodPalette.backgroundColor,
+                            color = mood.palette.backgroundColor,
                             shape = CircleShape
                         ).padding(vertical = 8.dp, horizontal = 12.dp),
                     ) {
                         Text(
                             text = stringResource(mood.text),
                             style = TextStyles.MindfulTrackerCardMood().copy(
-                                color = moodPalette.color
+                                color = mood.palette.color
                             )
                         )
                     }

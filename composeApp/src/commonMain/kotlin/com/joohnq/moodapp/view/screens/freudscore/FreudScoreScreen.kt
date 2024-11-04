@@ -4,7 +4,6 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,7 +31,6 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
 import com.joohnq.moodapp.viewmodel.MoodsViewModel
@@ -45,27 +43,28 @@ import org.jetbrains.compose.resources.stringResource
 fun FreudScoreScreenUi(
     freudScore: FreudScore,
     statsRecords: UiState<List<StatsRecord>>,
-    onGoBack: () -> Unit = {},
-    onClickOnItem: (StatsRecord) -> Unit = {}
+    onAction: (FreudScoreAction) -> Unit = {}
 ) {
-    val freudScorePalette = FreudScore.getPalette(freudScore)
     Column {
         Box(
             modifier = Modifier.fillMaxWidth().wrapContentSize()
-                .background(color = freudScorePalette.backgroundColor),
+                .background(color = freudScore.palette.backgroundColor),
         ) {
             Box(
                 modifier = Modifier.matchParentSize().paint(
                     painter = painterResource(Drawables.Images.FreudScoreBackground),
                     contentScale = ContentScale.FillBounds,
-                    colorFilter = ColorFilter.tint(color = freudScorePalette.subColor)
+                    colorFilter = ColorFilter.tint(color = freudScore.palette.subColor)
                 )
             )
             Column(
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TopBarLight(Res.string.freud_score, onGoBack = onGoBack)
+                TopBarLight(
+                    Res.string.freud_score,
+                    onGoBack = { onAction(FreudScoreAction.OnGoBack) }
+                )
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
                 Text(text = stringResource(freudScore.title), style = TextStyles.FreudScreenTitle())
@@ -76,7 +75,7 @@ fun FreudScoreScreenUi(
         statsRecords.onSuccessComposable { statsRecords ->
             LazyColumn {
                 items(statsRecords) { statsRecord ->
-                    MentalScoreHistoryItem(statsRecord, onClick = onClickOnItem)
+                    MentalScoreHistoryItem(statsRecord) { onAction(FreudScoreAction.OnNavigateToMood(statsRecord)) }
                 }
             }
         }
@@ -85,18 +84,15 @@ fun FreudScoreScreenUi(
 
 @Composable
 fun FreudScoreScreen(
-    padding: PaddingValues = PaddingValues(0.dp),
     moodsViewModel: MoodsViewModel = sharedViewModel(),
-    onGoBack: () -> Unit,
-    onClickOnItem: (StatsRecord) -> Unit
+    onAction: (FreudScoreAction) -> Unit
 ) {
     val freudScore by moodsViewModel.freudScore.collectAsState()
     val statsRecords by moodsViewModel.statsRecords.collectAsState()
     FreudScoreScreenUi(
         freudScore = freudScore,
         statsRecords,
-        onGoBack = onGoBack,
-        onClickOnItem = onClickOnItem
+        onAction = onAction
     )
 }
 

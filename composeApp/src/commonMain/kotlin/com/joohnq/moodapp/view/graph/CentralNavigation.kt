@@ -4,7 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.screens.CompilingDataScreen
+import com.joohnq.moodapp.view.screens.GetUserNameScreen
+import com.joohnq.moodapp.view.screens.LoadingScreen
+import com.joohnq.moodapp.view.screens.WelcomeScreen
 import com.joohnq.moodapp.view.screens.loading.CompilingDataScreen
 import com.joohnq.moodapp.view.screens.loading.LoadingScreen
 import com.joohnq.moodapp.view.screens.onboarding.GetUserNameScreen
@@ -12,29 +15,29 @@ import com.joohnq.moodapp.view.screens.welcome.WelcomeScreen
 
 @Composable
 fun NavHostController.CentralNavigation() {
-    val navController = this
-    NavHost(navController = navController, startDestination = Screens.LoadingScreen) {
-        composable<Screens.LoadingScreen> {
-            LoadingScreen(navigation = navController)
+    val navHostController = this
+    NavHost(navController = navHostController, startDestination = LoadingScreen) {
+        composable<LoadingScreen> {
+            LoadingScreen(navigation = navHostController)
         }
-        composable<Screens.WelcomeScreen> {
+        composable<WelcomeScreen> {
             WelcomeScreen(
-                navigation = navController,
+                navigation = navHostController,
             )
         }
         onboardingNavGraph(
-            navController = navController,
+            navController = navHostController,
         )
-        composable<Screens.GetUserNameScreen> {
+        composable<GetUserNameScreen> {
             GetUserNameScreen(
-                navigation = navController,
+                navigation = navHostController,
             )
         }
-        composable<Screens.CompilingDataScreen> {
+        composable<CompilingDataScreen> {
             CompilingDataScreen(
-                navigation = navController,
+                navigation = navHostController,
             )
         }
-        homeNavGraph()
+        mainNavGraph(navHostController = navHostController)
     }
 }

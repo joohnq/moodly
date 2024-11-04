@@ -26,101 +26,96 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.entities.BottomScreens
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.screens.Screens
 import org.jetbrains.compose.resources.painterResource
 
+sealed class BottomNavigationAction {
+    data object OnNavigateToAddMood : BottomNavigationAction()
+    data class OnNavigateToRoute(val route: Any) : BottomNavigationAction()
+}
+
 @Composable
-fun BottomNavigation(navController: NavController = rememberNavController()) {
+fun NavController.BottomNavigation(onAction: (BottomNavigationAction) -> Unit) {
+    val navBackStackEntry by currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    val hierarchy = currentDestination?.hierarchy
     val bottomScreens = remember {
         listOf(
             BottomScreens.Home,
             BottomScreens.Journaling,
         )
     }
-    Box(
-        contentAlignment = Alignment.BottomCenter,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().padding(10.dp).height(80.dp)
-                .paint(
-                    painter = painterResource(Drawables.Shape.BottomNavigation),
-                    contentScale = ContentScale.FillWidth,
-                    alignment = Alignment.Center
-                ),
+    if (hierarchy?.any {
+            bottomScreens.map { screen -> screen.route::class.qualifiedName }.contains(it.route)
+        } == true
+    )
+        Box(
+            contentAlignment = Alignment.BottomCenter,
+            modifier = Modifier.fillMaxSize()
         ) {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
-            bottomScreens.forEach { screen ->
-                val isSelected =
-                    currentDestination?.hierarchy?.any { it.route == screen.route::class.qualifiedName } == true
-                NavigationBarItem(
-                    selected = isSelected,
-                    colors = NavigationBarItemColors(
-                        selectedIconColor = Colors.Brown80,
-                        selectedTextColor = Colors.Brown80,
-                        selectedIndicatorColor = Colors.Brown10,
-                        unselectedIconColor = Colors.Brown30,
-                        unselectedTextColor = Colors.Brown30,
-                        disabledIconColor = Colors.Brown30,
-                        disabledTextColor = Colors.Brown30
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().padding(10.dp).height(80.dp)
+                    .paint(
+                        painter = painterResource(Drawables.Shape.BottomNavigation),
+                        contentScale = ContentScale.FillWidth,
+                        alignment = Alignment.Center
                     ),
-                    onClick = {
-                        navController.navigate(screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    },
-                    icon = {
-                        Icon(
-                            painter = painterResource(screen.icon),
-                            contentDescription = screen.name,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                )
-            }
-        }
-        Box(modifier = Modifier.padding(bottom = 60.dp).background(color = Colors.Transparent)) {
-            with(BottomScreens.Add) {
-                Button(
-                    contentPadding = PaddingValues(0.dp),
-                    onClick = {
-                        navController.navigate(Screens.HomeGraph.AddMoodScreen) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    },
-                    modifier = Modifier.size(64.dp)
-                        .background(color = Colors.Green50, shape = CircleShape),
-                    colors = ButtonColors(
-                        containerColor = Colors.Green50,
-                        contentColor = Colors.White,
-                        disabledContainerColor = Colors.Green50,
-                        disabledContentColor = Colors.White
-                    )
-                ) {
-                    Icon(
-                        painter = painterResource(icon),
-                        contentDescription = name,
-                        modifier = Modifier.size(24.dp),
+            ) {
+                bottomScreens.forEach { screen ->
+                    val isSelected =
+                        hierarchy.any { it.route == screen.route::class.qualifiedName }
+                    NavigationBarItem(
+                        selected = isSelected,
+                        colors = NavigationBarItemColors(
+                            selectedIconColor = Colors.Brown80,
+                            selectedTextColor = Colors.Brown80,
+                            selectedIndicatorColor = Colors.Brown10,
+                            unselectedIconColor = Colors.Brown30,
+                            unselectedTextColor = Colors.Brown30,
+                            disabledIconColor = Colors.Brown30,
+                            disabledTextColor = Colors.Brown30
+                        ),
+                        onClick = {
+                            onAction(BottomNavigationAction.OnNavigateToRoute(screen.route))
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(screen.icon),
+                                contentDescription = screen.name,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        },
                     )
                 }
             }
+            Box(
+                modifier = Modifier.padding(bottom = 60.dp).background(color = Colors.Transparent)
+            ) {
+                with(BottomScreens.Add) {
+                    Button(
+                        contentPadding = PaddingValues(0.dp),
+                        onClick = { onAction(BottomNavigationAction.OnNavigateToAddMood) },
+                        modifier = Modifier.size(64.dp)
+                            .background(color = Colors.Green50, shape = CircleShape),
+                        colors = ButtonColors(
+                            containerColor = Colors.Green50,
+                            contentColor = Colors.White,
+                            disabledContainerColor = Colors.Green50,
+                            disabledContentColor = Colors.White
+                        )
+                    ) {
+                        Icon(
+                            painter = painterResource(icon),
+                            contentDescription = name,
+                            modifier = Modifier.size(24.dp),
+                        )
+                    }
+                }
+            }
         }
-    }
 }

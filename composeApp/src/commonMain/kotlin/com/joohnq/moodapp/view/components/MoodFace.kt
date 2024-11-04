@@ -15,17 +15,16 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoodFace(modifier: Modifier = Modifier, mood: Mood) {
-    val moodPalette = Mood.getPalette(mood)
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = moodPalette.faceBackgroundColor, shape = CircleShape)
+            .background(color = mood.palette.faceBackgroundColor, shape = CircleShape)
     ) {
         Icon(
             painter = painterResource(mood.image),
             contentDescription = null,
             modifier = modifier,
-            tint = moodPalette.faceColor
+            tint = mood.palette.faceColor
         )
     }
 }

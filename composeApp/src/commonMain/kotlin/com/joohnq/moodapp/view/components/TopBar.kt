@@ -101,3 +101,20 @@ fun TopBarLight(
         content?.let { it() }
     }
 }
+
+@Composable
+fun TopBarLight(
+    onGoBack: () -> Unit,
+    content: (@Composable () -> Unit)? = null
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
+        }
+        content?.let { it() }
+    }
+}

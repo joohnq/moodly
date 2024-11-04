@@ -3,9 +3,8 @@ package com.joohnq.moodapp.view.graph
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.screens.OnboardingGraph
 import com.joohnq.moodapp.view.screens.onboarding.ExpressionAnalysisScreen
 import com.joohnq.moodapp.view.screens.onboarding.MedicationsSupplementsScreen
 import com.joohnq.moodapp.view.screens.onboarding.MoodRateScreen
@@ -17,36 +16,36 @@ import com.joohnq.moodapp.view.screens.onboarding.StressRateScreen
 fun NavGraphBuilder.onboardingNavGraph(
     navController: NavController,
 ) {
-    navigation<Screens.OnboardingGraph>(startDestination = Screens.OnboardingGraph.MoodRateScreen) {
-        composable<Screens.OnboardingGraph.MoodRateScreen> {
+    navigation<OnboardingGraph>(startDestination = OnboardingGraph.MoodRateScreen) {
+        composable<OnboardingGraph.MoodRateScreen> {
             MoodRateScreen(navigation = navController)
         }
-        composable<Screens.OnboardingGraph.ProfessionalHelpScreen> {
+        composable<OnboardingGraph.ProfessionalHelpScreen> {
             ProfessionalHelpScreen(
                 navigation = navController,
             )
         }
-        composable<Screens.OnboardingGraph.PhysicalSymptomsScreen> {
+        composable<OnboardingGraph.PhysicalSymptomsScreen> {
             PhysicalSymptomsScreen(
                 navigation = navController,
             )
         }
-        composable<Screens.OnboardingGraph.SleepQualityScreen> {
+        composable<OnboardingGraph.SleepQualityScreen> {
             SleepQualityScreen(
                 navigation = navController,
             )
         }
-        composable<Screens.OnboardingGraph.MedicationsSupplementsScreen> {
+        composable<OnboardingGraph.MedicationsSupplementsScreen> {
             MedicationsSupplementsScreen(
                 navigation = navController,
             )
         }
-        composable<Screens.OnboardingGraph.StressRateScreen> {
+        composable<OnboardingGraph.StressRateScreen> {
             StressRateScreen(
                 navigation = navController,
             )
         }
-        composable<Screens.OnboardingGraph.ExpressionAnalysisScreen> {
+        composable<OnboardingGraph.ExpressionAnalysisScreen> {
             ExpressionAnalysisScreen(
                 navigation = navController,
             )

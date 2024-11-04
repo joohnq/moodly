@@ -13,12 +13,18 @@ import org.jetbrains.compose.resources.StringResource
 sealed class FreudScore(
     open val score: Int,
     val title: StringResource,
+    val palette: FreudScorePalette
 ) {
     data class Healthy(
         override val score: Int,
     ) : FreudScore(
         score = score,
         title = Res.string.healthy,
+        palette = FreudScorePalette(
+            color = Colors.Green10,
+            subColor = Colors.Green40,
+            backgroundColor = Colors.Green50
+        )
     )
 
     data class MostlyHealthy(
@@ -26,6 +32,11 @@ sealed class FreudScore(
     ) : FreudScore(
         score = score,
         title = Res.string.mostly_healthy,
+        palette = FreudScorePalette(
+            color = Colors.Yellow10,
+            subColor = Colors.Yellow40,
+            backgroundColor = Colors.Yellow50
+        )
     )
 
     data class Stable(
@@ -33,6 +44,11 @@ sealed class FreudScore(
     ) : FreudScore(
         score = score,
         title = Res.string.stable,
+        palette = FreudScorePalette(
+            color = Colors.Brown20,
+            subColor = Colors.Brown40,
+            backgroundColor = Colors.Brown70
+        )
     )
 
     data class AtRisk(
@@ -40,6 +56,11 @@ sealed class FreudScore(
     ) : FreudScore(
         score = score,
         title = Res.string.at_risk,
+        palette = FreudScorePalette(
+            color = Colors.Orange10,
+            subColor = Colors.Orange30,
+            backgroundColor = Colors.Orange40
+        )
     )
 
     data class Unhealthy(
@@ -47,6 +68,11 @@ sealed class FreudScore(
     ) : FreudScore(
         score = score,
         title = Res.string.unhealthy,
+        palette = FreudScorePalette(
+            color = Colors.Purple10,
+            subColor = Colors.Purple30,
+            backgroundColor = Colors.Purple40
+        )
     )
 
     companion object {
@@ -62,38 +88,6 @@ sealed class FreudScore(
         }
 
         fun init(): FreudScore = Stable(50)
-
-        fun getPalette(value: FreudScore): FreudScorePalette = when (value) {
-            is Healthy -> FreudScorePalette(
-                color = Colors.Green10,
-                subColor = Colors.Green40,
-                backgroundColor = Colors.Green50
-            )
-
-            is MostlyHealthy -> FreudScorePalette(
-                color = Colors.Yellow10,
-                subColor = Colors.Yellow40,
-                backgroundColor = Colors.Yellow50
-            )
-
-            is Stable -> FreudScorePalette(
-                color = Colors.Brown20,
-                subColor = Colors.Brown40,
-                backgroundColor = Colors.Brown70
-            )
-
-            is AtRisk -> FreudScorePalette(
-                color = Colors.Orange10,
-                subColor = Colors.Orange30,
-                backgroundColor = Colors.Orange40
-            )
-
-            is Unhealthy -> FreudScorePalette(
-                color = Colors.Purple10,
-                subColor = Colors.Purple30,
-                backgroundColor = Colors.Purple40
-            )
-        }
     }
 }
 

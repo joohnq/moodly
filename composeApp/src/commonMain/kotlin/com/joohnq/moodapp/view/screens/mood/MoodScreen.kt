@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +30,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.entities.Icon
-import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithIcon
@@ -52,41 +50,39 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoodScreenUi(
-    padding: PaddingValues = PaddingValues(0.dp),
     statsRecord: StatsRecord,
     hasNext: Boolean,
     hasPrevious: Boolean,
     onPrevious: () -> Unit = {},
     onNext: () -> Unit = {},
-    onGoBack: () -> Unit = {}
+    onAction: (MoodAction) -> Unit = {}
 ) {
-    val moodPalette = remember { Mood.getPalette(statsRecord.mood) }
     Column {
         Box(
             modifier = Modifier.fillMaxWidth().wrapContentSize()
-                .background(color = moodPalette.backgroundColor),
+                .background(color = statsRecord.mood.palette.backgroundColor),
         ) {
             Box(
                 modifier = Modifier.matchParentSize().paint(
                     painter = painterResource(Drawables.Images.MoodBackground),
                     contentScale = ContentScale.FillBounds,
-                    colorFilter = ColorFilter.tint(color = moodPalette.subColor)
+                    colorFilter = ColorFilter.tint(color = statsRecord.mood.palette.subColor)
                 )
             )
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp).padding(top = padding.calculateTopPadding()),
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TopBarDark(Res.string.mood, onGoBack = onGoBack)
+                TopBarDark(Res.string.mood, onGoBack = { onAction(MoodAction.OnGoBack) })
                 Spacer(modifier = Modifier.height(60.dp))
                 Text(
                     text = stringResource(Res.string.your_mood_is), style = TextStyles.BoldXL(),
-                    color = moodPalette.color
+                    color = statsRecord.mood.palette.color
                 )
                 Text(
                     text = stringResource(statsRecord.mood.text),
                     style = TextStyles.ExtraBold2XL(),
-                    color = moodPalette.color
+                    color = statsRecord.mood.palette.color
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(
@@ -100,14 +96,14 @@ fun MoodScreenUi(
                             icon = Icon(
                                 icon = Drawables.Icons.ArrowChevron,
                                 modifier = Modifier.size(24.dp),
-                                tint = moodPalette.color,
+                                tint = statsRecord.mood.palette.color,
                                 contentDescription = Res.string.previous
                             ),
                             colors = ButtonColors(
                                 containerColor = Colors.Transparent,
-                                contentColor = moodPalette.color,
+                                contentColor = statsRecord.mood.palette.color,
                                 disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = moodPalette.color,
+                                disabledContentColor = statsRecord.mood.palette.color,
                             ),
                             modifier = Modifier.size(48.dp),
                         )
@@ -118,14 +114,14 @@ fun MoodScreenUi(
                             icon = Icon(
                                 icon = Drawables.Icons.ArrowChevron,
                                 modifier = Modifier.size(24.dp).rotate(180f),
-                                tint = moodPalette.color,
+                                tint = statsRecord.mood.palette.color,
                                 contentDescription = Res.string.next
                             ),
                             colors = ButtonColors(
                                 containerColor = Colors.Transparent,
-                                contentColor = moodPalette.color,
+                                contentColor = statsRecord.mood.palette.color,
                                 disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = moodPalette.color,
+                                disabledContentColor = statsRecord.mood.palette.color,
                             ),
                             modifier = Modifier.size(48.dp),
                         )
@@ -138,10 +134,9 @@ fun MoodScreenUi(
 
 @Composable
 fun MoodScreen(
-    padding: PaddingValues = PaddingValues(0.dp),
     statsRecord: StatsRecord,
-    onGoBack: () -> Unit,
-    moodsViewModel: MoodsViewModel = sharedViewModel()
+    moodsViewModel: MoodsViewModel = sharedViewModel(),
+    onAction: (MoodAction) -> Unit
 ) {
     val statsRecords =
         (moodsViewModel.statsRecords.collectAsState().value as UiState.Success<List<StatsRecord>>).data
@@ -155,11 +150,10 @@ fun MoodScreen(
     }
 
     MoodScreenUi(
-        padding = padding,
         statsRecord = currentStatsRecord,
         hasNext = hasNext != null,
         hasPrevious = hasPrevious != null,
-        onGoBack = onGoBack,
+        onAction = onAction,
         onPrevious = {
             if (hasPrevious != null) {
                 currentStatsRecord = hasPrevious as StatsRecord

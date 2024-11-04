@@ -25,12 +25,21 @@ import moodapp.composeapp.generated.resources.you_are_very_stressed_out
 import org.jetbrains.compose.resources.StringResource
 
 @Serializable
+data class StressLevelBrush(
+    @Contextual val color: Color,
+    @Contextual val backgroundColor: Color,
+    val gradient: List<@Contextual Color>
+)
+
+@Serializable
 sealed class StressLevel(
     val id: Int,
     @Contextual val value: StringResource,
     @Contextual val text: StringResource,
     @Contextual val subtitle: StringResource,
-    val level: Int
+    val level: Int,
+    val palette: StressLevelPalette,
+    val brush: StressLevelBrush
 ) {
     @Serializable
     data object One :
@@ -40,6 +49,12 @@ sealed class StressLevel(
             text = Res.string.you_are_not_stressed_out,
             subtitle = Res.string.level_one_zen,
             level = 1,
+            palette = StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10),
+            brush = StressLevelBrush(
+                color = Colors.Green50,
+                backgroundColor = Colors.Green10,
+                gradient = listOf(Colors.Green50, Colors.Green50)
+            )
         )
 
     @Serializable
@@ -50,6 +65,12 @@ sealed class StressLevel(
             text = Res.string.you_are_a_little_stressed_out,
             subtitle = Res.string.level_two_calm,
             level = 2,
+            palette = StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10),
+            brush = StressLevelBrush(
+                color = Colors.Yellow50,
+                backgroundColor = Colors.Yellow10,
+                gradient = listOf(Colors.Green50, Colors.Yellow50)
+            )
         )
 
     @Serializable
@@ -60,6 +81,12 @@ sealed class StressLevel(
             text = Res.string.you_are_neutral,
             subtitle = Res.string.level_three_normal,
             level = 3,
+            palette = StressLevelPalette(color = Colors.Brown80, backgroundColor = Colors.Brown40),
+            brush = StressLevelBrush(
+                color = Colors.Yellow50,
+                backgroundColor = Colors.Yellow10,
+                gradient = listOf(Colors.Yellow50, Colors.Yellow50)
+            )
         )
 
     @Serializable
@@ -70,6 +97,15 @@ sealed class StressLevel(
             text = Res.string.you_are_very_stressed_out,
             subtitle = Res.string.level_four_irritated,
             level = 4,
+            palette = StressLevelPalette(
+                color = Colors.Orange80,
+                backgroundColor = Colors.Orange20
+            ),
+            brush = StressLevelBrush(
+                color = Colors.Orange50,
+                backgroundColor = Colors.Orange10,
+                gradient = listOf(Colors.Yellow50, Colors.Orange50)
+            )
         )
 
     @Serializable
@@ -80,6 +116,15 @@ sealed class StressLevel(
             text = Res.string.you_are_extremely_stressed_out,
             subtitle = Res.string.level_five_angry,
             level = 5,
+            palette = StressLevelPalette(
+                color = Colors.Purple50,
+                backgroundColor = Colors.Purple10
+            ),
+            brush = StressLevelBrush(
+                color = Colors.Orange50,
+                backgroundColor = Colors.Orange10,
+                gradient = listOf(Colors.Orange50, Colors.Orange50)
+            )
         )
 
     companion object {
@@ -112,37 +157,5 @@ sealed class StressLevel(
             save = { fromValue(it) },
             restore = { toValue(it) }
         )
-
-        fun getPalette(value: StressLevel): StressLevelPalette = when (value) {
-            One -> StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10)
-            Two -> StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10)
-            Three -> StressLevelPalette(color = Colors.Brown80, backgroundColor = Colors.Brown40)
-            Four -> StressLevelPalette(color = Colors.Orange80, backgroundColor = Colors.Orange20)
-            Five -> StressLevelPalette(color = Colors.Purple50, backgroundColor = Colors.Purple10)
-        }
-
-        fun getBrushes(id: Int): List<Color> = when (id) {
-            ONE -> listOf(Colors.Green50, Colors.Green50)
-            TWO -> listOf(Colors.Green50, Colors.Yellow50)
-            THREE -> listOf(Colors.Yellow50, Colors.Yellow50)
-            FOUR -> listOf(Colors.Yellow50, Colors.Orange50)
-            else -> listOf(Colors.Orange50, Colors.Orange50)
-        }
-
-        fun getBushColor(id: Int): Color = when (id) {
-            ONE -> Colors.Green50
-            TWO -> Colors.Yellow50
-            THREE -> Colors.Yellow50
-            FOUR -> Colors.Orange50
-            else -> Colors.Orange50
-        }
-
-        fun getBushBackgroundColor(id: Int): Color = when (id) {
-            ONE -> Colors.Green10
-            TWO -> Colors.Yellow10
-            THREE -> Colors.Yellow10
-            FOUR -> Colors.Orange10
-            else -> Colors.Orange10
-        }
     }
 }

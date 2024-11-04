@@ -1,7 +1,6 @@
 package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.ui.graphics.Color
 import com.joohnq.moodapp.entities.palette.SleepQualityPalette
 import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.serialization.Contextual
@@ -24,14 +23,19 @@ sealed class SleepQuality(
     val id: Int,
     @Contextual val firstText: StringResource,
     @Contextual val secondText: StringResource,
-    val level: Int
+    val level: Int,
+    val palette: SleepQualityPalette
 ) {
     @Serializable
     data object Excellent : SleepQuality(
         id = EXCELLENT,
         firstText = Res.string.excellent,
         secondText = Res.string.seven_nine_hours,
-        level = 5
+        level = 5,
+        palette = SleepQualityPalette(
+            backgroundColor = Colors.Green10,
+            color = Colors.Green50
+        )
     )
 
     @Serializable
@@ -39,7 +43,8 @@ sealed class SleepQuality(
         id = GOOD,
         firstText = Res.string.good,
         secondText = Res.string.six_seven_hours,
-        level = 4
+        level = 4,
+        palette = SleepQualityPalette(backgroundColor = Colors.Yellow10, color = Colors.Yellow50)
     )
 
     @Serializable
@@ -47,7 +52,8 @@ sealed class SleepQuality(
         id = FAIR,
         firstText = Res.string.fair,
         secondText = Res.string.five_hours,
-        level = 3
+        level = 3,
+        palette = SleepQualityPalette(backgroundColor = Colors.Brown20, color = Colors.Brown80)
     )
 
     @Serializable
@@ -55,7 +61,8 @@ sealed class SleepQuality(
         id = POOR,
         firstText = Res.string.poor,
         secondText = Res.string.three_four_hours,
-        level = 2
+        level = 2,
+        palette = SleepQualityPalette(backgroundColor = Colors.Orange10, color = Colors.Orange50)
     )
 
     @Serializable
@@ -63,7 +70,8 @@ sealed class SleepQuality(
         id = WORST,
         firstText = Res.string.worst,
         secondText = Res.string.minus_three_hours,
-        level = 1
+        level = 1,
+        palette = SleepQualityPalette(backgroundColor = Colors.Purple10, color = Colors.Purple40)
     )
 
     companion object {
@@ -96,16 +104,5 @@ sealed class SleepQuality(
             save = { fromValue(it) },
             restore = { toValue(it) }
         )
-
-        fun getPalette(value: SleepQuality): SleepQualityPalette = when (value) {
-            Excellent -> SleepQualityPalette(
-                backgroundColor = Colors.Green10,
-                color = Colors.Green50
-            )
-            Good -> SleepQualityPalette(backgroundColor = Colors.Yellow10, color = Colors.Yellow50)
-            Fair -> SleepQualityPalette(backgroundColor = Colors.Brown20, color = Colors.Brown80)
-            Poor -> SleepQualityPalette(backgroundColor = Colors.Orange10, color = Colors.Orange50)
-            Worst -> SleepQualityPalette(backgroundColor = Colors.Purple10, color = Colors.Purple40)
-        }
     }
 }

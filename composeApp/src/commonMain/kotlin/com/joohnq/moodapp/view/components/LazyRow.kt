@@ -10,11 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.FreudScore
-import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.screens.home.action.HomeAction
+import com.joohnq.moodapp.view.screens.home.HomeAction
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
 import moodapp.composeapp.generated.resources.health_journal
@@ -24,11 +23,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MentalHealthMetrics(
     freudScore: FreudScore,
-    mood: Mood?,
+    statsRecord: StatsRecord,
     healthJournal: List<StatsRecord?>,
     onAction: (HomeAction) -> Unit,
 ) {
-    val freudScorePalette = FreudScore.getPalette(freudScore)
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -38,31 +36,38 @@ fun MentalHealthMetrics(
             MentalHealthMetricItem(
                 title = Res.string.freud_score,
                 icon = Drawables.Icons.Heart,
-                backgroundColor = freudScorePalette.backgroundColor,
+                backgroundColor = freudScore.palette.backgroundColor,
                 onClick = { onAction(HomeAction.OnNavigateToFreudScore) }
             ) {
                 CircularProgressWithText(
                     modifier = it.size(130.dp),
-                    color = freudScorePalette.color,
-                    backgroundColor = freudScorePalette.subColor,
+                    color = freudScore.palette.color,
+                    backgroundColor = freudScore.palette.subColor,
                     progress = { freudScore.score.toFloat() / 100 },
                 ) {
-                    Text(text = freudScore.score.toString(), style = TextStyles.FreudScore(), color = freudScorePalette.color)
-                    Text(text = stringResource(freudScore.title), style = TextStyles.FreudTitle(), color = freudScorePalette.color)
+                    Text(
+                        text = freudScore.score.toString(),
+                        style = TextStyles.FreudScore(),
+                        color = freudScore.palette.color
+                    )
+                    Text(
+                        text = stringResource(freudScore.title),
+                        style = TextStyles.FreudTitle(),
+                        color = freudScore.palette.color
+                    )
                 }
             }
         }
         item {
-            val moodPalette = Mood.getPalette(mood!!)
             MentalHealthMetricItem(
                 title = Res.string.mood,
                 icon = Drawables.Icons.SadFace,
-                backgroundColor = moodPalette.faceColor,
-                onClick = { onAction(HomeAction.OnNavigateToMood) }
+                backgroundColor = statsRecord.mood.palette.faceColor,
+                onClick = { onAction(HomeAction.OnNavigateToMood(statsRecord)) }
             ) {
                 MoodComponent(
                     it,
-                    mood
+                    statsRecord.mood
                 )
             }
         }

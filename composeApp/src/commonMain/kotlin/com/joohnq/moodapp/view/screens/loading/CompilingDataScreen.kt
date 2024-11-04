@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
@@ -27,12 +28,11 @@ import com.joohnq.moodapp.viewmodel.UserViewModel
 import org.koin.compose.viewmodel.koinNavViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun CompilingDataScreen(
     navigation: NavController,
-    moodsViewModel: MoodsViewModel = koinNavViewModel(),
-    userViewModel: UserViewModel = koinNavViewModel()
+    moodsViewModel: MoodsViewModel = sharedViewModel(),
+    userViewModel: UserViewModel = sharedViewModel()
 ) {
     val statsRecords by moodsViewModel.statsRecords.collectAsState()
     val user by userViewModel.user.collectAsState()

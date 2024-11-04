@@ -16,12 +16,16 @@ sealed class MentalMetric(
     val id: String,
     val title: StringResource,
     val icon: DrawableResource,
+    val palette: MentalMetricsPalette,
     open val content: @Composable (Modifier) -> Unit
 ) {
     data class FreudScore(override val content: @Composable (Modifier) -> Unit = {}) : MentalMetric(
         id = FREUD_SCORE,
         title = Res.string.freud_score,
         icon = Drawables.Icons.Heart,
+        palette = MentalMetricsPalette(
+            backgroundColor = Colors.Green50
+        ),
         content = content
     )
 
@@ -29,6 +33,9 @@ sealed class MentalMetric(
         id = MOOD,
         title = Res.string.mood,
         icon = Drawables.Icons.SadFace,
+        palette = MentalMetricsPalette(
+            backgroundColor = Colors.Orange40
+        ),
         content = content
     )
 
@@ -37,6 +44,9 @@ sealed class MentalMetric(
             id = HEALTH_JOURNAL,
             title = Res.string.health_journal,
             icon = Drawables.Icons.Document,
+            palette = MentalMetricsPalette(
+                backgroundColor = Colors.Purple30
+            ),
             content = content
         )
 
@@ -44,19 +54,5 @@ sealed class MentalMetric(
         private const val FREUD_SCORE = "0"
         private const val MOOD = "1"
         private const val HEALTH_JOURNAL = "2"
-
-        fun getPalette(value: MentalMetric): MentalMetricsPalette = when (value) {
-            is FreudScore -> MentalMetricsPalette(
-                backgroundColor = Colors.Green50
-            )
-
-            is Mood -> MentalMetricsPalette(
-                backgroundColor = Colors.Orange40
-            )
-
-            is HealthJournal -> MentalMetricsPalette(
-                backgroundColor = Colors.Purple30
-            )
-        }
     }
 }

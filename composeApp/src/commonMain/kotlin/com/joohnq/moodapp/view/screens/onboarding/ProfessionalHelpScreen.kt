@@ -28,9 +28,6 @@ import kotlinx.coroutines.withContext
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.koin.compose.koinInject
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.compose.viewmodel.koinNavViewModel as getViewModel
 
 @Composable
 fun ProfessionalHelpScreen(

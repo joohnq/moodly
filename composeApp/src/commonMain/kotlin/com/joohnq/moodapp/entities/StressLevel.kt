@@ -2,6 +2,7 @@ package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
+import com.joohnq.moodapp.entities.palette.StressLevelBrush
 import com.joohnq.moodapp.entities.palette.StressLevelPalette
 import com.joohnq.moodapp.view.constants.Colors
 import kotlinx.serialization.Contextual
@@ -25,13 +26,6 @@ import moodapp.composeapp.generated.resources.you_are_very_stressed_out
 import org.jetbrains.compose.resources.StringResource
 
 @Serializable
-data class StressLevelBrush(
-    @Contextual val color: Color,
-    @Contextual val backgroundColor: Color,
-    val gradient: List<@Contextual Color>
-)
-
-@Serializable
 sealed class StressLevel(
     val id: Int,
     @Contextual val value: StringResource,
@@ -53,7 +47,6 @@ sealed class StressLevel(
             brush = StressLevelBrush(
                 color = Colors.Green50,
                 backgroundColor = Colors.Green10,
-                gradient = listOf(Colors.Green50, Colors.Green50)
             )
         )
 
@@ -69,7 +62,6 @@ sealed class StressLevel(
             brush = StressLevelBrush(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
-                gradient = listOf(Colors.Green50, Colors.Yellow50)
             )
         )
 
@@ -85,7 +77,6 @@ sealed class StressLevel(
             brush = StressLevelBrush(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
-                gradient = listOf(Colors.Yellow50, Colors.Yellow50)
             )
         )
 
@@ -104,7 +95,6 @@ sealed class StressLevel(
             brush = StressLevelBrush(
                 color = Colors.Orange50,
                 backgroundColor = Colors.Orange10,
-                gradient = listOf(Colors.Yellow50, Colors.Orange50)
             )
         )
 
@@ -123,7 +113,6 @@ sealed class StressLevel(
             brush = StressLevelBrush(
                 color = Colors.Orange50,
                 backgroundColor = Colors.Orange10,
-                gradient = listOf(Colors.Orange50, Colors.Orange50)
             )
         )
 
@@ -156,6 +145,14 @@ sealed class StressLevel(
         fun getSaver(): Saver<StressLevel, Int> = Saver(
             save = { fromValue(it) },
             restore = { toValue(it) }
+        )
+
+        fun getBrushGradient(): List<List<Color>> = listOf(
+            listOf(Colors.Green50, Colors.Green50),
+            listOf(Colors.Green50, Colors.Yellow50),
+            listOf(Colors.Yellow50, Colors.Yellow50),
+            listOf(Colors.Yellow50, Colors.Orange50),
+            listOf(Colors.Orange50, Colors.Orange50)
         )
     }
 }

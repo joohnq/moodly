@@ -30,8 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithCheck
@@ -53,14 +52,15 @@ fun AddMoodScreenUi(
     moods: List<Mood>,
     selectedMood: Int,
     onSelectedMood: (Int) -> Unit = {},
-    onAction: (AddMoodAction) -> Unit = {}
+    onGoBack: () -> Unit = {},
+    onAction: (AddMoodIntent) -> Unit = {}
 ) {
     val mood = moods[selectedMood]
     Column(
         Modifier.background(color = mood.palette.moodScreenBackgroundColor).fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 30.dp),
     ) {
-        TopBarLight(onGoBack = { onAction(AddMoodAction.OnGoBack) })
+        TopBarLight(onGoBack = onGoBack)
         Spacer(modifier = Modifier.height(50.dp))
         Column(
             modifier = Modifier.weight(1f),
@@ -140,7 +140,7 @@ fun AddMoodScreenUi(
             ButtonWithCheck(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.set_mood,
-                onClick = { onSelectedMood(0) })
+                onClick = { })
         }
     }
 }
@@ -148,18 +148,20 @@ fun AddMoodScreenUi(
 @Composable
 fun AddMoodScreen(
     userViewModel: UserViewModel = sharedViewModel(),
-    onAction: (AddMoodAction) -> Unit
+    addMoodViewModel: AddMoodViewModel = sharedViewModel(),
+    navigation: NavHostController
 ) {
     val moods by remember { mutableStateOf(Mood.getAll()) }
     var selectedMood by remember { mutableStateOf(0) }
-    val user by userViewModel.user.collectAsState()
+    val userState by userViewModel.userState.collectAsState()
 
     AddMoodScreenUi(
-        userName = user.getValue().name,
+        userName = userState.user.getValue().name,
         moods = moods,
         selectedMood = selectedMood,
         onSelectedMood = { selectedMood = it },
-        onAction = onAction
+        onGoBack = navigation::popBackStack,
+        onAction = addMoodViewModel::onAction
     )
 }
 

@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.screens.onboarding
+package com.joohnq.moodapp.view.screens.getusername
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -23,6 +23,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,8 +38,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
@@ -46,32 +47,27 @@ import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
+import com.joohnq.moodapp.view.state.UiState.Companion.fold
+import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
 
 @Composable
-fun GetUserNameScreen(
-    navigation: NavController = rememberNavController(),
-    userViewModel: UserViewModel = sharedViewModel(),
-    userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
+fun GetUserNameScreenUI(
+    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
+    name: String,
+    nameError: String,
+    setName: (String) -> Unit,
+    setNameError: (String) -> Unit,
+    onAction: () -> Unit,
+    focusManager: FocusManager = LocalFocusManager.current
 ) {
-    var name by remember { mutableStateOf("") }
-    var nameError by remember { mutableStateOf("") }
-    val focusManager: FocusManager = LocalFocusManager.current
-    val snackBarState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-    val ioDispatcher: CoroutineDispatcher = koinInject()
-
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
         Box(
             modifier = Modifier
@@ -125,8 +121,8 @@ fun GetUserNameScreen(
                         name = name,
                         errorText = nameError,
                         onValueChange = {
-                            name = it
-                            nameError = ""
+                            setName(it)
+                            setNameError("")
                         }
                     )
                     Spacer(modifier = Modifier.height(24.dp))
@@ -137,25 +133,57 @@ fun GetUserNameScreen(
                 ) {
                     focusManager.clearFocus()
                     if (name.trim().isEmpty()) {
-                        nameError = "Name is required"
+                        setNameError("Name is required")
+                        return@ButtonWithArrowRight
                     }
 
-                    scope.launch(ioDispatcher) {
-                        val result = runCatching {
-                            userViewModel.setUserName(name) &&
-                                    userPreferencesViewModel.setSkipGetUserNameScreen()
-                        }
-                        if (result.isFailure) {
-                            snackBarState.showSnackbar("Something went wrong")
-                            return@launch
-                        }
-
-                        withContext(Dispatchers.Main) {
-                            navigation.onNavigateToCompilingData()
-                        }
-                    }
+                    onAction()
                 }
             }
         }
     }
+}
+
+@Composable
+fun GetUserNameScreen(
+    navigation: NavHostController,
+    userViewModel: UserViewModel = sharedViewModel(),
+    userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
+) {
+    val scope = rememberCoroutineScope()
+    var name by remember { mutableStateOf("") }
+    var nameError by remember { mutableStateOf("") }
+    val focusManager: FocusManager = LocalFocusManager.current
+    val snackBarState = remember { SnackbarHostState() }
+    val userState by userViewModel.userState.collectAsState()
+
+    LaunchedEffect(userState) {
+        userState.updatingStatus.fold(
+            onError = {
+                scope.launch {
+                    snackBarState.showSnackbar(it)
+                }
+            },
+            onSuccess = {
+                navigation.onNavigateToCompilingData()
+                userPreferencesViewModel.onAction(
+                    UserPreferenceIntent.UpdateSkipOnboardingScreen(
+                        true
+                    )
+                )
+            }
+        )
+    }
+
+    GetUserNameScreenUI(
+        name = name,
+        nameError = nameError,
+        snackBarState = snackBarState,
+        focusManager = focusManager,
+        setName = { name = it },
+        setNameError = { nameError = it },
+        onAction = {
+            userViewModel.updateUserName(name)
+        },
+    )
 }

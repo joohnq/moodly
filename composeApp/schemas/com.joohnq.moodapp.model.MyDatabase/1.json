@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c9154d88c7c0280aa5493b3e5008cdb7",
+    "identityHash": "8a9619be0bd2a00ff079c4ebdc564633",
     "entities": [
       {
         "tableName": "StatsRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `sleep_quality` INTEGER NOT NULL, `stress_level` INTEGER NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -18,18 +18,6 @@
             "fieldPath": "mood",
             "columnName": "mood",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "sleepQuality",
-            "columnName": "sleep_quality",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "stressLevel",
-            "columnName": "stress_level",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -129,11 +117,71 @@
             "id"
           ]
         }
+      },
+      {
+        "tableName": "StressLevelRecord",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stress_level` INTEGER NOT NULL, `date` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stressLevel",
+            "columnName": "stress_level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "SleepQualityRecord",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sleep_quality` INTEGER NOT NULL, `date` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepQuality",
+            "columnName": "sleep_quality",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c9154d88c7c0280aa5493b3e5008cdb7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8a9619be0bd2a00ff079c4ebdc564633')"
     ]
   }
 }

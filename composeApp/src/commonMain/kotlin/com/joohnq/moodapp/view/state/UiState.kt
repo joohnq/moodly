@@ -1,5 +1,6 @@
 package com.joohnq.moodapp.view.state
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 
 sealed class UiState<out T> {
@@ -62,6 +63,12 @@ sealed class UiState<out T> {
                 else -> throw IllegalStateException("UiState is not Success")
             }
 
+        fun <T> UiState<List<T>>.getValue(): List<T> =
+            when (this) {
+                is Success -> this.data
+                else -> throw IllegalStateException("UiState is not Success")
+            }
+
         fun <T> UiState<T>.onSuccess(
             onSuccess: (T) -> Unit = {},
         ) {
@@ -85,6 +92,19 @@ sealed class UiState<out T> {
         ) {
             when (this) {
                 is Error -> onError(this.message)
+                else -> {}
+            }
+        }
+
+        suspend fun <T> UiState<T>.showErrorOrUnit(
+            snackBar: SnackbarHostState
+        ) {
+            when (this) {
+                is Error -> {
+                    val error = this.message
+                    snackBar.showSnackbar(error)
+                }
+
                 else -> {}
             }
         }

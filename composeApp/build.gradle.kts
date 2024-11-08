@@ -4,7 +4,6 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -77,7 +76,6 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.koin.compose.navigation)
             implementation(libs.lifecycle.viewmodel)
 
             // Koin need these dependencies
@@ -88,7 +86,7 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
-            implementation("com.eygraber:uri-kmp:0.0.18")
+            implementation(libs.uri.kmp)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -143,7 +141,7 @@ android {
     }
 }
 
-room{
+room {
     schemaDirectory("$projectDir/schemas")
 }
 
@@ -157,6 +155,7 @@ dependencies {
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
 }
 
 compose.desktop {

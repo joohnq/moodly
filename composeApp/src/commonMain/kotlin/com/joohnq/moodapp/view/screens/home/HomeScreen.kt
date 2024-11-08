@@ -26,9 +26,10 @@ import com.joohnq.moodapp.view.components.HomeTopBar
 import com.joohnq.moodapp.view.components.MentalHealthMetrics
 import com.joohnq.moodapp.view.components.MindfulTracker
 import com.joohnq.moodapp.view.components.Title
-import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.UiState.Companion.getValueOrNull
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 
 @Composable
@@ -37,6 +38,8 @@ fun HomeScreenUi(
     padding: PaddingValues = PaddingValues(0.dp),
     userName: String,
     statsRecord: StatsRecord,
+    sleepQuality: SleepQuality,
+    stressLevel: StressLevel,
     freudScore: FreudScore,
     moodTracker: List<Mood>,
     healthJournal: List<StatsRecord?>,
@@ -60,8 +63,8 @@ fun HomeScreenUi(
         )
         Title("Mindful Tracker")
         MindfulTracker(
-            sleepQuality = statsRecord.sleepQuality,
-            stressLevel = statsRecord.stressLevel,
+            sleepQuality = sleepQuality,
+            stressLevel = stressLevel,
             moodTracker = moodTracker
         )
     }
@@ -70,25 +73,29 @@ fun HomeScreenUi(
 @Composable
 fun HomeScreen(
     padding: PaddingValues,
-    moodsViewModel: MoodsViewModel = sharedViewModel(),
+    statsViewModel: StatsViewModel = sharedViewModel(),
+    sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
+    stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
     userViewModel: UserViewModel = sharedViewModel(),
     onAction: (HomeAction) -> Unit,
 ) {
     val today = DatetimeHelper.getDateTime()
-    val user = userViewModel.user.value.getValueOrNull()!!
-    val statsRecords =
-        (moodsViewModel.statsRecords.collectAsState().value as UiState.Success<List<StatsRecord>>).data
-    val freudScore by moodsViewModel.freudScore.collectAsState()
-    val healthJournal by moodsViewModel.healthJournal.collectAsState()
+    val userState by userViewModel.userState.collectAsState()
+    val moodsState by statsViewModel.statsState.collectAsState()
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
+    val stressLevel by stressLevelViewModel.stressLevelState.collectAsState()
+    val statsRecord = moodsState.statsRecords.getValue()
 
     HomeScreenUi(
         today = today,
         padding = padding,
-        userName = user.name,
-        statsRecord = statsRecords.first(),
-        moodTracker = statsRecords.take(3).map { it.mood },
-        freudScore = freudScore,
-        healthJournal = healthJournal,
+        userName = userState.user.getValue().name,
+        statsRecord = statsRecord.first(),
+        moodTracker = statsRecord.take(3).map { it.mood },
+        freudScore = moodsState.freudScore,
+        healthJournal = moodsState.healthJournal,
+        sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
+        stressLevel = stressLevel.items.getValue().first().stressLevel,
         onAction = onAction
     )
 }
@@ -99,14 +106,14 @@ fun HomeScreenPreview() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-            sleepQuality = SleepQuality.Excellent,
-            stressLevel = StressLevel.One,
             mood = Mood.Overjoyed,
         ),
         freudScore = FreudScore.fromScore(80),
         moodTracker = listOf(
 
         ),
+        sleepQuality = SleepQuality.Excellent,
+        stressLevel = StressLevel.One,
         healthJournal = listOf(
             StatsRecord.init()
         ),
@@ -119,14 +126,15 @@ fun HomeScreenPreview2() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-            sleepQuality = SleepQuality.Good,
-            stressLevel = StressLevel.Two,
+
             mood = Mood.Happy
         ),
         freudScore = FreudScore.fromScore(60),
         moodTracker = listOf(
 
         ),
+        sleepQuality = SleepQuality.Good,
+        stressLevel = StressLevel.Two,
         healthJournal = listOf(
             StatsRecord.init()
         )
@@ -139,14 +147,15 @@ fun HomeScreenPreview3() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-            sleepQuality = SleepQuality.Fair,
-            stressLevel = StressLevel.Three,
+
             mood = Mood.Neutral,
         ),
         freudScore = FreudScore.fromScore(40),
         moodTracker = listOf(
 
         ),
+        sleepQuality = SleepQuality.Fair,
+        stressLevel = StressLevel.Three,
         healthJournal = listOf(
             StatsRecord.init()
         )
@@ -159,14 +168,15 @@ fun HomeScreenPreview4() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-            sleepQuality = SleepQuality.Poor,
-            stressLevel = StressLevel.Four,
+
             mood = Mood.Sad,
         ),
         freudScore = FreudScore.fromScore(20),
         moodTracker = listOf(
 
         ),
+        sleepQuality = SleepQuality.Poor,
+        stressLevel = StressLevel.Four,
         healthJournal = listOf(
             StatsRecord.init()
         )
@@ -179,14 +189,15 @@ fun HomeScreenPreview5() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-            sleepQuality = SleepQuality.Worst,
-            stressLevel = StressLevel.Five,
+
             mood = Mood.Depressed,
         ),
         freudScore = FreudScore.fromScore(0),
         moodTracker = listOf(
 
         ),
+        sleepQuality = SleepQuality.Worst,
+        stressLevel = StressLevel.Five,
         healthJournal = listOf(
             StatsRecord.init()
         )

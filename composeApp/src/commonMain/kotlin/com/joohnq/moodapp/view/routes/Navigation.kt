@@ -3,18 +3,10 @@ package com.joohnq.moodapp.view.routes
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.view.screens.AddMoodScreen
-import com.joohnq.moodapp.view.screens.CompilingDataScreen
-import com.joohnq.moodapp.view.screens.FreudScoreScreen
-import com.joohnq.moodapp.view.screens.GetUserNameScreen
-import com.joohnq.moodapp.view.screens.HealthJournalScreen
-import com.joohnq.moodapp.view.screens.HomeGraph
-import com.joohnq.moodapp.view.screens.MoodScreen
-import com.joohnq.moodapp.view.screens.OnboardingGraph
-import com.joohnq.moodapp.view.screens.WelcomeScreen
+import com.joohnq.moodapp.view.screens.Screens
 
 fun NavController.onNavigateToHomeGraph() {
-    navigate(HomeGraph) {
+    navigate(Screens.HomeGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -23,7 +15,7 @@ fun NavController.onNavigateToHomeGraph() {
 }
 
 fun NavController.onNavigateToWelcomeScreen() {
-    navigate(WelcomeScreen) {
+    navigate(Screens.WelcomeScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -32,7 +24,7 @@ fun NavController.onNavigateToWelcomeScreen() {
 }
 
 fun NavController.onNavigateToOnboardingScreen() {
-    navigate(OnboardingGraph) {
+    navigate(Screens.OnboardingGraph) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -41,7 +33,7 @@ fun NavController.onNavigateToOnboardingScreen() {
 }
 
 fun NavController.onNavigateToGetUserNameScreen() {
-    navigate(GetUserNameScreen) {
+    navigate(Screens.GetUserNameScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -50,7 +42,7 @@ fun NavController.onNavigateToGetUserNameScreen() {
 }
 
 fun NavController.onNavigateToCompilingData() {
-    navigate(CompilingDataScreen) {
+    navigate(Screens.CompilingDataScreen) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }
@@ -59,43 +51,43 @@ fun NavController.onNavigateToCompilingData() {
 }
 
 fun NavController.onNavigateToProfessionalHelp() {
-    navigate(OnboardingGraph.ProfessionalHelpScreen)
+    navigate(Screens.OnboardingGraph.ProfessionalHelpScreen)
 }
 
 fun NavController.onNavigateToPhysicalSymptoms() {
-    navigate(OnboardingGraph.PhysicalSymptomsScreen)
+    navigate(Screens.OnboardingGraph.PhysicalSymptomsScreen)
 }
 
 fun NavController.onNavigateToSleepQuality() {
-    navigate(OnboardingGraph.SleepQualityScreen)
+    navigate(Screens.OnboardingGraph.SleepQualityScreen)
 }
 
 fun NavController.onNavigateToMedicationsSupplements() {
-    navigate(OnboardingGraph.MedicationsSupplementsScreen)
+    navigate(Screens.OnboardingGraph.MedicationsSupplementsScreen)
 }
 
 fun NavController.onNavigateToStressRate() {
-    navigate(OnboardingGraph.StressRateScreen)
+    navigate(Screens.OnboardingGraph.StressLevelScreen)
 }
 
 fun NavController.onNavigateToExpressionAnalysis() {
-    navigate(OnboardingGraph.ExpressionAnalysisScreen)
+    navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
 }
 
 fun NavController.onNavigateToFreudScore() {
-    navigate(FreudScoreScreen)
+    navigate(Screens.FreudScoreScreen)
 }
 
 fun NavController.onNavigateToMood(statsRecord: StatsRecord) {
-    navigate(MoodScreen(statsRecord))
+    navigate(Screens.MoodScreen(statsRecord))
 }
 
 fun NavController.onNavigateToHealthJournal() {
-    navigate(HealthJournalScreen)
+    navigate(Screens.HealthJournalScreen)
 }
 
 fun NavController.onNavigateToAddMood() {
-    navigate(AddMoodScreen) {
+    navigate(Screens.AddMoodScreen) {
         popUpTo(graph.findStartDestination().id) {
             saveState = true
         }
@@ -104,7 +96,7 @@ fun NavController.onNavigateToAddMood() {
     }
 }
 
-fun NavController.onNavigateToRoute(route: Any) {
+fun NavController.onNavigateToRoute(route: Screens) {
     navigate(route) {
         popUpTo(graph.findStartDestination().id) {
             saveState = true

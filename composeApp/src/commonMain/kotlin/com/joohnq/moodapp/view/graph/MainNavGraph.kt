@@ -24,12 +24,7 @@ import com.joohnq.moodapp.view.routes.onNavigateToFreudScore
 import com.joohnq.moodapp.view.routes.onNavigateToHealthJournal
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
-import com.joohnq.moodapp.view.screens.AddMoodScreen
-import com.joohnq.moodapp.view.screens.FreudScoreScreen
-import com.joohnq.moodapp.view.screens.HealthJournalScreen
-import com.joohnq.moodapp.view.screens.HomeGraph
-import com.joohnq.moodapp.view.screens.MoodScreen
-import com.joohnq.moodapp.view.screens.add.AddMoodAction
+import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreAction
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
@@ -39,20 +34,24 @@ import com.joohnq.moodapp.view.screens.home.HomeScreen
 import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
 import com.joohnq.moodapp.view.screens.mood.MoodAction
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
+import com.joohnq.moodapp.view.screens.sleepquality.SleepQualityScreen
+import com.joohnq.moodapp.view.screens.stresslevel.StressLevelScreen
 import kotlin.reflect.typeOf
 
 fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
-    composable<HomeGraph> {
+    composable<Screens.HomeGraph> {
         HomeNavGraph(navHostController = navHostController)
     }
-    composable<AddMoodScreen> {
-        AddMoodScreen { action ->
-            when (action) {
-                is AddMoodAction.OnGoBack -> navHostController.popBackStack()
-            }
-        }
+    composable<Screens.AddMoodScreen> {
+        AddMoodScreen(navigation = navHostController)
     }
-    composable<FreudScoreScreen> {
+    composable<Screens.SleepQualityScreen> {
+        SleepQualityScreen(navigation = navHostController)
+    }
+    composable<Screens.StressLevelScreen> {
+        StressLevelScreen(navigation = navHostController)
+    }
+    composable<Screens.FreudScoreScreen> {
         FreudScoreScreen { action ->
             when (action) {
                 is FreudScoreAction.OnGoBack -> navHostController.popBackStack()
@@ -60,18 +59,18 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
             }
         }
     }
-    composable<MoodScreen>(
+    composable<Screens.MoodScreen>(
         typeMap = mapOf(typeOf<StatsRecord>() to StatsRecord.navType()),
     ) { navBackStackEntry ->
         val statsRecord =
-            navBackStackEntry.toRoute<MoodScreen>().statsRecord
+            navBackStackEntry.toRoute<Screens.MoodScreen>().statsRecord
         MoodScreen(statsRecord = statsRecord) { action ->
             when (action) {
                 is MoodAction.OnGoBack -> navHostController.popBackStack()
             }
         }
     }
-    composable<HealthJournalScreen> {
+    composable<Screens.HealthJournalScreen> {
         HealthJournalScreen()
     }
 }
@@ -91,10 +90,10 @@ fun HomeNavGraph(navHostController: NavHostController) {
         )
         NavHost(
             navController = homeNavController,
-            startDestination = HomeGraph.HomeScreen,
+            startDestination = Screens.HomeGraph.HomeScreen,
             modifier = Modifier.fillMaxSize()
         ) {
-            composable<HomeGraph.HomeScreen> {
+            composable<Screens.HomeGraph.HomeScreen> {
                 HomeScreen(
                     padding = padding,
                     onAction = { action ->
@@ -111,7 +110,7 @@ fun HomeNavGraph(navHostController: NavHostController) {
                     }
                 )
             }
-            composable<HomeGraph.JournalingScreen> {
+            composable<Screens.HomeGraph.JournalingScreen> {
                 JournalingScreen(padding = padding)
             }
         }

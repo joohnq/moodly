@@ -30,11 +30,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.joohnq.moodapp.entities.BottomScreens
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.screens.Screens
 import org.jetbrains.compose.resources.painterResource
 
 sealed class BottomNavigationAction {
     data object OnNavigateToAddMood : BottomNavigationAction()
-    data class OnNavigateToRoute(val route: Any) : BottomNavigationAction()
+    data class OnNavigateToRoute(val route: Screens) : BottomNavigationAction()
 }
 
 @Composable

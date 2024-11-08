@@ -16,24 +16,20 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TopBarDark
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TextWithBackground
+import com.joohnq.moodapp.view.components.TopBarDark
 import com.joohnq.moodapp.view.constants.Colors
-import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
 import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.page_of
-import moodapp.composeapp.generated.resources.something_went_wrong
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -42,22 +38,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingBaseComponent(
     page: Int,
+    snackBarState: SnackbarHostState,
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
-    onContinue: (() -> Unit) -> Unit = {},
-    onBack: () -> Unit,
+    onContinue: () -> Unit = {},
+    onGoBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    val snackBarState = remember { SnackbarHostState() }
-    val somethingWentWrongText = stringResource(Res.string.something_went_wrong)
-    val scope = rememberCoroutineScope()
-
-    fun onSomethingWentWrong(): () -> Unit = {
-        scope.launch {
-            snackBarState.showSnackbar(somethingWentWrongText)
-        }
-    }
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarState) },
         containerColor = Colors.Brown10,
@@ -70,8 +58,8 @@ fun OnboardingBaseComponent(
         ) {
             TopBarDark(
                 text = Res.string.assessments,
-                onGoBack = onBack
-            ){
+                onGoBack = onGoBack
+            ) {
                 TextWithBackground(
                     stringResource(Res.string.page_of, page, 7),
                     borderColor = Colors.Transparent,
@@ -95,12 +83,12 @@ fun OnboardingBaseComponent(
             )
             Spacer(modifier = Modifier.height(24.dp))
             content()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             if (isContinueButtonVisible) {
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
                     text = Res.string.continue_word,
-                    onClick = { onContinue(::onSomethingWentWrong) }
+                    onClick = onContinue
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }

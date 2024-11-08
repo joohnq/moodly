@@ -32,10 +32,12 @@ import moodapp.composeapp.generated.resources.mood_tracker
 import moodapp.composeapp.generated.resources.stress_level
 import org.jetbrains.compose.resources.stringResource
 
-@Composable
-fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTracker: List<Mood>) {
-    MindfulTrackerCardRow(
-        icon = Drawables.Icons.HospitalBed,
+@Composable fun MindfulTracker(
+    sleepQuality: SleepQuality,
+    stressLevel: StressLevel,
+    moodTracker: List<Mood>
+) {
+    MindfulTrackerCardRow(icon = Drawables.Icons.HospitalBed,
         color = sleepQuality.palette.color,
         backgroundColor = sleepQuality.palette.backgroundColor,
         title = sleepQuality.firstText,
@@ -48,17 +50,14 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                 progress = { sleepQuality.level * 0.2f },
             ) {
                 Text(
-                    text = sleepQuality.level.toString(),
-                    style = TextStyles.SleepQualityOption()
+                    text = sleepQuality.level.toString(), style = TextStyles.SleepQualityOption()
                 )
             }
-        }
-    ) {
+        }) {
 
     }
     Spacer(modifier = Modifier.height(16.dp))
-    MindfulTrackerCardRow(
-        icon = Drawables.Icons.DocumentHealth,
+    MindfulTrackerCardRow(icon = Drawables.Icons.DocumentHealth,
         color = Colors.Orange40,
         backgroundColor = Colors.Orange10,
         title = Res.string.mindful_journal,
@@ -78,24 +77,19 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                     }
 
                     Box(
-                        modifier = Modifier
-                            .size(12.dp)
-                            .background(
-                                color = background,
-                                shape = RoundedCornerShape(4.dp)
+                        modifier = Modifier.size(12.dp).background(
+                                color = background, shape = RoundedCornerShape(4.dp)
                             ),
                     )
                 }
             }
-        }
-    ) {
+        }) {
 
     }
     Spacer(modifier = Modifier.height(16.dp))
-    MindfulTrackerCardColumn(
-        icon = Drawables.Icons.Head,
+    MindfulTrackerCardColumn(icon = Drawables.Icons.Head,
         color = stressLevel.brush.color,
-        backgroundColor =stressLevel.brush.backgroundColor,
+        backgroundColor = stressLevel.brush.backgroundColor,
         title = Res.string.stress_level,
         subtitle = stressLevel.subtitle,
         content = {
@@ -105,27 +99,23 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                     for (i in 1..5) {
                         val isSelected = i <= stressLevel.level
                         val background = if (isSelected) Modifier.background(
-                            brush = Brush.linearGradient(stressLevel.brush.gradient),
+                            brush = Brush.linearGradient(StressLevel.getBrushGradient()[i - 1]),
                             shape = CircleShape
                         )
                         else Modifier.background(
-                            color = Colors.Brown20,
-                            shape = CircleShape
+                            color = Colors.Brown20, shape = CircleShape
                         )
                         Box(
-                            modifier = Modifier.width(boxWidth).height(6.dp)
-                                .then(background)
+                            modifier = Modifier.width(boxWidth).height(6.dp).then(background)
                         )
                     }
                 }
             }
-        }
-    ) {
+        }) {
 
     }
     Spacer(modifier = Modifier.height(16.dp))
-    MindfulTrackerCardColumn(
-        icon = Drawables.Icons.HappyFace,
+    MindfulTrackerCardColumn(icon = Drawables.Icons.HappyFace,
         color = Colors.Brown80,
         backgroundColor = Colors.Brown10,
         title = Res.string.mood_tracker,
@@ -134,8 +124,7 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                 for (mood in moodTracker) {
                     Box(
                         modifier = Modifier.background(
-                            color = mood.palette.backgroundColor,
-                            shape = CircleShape
+                            color = mood.palette.backgroundColor, shape = CircleShape
                         ).padding(vertical = 8.dp, horizontal = 12.dp),
                     ) {
                         Text(
@@ -147,8 +136,7 @@ fun MindfulTracker(sleepQuality: SleepQuality, stressLevel: StressLevel, moodTra
                     }
                 }
             }
-        }
-    ) {
+        }) {
 
     }
 

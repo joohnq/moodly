@@ -1,48 +1,64 @@
 package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.moodapp.model.dao.StatsRecordDAO
+import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.view.state.UiState
+import com.joohnq.moodapp.entities.User
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
-class OnboardingViewModel(
-    private val statsRecordDAO: StatsRecordDAO,
-) : ViewModel() {
-    private val _statsRecord:
-            MutableStateFlow<StatsRecord> = MutableStateFlow(StatsRecord.init())
-    val statsRecord: MutableStateFlow<StatsRecord> = _statsRecord
+data class OnboardingState(
+    val user: User = User.init(),
+    val statsRecord: StatsRecord = StatsRecord.init(),
+    val sleepQuality: SleepQuality = SleepQuality.Worst,
+    val stressLevel: StressLevel = StressLevel.Three,
+)
 
-    fun setStatsRecordMood(mood: Mood) {
-        _statsRecord.value = statsRecord.value.copy(mood = mood)
+class OnboardingViewModel : ViewModel() {
+    private val _onboardingState = MutableStateFlow(OnboardingState())
+    val onboardingState: StateFlow<OnboardingState> = _onboardingState.asStateFlow()
+
+    fun updateSleepQuality(sleepQuality: SleepQuality) {
+        _onboardingState.update { it.copy(sleepQuality = sleepQuality) }
     }
 
-    fun setStatsRecordSleepQuality(sleepQuality: SleepQuality) {
-        _statsRecord.value = statsRecord.value.copy(sleepQuality = sleepQuality)
+    fun updateStressLevel(stressLevel: StressLevel) {
+        _onboardingState.update { it.copy(stressLevel = stressLevel) }
     }
 
-    fun setStatsRecordDescription(description: String) {
-        _statsRecord.value =
-            statsRecord.value.copy(description = description)
+    fun updateMood(mood: Mood) {
+        _onboardingState.update { it.copy(statsRecord = it.statsRecord.copy(mood = mood)) }
     }
 
-    fun setStatsRecordStressLevel(stressLevel: StressLevel) {
-        _statsRecord.value =
-            statsRecord.value.copy(stressLevel = stressLevel)
+    fun updateUserMedicationsSupplements(
+        medicationsSupplements: MedicationsSupplements,
+    ) {
+        _onboardingState.update { it.copy(user = it.user.copy(medicationsSupplements = medicationsSupplements)) }
     }
 
-    suspend fun insertOnboardingStatsRecord(): Boolean = executeWithBoolean {
-        statsRecordDAO.insertMood(statsRecord.value)
+    fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) {
+        _onboardingState.update { it.copy(user = it.user.copy(physicalSymptoms = physicalSymptoms)) }
+    }
+
+    fun updateUserSoughtHelp(soughtHelp: Boolean) {
+        _onboardingState.update { it.copy(user = it.user.copy(soughtHelp = soughtHelp)) }
+    }
+
+    fun updateStatsRecordDescription(description: String) {
+        _onboardingState.update { it.copy(statsRecord = it.statsRecord.copy(description = description)) }
     }
 
     fun resetStatsRecord() {
-        _statsRecord.value = StatsRecord.init()
+        _onboardingState.update { it.copy(statsRecord = StatsRecord.init()) }
     }
 
     fun setCurrentStatsRecord(statsRecord: StatsRecord) {
-        _statsRecord.value = statsRecord
+        _onboardingState.update { it.copy(statsRecord = statsRecord) }
     }
 }

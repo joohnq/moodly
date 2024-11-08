@@ -16,10 +16,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
-class DateTimeViewModel() : ViewModel() {
+class DateTimeViewModel : ViewModel() {
     private val _today:
-            MutableStateFlow<LocalDate?> = MutableStateFlow(null)
-    val today: MutableStateFlow<LocalDate?> = _today
+            MutableStateFlow<LocalDate> = MutableStateFlow(DatetimeHelper.getLocalDate())
+    val today: MutableStateFlow<LocalDate> = _today
 
     fun getTodayLocalDate(){
         _today.value = DatetimeHelper.getLocalDate()

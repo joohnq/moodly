@@ -2,63 +2,72 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.model.dao.UserDAO
-import com.joohnq.moodapp.entities.MedicationsSupplements
-import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.entities.User
+import com.joohnq.moodapp.model.repository.UserRepository
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class UserViewModel(
-    private val userDAO: UserDAO,
-    private val ioDispatcher: CoroutineDispatcher
-) : ViewModel() {
-    private val _user: MutableStateFlow<UiState<User>> = MutableStateFlow(UiState.Idle)
-    val user: StateFlow<UiState<User>> = _user
+data class UserState(
+    val user: UiState<User> = UiState.Idle,
+    val addingStatus: UiState<Boolean> = UiState.Idle,
+    val updatingStatus: UiState<Boolean> = UiState.Idle
+)
 
-    fun getUser() = viewModelScope.launch {
-        try {
-            val user = userDAO.getUser()
-            _user.value = UiState.Success(user)
-        } catch (e: Exception) {
-            _user.value = UiState.Error(e.message.toString())
+class UserViewModel(
+    private val userRepository: UserRepository,
+    private val dispatcher: CoroutineDispatcher
+) : ViewModel() {
+    private val _userState: MutableStateFlow<UserState> = MutableStateFlow(UserState())
+    val userState: StateFlow<UserState> = _userState
+
+    fun initUser() = viewModelScope.launch(dispatcher) {
+        val res = userRepository.initUser()
+    }
+
+    fun updateUser(user: User) = viewModelScope.launch(dispatcher) {
+        _userState.update { it.copy(addingStatus = UiState.Loading) }
+
+        val res = userRepository.updateUser(user)
+
+        _userState.update {
+            it.copy(
+                addingStatus = if (res) UiState.Success(true) else UiState.Error(
+                    "Failure to set user"
+                )
+            )
         }
     }
 
-    suspend fun iniUser() = executeWithBoolean(userDAO::initUser)
 
-    /*
-    * Insert in the database if the user already sought professional help
-    * Tested
-    * */
-    suspend fun setUserSoughtHelp(soughtHelp: Boolean)  = executeWithBoolean{
-       userDAO.setUserSoughtHelp(soughtHelp)
+    fun getUser() = viewModelScope.launch(dispatcher) {
+        _userState.update {
+            it.copy(user = UiState.Loading)
+        }
+        try {
+            val user = userRepository.getUser()
+            _userState.update {
+                it.copy(user = UiState.Success(user))
+            }
+        } catch (e: Exception) {
+            _userState.update {
+                it.copy(user = UiState.Error(e.message.toString()))
+            }
+        }
     }
 
-    /*
-    * Insert in the database if the user is experiencing physical pain
-    * Tested
-    * */
-    suspend fun setUserPhysicalPain(physicalSymptoms: PhysicalSymptoms) = executeWithBoolean{
-        userDAO.setUserPhysicalPain(physicalSymptoms)
-    }
+    fun updateUserName(name: String) = viewModelScope.launch(dispatcher) {
+        val res = userRepository.updateUserName(name)
 
-    /*
-   * Insert in the database if the user is taking any medications or supplements
-   * Tested
-   * */
-    suspend fun setUserMedicationsSupplements(medicationsSupplements: MedicationsSupplements) = executeWithBoolean{
-        userDAO.setUserMedicationsSupplements(medicationsSupplements)
-    }
-
-    /*
-  * Insert in the database the user name
-  * Tested
-  * */
-    suspend fun setUserName(name: String) = executeWithBoolean {
-        userDAO.setUserName(name)
+        _userState.update {
+            it.copy(
+                updatingStatus = if (res) UiState.Success(true) else UiState.Error(
+                    "Failure to set user"
+                )
+            )
+        }
     }
 }

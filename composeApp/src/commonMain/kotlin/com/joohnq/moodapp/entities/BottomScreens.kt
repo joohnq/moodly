@@ -1,8 +1,7 @@
 package com.joohnq.moodapp.entities
 
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.screens.AddMoodScreen
-import com.joohnq.moodapp.view.screens.HomeGraph
+import com.joohnq.moodapp.view.screens.Screens
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.DrawableResource
@@ -14,23 +13,23 @@ sealed class BottomScreens<T>(
     val route: T
 ) {
     @Serializable
-    data object Home : BottomScreens<HomeGraph.HomeScreen>(
+    data object Home : BottomScreens<Screens.HomeGraph.HomeScreen>(
         name = "Home",
         icon = Drawables.Icons.Home,
-        route = HomeGraph.HomeScreen
+        route = Screens.HomeGraph.HomeScreen
     )
 
     @Serializable
-    data object Add : BottomScreens<AddMoodScreen>(
+    data object Add : BottomScreens<Screens.AddMoodScreen>(
         name = "Add",
         icon = Drawables.Icons.Add,
-        route = AddMoodScreen
+        route = Screens.AddMoodScreen
     )
 
     @Serializable
-    data object Journaling : BottomScreens<HomeGraph.JournalingScreen>(
+    data object Journaling : BottomScreens<Screens.HomeGraph.JournalingScreen>(
         name = "Journaling",
         icon = Drawables.Icons.Chat,
-        route = HomeGraph.JournalingScreen
+        route = Screens.HomeGraph.JournalingScreen
     )
 }

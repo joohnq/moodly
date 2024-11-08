@@ -21,8 +21,6 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
@@ -33,7 +31,7 @@ import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
 import org.jetbrains.compose.resources.painterResource
@@ -75,7 +73,13 @@ fun FreudScoreScreenUi(
         statsRecords.onSuccessComposable { statsRecords ->
             LazyColumn {
                 items(statsRecords) { statsRecord ->
-                    MentalScoreHistoryItem(statsRecord) { onAction(FreudScoreAction.OnNavigateToMood(statsRecord)) }
+                    MentalScoreHistoryItem(statsRecord) {
+                        onAction(
+                            FreudScoreAction.OnNavigateToMood(
+                                statsRecord
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -84,14 +88,13 @@ fun FreudScoreScreenUi(
 
 @Composable
 fun FreudScoreScreen(
-    moodsViewModel: MoodsViewModel = sharedViewModel(),
+    statsViewModel: StatsViewModel = sharedViewModel(),
     onAction: (FreudScoreAction) -> Unit
 ) {
-    val freudScore by moodsViewModel.freudScore.collectAsState()
-    val statsRecords by moodsViewModel.statsRecords.collectAsState()
+    val moodsState by statsViewModel.statsState.collectAsState()
     FreudScoreScreenUi(
-        freudScore = freudScore,
-        statsRecords,
+        freudScore = moodsState.freudScore,
+        statsRecords = moodsState.statsRecords,
         onAction = onAction
     )
 }

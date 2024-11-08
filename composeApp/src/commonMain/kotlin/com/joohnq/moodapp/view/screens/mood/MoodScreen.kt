@@ -38,8 +38,8 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TopBarDark
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood
 import moodapp.composeapp.generated.resources.next
@@ -135,18 +135,18 @@ fun MoodScreenUi(
 @Composable
 fun MoodScreen(
     statsRecord: StatsRecord,
-    moodsViewModel: MoodsViewModel = sharedViewModel(),
+    statsViewModel: StatsViewModel = sharedViewModel(),
     onAction: (MoodAction) -> Unit
 ) {
-    val statsRecords =
-        (moodsViewModel.statsRecords.collectAsState().value as UiState.Success<List<StatsRecord>>).data
+    val moodsState by statsViewModel.statsState.collectAsState()
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
     var currentStatsRecord by remember { mutableStateOf(statsRecord) }
 
     LaunchedEffect(currentStatsRecord) {
-        hasNext = MoodsManager.getNext(currentStatsRecord, statsRecords)
-        hasPrevious = MoodsManager.getPrevious(currentStatsRecord, statsRecords)
+        hasNext = MoodsManager.getNext(currentStatsRecord, moodsState.statsRecords.getValue())
+        hasPrevious =
+            MoodsManager.getPrevious(currentStatsRecord, moodsState.statsRecords.getValue())
     }
 
     MoodScreenUi(

@@ -15,31 +15,32 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.moodapp.entities.UserPreferences
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
-import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
+import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import com.joohnq.moodapp.viewmodel.UserViewModel
 
 @Composable
 fun LoadingScreen(
     navigation: NavController = rememberNavController()
 ) {
     val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
-    val userPreferences: UiState<UserPreferences> by userPreferenceViewModel.userPreferences.collectAsState()
+    val userViewModel: UserViewModel = sharedViewModel()
+    val userPreferencesState by userPreferenceViewModel.userPreferencesState.collectAsState()
 
     SideEffect {
-        userPreferenceViewModel.getUserPreferences()
+        userViewModel.initUser()
+        userPreferenceViewModel.onAction(UserPreferenceIntent.GetUserPreferences)
     }
 
-    LaunchedEffect(userPreferences) {
-        userPreferences.onSuccess { userPreferences ->
+    LaunchedEffect(userPreferencesState.userPreferences) {
+        userPreferencesState.userPreferences.onSuccess { userPreferences ->
             when (false) {
                 userPreferences.skipWelcomeScreen -> navigation.onNavigateToWelcomeScreen()
                 userPreferences.skipOnboardingScreen -> navigation.onNavigateToOnboardingScreen()

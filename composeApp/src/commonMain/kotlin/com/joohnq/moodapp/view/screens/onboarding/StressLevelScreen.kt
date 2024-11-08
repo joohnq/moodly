@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,39 +16,32 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun StressRateScreen(
-    navigation: NavController = rememberNavController(),
-    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
+fun StressLevelScreenUI(
+    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
+    selectedOption: StressLevel,
+    setSelectedOption: (StressLevel) -> Unit,
+    onGoBack: () -> Unit = {},
+    onAction: () -> Unit
 ) {
-    var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
-        mutableStateOf(
-            StressLevel.Three
-        )
-    }
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
     OnboardingBaseComponent(
         page = 6,
+        snackBarState = snackBarState,
         title = Res.string.stress_rate_title,
-        onBack = navigation::popBackStack,
-        onContinue = {
-            onboardingViewModel.setStatsRecordStressLevel(selectedOption)
-            navigation.onNavigateToExpressionAnalysis()
-        },
+        onGoBack = onGoBack,
+        onContinue = onAction,
     ) {
         Text(
             stringResource(selectedOption.value),
@@ -62,8 +56,9 @@ fun StressRateScreen(
                 StressRateButton(
                     modifier = Modifier.weight(1f),
                     option = option,
-                    isSelected = selectedOption == option
-                ) { selectedOption = option }
+                    isSelected = selectedOption == option,
+                    onClick = { setSelectedOption(option) }
+                )
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -71,6 +66,29 @@ fun StressRateScreen(
             stringResource(selectedOption.text),
             style = TextStyles.StressRateDesc()
         )
-        Spacer(modifier = Modifier.height(24.dp))
     }
+}
+
+@Composable
+fun StressLevelScreen(
+    navigation: NavController,
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
+) {
+    var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
+        mutableStateOf(
+            StressLevel.Three
+        )
+    }
+    val snackBarState = remember { SnackbarHostState() }
+
+    StressLevelScreenUI(
+        snackBarState = snackBarState,
+        selectedOption = selectedOption,
+        setSelectedOption = { selectedOption = it },
+        onGoBack = navigation::popBackStack,
+        onAction = {
+            onboardingViewModel.updateStressLevel(selectedOption)
+            navigation.onNavigateToExpressionAnalysis()
+        }
+    )
 }

@@ -23,27 +23,38 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.viewmodel.MoodsViewModel
+import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
-import org.koin.compose.viewmodel.koinNavViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun CompilingDataScreen(
     navigation: NavController,
-    moodsViewModel: MoodsViewModel = sharedViewModel(),
-    userViewModel: UserViewModel = sharedViewModel()
+    statsViewModel: StatsViewModel = sharedViewModel(),
+    userViewModel: UserViewModel = sharedViewModel(),
+    stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
+    sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
 ) {
-    val statsRecords by moodsViewModel.statsRecords.collectAsState()
-    val user by userViewModel.user.collectAsState()
+    val moodsState by statsViewModel.statsState.collectAsState()
+    val userState by userViewModel.userState.collectAsState()
+    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
 
     SideEffect {
-        moodsViewModel.getMoods()
+        statsViewModel.getStats()
         userViewModel.getUser()
+        stressLevelViewModel.getStressLevelRecords()
+        sleepQualityViewModel.getSleepQualityRecords()
     }
 
-    LaunchedEffect(statsRecords, user) {
-        when (statsRecords is UiState.Success && user is UiState.Success) {
+    LaunchedEffect(
+        moodsState,
+        userState,
+        stressLevelState,
+        sleepQualityState
+    ) {
+        when (moodsState.statsRecords is UiState.Success && stressLevelState.items is UiState.Success && sleepQualityState.items is UiState.Success && userState.user is UiState.Success) {
             true -> navigation.onNavigateToHomeGraph()
             else -> Unit
         }

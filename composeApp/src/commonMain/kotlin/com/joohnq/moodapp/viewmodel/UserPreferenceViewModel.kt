@@ -2,63 +2,140 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 import com.joohnq.moodapp.entities.UserPreferences
+import com.joohnq.moodapp.model.repository.UserPreferencesRepository
+import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.state.UiState
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class UserPreferenceViewModel(
-    private val userPreferencesDAO: UserPreferencesDAO,
-    private val ioDispatcher: CoroutineDispatcher
-) : ViewModel() {
-    private val _userPreferences:
-            MutableStateFlow<UiState<UserPreferences>> = MutableStateFlow(UiState.Idle)
-    val userPreferences: MutableStateFlow<UiState<UserPreferences>> = _userPreferences
+data class UserPreferenceState(
+    val userPreferences: UiState<UserPreferences> = UiState.Idle,
+)
 
-    /*
-   * Get the user preferences from database
-   *  Tested
-   * */
-    fun getUserPreferences() =
-        viewModelScope.launch(ioDispatcher) {
-            _userPreferences.value = UiState.Loading
-            userPreferencesDAO.getUserPreferences().catch {
-                _userPreferences.value = UiState.Error(it.message.toString())
-            }.collect {
-                _userPreferences.value = UiState.Success(it)
+sealed class UserPreferenceIntent {
+    data object AddUserPreferences : UserPreferenceIntent()
+    data object GetUserPreferences : UserPreferenceIntent()
+    data object LogoutUserPreferences : UserPreferenceIntent()
+
+    data class UpdateSkipWelcomeScreen(
+        val value: Boolean,
+        val route: Screens
+    ) : UserPreferenceIntent()
+
+    data class UpdateSkipOnboardingScreen(
+        val value: Boolean,
+        val route: Screens = Screens.GetUserNameScreen
+    ) : UserPreferenceIntent()
+
+    data class UpdateSkipGetUserNameScreen(
+        val value: Boolean,
+        val route: Screens
+    ) : UserPreferenceIntent()
+}
+
+sealed class UserPreferenceSideEffect {
+    data class ShowToast(val message: String) : UserPreferenceSideEffect()
+    data class NavigateTo(val route: Screens) : UserPreferenceSideEffect()
+}
+
+class UserPreferenceViewModel(
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val dispatcher: CoroutineDispatcher
+) : ViewModel() {
+    private val _userPreferencesState:
+            MutableStateFlow<UserPreferenceState> = MutableStateFlow(UserPreferenceState())
+    val userPreferencesState: MutableStateFlow<UserPreferenceState> = _userPreferencesState
+
+    private val _sideEffect = Channel<UserPreferenceSideEffect>()
+    val sideEffect = _sideEffect.receiveAsFlow()
+
+    fun onAction(intent: UserPreferenceIntent) {
+        when (intent) {
+            is UserPreferenceIntent.GetUserPreferences -> getUserPreferences()
+            is UserPreferenceIntent.UpdateSkipGetUserNameScreen -> updateSkipGetUserNameScreen(
+                route = intent.route,
+                value = true
+            )
+
+            is UserPreferenceIntent.UpdateSkipOnboardingScreen -> updateSkipOnboardingScreen(
+                route = intent.route,
+                value = true
+            )
+
+            is UserPreferenceIntent.UpdateSkipWelcomeScreen -> setSkipWelcomeScreen(
+                route = intent.route,
+                value = true
+            )
+
+            UserPreferenceIntent.AddUserPreferences -> addUserPreferences()
+            UserPreferenceIntent.LogoutUserPreferences -> {
+
+            }
+
+        }
+    }
+
+    private fun getUserPreferences() =
+        viewModelScope.launch(dispatcher) {
+            _userPreferencesState.update {
+                it.copy(userPreferences = UiState.Loading)
+            }
+            try {
+                val res = userPreferencesRepository.getUserPreferences()
+                _userPreferencesState.update {
+                    it.copy(userPreferences = UiState.Success(res))
+                }
+            } catch (e: Exception) {
+                _userPreferencesState.update {
+                    it.copy(userPreferences = UiState.Error(e.message.toString()))
+                }
             }
         }
 
-    /*
-   * Initialize the user preferences database when firstly launch the app
-   * Tested
-   * */
-    suspend fun initUserPreferences(): Boolean =
-        executeWithBoolean(userPreferencesDAO::insertUserPreferences)
+    private fun addUserPreferences() = viewModelScope.launch(dispatcher) {
+        val res = userPreferencesRepository.addUserPreferences(UserPreferences.init())
+        if (!res)
+            _sideEffect.send(
+                UserPreferenceSideEffect.ShowToast(
+                    "Failure add user preferences"
+                )
+            )
+    }
 
-    /*
-   * Set the skip welcome screen to true when already pass from the welcome screens flow
-   * Tested
-   * */
-    suspend fun setSkipWelcomeScreen(): Boolean =
-        executeWithBoolean(userPreferencesDAO::setSkipWelcomeScreen)
+    private fun setSkipWelcomeScreen(value: Boolean, route: Screens) =
+        viewModelScope.launch(dispatcher) {
+            val res = userPreferencesRepository.updateSkipWelcomeScreen(value)
+            _sideEffect.send(
+                if (res) UserPreferenceSideEffect.NavigateTo(route) else UserPreferenceSideEffect.ShowToast(
+                    "Failure when skipping onboarding screen"
+                )
+            )
+        }
 
-    /*
-  * Set the skip onboarding screen to true when already pass from the onboarding screens flow
-  * Tested
-  * */
-    suspend fun setSkipOnboardingScreen(): Boolean =
-        executeWithBoolean(userPreferencesDAO::setSkipOnboardingScreen)
+    private fun updateSkipOnboardingScreen(value: Boolean, route: Screens) =
+        viewModelScope.launch(dispatcher) {
+            val res = userPreferencesRepository.updateSkipOnboardingScreen(value)
 
-    /*
-  * Set the skip get user screen to true when already get the user name
-  * Tested
-  * */
-    suspend fun setSkipGetUserNameScreen(): Boolean =
-        executeWithBoolean(userPreferencesDAO::setSkipGetUserNameScreen)
+            _sideEffect.send(
+                if (res) UserPreferenceSideEffect.NavigateTo(route) else UserPreferenceSideEffect.ShowToast(
+                    "Failure when skipping onboarding screen"
+                )
+            )
+        }
 
+    private fun updateSkipGetUserNameScreen(value: Boolean, route: Screens) =
+        viewModelScope.launch(dispatcher) {
+            val res = userPreferencesRepository.updateSkipGetUserNameScreen(value)
+
+            _sideEffect.send(
+                if (res) UserPreferenceSideEffect.NavigateTo(route) else UserPreferenceSideEffect.ShowToast(
+                    "Failure when skipping get user name screen"
+                )
+            )
+        }
 }

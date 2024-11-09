@@ -34,7 +34,7 @@ import moodapp.composeapp.generated.resources.expression_analysis_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ExpressionAnalysisScreenUI(
+fun OnboardingExpressionAnalysisScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     desc: String,
     onGoBack: () -> Unit = {},
@@ -62,7 +62,7 @@ fun ExpressionAnalysisScreenUI(
 }
 
 @Composable
-fun ExpressionAnalysisScreen(
+fun OnboardingExpressionAnalysisScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel(),
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
@@ -103,7 +103,7 @@ fun ExpressionAnalysisScreen(
         }
     }
 
-    ExpressionAnalysisScreenUI(
+    OnboardingExpressionAnalysisScreenUI(
         desc = onboardingState.statsRecord.description,
         setDesc = { onboardingViewModel.updateStatsRecordDescription(it) },
         onGoBack = navigation::popBackStack,
@@ -125,8 +125,8 @@ fun ExpressionAnalysisScreen(
 
 @Preview
 @Composable
-fun ExpressionAnalysisScreenUIPreview() {
-    ExpressionAnalysisScreenUI(
+fun OnboardingExpressionAnalysisScreenUIPreview() {
+    OnboardingExpressionAnalysisScreenUI(
         desc = "",
     )
 }

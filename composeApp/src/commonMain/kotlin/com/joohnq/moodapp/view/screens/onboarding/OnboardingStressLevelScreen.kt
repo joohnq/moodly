@@ -2,7 +2,7 @@ package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,82 +13,82 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
+import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.routes.onNavigateToSleepQuality
+import com.joohnq.moodapp.view.routes.onNavigateToOnboardingExpressionAnalysis
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
-import moodapp.composeapp.generated.resources.select_one_answer
+import moodapp.composeapp.generated.resources.stress_rate_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun PhysicalSymptomsScreenUI(
+fun OnboardingStressLevelScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    selectedOption: PhysicalSymptoms?,
-    setSelectedOption: (PhysicalSymptoms) -> Unit = {},
+    selectedOption: StressLevel,
+    setSelectedOption: (StressLevel) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onAction: () -> Unit = {},
+    onAction: () -> Unit = {}
 ) {
-    val options: List<PhysicalSymptoms> = remember { PhysicalSymptoms.getAll() }
+    val options: List<StressLevel> = remember { StressLevel.getAll() }
 
     OnboardingBaseComponent(
-        page = 3,
+        page = 6,
         snackBarState = snackBarState,
-        title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = selectedOption != null,
+        title = Res.string.stress_rate_title,
         onGoBack = onGoBack,
         onContinue = onAction,
     ) {
         Text(
-            text = stringResource(Res.string.select_one_answer),
-            style = TextStyles.OnboardingScreenMood(),
-            textAlign = TextAlign.Center
+            stringResource(selectedOption.value),
+            style = TextStyles.StressRate()
         )
-        Spacer(modifier = Modifier.height(40.dp))
-        Column(
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            options.forEach { option: PhysicalSymptoms ->
-                PhysicalSymptomsRadioButton(
+            options.forEach { option: StressLevel ->
+                StressRateButton(
+                    modifier = Modifier.weight(1f),
                     option = option,
-                    selected = selectedOption == option,
+                    isSelected = selectedOption == option,
                     onClick = { setSelectedOption(option) }
                 )
             }
         }
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            stringResource(selectedOption.text),
+            style = TextStyles.StressRateDesc()
+        )
     }
 }
 
-
 @Composable
-fun PhysicalSymptomsScreen(
-    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
+fun OnboardingStressLevelScreen(
     navigation: NavController,
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
-    PhysicalSymptomsScreenUI(
+    OnboardingStressLevelScreenUI(
         snackBarState = snackBarState,
-        selectedOption = onboardingState.physicalSymptoms,
-        setSelectedOption = onboardingViewModel::updateUserPhysicalSymptoms,
+        selectedOption = onboardingState.stressLevel,
+        setSelectedOption = onboardingViewModel::updateStressLevel,
         onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToSleepQuality
+        onAction = navigation::onNavigateToOnboardingExpressionAnalysis
     )
 }
 
-
 @Preview
 @Composable
-fun PhysicalSymptomsScreenPreview() {
-    PhysicalSymptomsScreenUI(
-        selectedOption = PhysicalSymptoms.No,
+fun OnboardingStressLevelScreenPreview() {
+    OnboardingStressLevelScreenUI(
+        selectedOption = StressLevel.One,
     )
 }

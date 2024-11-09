@@ -1,116 +1,84 @@
 package com.joohnq.moodapp.view.screens.sleepquality
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.DoubleText
-import com.joohnq.moodapp.view.components.MoodFace
-import com.joohnq.moodapp.view.components.SliderColors
-import com.joohnq.moodapp.view.components.SliderComponents
-import com.joohnq.moodapp.view.components.VerticalSlider
+import com.joohnq.moodapp.view.components.PanelContentLight
+import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.continue_word
+import moodapp.composeapp.generated.resources.sleep_quality
+import moodapp.composeapp.generated.resources.sleep_stats
+import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SleepQualityScreenUI(
-    modifier: Modifier = Modifier.fillMaxSize(),
-    isContinueButtonVisible: Boolean,
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
-    selectedSleepQuality: SleepQuality,
-    sliderValue: Float,
-    sleepQualityOption: List<SleepQuality>,
-    setSliderValue: (Float) -> Unit,
-    onContinue: () -> Unit
+    sleepQuality: SleepQuality,
+    onContinue: () -> Unit = {},
+    onGoBack: () -> Unit = {}
 ) {
-    val moods = remember { Mood.getAll().reversed() }
-
     Scaffold(
-        modifier = modifier,
-        snackbarHost = { SnackbarHost(snackBarHostState) }
-    ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Spacer(modifier = Modifier.height(20.dp))
-            Row(
-                modifier = Modifier.fillMaxSize().height(400.dp)
+        containerColor = Colors.Brown10,
+    ) { scaffoldPadding ->
+        val padding = PaddingValues(
+            top = scaffoldPadding.calculateTopPadding(),
+            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
+            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
+            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
+        )
+        Column {
+            PanelContentLight(
+                padding = padding,
+                text = Res.string.sleep_quality,
+                background = Drawables.Images.SleepQualityBackground,
+                backgroundColor = sleepQuality.palette.color,
+                color = sleepQuality.palette.backgroundColor,
+                onAdd = onContinue,
+                onGoBack = onGoBack
             ) {
                 Column(
-                    modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
-                    verticalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                        .padding(top = padding.calculateTopPadding()).fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    sleepQualityOption.forEach { sleepQuality: SleepQuality ->
-                        val textColor =
-                            if (selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
-
-                        DoubleText(
-                            firstText = sleepQuality.firstText,
-                            secondText = sleepQuality.secondText,
-                            color = textColor
-                        )
-                    }
-                }
-                VerticalSlider(
-                    modifier = Modifier.weight(1f).testTag(TestConstants.SLEEP_QUALITY_SLIDER),
-                    sliderValue = sliderValue,
-                    setSliderValue = setSliderValue,
-                    thumb = { SliderComponents.SleepQualityThumb() },
-                    track = { SliderComponents.SleepQualityTrack(it) },
-                    sliderColors = SliderColors()
-                )
-                Column(
-                    modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.End
-                ) {
-                    moods.forEach { mood ->
-                        Column {
-                            MoodFace(
-                                modifier = Modifier.size(48.dp),
-                                mood,
-                            )
-                        }
-                    }
+                    Text(
+                        text = sleepQuality.level.toString(),
+                        style = TextStyles.FreudScreenScore()
+                    )
+                    Text(
+                        text = stringResource(sleepQuality.firstText),
+                        style = TextStyles.FreudScreenTitle()
+                    )
                 }
             }
-            Spacer(modifier = Modifier.height(20.dp))
-            if (isContinueButtonVisible) {
-                ButtonWithArrowRight(
-                    modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    text = Res.string.continue_word,
-                    onClick = onContinue
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            }
+            Spacer(modifier = Modifier.padding(top = 20.dp))
+            Title(Res.string.sleep_stats)
         }
     }
 }
@@ -120,28 +88,55 @@ fun SleepQualityScreen(
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
     navigation: NavController
 ) {
-    var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
-        mutableStateOf(
-            SleepQuality.Worst
-        )
-    }
     val snackBarHostState = remember { SnackbarHostState() }
-    var sliderValue by rememberSaveable { mutableStateOf(0f) }
-    val sleepQualityOption: List<SleepQuality> = remember { SleepQuality.getAll() }
-
-    LaunchedEffect(sliderValue) {
-        val i = sliderValue.toInt() / 25
-        selectedSleepQuality = sleepQualityOption[sleepQualityOption.size - i - 1]
-    }
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
 
     SleepQualityScreenUI(
-        isContinueButtonVisible = true,
         snackBarHostState = snackBarHostState,
-        selectedSleepQuality = selectedSleepQuality,
-        sliderValue = sliderValue,
-        sleepQualityOption = sleepQualityOption,
-        setSliderValue = { sliderValue = it },
+        sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
+        onGoBack = navigation::popBackStack,
         onContinue = {
         }
     )
 }
+
+@Preview
+@Composable
+fun SleepQualityScreenPreview() {
+    SleepQualityScreenUI(
+        sleepQuality = SleepQuality.Worst
+    )
+}
+
+@Preview
+@Composable
+fun SleepQualityScreenPreview2() {
+    SleepQualityScreenUI(
+        sleepQuality = SleepQuality.Poor
+    )
+}
+
+@Preview
+@Composable
+fun SleepQualityScreenPreview3() {
+    SleepQualityScreenUI(
+        sleepQuality = SleepQuality.Fair
+    )
+}
+
+@Preview
+@Composable
+fun SleepQualityScreenPreview4() {
+    SleepQualityScreenUI(
+        sleepQuality = SleepQuality.Good
+    )
+}
+
+@Preview
+@Composable
+fun SleepQualityScreenPreview5() {
+    SleepQualityScreenUI(
+        sleepQuality = SleepQuality.Excellent
+    )
+}
+

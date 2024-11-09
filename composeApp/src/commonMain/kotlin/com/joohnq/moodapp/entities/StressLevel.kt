@@ -43,7 +43,12 @@ sealed class StressLevel(
             text = Res.string.you_are_not_stressed_out,
             subtitle = Res.string.level_one_zen,
             level = 1,
-            palette = StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10),
+            palette = StressLevelPalette(
+                color = Colors.Green50,
+                backgroundColor = Colors.Green10,
+                pageBackgroundColor = Colors.Green60,
+                pageColor = Colors.Green30
+            ),
             brush = StressLevelBrush(
                 color = Colors.Green50,
                 backgroundColor = Colors.Green10,
@@ -58,7 +63,12 @@ sealed class StressLevel(
             text = Res.string.you_are_a_little_stressed_out,
             subtitle = Res.string.level_two_calm,
             level = 2,
-            palette = StressLevelPalette(color = Colors.Green50, backgroundColor = Colors.Green10),
+            palette = StressLevelPalette(
+                color = Colors.Yellow50,
+                backgroundColor = Colors.Yellow10,
+                pageBackgroundColor = Colors.Yellow60,
+                pageColor = Colors.Yellow20
+            ),
             brush = StressLevelBrush(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
@@ -73,7 +83,12 @@ sealed class StressLevel(
             text = Res.string.you_are_neutral,
             subtitle = Res.string.level_three_normal,
             level = 3,
-            palette = StressLevelPalette(color = Colors.Brown80, backgroundColor = Colors.Brown40),
+            palette = StressLevelPalette(
+                color = Colors.Brown80,
+                backgroundColor = Colors.Brown40,
+                pageBackgroundColor = Colors.Brown60,
+                pageColor = Colors.Brown40
+            ),
             brush = StressLevelBrush(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
@@ -90,7 +105,9 @@ sealed class StressLevel(
             level = 4,
             palette = StressLevelPalette(
                 color = Colors.Orange80,
-                backgroundColor = Colors.Orange20
+                backgroundColor = Colors.Orange20,
+                pageBackgroundColor = Colors.Orange40,
+                pageColor = Colors.Orange20
             ),
             brush = StressLevelBrush(
                 color = Colors.Orange50,
@@ -108,7 +125,9 @@ sealed class StressLevel(
             level = 5,
             palette = StressLevelPalette(
                 color = Colors.Purple50,
-                backgroundColor = Colors.Purple10
+                backgroundColor = Colors.Purple10,
+                pageBackgroundColor = Colors.Purple40,
+                pageColor = Colors.Purple20
             ),
             brush = StressLevelBrush(
                 color = Colors.Orange50,

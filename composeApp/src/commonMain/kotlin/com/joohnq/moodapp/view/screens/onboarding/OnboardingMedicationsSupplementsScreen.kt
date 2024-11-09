@@ -18,13 +18,13 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
-import com.joohnq.moodapp.view.routes.onNavigateToStressRate
+import com.joohnq.moodapp.view.routes.onNavigateToOnboardingStressLevel
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 
 @Composable
-fun MedicationsSupplementsScreenUI(
+fun OnboardingMedicationsSupplementsScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     selectedOption: MedicationsSupplements?,
     setSelectedOption: (MedicationsSupplements) -> Unit = {},
@@ -60,26 +60,26 @@ fun MedicationsSupplementsScreenUI(
 }
 
 @Composable
-fun MedicationsSupplementsScreen(
+fun OnboardingMedicationsSupplementsScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController,
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
-    MedicationsSupplementsScreenUI(
+    OnboardingMedicationsSupplementsScreenUI(
         selectedOption = onboardingState.medicationsSupplements,
         setSelectedOption = onboardingViewModel::updateUserMedicationsSupplements,
         snackBarState = snackBarState,
         onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToStressRate
+        onAction = navigation::onNavigateToOnboardingStressLevel
     )
 }
 
 @Preview
 @Composable
-fun MedicationsSupplementsScreenPreview() {
-    MedicationsSupplementsScreenUI(
+fun OnboardingMedicationsSupplementsScreenPreview() {
+    OnboardingMedicationsSupplementsScreenUI(
         selectedOption = MedicationsSupplements.ImNotTakingAny,
     )
 }

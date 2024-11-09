@@ -46,7 +46,7 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
-import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
+import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -165,7 +165,7 @@ fun GetUserNameScreen(
                 }
             },
             onSuccess = {
-                navigation.onNavigateToCompilingData()
+                navigation.onNavigateToHomeGraph()
                 userPreferencesViewModel.onAction(
                     UserPreferenceIntent.UpdateSkipGetUserNameScreen()
                 )

@@ -8,10 +8,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
@@ -23,6 +29,12 @@ import com.joohnq.moodapp.view.components.HomeTopBar
 import com.joohnq.moodapp.view.components.MentalHealthMetrics
 import com.joohnq.moodapp.view.components.MindfulTracker
 import com.joohnq.moodapp.view.components.Title
+import com.joohnq.moodapp.view.routes.onNavigateToFreudScore
+import com.joohnq.moodapp.view.routes.onNavigateToHealthJournal
+import com.joohnq.moodapp.view.routes.onNavigateToMood
+import com.joohnq.moodapp.view.routes.onNavigateToSleepQuality
+import com.joohnq.moodapp.view.routes.onNavigateToStressLevel
+import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
@@ -47,9 +59,12 @@ fun HomeScreenUi(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            .padding(bottom = padding.calculateBottomPadding())
     ) {
         HomeTopBar(
-            modifier = Modifier.padding(top = padding.calculateTopPadding()),
+            modifier = Modifier.padding(
+                top = padding.calculateTopPadding(),
+            ),
             userName = userName,
             date = today
         )
@@ -73,31 +88,71 @@ fun HomeScreenUi(
 @Composable
 fun HomeScreen(
     padding: PaddingValues,
+    navigation: NavHostController,
     statsViewModel: StatsViewModel = sharedViewModel(),
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
     userViewModel: UserViewModel = sharedViewModel(),
-    onAction: (HomeAction) -> Unit,
 ) {
     val today = DatetimeHelper.getDateTime()
     val userState by userViewModel.userState.collectAsState()
     val moodsState by statsViewModel.statsState.collectAsState()
+    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-    val stressLevel by stressLevelViewModel.stressLevelState.collectAsState()
     val statsRecord = moodsState.statsRecords.getValue()
+    var show by remember { mutableStateOf(false) }
 
-    HomeScreenUi(
-        today = today,
-        padding = padding,
-        userName = userState.user.getValue().name,
-        statsRecord = statsRecord.first(),
-        moodTracker = statsRecord.take(3).map { it.mood },
-        freudScore = moodsState.freudScore,
-        healthJournal = moodsState.healthJournal,
-        sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
-        stressLevel = stressLevel.items.getValue().first().stressLevel,
-        onAction = onAction
-    )
+    SideEffect {
+        statsViewModel.getStats()
+        userViewModel.getUser()
+        stressLevelViewModel.getStressLevelRecords()
+        sleepQualityViewModel.getSleepQualityRecords()
+    }
+
+    LaunchedEffect(
+        moodsState,
+        userState,
+        stressLevelState,
+        sleepQualityState
+    ) {
+        when (moodsState.statsRecords is UiState.Success && stressLevelState.items is UiState.Success && sleepQualityState.items is UiState.Success && userState.user is UiState.Success) {
+            true -> show = true
+            else -> Unit
+        }
+    }
+
+    if (show)
+        HomeScreenUi(
+            today = today,
+            padding = padding,
+            userName = userState.user.getValue().name,
+            statsRecord = statsRecord.first(),
+            moodTracker = statsRecord.take(3).map { it.mood },
+            freudScore = moodsState.freudScore,
+            healthJournal = moodsState.healthJournal,
+            sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
+            stressLevel = stressLevelState.items.getValue().first().stressLevel,
+            onAction = { action ->
+                when (action) {
+                    is HomeAction.OnNavigateToFreudScore ->
+                        navigation.onNavigateToFreudScore()
+
+                    is HomeAction.OnNavigateToMood ->
+                        navigation.onNavigateToMood(action.statsRecord)
+
+                    is HomeAction.OnNavigateToHealthJournal ->
+                        navigation.onNavigateToHealthJournal()
+
+                    HomeAction.OnNavigateToMindfulJournal -> {}
+                    HomeAction.OnNavigateToMoodTracker -> {}
+                    HomeAction.OnNavigateToSleepQuality ->
+                        navigation.onNavigateToSleepQuality()
+
+                    HomeAction.OnNavigateToStressLevel ->
+                        navigation.onNavigateToStressLevel()
+                }
+            }
+        )
 }
 
 @Preview

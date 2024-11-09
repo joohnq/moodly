@@ -22,7 +22,7 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 
 @Composable
-fun ProfessionalHelpScreenUI(
+fun OnboardingProfessionalHelpScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     selectedOption: ProfessionalHelp?,
     setSelectedOption: (ProfessionalHelp) -> Unit = {},
@@ -57,14 +57,14 @@ fun ProfessionalHelpScreenUI(
 }
 
 @Composable
-fun ProfessionalHelpScreen(
+fun OnboardingProfessionalHelpScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController,
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
-    ProfessionalHelpScreenUI(
+    OnboardingProfessionalHelpScreenUI(
         snackBarState = snackBarState,
         selectedOption = onboardingState.soughtHelp,
         setSelectedOption = onboardingViewModel::updateUserSoughtHelp,
@@ -75,8 +75,8 @@ fun ProfessionalHelpScreen(
 
 @Preview
 @Composable
-fun ProfessionalHelpScreenPreview() {
-    ProfessionalHelpScreenUI(
+fun OnboardingProfessionalHelpScreenPreview() {
+    OnboardingProfessionalHelpScreenUI(
         selectedOption = ProfessionalHelp.No,
     )
 }

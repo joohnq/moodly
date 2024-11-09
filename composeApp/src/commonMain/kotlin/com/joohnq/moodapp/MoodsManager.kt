@@ -3,7 +3,6 @@ package com.joohnq.moodapp
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 
 object MoodsManager {
@@ -20,9 +19,7 @@ object MoodsManager {
 
         val recordsByDay = statsRecords.filterNotNull().associateBy { it.date.dayOfMonth }
 
-        return (1..monthDaysCount).map { day ->
-            recordsByDay[day]
-        }
+        return (1..monthDaysCount).map { day -> recordsByDay[day] }
     }
 
     fun getNext(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =

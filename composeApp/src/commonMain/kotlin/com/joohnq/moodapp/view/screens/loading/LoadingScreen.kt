@@ -17,8 +17,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.routes.onNavigateToCompilingData
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
+import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
@@ -45,7 +45,7 @@ fun LoadingScreen(
                 userPreferences.skipWelcomeScreen -> navigation.onNavigateToWelcomeScreen()
                 userPreferences.skipOnboardingScreen -> navigation.onNavigateToOnboardingScreen()
                 userPreferences.skipGetUserNameScreen -> navigation.onNavigateToGetUserNameScreen()
-                else -> navigation.onNavigateToCompilingData()
+                else -> navigation.onNavigateToHomeGraph()
             }
         }
     }

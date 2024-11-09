@@ -39,7 +39,10 @@ sealed class BottomNavigationAction {
 }
 
 @Composable
-fun NavController.BottomNavigation(onAction: (BottomNavigationAction) -> Unit) {
+fun NavController.BottomNavigation(
+    onNavigateToAddMood: () -> Unit,
+    onNavigateToRoute: (Screens) -> Unit
+) {
     val navBackStackEntry by currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val hierarchy = currentDestination?.hierarchy
@@ -81,9 +84,7 @@ fun NavController.BottomNavigation(onAction: (BottomNavigationAction) -> Unit) {
                             disabledIconColor = Colors.Brown30,
                             disabledTextColor = Colors.Brown30
                         ),
-                        onClick = {
-                            onAction(BottomNavigationAction.OnNavigateToRoute(screen.route))
-                        },
+                        onClick = { onNavigateToRoute(screen.route) },
                         icon = {
                             Icon(
                                 painter = painterResource(screen.icon),
@@ -100,7 +101,7 @@ fun NavController.BottomNavigation(onAction: (BottomNavigationAction) -> Unit) {
                 with(BottomScreens.Add) {
                     Button(
                         contentPadding = PaddingValues(0.dp),
-                        onClick = { onAction(BottomNavigationAction.OnNavigateToAddMood) },
+                        onClick = onNavigateToAddMood,
                         modifier = Modifier.size(64.dp)
                             .background(color = Colors.Green50, shape = CircleShape),
                         colors = ButtonColors(

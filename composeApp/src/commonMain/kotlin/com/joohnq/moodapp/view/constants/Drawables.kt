@@ -9,16 +9,16 @@ import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score_background
 import moodapp.composeapp.generated.resources.ic_add
-import moodapp.composeapp.generated.resources.shape_bottom_navigation
-import moodapp.composeapp.generated.resources.ic_chat
 import moodapp.composeapp.generated.resources.ic_arrow
+import moodapp.composeapp.generated.resources.ic_arrow_chevron
 import moodapp.composeapp.generated.resources.ic_arrow_open
+import moodapp.composeapp.generated.resources.ic_calendar
+import moodapp.composeapp.generated.resources.ic_chat
 import moodapp.composeapp.generated.resources.ic_check
 import moodapp.composeapp.generated.resources.ic_close
-import moodapp.composeapp.generated.resources.ic_drug_store
-import moodapp.composeapp.generated.resources.ic_calendar
 import moodapp.composeapp.generated.resources.ic_document
 import moodapp.composeapp.generated.resources.ic_document_health
+import moodapp.composeapp.generated.resources.ic_drug_store
 import moodapp.composeapp.generated.resources.ic_happy_face
 import moodapp.composeapp.generated.resources.ic_head
 import moodapp.composeapp.generated.resources.ic_heart
@@ -29,22 +29,24 @@ import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
 import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.ic_sad_face
-import moodapp.composeapp.generated.resources.logo
-import moodapp.composeapp.generated.resources.ic_warning
-import moodapp.composeapp.generated.resources.mood_depressed
 import moodapp.composeapp.generated.resources.ic_user
+import moodapp.composeapp.generated.resources.ic_warning
+import moodapp.composeapp.generated.resources.logo
+import moodapp.composeapp.generated.resources.mood_background
+import moodapp.composeapp.generated.resources.mood_depressed
 import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
 import moodapp.composeapp.generated.resources.mood_overjoyed
 import moodapp.composeapp.generated.resources.mood_sad
 import moodapp.composeapp.generated.resources.onboarding_sought_professional_help_image
+import moodapp.composeapp.generated.resources.shape_bottom_navigation
+import moodapp.composeapp.generated.resources.sleep_quality_background
+import moodapp.composeapp.generated.resources.stress_level_background
 import moodapp.composeapp.generated.resources.welcome_community_image
 import moodapp.composeapp.generated.resources.welcome_first_screen_image
 import moodapp.composeapp.generated.resources.welcome_health_state_image
 import moodapp.composeapp.generated.resources.welcome_intelligent_image
 import moodapp.composeapp.generated.resources.welcome_resources_image
-import moodapp.composeapp.generated.resources.mood_background
-import moodapp.composeapp.generated.resources.ic_arrow_chevron
 
 object Drawables {
     object Icons {
@@ -83,6 +85,8 @@ object Drawables {
 
         val FreudScoreBackground = Res.drawable.freud_score_background
         val MoodBackground = Res.drawable.mood_background
+        val StressLevelBackground = Res.drawable.stress_level_background
+        val SleepQualityBackground = Res.drawable.sleep_quality_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image
@@ -104,7 +108,7 @@ object Drawables {
         val TargetVectorPainter = Target
     }
 
-    object Shape{
+    object Shape {
         val BottomNavigation = Res.drawable.shape_bottom_navigation
     }
 }

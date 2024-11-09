@@ -6,7 +6,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.getusername.GetUserNameScreen
-import com.joohnq.moodapp.view.screens.loading.CompilingDataScreen
 import com.joohnq.moodapp.view.screens.loading.LoadingScreen
 import com.joohnq.moodapp.view.screens.welcome.WelcomeScreen
 
@@ -28,11 +27,6 @@ fun AppNavigation() {
         )
         composable<Screens.GetUserNameScreen> {
             GetUserNameScreen(navigation = navHostController)
-        }
-        composable<Screens.CompilingDataScreen> {
-            CompilingDataScreen(
-                navigation = navHostController,
-            )
         }
         mainNavGraph(navHostController = navHostController)
     }

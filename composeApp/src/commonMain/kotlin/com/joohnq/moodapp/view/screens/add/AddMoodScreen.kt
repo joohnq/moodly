@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -25,7 +26,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +38,7 @@ import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
@@ -49,15 +50,15 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddMoodScreenUi(
     userName: String,
-    moods: List<Mood>,
-    selectedMood: Int,
-    onSelectedMood: (Int) -> Unit = {},
+    selectedMood: Mood,
+    setSelectedMood: (Mood) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onAction: (AddMoodIntent) -> Unit = {}
+    onContinue: () -> Unit = {}
 ) {
-    val mood = moods[selectedMood]
+    val moods by remember { mutableStateOf(Mood.getAll()) }
+    val moodIndex = moods.indexOf(selectedMood)
     Column(
-        Modifier.background(color = mood.palette.moodScreenBackgroundColor).fillMaxSize()
+        Modifier.background(color = selectedMood.palette.moodScreenBackgroundColor).fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 30.dp),
     ) {
         TopBarLight(onGoBack = onGoBack)
@@ -81,13 +82,13 @@ fun AddMoodScreenUi(
             Spacer(modifier = Modifier.height(48.dp))
             MoodFace(
                 modifier = Modifier.size(160.dp),
-                mood = moods[selectedMood],
-                backgroundColor = mood.palette.moodScreenMoodFaceBackgroundColor,
-                color = mood.palette.moodScreenMoodFaceColor
+                mood = selectedMood,
+                backgroundColor = selectedMood.palette.moodScreenMoodFaceBackgroundColor,
+                color = selectedMood.palette.moodScreenMoodFaceColor
             )
             Spacer(modifier = Modifier.height(48.dp))
             Text(
-                text = stringResource(moods[selectedMood].text),
+                text = stringResource(selectedMood.text),
                 style = TextStyles.SemiBold2XL(),
                 color = Colors.White,
                 textAlign = TextAlign.Center
@@ -100,27 +101,26 @@ fun AddMoodScreenUi(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    val size = moods.size
-                    val dividerCount = size - 1
+                    val dividerCount = moods.size - 1
 
-                    items(size) { i ->
+                    itemsIndexed(moods) { i, mood ->
                         Button(
                             modifier = Modifier.size(36.dp),
                             colors = ButtonColors(
-                                containerColor = if (i <= selectedMood) Colors.White else mood.palette.moodScreenInactiveColor,
-                                contentColor = mood.palette.moodScreenBackgroundColor,
-                                disabledContainerColor = if (i <= selectedMood) Colors.White else mood.palette.moodScreenInactiveColor,
-                                disabledContentColor = mood.palette.moodScreenBackgroundColor
+                                containerColor = if (i <= moodIndex) Colors.White else selectedMood.palette.moodScreenInactiveColor,
+                                contentColor = selectedMood.palette.moodScreenBackgroundColor,
+                                disabledContainerColor = if (i <= moodIndex) Colors.White else selectedMood.palette.moodScreenInactiveColor,
+                                disabledContentColor = selectedMood.palette.moodScreenBackgroundColor
                             ),
                             shape = CircleShape,
                             onClick = {
-                                onSelectedMood(i)
+                                setSelectedMood(moods[i])
                             },
                             contentPadding = PaddingValues(0.dp)
                         ) {
                             Box(
                                 modifier = Modifier.size(8.dp).background(
-                                    color = mood.palette.moodScreenBackgroundColor,
+                                    color = selectedMood.palette.moodScreenBackgroundColor,
                                     shape = CircleShape
                                 )
                             )
@@ -130,7 +130,7 @@ fun AddMoodScreenUi(
                             Box(
                                 modifier = Modifier.width(dividerWidth).height(10.dp)
                                     .padding(horizontal = 4.dp)
-                                    .background(color = if (selectedMood - 1 >= i) Colors.White else mood.palette.moodScreenInactiveColor)
+                                    .background(color = if (moodIndex - 1 >= i) Colors.White else selectedMood.palette.moodScreenInactiveColor)
                             )
                         }
                     }
@@ -140,7 +140,8 @@ fun AddMoodScreenUi(
             ButtonWithCheck(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.set_mood,
-                onClick = { })
+                onClick = onContinue
+            )
         }
     }
 }
@@ -151,17 +152,15 @@ fun AddMoodScreen(
     addMoodViewModel: AddMoodViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
-    val moods by remember { mutableStateOf(Mood.getAll()) }
-    var selectedMood by remember { mutableStateOf(0) }
+    val addMoodState by addMoodViewModel.addMoodState.collectAsState()
     val userState by userViewModel.userState.collectAsState()
 
     AddMoodScreenUi(
         userName = userState.user.getValue().name,
-        moods = moods,
-        selectedMood = selectedMood,
-        onSelectedMood = { selectedMood = it },
+        selectedMood = addMoodState.statsRecord.mood,
+        setSelectedMood = addMoodViewModel::updateStatsRecordMood,
         onGoBack = navigation::popBackStack,
-        onAction = addMoodViewModel::onAction
+        onContinue = navigation::onNavigateToExpressionAnalysis
     )
 }
 
@@ -170,8 +169,7 @@ fun AddMoodScreen(
 fun AddMoodScreenPreview() {
     AddMoodScreenUi(
         userName = "Henrique",
-        moods = Mood.getAll(),
-        selectedMood = 3,
+        selectedMood = Mood.Neutral,
     )
 }
 

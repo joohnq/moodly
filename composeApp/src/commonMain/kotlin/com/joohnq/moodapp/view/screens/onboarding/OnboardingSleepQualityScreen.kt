@@ -42,7 +42,7 @@ import moodapp.composeapp.generated.resources.sleep_quality_title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SleepQualityScreenUI(
+fun OnboardingSleepQualityScreenUI(
     onGoBack: () -> Unit = {},
     snackBarState: SnackbarHostState = SnackbarHostState(),
     sliderValue: Float,
@@ -107,7 +107,7 @@ fun SleepQualityScreenUI(
 }
 
 @Composable
-fun SleepQualityScreen(
+fun OnboardingSleepQualityScreen(
     navigation: NavController,
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
@@ -116,7 +116,7 @@ fun SleepQualityScreen(
     val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
     val snackBarState = remember { SnackbarHostState() }
 
-    SleepQualityScreenUI(
+    OnboardingSleepQualityScreenUI(
         snackBarState = snackBarState,
         sliderValue = sliderValue,
         setSliderValue = {
@@ -135,8 +135,8 @@ fun SleepQualityScreen(
 
 @Preview
 @Composable
-fun SleepQualityScreenPreview() {
-    SleepQualityScreenUI(
+fun OnboardingSleepQualityScreenPreview() {
+    OnboardingSleepQualityScreenUI(
         sliderValue = 100f,
         sleepQualityOptions = SleepQuality.getAll(),
         selectedSleepQuality = SleepQuality.Worst,

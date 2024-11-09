@@ -34,7 +34,7 @@ sealed class SleepQuality(
         level = 5,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Green10,
-            color = Colors.Green50
+            color = Colors.Green40
         )
     )
 
@@ -44,7 +44,10 @@ sealed class SleepQuality(
         firstText = Res.string.good,
         secondText = Res.string.six_seven_hours,
         level = 4,
-        palette = SleepQualityPalette(backgroundColor = Colors.Yellow10, color = Colors.Yellow50)
+        palette = SleepQualityPalette(
+            backgroundColor = Colors.Yellow10,
+            color = Colors.Yellow40
+        )
     )
 
     @Serializable
@@ -53,7 +56,10 @@ sealed class SleepQuality(
         firstText = Res.string.fair,
         secondText = Res.string.five_hours,
         level = 3,
-        palette = SleepQualityPalette(backgroundColor = Colors.Brown20, color = Colors.Brown80)
+        palette = SleepQualityPalette(
+            backgroundColor = Colors.Brown20,
+            color = Colors.Brown50
+        )
     )
 
     @Serializable
@@ -62,7 +68,10 @@ sealed class SleepQuality(
         firstText = Res.string.poor,
         secondText = Res.string.three_four_hours,
         level = 2,
-        palette = SleepQualityPalette(backgroundColor = Colors.Orange10, color = Colors.Orange50)
+        palette = SleepQualityPalette(
+            backgroundColor = Colors.Orange10,
+            color = Colors.Orange30
+        )
     )
 
     @Serializable
@@ -71,7 +80,10 @@ sealed class SleepQuality(
         firstText = Res.string.worst,
         secondText = Res.string.minus_three_hours,
         level = 1,
-        palette = SleepQualityPalette(backgroundColor = Colors.Purple10, color = Colors.Purple40)
+        palette = SleepQualityPalette(
+            backgroundColor = Colors.Purple10,
+            color = Colors.Purple30
+        )
     )
 
     companion object {

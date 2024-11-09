@@ -18,7 +18,6 @@ sealed class Screens {
     @Serializable data object LoadingScreen : Screens()
     @Serializable data object WelcomeScreen : Screens()
     @Serializable data object GetUserNameScreen : Screens()
-    @Serializable data object CompilingDataScreen : Screens()
 
     @Serializable
     data object HomeGraph : Screens() {
@@ -32,6 +31,7 @@ sealed class Screens {
     @Serializable data object SleepQualityScreen : Screens()
     @Serializable data object StressLevelScreen : Screens()
     @Serializable data object FreudScoreScreen : Screens()
+    @Serializable data object ExpressionAnalysisScreen : Screens()
 
 }
 

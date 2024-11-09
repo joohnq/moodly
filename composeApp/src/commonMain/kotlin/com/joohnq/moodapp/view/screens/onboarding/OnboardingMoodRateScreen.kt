@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @Composable
-fun MoodRateScreenUi(
+fun OnboardingMoodRateScreenUi(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     moodRatePadding: Int,
     selectedMood: Mood,
@@ -97,7 +97,7 @@ fun MoodRateScreenUi(
 }
 
 @Composable
-fun MoodRateScreen(
+fun OnboardingMoodRateScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController
 ) {
@@ -105,7 +105,7 @@ fun MoodRateScreen(
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
-    MoodRateScreenUi(
+    OnboardingMoodRateScreenUi(
         snackBarState = snackBarState,
         moodRatePadding = screenDimensions.moodRatePadding,
         selectedMood = onboardingState.statsRecord.mood,
@@ -117,8 +117,8 @@ fun MoodRateScreen(
 
 @Preview
 @Composable
-fun MoodRateScreenPreview() {
-    MoodRateScreenUi(
+fun OnboardingMoodRateScreenPreview() {
+    OnboardingMoodRateScreenUi(
         moodRatePadding = 0,
         selectedMood = Mood.Neutral
     )

@@ -25,6 +25,7 @@
     <string name="mood_rate_title">How would you describe your mood?</string>
     <string name="mood_rate_desc">I Feel %1$s</string>
     <string name="sleep_quality_title">How would you rate your sleep quality?</string>
+    <string name="sleep_quality">Sleep Quality</string>
     <string name="excellent">Excellent</string>
     <string name="seven_nine_hours">7 - 9 HOURS</string>
     <string name="good">Good</string>
@@ -101,4 +102,6 @@
     <string name="mental_health_metrics">Mental Health Metrics</string>
     <string name="mindful_tracker">Mindful Tracker</string>
     <string name="mental_score_history">Mental Score History</string>
+    <string name="stress_analysis">Stress Analysis</string>
+    <string name="sleep_stats">Sleep Stats</string>
 </resources>

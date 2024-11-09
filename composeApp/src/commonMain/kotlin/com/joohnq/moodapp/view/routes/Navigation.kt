@@ -41,15 +41,6 @@ fun NavController.onNavigateToGetUserNameScreen() {
     }
 }
 
-fun NavController.onNavigateToCompilingData() {
-    navigate(Screens.CompilingDataScreen) {
-        popUpTo(graph.startDestinationId) {
-            inclusive = true
-        }
-        launchSingleTop = true
-    }
-}
-
 fun NavController.onNavigateToProfessionalHelp() {
     navigate(Screens.OnboardingGraph.ProfessionalHelpScreen)
 }
@@ -58,7 +49,7 @@ fun NavController.onNavigateToPhysicalSymptoms() {
     navigate(Screens.OnboardingGraph.PhysicalSymptomsScreen)
 }
 
-fun NavController.onNavigateToSleepQuality() {
+fun NavController.onNavigateToOnboardingSleepQuality() {
     navigate(Screens.OnboardingGraph.SleepQualityScreen)
 }
 
@@ -66,12 +57,24 @@ fun NavController.onNavigateToMedicationsSupplements() {
     navigate(Screens.OnboardingGraph.MedicationsSupplementsScreen)
 }
 
-fun NavController.onNavigateToStressRate() {
+fun NavController.onNavigateToOnboardingStressLevel() {
     navigate(Screens.OnboardingGraph.StressLevelScreen)
 }
 
-fun NavController.onNavigateToExpressionAnalysis() {
+fun NavController.onNavigateToSleepQuality() {
+    navigate(Screens.SleepQualityScreen)
+}
+
+fun NavController.onNavigateToStressLevel() {
+    navigate(Screens.StressLevelScreen)
+}
+
+fun NavController.onNavigateToOnboardingExpressionAnalysis() {
     navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
+}
+
+fun NavController.onNavigateToExpressionAnalysis() {
+    navigate(Screens.ExpressionAnalysisScreen)
 }
 
 fun NavController.onNavigateToFreudScore() {

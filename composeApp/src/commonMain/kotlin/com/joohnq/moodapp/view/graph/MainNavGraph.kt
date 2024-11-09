@@ -17,18 +17,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.components.BottomNavigation
-import com.joohnq.moodapp.view.components.BottomNavigationAction
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
-import com.joohnq.moodapp.view.routes.onNavigateToFreudScore
-import com.joohnq.moodapp.view.routes.onNavigateToHealthJournal
-import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
+import com.joohnq.moodapp.view.screens.expressionanalysis.ExpressionAnalysisScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
 import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
-import com.joohnq.moodapp.view.screens.home.HomeAction
 import com.joohnq.moodapp.view.screens.home.HomeScreen
 import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
@@ -62,6 +58,9 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     composable<Screens.HealthJournalScreen> {
         HealthJournalScreen()
     }
+    composable<Screens.ExpressionAnalysisScreen> {
+        ExpressionAnalysisScreen(navigation = navHostController)
+    }
 }
 
 @Composable
@@ -85,23 +84,7 @@ fun HomeNavGraph(navHostController: NavHostController) {
             composable<Screens.HomeGraph.HomeScreen> {
                 HomeScreen(
                     padding = padding,
-                    onAction = { action ->
-                        when (action) {
-                            is HomeAction.OnNavigateToFreudScore ->
-                                navHostController.onNavigateToFreudScore()
-
-                            is HomeAction.OnNavigateToMood ->
-                                navHostController.onNavigateToMood(action.statsRecord)
-
-                            is HomeAction.OnNavigateToHealthJournal ->
-                                homeNavController.onNavigateToHealthJournal()
-
-                            HomeAction.OnNavigateToMindfulJournal -> {}
-                            HomeAction.OnNavigateToMoodTracker -> {}
-                            HomeAction.OnNavigateToSleepQuality -> {}
-                            HomeAction.OnNavigateToStressLevel -> {}
-                        }
-                    }
+                    navigation = navHostController
                 )
             }
             composable<Screens.HomeGraph.JournalingScreen> {
@@ -109,14 +92,9 @@ fun HomeNavGraph(navHostController: NavHostController) {
             }
         }
 
-        homeNavController.BottomNavigation { action ->
-            when (action) {
-                is BottomNavigationAction.OnNavigateToRoute ->
-                    homeNavController.onNavigateToRoute(action.route)
-
-                is BottomNavigationAction.OnNavigateToAddMood ->
-                    navHostController.onNavigateToAddMood()
-            }
-        }
+        homeNavController.BottomNavigation(
+            onNavigateToRoute = homeNavController::onNavigateToRoute,
+            onNavigateToAddMood = navHostController::onNavigateToAddMood
+        )
     }
 }

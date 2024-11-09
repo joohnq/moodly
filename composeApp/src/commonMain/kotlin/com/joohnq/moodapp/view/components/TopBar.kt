@@ -121,3 +121,21 @@ fun TopBarLight(
         content?.let { it() }
     }
 }
+
+@Composable
+fun TopBarDark(
+    modifier: Modifier = Modifier,
+    onGoBack: () -> Unit,
+    content: (@Composable () -> Unit)? = null
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
+        }
+        content?.let { it() }
+    }
+}

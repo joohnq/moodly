@@ -4,13 +4,17 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.FreudScore
@@ -29,6 +34,7 @@ import com.joohnq.moodapp.view.components.MentalScoreHistoryItem
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.TopBarLight
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState
@@ -46,42 +52,56 @@ fun FreudScoreScreenUi(
     statsRecords: UiState<List<StatsRecord>>,
     onAction: (FreudScoreAction) -> Unit = {}
 ) {
-    Column {
-        Box(
-            modifier = Modifier.fillMaxWidth().wrapContentSize()
-                .background(color = freudScore.palette.backgroundColor),
-        ) {
+    Scaffold(
+        containerColor = Colors.Brown10,
+    ) { scaffoldPadding ->
+        val padding = PaddingValues(
+            top = scaffoldPadding.calculateTopPadding(),
+            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
+            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
+            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
+        )
+        Column {
             Box(
-                modifier = Modifier.matchParentSize().paint(
-                    painter = painterResource(Drawables.Images.FreudScoreBackground),
-                    contentScale = ContentScale.FillBounds,
-                    colorFilter = ColorFilter.tint(color = freudScore.palette.subColor)
-                )
-            )
-            Column(
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxWidth().wrapContentSize()
+                    .background(color = freudScore.palette.backgroundColor),
             ) {
-                TopBarLight(
-                    Res.string.freud_score,
-                    onGoBack = { onAction(FreudScoreAction.OnGoBack) }
+                Box(
+                    modifier = Modifier.matchParentSize().paint(
+                        painter = painterResource(Drawables.Images.FreudScoreBackground),
+                        contentScale = ContentScale.FillBounds,
+                        colorFilter = ColorFilter.tint(color = freudScore.palette.subColor)
+                    )
                 )
-                Spacer(modifier = Modifier.height(60.dp))
-                Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
-                Text(text = stringResource(freudScore.title), style = TextStyles.FreudScreenTitle())
-                Spacer(modifier = Modifier.height(60.dp))
+                Column(
+                    modifier = Modifier.padding(horizontal = 20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    TopBarLight(
+                        modifier = Modifier.padding(top = padding.calculateTopPadding()),
+                        text = Res.string.freud_score,
+                        onGoBack = { onAction(FreudScoreAction.OnGoBack) }
+                    )
+                    Spacer(modifier = Modifier.height(60.dp))
+                    Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
+                    Text(
+                        text = stringResource(freudScore.title),
+                        style = TextStyles.FreudScreenTitle()
+                    )
+                    Spacer(modifier = Modifier.height(60.dp))
+                }
             }
-        }
-        Title(Res.string.mental_score_history)
-        statsRecords.onSuccessComposable { statsRecords ->
-            LazyColumn {
-                items(statsRecords) { statsRecord ->
-                    MentalScoreHistoryItem(statsRecord) {
-                        onAction(
-                            FreudScoreAction.OnNavigateToMood(
-                                statsRecord
+            Title(Res.string.mental_score_history)
+            statsRecords.onSuccessComposable { statsRecords ->
+                LazyColumn {
+                    items(statsRecords) { statsRecord ->
+                        MentalScoreHistoryItem(statsRecord) {
+                            onAction(
+                                FreudScoreAction.OnNavigateToMood(
+                                    statsRecord
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }

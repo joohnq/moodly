@@ -76,7 +76,6 @@ class UserPreferenceViewModel(
             UserPreferenceIntent.LogoutUserPreferences -> {
 
             }
-
         }
     }
 

@@ -12,7 +12,6 @@ import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import org.koin.core.module.dsl.singleOf
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 actual val platformModule = module {
@@ -21,11 +20,11 @@ actual val platformModule = module {
 }
 
 actual val viewModelModule = module {
-    viewModelOf(::UserPreferenceViewModel)
-    viewModelOf(::OnboardingViewModel)
-    viewModelOf(::StatsViewModel)
-    viewModelOf(::UserViewModel)
-    viewModelOf(::StressLevelViewModel)
-    viewModelOf(::SleepQualityViewModel)
-    viewModelOf(::AddMoodViewModel)
+    singleOf(::UserPreferenceViewModel)
+    singleOf(::OnboardingViewModel)
+    singleOf(::StatsViewModel)
+    singleOf(::UserViewModel)
+    singleOf(::StressLevelViewModel)
+    singleOf(::SleepQualityViewModel)
+    singleOf(::AddMoodViewModel)
 }

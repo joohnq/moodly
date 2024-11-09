@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +36,7 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.MoodsManager
@@ -62,79 +67,101 @@ fun MoodScreenUi(
     hasPrevious: Boolean,
     onAction: (MoodAction) -> Unit = {},
 ) {
-    Column {
+    Scaffold(
+        containerColor = Colors.Brown10,
+    ) { scaffoldPadding ->
+        val padding = PaddingValues(
+            top = scaffoldPadding.calculateTopPadding(),
+            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
+            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
+            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
+        )
         BoxWithConstraints {
             val height = maxHeight * 0.5f
             Box(
                 modifier = Modifier
                     .background(color = statsRecord.mood.palette.backgroundColor)
-                    .height(height),
-            ) {
-                Box(
-                    modifier = Modifier.matchParentSize().paint(
+                    .height(height)
+                    .paint(
                         painter = painterResource(Drawables.Images.MoodBackground),
                         contentScale = ContentScale.FillBounds,
                         colorFilter = ColorFilter.tint(color = statsRecord.mood.palette.subColor)
+                    ),
+            ) {
+                Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()) {
+                    TopBarDark(
+                        modifier = Modifier.padding(top = padding.calculateTopPadding())
+                            .padding(horizontal = 20.dp),
+                        text = Res.string.mood,
+                        onGoBack = { onAction(MoodAction.GoBack) }
                     )
-                )
-                Column(
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    TopBarDark(Res.string.mood, onGoBack = { onAction(MoodAction.GoBack) })
-                    Spacer(modifier = Modifier.height(60.dp))
-                    Text(
-                        text = stringResource(Res.string.your_mood_is), style = TextStyles.BoldXL(),
-                        color = statsRecord.mood.palette.moodScreenMoodFaceColor
-                    )
-                    Text(
-                        text = stringResource(statsRecord.mood.text),
-                        style = TextStyles.ExtraBold2XL(),
-                        color = statsRecord.mood.palette.moodScreenMoodFaceColor
-                    )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
+                    Column(
+                        modifier = Modifier.padding(horizontal = 20.dp)
+                            .padding(top = padding.calculateTopPadding()).fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        if (hasPrevious)
-                            ButtonWithIcon(
-                                onClick = { onAction(MoodAction.Previous) },
-                                icon = Icon(
-                                    icon = Drawables.Icons.ArrowChevron,
-                                    modifier = Modifier.size(24.dp),
-                                    tint = statsRecord.mood.palette.color,
-                                    contentDescription = Res.string.previous
-                                ),
-                                colors = ButtonColors(
-                                    containerColor = Colors.Transparent,
-                                    contentColor = statsRecord.mood.palette.color,
-                                    disabledContainerColor = Colors.Transparent,
-                                    disabledContentColor = statsRecord.mood.palette.color,
-                                ),
-                                modifier = Modifier.size(48.dp),
+                        Text(
+                            text = stringResource(Res.string.your_mood_is),
+                            style = TextStyles.BoldXL(),
+                            color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                        )
+                        Text(
+                            text = stringResource(statsRecord.mood.text),
+                            style = TextStyles.ExtraBold2XL(),
+                            color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if (hasPrevious)
+                                ButtonWithIcon(
+                                    onClick = { onAction(MoodAction.Previous) },
+                                    icon = Icon(
+                                        icon = Drawables.Icons.ArrowChevron,
+                                        modifier = Modifier.size(24.dp),
+                                        tint = statsRecord.mood.palette.color,
+                                        contentDescription = Res.string.previous
+                                    ),
+                                    colors = ButtonColors(
+                                        containerColor = Colors.Transparent,
+                                        contentColor = statsRecord.mood.palette.color,
+                                        disabledContainerColor = Colors.Transparent,
+                                        disabledContentColor = statsRecord.mood.palette.color,
+                                    ),
+                                    modifier = Modifier.size(48.dp),
+                                )
+                            MoodFace(
+                                modifier = Modifier.size(96.dp),
+                                mood = statsRecord.mood
                             )
-                        MoodFace(modifier = Modifier.size(96.dp), mood = statsRecord.mood)
-                        if (hasNext)
-                            ButtonWithIcon(
-                                onClick = { onAction(MoodAction.Next) },
-                                icon = Icon(
-                                    icon = Drawables.Icons.ArrowChevron,
-                                    modifier = Modifier.size(24.dp).rotate(180f),
-                                    tint = statsRecord.mood.palette.color,
-                                    contentDescription = Res.string.next
-                                ),
-                                colors = ButtonColors(
-                                    containerColor = Colors.Transparent,
-                                    contentColor = statsRecord.mood.palette.color,
-                                    disabledContainerColor = Colors.Transparent,
-                                    disabledContentColor = statsRecord.mood.palette.color,
-                                ),
-                                modifier = Modifier.size(48.dp),
-                            )
+                            if (hasNext)
+                                ButtonWithIcon(
+                                    onClick = { onAction(MoodAction.Next) },
+                                    icon = Icon(
+                                        icon = Drawables.Icons.ArrowChevron,
+                                        modifier = Modifier.size(24.dp).rotate(180f),
+                                        tint = statsRecord.mood.palette.color,
+                                        contentDescription = Res.string.next
+                                    ),
+                                    colors = ButtonColors(
+                                        containerColor = Colors.Transparent,
+                                        contentColor = statsRecord.mood.palette.color,
+                                        disabledContainerColor = Colors.Transparent,
+                                        disabledContentColor = statsRecord.mood.palette.color,
+                                    ),
+                                    modifier = Modifier.size(48.dp),
+                                )
+                        }
                     }
-                    Spacer(modifier = Modifier.height(60.dp))
                 }
                 Box(
                     modifier = Modifier.fillMaxSize().absoluteOffset(y = 40.dp),

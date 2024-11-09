@@ -27,6 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TopBarDark(
+    modifier: Modifier = Modifier,
     text: StringResource,
     onGoBack: () -> Unit,
     content: (@Composable () -> Unit)? = null
@@ -34,7 +35,7 @@ fun TopBarDark(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
+        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
@@ -81,6 +82,7 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
 
 @Composable
 fun TopBarLight(
+    modifier: Modifier = Modifier,
     text: StringResource,
     onGoBack: () -> Unit,
     content: (@Composable () -> Unit)? = null
@@ -88,7 +90,7 @@ fun TopBarLight(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
+        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
@@ -104,13 +106,14 @@ fun TopBarLight(
 
 @Composable
 fun TopBarLight(
+    modifier: Modifier = Modifier,
     onGoBack: () -> Unit,
     content: (@Composable () -> Unit)? = null
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
+        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)

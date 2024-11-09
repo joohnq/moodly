@@ -3,6 +3,7 @@ package com.joohnq.moodapp.model.converters
 import androidx.room.TypeConverter
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.ProfessionalHelp
 
 class UserConverter {
     @TypeConverter
@@ -18,4 +19,10 @@ class UserConverter {
 
     @TypeConverter
     fun toPhysicalSymptoms(value: String): PhysicalSymptoms = PhysicalSymptoms.toValue(value)
+
+    @TypeConverter
+    fun fromProfessionalHelp(value: ProfessionalHelp): String = ProfessionalHelp.fromValue(value)
+
+    @TypeConverter
+    fun toProfessionalHelp(value: String): ProfessionalHelp = ProfessionalHelp.toValue(value)
 }

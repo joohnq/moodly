@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8a9619be0bd2a00ff079c4ebdc564633",
+    "identityHash": "770e29c77eac0f619da94e1db5488847",
     "entities": [
       {
         "tableName": "StatsRecord",
@@ -42,7 +42,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `medications_supplements` TEXT NOT NULL, `sought_help` INTEGER NOT NULL, `physical_symptoms` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `medications_supplements` TEXT NOT NULL, `sought_help` TEXT NOT NULL, `physical_symptoms` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -65,7 +65,7 @@
           {
             "fieldPath": "soughtHelp",
             "columnName": "sought_help",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -181,7 +181,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8a9619be0bd2a00ff079c4ebdc564633')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '770e29c77eac0f619da94e1db5488847')"
     ]
   }
 }

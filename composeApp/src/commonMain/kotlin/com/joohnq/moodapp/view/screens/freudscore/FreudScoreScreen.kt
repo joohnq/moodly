@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
@@ -29,11 +30,13 @@ import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
+import moodapp.composeapp.generated.resources.mental_score_history
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -69,7 +72,7 @@ fun FreudScoreScreenUi(
                 Spacer(modifier = Modifier.height(60.dp))
             }
         }
-        Title("Mental Score History")
+        Title(Res.string.mental_score_history)
         statsRecords.onSuccessComposable { statsRecords ->
             LazyColumn {
                 items(statsRecords) { statsRecord ->
@@ -89,13 +92,19 @@ fun FreudScoreScreenUi(
 @Composable
 fun FreudScoreScreen(
     statsViewModel: StatsViewModel = sharedViewModel(),
-    onAction: (FreudScoreAction) -> Unit
+    navigation: NavHostController,
 ) {
     val moodsState by statsViewModel.statsState.collectAsState()
+
     FreudScoreScreenUi(
         freudScore = moodsState.freudScore,
         statsRecords = moodsState.statsRecords,
-        onAction = onAction
+        onAction = {
+            when (it) {
+                FreudScoreAction.OnGoBack -> navigation.popBackStack()
+                is FreudScoreAction.OnNavigateToMood -> navigation.onNavigateToMood(it.statsRecord)
+            }
+        }
     )
 }
 

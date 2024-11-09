@@ -9,12 +9,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -29,18 +26,18 @@ import moodapp.composeapp.generated.resources.medications_supplements_title
 @Composable
 fun MedicationsSupplementsScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    isContinueButtonVisible: Boolean,
-    options: List<MedicationsSupplements>,
     selectedOption: MedicationsSupplements?,
     setSelectedOption: (MedicationsSupplements) -> Unit = {},
     onGoBack: () -> Unit = {},
     onAction: () -> Unit = {},
 ) {
+    val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
+
     OnboardingBaseComponent(
         page = 5,
         snackBarState = snackBarState,
         title = Res.string.medications_supplements_title,
-        isContinueButtonVisible = isContinueButtonVisible,
+        isContinueButtonVisible = selectedOption != null,
         onGoBack = onGoBack,
         onContinue = onAction,
     ) {
@@ -67,28 +64,15 @@ fun MedicationsSupplementsScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController,
 ) {
-    var isContinueButtonVisible by remember { mutableStateOf(false) }
-    var selectedOption by rememberSaveable(stateSaver = MedicationsSupplements.getSaver()) {
-        mutableStateOf(null)
-    }
-    val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
+    val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
-    LaunchedEffect(selectedOption) {
-        isContinueButtonVisible = selectedOption != null
-    }
-
     MedicationsSupplementsScreenUI(
-        options = options,
-        selectedOption = selectedOption,
-        setSelectedOption = { selectedOption = it },
+        selectedOption = onboardingState.medicationsSupplements,
+        setSelectedOption = onboardingViewModel::updateUserMedicationsSupplements,
         snackBarState = snackBarState,
-        isContinueButtonVisible = isContinueButtonVisible,
         onGoBack = navigation::popBackStack,
-        onAction = {
-            onboardingViewModel.updateUserMedicationsSupplements(selectedOption!!)
-            navigation.onNavigateToStressRate()
-        }
+        onAction = navigation::onNavigateToStressRate
     )
 }
 
@@ -96,12 +80,7 @@ fun MedicationsSupplementsScreen(
 @Composable
 fun MedicationsSupplementsScreenPreview() {
     MedicationsSupplementsScreenUI(
-        options = MedicationsSupplements.getAll(),
-        selectedOption = null,
-        setSelectedOption = {},
-        snackBarState = remember { SnackbarHostState() },
-        isContinueButtonVisible = false,
-        onGoBack = {},
+        selectedOption = MedicationsSupplements.ImNotTakingAny,
     )
 }
 

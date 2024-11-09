@@ -4,17 +4,19 @@ import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.ProfessionalHelp
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.entities.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 data class OnboardingState(
-    val user: User = User.init(),
+    val physicalSymptoms: PhysicalSymptoms? = null,
+    val soughtHelp: ProfessionalHelp? = null,
+    val medicationsSupplements: MedicationsSupplements? = null,
     val statsRecord: StatsRecord = StatsRecord.init(),
     val sleepQuality: SleepQuality = SleepQuality.Worst,
     val stressLevel: StressLevel = StressLevel.Three,
@@ -39,15 +41,15 @@ class OnboardingViewModel : ViewModel() {
     fun updateUserMedicationsSupplements(
         medicationsSupplements: MedicationsSupplements,
     ) {
-        _onboardingState.update { it.copy(user = it.user.copy(medicationsSupplements = medicationsSupplements)) }
+        _onboardingState.update { it.copy(medicationsSupplements = medicationsSupplements) }
     }
 
     fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) {
-        _onboardingState.update { it.copy(user = it.user.copy(physicalSymptoms = physicalSymptoms)) }
+        _onboardingState.update { it.copy(physicalSymptoms = physicalSymptoms) }
     }
 
-    fun updateUserSoughtHelp(soughtHelp: Boolean) {
-        _onboardingState.update { it.copy(user = it.user.copy(soughtHelp = soughtHelp)) }
+    fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp) {
+        _onboardingState.update { it.copy(soughtHelp = soughtHelp) }
     }
 
     fun updateStatsRecordDescription(description: String) {

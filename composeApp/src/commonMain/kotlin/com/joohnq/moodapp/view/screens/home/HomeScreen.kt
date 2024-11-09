@@ -31,6 +31,9 @@ import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.mental_health_metrics
+import moodapp.composeapp.generated.resources.mindful_tracker
 
 @Composable
 fun HomeScreenUi(
@@ -54,18 +57,19 @@ fun HomeScreenUi(
             userName = userName,
             date = today
         )
-        Title("Mental Health Metrics")
+        Title(Res.string.mental_health_metrics)
         MentalHealthMetrics(
             freudScore = freudScore,
             statsRecord = statsRecord,
             healthJournal = healthJournal,
             onAction = onAction
         )
-        Title("Mindful Tracker")
+        Title(Res.string.mindful_tracker)
         MindfulTracker(
             sleepQuality = sleepQuality,
             stressLevel = stressLevel,
-            moodTracker = moodTracker
+            moodTracker = moodTracker,
+            onAction = onAction
         )
     }
 }
@@ -110,7 +114,7 @@ fun HomeScreenPreview() {
         ),
         freudScore = FreudScore.fromScore(80),
         moodTracker = listOf(
-
+            Mood.Happy, Mood.Overjoyed
         ),
         sleepQuality = SleepQuality.Excellent,
         stressLevel = StressLevel.One,
@@ -126,12 +130,11 @@ fun HomeScreenPreview2() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-
             mood = Mood.Happy
         ),
         freudScore = FreudScore.fromScore(60),
         moodTracker = listOf(
-
+            Mood.Happy, Mood.Overjoyed
         ),
         sleepQuality = SleepQuality.Good,
         stressLevel = StressLevel.Two,
@@ -147,12 +150,11 @@ fun HomeScreenPreview3() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-
             mood = Mood.Neutral,
         ),
         freudScore = FreudScore.fromScore(40),
         moodTracker = listOf(
-
+            Mood.Happy, Mood.Overjoyed
         ),
         sleepQuality = SleepQuality.Fair,
         stressLevel = StressLevel.Three,
@@ -168,12 +170,11 @@ fun HomeScreenPreview4() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-
             mood = Mood.Sad,
         ),
         freudScore = FreudScore.fromScore(20),
         moodTracker = listOf(
-
+            Mood.Neutral, Mood.Sad, Mood.Neutral
         ),
         sleepQuality = SleepQuality.Poor,
         stressLevel = StressLevel.Four,
@@ -189,12 +190,11 @@ fun HomeScreenPreview5() {
     HomeScreenUi(
         userName = "Henrique",
         statsRecord = StatsRecord.init().copy(
-
             mood = Mood.Depressed,
         ),
         freudScore = FreudScore.fromScore(0),
         moodTracker = listOf(
-
+            Mood.Happy, Mood.Overjoyed
         ),
         sleepQuality = SleepQuality.Worst,
         stressLevel = StressLevel.Five,

@@ -26,13 +26,11 @@ import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
-import com.joohnq.moodapp.view.screens.freudscore.FreudScoreAction
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
 import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
 import com.joohnq.moodapp.view.screens.home.HomeAction
 import com.joohnq.moodapp.view.screens.home.HomeScreen
 import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
-import com.joohnq.moodapp.view.screens.mood.MoodAction
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
 import com.joohnq.moodapp.view.screens.sleepquality.SleepQualityScreen
 import com.joohnq.moodapp.view.screens.stresslevel.StressLevelScreen
@@ -52,23 +50,14 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
         StressLevelScreen(navigation = navHostController)
     }
     composable<Screens.FreudScoreScreen> {
-        FreudScoreScreen { action ->
-            when (action) {
-                is FreudScoreAction.OnGoBack -> navHostController.popBackStack()
-                is FreudScoreAction.OnNavigateToMood -> navHostController.onNavigateToMood(action.statsRecord)
-            }
-        }
+        FreudScoreScreen(navigation = navHostController)
     }
     composable<Screens.MoodScreen>(
         typeMap = mapOf(typeOf<StatsRecord>() to StatsRecord.navType()),
     ) { navBackStackEntry ->
         val statsRecord =
             navBackStackEntry.toRoute<Screens.MoodScreen>().statsRecord
-        MoodScreen(statsRecord = statsRecord) { action ->
-            when (action) {
-                is MoodAction.OnGoBack -> navHostController.popBackStack()
-            }
-        }
+        MoodScreen(statsRecord = statsRecord, navigation = navHostController)
     }
     composable<Screens.HealthJournalScreen> {
         HealthJournalScreen()
@@ -106,6 +95,11 @@ fun HomeNavGraph(navHostController: NavHostController) {
 
                             is HomeAction.OnNavigateToHealthJournal ->
                                 homeNavController.onNavigateToHealthJournal()
+
+                            HomeAction.OnNavigateToMindfulJournal -> {}
+                            HomeAction.OnNavigateToMoodTracker -> {}
+                            HomeAction.OnNavigateToSleepQuality -> {}
+                            HomeAction.OnNavigateToStressLevel -> {}
                         }
                     }
                 )

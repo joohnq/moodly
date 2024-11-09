@@ -4,15 +4,20 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,8 +33,10 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.entities.Icon
+import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithIcon
@@ -53,80 +60,99 @@ fun MoodScreenUi(
     statsRecord: StatsRecord,
     hasNext: Boolean,
     hasPrevious: Boolean,
-    onPrevious: () -> Unit = {},
-    onNext: () -> Unit = {},
-    onAction: (MoodAction) -> Unit = {}
+    onAction: (MoodAction) -> Unit = {},
 ) {
     Column {
-        Box(
-            modifier = Modifier.fillMaxWidth().wrapContentSize()
-                .background(color = statsRecord.mood.palette.backgroundColor),
-        ) {
+        BoxWithConstraints {
+            val height = maxHeight * 0.5f
             Box(
-                modifier = Modifier.matchParentSize().paint(
-                    painter = painterResource(Drawables.Images.MoodBackground),
-                    contentScale = ContentScale.FillBounds,
-                    colorFilter = ColorFilter.tint(color = statsRecord.mood.palette.subColor)
-                )
-            )
-            Column(
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier
+                    .background(color = statsRecord.mood.palette.backgroundColor)
+                    .height(height),
             ) {
-                TopBarDark(Res.string.mood, onGoBack = { onAction(MoodAction.OnGoBack) })
-                Spacer(modifier = Modifier.height(60.dp))
-                Text(
-                    text = stringResource(Res.string.your_mood_is), style = TextStyles.BoldXL(),
-                    color = statsRecord.mood.palette.color
+                Box(
+                    modifier = Modifier.matchParentSize().paint(
+                        painter = painterResource(Drawables.Images.MoodBackground),
+                        contentScale = ContentScale.FillBounds,
+                        colorFilter = ColorFilter.tint(color = statsRecord.mood.palette.subColor)
+                    )
                 )
-                Text(
-                    text = stringResource(statsRecord.mood.text),
-                    style = TextStyles.ExtraBold2XL(),
-                    color = statsRecord.mood.palette.color
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (hasPrevious)
-                        ButtonWithIcon(
-                            onClick = onPrevious,
-                            icon = Icon(
-                                icon = Drawables.Icons.ArrowChevron,
-                                modifier = Modifier.size(24.dp),
-                                tint = statsRecord.mood.palette.color,
-                                contentDescription = Res.string.previous
-                            ),
-                            colors = ButtonColors(
-                                containerColor = Colors.Transparent,
-                                contentColor = statsRecord.mood.palette.color,
-                                disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = statsRecord.mood.palette.color,
-                            ),
-                            modifier = Modifier.size(48.dp),
-                        )
-                    MoodFace(modifier = Modifier.size(96.dp), mood = statsRecord.mood)
-                    if (hasNext)
-                        ButtonWithIcon(
-                            onClick = onNext,
-                            icon = Icon(
-                                icon = Drawables.Icons.ArrowChevron,
-                                modifier = Modifier.size(24.dp).rotate(180f),
-                                tint = statsRecord.mood.palette.color,
-                                contentDescription = Res.string.next
-                            ),
-                            colors = ButtonColors(
-                                containerColor = Colors.Transparent,
-                                contentColor = statsRecord.mood.palette.color,
-                                disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = statsRecord.mood.palette.color,
-                            ),
-                            modifier = Modifier.size(48.dp),
-                        )
+                    TopBarDark(Res.string.mood, onGoBack = { onAction(MoodAction.GoBack) })
+                    Spacer(modifier = Modifier.height(60.dp))
+                    Text(
+                        text = stringResource(Res.string.your_mood_is), style = TextStyles.BoldXL(),
+                        color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                    )
+                    Text(
+                        text = stringResource(statsRecord.mood.text),
+                        style = TextStyles.ExtraBold2XL(),
+                        color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (hasPrevious)
+                            ButtonWithIcon(
+                                onClick = { onAction(MoodAction.Previous) },
+                                icon = Icon(
+                                    icon = Drawables.Icons.ArrowChevron,
+                                    modifier = Modifier.size(24.dp),
+                                    tint = statsRecord.mood.palette.color,
+                                    contentDescription = Res.string.previous
+                                ),
+                                colors = ButtonColors(
+                                    containerColor = Colors.Transparent,
+                                    contentColor = statsRecord.mood.palette.color,
+                                    disabledContainerColor = Colors.Transparent,
+                                    disabledContentColor = statsRecord.mood.palette.color,
+                                ),
+                                modifier = Modifier.size(48.dp),
+                            )
+                        MoodFace(modifier = Modifier.size(96.dp), mood = statsRecord.mood)
+                        if (hasNext)
+                            ButtonWithIcon(
+                                onClick = { onAction(MoodAction.Next) },
+                                icon = Icon(
+                                    icon = Drawables.Icons.ArrowChevron,
+                                    modifier = Modifier.size(24.dp).rotate(180f),
+                                    tint = statsRecord.mood.palette.color,
+                                    contentDescription = Res.string.next
+                                ),
+                                colors = ButtonColors(
+                                    containerColor = Colors.Transparent,
+                                    contentColor = statsRecord.mood.palette.color,
+                                    disabledContainerColor = Colors.Transparent,
+                                    disabledContentColor = statsRecord.mood.palette.color,
+                                ),
+                                modifier = Modifier.size(48.dp),
+                            )
+                    }
+                    Spacer(modifier = Modifier.height(60.dp))
                 }
-                Spacer(modifier = Modifier.height(60.dp))
+                Box(
+                    modifier = Modifier.fillMaxSize().absoluteOffset(y = 40.dp),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    IconButton(
+                        onClick = { onAction(MoodAction.GoToAddMood) },
+                        modifier = Modifier.size(80.dp)
+                            .background(color = Colors.Brown80, shape = CircleShape)
+                    ) {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.Add),
+                            contentDescription = null,
+                            tint = Colors.White,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
             }
         }
     }
@@ -136,7 +162,7 @@ fun MoodScreenUi(
 fun MoodScreen(
     statsRecord: StatsRecord,
     statsViewModel: StatsViewModel = sharedViewModel(),
-    onAction: (MoodAction) -> Unit
+    navigation: NavHostController
 ) {
     val moodsState by statsViewModel.statsState.collectAsState()
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
@@ -153,22 +179,72 @@ fun MoodScreen(
         statsRecord = currentStatsRecord,
         hasNext = hasNext != null,
         hasPrevious = hasPrevious != null,
-        onAction = onAction,
-        onPrevious = {
-            if (hasPrevious != null) {
-                currentStatsRecord = hasPrevious as StatsRecord
+        onAction = {
+            when (it) {
+                MoodAction.GoToAddMood -> {
+
+                }
+
+                MoodAction.GoBack -> navigation.popBackStack()
+                MoodAction.Next -> hasNext?.run {
+                    currentStatsRecord = this
+                }
+
+                MoodAction.Previous -> hasPrevious?.run {
+                    currentStatsRecord = this
+                }
             }
         },
-        onNext = {
-            if (hasNext != null) {
-                currentStatsRecord = hasNext as StatsRecord
-            }
-        }
     )
 }
 
 @Preview
 @Composable
 fun MoodScreenPreview() {
-    MoodScreenUi(statsRecord = StatsRecord.init(), hasPrevious = true, hasNext = true)
+    MoodScreenUi(
+        statsRecord = StatsRecord.init().copy(mood = Mood.Overjoyed),
+        hasPrevious = true,
+        hasNext = true
+    )
 }
+
+@Preview
+@Composable
+fun MoodScreenPreview2() {
+    MoodScreenUi(
+        statsRecord = StatsRecord.init().copy(mood = Mood.Happy),
+        hasPrevious = true,
+        hasNext = true
+    )
+}
+
+@Preview
+@Composable
+fun MoodScreenPreview3() {
+    MoodScreenUi(
+        statsRecord = StatsRecord.init().copy(mood = Mood.Neutral),
+        hasPrevious = true,
+        hasNext = true
+    )
+}
+
+@Preview
+@Composable
+fun MoodScreenPreview4() {
+    MoodScreenUi(
+        statsRecord = StatsRecord.init().copy(mood = Mood.Sad),
+        hasPrevious = true,
+        hasNext = true
+    )
+}
+
+@Preview
+@Composable
+fun MoodScreenPreview5() {
+    MoodScreenUi(
+        statsRecord = StatsRecord.init().copy(mood = Mood.Depressed),
+        hasPrevious = true,
+        hasNext = true
+    )
+}
+

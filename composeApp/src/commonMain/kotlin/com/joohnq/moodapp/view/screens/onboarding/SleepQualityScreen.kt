@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -111,31 +111,25 @@ fun SleepQualityScreen(
     navigation: NavController,
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
-    var selectedSleepQuality: SleepQuality by rememberSaveable(stateSaver = SleepQuality.getSaver()) {
-        mutableStateOf(
-            SleepQuality.Worst
-        )
-    }
+    val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     var sliderValue by rememberSaveable { mutableStateOf(0f) }
     val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
     val snackBarState = remember { SnackbarHostState() }
 
-    LaunchedEffect(sliderValue) {
-        val i = sliderValue.toInt() / 25
-        selectedSleepQuality = sleepQualityOptions[sleepQualityOptions.size - i - 1]
-    }
-
     SleepQualityScreenUI(
         snackBarState = snackBarState,
         sliderValue = sliderValue,
-        setSliderValue = { sliderValue = it },
+        setSliderValue = {
+            sliderValue = it
+            val i = sliderValue.toInt() / 25
+            onboardingViewModel.updateSleepQuality(
+                sleepQualityOptions[sleepQualityOptions.size - i - 1]
+            )
+        },
         sleepQualityOptions = sleepQualityOptions,
-        selectedSleepQuality = selectedSleepQuality,
+        selectedSleepQuality = onboardingState.sleepQuality,
         onGoBack = navigation::popBackStack,
-        onAction = {
-            onboardingViewModel.updateSleepQuality(selectedSleepQuality)
-            navigation.onNavigateToMedicationsSupplements()
-        }
+        onAction = navigation::onNavigateToMedicationsSupplements
     )
 }
 
@@ -143,7 +137,7 @@ fun SleepQualityScreen(
 @Composable
 fun SleepQualityScreenPreview() {
     SleepQualityScreenUI(
-        sliderValue = 1F,
+        sliderValue = 100f,
         sleepQualityOptions = SleepQuality.getAll(),
         selectedSleepQuality = SleepQuality.Worst,
     )

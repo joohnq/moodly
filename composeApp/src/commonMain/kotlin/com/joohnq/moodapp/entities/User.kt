@@ -11,9 +11,10 @@ import kotlinx.serialization.Serializable
 data class User(
     @PrimaryKey val id: Int,
     val name: String,
-    @ColumnInfo(name = DatabaseConstants.MEDICATIONS_SUPPLEMENTS) val medicationsSupplements: MedicationsSupplements,
+    @ColumnInfo(name = DatabaseConstants.MEDICATIONS_SUPPLEMENTS)
+    val medicationsSupplements: MedicationsSupplements,
     @ColumnInfo(name = DatabaseConstants.SOUGHT_HELP)
-    val soughtHelp: Boolean,
+    val soughtHelp: ProfessionalHelp,
     @ColumnInfo(name = DatabaseConstants.PHYSICAL_SYMPTOMS)
     val physicalSymptoms: PhysicalSymptoms
 ) {
@@ -22,7 +23,7 @@ data class User(
             id = 1,
             name = "",
             medicationsSupplements = MedicationsSupplements.ImNotTakingAny,
-            soughtHelp = false,
+            soughtHelp = ProfessionalHelp.No,
             physicalSymptoms = PhysicalSymptoms.No
         )
     }

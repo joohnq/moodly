@@ -1,5 +1,6 @@
 package com.joohnq.moodapp.view.screens.onboarding
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,11 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -30,9 +29,9 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     selectedOption: StressLevel,
-    setSelectedOption: (StressLevel) -> Unit,
+    setSelectedOption: (StressLevel) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onAction: () -> Unit
+    onAction: () -> Unit = {}
 ) {
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
@@ -74,21 +73,22 @@ fun StressLevelScreen(
     navigation: NavController,
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
-    var selectedOption by rememberSaveable(stateSaver = StressLevel.getSaver()) {
-        mutableStateOf(
-            StressLevel.Three
-        )
-    }
+    val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
 
     StressLevelScreenUI(
         snackBarState = snackBarState,
-        selectedOption = selectedOption,
-        setSelectedOption = { selectedOption = it },
+        selectedOption = onboardingState.stressLevel,
+        setSelectedOption = onboardingViewModel::updateStressLevel,
         onGoBack = navigation::popBackStack,
-        onAction = {
-            onboardingViewModel.updateStressLevel(selectedOption)
-            navigation.onNavigateToExpressionAnalysis()
-        }
+        onAction = navigation::onNavigateToExpressionAnalysis
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelScreenPreview() {
+    StressLevelScreenUI(
+        selectedOption = StressLevel.One,
     )
 }

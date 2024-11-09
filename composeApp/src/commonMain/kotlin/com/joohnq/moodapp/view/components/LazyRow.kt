@@ -62,7 +62,7 @@ fun MentalHealthMetrics(
             MentalHealthMetricItem(
                 title = Res.string.mood,
                 icon = Drawables.Icons.SadFace,
-                backgroundColor = statsRecord.mood.palette.faceColor,
+                backgroundColor = statsRecord.mood.palette.color,
                 onClick = { onAction(HomeAction.OnNavigateToMood(statsRecord)) }
             ) {
                 MoodComponent(

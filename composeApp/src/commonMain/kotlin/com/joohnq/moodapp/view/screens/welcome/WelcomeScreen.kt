@@ -18,7 +18,6 @@ import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
-import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceSideEffect
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -47,10 +46,7 @@ fun WelcomeScreenUI(
                 3 -> ResourcesScreen(onNext = onNext)
                 4 -> CommunityScreen(onNext = {
                     onAction(
-                        UserPreferenceIntent.UpdateSkipWelcomeScreen(
-                            route = Screens.OnboardingGraph,
-                            value = true
-                        )
+                        UserPreferenceIntent.UpdateSkipWelcomeScreen()
                     )
                 })
             }

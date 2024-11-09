@@ -167,9 +167,7 @@ fun GetUserNameScreen(
             onSuccess = {
                 navigation.onNavigateToCompilingData()
                 userPreferencesViewModel.onAction(
-                    UserPreferenceIntent.UpdateSkipOnboardingScreen(
-                        true
-                    )
+                    UserPreferenceIntent.UpdateSkipGetUserNameScreen()
                 )
             }
         )

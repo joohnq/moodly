@@ -1,7 +1,6 @@
 package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
-import com.joohnq.moodapp.entities.SleepQuality.Companion
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -13,7 +12,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class ProfessionalHelp(
     val id: String,
     @Contextual val text: StringResource,
-    val value: Boolean? = null
+    val value: Boolean
 ) {
     @Serializable
     data object Yes : ProfessionalHelp(

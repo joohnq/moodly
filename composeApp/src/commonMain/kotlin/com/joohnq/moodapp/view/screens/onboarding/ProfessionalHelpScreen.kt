@@ -1,16 +1,14 @@
 package com.joohnq.moodapp.view.screens.onboarding
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -26,11 +24,10 @@ import moodapp.composeapp.generated.resources.sought_professional_help_title
 @Composable
 fun ProfessionalHelpScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    isContinueButtonVisible: Boolean,
     selectedOption: ProfessionalHelp?,
-    setSelectedOption: (ProfessionalHelp) -> Unit,
+    setSelectedOption: (ProfessionalHelp) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onAction: () -> Unit,
+    onAction: () -> Unit = {},
 ) {
     val options = remember { ProfessionalHelp.getAll() }
 
@@ -39,7 +36,7 @@ fun ProfessionalHelpScreenUI(
         snackBarState = snackBarState,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = isContinueButtonVisible,
+        isContinueButtonVisible = selectedOption != null,
         onGoBack = onGoBack,
         onContinue = onAction,
     ) {
@@ -64,25 +61,22 @@ fun ProfessionalHelpScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController,
 ) {
-    var isContinueButtonVisible by remember { mutableStateOf(false) }
-    var selectedOption by rememberSaveable(stateSaver = ProfessionalHelp.getSaver()) {
-        mutableStateOf(null)
-    }
+    val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
-
-    LaunchedEffect(selectedOption) {
-        isContinueButtonVisible = selectedOption != null
-    }
 
     ProfessionalHelpScreenUI(
         snackBarState = snackBarState,
-        isContinueButtonVisible = isContinueButtonVisible,
-        selectedOption = selectedOption,
-        setSelectedOption = { selectedOption = it },
+        selectedOption = onboardingState.soughtHelp,
+        setSelectedOption = onboardingViewModel::updateUserSoughtHelp,
         onGoBack = navigation::popBackStack,
-        onAction = {
-            onboardingViewModel.updateUserSoughtHelp(selectedOption?.value!!)
-            navigation.onNavigateToPhysicalSymptoms()
-        }
+        onAction = navigation::onNavigateToPhysicalSymptoms
+    )
+}
+
+@Preview
+@Composable
+fun ProfessionalHelpScreenPreview() {
+    ProfessionalHelpScreenUI(
+        selectedOption = ProfessionalHelp.No,
     )
 }

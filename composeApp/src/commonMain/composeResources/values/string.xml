@@ -98,4 +98,7 @@
     <string name="go_back">Go Back</string>
     <string name="go_next">Go Next</string>
     <string name="set_mood">Set Mood</string>
+    <string name="mental_health_metrics">Mental Health Metrics</string>
+    <string name="mindful_tracker">Mindful Tracker</string>
+    <string name="mental_score_history">Mental Score History</string>
 </resources>

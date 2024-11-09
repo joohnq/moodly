@@ -23,18 +23,18 @@ sealed class UserPreferenceIntent {
     data object LogoutUserPreferences : UserPreferenceIntent()
 
     data class UpdateSkipWelcomeScreen(
-        val value: Boolean,
-        val route: Screens
+        val value: Boolean = true,
+        val route: Screens = Screens.OnboardingGraph
     ) : UserPreferenceIntent()
 
     data class UpdateSkipOnboardingScreen(
-        val value: Boolean,
+        val value: Boolean = true,
         val route: Screens = Screens.GetUserNameScreen
     ) : UserPreferenceIntent()
 
     data class UpdateSkipGetUserNameScreen(
-        val value: Boolean,
-        val route: Screens
+        val value: Boolean = true,
+        val route: Screens = Screens.HomeGraph
     ) : UserPreferenceIntent()
 }
 

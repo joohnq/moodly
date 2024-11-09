@@ -7,15 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
@@ -37,9 +35,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ExpressionAnalysisScreenUI(
-    navigation: NavController = rememberNavController(),
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     desc: String,
+    onGoBack: () -> Unit = {},
     setDesc: (String) -> Unit = {},
     onAction: () -> Unit = {},
 ) {
@@ -47,7 +45,7 @@ fun ExpressionAnalysisScreenUI(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
-        onGoBack = navigation::popBackStack,
+        onGoBack = onGoBack,
         isContinueButtonVisible = desc.isNotEmpty(),
         onContinue = onAction,
     ) {
@@ -74,7 +72,6 @@ fun ExpressionAnalysisScreen(
     navigation: NavController
 ) {
     val scope = rememberCoroutineScope()
-    var desc by remember { mutableStateOf("") }
     val snackBarState = remember { SnackbarHostState() }
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
@@ -101,21 +98,27 @@ fun ExpressionAnalysisScreen(
             statsState.addingStatus is UiState.Success &&
             userState.addingStatus is UiState.Success
         ) {
-            userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen(value = true))
+            userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
             navigation.onNavigateToGetUserNameScreen()
         }
     }
 
     ExpressionAnalysisScreenUI(
-        desc = desc,
-        setDesc = { desc = it },
+        desc = onboardingState.statsRecord.description,
+        setDesc = { onboardingViewModel.updateStatsRecordDescription(it) },
+        onGoBack = navigation::popBackStack,
         snackBarState = snackBarState,
         onAction = {
-            onboardingViewModel.updateStatsRecordDescription(desc)
             sleepQualityViewModel.addSleepQualityRecord(onboardingState.sleepQuality)
             stressLevelViewModel.addStressLevelRecord(onboardingState.stressLevel)
             statsViewModel.addStatsRecord(onboardingState.statsRecord)
-            userViewModel.updateUser(onboardingState.user)
+            userViewModel.updateUser(
+                User.init().copy(
+                    physicalSymptoms = onboardingState.physicalSymptoms!!,
+                    medicationsSupplements = onboardingState.medicationsSupplements!!,
+                    soughtHelp = onboardingState.soughtHelp!!
+                )
+            )
         },
     )
 }
@@ -125,6 +128,5 @@ fun ExpressionAnalysisScreen(
 fun ExpressionAnalysisScreenUIPreview() {
     ExpressionAnalysisScreenUI(
         desc = "",
-        setDesc = {},
     )
 }

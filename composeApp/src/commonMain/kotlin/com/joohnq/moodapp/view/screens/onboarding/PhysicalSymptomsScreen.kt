@@ -1,5 +1,6 @@
 package com.joohnq.moodapp.view.screens.onboarding
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,12 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,11 +30,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun PhysicalSymptomsScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    isContinueButtonVisible: Boolean,
     selectedOption: PhysicalSymptoms?,
-    setSelectedOption: (PhysicalSymptoms) -> Unit,
+    setSelectedOption: (PhysicalSymptoms) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onAction: () -> Unit,
+    onAction: () -> Unit = {},
 ) {
     val options: List<PhysicalSymptoms> = remember { PhysicalSymptoms.getAll() }
 
@@ -44,7 +41,7 @@ fun PhysicalSymptomsScreenUI(
         page = 3,
         snackBarState = snackBarState,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = isContinueButtonVisible,
+        isContinueButtonVisible = selectedOption != null,
         onGoBack = onGoBack,
         onContinue = onAction,
     ) {
@@ -75,25 +72,23 @@ fun PhysicalSymptomsScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     navigation: NavController,
 ) {
-    var isContinueButtonVisible by remember { mutableStateOf(false) }
-    var selectedOption by rememberSaveable(stateSaver = PhysicalSymptoms.getSaver()) {
-        mutableStateOf(null)
-    }
+    val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
-
-    LaunchedEffect(selectedOption) {
-        isContinueButtonVisible = selectedOption != null
-    }
 
     PhysicalSymptomsScreenUI(
         snackBarState = snackBarState,
-        isContinueButtonVisible = isContinueButtonVisible,
-        selectedOption = selectedOption,
-        setSelectedOption = { selectedOption = it },
+        selectedOption = onboardingState.physicalSymptoms,
+        setSelectedOption = onboardingViewModel::updateUserPhysicalSymptoms,
         onGoBack = navigation::popBackStack,
-        onAction = {
-            onboardingViewModel.updateUserPhysicalSymptoms(selectedOption!!)
-            navigation.onNavigateToSleepQuality()
-        }
+        onAction = navigation::onNavigateToSleepQuality
+    )
+}
+
+
+@Preview
+@Composable
+fun PhysicalSymptomsScreenPreview() {
+    PhysicalSymptomsScreenUI(
+        selectedOption = PhysicalSymptoms.No,
     )
 }

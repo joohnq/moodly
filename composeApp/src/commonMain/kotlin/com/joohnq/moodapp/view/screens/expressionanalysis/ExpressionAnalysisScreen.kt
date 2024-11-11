@@ -33,8 +33,7 @@ import com.joohnq.moodapp.view.components.TopBarDark
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.screens.add.AddMoodViewModel
-import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.UiState.Companion.showErrorOrUnit
+import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
@@ -97,14 +96,16 @@ fun ExpressionAnalysisScreen(
     val scope = rememberCoroutineScope()
     val snackBarState = remember { SnackbarHostState() }
     val addMoodState by addMoodViewModel.addMoodState.collectAsState()
-    val statsState by statsViewModel.statsState.collectAsState()
+    val addingStatus by statsViewModel.addingStatus.collectAsState()
 
-    LaunchedEffect(
-        statsState.addingStatus,
-    ) {
-        scope.launch { statsState.addingStatus.showErrorOrUnit(snackBarState) }
-
-        if (statsState.addingStatus is UiState.Success) navigation.onNavigateToHomeGraph()
+    LaunchedEffect(addingStatus) {
+        addingStatus.fold(
+            onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
+            onSuccess = {
+                statsViewModel.resetAddingStatus()
+                navigation.onNavigateToHomeGraph()
+            },
+        )
     }
 
     ExpressionAnalysisScreenUI(

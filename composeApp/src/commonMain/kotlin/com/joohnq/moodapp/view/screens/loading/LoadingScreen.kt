@@ -53,6 +53,7 @@ fun LoadingScreen(
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
+
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(50.dp),

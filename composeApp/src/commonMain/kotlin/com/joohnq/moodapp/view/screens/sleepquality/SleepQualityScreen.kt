@@ -3,13 +3,10 @@ package com.joohnq.moodapp.view.screens.sleepquality
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,69 +15,69 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.SleepQuality
+import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.PanelContentLight
+import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SleepQualityIndicator
 import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality
+import moodapp.composeapp.generated.resources.sleep_quality_level
 import moodapp.composeapp.generated.resources.sleep_stats
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SleepQualityScreenUI(
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
-    sleepQuality: SleepQuality,
+    sleepQualityRecords: List<SleepQualityRecord>,
     onContinue: () -> Unit = {},
+    onAdd: () -> Unit = {},
     onGoBack: () -> Unit = {}
 ) {
-    Scaffold(
-        containerColor = Colors.Brown10,
-    ) { scaffoldPadding ->
-        val padding = PaddingValues(
-            top = scaffoldPadding.calculateTopPadding(),
-            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
-            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
-            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
-        )
-        Column {
-            PanelContentLight(
-                padding = padding,
-                text = Res.string.sleep_quality,
-                background = Drawables.Images.SleepQualityBackground,
-                backgroundColor = sleepQuality.palette.color,
-                color = sleepQuality.palette.backgroundColor,
-                onAdd = onContinue,
-                onGoBack = onGoBack
+    val first = sleepQualityRecords.first().sleepQuality
+    SharedItem(
+        isDark = false,
+        onGoBack = onGoBack,
+        backgroundColor = first.palette.color,
+        backgroundImage = Drawables.Images.SleepQualityBackground,
+        panelTitle = Res.string.sleep_quality,
+        bodyTitle = Res.string.sleep_stats,
+        color = first.palette.backgroundColor,
+        onAdd = onAdd,
+        items = sleepQualityRecords,
+        panelContent = {
+            Column(
+                modifier = Modifier.padding(horizontal = 20.dp)
+                    .padding(top = it.calculateTopPadding()).fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                Column(
-                    modifier = Modifier.padding(horizontal = 20.dp)
-                        .padding(top = padding.calculateTopPadding()).fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = sleepQuality.level.toString(),
-                        style = TextStyles.FreudScreenScore()
-                    )
-                    Text(
-                        text = stringResource(sleepQuality.firstText),
-                        style = TextStyles.FreudScreenTitle()
-                    )
-                }
+                Text(
+                    text = stringResource(Res.string.sleep_quality_level, first.level),
+                    style = TextStyles.ExtraBold2XL(),
+                    color = Colors.White
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(first.firstText),
+                    style = TextStyles.ExtraBoldSm(),
+                    color = Colors.White
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                SleepQualityIndicator(sleepQuality = first)
             }
-            Spacer(modifier = Modifier.padding(top = 20.dp))
-            Title(Res.string.sleep_stats)
+        },
+        content = {
+
         }
-    }
+    )
 }
 
 @Composable
@@ -89,12 +86,12 @@ fun SleepQualityScreen(
     navigation: NavController
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
-    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
+    val sleepQualityItems by sleepQualityViewModel.items.collectAsState()
 
     SleepQualityScreenUI(
         snackBarHostState = snackBarHostState,
-        sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
         onGoBack = navigation::popBackStack,
+        sleepQualityRecords = sleepQualityItems.getValue(),
         onContinue = {
         }
     )
@@ -104,7 +101,11 @@ fun SleepQualityScreen(
 @Composable
 fun SleepQualityScreenPreview() {
     SleepQualityScreenUI(
-        sleepQuality = SleepQuality.Worst
+        sleepQualityRecords = listOf(
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Worst
+            )
+        )
     )
 }
 
@@ -112,7 +113,20 @@ fun SleepQualityScreenPreview() {
 @Composable
 fun SleepQualityScreenPreview2() {
     SleepQualityScreenUI(
-        sleepQuality = SleepQuality.Poor
+        sleepQualityRecords = listOf(
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Poor
+            ),
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Worst
+            ),
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Poor
+            ),
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Excellent
+            )
+        )
     )
 }
 
@@ -120,7 +134,11 @@ fun SleepQualityScreenPreview2() {
 @Composable
 fun SleepQualityScreenPreview3() {
     SleepQualityScreenUI(
-        sleepQuality = SleepQuality.Fair
+        sleepQualityRecords = listOf(
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Fair
+            )
+        )
     )
 }
 
@@ -128,7 +146,11 @@ fun SleepQualityScreenPreview3() {
 @Composable
 fun SleepQualityScreenPreview4() {
     SleepQualityScreenUI(
-        sleepQuality = SleepQuality.Good
+        sleepQualityRecords = listOf(
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Good
+            )
+        )
     )
 }
 
@@ -136,7 +158,11 @@ fun SleepQualityScreenPreview4() {
 @Composable
 fun SleepQualityScreenPreview5() {
     SleepQualityScreenUI(
-        sleepQuality = SleepQuality.Excellent
+        sleepQualityRecords = listOf(
+            SleepQualityRecord.init().copy(
+                sleepQuality = SleepQuality.Excellent
+            )
+        )
     )
 }
 

@@ -8,6 +8,7 @@ import com.joohnq.moodapp.view.icons.MoodSad
 import com.joohnq.moodapp.view.icons.Target
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score_background
+import moodapp.composeapp.generated.resources.health_journal_background
 import moodapp.composeapp.generated.resources.ic_add
 import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_chevron
@@ -87,6 +88,7 @@ object Drawables {
         val MoodBackground = Res.drawable.mood_background
         val StressLevelBackground = Res.drawable.stress_level_background
         val SleepQualityBackground = Res.drawable.sleep_quality_background
+        val HealthJournalBackground = Res.drawable.health_journal_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image

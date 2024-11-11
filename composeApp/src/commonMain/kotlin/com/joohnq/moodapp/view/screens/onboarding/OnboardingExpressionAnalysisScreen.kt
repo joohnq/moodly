@@ -74,31 +74,35 @@ fun OnboardingExpressionAnalysisScreen(
     val scope = rememberCoroutineScope()
     val snackBarState = remember { SnackbarHostState() }
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-    val statsState by statsViewModel.statsState.collectAsState()
-    val userState by userViewModel.userState.collectAsState()
+    val userUpdatingStatus by userViewModel.updatingStatus.collectAsState()
+    val statsAddingStatus by statsViewModel.addingStatus.collectAsState()
+    val sleepQualityAddingStatus by sleepQualityViewModel.addingStatus.collectAsState()
+    val stressLevelAddingStatus by stressLevelViewModel.addingStatus.collectAsState()
 
     LaunchedEffect(
-        stressLevelState.addingStatus,
-        sleepQualityState.addingStatus,
-        statsState.addingStatus,
-        userState.addingStatus
+        stressLevelAddingStatus,
+        sleepQualityAddingStatus,
+        statsAddingStatus,
+        userUpdatingStatus
     ) {
         scope.launch {
-            stressLevelState.addingStatus.showErrorOrUnit(snackBarState)
-            sleepQualityState.addingStatus.showErrorOrUnit(snackBarState)
-            statsState.addingStatus.showErrorOrUnit(snackBarState)
-            userState.addingStatus.showErrorOrUnit(snackBarState)
+            stressLevelAddingStatus.showErrorOrUnit(snackBarState)
+            sleepQualityAddingStatus.showErrorOrUnit(snackBarState)
+            statsAddingStatus.showErrorOrUnit(snackBarState)
+            userUpdatingStatus.showErrorOrUnit(snackBarState)
         }
 
         if (
-            stressLevelState.addingStatus is UiState.Success &&
-            sleepQualityState.addingStatus is UiState.Success &&
-            statsState.addingStatus is UiState.Success &&
-            userState.addingStatus is UiState.Success
+            stressLevelAddingStatus is UiState.Success &&
+            sleepQualityAddingStatus is UiState.Success &&
+            statsAddingStatus is UiState.Success &&
+            userUpdatingStatus is UiState.Success
         ) {
             userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
+            sleepQualityViewModel.resetAddingStatus()
+            stressLevelViewModel.resetAddingStatus()
+            statsViewModel.resetAddingStatus()
+            userViewModel.resetUpdatingStatus()
             navigation.onNavigateToGetUserNameScreen()
         }
     }

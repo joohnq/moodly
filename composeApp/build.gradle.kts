@@ -87,6 +87,8 @@ kotlin {
             implementation(libs.sqlite.bundled)
 
             implementation(libs.uri.kmp)
+
+            implementation("io.github.ehsannarmani:compose-charts:0.0.17")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

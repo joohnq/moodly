@@ -34,7 +34,7 @@ sealed class SleepQuality(
         level = 5,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Green10,
-            color = Colors.Green40
+            color = Colors.Green50
         )
     )
 
@@ -46,7 +46,7 @@ sealed class SleepQuality(
         level = 4,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Yellow10,
-            color = Colors.Yellow40
+            color = Colors.Yellow50
         )
     )
 
@@ -58,7 +58,7 @@ sealed class SleepQuality(
         level = 3,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Brown20,
-            color = Colors.Brown50
+            color = Colors.Brown60
         )
     )
 
@@ -70,7 +70,7 @@ sealed class SleepQuality(
         level = 2,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Orange10,
-            color = Colors.Orange30
+            color = Colors.Orange40
         )
     )
 
@@ -82,7 +82,7 @@ sealed class SleepQuality(
         level = 1,
         palette = SleepQualityPalette(
             backgroundColor = Colors.Purple10,
-            color = Colors.Purple30
+            color = Colors.Purple40
         )
     )
 

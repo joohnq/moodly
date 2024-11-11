@@ -3,7 +3,6 @@ package com.joohnq.moodapp.view.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,14 +20,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 
 @Composable
-fun PanelContentDark(
+fun PanelContent(
+    isDark: Boolean,
     padding: PaddingValues,
     text: StringResource,
     backgroundColor: Color,
@@ -38,27 +40,26 @@ fun PanelContentDark(
     onGoBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    BoxWithConstraints {
-        val height = maxHeight * 0.5f
+    val screenDimensions: ScreenDimensions = koinInject()
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(screenDimensions.deviceHeight() * 0.5f)
+            .background(color = backgroundColor)
+    ) {
+        Image(
+            painter = painterResource(background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            colorFilter = ColorFilter.tint(color = color),
+            modifier = Modifier.fillMaxSize()
+        )
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(height)
-                .background(color = backgroundColor)
+            contentAlignment = Alignment.TopCenter,
+            modifier = Modifier.fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(background),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                colorFilter = ColorFilter.tint(color = color),
-                modifier = Modifier.fillMaxSize()
-            )
-
-            Box(
-                contentAlignment = Alignment.TopCenter,
-                modifier = Modifier.fillMaxSize()
-            ) {
+            if (isDark) {
                 TopBarDark(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding())
@@ -66,71 +67,7 @@ fun PanelContentDark(
                     text = text,
                     onGoBack = onGoBack
                 )
-            }
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                content()
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .absoluteOffset(y = 40.dp),
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                IconButton(
-                    onClick = onAdd,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .background(color = Colors.Brown80, shape = CircleShape)
-                ) {
-                    Icon(
-                        painter = painterResource(Drawables.Icons.Add),
-                        contentDescription = null,
-                        tint = Colors.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun PanelContentLight(
-    padding: PaddingValues,
-    text: StringResource,
-    backgroundColor: Color,
-    background: DrawableResource,
-    color: Color,
-    onAdd: () -> Unit,
-    onGoBack: () -> Unit,
-    content: @Composable () -> Unit
-) {
-    BoxWithConstraints {
-        val height = maxHeight * 0.5f
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(height)
-                .background(color = backgroundColor)
-        ) {
-            Image(
-                painter = painterResource(background),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                colorFilter = ColorFilter.tint(color = color),
-                modifier = Modifier.fillMaxSize()
-            )
-
-            Box(
-                contentAlignment = Alignment.TopCenter,
-                modifier = Modifier.fillMaxSize()
-            ) {
+            } else {
                 TopBarLight(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding())
@@ -139,34 +76,35 @@ fun PanelContentLight(
                     onGoBack = onGoBack
                 )
             }
+        }
 
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                content()
-            }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            content()
+        }
 
-            Box(
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .absoluteOffset(y = 40.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            IconButton(
+                onClick = onAdd,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .absoluteOffset(y = 40.dp),
-                contentAlignment = Alignment.BottomCenter
+                    .size(80.dp)
+                    .background(color = Colors.Brown80, shape = CircleShape)
             ) {
-                IconButton(
-                    onClick = onAdd,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .background(color = Colors.Brown80, shape = CircleShape)
-                ) {
-                    Icon(
-                        painter = painterResource(Drawables.Icons.Add),
-                        contentDescription = null,
-                        tint = Colors.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+                Icon(
+                    painter = painterResource(Drawables.Icons.Add),
+                    contentDescription = null,
+                    tint = Colors.White,
+                    modifier = Modifier.size(24.dp)
+                )
             }
         }
     }
 }
+

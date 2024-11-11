@@ -40,6 +40,7 @@ import com.joohnq.moodapp.view.components.TopBarLight
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.hey_name
@@ -57,8 +58,9 @@ fun AddMoodScreenUi(
 ) {
     val moods by remember { mutableStateOf(Mood.getAll()) }
     val moodIndex = moods.indexOf(selectedMood)
+
     Column(
-        Modifier.background(color = selectedMood.palette.moodScreenBackgroundColor).fillMaxSize()
+        Modifier.fillMaxSize().background(color = selectedMood.palette.moodScreenBackgroundColor)
             .padding(horizontal = 20.dp, vertical = 30.dp),
     ) {
         TopBarLight(onGoBack = onGoBack)
@@ -150,13 +152,14 @@ fun AddMoodScreenUi(
 fun AddMoodScreen(
     userViewModel: UserViewModel = sharedViewModel(),
     addMoodViewModel: AddMoodViewModel = sharedViewModel(),
+    statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
     val addMoodState by addMoodViewModel.addMoodState.collectAsState()
-    val userState by userViewModel.userState.collectAsState()
+    val user by userViewModel.user.collectAsState()
 
     AddMoodScreenUi(
-        userName = userState.user.getValue().name,
+        userName = user.getValue().name,
         selectedMood = addMoodState.statsRecord.mood,
         setSelectedMood = addMoodViewModel::updateStatsRecordMood,
         onGoBack = navigation::popBackStack,

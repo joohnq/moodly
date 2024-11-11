@@ -299,4 +299,16 @@ object TextStyles {
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 36.sp
     )
+
+    @Composable
+    fun ExtraBoldSm() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 30.sp
+    )
+
+    @Composable
+    fun TextExtraBoldLG() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 18.sp
+    )
 }

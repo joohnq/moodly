@@ -3,11 +3,9 @@ package com.joohnq.moodapp.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.model.DatabaseConstants
-import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
 @Entity(tableName = DatabaseConstants.SLEEP_QUALITY_RECORD_DATABASE)
@@ -15,20 +13,20 @@ import kotlinx.serialization.Serializable
 data class SleepQualityRecord(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = DatabaseConstants.SLEEP_QUALITY) val sleepQuality: SleepQuality,
-    val date: LocalDate
+    val date: LocalDateTime
 ) {
     companion object {
         fun init(): SleepQualityRecord = SleepQualityRecord(
-            id = -1,
+            id = 0,
             sleepQuality = SleepQuality.Fair,
-            date = Clock.System.todayIn(TimeZone.currentSystemDefault())
+            date = DatetimeHelper.getLocalDateTime()
         )
 
         fun SleepQuality.toSleepQualityRecord(): SleepQualityRecord =
             SleepQualityRecord(
-                id = -1,
+                id = 0,
                 sleepQuality = this,
-                date = Clock.System.todayIn(TimeZone.currentSystemDefault())
+                date = DatetimeHelper.getLocalDateTime()
             )
     }
 }

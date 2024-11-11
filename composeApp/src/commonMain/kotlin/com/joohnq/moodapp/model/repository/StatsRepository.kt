@@ -19,7 +19,7 @@ class StatsRepositoryImpl(
             statsRecordDAO.addStats(statsRecord)
             true
         } catch (e: Exception) {
-            e.printStackTrace()
+            println("Error MoodsApp: ${e.message}")
             false
         }
 }

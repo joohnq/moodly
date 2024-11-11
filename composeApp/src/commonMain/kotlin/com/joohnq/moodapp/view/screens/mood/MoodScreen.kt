@@ -3,18 +3,14 @@ package com.joohnq.moodapp.view.screens.mood
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.MoodsManager
@@ -36,7 +31,7 @@ import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithIcon
 import com.joohnq.moodapp.view.components.MoodFace
-import com.joohnq.moodapp.view.components.PanelContentDark
+import com.joohnq.moodapp.view.components.SharedItem
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
@@ -44,6 +39,7 @@ import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood
+import moodapp.composeapp.generated.resources.mood_statistics
 import moodapp.composeapp.generated.resources.next
 import moodapp.composeapp.generated.resources.previous
 import moodapp.composeapp.generated.resources.your_mood_is
@@ -54,29 +50,22 @@ fun MoodScreenUi(
     statsRecord: StatsRecord,
     hasNext: Boolean,
     hasPrevious: Boolean,
+    onAdd: () -> Unit = {},
     onAction: (MoodAction) -> Unit = {},
 ) {
-    Scaffold(
-        containerColor = Colors.Brown10,
-    ) { scaffoldPadding ->
-        val padding = PaddingValues(
-            top = scaffoldPadding.calculateTopPadding(),
-            bottom = scaffoldPadding.calculateBottomPadding() + 100.dp,
-            start = scaffoldPadding.calculateStartPadding(LayoutDirection.Ltr),
-            end = scaffoldPadding.calculateEndPadding(LayoutDirection.Rtl)
-        )
-        PanelContentDark(
-            padding = padding,
-            text = Res.string.mood,
-            backgroundColor = statsRecord.mood.palette.backgroundColor,
-            background = Drawables.Images.MoodBackground,
-            color = statsRecord.mood.palette.subColor,
-            onGoBack = { onAction(MoodAction.GoBack) },
-            onAdd = { onAction(MoodAction.GoToAddMood) }
-        ) {
+    SharedItem(
+        isDark = true,
+        onGoBack = { onAction(MoodAction.GoBack) },
+        backgroundColor = statsRecord.mood.palette.backgroundColor,
+        backgroundImage = Drawables.Images.MoodBackground,
+        panelTitle = Res.string.mood,
+        bodyTitle = Res.string.mood_statistics,
+        color = statsRecord.mood.palette.subColor,
+        onAdd = onAdd,
+        panelContent = {
             Column(
                 modifier = Modifier.padding(horizontal = 20.dp)
-                    .padding(top = padding.calculateTopPadding()).fillMaxSize(),
+                    .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -136,8 +125,11 @@ fun MoodScreenUi(
                         )
                 }
             }
+        },
+        content = {
+
         }
-    }
+    )
 }
 
 @Composable
@@ -146,15 +138,15 @@ fun MoodScreen(
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
-    val moodsState by statsViewModel.statsState.collectAsState()
+    val statsRecords by statsViewModel.statsRecords.collectAsState()
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
     var currentStatsRecord by remember { mutableStateOf(statsRecord) }
 
     LaunchedEffect(currentStatsRecord) {
-        hasNext = MoodsManager.getNext(currentStatsRecord, moodsState.statsRecords.getValue())
+        hasNext = MoodsManager.getNext(currentStatsRecord, statsRecords.getValue())
         hasPrevious =
-            MoodsManager.getPrevious(currentStatsRecord, moodsState.statsRecords.getValue())
+            MoodsManager.getPrevious(currentStatsRecord, statsRecords.getValue())
     }
 
     MoodScreenUi(

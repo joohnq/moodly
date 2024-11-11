@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MentalHealthMetrics(
     freudScore: FreudScore,
     statsRecord: StatsRecord,
-    healthJournal: List<StatsRecord?>,
+    healthJournal: Map<String, List<StatsRecord>?>,
     onAction: (HomeAction) -> Unit,
 ) {
     LazyRow(

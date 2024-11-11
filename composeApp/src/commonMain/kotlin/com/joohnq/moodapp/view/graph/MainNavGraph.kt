@@ -56,7 +56,9 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
         MoodScreen(statsRecord = statsRecord, navigation = navHostController)
     }
     composable<Screens.HealthJournalScreen> {
-        HealthJournalScreen()
+        HealthJournalScreen(
+            navigation = navHostController
+        )
     }
     composable<Screens.ExpressionAnalysisScreen> {
         ExpressionAnalysisScreen(navigation = navHostController)

@@ -11,7 +11,7 @@ import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevelRecord
 import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.entities.UserPreferences
-import com.joohnq.moodapp.model.converters.LocalDateConverter
+import com.joohnq.moodapp.model.converters.LocalDateTimeConverter
 import com.joohnq.moodapp.model.converters.SleepQualityRecordConverter
 import com.joohnq.moodapp.model.converters.StatsRecordConverter
 import com.joohnq.moodapp.model.converters.StressLevelRecordConverter
@@ -33,7 +33,7 @@ import kotlinx.coroutines.CoroutineDispatcher
     UserConverter::class,
     SleepQualityRecordConverter::class,
     StressLevelRecordConverter::class,
-    LocalDateConverter::class
+    LocalDateTimeConverter::class
 )
 abstract class MyDatabase : RoomDatabase() {
     abstract fun moodsDAO(): StatsRecordDAO

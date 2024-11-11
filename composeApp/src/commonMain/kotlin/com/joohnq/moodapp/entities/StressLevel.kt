@@ -32,6 +32,7 @@ sealed class StressLevel(
     @Contextual val text: StringResource,
     @Contextual val subtitle: StringResource,
     val level: Int,
+    val graphValue: Double,
     val palette: StressLevelPalette,
     val brush: StressLevelBrush
 ) {
@@ -43,6 +44,7 @@ sealed class StressLevel(
             text = Res.string.you_are_not_stressed_out,
             subtitle = Res.string.level_one_zen,
             level = 1,
+            graphValue = 100.0,
             palette = StressLevelPalette(
                 color = Colors.Green50,
                 backgroundColor = Colors.Green10,
@@ -63,6 +65,7 @@ sealed class StressLevel(
             text = Res.string.you_are_a_little_stressed_out,
             subtitle = Res.string.level_two_calm,
             level = 2,
+            graphValue = 80.0,
             palette = StressLevelPalette(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
@@ -83,6 +86,7 @@ sealed class StressLevel(
             text = Res.string.you_are_neutral,
             subtitle = Res.string.level_three_normal,
             level = 3,
+            graphValue = 60.0,
             palette = StressLevelPalette(
                 color = Colors.Brown80,
                 backgroundColor = Colors.Brown40,
@@ -103,6 +107,7 @@ sealed class StressLevel(
             text = Res.string.you_are_very_stressed_out,
             subtitle = Res.string.level_four_irritated,
             level = 4,
+            graphValue = 40.0,
             palette = StressLevelPalette(
                 color = Colors.Orange80,
                 backgroundColor = Colors.Orange20,
@@ -123,6 +128,7 @@ sealed class StressLevel(
             text = Res.string.you_are_extremely_stressed_out,
             subtitle = Res.string.level_five_angry,
             level = 5,
+            graphValue = 20.0,
             palette = StressLevelPalette(
                 color = Colors.Purple50,
                 backgroundColor = Colors.Purple10,

@@ -155,10 +155,10 @@ fun GetUserNameScreen(
     var nameError by remember { mutableStateOf("") }
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = remember { SnackbarHostState() }
-    val userState by userViewModel.userState.collectAsState()
+    val updatingStatus by userViewModel.updatingStatus.collectAsState()
 
-    LaunchedEffect(userState) {
-        userState.updatingStatus.fold(
+    LaunchedEffect(updatingStatus) {
+        updatingStatus.fold(
             onError = {
                 scope.launch {
                     snackBarState.showSnackbar(it)

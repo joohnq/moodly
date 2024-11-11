@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.view.constants.Colors
 
@@ -31,6 +33,32 @@ fun StressLevelIndicator(stressLevel: StressLevel) {
                 )
                 Box(
                     modifier = Modifier.width(boxWidth).height(6.dp).then(background)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SleepQualityIndicator(sleepQuality: SleepQuality) {
+    BoxWithConstraints {
+        val boxWidth = (maxWidth - 16.dp) / 5
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            for (i in 1..5) {
+                val isSelected = i <= sleepQuality.level
+                val modifier = if (isSelected) Modifier else Modifier.border(
+                    width = 1.dp,
+                    color = Colors.White,
+                    shape = CircleShape
+                )
+                Box(
+                    modifier = modifier
+                        .background(
+                            color = if (isSelected) Colors.White else Colors.Transparent,
+                            shape = CircleShape
+                        )
+                        .width(boxWidth)
+                        .height(6.dp)
                 )
             }
         }

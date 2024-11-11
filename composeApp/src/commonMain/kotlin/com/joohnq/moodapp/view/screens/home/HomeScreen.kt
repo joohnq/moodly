@@ -54,7 +54,7 @@ fun HomeScreenUi(
     stressLevel: StressLevel,
     freudScore: FreudScore,
     moodTracker: List<Mood>,
-    healthJournal: List<StatsRecord?>,
+    healthJournal: Map<String, List<StatsRecord>?>,
     onAction: (HomeAction) -> Unit = {},
 ) {
     Column(
@@ -95,11 +95,12 @@ fun HomeScreen(
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val today = DatetimeHelper.getDateTime()
-    val userState by userViewModel.userState.collectAsState()
-    val moodsState by statsViewModel.statsState.collectAsState()
-    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-    val statsRecord = moodsState.statsRecords.getValue()
+    val user by userViewModel.user.collectAsState()
+    val statsRecords by statsViewModel.statsRecords.collectAsState()
+    val freudScore by statsViewModel.freudScore.collectAsState()
+    val healthJournal by statsViewModel.healthJournal.collectAsState()
+    val sleepQualityItems by sleepQualityViewModel.items.collectAsState()
+    val stressLevelItems by stressLevelViewModel.items.collectAsState()
     var show by remember { mutableStateOf(false) }
 
     SideEffect {
@@ -110,12 +111,12 @@ fun HomeScreen(
     }
 
     LaunchedEffect(
-        moodsState,
-        userState,
-        stressLevelState,
-        sleepQualityState
+        statsRecords,
+        user,
+        stressLevelItems,
+        sleepQualityItems
     ) {
-        when (moodsState.statsRecords is UiState.Success && stressLevelState.items is UiState.Success && sleepQualityState.items is UiState.Success && userState.user is UiState.Success) {
+        when (statsRecords is UiState.Success && stressLevelItems is UiState.Success && sleepQualityItems is UiState.Success && user is UiState.Success) {
             true -> show = true
             else -> Unit
         }
@@ -125,13 +126,13 @@ fun HomeScreen(
         HomeScreenUi(
             today = today,
             padding = padding,
-            userName = userState.user.getValue().name,
-            statsRecord = statsRecord.first(),
-            moodTracker = statsRecord.take(3).map { it.mood },
-            freudScore = moodsState.freudScore,
-            healthJournal = moodsState.healthJournal,
-            sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
-            stressLevel = stressLevelState.items.getValue().first().stressLevel,
+            userName = user.getValue().name,
+            statsRecord = statsRecords.getValue().first(),
+            moodTracker = statsRecords.getValue().take(3).map { it.mood },
+            freudScore = freudScore,
+            healthJournal = healthJournal,
+            sleepQuality = sleepQualityItems.getValue().first().sleepQuality,
+            stressLevel = stressLevelItems.getValue().first().stressLevel,
             onAction = { action ->
                 when (action) {
                     is HomeAction.OnNavigateToFreudScore ->
@@ -169,9 +170,9 @@ fun HomeScreenPreview() {
         ),
         sleepQuality = SleepQuality.Excellent,
         stressLevel = StressLevel.One,
-        healthJournal = listOf(
-            StatsRecord.init()
-        ),
+        healthJournal = mapOf(
+            "123" to listOf(StatsRecord.init())
+        )
     )
 }
 
@@ -189,8 +190,8 @@ fun HomeScreenPreview2() {
         ),
         sleepQuality = SleepQuality.Good,
         stressLevel = StressLevel.Two,
-        healthJournal = listOf(
-            StatsRecord.init()
+        healthJournal = mapOf(
+            "123" to listOf(StatsRecord.init())
         )
     )
 }
@@ -209,8 +210,8 @@ fun HomeScreenPreview3() {
         ),
         sleepQuality = SleepQuality.Fair,
         stressLevel = StressLevel.Three,
-        healthJournal = listOf(
-            StatsRecord.init()
+        healthJournal = mapOf(
+            "123" to listOf(StatsRecord.init())
         )
     )
 }
@@ -229,8 +230,8 @@ fun HomeScreenPreview4() {
         ),
         sleepQuality = SleepQuality.Poor,
         stressLevel = StressLevel.Four,
-        healthJournal = listOf(
-            StatsRecord.init()
+        healthJournal = mapOf(
+            "123" to listOf(StatsRecord.init())
         )
     )
 }
@@ -249,8 +250,8 @@ fun HomeScreenPreview5() {
         ),
         sleepQuality = SleepQuality.Worst,
         stressLevel = StressLevel.Five,
-        healthJournal = listOf(
-            StatsRecord.init()
+        healthJournal = mapOf(
+            "123" to listOf(StatsRecord.init())
         )
     )
 }

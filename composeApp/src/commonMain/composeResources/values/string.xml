@@ -104,4 +104,8 @@
     <string name="mental_score_history">Mental Score History</string>
     <string name="stress_analysis">Stress Analysis</string>
     <string name="sleep_stats">Sleep Stats</string>
+    <string name="mood_statistics">Mood Statistics</string>
+    <string name="sleep_quality_level">Level %1$s</string>
+    <string name="journals_this_year">Journals this year. Keep it Up!</string>
+    <string name="journal_history">Journal History</string>
 </resources>

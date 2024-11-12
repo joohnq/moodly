@@ -18,13 +18,14 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.SleepQualityIndicator
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality
@@ -36,24 +37,22 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepQualityScreenUI(
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
     sleepQualityRecords: List<SleepQualityRecord>,
-    onContinue: () -> Unit = {},
-    onAdd: () -> Unit = {},
-    onGoBack: () -> Unit = {}
+    onAction: (SleepQualityAction) -> Unit = {}
 ) {
     val first = sleepQualityRecords.first().sleepQuality
-    SharedItem(
+    SharedPanelComponent(
         isDark = false,
-        onGoBack = onGoBack,
+        onGoBack = { onAction(SleepQualityAction.OnGoBack) },
         backgroundColor = first.palette.color,
         backgroundImage = Drawables.Images.SleepQualityBackground,
         panelTitle = Res.string.sleep_quality,
         bodyTitle = Res.string.sleep_stats,
         color = first.palette.backgroundColor,
-        onAdd = onAdd,
+        onAdd = { onAction(SleepQualityAction.OnAdd) },
         items = sleepQualityRecords,
         panelContent = {
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.paddingHorizontalMedium()
                     .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -85,13 +84,16 @@ fun SleepQualityScreen(
     navigation: NavController
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
-    val sleepQualityItems by sleepQualityViewModel.items.collectAsState()
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
 
     SleepQualityScreenUI(
         snackBarHostState = snackBarHostState,
-        onGoBack = navigation::popBackStack,
-        sleepQualityRecords = sleepQualityItems.getValue(),
-        onContinue = {
+        sleepQualityRecords = sleepQualityState.items.getValue(),
+        onAction = { action ->
+            when (action) {
+                SleepQualityAction.OnAdd -> {}
+                SleepQualityAction.OnGoBack -> navigation.popBackStack()
+            }
         }
     )
 }

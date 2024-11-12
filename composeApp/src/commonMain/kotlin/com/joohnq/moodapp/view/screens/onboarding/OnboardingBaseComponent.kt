@@ -20,15 +20,15 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.TextWithBackground
-import com.joohnq.moodapp.view.components.TopBarDark
+import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
-import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.page_of
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -52,11 +52,11 @@ fun OnboardingBaseComponent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+            modifier = Modifier.padding(padding).paddingHorizontalSmall().fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBarDark(
+            TopBar(
                 text = Res.string.assessments,
                 onGoBack = onGoBack
             ) {
@@ -87,9 +87,8 @@ fun OnboardingBaseComponent(
             content()
             VerticalSpacer(24.dp)
             if (isContinueButtonVisible) {
-                ButtonWithArrowRight(
+                ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    text = Res.string.continue_word,
                     onClick = onContinue
                 )
                 VerticalSpacer(16.dp)

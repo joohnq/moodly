@@ -2,7 +2,7 @@ package com.joohnq.moodapp.entities
 
 import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.entities.palette.SleepQualityPalette
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res

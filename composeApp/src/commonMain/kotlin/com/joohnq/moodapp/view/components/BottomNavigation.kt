@@ -10,12 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -28,9 +25,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.joohnq.moodapp.entities.BottomScreens
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -71,21 +70,13 @@ fun NavController.BottomNavigation(
                         hierarchy.any { it.route == screen.route::class.qualifiedName }
                     NavigationBarItem(
                         selected = isSelected,
-                        colors = NavigationBarItemColors(
-                            selectedIconColor = Colors.Brown80,
-                            selectedTextColor = Colors.Brown80,
-                            selectedIndicatorColor = Colors.Brown10,
-                            unselectedIconColor = Colors.Brown30,
-                            unselectedTextColor = Colors.Brown30,
-                            disabledIconColor = Colors.Brown30,
-                            disabledTextColor = Colors.Brown30
-                        ),
+                        colors = ComponentColors.NavigationBarItem.NavigationBarItemColors(),
                         onClick = { onNavigateToRoute(screen.route) },
                         icon = {
                             Icon(
                                 painter = painterResource(screen.icon),
                                 contentDescription = stringResource(screen.name),
-                                modifier = Modifier.size(24.dp)
+                                modifier = Modifier.size(Dimens.Icon)
                             )
                         },
                     )
@@ -99,18 +90,13 @@ fun NavController.BottomNavigation(
                         contentPadding = PaddingValues(0.dp),
                         onClick = onNavigateToAddMood,
                         modifier = Modifier.size(64.dp)
-                            .background(color = Colors.Green50, shape = CircleShape),
-                        colors = ButtonColors(
-                            containerColor = Colors.Green50,
-                            contentColor = Colors.White,
-                            disabledContainerColor = Colors.Green50,
-                            disabledContentColor = Colors.White
-                        )
+                            .background(color = Colors.Green50, shape = Dimens.Shape.Circle),
+                        colors = ComponentColors.Button.BottomNavigationAddButtonColors()
                     ) {
                         Icon(
                             painter = painterResource(icon),
                             contentDescription = stringResource(name),
-                            modifier = Modifier.size(24.dp),
+                            modifier = Modifier.size(Dimens.Icon),
                         )
                     }
                 }

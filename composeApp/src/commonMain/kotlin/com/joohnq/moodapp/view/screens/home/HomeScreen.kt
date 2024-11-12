@@ -82,7 +82,6 @@ fun HomeScreenUi(
             moodTracker = moodTracker,
             onAction = onAction
         )
-
     }
 }
 
@@ -100,7 +99,7 @@ fun HomeScreen(
     val statsRecords by statsViewModel.statsRecords.collectAsState()
     val freudScore by statsViewModel.freudScore.collectAsState()
     val healthJournal by statsViewModel.healthJournal.collectAsState()
-    val sleepQualityItems by sleepQualityViewModel.items.collectAsState()
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
     val stressLevelItems by stressLevelViewModel.items.collectAsState()
     var show by remember { mutableStateOf(false) }
 
@@ -115,9 +114,9 @@ fun HomeScreen(
         statsRecords,
         user,
         stressLevelItems,
-        sleepQualityItems
+        sleepQualityState.items
     ) {
-        when (statsRecords is UiState.Success && stressLevelItems is UiState.Success && sleepQualityItems is UiState.Success && user is UiState.Success) {
+        when (statsRecords is UiState.Success && stressLevelItems is UiState.Success && sleepQualityState.items is UiState.Success && user is UiState.Success) {
             true -> show = true
             else -> Unit
         }
@@ -132,7 +131,7 @@ fun HomeScreen(
             moodTracker = statsRecords.getValue().take(3).map { it.mood }.reversed(),
             freudScore = freudScore,
             healthJournal = healthJournal,
-            sleepQuality = sleepQualityItems.getValue().first().sleepQuality,
+            sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
             stressLevel = stressLevelItems.getValue().first().stressLevel,
             onAction = { action ->
                 when (action) {

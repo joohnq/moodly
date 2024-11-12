@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -29,8 +27,12 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -43,22 +45,16 @@ fun ExpressionAnalysisTextField(
         value = text,
         onValueChange = onValueChange,
         label = null,
-        shape = RoundedCornerShape(20.dp),
+        shape = Dimens.Shape.Medium,
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
             .heightIn(min = 250.dp).border(
                 color = Colors.Brown80Alpha25,
                 width = 4.dp,
-                shape = RoundedCornerShape(20.dp)
+                shape = Dimens.Shape.Medium
             ),
-        colors = TextFieldColors(
-            indicatorColor = Colors.Orange40,
-            containerColor = Colors.White,
-            textColor = Colors.Brown80,
-            placeholderColor = Colors.Brown100Alpha64,
-            cursorColor = Colors.Orange40,
-        ),
+        colors = ComponentColors.TextField.ExpressionAnalysisColors(),
         textStyle = TextStyles.HeadingSmSemiBold(),
     )
 }
@@ -103,7 +99,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                         isFocused -> focusedBorderColor
                         else -> Colors.Transparent
                     },
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 )
                 .padding(4.dp)
         ) {
@@ -115,7 +111,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                     .onFocusChanged { focusState ->
                         isFocused = focusState.isFocused
                     }.focusRequester(focusRequester),
-                shape = CircleShape,
+                shape = Dimens.Shape.Circle,
                 placeholder = {
                     Text(
                         text = placeholder,
@@ -129,7 +125,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                         painter = painterResource(Drawables.Icons.User),
                         contentDescription = null,
                         tint = Colors.Brown80,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(Dimens.Icon)
                     )
                 }
             )
@@ -140,11 +136,11 @@ fun TextFieldWithLabelAndDoubleBorder(
                 modifier = Modifier.border(
                     width = 1.dp,
                     color = Colors.Orange40,
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 ).background(
                     color = Colors.Orange20,
-                    shape = CircleShape
-                ).padding(vertical = 5.dp).fillMaxWidth(),
+                    shape = Dimens.Shape.Circle
+                ).paddingVerticalSmall().fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -180,16 +176,7 @@ fun UserNameTextField(
         name = name,
         errorText = errorText,
         focusedBorderColor = Colors.Green50Alpha25,
-        colors = TextFieldColors(
-            containerColor = Colors.White,
-            placeholderColor = Colors.Brown100Alpha64,
-            leadingIconColor = Colors.Brown80,
-            textColor = Colors.Brown100Alpha64,
-            cursorColor = Colors.Brown80,
-            focusedBorderColor = Colors.Green50,
-            errorBorderColor = Colors.Orange40,
-            unfocusedBorderColor = Colors.Transparent
-        ),
+        colors = ComponentColors.TextField.UserNameColors(),
         onValueChange = onValueChange,
     )
 }

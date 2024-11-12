@@ -16,26 +16,23 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToWelcomeScreen
 import com.joohnq.moodapp.view.state.UiState.Companion.onSuccess
+import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
-import com.joohnq.moodapp.viewmodel.UserViewModel
 
 @Composable
 fun LoadingScreen(
-    navigation: NavController = rememberNavController()
+    navigation: NavController = rememberNavController(),
+    userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
 ) {
-    val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
-    val userViewModel: UserViewModel = sharedViewModel()
     val userPreferencesState by userPreferenceViewModel.userPreferencesState.collectAsState()
 
     SideEffect {
-        userViewModel.initUser()
         userPreferenceViewModel.onAction(UserPreferenceIntent.GetUserPreferences)
     }
 
@@ -53,7 +50,6 @@ fun LoadingScreen(
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(50.dp),

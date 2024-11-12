@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -40,20 +39,21 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.UserNameTextField
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.how_we_can_call_you
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -63,10 +63,9 @@ fun GetUserNameScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     name: String,
     nameError: String,
-    setName: (String) -> Unit,
-    setNameError: (String) -> Unit,
+    onValueChange: (String) -> Unit,
     onAction: () -> Unit,
-    focusManager: FocusManager = LocalFocusManager.current
+    onClearFocus: () -> Unit,
 ) {
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
         Box(
@@ -76,7 +75,7 @@ fun GetUserNameScreenUI(
                 .aspectRatio(1f)
                 .background(
                     color = Colors.Green50,
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 )
                 .padding(30.dp),
             contentAlignment = Alignment.BottomCenter
@@ -94,13 +93,13 @@ fun GetUserNameScreenUI(
             modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp, bottom = 20.dp)
                 .pointerInput(Unit) {
                     detectTapGestures(onTap = {
-                        focusManager.clearFocus()
+                        onClearFocus()
                     })
                 }
-        ) { padding ->
+        ) { _ ->
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 16.dp)
+                    .paddingHorizontalSmall()
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,25 +120,14 @@ fun GetUserNameScreenUI(
                         modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
                         name = name,
                         errorText = nameError,
-                        onValueChange = {
-                            setName(it)
-                            setNameError("")
-                        }
+                        onValueChange = onValueChange
                     )
                     VerticalSpacer(24.dp)
                 }
-                ButtonWithArrowRight(
+                ContinueButton(
                     modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                    text = Res.string.continue_word
-                ) {
-                    focusManager.clearFocus()
-                    if (name.trim().isEmpty()) {
-                        setNameError("Name is required")
-                        return@ButtonWithArrowRight
-                    }
-
-                    onAction()
-                }
+                    onClick = onAction
+                )
             }
         }
     }
@@ -178,10 +166,18 @@ fun GetUserNameScreen(
         name = name,
         nameError = nameError,
         snackBarState = snackBarState,
-        focusManager = focusManager,
-        setName = { name = it },
-        setNameError = { nameError = it },
+        onValueChange = {
+            name = it
+            nameError = ""
+        },
+        onClearFocus = focusManager::clearFocus,
         onAction = {
+            focusManager.clearFocus()
+            if (name.trim().isEmpty()) {
+                nameError = "Name is required"
+                return@GetUserNameScreenUI
+            }
+
             userViewModel.updateUserName(name)
         },
     )

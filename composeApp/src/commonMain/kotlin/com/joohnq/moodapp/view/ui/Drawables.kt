@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.constants
+package com.joohnq.moodapp.view.ui
 
 import com.joohnq.moodapp.view.icons.MoodDepressed
 import com.joohnq.moodapp.view.icons.MoodHappy

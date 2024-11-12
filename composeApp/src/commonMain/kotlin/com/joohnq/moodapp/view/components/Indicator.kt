@@ -8,14 +8,14 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
 
 @Composable
 fun StressLevelIndicator(stressLevel: StressLevel) {
@@ -26,10 +26,10 @@ fun StressLevelIndicator(stressLevel: StressLevel) {
                 val isSelected = i <= stressLevel.level
                 val background = if (isSelected) Modifier.background(
                     brush = Brush.linearGradient(StressLevel.getBrushGradient()[i - 1]),
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 )
                 else Modifier.background(
-                    color = Colors.Brown20, shape = CircleShape
+                    color = Colors.Brown20, shape = Dimens.Shape.Circle
                 )
                 Box(
                     modifier = Modifier.width(boxWidth).height(6.dp).then(background)
@@ -49,13 +49,13 @@ fun SleepQualityIndicator(sleepQuality: SleepQuality) {
                 val modifier = if (isSelected) Modifier else Modifier.border(
                     width = 1.dp,
                     color = Colors.White,
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 )
                 Box(
                     modifier = modifier
                         .background(
                             color = if (isSelected) Colors.White else Colors.Transparent,
-                            shape = CircleShape
+                            shape = Dimens.Shape.Circle
                         )
                         .width(boxWidth)
                         .height(6.dp)

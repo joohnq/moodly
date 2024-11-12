@@ -3,7 +3,9 @@ package com.joohnq.moodapp.view.screens.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,11 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingSleepQuality
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
@@ -57,9 +61,15 @@ fun OnboardingPhysicalSymptomsScreenUI(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             options.forEach { option: PhysicalSymptoms ->
-                PhysicalSymptomsRadioButton(
-                    option = option,
+                IconAndTextRadioButtonHorizontal(
+                    modifier = Modifier.fillMaxWidth(),
+                    paddingValues = PaddingValues(all = 16.dp),
+                    text = stringResource(option.text),
+                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = selectedOption == option,
+                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
+                    shape = Dimens.Shape.Medium,
+                    textStyle = TextStyles.TextLgExtraBold(),
                     onClick = { setSelectedOption(option) }
                 )
             }

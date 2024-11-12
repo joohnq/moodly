@@ -24,19 +24,19 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
+import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.components.TopBarDark
+import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
-import com.joohnq.moodapp.view.screens.add.AddMoodViewModel
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.AddMoodViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.expression_analysis_desc
 import moodapp.composeapp.generated.resources.expression_analysis_title
 import org.jetbrains.compose.resources.stringResource
@@ -55,11 +55,11 @@ fun ExpressionAnalysisScreenUI(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(horizontal = 16.dp).fillMaxSize()
+            modifier = Modifier.padding(padding).paddingHorizontalSmall().fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBarDark(onGoBack = onGoBack)
+            TopBar(onGoBack = onGoBack)
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -73,15 +73,13 @@ fun ExpressionAnalysisScreenUI(
                 color = Colors.Brown100Alpha64
             )
             ExpressionAnalysisTextField(
-                modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
                 text = desc,
                 onValueChange = setDesc
             )
             VerticalSpacer(24.dp)
             if (desc.isNotEmpty())
-                ButtonWithArrowRight(
+                ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    text = Res.string.continue_word,
                     onClick = onContinue
                 )
         }

@@ -4,7 +4,7 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
 import com.joohnq.moodapp.entities.palette.StressLevelBrush
 import com.joohnq.moodapp.entities.palette.StressLevelPalette
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res

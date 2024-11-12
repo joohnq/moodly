@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.mappers.distanceTo
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
 import kotlin.math.PI
 import kotlin.math.sin
 

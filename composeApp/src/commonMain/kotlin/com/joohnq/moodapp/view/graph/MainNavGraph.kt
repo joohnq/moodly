@@ -17,7 +17,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.components.BottomNavigation
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
@@ -30,6 +29,7 @@ import com.joohnq.moodapp.view.screens.journaling.JournalingScreen
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
 import com.joohnq.moodapp.view.screens.sleepquality.SleepQualityScreen
 import com.joohnq.moodapp.view.screens.stresslevel.StressLevelScreen
+import com.joohnq.moodapp.view.ui.Colors
 import kotlin.reflect.typeOf
 
 fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {

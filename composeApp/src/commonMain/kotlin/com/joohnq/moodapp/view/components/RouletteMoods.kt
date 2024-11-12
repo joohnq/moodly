@@ -14,14 +14,14 @@ import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun MoodRoulette(paddingBottom: Int, setSelectedMood: (Mood) -> Unit) {
+fun RouletteMoods(paddingBottom: Int, setSelectedMood: (Mood) -> Unit) {
     val moods =
         rememberSaveable {
             listOf(

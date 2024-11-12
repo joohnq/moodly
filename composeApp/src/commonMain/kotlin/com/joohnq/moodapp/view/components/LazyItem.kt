@@ -11,9 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +23,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -42,13 +44,8 @@ fun MentalHealthMetricItem(
     Card(
         modifier = Modifier.fillMaxSize(),
         onClick = onClick,
-        colors = CardColors(
-            containerColor = backgroundColor,
-            contentColor = Colors.White,
-            disabledContainerColor = backgroundColor,
-            disabledContentColor = Colors.White
-        ),
-        shape = RoundedCornerShape(20.dp)
+        colors = ComponentColors.Card.MentalHealthMetricColors(backgroundColor),
+        shape = Dimens.Shape.Medium
     ) {
         Column(
             modifier = Modifier.fillMaxSize().padding(20.dp)
@@ -58,7 +55,7 @@ fun MentalHealthMetricItem(
                     painter = painterResource(icon),
                     contentDescription = stringResource(title),
                     tint = Colors.White,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(Dimens.Icon)
                 )
                 HorizontalSpacer(10.dp)
                 Text(
@@ -82,14 +79,9 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
     val daySection = remember { DatetimeHelper.daySection(statsRecord.date) }
 
     Card(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-        colors = CardColors(
-            containerColor = Colors.White,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.White
-        ),
-        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
+        colors = ComponentColors.Card.MainCardColors(),
+        shape = Dimens.Shape.Medium,
         onClick = onClick,
     ) {
         Row(
@@ -101,7 +93,7 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = Colors.White, shape = RoundedCornerShape(16.dp)),
+                    .background(color = Colors.White, shape = Dimens.Shape.Small),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -138,16 +130,13 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
             HorizontalSpacer(20.dp)
             CircularProgressWithText(
                 modifier = Modifier.size(64.dp),
+                text = statsRecord.mood.healthLevel.toString(),
+                textStyle = TextStyles.TextXsBold(),
+                textColor = Colors.Brown80,
                 color = statsRecord.mood.palette.color,
                 backgroundColor = statsRecord.mood.palette.backgroundColor,
                 progress = { statsRecord.mood.healthLevel / 100f },
-            ) {
-                Text(
-                    text = statsRecord.mood.healthLevel.toString(),
-                    style = TextStyles.TextXsBold(),
-                    color = Colors.Brown80
-                )
-            }
+            )
         }
     }
 }

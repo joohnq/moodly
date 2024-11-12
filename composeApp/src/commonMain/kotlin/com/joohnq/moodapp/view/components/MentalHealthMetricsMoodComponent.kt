@@ -12,11 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoodComponent(modifier: Modifier = Modifier, mood: Mood?) {
+fun MentalHealthMetricsMoodComponent(modifier: Modifier = Modifier, mood: Mood?) {
     Column(
         modifier = modifier.size(120.dp),
         verticalArrangement = Arrangement.SpaceBetween

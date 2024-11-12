@@ -8,53 +8,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun TopBarDark(
-    modifier: Modifier = Modifier,
-    text: StringResource,
-    onGoBack: () -> Unit,
-    content: (@Composable () -> Unit)? = null
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
-            HorizontalSpacer(10.dp)
-            Text(
-                text = stringResource(text),
-                style = TextStyles.TextXlExtraBold(),
-                color = Colors.Brown80,
-            )
-        }
-        content?.let { it() }
-    }
-}
-
-@Composable
 fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
     Column(
         modifier = Modifier.fillMaxSize().background(
-            color = Colors.White, shape = RoundedCornerShape(
-                bottomStart = 20.dp,
-                bottomEnd = 20.dp
-            )
+            color = Colors.White, shape = Dimens.Shape.BottomMedium
         ).padding(20.dp).then(modifier)
     ) {
         Row {
@@ -79,60 +52,32 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
 }
 
 @Composable
-fun TopBarLight(
+fun TopBar(
     modifier: Modifier = Modifier,
-    text: StringResource,
+    isDark: Boolean = true,
+    text: StringResource? = null,
     onGoBack: () -> Unit,
     content: (@Composable () -> Unit)? = null
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
+        modifier = modifier.fillMaxWidth().paddingVerticalMedium()
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
-            HorizontalSpacer(10.dp)
-            Text(
-                text = stringResource(text),
-                style = TextStyles.TextXlExtraBold().copy(color = Color.White)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            BackButton(
+                color = if (isDark) Colors.Brown80 else Colors.White,
+                onClick = onGoBack
             )
-        }
-        content?.let { it() }
-    }
-}
+            text?.let {
+                HorizontalSpacer(10.dp)
 
-@Composable
-fun TopBarLight(
-    modifier: Modifier = Modifier,
-    onGoBack: () -> Unit,
-    content: (@Composable () -> Unit)? = null
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
-    ) {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
-        }
-        content?.let { it() }
-    }
-}
-
-@Composable
-fun TopBarDark(
-    modifier: Modifier = Modifier,
-    onGoBack: () -> Unit,
-    content: (@Composable () -> Unit)? = null
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(vertical = 12.dp)
-    ) {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
+                Text(
+                    text = stringResource(text),
+                    style = TextStyles.TextXlExtraBold(),
+                    color = if (isDark) Colors.Brown80 else Colors.White,
+                )
+            }
         }
         content?.let { it() }
     }

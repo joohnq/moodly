@@ -2,8 +2,10 @@ package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -17,11 +19,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.MedicationsSupplementsRadioButton
+import com.joohnq.moodapp.view.components.IconAndTextRadioButtonVertical
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingStressLevel
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingMedicationsSupplementsScreenUI(
@@ -49,9 +55,15 @@ fun OnboardingMedicationsSupplementsScreenUI(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(options) { option: MedicationsSupplements ->
-                MedicationsSupplementsRadioButton(
-                    option = option,
+                IconAndTextRadioButtonVertical(
+                    modifier = Modifier.fillMaxSize().aspectRatio(1f),
+                    paddingValues = PaddingValues(all = 16.dp),
+                    text = stringResource(option.text),
+                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = selectedOption == option,
+                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
+                    shape = Dimens.Shape.Medium,
+                    textStyle = TextStyles.TextMdBold(),
                     onClick = { setSelectedOption(option) }
                 )
             }

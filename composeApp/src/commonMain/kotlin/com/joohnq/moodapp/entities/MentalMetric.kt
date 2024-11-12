@@ -3,8 +3,8 @@ package com.joohnq.moodapp.entities
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.moodapp.entities.palette.MentalMetricsPalette
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
 import moodapp.composeapp.generated.resources.health_journal

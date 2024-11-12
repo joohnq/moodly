@@ -2,14 +2,14 @@ package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -18,7 +18,7 @@ fun MoodFace(modifier: Modifier = Modifier, mood: Mood) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = mood.palette.faceBackgroundColor, shape = CircleShape)
+            .background(color = mood.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
             painter = painterResource(mood.image),
@@ -34,7 +34,7 @@ fun MoodFace(modifier: Modifier = Modifier, backgroundColor: Color, color: Color
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = backgroundColor, shape = CircleShape)
+            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
             painter = painterResource(mood.image),
@@ -55,7 +55,7 @@ fun MoodFace(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = backgroundColor, shape = CircleShape)
+            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
             painter = painterResource(mood.image),

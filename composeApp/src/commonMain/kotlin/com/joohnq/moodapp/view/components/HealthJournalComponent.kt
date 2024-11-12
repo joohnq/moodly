@@ -7,12 +7,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,7 +17,9 @@ import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.mappers.items
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 
 @Composable
 fun HealthJournalComponent(
@@ -37,7 +36,7 @@ fun HealthJournalComponent(
         items(dayOfWeek + 1) {
             Box(
                 modifier = Modifier.fillMaxSize()
-                    .background(color = Colors.Transparent, shape = RoundedCornerShape(4.dp))
+                    .background(color = Colors.Transparent, shape = Dimens.Shape.ExtraSmall)
                     .size(18.dp),
             )
         }
@@ -49,7 +48,7 @@ fun HealthJournalComponent(
             }
             Box(
                 modifier = Modifier.fillMaxSize()
-                    .background(color = background, shape = RoundedCornerShape(4.dp))
+                    .background(color = background, shape = Dimens.Shape.ExtraSmall)
                     .size(18.dp),
             )
         }
@@ -66,7 +65,7 @@ fun HealthJournalComponentColorful(
         val boxSize = (maxWidth - 88.dp) / 7
         LazyVerticalGrid(
             modifier = modifier.heightIn(min = boxSize * 4 + 24.dp, max = boxSize * 5 + 32.dp)
-                .padding(horizontal = 20.dp),
+                .paddingHorizontalMedium(),
             columns = GridCells.Fixed(7),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -74,7 +73,7 @@ fun HealthJournalComponentColorful(
             items(dayOfWeek + 1) {
                 Box(
                     modifier = Modifier
-                        .background(color = Colors.Transparent, shape = CircleShape)
+                        .background(color = Colors.Transparent, shape = Dimens.Shape.Circle)
                         .size(boxSize),
                 )
             }
@@ -86,11 +85,11 @@ fun HealthJournalComponentColorful(
                 val border = Modifier.border(
                     width = 1.dp,
                     color = if (statsRecords == null) Colors.Brown30 else background,
-                    shape = CircleShape
+                    shape = Dimens.Shape.Circle
                 )
                 Box(
                     modifier = Modifier
-                        .background(color = background, shape = CircleShape).size(boxSize)
+                        .background(color = background, shape = Dimens.Shape.Circle).size(boxSize)
                         .then(border),
                 )
             }

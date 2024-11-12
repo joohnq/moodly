@@ -3,6 +3,7 @@ package com.joohnq.moodapp.view.screens.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -15,11 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.StressRateButton
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingExpressionAnalysis
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
@@ -53,10 +56,12 @@ fun OnboardingStressLevelScreenUI(
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             options.forEach { option: StressLevel ->
-                StressRateButton(
-                    modifier = Modifier.weight(1f),
-                    option = option,
-                    isSelected = selectedOption == option,
+                TextRadioButton(
+                    modifier = Modifier.weight(1f).aspectRatio(1f),
+                    text = stringResource(option.value),
+                    selected = selectedOption == option,
+                    shape = Dimens.Shape.Circle,
+                    colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
                     onClick = { setSelectedOption(option) }
                 )
             }

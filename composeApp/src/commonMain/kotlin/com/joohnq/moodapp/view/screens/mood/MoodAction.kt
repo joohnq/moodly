@@ -4,5 +4,5 @@ sealed class MoodAction {
     data object Previous : MoodAction()
     data object Next : MoodAction()
     data object GoBack : MoodAction()
-    data object GoToAddMood : MoodAction()
+    data object OnAdd : MoodAction()
 }

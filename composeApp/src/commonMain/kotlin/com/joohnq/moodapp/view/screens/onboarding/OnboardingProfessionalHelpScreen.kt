@@ -14,12 +14,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.ProfessionalHelp
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ProfessionalHelpRadioButton
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingProfessionalHelpScreenUI(
@@ -45,10 +48,12 @@ fun OnboardingProfessionalHelpScreenUI(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             options.forEach { option ->
-                ProfessionalHelpRadioButton(
+                TextRadioButton(
                     modifier = Modifier.weight(1f),
-                    option = option,
+                    text = stringResource(option.text),
                     selected = selectedOption == option,
+                    shape = Dimens.Shape.Circle,
+                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     onClick = { setSelectedOption(option) }
                 )
             }

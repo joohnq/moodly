@@ -16,11 +16,11 @@ import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.showErrorOrUnit
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
@@ -78,25 +78,25 @@ fun OnboardingExpressionAnalysisScreen(
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     val userUpdatingStatus by userViewModel.updatingStatus.collectAsState()
     val statsAddingStatus by statsViewModel.addingStatus.collectAsState()
-    val sleepQualityAddingStatus by sleepQualityViewModel.addingStatus.collectAsState()
+    val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
     val stressLevelAddingStatus by stressLevelViewModel.addingStatus.collectAsState()
 
     LaunchedEffect(
         stressLevelAddingStatus,
-        sleepQualityAddingStatus,
+        sleepQualityState.addingStatus,
         statsAddingStatus,
         userUpdatingStatus
     ) {
         scope.launch {
             stressLevelAddingStatus.showErrorOrUnit(snackBarState)
-            sleepQualityAddingStatus.showErrorOrUnit(snackBarState)
+            sleepQualityState.addingStatus.showErrorOrUnit(snackBarState)
             statsAddingStatus.showErrorOrUnit(snackBarState)
             userUpdatingStatus.showErrorOrUnit(snackBarState)
         }
 
         if (
             stressLevelAddingStatus is UiState.Success &&
-            sleepQualityAddingStatus is UiState.Success &&
+            sleepQualityState.addingStatus is UiState.Success &&
             statsAddingStatus is UiState.Success &&
             userUpdatingStatus is UiState.Success
         ) {

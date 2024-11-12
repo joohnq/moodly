@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
@@ -30,12 +29,14 @@ import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
-import com.joohnq.moodapp.view.components.SliderColors
-import com.joohnq.moodapp.view.components.SliderComponents
+import com.joohnq.moodapp.view.components.SleepQualityThumb
+import com.joohnq.moodapp.view.components.SleepQualityTrack
 import com.joohnq.moodapp.view.components.VerticalSlider
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToMedicationsSupplements
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalLarge
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
@@ -65,7 +66,7 @@ fun OnboardingSleepQualityScreenUI(
                 modifier = Modifier.fillMaxSize().height(400.dp)
             ) {
                 Column(
-                    modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
+                    modifier = Modifier.fillMaxHeight().weight(1f).paddingVerticalLarge(),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQuality ->
@@ -83,12 +84,12 @@ fun OnboardingSleepQualityScreenUI(
                     modifier = Modifier.weight(1f).testTag(TestConstants.SLEEP_QUALITY_SLIDER),
                     sliderValue = sliderValue,
                     setSliderValue = setSliderValue,
-                    thumb = { SliderComponents.SleepQualityThumb() },
-                    track = { SliderComponents.SleepQualityTrack(it) },
-                    sliderColors = SliderColors()
+                    thumb = { SleepQualityThumb() },
+                    track = { SleepQualityTrack(it) },
+                    sliderColors = ComponentColors.Slider.SleepQualitySliderColors()
                 )
                 Column(
-                    modifier = Modifier.fillMaxHeight().weight(1f).padding(vertical = 15.dp),
+                    modifier = Modifier.fillMaxHeight().weight(1f).paddingVerticalLarge(),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
                 ) {

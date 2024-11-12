@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.constants
+package com.joohnq.moodapp.view.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily

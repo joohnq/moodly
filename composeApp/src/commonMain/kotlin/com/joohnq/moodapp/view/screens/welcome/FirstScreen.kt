@@ -6,24 +6,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.ContinueButton
+import com.joohnq.moodapp.view.components.TextWithSpan
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.first_screen_desc
+import moodapp.composeapp.generated.resources.first_screen_image
 import moodapp.composeapp.generated.resources.first_screen_second_title
 import moodapp.composeapp.generated.resources.first_screen_title
 import moodapp.composeapp.generated.resources.first_screen_title_word
@@ -36,48 +36,35 @@ fun FirstScreen(onGetStarted: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)
+        modifier = Modifier.fillMaxSize().paddingHorizontalSmall()
     ) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(
-                    style = TextStyles.HeadingSpanSmExtraBold().copy(color = Colors.Brown80),
-                ) {
-                    append(stringResource(Res.string.first_screen_title))
-                }
-                withStyle(
-                    style = TextStyles.HeadingSpanSmExtraBold().copy(color = Colors.Brown60)
-                ) {
-                    append(stringResource(Res.string.first_screen_title_word))
-                }
-                withStyle(
-                    style = TextStyles.HeadingSpanSmExtraBold().copy(color = Colors.Brown80)
-                ) {
-                    append(stringResource(Res.string.first_screen_second_title))
-                }
-            },
-            textAlign = TextAlign.Center
+        TextWithSpan(
+            firstTitle = stringResource(Res.string.first_screen_title),
+            secondTitle = stringResource(Res.string.first_screen_second_title),
+            span = stringResource(Res.string.first_screen_title_word),
+            spanColor = Colors.Brown60,
         )
         VerticalSpacer(16.dp)
         Text(
             text = stringResource(Res.string.first_screen_desc),
             style = TextStyles.ParagraphLg(),
-            color = Colors.Brown100Alpha64
+            color = Colors.Brown100Alpha64,
+            textAlign = TextAlign.Center
         )
         VerticalSpacer(32.dp)
         Box(contentAlignment = Alignment.Center) {
             Box(
                 modifier = Modifier
                     .size(300.dp)
-                    .background(color = Colors.White, shape = CircleShape)
+                    .background(color = Colors.White, shape = Dimens.Shape.Circle)
             )
             Image(
                 painter = painterResource(Drawables.Images.WelcomeFirstScreenImage),
-                contentDescription = null,
+                contentDescription = stringResource(Res.string.first_screen_image),
             )
         }
         VerticalSpacer(32.dp)
-        ButtonWithArrowRight(text = Res.string.get_started, onClick = onGetStarted)
+        ContinueButton(text = Res.string.get_started, onClick = onGetStarted)
         VerticalSpacer(30.dp)
     }
 }

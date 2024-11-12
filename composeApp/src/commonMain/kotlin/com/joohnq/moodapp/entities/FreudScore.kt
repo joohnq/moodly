@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.entities
 
 import com.joohnq.moodapp.entities.palette.FreudScorePalette
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.at_risk
 import moodapp.composeapp.generated.resources.healthy

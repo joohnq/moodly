@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,13 +22,14 @@ import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.ScreenDimensions
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
+import com.joohnq.moodapp.view.components.IconContinueButton
 import com.joohnq.moodapp.view.components.MoodFace
-import com.joohnq.moodapp.view.components.MoodRoulette
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.RouletteMoods
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToProfessionalHelp
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
@@ -72,14 +72,9 @@ fun OnboardingMoodRateScreenUi(
         modifier = Modifier.fillMaxSize().padding(all = 16.dp),
         contentAlignment = Alignment.CenterEnd
     ) {
-        ButtonWithArrowRight(
+        IconContinueButton(
             modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
-            colors = IconButtonColors(
-                containerColor = Colors.Brown80,
-                contentColor = Colors.White,
-                disabledContainerColor = Colors.Brown80,
-                disabledContentColor = Colors.White
-            ),
+            colors = ComponentColors.IconButton.ContinueButtonColors(),
             onClick = onAction
         )
     }
@@ -93,7 +88,7 @@ fun OnboardingMoodRateScreenUi(
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            MoodRoulette(paddingBottom = moodRatePadding, setSelectedMood = setSelectedMood)
+            RouletteMoods(paddingBottom = moodRatePadding, setSelectedMood = setSelectedMood)
         }
     }
 }

@@ -112,4 +112,5 @@
     <string name="add">Add</string>
     <string name="journaling">Journaling</string>
     <string name="home">Home</string>
+    <string name="first_screen_image">First Screen Image</string>
 </resources>

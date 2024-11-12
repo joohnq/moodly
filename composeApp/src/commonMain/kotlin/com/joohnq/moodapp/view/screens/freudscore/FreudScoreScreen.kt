@@ -14,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.entities.FreudScore
@@ -23,11 +22,12 @@ import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
 import com.joohnq.moodapp.view.components.SharedItem
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
@@ -37,7 +37,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable fun FreudScoreScreenUi(
     freudScore: FreudScore,
     mapStatsRecords: Map<String, List<StatsRecord>>,
-    onAdd: () -> Unit = {},
     onAction: (FreudScoreAction) -> Unit = {}
 ) {
     SharedItem(
@@ -48,10 +47,10 @@ import org.jetbrains.compose.resources.stringResource
         panelTitle = Res.string.freud_score,
         bodyTitle = Res.string.mental_score_history,
         color = freudScore.palette.subColor,
-        onAdd = onAdd,
+        onAdd = { onAction(FreudScoreAction.OnAdd) },
         panelContent = {
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.paddingHorizontalMedium()
                     .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -73,7 +72,7 @@ import org.jetbrains.compose.resources.stringResource
                 item {
                     Text(
                         text = key,
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+                        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                         style = TextStyles.LabelSm(),
                         color = Colors.Brown100Alpha64
                     )
@@ -105,8 +104,9 @@ import org.jetbrains.compose.resources.stringResource
         mapStatsRecords = mapStatsRecords,
         onAction = {
             when (it) {
-                FreudScoreAction.OnGoBack -> navigation.popBackStack()
+                is FreudScoreAction.OnGoBack -> navigation.popBackStack()
                 is FreudScoreAction.OnNavigateToMood -> navigation.onNavigateToMood(it.statsRecord)
+                is FreudScoreAction.OnAdd -> {}
             }
         }
     )

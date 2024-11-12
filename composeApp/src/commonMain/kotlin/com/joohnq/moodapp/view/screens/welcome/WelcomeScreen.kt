@@ -16,8 +16,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
+import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceSideEffect
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel

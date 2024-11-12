@@ -17,10 +17,11 @@ import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.HealthJournalComponentColorful
 import com.joohnq.moodapp.view.components.SharedItem
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.health_journal
@@ -46,7 +47,7 @@ fun HealthJournalScreenUI(
         onAdd = onAdd,
         panelContent = {
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.paddingHorizontalMedium()
                     .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center

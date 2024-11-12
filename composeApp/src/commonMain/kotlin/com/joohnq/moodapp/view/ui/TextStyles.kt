@@ -1,10 +1,9 @@
-package com.joohnq.moodapp.view.components
+package com.joohnq.moodapp.view.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.joohnq.moodapp.view.constants.FontFamily
 
 object TextStyles {
     @Composable

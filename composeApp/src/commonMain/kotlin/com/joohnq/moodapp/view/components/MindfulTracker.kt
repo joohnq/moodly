@@ -7,17 +7,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.home.HomeAction
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mindful_journal
 import moodapp.composeapp.generated.resources.mood_tracker
@@ -40,13 +40,10 @@ import moodapp.composeapp.generated.resources.stress_level
                 color = sleepQuality.palette.color,
                 backgroundColor = sleepQuality.palette.backgroundColor2,
                 progress = { sleepQuality.level * 0.2f },
-            ) {
-                Text(
-                    text = sleepQuality.level.toString(),
-                    style = TextStyles.TextXsExtraBold(),
-                    color = Colors.Brown80
-                )
-            }
+                text = sleepQuality.level.toString(),
+                textStyle = TextStyles.TextXsExtraBold(),
+                textColor = Colors.Brown80
+            )
         },
         onClick = { onAction(HomeAction.OnNavigateToSleepQuality) }
     )
@@ -72,7 +69,7 @@ import moodapp.composeapp.generated.resources.stress_level
 
                     Box(
                         modifier = Modifier.size(12.dp).background(
-                            color = background, shape = RoundedCornerShape(4.dp)
+                            color = background, shape = Dimens.Shape.ExtraSmall
                         ),
                     )
                 }

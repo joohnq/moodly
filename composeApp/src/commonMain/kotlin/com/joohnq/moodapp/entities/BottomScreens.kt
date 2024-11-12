@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.entities
 
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.ui.Drawables
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res

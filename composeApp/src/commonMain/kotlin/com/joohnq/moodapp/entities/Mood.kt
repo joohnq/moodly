@@ -3,8 +3,8 @@ package com.joohnq.moodapp.entities
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.joohnq.moodapp.entities.palette.MoodPalette
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res

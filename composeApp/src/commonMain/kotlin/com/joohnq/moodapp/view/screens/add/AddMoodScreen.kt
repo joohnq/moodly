@@ -20,16 +20,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ButtonWithCheck
+import com.joohnq.moodapp.view.components.AddMoodRadioGroup
+import com.joohnq.moodapp.view.components.ButtonTextAndCheck
+import com.joohnq.moodapp.view.components.CurvedConnectedDotsRow
 import com.joohnq.moodapp.view.components.MoodFace
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.components.TopBarLight
+import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToExpressionAnalysis
-import com.joohnq.moodapp.view.screens.home.CurvedConnectedDotsRow
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
-import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.AddMoodViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.hey_name
@@ -52,7 +53,7 @@ fun AddMoodScreenUi(
         Modifier.fillMaxSize().background(color = selectedMood.palette.moodScreenBackgroundColor)
             .padding(horizontal = 20.dp, vertical = 30.dp),
     ) {
-        TopBarLight(onGoBack = onGoBack)
+        TopBar(isDark = false, onGoBack = onGoBack)
         VerticalSpacer(50.dp)
         Column(
             modifier = Modifier.weight(1f),
@@ -94,55 +95,18 @@ fun AddMoodScreenUi(
                 dotSize = 36.dp,
                 curveHeight = 60.dp,
                 onDotClick = {
-                    println("  $it")
                     setSelectedMood(moods[it])
                 }
             )
             VerticalSpacer(40.dp)
-//            BoxWithConstraints {
-//                val dividerWidth = (maxWidth - 180.dp - 40.dp) / 4
-//                LazyRow(
-//                    modifier = Modifier.wrapContentSize(Alignment.Center).fillMaxWidth(),
-//                    verticalAlignment = Alignment.CenterVertically,
-//                    horizontalArrangement = Arrangement.Center
-//                ) {
-//                    val dividerCount = moods.size - 1
-//
-//                    itemsIndexed(moods) { i, mood ->
-//                        Button(
-//                            modifier = Modifier.size(36.dp),
-//                            colors = ButtonColors(
-//                                containerColor = if (i <= moodIndex) Colors.White else selectedMood.palette.moodScreenInactiveColor,
-//                                contentColor = selectedMood.palette.moodScreenBackgroundColor,
-//                                disabledContainerColor = if (i <= moodIndex) Colors.White else selectedMood.palette.moodScreenInactiveColor,
-//                                disabledContentColor = selectedMood.palette.moodScreenBackgroundColor
-//                            ),
-//                            shape = CircleShape,
-//                            onClick = {
-//                                setSelectedMood(moods[i])
-//                            },
-//                            contentPadding = PaddingValues(0.dp)
-//                        ) {
-//                            Box(
-//                                modifier = Modifier.size(8.dp).background(
-//                                    color = selectedMood.palette.moodScreenBackgroundColor,
-//                                    shape = CircleShape
-//                                )
-//                            )
-//                        }
-//
-//                        if (i < dividerCount) {
-//                            Box(
-//                                modifier = Modifier.width(dividerWidth).height(10.dp)
-//                                    .padding(horizontal = 4.dp)
-//                                    .background(color = if (moodIndex - 1 >= i) Colors.White else selectedMood.palette.moodScreenInactiveColor)
-//                            )
-//                        }
-//                    }
-//                }
-//            }
+            AddMoodRadioGroup(
+                moodsSize = moods.size,
+                moodIndex = moodIndex,
+                selectedMood = selectedMood,
+                setSelectedMood = { setSelectedMood(moods[it]) }
+            )
             VerticalSpacer(40.dp)
-            ButtonWithCheck(
+            ButtonTextAndCheck(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.set_mood,
                 onClick = onContinue
@@ -155,7 +119,6 @@ fun AddMoodScreenUi(
 fun AddMoodScreen(
     userViewModel: UserViewModel = sharedViewModel(),
     addMoodViewModel: AddMoodViewModel = sharedViewModel(),
-    statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
     val addMoodState by addMoodViewModel.addMoodState.collectAsState()

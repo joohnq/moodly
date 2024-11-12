@@ -1,8 +1,8 @@
-package com.joohnq.moodapp.view.constants
+package com.joohnq.moodapp.view.ui
 
 import androidx.compose.ui.graphics.Color
 
-object Colors{
+object Colors {
     val Brown100 = Color(0xFF372315)
     val Brown90 = Color(0xFF372315)
     val Brown80 = Color(0xFF4f4322)

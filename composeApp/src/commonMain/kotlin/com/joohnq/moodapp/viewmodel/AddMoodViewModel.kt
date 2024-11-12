@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.view.screens.add
+package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.entities.Mood

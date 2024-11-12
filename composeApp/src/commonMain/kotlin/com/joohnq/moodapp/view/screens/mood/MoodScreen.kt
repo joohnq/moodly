@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,30 +18,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.MoodsManager
-import com.joohnq.moodapp.entities.Icon
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.ButtonWithIcon
 import com.joohnq.moodapp.view.components.MoodFace
+import com.joohnq.moodapp.view.components.PreviousNextButton
 import com.joohnq.moodapp.view.components.SharedItem
-import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.description
 import moodapp.composeapp.generated.resources.mood
-import moodapp.composeapp.generated.resources.next
-import moodapp.composeapp.generated.resources.previous
 import moodapp.composeapp.generated.resources.your_mood_is
 import org.jetbrains.compose.resources.stringResource
 
@@ -51,7 +47,6 @@ fun MoodScreenUi(
     statsRecord: StatsRecord,
     hasNext: Boolean,
     hasPrevious: Boolean,
-    onAdd: () -> Unit = {},
     onAction: (MoodAction) -> Unit = {},
 ) {
     SharedItem(
@@ -62,7 +57,7 @@ fun MoodScreenUi(
         panelTitle = Res.string.mood,
         bodyTitle = Res.string.description,
         color = statsRecord.mood.palette.subColor,
-        onAdd = onAdd,
+        onAdd = { onAction(MoodAction.OnAdd) },
         topBarContent = {
             TextWithBackground(
                 text = DatetimeHelper.formatLocalDateTime(statsRecord.date),
@@ -72,7 +67,7 @@ fun MoodScreenUi(
         },
         panelContent = {
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.paddingHorizontalMedium()
                     .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -93,43 +88,21 @@ fun MoodScreenUi(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ButtonWithIcon(
+                    PreviousNextButton(
                         enabled = hasPrevious,
+                        isPrevious = true,
                         onClick = { onAction(MoodAction.Previous) },
-                        icon = Icon(
-                            icon = Drawables.Icons.ArrowChevron,
-                            modifier = Modifier.size(24.dp),
-                            tint = statsRecord.mood.palette.color,
-                            contentDescription = Res.string.previous
-                        ),
-                        colors = IconButtonColors(
-                            containerColor = Colors.Transparent,
-                            contentColor = statsRecord.mood.palette.color,
-                            disabledContainerColor = Colors.Transparent,
-                            disabledContentColor = Colors.Transparent,
-                        ),
-                        modifier = Modifier.size(48.dp),
+                        color = statsRecord.mood.palette.color
                     )
                     MoodFace(
                         modifier = Modifier.size(96.dp),
                         mood = statsRecord.mood
                     )
-                    ButtonWithIcon(
+                    PreviousNextButton(
                         enabled = hasNext,
+                        isPrevious = false,
                         onClick = { onAction(MoodAction.Next) },
-                        icon = Icon(
-                            icon = Drawables.Icons.ArrowChevron,
-                            modifier = Modifier.size(24.dp).rotate(180f),
-                            tint = statsRecord.mood.palette.color,
-                            contentDescription = Res.string.next
-                        ),
-                        colors = IconButtonColors(
-                            containerColor = Colors.Transparent,
-                            contentColor = statsRecord.mood.palette.color,
-                            disabledContainerColor = Colors.Transparent,
-                            disabledContentColor = Colors.Transparent,
-                        ),
-                        modifier = Modifier.size(48.dp),
+                        color = statsRecord.mood.palette.color
                     )
                 }
             }
@@ -141,7 +114,7 @@ fun MoodScreenUi(
                         text = statsRecord.description,
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Brown100Alpha64,
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)
+                        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
                     )
                 }
             }
@@ -172,18 +145,10 @@ fun MoodScreen(
         hasPrevious = hasPrevious != null,
         onAction = {
             when (it) {
-                MoodAction.GoToAddMood -> {
-
-                }
-
                 MoodAction.GoBack -> navigation.popBackStack()
-                MoodAction.Next -> hasNext?.run {
-                    currentStatsRecord = this
-                }
-
-                MoodAction.Previous -> hasPrevious?.run {
-                    currentStatsRecord = this
-                }
+                MoodAction.Next -> hasNext?.run { currentStatsRecord = this }
+                MoodAction.Previous -> hasPrevious?.run { currentStatsRecord = this }
+                MoodAction.OnAdd -> {}
             }
         },
     )

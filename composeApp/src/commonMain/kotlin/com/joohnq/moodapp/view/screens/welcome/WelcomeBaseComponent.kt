@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.view.screens.welcome
 
-import androidx.annotation.ColorLong
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,9 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,18 +20,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.ScreenDimensions
-import com.joohnq.moodapp.view.components.ButtonWithArrowRight
-import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.IconContinueButton
 import com.joohnq.moodapp.view.components.TextWithBackground
+import com.joohnq.moodapp.view.components.TextWithSpan
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.constants.Colors
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.step
 import org.jetbrains.compose.resources.DrawableResource
@@ -47,11 +41,11 @@ fun MockScreen(
     image: DrawableResource,
     step: String,
     index: Int,
-    @ColorLong backgroundColor: Color,
+    backgroundColor: Color,
     firstTitle: String? = null,
     span: String,
     secondTitle: String? = null,
-    @ColorLong spanColor: Color,
+    spanColor: Color,
     testTag: String,
     onNext: () -> Unit
 ) {
@@ -111,41 +105,16 @@ fun MockScreen(
                     strokeCap = StrokeCap.Round,
                 )
                 VerticalSpacer(24.dp)
-                Text(
-                    text = buildAnnotatedString {
-                        if (firstTitle != null)
-                            withStyle(
-                                style = TextStyles.HeadingSpanSmExtraBold()
-                                    .copy(color = Colors.Brown80)
-                            ) {
-                                append(firstTitle)
-                            }
-                        withStyle(
-                            style = TextStyles.HeadingSpanSmExtraBold()
-                                .copy(color = spanColor)
-                        ) {
-                            append(span)
-                        }
-                        if (secondTitle != null)
-                            withStyle(
-                                style = TextStyles.HeadingSpanSmExtraBold()
-                                    .copy(color = Colors.Brown80)
-                            ) {
-                                append(secondTitle)
-                            }
-                    },
-                    lineHeight = 40.sp,
-                    textAlign = TextAlign.Center
+                TextWithSpan(
+                    firstTitle = firstTitle,
+                    secondTitle = secondTitle,
+                    span = span,
+                    spanColor = spanColor,
                 )
                 VerticalSpacer(24.dp)
-                ButtonWithArrowRight(
+                IconContinueButton(
                     modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON + step),
-                    colors = IconButtonColors(
-                        containerColor = Colors.Brown80,
-                        contentColor = Colors.White,
-                        disabledContainerColor = Colors.Brown80,
-                        disabledContentColor = Colors.White
-                    ),
+                    colors = ComponentColors.IconButton.ContinueButtonColors(),
                     onClick = onNext
                 )
             }

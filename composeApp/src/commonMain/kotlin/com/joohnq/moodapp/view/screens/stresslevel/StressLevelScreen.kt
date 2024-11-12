@@ -1,15 +1,10 @@
 package com.joohnq.moodapp.view.screens.stresslevel
 
-import androidx.compose.animation.core.EaseInOutCubic
-import androidx.compose.animation.core.tween
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -19,29 +14,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.times
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.SharedItem
-import com.joohnq.moodapp.view.components.TextStyles
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.components.StressLevelChart
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
-import ir.ehsannarmani.compose_charts.LineChart
-import ir.ehsannarmani.compose_charts.models.AnimationMode
-import ir.ehsannarmani.compose_charts.models.DividerProperties
-import ir.ehsannarmani.compose_charts.models.DrawStyle
-import ir.ehsannarmani.compose_charts.models.GridProperties
-import ir.ehsannarmani.compose_charts.models.HorizontalIndicatorProperties
-import ir.ehsannarmani.compose_charts.models.LabelHelperProperties
-import ir.ehsannarmani.compose_charts.models.LabelProperties
-import ir.ehsannarmani.compose_charts.models.Line
-import ir.ehsannarmani.compose_charts.models.PopupProperties
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_analysis
 import moodapp.composeapp.generated.resources.stress_level
@@ -51,8 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelScreenUI(
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
     stressLevelRecords: List<StressLevelRecord>,
-    onAdd: () -> Unit = {},
-    onGoBack: () -> Unit = {},
+    onAction: (StressLevelAction) -> Unit = {}
 ) {
     val first = stressLevelRecords.first().stressLevel
     val list = remember {
@@ -70,16 +53,16 @@ fun StressLevelScreenUI(
     }
     SharedItem(
         isDark = false,
-        onGoBack = onGoBack,
+        onGoBack = { onAction(StressLevelAction.OnGoBack) },
         backgroundColor = first.palette.pageBackgroundColor,
         backgroundImage = Drawables.Images.StressLevelBackground,
         panelTitle = Res.string.stress_level,
         bodyTitle = Res.string.stress_analysis,
         color = first.palette.pageColor,
-        onAdd = onAdd,
+        onAdd = { onAction(StressLevelAction.OnAdd) },
         panelContent = {
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.paddingHorizontalMedium()
                     .padding(top = it.calculateTopPadding()).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -100,58 +83,7 @@ fun StressLevelScreenUI(
             item {
                 LazyRow {
                     item {
-                        LineChart(
-                            indicatorProperties = HorizontalIndicatorProperties(
-                                false,
-                                padding = 0.dp
-                            ),
-                            dividerProperties = DividerProperties(false),
-                            labelHelperProperties = LabelHelperProperties(false),
-                            maxValue = 100.00,
-                            minValue = 0.0,
-//                            dotsProperties = DotProperties(
-//                                true,
-//                                radius = 6.dp,
-//                                color = SolidColor(Colors.Brown80)
-//                            ),
-                            popupProperties = PopupProperties(false),
-                            gridProperties = GridProperties(
-                                false,
-                                xAxisProperties = GridProperties.AxisProperties(false),
-                                yAxisProperties = GridProperties.AxisProperties(false)
-                            ),
-                            labelProperties = LabelProperties(false),
-                            modifier = Modifier.fillMaxWidth().height(130.dp)
-                                .width(12 * 10.dp),
-                            data = remember {
-                                listOf(
-                                    Line(
-                                        label = "",
-                                        curvedEdges = false,
-                                        values = listOf(
-                                            0.0,
-                                            0.0,
-                                            0.0,
-                                            50.0,
-                                            50.0,
-                                            50.0,
-                                            25.0,
-                                            25.0,
-                                            25.0
-                                        ),
-                                        color = SolidColor(Colors.Brown80),
-                                        strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                                        gradientAnimationDelay = 1000,
-                                        drawStyle = DrawStyle.Stroke(width = 3.dp),
-                                    )
-                                )
-                            },
-                            animationDelay = 0L,
-                            animationMode = AnimationMode.Together(delayBuilder = {
-                                it * 500L
-                            }
-                            ),
-                        )
+                        StressLevelChart()
                     }
                 }
             }
@@ -170,7 +102,12 @@ fun StressLevelScreen(
     StressLevelScreenUI(
         snackBarHostState = snackBarHostState,
         stressLevelRecords = stressLevelItems.getValue(),
-        onGoBack = navigation::popBackStack
+        onAction = { action ->
+            when (action) {
+                is StressLevelAction.OnAdd -> {}
+                is StressLevelAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 

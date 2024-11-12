@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,8 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -26,7 +27,7 @@ fun MoodTrackerRow(moodTracker: List<Mood>) {
             val mood = moodTracker[i]
             Box(
                 modifier = Modifier.background(
-                    color = mood.palette.backgroundColor, shape = CircleShape
+                    color = mood.palette.backgroundColor, shape = Dimens.Shape.Circle
                 ).padding(vertical = 6.dp, horizontal = 10.dp),
             ) {
                 Text(

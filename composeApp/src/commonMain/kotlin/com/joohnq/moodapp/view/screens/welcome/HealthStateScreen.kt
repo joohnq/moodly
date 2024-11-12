@@ -2,8 +2,8 @@ package com.joohnq.moodapp.view.screens.welcome
 
 import androidx.compose.runtime.Composable
 import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Drawables
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.health_state_first_title
 import moodapp.composeapp.generated.resources.health_state_second_title

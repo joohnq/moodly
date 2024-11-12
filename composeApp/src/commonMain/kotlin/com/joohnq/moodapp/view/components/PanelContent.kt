@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,8 +20,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.ScreenDimensions
-import com.joohnq.moodapp.view.constants.Colors
-import com.joohnq.moodapp.view.constants.Drawables
+import com.joohnq.moodapp.view.ui.ComponentColors
+import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.add
 import org.jetbrains.compose.resources.DrawableResource
@@ -65,19 +65,20 @@ fun PanelContent(
             modifier = Modifier.fillMaxSize()
         ) {
             if (isDark) {
-                TopBarDark(
+                TopBar(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding())
-                        .padding(horizontal = 20.dp),
+                        .paddingHorizontalMedium(),
                     text = text,
                     onGoBack = onGoBack,
                     content = topBarContent
                 )
             } else {
-                TopBarLight(
+                TopBar(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding())
-                        .padding(horizontal = 20.dp),
+                        .paddingHorizontalMedium(),
+                    isDark = false,
                     text = text,
                     onGoBack = onGoBack
                 )
@@ -99,18 +100,15 @@ fun PanelContent(
         ) {
             FilledIconButton(
                 onClick = onAdd,
-                shape = CircleShape,
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Colors.Brown80,
-                    contentColor = Colors.White
-                ),
+                shape = Dimens.Shape.Circle,
+                colors = ComponentColors.IconButton.ContinueButtonColors(),
                 modifier = Modifier
                     .size(80.dp)
             ) {
                 Icon(
                     painter = painterResource(Drawables.Icons.Add),
                     contentDescription = stringResource(Res.string.add),
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(Dimens.Icon)
                 )
             }
         }

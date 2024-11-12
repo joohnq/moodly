@@ -47,12 +47,12 @@ fun MentalHealthMetrics(
                 ) {
                     Text(
                         text = freudScore.score.toString(),
-                        style = TextStyles.FreudScore(),
+                        style = TextStyles.Text2xlExtraBold(),
                         color = freudScore.palette.color
                     )
                     Text(
                         text = stringResource(freudScore.title),
-                        style = TextStyles.FreudTitle(),
+                        style = TextStyles.TextSmSemiBold(),
                         color = freudScore.palette.color
                     )
                 }
@@ -63,7 +63,7 @@ fun MentalHealthMetrics(
                 title = Res.string.mood,
                 icon = Drawables.Icons.SadFace,
                 backgroundColor = statsRecord.mood.palette.color,
-                onClick = { onAction(HomeAction.OnNavigateToMood(statsRecord)) }
+                onClick = { onAction(HomeAction.OnNavigateToMood) }
             ) {
                 MoodComponent(
                     it,

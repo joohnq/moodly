@@ -5,13 +5,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -61,7 +59,7 @@ fun ExpressionAnalysisTextField(
             placeholderColor = Colors.Brown100Alpha64,
             cursorColor = Colors.Orange40,
         ),
-        textStyle = TextStyles.ExpressionAnalysisTextField()
+        textStyle = TextStyles.HeadingSmSemiBold(),
     )
 }
 
@@ -87,10 +85,11 @@ fun TextFieldWithLabelAndDoubleBorder(
 
     Column {
         Text(
-            label,
-            style = TextStyles.TextFieldLabel()
+            text = label,
+            style = TextStyles.TextSmExtraBold(),
+            color = Colors.Brown80
         )
-        Spacer(modifier = Modifier.height(5.dp))
+        VerticalSpacer(5.dp)
         Box(
             modifier = Modifier
                 .border(
@@ -119,12 +118,12 @@ fun TextFieldWithLabelAndDoubleBorder(
                 shape = CircleShape,
                 placeholder = {
                     Text(
-                        placeholder,
-                        style = TextStyles.TextFieldText()
+                        text = placeholder,
+                        style = TextStyles.TextMdBold()
                     )
                 },
                 colors = colors,
-                textStyle = TextStyles.TextFieldText(),
+                textStyle = TextStyles.TextMdBold(),
                 leadingIcon = {
                     Icon(
                         painter = painterResource(Drawables.Icons.User),
@@ -136,7 +135,7 @@ fun TextFieldWithLabelAndDoubleBorder(
             )
         }
         if (isError) {
-            Spacer(modifier = Modifier.height(4.dp))
+            VerticalSpacer(4.dp)
             Box(
                 modifier = Modifier.border(
                     width = 1.dp,
@@ -155,10 +154,11 @@ fun TextFieldWithLabelAndDoubleBorder(
                         tint = Colors.Orange40,
                         modifier = Modifier.size(20.dp)
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    HorizontalSpacer(10.dp)
                     Text(
                         text = errorText,
-                        style = TextStyles.TextFieldErrorText()
+                        style = TextStyles.TextXsExtraBold(),
+                        color = Colors.Orange40
                     )
                 }
             }

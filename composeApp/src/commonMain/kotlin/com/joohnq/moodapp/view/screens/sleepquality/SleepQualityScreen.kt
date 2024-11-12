@@ -3,9 +3,7 @@ package com.joohnq.moodapp.view.screens.sleepquality
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -23,6 +21,7 @@ import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.SharedItem
 import com.joohnq.moodapp.view.components.SleepQualityIndicator
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
@@ -61,16 +60,16 @@ fun SleepQualityScreenUI(
             ) {
                 Text(
                     text = stringResource(Res.string.sleep_quality_level, first.level),
-                    style = TextStyles.ExtraBold2XL(),
+                    style = TextStyles.Heading2xlExtraBold(),
                     color = Colors.White
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(first.firstText),
-                    style = TextStyles.ExtraBoldSm(),
+                    style = TextStyles.HeadingSmExtraBold(),
                     color = Colors.White
                 )
-                Spacer(modifier = Modifier.height(20.dp))
+                VerticalSpacer(20.dp)
                 SleepQualityIndicator(sleepQuality = first)
             }
         },

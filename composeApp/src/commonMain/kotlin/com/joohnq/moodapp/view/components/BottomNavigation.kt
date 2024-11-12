@@ -33,11 +33,6 @@ import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.Screens
 import org.jetbrains.compose.resources.painterResource
 
-sealed class BottomNavigationAction {
-    data object OnNavigateToAddMood : BottomNavigationAction()
-    data class OnNavigateToRoute(val route: Screens) : BottomNavigationAction()
-}
-
 @Composable
 fun NavController.BottomNavigation(
     onNavigateToAddMood: () -> Unit,

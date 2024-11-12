@@ -4,15 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -63,91 +60,18 @@ fun MentalHealthMetricItem(
                     tint = Colors.White,
                     modifier = Modifier.size(24.dp)
                 )
-                Spacer(modifier = Modifier.width(10.dp))
+                HorizontalSpacer(10.dp)
                 Text(
                     text = stringResource(title),
-                    style = TextStyles.HomeMetricTitle()
+                    style = TextStyles.TextSmBold(),
+                    color = Colors.White
                 )
             }
-            Spacer(modifier = Modifier.height(24.dp))
+            VerticalSpacer(24.dp)
             content(
                 Modifier.heightIn(min = 130.dp, max = 140.dp)
                     .widthIn(min = 130.dp, max = 140.dp).fillMaxSize()
             )
-        }
-    }
-}
-
-@Composable
-fun MentalScoreHistoryItem(statsRecord: StatsRecord, onClick: () -> Unit) {
-    val day = remember { DatetimeHelper.dayOfMonth(statsRecord.date) }
-    val monthNameAbbrev = remember { DatetimeHelper.monthNameAbbrev(statsRecord.date) }
-
-    Card(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-        colors = CardColors(
-            containerColor = Colors.White,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.White
-        ),
-        shape = RoundedCornerShape(20.dp),
-        onClick = onClick,
-    ) {
-        Row(
-            modifier = Modifier.fillMaxSize()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(1f)
-                    .background(color = Colors.White, shape = RoundedCornerShape(16.dp))
-                    .padding(horizontal = 20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = monthNameAbbrev,
-                    style = TextStyles.SmLabel(),
-                    color = Colors.Brown100Alpha64
-                )
-                Text(
-                    text = day,
-                    style = TextStyles.ExtraBoldXL(),
-                    color = Colors.Brown80
-                )
-            }
-            Spacer(modifier = Modifier.width(10.dp))
-            Column(
-                modifier = Modifier.fillMaxHeight(),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = stringResource(statsRecord.mood.text),
-                    style = TextStyles.MindfulTrackerCardTitle()
-                )
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    text = statsRecord.description,
-                    style = TextStyles.MindfulTrackerCardSubtitle(),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-            CircularProgressWithText(
-                modifier = Modifier.size(64.dp),
-                color = statsRecord.mood.palette.color,
-                backgroundColor = statsRecord.mood.palette.backgroundColor,
-                progress = { statsRecord.mood.healthLevel / 100f },
-            ) {
-                Text(
-                    text = statsRecord.mood.healthLevel.toString(),
-                    style = TextStyles.SleepQualityOption()
-                )
-            }
         }
     }
 }
@@ -183,33 +107,35 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
             ) {
                 Text(
                     text = daySection,
-                    style = TextStyles.SmLabel(),
+                    style = TextStyles.LabelSm(),
                     color = Colors.Brown100Alpha64
                 )
                 Text(
                     text = hourAndMinutes,
-                    style = TextStyles.TextExtraBoldLG(),
+                    style = TextStyles.TextLgExtraBold(),
                     color = Colors.Brown80
                 )
             }
-            Spacer(modifier = Modifier.width(20.dp))
+            HorizontalSpacer(20.dp)
             Column(
                 modifier = Modifier.fillMaxHeight().weight(1f),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = stringResource(statsRecord.mood.text),
-                    style = TextStyles.MindfulTrackerCardTitle()
+                    style = TextStyles.TextMdBold(),
+                    color = Colors.Brown80
                 )
-                Spacer(modifier = Modifier.height(5.dp))
+                VerticalSpacer(5.dp)
                 Text(
                     text = statsRecord.description,
-                    style = TextStyles.MindfulTrackerCardSubtitle(),
+                    style = TextStyles.TextSmSemiBold(),
+                    color = Colors.Brown100Alpha64,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            Spacer(modifier = Modifier.width(20.dp))
+            HorizontalSpacer(20.dp)
             CircularProgressWithText(
                 modifier = Modifier.size(64.dp),
                 color = statsRecord.mood.palette.color,
@@ -218,7 +144,8 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
             ) {
                 Text(
                     text = statsRecord.mood.healthLevel.toString(),
-                    style = TextStyles.SleepQualityOption()
+                    style = TextStyles.TextXsBold(),
+                    color = Colors.Brown80
                 )
             }
         }

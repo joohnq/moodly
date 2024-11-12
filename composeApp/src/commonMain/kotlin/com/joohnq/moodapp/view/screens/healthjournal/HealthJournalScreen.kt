@@ -2,9 +2,7 @@ package com.joohnq.moodapp.view.screens.healthjournal
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +18,7 @@ import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.HealthJournalComponentColorful
 import com.joohnq.moodapp.view.components.SharedItem
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.viewmodel.StatsViewModel
@@ -35,7 +34,6 @@ fun HealthJournalScreenUI(
     onGoBack: () -> Unit = {},
     onAdd: () -> Unit = {},
 ) {
-
     val dayPerYear = remember { "2" }
     SharedItem(
         isDark = false,
@@ -55,13 +53,13 @@ fun HealthJournalScreenUI(
             ) {
                 Text(
                     text = dayPerYear,
-                    style = TextStyles.ExtraBold2XL(),
+                    style = TextStyles.Heading2xlExtraBold(),
                     color = Colors.White
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(Res.string.journals_this_year),
-                    style = TextStyles.SemiBoldXL(),
+                    style = TextStyles.TextXlSemiBold(),
                     color = Colors.White
                 )
             }

@@ -3,13 +3,11 @@ package com.joohnq.moodapp.view.screens.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +27,7 @@ import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.MoodRoulette
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToProfessionalHelp
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
@@ -55,18 +54,19 @@ fun OnboardingMoodRateScreenUi(
         onGoBack = onGoBack,
     ) {
         Text(
-            stringResource(
+            text = stringResource(
                 Res.string.mood_rate_desc,
                 stringResource(selectedMood.text)
             ),
-            style = TextStyles.OnboardingScreenMood()
+            style = TextStyles.TextXlSemiBold(),
+            color = Colors.Brown100Alpha64,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
             mood = selectedMood,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        VerticalSpacer(24.dp)
     }
     Box(
         modifier = Modifier.fillMaxSize().padding(all = 16.dp),
@@ -74,9 +74,11 @@ fun OnboardingMoodRateScreenUi(
     ) {
         ButtonWithArrowRight(
             modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
-            colors = ButtonDefaults.buttonColors(
+            colors = IconButtonColors(
                 containerColor = Colors.Brown80,
-                contentColor = Colors.White
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Brown80,
+                disabledContentColor = Colors.White
             ),
             onClick = onAction
         )

@@ -56,9 +56,15 @@ import org.jetbrains.compose.resources.stringResource
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = freudScore.score.toString(), style = TextStyles.FreudScreenScore())
                 Text(
-                    text = stringResource(freudScore.title), style = TextStyles.FreudScreenTitle()
+                    text = freudScore.score.toString(),
+                    style = TextStyles.DisplayMdExtraBold(),
+                    color = Colors.White
+                )
+                Text(
+                    text = stringResource(freudScore.title),
+                    style = TextStyles.TextXlSemiBold(),
+                    color = Colors.White
                 )
             }
         },
@@ -68,7 +74,7 @@ import org.jetbrains.compose.resources.stringResource
                     Text(
                         text = key,
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
-                        style = TextStyles.SmLabel(),
+                        style = TextStyles.LabelSm(),
                         color = Colors.Brown100Alpha64
                     )
                 }

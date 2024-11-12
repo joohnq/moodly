@@ -28,7 +28,8 @@ fun MoodComponent(modifier: Modifier = Modifier, mood: Mood?) {
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterStart) {
                     Text(
                         text = stringResource(it),
-                        style = TextStyles.MoodComponentText()
+                        style = TextStyles.Text2xlExtraBold(),
+                        color = Colors.White
                     )
                 }
             }

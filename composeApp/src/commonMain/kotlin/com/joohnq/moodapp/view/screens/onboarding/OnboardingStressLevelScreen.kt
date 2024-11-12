@@ -3,9 +3,7 @@ package com.joohnq.moodapp.view.screens.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +17,8 @@ import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.StressRateButton
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.VerticalSpacer
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingExpressionAnalysis
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
@@ -43,10 +43,11 @@ fun OnboardingStressLevelScreenUI(
         onContinue = onAction,
     ) {
         Text(
-            stringResource(selectedOption.value),
-            style = TextStyles.StressRate()
+            text = stringResource(selectedOption.value),
+            style = TextStyles.DisplayLgExtraBold(),
+            color = Colors.Brown80
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        VerticalSpacer(16.dp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(5.dp)
@@ -60,10 +61,11 @@ fun OnboardingStressLevelScreenUI(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        VerticalSpacer(16.dp)
         Text(
-            stringResource(selectedOption.text),
-            style = TextStyles.StressRateDesc()
+            text = stringResource(selectedOption.text),
+            style = TextStyles.TextLgBold(),
+            color = Colors.Brown80
         )
     }
 }

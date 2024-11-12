@@ -3,8 +3,6 @@ package com.joohnq.moodapp.view.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -33,25 +31,26 @@ import moodapp.composeapp.generated.resources.stress_level
 ) {
     MindfulTrackerCardRow(icon = Drawables.Icons.HospitalBed,
         color = sleepQuality.palette.color,
-        backgroundColor = sleepQuality.palette.backgroundColor,
+        backgroundColor = sleepQuality.palette.backgroundColor2,
         title = sleepQuality.firstText,
         subtitle = sleepQuality.secondText,
         content = {
             CircularProgressWithText(
                 modifier = Modifier.size(56.dp),
                 color = sleepQuality.palette.color,
-                backgroundColor = sleepQuality.palette.backgroundColor,
+                backgroundColor = sleepQuality.palette.backgroundColor2,
                 progress = { sleepQuality.level * 0.2f },
             ) {
                 Text(
                     text = sleepQuality.level.toString(),
-                    style = TextStyles.SleepQualityOption()
+                    style = TextStyles.TextXsExtraBold(),
+                    color = Colors.Brown80
                 )
             }
         },
         onClick = { onAction(HomeAction.OnNavigateToSleepQuality) }
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    VerticalSpacer(16.dp)
     MindfulTrackerCardRow(icon = Drawables.Icons.DocumentHealth,
         color = Colors.Orange40,
         backgroundColor = Colors.Orange10,
@@ -81,7 +80,7 @@ import moodapp.composeapp.generated.resources.stress_level
         },
         onClick = { onAction(HomeAction.OnNavigateToMindfulJournal) }
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    VerticalSpacer(16.dp)
     MindfulTrackerCardColumn(icon = Drawables.Icons.Head,
         color = stressLevel.brush.color,
         backgroundColor = stressLevel.brush.backgroundColor,
@@ -92,7 +91,7 @@ import moodapp.composeapp.generated.resources.stress_level
         },
         onClick = { onAction(HomeAction.OnNavigateToStressLevel) }
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    VerticalSpacer(16.dp)
     MindfulTrackerCardColumn(icon = Drawables.Icons.HappyFace,
         color = Colors.Brown80,
         backgroundColor = Colors.Brown10,
@@ -102,5 +101,5 @@ import moodapp.composeapp.generated.resources.stress_level
         },
         onClick = { onAction(HomeAction.OnNavigateToMoodTracker) }
     )
-    Spacer(modifier = Modifier.height(30.dp))
+    VerticalSpacer(30.dp)
 }

@@ -12,12 +12,12 @@ fun DoubleText(firstText: StringResource, secondText: StringResource, color: Col
     Column {
         Text(
             stringResource(firstText),
-            style = TextStyles.OnboardingSleepQualityTitle()
+            style = TextStyles.TextLgExtraBold()
                 .copy(color = color)
         )
         Text(
             stringResource(secondText),
-            style = TextStyles.OnboardingSleepQualitySubTitle()
+            style = TextStyles.LabelSm()
                 .copy(color = color)
         )
     }

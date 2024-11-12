@@ -60,7 +60,7 @@ fun TextRadioButton(
     ) {
         Text(
             text = text,
-            style = TextStyles.WelcomeScreenButton()
+            style = TextStyles.TextLgExtraBold(),
         )
     }
 }
@@ -193,7 +193,7 @@ fun PhysicalSymptomsRadioButton(
             selectedBorderColor = Colors.Green50Alpha25,
         ),
         shape = RoundedCornerShape(20.dp),
-        textStyle = TextStyles.WelcomeScreenButton(),
+        textStyle = TextStyles.TextLgExtraBold(),
         onClick = onClick
     )
 }
@@ -219,7 +219,7 @@ fun MedicationsSupplementsRadioButton(
             selectedBorderColor = Colors.Green50Alpha25,
         ),
         shape = RoundedCornerShape(20.dp),
-        textStyle = TextStyles.OnboardingMedicationsGridItem(),
+        textStyle = TextStyles.TextMdBold(),
         onClick = onClick
     )
 }

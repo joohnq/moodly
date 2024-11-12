@@ -2,11 +2,9 @@ package com.joohnq.moodapp.view.screens.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -19,12 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.TopBarDark
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
@@ -61,13 +61,13 @@ fun OnboardingBaseComponent(
                 onGoBack = onGoBack
             ) {
                 TextWithBackground(
-                    stringResource(Res.string.page_of, page, 7),
+                    text = stringResource(Res.string.page_of, page, 7),
                     borderColor = Colors.Transparent,
                     backgroundColor = Colors.Brown20,
                     textColor = Colors.Brown60
                 )
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            VerticalSpacer(32.dp)
             if (image != null) {
                 Image(
                     painter = painterResource(image),
@@ -75,22 +75,24 @@ fun OnboardingBaseComponent(
                     modifier = Modifier.widthIn(max = 300.dp).fillMaxWidth().aspectRatio(1f)
                         .align(alignment = Alignment.CenterHorizontally)
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                VerticalSpacer(24.dp)
             }
             Text(
                 text = stringResource(title),
-                style = TextStyles.OnboardingScreenTitle()
+                style = TextStyles.HeadingSmExtraBold(),
+                color = Colors.Brown80,
+                textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            VerticalSpacer(24.dp)
             content()
-            Spacer(modifier = Modifier.height(24.dp))
+            VerticalSpacer(24.dp)
             if (isContinueButtonVisible) {
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
                     text = Res.string.continue_word,
                     onClick = onContinue
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16.dp)
             }
         }
     }

@@ -33,8 +33,9 @@ sealed class SleepQuality(
         secondText = Res.string.seven_nine_hours,
         level = 5,
         palette = SleepQualityPalette(
-            backgroundColor = Colors.Green10,
-            color = Colors.Green50
+            backgroundColor2 = Colors.Green10,
+            backgroundColor = Colors.Green30,
+            color = Colors.Green60
         )
     )
 
@@ -45,8 +46,9 @@ sealed class SleepQuality(
         secondText = Res.string.six_seven_hours,
         level = 4,
         palette = SleepQualityPalette(
-            backgroundColor = Colors.Yellow10,
-            color = Colors.Yellow50
+            backgroundColor2 = Colors.Yellow10,
+            backgroundColor = Colors.Yellow30,
+            color = Colors.Yellow60
         )
     )
 
@@ -57,8 +59,9 @@ sealed class SleepQuality(
         secondText = Res.string.five_hours,
         level = 3,
         palette = SleepQualityPalette(
-            backgroundColor = Colors.Brown20,
-            color = Colors.Brown60
+            backgroundColor2 = Colors.Brown20,
+            backgroundColor = Colors.Brown40,
+            color = Colors.Brown70
         )
     )
 
@@ -69,8 +72,9 @@ sealed class SleepQuality(
         secondText = Res.string.three_four_hours,
         level = 2,
         palette = SleepQualityPalette(
-            backgroundColor = Colors.Orange10,
-            color = Colors.Orange40
+            backgroundColor2 = Colors.Orange10,
+            backgroundColor = Colors.Orange30,
+            color = Colors.Orange50
         )
     )
 
@@ -81,8 +85,9 @@ sealed class SleepQuality(
         secondText = Res.string.minus_three_hours,
         level = 1,
         palette = SleepQualityPalette(
-            backgroundColor = Colors.Purple10,
-            color = Colors.Purple40
+            backgroundColor2 = Colors.Purple10,
+            backgroundColor = Colors.Purple30,
+            color = Colors.Purple50
         )
     )
 

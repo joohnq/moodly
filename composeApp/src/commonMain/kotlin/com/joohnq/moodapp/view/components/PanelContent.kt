@@ -11,8 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,9 +24,12 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.add
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @Composable
@@ -38,6 +42,7 @@ fun PanelContent(
     color: Color,
     onAdd: () -> Unit,
     onGoBack: () -> Unit,
+    topBarContent: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     val screenDimensions: ScreenDimensions = koinInject()
@@ -65,7 +70,8 @@ fun PanelContent(
                         .padding(top = padding.calculateTopPadding())
                         .padding(horizontal = 20.dp),
                     text = text,
-                    onGoBack = onGoBack
+                    onGoBack = onGoBack,
+                    content = topBarContent
                 )
             } else {
                 TopBarLight(
@@ -91,16 +97,19 @@ fun PanelContent(
                 .absoluteOffset(y = 40.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
-            IconButton(
+            FilledIconButton(
                 onClick = onAdd,
+                shape = CircleShape,
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = Colors.Brown80,
+                    contentColor = Colors.White
+                ),
                 modifier = Modifier
                     .size(80.dp)
-                    .background(color = Colors.Brown80, shape = CircleShape)
             ) {
                 Icon(
                     painter = painterResource(Drawables.Icons.Add),
-                    contentDescription = null,
-                    tint = Colors.White,
+                    contentDescription = stringResource(Res.string.add),
                     modifier = Modifier.size(24.dp)
                 )
             }

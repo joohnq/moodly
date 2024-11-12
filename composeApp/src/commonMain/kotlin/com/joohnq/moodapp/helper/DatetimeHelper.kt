@@ -43,7 +43,7 @@ object DatetimeHelper {
     }
 
     // Mon, 28 Oct 20224
-    fun formatDateTime(date: LocalDate): String {
+    fun formatLocalDate(date: LocalDate): String {
         return date.format(LocalDate.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
             chars(", ")
@@ -55,7 +55,7 @@ object DatetimeHelper {
         })
     }
 
-    fun formatDateTime(date: LocalDateTime): String {
+    fun formatLocalDateTime(date: LocalDateTime = getLocalDateTime()): String {
         return date.format(LocalDateTime.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
             chars(", ")
@@ -64,6 +64,10 @@ object DatetimeHelper {
             monthName(MonthNames.ENGLISH_ABBREVIATED)
             char(' ')
             year()
+            chars(" at ")
+            hour()
+            char(':')
+            minute()
         })
     }
 
@@ -109,7 +113,7 @@ object DatetimeHelper {
         date: LocalDateTime = getLocalDateTime()
     ): String {
         val yearsDay = getDaysInCurrentYear(date.year)
-        val days = statsRecords.associateBy { it?.let { formatDateTime(date) } }.keys.size
+        val days = statsRecords.associateBy { it?.let { formatLocalDate(date.date) } }.keys.size
         return "$days/$yearsDay"
     }
 }

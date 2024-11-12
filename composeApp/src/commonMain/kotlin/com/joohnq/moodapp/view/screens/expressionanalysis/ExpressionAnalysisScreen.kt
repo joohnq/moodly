@@ -2,10 +2,8 @@ package com.joohnq.moodapp.view.screens.expressionanalysis
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,6 +28,7 @@ import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.TopBarDark
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.screens.add.AddMoodViewModel
@@ -61,22 +60,24 @@ fun ExpressionAnalysisScreenUI(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TopBarDark(onGoBack = onGoBack)
-            Spacer(modifier = Modifier.height(60.dp))
+            VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
-                style = TextStyles.OnboardingScreenTitle()
+                style = TextStyles.HeadingSmExtraBold(),
+                color = Colors.Brown80
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            VerticalSpacer(24.dp)
             Text(
-                stringResource(Res.string.expression_analysis_desc),
-                style = TextStyles.ExpressionAnalysisDesc()
+                text = stringResource(Res.string.expression_analysis_desc),
+                style = TextStyles.ParagraphMd(),
+                color = Colors.Brown100Alpha64
             )
             ExpressionAnalysisTextField(
                 modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
-                desc,
+                text = desc,
                 onValueChange = setDesc
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            VerticalSpacer(24.dp)
             if (desc.isNotEmpty())
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),

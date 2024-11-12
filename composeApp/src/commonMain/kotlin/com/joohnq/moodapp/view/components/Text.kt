@@ -18,6 +18,17 @@ fun TextWithBackground(text: String, borderColor: Color, backgroundColor: Color,
             .border(2.dp, color = borderColor, shape = CircleShape)
             .background(color = backgroundColor, shape = CircleShape)
             .padding(vertical = 9.dp, horizontal = 16.dp),
-        style = TextStyles.WelcomeScreenIndicatorIndex().copy(color = textColor)
+        style = TextStyles.LabelSm().copy(color = textColor)
+    )
+}
+
+@Composable
+fun TextWithBackground(text: String, backgroundColor: Color, textColor: Color) {
+    Text(
+        text,
+        modifier = Modifier
+            .background(color = backgroundColor, shape = CircleShape)
+            .padding(vertical = 9.dp, horizontal = 16.dp),
+        style = TextStyles.LabelSm().copy(color = textColor)
     )
 }

@@ -4,7 +4,6 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +33,7 @@ import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SliderColors
 import com.joohnq.moodapp.view.components.SliderComponents
 import com.joohnq.moodapp.view.components.VerticalSlider
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToMedicationsSupplements
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
@@ -60,7 +60,7 @@ fun OnboardingSleepQualityScreenUI(
         onContinue = onAction
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Spacer(modifier = Modifier.height(20.dp))
+            VerticalSpacer(20.dp)
             Row(
                 modifier = Modifier.fillMaxSize().height(400.dp)
             ) {

@@ -4,13 +4,11 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,18 +26,21 @@ import com.joohnq.moodapp.MoodsManager
 import com.joohnq.moodapp.entities.Icon
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithIcon
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SharedItem
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.TextWithBackground
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.description
 import moodapp.composeapp.generated.resources.mood
-import moodapp.composeapp.generated.resources.mood_statistics
 import moodapp.composeapp.generated.resources.next
 import moodapp.composeapp.generated.resources.previous
 import moodapp.composeapp.generated.resources.your_mood_is
@@ -59,9 +60,16 @@ fun MoodScreenUi(
         backgroundColor = statsRecord.mood.palette.backgroundColor,
         backgroundImage = Drawables.Images.MoodBackground,
         panelTitle = Res.string.mood,
-        bodyTitle = Res.string.mood_statistics,
+        bodyTitle = Res.string.description,
         color = statsRecord.mood.palette.subColor,
         onAdd = onAdd,
+        topBarContent = {
+            TextWithBackground(
+                text = DatetimeHelper.formatLocalDateTime(statsRecord.date),
+                textColor = statsRecord.mood.palette.moodScreenMoodFaceColor,
+                backgroundColor = statsRecord.mood.palette.subColor,
+            )
+        },
         panelContent = {
             Column(
                 modifier = Modifier.padding(horizontal = 20.dp)
@@ -71,63 +79,72 @@ fun MoodScreenUi(
             ) {
                 Text(
                     text = stringResource(Res.string.your_mood_is),
-                    style = TextStyles.BoldXL(),
+                    style = TextStyles.TextXlBold(),
                     color = statsRecord.mood.palette.moodScreenMoodFaceColor
                 )
                 Text(
                     text = stringResource(statsRecord.mood.text),
-                    style = TextStyles.ExtraBold2XL(),
+                    style = TextStyles.Heading2xlExtraBold(),
                     color = statsRecord.mood.palette.moodScreenMoodFaceColor
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                VerticalSpacer(10.dp)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (hasPrevious)
-                        ButtonWithIcon(
-                            onClick = { onAction(MoodAction.Previous) },
-                            icon = Icon(
-                                icon = Drawables.Icons.ArrowChevron,
-                                modifier = Modifier.size(24.dp),
-                                tint = statsRecord.mood.palette.color,
-                                contentDescription = Res.string.previous
-                            ),
-                            colors = ButtonColors(
-                                containerColor = Colors.Transparent,
-                                contentColor = statsRecord.mood.palette.color,
-                                disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = statsRecord.mood.palette.color,
-                            ),
-                            modifier = Modifier.size(48.dp),
-                        )
+                    ButtonWithIcon(
+                        enabled = hasPrevious,
+                        onClick = { onAction(MoodAction.Previous) },
+                        icon = Icon(
+                            icon = Drawables.Icons.ArrowChevron,
+                            modifier = Modifier.size(24.dp),
+                            tint = statsRecord.mood.palette.color,
+                            contentDescription = Res.string.previous
+                        ),
+                        colors = IconButtonColors(
+                            containerColor = Colors.Transparent,
+                            contentColor = statsRecord.mood.palette.color,
+                            disabledContainerColor = Colors.Transparent,
+                            disabledContentColor = Colors.Transparent,
+                        ),
+                        modifier = Modifier.size(48.dp),
+                    )
                     MoodFace(
                         modifier = Modifier.size(96.dp),
                         mood = statsRecord.mood
                     )
-                    if (hasNext)
-                        ButtonWithIcon(
-                            onClick = { onAction(MoodAction.Next) },
-                            icon = Icon(
-                                icon = Drawables.Icons.ArrowChevron,
-                                modifier = Modifier.size(24.dp).rotate(180f),
-                                tint = statsRecord.mood.palette.color,
-                                contentDescription = Res.string.next
-                            ),
-                            colors = ButtonColors(
-                                containerColor = Colors.Transparent,
-                                contentColor = statsRecord.mood.palette.color,
-                                disabledContainerColor = Colors.Transparent,
-                                disabledContentColor = statsRecord.mood.palette.color,
-                            ),
-                            modifier = Modifier.size(48.dp),
-                        )
+                    ButtonWithIcon(
+                        enabled = hasNext,
+                        onClick = { onAction(MoodAction.Next) },
+                        icon = Icon(
+                            icon = Drawables.Icons.ArrowChevron,
+                            modifier = Modifier.size(24.dp).rotate(180f),
+                            tint = statsRecord.mood.palette.color,
+                            contentDescription = Res.string.next
+                        ),
+                        colors = IconButtonColors(
+                            containerColor = Colors.Transparent,
+                            contentColor = statsRecord.mood.palette.color,
+                            disabledContainerColor = Colors.Transparent,
+                            disabledContentColor = Colors.Transparent,
+                        ),
+                        modifier = Modifier.size(48.dp),
+                    )
                 }
             }
         },
         content = {
-
+            item {
+                Column {
+                    Text(
+                        text = statsRecord.description,
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown100Alpha64,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)
+                    )
+                }
+            }
         }
     )
 }

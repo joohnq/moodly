@@ -4,17 +4,16 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,10 +53,11 @@ fun ButtonTextWithIcon(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                stringResource(text),
-                style = TextStyles.WelcomeScreenButton()
+                text = stringResource(text),
+                style = TextStyles.TextLgExtraBold(),
+                color = Colors.White
             )
-            Spacer(modifier = Modifier.width(12.dp))
+            VerticalSpacer(12.dp)
             Icon(
                 painter = painterResource(icon.icon),
                 contentDescription = stringResource(icon.contentDescription),
@@ -70,24 +70,24 @@ fun ButtonTextWithIcon(
 
 @Composable
 fun ButtonWithIcon(
-    modifier: Modifier,
+    enabled: Boolean = true,
+    modifier: Modifier = Modifier,
     icon: Icon,
-    colors: ButtonColors,
     borderStroke: BorderStroke? = null,
+    colors: IconButtonColors,
     onClick: () -> Unit
 ) {
-    Button(
+    OutlinedIconButton(
+        enabled = enabled,
         modifier = modifier,
-        colors = colors,
         shape = CircleShape,
+        colors = colors,
+        border = borderStroke,
         onClick = onClick,
-        contentPadding = PaddingValues(0.dp),
-        border = borderStroke
     ) {
         Icon(
             painter = painterResource(icon.icon),
             contentDescription = stringResource(icon.contentDescription),
-            tint = icon.tint,
             modifier = icon.modifier
         )
     }
@@ -149,7 +149,7 @@ fun ButtonWithArrowOpen(
 ) {
     ButtonWithIcon(
         modifier = Modifier.size(48.dp),
-        colors = ButtonColors(
+        colors = IconButtonColors(
             containerColor = backgroundColor,
             contentColor = color,
             disabledContainerColor = backgroundColor,
@@ -172,7 +172,7 @@ fun ButtonWithArrowOpen(
 @Composable
 fun ButtonWithArrowRight(
     modifier: Modifier = Modifier,
-    colors: ButtonColors,
+    colors: IconButtonColors,
     onClick: () -> Unit
 ) {
     ButtonWithIcon(
@@ -212,6 +212,10 @@ fun StressRateButton(
         shape = CircleShape,
         contentPadding = PaddingValues(0.dp),
     ) {
-        Text(text = stringResource(option.value))
+        Text(
+            text = stringResource(option.value),
+            style = TextStyles.HeadingXsExtraBold(),
+            color = Colors.Brown80
+        )
     }
 }

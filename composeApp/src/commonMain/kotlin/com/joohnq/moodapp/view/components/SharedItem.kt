@@ -3,16 +3,13 @@ package com.joohnq.moodapp.view.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -56,13 +53,13 @@ import org.jetbrains.compose.resources.StringResource
                         onGoBack = onGoBack,
                         content = { panelContent(padding) }
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
+                    VerticalSpacer(20.dp)
                     Title(bodyTitle)
                 }
             }
             items(items) { content(it) }
             item {
-                Spacer(modifier = Modifier.height(20.dp))
+                VerticalSpacer(20.dp)
             }
         }
     }
@@ -77,6 +74,7 @@ import org.jetbrains.compose.resources.StringResource
     bodyTitle: StringResource,
     color: Color,
     onAdd: () -> Unit,
+    topBarContent: (@Composable () -> Unit)? = null,
     panelContent: @Composable (PaddingValues) -> Unit,
     content: LazyListScope.() -> Unit,
 ) {
@@ -103,15 +101,16 @@ import org.jetbrains.compose.resources.StringResource
                         color = color,
                         onAdd = onAdd,
                         onGoBack = onGoBack,
-                        content = { panelContent(padding) }
+                        content = { panelContent(padding) },
+                        topBarContent = topBarContent
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
+                    VerticalSpacer(20.dp)
                     Title(bodyTitle)
                 }
             }
             content()
             item {
-                Spacer(modifier = Modifier.height(20.dp))
+                HorizontalSpacer(20.dp)
             }
         }
     }

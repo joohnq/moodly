@@ -3,9 +3,7 @@ package com.joohnq.moodapp.view.screens.onboarding
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +18,8 @@ import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.PhysicalSymptomsRadioButton
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.components.VerticalSpacer
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingSleepQuality
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
@@ -47,10 +47,11 @@ fun OnboardingPhysicalSymptomsScreenUI(
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
-            style = TextStyles.OnboardingScreenMood(),
-            textAlign = TextAlign.Center
+            style = TextStyles.ParagraphMd(),
+            textAlign = TextAlign.Center,
+            color = Colors.Brown100Alpha64
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        VerticalSpacer(40.dp)
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(10.dp)

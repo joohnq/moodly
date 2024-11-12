@@ -4,13 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -39,10 +36,11 @@ fun TopBarDark(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             ButtonWithArrowOpen(color = Colors.Brown80, onClick = onGoBack)
-            Spacer(modifier = Modifier.width(10.dp))
+            HorizontalSpacer(10.dp)
             Text(
-                stringResource(text),
-                style = TextStyles.OnboardingScreenSession()
+                text = stringResource(text),
+                style = TextStyles.TextXlExtraBold(),
+                color = Colors.Brown80,
             )
         }
         content?.let { it() }
@@ -70,12 +68,12 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
                     tint = Colors.Brown80,
                     contentDescription = null
                 )
-                Text(date, style = TextStyles.HomeTopBarDate())
+                Text(text = date, style = TextStyles.TextSmBold(), color = Colors.Brown100Alpha64)
             }
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        VerticalSpacer(10.dp)
         Text(
-            text = "Hi, $userName", style = TextStyles.HomeTopBarName()
+            text = "Hi, $userName", style = TextStyles.HeadingSmExtraBold(), color = Colors.Brown80
         )
     }
 }
@@ -94,10 +92,10 @@ fun TopBarLight(
     ) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             ButtonWithArrowOpen(color = Colors.White, onClick = onGoBack)
-            Spacer(modifier = Modifier.width(10.dp))
+            HorizontalSpacer(10.dp)
             Text(
                 text = stringResource(text),
-                style = TextStyles.TopBar().copy(color = Color.White)
+                style = TextStyles.TextXlExtraBold().copy(color = Color.White)
             )
         }
         content?.let { it() }

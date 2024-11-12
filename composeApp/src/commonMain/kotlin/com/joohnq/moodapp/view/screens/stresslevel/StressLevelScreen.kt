@@ -84,10 +84,15 @@ fun StressLevelScreenUI(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = first.level.toString(), style = TextStyles.FreudScreenScore())
+                Text(
+                    text = first.level.toString(),
+                    style = TextStyles.DisplayMdExtraBold(),
+                    color = Colors.White
+                )
                 Text(
                     text = stringResource(first.text),
-                    style = TextStyles.FreudScreenTitle()
+                    style = TextStyles.TextXlSemiBold(),
+                    color = Colors.White
                 )
             }
         },

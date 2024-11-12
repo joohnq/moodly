@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,6 +43,7 @@ import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ButtonWithArrowRight
 import com.joohnq.moodapp.view.components.TextStyles
 import com.joohnq.moodapp.view.components.UserNameTextField
+import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
@@ -112,10 +112,11 @@ fun GetUserNameScreenUI(
                 ) {
                     Text(
                         text = stringResource(Res.string.how_we_can_call_you),
-                        style = TextStyles.OnboardingScreenTitle(),
-                        textAlign = TextAlign.Center
+                        style = TextStyles.HeadingSmExtraBold(),
+                        textAlign = TextAlign.Center,
+                        color = Colors.Brown80
                     )
-                    Spacer(modifier = Modifier.height(48.dp))
+                    VerticalSpacer(48.dp)
                     UserNameTextField(
                         modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
                         name = name,
@@ -125,7 +126,7 @@ fun GetUserNameScreenUI(
                             setNameError("")
                         }
                     )
-                    Spacer(modifier = Modifier.height(24.dp))
+                    VerticalSpacer(24.dp)
                 }
                 ButtonWithArrowRight(
                     modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),

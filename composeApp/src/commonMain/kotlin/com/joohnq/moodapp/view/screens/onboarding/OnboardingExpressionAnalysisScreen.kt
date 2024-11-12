@@ -17,6 +17,7 @@ import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TextStyles
+import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.showErrorOrUnit
@@ -50,8 +51,9 @@ fun OnboardingExpressionAnalysisScreenUI(
         onContinue = onAction,
     ) {
         Text(
-            stringResource(Res.string.expression_analysis_desc),
-            style = TextStyles.ExpressionAnalysisDesc()
+            text = stringResource(Res.string.expression_analysis_desc),
+            style = TextStyles.ParagraphMd(),
+            color = Colors.Brown100Alpha64
         )
         ExpressionAnalysisTextField(
             modifier = Modifier.testTag(TestConstants.TEXT_INPUT),

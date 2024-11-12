@@ -21,23 +21,25 @@ object MoodsManager {
 
         return (1..monthDaysCount).associate { day ->
             val localDate = LocalDate(date.year, date.month, day)
-            val formattedDate = DatetimeHelper.formatDateTime(localDate)
+            val formattedDate = DatetimeHelper.formatLocalDate(localDate)
             formattedDate to recordsByDay[localDate]
         }
     }
 
 
     fun getNext(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
-        statsRecords.find { item -> item.date > statsRecord.date }
+        statsRecords.filter { it.date > statsRecord.date }
+            .minByOrNull { it.date }
 
     fun getPrevious(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
-        statsRecords.find { item -> item.date < statsRecord.date }
+        statsRecords.filter { it.date < statsRecord.date }
+            .maxByOrNull { it.date }
 
     fun getMap(statsRecords: List<StatsRecord>): Map<String, List<StatsRecord>> =
         statsRecords
             .groupBy { it.date.date }
             .map { (key, value) ->
-                DatetimeHelper.formatDateTime(key) to value
+                DatetimeHelper.formatLocalDate(key) to value
             }
             .toMap()
 

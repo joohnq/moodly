@@ -63,7 +63,7 @@ fun MentalHealthMetricItem(
                 HorizontalSpacer(10.dp)
                 Text(
                     text = stringResource(title),
-                    style = TextStyles.TextSmBold(),
+                    style = TextStyles.TextMdBold(),
                     color = Colors.White
                 )
             }

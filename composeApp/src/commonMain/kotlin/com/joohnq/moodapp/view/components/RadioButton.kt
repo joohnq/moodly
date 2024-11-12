@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
@@ -32,7 +31,6 @@ import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.entities.ProfessionalHelp
 import com.joohnq.moodapp.view.constants.Colors
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -103,10 +101,7 @@ fun IconAndTextRadioButtonHorizontal(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(icon.icon),
-                    contentDescription = stringResource(icon.contentDescription),
-                    tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor,
-                    modifier = icon.modifier
+                    icon.copy(tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor)
                 )
                 Text(
                     text = text,
@@ -159,10 +154,7 @@ fun IconAndTextRadioButtonVertical(
             horizontalAlignment = Alignment.Start
         ) {
             Icon(
-                painter = painterResource(icon.icon),
-                contentDescription = stringResource(icon.contentDescription),
-                tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor,
-                modifier = icon.modifier
+                icon.copy(tint = if (selected) iconAndTextRadioButtonColors.selectedContentColor else iconAndTextRadioButtonColors.unSelectedContentColor)
             )
             Text(
                 text = text,

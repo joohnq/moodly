@@ -56,7 +56,6 @@ fun HealthJournalComponent(
     }
 }
 
-
 @Composable
 fun HealthJournalComponentColorful(
     modifier: Modifier = Modifier,

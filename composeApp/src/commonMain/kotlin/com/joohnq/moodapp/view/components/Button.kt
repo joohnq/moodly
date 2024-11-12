@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
@@ -30,7 +29,6 @@ import moodapp.composeapp.generated.resources.continue_word
 import moodapp.composeapp.generated.resources.go_back
 import moodapp.composeapp.generated.resources.go_next
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -58,12 +56,7 @@ fun ButtonTextWithIcon(
                 color = Colors.White
             )
             VerticalSpacer(12.dp)
-            Icon(
-                painter = painterResource(icon.icon),
-                contentDescription = stringResource(icon.contentDescription),
-                tint = icon.tint,
-                modifier = icon.modifier
-            )
+            Icon(icon)
         }
     }
 }
@@ -85,11 +78,7 @@ fun ButtonWithIcon(
         border = borderStroke,
         onClick = onClick,
     ) {
-        Icon(
-            painter = painterResource(icon.icon),
-            contentDescription = stringResource(icon.contentDescription),
-            modifier = icon.modifier
-        )
+        Icon(icon)
     }
 }
 

@@ -32,6 +32,7 @@ import com.joohnq.moodapp.view.constants.Colors
 import com.joohnq.moodapp.view.constants.Drawables
 import com.joohnq.moodapp.view.screens.Screens
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NavController.BottomNavigation(
@@ -83,7 +84,7 @@ fun NavController.BottomNavigation(
                         icon = {
                             Icon(
                                 painter = painterResource(screen.icon),
-                                contentDescription = screen.name,
+                                contentDescription = stringResource(screen.name),
                                 modifier = Modifier.size(24.dp)
                             )
                         },
@@ -108,7 +109,7 @@ fun NavController.BottomNavigation(
                     ) {
                         Icon(
                             painter = painterResource(icon),
-                            contentDescription = name,
+                            contentDescription = stringResource(name),
                             modifier = Modifier.size(24.dp),
                         )
                     }

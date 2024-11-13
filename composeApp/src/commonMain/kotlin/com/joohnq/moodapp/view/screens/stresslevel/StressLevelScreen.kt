@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,19 +37,6 @@ fun StressLevelScreenUI(
     onAction: (StressLevelAction) -> Unit = {}
 ) {
     val first = stressLevelRecords.first().stressLevel
-    val list = remember {
-        listOf(
-            0.0,
-            0.0,
-            0.0,
-            50.0,
-            50.0,
-            50.0,
-            25.0,
-            25.0,
-            25.0
-        )
-    }
     SharedItem(
         isDark = false,
         onGoBack = { onAction(StressLevelAction.OnGoBack) },
@@ -81,11 +67,7 @@ fun StressLevelScreenUI(
         },
         content = {
             item {
-                LazyRow {
-                    item {
-                        StressLevelChart()
-                    }
-                }
+                StressLevelChart(stressLevelRecords = stressLevelRecords)
             }
         }
     )
@@ -97,11 +79,11 @@ fun StressLevelScreen(
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
-    val stressLevelItems by stressLevelViewModel.items.collectAsState()
+    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     StressLevelScreenUI(
         snackBarHostState = snackBarHostState,
-        stressLevelRecords = stressLevelItems.getValue(),
+        stressLevelRecords = stressLevelState.items.getValue(),
         onAction = { action ->
             when (action) {
                 is StressLevelAction.OnAdd -> {}

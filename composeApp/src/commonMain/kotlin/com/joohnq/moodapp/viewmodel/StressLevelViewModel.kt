@@ -11,44 +11,53 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+
+data class StressLevelState(
+    val items: UiState<List<StressLevelRecord>> = UiState.Idle,
+    val addingStatus: UiState<Boolean> = UiState.Idle,
+)
 
 class StressLevelViewModel(
     private val stressLevelRepository: StressLevelRepository,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private val _items = MutableStateFlow<UiState<List<StressLevelRecord>>>(UiState.Idle)
-    val items: StateFlow<UiState<List<StressLevelRecord>>> = _items.asStateFlow()
-
-    private val _addingStatus = MutableStateFlow<UiState<Boolean>>(UiState.Idle)
-    val addingStatus: StateFlow<UiState<Boolean>> = _addingStatus.asStateFlow()
+    private val _stressLevelState = MutableStateFlow(StressLevelState())
+    val stressLevelState: StateFlow<StressLevelState> = _stressLevelState.asStateFlow()
 
     fun getStressLevelRecords() {
         viewModelScope.launch(dispatcher) {
-            _items.value = UiState.Loading
+            _stressLevelState.update { it.copy(items = UiState.Loading) }
 
             try {
                 val res = stressLevelRepository.getStressLevels()
-                _items.value = UiState.Success(res)
+                _stressLevelState.update { it.copy(items = UiState.Success(res)) }
             } catch (e: Exception) {
-                _items.value = UiState.Error(e.message.toString())
+                _stressLevelState.update { it.copy(items = UiState.Error(e.message.toString())) }
             }
         }
     }
 
     fun addStressLevelRecord(stressLevel: StressLevel) = viewModelScope.launch(dispatcher) {
-        _addingStatus.value = UiState.Loading
+        _stressLevelState.update { it.copy(addingStatus = UiState.Loading) }
+
         val res = stressLevelRepository.addStressLevel(
             stressLevel.toStressLevelRecord()
         )
 
-        _addingStatus.value = if (res) UiState.Success(true) else UiState.Error(
-            "Fail to add sleep quality record"
-        )
+        _stressLevelState.update {
+            it.copy(
+                addingStatus =
+                if (res) UiState.Success(true) else UiState.Error(
+                    "Fail to add sleep quality record"
+                )
+            )
+        }
     }
 
 
     fun resetAddingStatus() {
-        _addingStatus.value = UiState.Idle
+        _stressLevelState.update { it.copy(addingStatus = UiState.Idle) }
     }
 }

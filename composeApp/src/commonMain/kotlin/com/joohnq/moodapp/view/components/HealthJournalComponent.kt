@@ -13,7 +13,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.MoodsManager
+import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.mappers.items
@@ -79,7 +79,7 @@ fun HealthJournalComponentColorful(
             }
             items(healthJournal) { statsRecords ->
                 val background = if (statsRecords == null) Colors.White else {
-                    val freudScore = MoodsManager.getFreudScore(statsRecords)
+                    val freudScore = StatsManager.getFreudScore(statsRecords)
                     freudScore.palette.color
                 }
                 val border = Modifier.border(

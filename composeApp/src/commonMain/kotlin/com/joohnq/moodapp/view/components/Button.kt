@@ -57,7 +57,7 @@ fun ButtonTextAndIcon(
             Text(
                 text = stringResource(text),
                 style = TextStyles.TextLgExtraBold(),
-                color = Colors.White
+                color = colors.contentColor
             )
             HorizontalSpacer(12.dp)
             Icon(icon)
@@ -95,7 +95,7 @@ fun ButtonTextAndCheck(
     ButtonTextAndIcon(
         modifier = modifier,
         text = text,
-        colors = ComponentColors.Button.MainButtonColors(),
+        colors = ComponentColors.Button.MainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
         icon = Icon(
             icon = Drawables.Icons.Check,

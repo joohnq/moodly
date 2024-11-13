@@ -22,10 +22,8 @@ enum class DaySection(val text: String) {
 }
 
 object DatetimeHelper {
-    fun getLocalDateTime(): LocalDateTime {
-        val currentMoment = Clock.System.now()
-        return currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
-    }
+    fun getLocalDateTime(): LocalDateTime =
+        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
     fun getDateTime(): String {
         val currentMoment = Clock.System.now()
@@ -43,8 +41,8 @@ object DatetimeHelper {
     }
 
     // Mon, 28 Oct 20224
-    fun formatLocalDate(date: LocalDate): String {
-        return date.format(LocalDate.Format {
+    fun formatLocalDate(date: LocalDate): String =
+        date.format(LocalDate.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
             chars(", ")
             dayOfMonth()
@@ -53,7 +51,13 @@ object DatetimeHelper {
             char(' ')
             year()
         })
-    }
+
+    // Mon, 28 Oct 20224
+    fun formatLocalDate2(date: LocalDate): String = date.format(LocalDate.Format {
+        dayOfMonth()
+        chars("/")
+        monthNumber()
+    })
 
     fun formatLocalDateTime(date: LocalDateTime = getLocalDateTime()): String {
         return date.format(LocalDateTime.Format {
@@ -79,12 +83,6 @@ object DatetimeHelper {
         return start.until(end, DateTimeUnit.DAY)
     }
 
-    fun dayOfMonth(date: LocalDateTime): String = date.dayOfMonth.toString()
-
-    fun monthNameAbbrev(date: LocalDateTime): String = date.format(LocalDateTime.Format {
-        monthName(MonthNames.ENGLISH_ABBREVIATED)
-    })
-
     fun weekDayByMonth(date: LocalDateTime): Int =
         LocalDate(date.year, date.month, 1).dayOfWeek.ordinal
 
@@ -100,13 +98,11 @@ object DatetimeHelper {
         else -> DaySection.Evening.text
     }
 
-    private fun isLeapYearUsingIfElse(year: Int): Boolean {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
-    }
+    private fun isLeapYearUsingIfElse(year: Int): Boolean =
+        (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
 
-    private fun getDaysInCurrentYear(year: Int): Int {
-        return if (isLeapYearUsingIfElse(year)) 366 else 365
-    }
+    private fun getDaysInCurrentYear(year: Int): Int =
+        if (isLeapYearUsingIfElse(year)) 366 else 365
 
     fun getDayPerYear(
         statsRecords: List<StatsRecord?>,

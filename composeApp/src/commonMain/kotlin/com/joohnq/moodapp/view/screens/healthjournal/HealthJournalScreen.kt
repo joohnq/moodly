@@ -81,9 +81,9 @@ fun HealthJournalScreen(
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavController
 ) {
-    val healthJournal by statsViewModel.healthJournal.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
     HealthJournalScreenUI(
-        healthJournal = healthJournal,
+        healthJournal = statsState.healthJournal,
         onGoBack = navigation::popBackStack,
         onAdd = {}
     )

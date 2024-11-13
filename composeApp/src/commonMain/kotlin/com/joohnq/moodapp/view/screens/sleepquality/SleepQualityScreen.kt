@@ -52,8 +52,10 @@ fun SleepQualityScreenUI(
         items = sleepQualityRecords,
         panelContent = {
             Column(
-                modifier = Modifier.paddingHorizontalMedium()
-                    .padding(top = it.calculateTopPadding()).fillMaxSize(),
+                modifier = Modifier
+                    .paddingHorizontalMedium()
+                    .padding(top = it.calculateTopPadding())
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {

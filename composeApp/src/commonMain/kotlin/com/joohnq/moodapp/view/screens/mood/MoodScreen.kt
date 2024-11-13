@@ -20,16 +20,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.joohnq.moodapp.MoodsManager
+import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.components.MoodBarStatistic
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.PreviousNextButton
 import com.joohnq.moodapp.view.components.SharedItem
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.VerticalSpacer
+import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Drawables
@@ -45,6 +47,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodScreenUi(
     statsRecord: StatsRecord,
+    statsRecords: List<StatsRecord>,
     hasNext: Boolean,
     hasPrevious: Boolean,
     onAction: (MoodAction) -> Unit = {},
@@ -116,6 +119,13 @@ fun MoodScreenUi(
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
                     )
+                    VerticalSpacer(40.dp)
+                    MoodBarStatistic(
+                        statsRecords = statsRecords,
+                        currentStatsRecord = statsRecord,
+                        onClick = { onAction(MoodAction.OnSetMood(it)) }
+                    )
+                    VerticalSpacer(20.dp)
                 }
             }
         }
@@ -128,27 +138,31 @@ fun MoodScreen(
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
-    val statsRecords by statsViewModel.statsRecords.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
     var currentStatsRecord by remember { mutableStateOf(statsRecord) }
 
     LaunchedEffect(currentStatsRecord) {
-        hasNext = MoodsManager.getNext(currentStatsRecord, statsRecords.getValue())
+        hasNext = StatsManager.getNext(currentStatsRecord, statsState.statsRecords.getValue())
         hasPrevious =
-            MoodsManager.getPrevious(currentStatsRecord, statsRecords.getValue())
+            StatsManager.getPrevious(currentStatsRecord, statsState.statsRecords.getValue())
     }
 
     MoodScreenUi(
         statsRecord = currentStatsRecord,
         hasNext = hasNext != null,
         hasPrevious = hasPrevious != null,
+        statsRecords = statsState.statsRecords.getValue().reversed(),
         onAction = {
             when (it) {
-                MoodAction.GoBack -> navigation.popBackStack()
-                MoodAction.Next -> hasNext?.run { currentStatsRecord = this }
-                MoodAction.Previous -> hasPrevious?.run { currentStatsRecord = this }
-                MoodAction.OnAdd -> {}
+                is MoodAction.GoBack -> navigation.popBackStack()
+                is MoodAction.Next -> hasNext?.run { currentStatsRecord = this }
+                is MoodAction.Previous -> hasPrevious?.run { currentStatsRecord = this }
+                is MoodAction.OnAdd -> navigation.onNavigateToAddMood()
+                is MoodAction.OnSetMood -> {
+                    currentStatsRecord = it.statsRecord
+                }
             }
         },
     )
@@ -160,7 +174,10 @@ fun MoodScreenPreview() {
     MoodScreenUi(
         statsRecord = StatsRecord.init().copy(mood = Mood.Overjoyed),
         hasPrevious = true,
-        hasNext = true
+        hasNext = true,
+        statsRecords = listOf(
+            StatsRecord.init()
+        )
     )
 }
 
@@ -170,7 +187,10 @@ fun MoodScreenPreview2() {
     MoodScreenUi(
         statsRecord = StatsRecord.init().copy(mood = Mood.Happy),
         hasPrevious = true,
-        hasNext = true
+        hasNext = true,
+        statsRecords = listOf(
+            StatsRecord.init()
+        )
     )
 }
 
@@ -180,7 +200,10 @@ fun MoodScreenPreview3() {
     MoodScreenUi(
         statsRecord = StatsRecord.init().copy(mood = Mood.Neutral),
         hasPrevious = true,
-        hasNext = true
+        hasNext = true,
+        statsRecords = listOf(
+            StatsRecord.init()
+        )
     )
 }
 
@@ -190,7 +213,10 @@ fun MoodScreenPreview4() {
     MoodScreenUi(
         statsRecord = StatsRecord.init().copy(mood = Mood.Sad),
         hasPrevious = true,
-        hasNext = true
+        hasNext = true,
+        statsRecords = listOf(
+            StatsRecord.init()
+        )
     )
 }
 
@@ -200,7 +226,10 @@ fun MoodScreenPreview5() {
     MoodScreenUi(
         statsRecord = StatsRecord.init().copy(mood = Mood.Depressed),
         hasPrevious = true,
-        hasNext = true
+        hasNext = true,
+        statsRecords = listOf(
+            StatsRecord.init()
+        )
     )
 }
 

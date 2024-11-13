@@ -16,4 +16,6 @@ data class MoodPalette(
     @Contextual val moodScreenTraceColor: Color,
     @Contextual val moodScreenMoodFaceBackgroundColor: Color,
     @Contextual val moodScreenMoodFaceColor: Color,
+    @Contextual val barColor: Color,
+    @Contextual val barFaceColor: Color,
 )

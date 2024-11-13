@@ -8,13 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -95,13 +91,10 @@ fun HomeScreen(
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val today = DatetimeHelper.getDateTime()
-    val user by userViewModel.user.collectAsState()
-    val statsRecords by statsViewModel.statsRecords.collectAsState()
-    val freudScore by statsViewModel.freudScore.collectAsState()
-    val healthJournal by statsViewModel.healthJournal.collectAsState()
+    val userState by userViewModel.userState.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-    val stressLevelItems by stressLevelViewModel.items.collectAsState()
-    var show by remember { mutableStateOf(false) }
+    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     SideEffect {
         statsViewModel.getStats()
@@ -110,43 +103,38 @@ fun HomeScreen(
         sleepQualityViewModel.getSleepQualityRecords()
     }
 
-    LaunchedEffect(
-        statsRecords,
-        user,
-        stressLevelItems,
-        sleepQualityState.items
-    ) {
-        when (statsRecords is UiState.Success && stressLevelItems is UiState.Success && sleepQualityState.items is UiState.Success && user is UiState.Success) {
-            true -> show = true
-            else -> Unit
-        }
-    }
-
-    if (show)
+    if (
+        UiState.allIsSuccess(
+            statsState.statsRecords,
+            userState.user,
+            stressLevelState.items,
+            sleepQualityState.items
+        )
+    )
         HomeScreenUi(
             today = today,
             padding = padding,
-            userName = user.getValue().name,
-            statsRecord = statsRecords.getValue().first(),
-            moodTracker = statsRecords.getValue().take(3).map { it.mood }.reversed(),
-            freudScore = freudScore,
-            healthJournal = healthJournal,
+            userName = userState.user.getValue().name,
+            statsRecord = statsState.statsRecords.getValue().first(),
+            moodTracker = statsState.statsRecords.getValue().take(3).map { it.mood }.reversed(),
+            freudScore = statsState.freudScore,
+            healthJournal = statsState.healthJournal,
             sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
-            stressLevel = stressLevelItems.getValue().first().stressLevel,
+            stressLevel = stressLevelState.items.getValue().first().stressLevel,
             onAction = { action ->
                 when (action) {
                     is HomeAction.OnNavigateToFreudScore ->
                         navigation.onNavigateToFreudScore()
 
                     is HomeAction.OnNavigateToMood ->
-                        navigation.onNavigateToMood(statsRecords.getValue().first())
+                        navigation.onNavigateToMood(statsState.statsRecords.getValue().first())
 
                     is HomeAction.OnNavigateToHealthJournal ->
                         navigation.onNavigateToHealthJournal()
 
                     HomeAction.OnNavigateToMindfulJournal -> {}
                     HomeAction.OnNavigateToMoodTracker ->
-                        navigation.onNavigateToMood(statsRecords.getValue().first())
+                        navigation.onNavigateToMood(statsState.statsRecords.getValue().first())
 
                     HomeAction.OnNavigateToSleepQuality ->
                         navigation.onNavigateToSleepQuality()

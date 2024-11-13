@@ -39,6 +39,7 @@ import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
 import moodapp.composeapp.generated.resources.mood_overjoyed
 import moodapp.composeapp.generated.resources.mood_sad
+import moodapp.composeapp.generated.resources.mood_statistics_grid_background
 import moodapp.composeapp.generated.resources.onboarding_sought_professional_help_image
 import moodapp.composeapp.generated.resources.shape_bottom_navigation
 import moodapp.composeapp.generated.resources.sleep_quality_background
@@ -89,6 +90,7 @@ object Drawables {
         val StressLevelBackground = Res.drawable.stress_level_background
         val SleepQualityBackground = Res.drawable.sleep_quality_background
         val HealthJournalBackground = Res.drawable.health_journal_background
+        val MoodStatisticGridBackground = Res.drawable.mood_statistics_grid_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image

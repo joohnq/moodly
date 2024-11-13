@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.User
@@ -18,7 +19,6 @@ import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.UiState.Companion.showErrorOrUnit
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
@@ -53,7 +53,8 @@ fun OnboardingExpressionAnalysisScreenUI(
         Text(
             text = stringResource(Res.string.expression_analysis_desc),
             style = TextStyles.ParagraphMd(),
-            color = Colors.Brown100Alpha64
+            color = Colors.Brown100Alpha64,
+            textAlign = TextAlign.Center
         )
         ExpressionAnalysisTextField(
             modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
@@ -76,37 +77,35 @@ fun OnboardingExpressionAnalysisScreen(
     val scope = rememberCoroutineScope()
     val snackBarState = remember { SnackbarHostState() }
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val userUpdatingStatus by userViewModel.updatingStatus.collectAsState()
-    val statsAddingStatus by statsViewModel.addingStatus.collectAsState()
+    val userState by userViewModel.userState.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-    val stressLevelAddingStatus by stressLevelViewModel.addingStatus.collectAsState()
+    val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     LaunchedEffect(
-        stressLevelAddingStatus,
+        stressLevelState.addingStatus,
         sleepQualityState.addingStatus,
-        statsAddingStatus,
-        userUpdatingStatus
+        statsState.addingStatus,
+        userState.updatingStatus
     ) {
-        scope.launch {
-            stressLevelAddingStatus.showErrorOrUnit(snackBarState)
-            sleepQualityState.addingStatus.showErrorOrUnit(snackBarState)
-            statsAddingStatus.showErrorOrUnit(snackBarState)
-            userUpdatingStatus.showErrorOrUnit(snackBarState)
-        }
-
-        if (
-            stressLevelAddingStatus is UiState.Success &&
-            sleepQualityState.addingStatus is UiState.Success &&
-            statsAddingStatus is UiState.Success &&
-            userUpdatingStatus is UiState.Success
-        ) {
-            userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
-            sleepQualityViewModel.resetAddingStatus()
-            stressLevelViewModel.resetAddingStatus()
-            statsViewModel.resetAddingStatus()
-            userViewModel.resetUpdatingStatus()
-            navigation.onNavigateToGetUserNameScreen()
-        }
+        UiState.fold(
+            stressLevelState.addingStatus,
+            sleepQualityState.addingStatus,
+            statsState.addingStatus,
+            userState.updatingStatus,
+            onAllSuccess = {
+                userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
+                sleepQualityViewModel.resetAddingStatus()
+                stressLevelViewModel.resetAddingStatus()
+                statsViewModel.resetAddingStatus()
+                userViewModel.resetUpdatingStatus()
+                navigation.onNavigateToGetUserNameScreen()
+                onboardingViewModel.resetStatsRecord()
+            },
+            onAnyHasError = {
+                scope.launch { snackBarState.showSnackbar(it) }
+            }
+        )
     }
 
     OnboardingExpressionAnalysisScreenUI(

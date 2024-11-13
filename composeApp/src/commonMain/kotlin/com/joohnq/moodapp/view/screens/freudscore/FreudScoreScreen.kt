@@ -15,13 +15,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.joohnq.moodapp.MoodsManager
+import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
 import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
@@ -95,18 +96,17 @@ import org.jetbrains.compose.resources.stringResource
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController,
 ) {
-    val freudScore by statsViewModel.freudScore.collectAsState()
-    val statsRecords by statsViewModel.statsRecords.collectAsState()
-    val mapStatsRecords = remember { MoodsManager.getMap(statsRecords.getValue()) }
+    val statsState by statsViewModel.statsState.collectAsState()
+    val mapStatsRecords = remember { StatsManager.getMap(statsState.statsRecords.getValue()) }
 
     FreudScoreScreenUi(
-        freudScore = freudScore,
+        freudScore = statsState.freudScore,
         mapStatsRecords = mapStatsRecords,
         onAction = {
             when (it) {
                 is FreudScoreAction.OnGoBack -> navigation.popBackStack()
                 is FreudScoreAction.OnNavigateToMood -> navigation.onNavigateToMood(it.statsRecord)
-                is FreudScoreAction.OnAdd -> {}
+                is FreudScoreAction.OnAdd -> navigation.onNavigateToAddMood()
             }
         }
     )

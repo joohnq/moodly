@@ -44,6 +44,8 @@ sealed class Mood(
                 moodScreenTraceColor = Colors.Purple40,
                 moodScreenMoodFaceBackgroundColor = Colors.Purple20,
                 moodScreenMoodFaceColor = Colors.Purple80,
+                barColor = Colors.Purple30,
+                barFaceColor = Colors.Purple50,
             )
         )
 
@@ -65,6 +67,8 @@ sealed class Mood(
             moodScreenTraceColor = Colors.Orange60,
             moodScreenMoodFaceBackgroundColor = Colors.Orange30,
             moodScreenMoodFaceColor = Colors.Orange80,
+            barColor = Colors.Orange40,
+            barFaceColor = Colors.Orange60,
         )
     )
 
@@ -87,6 +91,8 @@ sealed class Mood(
                 moodScreenTraceColor = Colors.Brown80,
                 moodScreenMoodFaceBackgroundColor = Colors.Brown40,
                 moodScreenMoodFaceColor = Colors.Brown80,
+                barColor = Colors.Brown50,
+                barFaceColor = Colors.Brown70,
             )
         )
 
@@ -108,6 +114,8 @@ sealed class Mood(
             moodScreenTraceColor = Colors.Yellow60,
             moodScreenMoodFaceBackgroundColor = Colors.Yellow20,
             moodScreenMoodFaceColor = Colors.Yellow80,
+            barColor = Colors.Yellow40,
+            barFaceColor = Colors.Yellow60,
         )
     )
 
@@ -130,6 +138,8 @@ sealed class Mood(
                 moodScreenTraceColor = Colors.Green50,
                 moodScreenMoodFaceBackgroundColor = Colors.Green30,
                 moodScreenMoodFaceColor = Colors.Green80,
+                barColor = Colors.Green50,
+                barFaceColor = Colors.Green70,
             )
         )
 

@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
@@ -47,12 +48,12 @@ fun ExpressionAnalysisScreenUI(
     desc: String,
     setDesc: (String) -> Unit = {},
     onGoBack: () -> Unit = {},
-    onContinue: () -> Unit = {}
+    onContinue: () -> Unit = {},
 ) {
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarState) },
         containerColor = Colors.Brown10,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding).paddingHorizontalSmall().fillMaxSize()
@@ -70,7 +71,8 @@ fun ExpressionAnalysisScreenUI(
             Text(
                 text = stringResource(Res.string.expression_analysis_desc),
                 style = TextStyles.ParagraphMd(),
-                color = Colors.Brown100Alpha64
+                color = Colors.Brown100Alpha64,
+                textAlign = TextAlign.Center
             )
             ExpressionAnalysisTextField(
                 text = desc,
@@ -95,13 +97,12 @@ fun ExpressionAnalysisScreen(
     val scope = rememberCoroutineScope()
     val snackBarState = remember { SnackbarHostState() }
     val addMoodState by addMoodViewModel.addMoodState.collectAsState()
-    val addingStatus by statsViewModel.addingStatus.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
 
-    LaunchedEffect(addingStatus) {
-        addingStatus.fold(
+    LaunchedEffect(statsState.addingStatus) {
+        statsState.addingStatus.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
-                statsViewModel.resetAddingStatus()
                 navigation.onNavigateToHomeGraph()
             },
         )

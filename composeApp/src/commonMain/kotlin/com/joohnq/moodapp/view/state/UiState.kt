@@ -24,6 +24,32 @@ sealed class UiState<out T> {
             }
         }
 
+        fun onAllSuccess(
+            vararg values: UiState<*>,
+            onAllSuccess: () -> Unit,
+        ) {
+            if (values.all { it is Success }) {
+                onAllSuccess()
+            }
+        }
+
+        fun allIsSuccess(vararg values: UiState<*>): Boolean = values.all { it is Success }
+
+        fun fold(
+            vararg values: UiState<*>,
+            onAllSuccess: () -> Unit,
+            onAnyHasError: (String) -> Unit
+        ) {
+            values.filterIsInstance<Error>().firstOrNull()?.let { errorState ->
+                onAnyHasError(errorState.message)
+                return
+            }
+
+            if (values.all { it is Success }) {
+                onAllSuccess()
+            }
+        }
+
         @Composable
         fun <T> UiState<T>.foldComposable(
             onLoading: @Composable () -> Unit = {},

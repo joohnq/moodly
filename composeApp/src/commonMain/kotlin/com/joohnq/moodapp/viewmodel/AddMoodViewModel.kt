@@ -23,4 +23,12 @@ class AddMoodViewModel : ViewModel() {
     fun updateStatsRecordDescription(desc: String) {
         _addMoodState.update { it.copy(statsRecord = it.statsRecord.copy(description = desc)) }
     }
+
+    fun resetStatsRecord() {
+        _addMoodState.update {
+            it.copy(
+                statsRecord = StatsRecord.init().copy(mood = Mood.Depressed)
+            )
+        }
+    }
 }

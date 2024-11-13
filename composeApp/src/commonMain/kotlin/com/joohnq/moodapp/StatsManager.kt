@@ -6,7 +6,7 @@ import com.joohnq.moodapp.helper.DatetimeHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
-object MoodsManager {
+object StatsManager {
     fun getFreudScore(statsRecords: List<StatsRecord?>): FreudScore {
         val score = statsRecords.sumOf { it?.mood?.healthLevel ?: 0 } / statsRecords.size
         return FreudScore.fromScore(score)
@@ -26,7 +26,6 @@ object MoodsManager {
         }
     }
 
-
     fun getNext(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
         statsRecords.filter { it.date > statsRecord.date }
             .minByOrNull { it.date }
@@ -43,4 +42,26 @@ object MoodsManager {
             }
             .toMap()
 
+    fun fillList(input: List<Double>): List<Double> {
+        val maxSize = 8
+        val size = input.size
+        if (size >= maxSize) return input
+        val newList = mutableListOf<Double>()
+        var total = 0
+        var remaining = 0
+        newList.addAll(input)
+        if (input.size % 2 == 0) {
+            total = maxSize
+            remaining = total - size
+        } else {
+            total = maxSize + 1
+            remaining = total - size
+        }
+        val half = remaining.div(2)
+        for (i in 1..half) {
+            newList.add(0, 50.0)
+            newList.add(newList.size, 50.0)
+        }
+        return newList
+    }
 }

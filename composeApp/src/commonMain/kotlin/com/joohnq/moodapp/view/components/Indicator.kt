@@ -58,7 +58,7 @@ fun SleepQualityIndicator(sleepQuality: SleepQuality) {
                             shape = Dimens.Shape.Circle
                         )
                         .width(boxWidth)
-                        .height(6.dp)
+                        .height(8.dp)
                 )
             }
         }

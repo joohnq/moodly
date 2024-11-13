@@ -117,6 +117,13 @@ object ComponentColors {
             disabledContentColor = Colors.White
         )
 
+        @Composable fun MainButtonColorsInverted(): ButtonColors = ButtonColors(
+            containerColor = Colors.White,
+            contentColor = Colors.Brown80,
+            disabledContainerColor = Colors.White,
+            disabledContentColor = Colors.Brown80
+        )
+
         @Composable fun TextRadioButtonColors(
             selected: Boolean,
             colors: TextRadioButtonColors

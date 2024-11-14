@@ -31,6 +31,8 @@ uiTestJunit4Desktop = "1.7.0"
 uiToolingPreviewDesktop = "1.7.0"
 lifecycleViewModel = "2.8.3"
 uriKmp = "0.0.18"
+coreI18n = "1.0.0-alpha01"
+protoliteWellKnownTypes = "18.0.0"
 
 [libraries]
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModel" }
@@ -63,6 +65,8 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 androidx-ui-test-junit4-desktop = { group = "androidx.compose.ui", name = "ui-test-junit4-desktop", version.ref = "uiTestJunit4Desktop" }
 ui-tooling-preview-desktop = { module = "org.jetbrains.compose.ui:ui-tooling-preview-desktop", version.ref = "uiToolingPreviewDesktop" }
 uri-kmp = { module = "com.eygraber:uri-kmp", version.ref = "uriKmp" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
+protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

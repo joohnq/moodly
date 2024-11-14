@@ -12,12 +12,14 @@ object Dimens {
         val HorizontalMedium = PaddingValues(horizontal = 20.dp)
         val HorizontalSmall = PaddingValues(horizontal = 16.dp)
 
+        val VerticalExtraLarge = PaddingValues(vertical = 20.dp)
         val VerticalLarge = PaddingValues(vertical = 15.dp)
         val VerticalMedium = PaddingValues(vertical = 12.dp)
         val VerticalSmall = PaddingValues(vertical = 5.dp)
     }
 
     object Shape {
+        val ExtraLarge = RoundedCornerShape(32.dp)
         val Large = RoundedCornerShape(24.dp)
         val Medium = RoundedCornerShape(20.dp)
         val Small = RoundedCornerShape(16.dp)

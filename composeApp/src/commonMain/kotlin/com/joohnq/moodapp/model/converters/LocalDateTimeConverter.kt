@@ -1,13 +1,24 @@
 package com.joohnq.moodapp.model.converters
 
 import androidx.room.TypeConverter
-import com.joohnq.moodapp.helper.LocalDateHelper
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format.char
 
 class LocalDateTimeConverter {
     @TypeConverter
-    fun fromLocalDateTime(value: LocalDateTime): String = LocalDateHelper.fromValue(value)
+    fun fromLocalDateTime(date: LocalDateTime): String = date.toString()
 
     @TypeConverter
-    fun toLocalDateTime(value: String): LocalDateTime = LocalDateHelper.toValue(value)
+    fun toLocalDateTime(dateString: String): LocalDateTime {
+        return LocalDateTime.parse(dateString, LocalDateTime.Format {
+            date(LocalDate.Formats.ISO)
+            char(' ')
+            hour()
+            char(':')
+            minute()
+            char(':')
+            second()
+        })
+    }
 }

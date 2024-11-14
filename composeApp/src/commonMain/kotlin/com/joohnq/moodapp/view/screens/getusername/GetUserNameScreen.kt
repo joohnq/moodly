@@ -33,18 +33,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ContinueButton
-import com.joohnq.moodapp.view.components.UserNameTextField
+import com.joohnq.moodapp.view.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
@@ -54,7 +53,9 @@ import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.enter_your_name
 import moodapp.composeapp.generated.resources.how_we_can_call_you
+import moodapp.composeapp.generated.resources.name
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -116,11 +117,22 @@ fun GetUserNameScreenUI(
                         color = Colors.Brown80
                     )
                     VerticalSpacer(48.dp)
-                    UserNameTextField(
-                        modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
-                        name = name,
+                    TextFieldWithLabelAndDoubleBorder(
+                        label = Res.string.name,
+                        placeholder = Res.string.enter_your_name,
+                        text = name,
                         errorText = nameError,
-                        onValueChange = onValueChange
+                        focusedBorderColor = Colors.Green50Alpha25,
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(Drawables.Icons.User),
+                                contentDescription = null,
+                                tint = Colors.Brown80,
+                                modifier = Modifier.size(Dimens.Icon)
+                            )
+                        },
+                        colors = ComponentColors.TextField.MainTextFieldColors(),
+                        onValueChange = onValueChange,
                     )
                     VerticalSpacer(24.dp)
                 }

@@ -3,22 +3,24 @@ package com.joohnq.moodapp.view.screens.stresslevel
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.StressLevelCard
 import com.joohnq.moodapp.view.components.StressLevelChart
+import com.joohnq.moodapp.view.routes.onNavigateToAddStressLevel
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Drawables
@@ -26,25 +28,26 @@ import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMed
 import com.joohnq.moodapp.view.ui.TextStyles
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.life_impact
 import moodapp.composeapp.generated.resources.stress_analysis
 import moodapp.composeapp.generated.resources.stress_level
+import moodapp.composeapp.generated.resources.stressor
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelScreenUI(
-    snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
     stressLevelRecords: List<StressLevelRecord>,
     onAction: (StressLevelAction) -> Unit = {}
 ) {
-    val first = stressLevelRecords.first().stressLevel
+    val stressLevelRecord = stressLevelRecords.last()
     SharedItem(
         isDark = false,
         onGoBack = { onAction(StressLevelAction.OnGoBack) },
-        backgroundColor = first.palette.pageBackgroundColor,
+        backgroundColor = stressLevelRecord.stressLevel.palette.color,
         backgroundImage = Drawables.Images.StressLevelBackground,
         panelTitle = Res.string.stress_level,
         bodyTitle = Res.string.stress_analysis,
-        color = first.palette.pageColor,
+        color = stressLevelRecord.stressLevel.palette.backgroundColor,
         onAdd = { onAction(StressLevelAction.OnAdd) },
         panelContent = {
             Column(
@@ -54,12 +57,12 @@ fun StressLevelScreenUI(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = first.level.toString(),
+                    text = stressLevelRecord.stressLevel.level.toString(),
                     style = TextStyles.DisplayMdExtraBold(),
                     color = Colors.White
                 )
                 Text(
-                    text = stringResource(first.text),
+                    text = stringResource(stressLevelRecord.stressLevel.text),
                     style = TextStyles.TextXlSemiBold(),
                     color = Colors.White
                 )
@@ -67,7 +70,27 @@ fun StressLevelScreenUI(
         },
         content = {
             item {
-                StressLevelChart(stressLevelRecords = stressLevelRecords)
+                Row(
+                    modifier = Modifier.paddingHorizontalMedium(),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    StressLevelCard(
+                        modifier = Modifier.weight(1f),
+                        icon = Drawables.Icons.WarningOutlined,
+                        title = Res.string.stressor,
+                        value = stressLevelRecord.stressors.first().value,
+                    ) {
+
+                    }
+                    StressLevelCard(
+                        modifier = Modifier.weight(1f),
+                        icon = Drawables.Icons.Flag,
+                        title = Res.string.life_impact,
+                        value = stringResource(Res.string.life_impact),
+                    ) {
+                        StressLevelChart(stressLevelRecords = stressLevelRecords.takeLast(8))
+                    }
+                }
             }
         }
     )
@@ -78,15 +101,13 @@ fun StressLevelScreen(
     navigation: NavController,
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
 ) {
-    val snackBarHostState = remember { SnackbarHostState() }
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     StressLevelScreenUI(
-        snackBarHostState = snackBarHostState,
         stressLevelRecords = stressLevelState.items.getValue(),
         onAction = { action ->
             when (action) {
-                is StressLevelAction.OnAdd -> {}
+                is StressLevelAction.OnAdd -> navigation.onNavigateToAddStressLevel()
                 is StressLevelAction.OnGoBack -> navigation.popBackStack()
             }
         }

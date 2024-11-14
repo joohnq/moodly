@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.FreudScore
+import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.model.repository.StatsRepository
 import com.joohnq.moodapp.view.state.UiState
@@ -19,6 +20,8 @@ data class StatsState(
     val healthJournal: Map<String, List<StatsRecord>?> = emptyMap(),
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,
     val addingStatus: UiState<Boolean> = UiState.Idle,
+    val addingMood: Mood = Mood.Depressed,
+    val addingDescription: String = "",
 )
 
 class StatsViewModel(
@@ -42,14 +45,31 @@ class StatsViewModel(
             }
         }
 
-    fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
+    fun addStatsRecord() = viewModelScope.launch(dispatcher) {
         _statsState.update { it.copy(addingStatus = UiState.Loading) }
-        val res = statsRepository.addStats(statsRecord)
+
+        val value = statsState.value
+        val res = statsRepository.addStats(value.addingMood, value.addingDescription)
 
         _statsState.update {
             it.copy(
                 addingStatus = if (res) UiState.Success(true) else UiState.Error(
-                    "Fail to add sleep quality record"
+                    "Fail to add stats record"
+                )
+            )
+        }
+    }
+
+    fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
+        _statsState.update { it.copy(addingStatus = UiState.Loading) }
+
+        val value = statsState.value
+        val res = statsRepository.addStats(statsRecord.mood, statsRecord.description)
+
+        _statsState.update {
+            it.copy(
+                addingStatus = if (res) UiState.Success(true) else UiState.Error(
+                    "Fail to add stats record"
                 )
             )
         }
@@ -71,9 +91,23 @@ class StatsViewModel(
         }
     }
 
-    fun resetAddingStatus() {
+    fun updateAddingStatsRecordMood(mood: Mood) {
+        _statsState.update {
+            it.copy(addingMood = mood)
+        }
+    }
+
+    fun updateAddingStatsRecordDescription(desc: String) {
+        _statsState.update {
+            it.copy(addingDescription = desc)
+        }
+    }
+
+    fun resetAddingStatsRecord() {
         _statsState.update {
             it.copy(
+                addingMood = Mood.Depressed,
+                addingDescription = "",
                 addingStatus = UiState.Idle
             )
         }

@@ -15,12 +15,14 @@ data class StressLevelRecord(
     val id: Int,
     @ColumnInfo(name = DatabaseConstants.STRESS_LEVEL)
     val stressLevel: StressLevel,
+    val stressors: List<Stressors>,
     val date: LocalDateTime
 ) {
     companion object {
         fun init(): StressLevelRecord = StressLevelRecord(
             id = 0,
             stressLevel = StressLevel.Three,
+            stressors = emptyList(),
             date = DatetimeHelper.getLocalDateTime()
         )
 
@@ -28,6 +30,7 @@ data class StressLevelRecord(
             StressLevelRecord(
                 id = 0,
                 stressLevel = this,
+                stressors = emptyList(),
                 date = DatetimeHelper.getLocalDateTime()
             )
     }

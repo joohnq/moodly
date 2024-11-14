@@ -11,7 +11,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,10 +32,10 @@ import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.TextStyles
-import com.joohnq.moodapp.viewmodel.AddMoodViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.add_mood
 import moodapp.composeapp.generated.resources.hey_name
 import moodapp.composeapp.generated.resources.how_are_you_feeling_this_day
 import moodapp.composeapp.generated.resources.set_mood
@@ -64,7 +63,7 @@ fun AddMoodScreenUi(
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
-            TopBar(isDark = false, onGoBack = onGoBack)
+            TopBar(isDark = false, text = Res.string.add_mood, onGoBack = onGoBack)
             VerticalSpacer(50.dp)
             Column(
                 modifier = Modifier.weight(1f),
@@ -119,21 +118,15 @@ fun AddMoodScreenUi(
 fun AddMoodScreen(
     userViewModel: UserViewModel = sharedViewModel(),
     statsViewModel: StatsViewModel = sharedViewModel(),
-    addMoodViewModel: AddMoodViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
-    val addMoodState by addMoodViewModel.addMoodState.collectAsState()
+    val statsState by statsViewModel.statsState.collectAsState()
     val userState by userViewModel.userState.collectAsState()
-
-    LaunchedEffect(Unit) {
-        statsViewModel.resetAddingStatus()
-        addMoodViewModel.resetStatsRecord()
-    }
 
     AddMoodScreenUi(
         userName = userState.user.getValue().name,
-        selectedMood = addMoodState.statsRecord.mood,
-        setSelectedMood = addMoodViewModel::updateStatsRecordMood,
+        selectedMood = statsState.addingMood,
+        setSelectedMood = statsViewModel::updateAddingStatsRecordMood,
         onGoBack = navigation::popBackStack,
         onContinue = navigation::onNavigateToExpressionAnalysis
     )

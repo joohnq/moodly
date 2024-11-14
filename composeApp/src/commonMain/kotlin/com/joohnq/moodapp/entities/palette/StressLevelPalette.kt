@@ -8,6 +8,4 @@ import kotlinx.serialization.Serializable
 data class StressLevelPalette(
     @Contextual val color: Color,
     @Contextual val backgroundColor: Color,
-    @Contextual val pageBackgroundColor: Color,
-    @Contextual val pageColor: Color,
 )

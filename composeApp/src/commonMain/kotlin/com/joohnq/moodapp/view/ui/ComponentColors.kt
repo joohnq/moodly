@@ -84,6 +84,13 @@ object ComponentColors {
             disabledContainerColor = Colors.White,
             disabledContentColor = Color.Unspecified
         )
+
+        @Composable fun StressLevelCardColors(): CardColors = CardColors(
+            containerColor = Colors.Brown20,
+            contentColor = Colors.Brown80,
+            disabledContainerColor = Colors.Brown20,
+            disabledContentColor = Colors.Brown80
+        )
     }
 
     object IconButton {
@@ -144,7 +151,7 @@ object ComponentColors {
             cursorColor = Colors.Orange40,
         )
 
-        @Composable fun UserNameColors(): TextFieldColors = TextFieldColors(
+        @Composable fun MainTextFieldColors(): TextFieldColors = TextFieldColors(
             containerColor = Colors.White,
             placeholderColor = Colors.Brown100Alpha64,
             leadingIconColor = Colors.Brown80,

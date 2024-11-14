@@ -35,6 +35,16 @@ sealed class UiState<out T> {
 
         fun allIsSuccess(vararg values: UiState<*>): Boolean = values.all { it is Success }
 
+        fun onAnyError(
+            vararg values: UiState<*>,
+            onAnyHasError: (String) -> Unit
+        ) {
+            values.filterIsInstance<Error>().firstOrNull()?.let { errorState ->
+                onAnyHasError(errorState.message)
+                return
+            }
+        }
+
         fun fold(
             vararg values: UiState<*>,
             onAllSuccess: () -> Unit,

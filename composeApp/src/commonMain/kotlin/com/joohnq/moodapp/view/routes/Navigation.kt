@@ -89,6 +89,14 @@ fun NavController.onNavigateToHealthJournal() {
     navigate(Screens.HealthJournalScreen)
 }
 
+fun NavController.onNavigateToAddStressLevel() {
+    navigate(Screens.AddStressLevelScreen)
+}
+
+fun NavController.onNavigateToStressStressors() {
+    navigate(Screens.StressStressorsScreen)
+}
+
 fun NavController.onNavigateToAddMood() {
     navigate(Screens.AddMoodScreen) {
         popUpTo(graph.findStartDestination().id) {

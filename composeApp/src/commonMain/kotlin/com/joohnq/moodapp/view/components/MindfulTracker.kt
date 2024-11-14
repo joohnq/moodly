@@ -79,8 +79,8 @@ import moodapp.composeapp.generated.resources.stress_level
     )
     VerticalSpacer(16.dp)
     MindfulTrackerCardColumn(icon = Drawables.Icons.Head,
-        color = stressLevel.brush.color,
-        backgroundColor = stressLevel.brush.backgroundColor,
+        color = stressLevel.palette.color,
+        backgroundColor = stressLevel.palette.backgroundColor,
         title = Res.string.stress_level,
         subtitle = stressLevel.subtitle,
         content = {

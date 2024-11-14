@@ -1,11 +1,12 @@
 package com.joohnq.moodapp.model.repository
 
+import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 
 interface StatsRepository {
     suspend fun getStats(): List<StatsRecord>
-    suspend fun addStats(statsRecord: StatsRecord): Boolean
+    suspend fun addStats(mood: Mood, description: String): Boolean
 }
 
 class StatsRepositoryImpl(
@@ -14,12 +15,12 @@ class StatsRepositoryImpl(
 
     override suspend fun getStats(): List<StatsRecord> = statsRecordDAO.getStats()
 
-    override suspend fun addStats(statsRecord: StatsRecord): Boolean =
+    override suspend fun addStats(mood: Mood, description: String): Boolean =
         try {
-            statsRecordDAO.addStats(statsRecord)
+            statsRecordDAO.addStats(mood, description)
             true
         } catch (e: Exception) {
-            println("Error MoodsApp: ${e.message}")
+            e.printStackTrace()
             false
         }
 }

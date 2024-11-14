@@ -32,10 +32,10 @@ import ir.ehsannarmani.compose_charts.models.PopupProperties
 
 @Composable
 fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
-    val first = stressLevelRecords.first().stressLevel
+    val first = stressLevelRecords.last().stressLevel
     val newList =
         remember {
-            StatsManager.fillList(stressLevelRecords.map {
+            StatsManager.addHalfInStartAndEnd(stressLevelRecords.map {
                 StressLevel.toPercent(it.stressLevel.level)
             })
         }
@@ -72,8 +72,8 @@ fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
                             strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
                             gradientAnimationDelay = 1000,
                             drawStyle = DrawStyle.Stroke(width = 3.dp),
-                            firstGradientFillColor = first.palette.pageBackgroundColor.copy(
-                                alpha = .5f
+                            firstGradientFillColor = first.palette.color.copy(
+                                alpha = .3f
                             ),
                             secondGradientFillColor = Colors.Transparent,
                         )

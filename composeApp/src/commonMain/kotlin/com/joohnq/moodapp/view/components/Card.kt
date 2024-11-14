@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalExtraLarge
 import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -141,6 +143,49 @@ fun MindfulTrackerCardColumn(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun StressLevelCard(
+    modifier: Modifier = Modifier,
+    icon: DrawableResource,
+    title: StringResource,
+    value: String,
+    content: @Composable () -> Unit
+) {
+    Card(
+        colors = ComponentColors.Card.StressLevelCardColors(),
+        shape = Dimens.Shape.ExtraLarge,
+        modifier = modifier
+    ) {
+        Column(modifier = Modifier.fillMaxWidth().paddingVerticalExtraLarge()) {
+            Row(
+                modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Icon(
+                    painter = painterResource(icon),
+                    contentDescription = stringResource(title),
+                    tint = Colors.Brown80,
+                    modifier = Modifier.size(24.dp)
+                )
+                Text(
+                    text = stringResource(title),
+                    style = TextStyles.TextMdExtraBold(),
+                    color = Colors.Brown80
+                )
+            }
+            VerticalSpacer(12.dp)
+            Text(
+                text = value,
+                style = TextStyles.TextLgSemiBold(),
+                color = Colors.Brown100Alpha64,
+                modifier = Modifier.paddingHorizontalMedium()
+            )
+            VerticalSpacer(20.dp)
+            content()
         }
     }
 }

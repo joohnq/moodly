@@ -39,11 +39,7 @@ class SleepQualityViewModel(
 
     fun addSleepQualityRecord(sleepQuality: SleepQuality) = viewModelScope.launch(dispatcher) {
         _sleepQualityState.update { it.copy(addingStatus = UiState.Loading) }
-        val res = sleepQualityRepository.addSleepQuality(
-            SleepQualityRecord.init().copy(
-                sleepQuality = sleepQuality
-            )
-        )
+        val res = sleepQualityRepository.addSleepQuality(sleepQuality)
         _sleepQualityState.update {
             it.copy(
                 addingStatus = if (res) UiState.Success(true) else UiState.Error(

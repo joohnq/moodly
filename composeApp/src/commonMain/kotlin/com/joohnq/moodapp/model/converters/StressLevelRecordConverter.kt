@@ -1,11 +1,8 @@
 package com.joohnq.moodapp.model.converters
 
 import androidx.room.TypeConverter
-import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.helper.LocalDateHelper
-import kotlinx.datetime.LocalDate
+import com.joohnq.moodapp.entities.Stressors
 
 class StressLevelRecordConverter {
     @TypeConverter
@@ -13,4 +10,10 @@ class StressLevelRecordConverter {
 
     @TypeConverter
     fun toStressLevel(value: Int): StressLevel = StressLevel.toValue(value)
+
+    @TypeConverter
+    fun fromStressor(value: Stressors): String = Stressors.fromValue(value)
+
+    @TypeConverter
+    fun toStressors(value: String): Stressors = Stressors.toValue(value)
 }

@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -36,6 +39,7 @@ import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mental_health_metrics
 import moodapp.composeapp.generated.resources.mindful_tracker
@@ -83,6 +87,7 @@ fun HomeScreenUi(
 
 @Composable
 fun HomeScreen(
+    snackBarHostState: SnackbarHostState,
     padding: PaddingValues,
     navigation: NavHostController,
     statsViewModel: StatsViewModel = sharedViewModel(),
@@ -90,6 +95,7 @@ fun HomeScreen(
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
+    val scope = rememberCoroutineScope()
     val today = DatetimeHelper.getDateTime()
     val userState by userViewModel.userState.collectAsState()
     val statsState by statsViewModel.statsState.collectAsState()
@@ -101,6 +107,22 @@ fun HomeScreen(
         userViewModel.getUser()
         stressLevelViewModel.getStressLevelRecords()
         sleepQualityViewModel.getSleepQualityRecords()
+    }
+
+    LaunchedEffect(
+        statsState.statsRecords,
+        userState.user,
+        stressLevelState.items,
+        sleepQualityState.items
+    ) {
+        UiState.onAnyError(
+            statsState.statsRecords,
+            userState.user,
+            stressLevelState.items,
+            sleepQualityState.items
+        ) {
+            scope.launch { snackBarHostState.showSnackbar(it) }
+        }
     }
 
     if (
@@ -115,12 +137,12 @@ fun HomeScreen(
             today = today,
             padding = padding,
             userName = userState.user.getValue().name,
-            statsRecord = statsState.statsRecords.getValue().first(),
-            moodTracker = statsState.statsRecords.getValue().take(3).map { it.mood }.reversed(),
+            statsRecord = statsState.statsRecords.getValue().last(),
+            moodTracker = statsState.statsRecords.getValue().reversed().take(3).map { it.mood },
             freudScore = statsState.freudScore,
             healthJournal = statsState.healthJournal,
-            sleepQuality = sleepQualityState.items.getValue().first().sleepQuality,
-            stressLevel = stressLevelState.items.getValue().first().stressLevel,
+            sleepQuality = sleepQualityState.items.getValue().last().sleepQuality,
+            stressLevel = stressLevelState.items.getValue().last().stressLevel,
             onAction = { action ->
                 when (action) {
                     is HomeAction.OnNavigateToFreudScore ->

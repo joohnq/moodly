@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -21,6 +24,8 @@ import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.add.AddMoodScreen
+import com.joohnq.moodapp.view.screens.addstresslevel.AddStressLevelScreen
+import com.joohnq.moodapp.view.screens.addstresslevel.StressStressorsScreen
 import com.joohnq.moodapp.view.screens.expressionanalysis.ExpressionAnalysisScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
 import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
@@ -63,13 +68,21 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     composable<Screens.ExpressionAnalysisScreen> {
         ExpressionAnalysisScreen(navigation = navHostController)
     }
+    composable<Screens.AddStressLevelScreen> {
+        AddStressLevelScreen(navigation = navHostController)
+    }
+    composable<Screens.StressStressorsScreen> {
+        StressStressorsScreen(navigation = navHostController)
+    }
 }
 
 @Composable
 fun HomeNavGraph(navHostController: NavHostController) {
     val homeNavController = rememberNavController()
+    val snackBarHostState = remember { SnackbarHostState() }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackBarHostState) },
         containerColor = Colors.Brown10,
     ) { scaffoldPadding ->
         val padding = PaddingValues(
@@ -85,6 +98,7 @@ fun HomeNavGraph(navHostController: NavHostController) {
         ) {
             composable<Screens.HomeGraph.HomeScreen> {
                 HomeScreen(
+                    snackBarHostState = snackBarHostState,
                     padding = padding,
                     navigation = navHostController
                 )

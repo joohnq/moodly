@@ -2,7 +2,9 @@ package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.TextRadioButtonColors
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
@@ -138,5 +143,36 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
                 progress = { statsRecord.mood.healthLevel / 100f },
             )
         }
+    }
+}
+
+@Composable
+fun StressStressorCircle(
+    stressStressor: Stressors,
+    selected: Boolean,
+    onClick: () -> Unit = {}
+) {
+    val fontSize = 18.sp
+    val text = stringResource(stressStressor.text)
+    val padding = 24.dp
+    val size = CalculateTextWidth(text, fontSize)
+
+    Box(modifier = Modifier.size(size + padding)) {
+        TextRadioButton(
+            onClick = onClick,
+            modifier = Modifier
+                .size(size + padding),
+            colors = TextRadioButtonColors(
+                selectedBackgroundColor = Colors.Green50,
+                selectedContentColor = Colors.White,
+                selectedBorderColor = Colors.Green50Alpha25,
+                unSelectedBackgroundColor = Colors.Brown20,
+                unSelectedContentColor = Colors.Brown40
+            ),
+            contentPaddingValues = PaddingValues(0.dp),
+            text = text,
+            selected = selected,
+            shape = Dimens.Shape.Circle
+        )
     }
 }

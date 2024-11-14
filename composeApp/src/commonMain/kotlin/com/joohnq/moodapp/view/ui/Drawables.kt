@@ -20,6 +20,7 @@ import moodapp.composeapp.generated.resources.ic_close
 import moodapp.composeapp.generated.resources.ic_document
 import moodapp.composeapp.generated.resources.ic_document_health
 import moodapp.composeapp.generated.resources.ic_drug_store
+import moodapp.composeapp.generated.resources.ic_flag
 import moodapp.composeapp.generated.resources.ic_happy_face
 import moodapp.composeapp.generated.resources.ic_head
 import moodapp.composeapp.generated.resources.ic_heart
@@ -32,6 +33,7 @@ import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.ic_sad_face
 import moodapp.composeapp.generated.resources.ic_user
 import moodapp.composeapp.generated.resources.ic_warning
+import moodapp.composeapp.generated.resources.ic_warning_outlined
 import moodapp.composeapp.generated.resources.logo
 import moodapp.composeapp.generated.resources.mood_background
 import moodapp.composeapp.generated.resources.mood_depressed
@@ -76,6 +78,8 @@ object Drawables {
         val Home = Res.drawable.ic_home
         val Chat = Res.drawable.ic_chat
         val ArrowChevron = Res.drawable.ic_arrow_chevron
+        val Flag = Res.drawable.ic_flag
+        val WarningOutlined = Res.drawable.ic_warning_outlined
     }
 
     object Images {

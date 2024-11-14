@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevelRecord
@@ -15,13 +14,13 @@ import com.joohnq.moodapp.model.converters.LocalDateTimeConverter
 import com.joohnq.moodapp.model.converters.SleepQualityRecordConverter
 import com.joohnq.moodapp.model.converters.StatsRecordConverter
 import com.joohnq.moodapp.model.converters.StressLevelRecordConverter
+import com.joohnq.moodapp.model.converters.StressorsConverter
 import com.joohnq.moodapp.model.converters.UserConverter
 import com.joohnq.moodapp.model.dao.SleepQualityRecordDAO
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.dao.StressLevelRecordDAO
 import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
-import kotlinx.coroutines.CoroutineDispatcher
 
 @Database(
     entities = [StatsRecord::class, User::class, UserPreferences::class, StressLevelRecord::class, SleepQualityRecord::class],
@@ -33,7 +32,8 @@ import kotlinx.coroutines.CoroutineDispatcher
     UserConverter::class,
     SleepQualityRecordConverter::class,
     StressLevelRecordConverter::class,
-    LocalDateTimeConverter::class
+    LocalDateTimeConverter::class,
+    StressorsConverter::class
 )
 abstract class MyDatabase : RoomDatabase() {
     abstract fun moodsDAO(): StatsRecordDAO
@@ -47,18 +47,6 @@ abstract class MyDatabase : RoomDatabase() {
 expect object MyDatabaseConstructor : RoomDatabaseConstructor<MyDatabase> {
     override fun initialize(): MyDatabase
 }
-
-fun getMyDatabase(
-    builder: RoomDatabase.Builder<MyDatabase>,
-    bundledSQLiteDriver: BundledSQLiteDriver,
-    ioDispatcher: CoroutineDispatcher
-): MyDatabase {
-    return builder
-        .setDriver(bundledSQLiteDriver)
-        .setQueryCoroutineContext(ioDispatcher)
-        .build()
-}
-
 
 expect class MyDatabaseInitializer {
     fun init(): RoomDatabase.Builder<MyDatabase>

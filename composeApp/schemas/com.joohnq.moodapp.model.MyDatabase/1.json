@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "770e29c77eac0f619da94e1db5488847",
+    "identityHash": "c5a77f7cb5ad587b59be7f14423eb99e",
     "entities": [
       {
         "tableName": "StatsRecord",
@@ -120,7 +120,7 @@
       },
       {
         "tableName": "StressLevelRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stress_level` INTEGER NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `stress_level` INTEGER NOT NULL, `stressors` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -132,6 +132,12 @@
             "fieldPath": "stressLevel",
             "columnName": "stress_level",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stressors",
+            "columnName": "stressors",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -181,7 +187,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '770e29c77eac0f619da94e1db5488847')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c5a77f7cb5ad587b59be7f14423eb99e')"
     ]
   }
 }

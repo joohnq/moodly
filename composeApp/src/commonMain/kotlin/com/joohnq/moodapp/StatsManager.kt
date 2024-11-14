@@ -42,26 +42,6 @@ object StatsManager {
             }
             .toMap()
 
-    fun fillList(input: List<Double>): List<Double> {
-        val maxSize = 8
-        val size = input.size
-        if (size >= maxSize) return input
-        val newList = mutableListOf<Double>()
-        var total = 0
-        var remaining = 0
-        newList.addAll(input)
-        if (input.size % 2 == 0) {
-            total = maxSize
-            remaining = total - size
-        } else {
-            total = maxSize + 1
-            remaining = total - size
-        }
-        val half = remaining.div(2)
-        for (i in 1..half) {
-            newList.add(0, 50.0)
-            newList.add(newList.size, 50.0)
-        }
-        return newList
-    }
+    fun addHalfInStartAndEnd(input: List<Double>): List<Double> =
+        if (input.size < 8) listOf(0.0) + input + 0.0 else input
 }

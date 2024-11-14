@@ -150,6 +150,8 @@ room {
 dependencies {
     implementation(libs.androidx.benchmark.common)
     implementation(libs.androidx.ui.test.junit4.desktop)
+    implementation(libs.androidx.core.i18n)
+    implementation(libs.protolite.well.known.types)
     ksp(libs.room.compiler)
     debugImplementation(compose.uiTooling)
     implementation(libs.kotlinx.coroutines.core)

@@ -34,7 +34,6 @@ import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.view.ui.TextStyles
-import com.joohnq.moodapp.viewmodel.AddMoodViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
@@ -91,12 +90,10 @@ fun ExpressionAnalysisScreenUI(
 @Composable
 fun ExpressionAnalysisScreen(
     navigation: NavController,
-    addMoodViewModel: AddMoodViewModel = sharedViewModel(),
     statsViewModel: StatsViewModel = sharedViewModel()
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = remember { SnackbarHostState() }
-    val addMoodState by addMoodViewModel.addMoodState.collectAsState()
     val statsState by statsViewModel.statsState.collectAsState()
 
     LaunchedEffect(statsState.addingStatus) {
@@ -104,6 +101,7 @@ fun ExpressionAnalysisScreen(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
                 navigation.onNavigateToHomeGraph()
+                statsViewModel.resetAddingStatsRecord()
             },
         )
     }
@@ -111,9 +109,9 @@ fun ExpressionAnalysisScreen(
     ExpressionAnalysisScreenUI(
         snackBarState = snackBarState,
         onGoBack = navigation::popBackStack,
-        desc = addMoodState.statsRecord.description,
-        setDesc = addMoodViewModel::updateStatsRecordDescription,
-        onContinue = { statsViewModel.addStatsRecord(addMoodState.statsRecord) }
+        desc = statsState.addingDescription,
+        setDesc = statsViewModel::updateAddingStatsRecordDescription,
+        onContinue = statsViewModel::addStatsRecord
     )
 }
 

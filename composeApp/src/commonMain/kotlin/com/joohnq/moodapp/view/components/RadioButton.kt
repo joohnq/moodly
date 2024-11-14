@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,7 @@ fun TextRadioButton(
     selected: Boolean,
     colors: TextRadioButtonColors,
     shape: Shape,
+    contentPaddingValues: PaddingValues = ButtonDefaults.ContentPadding,
     onClick: () -> Unit
 ) {
     Button(
@@ -37,6 +39,7 @@ fun TextRadioButton(
         shape = shape,
         colors = ComponentColors.Button.TextRadioButtonColors(selected = selected, colors = colors),
         onClick = onClick,
+        contentPadding = contentPaddingValues,
         border = if (selected) BorderStroke(
             color = colors.selectedBorderColor,
             width = 4.dp

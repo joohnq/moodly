@@ -33,7 +33,9 @@ import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalSmall
 import com.joohnq.moodapp.view.ui.TextStyles
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ExpressionAnalysisTextField(
@@ -62,11 +64,12 @@ fun ExpressionAnalysisTextField(
 @Composable
 fun TextFieldWithLabelAndDoubleBorder(
     modifier: Modifier = Modifier,
-    label: String,
-    placeholder: String,
-    name: String,
+    label: StringResource,
+    placeholder: StringResource,
+    text: String,
     errorText: String,
     colors: TextFieldColors,
+    leadingIcon: @Composable (() -> Unit)? = null,
     focusedBorderColor: Color,
     onValueChange: (String) -> Unit,
 ) {
@@ -81,7 +84,7 @@ fun TextFieldWithLabelAndDoubleBorder(
 
     Column {
         Text(
-            text = label,
+            text = stringResource(label),
             style = TextStyles.TextSmExtraBold(),
             color = Colors.Brown80
         )
@@ -104,7 +107,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                 .padding(4.dp)
         ) {
             OutlinedTextField(
-                value = name,
+                value = text,
                 isError = errorText.isNotEmpty(),
                 onValueChange = onValueChange,
                 modifier = modifier.fillMaxWidth().height(56.dp)
@@ -114,20 +117,13 @@ fun TextFieldWithLabelAndDoubleBorder(
                 shape = Dimens.Shape.Circle,
                 placeholder = {
                     Text(
-                        text = placeholder,
+                        text = stringResource(placeholder),
                         style = TextStyles.TextMdBold()
                     )
                 },
                 colors = colors,
                 textStyle = TextStyles.TextMdBold(),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(Drawables.Icons.User),
-                        contentDescription = null,
-                        tint = Colors.Brown80,
-                        modifier = Modifier.size(Dimens.Icon)
-                    )
-                }
+                leadingIcon = leadingIcon
             )
         }
         if (isError) {
@@ -160,23 +156,4 @@ fun TextFieldWithLabelAndDoubleBorder(
             }
         }
     }
-}
-
-@Composable
-fun UserNameTextField(
-    modifier: Modifier = Modifier,
-    name: String,
-    errorText: String,
-    onValueChange: (String) -> Unit
-) {
-    TextFieldWithLabelAndDoubleBorder(
-        modifier = modifier,
-        label = "Name",
-        placeholder = "Enter your name...",
-        name = name,
-        errorText = errorText,
-        focusedBorderColor = Colors.Green50Alpha25,
-        colors = ComponentColors.TextField.UserNameColors(),
-        onValueChange = onValueChange,
-    )
 }

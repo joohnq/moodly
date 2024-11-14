@@ -115,6 +115,18 @@ object TextStyles {
     )
 
     @Composable
+    fun TextLgSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.SemiBold(),
+        fontSize = 18.sp
+    )
+
+    @Composable
+    fun TextMdExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 18.sp
+    )
+
+    @Composable
     fun TextMdBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.Bold(),
         fontSize = 16.sp,

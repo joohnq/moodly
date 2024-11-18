@@ -34,5 +34,6 @@ sealed class Screens {
     @Serializable data object ExpressionAnalysisScreen : Screens()
     @Serializable data object AddStressLevelScreen : Screens()
     @Serializable data object StressStressorsScreen : Screens()
+    @Serializable data object AddSleepQualityScreen : Screens()
 }
 

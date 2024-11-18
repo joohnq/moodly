@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
@@ -52,15 +54,16 @@ fun MoodBarStatistic(
     }
 
     BoxWithConstraints(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().height(height)
     ) {
         val usableWidth = maxWidth - (15.dp * 8)
         val boxWidth = usableWidth / 7
+        val offset = calculateTextHeight(font = TextStyles.TextSmSemiBold())
 
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
-            Box {
+            Box(modifier = Modifier.fillMaxSize()) {
                 Column {
                     repeat(5) {
                         Box(
@@ -94,6 +97,7 @@ fun MoodBarStatistic(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom,
+                    modifier = Modifier.width(boxWidth).fillMaxHeight().offset(y = offset)
                 ) {
                     Button(
                         modifier = Modifier
@@ -111,7 +115,7 @@ fun MoodBarStatistic(
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Top
+                            verticalArrangement = Arrangement.Top,
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
@@ -121,11 +125,11 @@ fun MoodBarStatistic(
                             )
                         }
                     }
-                    VerticalSpacer(5.dp)
                     Text(
                         text = DatetimeHelper.formatLocalDate2(statsRecord.date.date),
                         style = TextStyles.TextSmSemiBold(),
-                        color = Colors.Brown100Alpha64
+                        color = Colors.Brown100Alpha64,
+                        modifier = Modifier
                     )
                 }
             }
@@ -136,15 +140,9 @@ fun MoodBarStatistic(
 @Preview @Composable fun MoodBarStatisticPreview() {
     MoodBarStatistic(
         listOf(
-            StatsRecord.init().copy(mood = Mood.Neutral),
-            StatsRecord.init().copy(mood = Mood.Sad),
-            StatsRecord.init().copy(mood = Mood.Overjoyed),
             StatsRecord.init().copy(mood = Mood.Depressed),
-            StatsRecord.init().copy(mood = Mood.Happy),
-            StatsRecord.init().copy(mood = Mood.Sad),
-            StatsRecord.init().copy(mood = Mood.Overjoyed),
         ),
-        currentStatsRecord = StatsRecord.init().copy(mood = Mood.Sad)
+        currentStatsRecord = StatsRecord.init().copy(mood = Mood.Depressed)
     )
 }
 

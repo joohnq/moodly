@@ -18,10 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -128,24 +126,15 @@ fun StressStressorsScreen(
     val snackBarState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-    var otherValue by remember { mutableStateOf("") }
-    var otherValueError by remember { mutableStateOf("") }
-    val onOtherValueError: (String) -> Unit = remember { { otherValueError = it } }
-    val onOtherValueChange: (String) -> Unit = remember {
-        {
-            otherValue = it
-            onOtherValueError("")
+
+    LaunchedEffect(stressLevelState.adding.stressors) {
+        if (stressLevelState.adding.stressors.any { it::class == Stressors.Other::class }) {
+            stressLevelViewModel.updateOtherValue("")
         }
     }
 
-    LaunchedEffect(stressLevelState.addingStressors) {
-        if (stressLevelState.addingStressors.any { it::class == Stressors.Other::class }) {
-            otherValue = ""
-        }
-    }
-
-    LaunchedEffect(stressLevelState.addingStatus) {
-        stressLevelState.addingStatus.fold(
+    LaunchedEffect(stressLevelState.adding.status) {
+        stressLevelState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
                 navigation.onNavigateToHomeGraph()
@@ -157,20 +146,20 @@ fun StressStressorsScreen(
     StressStressorsScreenUI(
         snackBarState = snackBarState,
         onGoBack = navigation::popBackStack,
-        otherValueError = otherValueError,
-        selectedStressors = stressLevelState.addingStressors,
+        otherValueError = stressLevelState.adding.otherValueError,
+        selectedStressors = stressLevelState.adding.stressors,
         onContinue = {
-            if (stressLevelState.addingStressors.any { it::class == Stressors.Other::class } && otherValue.isEmpty()) {
-                onOtherValueError("Please type your other stressor")
+            if (stressLevelState.adding.stressors.any { it::class == Stressors.Other::class } && stressLevelState.adding.otherValue.isEmpty()) {
+                stressLevelViewModel.updateOtherValueError("Please type your other stressor")
                 return@StressStressorsScreenUI
             }
 
-            stressLevelViewModel.updateAddingStressorOtherValue(otherValue)
+            stressLevelViewModel.updateAddingStressorOtherValue()
             stressLevelViewModel.addStressLevelRecord()
         },
         onClick = stressLevelViewModel::updateAddingStressStressors,
-        onOtherValue = onOtherValueChange,
-        otherValue = otherValue
+        onOtherValue = stressLevelViewModel::updateOtherValue,
+        otherValue = stressLevelState.adding.otherValue
     )
 }
 

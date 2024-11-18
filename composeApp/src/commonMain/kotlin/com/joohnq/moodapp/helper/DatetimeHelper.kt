@@ -1,5 +1,3 @@
-@file:OptIn(FormatStringsInDatetimeFormats::class)
-
 package com.joohnq.moodapp.helper
 
 import com.joohnq.moodapp.entities.StatsRecord
@@ -10,7 +8,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DayOfWeekNames
-import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
 import kotlinx.datetime.plus
@@ -22,12 +19,13 @@ enum class DaySection(val text: String) {
 }
 
 object DatetimeHelper {
+    fun formatTime(hour: Int, minute: Int) = "${formatHour(hour)}:${formatMinute(minute)}"
+
     fun getLocalDateTime(): LocalDateTime =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
-    fun getDateTime(): String {
-        val currentMoment = Clock.System.now()
-        val dateTime = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
+    fun formatLocalDate(): String {
+        val dateTime = getLocalDateTime()
         // Mon, 28 Oct 20224
         return dateTime.date.format(LocalDate.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
@@ -112,4 +110,10 @@ object DatetimeHelper {
         val days = statsRecords.associateBy { it?.let { formatLocalDate(date.date) } }.keys.size
         return "$days/$yearsDay"
     }
+
+    fun formatMinute(minute: Int): String = if (minute < 10) "0$minute" else "$minute"
+    fun formatHour(hour: Int): String = if (hour < 10) "0$hour" else "$hour"
+
+    fun formatHourMinute(hour: Int, minute: Int): String =
+        "${formatHour(hour)}:${formatMinute(minute)}"
 }

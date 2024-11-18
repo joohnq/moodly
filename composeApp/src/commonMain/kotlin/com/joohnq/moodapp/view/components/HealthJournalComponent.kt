@@ -36,7 +36,7 @@ fun HealthJournalComponent(
         items(dayOfWeek + 1) {
             Box(
                 modifier = Modifier.fillMaxSize()
-                    .background(color = Colors.Transparent, shape = Dimens.Shape.ExtraSmall)
+                    .background(color = Colors.Transparent, shape = Dimens.Shape.ExtraExtraSmall)
                     .size(18.dp),
             )
         }
@@ -48,7 +48,7 @@ fun HealthJournalComponent(
             }
             Box(
                 modifier = Modifier.fillMaxSize()
-                    .background(color = background, shape = Dimens.Shape.ExtraSmall)
+                    .background(color = background, shape = Dimens.Shape.ExtraExtraSmall)
                     .size(18.dp),
             )
         }

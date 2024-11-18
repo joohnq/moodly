@@ -97,7 +97,7 @@ fun OnboardingSleepQualityScreenUI(
                         Column {
                             MoodFace(
                                 modifier = Modifier.size(48.dp),
-                                mood,
+                                mood = mood,
                             )
                         }
                     }

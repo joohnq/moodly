@@ -158,8 +158,8 @@ fun GetUserNameScreen(
     val snackBarState = remember { SnackbarHostState() }
     val userState by userViewModel.userState.collectAsState()
 
-    LaunchedEffect(userState.updatingStatus) {
-        userState.updatingStatus.fold(
+    LaunchedEffect(userState.updating.status) {
+        userState.updating.status.fold(
             onError = {
                 scope.launch {
                     snackBarState.showSnackbar(it)

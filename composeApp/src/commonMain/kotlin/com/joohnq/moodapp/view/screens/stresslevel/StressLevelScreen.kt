@@ -1,11 +1,17 @@
 package com.joohnq.moodapp.view.screens.stresslevel
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,13 +22,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
+import com.joohnq.moodapp.entities.Stressors
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.StressLevelCard
 import com.joohnq.moodapp.view.components.StressLevelChart
 import com.joohnq.moodapp.view.routes.onNavigateToAddStressLevel
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.TextStyles
@@ -40,7 +48,7 @@ fun StressLevelScreenUI(
     onAction: (StressLevelAction) -> Unit = {}
 ) {
     val stressLevelRecord = stressLevelRecords.last()
-    SharedItem(
+    SharedPanelComponent(
         isDark = false,
         onGoBack = { onAction(StressLevelAction.OnGoBack) },
         backgroundColor = stressLevelRecord.stressLevel.palette.color,
@@ -75,18 +83,70 @@ fun StressLevelScreenUI(
                     horizontalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     StressLevelCard(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).fillMaxHeight(),
                         icon = Drawables.Icons.WarningOutlined,
                         title = Res.string.stressor,
-                        value = stressLevelRecord.stressors.first().value,
+                        value = Stressors.getText(stressLevelRecord.stressors),
                     ) {
-
+                        Column(
+                            modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Box(
+                                    modifier = Modifier.width(24.dp).height(20.dp)
+                                        .background(
+                                            color = Colors.Green50,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                                Box(
+                                    modifier = Modifier.weight(1f).height(20.dp)
+                                        .background(
+                                            color = Colors.Green30,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Box(
+                                    modifier = Modifier.weight(0.4f).height(20.dp)
+                                        .background(
+                                            color = Colors.Green30,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                                Box(
+                                    modifier = Modifier.weight(0.6f).height(20.dp)
+                                        .background(
+                                            color = Colors.Green50,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Box(
+                                    modifier = Modifier.weight(0.6f).height(20.dp)
+                                        .background(
+                                            color = Colors.Green50,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                                Box(
+                                    modifier = Modifier.weight(0.4f).height(20.dp)
+                                        .background(
+                                            color = Colors.Green30,
+                                            shape = Dimens.Shape.Circle
+                                        )
+                                )
+                            }
+                        }
                     }
                     StressLevelCard(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).fillMaxHeight(),
                         icon = Drawables.Icons.Flag,
                         title = Res.string.life_impact,
-                        value = stringResource(Res.string.life_impact),
+                        value = stringResource(stressLevelRecord.stressLevel.lifeImpact),
                     ) {
                         StressLevelChart(stressLevelRecords = stressLevelRecords.takeLast(8))
                     }

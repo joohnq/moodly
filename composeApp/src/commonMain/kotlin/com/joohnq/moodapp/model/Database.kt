@@ -11,6 +11,7 @@ import com.joohnq.moodapp.entities.StressLevelRecord
 import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.entities.UserPreferences
 import com.joohnq.moodapp.model.converters.LocalDateTimeConverter
+import com.joohnq.moodapp.model.converters.SleepInfluencesConverter
 import com.joohnq.moodapp.model.converters.SleepQualityRecordConverter
 import com.joohnq.moodapp.model.converters.StatsRecordConverter
 import com.joohnq.moodapp.model.converters.StressLevelRecordConverter
@@ -33,7 +34,8 @@ import com.joohnq.moodapp.model.dao.UserPreferencesDAO
     SleepQualityRecordConverter::class,
     StressLevelRecordConverter::class,
     LocalDateTimeConverter::class,
-    StressorsConverter::class
+    StressorsConverter::class,
+    SleepInfluencesConverter::class
 )
 abstract class MyDatabase : RoomDatabase() {
     abstract fun moodsDAO(): StatsRecordDAO

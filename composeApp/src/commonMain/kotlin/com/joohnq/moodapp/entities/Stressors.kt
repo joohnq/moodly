@@ -1,5 +1,6 @@
 package com.joohnq.moodapp.entities
 
+import androidx.compose.runtime.Composable
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -12,6 +13,7 @@ import moodapp.composeapp.generated.resources.other
 import moodapp.composeapp.generated.resources.relationship
 import moodapp.composeapp.generated.resources.work
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Serializable
 sealed class Stressors(
@@ -66,5 +68,14 @@ sealed class Stressors(
 
         fun getAll(): List<Stressors> =
             listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other())
+
+        @Composable fun getText(stressors: List<Stressors>): String =
+            stressors.map { stressor ->
+                if (stressor is Other) {
+                    stressor.value.replaceFirstChar { it.uppercase() }
+                } else {
+                    stringResource(stressor.text)
+                }
+            }.joinToString(separator = ", ")
     }
 }

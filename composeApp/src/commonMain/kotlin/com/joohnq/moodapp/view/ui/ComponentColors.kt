@@ -80,15 +80,15 @@ object ComponentColors {
 
         @Composable fun MainCardColors(): CardColors = CardColors(
             containerColor = Colors.White,
-            contentColor = Color.Unspecified,
+            contentColor = Colors.Brown80,
             disabledContainerColor = Colors.White,
-            disabledContentColor = Color.Unspecified
+            disabledContentColor = Colors.Brown80
         )
 
         @Composable fun StressLevelCardColors(): CardColors = CardColors(
-            containerColor = Colors.Brown20,
+            containerColor = Colors.Brown10,
             contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Brown20,
+            disabledContainerColor = Colors.Brown10,
             disabledContentColor = Colors.Brown80
         )
     }

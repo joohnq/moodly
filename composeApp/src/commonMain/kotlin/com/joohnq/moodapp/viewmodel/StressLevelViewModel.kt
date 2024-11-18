@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
 import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.mappers.toggle
 import com.joohnq.moodapp.model.repository.StressLevelRepository
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,11 +15,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class AddingStressLevel(
+    val status: UiState<Boolean> = UiState.Idle,
+    val stressLevel: StressLevel = StressLevel.One,
+    val stressors: List<Stressors> = emptyList(),
+    val otherValue: String = "",
+    val otherValueError: String = "",
+)
+
 data class StressLevelState(
     val items: UiState<List<StressLevelRecord>> = UiState.Idle,
-    val addingStatus: UiState<Boolean> = UiState.Idle,
-    val addingStressLevel: StressLevel = StressLevel.One,
-    val addingStressors: List<Stressors> = emptyList()
+    val adding: AddingStressLevel = AddingStressLevel(),
 )
 
 class StressLevelViewModel(
@@ -43,20 +50,21 @@ class StressLevelViewModel(
 
     fun addStressLevelRecord() =
         viewModelScope.launch(dispatcher) {
-            _stressLevelState.update { it.copy(addingStatus = UiState.Loading) }
+            changeAddingStatus(UiState.Loading)
 
             val value = stressLevelState.value
             val res =
-                stressLevelRepository.addStressLevel(value.addingStressLevel, value.addingStressors)
-
-            _stressLevelState.update {
-                it.copy(
-                    addingStatus =
-                    if (res) UiState.Success(true) else UiState.Error(
-                        "Fail to add stress level record"
-                    )
+                stressLevelRepository.addStressLevel(
+                    value.adding.stressLevel,
+                    value.adding.stressors
                 )
-            }
+
+
+            changeAddingStatus(
+                if (res) UiState.Success(true) else UiState.Error(
+                    "Fail to add stress level record"
+                )
+            )
         }
 
     fun addStressLevelRecord(
@@ -64,50 +72,63 @@ class StressLevelViewModel(
         stressors: List<Stressors> = listOf(Stressors.Other())
     ) =
         viewModelScope.launch(dispatcher) {
-            _stressLevelState.update { it.copy(addingStatus = UiState.Loading) }
+            changeAddingStatus(UiState.Loading)
 
-            val value = stressLevelState.value
             val res =
                 stressLevelRepository.addStressLevel(stressLevel, stressors)
 
-            _stressLevelState.update {
-                it.copy(
-                    addingStatus =
-                    if (res) UiState.Success(true) else UiState.Error(
-                        "Fail to add stress level record"
-                    )
+            changeAddingStatus(
+                if (res) UiState.Success(true) else UiState.Error(
+                    "Fail to add stress level record"
                 )
-            }
+            )
         }
 
     fun updateAddingStressLevel(stressLevel: StressLevel) {
         _stressLevelState.update {
-            it.copy(addingStressLevel = stressLevel)
+            it.copy(adding = it.adding.copy(stressLevel = stressLevel))
         }
     }
 
-    fun updateAddingStressorOtherValue(otherValue: String) {
-        _stressLevelState.update { currentState ->
-            val updatedStressors = currentState.addingStressors.map { stressor ->
-                if (stressor is Stressors.Other) stressor.copy(other = otherValue) else stressor
+    fun updateAddingStressorOtherValue() {
+        _stressLevelState.update { state ->
+            val updatedStressors = state.adding.stressors.map { stressor ->
+                if (stressor is Stressors.Other) stressor.copy(other = stressLevelState.value.adding.otherValue) else stressor
             }
 
-            currentState.copy(addingStressors = updatedStressors)
+            state.copy(adding = state.adding.copy(stressors = updatedStressors))
         }
     }
 
     fun updateAddingStressStressors(stressor: Stressors) {
-        val list = stressLevelState.value.addingStressors
+        val list = stressLevelState.value.adding.stressors
 
         _stressLevelState.update {
             it.copy(
-                addingStressors = if (list.contains(
-                        stressor
-                    )
-                ) list.minus(
-                    stressor
-                ) else
-                    list.plus(stressor)
+                adding = it.adding.copy(
+                    stressors = list.toggle(stressor)
+                )
+            )
+        }
+    }
+
+
+    fun updateOtherValue(otherValue: String) {
+        _stressLevelState.update {
+            it.copy(
+                adding = it.adding.copy(
+                    otherValue = otherValue
+                )
+            )
+        }
+    }
+
+    fun updateOtherValueError(otherValueError: String) {
+        _stressLevelState.update {
+            it.copy(
+                adding = it.adding.copy(
+                    otherValueError = otherValueError
+                )
             )
         }
     }
@@ -115,14 +136,13 @@ class StressLevelViewModel(
     fun resetAddingStressLevel() {
         _stressLevelState.update {
             it.copy(
-                addingStatus = UiState.Idle,
-                addingStressLevel = StressLevel.One,
-                addingStressors = emptyList()
+                adding = AddingStressLevel(),
             )
         }
     }
 
-    fun resetAddingStatus() {
-        _stressLevelState.update { it.copy(addingStatus = UiState.Idle) }
+
+    private fun changeAddingStatus(status: UiState<Boolean>) {
+        _stressLevelState.update { it.copy(adding = it.adding.copy(status = status)) }
     }
 }

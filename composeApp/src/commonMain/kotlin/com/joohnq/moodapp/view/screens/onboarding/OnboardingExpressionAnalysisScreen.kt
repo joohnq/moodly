@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
@@ -83,24 +84,24 @@ fun OnboardingExpressionAnalysisScreen(
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     LaunchedEffect(
-        stressLevelState.addingStatus,
-        sleepQualityState.addingStatus,
-        statsState.addingStatus,
-        userState.updatingStatus
+        stressLevelState.adding.status,
+        sleepQualityState.adding.status,
+        statsState.adding.status,
+        userState.updating.status
     ) {
         UiState.fold(
-            stressLevelState.addingStatus,
-            sleepQualityState.addingStatus,
-            statsState.addingStatus,
-            userState.updatingStatus,
+            stressLevelState.adding.status,
+            sleepQualityState.adding.status,
+            statsState.adding.status,
+            userState.updating.status,
             onAllSuccess = {
                 userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
                 sleepQualityViewModel.resetAddingStatus()
-                stressLevelViewModel.resetAddingStatus()
-                statsViewModel.resetAddingStatus()
+                stressLevelViewModel.resetAddingStressLevel()
+                statsViewModel.resetAddingStatsRecord()
                 userViewModel.resetUpdatingStatus()
-                navigation.onNavigateToGetUserNameScreen()
                 onboardingViewModel.resetStatsRecord()
+                navigation.onNavigateToGetUserNameScreen()
             },
             onAnyHasError = {
                 scope.launch { snackBarState.showSnackbar(it) }
@@ -114,7 +115,11 @@ fun OnboardingExpressionAnalysisScreen(
         onGoBack = navigation::popBackStack,
         snackBarState = snackBarState,
         onAction = {
-            sleepQualityViewModel.addSleepQualityRecord(onboardingState.sleepQuality)
+            sleepQualityViewModel.addSleepQualityRecord(
+                SleepQualityRecord.Builder()
+                    .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
+                    .build()
+            )
             stressLevelViewModel.addStressLevelRecord(onboardingState.stressLevel)
             statsViewModel.addStatsRecord(onboardingState.statsRecord)
             userViewModel.updateUser(

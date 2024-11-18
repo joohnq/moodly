@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c5a77f7cb5ad587b59be7f14423eb99e",
+    "identityHash": "9c11ea485b887557878b6ab99186014f",
     "entities": [
       {
         "tableName": "StatsRecord",
@@ -156,7 +156,7 @@
       },
       {
         "tableName": "SleepQualityRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sleep_quality` INTEGER NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sleep_quality` INTEGER NOT NULL, `start_sleeping` TEXT NOT NULL, `end_sleeping` TEXT NOT NULL, `sleep_influences` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -168,6 +168,24 @@
             "fieldPath": "sleepQuality",
             "columnName": "sleep_quality",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startSleeping",
+            "columnName": "start_sleeping",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endSleeping",
+            "columnName": "end_sleeping",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepInfluences",
+            "columnName": "sleep_influences",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -187,7 +205,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c5a77f7cb5ad587b59be7f14423eb99e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9c11ea485b887557878b6ab99186014f')"
     ]
   }
 }

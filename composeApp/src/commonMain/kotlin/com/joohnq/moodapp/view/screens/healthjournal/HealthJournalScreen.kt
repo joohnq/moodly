@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.HealthJournalComponentColorful
-import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Drawables
@@ -36,7 +36,7 @@ fun HealthJournalScreenUI(
     onAdd: () -> Unit = {},
 ) {
     val dayPerYear = remember { "2" }
-    SharedItem(
+    SharedPanelComponent(
         isDark = false,
         onGoBack = onGoBack,
         backgroundColor = Colors.Brown60,

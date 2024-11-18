@@ -11,10 +11,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class UserAdding(
+    val status: UiState<Boolean> = UiState.Idle
+)
+
+data class UserUpdating(
+    val status: UiState<Boolean> = UiState.Idle
+)
+
 data class UserState(
     val user: UiState<User> = UiState.Idle,
-    val addingStatus: UiState<Boolean> = UiState.Idle,
-    val updatingStatus: UiState<Boolean> = UiState.Idle,
+    val adding: UserAdding = UserAdding(),
+    val updating: UserUpdating = UserUpdating()
 )
 
 class UserViewModel(
@@ -25,21 +33,19 @@ class UserViewModel(
     val userState: StateFlow<UserState> = _userState
 
     fun initUser() = viewModelScope.launch(dispatcher) {
-        val res = userRepository.initUser()
+        userRepository.initUser()
     }
 
     fun updateUser(user: User) = viewModelScope.launch(dispatcher) {
-        _userState.update { it.copy(updatingStatus = UiState.Loading) }
+        changeUpdatingStatus(UiState.Loading)
 
         val res = userRepository.updateUser(user)
 
-        _userState.update {
-            it.copy(
-                updatingStatus = if (res) UiState.Success(true) else UiState.Error(
-                    "Failure to set user"
-                )
+        changeUpdatingStatus(
+            if (res) UiState.Success(true) else UiState.Error(
+                "Failure to set user"
             )
-        }
+        )
     }
 
     fun getUser() = viewModelScope.launch(dispatcher)
@@ -55,20 +61,22 @@ class UserViewModel(
     }
 
     fun updateUserName(name: String) = viewModelScope.launch(dispatcher) {
-        _userState.update { it.copy(updatingStatus = UiState.Loading) }
+        changeUpdatingStatus(UiState.Loading)
 
         val res = userRepository.updateUserName(name)
 
-        _userState.update {
-            it.copy(
-                updatingStatus = if (res) UiState.Success(true) else UiState.Error(
-                    "Failure to set user"
-                )
+        changeUpdatingStatus(
+            if (res) UiState.Success(true) else UiState.Error(
+                "Failure to set user"
             )
-        }
+        )
     }
 
     fun resetUpdatingStatus() {
-        _userState.update { it.copy(updatingStatus = UiState.Idle) }
+        _userState.update { it.copy(updating = UserUpdating()) }
+    }
+
+    private fun changeUpdatingStatus(status: UiState<Boolean>) {
+        _userState.update { it.copy(updating = it.updating.copy(status = status)) }
     }
 }

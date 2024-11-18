@@ -21,7 +21,7 @@ import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
-import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
@@ -40,7 +40,7 @@ import org.jetbrains.compose.resources.stringResource
     mapStatsRecords: Map<String, List<StatsRecord>>,
     onAction: (FreudScoreAction) -> Unit = {}
 ) {
-    SharedItem(
+    SharedPanelComponent(
         isDark = false,
         onGoBack = { onAction(FreudScoreAction.OnGoBack) },
         backgroundColor = freudScore.palette.backgroundColor,

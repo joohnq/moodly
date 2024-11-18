@@ -28,7 +28,7 @@ import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MoodBarStatistic
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.PreviousNextButton
-import com.joohnq.moodapp.view.components.SharedItem
+import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
@@ -52,7 +52,7 @@ fun MoodScreenUi(
     hasPrevious: Boolean,
     onAction: (MoodAction) -> Unit = {},
 ) {
-    SharedItem(
+    SharedPanelComponent(
         isDark = true,
         onGoBack = { onAction(MoodAction.GoBack) },
         backgroundColor = statsRecord.mood.palette.backgroundColor,

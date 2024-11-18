@@ -15,13 +15,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class AddingStats(
+    val status: UiState<Boolean> = UiState.Idle,
+    val mood: Mood = Mood.Depressed,
+    val description: String = "",
+)
+
 data class StatsState(
     val freudScore: FreudScore = FreudScore.init(),
     val healthJournal: Map<String, List<StatsRecord>?> = emptyMap(),
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,
-    val addingStatus: UiState<Boolean> = UiState.Idle,
-    val addingMood: Mood = Mood.Depressed,
-    val addingDescription: String = "",
+    val adding: AddingStats = AddingStats(),
 )
 
 class StatsViewModel(
@@ -46,33 +50,28 @@ class StatsViewModel(
         }
 
     fun addStatsRecord() = viewModelScope.launch(dispatcher) {
-        _statsState.update { it.copy(addingStatus = UiState.Loading) }
+        changeAddingStatus(UiState.Loading)
 
         val value = statsState.value
-        val res = statsRepository.addStats(value.addingMood, value.addingDescription)
+        val res = statsRepository.addStats(value.adding.mood, value.adding.description)
 
-        _statsState.update {
-            it.copy(
-                addingStatus = if (res) UiState.Success(true) else UiState.Error(
-                    "Fail to add stats record"
-                )
+        changeAddingStatus(
+            if (res) UiState.Success(true) else UiState.Error(
+                "Fail to add stats record"
             )
-        }
+        )
     }
 
     fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
-        _statsState.update { it.copy(addingStatus = UiState.Loading) }
+        changeAddingStatus(UiState.Loading)
 
-        val value = statsState.value
         val res = statsRepository.addStats(statsRecord.mood, statsRecord.description)
 
-        _statsState.update {
-            it.copy(
-                addingStatus = if (res) UiState.Success(true) else UiState.Error(
-                    "Fail to add stats record"
-                )
+        changeAddingStatus(
+            if (res) UiState.Success(true) else UiState.Error(
+                "Fail to add stats record"
             )
-        }
+        )
     }
 
     private fun getFreudScore(statsRecords: List<StatsRecord>) {
@@ -92,24 +91,18 @@ class StatsViewModel(
     }
 
     fun updateAddingStatsRecordMood(mood: Mood) {
-        _statsState.update {
-            it.copy(addingMood = mood)
-        }
+        _statsState.update { it.copy(adding = it.adding.copy(mood = mood)) }
     }
 
     fun updateAddingStatsRecordDescription(desc: String) {
-        _statsState.update {
-            it.copy(addingDescription = desc)
-        }
+        _statsState.update { it.copy(adding = it.adding.copy(description = desc)) }
     }
 
     fun resetAddingStatsRecord() {
-        _statsState.update {
-            it.copy(
-                addingMood = Mood.Depressed,
-                addingDescription = "",
-                addingStatus = UiState.Idle
-            )
-        }
+        _statsState.update { it.copy(adding = AddingStats()) }
+    }
+
+    private fun changeAddingStatus(status: UiState<Boolean>) {
+        _statsState.update { it.copy(adding = it.adding.copy(status = status)) }
     }
 }

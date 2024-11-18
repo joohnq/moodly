@@ -98,7 +98,7 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = Colors.White, shape = Dimens.Shape.Small),
+                    .background(color = Colors.White, shape = Dimens.Shape.ExtraSmall),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {

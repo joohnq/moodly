@@ -27,10 +27,14 @@ import moodapp.composeapp.generated.resources.ic_heart
 import moodapp.composeapp.generated.resources.ic_home
 import moodapp.composeapp.generated.resources.ic_hospital_bed
 import moodapp.composeapp.generated.resources.ic_medicine
+import moodapp.composeapp.generated.resources.ic_mood_neutral
+import moodapp.composeapp.generated.resources.ic_moon
 import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
 import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.ic_sad_face
+import moodapp.composeapp.generated.resources.ic_sleep
+import moodapp.composeapp.generated.resources.ic_sun
 import moodapp.composeapp.generated.resources.ic_user
 import moodapp.composeapp.generated.resources.ic_warning
 import moodapp.composeapp.generated.resources.ic_warning_outlined
@@ -80,6 +84,10 @@ object Drawables {
         val ArrowChevron = Res.drawable.ic_arrow_chevron
         val Flag = Res.drawable.ic_flag
         val WarningOutlined = Res.drawable.ic_warning_outlined
+        val Sleep = Res.drawable.ic_sleep
+        val Sun = Res.drawable.ic_sun
+        val Moon = Res.drawable.ic_moon
+        val MoodNeutral = Res.drawable.ic_mood_neutral
     }
 
     object Images {

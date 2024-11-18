@@ -97,6 +97,10 @@ fun NavController.onNavigateToStressStressors() {
     navigate(Screens.StressStressorsScreen)
 }
 
+fun NavController.onNavigateToAddSleepQuality() {
+    navigate(Screens.AddSleepQualityScreen)
+}
+
 fun NavController.onNavigateToAddMood() {
     navigate(Screens.AddMoodScreen) {
         popUpTo(graph.findStartDestination().id) {

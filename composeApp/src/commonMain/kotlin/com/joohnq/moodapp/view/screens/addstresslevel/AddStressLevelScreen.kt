@@ -144,7 +144,7 @@ fun AddStressLevelScreen(
     }
     val onContinue: () -> Unit = remember {
         {
-            if (stressLevelState.addingStressLevel != StressLevel.One) {
+            if (stressLevelState.adding.stressLevel != StressLevel.One) {
                 navigation.onNavigateToStressStressors()
             } else {
                 stressLevelViewModel.updateAddingStressStressors(Stressors.InPeace)
@@ -153,8 +153,8 @@ fun AddStressLevelScreen(
         }
     }
 
-    LaunchedEffect(stressLevelState.addingStatus) {
-        stressLevelState.addingStatus.fold(
+    LaunchedEffect(stressLevelState.adding.status) {
+        stressLevelState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
                 navigation.onNavigateToHomeGraph()
@@ -168,7 +168,7 @@ fun AddStressLevelScreen(
         onContinue = onContinue,
         sliderValue = sliderValue,
         setSliderValue = setSliderValue,
-        selectedStressLevel = stressLevelState.addingStressLevel,
+        selectedStressLevel = stressLevelState.adding.stressLevel,
         onGoBack = navigation::popBackStack
     )
 }

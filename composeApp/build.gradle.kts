@@ -86,9 +86,14 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
+            // URI
             implementation(libs.uri.kmp)
 
-            implementation("io.github.ehsannarmani:compose-charts:0.0.17")
+            // Charts
+            implementation(libs.compose.charts)
+
+            // WheelPicker
+            implementation(libs.datetime.wheel.picker)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -132,11 +137,14 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+
+        isCoreLibraryDesugaringEnabled = true
     }
     buildFeatures {
         compose = true
@@ -159,7 +167,8 @@ dependencies {
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(libs.kotlinx.coroutines.core)
 }
 
 compose.desktop {

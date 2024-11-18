@@ -69,7 +69,7 @@ import moodapp.composeapp.generated.resources.stress_level
 
                     Box(
                         modifier = Modifier.size(12.dp).background(
-                            color = background, shape = Dimens.Shape.ExtraSmall
+                            color = background, shape = Dimens.Shape.ExtraExtraSmall
                         ),
                     )
                 }

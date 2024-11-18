@@ -96,8 +96,8 @@ fun ExpressionAnalysisScreen(
     val snackBarState = remember { SnackbarHostState() }
     val statsState by statsViewModel.statsState.collectAsState()
 
-    LaunchedEffect(statsState.addingStatus) {
-        statsState.addingStatus.fold(
+    LaunchedEffect(statsState.adding.status) {
+        statsState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
                 navigation.onNavigateToHomeGraph()
@@ -109,7 +109,7 @@ fun ExpressionAnalysisScreen(
     ExpressionAnalysisScreenUI(
         snackBarState = snackBarState,
         onGoBack = navigation::popBackStack,
-        desc = statsState.addingDescription,
+        desc = statsState.adding.description,
         setDesc = statsViewModel::updateAddingStatsRecordDescription,
         onContinue = statsViewModel::addStatsRecord
     )

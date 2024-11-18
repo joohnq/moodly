@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
@@ -14,15 +16,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.entities.SleepStatsItem
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
+import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingVerticalExtraLarge
 import com.joohnq.moodapp.view.ui.TextStyles
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.start_sleeping
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -186,6 +193,101 @@ fun StressLevelCard(
             )
             VerticalSpacer(20.dp)
             content()
+        }
+    }
+}
+
+
+@Composable
+fun TimePickerCard(
+    modifier: Modifier = Modifier,
+    title: StringResource,
+    hour: String,
+    minutes: String,
+    isAfternoon: Boolean,
+    onClick: () -> Unit = {},
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = modifier) {
+        Text(
+            text = stringResource(title),
+            style = TextStyles.TextLgExtraBold(),
+            color = Colors.Brown80
+        )
+        Card(
+            colors = ComponentColors.Card.MainCardColors(),
+            shape = Dimens.Shape.Circle,
+            onClick = onClick,
+            modifier = Modifier.height(56.dp)
+        ) {
+            Row(
+                modifier = Modifier.padding(10.dp).fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        painter = painterResource(Drawables.Icons.Calendar),
+                        contentDescription = stringResource(Res.string.start_sleeping),
+                        tint = Colors.Brown80,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    HorizontalSpacer(15.dp)
+                    Text(
+                        text = "$hour:$minutes",
+                        style = TextStyles.TextMdBold(),
+                        color = Colors.Brown100Alpha64
+                    )
+                    Text(
+                        text = if (isAfternoon) " PM" else " AM",
+                        style = TextStyles.TextMdBold(),
+                        color = Colors.Brown100Alpha64
+                    )
+                }
+                HorizontalSpacer(10.dp)
+                Icon(
+                    painter = painterResource(Drawables.Icons.ArrowOpen),
+                    contentDescription = stringResource(Res.string.start_sleeping),
+                    tint = Colors.Brown80,
+                    modifier = Modifier.size(18.dp).rotate(90f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SleepQualityCard(modifier: Modifier = Modifier, item: SleepStatsItem) {
+    Card(
+        shape = Dimens.Shape.Large,
+        colors = ComponentColors.Card.MainCardColors(),
+        modifier = modifier
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Box(
+                modifier = Modifier.size(40.dp)
+                    .background(
+                        color = Colors.Brown10,
+                        shape = Dimens.Shape.ExtraSmall
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(item.icon),
+                    contentDescription = stringResource(item.title),
+                    tint = Colors.Brown80,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            VerticalSpacer(16.dp)
+            Text(
+                text = stringResource(item.title),
+                style = TextStyles.TextMdBold(),
+                color = Colors.Brown80
+            )
+            VerticalSpacer(5.dp)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                item.content()
+            }
         }
     }
 }

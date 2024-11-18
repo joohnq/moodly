@@ -96,7 +96,7 @@ fun HomeScreen(
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
-    val today = DatetimeHelper.getDateTime()
+    val today = DatetimeHelper.formatLocalDate()
     val userState by userViewModel.userState.collectAsState()
     val statsState by statsViewModel.statsState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()

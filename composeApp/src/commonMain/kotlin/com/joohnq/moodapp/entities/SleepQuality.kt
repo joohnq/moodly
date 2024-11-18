@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.entities
 
-import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.entities.palette.SleepQualityPalette
 import com.joohnq.moodapp.view.ui.Colors
 import kotlinx.serialization.Contextual
@@ -117,9 +116,20 @@ sealed class SleepQuality(
             Worst
         )
 
-        fun getSaver(): Saver<SleepQuality, Int> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
-        )
+        fun fromMood(mood: Mood): SleepQuality = when (mood) {
+            Mood.Depressed -> Worst
+            Mood.Sad -> Poor
+            Mood.Neutral -> Fair
+            Mood.Happy -> Good
+            Mood.Overjoyed -> Excellent
+        }
+
+        fun toMood(sleepQuality: SleepQuality): Mood = when (sleepQuality) {
+            Excellent -> Mood.Overjoyed
+            Good -> Mood.Happy
+            Fair -> Mood.Neutral
+            Poor -> Mood.Sad
+            Worst -> Mood.Depressed
+        }
     }
 }

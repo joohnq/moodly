@@ -17,5 +17,8 @@ object DatabaseConstants {
     const val SKIP_GET_USER_NAME_SCREEN = "skip_get_user_name_screen"
 
     const val SLEEP_QUALITY = "sleep_quality"
+    const val SLEEP_INFLUENCES = "sleep_influences"
     const val STRESS_LEVEL = "stress_level"
+    const val START_SLEEPING = "start_sleeping"
+    const val END_SLEEPING = "end_sleeping"
 }

@@ -23,7 +23,8 @@ object Dimens {
         val Large = RoundedCornerShape(24.dp)
         val Medium = RoundedCornerShape(20.dp)
         val Small = RoundedCornerShape(16.dp)
-        val ExtraSmall = RoundedCornerShape(4.dp)
+        val ExtraSmall = RoundedCornerShape(10.dp)
+        val ExtraExtraSmall = RoundedCornerShape(4.dp)
 
         val Circle = CircleShape
 

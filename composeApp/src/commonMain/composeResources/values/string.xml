@@ -130,4 +130,24 @@
     <string name="stressor">Stressor</string>
     <string name="life_impact">Life Impact</string>
     <string name="in_peace">In Peace</string>
+    <string name="none">None</string>
+    <string name="mild">Mild</string>
+    <string name="moderate">Moderate</string>
+    <string name="high">High</string>
+    <string name="very_high">Very High</string>
+    <string name="start_sleeping">Start Sleeping</string>
+    <string name="end_sleeping">End Sleeping</string>
+    <string name="sleeping_influences">Sleeping Influences</string>
+    <string name="exposure_to_natural_light">Exposure to Natural Light</string>
+    <string name="physical_activity">Physical Activity</string>
+    <string name="chill_sleep_environment">Chill Sleep Environment</string>
+    <string name="meditation">Meditation</string>
+    <string name="caffeine">Caffeine</string>
+    <string name="excessive_screen_time">Excessive Screen Time</string>
+    <string name="high_stress">High Stress</string>
+    <string name="anxiety">Anxiety</string>
+    <string name="alcohol_consumption">Alcohol Consumption</string>
+    <string name="new_sleep_quality">New Sleep Quality</string>
+    <string name="start_sleeping_time">Start Sleeping Time</string>
+    <string name="end_sleeping_time">End Sleeping Time</string>
 </resources>

@@ -23,7 +23,8 @@ import com.joohnq.moodapp.view.components.BottomNavigation
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
-import com.joohnq.moodapp.view.screens.add.AddMoodScreen
+import com.joohnq.moodapp.view.screens.addsleepquality.AddSleepQualityScreen
+import com.joohnq.moodapp.view.screens.addstats.AddMoodScreen
 import com.joohnq.moodapp.view.screens.addstresslevel.AddStressLevelScreen
 import com.joohnq.moodapp.view.screens.addstresslevel.StressStressorsScreen
 import com.joohnq.moodapp.view.screens.expressionanalysis.ExpressionAnalysisScreen
@@ -73,6 +74,9 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     }
     composable<Screens.StressStressorsScreen> {
         StressStressorsScreen(navigation = navHostController)
+    }
+    composable<Screens.AddSleepQualityScreen> {
+        AddSleepQualityScreen(navigation = navHostController)
     }
 }
 

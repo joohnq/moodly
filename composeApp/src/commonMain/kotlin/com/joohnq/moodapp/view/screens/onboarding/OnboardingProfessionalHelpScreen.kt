@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.ProfessionalHelp
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
 import com.joohnq.moodapp.view.ui.ComponentColors
@@ -27,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingProfessionalHelpScreenUI(
     selectedOption: ValueSetValue<ProfessionalHelp?>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     val options = rememberSaveable { ProfessionalHelp.getAll() }
 
@@ -70,8 +71,8 @@ fun OnboardingProfessionalHelpScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToPhysicalSymptoms()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToPhysicalSymptoms()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

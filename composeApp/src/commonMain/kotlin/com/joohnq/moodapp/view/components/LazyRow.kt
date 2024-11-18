@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -25,6 +24,7 @@ import com.joohnq.moodapp.view.screens.home.HomeAction
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall
 import com.joohnq.moodapp.view.ui.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.freud_score
@@ -134,7 +134,7 @@ fun AddMoodRadioGroup(
                 if (i < moodsSize - 1) {
                     Box(
                         modifier = Modifier.width(dividerWidth).height(10.dp)
-                            .padding(horizontal = 4.dp)
+                            .paddingHorizontalExtraExtraSmall()
                             .background(color = if (moodIndex - 1 >= i) Colors.White else selectedMood.palette.moodScreenInactiveColor)
                     )
                 }

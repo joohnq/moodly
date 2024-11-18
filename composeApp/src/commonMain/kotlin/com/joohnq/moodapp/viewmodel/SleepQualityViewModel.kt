@@ -92,7 +92,7 @@ class SleepQualityViewModel(
             )
         }
 
-    fun updateAddingMood(mood: Mood) {
+    fun updateAddingMood(mood: Mood?) {
         _sleepQualityState.update {
             it.copy(
                 adding = it.adding.copy(

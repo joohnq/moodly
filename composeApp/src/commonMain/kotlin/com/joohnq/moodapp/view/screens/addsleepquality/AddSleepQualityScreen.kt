@@ -31,8 +31,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepInfluences
+import com.joohnq.moodapp.entities.ValueSetValue
+import com.joohnq.moodapp.entities.ValueSetValueList
+import com.joohnq.moodapp.entities.ValueSetValueTyped
 import com.joohnq.moodapp.helper.DatetimeHelper
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.AddSleepQualityTimePicker
 import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.HorizontalSpacer
@@ -64,57 +68,45 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddSleepQualityUi(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    showStartTimePickerDialog: Boolean,
-    showEndTimePickerDialog: Boolean,
-    startTimePickerState: TimePickerState = rememberTimePickerState(
-        initialHour = 12,
-        initialMinute = 0,
-        is24Hour = true,
-    ),
-    endTimePickerState: TimePickerState = rememberTimePickerState(
-        initialHour = 12,
-        initialMinute = 0,
-        is24Hour = true,
-    ),
-    selectedMood: Mood? = null,
-    setSelectedMood: (Mood) -> Unit = {},
-    selectedSleepInfluences: List<SleepInfluences>,
-    setSelectedSleepInfluences: (SleepInfluences) -> Unit = {},
-    setStartTime: (Int, Int) -> Unit = { _, _ -> },
-    setEndTime: (Int, Int) -> Unit = { _, _ -> },
-    onSetStartTimePickerVisibility: (Boolean) -> Unit = {},
-    onSetEndTimePickerVisibility: (Boolean) -> Unit = {},
-    onContinue: () -> Unit = {},
-    onGoBack: () -> Unit = {},
+    showStartTimePickerDialog: ValueSetValue<Boolean>,
+    showEndTimePickerDialog: ValueSetValue<Boolean>,
+    startTimePickerState: ValueSetValueTyped<TimePickerState, (Int, Int) -> Unit>,
+    endTimePickerState: ValueSetValueTyped<TimePickerState, (Int, Int) -> Unit>,
+    selectedMood: ValueSetValue<Mood?>,
+    selectedSleepInfluences: ValueSetValueList<SleepInfluences>,
+    onAction: (NextAndBackAction) -> Unit = {}
 ) {
     val moods = remember { Mood.getAll() }
     val sleepInfluences = remember { SleepInfluences.getAll() }
 
-    if (showStartTimePickerDialog)
+    if (showStartTimePickerDialog.value)
         TimePickerDialog(
             title = Res.string.start_sleeping_time,
-            onDismiss = { onSetStartTimePickerVisibility(false) },
+            onDismiss = { showStartTimePickerDialog.setValue(false) },
             onConfirm = {
-                onSetStartTimePickerVisibility(false)
-                setStartTime(startTimePickerState.hour, startTimePickerState.minute)
+                showStartTimePickerDialog.setValue(false)
+                startTimePickerState.setValue(
+                    startTimePickerState.value.hour,
+                    startTimePickerState.value.minute
+                )
             },
         ) {
-            if (showStartTimePickerDialog) {
-                AddSleepQualityTimePicker(startTimePickerState)
-            }
+            AddSleepQualityTimePicker(startTimePickerState.value)
         }
-    if (showEndTimePickerDialog)
+
+    if (showEndTimePickerDialog.value)
         TimePickerDialog(
             title = Res.string.end_sleeping_time,
-            onDismiss = { onSetEndTimePickerVisibility(false) },
+            onDismiss = { showEndTimePickerDialog.setValue(false) },
             onConfirm = {
-                onSetEndTimePickerVisibility(false)
-                setEndTime(endTimePickerState.hour, endTimePickerState.minute)
+                showEndTimePickerDialog.setValue(false)
+                endTimePickerState.setValue(
+                    endTimePickerState.value.hour,
+                    endTimePickerState.value.minute
+                )
             },
         ) {
-            if (showEndTimePickerDialog) {
-                AddSleepQualityTimePicker(endTimePickerState)
-            }
+            AddSleepQualityTimePicker(endTimePickerState.value)
         }
 
     Scaffold(
@@ -127,7 +119,7 @@ fun AddSleepQualityUi(
                 .padding(padding),
         ) {
             Box(modifier = Modifier.paddingHorizontalMedium()) {
-                TopBar(onGoBack = onGoBack)
+                TopBar(onGoBack = { onAction(NextAndBackAction.OnGoBack) })
             }
             VerticalSpacer(40.dp)
             Text(
@@ -145,19 +137,19 @@ fun AddSleepQualityUi(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.start_sleeping_time,
-                    hour = DatetimeHelper.formatHour(startTimePickerState.hour),
-                    minutes = DatetimeHelper.formatHour(startTimePickerState.minute),
-                    isAfternoon = startTimePickerState.isAfternoon,
-                    onClick = { onSetStartTimePickerVisibility(true) }
+                    hour = DatetimeHelper.formatHour(startTimePickerState.value.hour),
+                    minutes = DatetimeHelper.formatHour(startTimePickerState.value.minute),
+                    isAfternoon = startTimePickerState.value.isAfternoon,
+                    onClick = { showStartTimePickerDialog.setValue(true) }
                 )
                 HorizontalSpacer(20.dp)
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.end_sleeping_time,
-                    hour = DatetimeHelper.formatHour(endTimePickerState.hour),
-                    minutes = DatetimeHelper.formatHour(endTimePickerState.minute),
-                    isAfternoon = endTimePickerState.isAfternoon,
-                    onClick = { onSetEndTimePickerVisibility(true) }
+                    hour = DatetimeHelper.formatHour(endTimePickerState.value.hour),
+                    minutes = DatetimeHelper.formatHour(endTimePickerState.value.minute),
+                    isAfternoon = endTimePickerState.value.isAfternoon,
+                    onClick = { showEndTimePickerDialog.setValue(true) }
                 )
             }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -172,7 +164,7 @@ fun AddSleepQualityUi(
                             mood = it,
                             backgroundColor = if (selectedMood == it) it.palette.faceBackgroundColor else Colors.Gray30,
                             color = if (selectedMood == it) it.palette.faceColor else Colors.Gray60,
-                            onClick = { setSelectedMood(it) }
+                            onClick = { selectedMood.setValue(it) }
                         )
                     }
                 }
@@ -186,20 +178,20 @@ fun AddSleepQualityUi(
                     items(sleepInfluences) {
                         TextRadioButton(
                             text = stringResource(it.title),
-                            selected = selectedSleepInfluences.contains(it),
+                            selected = selectedSleepInfluences.value.contains(it),
                             colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                             shape = Dimens.Shape.Circle,
-                            onClick = { setSelectedSleepInfluences(it) }
+                            onClick = { selectedSleepInfluences.setValue(it) }
                         )
                     }
                 }
             }
             VerticalSpacer(48.dp)
-            if (selectedMood != null)
+            if (selectedMood.value != null)
                 Box(modifier = Modifier.paddingHorizontalMedium()) {
                     ContinueButton(
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = onContinue
+                        onClick = { onAction(NextAndBackAction.OnContinue) }
                     )
                 }
         }
@@ -238,20 +230,36 @@ fun AddSleepQualityScreen(
 
     AddSleepQualityUi(
         snackBarState = snackBarState,
-        showStartTimePickerDialog = sleepQualityState.adding.showStartTimePickerDialog,
-        showEndTimePickerDialog = sleepQualityState.adding.showEndTimePickerDialog,
-        startTimePickerState = startTimePickerState,
-        endTimePickerState = endTimePickerState,
-        selectedMood = sleepQualityState.adding.mood,
-        setSelectedMood = sleepQualityViewModel::updateAddingMood,
-        onSetStartTimePickerVisibility = sleepQualityViewModel::updateOnSetStartTimePickerVisibility,
-        onSetEndTimePickerVisibility = sleepQualityViewModel::updateOnSetEndTimePickerVisibility,
-        selectedSleepInfluences = sleepQualityState.adding.selectedSleepInfluences,
-        setSelectedSleepInfluences = sleepQualityViewModel::updateSelectedSleepInfluences,
-        setStartTime = sleepQualityViewModel::updateStartTime,
-        setEndTime = sleepQualityViewModel::updateEndTime,
-        onContinue = sleepQualityViewModel::addSleepQualityRecord,
-        onGoBack = navigation::popBackStack
+        showStartTimePickerDialog = ValueSetValue(
+            sleepQualityState.adding.showStartTimePickerDialog,
+            sleepQualityViewModel::updateOnSetStartTimePickerVisibility
+        ),
+        showEndTimePickerDialog = ValueSetValue(
+            sleepQualityState.adding.showEndTimePickerDialog,
+            sleepQualityViewModel::updateOnSetEndTimePickerVisibility
+        ),
+        startTimePickerState = ValueSetValueTyped(
+            startTimePickerState,
+            sleepQualityViewModel::updateStartTime
+        ),
+        endTimePickerState = ValueSetValueTyped(
+            endTimePickerState,
+            sleepQualityViewModel::updateEndTime
+        ),
+        selectedMood = ValueSetValue(
+            sleepQualityState.adding.mood,
+            sleepQualityViewModel::updateAddingMood
+        ),
+        selectedSleepInfluences = ValueSetValueList(
+            sleepQualityState.adding.selectedSleepInfluences,
+            sleepQualityViewModel::updateSelectedSleepInfluences
+        ),
+        onAction = { action ->
+            when (action) {
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> sleepQualityViewModel.addSleepQualityRecord()
+            }
+        }
     )
 }
 
@@ -260,10 +268,24 @@ fun AddSleepQualityScreen(
 @Composable
 fun AddSleepQualityPreview() {
     AddSleepQualityUi(
-        showStartTimePickerDialog = false,
-        showEndTimePickerDialog = false,
-        selectedMood = Mood.Neutral,
-        selectedSleepInfluences = mutableListOf(SleepInfluences.ChillSleepEnvironment)
+        showStartTimePickerDialog = ValueSetValue(false),
+        showEndTimePickerDialog = ValueSetValue(false),
+        selectedMood = ValueSetValue(Mood.Neutral),
+        selectedSleepInfluences = ValueSetValueList(mutableListOf(SleepInfluences.ChillSleepEnvironment)),
+        startTimePickerState = ValueSetValueTyped(
+            rememberTimePickerState(
+                initialHour = 0,
+                initialMinute = 0,
+                is24Hour = true,
+            )
+        ) { _, _ -> },
+        endTimePickerState = ValueSetValueTyped(
+            rememberTimePickerState(
+                initialHour = 0,
+                initialMinute = 0,
+                is24Hour = true,
+            )
+        ) { _, _ -> },
     )
 }
 
@@ -272,9 +294,24 @@ fun AddSleepQualityPreview() {
 @Composable
 fun AddSleepQualityPreview2() {
     AddSleepQualityUi(
-        showStartTimePickerDialog = true,
-        showEndTimePickerDialog = false,
-        selectedSleepInfluences = mutableListOf(SleepInfluences.ChillSleepEnvironment)
+        showStartTimePickerDialog = ValueSetValue(true),
+        showEndTimePickerDialog = ValueSetValue(false),
+        selectedMood = ValueSetValue(Mood.Neutral),
+        selectedSleepInfluences = ValueSetValueList(mutableListOf(SleepInfluences.ChillSleepEnvironment)),
+        startTimePickerState = ValueSetValueTyped(
+            rememberTimePickerState(
+                initialHour = 0,
+                initialMinute = 0,
+                is24Hour = true,
+            )
+        ) { _, _ -> },
+        endTimePickerState = ValueSetValueTyped(
+            rememberTimePickerState(
+                initialHour = 0,
+                initialMinute = 0,
+                is24Hour = true,
+            )
+        ) { _, _ -> },
     )
 }
 

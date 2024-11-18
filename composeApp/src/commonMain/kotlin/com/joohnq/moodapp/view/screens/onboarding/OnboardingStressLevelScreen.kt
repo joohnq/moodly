@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingExpressionAnalysis
@@ -31,7 +32,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingStressLevelScreenUI(
     selectedOption: ValueSetValue<StressLevel>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
@@ -84,8 +85,8 @@ fun OnboardingStressLevelScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToOnboardingExpressionAnalysis()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToOnboardingExpressionAnalysis()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

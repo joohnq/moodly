@@ -11,6 +11,7 @@ object Dimens {
     object Padding {
         val HorizontalMedium = PaddingValues(horizontal = 20.dp)
         val HorizontalSmall = PaddingValues(horizontal = 16.dp)
+        val HorizontalExtraExtraSmall = PaddingValues(horizontal = 4.dp)
 
         val VerticalExtraLarge = PaddingValues(vertical = 20.dp)
         val VerticalLarge = PaddingValues(vertical = 15.dp)

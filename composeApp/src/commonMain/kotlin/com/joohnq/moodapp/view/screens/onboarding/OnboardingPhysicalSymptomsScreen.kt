@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.PhysicalSymptoms
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingSleepQuality
@@ -34,7 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingPhysicalSymptomsScreenUI(
     selectedOption: ValueSetValue<PhysicalSymptoms?>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     val options = remember { PhysicalSymptoms.getAll() }
 
@@ -86,8 +87,8 @@ fun OnboardingPhysicalSymptomsScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToOnboardingSleepQuality()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToOnboardingSleepQuality()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

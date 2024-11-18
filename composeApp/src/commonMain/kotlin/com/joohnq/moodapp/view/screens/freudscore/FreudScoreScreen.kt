@@ -4,7 +4,6 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -22,6 +21,7 @@ import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
 import com.joohnq.moodapp.view.components.SharedPanelComponent
+import com.joohnq.moodapp.view.components.SubTitle
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
@@ -71,12 +71,7 @@ import org.jetbrains.compose.resources.stringResource
         content = {
             mapStatsRecords.forEachMap { key, items ->
                 item {
-                    Text(
-                        text = key,
-                        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                        style = TextStyles.LabelSm(),
-                        color = Colors.Brown100Alpha64
-                    )
+                    SubTitle(text = key)
                 }
                 items(items) { statsRecord ->
                     MentalScoreHistoryItemWithHour(statsRecord) {

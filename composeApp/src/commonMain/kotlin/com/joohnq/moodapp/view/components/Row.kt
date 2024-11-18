@@ -16,6 +16,7 @@ import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall
 import com.joohnq.moodapp.view.ui.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -43,7 +44,7 @@ fun MoodTrackerRow(moodTracker: List<Mood>) {
                     painter = painterResource(Drawables.Icons.Arrow),
                     contentDescription = null,
                     tint = Colors.Brown80,
-                    modifier = Modifier.padding(horizontal = 4.dp).size(16.dp)
+                    modifier = Modifier.paddingHorizontalExtraExtraSmall().size(16.dp)
                 )
             }
         }

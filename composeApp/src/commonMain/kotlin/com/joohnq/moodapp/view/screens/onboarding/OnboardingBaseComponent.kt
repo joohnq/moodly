@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.constants.TestConstants
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.TopBar
@@ -43,7 +44,7 @@ fun OnboardingBaseComponent(
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
-    onAction: (OnboardingAction) -> Unit,
+    onAction: (NextAndBackAction) -> Unit,
     content: @Composable () -> Unit
 ) {
     Scaffold(
@@ -58,7 +59,7 @@ fun OnboardingBaseComponent(
         ) {
             TopBar(
                 text = Res.string.assessments,
-                onGoBack = { onAction(OnboardingAction.OnGoBack) }
+                onGoBack = { onAction(NextAndBackAction.OnGoBack) }
             ) {
                 TextWithBackground(
                     text = stringResource(Res.string.page_of, page, 7),
@@ -89,7 +90,7 @@ fun OnboardingBaseComponent(
             if (isContinueButtonVisible) {
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = { onAction(OnboardingAction.OnContinue) }
+                    onClick = { onAction(NextAndBackAction.OnContinue) }
                 )
                 VerticalSpacer(16.dp)
             }

@@ -3,7 +3,7 @@ package com.joohnq.moodapp.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.DatabaseConstants
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
@@ -23,7 +23,7 @@ data class StressLevelRecord(
             id = 0,
             stressLevel = StressLevel.Three,
             stressors = emptyList(),
-            date = DatetimeHelper.getLocalDateTime()
+            date = DatetimeManager.getCurrentDateTime()
         )
 
         fun StressLevel.toStressLevelRecord(): StressLevelRecord =
@@ -31,7 +31,7 @@ data class StressLevelRecord(
                 id = 0,
                 stressLevel = this,
                 stressors = emptyList(),
-                date = DatetimeHelper.getLocalDateTime()
+                date = DatetimeManager.getCurrentDateTime()
             )
     }
 }

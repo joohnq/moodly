@@ -23,7 +23,7 @@ sealed class Mood(
     @Contextual val imageVector: ImageVector,
     @Contextual val text: StringResource,
     val healthLevel: Int,
-    val palette: MoodPalette
+    @Contextual val palette: MoodPalette
 ) {
     @Serializable
     data object Depressed :

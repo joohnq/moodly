@@ -22,7 +22,7 @@ import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.HomeTopBar
 import com.joohnq.moodapp.view.components.MentalHealthMetrics
@@ -96,7 +96,7 @@ fun HomeScreen(
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
-    val today = DatetimeHelper.formatLocalDate()
+    val today = DatetimeManager.formatDate()
     val userState by userViewModel.userState.collectAsState()
     val statsState by statsViewModel.statsState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()

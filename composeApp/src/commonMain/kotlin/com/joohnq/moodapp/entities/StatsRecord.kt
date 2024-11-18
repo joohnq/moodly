@@ -5,7 +5,7 @@ import androidx.navigation.NavType
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.eygraber.uri.UriCodec
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.DatabaseConstants
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
@@ -26,7 +26,7 @@ data class StatsRecord(
             id = 0,
             mood = Mood.Neutral,
             description = "",
-            date = DatetimeHelper.getLocalDateTime()
+            date = DatetimeManager.getCurrentDateTime()
         )
 
         fun navType() = object : NavType<StatsRecord?>(

@@ -5,7 +5,7 @@ import androidx.room.Query
 import com.joohnq.moodapp.entities.SleepInfluences
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.SleepQualityRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.DatabaseConstants
 import kotlinx.datetime.LocalDateTime
 
@@ -17,7 +17,7 @@ interface SleepQualityRecordDAO {
         startSleeping: String,
         endSleeping: String,
         sleepInfluences: List<SleepInfluences>,
-        date: LocalDateTime = DatetimeHelper.getLocalDateTime()
+        date: LocalDateTime = DatetimeManager.getCurrentDateTime()
     )
 
     @Query("SELECT * FROM ${DatabaseConstants.SLEEP_QUALITY_RECORD_DATABASE} ORDER BY date ASC")

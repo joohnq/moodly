@@ -37,7 +37,7 @@ sealed class StressLevel(
     @Contextual val subtitle: StringResource,
     @Contextual val lifeImpact: StringResource,
     val level: Int,
-    val palette: StressLevelPalette,
+    @Contextual val palette: StressLevelPalette,
 ) {
     @Serializable
     data object One :

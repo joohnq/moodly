@@ -14,9 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
+import com.joohnq.moodapp.helper.StatsManager
 import com.joohnq.moodapp.view.ui.Colors
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.models.AnimationMode
@@ -35,7 +35,7 @@ fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
     val first = stressLevelRecords.last().stressLevel
     val newList =
         remember {
-            StatsManager.addHalfInStartAndEnd(stressLevelRecords.map {
+            StatsManager.normalizeRange(stressLevelRecords.map {
                 StressLevel.toPercent(it.stressLevel.level)
             })
         }

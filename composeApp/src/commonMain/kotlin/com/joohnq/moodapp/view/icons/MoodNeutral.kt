@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-public val MoodNeutral: ImageVector
+val MoodNeutral: ImageVector
     get() {
         if (_moodNeutral != null) {
             return _moodNeutral!!

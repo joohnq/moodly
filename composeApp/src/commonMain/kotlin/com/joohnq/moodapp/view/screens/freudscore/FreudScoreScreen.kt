@@ -14,9 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.helper.StatsManager
 import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
@@ -92,7 +92,8 @@ import org.jetbrains.compose.resources.stringResource
     navigation: NavHostController,
 ) {
     val statsState by statsViewModel.statsState.collectAsState()
-    val mapStatsRecords = remember { StatsManager.getMap(statsState.statsRecords.getValue()) }
+    val mapStatsRecords =
+        remember { StatsManager.getGroupByDate(statsState.statsRecords.getValue()) }
 
     FreudScoreScreenUi(
         freudScore = statsState.freudScore,

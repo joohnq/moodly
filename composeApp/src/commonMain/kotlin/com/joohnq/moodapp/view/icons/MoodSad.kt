@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-public val MoodSad: ImageVector
+val MoodSad: ImageVector
     get() {
         if (_moodSad != null) {
             return _moodSad!!

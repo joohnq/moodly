@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.DatabaseConstants
 import kotlinx.datetime.LocalDateTime
 
@@ -14,7 +14,7 @@ interface StatsRecordDAO {
     suspend fun addStats(
         mood: Mood,
         description: String,
-        date: LocalDateTime = DatetimeHelper.getLocalDateTime()
+        date: LocalDateTime = DatetimeManager.getCurrentDateTime()
     )
 
     @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE} ORDER BY date DESC")

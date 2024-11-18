@@ -2,10 +2,10 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
+import com.joohnq.moodapp.helper.StatsManager
 import com.joohnq.moodapp.model.repository.StatsRepository
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +25,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
@@ -44,21 +44,17 @@ import moodapp.composeapp.generated.resources.sleep_quality_title
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingSleepQualityScreenUI(
-    onGoBack: () -> Unit = {},
-    snackBarState: SnackbarHostState = SnackbarHostState(),
-    sliderValue: Float,
-    setSliderValue: (Float) -> Unit = {},
-    sleepQualityOptions: List<SleepQuality>,
-    selectedSleepQuality: SleepQuality,
-    onAction: () -> Unit = {}
+    sliderValue: ValueSetValue<Float>,
+    selectedSleepQuality: ValueSetValue<SleepQuality>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
     val moods = remember { Mood.getAll().reversed() }
+    val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
+
     OnboardingBaseComponent(
         page = 4,
-        snackBarState = snackBarState,
         title = Res.string.sleep_quality_title,
-        onGoBack = onGoBack,
-        onContinue = onAction
+        onAction = onAction
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             VerticalSpacer(20.dp)
@@ -71,7 +67,7 @@ fun OnboardingSleepQualityScreenUI(
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQuality ->
                         val textColor =
-                            if (selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
+                            if (selectedSleepQuality.value == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
 
                         DoubleText(
                             firstText = sleepQuality.firstText,
@@ -82,8 +78,11 @@ fun OnboardingSleepQualityScreenUI(
                 }
                 VerticalSlider(
                     modifier = Modifier.weight(1f).testTag(TestConstants.SLEEP_QUALITY_SLIDER),
-                    sliderValue = sliderValue,
-                    setSliderValue = setSliderValue,
+                    sliderValue = sliderValue.value,
+                    setSliderValue = {
+                        sliderValue.setValue(it)
+                        selectedSleepQuality.setValue(SleepQuality.fromSliderValue(sliderValue.value / 25))
+                    },
                     thumb = { SleepQualityThumb() },
                     track = { SleepQualityTrack(it) },
                     sliderColors = ComponentColors.Slider.SleepQualitySliderColors()
@@ -114,23 +113,19 @@ fun OnboardingSleepQualityScreen(
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
     var sliderValue by rememberSaveable { mutableStateOf(0f) }
-    val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
-    val snackBarState = remember { SnackbarHostState() }
 
     OnboardingSleepQualityScreenUI(
-        snackBarState = snackBarState,
-        sliderValue = sliderValue,
-        setSliderValue = {
-            sliderValue = it
-            val i = sliderValue.toInt() / 25
-            onboardingViewModel.updateSleepQuality(
-                sleepQualityOptions[sleepQualityOptions.size - i - 1]
-            )
-        },
-        sleepQualityOptions = sleepQualityOptions,
-        selectedSleepQuality = onboardingState.sleepQuality,
-        onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToMedicationsSupplements
+        sliderValue = ValueSetValue(sliderValue) { sliderValue = it },
+        selectedSleepQuality = ValueSetValue(
+            onboardingState.sleepQuality,
+            onboardingViewModel::updateSleepQuality
+        ),
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> navigation.onNavigateToMedicationsSupplements()
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -138,8 +133,7 @@ fun OnboardingSleepQualityScreen(
 @Composable
 fun OnboardingSleepQualityScreenPreview() {
     OnboardingSleepQualityScreenUI(
-        sliderValue = 100f,
-        sleepQualityOptions = SleepQuality.getAll(),
-        selectedSleepQuality = SleepQuality.Worst,
+        sliderValue = ValueSetValue(0f),
+        selectedSleepQuality = ValueSetValue(SleepQuality.Worst),
     )
 }

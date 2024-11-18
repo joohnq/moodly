@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.User
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
@@ -38,18 +39,15 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingExpressionAnalysisScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    desc: String,
-    onGoBack: () -> Unit = {},
-    setDesc: (String) -> Unit = {},
-    onAction: () -> Unit = {},
+    desc: ValueSetValue<String>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
-        onGoBack = onGoBack,
-        isContinueButtonVisible = desc.isNotEmpty(),
-        onContinue = onAction,
+        isContinueButtonVisible = desc.value.isNotEmpty(),
+        onAction = onAction
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),
@@ -59,8 +57,8 @@ fun OnboardingExpressionAnalysisScreenUI(
         )
         ExpressionAnalysisTextField(
             modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
-            desc,
-            onValueChange = setDesc
+            text = desc.value,
+            onValueChange = desc.setValue
         )
     }
 }
@@ -110,26 +108,33 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     OnboardingExpressionAnalysisScreenUI(
-        desc = onboardingState.statsRecord.description,
-        setDesc = { onboardingViewModel.updateStatsRecordDescription(it) },
-        onGoBack = navigation::popBackStack,
+        desc = ValueSetValue(
+            onboardingState.statsRecord.description,
+            onboardingViewModel::updateStatsRecordDescription
+        ),
         snackBarState = snackBarState,
-        onAction = {
-            sleepQualityViewModel.addSleepQualityRecord(
-                SleepQualityRecord.Builder()
-                    .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
-                    .build()
-            )
-            stressLevelViewModel.addStressLevelRecord(onboardingState.stressLevel)
-            statsViewModel.addStatsRecord(onboardingState.statsRecord)
-            userViewModel.updateUser(
-                User.init().copy(
-                    physicalSymptoms = onboardingState.physicalSymptoms!!,
-                    medicationsSupplements = onboardingState.medicationsSupplements!!,
-                    soughtHelp = onboardingState.soughtHelp!!
-                )
-            )
-        },
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> {
+                    sleepQualityViewModel.addSleepQualityRecord(
+                        SleepQualityRecord.Builder()
+                            .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
+                            .build()
+                    )
+                    stressLevelViewModel.addStressLevelRecord(onboardingState.stressLevel)
+                    statsViewModel.addStatsRecord(onboardingState.statsRecord)
+                    userViewModel.updateUser(
+                        User.init().copy(
+                            physicalSymptoms = onboardingState.physicalSymptoms!!,
+                            medicationsSupplements = onboardingState.medicationsSupplements!!,
+                            soughtHelp = onboardingState.soughtHelp!!
+                        )
+                    )
+                }
+
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -137,6 +142,6 @@ fun OnboardingExpressionAnalysisScreen(
 @Composable
 fun OnboardingExpressionAnalysisScreenUIPreview() {
     OnboardingExpressionAnalysisScreenUI(
-        desc = "",
+        desc = ValueSetValue(""),
     )
 }

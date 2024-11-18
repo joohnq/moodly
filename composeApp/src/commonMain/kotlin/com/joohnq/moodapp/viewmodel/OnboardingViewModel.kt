@@ -39,16 +39,16 @@ class OnboardingViewModel : ViewModel() {
     }
 
     fun updateUserMedicationsSupplements(
-        medicationsSupplements: MedicationsSupplements,
+        medicationsSupplements: MedicationsSupplements?,
     ) {
         _onboardingState.update { it.copy(medicationsSupplements = medicationsSupplements) }
     }
 
-    fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) {
+    fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms?) {
         _onboardingState.update { it.copy(physicalSymptoms = physicalSymptoms) }
     }
 
-    fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp) {
+    fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp?) {
         _onboardingState.update { it.copy(soughtHelp = soughtHelp) }
     }
 

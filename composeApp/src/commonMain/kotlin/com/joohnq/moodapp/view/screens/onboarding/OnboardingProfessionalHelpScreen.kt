@@ -4,15 +4,15 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.ProfessionalHelp
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
@@ -26,22 +26,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingProfessionalHelpScreenUI(
-    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    selectedOption: ProfessionalHelp?,
-    setSelectedOption: (ProfessionalHelp) -> Unit = {},
-    onGoBack: () -> Unit = {},
-    onAction: () -> Unit = {},
+    selectedOption: ValueSetValue<ProfessionalHelp?>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
-    val options = remember { ProfessionalHelp.getAll() }
+    val options = rememberSaveable { ProfessionalHelp.getAll() }
 
     OnboardingBaseComponent(
         page = 2,
-        snackBarState = snackBarState,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = selectedOption != null,
-        onGoBack = onGoBack,
-        onContinue = onAction,
+        isContinueButtonVisible = selectedOption.value != null,
+        onAction = onAction
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -54,7 +49,7 @@ fun OnboardingProfessionalHelpScreenUI(
                     selected = selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    onClick = { setSelectedOption(option) }
+                    onClick = { selectedOption.setValue(option) }
                 )
             }
         }
@@ -67,14 +62,18 @@ fun OnboardingProfessionalHelpScreen(
     navigation: NavController,
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val snackBarState = remember { SnackbarHostState() }
 
     OnboardingProfessionalHelpScreenUI(
-        snackBarState = snackBarState,
-        selectedOption = onboardingState.soughtHelp,
-        setSelectedOption = onboardingViewModel::updateUserSoughtHelp,
-        onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToPhysicalSymptoms
+        selectedOption = ValueSetValue(
+            onboardingState.soughtHelp,
+            onboardingViewModel::updateUserSoughtHelp
+        ),
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> navigation.onNavigateToPhysicalSymptoms()
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -82,6 +81,6 @@ fun OnboardingProfessionalHelpScreen(
 @Composable
 fun OnboardingProfessionalHelpScreenPreview() {
     OnboardingProfessionalHelpScreenUI(
-        selectedOption = ProfessionalHelp.No,
+        selectedOption = ValueSetValue(ProfessionalHelp.No),
     )
 }

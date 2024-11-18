@@ -1,13 +1,18 @@
 package com.joohnq.moodapp.view.screens.sleepquality
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,12 +26,15 @@ import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.SleepStatsItem
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.components.HorizontalSpacer
 import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.SleepQualityCard
+import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToAddSleepQuality
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
+import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.TextStyles
@@ -39,6 +47,8 @@ import moodapp.composeapp.generated.resources.sleep_quality_level
 import moodapp.composeapp.generated.resources.sleep_stats
 import moodapp.composeapp.generated.resources.sleeping_influences
 import moodapp.composeapp.generated.resources.start_sleeping
+import moodapp.composeapp.generated.resources.to_word
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -50,26 +60,6 @@ fun SleepQualityScreenUI(
     val last = sleepQualityRecords.last()
     val options = remember {
         listOf(
-            SleepStatsItem(
-                icon = Drawables.Icons.Sleep,
-                title = Res.string.start_sleeping,
-            ) {
-                Text(
-                    text = last.startSleeping,
-                    style = TextStyles.TextMdSemiBold(),
-                    color = Colors.Brown80
-                )
-            },
-            SleepStatsItem(
-                icon = Drawables.Icons.Sun,
-                title = Res.string.end_sleeping,
-            ) {
-                Text(
-                    text = last.endSleeping,
-                    style = TextStyles.TextMdSemiBold(),
-                    color = Colors.Brown80
-                )
-            },
             SleepStatsItem(
                 icon = Drawables.Icons.MoodNeutral,
                 title = Res.string.mood,
@@ -84,12 +74,15 @@ fun SleepQualityScreenUI(
                 icon = Drawables.Icons.Moon,
                 title = Res.string.sleeping_influences,
             ) {
+                VerticalSpacer(15.dp)
                 if (last.sleepInfluences.isNotEmpty())
-                    Text(
-                        text = last.sleepInfluences.joinToString(", "),
-                        style = TextStyles.TextMdSemiBold(),
-                        color = Colors.Brown80
-                    )
+                    last.sleepInfluences.forEach {
+                        TextWithBackground(
+                            text = stringResource(it.title),
+                            backgroundColor = Colors.Green50,
+                            textColor = Colors.White
+                        )
+                    }
             }
         )
     }
@@ -125,12 +118,67 @@ fun SleepQualityScreenUI(
                     color = Colors.White
                 )
                 VerticalSpacer(20.dp)
+                Row(
+                    modifier = Modifier
+                        .background(color = Colors.White, shape = Dimens.Shape.Circle)
+                        .padding(vertical = 5.dp, horizontal = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier.size(30.dp)
+                            .background(
+                                color = Colors.Brown10,
+                                shape = Dimens.Shape.Circle
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.Sleep),
+                            contentDescription = stringResource(Res.string.start_sleeping),
+                            tint = Colors.Brown80,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    HorizontalSpacer(10.dp)
+                    Text(
+                        text = last.startSleeping,
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown80
+                    )
+                    Text(
+                        text = stringResource(Res.string.to_word),
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown100Alpha64,
+                        modifier = Modifier.padding(horizontal = 5.dp)
+                    )
+                    Box(
+                        modifier = Modifier.size(30.dp)
+                            .background(
+                                color = Colors.Brown10,
+                                shape = Dimens.Shape.Circle
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.Sun),
+                            contentDescription = stringResource(Res.string.end_sleeping),
+                            tint = Colors.Brown80,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    HorizontalSpacer(10.dp)
+                    Text(
+                        text = last.endSleeping,
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown80
+                    )
+                }
             }
         },
         content = {
             item {
                 FlowRow(
-                    maxItemsInEachRow = 2,
+                    maxItemsInEachRow = 1,
                     maxLines = 2,
                     modifier = Modifier.fillMaxSize().wrapContentHeight()
                         .paddingHorizontalMedium(),

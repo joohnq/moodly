@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.PhysicalSymptoms
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.moodapp.view.components.VerticalSpacer
@@ -33,21 +33,16 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsScreenUI(
-    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    selectedOption: PhysicalSymptoms?,
-    setSelectedOption: (PhysicalSymptoms) -> Unit = {},
-    onGoBack: () -> Unit = {},
-    onAction: () -> Unit = {},
+    selectedOption: ValueSetValue<PhysicalSymptoms?>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
-    val options: List<PhysicalSymptoms> = remember { PhysicalSymptoms.getAll() }
+    val options = remember { PhysicalSymptoms.getAll() }
 
     OnboardingBaseComponent(
         page = 3,
-        snackBarState = snackBarState,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = selectedOption != null,
-        onGoBack = onGoBack,
-        onContinue = onAction,
+        isContinueButtonVisible = selectedOption.value != null,
+        onAction = onAction
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -70,7 +65,7 @@ fun OnboardingPhysicalSymptomsScreenUI(
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),
-                    onClick = { setSelectedOption(option) }
+                    onClick = { selectedOption.setValue(option) }
                 )
             }
         }
@@ -83,14 +78,18 @@ fun OnboardingPhysicalSymptomsScreen(
     navigation: NavController,
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val snackBarState = remember { SnackbarHostState() }
 
     OnboardingPhysicalSymptomsScreenUI(
-        snackBarState = snackBarState,
-        selectedOption = onboardingState.physicalSymptoms,
-        setSelectedOption = onboardingViewModel::updateUserPhysicalSymptoms,
-        onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToOnboardingSleepQuality
+        selectedOption = ValueSetValue(
+            onboardingState.physicalSymptoms,
+            onboardingViewModel::updateUserPhysicalSymptoms
+        ),
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> navigation.onNavigateToOnboardingSleepQuality()
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -98,6 +97,6 @@ fun OnboardingPhysicalSymptomsScreen(
 @Composable
 fun OnboardingPhysicalSymptomsScreenPreview() {
     OnboardingPhysicalSymptomsScreenUI(
-        selectedOption = PhysicalSymptoms.No,
+        selectedOption = ValueSetValue(PhysicalSymptoms.No),
     )
 }

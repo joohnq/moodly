@@ -49,6 +49,7 @@ fun StressLevelScreenUI(
 ) {
     val stressLevelRecord = stressLevelRecords.last()
     SharedPanelComponent(
+        containerColor = Colors.White,
         isDark = false,
         onGoBack = { onAction(StressLevelAction.OnGoBack) },
         backgroundColor = stressLevelRecord.stressLevel.palette.color,

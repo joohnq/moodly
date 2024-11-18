@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -20,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Mood
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.IconContinueButton
@@ -39,24 +38,20 @@ import org.koin.compose.koinInject
 
 @Composable
 fun OnboardingMoodRateScreenUi(
-    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     moodRatePadding: Int,
-    selectedMood: Mood,
-    setSelectedMood: (Mood) -> Unit = {},
-    onAction: () -> Unit = {},
-    onGoBack: () -> Unit = {},
+    selectedMood: ValueSetValue<Mood>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 1,
-        snackBarState = snackBarState,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onGoBack = onGoBack,
+        onAction = onAction
     ) {
         Text(
             text = stringResource(
                 Res.string.mood_rate_desc,
-                stringResource(selectedMood.text)
+                stringResource(selectedMood.value.text)
             ),
             style = TextStyles.TextXlSemiBold(),
             color = Colors.Brown100Alpha64,
@@ -64,7 +59,7 @@ fun OnboardingMoodRateScreenUi(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            mood = selectedMood,
+            mood = selectedMood.value,
         )
         VerticalSpacer(24.dp)
     }
@@ -75,7 +70,7 @@ fun OnboardingMoodRateScreenUi(
         IconContinueButton(
             modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
             colors = ComponentColors.IconButton.ContinueButtonColors(),
-            onClick = onAction
+            onClick = { onAction(OnboardingAction.OnContinue) }
         )
     }
 
@@ -88,7 +83,7 @@ fun OnboardingMoodRateScreenUi(
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            RouletteMoods(paddingBottom = moodRatePadding, setSelectedMood = setSelectedMood)
+            RouletteMoods(paddingBottom = moodRatePadding, setSelectedMood = selectedMood.setValue)
         }
     }
 }
@@ -100,15 +95,19 @@ fun OnboardingMoodRateScreen(
 ) {
     val screenDimensions: ScreenDimensions = koinInject()
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val snackBarState = remember { SnackbarHostState() }
 
     OnboardingMoodRateScreenUi(
-        snackBarState = snackBarState,
         moodRatePadding = screenDimensions.moodRatePadding,
-        selectedMood = onboardingState.statsRecord.mood,
-        setSelectedMood = onboardingViewModel::updateMood,
-        onAction = navigation::onNavigateToProfessionalHelp,
-        onGoBack = navigation::popBackStack
+        selectedMood = ValueSetValue(
+            onboardingState.statsRecord.mood,
+            onboardingViewModel::updateMood
+        ),
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> navigation.onNavigateToProfessionalHelp()
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -117,6 +116,6 @@ fun OnboardingMoodRateScreen(
 fun OnboardingMoodRateScreenPreview() {
     OnboardingMoodRateScreenUi(
         moodRatePadding = 0,
-        selectedMood = Mood.Neutral
+        selectedMood = ValueSetValue(Mood.Neutral)
     )
 }

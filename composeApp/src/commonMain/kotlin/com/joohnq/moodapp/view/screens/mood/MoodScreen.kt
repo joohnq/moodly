@@ -134,14 +134,18 @@ fun MoodScreenUi(
 
 @Composable
 fun MoodScreen(
-    statsRecord: StatsRecord,
+    statsRecord: StatsRecord?,
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
     val statsState by statsViewModel.statsState.collectAsState()
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
-    var currentStatsRecord by remember { mutableStateOf(statsRecord) }
+    var currentStatsRecord by remember {
+        mutableStateOf(
+            statsRecord ?: statsState.statsRecords.getValue().last()
+        )
+    }
 
     LaunchedEffect(currentStatsRecord) {
         hasNext = StatsManager.getNext(currentStatsRecord, statsState.statsRecords.getValue())

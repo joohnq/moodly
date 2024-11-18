@@ -96,7 +96,7 @@ import moodapp.composeapp.generated.resources.stress_level
         content = {
             MoodTrackerRow(moodTracker)
         },
-        onClick = { onAction(HomeAction.OnNavigateToMoodTracker) }
+        onClick = { onAction(HomeAction.OnNavigateToMood) }
     )
     VerticalSpacer(30.dp)
 }

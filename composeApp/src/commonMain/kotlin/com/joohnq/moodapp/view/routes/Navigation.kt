@@ -85,6 +85,10 @@ fun NavController.onNavigateToMood(statsRecord: StatsRecord) {
     navigate(Screens.MoodScreen(statsRecord))
 }
 
+fun NavController.onNavigateToMood() {
+    navigate(Screens.MoodScreen)
+}
+
 fun NavController.onNavigateToHealthJournal() {
     navigate(Screens.HealthJournalScreen)
 }

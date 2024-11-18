@@ -6,6 +6,5 @@ sealed class HomeAction {
     data object OnNavigateToHealthJournal : HomeAction()
     data object OnNavigateToMindfulJournal : HomeAction()
     data object OnNavigateToStressLevel : HomeAction()
-    data object OnNavigateToMoodTracker : HomeAction()
     data object OnNavigateToSleepQuality : HomeAction()
 }

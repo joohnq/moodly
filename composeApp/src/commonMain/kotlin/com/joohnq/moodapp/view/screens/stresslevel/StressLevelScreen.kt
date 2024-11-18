@@ -165,7 +165,7 @@ fun StressLevelScreen(
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
 
     StressLevelScreenUI(
-        stressLevelRecords = stressLevelState.items.getValue(),
+        stressLevelRecords = stressLevelState.stressLevelRecords.getValue(),
         onAction = { action ->
             when (action) {
                 is StressLevelAction.OnAdd -> navigation.onNavigateToAddStressLevel()

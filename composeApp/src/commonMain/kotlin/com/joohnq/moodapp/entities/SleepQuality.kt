@@ -131,5 +131,13 @@ sealed class SleepQuality(
             Poor -> Mood.Sad
             Worst -> Mood.Depressed
         }
+
+        fun fromSliderValue(value: Float): SleepQuality = when (value) {
+            0f -> Worst
+            25f -> Poor
+            50f -> Fair
+            75f -> Good
+            else -> Excellent
+        }
     }
 }

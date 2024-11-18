@@ -14,6 +14,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -38,12 +39,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingBaseComponent(
     page: Int,
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
-    onContinue: () -> Unit = {},
-    onGoBack: () -> Unit,
+    onAction: (OnboardingAction) -> Unit,
     content: @Composable () -> Unit
 ) {
     Scaffold(
@@ -58,7 +58,7 @@ fun OnboardingBaseComponent(
         ) {
             TopBar(
                 text = Res.string.assessments,
-                onGoBack = onGoBack
+                onGoBack = { onAction(OnboardingAction.OnGoBack) }
             ) {
                 TextWithBackground(
                     text = stringResource(Res.string.page_of, page, 7),
@@ -89,7 +89,7 @@ fun OnboardingBaseComponent(
             if (isContinueButtonVisible) {
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = onContinue
+                    onClick = { onAction(OnboardingAction.OnContinue) }
                 )
                 VerticalSpacer(16.dp)
             }

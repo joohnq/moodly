@@ -150,4 +150,5 @@
     <string name="new_sleep_quality">New Sleep Quality</string>
     <string name="start_sleeping_time">Start Sleeping Time</string>
     <string name="end_sleeping_time">End Sleeping Time</string>
+    <string name="to_word">to</string>
 </resources>

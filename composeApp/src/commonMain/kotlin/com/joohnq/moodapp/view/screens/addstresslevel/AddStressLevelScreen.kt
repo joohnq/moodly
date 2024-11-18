@@ -53,10 +53,6 @@ import moodapp.composeapp.generated.resources.add_stress_level
 import moodapp.composeapp.generated.resources.whats_your_stress_level_today
 import org.jetbrains.compose.resources.stringResource
 
-data class ValueSetValue<T>(
-    val value: T,
-    val setValue: (T) -> Unit
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

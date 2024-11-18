@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.TextRadioButton
 import com.joohnq.moodapp.view.components.VerticalSpacer
@@ -30,23 +30,18 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingStressLevelScreenUI(
-    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    selectedOption: StressLevel,
-    setSelectedOption: (StressLevel) -> Unit = {},
-    onGoBack: () -> Unit = {},
-    onAction: () -> Unit = {}
+    selectedOption: ValueSetValue<StressLevel>,
+    onAction: (OnboardingAction) -> Unit = {},
 ) {
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
     OnboardingBaseComponent(
         page = 6,
-        snackBarState = snackBarState,
         title = Res.string.stress_rate_title,
-        onGoBack = onGoBack,
-        onContinue = onAction,
+        onAction = onAction
     ) {
         Text(
-            text = stringResource(selectedOption.value),
+            text = stringResource(selectedOption.value.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -62,13 +57,13 @@ fun OnboardingStressLevelScreenUI(
                     selected = selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
-                    onClick = { setSelectedOption(option) }
+                    onClick = { selectedOption.setValue(option) }
                 )
             }
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(selectedOption.text),
+            text = stringResource(selectedOption.value.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )
@@ -81,14 +76,18 @@ fun OnboardingStressLevelScreen(
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
-    val snackBarState = remember { SnackbarHostState() }
 
     OnboardingStressLevelScreenUI(
-        snackBarState = snackBarState,
-        selectedOption = onboardingState.stressLevel,
-        setSelectedOption = onboardingViewModel::updateStressLevel,
-        onGoBack = navigation::popBackStack,
-        onAction = navigation::onNavigateToOnboardingExpressionAnalysis
+        selectedOption = ValueSetValue(
+            onboardingState.stressLevel,
+            onboardingViewModel::updateStressLevel
+        ),
+        onAction = { action ->
+            when (action) {
+                OnboardingAction.OnContinue -> navigation.onNavigateToOnboardingExpressionAnalysis()
+                OnboardingAction.OnGoBack -> navigation.popBackStack()
+            }
+        }
     )
 }
 
@@ -96,6 +95,6 @@ fun OnboardingStressLevelScreen(
 @Composable
 fun OnboardingStressLevelScreenPreview() {
     OnboardingStressLevelScreenUI(
-        selectedOption = StressLevel.One,
+        selectedOption = ValueSetValue(StressLevel.One),
     )
 }

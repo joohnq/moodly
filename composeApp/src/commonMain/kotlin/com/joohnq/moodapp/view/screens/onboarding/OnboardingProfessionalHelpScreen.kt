@@ -46,7 +46,7 @@ fun OnboardingProfessionalHelpScreenUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
                     text = stringResource(option.text),
-                    selected = selectedOption == option,
+                    selected = selectedOption.value == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     onClick = { selectedOption.setValue(option) }

@@ -16,7 +16,9 @@ data class UserAdding(
 )
 
 data class UserUpdating(
-    val status: UiState<Boolean> = UiState.Idle
+    val status: UiState<Boolean> = UiState.Idle,
+    val name: String = "",
+    val nameError: String = ""
 )
 
 data class UserState(
@@ -60,7 +62,13 @@ class UserViewModel(
         }
     }
 
-    fun updateUserName(name: String) = viewModelScope.launch(dispatcher) {
+    fun updateUserName() = viewModelScope.launch(dispatcher) {
+        val name = userState.value.updating.name
+        if (name.trim().isEmpty()) {
+            _userState.update { it.copy(updating = it.updating.copy(nameError = "Name is required")) }
+            return@launch
+        }
+
         changeUpdatingStatus(UiState.Loading)
 
         val res = userRepository.updateUserName(name)
@@ -70,6 +78,12 @@ class UserViewModel(
                 "Failure to set user"
             )
         )
+    }
+
+    fun setUpdatingUserName(name: String) {
+        _userState.update {
+            it.copy(updating = it.updating.copy(name = name, nameError = ""))
+        }
     }
 
     fun resetUpdatingStatus() {

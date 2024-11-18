@@ -20,6 +20,7 @@ import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.ScreenDimensions
 import com.joohnq.moodapp.view.components.IconContinueButton
 import com.joohnq.moodapp.view.components.MoodFace
@@ -40,7 +41,7 @@ import org.koin.compose.koinInject
 fun OnboardingMoodRateScreenUi(
     moodRatePadding: Int,
     selectedMood: ValueSetValue<Mood>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 1,
@@ -70,7 +71,7 @@ fun OnboardingMoodRateScreenUi(
         IconContinueButton(
             modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
             colors = ComponentColors.IconButton.ContinueButtonColors(),
-            onClick = { onAction(OnboardingAction.OnContinue) }
+            onClick = { onAction(NextAndBackAction.OnContinue) }
         )
     }
 
@@ -104,8 +105,8 @@ fun OnboardingMoodRateScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToProfessionalHelp()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToProfessionalHelp()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

@@ -11,6 +11,9 @@ class PaddingModifier {
         fun Modifier.paddingHorizontalSmall(): Modifier =
             this.padding(Dimens.Padding.HorizontalSmall)
 
+        fun Modifier.paddingHorizontalExtraExtraSmall(): Modifier =
+            this.padding(Dimens.Padding.HorizontalExtraExtraSmall)
+
         fun Modifier.paddingVerticalExtraLarge(): Modifier =
             padding(Dimens.Padding.VerticalExtraLarge)
 

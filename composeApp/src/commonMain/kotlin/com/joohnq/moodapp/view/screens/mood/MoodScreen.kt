@@ -54,7 +54,7 @@ fun MoodScreenUi(
 ) {
     SharedPanelComponent(
         isDark = true,
-        onGoBack = { onAction(MoodAction.GoBack) },
+        onGoBack = { onAction(MoodAction.OnGoBack) },
         backgroundColor = statsRecord.mood.palette.backgroundColor,
         backgroundImage = Drawables.Images.MoodBackground,
         panelTitle = Res.string.mood,
@@ -94,7 +94,7 @@ fun MoodScreenUi(
                     PreviousNextButton(
                         enabled = hasPrevious,
                         isPrevious = true,
-                        onClick = { onAction(MoodAction.Previous) },
+                        onClick = { onAction(MoodAction.OnPrevious) },
                         color = statsRecord.mood.palette.color
                     )
                     MoodFace(
@@ -104,7 +104,7 @@ fun MoodScreenUi(
                     PreviousNextButton(
                         enabled = hasNext,
                         isPrevious = false,
-                        onClick = { onAction(MoodAction.Next) },
+                        onClick = { onAction(MoodAction.OnNext) },
                         color = statsRecord.mood.palette.color
                     )
                 }
@@ -160,9 +160,9 @@ fun MoodScreen(
         statsRecords = statsState.statsRecords.getValue().reversed(),
         onAction = {
             when (it) {
-                is MoodAction.GoBack -> navigation.popBackStack()
-                is MoodAction.Next -> hasNext?.run { currentStatsRecord = this }
-                is MoodAction.Previous -> hasPrevious?.run { currentStatsRecord = this }
+                is MoodAction.OnGoBack -> navigation.popBackStack()
+                is MoodAction.OnNext -> hasNext?.run { currentStatsRecord = this }
+                is MoodAction.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
                 is MoodAction.OnAdd -> navigation.onNavigateToAddMood()
                 is MoodAction.OnSetMood -> {
                     currentStatsRecord = it.statsRecord

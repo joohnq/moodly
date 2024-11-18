@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.MedicationsSupplements
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonVertical
 import com.joohnq.moodapp.view.routes.onNavigateToOnboardingStressLevel
 import com.joohnq.moodapp.view.ui.ComponentColors
@@ -32,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingMedicationsSupplementsScreenUI(
     selectedOption: ValueSetValue<MedicationsSupplements?>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
 
@@ -80,8 +81,8 @@ fun OnboardingMedicationsSupplementsScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToOnboardingStressLevel()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToOnboardingStressLevel()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

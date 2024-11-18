@@ -52,7 +52,7 @@ fun MindfulTrackerCardRow(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -112,7 +112,7 @@ fun MindfulTrackerCardColumn(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

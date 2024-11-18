@@ -18,6 +18,7 @@ import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.User
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.state.UiState
@@ -40,7 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingExpressionAnalysisScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     desc: ValueSetValue<String>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 7,
@@ -115,7 +116,7 @@ fun OnboardingExpressionAnalysisScreen(
         snackBarState = snackBarState,
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> {
+                NextAndBackAction.OnContinue -> {
                     sleepQualityViewModel.addSleepQualityRecord(
                         SleepQualityRecord.Builder()
                             .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
@@ -132,7 +133,7 @@ fun OnboardingExpressionAnalysisScreen(
                     )
                 }
 
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

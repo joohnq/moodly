@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.view.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,4 +24,14 @@ fun Title(text: StringResource) {
         )
         VerticalSpacer(12.dp)
     }
+}
+
+@Composable
+fun SubTitle(text: String) {
+    Text(
+        text = text,
+        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+        style = TextStyles.LabelSm(),
+        color = Colors.Brown100Alpha64
+    )
 }

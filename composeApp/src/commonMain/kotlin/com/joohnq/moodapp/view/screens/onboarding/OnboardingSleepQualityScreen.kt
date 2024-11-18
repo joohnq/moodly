@@ -27,6 +27,7 @@ import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
+import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.DoubleText
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.SleepQualityThumb
@@ -46,7 +47,7 @@ import moodapp.composeapp.generated.resources.sleep_quality_title
 fun OnboardingSleepQualityScreenUI(
     sliderValue: ValueSetValue<Float>,
     selectedSleepQuality: ValueSetValue<SleepQuality>,
-    onAction: (OnboardingAction) -> Unit = {},
+    onAction: (NextAndBackAction) -> Unit = {},
 ) {
     val moods = remember { Mood.getAll().reversed() }
     val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
@@ -119,8 +120,8 @@ fun OnboardingSleepQualityScreen(
         ),
         onAction = { action ->
             when (action) {
-                OnboardingAction.OnContinue -> navigation.onNavigateToMedicationsSupplements()
-                OnboardingAction.OnGoBack -> navigation.popBackStack()
+                NextAndBackAction.OnContinue -> navigation.onNavigateToMedicationsSupplements()
+                NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
     )

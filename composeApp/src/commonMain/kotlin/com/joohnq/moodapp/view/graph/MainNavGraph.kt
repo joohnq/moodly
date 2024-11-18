@@ -35,7 +35,7 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
         FreudScoreScreen(navigation = navHostController)
     }
     composable<Screens.MoodScreen>(
-        typeMap = mapOf(typeOf<StatsRecord>() to StatsRecord.navType()),
+        typeMap = mapOf(typeOf<StatsRecord?>() to StatsRecord.navType()),
     ) { navBackStackEntry ->
         val statsRecord =
             navBackStackEntry.toRoute<Screens.MoodScreen>().statsRecord

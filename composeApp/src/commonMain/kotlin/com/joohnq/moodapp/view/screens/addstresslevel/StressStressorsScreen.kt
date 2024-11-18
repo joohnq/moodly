@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.StressStressorCircle
@@ -53,12 +54,9 @@ import org.jetbrains.compose.resources.stringResource
 fun StressStressorsScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     selectedStressors: List<Stressors>,
-    otherValue: String,
     otherValueError: String,
-    onOtherValue: (String) -> Unit = {},
-    onGoBack: () -> Unit = {},
-    onContinue: () -> Unit = {},
-    onClick: (Stressors) -> Unit = {}
+    otherValue: ValueSetValue<String>,
+    onAction: (StressStressorsAction) -> Unit = {},
 ) {
     val stressors = remember { Stressors.getAll() }
     Scaffold(
@@ -73,7 +71,10 @@ fun StressStressorsScreenUI(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(text = Res.string.add_stress_level, onGoBack = onGoBack)
+            TopBar(
+                text = Res.string.add_stress_level,
+                onGoBack = { onAction(StressStressorsAction.OnGoBack) }
+            )
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.select_stressors),
@@ -88,11 +89,11 @@ fun StressStressorsScreenUI(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                 content = {
-                    items(stressors) { stressStressor ->
+                    items(stressors) { stressor ->
                         StressStressorCircle(
-                            stressStressor = stressStressor,
-                            selected = selectedStressors.contains(stressStressor),
-                            onClick = { onClick(stressStressor) }
+                            stressStressor = stressor,
+                            selected = selectedStressors.contains(stressor),
+                            onClick = { onAction(StressStressorsAction.OnClick(stressor)) }
                         )
                     }
                 },
@@ -101,18 +102,18 @@ fun StressStressorsScreenUI(
                 TextFieldWithLabelAndDoubleBorder(
                     label = Res.string.other,
                     placeholder = Res.string.enter_your_stressor,
-                    text = otherValue,
+                    text = otherValue.value,
                     errorText = otherValueError,
                     focusedBorderColor = Colors.Green50Alpha25,
                     colors = ComponentColors.TextField.MainTextFieldColors(),
-                    onValueChange = onOtherValue,
+                    onValueChange = otherValue.setValue,
                 )
             VerticalSpacer(24.dp)
             if (selectedStressors.isNotEmpty())
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
                         .testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = onContinue
+                    onClick = { onAction(StressStressorsAction.OnContinue) }
                 )
         }
     }
@@ -145,21 +146,30 @@ fun StressStressorsScreen(
 
     StressStressorsScreenUI(
         snackBarState = snackBarState,
-        onGoBack = navigation::popBackStack,
         otherValueError = stressLevelState.adding.otherValueError,
         selectedStressors = stressLevelState.adding.stressors,
-        onContinue = {
-            if (stressLevelState.adding.stressors.any { it::class == Stressors.Other::class } && stressLevelState.adding.otherValue.isEmpty()) {
-                stressLevelViewModel.updateOtherValueError("Please type your other stressor")
-                return@StressStressorsScreenUI
-            }
+        otherValue = ValueSetValue(
+            stressLevelState.adding.otherValue,
+            stressLevelViewModel::updateOtherValue
+        ),
+        onAction = { action ->
+            when (action) {
+                is StressStressorsAction.OnGoBack -> navigation.popBackStack()
+                is StressStressorsAction.OnClick -> stressLevelViewModel.updateAddingStressStressors(
+                    action.stressor
+                )
 
-            stressLevelViewModel.updateAddingStressorOtherValue()
-            stressLevelViewModel.addStressLevelRecord()
-        },
-        onClick = stressLevelViewModel::updateAddingStressStressors,
-        onOtherValue = stressLevelViewModel::updateOtherValue,
-        otherValue = stressLevelState.adding.otherValue
+                is StressStressorsAction.OnContinue -> {
+                    if (stressLevelState.adding.stressors.any { it::class == Stressors.Other::class } && stressLevelState.adding.otherValue.isEmpty()) {
+                        stressLevelViewModel.updateOtherValueError("Please type your other stressor")
+                        return@StressStressorsScreenUI
+                    }
+
+                    stressLevelViewModel.updateAddingStressorOtherValue()
+                    stressLevelViewModel.addStressLevelRecord()
+                }
+            }
+        }
     )
 }
 
@@ -168,7 +178,7 @@ fun StressStressorsScreen(
 fun StressStressorsScreenPreview() {
     StressStressorsScreenUI(
         selectedStressors = listOf(Stressors.getAll().first(), Stressors.getAll().last()),
-        otherValue = "",
+        otherValue = ValueSetValue(""),
         otherValueError = ""
     )
 }

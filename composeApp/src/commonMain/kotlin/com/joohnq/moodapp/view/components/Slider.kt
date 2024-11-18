@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
@@ -92,7 +91,7 @@ fun SleepQualityTrack(sliderState: SliderState) {
     Box(
         modifier = Modifier
             .background(color = Colors.Brown20, shape = Dimens.Shape.Circle)
-            .height(16.dp).fillMaxWidth().padding(0.dp),
+            .height(16.dp).fillMaxWidth(),
         contentAlignment = Alignment.CenterStart
     ) {
         Box(

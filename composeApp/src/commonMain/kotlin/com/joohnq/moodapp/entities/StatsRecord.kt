@@ -29,24 +29,34 @@ data class StatsRecord(
             date = DatetimeHelper.getLocalDateTime()
         )
 
-        fun navType() = object : NavType<StatsRecord>(
-            isNullableAllowed = false,
+        fun navType() = object : NavType<StatsRecord?>(
+            isNullableAllowed = true
         ) {
             override fun get(bundle: Bundle, key: String): StatsRecord? {
-                return Json.decodeFromString(bundle.getString(key) ?: return null)
+                val jsonString = bundle.getString(key) ?: return null
+                return try {
+                    Json.decodeFromString(jsonString)
+                } catch (e: Exception) {
+                    null
+                }
             }
 
-            override fun parseValue(value: String): StatsRecord {
-                return Json.decodeFromString(UriCodec.decode(value))
+            override fun parseValue(value: String): StatsRecord? {
+                return try {
+                    Json.decodeFromString(UriCodec.decode(value))
+                } catch (e: Exception) {
+                    null
+                }
             }
 
-            override fun put(bundle: Bundle, key: String, value: StatsRecord) {
-                bundle.putString(key, Json.encodeToString(value))
+            override fun put(bundle: Bundle, key: String, value: StatsRecord?) {
+                bundle.putString(key, value?.let { Json.encodeToString(it) })
             }
 
-            override fun serializeAsValue(value: StatsRecord): String {
-                return UriCodec.encode(Json.encodeToString(value))
+            override fun serializeAsValue(value: StatsRecord?): String {
+                return UriCodec.encode(Json.encodeToString(value ?: return ""))
             }
         }
+
     }
 }

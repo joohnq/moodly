@@ -24,7 +24,7 @@ data class AddingStressLevel(
 )
 
 data class StressLevelState(
-    val items: UiState<List<StressLevelRecord>> = UiState.Idle,
+    val stressLevelRecords: UiState<List<StressLevelRecord>> = UiState.Idle,
     val adding: AddingStressLevel = AddingStressLevel(),
 )
 
@@ -37,13 +37,13 @@ class StressLevelViewModel(
 
     fun getStressLevelRecords() {
         viewModelScope.launch(dispatcher) {
-            _stressLevelState.update { it.copy(items = UiState.Loading) }
+            _stressLevelState.update { it.copy(stressLevelRecords = UiState.Loading) }
 
             try {
                 val res = stressLevelRepository.getStressLevels()
-                _stressLevelState.update { it.copy(items = UiState.Success(res)) }
+                _stressLevelState.update { it.copy(stressLevelRecords = UiState.Success(res)) }
             } catch (e: Exception) {
-                _stressLevelState.update { it.copy(items = UiState.Error(e.message.toString())) }
+                _stressLevelState.update { it.copy(stressLevelRecords = UiState.Error(e.message.toString())) }
             }
         }
     }

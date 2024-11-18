@@ -205,7 +205,7 @@ fun SleepQualityScreen(
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
 
     SleepQualityScreenUI(
-        sleepQualityRecords = sleepQualityState.items.getValue(),
+        sleepQualityRecords = sleepQualityState.sleepQualityRecords.getValue(),
         onAction = { action ->
             when (action) {
                 SleepQualityAction.OnAdd -> navigation.onNavigateToAddSleepQuality()

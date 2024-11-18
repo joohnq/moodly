@@ -29,7 +29,7 @@ data class AddingSleepQuality(
 )
 
 data class SleepQualityState(
-    val items: UiState<List<SleepQualityRecord>> = UiState.Idle,
+    val sleepQualityRecords: UiState<List<SleepQualityRecord>> = UiState.Idle,
     val adding: AddingSleepQuality = AddingSleepQuality(),
 )
 
@@ -42,12 +42,12 @@ class SleepQualityViewModel(
 
     fun getSleepQualityRecords() {
         viewModelScope.launch(dispatcher) {
-            _sleepQualityState.update { it.copy(items = UiState.Loading) }
+            _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Loading) }
             try {
                 val res = sleepQualityRepository.getSleepQualities()
-                _sleepQualityState.update { it.copy(items = UiState.Success(res)) }
+                _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Success(res)) }
             } catch (e: Exception) {
-                _sleepQualityState.update { it.copy(items = UiState.Error(e.message.toString())) }
+                _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Error(e.message.toString())) }
             }
         }
     }

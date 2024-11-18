@@ -25,7 +25,7 @@ sealed class Screens {
         @Serializable data object JournalingScreen : Screens()
     }
 
-    @Serializable data class MoodScreen(val statsRecord: StatsRecord) : Screens()
+    @Serializable data class MoodScreen(val statsRecord: StatsRecord? = null) : Screens()
     @Serializable data object HealthJournalScreen : Screens()
     @Serializable data object AddMoodScreen : Screens()
     @Serializable data object SleepQualityScreen : Screens()

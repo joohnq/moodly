@@ -112,14 +112,14 @@ fun HomeScreen(
     LaunchedEffect(
         statsState.statsRecords,
         userState.user,
-        stressLevelState.items,
-        sleepQualityState.items
+        stressLevelState.stressLevelRecords,
+        sleepQualityState.sleepQualityRecords
     ) {
         UiState.onAnyError(
             statsState.statsRecords,
             userState.user,
-            stressLevelState.items,
-            sleepQualityState.items
+            stressLevelState.stressLevelRecords,
+            sleepQualityState.sleepQualityRecords
         ) {
             scope.launch { snackBarHostState.showSnackbar(it) }
         }
@@ -129,8 +129,8 @@ fun HomeScreen(
         UiState.allIsSuccess(
             statsState.statsRecords,
             userState.user,
-            stressLevelState.items,
-            sleepQualityState.items
+            stressLevelState.stressLevelRecords,
+            sleepQualityState.sleepQualityRecords
         )
     )
         HomeScreenUi(
@@ -141,22 +141,20 @@ fun HomeScreen(
             moodTracker = statsState.statsRecords.getValue().reversed().take(3).map { it.mood },
             freudScore = statsState.freudScore,
             healthJournal = statsState.healthJournal,
-            sleepQuality = sleepQualityState.items.getValue().last().sleepQuality,
-            stressLevel = stressLevelState.items.getValue().last().stressLevel,
+            sleepQuality = sleepQualityState.sleepQualityRecords.getValue().last().sleepQuality,
+            stressLevel = stressLevelState.stressLevelRecords.getValue().last().stressLevel,
             onAction = { action ->
                 when (action) {
-                    is HomeAction.OnNavigateToFreudScore ->
+                    HomeAction.OnNavigateToFreudScore ->
                         navigation.onNavigateToFreudScore()
 
-                    is HomeAction.OnNavigateToMood ->
-                        navigation.onNavigateToMood(statsState.statsRecords.getValue().first())
+                    HomeAction.OnNavigateToMood ->
+                        navigation.onNavigateToMood()
 
-                    is HomeAction.OnNavigateToHealthJournal ->
+                    HomeAction.OnNavigateToHealthJournal ->
                         navigation.onNavigateToHealthJournal()
 
                     HomeAction.OnNavigateToMindfulJournal -> {}
-                    HomeAction.OnNavigateToMoodTracker ->
-                        navigation.onNavigateToMood(statsState.statsRecords.getValue().first())
 
                     HomeAction.OnNavigateToSleepQuality ->
                         navigation.onNavigateToSleepQuality()

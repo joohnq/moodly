@@ -6,7 +6,7 @@ import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepInfluences
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.SleepQualityRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.repository.SleepQualityRepository
 import com.joohnq.moodapp.view.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -58,11 +58,11 @@ class SleepQualityViewModel(
             changeAddingStatus(UiState.Loading)
             val res = sleepQualityRepository.addSleepQuality(
                 sleepQuality = SleepQuality.fromMood(adding.mood!!),
-                startSleeping = DatetimeHelper.formatTime(
+                startSleeping = DatetimeManager.formatTime(
                     adding.startHour,
                     adding.startMinute
                 ),
-                endSleeping = DatetimeHelper.formatTime(
+                endSleeping = DatetimeManager.formatTime(
                     adding.endHour,
                     adding.endMinute
                 ),

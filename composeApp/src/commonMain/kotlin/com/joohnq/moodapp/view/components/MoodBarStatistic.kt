@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.TextStyles
 
@@ -126,7 +126,7 @@ fun MoodBarStatistic(
                         }
                     }
                     Text(
-                        text = DatetimeHelper.formatLocalDate2(statsRecord.date.date),
+                        text = DatetimeManager.formatShortDate(statsRecord.date.date),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

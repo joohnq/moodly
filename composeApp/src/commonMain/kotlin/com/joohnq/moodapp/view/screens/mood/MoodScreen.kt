@@ -20,10 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
+import com.joohnq.moodapp.helper.StatsManager
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MoodBarStatistic
 import com.joohnq.moodapp.view.components.MoodFace
@@ -63,7 +63,7 @@ fun MoodScreenUi(
         onAdd = { onAction(MoodAction.OnAdd) },
         topBarContent = {
             TextWithBackground(
-                text = DatetimeHelper.formatLocalDateTime(statsRecord.date),
+                text = DatetimeManager.formatDateTime(statsRecord.date),
                 textColor = statsRecord.mood.palette.moodScreenMoodFaceColor,
                 backgroundColor = statsRecord.mood.palette.subColor,
             )

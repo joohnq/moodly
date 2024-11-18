@@ -23,7 +23,7 @@ sealed class SleepQuality(
     @Contextual val firstText: StringResource,
     @Contextual val secondText: StringResource,
     val level: Int,
-    val palette: SleepQualityPalette
+    @Contextual val palette: SleepQualityPalette
 ) {
     @Serializable
     data object Excellent : SleepQuality(

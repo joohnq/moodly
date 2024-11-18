@@ -1,8 +1,7 @@
-package com.joohnq.moodapp
+package com.joohnq.moodapp.helper
 
 import com.joohnq.moodapp.entities.FreudScore
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
@@ -13,15 +12,15 @@ object StatsManager {
     }
 
     fun getHealthJournal(
-        date: LocalDateTime = DatetimeHelper.getLocalDateTime(),
+        date: LocalDateTime = DatetimeManager.getCurrentDateTime(),
         statsRecords: List<StatsRecord>
     ): Map<String, List<StatsRecord>?> {
-        val monthDaysCount = DatetimeHelper.monthDaysCount(date)
+        val monthDaysCount = DatetimeManager.getMonthDaysCount(date)
         val recordsByDay = statsRecords.groupBy { it.date.date }
 
         return (1..monthDaysCount).associate { day ->
             val localDate = LocalDate(date.year, date.month, day)
-            val formattedDate = DatetimeHelper.formatLocalDate(localDate)
+            val formattedDate = DatetimeManager.formatDate(localDate)
             formattedDate to recordsByDay[localDate]
         }
     }
@@ -34,14 +33,14 @@ object StatsManager {
         statsRecords.filter { it.date < statsRecord.date }
             .maxByOrNull { it.date }
 
-    fun getMap(statsRecords: List<StatsRecord>): Map<String, List<StatsRecord>> =
+    fun getGroupByDate(statsRecords: List<StatsRecord>): Map<String, List<StatsRecord>> =
         statsRecords
             .groupBy { it.date.date }
             .map { (key, value) ->
-                DatetimeHelper.formatLocalDate(key) to value
+                DatetimeManager.formatDate(key) to value
             }
             .toMap()
 
-    fun addHalfInStartAndEnd(input: List<Double>): List<Double> =
+    fun normalizeRange(input: List<Double>): List<Double> =
         if (input.size < 8) listOf(0.0) + input + 0.0 else input
 }

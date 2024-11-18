@@ -13,9 +13,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.StatsManager
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
+import com.joohnq.moodapp.helper.StatsManager
 import com.joohnq.moodapp.mappers.items
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Dimens
@@ -26,7 +26,7 @@ fun HealthJournalComponent(
     modifier: Modifier = Modifier,
     healthJournal: Map<String, List<StatsRecord>?>
 ) {
-    val dayOfWeek = DatetimeHelper.weekDayByMonth(DatetimeHelper.getLocalDateTime())
+    val dayOfWeek = DatetimeManager.getCurrentWeekDay(DatetimeManager.getCurrentDateTime())
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(7),
@@ -60,7 +60,7 @@ fun HealthJournalComponentColorful(
     modifier: Modifier = Modifier,
     healthJournal: Map<String, List<StatsRecord>?>
 ) {
-    val dayOfWeek = DatetimeHelper.weekDayByMonth(DatetimeHelper.getLocalDateTime())
+    val dayOfWeek = DatetimeManager.getCurrentWeekDay(DatetimeManager.getCurrentDateTime())
     BoxWithConstraints {
         val boxSize = (maxWidth - 88.dp) / 7
         LazyVerticalGrid(

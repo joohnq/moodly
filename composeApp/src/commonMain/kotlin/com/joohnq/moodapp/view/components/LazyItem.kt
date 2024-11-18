@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.Stressors
 import com.joohnq.moodapp.entities.TextRadioButtonColors
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
@@ -80,8 +80,8 @@ fun MentalHealthMetricItem(
 
 @Composable
 fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit) {
-    val hourAndMinutes = remember { DatetimeHelper.hourAndMinutes(statsRecord.date) }
-    val daySection = remember { DatetimeHelper.daySection(statsRecord.date) }
+    val hourAndMinutes = remember { DatetimeManager.formatTime(statsRecord.date) }
+    val daySection = remember { DatetimeManager.getDaySection(statsRecord.date) }
 
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),

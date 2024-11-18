@@ -34,7 +34,7 @@ import com.joohnq.moodapp.entities.SleepInfluences
 import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.entities.ValueSetValueList
 import com.joohnq.moodapp.entities.ValueSetValueTyped
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.AddSleepQualityTimePicker
@@ -137,8 +137,8 @@ fun AddSleepQualityUi(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.start_sleeping_time,
-                    hour = DatetimeHelper.formatHour(startTimePickerState.value.hour),
-                    minutes = DatetimeHelper.formatHour(startTimePickerState.value.minute),
+                    hour = DatetimeManager.formatInt(startTimePickerState.value.hour),
+                    minutes = DatetimeManager.formatInt(startTimePickerState.value.minute),
                     isAfternoon = startTimePickerState.value.isAfternoon,
                     onClick = { showStartTimePickerDialog.setValue(true) }
                 )
@@ -146,8 +146,8 @@ fun AddSleepQualityUi(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.end_sleeping_time,
-                    hour = DatetimeHelper.formatHour(endTimePickerState.value.hour),
-                    minutes = DatetimeHelper.formatHour(endTimePickerState.value.minute),
+                    hour = DatetimeManager.formatInt(endTimePickerState.value.hour),
+                    minutes = DatetimeManager.formatInt(endTimePickerState.value.minute),
                     isAfternoon = endTimePickerState.value.isAfternoon,
                     onClick = { showEndTimePickerDialog.setValue(true) }
                 )

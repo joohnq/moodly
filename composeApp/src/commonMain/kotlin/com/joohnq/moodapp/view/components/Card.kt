@@ -52,7 +52,7 @@ fun MindfulTrackerCardRow(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -112,7 +112,7 @@ fun MindfulTrackerCardColumn(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -196,7 +196,6 @@ fun StressLevelCard(
         }
     }
 }
-
 
 @Composable
 fun TimePickerCard(

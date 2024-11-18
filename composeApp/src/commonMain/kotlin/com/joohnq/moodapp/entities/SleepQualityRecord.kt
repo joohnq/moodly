@@ -3,7 +3,7 @@ package com.joohnq.moodapp.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.joohnq.moodapp.helper.DatetimeHelper
+import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.model.DatabaseConstants
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
@@ -26,7 +26,7 @@ data class SleepQualityRecord(
         private var startSleeping: String = "--:--"
         private var endSleeping: String = "--:--"
         private var sleepInfluences: List<SleepInfluences> = emptyList()
-        private var date: LocalDateTime = DatetimeHelper.getLocalDateTime()
+        private var date: LocalDateTime = DatetimeManager.getCurrentDateTime()
 
         fun setSleepQuality(sleepQuality: SleepQuality) = apply { this.sleepQuality = sleepQuality }
         fun setStartSleeping(startSleeping: String) = apply { this.startSleeping = startSleeping }

@@ -54,7 +54,7 @@ fun OnboardingStressLevelScreenUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f).aspectRatio(1f),
                     text = stringResource(option.value),
-                    selected = selectedOption == option,
+                    selected = selectedOption.value == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
                     onClick = { selectedOption.setValue(option) }

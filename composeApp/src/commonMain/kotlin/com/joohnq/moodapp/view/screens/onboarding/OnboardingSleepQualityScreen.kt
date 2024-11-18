@@ -66,13 +66,10 @@ fun OnboardingSleepQualityScreenUI(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQuality ->
-                        val textColor =
-                            if (selectedSleepQuality.value == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
-
                         DoubleText(
                             firstText = sleepQuality.firstText,
                             secondText = sleepQuality.secondText,
-                            color = textColor
+                            color = if (selectedSleepQuality.value == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
                         )
                     }
                 }
@@ -81,7 +78,7 @@ fun OnboardingSleepQualityScreenUI(
                     sliderValue = sliderValue.value,
                     setSliderValue = {
                         sliderValue.setValue(it)
-                        selectedSleepQuality.setValue(SleepQuality.fromSliderValue(sliderValue.value / 25))
+                        selectedSleepQuality.setValue(SleepQuality.fromSliderValue(it))
                     },
                     thumb = { SleepQualityThumb() },
                     track = { SleepQualityTrack(it) },

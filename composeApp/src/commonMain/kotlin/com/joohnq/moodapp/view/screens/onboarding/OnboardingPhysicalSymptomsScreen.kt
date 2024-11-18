@@ -61,7 +61,7 @@ fun OnboardingPhysicalSymptomsScreenUI(
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = selectedOption == option,
+                    selected = selectedOption.value == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),

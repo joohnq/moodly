@@ -24,10 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
@@ -152,8 +150,6 @@ fun GetUserNameScreen(
     userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
 ) {
     val scope = rememberCoroutineScope()
-    var name by remember { mutableStateOf("") }
-    var nameError by remember { mutableStateOf("") }
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = remember { SnackbarHostState() }
     val userState by userViewModel.userState.collectAsState()
@@ -175,22 +171,14 @@ fun GetUserNameScreen(
     }
 
     GetUserNameScreenUI(
-        name = name,
-        nameError = nameError,
+        name = userState.updating.name,
+        nameError = userState.updating.nameError,
         snackBarState = snackBarState,
-        onValueChange = {
-            name = it
-            nameError = ""
-        },
+        onValueChange = userViewModel::setUpdatingUserName,
         onClearFocus = focusManager::clearFocus,
         onAction = {
             focusManager.clearFocus()
-            if (name.trim().isEmpty()) {
-                nameError = "Name is required"
-                return@GetUserNameScreenUI
-            }
-
-            userViewModel.updateUserName(name)
+            userViewModel.updateUserName()
         },
     )
 }

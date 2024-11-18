@@ -32,7 +32,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingMedicationsSupplementsScreenUI(
     selectedOption: ValueSetValue<MedicationsSupplements?>,
-    setSelectedOption: (MedicationsSupplements) -> Unit = {},
     onAction: (OnboardingAction) -> Unit = {},
 ) {
     val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
@@ -56,11 +55,11 @@ fun OnboardingMedicationsSupplementsScreenUI(
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = selectedOption == option,
+                    selected = selectedOption.value == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextMdBold(),
-                    onClick = { setSelectedOption(option) }
+                    onClick = { selectedOption.setValue(option) }
                 )
             }
         }

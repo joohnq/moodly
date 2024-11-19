@@ -2,7 +2,7 @@ package com.joohnq.moodapp.model.converters
 
 import androidx.room.TypeConverter
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.Stressor
 
 class StressLevelRecordConverter {
     @TypeConverter
@@ -12,8 +12,8 @@ class StressLevelRecordConverter {
     fun toStressLevel(value: Int): StressLevel = StressLevel.toValue(value)
 
     @TypeConverter
-    fun fromStressor(value: Stressors): String = Stressors.fromValue(value)
+    fun fromStressor(value: Stressor): String = Stressor.fromValue(value)
 
     @TypeConverter
-    fun toStressors(value: String): Stressors = Stressors.toValue(value)
+    fun toStressors(value: String): Stressor = Stressor.toValue(value)
 }

@@ -55,6 +55,12 @@ object TextStyles {
     )
 
     @Composable
+    fun ParagraphXs() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Medium(),
+        fontSize = 12.sp
+    )
+
+    @Composable
     fun LabelSm() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 12.sp

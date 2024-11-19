@@ -7,8 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,9 +31,14 @@ fun TextWithBackground(text: String, borderColor: Color, backgroundColor: Color,
 }
 
 @Composable
-fun TextWithBackground(text: String, backgroundColor: Color, textColor: Color) {
+fun TextWithBackground(
+    modifier: Modifier = Modifier,
+    text: String,
+    backgroundColor: Color,
+    textColor: Color
+) {
     Text(
-        text,
+        text = text,
         modifier = Modifier
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
             .padding(vertical = 9.dp, horizontal = 16.dp),
@@ -71,5 +78,22 @@ fun TextWithSpan(
         },
         lineHeight = 40.sp,
         textAlign = TextAlign.Center
+    )
+}
+
+@Composable
+fun TextEllipsis(
+    text: String,
+    style: TextStyle,
+    color: Color,
+    textAlign: TextAlign? = null
+) {
+    Text(
+        text = text,
+        maxLines = 1,
+        style = style,
+        color = color,
+        textAlign = textAlign,
+        overflow = TextOverflow.Ellipsis
     )
 }

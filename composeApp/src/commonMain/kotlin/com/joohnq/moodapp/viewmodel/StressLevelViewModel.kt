@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
-import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.Stressor
 import com.joohnq.moodapp.mappers.toggle
 import com.joohnq.moodapp.model.repository.StressLevelRepository
 import com.joohnq.moodapp.view.state.UiState
@@ -18,15 +18,32 @@ import kotlinx.coroutines.launch
 data class AddingStressLevel(
     val status: UiState<Boolean> = UiState.Idle,
     val stressLevel: StressLevel = StressLevel.One,
-    val stressors: List<Stressors> = emptyList(),
+    val stressors: List<Stressor> = emptyList(),
     val otherValue: String = "",
-    val otherValueError: String = "",
+    val otherValueError: String? = null,
+    val sliderValue: Float = 0f
 )
 
 data class StressLevelState(
     val stressLevelRecords: UiState<List<StressLevelRecord>> = UiState.Idle,
     val adding: AddingStressLevel = AddingStressLevel(),
 )
+
+sealed class StressLevelIntent {
+    data object GetStressLevelRecords : StressLevelIntent()
+    data class AddStressLevelRecord(
+        val stressLevel: StressLevel? = null,
+        val stressors: List<Stressor>? = null
+    ) : StressLevelIntent()
+
+    data class UpdateAddingStatus(val status: UiState<Boolean>) : StressLevelIntent()
+    data class UpdateAddingStressLevel(val stressLevel: StressLevel) : StressLevelIntent()
+    data class UpdateAddingStressors(val stressor: Stressor) : StressLevelIntent()
+    data class UpdateAddingOtherValue(val value: String) : StressLevelIntent()
+    data class UpdateAddingOtherValueError(val error: String?) : StressLevelIntent()
+    data class UpdateAddingSliderValue(val sliderValue: Float) : StressLevelIntent()
+    data object ResetAdding : StressLevelIntent()
+}
 
 class StressLevelViewModel(
     private val stressLevelRepository: StressLevelRepository,
@@ -35,7 +52,31 @@ class StressLevelViewModel(
     private val _stressLevelState = MutableStateFlow(StressLevelState())
     val stressLevelState: StateFlow<StressLevelState> = _stressLevelState.asStateFlow()
 
-    fun getStressLevelRecords() {
+    fun onAction(intent: StressLevelIntent) {
+        when (intent) {
+            StressLevelIntent.GetStressLevelRecords -> getStressLevelRecords()
+            is StressLevelIntent.AddStressLevelRecord -> if (intent.stressLevel != null && intent.stressors != null) addStressLevelRecord(
+                stressLevel = intent.stressLevel,
+                stressors = intent.stressors
+            ) else addStressLevelRecord()
+
+            is StressLevelIntent.UpdateAddingStatus -> updateAddingStatus(intent.status)
+            is StressLevelIntent.UpdateAddingOtherValue -> updateAddingOtherValue(intent.value)
+            is StressLevelIntent.UpdateAddingOtherValueError -> updateAddingOtherValueError(intent.error)
+            is StressLevelIntent.UpdateAddingStressLevel -> updateAddingStressLevel(intent.stressLevel)
+            is StressLevelIntent.UpdateAddingStressors -> updateAddingStressStressors(intent.stressor)
+            is StressLevelIntent.UpdateAddingSliderValue -> updateAddingSliderValue(intent.sliderValue)
+            is StressLevelIntent.ResetAdding -> resetAdding()
+        }
+    }
+
+    private fun updateAddingSliderValue(value: Float) {
+        _stressLevelState.update {
+            it.copy(adding = it.adding.copy(sliderValue = value))
+        }
+    }
+
+    private fun getStressLevelRecords() =
         viewModelScope.launch(dispatcher) {
             _stressLevelState.update { it.copy(stressLevelRecords = UiState.Loading) }
 
@@ -46,11 +87,10 @@ class StressLevelViewModel(
                 _stressLevelState.update { it.copy(stressLevelRecords = UiState.Error(e.message.toString())) }
             }
         }
-    }
 
-    fun addStressLevelRecord() =
+    private fun addStressLevelRecord() =
         viewModelScope.launch(dispatcher) {
-            changeAddingStatus(UiState.Loading)
+            updateAddingStatus(UiState.Loading)
 
             val value = stressLevelState.value
             val res =
@@ -60,47 +100,36 @@ class StressLevelViewModel(
                 )
 
 
-            changeAddingStatus(
+            updateAddingStatus(
                 if (res) UiState.Success(true) else UiState.Error(
                     "Fail to add stress level record"
                 )
             )
         }
 
-    fun addStressLevelRecord(
+    private fun addStressLevelRecord(
         stressLevel: StressLevel,
-        stressors: List<Stressors> = listOf(Stressors.Other())
-    ) =
-        viewModelScope.launch(dispatcher) {
-            changeAddingStatus(UiState.Loading)
+        stressors: List<Stressor> = listOf(Stressor.Other())
+    ) = viewModelScope.launch(dispatcher) {
+        updateAddingStatus(UiState.Loading)
 
-            val res =
-                stressLevelRepository.addStressLevel(stressLevel, stressors)
+        val res =
+            stressLevelRepository.addStressLevel(stressLevel, stressors)
 
-            changeAddingStatus(
-                if (res) UiState.Success(true) else UiState.Error(
-                    "Fail to add stress level record"
-                )
+        updateAddingStatus(
+            if (res) UiState.Success(true) else UiState.Error(
+                "Fail to add stress level record"
             )
-        }
+        )
+    }
 
-    fun updateAddingStressLevel(stressLevel: StressLevel) {
+    private fun updateAddingStressLevel(stressLevel: StressLevel) {
         _stressLevelState.update {
             it.copy(adding = it.adding.copy(stressLevel = stressLevel))
         }
     }
 
-    fun updateAddingStressorOtherValue() {
-        _stressLevelState.update { state ->
-            val updatedStressors = state.adding.stressors.map { stressor ->
-                if (stressor is Stressors.Other) stressor.copy(other = stressLevelState.value.adding.otherValue) else stressor
-            }
-
-            state.copy(adding = state.adding.copy(stressors = updatedStressors))
-        }
-    }
-
-    fun updateAddingStressStressors(stressor: Stressors) {
+    private fun updateAddingStressStressors(stressor: Stressor) {
         val list = stressLevelState.value.adding.stressors
 
         _stressLevelState.update {
@@ -112,8 +141,7 @@ class StressLevelViewModel(
         }
     }
 
-
-    fun updateOtherValue(otherValue: String) {
+    private fun updateAddingOtherValue(otherValue: String) {
         _stressLevelState.update {
             it.copy(
                 adding = it.adding.copy(
@@ -123,7 +151,7 @@ class StressLevelViewModel(
         }
     }
 
-    fun updateOtherValueError(otherValueError: String) {
+    private fun updateAddingOtherValueError(otherValueError: String?) {
         _stressLevelState.update {
             it.copy(
                 adding = it.adding.copy(
@@ -133,7 +161,7 @@ class StressLevelViewModel(
         }
     }
 
-    fun resetAddingStressLevel() {
+    private fun resetAdding() {
         _stressLevelState.update {
             it.copy(
                 adding = AddingStressLevel(),
@@ -141,8 +169,7 @@ class StressLevelViewModel(
         }
     }
 
-
-    private fun changeAddingStatus(status: UiState<Boolean>) {
+    private fun updateAddingStatus(status: UiState<Boolean>) {
         _stressLevelState.update { it.copy(adding = it.adding.copy(status = status)) }
     }
 }

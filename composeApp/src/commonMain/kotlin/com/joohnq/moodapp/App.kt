@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.view.graph.AppNavigation
+import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
@@ -23,7 +24,7 @@ fun App() {
 
         SideEffect {
             userPreferenceViewModel.onAction(UserPreferenceIntent.AddUserPreferences)
-            userViewModel.initUser()
+            userViewModel.onAction(UserIntent.InitUser)
         }
 
         MaterialTheme { AppNavigation() }

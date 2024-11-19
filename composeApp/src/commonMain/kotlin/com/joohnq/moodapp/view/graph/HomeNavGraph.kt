@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.view.components.BottomNavigation
+import com.joohnq.moodapp.view.routes.onNavigateToAddJournalingScreen
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToRoute
 import com.joohnq.moodapp.view.screens.Screens
@@ -58,7 +59,13 @@ fun HomeNavGraph(navHostController: NavHostController) {
 
         homeNavController.BottomNavigation(
             onNavigateToRoute = homeNavController::onNavigateToRoute,
-            onNavigateToAddMood = navHostController::onNavigateToAddMood
+            onNavigateToAdd = { screen ->
+                if (screen == Screens.HomeGraph.HomeScreen) {
+                    navHostController.onNavigateToAddMood()
+                } else if (screen == Screens.HomeGraph.JournalingScreen) {
+                    navHostController.onNavigateToAddJournalingScreen()
+                }
+            }
         )
     }
 }

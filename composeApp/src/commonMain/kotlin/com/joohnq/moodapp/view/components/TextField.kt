@@ -67,13 +67,14 @@ fun TextFieldWithLabelAndDoubleBorder(
     label: StringResource,
     placeholder: StringResource,
     text: String,
-    errorText: String,
+    errorText: String?,
     colors: TextFieldColors,
     leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     focusedBorderColor: Color,
     onValueChange: (String) -> Unit,
 ) {
-    val isError = errorText.isNotEmpty()
+    val isError = errorText != null
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
 
@@ -106,24 +107,18 @@ fun TextFieldWithLabelAndDoubleBorder(
                 )
                 .padding(4.dp)
         ) {
-            OutlinedTextField(
-                value = text,
-                isError = errorText.isNotEmpty(),
-                onValueChange = onValueChange,
+            CustomOutlinedTextField(
+                text = text,
+                placeholder = placeholder,
+                errorText = errorText,
+                colors = colors,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
                 modifier = modifier.fillMaxWidth().height(56.dp)
                     .onFocusChanged { focusState ->
                         isFocused = focusState.isFocused
                     }.focusRequester(focusRequester),
-                shape = Dimens.Shape.Circle,
-                placeholder = {
-                    Text(
-                        text = stringResource(placeholder),
-                        style = TextStyles.TextMdBold()
-                    )
-                },
-                colors = colors,
-                textStyle = TextStyles.TextMdBold(),
-                leadingIcon = leadingIcon
+                onValueChange = onValueChange,
             )
         }
         if (isError) {
@@ -148,7 +143,7 @@ fun TextFieldWithLabelAndDoubleBorder(
                     )
                     HorizontalSpacer(10.dp)
                     Text(
-                        text = errorText,
+                        text = errorText.toString(),
                         style = TextStyles.TextXsExtraBold(),
                         color = Colors.Orange40
                     )
@@ -156,4 +151,34 @@ fun TextFieldWithLabelAndDoubleBorder(
             }
         }
     }
+}
+
+@Composable
+fun CustomOutlinedTextField(
+    text: String,
+    placeholder: StringResource,
+    errorText: String?,
+    colors: TextFieldColors,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit,
+) {
+    OutlinedTextField(
+        value = text,
+        isError = errorText != null,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        shape = Dimens.Shape.Circle,
+        placeholder = {
+            Text(
+                text = stringResource(placeholder),
+                style = TextStyles.TextMdBold()
+            )
+        },
+        trailingIcon = trailingIcon,
+        colors = colors,
+        textStyle = TextStyles.TextMdBold(),
+        leadingIcon = leadingIcon
+    )
 }

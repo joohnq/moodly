@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.AddMoodRadioGroup
@@ -33,6 +32,7 @@ import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.StatsIntent
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import moodapp.composeapp.generated.resources.Res
@@ -45,11 +45,12 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddMoodScreenUi(
     username: String,
-    selectedMood: ValueSetValue<Mood>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    selectedMood: Mood,
+    onAction: (StatsIntent) -> Unit = {},
+    onNavigation: (NextAndBackAction) -> Unit = {},
 ) {
     val moods by remember { mutableStateOf(Mood.getAll()) }
-    val moodIndex = moods.indexOf(selectedMood.value)
+    val moodIndex = moods.indexOf(selectedMood)
 
     Scaffold(
         containerColor = Colors.Brown10,
@@ -57,14 +58,14 @@ fun AddMoodScreenUi(
     ) { padding ->
         Column(
             Modifier.fillMaxSize()
-                .background(color = selectedMood.value.palette.moodScreenBackgroundColor)
+                .background(color = selectedMood.palette.moodScreenBackgroundColor)
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
             TopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { onAction(NextAndBackAction.OnGoBack) }
+                onGoBack = { onNavigation(NextAndBackAction.OnGoBack) }
             )
             VerticalSpacer(50.dp)
             Column(
@@ -86,13 +87,13 @@ fun AddMoodScreenUi(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    mood = selectedMood.value,
-                    backgroundColor = selectedMood.value.palette.moodScreenMoodFaceBackgroundColor,
-                    color = selectedMood.value.palette.moodScreenMoodFaceColor
+                    mood = selectedMood,
+                    backgroundColor = selectedMood.palette.moodScreenMoodFaceBackgroundColor,
+                    color = selectedMood.palette.moodScreenMoodFaceColor
                 )
                 VerticalSpacer(48.dp)
                 Text(
-                    text = stringResource(selectedMood.value.text),
+                    text = stringResource(selectedMood.text),
                     style = TextStyles.Text2xlSemiBold(),
                     color = Colors.White,
                     textAlign = TextAlign.Center
@@ -102,14 +103,14 @@ fun AddMoodScreenUi(
                 AddMoodRadioGroup(
                     moodsSize = moods.size,
                     moodIndex = moodIndex,
-                    selectedMood = selectedMood.value,
-                    setSelectedMood = { selectedMood.setValue(moods[it]) }
+                    selectedMood = selectedMood,
+                    setSelectedMood = { onAction(StatsIntent.UpdateAddingStatsRecordMood(moods[it])) }
                 )
                 VerticalSpacer(40.dp)
                 ButtonTextAndCheck(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.set_mood,
-                    onClick = { onAction(NextAndBackAction.OnContinue) }
+                    onClick = { onNavigation(NextAndBackAction.OnContinue) }
                 )
             }
         }
@@ -127,11 +128,9 @@ fun AddMoodScreen(
 
     AddMoodScreenUi(
         username = userState.user.getValue().name,
-        selectedMood = ValueSetValue(
-            statsState.adding.mood,
-            statsViewModel::updateAddingStatsRecordMood
-        ),
-        onAction = { action ->
+        selectedMood = statsState.adding.mood,
+        onAction = statsViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
                 NextAndBackAction.OnContinue -> navigation.onNavigateToExpressionAnalysis()
@@ -145,7 +144,7 @@ fun AddMoodScreen(
 fun AddMoodScreenPreview() {
     AddMoodScreenUi(
         username = "Henrique",
-        selectedMood = ValueSetValue(Mood.Neutral),
+        selectedMood = Mood.Neutral,
     )
 }
 

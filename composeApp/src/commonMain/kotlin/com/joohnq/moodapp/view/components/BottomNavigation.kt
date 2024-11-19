@@ -26,6 +26,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.joohnq.moodapp.entities.BottomScreens
 import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.screens.toRoute
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
@@ -35,7 +36,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NavController.BottomNavigation(
-    onNavigateToAddMood: () -> Unit,
+    onNavigateToAdd: (Screens) -> Unit,
     onNavigateToRoute: (Screens) -> Unit
 ) {
     val navBackStackEntry by currentBackStackEntryAsState()
@@ -88,7 +89,10 @@ fun NavController.BottomNavigation(
                 with(BottomScreens.Add) {
                     Button(
                         contentPadding = PaddingValues(0.dp),
-                        onClick = onNavigateToAddMood,
+                        onClick = {
+                            onNavigateToAdd(currentDestination.route.toRoute())
+                            println("Oiiiiii" + currentDestination.route)
+                        },
                         modifier = Modifier.size(64.dp)
                             .background(color = Colors.Green50, shape = Dimens.Shape.Circle),
                         colors = ComponentColors.Button.BottomNavigationAddButtonColors()

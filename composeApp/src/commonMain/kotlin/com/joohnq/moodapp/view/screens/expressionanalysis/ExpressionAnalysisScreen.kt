@@ -24,7 +24,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.ContinueButton
@@ -36,6 +35,7 @@ import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.StatsIntent
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
@@ -46,8 +46,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ExpressionAnalysisScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    desc: ValueSetValue<String>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    description: String,
+    onAction: (StatsIntent) -> Unit = {},
+    onNavigation: (NextAndBackAction) -> Unit = {},
 ) {
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarState) },
@@ -59,7 +60,7 @@ fun ExpressionAnalysisScreenUI(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(onGoBack = { onAction(NextAndBackAction.OnGoBack) })
+            TopBar(onGoBack = { onNavigation(NextAndBackAction.OnGoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -74,14 +75,14 @@ fun ExpressionAnalysisScreenUI(
                 textAlign = TextAlign.Center
             )
             ExpressionAnalysisTextField(
-                text = desc.value,
-                onValueChange = desc.setValue
+                text = description,
+                onValueChange = { onAction(StatsIntent.UpdateAddingStatsRecordDescription(it)) }
             )
             VerticalSpacer(24.dp)
-            if (desc.value.isNotEmpty())
+            if (description.isNotEmpty())
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = { onAction(NextAndBackAction.OnContinue) }
+                    onClick = { onNavigation(NextAndBackAction.OnContinue) }
                 )
         }
     }
@@ -101,20 +102,18 @@ fun ExpressionAnalysisScreen(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
                 navigation.onNavigateToHomeGraph()
-                statsViewModel.resetAddingStatsRecord()
+                statsViewModel.onAction(StatsIntent.ResetAdding)
             },
         )
     }
 
     ExpressionAnalysisScreenUI(
         snackBarState = snackBarState,
-        desc = ValueSetValue(
-            statsState.adding.description,
-            statsViewModel::updateAddingStatsRecordDescription
-        ),
-        onAction = { action ->
+        description = statsState.adding.description,
+        onAction = statsViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
-                NextAndBackAction.OnContinue -> statsViewModel.addStatsRecord()
+                NextAndBackAction.OnContinue -> statsViewModel.onAction(StatsIntent.AddStatsRecord())
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }
@@ -125,6 +124,6 @@ fun ExpressionAnalysisScreen(
 @Composable
 fun ExpressionAnalysisScreenPreview() {
     ExpressionAnalysisScreenUI(
-        desc = ValueSetValue("")
+        description = "Description"
     )
 }

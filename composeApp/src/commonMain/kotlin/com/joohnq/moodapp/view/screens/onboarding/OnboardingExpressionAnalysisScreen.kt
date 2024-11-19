@@ -16,7 +16,6 @@ import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.User
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
@@ -24,10 +23,15 @@ import com.joohnq.moodapp.view.routes.onNavigateToGetUserNameScreen
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.StatsIntent
 import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.viewmodel.StressLevelIntent
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
+import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
@@ -40,15 +44,16 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingExpressionAnalysisScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
-    desc: ValueSetValue<String>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    desc: String,
+    onNavigation: (NextAndBackAction) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {}
 ) {
     OnboardingBaseComponent(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
-        isContinueButtonVisible = desc.value.isNotEmpty(),
-        onAction = onAction
+        isContinueButtonVisible = desc.isNotEmpty(),
+        onAction = onNavigation
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),
@@ -58,8 +63,8 @@ fun OnboardingExpressionAnalysisScreenUI(
         )
         ExpressionAnalysisTextField(
             modifier = Modifier.testTag(TestConstants.TEXT_INPUT),
-            text = desc.value,
-            onValueChange = desc.setValue
+            text = desc,
+            onValueChange = { onAction(OnboardingIntent.UpdateStatsRecordDescription(it)) }
         )
     }
 }
@@ -95,11 +100,11 @@ fun OnboardingExpressionAnalysisScreen(
             userState.updating.status,
             onAllSuccess = {
                 userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
-                sleepQualityViewModel.resetAddingStatus()
-                stressLevelViewModel.resetAddingStressLevel()
-                statsViewModel.resetAddingStatsRecord()
-                userViewModel.resetUpdatingStatus()
-                onboardingViewModel.resetStatsRecord()
+                sleepQualityViewModel.onAction(SleepQualityIntent.ResetAdding)
+                stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
+                statsViewModel.onAction(StatsIntent.ResetAdding)
+                userViewModel.onAction(UserIntent.ResetUpdating)
+                onboardingViewModel.onAction(OnboardingIntent.ResetStatsRecord)
                 navigation.onNavigateToGetUserNameScreen()
             },
             onAnyHasError = {
@@ -109,26 +114,33 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     OnboardingExpressionAnalysisScreenUI(
-        desc = ValueSetValue(
-            onboardingState.statsRecord.description,
-            onboardingViewModel::updateStatsRecordDescription
-        ),
+        desc = onboardingState.statsRecord.description,
         snackBarState = snackBarState,
-        onAction = { action ->
+        onAction = onboardingViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> {
-                    sleepQualityViewModel.addSleepQualityRecord(
-                        SleepQualityRecord.Builder()
-                            .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
-                            .build()
+                    sleepQualityViewModel.onAction(
+                        SleepQualityIntent.AddSleepQualityRecord(
+                            SleepQualityRecord.Builder()
+                                .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
+                                .build()
+                        )
                     )
-                    stressLevelViewModel.addStressLevelRecord(onboardingState.stressLevel)
-                    statsViewModel.addStatsRecord(onboardingState.statsRecord)
-                    userViewModel.updateUser(
-                        User.init().copy(
-                            physicalSymptoms = onboardingState.physicalSymptoms!!,
-                            medicationsSupplements = onboardingState.medicationsSupplements!!,
-                            soughtHelp = onboardingState.soughtHelp!!
+                    stressLevelViewModel.onAction(
+                        StressLevelIntent.AddStressLevelRecord(
+                            onboardingState.stressLevel,
+                            emptyList()
+                        )
+                    )
+                    statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.statsRecord))
+                    userViewModel.onAction(
+                        UserIntent.UpdateUser(
+                            User.init().copy(
+                                physicalSymptoms = onboardingState.physicalSymptoms!!,
+                                medicationsSupplements = onboardingState.medicationsSupplements!!,
+                                soughtHelp = onboardingState.soughtHelp!!
+                            )
                         )
                     )
                 }
@@ -143,6 +155,6 @@ fun OnboardingExpressionAnalysisScreen(
 @Composable
 fun OnboardingExpressionAnalysisScreenUIPreview() {
     OnboardingExpressionAnalysisScreenUI(
-        desc = ValueSetValue(""),
+        desc = "Desc",
     )
 }

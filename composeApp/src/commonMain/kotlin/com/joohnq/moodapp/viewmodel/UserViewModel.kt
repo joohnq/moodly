@@ -18,7 +18,7 @@ data class UserAdding(
 data class UserUpdating(
     val status: UiState<Boolean> = UiState.Idle,
     val name: String = "",
-    val nameError: String = ""
+    val nameError: String? = null
 )
 
 data class UserState(
@@ -27,6 +27,15 @@ data class UserState(
     val updating: UserUpdating = UserUpdating()
 )
 
+sealed class UserIntent {
+    data object InitUser : UserIntent()
+    data object GetUser : UserIntent()
+    data class UpdateUpdatingUserName(val name: String) : UserIntent()
+    data class UpdateUser(val user: User) : UserIntent()
+    data object UpdateUserName : UserIntent()
+    data object ResetUpdating : UserIntent()
+}
+
 class UserViewModel(
     private val userRepository: UserRepository,
     private val dispatcher: CoroutineDispatcher
@@ -34,11 +43,22 @@ class UserViewModel(
     private val _userState: MutableStateFlow<UserState> = MutableStateFlow(UserState())
     val userState: StateFlow<UserState> = _userState
 
-    fun initUser() = viewModelScope.launch(dispatcher) {
+    fun onAction(intent: UserIntent) {
+        when (intent) {
+            is UserIntent.InitUser -> initUser()
+            is UserIntent.GetUser -> getUser()
+            is UserIntent.UpdateUser -> updateUser(intent.user)
+            is UserIntent.UpdateUserName -> updateUserName()
+            UserIntent.ResetUpdating -> resetUpdating()
+            is UserIntent.UpdateUpdatingUserName -> updateUpdatingUserName(intent.name)
+        }
+    }
+
+    private fun initUser() = viewModelScope.launch(dispatcher) {
         userRepository.initUser()
     }
 
-    fun updateUser(user: User) = viewModelScope.launch(dispatcher) {
+    private fun updateUser(user: User) = viewModelScope.launch(dispatcher) {
         changeUpdatingStatus(UiState.Loading)
 
         val res = userRepository.updateUser(user)
@@ -50,7 +70,7 @@ class UserViewModel(
         )
     }
 
-    fun getUser() = viewModelScope.launch(dispatcher)
+    private fun getUser() = viewModelScope.launch(dispatcher)
     {
         _userState.update { it.copy(user = UiState.Loading) }
 
@@ -62,7 +82,7 @@ class UserViewModel(
         }
     }
 
-    fun updateUserName() = viewModelScope.launch(dispatcher) {
+    private fun updateUserName() = viewModelScope.launch(dispatcher) {
         val name = userState.value.updating.name
         if (name.trim().isEmpty()) {
             _userState.update { it.copy(updating = it.updating.copy(nameError = "Name is required")) }
@@ -80,13 +100,13 @@ class UserViewModel(
         )
     }
 
-    fun setUpdatingUserName(name: String) {
+    private fun updateUpdatingUserName(name: String) {
         _userState.update {
-            it.copy(updating = it.updating.copy(name = name, nameError = ""))
+            it.copy(updating = it.updating.copy(name = name, nameError = null))
         }
     }
 
-    fun resetUpdatingStatus() {
+    private fun resetUpdating() {
         _userState.update { it.copy(updating = UserUpdating()) }
     }
 

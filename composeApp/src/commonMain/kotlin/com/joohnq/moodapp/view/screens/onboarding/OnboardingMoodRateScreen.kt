@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.constants.TestConstants
 import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.ScreenDimensions
@@ -30,6 +29,7 @@ import com.joohnq.moodapp.view.routes.onNavigateToProfessionalHelp
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
@@ -40,19 +40,20 @@ import org.koin.compose.koinInject
 @Composable
 fun OnboardingMoodRateScreenUi(
     moodRatePadding: Int,
-    selectedMood: ValueSetValue<Mood>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    selectedMood: Mood,
+    onNavigation: (NextAndBackAction) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {}
 ) {
     OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onAction = onAction
+        onAction = onNavigation
     ) {
         Text(
             text = stringResource(
                 Res.string.mood_rate_desc,
-                stringResource(selectedMood.value.text)
+                stringResource(selectedMood.text)
             ),
             style = TextStyles.TextXlSemiBold(),
             color = Colors.Brown100Alpha64,
@@ -60,7 +61,7 @@ fun OnboardingMoodRateScreenUi(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            mood = selectedMood.value,
+            mood = selectedMood,
         )
         VerticalSpacer(24.dp)
     }
@@ -71,7 +72,7 @@ fun OnboardingMoodRateScreenUi(
         IconContinueButton(
             modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON),
             colors = ComponentColors.IconButton.ContinueButtonColors(),
-            onClick = { onAction(NextAndBackAction.OnContinue) }
+            onClick = { onNavigation(NextAndBackAction.OnContinue) }
         )
     }
 
@@ -84,7 +85,9 @@ fun OnboardingMoodRateScreenUi(
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            RouletteMoods(paddingBottom = moodRatePadding, setSelectedMood = selectedMood.setValue)
+            RouletteMoods(
+                paddingBottom = moodRatePadding,
+                setSelectedMood = { onAction(OnboardingIntent.UpdateMood(it)) })
         }
     }
 }
@@ -99,11 +102,9 @@ fun OnboardingMoodRateScreen(
 
     OnboardingMoodRateScreenUi(
         moodRatePadding = screenDimensions.moodRatePadding,
-        selectedMood = ValueSetValue(
-            onboardingState.statsRecord.mood,
-            onboardingViewModel::updateMood
-        ),
-        onAction = { action ->
+        selectedMood = onboardingState.statsRecord.mood,
+        onAction = onboardingViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> navigation.onNavigateToProfessionalHelp()
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
@@ -117,6 +118,6 @@ fun OnboardingMoodRateScreen(
 fun OnboardingMoodRateScreenPreview() {
     OnboardingMoodRateScreenUi(
         moodRatePadding = 0,
-        selectedMood = ValueSetValue(Mood.Neutral)
+        selectedMood = Mood.Neutral
     )
 }

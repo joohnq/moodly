@@ -35,5 +35,38 @@ sealed class Screens {
     @Serializable data object AddStressLevelScreen : Screens()
     @Serializable data object StressStressorsScreen : Screens()
     @Serializable data object AddSleepQualityScreen : Screens()
+    @Serializable data object AddJournalingScreen : Screens()
+
+    companion object {
+        fun getAll(): List<Screens> =
+            listOf(
+                OnboardingGraph.ExpressionAnalysisScreen,
+                OnboardingGraph.MedicationsSupplementsScreen,
+                OnboardingGraph.MoodRateScreen,
+                OnboardingGraph.PhysicalSymptomsScreen,
+                OnboardingGraph.ProfessionalHelpScreen,
+                OnboardingGraph.SleepQualityScreen,
+                OnboardingGraph.StressLevelScreen,
+                LoadingScreen,
+                WelcomeScreen,
+                GetUserNameScreen,
+                HomeGraph.HomeScreen,
+                HomeGraph.JournalingScreen,
+                MoodScreen(null),
+                HealthJournalScreen,
+                AddMoodScreen,
+                SleepQualityScreen,
+                StressLevelScreen,
+                FreudScoreScreen,
+                ExpressionAnalysisScreen,
+                AddStressLevelScreen,
+                StressStressorsScreen,
+                AddSleepQualityScreen
+            )
+    }
 }
 
+fun String?.toRoute(): Screens {
+    val list = Screens.getAll()
+    return list.find { it::class.qualifiedName == this } ?: throw IllegalArgumentException()
+}

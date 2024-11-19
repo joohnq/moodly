@@ -105,6 +105,10 @@ fun NavController.onNavigateToAddSleepQuality() {
     navigate(Screens.AddSleepQualityScreen)
 }
 
+fun NavController.onNavigateToAddJournalingScreen() {
+    navigate(Screens.AddJournalingScreen)
+}
+
 fun NavController.onNavigateToAddMood() {
     navigate(Screens.AddMoodScreen) {
         popUpTo(graph.findStartDestination().id) {

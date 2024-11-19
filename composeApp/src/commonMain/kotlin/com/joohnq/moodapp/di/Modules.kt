@@ -3,11 +3,14 @@ package com.joohnq.moodapp.di
 import androidx.room.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.joohnq.moodapp.model.MyDatabase
+import com.joohnq.moodapp.model.dao.HealthJournalRecordDAO
 import com.joohnq.moodapp.model.dao.SleepQualityRecordDAO
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.dao.StressLevelRecordDAO
 import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
+import com.joohnq.moodapp.model.repository.HealthJournalRepository
+import com.joohnq.moodapp.model.repository.HealthJournalRepositoryImpl
 import com.joohnq.moodapp.model.repository.SleepQualityRepository
 import com.joohnq.moodapp.model.repository.SleepQualityRepositoryImpl
 import com.joohnq.moodapp.model.repository.StatsRepository
@@ -38,6 +41,7 @@ val sharedModule = module {
     singleOf(::StressLevelRepositoryImpl) bind StressLevelRepository::class
     singleOf(::SleepQualityRepositoryImpl) bind SleepQualityRepository::class
     singleOf(::StatsRepositoryImpl) bind StatsRepository::class
+    singleOf(::HealthJournalRepositoryImpl) bind HealthJournalRepository::class
     single<MyDatabase> {
         get<RoomDatabase.Builder<MyDatabase>>()
             .setDriver(get<BundledSQLiteDriver>())
@@ -58,5 +62,8 @@ val sharedModule = module {
     }
     single<SleepQualityRecordDAO> {
         get<MyDatabase>().sleepQualityRecordDAO()
+    }
+    single<HealthJournalRecordDAO> {
+        get<MyDatabase>().healthJournalRecordDAO()
     }
 }

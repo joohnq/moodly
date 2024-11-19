@@ -16,33 +16,33 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Serializable
-sealed class Stressors(
+sealed class Stressor(
     @Contextual val text: StringResource,
     val id: String
 ) {
     @Serializable
-    data object Work : Stressors(text = Res.string.work, id = WORK)
+    data object Work : Stressor(text = Res.string.work, id = WORK)
 
     @Serializable
-    data object Relationship : Stressors(text = Res.string.relationship, id = RELATIONSHIP)
+    data object Relationship : Stressor(text = Res.string.relationship, id = RELATIONSHIP)
 
     @Serializable
-    data object Kids : Stressors(text = Res.string.kids, id = KIDS)
+    data object Kids : Stressor(text = Res.string.kids, id = KIDS)
 
     @Serializable
-    data object Life : Stressors(text = Res.string.life, id = LIFE)
+    data object Life : Stressor(text = Res.string.life, id = LIFE)
 
     @Serializable
-    data object Finances : Stressors(text = Res.string.finances, id = FINANCES)
+    data object Finances : Stressor(text = Res.string.finances, id = FINANCES)
 
     @Serializable
-    data object Loneliness : Stressors(text = Res.string.loneliness, id = LONELINESS)
+    data object Loneliness : Stressor(text = Res.string.loneliness, id = LONELINESS)
 
     @Serializable
-    data object InPeace : Stressors(text = Res.string.in_peace, id = IN_PEACE)
+    data object InPeace : Stressor(text = Res.string.in_peace, id = IN_PEACE)
 
     @Serializable
-    data class Other(val other: String = "") : Stressors(text = Res.string.other, id = other)
+    data class Other(val other: String = "") : Stressor(text = Res.string.other, id = other)
 
     companion object {
         private const val WORK = "0"
@@ -53,7 +53,7 @@ sealed class Stressors(
         private const val LONELINESS = "5"
         private const val IN_PEACE = "7"
 
-        fun toValue(src: String): Stressors = when (src) {
+        fun toValue(src: String): Stressor = when (src) {
             WORK -> Work
             RELATIONSHIP -> Relationship
             KIDS -> Kids
@@ -64,12 +64,12 @@ sealed class Stressors(
             else -> Other(src)
         }
 
-        fun fromValue(stressors: Stressors?): String = stressors?.id ?: ""
+        fun fromValue(stressor: Stressor?): String = stressor?.id ?: ""
 
-        fun getAll(): List<Stressors> =
+        fun getAll(): List<Stressor> =
             listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other())
 
-        @Composable fun getText(stressors: List<Stressors>): String =
+        @Composable fun getText(stressors: List<Stressor>): String =
             stressors.map { stressor ->
                 if (stressor is Other) {
                     stressor.id.replaceFirstChar { it.uppercase() }

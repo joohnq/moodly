@@ -46,6 +46,7 @@ import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
@@ -61,10 +62,10 @@ import org.jetbrains.compose.resources.stringResource
 fun GetUserNameScreenUI(
     snackBarState: SnackbarHostState = remember { SnackbarHostState() },
     name: String,
-    nameError: String,
-    onValueChange: (String) -> Unit,
-    onAction: () -> Unit,
-    onClearFocus: () -> Unit,
+    nameError: String?,
+    onContinue: () -> Unit = {},
+    onClearFocus: () -> Unit = {},
+    onAction: (UserIntent) -> Unit = {}
 ) {
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
         Box(
@@ -130,13 +131,13 @@ fun GetUserNameScreenUI(
                             )
                         },
                         colors = ComponentColors.TextField.MainTextFieldColors(),
-                        onValueChange = onValueChange,
+                        onValueChange = { onAction(UserIntent.UpdateUpdatingUserName(it)) },
                     )
                     VerticalSpacer(24.dp)
                 }
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                    onClick = onAction
+                    onClick = onContinue
                 )
             }
         }
@@ -174,11 +175,11 @@ fun GetUserNameScreen(
         name = userState.updating.name,
         nameError = userState.updating.nameError,
         snackBarState = snackBarState,
-        onValueChange = userViewModel::setUpdatingUserName,
         onClearFocus = focusManager::clearFocus,
-        onAction = {
+        onAction = userViewModel::onAction,
+        onContinue = {
             focusManager.clearFocus()
-            userViewModel.updateUserName()
+            userViewModel.onAction(UserIntent.UpdateUserName)
         },
     )
 }

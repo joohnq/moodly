@@ -21,7 +21,7 @@ import com.joohnq.moodapp.mappers.forEachMap
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.MentalScoreHistoryItemWithHour
 import com.joohnq.moodapp.view.components.SharedPanelComponent
-import com.joohnq.moodapp.view.components.SubTitle
+import com.joohnq.moodapp.view.components.SmallTitle
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
 import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
@@ -71,7 +71,7 @@ import org.jetbrains.compose.resources.stringResource
         content = {
             mapStatsRecords.forEachMap { key, items ->
                 item {
-                    SubTitle(text = key)
+                    SmallTitle(text = key)
                 }
                 items(items) { statsRecord ->
                     MentalScoreHistoryItemWithHour(statsRecord) {

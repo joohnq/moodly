@@ -2,6 +2,7 @@ package com.joohnq.moodapp.model
 
 object DatabaseConstants {
     const val USER_DATABASE = "User"
+    const val HEALTH_JOURNAL_RECORD_DATABASE = "HealthJournalRecord"
     const val STATS_RECORD_DATABASE = "StatsRecord"
     const val STRESS_LEVEL_RECORD_DATABASE = "StressLevelRecord"
     const val SLEEP_QUALITY_RECORD_DATABASE = "SleepQualityRecord"

@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
 import com.joohnq.moodapp.entities.StressLevelRecord
-import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.Stressor
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.StressLevelCard
@@ -87,7 +87,7 @@ fun StressLevelScreenUI(
                         modifier = Modifier.weight(1f).fillMaxHeight(),
                         icon = Drawables.Icons.WarningOutlined,
                         title = Res.string.stressor,
-                        value = Stressors.getText(stressLevelRecord.stressors),
+                        value = Stressor.getText(stressLevelRecord.stressors),
                     ) {
                         Column(
                             modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

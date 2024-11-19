@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.helper
 
 import com.joohnq.moodapp.entities.DaySection
+import com.joohnq.moodapp.entities.HealthJournalRecord
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -59,6 +60,15 @@ object DatetimeManager {
         val start = LocalDate(date.year, date.month, 1)
         val end = start.plus(1, DateTimeUnit.MONTH)
         return start.until(end, DateTimeUnit.DAY)
+    }
+
+    fun getHealthJournalsInYear(
+        healthJournals: List<HealthJournalRecord?>,
+        date: LocalDateTime = getCurrentDateTime()
+    ): String {
+        val yearsDay = getDaysInYear(date.year)
+        val days = healthJournals.associateBy { it?.let { formatDate(date.date) } }.keys.size
+        return "$days/$yearsDay"
     }
 
     fun getCurrentWeekDay(date: LocalDateTime): Int =

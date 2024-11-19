@@ -28,6 +28,14 @@ data class StatsState(
     val adding: AddingStats = AddingStats(),
 )
 
+sealed class StatsIntent {
+    data object GetStatsRecord : StatsIntent()
+    data class AddStatsRecord(val statsRecord: StatsRecord? = null) : StatsIntent()
+    data class UpdateAddingStatsRecordMood(val mood: Mood) : StatsIntent()
+    data class UpdateAddingStatsRecordDescription(val description: String) : StatsIntent()
+    data object ResetAdding : StatsIntent()
+}
+
 class StatsViewModel(
     private val statsRepository: StatsRepository,
     private val dispatcher: CoroutineDispatcher
@@ -35,7 +43,20 @@ class StatsViewModel(
     private val _statsState = MutableStateFlow(StatsState())
     val statsState: StateFlow<StatsState> = _statsState.asStateFlow()
 
-    fun getStats() =
+    fun onAction(intent: StatsIntent) {
+        when (intent) {
+            is StatsIntent.GetStatsRecord -> getStatsRecord()
+            is StatsIntent.AddStatsRecord -> if (intent.statsRecord != null) addStatsRecord(intent.statsRecord) else addStatsRecord()
+            is StatsIntent.UpdateAddingStatsRecordMood -> updateAddingStatsRecordMood(intent.mood)
+            is StatsIntent.UpdateAddingStatsRecordDescription -> updateAddingStatsRecordDescription(
+                intent.description
+            )
+
+            StatsIntent.ResetAdding -> resetAdding()
+        }
+    }
+
+    private fun getStatsRecord() =
         viewModelScope.launch(dispatcher) {
             _statsState.update { it.copy(statsRecords = UiState.Loading) }
 
@@ -49,7 +70,7 @@ class StatsViewModel(
             }
         }
 
-    fun addStatsRecord() = viewModelScope.launch(dispatcher) {
+    private fun addStatsRecord() = viewModelScope.launch(dispatcher) {
         changeAddingStatus(UiState.Loading)
 
         val value = statsState.value
@@ -62,7 +83,7 @@ class StatsViewModel(
         )
     }
 
-    fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
+    private fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
         changeAddingStatus(UiState.Loading)
 
         val res = statsRepository.addStats(statsRecord.mood, statsRecord.description)
@@ -90,15 +111,15 @@ class StatsViewModel(
         }
     }
 
-    fun updateAddingStatsRecordMood(mood: Mood) {
+    private fun updateAddingStatsRecordMood(mood: Mood) {
         _statsState.update { it.copy(adding = it.adding.copy(mood = mood)) }
     }
 
-    fun updateAddingStatsRecordDescription(desc: String) {
+    private fun updateAddingStatsRecordDescription(desc: String) {
         _statsState.update { it.copy(adding = it.adding.copy(description = desc)) }
     }
 
-    fun resetAddingStatsRecord() {
+    private fun resetAdding() {
         _statsState.update { it.copy(adding = AddingStats()) }
     }
 

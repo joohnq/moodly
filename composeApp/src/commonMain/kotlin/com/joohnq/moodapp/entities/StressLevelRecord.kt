@@ -15,7 +15,7 @@ data class StressLevelRecord(
     val id: Int,
     @ColumnInfo(name = DatabaseConstants.STRESS_LEVEL)
     val stressLevel: StressLevel,
-    val stressors: List<Stressors>,
+    val stressors: List<Stressor>,
     val date: LocalDateTime
 ) {
     companion object {

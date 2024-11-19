@@ -35,9 +35,15 @@ import com.joohnq.moodapp.view.routes.onNavigateToSleepQuality
 import com.joohnq.moodapp.view.routes.onNavigateToStressLevel
 import com.joohnq.moodapp.view.state.UiState
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.viewmodel.HealthJournalIntent
+import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
+import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.StatsIntent
 import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.viewmodel.StressLevelIntent
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
+import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
@@ -93,6 +99,7 @@ fun HomeScreen(
     statsViewModel: StatsViewModel = sharedViewModel(),
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
+    healthJournalViewModel: HealthJournalViewModel = sharedViewModel(),
     userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
@@ -101,24 +108,28 @@ fun HomeScreen(
     val statsState by statsViewModel.statsState.collectAsState()
     val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
+    val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
 
     SideEffect {
-        statsViewModel.getStats()
-        userViewModel.getUser()
-        stressLevelViewModel.getStressLevelRecords()
-        sleepQualityViewModel.getSleepQualityRecords()
+        statsViewModel.onAction(StatsIntent.GetStatsRecord)
+        userViewModel.onAction(UserIntent.GetUser)
+        stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
+        sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
+        healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
     }
 
     LaunchedEffect(
         statsState.statsRecords,
         userState.user,
         stressLevelState.stressLevelRecords,
-        sleepQualityState.sleepQualityRecords
+        sleepQualityState.sleepQualityRecords,
+        healthJournalState.healthJournalRecords
     ) {
         UiState.onAnyError(
             statsState.statsRecords,
             userState.user,
             stressLevelState.stressLevelRecords,
+            sleepQualityState.sleepQualityRecords,
             sleepQualityState.sleepQualityRecords
         ) {
             scope.launch { snackBarHostState.showSnackbar(it) }
@@ -130,6 +141,7 @@ fun HomeScreen(
             statsState.statsRecords,
             userState.user,
             stressLevelState.stressLevelRecords,
+            sleepQualityState.sleepQualityRecords,
             sleepQualityState.sleepQualityRecords
         )
     )

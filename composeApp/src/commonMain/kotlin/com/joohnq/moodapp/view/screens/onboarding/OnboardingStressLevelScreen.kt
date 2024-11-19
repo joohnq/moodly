@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.TextRadioButton
@@ -24,6 +23,7 @@ import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.stress_rate_title
@@ -31,18 +31,19 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingStressLevelScreenUI(
-    selectedOption: ValueSetValue<StressLevel>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    selectedOption: StressLevel,
+    onAction: (OnboardingIntent) -> Unit = {},
+    onNavigation: (NextAndBackAction) -> Unit = {},
 ) {
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
     OnboardingBaseComponent(
         page = 6,
         title = Res.string.stress_rate_title,
-        onAction = onAction
+        onAction = onNavigation
     ) {
         Text(
-            text = stringResource(selectedOption.value.value),
+            text = stringResource(selectedOption.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -55,16 +56,16 @@ fun OnboardingStressLevelScreenUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f).aspectRatio(1f),
                     text = stringResource(option.value),
-                    selected = selectedOption.value == option,
+                    selected = selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
-                    onClick = { selectedOption.setValue(option) }
+                    onClick = { onAction(OnboardingIntent.UpdateStressLevel(option)) }
                 )
             }
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(selectedOption.value.text),
+            text = stringResource(selectedOption.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )
@@ -79,11 +80,9 @@ fun OnboardingStressLevelScreen(
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
 
     OnboardingStressLevelScreenUI(
-        selectedOption = ValueSetValue(
-            onboardingState.stressLevel,
-            onboardingViewModel::updateStressLevel
-        ),
-        onAction = { action ->
+        selectedOption = onboardingState.stressLevel,
+        onAction = onboardingViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> navigation.onNavigateToOnboardingExpressionAnalysis()
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
@@ -96,6 +95,6 @@ fun OnboardingStressLevelScreen(
 @Composable
 fun OnboardingStressLevelScreenPreview() {
     OnboardingStressLevelScreenUI(
-        selectedOption = ValueSetValue(StressLevel.One),
+        selectedOption = StressLevel.One,
     )
 }

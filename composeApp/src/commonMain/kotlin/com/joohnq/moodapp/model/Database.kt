@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
+import com.joohnq.moodapp.entities.HealthJournalRecord
 import com.joohnq.moodapp.entities.SleepQualityRecord
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.entities.StressLevelRecord
@@ -17,6 +18,7 @@ import com.joohnq.moodapp.model.converters.StatsRecordConverter
 import com.joohnq.moodapp.model.converters.StressLevelRecordConverter
 import com.joohnq.moodapp.model.converters.StressorsConverter
 import com.joohnq.moodapp.model.converters.UserConverter
+import com.joohnq.moodapp.model.dao.HealthJournalRecordDAO
 import com.joohnq.moodapp.model.dao.SleepQualityRecordDAO
 import com.joohnq.moodapp.model.dao.StatsRecordDAO
 import com.joohnq.moodapp.model.dao.StressLevelRecordDAO
@@ -24,7 +26,7 @@ import com.joohnq.moodapp.model.dao.UserDAO
 import com.joohnq.moodapp.model.dao.UserPreferencesDAO
 
 @Database(
-    entities = [StatsRecord::class, User::class, UserPreferences::class, StressLevelRecord::class, SleepQualityRecord::class],
+    entities = [StatsRecord::class, User::class, UserPreferences::class, StressLevelRecord::class, SleepQualityRecord::class, HealthJournalRecord::class],
     version = DatabaseConstants.DATABASE_VERSION
 )
 @ConstructedBy(MyDatabaseConstructor::class)
@@ -43,6 +45,7 @@ abstract class MyDatabase : RoomDatabase() {
     abstract fun userPreferencesDAO(): UserPreferencesDAO
     abstract fun stressLevelRecordDAO(): StressLevelRecordDAO
     abstract fun sleepQualityRecordDAO(): SleepQualityRecordDAO
+    abstract fun healthJournalRecordDAO(): HealthJournalRecordDAO
 }
 
 @Suppress("NO_ACTUAL_FOR_EXPECT")

@@ -20,43 +20,81 @@ data class OnboardingState(
     val statsRecord: StatsRecord = StatsRecord.init(),
     val sleepQuality: SleepQuality = SleepQuality.Worst,
     val stressLevel: StressLevel = StressLevel.Three,
+    val sliderValue: Float = 0f
 )
+
+sealed class OnboardingIntent {
+    data class UpdateSleepQuality(val sleepQuality: SleepQuality) : OnboardingIntent()
+    data class UpdateStressLevel(val stressLevel: StressLevel) : OnboardingIntent()
+    data class UpdateMood(val mood: Mood) : OnboardingIntent()
+    data class UpdateUserMedicationsSupplements(val medicationsSupplements: MedicationsSupplements?) :
+        OnboardingIntent()
+
+    data class UpdateUserPhysicalSymptoms(val physicalSymptoms: PhysicalSymptoms?) :
+        OnboardingIntent()
+
+    data class UpdateUserSoughtHelp(val soughtHelp: ProfessionalHelp?) : OnboardingIntent()
+    data class UpdateStatsRecordDescription(val description: String) : OnboardingIntent()
+    data class UpdateSliderValue(val sliderValue: Float) : OnboardingIntent()
+    data object ResetStatsRecord : OnboardingIntent()
+}
 
 class OnboardingViewModel : ViewModel() {
     private val _onboardingState = MutableStateFlow(OnboardingState())
     val onboardingState: StateFlow<OnboardingState> = _onboardingState.asStateFlow()
 
-    fun updateSleepQuality(sleepQuality: SleepQuality) {
+    fun onAction(intent: OnboardingIntent) {
+        when (intent) {
+            is OnboardingIntent.ResetStatsRecord -> resetStatsRecord()
+            is OnboardingIntent.UpdateMood -> updateMood(intent.mood)
+            is OnboardingIntent.UpdateSleepQuality -> updateSleepQuality(intent.sleepQuality)
+            is OnboardingIntent.UpdateStatsRecordDescription -> updateStatsRecordDescription(intent.description)
+            is OnboardingIntent.UpdateStressLevel -> updateStressLevel(intent.stressLevel)
+            is OnboardingIntent.UpdateUserMedicationsSupplements -> updateUserMedicationsSupplements(
+                intent.medicationsSupplements
+            )
+
+            is OnboardingIntent.UpdateUserPhysicalSymptoms -> updateUserPhysicalSymptoms(intent.physicalSymptoms)
+            is OnboardingIntent.UpdateUserSoughtHelp -> updateUserSoughtHelp(intent.soughtHelp)
+            is OnboardingIntent.UpdateSliderValue -> updateSliderValue(intent.sliderValue)
+        }
+    }
+
+    private fun updateSliderValue(sliderValue: Float) {
+        _onboardingState.update { it.copy(sliderValue = sliderValue) }
+    }
+
+    private fun updateSleepQuality(sleepQuality: SleepQuality) {
         _onboardingState.update { it.copy(sleepQuality = sleepQuality) }
     }
 
-    fun updateStressLevel(stressLevel: StressLevel) {
+    private fun updateStressLevel(stressLevel: StressLevel) {
         _onboardingState.update { it.copy(stressLevel = stressLevel) }
     }
 
-    fun updateMood(mood: Mood) {
+    private fun updateMood(mood: Mood) {
         _onboardingState.update { it.copy(statsRecord = it.statsRecord.copy(mood = mood)) }
     }
 
-    fun updateUserMedicationsSupplements(
+    private fun updateUserMedicationsSupplements(
         medicationsSupplements: MedicationsSupplements?,
     ) {
         _onboardingState.update { it.copy(medicationsSupplements = medicationsSupplements) }
     }
 
-    fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms?) {
+    private fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms?) {
         _onboardingState.update { it.copy(physicalSymptoms = physicalSymptoms) }
     }
 
-    fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp?) {
+    private fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp?) {
         _onboardingState.update { it.copy(soughtHelp = soughtHelp) }
     }
 
-    fun updateStatsRecordDescription(description: String) {
+    private fun updateStatsRecordDescription(description: String) {
         _onboardingState.update { it.copy(statsRecord = it.statsRecord.copy(description = description)) }
     }
 
-    fun resetStatsRecord() {
+    private fun resetStatsRecord() {
         _onboardingState.update { it.copy(statsRecord = StatsRecord.init()) }
     }
 

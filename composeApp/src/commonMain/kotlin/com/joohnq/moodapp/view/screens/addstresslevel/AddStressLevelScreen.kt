@@ -16,17 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.entities.Stressors
-import com.joohnq.moodapp.entities.ValueSetValue
+import com.joohnq.moodapp.entities.Stressor
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.ContinueButton
@@ -41,6 +37,7 @@ import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.StressLevelIntent
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.add_stress_level
@@ -51,8 +48,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddStressLevelScreenUI(
     selectedStressLevel: StressLevel,
-    sliderValue: ValueSetValue<Float>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    sliderValue: Float,
+    onAction: (StressLevelIntent) -> Unit = {},
+    onNavigation: (NextAndBackAction) -> Unit = {},
 ) {
     Scaffold(
         containerColor = Colors.Brown10,
@@ -67,7 +65,7 @@ fun AddStressLevelScreenUI(
             ) {
                 TopBar(
                     text = Res.string.add_stress_level,
-                    onGoBack = { onAction(NextAndBackAction.OnGoBack) }
+                    onGoBack = { onNavigation(NextAndBackAction.OnGoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -84,8 +82,8 @@ fun AddStressLevelScreenUI(
                 ) {
                     VerticalSlider(
                         modifier = Modifier.height(height),
-                        sliderValue = sliderValue.value,
-                        setSliderValue = sliderValue.setValue,
+                        sliderValue = sliderValue,
+                        setSliderValue = { onAction(StressLevelIntent.UpdateAddingSliderValue(it)) },
                         thumb = { SleepQualityThumb() },
                         track = { SleepQualityTrack(it) },
                         sliderColors = ComponentColors.Slider.SleepQualitySliderColors()
@@ -107,7 +105,7 @@ fun AddStressLevelScreenUI(
                 VerticalSpacer(24.dp)
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { onAction(NextAndBackAction.OnContinue) }
+                    onClick = { onNavigation(NextAndBackAction.OnContinue) }
                 )
             }
         }
@@ -121,22 +119,23 @@ fun AddStressLevelScreen(
     stressLevelViewModel: StressLevelViewModel = sharedViewModel()
 ) {
     val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-    var sliderValue by rememberSaveable { mutableFloatStateOf(0f) }
 
     AddStressLevelScreenUI(
-        sliderValue = ValueSetValue(sliderValue) {
-            sliderValue = it
-            stressLevelViewModel.updateAddingStressLevel(StressLevel.fromSliderValue(sliderValue))
-        },
+        sliderValue = stressLevelState.adding.sliderValue,
         selectedStressLevel = stressLevelState.adding.stressLevel,
-        onAction = { action ->
+        onAction = stressLevelViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> {
                     if (stressLevelState.adding.stressLevel != StressLevel.One) {
                         navigation.onNavigateToStressStressors()
                     } else {
-                        stressLevelViewModel.updateAddingStressStressors(Stressors.InPeace)
-                        stressLevelViewModel.addStressLevelRecord()
+                        stressLevelViewModel.onAction(
+                            StressLevelIntent.UpdateAddingStressors(
+                                Stressor.InPeace
+                            )
+                        )
+                        stressLevelViewModel.onAction(StressLevelIntent.AddStressLevelRecord())
                     }
                 }
 

@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.ProfessionalHelp
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.TextRadioButton
@@ -20,6 +19,7 @@ import com.joohnq.moodapp.view.routes.onNavigateToPhysicalSymptoms
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.Drawables
+import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
@@ -27,8 +27,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingProfessionalHelpScreenUI(
-    selectedOption: ValueSetValue<ProfessionalHelp?>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    selectedOption: ProfessionalHelp?,
+    onNavigation: (NextAndBackAction) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {},
 ) {
     val options = rememberSaveable { ProfessionalHelp.getAll() }
 
@@ -36,8 +37,8 @@ fun OnboardingProfessionalHelpScreenUI(
         page = 2,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = selectedOption.value != null,
-        onAction = onAction
+        isContinueButtonVisible = selectedOption != null,
+        onAction = onNavigation
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -47,10 +48,10 @@ fun OnboardingProfessionalHelpScreenUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
                     text = stringResource(option.text),
-                    selected = selectedOption.value == option,
+                    selected = selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    onClick = { selectedOption.setValue(option) }
+                    onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
                 )
             }
         }
@@ -65,11 +66,9 @@ fun OnboardingProfessionalHelpScreen(
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
 
     OnboardingProfessionalHelpScreenUI(
-        selectedOption = ValueSetValue(
-            onboardingState.soughtHelp,
-            onboardingViewModel::updateUserSoughtHelp
-        ),
-        onAction = { action ->
+        selectedOption = onboardingState.soughtHelp,
+        onAction = onboardingViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> navigation.onNavigateToPhysicalSymptoms()
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
@@ -82,6 +81,6 @@ fun OnboardingProfessionalHelpScreen(
 @Composable
 fun OnboardingProfessionalHelpScreenPreview() {
     OnboardingProfessionalHelpScreenUI(
-        selectedOption = ValueSetValue(ProfessionalHelp.No),
+        selectedOption = ProfessionalHelp.No,
     )
 }

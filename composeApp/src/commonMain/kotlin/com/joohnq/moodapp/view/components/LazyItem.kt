@@ -21,11 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.entities.Stressors
+import com.joohnq.moodapp.entities.Stressor
 import com.joohnq.moodapp.entities.TextRadioButtonColors
 import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.view.ui.Colors
@@ -124,12 +123,10 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
                     color = Colors.Brown80
                 )
                 VerticalSpacer(5.dp)
-                Text(
+                TextEllipsis(
                     text = statsRecord.description,
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown100Alpha64,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
                 )
             }
             HorizontalSpacer(20.dp)
@@ -148,7 +145,7 @@ fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit
 
 @Composable
 fun StressStressorCircle(
-    stressStressor: Stressors,
+    stressStressor: Stressor,
     selected: Boolean,
     onClick: () -> Unit = {}
 ) {

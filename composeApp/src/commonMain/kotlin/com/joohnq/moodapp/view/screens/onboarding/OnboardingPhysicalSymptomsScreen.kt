@@ -16,7 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.joohnq.moodapp.entities.PhysicalSymptoms
-import com.joohnq.moodapp.entities.ValueSetValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.view.NextAndBackAction
 import com.joohnq.moodapp.view.components.IconAndTextRadioButtonHorizontal
@@ -26,6 +25,7 @@ import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
 import com.joohnq.moodapp.view.ui.Dimens
 import com.joohnq.moodapp.view.ui.TextStyles
+import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
@@ -34,16 +34,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsScreenUI(
-    selectedOption: ValueSetValue<PhysicalSymptoms?>,
-    onAction: (NextAndBackAction) -> Unit = {},
+    selectedOption: PhysicalSymptoms?,
+    onNavigation: (NextAndBackAction) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {},
 ) {
     val options = remember { PhysicalSymptoms.getAll() }
 
     OnboardingBaseComponent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = selectedOption.value != null,
-        onAction = onAction
+        isContinueButtonVisible = selectedOption != null,
+        onAction = onNavigation
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -62,11 +63,11 @@ fun OnboardingPhysicalSymptomsScreenUI(
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = selectedOption.value == option,
+                    selected = selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),
-                    onClick = { selectedOption.setValue(option) }
+                    onClick = { onAction(OnboardingIntent.UpdateUserPhysicalSymptoms(option)) }
                 )
             }
         }
@@ -81,11 +82,9 @@ fun OnboardingPhysicalSymptomsScreen(
     val onboardingState by onboardingViewModel.onboardingState.collectAsState()
 
     OnboardingPhysicalSymptomsScreenUI(
-        selectedOption = ValueSetValue(
-            onboardingState.physicalSymptoms,
-            onboardingViewModel::updateUserPhysicalSymptoms
-        ),
-        onAction = { action ->
+        selectedOption = onboardingState.physicalSymptoms,
+        onAction = onboardingViewModel::onAction,
+        onNavigation = { action ->
             when (action) {
                 NextAndBackAction.OnContinue -> navigation.onNavigateToOnboardingSleepQuality()
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
@@ -98,6 +97,6 @@ fun OnboardingPhysicalSymptomsScreen(
 @Composable
 fun OnboardingPhysicalSymptomsScreenPreview() {
     OnboardingPhysicalSymptomsScreenUI(
-        selectedOption = ValueSetValue(PhysicalSymptoms.No),
+        selectedOption = PhysicalSymptoms.No,
     )
 }

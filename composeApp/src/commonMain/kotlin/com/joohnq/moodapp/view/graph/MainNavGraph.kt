@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.screens.Screens
+import com.joohnq.moodapp.view.screens.addjournalingscreen.AddJournalingScreen
 import com.joohnq.moodapp.view.screens.addsleepquality.AddSleepQualityScreen
 import com.joohnq.moodapp.view.screens.addstats.AddMoodScreen
 import com.joohnq.moodapp.view.screens.addstresslevel.AddStressLevelScreen
@@ -42,9 +43,7 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
         MoodScreen(statsRecord = statsRecord, navigation = navHostController)
     }
     composable<Screens.HealthJournalScreen> {
-        HealthJournalScreen(
-            navigation = navHostController
-        )
+        HealthJournalScreen(navigation = navHostController)
     }
     composable<Screens.ExpressionAnalysisScreen> {
         ExpressionAnalysisScreen(navigation = navHostController)
@@ -57,5 +56,8 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     }
     composable<Screens.AddSleepQualityScreen> {
         AddSleepQualityScreen(navigation = navHostController)
+    }
+    composable<Screens.AddJournalingScreen> {
+        AddJournalingScreen(navigation = navHostController)
     }
 }

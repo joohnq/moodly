@@ -14,12 +14,14 @@ import moodapp.composeapp.generated.resources.ic_arrow
 import moodapp.composeapp.generated.resources.ic_arrow_chevron
 import moodapp.composeapp.generated.resources.ic_arrow_open
 import moodapp.composeapp.generated.resources.ic_calendar
+import moodapp.composeapp.generated.resources.ic_chart
 import moodapp.composeapp.generated.resources.ic_chat
 import moodapp.composeapp.generated.resources.ic_check
 import moodapp.composeapp.generated.resources.ic_close
 import moodapp.composeapp.generated.resources.ic_document
 import moodapp.composeapp.generated.resources.ic_document_health
 import moodapp.composeapp.generated.resources.ic_drug_store
+import moodapp.composeapp.generated.resources.ic_edit
 import moodapp.composeapp.generated.resources.ic_flag
 import moodapp.composeapp.generated.resources.ic_happy_face
 import moodapp.composeapp.generated.resources.ic_head
@@ -45,7 +47,6 @@ import moodapp.composeapp.generated.resources.mood_happy
 import moodapp.composeapp.generated.resources.mood_neutral
 import moodapp.composeapp.generated.resources.mood_overjoyed
 import moodapp.composeapp.generated.resources.mood_sad
-import moodapp.composeapp.generated.resources.mood_statistics_grid_background
 import moodapp.composeapp.generated.resources.onboarding_sought_professional_help_image
 import moodapp.composeapp.generated.resources.shape_bottom_navigation
 import moodapp.composeapp.generated.resources.sleep_quality_background
@@ -88,6 +89,8 @@ object Drawables {
         val Sun = Res.drawable.ic_sun
         val Moon = Res.drawable.ic_moon
         val MoodNeutral = Res.drawable.ic_mood_neutral
+        val Chart = Res.drawable.ic_chart
+        val Edit = Res.drawable.ic_edit
     }
 
     object Images {
@@ -102,7 +105,6 @@ object Drawables {
         val StressLevelBackground = Res.drawable.stress_level_background
         val SleepQualityBackground = Res.drawable.sleep_quality_background
         val HealthJournalBackground = Res.drawable.health_journal_background
-        val MoodStatisticGridBackground = Res.drawable.mood_statistics_grid_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image

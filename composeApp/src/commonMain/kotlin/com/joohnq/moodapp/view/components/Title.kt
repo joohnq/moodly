@@ -27,7 +27,17 @@ fun Title(text: StringResource) {
 }
 
 @Composable
-fun SubTitle(text: String) {
+fun MediumTitle(text: StringResource) {
+    Text(
+        text = stringResource(text),
+        modifier = Modifier.fillMaxWidth(),
+        style = TextStyles.TextMdExtraBold(),
+        color = Colors.Brown80
+    )
+}
+
+@Composable
+fun SmallTitle(text: String) {
     Text(
         text = text,
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

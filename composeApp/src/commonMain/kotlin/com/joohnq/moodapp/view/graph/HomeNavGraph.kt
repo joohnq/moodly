@@ -53,7 +53,7 @@ fun HomeNavGraph(navHostController: NavHostController) {
                 )
             }
             composable<Screens.HomeGraph.JournalingScreen> {
-                JournalingScreen(padding = padding)
+                JournalingScreen(navigation = navHostController, padding = padding)
             }
         }
 

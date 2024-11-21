@@ -38,7 +38,6 @@ import com.joohnq.moodapp.view.components.MediumTitle
 import com.joohnq.moodapp.view.components.MoodFace
 import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
@@ -157,8 +156,9 @@ fun AddJournalingScreen(
         healthJournalState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
-                navigation.onNavigateToHomeGraph()
+                navigation.popBackStack()
                 healthJournalViewModel.onAction(HealthJournalIntent.ResetAddingHeathJournal)
+                healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
             },
         )
     }
@@ -172,7 +172,10 @@ fun AddJournalingScreen(
         onAction = healthJournalViewModel::onAction,
         onNavigation = { action ->
             when (action) {
-                NextAndBackAction.OnContinue -> {}
+                NextAndBackAction.OnContinue -> {
+                    healthJournalViewModel.onAction(HealthJournalIntent.AddHealthJournal)
+                }
+
                 NextAndBackAction.OnGoBack -> navigation.popBackStack()
             }
         }

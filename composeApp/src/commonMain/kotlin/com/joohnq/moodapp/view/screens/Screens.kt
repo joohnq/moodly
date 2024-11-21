@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.view.screens
 
-import com.joohnq.moodapp.entities.StatsRecord
 import kotlinx.serialization.Serializable
 
 sealed class Screens {
@@ -25,7 +24,7 @@ sealed class Screens {
         @Serializable data object JournalingScreen : Screens()
     }
 
-    @Serializable data class MoodScreen(val statsRecord: StatsRecord? = null) : Screens()
+    @Serializable data class MoodScreen(val id: Int? = null) : Screens()
     @Serializable data object HealthJournalScreen : Screens()
     @Serializable data object AddMoodScreen : Screens()
     @Serializable data object SleepQualityScreen : Screens()
@@ -36,6 +35,7 @@ sealed class Screens {
     @Serializable data object StressStressorsScreen : Screens()
     @Serializable data object AddSleepQualityScreen : Screens()
     @Serializable data object AddJournalingScreen : Screens()
+    @Serializable data class EditJournalingScreen(val id: Int) : Screens()
 
     companion object {
         fun getAll(): List<Screens> =
@@ -61,7 +61,8 @@ sealed class Screens {
                 ExpressionAnalysisScreen,
                 AddStressLevelScreen,
                 StressStressorsScreen,
-                AddSleepQualityScreen
+                AddSleepQualityScreen,
+                EditJournalingScreen(-1),
             )
     }
 }

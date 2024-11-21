@@ -78,11 +78,11 @@ sealed class FreudScore(
     companion object {
         fun fromScore(score: Int): FreudScore {
             return when (score) {
-                in 0..19 -> Unhealthy(score)
-                in 20..39 -> AtRisk(score)
-                in 40..59 -> Stable(score)
-                in 60..79 -> MostlyHealthy(score)
-                in 80..100 -> Healthy(score)
+                in 0..20 -> Unhealthy(score)
+                in 21..40 -> AtRisk(score)
+                in 41..60 -> Stable(score)
+                in 61..80 -> MostlyHealthy(score)
+                in 81..100 -> Healthy(score)
                 else -> throw IllegalArgumentException("Unknown freud score: $score")
             }
         }

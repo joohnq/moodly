@@ -10,3 +10,4 @@ class StatsRecordConverter {
     @TypeConverter
     fun toMood(value: String): Mood = Mood.toValue(value)
 }
+

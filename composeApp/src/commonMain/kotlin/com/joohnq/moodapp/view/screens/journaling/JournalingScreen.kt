@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.HealthJournalRecord
 import com.joohnq.moodapp.helper.DatetimeManager
 import com.joohnq.moodapp.sharedViewModel
@@ -27,7 +28,9 @@ import com.joohnq.moodapp.view.components.HealthJournalCard
 import com.joohnq.moodapp.view.components.HealthJournalStatsCard
 import com.joohnq.moodapp.view.components.Title
 import com.joohnq.moodapp.view.components.VerticalSpacer
+import com.joohnq.moodapp.view.routes.onNavigateToEditJournalingScreen
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.view.state.UiState.Companion.onSuccessComposable
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Drawables
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalMedium
@@ -47,7 +50,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalingScreenUI(
     padding: PaddingValues = PaddingValues(0.dp),
-    journals: List<HealthJournalRecord>
+    journals: List<HealthJournalRecord>,
+    onClick: (Int) -> Unit = {}
 ) {
     Scaffold(
         containerColor = Colors.Brown10,
@@ -81,7 +85,7 @@ fun JournalingScreenUI(
                     }
                 } else {
                     items(journals) { journal ->
-                        HealthJournalCard(journal)
+                        HealthJournalCard(journal = journal, onClick = { onClick(journal.id) })
                     }
                 }
             }
@@ -103,7 +107,7 @@ fun JournalingScreenUI(
                 HealthJournalStatsCard(
                     modifier = Modifier.weight(1f),
                     icon = Drawables.Icons.Chart,
-                    title = stringResource(if (journals.isEmpty()) Res.string.no_data else journals.last().mood.text),
+                    title = stringResource(if (journals.isEmpty()) Res.string.no_data else journals.first().mood.text),
                     color = Colors.Brown60,
                     backgroundColor = Colors.Brown10,
                     desc = stringResource(Res.string.emotion)
@@ -117,10 +121,18 @@ fun JournalingScreenUI(
 @Composable
 fun JournalingScreen(
     padding: PaddingValues = PaddingValues(0.dp),
+    navigation: NavHostController,
     healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
 ) {
     val journal by healthJournalViewModel.healthJournalState.collectAsState()
-    JournalingScreenUI(padding = padding, journals = journal.healthJournalRecords.getValue())
+
+    journal.healthJournalRecords.onSuccessComposable {
+        JournalingScreenUI(
+            padding = padding,
+            journals = journal.healthJournalRecords.getValue(),
+            onClick = navigation::onNavigateToEditJournalingScreen
+        )
+    }
 }
 
 @Preview

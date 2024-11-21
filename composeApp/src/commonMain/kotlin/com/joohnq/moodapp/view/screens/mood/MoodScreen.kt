@@ -32,6 +32,7 @@ import com.joohnq.moodapp.view.components.SharedPanelComponent
 import com.joohnq.moodapp.view.components.TextWithBackground
 import com.joohnq.moodapp.view.components.VerticalSpacer
 import com.joohnq.moodapp.view.routes.onNavigateToAddMood
+import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.state.UiState.Companion.getValue
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.Drawables
@@ -50,17 +51,17 @@ fun MoodScreenUi(
     statsRecords: List<StatsRecord>,
     hasNext: Boolean,
     hasPrevious: Boolean,
-    onAction: (MoodAction) -> Unit = {},
+    onNavigation: (MoodAction) -> Unit = {},
 ) {
     SharedPanelComponent(
         isDark = true,
-        onGoBack = { onAction(MoodAction.OnGoBack) },
+        onGoBack = { onNavigation(MoodAction.OnGoBack) },
         backgroundColor = statsRecord.mood.palette.backgroundColor,
         backgroundImage = Drawables.Images.MoodBackground,
         panelTitle = Res.string.mood,
         bodyTitle = Res.string.description,
         color = statsRecord.mood.palette.subColor,
-        onAdd = { onAction(MoodAction.OnAdd) },
+        onAdd = { onNavigation(MoodAction.OnAdd) },
         topBarContent = {
             TextWithBackground(
                 text = DatetimeManager.formatDateTime(statsRecord.date),
@@ -94,7 +95,7 @@ fun MoodScreenUi(
                     PreviousNextButton(
                         enabled = hasPrevious,
                         isPrevious = true,
-                        onClick = { onAction(MoodAction.OnPrevious) },
+                        onClick = { onNavigation(MoodAction.OnPrevious) },
                         color = statsRecord.mood.palette.color
                     )
                     MoodFace(
@@ -104,7 +105,7 @@ fun MoodScreenUi(
                     PreviousNextButton(
                         enabled = hasNext,
                         isPrevious = false,
-                        onClick = { onAction(MoodAction.OnNext) },
+                        onClick = { onNavigation(MoodAction.OnNext) },
                         color = statsRecord.mood.palette.color
                     )
                 }
@@ -123,7 +124,7 @@ fun MoodScreenUi(
                     MoodBarStatistic(
                         statsRecords = statsRecords,
                         currentStatsRecord = statsRecord,
-                        onClick = { onAction(MoodAction.OnSetMood(it)) }
+                        onClick = { onNavigation(MoodAction.OnSetMood(it)) }
                     )
                     VerticalSpacer(20.dp)
                 }
@@ -134,7 +135,7 @@ fun MoodScreenUi(
 
 @Composable
 fun MoodScreen(
-    statsRecord: StatsRecord?,
+    id: Int?,
     statsViewModel: StatsViewModel = sharedViewModel(),
     navigation: NavHostController
 ) {
@@ -143,7 +144,8 @@ fun MoodScreen(
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
     var currentStatsRecord by remember {
         mutableStateOf(
-            statsRecord ?: statsState.statsRecords.getValue().last()
+            statsState.statsRecords.getValue().find { it.id == id }
+                ?: statsState.statsRecords.getValue().first()
         )
     }
 
@@ -158,9 +160,12 @@ fun MoodScreen(
         hasNext = hasNext != null,
         hasPrevious = hasPrevious != null,
         statsRecords = statsState.statsRecords.getValue().reversed(),
-        onAction = {
+        onNavigation = {
             when (it) {
-                is MoodAction.OnGoBack -> navigation.popBackStack()
+                is MoodAction.OnGoBack -> navigation.navigate(Screens.HomeGraph) {
+                    popUpTo(Screens.HomeGraph) { inclusive = true }
+                }
+
                 is MoodAction.OnNext -> hasNext?.run { currentStatsRecord = this }
                 is MoodAction.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
                 is MoodAction.OnAdd -> navigation.onNavigateToAddMood()

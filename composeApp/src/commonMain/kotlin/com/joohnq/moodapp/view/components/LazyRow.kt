@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.entities.FreudScore
+import com.joohnq.moodapp.entities.HealthJournalRecord
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.screens.home.HomeAction
@@ -36,7 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MentalHealthMetrics(
     freudScore: FreudScore,
     statsRecord: StatsRecord,
-    healthJournal: Map<String, List<StatsRecord>?>,
+    healthJournal: List<HealthJournalRecord>,
     onAction: (HomeAction) -> Unit,
 ) {
     LazyRow(
@@ -107,8 +108,7 @@ fun AddMoodRadioGroup(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-
-            items(moodsSize) { i ->
+            items(moodsSize, key = { it }) { i ->
                 Button(
                     modifier = Modifier.size(36.dp),
                     colors = ButtonColors(

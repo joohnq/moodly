@@ -2,7 +2,6 @@ package com.joohnq.moodapp.view.routes
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.screens.Screens
 
 fun NavController.onNavigateToHomeGraph() {
@@ -69,6 +68,10 @@ fun NavController.onNavigateToStressLevel() {
     navigate(Screens.StressLevelScreen)
 }
 
+fun NavController.onNavigateToStressLevelPopUp() {
+    popBackStack(route = Screens.StressLevelScreen, inclusive = false)
+}
+
 fun NavController.onNavigateToOnboardingExpressionAnalysis() {
     navigate(Screens.OnboardingGraph.ExpressionAnalysisScreen)
 }
@@ -81,12 +84,8 @@ fun NavController.onNavigateToFreudScore() {
     navigate(Screens.FreudScoreScreen)
 }
 
-fun NavController.onNavigateToMood(statsRecord: StatsRecord) {
-    navigate(Screens.MoodScreen(statsRecord))
-}
-
-fun NavController.onNavigateToMood() {
-    navigate(Screens.MoodScreen)
+fun NavController.onNavigateToMood(id: Int? = null) {
+    navigate(Screens.MoodScreen(id))
 }
 
 fun NavController.onNavigateToHealthJournal() {
@@ -109,6 +108,10 @@ fun NavController.onNavigateToAddJournalingScreen() {
     navigate(Screens.AddJournalingScreen)
 }
 
+fun NavController.onNavigateToEditJournalingScreen(id: Int) {
+    navigate(Screens.EditJournalingScreen(id))
+}
+
 fun NavController.onNavigateToAddMood() {
     navigate(Screens.AddMoodScreen) {
         popUpTo(graph.findStartDestination().id) {
@@ -117,6 +120,10 @@ fun NavController.onNavigateToAddMood() {
         launchSingleTop = true
         restoreState = true
     }
+}
+
+fun NavController.onNavigateToMoodScreenPopUp() {
+    popBackStack(route = Screens.MoodScreen, inclusive = false)
 }
 
 fun NavController.onNavigateToRoute(route: Screens) {

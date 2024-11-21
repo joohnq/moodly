@@ -23,7 +23,6 @@ data class AddingStats(
 
 data class StatsState(
     val freudScore: FreudScore = FreudScore.init(),
-    val healthJournal: Map<String, List<StatsRecord>?> = emptyMap(),
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,
     val adding: AddingStats = AddingStats(),
 )
@@ -64,7 +63,6 @@ class StatsViewModel(
                 val res = statsRepository.getStats()
                 _statsState.update { it.copy(statsRecords = UiState.Success(res)) }
                 getFreudScore(res)
-                getHealthJournal(res)
             } catch (e: Exception) {
                 _statsState.update { it.copy(statsRecords = UiState.Error(e.message.toString())) }
             }
@@ -103,13 +101,6 @@ class StatsViewModel(
         }
     }
 
-    private fun getHealthJournal(statsRecords: List<StatsRecord>) {
-        _statsState.update {
-            it.copy(
-                healthJournal = StatsManager.getHealthJournal(statsRecords = statsRecords)
-            )
-        }
-    }
 
     private fun updateAddingStatsRecordMood(mood: Mood) {
         _statsState.update { it.copy(adding = it.adding.copy(mood = mood)) }

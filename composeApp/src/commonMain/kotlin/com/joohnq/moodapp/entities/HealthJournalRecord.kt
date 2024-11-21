@@ -13,26 +13,26 @@ data class HealthJournalRecord(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val mood: Mood,
     val title: String,
-    val desc: String,
+    val description: String,
     val date: LocalDateTime
 ) {
     class Builder {
         private var id: Int = 0
         private var mood: Mood = Mood.Neutral
         private var title: String = ""
-        private var desc: String = ""
+        private var description: String = ""
         private var date: LocalDateTime = DatetimeManager.getCurrentDateTime()
 
         fun setMood(mood: Mood) = apply { this.mood = mood }
         fun setTitle(title: String) = apply { this.title = title }
-        fun setDesc(desc: String) = apply { this.desc = desc }
+        fun setDescription(description: String) = apply { this.description = description }
         fun setDate(date: LocalDateTime) = apply { this.date = date }
 
         fun build() = HealthJournalRecord(
             id = id,
             mood = mood,
             title = title,
-            desc = desc,
+            description = description,
             date = date
         )
     }

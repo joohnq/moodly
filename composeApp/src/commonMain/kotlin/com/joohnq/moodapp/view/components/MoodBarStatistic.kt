@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
@@ -52,13 +51,13 @@ fun MoodBarStatistic(
             pagerState.animateScrollToPage(selectedIndex)
         }
     }
+    val textHeight = calculateTextHeight(font = TextStyles.TextSmSemiBold())
 
     BoxWithConstraints(
-        modifier = Modifier.fillMaxWidth().height(height)
+        modifier = Modifier.fillMaxWidth().height(height + textHeight)
     ) {
         val usableWidth = maxWidth - (15.dp * 8)
         val boxWidth = usableWidth / 7
-        val offset = calculateTextHeight(font = TextStyles.TextSmSemiBold())
 
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -97,7 +96,7 @@ fun MoodBarStatistic(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom,
-                    modifier = Modifier.width(boxWidth).fillMaxHeight().offset(y = offset)
+                    modifier = Modifier.width(boxWidth).fillMaxHeight()
                 ) {
                     Button(
                         modifier = Modifier

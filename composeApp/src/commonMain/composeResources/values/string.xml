@@ -163,4 +163,19 @@
     <string name="journal_title">Journal Title</string>
     <string name="write_your_entry">Write Your Entry</string>
     <string name="enter_the_title">Enter the Title</string>
+    <string name="sunday_char">S</string>
+    <string name="monday_char">M</string>
+    <string name="tuesday_char">T</string>
+    <string name="wednesday_char">W</string>
+    <string name="thursday_char">T</string>
+    <string name="friday_char">F</string>
+    <string name="saturday_char">S</string>
+    <string name="edit_journal">Edit Journal</string>
+    <string name="remove_journal">Remove Journal</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_journal">Delete Journal?</string>
+    <string name="do_you_wish_to_remove_this_journal">Do you wish to remove this journal?</string>
+    <string name="save">Save</string>
+    <string name="editing">Editing</string>
 </resources>

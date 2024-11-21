@@ -60,7 +60,7 @@ import moodapp.composeapp.generated.resources.stress_level
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                items(16) { i ->
+                items(16, key = { it }) { i ->
                     val background = when (i) {
                         5, 6, 7, 8, 9 -> Colors.Orange40
                         2, 3, 10, 11 -> Colors.Orange20

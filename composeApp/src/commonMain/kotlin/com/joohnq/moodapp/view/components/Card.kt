@@ -295,13 +295,14 @@ fun SleepQualityCard(modifier: Modifier = Modifier, item: SleepStatsItem) {
 }
 
 @Composable
-fun HealthJournalCard(journal: HealthJournalRecord) {
+fun HealthJournalCard(journal: HealthJournalRecord, onClick: () -> Unit) {
     val mood = journal.mood
     val palette = mood.palette
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
         colors = ComponentColors.Card.MainCardColors(),
-        shape = Dimens.Shape.Large
+        shape = Dimens.Shape.Large,
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -344,9 +345,9 @@ fun HealthJournalCard(journal: HealthJournalRecord) {
                     color = Colors.Brown80
                 )
                 TextEllipsis(
-                    text = journal.desc,
-                    style = TextStyles.ParagraphXs(),
-                    color = Colors.Brown80
+                    text = journal.description,
+                    style = TextStyles.TextSmSemiBold(),
+                    color = Colors.Brown100Alpha64
                 )
             }
         }
@@ -383,10 +384,13 @@ fun HealthJournalStatsCard(
                     modifier = Modifier.size(24.dp)
                 )
             }
-            Column {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
                 Text(
                     text = title,
-                    style = TextStyles.TextXlExtraBold(),
+                    style = TextStyles.TextMdExtraBold(),
                     color = Colors.Brown80
                 )
                 Text(

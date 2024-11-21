@@ -5,6 +5,9 @@ import androidx.compose.ui.Modifier
 
 class PaddingModifier {
     companion object {
+        fun Modifier.paddingHorizontalLarge(): Modifier =
+            padding(Dimens.Padding.HorizontalLarge)
+
         fun Modifier.paddingHorizontalMedium(): Modifier =
             padding(Dimens.Padding.HorizontalMedium)
 

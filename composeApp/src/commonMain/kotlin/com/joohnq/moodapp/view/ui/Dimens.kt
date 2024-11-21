@@ -9,6 +9,7 @@ object Dimens {
     val Icon = 24.dp
 
     object Padding {
+        val HorizontalLarge = PaddingValues(horizontal = 24.dp)
         val HorizontalMedium = PaddingValues(horizontal = 20.dp)
         val HorizontalSmall = PaddingValues(horizontal = 16.dp)
         val HorizontalExtraExtraSmall = PaddingValues(horizontal = 4.dp)

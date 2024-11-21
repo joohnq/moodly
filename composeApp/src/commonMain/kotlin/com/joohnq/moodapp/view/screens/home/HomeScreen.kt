@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.joohnq.moodapp.entities.FreudScore
+import com.joohnq.moodapp.entities.HealthJournalRecord
 import com.joohnq.moodapp.entities.Mood
 import com.joohnq.moodapp.entities.SleepQuality
 import com.joohnq.moodapp.entities.StatsRecord
@@ -60,7 +61,7 @@ fun HomeScreenUi(
     stressLevel: StressLevel,
     freudScore: FreudScore,
     moodTracker: List<Mood>,
-    healthJournal: Map<String, List<StatsRecord>?>,
+    healthJournal: List<HealthJournalRecord>,
     onAction: (HomeAction) -> Unit = {},
 ) {
     Column(
@@ -149,10 +150,10 @@ fun HomeScreen(
             today = today,
             padding = padding,
             userName = userState.user.getValue().name,
-            statsRecord = statsState.statsRecords.getValue().last(),
-            moodTracker = statsState.statsRecords.getValue().reversed().take(3).map { it.mood },
+            statsRecord = statsState.statsRecords.getValue().first(),
+            moodTracker = statsState.statsRecords.getValue().take(3).reversed().map { it.mood },
             freudScore = statsState.freudScore,
-            healthJournal = statsState.healthJournal,
+            healthJournal = healthJournalState.healthJournalRecords.getValue(),
             sleepQuality = sleepQualityState.sleepQualityRecords.getValue().last().sleepQuality,
             stressLevel = stressLevelState.stressLevelRecords.getValue().last().stressLevel,
             onAction = { action ->
@@ -192,9 +193,7 @@ fun HomeScreenPreview() {
         ),
         sleepQuality = SleepQuality.Excellent,
         stressLevel = StressLevel.One,
-        healthJournal = mapOf(
-            "123" to listOf(StatsRecord.init())
-        )
+        healthJournal = listOf(HealthJournalRecord.init())
     )
 }
 
@@ -212,9 +211,7 @@ fun HomeScreenPreview2() {
         ),
         sleepQuality = SleepQuality.Good,
         stressLevel = StressLevel.Two,
-        healthJournal = mapOf(
-            "123" to listOf(StatsRecord.init())
-        )
+        healthJournal = listOf(HealthJournalRecord.init())
     )
 }
 
@@ -232,9 +229,7 @@ fun HomeScreenPreview3() {
         ),
         sleepQuality = SleepQuality.Fair,
         stressLevel = StressLevel.Three,
-        healthJournal = mapOf(
-            "123" to listOf(StatsRecord.init())
-        )
+        healthJournal = listOf(HealthJournalRecord.init())
     )
 }
 
@@ -252,9 +247,7 @@ fun HomeScreenPreview4() {
         ),
         sleepQuality = SleepQuality.Poor,
         stressLevel = StressLevel.Four,
-        healthJournal = mapOf(
-            "123" to listOf(StatsRecord.init())
-        )
+        healthJournal = listOf(HealthJournalRecord.init())
     )
 }
 
@@ -272,8 +265,6 @@ fun HomeScreenPreview5() {
         ),
         sleepQuality = SleepQuality.Worst,
         stressLevel = StressLevel.Five,
-        healthJournal = mapOf(
-            "123" to listOf(StatsRecord.init())
-        )
+        healthJournal = listOf(HealthJournalRecord.init())
     )
 }

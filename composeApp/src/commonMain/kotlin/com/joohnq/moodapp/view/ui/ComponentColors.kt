@@ -282,6 +282,108 @@ object ComponentColors {
                 focusedBorderColor = focusedBorderColor,
                 unfocusedBorderColor = unfocusedBorderColor
             )
+
+        @Composable
+        fun TextFieldTitleTransparentColors() =
+            TextFieldColors(
+                focusedTextColor = Colors.Brown80,
+                unfocusedTextColor = Colors.Brown80,
+                disabledTextColor = Colors.Brown80,
+                errorTextColor = Colors.Brown80,
+                focusedContainerColor = Colors.Transparent,
+                unfocusedContainerColor = Colors.Transparent,
+                disabledContainerColor = Colors.Transparent,
+                errorContainerColor = Colors.Transparent,
+                cursorColor = Colors.Brown80,
+                errorCursorColor = Colors.Brown80,
+                textSelectionColors = TextSelectionColors(
+                    handleColor = Colors.Brown60,
+                    backgroundColor = Colors.Green40
+                ),
+                focusedIndicatorColor = Colors.Transparent,
+                unfocusedIndicatorColor = Colors.Transparent,
+                disabledIndicatorColor = Colors.Transparent,
+                errorIndicatorColor = Colors.Transparent,
+                focusedLeadingIconColor = Color.Unspecified,
+                unfocusedLeadingIconColor = Color.Unspecified,
+                disabledLeadingIconColor = Color.Unspecified,
+                errorLeadingIconColor = Color.Unspecified,
+                focusedTrailingIconColor = Color.Unspecified,
+                unfocusedTrailingIconColor = Color.Unspecified,
+                disabledTrailingIconColor = Color.Unspecified,
+                errorTrailingIconColor = Color.Unspecified,
+                focusedLabelColor = Color.Unspecified,
+                unfocusedLabelColor = Color.Unspecified,
+                disabledLabelColor = Color.Unspecified,
+                errorLabelColor = Color.Unspecified,
+                focusedPlaceholderColor = Colors.Brown100Alpha64,
+                unfocusedPlaceholderColor = Colors.Brown100Alpha64,
+                disabledPlaceholderColor = Colors.Brown100Alpha64,
+                errorPlaceholderColor = Colors.Brown100Alpha64,
+                focusedSupportingTextColor = Colors.Brown80,
+                unfocusedSupportingTextColor = Colors.Brown80,
+                disabledSupportingTextColor = Colors.Brown80,
+                errorSupportingTextColor = Colors.Brown80,
+                focusedPrefixColor = Color.Unspecified,
+                unfocusedPrefixColor = Color.Unspecified,
+                disabledPrefixColor = Color.Unspecified,
+                errorPrefixColor = Color.Unspecified,
+                focusedSuffixColor = Color.Unspecified,
+                unfocusedSuffixColor = Color.Unspecified,
+                disabledSuffixColor = Color.Unspecified,
+                errorSuffixColor = Color.Unspecified
+            )
+
+        @Composable
+        fun TextFieldDescriptionTransparentColors() =
+            TextFieldColors(
+                focusedTextColor = Colors.Brown100Alpha64,
+                unfocusedTextColor = Colors.Brown100Alpha64,
+                disabledTextColor = Colors.Brown100Alpha64,
+                errorTextColor = Colors.Brown100Alpha64,
+                focusedContainerColor = Colors.Transparent,
+                unfocusedContainerColor = Colors.Transparent,
+                disabledContainerColor = Colors.Transparent,
+                errorContainerColor = Colors.Transparent,
+                cursorColor = Colors.Brown80,
+                errorCursorColor = Colors.Brown80,
+                textSelectionColors = TextSelectionColors(
+                    handleColor = Colors.Brown60,
+                    backgroundColor = Colors.Green40
+                ),
+                focusedIndicatorColor = Colors.Transparent,
+                unfocusedIndicatorColor = Colors.Transparent,
+                disabledIndicatorColor = Colors.Transparent,
+                errorIndicatorColor = Colors.Transparent,
+                focusedLeadingIconColor = Color.Unspecified,
+                unfocusedLeadingIconColor = Color.Unspecified,
+                disabledLeadingIconColor = Color.Unspecified,
+                errorLeadingIconColor = Color.Unspecified,
+                focusedTrailingIconColor = Color.Unspecified,
+                unfocusedTrailingIconColor = Color.Unspecified,
+                disabledTrailingIconColor = Color.Unspecified,
+                errorTrailingIconColor = Color.Unspecified,
+                focusedLabelColor = Color.Unspecified,
+                unfocusedLabelColor = Color.Unspecified,
+                disabledLabelColor = Color.Unspecified,
+                errorLabelColor = Color.Unspecified,
+                focusedPlaceholderColor = Colors.Brown100Alpha64,
+                unfocusedPlaceholderColor = Colors.Brown100Alpha64,
+                disabledPlaceholderColor = Colors.Brown100Alpha64,
+                errorPlaceholderColor = Colors.Brown100Alpha64,
+                focusedSupportingTextColor = Colors.Brown80,
+                unfocusedSupportingTextColor = Colors.Brown80,
+                disabledSupportingTextColor = Colors.Brown80,
+                errorSupportingTextColor = Colors.Brown80,
+                focusedPrefixColor = Color.Unspecified,
+                unfocusedPrefixColor = Color.Unspecified,
+                disabledPrefixColor = Color.Unspecified,
+                errorPrefixColor = Color.Unspecified,
+                focusedSuffixColor = Color.Unspecified,
+                unfocusedSuffixColor = Color.Unspecified,
+                disabledSuffixColor = Color.Unspecified,
+                errorSuffixColor = Color.Unspecified
+            )
     }
 
 }

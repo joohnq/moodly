@@ -37,7 +37,7 @@ sealed class StressLevelIntent {
     ) : StressLevelIntent()
 
     data class UpdateAddingStatus(val status: UiState<Boolean>) : StressLevelIntent()
-    data class UpdateAddingStressLevel(val stressLevel: StressLevel) : StressLevelIntent()
+    data object UpdateAddingStressLevel : StressLevelIntent()
     data class UpdateAddingStressors(val stressor: Stressor) : StressLevelIntent()
     data class UpdateAddingOtherValue(val value: String) : StressLevelIntent()
     data class UpdateAddingOtherValueError(val error: String?) : StressLevelIntent()
@@ -63,7 +63,7 @@ class StressLevelViewModel(
             is StressLevelIntent.UpdateAddingStatus -> updateAddingStatus(intent.status)
             is StressLevelIntent.UpdateAddingOtherValue -> updateAddingOtherValue(intent.value)
             is StressLevelIntent.UpdateAddingOtherValueError -> updateAddingOtherValueError(intent.error)
-            is StressLevelIntent.UpdateAddingStressLevel -> updateAddingStressLevel(intent.stressLevel)
+            is StressLevelIntent.UpdateAddingStressLevel -> updateAddingStressLevel()
             is StressLevelIntent.UpdateAddingStressors -> updateAddingStressStressors(intent.stressor)
             is StressLevelIntent.UpdateAddingSliderValue -> updateAddingSliderValue(intent.sliderValue)
             is StressLevelIntent.ResetAdding -> resetAdding()
@@ -123,9 +123,15 @@ class StressLevelViewModel(
         )
     }
 
-    private fun updateAddingStressLevel(stressLevel: StressLevel) {
+    private fun updateAddingStressLevel() {
         _stressLevelState.update {
-            it.copy(adding = it.adding.copy(stressLevel = stressLevel))
+            it.copy(
+                adding = it.adding.copy(
+                    stressLevel = StressLevel.fromSliderValue(
+                        stressLevelState.value.adding.sliderValue
+                    )
+                )
+            )
         }
     }
 

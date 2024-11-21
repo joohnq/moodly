@@ -34,7 +34,7 @@ import com.joohnq.moodapp.view.components.StressStressorCircle
 import com.joohnq.moodapp.view.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
+import com.joohnq.moodapp.view.routes.onNavigateToStressLevelPopUp
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.ComponentColors
@@ -139,7 +139,7 @@ fun StressStressorsScreen(
         stressLevelState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
-                navigation.onNavigateToHomeGraph()
+                navigation.onNavigateToStressLevelPopUp()
                 stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
             },
         )

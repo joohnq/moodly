@@ -30,7 +30,7 @@ import com.joohnq.moodapp.view.components.ContinueButton
 import com.joohnq.moodapp.view.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.view.components.TopBar
 import com.joohnq.moodapp.view.components.VerticalSpacer
-import com.joohnq.moodapp.view.routes.onNavigateToHomeGraph
+import com.joohnq.moodapp.view.routes.onNavigateToMood
 import com.joohnq.moodapp.view.state.UiState.Companion.fold
 import com.joohnq.moodapp.view.ui.Colors
 import com.joohnq.moodapp.view.ui.PaddingModifier.Companion.paddingHorizontalSmall
@@ -101,7 +101,7 @@ fun ExpressionAnalysisScreen(
         statsState.adding.status.fold(
             onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
             onSuccess = {
-                navigation.onNavigateToHomeGraph()
+                navigation.onNavigateToMood()
                 statsViewModel.onAction(StatsIntent.ResetAdding)
             },
         )

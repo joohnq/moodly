@@ -4,20 +4,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joohnq.moodapp.entities.StatsRecord
 import com.joohnq.moodapp.view.screens.Screens
 import com.joohnq.moodapp.view.screens.addjournalingscreen.AddJournalingScreen
 import com.joohnq.moodapp.view.screens.addsleepquality.AddSleepQualityScreen
 import com.joohnq.moodapp.view.screens.addstats.AddMoodScreen
 import com.joohnq.moodapp.view.screens.addstresslevel.AddStressLevelScreen
 import com.joohnq.moodapp.view.screens.addstresslevel.StressStressorsScreen
+import com.joohnq.moodapp.view.screens.editjournalingscreen.EditJournalingScreen
 import com.joohnq.moodapp.view.screens.expressionanalysis.ExpressionAnalysisScreen
 import com.joohnq.moodapp.view.screens.freudscore.FreudScoreScreen
 import com.joohnq.moodapp.view.screens.healthjournal.HealthJournalScreen
 import com.joohnq.moodapp.view.screens.mood.MoodScreen
 import com.joohnq.moodapp.view.screens.sleepquality.SleepQualityScreen
 import com.joohnq.moodapp.view.screens.stresslevel.StressLevelScreen
-import kotlin.reflect.typeOf
 
 fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     composable<Screens.HomeGraph> {
@@ -35,12 +34,10 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     composable<Screens.FreudScoreScreen> {
         FreudScoreScreen(navigation = navHostController)
     }
-    composable<Screens.MoodScreen>(
-        typeMap = mapOf(typeOf<StatsRecord?>() to StatsRecord.navType()),
-    ) { navBackStackEntry ->
-        val statsRecord =
-            navBackStackEntry.toRoute<Screens.MoodScreen>().statsRecord
-        MoodScreen(statsRecord = statsRecord, navigation = navHostController)
+    composable<Screens.MoodScreen> { navBackStackEntry ->
+        val id =
+            navBackStackEntry.toRoute<Screens.MoodScreen>().id
+        MoodScreen(id = id, navigation = navHostController)
     }
     composable<Screens.HealthJournalScreen> {
         HealthJournalScreen(navigation = navHostController)
@@ -59,5 +56,10 @@ fun NavGraphBuilder.mainNavGraph(navHostController: NavHostController) {
     }
     composable<Screens.AddJournalingScreen> {
         AddJournalingScreen(navigation = navHostController)
+    }
+    composable<Screens.EditJournalingScreen> { navBackStackEntry ->
+        val id =
+            navBackStackEntry.toRoute<Screens.EditJournalingScreen>().id
+        EditJournalingScreen(navigation = navHostController, id = id)
     }
 }

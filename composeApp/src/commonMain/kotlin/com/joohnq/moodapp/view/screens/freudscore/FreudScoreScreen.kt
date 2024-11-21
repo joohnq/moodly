@@ -101,7 +101,7 @@ import org.jetbrains.compose.resources.stringResource
         onAction = {
             when (it) {
                 is FreudScoreAction.OnGoBack -> navigation.popBackStack()
-                is FreudScoreAction.OnNavigateToMood -> navigation.onNavigateToMood(it.statsRecord)
+                is FreudScoreAction.OnNavigateToMood -> navigation.onNavigateToMood(it.statsRecord.id)
                 is FreudScoreAction.OnAdd -> navigation.onNavigateToAddMood()
             }
         }

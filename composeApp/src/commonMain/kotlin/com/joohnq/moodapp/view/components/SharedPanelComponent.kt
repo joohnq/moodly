@@ -14,7 +14,7 @@ import com.joohnq.moodapp.view.ui.Colors
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
-@Composable fun <T> SharedPanelComponent(
+@Composable fun <T, K> SharedPanelComponent(
     containerColor: Color = Colors.Brown10,
     isDark: Boolean,
     onGoBack: () -> Unit,
@@ -25,6 +25,7 @@ import org.jetbrains.compose.resources.StringResource
     color: Color,
     onAdd: () -> Unit,
     items: List<T>,
+    keys: List<K>,
     panelContent: @Composable (PaddingValues) -> Unit,
     content: @Composable (T) -> Unit,
 ) {

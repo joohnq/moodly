@@ -86,14 +86,8 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
-            // URI
-            implementation(libs.uri.kmp)
-
             // Charts
             implementation(libs.compose.charts)
-
-            // WheelPicker
-            implementation(libs.datetime.wheel.picker)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -1,13 +1,13 @@
 package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.moodapp.entities.MedicationsSupplements
-import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.entities.PhysicalSymptoms
-import com.joohnq.moodapp.entities.ProfessionalHelp
-import com.joohnq.moodapp.entities.SleepQuality
-import com.joohnq.moodapp.entities.StatsRecord
-import com.joohnq.moodapp.entities.StressLevel
+import com.joohnq.moodapp.domain.MedicationsSupplements
+import com.joohnq.moodapp.domain.Mood
+import com.joohnq.moodapp.domain.PhysicalSymptoms
+import com.joohnq.moodapp.domain.ProfessionalHelp
+import com.joohnq.moodapp.domain.SleepQuality
+import com.joohnq.moodapp.domain.StatsRecord
+import com.joohnq.moodapp.domain.StressLevel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

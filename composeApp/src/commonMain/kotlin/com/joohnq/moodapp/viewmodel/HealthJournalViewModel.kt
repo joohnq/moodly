@@ -2,11 +2,11 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.entities.HealthJournalRecord
-import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.model.repository.HealthJournalRepository
-import com.joohnq.moodapp.view.state.UiState
-import com.joohnq.moodapp.view.state.UiState.Companion.getValue
+import com.joohnq.moodapp.domain.HealthJournalRecord
+import com.joohnq.moodapp.domain.Mood
+import com.joohnq.moodapp.data.repository.HealthJournalRepository
+import com.joohnq.moodapp.ui.state.UiState
+import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

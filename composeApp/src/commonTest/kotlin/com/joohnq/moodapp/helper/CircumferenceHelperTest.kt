@@ -1,7 +1,7 @@
 package com.joohnq.moodapp.helper
 
-import com.joohnq.moodapp.mappers.toDegrees
-import com.joohnq.moodapp.mappers.toRadians
+import com.joohnq.moodapp.util.mappers.toDegrees
+import com.joohnq.moodapp.util.mappers.toRadians
 import com.varabyte.truthish.assertThat
 import kotlin.test.Test
 

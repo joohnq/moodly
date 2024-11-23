@@ -4,7 +4,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.lifecycle.ViewModel
-import com.joohnq.moodapp.view.graph.AppNavigation
+import cafe.adriel.voyager.navigator.Navigator
+import com.joohnq.moodapp.ui.presentation.loading.LoadingScreen
 import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -27,6 +28,10 @@ fun App() {
             userViewModel.onAction(UserIntent.InitUser)
         }
 
-        MaterialTheme { AppNavigation() }
+        MaterialTheme {
+            Navigator(
+                screen = LoadingScreen()
+            )
+        }
     }
 }

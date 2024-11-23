@@ -2,13 +2,13 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.entities.Mood
-import com.joohnq.moodapp.entities.SleepInfluences
-import com.joohnq.moodapp.entities.SleepQuality
-import com.joohnq.moodapp.entities.SleepQualityRecord
-import com.joohnq.moodapp.helper.DatetimeManager
-import com.joohnq.moodapp.model.repository.SleepQualityRepository
-import com.joohnq.moodapp.view.state.UiState
+import com.joohnq.moodapp.domain.Mood
+import com.joohnq.moodapp.domain.SleepInfluences
+import com.joohnq.moodapp.domain.SleepQuality
+import com.joohnq.moodapp.domain.SleepQualityRecord
+import com.joohnq.moodapp.util.helper.DatetimeManager
+import com.joohnq.moodapp.data.repository.SleepQualityRepository
+import com.joohnq.moodapp.ui.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -15,8 +15,8 @@ import com.joohnq.moodapp.domain.PhysicalSymptoms
 import com.joohnq.moodapp.ui.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingBaseComponent
+import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
-import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
@@ -38,8 +38,8 @@ fun OnboardingPhysicalSymptomsUI(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = selectedOption != null,
-        onGoBack = { onEvent(OnboardingProfessionalHelpEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen) }
+        onGoBack = { onEvent(OnboardingPhysicalSymptomsEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),

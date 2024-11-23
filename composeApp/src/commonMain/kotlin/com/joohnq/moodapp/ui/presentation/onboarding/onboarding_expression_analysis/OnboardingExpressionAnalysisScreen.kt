@@ -11,6 +11,7 @@ import com.joohnq.moodapp.domain.SleepQualityRecord
 import com.joohnq.moodapp.domain.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
+import com.joohnq.moodapp.ui.presentation.get_user_name.GetUserNameScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.event.OnboardingExpressionEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.moodapp.ui.state.UiState
@@ -106,6 +107,7 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
         LaunchedEffect(userPreferencesState.updating) {
             userPreferencesState.updating.fold(
                 onSuccess = {
+                    onNavigate(GetUserNameScreen())
                 },
                 onError = {
                     scope.launch { snackBarState.showSnackbar(it) }

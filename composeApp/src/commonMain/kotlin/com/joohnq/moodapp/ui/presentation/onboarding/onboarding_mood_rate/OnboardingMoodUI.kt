@@ -17,6 +17,7 @@ import com.joohnq.moodapp.ui.components.MoodFace
 import com.joohnq.moodapp.ui.components.RouletteMoods
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingBaseComponent
+import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors

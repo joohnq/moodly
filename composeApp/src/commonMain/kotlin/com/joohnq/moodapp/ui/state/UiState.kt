@@ -35,6 +35,10 @@ sealed class UiState<out T> {
 
         fun allIsSuccess(vararg values: UiState<*>): Boolean = values.all { it is Success }
 
+        @Composable
+        fun allIsSuccessComposable(vararg values: UiState<*>): Boolean =
+            values.all { it is Success }
+
         fun onAnyError(
             vararg values: UiState<*>,
             onAnyHasError: (String) -> Unit

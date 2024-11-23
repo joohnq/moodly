@@ -24,7 +24,6 @@ import com.joohnq.moodapp.ui.components.ContinueButton
 import com.joohnq.moodapp.ui.components.TextWithBackground
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
-import com.joohnq.moodapp.ui.event.NextAndBackAction
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.ui.theme.TextStyles

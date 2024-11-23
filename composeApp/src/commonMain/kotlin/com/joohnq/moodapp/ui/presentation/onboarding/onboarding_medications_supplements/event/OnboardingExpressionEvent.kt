@@ -2,5 +2,5 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_sup
 
 sealed class OnboardingMedicationsSupplementsEvent {
     data object OnGoBack : OnboardingMedicationsSupplementsEvent()
-    data object OnContinue : OnboardingMedicationsSupplementsEvent()
+    data object OnNavigateToOnboardingStressLevelScreen : OnboardingMedicationsSupplementsEvent()
 }

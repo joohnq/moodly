@@ -2,5 +2,5 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_sympto
 
 sealed class OnboardingPhysicalSymptomsEvent {
     data object OnGoBack : OnboardingPhysicalSymptomsEvent()
-    data object OnContinue : OnboardingPhysicalSymptomsEvent()
+    data object OnNavigateOnboardingSleepQualityScreen : OnboardingPhysicalSymptomsEvent()
 }

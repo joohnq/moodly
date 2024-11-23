@@ -19,9 +19,8 @@ class OnboardingMedicationsSupplementsScreen :
 
         fun onEvent(event: OnboardingMedicationsSupplementsEvent) =
             when (event) {
-                OnboardingMedicationsSupplementsEvent.OnContinue -> onNavigate(
-                    OnboardingStressLevelScreen()
-                )
+                OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen ->
+                    onNavigate(OnboardingStressLevelScreen())
 
                 OnboardingMedicationsSupplementsEvent.OnGoBack -> onGoBack()
             }

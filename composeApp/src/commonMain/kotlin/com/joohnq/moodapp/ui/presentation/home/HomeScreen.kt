@@ -19,7 +19,6 @@ import com.joohnq.moodapp.ui.presentation.mood.MoodScreen
 import com.joohnq.moodapp.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.moodapp.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.moodapp.ui.state.UiState
-import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.util.helper.DatetimeManager
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
@@ -96,29 +95,31 @@ class HomeScreen : CustomScreen<HomeState>() {
             }
         }
 
-//        if (
-//            UiState.allIsSuccess(
-//                statsState.statsRecords,
-//                userState.user,
-//                stressLevelState.stressLevelRecords,
-//                sleepQualityState.sleepQualityRecords,
-//                sleepQualityState.sleepQualityRecords
-//            )
-//        )
         return HomeState(
             today = today,
             padding = PaddingValues(),
-            userName = userState.user.getValue().name,
-            statsRecord = statsState.statsRecords.getValue().first(),
-            moodTracker = statsState.statsRecords.getValue().take(3).reversed().map { it.mood },
+            userName = userState.user,
+            statsRecord = statsState.statsRecords,
             freudScore = statsState.freudScore,
-            healthJournal = healthJournalState.healthJournalRecords.getValue(),
-            sleepQuality = sleepQualityState.sleepQualityRecords.getValue().last().sleepQuality,
-            stressLevel = stressLevelState.stressLevelRecords.getValue().last().stressLevel,
+            healthJournal = healthJournalState.healthJournalRecords,
+            sleepQuality = sleepQualityState.sleepQualityRecords,
+            stressLevel = stressLevelState.stressLevelRecords,
             onEvent = ::onEvent
         )
     }
 
     @Composable
-    override fun UI(state: HomeState) = HomeUI(state)
+    override fun UI(state: HomeState) {
+        if (
+            UiState.allIsSuccessComposable(
+                state.userName,
+                state.statsRecord,
+                state.healthJournal,
+                state.sleepQuality,
+                state.stressLevel
+            )
+        ) {
+            HomeUI(state = state)
+        }
+    }
 }

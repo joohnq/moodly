@@ -5,12 +5,6 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
-import com.joohnq.moodapp.domain.HealthJournalRecord
-import com.joohnq.moodapp.domain.SleepQualityRecord
-import com.joohnq.moodapp.domain.StatsRecord
-import com.joohnq.moodapp.domain.StressLevelRecord
-import com.joohnq.moodapp.domain.User
-import com.joohnq.moodapp.domain.UserPreferences
 import com.joohnq.moodapp.data.converters.LocalDateTimeConverter
 import com.joohnq.moodapp.data.converters.SleepInfluencesConverter
 import com.joohnq.moodapp.data.converters.SleepQualityRecordConverter
@@ -24,6 +18,12 @@ import com.joohnq.moodapp.data.dao.StatsRecordDAO
 import com.joohnq.moodapp.data.dao.StressLevelRecordDAO
 import com.joohnq.moodapp.data.dao.UserDAO
 import com.joohnq.moodapp.data.dao.UserPreferencesDAO
+import com.joohnq.moodapp.domain.HealthJournalRecord
+import com.joohnq.moodapp.domain.SleepQualityRecord
+import com.joohnq.moodapp.domain.StatsRecord
+import com.joohnq.moodapp.domain.StressLevelRecord
+import com.joohnq.moodapp.domain.User
+import com.joohnq.moodapp.domain.UserPreferences
 
 @Database(
     entities = [StatsRecord::class, User::class, UserPreferences::class, StressLevelRecord::class, SleepQualityRecord::class, HealthJournalRecord::class],
@@ -39,7 +39,7 @@ import com.joohnq.moodapp.data.dao.UserPreferencesDAO
     StressorsConverter::class,
     SleepInfluencesConverter::class
 )
-abstract class MyDatabase : RoomDatabase() {
+abstract class LocalDatabase : RoomDatabase() {
     abstract fun moodsDAO(): StatsRecordDAO
     abstract fun userDAO(): UserDAO
     abstract fun userPreferencesDAO(): UserPreferencesDAO
@@ -49,10 +49,11 @@ abstract class MyDatabase : RoomDatabase() {
 }
 
 @Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object MyDatabaseConstructor : RoomDatabaseConstructor<MyDatabase> {
-    override fun initialize(): MyDatabase
+expect object MyDatabaseConstructor :
+    RoomDatabaseConstructor<LocalDatabase> {
+    override fun initialize(): LocalDatabase
 }
 
 expect class MyDatabaseInitializer {
-    fun init(): RoomDatabase.Builder<MyDatabase>
+    fun init(): RoomDatabase.Builder<LocalDatabase>
 }

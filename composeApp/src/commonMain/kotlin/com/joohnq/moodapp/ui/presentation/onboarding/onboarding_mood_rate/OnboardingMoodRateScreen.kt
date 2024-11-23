@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.ScreenDimensions
+import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.OnboardingProfessionalHelpScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
@@ -20,9 +21,8 @@ class OnboardingMoodRateScreen : CustomScreen<OnboardingMoodRateState>() {
 
         fun onEvent(event: OnboardingProfessionalHelpEvent) =
             when (event) {
-                OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen -> onNavigate(
-                    OnboardingProfessionalHelpScreen()
-                )
+                OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen ->
+                    onNavigate(OnboardingProfessionalHelpScreen())
 
                 OnboardingProfessionalHelpEvent.OnGoBack -> onGoBack()
             }

@@ -16,15 +16,6 @@ import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import kotlinx.coroutines.launch
 
-//class AddJournalingScreen : CustomScreen<AddJournalingState>() {
-//    @Composable
-//    override fun Screen(): AddJournalingState {
-//    }
-//
-//    @Composable
-//    override fun UI(state: AddJournalingState) = AddJournalingScreenUI(state)
-//}
-
 class AddJournalingScreen : CustomScreen<AddJournalingState>() {
     @Composable
     override fun Screen(): AddJournalingState {

@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate
+package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state
 
 import com.joohnq.moodapp.domain.Mood
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent

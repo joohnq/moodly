@@ -8,10 +8,10 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 actual class MyDatabaseInitializer {
-    actual fun init(): RoomDatabase.Builder<MyDatabase> {
+    actual fun init(): RoomDatabase.Builder<LocalDatabase> {
         val dbFile = documentDirectory() + "/MyDatabase.db"
 
-        return Room.databaseBuilder<MyDatabase>(
+        return Room.databaseBuilder<LocalDatabase>(
             name = dbFile,
         )
     }

@@ -37,7 +37,7 @@ fun OnboardingMedicationsSupplementsUI(
         title = Res.string.medications_supplements_title,
         isContinueButtonVisible = selectedOption != null,
         onGoBack = { onEvent(OnboardingMedicationsSupplementsEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingMedicationsSupplementsEvent.OnContinue) },
+        onContinue = { onEvent(OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen) },
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),

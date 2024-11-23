@@ -12,6 +12,7 @@ import com.joohnq.moodapp.ui.components.MentalHealthMetrics
 import com.joohnq.moodapp.ui.components.MindfulTracker
 import com.joohnq.moodapp.ui.components.Title
 import com.joohnq.moodapp.ui.presentation.home.state.HomeState
+import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mental_health_metrics
 import moodapp.composeapp.generated.resources.mindful_tracker
@@ -20,7 +21,7 @@ import moodapp.composeapp.generated.resources.mindful_tracker
 fun HomeUI(
     state: HomeState,
 ) {
-    val (today, padding, userName, statsRecord, sleepQuality, stressLevel, freudScore, moodTracker, healthJournal, onEvent) = state
+    val (today, padding, userName, statsRecord, sleepQuality, stressLevel, freudScore, healthJournal, onEvent) = state
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .padding(bottom = padding.calculateBottomPadding())
@@ -29,21 +30,21 @@ fun HomeUI(
             modifier = Modifier.padding(
                 top = padding.calculateTopPadding(),
             ),
-            userName = userName,
+            userName = userName.getValue().name,
             date = today
         )
         Title(Res.string.mental_health_metrics)
         MentalHealthMetrics(
             freudScore = freudScore,
-            statsRecord = statsRecord,
-            healthJournal = healthJournal,
+            statsRecord = statsRecord.getValue().first(),
+            healthJournal = healthJournal.getValue(),
             onAction = onEvent
         )
         Title(Res.string.mindful_tracker)
         MindfulTracker(
-            sleepQuality = sleepQuality,
-            stressLevel = stressLevel,
-            moodTracker = moodTracker,
+            sleepQuality = sleepQuality.getValue().last().sleepQuality,
+            stressLevel = stressLevel.getValue().last().stressLevel,
+            moodTracker = statsRecord.getValue().take(3).reversed().map { it.mood },
             onAction = onEvent
         )
     }

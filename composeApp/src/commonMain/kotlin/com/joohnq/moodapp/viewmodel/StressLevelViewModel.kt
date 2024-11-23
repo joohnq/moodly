@@ -2,12 +2,12 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.entities.StressLevel
-import com.joohnq.moodapp.entities.StressLevelRecord
-import com.joohnq.moodapp.entities.Stressor
-import com.joohnq.moodapp.mappers.toggle
-import com.joohnq.moodapp.model.repository.StressLevelRepository
-import com.joohnq.moodapp.view.state.UiState
+import com.joohnq.moodapp.domain.StressLevel
+import com.joohnq.moodapp.domain.StressLevelRecord
+import com.joohnq.moodapp.domain.Stressor
+import com.joohnq.moodapp.util.mappers.toggle
+import com.joohnq.moodapp.data.repository.StressLevelRepository
+import com.joohnq.moodapp.ui.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

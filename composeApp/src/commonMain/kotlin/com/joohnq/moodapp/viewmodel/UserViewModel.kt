@@ -2,9 +2,9 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.entities.User
-import com.joohnq.moodapp.model.repository.UserRepository
-import com.joohnq.moodapp.view.state.UiState
+import com.joohnq.moodapp.domain.User
+import com.joohnq.moodapp.data.repository.UserRepository
+import com.joohnq.moodapp.ui.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

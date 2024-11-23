@@ -1,9 +1,11 @@
 @file:OptIn(ExperimentalComposeLibrary::class)
 
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -14,6 +16,7 @@ plugins {
     alias(libs.plugins.room)
     alias(libs.plugins.serialization)
     alias(libs.plugins.mokkery)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -88,6 +91,14 @@ kotlin {
 
             // Charts
             implementation(libs.compose.charts)
+
+            api(libs.generativeai)
+
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.bottom.sheet.navigator)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.transitions)
+            implementation(libs.voyager.koin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -154,15 +165,16 @@ dependencies {
     implementation(libs.androidx.ui.test.junit4.desktop)
     implementation(libs.androidx.core.i18n)
     implementation(libs.protolite.well.known.types)
-    ksp(libs.room.compiler)
     debugImplementation(compose.uiTooling)
     implementation(libs.kotlinx.coroutines.core)
+    ksp(libs.room.compiler)
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.kotlinx.coroutines.core)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 }
 
 compose.desktop {
@@ -177,3 +189,49 @@ compose.desktop {
     }
 }
 
+buildkonfig {
+    packageName = libs.versions.android.packageName.get()
+    defaultConfigs {
+        val localPropsFile = rootProject.file("local.properties")
+        val localProperties = Properties()
+        if (localPropsFile.exists()) {
+            runCatching {
+                localProperties.load(localPropsFile.inputStream())
+            }.getOrElse {
+                it.printStackTrace()
+            }
+        }
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_API_KEY",
+            localProperties["gemini_api_key"]?.toString() ?: ""
+        )
+    }
+}
+
+// Prevent the bug with room when generate an APK
+tasks.withType<Test> {
+    if (name == "mergeDebugAndroidTestAssets") {
+        enabled = false
+    }
+}
+
+tasks.withType<Test> {
+    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
+        enabled = false
+    }
+}
+
+tasks.whenTaskAdded {
+    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
+        enabled = false
+    }
+}
+
+gradle.taskGraph.whenReady {
+    allTasks.onEach { task ->
+        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
+            task.enabled = false
+        }
+    }
+}

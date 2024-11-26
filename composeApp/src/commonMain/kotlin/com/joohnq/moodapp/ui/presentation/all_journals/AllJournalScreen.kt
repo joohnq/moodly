@@ -33,18 +33,22 @@ class AllJournalScreen : CustomScreen<AllJournalState>() {
                 )
             }
         var selectedDateTime by remember { mutableStateOf(DatetimeManager.getCurrentDateTime().date) }
+        var openDeleteDialog by remember { mutableStateOf(false) }
 
         fun onEvent(event: AllJournalEvent) =
             when (event) {
                 AllJournalEvent.OnGoBack -> onGoBack()
                 is AllJournalEvent.OnSelectJournal -> onNavigate(EditJournalingScreen(event.id))
                 is AllJournalEvent.OnSelectDate -> selectedDateTime = event.localDate
+                is AllJournalEvent.UpdateEditingOpenDeleteDialog -> openDeleteDialog = event.value
             }
 
         return AllJournalState(
             selectedDateTime = selectedDateTime,
             healthJournals = healthJournalMap,
-            onEvent = ::onEvent
+            onEvent = ::onEvent,
+            openDeleteDialog = openDeleteDialog,
+            onAction = healthJournalViewModel::onAction
         )
     }
 

@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +12,6 @@ import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingBaseComponent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.event.OnboardingExpressionEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.moodapp.ui.theme.Colors
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
@@ -33,19 +31,17 @@ fun OnboardingExpressionAnalysisUI(
         onContinue = { state.onEvent(OnboardingExpressionEvent.OnContinue) },
         onGoBack = { state.onEvent(OnboardingExpressionEvent.OnGoBack) },
     ) {
-        Column(modifier = Modifier.paddingHorizontalMedium()) {
-            Text(
-                text = stringResource(Res.string.expression_analysis_desc),
-                style = TextStyles.ParagraphMd(),
-                color = Colors.Brown100Alpha64,
-                textAlign = TextAlign.Center
-            )
-            VerticalSpacer(10.dp)
-            ExpressionAnalysisTextField(
-                modifier = Modifier.testTag(OnboardingExpressionAnalysisScreen.OnboardingExpressionTestTag.TEXT_INPUT),
-                text = state.desc,
-                onValueChange = { state.onAction(OnboardingIntent.UpdateStatsRecordDescription(it)) }
-            )
-        }
+        Text(
+            text = stringResource(Res.string.expression_analysis_desc),
+            style = TextStyles.ParagraphMd(),
+            color = Colors.Brown100Alpha64,
+            textAlign = TextAlign.Center
+        )
+        VerticalSpacer(10.dp)
+        ExpressionAnalysisTextField(
+            modifier = Modifier.testTag(OnboardingExpressionAnalysisScreen.OnboardingExpressionTestTag.TEXT_INPUT),
+            text = state.desc,
+            onValueChange = { state.onAction(OnboardingIntent.UpdateStatsRecordDescription(it)) }
+        )
     }
 }

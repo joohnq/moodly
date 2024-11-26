@@ -2,7 +2,6 @@ package com.joohnq.moodapp.ui.presentation.all_journals
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,21 +18,30 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.domain.Mood
+import com.joohnq.moodapp.ui.components.MainAlertDialog
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.moodapp.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
+import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
+import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import kotlinx.datetime.LocalDate
 import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.delete_journal
+import moodapp.composeapp.generated.resources.do_you_wish_to_remove_this_journal
 import moodapp.composeapp.generated.resources.my_journals
 import moodapp.composeapp.generated.resources.timeline
 import org.jetbrains.compose.resources.stringResource
@@ -44,6 +52,25 @@ fun AllJournalUI(state: AllJournalState) {
     val key = state.healthJournals.keys.find { it == state.selectedDateTime }
         ?: state.healthJournals.keys.last()
     val list = state.healthJournals[key]
+    var currentDeleteId by remember { mutableStateOf(-1) }
+
+    if (state.openDeleteDialog)
+        MainAlertDialog(
+            onDismissRequest = {
+                state.onEvent(
+                    AllJournalEvent.UpdateEditingOpenDeleteDialog(false)
+                )
+            },
+            onConfirmation = {
+                state.onEvent(AllJournalEvent.UpdateEditingOpenDeleteDialog(false))
+                state.onAction(HealthJournalIntent.DeleteHealthJournal(currentDeleteId))
+            },
+            dialogTitle = Res.string.delete_journal,
+            dialogText = Res.string.do_you_wish_to_remove_this_journal,
+            icon = Drawables.Icons.Trash,
+            backgroundColor = Colors.White
+        )
+
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
@@ -74,35 +101,13 @@ fun AllJournalUI(state: AllJournalState) {
                     contentPadding = PaddingValues(horizontal = 20.dp),
                     state = rememberLazyListState(initialFirstVisibleItemIndex = keys.lastIndex)
                 ) {
-                    items(keys) {
-                        val isSelected = it == state.selectedDateTime
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.background(
-                                color = if (isSelected) Colors.White else Colors.Brown70,
-                                shape = Dimens.Shape.Circle
-                            ).padding(horizontal = 10.dp, vertical = 15.dp)
-                                .clickable { state.onEvent(AllJournalEvent.OnSelectDate(it)) }
-//                                .then(
-//                                    if (isSelected) Modifier.border(
-//                                        3.dp,
-//                                        color = Colors.Brown100Alpha64,
-//                                        shape = Dimens.Shape.Circle
-//                                    ) else Modifier
-//                                )
-                        ) {
-                            Text(
-                                text = "daw",
-                                style = TextStyles.TextXsBold(),
-                                color = if (isSelected) Colors.Brown80 else Colors.Brown20
-                            )
-                            VerticalSpacer(5.dp)
-                            Text(
-                                text = it.dayOfMonth.toString(),
-                                style = TextStyles.TextMdExtraBold(),
-                                color = if (isSelected) Colors.Brown80 else Colors.Brown20
-                            )
-                        }
+                    items(keys) { date ->
+                        val isSelected = date == state.selectedDateTime
+                        AllJournalDateCard(
+                            isSelected = isSelected,
+                            date = date,
+                            onEvent = state.onEvent,
+                        )
                     }
                 }
             }
@@ -133,6 +138,12 @@ fun AllJournalUI(state: AllJournalState) {
                             healthJournal = healthJournal,
                             lastIndex = list.lastIndex,
                             onEvent = state.onEvent,
+                            onDelete = {
+                                currentDeleteId = healthJournal.id
+                                state.onEvent(
+                                    AllJournalEvent.UpdateEditingOpenDeleteDialog(true)
+                                )
+                            }
                         )
                     }
                 }
@@ -213,7 +224,9 @@ fun Preview() {
                 ),
             ),
             onEvent = {},
-            selectedDateTime = LocalDate(2022, 1, 1)
+            selectedDateTime = LocalDate(2022, 1, 1),
+            openDeleteDialog = false,
+            onAction = {}
         )
     )
 }
@@ -242,7 +255,9 @@ fun Preview2() {
                 ),
             ),
             onEvent = {},
-            selectedDateTime = LocalDate(2022, 1, 1)
+            selectedDateTime = LocalDate(2022, 1, 1),
+            openDeleteDialog = false,
+            onAction = {}
         )
     )
 }

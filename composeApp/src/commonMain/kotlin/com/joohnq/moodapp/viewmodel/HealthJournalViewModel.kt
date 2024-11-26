@@ -232,6 +232,7 @@ class HealthJournalViewModel(
                         )
                     )
                 }
+                onAction(HealthJournalIntent.GetHealthJournals)
             } catch (e: Exception) {
                 _healthJournalState.update { it.copy(deleting = UiState.Error(e.message.toString())) }
             }

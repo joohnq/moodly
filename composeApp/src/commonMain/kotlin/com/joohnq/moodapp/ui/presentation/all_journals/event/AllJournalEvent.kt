@@ -6,4 +6,5 @@ sealed class AllJournalEvent {
     data object OnGoBack : AllJournalEvent()
     data class OnSelectJournal(val id: Int) : AllJournalEvent()
     data class OnSelectDate(val localDate: LocalDate) : AllJournalEvent()
+    data class UpdateEditingOpenDeleteDialog(val value: Boolean) : AllJournalEvent()
 }

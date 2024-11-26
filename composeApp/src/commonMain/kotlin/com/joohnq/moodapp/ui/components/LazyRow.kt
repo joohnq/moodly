@@ -22,7 +22,6 @@ import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.domain.Mood
 import com.joohnq.moodapp.domain.StatsRecord
 import com.joohnq.moodapp.ui.presentation.home.event.HomeEvent
-import com.joohnq.moodapp.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
@@ -39,7 +38,7 @@ fun MentalHealthMetrics(
     freudScore: FreudScore,
     statsRecord: StatsRecord,
     healthJournal: List<HealthJournalRecord>,
-    onAction: (HomeEvent) -> Unit,
+    onEvent: (HomeEvent) -> Unit,
 ) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -51,7 +50,7 @@ fun MentalHealthMetrics(
                 title = Res.string.freud_score,
                 icon = Drawables.Icons.Heart,
                 backgroundColor = freudScore.palette.backgroundColor,
-                onClick = { onAction(HomeEvent.OnNavigateToFreudScore) }
+                onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
             ) {
                 CircularProgressWithDoubleText(
                     modifier = it.size(130.dp),
@@ -71,7 +70,7 @@ fun MentalHealthMetrics(
                 title = Res.string.mood,
                 icon = Drawables.Icons.SadFace,
                 backgroundColor = statsRecord.mood.palette.color,
-                onClick = { onAction(HomeEvent.OnNavigateToMood) }
+                onClick = { onEvent(HomeEvent.OnNavigateToMood) }
             ) {
                 MentalHealthMetricsMoodComponent(
                     it,
@@ -84,7 +83,7 @@ fun MentalHealthMetrics(
                 title = Res.string.health_journal,
                 icon = Drawables.Icons.Document,
                 backgroundColor = Colors.Purple30,
-                onClick = { onAction(HomeEvent.OnNavigateToHealthJournal) }
+                onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
             ) {
                 HealthJournalComponent(
                     it,

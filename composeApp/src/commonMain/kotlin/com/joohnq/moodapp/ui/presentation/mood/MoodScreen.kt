@@ -11,6 +11,7 @@ import com.joohnq.moodapp.domain.StatsRecord
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_stats.AddStatScreen
+import com.joohnq.moodapp.ui.presentation.home.HomeScreen
 import com.joohnq.moodapp.ui.presentation.mood.event.MoodEvent
 import com.joohnq.moodapp.ui.presentation.mood.state.MoodState
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
@@ -33,7 +34,7 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
 
         fun onEvent(event: MoodEvent) =
             when (event) {
-                is MoodEvent.OnGoBack -> onGoBack()
+                is MoodEvent.OnGoBack -> onGoBack(HomeScreen())
                 is MoodEvent.OnNext -> hasNext?.run { hasNext = this }
                 is MoodEvent.OnPrevious -> hasPrevious?.run { hasPrevious = this }
                 is MoodEvent.OnAddStatScreen -> onNavigate(AddStatScreen())

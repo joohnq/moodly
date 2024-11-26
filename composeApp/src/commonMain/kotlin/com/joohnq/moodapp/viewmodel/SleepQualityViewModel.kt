@@ -2,13 +2,14 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.moodapp.data.repository.SleepQualityRepository
 import com.joohnq.moodapp.domain.Mood
 import com.joohnq.moodapp.domain.SleepInfluences
 import com.joohnq.moodapp.domain.SleepQuality
 import com.joohnq.moodapp.domain.SleepQualityRecord
-import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.data.repository.SleepQualityRepository
 import com.joohnq.moodapp.ui.state.UiState
+import com.joohnq.moodapp.util.helper.DatetimeManager
+import com.joohnq.moodapp.util.mappers.toggle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -160,9 +161,7 @@ class SleepQualityViewModel(
         _sleepQualityState.update {
             it.copy(
                 adding = it.adding.copy(
-                    selectedSleepInfluences = if (list.contains(sleepInfluences)) list.minus(
-                        sleepInfluences
-                    ) else list.plus(sleepInfluences)
+                    selectedSleepInfluences = list.toggle(sleepInfluences)
                 )
             )
         }

@@ -7,8 +7,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreenNothing
+import com.joohnq.moodapp.ui.presentation.dashboard_screen.DashboardScreen
 import com.joohnq.moodapp.ui.presentation.get_user_name.GetUserNameScreen
-import com.joohnq.moodapp.ui.presentation.home.HomeScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.OnboardingMoodRateScreen
 import com.joohnq.moodapp.ui.presentation.welcome.WelcomeScreen
 import com.joohnq.moodapp.ui.state.UiState.Companion.onSuccess
@@ -45,7 +45,7 @@ class LoadingScreen : CustomScreenNothing() {
                     }
 
                     else -> {
-                        onNavigate(HomeScreen(), false)
+                        onNavigate(DashboardScreen(), false)
                         return@onSuccess
                     }
                 }

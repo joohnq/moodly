@@ -85,6 +85,12 @@ object TextStyles {
     )
 
     @Composable
+    fun Text2xlBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 24.sp
+    )
+
+    @Composable
     fun Text2xlSemiBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.SemiBold(),
         fontSize = 24.sp

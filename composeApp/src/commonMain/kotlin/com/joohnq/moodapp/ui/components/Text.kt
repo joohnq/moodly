@@ -86,11 +86,12 @@ fun TextEllipsis(
     text: String,
     style: TextStyle,
     color: Color,
+    maxLines: Int = 1,
     textAlign: TextAlign? = null
 ) {
     Text(
         text = text,
-        maxLines = 1,
+        maxLines = maxLines,
         style = style,
         color = color,
         textAlign = textAlign,

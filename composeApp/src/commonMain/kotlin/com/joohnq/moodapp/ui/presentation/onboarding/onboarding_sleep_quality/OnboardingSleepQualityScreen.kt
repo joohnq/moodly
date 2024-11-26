@@ -34,4 +34,8 @@ class OnboardingSleepQualityScreen : CustomScreen<OnboardingSleepQualityState>()
 
     @Composable
     override fun UI(state: OnboardingSleepQualityState) = OnboardingSleepQualityUI(state)
+
+    object OnboardingSleepQualityTestTag {
+        const val SLEEP_QUALITY_SLIDER = "SLEEP_QUALITY_SLIDER"
+    }
 }

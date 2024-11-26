@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.ui.components.ContinueButton
@@ -27,7 +26,6 @@ import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.util.constants.TestConstants
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
 import moodapp.composeapp.generated.resources.page_of
@@ -44,7 +42,7 @@ fun OnboardingBaseComponent(
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,
     onGoBack: () -> Unit,
-    onContinue: () -> Unit,
+    onContinue: () -> Unit = {},
     content: @Composable () -> Unit
 ) {
     Scaffold(
@@ -89,7 +87,7 @@ fun OnboardingBaseComponent(
             VerticalSpacer(24.dp)
             if (isContinueButtonVisible) {
                 ContinueButton(
-                    modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
+                    modifier = Modifier.fillMaxWidth(),
                     onClick = onContinue
                 )
                 VerticalSpacer(16.dp)

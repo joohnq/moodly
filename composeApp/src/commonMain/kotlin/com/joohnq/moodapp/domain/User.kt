@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.joohnq.moodapp.data.DatabaseConstants
+import com.joohnq.moodapp.util.helper.DatetimeManager
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
 @Entity(tableName = DatabaseConstants.USER_DATABASE)
@@ -16,7 +18,8 @@ data class User(
     @ColumnInfo(name = DatabaseConstants.SOUGHT_HELP)
     val soughtHelp: ProfessionalHelp,
     @ColumnInfo(name = DatabaseConstants.PHYSICAL_SYMPTOMS)
-    val physicalSymptoms: PhysicalSymptoms
+    val physicalSymptoms: PhysicalSymptoms,
+    @ColumnInfo(name = DatabaseConstants.DATE_CREATED) val dateCreated: LocalDateTime
 ) {
     companion object {
         fun init(): User = User(
@@ -24,7 +27,8 @@ data class User(
             name = "",
             medicationsSupplements = MedicationsSupplements.ImNotTakingAny,
             soughtHelp = ProfessionalHelp.No,
-            physicalSymptoms = PhysicalSymptoms.No
+            physicalSymptoms = PhysicalSymptoms.No,
+            dateCreated = DatetimeManager.getCurrentDateTime()
         )
     }
 }

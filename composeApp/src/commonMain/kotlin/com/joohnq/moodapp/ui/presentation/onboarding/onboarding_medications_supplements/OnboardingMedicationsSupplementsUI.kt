@@ -1,6 +1,8 @@
 package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_supplements
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,19 +27,19 @@ import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.medications_supplements_title
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun OnboardingMedicationsSupplementsUI(
     state: OnboardingMedicationSupplementsState,
 ) {
-    val (selectedOption, onEvent, onAction) = state
     val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
 
     OnboardingBaseComponent(
         page = 5,
         title = Res.string.medications_supplements_title,
-        isContinueButtonVisible = selectedOption != null,
-        onGoBack = { onEvent(OnboardingMedicationsSupplementsEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen) },
+        isContinueButtonVisible = state.selectedOption != null,
+        onGoBack = { state.onEvent(OnboardingMedicationsSupplementsEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen) },
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -52,13 +54,32 @@ fun OnboardingMedicationsSupplementsUI(
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = selectedOption == option,
+                    selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextMdBold(),
-                    onClick = { onAction(OnboardingIntent.UpdateUserMedicationsSupplements(option)) }
+                    onClick = {
+                        state.onAction(
+                            OnboardingIntent.UpdateUserMedicationsSupplements(
+                                option
+                            )
+                        )
+                    }
                 )
             }
         }
     }
+}
+
+
+@Preview
+@Composable
+fun Preview() {
+    OnboardingMedicationsSupplementsUI(
+        OnboardingMedicationSupplementsState(
+            selectedOption = MedicationsSupplements.PrescribedMedications,
+            onEvent = {},
+            onAction = {}
+        )
+    )
 }

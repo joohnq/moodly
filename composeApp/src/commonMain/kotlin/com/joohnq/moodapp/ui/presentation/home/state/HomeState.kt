@@ -1,7 +1,5 @@
 package com.joohnq.moodapp.ui.presentation.home.state
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.FreudScore
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.domain.SleepQualityRecord
@@ -13,7 +11,6 @@ import com.joohnq.moodapp.ui.state.UiState
 
 data class HomeState(
     val today: String = "",
-    val padding: PaddingValues = PaddingValues(0.dp),
     val userName: UiState<User>,
     val statsRecord: UiState<List<StatsRecord>>,
     val sleepQuality: UiState<List<SleepQualityRecord>>,

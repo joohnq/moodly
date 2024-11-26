@@ -107,7 +107,7 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
         LaunchedEffect(userPreferencesState.updating) {
             userPreferencesState.updating.fold(
                 onSuccess = {
-                    onNavigate(GetUserNameScreen())
+                    onNavigate(GetUserNameScreen(), true)
                 },
                 onError = {
                     scope.launch { snackBarState.showSnackbar(it) }
@@ -126,6 +126,10 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
     @Composable
     override fun UI(state: OnboardingExpressionAnalysisState) =
         OnboardingExpressionAnalysisUI(state)
+
+    object OnboardingExpressionTestTag {
+        const val TEXT_INPUT = "TEXT_INPUT"
+    }
 }
 
 

@@ -46,6 +46,7 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
             sleepQualityState.adding.status.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
+                    sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
                     onEvent(AddSleepQualityEvent.OnGoBack)
                     sleepQualityViewModel.onAction(SleepQualityIntent.ResetAdding)
                 },

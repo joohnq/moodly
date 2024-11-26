@@ -33,6 +33,8 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingVerticalSmall
 import com.joohnq.moodapp.ui.theme.TextStyles
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.write_what_are_you_feeling
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -48,16 +50,22 @@ fun ExpressionAnalysisTextField(
         onValueChange = onValueChange,
         label = null,
         shape = Dimens.Shape.Medium,
+        placeholder = {
+            Text(
+                text = stringResource(Res.string.write_what_are_you_feeling),
+                style = TextStyles.Text2xlBold(),
+                color = Colors.Brown100Alpha64
+            )
+        },
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
             .heightIn(min = 250.dp).border(
                 color = Colors.Brown80Alpha25,
                 width = 4.dp,
                 shape = Dimens.Shape.Medium
             ),
         colors = ComponentColors.TextField.ExpressionAnalysisColors(),
-        textStyle = TextStyles.HeadingSmSemiBold(),
+        textStyle = TextStyles.Text2xlBold(),
     )
 }
 
@@ -173,7 +181,7 @@ fun CustomOutlinedTextField(
         placeholder = {
             Text(
                 text = stringResource(placeholder),
-                style = TextStyles.TextMdBold()
+                style = TextStyles.TextMdSemiBold()
             )
         },
         trailingIcon = trailingIcon,

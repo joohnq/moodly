@@ -178,4 +178,13 @@
     <string name="do_you_wish_to_remove_this_journal">Do you wish to remove this journal?</string>
     <string name="save">Save</string>
     <string name="editing">Editing</string>
+    <string name="write_what_are_you_feeling">Write what are you feeling</string>
+    <string name="my_journals">My Journals</string>
+    <string name="more_journal_stats">More Journal Stats</string>
+    <string name="timeline">Timeline</string>
+    <string name="hour">Hour</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="type_here_your_title">Type here your title</string>
+    <string name="type_here_your_description">Type here your description</string>
 </resources>

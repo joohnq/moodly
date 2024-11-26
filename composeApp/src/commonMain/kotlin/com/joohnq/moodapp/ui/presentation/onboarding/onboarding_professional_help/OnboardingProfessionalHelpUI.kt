@@ -24,16 +24,15 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingProfessionalHelpUI(
     state: OnboardingProfessionalHelpState,
 ) {
-    val (selectedOption, onEvent, onAction) = state
     val options = rememberSaveable { ProfessionalHelp.getAll() }
 
     OnboardingBaseComponent(
         page = 2,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = selectedOption != null,
-        onGoBack = { onEvent(OnboardingProfessionalHelpEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen) }
+        isContinueButtonVisible = state.selectedOption != null,
+        onGoBack = { state.onEvent(OnboardingProfessionalHelpEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen) }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -43,10 +42,10 @@ fun OnboardingProfessionalHelpUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
                     text = stringResource(option.text),
-                    selected = selectedOption == option,
+                    selected = state.selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
+                    onClick = { state.onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
                 )
             }
         }

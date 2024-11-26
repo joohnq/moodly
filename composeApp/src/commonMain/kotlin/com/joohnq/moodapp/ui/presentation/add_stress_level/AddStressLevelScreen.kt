@@ -31,7 +31,8 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
             stressLevelState.adding.status.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
-//                    component.onEvent(AddStressLevelEvent.OnPopUpToStressLevelLevel)
+                    onGoBack()
+                    stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
                 },
             )
@@ -51,11 +52,6 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
                         )
                         stressLevelViewModel.onAction(StressLevelIntent.AddStressLevelRecord())
                     }
-                    stressLevelViewModel.onAction(
-                        StressLevelIntent.UpdateAddingStressors(
-                            Stressor.InPeace
-                        )
-                    )
                 }
 
                 AddStressLevelEvent.OnPopUpToStressLevelLevel -> onGoBack()

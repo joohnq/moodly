@@ -37,6 +37,8 @@ sealed class OnboardingIntent {
     data class UpdateStatsRecordDescription(val description: String) : OnboardingIntent()
     data class UpdateSliderValue(val sliderValue: Float) : OnboardingIntent()
     data object ResetStatsRecord : OnboardingIntent()
+    data class SetOnboardingStateForTesting(val onboardingState: OnboardingState) :
+        OnboardingIntent()
 }
 
 class OnboardingViewModel : ViewModel() {
@@ -57,6 +59,7 @@ class OnboardingViewModel : ViewModel() {
             is OnboardingIntent.UpdateUserPhysicalSymptoms -> updateUserPhysicalSymptoms(intent.physicalSymptoms)
             is OnboardingIntent.UpdateUserSoughtHelp -> updateUserSoughtHelp(intent.soughtHelp)
             is OnboardingIntent.UpdateSliderValue -> updateSliderValue(intent.sliderValue)
+            is OnboardingIntent.SetOnboardingStateForTesting -> setOnboardingStateForTesting(intent.onboardingState)
         }
     }
 
@@ -98,7 +101,7 @@ class OnboardingViewModel : ViewModel() {
         _onboardingState.update { it.copy(statsRecord = StatsRecord.init()) }
     }
 
-    fun setCurrentStatsRecord(statsRecord: StatsRecord) {
-        _onboardingState.update { it.copy(statsRecord = statsRecord) }
+    private fun setOnboardingStateForTesting(onboardingState: OnboardingState) {
+        _onboardingState.update { onboardingState }
     }
 }

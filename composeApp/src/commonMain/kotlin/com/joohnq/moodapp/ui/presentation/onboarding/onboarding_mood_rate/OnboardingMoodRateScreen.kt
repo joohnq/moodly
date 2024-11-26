@@ -6,9 +6,9 @@ import androidx.compose.runtime.getValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.ScreenDimensions
+import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.event.OnboardingMoodRateEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.OnboardingProfessionalHelpScreen
-import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import org.koin.compose.koinInject
 
@@ -19,22 +19,26 @@ class OnboardingMoodRateScreen : CustomScreen<OnboardingMoodRateState>() {
         val screenDimensions: ScreenDimensions = koinInject()
         val onboardingState by onboardingViewModel.onboardingState.collectAsState()
 
-        fun onEvent(event: OnboardingProfessionalHelpEvent) =
+        fun onEvent(event: OnboardingMoodRateEvent) =
             when (event) {
-                OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen ->
+                OnboardingMoodRateEvent.OnNavigateToOnboardingProfessionalHelpScreen ->
                     onNavigate(OnboardingProfessionalHelpScreen())
 
-                OnboardingProfessionalHelpEvent.OnGoBack -> onGoBack()
+                OnboardingMoodRateEvent.OnGoBack -> onGoBack()
             }
 
         return OnboardingMoodRateState(
             moodRatePadding = screenDimensions.moodRatePadding,
             selectedMood = onboardingState.statsRecord.mood,
             onAction = onboardingViewModel::onAction,
-            onEvent = ::onEvent
+            onEvent = ::onEvent,
         )
     }
 
     @Composable
     override fun UI(state: OnboardingMoodRateState) = OnboardingMoodRateUI(state)
+
+    object OnboardingMoodRateTestTag {
+        const val ROULETTE = "ROULETTE"
+    }
 }

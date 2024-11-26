@@ -3,7 +3,6 @@ package com.joohnq.moodapp.ui.presentation.welcome.screens
 import androidx.compose.runtime.Composable
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.util.constants.TestConstants
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.community_first_title
 import moodapp.composeapp.generated.resources.community_span
@@ -20,7 +19,6 @@ fun CommunityScreen(onNext: () -> Unit) {
         firstTitle = stringResource(Res.string.community_first_title),
         span = stringResource(Res.string.community_span),
         spanColor = Colors.Purple40,
-        testTag = TestConstants.WELCOME_SCREEN_COMMUNITY,
         onNext = onNext
     )
 }

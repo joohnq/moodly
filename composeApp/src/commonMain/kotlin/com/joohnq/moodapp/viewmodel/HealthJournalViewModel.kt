@@ -2,11 +2,14 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.moodapp.data.repository.HealthJournalRepository
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.domain.Mood
-import com.joohnq.moodapp.data.repository.HealthJournalRepository
+import com.joohnq.moodapp.domain.StressLevel
+import com.joohnq.moodapp.domain.Stressor
 import com.joohnq.moodapp.ui.state.UiState
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
+import com.joohnq.moodapp.util.mappers.toggle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +31,8 @@ data class HealthJournalAddingStats(
     val title: String = "",
     val titleError: String? = null,
     val description: String = "",
+    val selectedStressStressors: List<Stressor> = mutableListOf(),
+    val sliderValue: Float = 0f
 )
 
 sealed class HealthJournalIntent {
@@ -47,13 +52,15 @@ sealed class HealthJournalIntent {
     data class UpdateEditingOpenDeleteDialog(val value: Boolean) : HealthJournalIntent()
     data class DeleteHealthJournal(val id: Int) : HealthJournalIntent()
     data object UpdateEditingHealthJournal : HealthJournalIntent()
+    data class UpdateAddingSliderValue(val sliderValue: Float) : HealthJournalIntent()
+    data class UpdateAddingSelectedStressStressors(val stressor: Stressor) : HealthJournalIntent()
 }
 
 data class HealthJournalState(
     val healthJournalRecords: UiState<List<HealthJournalRecord>> = UiState.Idle,
     val adding: HealthJournalAddingStats = HealthJournalAddingStats(),
     val editing: HealthJournalEditing = HealthJournalEditing(),
-    val deleting: UiState<Boolean> = UiState.Idle
+    val deleting: UiState<Boolean> = UiState.Idle,
 )
 
 class HealthJournalViewModel(
@@ -85,6 +92,10 @@ class HealthJournalViewModel(
             is HealthJournalIntent.DeleteHealthJournal -> deleteHealthJournal(intent.id)
             is HealthJournalIntent.UpdateEditingHealthJournal -> updateEditingHealthJournal()
             HealthJournalIntent.ResetDeletingHeathJournal -> resetDeletingHeathJournal()
+            is HealthJournalIntent.UpdateAddingSliderValue -> updateAddingSliderValue(intent.sliderValue)
+            is HealthJournalIntent.UpdateAddingSelectedStressStressors -> updateAddingSelectedStressStressors(
+                intent.stressor
+            )
         }
     }
 
@@ -95,7 +106,9 @@ class HealthJournalViewModel(
             val res = healthJournalRepository.addHealthJournal(
                 title = healthJournalState.value.adding.title,
                 description = healthJournalState.value.adding.description,
-                mood = healthJournalState.value.adding.mood!!
+                mood = healthJournalState.value.adding.mood!!,
+                stressLevel = StressLevel.fromSliderValue(healthJournalState.value.adding.sliderValue),
+                stressors = healthJournalState.value.adding.selectedStressStressors
             )
             changeAddingStatus(UiState.Success(res))
         } catch (e: Exception) {
@@ -146,6 +159,10 @@ class HealthJournalViewModel(
         _healthJournalState.update { it.copy(adding = it.adding.copy(description = description)) }
     }
 
+    private fun updateAddingSliderValue(sliderValue: Float) {
+        _healthJournalState.update { it.copy(adding = it.adding.copy(sliderValue = sliderValue)) }
+    }
+
     private fun updateEditingTitle(title: String) {
         _healthJournalState.update {
             it.copy(
@@ -168,11 +185,12 @@ class HealthJournalViewModel(
 
     private fun updateEditingDescription(description: String) {
         _healthJournalState.update {
+            val editing = it.editing
             it.copy(
                 editing = it.editing.copy(
-                    editingHealthJournalRecord = it.editing.editingHealthJournalRecord.copy(
+                    editingHealthJournalRecord = editing.editingHealthJournalRecord.copy(
                         description = description
-                    )
+                    ),
                 )
             )
         }
@@ -183,6 +201,17 @@ class HealthJournalViewModel(
             it.copy(
                 editing = it.editing.copy(
                     openDeleteDialog = value
+                )
+            )
+        }
+    }
+
+    private fun updateAddingSelectedStressStressors(stressor: Stressor) {
+        val list = _healthJournalState.value.adding.selectedStressStressors
+        _healthJournalState.update {
+            it.copy(
+                adding = it.adding.copy(
+                    selectedStressStressors = list.toggle(stressor)
                 )
             )
         }

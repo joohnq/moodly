@@ -19,14 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.HealthJournalRecord
-import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.util.helper.StatsManager
-import com.joohnq.moodapp.util.mappers.forEachMapComposable
-import com.joohnq.moodapp.util.mappers.items
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
+import com.joohnq.moodapp.util.helper.DatetimeManager
+import com.joohnq.moodapp.util.helper.StatsManager
+import com.joohnq.moodapp.util.mappers.forEachMapComposable
+import com.joohnq.moodapp.util.mappers.items
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.friday_char
 import moodapp.composeapp.generated.resources.monday_char
@@ -56,7 +56,7 @@ fun HealthJournalComponent(
             horizontalArrangement = Arrangement.spacedBy(3.dp),
             verticalArrangement = Arrangement.spacedBy(3.dp, alignment = Alignment.CenterVertically)
         ) {
-            items(dayOfWeek + 1, key = { it }) {
+            items(dayOfWeek + 1) {
                 Box(
                     modifier = Modifier.fillMaxSize()
                         .background(

@@ -7,12 +7,11 @@ android-versionCode = "1"
 android-versionName = "1.0.0"
 android-packageName = "com.joohnq.moodapp"
 androidx-activityCompose = "1.9.3"
-androidx-lifecycle = "2.8.3"
+androidx-lifecycle = "2.8.4"
 compose-plugin = "1.7.1"
 composeCharts = "0.0.17"
-desugar_jdk_libs = "2.1.3"
 koinCore = "4.0.0"
-kotlin = "2.0.21"
+kotlin = "2.0.20"
 kotlinxCoroutinesAndroid = "1.9.0"
 kotlinxCoroutinesCore = "1.9.0"
 kotlinxDatetime = "0.6.1"
@@ -33,7 +32,6 @@ uiTestJunit4Desktop = "1.7.0"
 uiToolingPreviewDesktop = "1.7.0"
 lifecycleViewModel = "2.8.3"
 coreI18n = "1.0.0-alpha01"
-protoliteWellKnownTypes = "18.0.0"
 buildkonfig = "0.15.2"
 generativeai = "0.9.0-1.0.1"
 voyagerNavigator = "1.1.0-beta02"
@@ -41,10 +39,10 @@ voyagerBottomSheetNavigator = "1.1.0-beta02"
 voyagerTabNavigator = "1.1.0-beta02"
 voyagerTransitions = "1.1.0-beta02"
 voyagerKoin = "1.1.0-beta02"
+navigationCommonKtx = "2.8.4"
 
 [libraries]
 compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
-desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModel" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCore" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
@@ -74,13 +72,13 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 androidx-ui-test-junit4-desktop = { group = "androidx.compose.ui", name = "ui-test-junit4-desktop", version.ref = "uiTestJunit4Desktop" }
 ui-tooling-preview-desktop = { module = "org.jetbrains.compose.ui:ui-tooling-preview-desktop", version.ref = "uiToolingPreviewDesktop" }
 androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
-protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
 generativeai = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerKoin" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerTransitions" }
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerTabNavigator" }
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyagerBottomSheetNavigator" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerNavigator" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -335,7 +335,7 @@ fun HealthJournalCard(journal: HealthJournalRecord, onClick: () -> Unit) {
                     text = stringResource(
                         Res.string.mood_show,
                         stringResource(mood.text)
-                    ),
+                    ).uppercase(),
                     backgroundColor = palette.backgroundColor,
                     textColor = palette.color
                 )

@@ -168,5 +168,13 @@ sealed class StressLevel(
             75f -> Four
             else -> Five
         }
+
+        fun toSliderValue(stressLevel: StressLevel): Float = when (stressLevel) {
+            One -> 0f
+            Two -> 25f
+            Three -> 50f
+            Four -> 75f
+            else -> 100f
+        }
     }
 }

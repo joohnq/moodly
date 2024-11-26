@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.PhysicalSymptoms
@@ -31,15 +32,14 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingPhysicalSymptomsUI(
     state: OnboardingPhysicalSymptomsState
 ) {
-    val (selectedOption, onEvent, onAction) = state
     val options = remember { PhysicalSymptoms.getAll() }
 
     OnboardingBaseComponent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = selectedOption != null,
-        onGoBack = { onEvent(OnboardingPhysicalSymptomsEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen) }
+        isContinueButtonVisible = state.selectedOption != null,
+        onGoBack = { state.onEvent(OnboardingPhysicalSymptomsEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -54,15 +54,15 @@ fun OnboardingPhysicalSymptomsUI(
         ) {
             options.forEach { option: PhysicalSymptoms ->
                 IconAndTextRadioButtonHorizontal(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().testTag(option.id),
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = selectedOption == option,
+                    selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),
-                    onClick = { onAction(OnboardingIntent.UpdateUserPhysicalSymptoms(option)) }
+                    onClick = { state.onAction(OnboardingIntent.UpdateUserPhysicalSymptoms(option)) }
                 )
             }
         }

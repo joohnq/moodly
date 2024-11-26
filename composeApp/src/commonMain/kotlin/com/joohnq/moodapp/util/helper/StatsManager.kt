@@ -3,8 +3,10 @@ package com.joohnq.moodapp.util.helper
 import com.joohnq.moodapp.domain.FreudScore
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.domain.StatsRecord
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.plus
 
 object StatsManager {
     fun getFreudScore(statsRecords: List<StatsRecord?>): FreudScore {
@@ -19,16 +21,31 @@ object StatsManager {
     }
 
     fun getHealthJournal(
-        date: LocalDateTime = DatetimeManager.getCurrentDateTime(),
         healthJournals: List<HealthJournalRecord>
-    ): Map<String, List<HealthJournalRecord>?> {
+    ): Map<LocalDate, List<HealthJournalRecord>?> {
+        val date = DatetimeManager.getCurrentDateTime()
         val monthDaysCount = DatetimeManager.getMonthDaysCount(date)
         val recordsByDay = healthJournals.groupBy { it.date.date }
 
         return (1..monthDaysCount).associate { day ->
             val localDate = LocalDate(date.year, date.month, day)
-            val formattedDate = DatetimeManager.formatDate(localDate)
-            formattedDate to recordsByDay[localDate]
+            localDate to recordsByDay[localDate]
+        }
+    }
+
+    fun getHealthJournalBasedOnUserEntry(
+        creationDate: LocalDateTime,
+        healthJournals: List<HealthJournalRecord>
+    ): Map<LocalDate, List<HealthJournalRecord>?> {
+        val currentDate = DatetimeManager.getCurrentDateTime()
+        val recordsByDay = healthJournals.groupBy { it.date.date }
+
+        return generateSequence(creationDate.date) { current ->
+            val nextDate = current.plus(1, DateTimeUnit.DAY)
+            if (nextDate <= currentDate.date) nextDate else null
+        }.associate { date ->
+            val localDate = LocalDate(date.year, date.month, date.dayOfMonth)
+            localDate to recordsByDay[localDate]
         }
     }
 

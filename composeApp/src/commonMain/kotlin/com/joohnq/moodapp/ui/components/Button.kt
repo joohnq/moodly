@@ -38,6 +38,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ButtonTextAndIcon(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     text: StringResource,
     icon: Icon,
     colors: ButtonColors,
@@ -47,6 +48,7 @@ fun ButtonTextAndIcon(
     Button(
         modifier = modifier.height(56.dp),
         colors = colors,
+        enabled = enabled,
         shape = shape,
         onClick = onClick
     ) {
@@ -57,10 +59,9 @@ fun ButtonTextAndIcon(
             Text(
                 text = stringResource(text),
                 style = TextStyles.TextLgExtraBold(),
-                color = colors.contentColor
             )
             HorizontalSpacer(12.dp)
-            Icon(icon)
+            Icon(icon.copy(tint = if (enabled) colors.contentColor else colors.disabledContentColor))
         }
     }
 }
@@ -68,17 +69,18 @@ fun ButtonTextAndIcon(
 @Composable
 fun ContinueButton(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     text: StringResource = Res.string.continue_word,
     onClick: () -> Unit
 ) {
     ButtonTextAndIcon(
         modifier = modifier,
         text = text,
+        enabled = enabled,
         colors = ComponentColors.Button.MainButtonColors(),
         shape = Dimens.Shape.Circle,
         icon = Icon(
             icon = Drawables.Icons.Arrow,
-            tint = Colors.White,
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = Res.string.continue_word
         ),

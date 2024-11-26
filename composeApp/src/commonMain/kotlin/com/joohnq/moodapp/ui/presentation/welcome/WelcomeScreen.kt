@@ -34,7 +34,7 @@ class WelcomeScreen : CustomScreen<WelcomeState>() {
         LaunchedEffect(userPreferencesState.updating) {
             userPreferencesState.updating.fold(
                 onSuccess = {
-                    onNavigate(OnboardingMoodRateScreen())
+                    onNavigate(OnboardingMoodRateScreen(), true)
                 },
                 onError = {
                     scope.launch {
@@ -60,4 +60,10 @@ class WelcomeScreen : CustomScreen<WelcomeState>() {
 
     @Composable
     override fun UI(state: WelcomeState) = WelcomeUI(state)
+
+    object WelcomeTestTag {
+        const val HORIZONTAL_PAGER = "HORIZONTAL_PAGER"
+        const val GO_NEXT = "GO_NEXT"
+        const val SNACK_BAR = "SNACK_BAR"
+    }
 }

@@ -29,7 +29,6 @@ import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.st
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingVerticalLarge
-import com.joohnq.moodapp.util.constants.TestConstants
 import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
@@ -67,7 +66,8 @@ fun OnboardingSleepQualityUI(
                     }
                 }
                 VerticalSlider(
-                    modifier = Modifier.weight(1f).testTag(TestConstants.SLEEP_QUALITY_SLIDER),
+                    modifier = Modifier.weight(1f)
+                        .testTag(OnboardingSleepQualityScreen.OnboardingSleepQualityTestTag.SLEEP_QUALITY_SLIDER),
                     sliderValue = sliderValue,
                     setSliderValue = {
                         onAction(OnboardingIntent.UpdateSliderValue(it))

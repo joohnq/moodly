@@ -44,10 +44,9 @@ import org.jetbrains.compose.resources.stringResource
 fun StressStressorsUI(
     state: StressStressorsState,
 ) {
-    val (snackBarState, selectedStressors, otherValueError, otherValue, onAction, onEvent) = state
     val stressors = remember { Stressor.getAll() }
     Scaffold(
-        snackbarHost = { SnackbarHost(snackBarState) },
+        snackbarHost = { SnackbarHost(state.snackBarState) },
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
     ) { padding ->
@@ -60,7 +59,7 @@ fun StressStressorsUI(
         ) {
             TopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { onEvent(StressStressorsEvent.OnGoBack) }
+                onGoBack = { state.onEvent(StressStressorsEvent.OnGoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -79,28 +78,28 @@ fun StressStressorsUI(
                     items(stressors) { stressor ->
                         StressStressorCircle(
                             stressStressor = stressor,
-                            selected = selectedStressors.contains(stressor),
-                            onClick = { onEvent(StressStressorsEvent.OnAddStressor(stressor)) }
+                            selected = state.selectedStressors.contains(stressor),
+                            onClick = { state.onEvent(StressStressorsEvent.OnAddStressor(stressor)) }
                         )
                     }
                 },
             )
-            if (selectedStressors.any { it::class == Stressor.Other::class })
+            if (state.selectedStressors.any { it::class == Stressor.Other::class })
                 TextFieldWithLabelAndDoubleBorder(
                     label = Res.string.other,
                     placeholder = Res.string.enter_your_stressor,
-                    text = otherValue,
-                    errorText = otherValueError,
+                    text = state.otherValue,
+                    errorText = state.otherValueError,
                     focusedBorderColor = Colors.Green50Alpha25,
                     colors = ComponentColors.TextField.MainTextFieldColors(),
-                    onValueChange = { onAction(StressLevelIntent.UpdateAddingOtherValue(it)) },
+                    onValueChange = { state.onAction(StressLevelIntent.UpdateAddingOtherValue(it)) },
                 )
             VerticalSpacer(24.dp)
-            if (selectedStressors.isNotEmpty())
+            if (state.selectedStressors.isNotEmpty())
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
                         .testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = { onEvent(StressStressorsEvent.OnContinue) }
+                    onClick = { state.onEvent(StressStressorsEvent.OnContinue) }
                 )
         }
     }

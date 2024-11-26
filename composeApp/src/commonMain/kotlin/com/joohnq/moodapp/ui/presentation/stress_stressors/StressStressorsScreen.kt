@@ -10,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.moodapp.domain.Stressor
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
+import com.joohnq.moodapp.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.moodapp.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.moodapp.ui.presentation.stress_stressors.state.StressStressorsState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
@@ -47,8 +48,6 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
                     stressLevelViewModel.onAction(StressLevelIntent.UpdateAddingOtherValue(""))
                     stressLevelViewModel.onAction(StressLevelIntent.AddStressLevelRecord())
                 }
-
-                StressStressorsEvent.OnGoBackToStressLevel -> {}
             }
 
         LaunchedEffect(stressLevelState.adding.stressors) {
@@ -61,8 +60,9 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
             stressLevelState.adding.status.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
-                    onEvent(StressStressorsEvent.OnGoBackToStressLevel)
+                    onGoBack(StressLevelScreen())
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
+                    stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 },
             )
         }

@@ -11,9 +11,9 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
+import com.joohnq.moodapp.ui.presentation.dashboard_screen.DashboardScreen
 import com.joohnq.moodapp.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.moodapp.ui.presentation.get_user_name.state.GetUserNameState
-import com.joohnq.moodapp.ui.presentation.home.HomeScreen
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
 import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
@@ -47,7 +47,7 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
                     }
                 },
                 onSuccess = {
-                    onNavigate(HomeScreen())
+                    onNavigate(DashboardScreen(), true)
                     userPreferencesViewModel.onAction(
                         UserPreferenceIntent.UpdateSkipGetUserNameScreen()
                     )
@@ -67,4 +67,8 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
 
     @Composable
     override fun UI(state: GetUserNameState) = GetUserNameUI(state)
+
+    object GetUserNameTestTag {
+        const val TEXT_INPUT = "TEXT_INPUT"
+    }
 }

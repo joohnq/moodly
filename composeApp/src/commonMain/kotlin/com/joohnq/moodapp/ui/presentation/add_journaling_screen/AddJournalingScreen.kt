@@ -47,6 +47,8 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
             titleError = healthJournalState.adding.titleError,
             desc = healthJournalState.adding.description,
             onAction = healthJournalViewModel::onAction,
+            sliderValue = healthJournalState.adding.sliderValue,
+            selectedStressStressors = healthJournalState.adding.selectedStressStressors,
             onNavigation = ::onEvent
         )
     }

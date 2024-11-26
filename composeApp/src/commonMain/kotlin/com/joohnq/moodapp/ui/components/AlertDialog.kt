@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -40,12 +41,12 @@ fun MainAlertDialog(
         icon = {
             Box(
                 modifier = Modifier.size(56.dp).background(
-                    color = Colors.Brown80,
+                    color = Colors.Orange50,
                     shape = Dimens.Shape.Circle
                 ),
                 contentAlignment = Alignment.Center
             ) {
-                androidx.compose.material3.Icon(
+                Icon(
                     painter = painterResource(icon),
                     contentDescription = stringResource(dialogTitle),
                     modifier = Modifier.size(32.dp),
@@ -64,7 +65,7 @@ fun MainAlertDialog(
             Text(
                 text = stringResource(dialogText),
                 style = TextStyles.TextMdSemiBold(),
-                color = Colors.Brown100Alpha64,
+                color = Colors.Brown80,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -74,7 +75,7 @@ fun MainAlertDialog(
             TextButton(
                 onClick = onConfirmation,
                 shape = Dimens.Shape.ExtraSmall,
-                colors = ComponentColors.Button.MainButtonColors(),
+                colors = ComponentColors.Button.DeleteButtonColors(),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
             ) {
                 Text(

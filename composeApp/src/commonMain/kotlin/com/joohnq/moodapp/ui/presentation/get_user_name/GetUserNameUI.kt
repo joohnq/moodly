@@ -1,8 +1,8 @@
 package com.joohnq.moodapp.ui.presentation.get_user_name
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -13,16 +13,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.ui.components.ContinueButton
@@ -48,7 +51,8 @@ import org.jetbrains.compose.resources.stringResource
 fun GetUserNameUI(
     state: GetUserNameState,
 ) {
-    val (snackBarState, name, nameError, onEvent, onClearFocus, onAction) = state
+    val canContinue by derivedStateOf { state.name.isNotBlank() }
+
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
         Box(
             modifier = Modifier
@@ -71,57 +75,67 @@ fun GetUserNameUI(
         }
         Scaffold(
             containerColor = Colors.Brown10,
-            snackbarHost = { SnackbarHost(hostState = snackBarState) },
+            snackbarHost = { SnackbarHost(hostState = state.snackBarState) },
             modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp, bottom = 20.dp)
                 .pointerInput(Unit) {
                     detectTapGestures(onTap = {
-                        onClearFocus()
+                        state.onClearFocus()
                     })
                 }
         ) { _ ->
             Column(
                 modifier = Modifier
                     .paddingHorizontalSmall()
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = stringResource(Res.string.how_we_can_call_you),
-                        style = TextStyles.HeadingSmExtraBold(),
-                        textAlign = TextAlign.Center,
-                        color = Colors.Brown80
-                    )
-                    VerticalSpacer(48.dp)
-                    TextFieldWithLabelAndDoubleBorder(
-                        label = Res.string.name,
-                        placeholder = Res.string.enter_your_name,
-                        text = name,
-                        errorText = nameError,
-                        focusedBorderColor = Colors.Green50Alpha25,
-                        leadingIcon = {
-                            Icon(
-                                painter = painterResource(Drawables.Icons.User),
-                                contentDescription = null,
-                                tint = Colors.Brown80,
-                                modifier = Modifier.size(Dimens.Icon)
-                            )
-                        },
-                        colors = ComponentColors.TextField.MainTextFieldColors(),
-                        onValueChange = { onAction(UserIntent.UpdateUpdatingUserName(it)) },
-                    )
-                    VerticalSpacer(24.dp)
-                }
-                ContinueButton(
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                    onClick = { onEvent(GetUserNameEvent.OnContinue) }
+                Text(
+                    text = stringResource(Res.string.how_we_can_call_you),
+                    style = TextStyles.HeadingSmExtraBold(),
+                    textAlign = TextAlign.Center,
+                    color = Colors.Brown80
                 )
+                VerticalSpacer(48.dp)
+                TextFieldWithLabelAndDoubleBorder(
+                    modifier = Modifier.testTag(GetUserNameScreen.GetUserNameTestTag.TEXT_INPUT),
+                    label = Res.string.name,
+                    placeholder = Res.string.enter_your_name,
+                    text = state.name,
+                    errorText = state.nameError,
+                    focusedBorderColor = Colors.Green50Alpha25,
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.User),
+                            contentDescription = null,
+                            tint = Colors.Brown80,
+                            modifier = Modifier.size(Dimens.Icon)
+                        )
+                    },
+                    colors = ComponentColors.TextField.MainTextFieldColors(),
+                    onValueChange = { state.onAction(UserIntent.UpdateUpdatingUserName(it)) },
+                )
+                VerticalSpacer(24.dp)
+                if (canContinue)
+                    ContinueButton(
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
+                        onClick = { state.onEvent(GetUserNameEvent.OnContinue) }
+                    )
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    GetUserNameUI(
+        GetUserNameState(
+            snackBarState = remember { SnackbarHostState() },
+            name = "dawd",
+            nameError = null,
+            onEvent = {},
+            onClearFocus = {},
+            onAction = {}
+        )
+    )
 }

@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.StressLevel
 import com.joohnq.moodapp.ui.components.TextRadioButton
@@ -28,17 +29,16 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingStressLevelUI(
     state: OnboardingStressLevelState,
 ) {
-    val (selectedOption, onAction, onEvent) = state
     val options: List<StressLevel> = remember { StressLevel.getAll() }
 
     OnboardingBaseComponent(
         page = 6,
         title = Res.string.stress_rate_title,
-        onGoBack = { onEvent(OnboardingStressLevelEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingStressLevelEvent.OnNavigateToOnboardingExpressionAnalysisScreen) }
+        onGoBack = { state.onEvent(OnboardingStressLevelEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingStressLevelEvent.OnNavigateToOnboardingExpressionAnalysisScreen) }
     ) {
         Text(
-            text = stringResource(selectedOption.value),
+            text = stringResource(state.selectedOption.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -49,18 +49,18 @@ fun OnboardingStressLevelUI(
         ) {
             options.forEach { option: StressLevel ->
                 TextRadioButton(
-                    modifier = Modifier.weight(1f).aspectRatio(1f),
+                    modifier = Modifier.weight(1f).aspectRatio(1f).testTag(option.id.toString()),
                     text = stringResource(option.value),
-                    selected = selectedOption == option,
+                    selected = state.selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
-                    onClick = { onAction(OnboardingIntent.UpdateStressLevel(option)) }
+                    onClick = { state.onAction(OnboardingIntent.UpdateStressLevel(option)) }
                 )
             }
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(selectedOption.text),
+            text = stringResource(state.selectedOption.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )

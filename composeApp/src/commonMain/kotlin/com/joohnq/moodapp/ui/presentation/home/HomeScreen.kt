@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.ui.presentation.home
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,8 +8,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.ui.CustomScreen
+import com.joohnq.moodapp.ui.CustomTab
 import com.joohnq.moodapp.ui.presentation.freud_score.FreudScoreScreen
 import com.joohnq.moodapp.ui.presentation.health_journal.HealthJournalScreen
 import com.joohnq.moodapp.ui.presentation.home.event.HomeEvent
@@ -19,6 +19,7 @@ import com.joohnq.moodapp.ui.presentation.mood.MoodScreen
 import com.joohnq.moodapp.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.moodapp.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.moodapp.ui.state.UiState
+import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.util.helper.DatetimeManager
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
@@ -31,8 +32,12 @@ import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
+import moodapp.composeapp.generated.resources.Res
+import moodapp.composeapp.generated.resources.home
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
-class HomeScreen : CustomScreen<HomeState>() {
+class HomeScreen : CustomTab<HomeState>() {
     @Composable
     override fun Screen(): HomeState {
         val snackBarHostState = remember { SnackbarHostState() }
@@ -52,21 +57,21 @@ class HomeScreen : CustomScreen<HomeState>() {
         fun onEvent(event: HomeEvent) =
             when (event) {
                 HomeEvent.OnNavigateToFreudScore ->
-                    onNavigate(FreudScoreScreen(), false)
+                    onNavigate(FreudScoreScreen())
 
                 HomeEvent.OnNavigateToMood ->
-                    onNavigate(MoodScreen(), false)
+                    onNavigate(MoodScreen())
 
                 HomeEvent.OnNavigateToHealthJournal ->
-                    onNavigate(HealthJournalScreen(), false)
+                    onNavigate(HealthJournalScreen())
 
                 HomeEvent.OnNavigateToMindfulJournal -> {}
 
                 HomeEvent.OnNavigateToSleepQuality ->
-                    onNavigate(SleepQualityScreen(), false)
+                    onNavigate(SleepQualityScreen())
 
                 HomeEvent.OnNavigateToStressLevel ->
-                    onNavigate(StressLevelScreen(), false)
+                    onNavigate(StressLevelScreen())
             }
 
         SideEffect {
@@ -76,6 +81,10 @@ class HomeScreen : CustomScreen<HomeState>() {
             sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
             healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
         }
+
+//        LaunchedEffect(Unit) {
+//            onNavigate(AllJournalScreen())
+//        }
 
         LaunchedEffect(
             statsState.statsRecords,
@@ -97,7 +106,6 @@ class HomeScreen : CustomScreen<HomeState>() {
 
         return HomeState(
             today = today,
-            padding = PaddingValues(),
             userName = userState.user,
             statsRecord = statsState.statsRecords,
             freudScore = statsState.freudScore,
@@ -107,6 +115,15 @@ class HomeScreen : CustomScreen<HomeState>() {
             onEvent = ::onEvent
         )
     }
+
+    override val options: TabOptions
+        @Composable
+        get() =
+            TabOptions(
+                icon = painterResource(Drawables.Icons.Home),
+                title = stringResource(Res.string.home),
+                index = 0u
+            )
 
     @Composable
     override fun UI(state: HomeState) {
@@ -118,8 +135,6 @@ class HomeScreen : CustomScreen<HomeState>() {
                 state.sleepQuality,
                 state.stressLevel
             )
-        ) {
-            HomeUI(state = state)
-        }
+        ) HomeUI(state = state)
     }
 }

@@ -26,9 +26,9 @@ import com.joohnq.moodapp.ui.components.IconContinueButton
 import com.joohnq.moodapp.ui.components.TextWithBackground
 import com.joohnq.moodapp.ui.components.TextWithSpan
 import com.joohnq.moodapp.ui.components.VerticalSpacer
+import com.joohnq.moodapp.ui.presentation.welcome.WelcomeScreen
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
-import com.joohnq.moodapp.util.constants.TestConstants
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.step
 import org.jetbrains.compose.resources.DrawableResource
@@ -46,14 +46,12 @@ fun MockScreen(
     span: String,
     secondTitle: String? = null,
     spanColor: Color,
-    testTag: String,
     onNext: () -> Unit
 ) {
     val screenDimensions: ScreenDimensions = koinInject()
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .testTag(testTag)
     ) {
         Box(
             modifier = Modifier
@@ -113,7 +111,8 @@ fun MockScreen(
                 )
                 VerticalSpacer(24.dp)
                 IconContinueButton(
-                    modifier = Modifier.size(60.dp).testTag(TestConstants.NEXT_BUTTON + step),
+                    modifier = Modifier.size(60.dp)
+                        .testTag(WelcomeScreen.WelcomeTestTag.GO_NEXT + index),
                     colors = ComponentColors.IconButton.ContinueButtonColors(),
                     onClick = onNext
                 )

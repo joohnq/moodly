@@ -5,10 +5,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.joohnq.moodapp.data.DatabaseConstants
 import com.joohnq.moodapp.domain.MedicationsSupplements
 import com.joohnq.moodapp.domain.PhysicalSymptoms
 import com.joohnq.moodapp.domain.User
-import com.joohnq.moodapp.data.DatabaseConstants
 
 @Dao
 interface UserDAO {
@@ -22,7 +22,9 @@ interface UserDAO {
     suspend fun updateUser(user: User)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun initUser(user: User = User.init())
+    suspend fun initUser(
+        user: User = User.init(),
+    )
 
     @Query("UPDATE ${DatabaseConstants.USER_DATABASE} SET name = :name WHERE id = 1")
     suspend fun updateUserName(name: String)

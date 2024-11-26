@@ -17,6 +17,7 @@ import moodapp.composeapp.generated.resources.ic_calendar
 import moodapp.composeapp.generated.resources.ic_chart
 import moodapp.composeapp.generated.resources.ic_chat
 import moodapp.composeapp.generated.resources.ic_check
+import moodapp.composeapp.generated.resources.ic_clock
 import moodapp.composeapp.generated.resources.ic_close
 import moodapp.composeapp.generated.resources.ic_document
 import moodapp.composeapp.generated.resources.ic_document_health
@@ -32,13 +33,16 @@ import moodapp.composeapp.generated.resources.ic_hospital_bed
 import moodapp.composeapp.generated.resources.ic_medicine
 import moodapp.composeapp.generated.resources.ic_mood_neutral
 import moodapp.composeapp.generated.resources.ic_moon
+import moodapp.composeapp.generated.resources.ic_more_horizontal
 import moodapp.composeapp.generated.resources.ic_nothing
 import moodapp.composeapp.generated.resources.ic_question
+import moodapp.composeapp.generated.resources.ic_redo
 import moodapp.composeapp.generated.resources.ic_resize
 import moodapp.composeapp.generated.resources.ic_sad_face
 import moodapp.composeapp.generated.resources.ic_sleep
 import moodapp.composeapp.generated.resources.ic_sun
 import moodapp.composeapp.generated.resources.ic_trash
+import moodapp.composeapp.generated.resources.ic_undo
 import moodapp.composeapp.generated.resources.ic_user
 import moodapp.composeapp.generated.resources.ic_warning
 import moodapp.composeapp.generated.resources.ic_warning_outlined
@@ -95,6 +99,10 @@ object Drawables {
         val Edit = Res.drawable.ic_edit
         val Edit2 = Res.drawable.ic_edit_2
         val Trash = Res.drawable.ic_trash
+        val MoreHorizontal = Res.drawable.ic_more_horizontal
+        val Clock = Res.drawable.ic_clock
+        val Undo = Res.drawable.ic_undo
+        val Redo = Res.drawable.ic_redo
     }
 
     object Images {

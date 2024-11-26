@@ -58,7 +58,7 @@ class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
             isDifferent = healthJournalState.editing.editingHealthJournalRecord.title != healthJournalState.editing.currentHealthJournalRecord.title || healthJournalState.editing.editingHealthJournalRecord.description != healthJournalState.editing.currentHealthJournalRecord.description,
             openDeleteDialog = healthJournalState.editing.openDeleteDialog,
             onAction = healthJournalViewModel::onAction,
-            onEvent = ::onEvent
+            onEvent = ::onEvent,
         )
     }
 

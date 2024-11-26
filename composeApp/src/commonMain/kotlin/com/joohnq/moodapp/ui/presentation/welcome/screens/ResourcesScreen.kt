@@ -3,7 +3,6 @@ package com.joohnq.moodapp.ui.presentation.welcome.screens
 import androidx.compose.runtime.Composable
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.util.constants.TestConstants
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.resource_first_title
 import moodapp.composeapp.generated.resources.resource_second_title
@@ -22,7 +21,6 @@ fun ResourcesScreen(onNext: () -> Unit) {
         span = stringResource(Res.string.resource_span),
         secondTitle = stringResource(Res.string.resource_second_title),
         spanColor = Colors.Yellow60,
-        testTag = TestConstants.WELCOME_SCREEN_RESOURCES,
         onNext = onNext
     )
 }

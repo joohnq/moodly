@@ -28,12 +28,16 @@ fun Title(text: StringResource) {
 
 @Composable
 fun MediumTitle(text: StringResource) {
-    Text(
-        text = stringResource(text),
-        modifier = Modifier.fillMaxWidth(),
-        style = TextStyles.TextMdExtraBold(),
-        color = Colors.Brown80
-    )
+    Column {
+        VerticalSpacer(20.dp)
+        Text(
+            text = stringResource(text),
+            modifier = Modifier.fillMaxWidth(),
+            style = TextStyles.TextMdExtraBold(),
+            color = Colors.Brown80
+        )
+        VerticalSpacer(10.dp)
+    }
 }
 
 @Composable

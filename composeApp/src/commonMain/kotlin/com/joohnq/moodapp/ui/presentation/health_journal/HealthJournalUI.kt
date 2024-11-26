@@ -30,17 +30,16 @@ import org.jetbrains.compose.resources.stringResource
 fun HealthJournalUI(
     state: HealthJournalState
 ) {
-    val (healthJournal, onEvent) = state
-    val dayPerYear = remember { DatetimeManager.getHealthJournalsInYear(healthJournal) }
+    val dayPerYear = remember { DatetimeManager.getHealthJournalsInYear(state.healthJournal) }
     SharedPanelComponent(
         isDark = false,
-        onGoBack = { onEvent(HealthJournalEvent.OnGoBack) },
+        onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },
         backgroundColor = Colors.Brown60,
         backgroundImage = Drawables.Images.HealthJournalBackground,
         panelTitle = Res.string.health_journal,
         bodyTitle = Res.string.journal_history,
         color = Colors.Brown50,
-        onAdd = { onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
+        onAdd = { state.onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
         panelContent = {
             Column(
                 modifier = Modifier.paddingHorizontalMedium()
@@ -65,7 +64,7 @@ fun HealthJournalUI(
             item {
                 VerticalSpacer(10.dp)
                 HealthJournalComponentColorful(
-                    healthJournals = healthJournal
+                    healthJournals = state.healthJournal
                 )
             }
         }

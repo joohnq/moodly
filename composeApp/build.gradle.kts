@@ -109,6 +109,12 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.test)
             implementation(libs.turbine)
+            
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.bottom.sheet.navigator)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.transitions)
+            implementation(libs.voyager.koin)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -149,7 +155,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
 
-        isCoreLibraryDesugaringEnabled = true
+//        isCoreLibraryDesugaringEnabled = true
     }
     buildFeatures {
         compose = true
@@ -164,7 +170,7 @@ dependencies {
     implementation(libs.androidx.benchmark.common)
     implementation(libs.androidx.ui.test.junit4.desktop)
     implementation(libs.androidx.core.i18n)
-    implementation(libs.protolite.well.known.types)
+    implementation(libs.androidx.navigation.common.ktx)
     debugImplementation(compose.uiTooling)
     implementation(libs.kotlinx.coroutines.core)
     ksp(libs.room.compiler)
@@ -172,9 +178,6 @@ dependencies {
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
-    implementation(libs.kotlinx.coroutines.core)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 }
 
 compose.desktop {
@@ -209,29 +212,29 @@ buildkonfig {
     }
 }
 
-// Prevent the bug with room when generate an APK
-tasks.withType<Test> {
-    if (name == "mergeDebugAndroidTestAssets") {
-        enabled = false
-    }
-}
-
-tasks.withType<Test> {
-    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
-        enabled = false
-    }
-}
-
-tasks.whenTaskAdded {
-    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
-        enabled = false
-    }
-}
-
-gradle.taskGraph.whenReady {
-    allTasks.onEach { task ->
-        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
-            task.enabled = false
-        }
-    }
-}
+//// Prevent the bug with room when generate an APK
+//tasks.withType<Test> {
+//    if (name == "mergeDebugAndroidTestAssets") {
+//        enabled = false
+//    }
+//}
+//
+//tasks.withType<Test> {
+//    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
+//        enabled = false
+//    }
+//}
+//
+//tasks.whenTaskAdded {
+//    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
+//        enabled = false
+//    }
+//}
+//
+//gradle.taskGraph.whenReady {
+//    allTasks.onEach { task ->
+//        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
+//            task.enabled = false
+//        }
+//    }
+//}

@@ -1,6 +1,8 @@
 package com.joohnq.moodapp.ui.presentation.all_journals
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,15 +11,28 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.ui.components.MoodFace
@@ -31,20 +46,36 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.util.helper.DatetimeManager
+import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.hour
+import moodapp.composeapp.generated.resources.remove_journal
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import kotlin.math.roundToInt
 
 @Composable
 fun AllJournalsCard(
     i: Int,
     lastIndex: Int,
     healthJournal: HealthJournalRecord,
-    onEvent: (AllJournalEvent) -> Unit
+    onEvent: (AllJournalEvent) -> Unit,
+    onDelete: () -> Unit
 ) {
     val mood = healthJournal.mood
     val palette = mood.palette
+    val scope = rememberCoroutineScope()
+    var contextButtonsWidth by remember { mutableFloatStateOf(0f) }
+    val offset = remember {
+        Animatable(initialValue = 0f)
+    }
+    var isExpanded by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isExpanded) {
+        scope.launch {
+            offset.animateTo(if (isExpanded) -contextButtonsWidth else 0f)
+        }
+    }
 
     Row(modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max)) {
         Column(
@@ -83,56 +114,109 @@ fun AllJournalsCard(
                     .background(color = if (i != lastIndex) Colors.Brown80 else Colors.Transparent)
             )
         }
-        Card(
-            modifier = Modifier.padding(end = 10.dp, top = 5.dp, bottom = 5.dp),
-            colors = ComponentColors.Card.MainCardColors(),
-            onClick = {
-                onEvent(
-                    AllJournalEvent.OnSelectJournal(
-                        healthJournal.id
+        Box(modifier = Modifier.padding(end = 10.dp, top = 5.dp, bottom = 5.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(IntrinsicSize.Max)
+                    .align(Alignment.CenterEnd)
+                    .onSizeChanged { contextButtonsWidth = it.width.toFloat() },
+                verticalArrangement = Arrangement.Center
+            ) {
+                FilledIconButton(
+                    onClick = {
+                        onDelete()
+                        isExpanded = false
+                    },
+                    modifier = Modifier.width(61.dp).fillMaxHeight(),
+                    shape = Dimens.Shape.EndMedium,
+                    colors = IconButtonColors(
+                        containerColor = Colors.Orange50,
+                        contentColor = Colors.White,
+                        disabledContainerColor = Colors.Orange50,
+                        disabledContentColor = Colors.White
                     )
-                )
-            }
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Box(
-                        modifier = Modifier.background(
-                            color = palette.color,
-                            shape = Dimens.Shape.Circle
-                        ).size(44.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        MoodFace(
-                            modifier = Modifier.size(20.dp),
-                            mood = mood,
-                            backgroundColor = Colors.White,
-                            color = palette.barFaceColor
-                        )
-                    }
-                    TextWithBackground(
-                        text = stringResource(mood.text),
-                        backgroundColor = palette.backgroundColor,
-                        textColor = palette.color
+                    Icon(
+                        painter = painterResource(Drawables.Icons.Trash),
+                        contentDescription = stringResource(Res.string.remove_journal),
+                        tint = Colors.White,
+                        modifier = Modifier.size(28.dp)
                     )
                 }
-                VerticalSpacer(10.dp)
-                TextEllipsis(
-                    text = healthJournal.title,
-                    style = TextStyles.TextMdExtraBold(),
-                    color = Colors.Brown80,
-                    maxLines = 1
-                )
-                VerticalSpacer(10.dp)
-                TextEllipsis(
-                    text = healthJournal.description,
-                    style = TextStyles.TextMdSemiBold(),
-                    color = Colors.Brown100Alpha64,
-                    maxLines = 2
-                )
+            }
+
+            Card(
+                shape = if (!isExpanded) Dimens.Shape.Medium else Dimens.Shape.StartMedium,
+                modifier = Modifier
+                    .offset { IntOffset(offset.value.roundToInt(), 0) }
+                    .pointerInput(contextButtonsWidth) {
+                        detectHorizontalDragGestures(
+                            onHorizontalDrag = { _, dragAmount ->
+                                scope.launch {
+                                    val newOffset = (offset.value + dragAmount).coerceIn(
+                                        -contextButtonsWidth,
+                                        0f
+                                    )
+                                    offset.snapTo(newOffset)
+                                }
+                            },
+                            onDragEnd = {
+                                isExpanded = offset.value <= -contextButtonsWidth / 2f
+                            }
+                        )
+                    },
+                colors = ComponentColors.Card.MainCardColors(),
+                onClick = {
+                    onEvent(
+                        AllJournalEvent.OnSelectJournal(
+                            healthJournal.id
+                        )
+                    )
+                }
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    color = palette.color,
+                                    shape = Dimens.Shape.Circle
+                                )
+                                .size(44.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            MoodFace(
+                                modifier = Modifier.size(20.dp),
+                                mood = mood,
+                                backgroundColor = Colors.White,
+                                color = palette.barFaceColor
+                            )
+                        }
+                        TextWithBackground(
+                            text = stringResource(mood.text),
+                            backgroundColor = palette.backgroundColor,
+                            textColor = palette.color
+                        )
+                    }
+                    VerticalSpacer(10.dp)
+                    TextEllipsis(
+                        text = healthJournal.title,
+                        style = TextStyles.TextMdExtraBold(),
+                        color = Colors.Brown80,
+                        maxLines = 1
+                    )
+                    VerticalSpacer(10.dp)
+                    TextEllipsis(
+                        text = healthJournal.description,
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown100Alpha64,
+                        maxLines = 2
+                    )
+                }
             }
         }
     }

@@ -45,7 +45,7 @@ import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.moodapp.viewmodel.HealthJournalIntent
+import com.joohnq.moodapp.viewmodel.AddingJournalingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.enter_the_title
 import moodapp.composeapp.generated.resources.journal_title
@@ -81,7 +81,7 @@ fun AddJournalingUI(
                     .paddingHorizontalMedium(),
             ) {
                 TopBar(
-                    onGoBack = { state.onNavigation(AddJournalingEvent.OnGoBack) },
+                    onGoBack = { state.onEvent(AddJournalingEvent.OnGoBack) },
                     text = Res.string.new_journal_entry
                 )
                 MediumTitle(Res.string.journal_title)
@@ -110,7 +110,7 @@ fun AddJournalingUI(
                         .onFocusChanged { focusState ->
                             isFocused = focusState.isFocused
                         }.focusRequester(focusRequester),
-                    onValueChange = { state.onAction(HealthJournalIntent.UpdateAddingTitle(it)) },
+                    onValueChange = { state.onAddingAction(AddingJournalingIntent.UpdateTitle(it)) },
                 )
                 MediumTitle(Res.string.mood)
                 LazyRow(
@@ -122,19 +122,23 @@ fun AddJournalingUI(
                             mood = it,
                             backgroundColor = if (state.selectedMood == it) it.palette.faceBackgroundColor else Colors.Gray30,
                             color = if (state.selectedMood == it) it.palette.faceColor else Colors.Gray60,
-                            onClick = { state.onAction(HealthJournalIntent.UpdateAddingMood(it)) }
+                            onClick = { state.onAddingAction(AddingJournalingIntent.UpdateMood(it)) }
                         )
                     }
                 }
                 MediumTitle(Res.string.stress_level)
                 AddJournalingStressLevel(
                     sliderValue = state.sliderValue,
-                    onAction = state.onAction
+                    onAddingAction = state.onAddingAction
                 )
                 MediumTitle(Res.string.write_your_entry)
                 ExpressionAnalysisTextField(
                     text = state.desc,
-                    onValueChange = { state.onAction(HealthJournalIntent.UpdateAddingDescription(it)) }
+                    onValueChange = {
+                        state.onAddingAction(
+                            AddingJournalingIntent.UpdateDescription(it)
+                        )
+                    }
                 )
                 MediumTitle(text = Res.string.select_stressors)
             }
@@ -149,10 +153,8 @@ fun AddJournalingUI(
                         colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                         shape = Dimens.Shape.Circle,
                         onClick = {
-                            state.onAction(
-                                HealthJournalIntent.UpdateAddingSelectedStressStressors(
-                                    it
-                                )
+                            state.onAddingAction(
+                                AddingJournalingIntent.UpdateSelectedStressStressors(it)
                             )
                         }
                     )
@@ -165,7 +167,7 @@ fun AddJournalingUI(
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = canContinue,
-                    onClick = { state.onAction(HealthJournalIntent.AddHealthJournal) }
+                    onClick = { state.onEvent(AddJournalingEvent.OnAdd) }
                 )
             }
         }
@@ -184,8 +186,8 @@ fun Preview() {
             desc = "desc",
             selectedStressStressors = emptyList(),
             sliderValue = 0f,
-            onAction = {},
-            onNavigation = {}
+            onAddingAction = {},
+            onEvent = {}
         )
     )
 }
@@ -202,8 +204,8 @@ fun Preview2() {
             desc = "",
             selectedStressStressors = emptyList(),
             sliderValue = 0f,
-            onAction = {},
-            onNavigation = {}
+            onAddingAction = {},
+            onEvent = {}
         )
     )
 }

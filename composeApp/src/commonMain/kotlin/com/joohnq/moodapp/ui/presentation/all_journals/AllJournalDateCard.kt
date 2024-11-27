@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.ui.components.VerticalSpacer
-import com.joohnq.moodapp.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.TextStyles
@@ -20,7 +19,7 @@ import kotlinx.datetime.LocalDate
 fun AllJournalDateCard(
     isSelected: Boolean,
     date: LocalDate,
-    onEvent: (AllJournalEvent) -> Unit,
+    onAllAction: (AllJournalIntent) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -28,7 +27,7 @@ fun AllJournalDateCard(
             color = if (isSelected) Colors.White else Colors.Brown70,
             shape = Dimens.Shape.Circle
         ).padding(horizontal = 10.dp, vertical = 15.dp)
-            .clickable { onEvent(AllJournalEvent.OnSelectDate(date)) }
+            .clickable { onAllAction(AllJournalIntent.UpdateSelectedDateTime(date)) }
 //                                .then(
 //                                    if (isSelected) Modifier.border(
 //                                        3.dp,

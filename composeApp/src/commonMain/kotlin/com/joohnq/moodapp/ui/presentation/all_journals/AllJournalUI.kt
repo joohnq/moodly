@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.ui.presentation.all_journals
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,15 +17,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.domain.HealthJournalRecord
-import com.joohnq.moodapp.domain.Mood
 import com.joohnq.moodapp.ui.components.MainAlertDialog
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
@@ -37,8 +30,7 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.HealthJournalIntent
-import kotlinx.datetime.LocalDate
+import com.joohnq.moodapp.util.helper.StatsManager
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.delete_journal
 import moodapp.composeapp.generated.resources.do_you_wish_to_remove_this_journal
@@ -48,22 +40,27 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AllJournalUI(state: AllJournalState) {
-    val keys = state.healthJournals.keys.toList()
-    val key = state.healthJournals.keys.find { it == state.selectedDateTime }
-        ?: state.healthJournals.keys.last()
-    val list = state.healthJournals[key]
-    var currentDeleteId by remember { mutableStateOf(-1) }
+    val healthJournalMap = StatsManager.getHealthJournalBasedOnUserEntry(
+        state.dateCreated,
+        state.healthJournalRecords
+    )
+    val keys = healthJournalMap.keys.toList()
+    val key = healthJournalMap.keys.find { it == state.selectedDateTime }
+        ?: healthJournalMap.keys.last()
+    val list = healthJournalMap[key]
 
     if (state.openDeleteDialog)
         MainAlertDialog(
             onDismissRequest = {
-                state.onEvent(
-                    AllJournalEvent.UpdateEditingOpenDeleteDialog(false)
+                state.onAllAction(
+                    AllJournalIntent.UpdateOpenDeleteDialog(false)
                 )
             },
             onConfirmation = {
-                state.onEvent(AllJournalEvent.UpdateEditingOpenDeleteDialog(false))
-                state.onAction(HealthJournalIntent.DeleteHealthJournal(currentDeleteId))
+                state.onAllAction(
+                    AllJournalIntent.UpdateOpenDeleteDialog(false)
+                )
+                state.onEvent(AllJournalEvent.OnDelete)
             },
             dialogTitle = Res.string.delete_journal,
             dialogText = Res.string.do_you_wish_to_remove_this_journal,
@@ -106,7 +103,7 @@ fun AllJournalUI(state: AllJournalState) {
                         AllJournalDateCard(
                             isSelected = isSelected,
                             date = date,
-                            onEvent = state.onEvent,
+                            onAllAction = state.onAllAction,
                         )
                     }
                 }
@@ -139,9 +136,11 @@ fun AllJournalUI(state: AllJournalState) {
                             lastIndex = list.lastIndex,
                             onEvent = state.onEvent,
                             onDelete = {
-                                currentDeleteId = healthJournal.id
-                                state.onEvent(
-                                    AllJournalEvent.UpdateEditingOpenDeleteDialog(true)
+                                state.onAllAction(
+                                    AllJournalIntent.UpdateCurrentDeleteId(healthJournal.id)
+                                )
+                                state.onAllAction(
+                                    AllJournalIntent.UpdateOpenDeleteDialog(true)
                                 )
                             }
                         )
@@ -150,114 +149,4 @@ fun AllJournalUI(state: AllJournalState) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    AllJournalUI(
-        AllJournalState(
-            healthJournals = mapOf(
-                LocalDate(2022, 1, 1) to listOf(
-                    HealthJournalRecord.init()
-                        .copy(
-                            title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            mood = Mood.Overjoyed
-                        ),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Happy),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Neutral),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Sad),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Depressed),
-                ),
-                LocalDate(2022, 1, 2) to listOf(
-                    HealthJournalRecord.init()
-                        .copy(
-                            title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            mood = Mood.Overjoyed
-                        ),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Happy),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Neutral),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Sad),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Depressed),
-                ),
-                LocalDate(2022, 1, 3) to listOf(
-                    HealthJournalRecord.init()
-                        .copy(
-                            title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            mood = Mood.Overjoyed
-                        ),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Happy),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Neutral),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Sad),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Depressed),
-                ),
-                LocalDate(2022, 1, 4) to listOf(
-                    HealthJournalRecord.init()
-                        .copy(
-                            title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            mood = Mood.Overjoyed
-                        ),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Happy),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Neutral),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Sad),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Depressed),
-                ),
-            ),
-            onEvent = {},
-            selectedDateTime = LocalDate(2022, 1, 1),
-            openDeleteDialog = false,
-            onAction = {}
-        )
-    )
-}
-
-@Preview
-@Composable
-fun Preview2() {
-    AllJournalUI(
-        AllJournalState(
-            healthJournals = mapOf(
-                LocalDate(2022, 1, 1) to listOf(
-                    HealthJournalRecord.init()
-                        .copy(
-                            title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            mood = Mood.Overjoyed
-                        ),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Happy),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Neutral),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Sad),
-                    HealthJournalRecord.init()
-                        .copy(title = "Title", description = "Description", mood = Mood.Depressed),
-                ),
-            ),
-            onEvent = {},
-            selectedDateTime = LocalDate(2022, 1, 1),
-            openDeleteDialog = false,
-            onAction = {}
-        )
-    )
 }

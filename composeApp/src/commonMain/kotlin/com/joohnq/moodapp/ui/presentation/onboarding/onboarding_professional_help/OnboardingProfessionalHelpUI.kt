@@ -15,7 +15,7 @@ import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_hel
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sought_professional_help_title
 import org.jetbrains.compose.resources.stringResource

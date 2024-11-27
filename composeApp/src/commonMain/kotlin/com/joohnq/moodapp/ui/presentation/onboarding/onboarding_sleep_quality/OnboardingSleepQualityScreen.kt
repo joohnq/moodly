@@ -8,7 +8,7 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_supplements.OnboardingMedicationsSupplementsScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.event.OnboardingSleepQualityEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.state.OnboardingSleepQualityState
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 
 class OnboardingSleepQualityScreen : CustomScreen<OnboardingSleepQualityState>() {
     @Composable

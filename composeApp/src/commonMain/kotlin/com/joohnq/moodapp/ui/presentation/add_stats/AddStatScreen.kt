@@ -9,15 +9,14 @@ import com.joohnq.moodapp.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.moodapp.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.moodapp.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
-import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 
 class AddStatScreen : CustomScreen<AddStatState>() {
     @Composable
     override fun Screen(): AddStatState {
-        val statsViewModel: StatsViewModel = sharedViewModel()
+        val addStatsViewModel: AddStatViewModel = sharedViewModel()
         val userViewModel: UserViewModel = sharedViewModel()
-        val statsState by statsViewModel.statsState.collectAsState()
+        val addStatsState by addStatsViewModel.addStatState.collectAsState()
         val userState by userViewModel.userState.collectAsState()
 
         fun onEvent(event: AddStatEvent) =
@@ -28,9 +27,9 @@ class AddStatScreen : CustomScreen<AddStatState>() {
 
         return AddStatState(
             username = userState.user.getValue().name,
-            selectedMood = statsState.adding.mood,
-            onAction = statsViewModel::onAction,
-            onNavigation = ::onEvent,
+            selectedMood = addStatsState.mood,
+            onEvent = ::onEvent,
+            onAddAction = addStatsViewModel::onAction
         )
     }
 

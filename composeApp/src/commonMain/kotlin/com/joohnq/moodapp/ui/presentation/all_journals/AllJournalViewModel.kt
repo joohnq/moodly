@@ -15,15 +15,16 @@ sealed class AllJournalIntent {
     data class ResetState(val id: Int) : AllJournalIntent()
 }
 
-data class AllJournalState(
+data class AllJournalViewModelState(
     val selectedDateTime: LocalDate = DatetimeManager.getCurrentDateTime().date,
     val openDeleteDialog: Boolean = false,
     val currentDeleteId: Int = -1,
 )
 
 class AllJournalViewModel : ViewModel() {
-    private val _allJournalState = MutableStateFlow(AllJournalState())
-    val allJournalState: StateFlow<AllJournalState> = _allJournalState.asStateFlow()
+    private val _allJournalViewModelState = MutableStateFlow(AllJournalViewModelState())
+    val allJournalViewModelState: StateFlow<AllJournalViewModelState> =
+        _allJournalViewModelState.asStateFlow()
 
     fun onAction(intent: AllJournalIntent) {
         when (intent) {
@@ -35,26 +36,26 @@ class AllJournalViewModel : ViewModel() {
     }
 
     private fun updateCurrentDeleteId(id: Int) {
-        _allJournalState.update {
+        _allJournalViewModelState.update {
             it.copy(currentDeleteId = id)
         }
     }
 
     private fun updateOpenDeleteDialog(openDeleteDialog: Boolean) {
-        _allJournalState.update {
+        _allJournalViewModelState.update {
             it.copy(openDeleteDialog = openDeleteDialog)
         }
     }
 
     private fun updateSelectedDateTime(selectedDateTime: LocalDate) {
-        _allJournalState.update {
+        _allJournalViewModelState.update {
             it.copy(selectedDateTime = selectedDateTime)
         }
     }
 
     private fun resetState() {
-        _allJournalState.update {
-            AllJournalState()
+        _allJournalViewModelState.update {
+            AllJournalViewModelState()
         }
     }
 }

@@ -8,7 +8,6 @@ import com.joohnq.moodapp.util.helper.DatetimeManager
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
-
 @Entity(tableName = DatabaseConstants.SLEEP_QUALITY_RECORD_DATABASE)
 @Serializable
 data class SleepQualityRecord(

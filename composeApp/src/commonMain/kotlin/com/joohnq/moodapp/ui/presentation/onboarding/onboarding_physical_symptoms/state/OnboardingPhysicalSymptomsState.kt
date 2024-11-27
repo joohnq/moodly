@@ -2,7 +2,7 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_sympto
 
 import com.joohnq.moodapp.domain.PhysicalSymptoms
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 
 data class OnboardingPhysicalSymptomsState(
     val selectedOption: PhysicalSymptoms?,

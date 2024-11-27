@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.ui.components.ExpressionAnalysisTextField
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingBaseComponent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.event.OnboardingExpressionEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.expression_analysis_desc
 import moodapp.composeapp.generated.resources.expression_analysis_title
@@ -37,7 +37,7 @@ fun OnboardingExpressionAnalysisUI(
             color = Colors.Brown100Alpha64,
             textAlign = TextAlign.Center
         )
-        VerticalSpacer(10.dp)
+        VerticalSpacer(24.dp)
         ExpressionAnalysisTextField(
             modifier = Modifier.testTag(OnboardingExpressionAnalysisScreen.OnboardingExpressionTestTag.TEXT_INPUT),
             text = state.desc,

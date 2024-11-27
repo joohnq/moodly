@@ -2,8 +2,8 @@ package com.joohnq.moodapp.ui.presentation.edit_journaling_screen.state
 
 import androidx.compose.material3.SnackbarHostState
 import com.joohnq.moodapp.domain.HealthJournalRecord
+import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.EditJournalingIntent
 import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
-import com.joohnq.moodapp.viewmodel.EditJournalingIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 
 data class EditJournalingState(

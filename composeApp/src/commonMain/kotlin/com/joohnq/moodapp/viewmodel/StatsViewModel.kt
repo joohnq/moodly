@@ -2,12 +2,11 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.domain.FreudScore
-import com.joohnq.moodapp.domain.Mood
-import com.joohnq.moodapp.domain.StatsRecord
-import com.joohnq.moodapp.util.helper.StatsManager
 import com.joohnq.moodapp.data.repository.StatsRepository
+import com.joohnq.moodapp.domain.FreudScore
+import com.joohnq.moodapp.domain.StatsRecord
 import com.joohnq.moodapp.ui.state.UiState
+import com.joohnq.moodapp.util.helper.StatsManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,24 +14,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class AddingStats(
-    val status: UiState<Boolean> = UiState.Idle,
-    val mood: Mood = Mood.Depressed,
-    val description: String = "",
-)
-
 data class StatsState(
     val freudScore: FreudScore = FreudScore.init(),
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,
-    val adding: AddingStats = AddingStats(),
+    val adding: UiState<Boolean> = UiState.Idle,
 )
 
 sealed class StatsIntent {
-    data object GetStatsRecord : StatsIntent()
-    data class AddStatsRecord(val statsRecord: StatsRecord? = null) : StatsIntent()
-    data class UpdateAddingStatsRecordMood(val mood: Mood) : StatsIntent()
-    data class UpdateAddingStatsRecordDescription(val description: String) : StatsIntent()
-    data object ResetAdding : StatsIntent()
+    data object GetStatsRecords : StatsIntent()
+    data class AddStatsRecord(val statsRecord: StatsRecord) : StatsIntent()
+    data object ResetAddingStatus : StatsIntent()
 }
 
 class StatsViewModel(
@@ -44,18 +35,14 @@ class StatsViewModel(
 
     fun onAction(intent: StatsIntent) {
         when (intent) {
-            is StatsIntent.GetStatsRecord -> getStatsRecord()
-            is StatsIntent.AddStatsRecord -> if (intent.statsRecord != null) addStatsRecord(intent.statsRecord) else addStatsRecord()
-            is StatsIntent.UpdateAddingStatsRecordMood -> updateAddingStatsRecordMood(intent.mood)
-            is StatsIntent.UpdateAddingStatsRecordDescription -> updateAddingStatsRecordDescription(
-                intent.description
-            )
+            is StatsIntent.GetStatsRecords -> getStatsRecords()
+            is StatsIntent.AddStatsRecord -> addStatsRecord(intent.statsRecord)
 
-            StatsIntent.ResetAdding -> resetAdding()
+            StatsIntent.ResetAddingStatus -> changeAddingStatus(UiState.Idle)
         }
     }
 
-    private fun getStatsRecord() =
+    private fun getStatsRecords() =
         viewModelScope.launch(dispatcher) {
             _statsState.update { it.copy(statsRecords = UiState.Loading) }
 
@@ -67,19 +54,6 @@ class StatsViewModel(
                 _statsState.update { it.copy(statsRecords = UiState.Error(e.message.toString())) }
             }
         }
-
-    private fun addStatsRecord() = viewModelScope.launch(dispatcher) {
-        changeAddingStatus(UiState.Loading)
-
-        val value = statsState.value
-        val res = statsRepository.addStats(value.adding.mood, value.adding.description)
-
-        changeAddingStatus(
-            if (res) UiState.Success(true) else UiState.Error(
-                "Fail to add stats record"
-            )
-        )
-    }
 
     private fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
         changeAddingStatus(UiState.Loading)
@@ -101,20 +75,7 @@ class StatsViewModel(
         }
     }
 
-
-    private fun updateAddingStatsRecordMood(mood: Mood) {
-        _statsState.update { it.copy(adding = it.adding.copy(mood = mood)) }
-    }
-
-    private fun updateAddingStatsRecordDescription(desc: String) {
-        _statsState.update { it.copy(adding = it.adding.copy(description = desc)) }
-    }
-
-    private fun resetAdding() {
-        _statsState.update { it.copy(adding = AddingStats()) }
-    }
-
     private fun changeAddingStatus(status: UiState<Boolean>) {
-        _statsState.update { it.copy(adding = it.adding.copy(status = status)) }
+        _statsState.update { it.copy(adding = status) }
     }
 }

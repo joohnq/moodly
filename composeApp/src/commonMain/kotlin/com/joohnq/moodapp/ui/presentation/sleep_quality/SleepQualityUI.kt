@@ -49,8 +49,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepQualityUI(
     state: SleepQualityState,
 ) {
-    val (sleepQualityRecords, onEvent) = state
-    val last = sleepQualityRecords.last()
+    val last = state.sleepQualityRecords.last()
     val options = remember {
         listOf(
             SleepStatsItem(
@@ -84,13 +83,13 @@ fun SleepQualityUI(
     SharedPanelComponent(
         containerColor = Colors.Brown10,
         isDark = false,
-        onGoBack = { onEvent(SleepQualityEvent.OnGoBack) },
+        onGoBack = { state.onEvent(SleepQualityEvent.OnGoBack) },
         backgroundColor = last.sleepQuality.palette.color,
         backgroundImage = Drawables.Images.SleepQualityBackground,
         panelTitle = Res.string.sleep_quality,
         bodyTitle = Res.string.sleep_stats,
         color = last.sleepQuality.palette.backgroundColor,
-        onAdd = { onEvent(SleepQualityEvent.OnAdd) },
+        onAdd = { state.onEvent(SleepQualityEvent.OnAdd) },
         panelContent = {
             Column(
                 modifier = Modifier

@@ -8,7 +8,7 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.OnboardingExpressionAnalysisScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_stress_level.event.OnboardingStressLevelEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_stress_level.state.OnboardingStressLevelState
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 
 class OnboardingStressLevelScreen : CustomScreen<OnboardingStressLevelState>() {
     @Composable

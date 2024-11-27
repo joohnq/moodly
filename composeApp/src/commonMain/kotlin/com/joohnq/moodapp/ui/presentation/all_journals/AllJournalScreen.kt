@@ -2,6 +2,7 @@ package com.joohnq.moodapp.ui.presentation.all_journals
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.moodapp.sharedViewModel
@@ -13,8 +14,9 @@ import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
+import kotlinx.datetime.LocalDate
 
-class AllJournalScreen : CustomScreen<AllJournalState>() {
+class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<AllJournalState>() {
     @Composable
     override fun Screen(): AllJournalState {
         val userViewModel: UserViewModel = sharedViewModel()
@@ -23,7 +25,7 @@ class AllJournalScreen : CustomScreen<AllJournalState>() {
         val userState by userViewModel.userState.collectAsState()
         val user = userState.user.getValue()
         val allJournalViewModel: AllJournalViewModel = sharedViewModel()
-        val allJournalState by allJournalViewModel.allJournalState.collectAsState()
+        val allJournalState by allJournalViewModel.allJournalViewModelState.collectAsState()
 
         fun onEvent(event: AllJournalEvent) =
             when (event) {
@@ -36,6 +38,12 @@ class AllJournalScreen : CustomScreen<AllJournalState>() {
                 )
             }
 
+        if (localDate != null) {
+            LaunchedEffect(Unit) {
+                allJournalViewModel.onAction(AllJournalIntent.UpdateSelectedDateTime(localDate))
+            }
+        }
+
         DisposableEffect(Unit) {
             onDispose {
                 healthJournalViewModel.onAction(HealthJournalIntent.ResetDeletingStatus)
@@ -43,8 +51,7 @@ class AllJournalScreen : CustomScreen<AllJournalState>() {
         }
 
         return AllJournalState(
-            selectedDateTime = allJournalState.selectedDateTime,
-            openDeleteDialog = allJournalState.openDeleteDialog,
+            allJournalViewModelState = allJournalState,
             dateCreated = user.dateCreated,
             onAllAction = allJournalViewModel::onAction,
             healthJournalRecords = healthJournalState.healthJournalRecords.getValue(),

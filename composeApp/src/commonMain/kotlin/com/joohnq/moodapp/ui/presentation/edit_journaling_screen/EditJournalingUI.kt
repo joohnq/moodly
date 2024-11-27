@@ -35,7 +35,6 @@ import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.EditJournalingIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.delete_journal

@@ -1,15 +1,13 @@
 package com.joohnq.moodapp.ui.presentation.stress_stressors.state
 
 import androidx.compose.material3.SnackbarHostState
-import com.joohnq.moodapp.domain.Stressor
 import com.joohnq.moodapp.ui.presentation.stress_stressors.event.StressStressorsEvent
-import com.joohnq.moodapp.viewmodel.StressLevelIntent
+import com.joohnq.moodapp.ui.presentation.add_stress_level.AddStressLevelIntent
+import com.joohnq.moodapp.ui.presentation.add_stress_level.AddingStressLevelViewModelState
 
 data class StressStressorsState(
     val snackBarState: SnackbarHostState,
-    val selectedStressors: List<Stressor>,
-    val otherValueError: String?,
-    val otherValue: String,
-    val onAction: (StressLevelIntent) -> Unit = {},
-    val onEvent: (StressStressorsEvent) -> Unit = {},
+    val addStressLevelViewModelState: AddingStressLevelViewModelState,
+    val onAddAction: (AddStressLevelIntent) -> Unit,
+    val onEvent: (StressStressorsEvent) -> Unit,
 )

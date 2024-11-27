@@ -38,18 +38,17 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelUI(
     state: StressLevelState,
 ) {
-    val (stressLevelRecords, onEvent) = state
-    val stressLevelRecord = stressLevelRecords.last()
+    val stressLevelRecord = state.stressLevelRecords.last()
     SharedPanelComponent(
         containerColor = Colors.White,
         isDark = false,
-        onGoBack = { onEvent(StressLevelEvent.OnGoBack) },
+        onGoBack = { state.onEvent(StressLevelEvent.OnGoBack) },
         backgroundColor = stressLevelRecord.stressLevel.palette.color,
         backgroundImage = Drawables.Images.StressLevelBackground,
         panelTitle = Res.string.stress_level,
         bodyTitle = Res.string.stress_analysis,
         color = stressLevelRecord.stressLevel.palette.backgroundColor,
-        onAdd = { onEvent(StressLevelEvent.OnAdd) },
+        onAdd = { state.onEvent(StressLevelEvent.OnAdd) },
         panelContent = {
             Column(
                 modifier = Modifier.paddingHorizontalMedium()
@@ -141,7 +140,7 @@ fun StressLevelUI(
                         title = Res.string.life_impact,
                         value = stringResource(stressLevelRecord.stressLevel.lifeImpact),
                     ) {
-                        StressLevelChart(stressLevelRecords = stressLevelRecords.takeLast(8))
+                        StressLevelChart(stressLevelRecords = state.stressLevelRecords.takeLast(8))
                     }
                 }
             }

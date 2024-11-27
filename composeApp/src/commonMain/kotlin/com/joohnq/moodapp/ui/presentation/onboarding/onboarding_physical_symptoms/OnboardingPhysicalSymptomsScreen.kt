@@ -8,7 +8,7 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.OnboardingSleepQualityScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 
 class OnboardingPhysicalSymptomsScreen : CustomScreen<OnboardingPhysicalSymptomsState>() {
     @Composable

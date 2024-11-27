@@ -29,7 +29,7 @@ import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.st
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingVerticalLarge
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.sleep_quality_title
 
@@ -38,15 +38,14 @@ import moodapp.composeapp.generated.resources.sleep_quality_title
 fun OnboardingSleepQualityUI(
     state: OnboardingSleepQualityState,
 ) {
-    val (sliderValue, selectedSleepQuality, onEvent, onAction) = state
     val moods = remember { Mood.getAll().reversed() }
     val sleepQualityOptions: List<SleepQuality> = remember { SleepQuality.getAll() }
 
     OnboardingBaseComponent(
         page = 4,
         title = Res.string.sleep_quality_title,
-        onGoBack = { onEvent(OnboardingSleepQualityEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingSleepQualityEvent.OnNavigateToOnboardingMedicationSupplementsScreen) }
+        onGoBack = { state.onEvent(OnboardingSleepQualityEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingSleepQualityEvent.OnNavigateToOnboardingMedicationSupplementsScreen) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             VerticalSpacer(20.dp)
@@ -61,17 +60,23 @@ fun OnboardingSleepQualityUI(
                         DoubleText(
                             firstText = sleepQuality.firstText,
                             secondText = sleepQuality.secondText,
-                            color = if (selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
+                            color = if (state.selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
                         )
                     }
                 }
                 VerticalSlider(
                     modifier = Modifier.weight(1f)
                         .testTag(OnboardingSleepQualityScreen.OnboardingSleepQualityTestTag.SLEEP_QUALITY_SLIDER),
-                    sliderValue = sliderValue,
+                    sliderValue = state.sliderValue,
                     setSliderValue = {
-                        onAction(OnboardingIntent.UpdateSliderValue(it))
-                        onAction(OnboardingIntent.UpdateSleepQuality(SleepQuality.fromSliderValue(it)))
+                        state.onAction(OnboardingIntent.UpdateSliderValue(it))
+                        state.onAction(
+                            OnboardingIntent.UpdateSleepQuality(
+                                SleepQuality.fromSliderValue(
+                                    it
+                                )
+                            )
+                        )
                     },
                     thumb = { SleepQualityThumb() },
                     track = { SleepQualityTrack(it) },

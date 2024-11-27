@@ -24,7 +24,7 @@ import com.joohnq.moodapp.ui.components.TextWithBackground
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.theme.Colors
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.assessments
@@ -51,7 +51,7 @@ fun OnboardingBaseComponent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).paddingHorizontalSmall().fillMaxSize()
+            modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

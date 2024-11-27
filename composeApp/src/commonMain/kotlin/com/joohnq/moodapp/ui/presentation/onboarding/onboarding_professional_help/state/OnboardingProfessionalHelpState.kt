@@ -2,7 +2,7 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_he
 
 import com.joohnq.moodapp.domain.ProfessionalHelp
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 
 data class OnboardingProfessionalHelpState(
     val selectedOption: ProfessionalHelp?,

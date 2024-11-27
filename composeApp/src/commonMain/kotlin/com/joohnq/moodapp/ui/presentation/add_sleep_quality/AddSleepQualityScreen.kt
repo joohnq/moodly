@@ -14,8 +14,6 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.moodapp.ui.presentation.add_sleep_quality.state.AddSleepQualityState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
-import com.joohnq.moodapp.viewmodel.AddSleepQualityIntent
-import com.joohnq.moodapp.viewmodel.AddSleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import kotlinx.coroutines.launch

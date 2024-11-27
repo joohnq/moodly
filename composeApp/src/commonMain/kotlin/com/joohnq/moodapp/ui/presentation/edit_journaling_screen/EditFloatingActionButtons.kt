@@ -28,7 +28,6 @@ import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.EditJournalingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.edit_journal
 import moodapp.composeapp.generated.resources.editing

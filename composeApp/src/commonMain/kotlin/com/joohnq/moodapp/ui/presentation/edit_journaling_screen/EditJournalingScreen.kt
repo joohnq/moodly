@@ -14,8 +14,6 @@ import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.event.EditJourn
 import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.state.EditJournalingState
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.ui.state.UiState.Companion.onSuccess
-import com.joohnq.moodapp.viewmodel.EditJournalingIntent
-import com.joohnq.moodapp.viewmodel.EditJournalingViewModel
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 

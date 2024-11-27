@@ -2,8 +2,8 @@ package com.joohnq.moodapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.moodapp.domain.User
 import com.joohnq.moodapp.data.repository.UserRepository
+import com.joohnq.moodapp.domain.User
 import com.joohnq.moodapp.ui.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +33,7 @@ sealed class UserIntent {
     data class UpdateUpdatingUserName(val name: String) : UserIntent()
     data class UpdateUser(val user: User) : UserIntent()
     data object UpdateUserName : UserIntent()
-    data object ResetUpdating : UserIntent()
+    data object ResetUpdatingState : UserIntent()
 }
 
 class UserViewModel(
@@ -49,7 +49,7 @@ class UserViewModel(
             is UserIntent.GetUser -> getUser()
             is UserIntent.UpdateUser -> updateUser(intent.user)
             is UserIntent.UpdateUserName -> updateUserName()
-            UserIntent.ResetUpdating -> resetUpdating()
+            UserIntent.ResetUpdatingState -> resetUpdatingState()
             is UserIntent.UpdateUpdatingUserName -> updateUpdatingUserName(intent.name)
         }
     }
@@ -106,7 +106,7 @@ class UserViewModel(
         }
     }
 
-    private fun resetUpdating() {
+    private fun resetUpdatingState() {
         _userState.update { it.copy(updating = UserUpdating()) }
     }
 

@@ -14,7 +14,7 @@ import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.HealthJournalIntent
+import com.joohnq.moodapp.viewmodel.AddingJournalingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.five_number
 import moodapp.composeapp.generated.resources.one_number
@@ -25,14 +25,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddJournalingStressLevel(
     sliderValue: Float,
-    onAction: (HealthJournalIntent) -> Unit
+    onAddingAction: (AddingJournalingIntent) -> Unit
 ) {
     Column {
         Slider(
             value = sliderValue,
             onValueChange = {
-                onAction(
-                    HealthJournalIntent.UpdateAddingSliderValue(it)
+                onAddingAction(
+                    AddingJournalingIntent.UpdateSliderValue(it)
                 )
             },
             steps = 3,

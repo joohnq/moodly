@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -40,7 +41,7 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.viewmodel.SleepQualityIntent
+import com.joohnq.moodapp.viewmodel.AddSleepQualityIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.end_sleeping_time
 import moodapp.composeapp.generated.resources.mood
@@ -54,18 +55,33 @@ import org.jetbrains.compose.resources.stringResource
 fun AddSleepQualityUI(
     state: AddSleepQualityState
 ) {
-    val (snackBarState, showStartTimePickerDialog, showEndTimePickerDialog, startTimePickerState, endTimePickerState, selectedMood, selectedSleepInfluences, onEvent, onAction) = state
     val moods = remember { Mood.getAll() }
     val sleepInfluences = remember { SleepInfluences.getAll() }
+    val startTimePickerState = rememberTimePickerState(
+        initialHour = state.addSleepQualityViewModelState.startHour,
+        initialMinute = state.addSleepQualityViewModelState.startMinute,
+        is24Hour = true,
+    )
+    val endTimePickerState = rememberTimePickerState(
+        initialHour = state.addSleepQualityViewModelState.endHour,
+        initialMinute = state.addSleepQualityViewModelState.endMinute,
+        is24Hour = true,
+    )
 
-    if (showStartTimePickerDialog)
+    if (state.addSleepQualityViewModelState.showStartTimePickerDialog) {
         TimePickerDialog(
             title = Res.string.start_sleeping_time,
-            onDismiss = { onAction(SleepQualityIntent.UpdateShowStartTimePickerDialog(false)) },
+            onDismiss = {
+                state.onAddAction(
+                    AddSleepQualityIntent.UpdateShowStartTimePickerDialog(
+                        false
+                    )
+                )
+            },
             onConfirm = {
-                onAction(SleepQualityIntent.UpdateShowStartTimePickerDialog(false))
-                onAction(
-                    SleepQualityIntent.UpdateStartTime(
+                state.onAddAction(AddSleepQualityIntent.UpdateShowStartTimePickerDialog(false))
+                state.onAddAction(
+                    AddSleepQualityIntent.UpdateStartTime(
                         startTimePickerState.hour,
                         startTimePickerState.minute
                     )
@@ -74,15 +90,18 @@ fun AddSleepQualityUI(
         ) {
             AddSleepQualityTimePicker(startTimePickerState)
         }
+    }
 
-    if (showEndTimePickerDialog)
+    if (state.addSleepQualityViewModelState.showEndTimePickerDialog) {
         TimePickerDialog(
             title = Res.string.end_sleeping_time,
-            onDismiss = { onAction(SleepQualityIntent.UpdateShowEndTimePickerDialog(false)) },
+            onDismiss = {
+                state.onAddAction(AddSleepQualityIntent.UpdateShowStartTimePickerDialog(false))
+            },
             onConfirm = {
-                onAction(SleepQualityIntent.UpdateShowEndTimePickerDialog(false))
-                onAction(
-                    SleepQualityIntent.UpdateEndTime(
+                state.onAddAction(AddSleepQualityIntent.UpdateShowEndTimePickerDialog(false))
+                state.onAddAction(
+                    AddSleepQualityIntent.UpdateEndTime(
                         endTimePickerState.hour,
                         endTimePickerState.minute
                     )
@@ -91,18 +110,19 @@ fun AddSleepQualityUI(
         ) {
             AddSleepQualityTimePicker(endTimePickerState)
         }
+    }
 
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(snackBarState) }
+        snackbarHost = { SnackbarHost(state.snackBarState) }
     ) { padding ->
         Column(
             Modifier.fillMaxSize()
                 .padding(padding),
         ) {
             Box(modifier = Modifier.paddingHorizontalMedium()) {
-                TopBar(onGoBack = { onEvent(AddSleepQualityEvent.OnGoBack) })
+                TopBar(onGoBack = { state.onEvent(AddSleepQualityEvent.OnGoBack) })
             }
             VerticalSpacer(40.dp)
             Text(
@@ -123,7 +143,11 @@ fun AddSleepQualityUI(
                     hour = DatetimeManager.formatInt(startTimePickerState.hour),
                     minutes = DatetimeManager.formatInt(startTimePickerState.minute),
                     isAfternoon = startTimePickerState.isAfternoon,
-                    onClick = { onAction(SleepQualityIntent.UpdateShowStartTimePickerDialog(true)) }
+                    onClick = {
+                        state.onAddAction(
+                            AddSleepQualityIntent.UpdateShowStartTimePickerDialog(true)
+                        )
+                    }
                 )
                 HorizontalSpacer(20.dp)
                 TimePickerCard(
@@ -132,7 +156,9 @@ fun AddSleepQualityUI(
                     hour = DatetimeManager.formatInt(endTimePickerState.hour),
                     minutes = DatetimeManager.formatInt(endTimePickerState.minute),
                     isAfternoon = endTimePickerState.isAfternoon,
-                    onClick = { onAction(SleepQualityIntent.UpdateShowEndTimePickerDialog(true)) }
+                    onClick = {
+                        state.onAddAction(AddSleepQualityIntent.UpdateShowEndTimePickerDialog(true))
+                    }
                 )
             }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -145,9 +171,9 @@ fun AddSleepQualityUI(
                         MoodFace(
                             modifier = Modifier.size(32.dp),
                             mood = it,
-                            backgroundColor = if (selectedMood == it) it.palette.faceBackgroundColor else Colors.Gray30,
-                            color = if (selectedMood == it) it.palette.faceColor else Colors.Gray60,
-                            onClick = { onAction(SleepQualityIntent.UpdateAddingMood(it)) }
+                            backgroundColor = if (state.addSleepQualityViewModelState.mood == it) it.palette.faceBackgroundColor else Colors.Gray30,
+                            color = if (state.addSleepQualityViewModelState.mood == it) it.palette.faceColor else Colors.Gray60,
+                            onClick = { state.onAddAction(AddSleepQualityIntent.UpdateMood(it)) }
                         )
                     }
                 }
@@ -161,20 +187,28 @@ fun AddSleepQualityUI(
                     items(sleepInfluences) {
                         TextRadioButton(
                             text = stringResource(it.title),
-                            selected = selectedSleepInfluences.contains(it),
+                            selected = state.addSleepQualityViewModelState.selectedSleepInfluences.contains(
+                                it
+                            ),
                             colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                             shape = Dimens.Shape.Circle,
-                            onClick = { onAction(SleepQualityIntent.UpdateSelectedSleepInfluence(it)) }
+                            onClick = {
+                                state.onAddAction(
+                                    AddSleepQualityIntent.UpdateSelectedSleepInfluence(
+                                        it
+                                    )
+                                )
+                            }
                         )
                     }
                 }
             }
             VerticalSpacer(48.dp)
-            if (selectedMood != null)
+            if (state.addSleepQualityViewModelState.mood != null)
                 Box(modifier = Modifier.paddingHorizontalMedium()) {
                     ContinueButton(
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = { onAction(SleepQualityIntent.AddSleepQualityRecord()) }
+                        onClick = { state.onEvent(AddSleepQualityEvent.OnAdd) }
                     )
                 }
         }

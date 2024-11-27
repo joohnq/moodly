@@ -35,6 +35,7 @@ import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
+import com.joohnq.moodapp.viewmodel.EditJournalingIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.delete_journal
@@ -50,17 +51,24 @@ import org.jetbrains.compose.resources.stringResource
     val titleFocusRequest = remember { FocusRequester() }
     val descriptionFocusRequest = remember { FocusRequester() }
 
-    if (state.openDeleteDialog) MainAlertDialog(
-        onDismissRequest = { state.onAction(HealthJournalIntent.UpdateEditingOpenDeleteDialog(false)) },
-        onConfirmation = {
-            state.onAction(HealthJournalIntent.UpdateEditingOpenDeleteDialog(false))
-            state.onAction(HealthJournalIntent.DeleteHealthJournal(state.healthJournal.id))
-        },
-        dialogTitle = Res.string.delete_journal,
-        dialogText = Res.string.do_you_wish_to_remove_this_journal,
-        icon = Drawables.Icons.Trash,
-        backgroundColor = Colors.White
-    )
+    if (state.openDeleteDialog)
+        MainAlertDialog(
+            onDismissRequest = {
+                state.onEditingAction(
+                    EditJournalingIntent.UpdateOpenDeleteDialog(
+                        false
+                    )
+                )
+            },
+            onConfirmation = {
+                state.onEditingAction(EditJournalingIntent.UpdateOpenDeleteDialog(false))
+                state.onAction(HealthJournalIntent.DeleteHealthJournal(state.healthJournal.id))
+            },
+            dialogTitle = Res.string.delete_journal,
+            dialogText = Res.string.do_you_wish_to_remove_this_journal,
+            icon = Drawables.Icons.Trash,
+            backgroundColor = Colors.White
+        )
 
     Scaffold(
         containerColor = Colors.Brown10,
@@ -69,8 +77,9 @@ import org.jetbrains.compose.resources.stringResource
         floatingActionButton = {
             EditFloatingActionButtons(
                 isEditing = state.isEditing,
-                canSave = state.isDifferent && state.healthJournal.title.isNotBlank() && state.healthJournal.description.isNotBlank(),
-                onAction = state.onAction,
+                canSave = state.canSave,
+                onEditingAction = state.onEditingAction,
+                onEvent = state.onEvent,
                 requestTitleFocus = titleFocusRequest::requestFocus,
             )
         },
@@ -104,7 +113,7 @@ import org.jetbrains.compose.resources.stringResource
                         color = Colors.Brown100Alpha64
                     )
                 },
-                onValueChange = { state.onAction(HealthJournalIntent.UpdateEditingTitle(it)) },
+                onValueChange = { state.onEditingAction(EditJournalingIntent.UpdateTitle(it)) },
                 modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
                 colors = ComponentColors.TextField.TextFieldTitleTransparentColors(),
                 textStyle = TextStyles.HeadingMdExtraBold(),
@@ -124,7 +133,11 @@ import org.jetbrains.compose.resources.stringResource
                         color = Colors.Brown100Alpha64
                     )
                 },
-                onValueChange = { state.onAction(HealthJournalIntent.UpdateEditingDescription(it)) },
+                onValueChange = {
+                    state.onEditingAction(
+                        EditJournalingIntent.UpdateDescription(it)
+                    )
+                },
                 modifier = Modifier.fillMaxWidth().focusRequester(descriptionFocusRequest),
                 colors = ComponentColors.TextField.TextFieldDescriptionTransparentColors(),
                 textStyle = TextStyles.ParagraphLg(),
@@ -144,11 +157,9 @@ fun Preview() {
         EditJournalingState(
             snackBarState = remember { SnackbarHostState() },
             isEditing = true,
-            isDifferent = true,
             healthJournal = HealthJournalRecord.init(),
-            onAction = {},
-            onEvent = {},
-            openDeleteDialog = false
+            openDeleteDialog = false,
+            canSave = false,
         )
     )
 }

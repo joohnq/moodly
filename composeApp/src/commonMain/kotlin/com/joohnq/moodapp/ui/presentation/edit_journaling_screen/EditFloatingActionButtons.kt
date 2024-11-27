@@ -23,11 +23,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.HealthJournalIntent
+import com.joohnq.moodapp.viewmodel.EditJournalingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.edit_journal
 import moodapp.composeapp.generated.resources.editing
@@ -40,7 +41,8 @@ import org.jetbrains.compose.resources.stringResource
 fun EditFloatingActionButtons(
     isEditing: Boolean,
     canSave: Boolean,
-    onAction: (HealthJournalIntent) -> Unit,
+    onEditingAction: (EditJournalingIntent) -> Unit,
+    onEvent: (EditJournalingEvent) -> Unit,
     requestTitleFocus: () -> Unit
 ) {
     Box(
@@ -58,10 +60,8 @@ fun EditFloatingActionButtons(
             item {
                 FilledIconButton(
                     onClick = {
-                        onAction(
-                            HealthJournalIntent.UpdateEditingOpenDeleteDialog(
-                                true
-                            )
+                        onEditingAction(
+                            EditJournalingIntent.UpdateOpenDeleteDialog(true)
                         )
                     },
                     modifier = Modifier.size(56.dp),
@@ -84,7 +84,7 @@ fun EditFloatingActionButtons(
             item {
                 Button(
                     onClick = {
-                        onAction(HealthJournalIntent.UpdateIsEditing(!isEditing))
+                        onEditingAction(EditJournalingIntent.UpdateIsEditing(!isEditing))
                         requestTitleFocus()
                     },
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
@@ -119,7 +119,7 @@ fun EditFloatingActionButtons(
                 Button(
                     enabled = canSave,
                     onClick = {
-                        onAction(HealthJournalIntent.UpdateEditingHealthJournal)
+                        onEvent(EditJournalingEvent.OnSave)
                     },
                     contentPadding = if (canSave) PaddingValues(
                         horizontal = 20.dp,

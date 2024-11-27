@@ -81,18 +81,18 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
 
         LaunchedEffect(
             stressLevelState.adding.status,
-            sleepQualityState.adding.status,
+            sleepQualityState.adding,
             statsState.adding.status,
             userState.updating.status
         ) {
             UiState.fold(
                 stressLevelState.adding.status,
-                sleepQualityState.adding.status,
+                sleepQualityState.adding,
                 statsState.adding.status,
                 userState.updating.status,
                 onAllSuccess = {
                     userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
-                    sleepQualityViewModel.onAction(SleepQualityIntent.ResetAdding)
+                    sleepQualityViewModel.onAction(SleepQualityIntent.ResetAddingStatus)
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
                     statsViewModel.onAction(StatsIntent.ResetAdding)
                     userViewModel.onAction(UserIntent.ResetUpdating)

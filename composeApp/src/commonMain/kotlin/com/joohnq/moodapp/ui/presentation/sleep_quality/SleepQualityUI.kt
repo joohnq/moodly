@@ -67,14 +67,15 @@ fun SleepQualityUI(
                 icon = Drawables.Icons.Moon,
                 title = Res.string.sleeping_influences,
             ) {
-                VerticalSpacer(15.dp)
                 if (last.sleepInfluences.isNotEmpty())
-                    last.sleepInfluences.forEach {
-                        TextWithBackground(
-                            text = stringResource(it.title),
-                            backgroundColor = Colors.Green50,
-                            textColor = Colors.White
-                        )
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        last.sleepInfluences.forEach {
+                            TextWithBackground(
+                                text = stringResource(it.title),
+                                backgroundColor = Colors.Green50,
+                                textColor = Colors.White
+                            )
+                        }
                     }
             }
         )

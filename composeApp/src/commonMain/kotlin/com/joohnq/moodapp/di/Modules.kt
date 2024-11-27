@@ -21,6 +21,17 @@ import com.joohnq.moodapp.data.repository.UserPreferencesRepository
 import com.joohnq.moodapp.data.repository.UserPreferencesRepositoryImpl
 import com.joohnq.moodapp.data.repository.UserRepository
 import com.joohnq.moodapp.data.repository.UserRepositoryImpl
+import com.joohnq.moodapp.ui.presentation.all_journals.AllJournalViewModel
+import com.joohnq.moodapp.viewmodel.AddJournalingViewModel
+import com.joohnq.moodapp.viewmodel.AddSleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.EditJournalingViewModel
+import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
+import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
+import com.joohnq.moodapp.viewmodel.StatsViewModel
+import com.joohnq.moodapp.viewmodel.StressLevelViewModel
+import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
+import com.joohnq.moodapp.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -31,7 +42,19 @@ import org.koin.dsl.module
 
 expect val platformModule: Module
 
-expect val viewModelModule: Module
+val viewModelModule = module {
+    singleOf(::UserPreferenceViewModel)
+    singleOf(::OnboardingViewModel)
+    singleOf(::StatsViewModel)
+    singleOf(::UserViewModel)
+    singleOf(::StressLevelViewModel)
+    singleOf(::SleepQualityViewModel)
+    singleOf(::HealthJournalViewModel)
+    singleOf(::AddJournalingViewModel)
+    singleOf(::EditJournalingViewModel)
+    singleOf(::AllJournalViewModel)
+    singleOf(::AddSleepQualityViewModel)
+}
 
 val sharedModule = module {
     singleOf(Dispatchers::IO)

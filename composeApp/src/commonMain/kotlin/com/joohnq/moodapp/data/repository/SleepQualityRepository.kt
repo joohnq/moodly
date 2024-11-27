@@ -1,17 +1,12 @@
 package com.joohnq.moodapp.data.repository
 
-import com.joohnq.moodapp.domain.SleepInfluences
-import com.joohnq.moodapp.domain.SleepQuality
-import com.joohnq.moodapp.domain.SleepQualityRecord
 import com.joohnq.moodapp.data.dao.SleepQualityRecordDAO
+import com.joohnq.moodapp.domain.SleepQualityRecord
 
 interface SleepQualityRepository {
     suspend fun getSleepQualities(): List<SleepQualityRecord>
     suspend fun addSleepQuality(
-        sleepQuality: SleepQuality,
-        startSleeping: String,
-        endSleeping: String,
-        sleepInfluences: List<SleepInfluences>
+        sleepQualityRecord: SleepQualityRecord
     ): Boolean
 }
 
@@ -22,17 +17,14 @@ class SleepQualityRepositoryImpl(
         sleepQualityRecordDAO.getSleepQualities()
 
     override suspend fun addSleepQuality(
-        sleepQuality: SleepQuality,
-        startSleeping: String,
-        endSleeping: String,
-        sleepInfluences: List<SleepInfluences>
+        sleepQualityRecord: SleepQualityRecord
     ): Boolean =
         try {
             sleepQualityRecordDAO.addSleepQuality(
-                sleepQuality = sleepQuality,
-                startSleeping = startSleeping,
-                endSleeping = endSleeping,
-                sleepInfluences = sleepInfluences
+                sleepQuality = sleepQualityRecord.sleepQuality,
+                startSleeping = sleepQualityRecord.startSleeping,
+                endSleeping = sleepQualityRecord.endSleeping,
+                sleepInfluences = sleepQualityRecord.sleepInfluences
             )
             true
         } catch (e: Exception) {

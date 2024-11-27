@@ -32,7 +32,6 @@ data class HealthJournalRecord(
         fun setDescription(description: String) = apply { this.description = description }
         fun setStressLevel(stressLevel: StressLevel) = apply { this.stressLevel = stressLevel }
         fun setStressors(stressors: List<Stressor>) = apply { this.stressors = stressors }
-        fun setDate(date: LocalDateTime) = apply { this.date = date }
 
         fun build() = HealthJournalRecord(
             id = 0,

@@ -1,19 +1,16 @@
 package com.joohnq.moodapp.ui.presentation.all_journals
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.moodapp.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
-import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.util.helper.StatsManager
+import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
 
@@ -25,30 +22,34 @@ class AllJournalScreen : CustomScreen<AllJournalState>() {
         val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
         val userState by userViewModel.userState.collectAsState()
         val user = userState.user.getValue()
-        val healthJournalMap =
-            remember {
-                StatsManager.getHealthJournalBasedOnUserEntry(
-                    user.dateCreated,
-                    healthJournalState.healthJournalRecords.getValue()
-                )
-            }
-        var selectedDateTime by remember { mutableStateOf(DatetimeManager.getCurrentDateTime().date) }
-        var openDeleteDialog by remember { mutableStateOf(false) }
+        val allJournalViewModel: AllJournalViewModel = sharedViewModel()
+        val allJournalState by allJournalViewModel.allJournalState.collectAsState()
 
         fun onEvent(event: AllJournalEvent) =
             when (event) {
                 AllJournalEvent.OnGoBack -> onGoBack()
                 is AllJournalEvent.OnSelectJournal -> onNavigate(EditJournalingScreen(event.id))
-                is AllJournalEvent.OnSelectDate -> selectedDateTime = event.localDate
-                is AllJournalEvent.UpdateEditingOpenDeleteDialog -> openDeleteDialog = event.value
+                AllJournalEvent.OnDelete -> healthJournalViewModel.onAction(
+                    HealthJournalIntent.DeleteHealthJournal(
+                        allJournalState.currentDeleteId
+                    )
+                )
             }
 
+        DisposableEffect(Unit) {
+            onDispose {
+                healthJournalViewModel.onAction(HealthJournalIntent.ResetDeletingStatus)
+            }
+        }
+
         return AllJournalState(
-            selectedDateTime = selectedDateTime,
-            healthJournals = healthJournalMap,
+            selectedDateTime = allJournalState.selectedDateTime,
+            openDeleteDialog = allJournalState.openDeleteDialog,
+            dateCreated = user.dateCreated,
+            onAllAction = allJournalViewModel::onAction,
+            healthJournalRecords = healthJournalState.healthJournalRecords.getValue(),
+            onAction = healthJournalViewModel::onAction,
             onEvent = ::onEvent,
-            openDeleteDialog = openDeleteDialog,
-            onAction = healthJournalViewModel::onAction
         )
     }
 

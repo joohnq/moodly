@@ -28,17 +28,15 @@ import moodapp.composeapp.generated.resources.mindful_tracker
 fun HomeUI(
     state: HomeState,
 ) {
-    val (today, userName, statsRecord, sleepQuality, stressLevel, freudScore, healthJournal, onEvent) = state
-
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize()
-    ) {
+    ) { pad ->
         val padding = PaddingValues(
-            top = it.calculateTopPadding(),
-            bottom = it.calculateBottomPadding() + 80.dp,
-            start = it.calculateStartPadding(LayoutDirection.Ltr),
-            end = it.calculateEndPadding(LayoutDirection.Rtl)
+            top = pad.calculateTopPadding(),
+            bottom = pad.calculateBottomPadding() + 80.dp,
+            start = pad.calculateStartPadding(LayoutDirection.Ltr),
+            end = pad.calculateEndPadding(LayoutDirection.Rtl)
         )
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -48,22 +46,23 @@ fun HomeUI(
                 modifier = Modifier.padding(
                     top = padding.calculateTopPadding(),
                 ),
-                userName = userName.getValue().name,
-                date = today
+                userName = state.userName.getValue().name,
+                date = state.today
             )
             Title(Res.string.mental_health_metrics)
             MentalHealthMetrics(
-                freudScore = freudScore,
-                statsRecord = statsRecord.getValue().first(),
-                healthJournal = healthJournal.getValue(),
-                onEvent = onEvent
+                freudScore = state.freudScore,
+                statsRecord = state.statsRecord.getValue().first(),
+                healthJournal = state.healthJournal.getValue(),
+                onEvent = state.onEvent
             )
             Title(Res.string.mindful_tracker)
             MindfulTracker(
-                sleepQuality = sleepQuality.getValue().last().sleepQuality,
-                stressLevel = stressLevel.getValue().last().stressLevel,
-                moodTracker = statsRecord.getValue().take(3).reversed().map { it.mood },
-                onAction = onEvent
+                sleepQuality = state.sleepQuality.getValue().last().sleepQuality,
+                stressLevel = state.stressLevel.getValue().last().stressLevel,
+                moodTracker = state.statsRecord.getValue().take(3).reversed()
+                    .map { statsRecord -> statsRecord.mood },
+                onAction = state.onEvent
             )
         }
     }

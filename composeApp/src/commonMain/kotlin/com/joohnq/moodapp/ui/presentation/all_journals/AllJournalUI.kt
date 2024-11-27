@@ -45,11 +45,11 @@ fun AllJournalUI(state: AllJournalState) {
         state.healthJournalRecords
     )
     val keys = healthJournalMap.keys.toList()
-    val key = healthJournalMap.keys.find { it == state.selectedDateTime }
+    val key = healthJournalMap.keys.find { it == state.allJournalViewModelState.selectedDateTime }
         ?: healthJournalMap.keys.last()
     val list = healthJournalMap[key]
 
-    if (state.openDeleteDialog)
+    if (state.allJournalViewModelState.openDeleteDialog)
         MainAlertDialog(
             onDismissRequest = {
                 state.onAllAction(
@@ -99,7 +99,7 @@ fun AllJournalUI(state: AllJournalState) {
                     state = rememberLazyListState(initialFirstVisibleItemIndex = keys.lastIndex)
                 ) {
                     items(keys) { date ->
-                        val isSelected = date == state.selectedDateTime
+                        val isSelected = date == state.allJournalViewModelState.selectedDateTime
                         AllJournalDateCard(
                             isSelected = isSelected,
                             date = date,

@@ -11,7 +11,6 @@ import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
 import com.joohnq.moodapp.domain.MedicationsSupplements
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_supplements.OnboardingMedicationsSupplementsScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.varabyte.truthish.assertThat
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

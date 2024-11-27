@@ -64,7 +64,8 @@ fun HealthJournalUI(
             item {
                 VerticalSpacer(10.dp)
                 HealthJournalComponentColorful(
-                    healthJournals = state.healthJournal
+                    healthJournals = state.healthJournal,
+                    onClick = { state.onEvent(HealthJournalEvent.OnClick(it)) }
                 )
             }
         }

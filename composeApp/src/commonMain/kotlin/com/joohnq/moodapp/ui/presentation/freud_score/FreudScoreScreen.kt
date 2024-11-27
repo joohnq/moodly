@@ -33,7 +33,7 @@ class FreudScoreScreen : CustomScreen<FreudScoreState>() {
         return FreudScoreState(
             freudScore = statsState.freudScore,
             mapStatsRecords = mapStatsRecords,
-            onAction = ::onEvent
+            onEvent = ::onEvent
         )
     }
 

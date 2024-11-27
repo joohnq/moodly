@@ -2,7 +2,7 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.s
 
 import com.joohnq.moodapp.domain.SleepQuality
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_sleep_quality.event.OnboardingSleepQualityEvent
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 
 data class OnboardingSleepQualityState(
     val sliderValue: Float,

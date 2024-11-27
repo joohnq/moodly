@@ -7,5 +7,5 @@ import com.joohnq.moodapp.ui.presentation.freud_score.event.FreudScoreEvent
 data class FreudScoreState(
     val freudScore: FreudScore,
     val mapStatsRecords: Map<String, List<StatsRecord>>,
-    val onAction: (FreudScoreEvent) -> Unit = {}
+    val onEvent: (FreudScoreEvent) -> Unit = {}
 )

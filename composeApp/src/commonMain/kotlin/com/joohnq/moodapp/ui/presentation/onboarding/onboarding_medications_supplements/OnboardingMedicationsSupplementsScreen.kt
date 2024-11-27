@@ -8,7 +8,7 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_supplements.event.OnboardingMedicationsSupplementsEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_medications_supplements.state.OnboardingMedicationSupplementsState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_stress_level.OnboardingStressLevelScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 
 class OnboardingMedicationsSupplementsScreen :
     CustomScreen<OnboardingMedicationSupplementsState>() {

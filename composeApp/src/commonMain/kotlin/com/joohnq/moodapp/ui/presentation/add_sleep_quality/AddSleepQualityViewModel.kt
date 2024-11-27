@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.viewmodel
+package com.joohnq.moodapp.ui.presentation.add_sleep_quality
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.domain.Mood

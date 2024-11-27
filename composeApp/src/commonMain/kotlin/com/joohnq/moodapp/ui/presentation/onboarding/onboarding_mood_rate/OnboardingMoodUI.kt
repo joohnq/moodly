@@ -22,7 +22,7 @@ import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state.
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.mood_rate_desc
 import moodapp.composeapp.generated.resources.mood_rate_title

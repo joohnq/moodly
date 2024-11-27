@@ -27,7 +27,6 @@ import com.joohnq.moodapp.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.StatsIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.add_mood
 import moodapp.composeapp.generated.resources.hey_name
@@ -39,9 +38,8 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStatScreenUI(
     state: AddStatState,
 ) {
-    val (username, selectedMood, onAction, onNavigation) = state
     val moods by remember { mutableStateOf(Mood.getAll()) }
-    val moodIndex = moods.indexOf(selectedMood)
+    val moodIndex = moods.indexOf(state.selectedMood)
 
     Scaffold(
         containerColor = Colors.Brown10,
@@ -49,14 +47,14 @@ fun AddStatScreenUI(
     ) { padding ->
         Column(
             Modifier.fillMaxSize()
-                .background(color = selectedMood.palette.moodScreenBackgroundColor)
+                .background(color = state.selectedMood.palette.moodScreenBackgroundColor)
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
             TopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { onNavigation(AddStatEvent.OnGoBack) }
+                onGoBack = { state.onEvent(AddStatEvent.OnGoBack) }
             )
             VerticalSpacer(50.dp)
             Column(
@@ -64,7 +62,7 @@ fun AddStatScreenUI(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
-                    text = stringResource(Res.string.hey_name, username),
+                    text = stringResource(Res.string.hey_name, state.username),
                     style = TextStyles.TextXlSemiBold(),
                     color = Colors.White,
                     textAlign = TextAlign.Center
@@ -78,13 +76,13 @@ fun AddStatScreenUI(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    mood = selectedMood,
-                    backgroundColor = selectedMood.palette.moodScreenMoodFaceBackgroundColor,
-                    color = selectedMood.palette.moodScreenMoodFaceColor
+                    mood = state.selectedMood,
+                    backgroundColor = state.selectedMood.palette.moodScreenMoodFaceBackgroundColor,
+                    color = state.selectedMood.palette.moodScreenMoodFaceColor
                 )
                 VerticalSpacer(48.dp)
                 Text(
-                    text = stringResource(selectedMood.text),
+                    text = stringResource(state.selectedMood.text),
                     style = TextStyles.Text2xlSemiBold(),
                     color = Colors.White,
                     textAlign = TextAlign.Center
@@ -94,14 +92,20 @@ fun AddStatScreenUI(
                 AddMoodRadioGroup(
                     moodsSize = moods.size,
                     moodIndex = moodIndex,
-                    selectedMood = selectedMood,
-                    setSelectedMood = { onAction(StatsIntent.UpdateAddingStatsRecordMood(moods[it])) }
+                    selectedMood = state.selectedMood,
+                    setSelectedMood = {
+                        state.onAddAction(
+                            AddStatIntent.UpdateAddingStatsRecordMood(
+                                moods[it]
+                            )
+                        )
+                    }
                 )
                 VerticalSpacer(40.dp)
                 ButtonTextAndCheck(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.set_mood,
-                    onClick = { onNavigation(AddStatEvent.OnNavigateToExpressionAnalysis) }
+                    onClick = { state.onEvent(AddStatEvent.OnNavigateToExpressionAnalysis) }
                 )
             }
         }

@@ -41,7 +41,6 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.viewmodel.AddSleepQualityIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.end_sleeping_time
 import moodapp.composeapp.generated.resources.mood

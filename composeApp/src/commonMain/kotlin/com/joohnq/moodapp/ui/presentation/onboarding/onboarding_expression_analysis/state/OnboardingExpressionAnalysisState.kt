@@ -2,7 +2,7 @@ package com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_anal
 
 import androidx.compose.material3.SnackbarHostState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.event.OnboardingExpressionEvent
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 
 data class OnboardingExpressionAnalysisState(
     val snackBarState: SnackbarHostState,

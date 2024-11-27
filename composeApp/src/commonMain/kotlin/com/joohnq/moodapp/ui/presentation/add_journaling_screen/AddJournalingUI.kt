@@ -45,7 +45,6 @@ import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.moodapp.viewmodel.AddingJournalingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.enter_the_title
 import moodapp.composeapp.generated.resources.journal_title

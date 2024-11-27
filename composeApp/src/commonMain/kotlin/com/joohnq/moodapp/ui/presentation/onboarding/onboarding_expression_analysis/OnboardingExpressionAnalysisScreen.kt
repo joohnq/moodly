@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.moodapp.domain.SleepQualityRecord
+import com.joohnq.moodapp.domain.StressLevelRecord
 import com.joohnq.moodapp.domain.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
@@ -16,8 +17,8 @@ import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analy
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.moodapp.ui.state.UiState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
-import com.joohnq.moodapp.viewmodel.OnboardingIntent
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsIntent
@@ -60,8 +61,9 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
                     )
                     stressLevelViewModel.onAction(
                         StressLevelIntent.AddStressLevelRecord(
-                            onboardingState.stressLevel,
-                            emptyList()
+                            StressLevelRecord.Builder()
+                                .setStressLevel(onboardingState.stressLevel)
+                                .build()
                         )
                     )
                     statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.statsRecord))
@@ -80,22 +82,22 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
             }
 
         LaunchedEffect(
-            stressLevelState.adding.status,
+            stressLevelState.adding,
             sleepQualityState.adding,
-            statsState.adding.status,
+            statsState.adding,
             userState.updating.status
         ) {
             UiState.fold(
-                stressLevelState.adding.status,
+                stressLevelState.adding,
                 sleepQualityState.adding,
-                statsState.adding.status,
+                statsState.adding,
                 userState.updating.status,
                 onAllSuccess = {
                     userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
                     sleepQualityViewModel.onAction(SleepQualityIntent.ResetAddingStatus)
-                    stressLevelViewModel.onAction(StressLevelIntent.ResetAdding)
-                    statsViewModel.onAction(StatsIntent.ResetAdding)
-                    userViewModel.onAction(UserIntent.ResetUpdating)
+                    stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
+                    statsViewModel.onAction(StatsIntent.ResetAddingStatus)
+                    userViewModel.onAction(UserIntent.ResetUpdatingState)
                     onboardingViewModel.onAction(OnboardingIntent.ResetStatsRecord)
                 },
                 onAnyHasError = {

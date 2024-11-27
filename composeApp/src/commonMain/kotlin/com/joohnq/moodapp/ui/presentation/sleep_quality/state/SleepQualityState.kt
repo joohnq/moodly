@@ -5,5 +5,5 @@ import com.joohnq.moodapp.ui.presentation.sleep_quality.event.SleepQualityEvent
 
 data class SleepQualityState(
     val sleepQualityRecords: List<SleepQualityRecord>,
-    val onAction: (SleepQualityEvent) -> Unit = {}
+    val onEvent: (SleepQualityEvent) -> Unit = {}
 )

@@ -75,7 +75,7 @@ class HomeScreen : CustomTab<HomeState>() {
             }
 
         SideEffect {
-            statsViewModel.onAction(StatsIntent.GetStatsRecord)
+            statsViewModel.onAction(StatsIntent.GetStatsRecords)
             userViewModel.onAction(UserIntent.GetUser)
             stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
             sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)

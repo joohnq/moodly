@@ -28,7 +28,7 @@ class SleepQualityScreen : CustomScreen<SleepQualityState>() {
 
         return SleepQualityState(
             sleepQualityRecords = sleepQualityState.sleepQualityRecords.getValue(),
-            onAction = ::onEvent
+            onEvent = ::onEvent
         )
     }
 

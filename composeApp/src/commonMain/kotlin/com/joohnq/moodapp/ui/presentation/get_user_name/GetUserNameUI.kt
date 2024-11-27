@@ -37,7 +37,7 @@ import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.viewmodel.UserIntent
 import moodapp.composeapp.generated.resources.Res
@@ -85,7 +85,7 @@ fun GetUserNameUI(
         ) { _ ->
             Column(
                 modifier = Modifier
-                    .paddingHorizontalSmall()
+                    .paddingHorizontalMedium()
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {

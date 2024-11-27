@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -27,6 +28,7 @@ import com.joohnq.moodapp.util.helper.DatetimeManager
 import com.joohnq.moodapp.util.helper.StatsManager
 import com.joohnq.moodapp.util.mappers.forEachMapComposable
 import com.joohnq.moodapp.util.mappers.items
+import kotlinx.datetime.LocalDate
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.friday_char
 import moodapp.composeapp.generated.resources.monday_char
@@ -86,7 +88,8 @@ fun HealthJournalComponent(
 @Composable
 fun HealthJournalComponentColorful(
     modifier: Modifier = Modifier,
-    healthJournals: List<HealthJournalRecord>
+    healthJournals: List<HealthJournalRecord>,
+    onClick: (LocalDate) -> Unit
 ) {
     val dayOfWeek = DatetimeManager.getCurrentWeekDay(DatetimeManager.getCurrentDateTime())
     val weekChars = remember {
@@ -135,7 +138,12 @@ fun HealthJournalComponentColorful(
             val background = dayFreudScore?.palette?.backgroundColor ?: Colors.Brown20
             Box(
                 modifier = Modifier.weight(1f).aspectRatio(1f / 1f)
-                    .background(color = background, shape = Dimens.Shape.Circle),
+                    .background(color = background, shape = Dimens.Shape.Circle)
+                    .then(if (healthJournal?.firstOrNull()?.date?.date != null)
+                        Modifier.clickable {
+                            onClick(healthJournal.firstOrNull()?.date?.date!!)
+                        }
+                    else Modifier)
             )
         }
     }

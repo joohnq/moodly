@@ -9,7 +9,6 @@ import com.joohnq.moodapp.di.platformModule
 import com.joohnq.moodapp.di.sharedModule
 import com.joohnq.moodapp.domain.ProfessionalHelp
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.OnboardingProfessionalHelpScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.varabyte.truthish.assertThat
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

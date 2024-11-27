@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.viewmodel
+package com.joohnq.moodapp.ui.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.domain.MedicationsSupplements

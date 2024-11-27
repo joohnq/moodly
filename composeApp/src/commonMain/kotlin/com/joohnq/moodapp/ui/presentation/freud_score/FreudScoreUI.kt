@@ -27,16 +27,15 @@ import org.jetbrains.compose.resources.stringResource
 @Composable fun FreudScoreUI(
     state: FreudScoreState,
 ) {
-    val (freudScore, mapStatsRecords, onAction) = state
     SharedPanelComponent(
         isDark = false,
-        onGoBack = { onAction(FreudScoreEvent.OnGoBack) },
-        backgroundColor = freudScore.palette.backgroundColor,
+        onGoBack = { state.onEvent(FreudScoreEvent.OnGoBack) },
+        backgroundColor = state.freudScore.palette.backgroundColor,
         backgroundImage = Drawables.Images.FreudScoreBackground,
         panelTitle = Res.string.freud_score,
         bodyTitle = Res.string.mental_score_history,
-        color = freudScore.palette.subColor,
-        onAdd = { onAction(FreudScoreEvent.OnAdd) },
+        color = state.freudScore.palette.subColor,
+        onAdd = { state.onEvent(FreudScoreEvent.OnAdd) },
         panelContent = {
             Column(
                 modifier = Modifier.paddingHorizontalMedium()
@@ -45,25 +44,25 @@ import org.jetbrains.compose.resources.stringResource
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = freudScore.score.toString(),
+                    text = state.freudScore.score.toString(),
                     style = TextStyles.DisplayMdExtraBold(),
                     color = Colors.White
                 )
                 Text(
-                    text = stringResource(freudScore.title),
+                    text = stringResource(state.freudScore.title),
                     style = TextStyles.TextXlSemiBold(),
                     color = Colors.White
                 )
             }
         },
         content = {
-            mapStatsRecords.forEachMap { key, items ->
+            state.mapStatsRecords.forEachMap { key, items ->
                 item {
                     SmallTitle(text = key)
                 }
                 items(items) { statsRecord ->
                     MentalScoreHistoryItemWithHour(statsRecord) {
-                        onAction(
+                        state.onEvent(
                             FreudScoreEvent.OnNavigateToMoodScreen(
                                 statsRecord
                             )

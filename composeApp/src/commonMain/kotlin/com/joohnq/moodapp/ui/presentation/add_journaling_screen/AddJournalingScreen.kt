@@ -15,8 +15,6 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.moodapp.ui.presentation.add_journaling_screen.state.AddJournalingState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
-import com.joohnq.moodapp.viewmodel.AddJournalingViewModel
-import com.joohnq.moodapp.viewmodel.AddingJournalingIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import kotlinx.coroutines.launch

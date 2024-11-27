@@ -1,9 +1,9 @@
 package com.joohnq.moodapp.ui.presentation.add_sleep_quality.state
 
 import androidx.compose.material3.SnackbarHostState
+import com.joohnq.moodapp.ui.presentation.add_sleep_quality.AddSleepQualityIntent
+import com.joohnq.moodapp.ui.presentation.add_sleep_quality.AddSleepQualityStateViewModel
 import com.joohnq.moodapp.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
-import com.joohnq.moodapp.viewmodel.AddSleepQualityIntent
-import com.joohnq.moodapp.viewmodel.AddSleepQualityStateViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 
 data class AddSleepQualityState(

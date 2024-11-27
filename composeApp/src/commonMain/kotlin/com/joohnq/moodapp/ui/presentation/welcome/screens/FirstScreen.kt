@@ -19,7 +19,7 @@ import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.first_screen_desc
@@ -36,7 +36,7 @@ fun FirstScreen(onGetStarted: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize().paddingHorizontalSmall()
+        modifier = Modifier.fillMaxSize().paddingHorizontalMedium()
     ) {
         TextWithSpan(
             firstTitle = stringResource(Res.string.first_screen_title),

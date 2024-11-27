@@ -9,7 +9,7 @@ import com.joohnq.moodapp.ui.ScreenDimensions
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.event.OnboardingMoodRateEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_professional_help.OnboardingProfessionalHelpScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 import org.koin.compose.koinInject
 
 class OnboardingMoodRateScreen : CustomScreen<OnboardingMoodRateState>() {

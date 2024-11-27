@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_journaling_screen.AddJournalingScreen
+import com.joohnq.moodapp.ui.presentation.all_journals.AllJournalScreen
 import com.joohnq.moodapp.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.moodapp.ui.presentation.health_journal.state.HealthJournalState
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
@@ -22,6 +23,8 @@ class HealthJournalScreen : CustomScreen<HealthJournalState>() {
                 HealthJournalEvent.OnGoBack -> onGoBack()
                 HealthJournalEvent.OnNavigateToAddHealthJournalScreen ->
                     onNavigate(AddJournalingScreen())
+
+                is HealthJournalEvent.OnClick -> onNavigate(AllJournalScreen(event.localDate))
             }
 
         return HealthJournalState(

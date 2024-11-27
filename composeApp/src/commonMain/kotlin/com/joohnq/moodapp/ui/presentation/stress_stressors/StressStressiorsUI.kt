@@ -13,6 +13,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,14 +27,14 @@ import com.joohnq.moodapp.ui.components.StressStressorCircle
 import com.joohnq.moodapp.ui.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
+import com.joohnq.moodapp.ui.presentation.add_stress_level.AddStressLevelIntent
 import com.joohnq.moodapp.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.moodapp.ui.presentation.stress_stressors.state.StressStressorsState
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
 import com.joohnq.moodapp.util.constants.TestConstants
-import com.joohnq.moodapp.viewmodel.StressLevelIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.add_stress_level
 import moodapp.composeapp.generated.resources.enter_your_stressor
@@ -45,6 +47,9 @@ fun StressStressorsUI(
     state: StressStressorsState,
 ) {
     val stressors = remember { Stressor.getAll() }
+    val canContinue by derivedStateOf { state.addStressLevelViewModelState.stressors.isNotEmpty() }
+    val containOtherInStressors by derivedStateOf { state.addStressLevelViewModelState.stressors.any { it::class == Stressor.Other::class } }
+
     Scaffold(
         snackbarHost = { SnackbarHost(state.snackBarState) },
         containerColor = Colors.Brown10,
@@ -53,7 +58,7 @@ fun StressStressorsUI(
         Column(
             modifier = Modifier
                 .padding(padding)
-                .paddingHorizontalSmall()
+                .paddingHorizontalMedium()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -78,24 +83,36 @@ fun StressStressorsUI(
                     items(stressors) { stressor ->
                         StressStressorCircle(
                             stressStressor = stressor,
-                            selected = state.selectedStressors.contains(stressor),
-                            onClick = { state.onEvent(StressStressorsEvent.OnAddStressor(stressor)) }
+                            selected = state.addStressLevelViewModelState.stressors.contains(
+                                stressor
+                            ),
+                            onClick = {
+                                state.onAddAction(
+                                    AddStressLevelIntent.UpdateAddingStressors(
+                                        stressor
+                                    )
+                                )
+                            }
                         )
                     }
                 },
             )
-            if (state.selectedStressors.any { it::class == Stressor.Other::class })
+            if (containOtherInStressors)
                 TextFieldWithLabelAndDoubleBorder(
                     label = Res.string.other,
                     placeholder = Res.string.enter_your_stressor,
-                    text = state.otherValue,
-                    errorText = state.otherValueError,
+                    text = state.addStressLevelViewModelState.otherValue,
+                    errorText = state.addStressLevelViewModelState.otherValueError,
                     focusedBorderColor = Colors.Green50Alpha25,
                     colors = ComponentColors.TextField.MainTextFieldColors(),
-                    onValueChange = { state.onAction(StressLevelIntent.UpdateAddingOtherValue(it)) },
+                    onValueChange = {
+                        state.onAddAction(
+                            AddStressLevelIntent.UpdateAddingOtherValue(it)
+                        )
+                    },
                 )
             VerticalSpacer(24.dp)
-            if (state.selectedStressors.isNotEmpty())
+            if (canContinue)
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
                         .testTag(TestConstants.CONTINUE_BUTTON),

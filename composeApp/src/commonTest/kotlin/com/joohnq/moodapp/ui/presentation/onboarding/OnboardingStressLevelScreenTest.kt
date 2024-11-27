@@ -11,7 +11,6 @@ import com.joohnq.moodapp.di.sharedModule
 import com.joohnq.moodapp.di.viewModelModule
 import com.joohnq.moodapp.domain.StressLevel
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_stress_level.OnboardingStressLevelScreen
-import com.joohnq.moodapp.viewmodel.OnboardingViewModel
 import com.varabyte.truthish.assertThat
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

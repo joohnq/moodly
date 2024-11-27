@@ -35,21 +35,20 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodUI(
     state: MoodState,
 ) {
-    val (statsRecord, statsRecords, hasNext, hasPrevious, onEvent) = state
     SharedPanelComponent(
         isDark = true,
-        onGoBack = { onEvent(MoodEvent.OnGoBack) },
-        backgroundColor = statsRecord.mood.palette.backgroundColor,
+        onGoBack = { state.onEvent(MoodEvent.OnGoBack) },
+        backgroundColor = state.statsRecord.mood.palette.backgroundColor,
         backgroundImage = Drawables.Images.MoodBackground,
         panelTitle = Res.string.mood,
         bodyTitle = Res.string.description,
-        color = statsRecord.mood.palette.subColor,
-        onAdd = { onEvent(MoodEvent.OnAddStatScreen) },
+        color = state.statsRecord.mood.palette.subColor,
+        onAdd = { state.onEvent(MoodEvent.OnAddStatScreen) },
         topBarContent = {
             TextWithBackground(
-                text = DatetimeManager.formatDateTime(statsRecord.date),
-                textColor = statsRecord.mood.palette.moodScreenMoodFaceColor,
-                backgroundColor = statsRecord.mood.palette.subColor,
+                text = DatetimeManager.formatDateTime(state.statsRecord.date),
+                textColor = state.statsRecord.mood.palette.moodScreenMoodFaceColor,
+                backgroundColor = state.statsRecord.mood.palette.subColor,
             )
         },
         panelContent = {
@@ -62,12 +61,12 @@ fun MoodUI(
                 Text(
                     text = stringResource(Res.string.your_mood_is),
                     style = TextStyles.TextXlBold(),
-                    color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                    color = state.statsRecord.mood.palette.moodScreenMoodFaceColor
                 )
                 Text(
-                    text = stringResource(statsRecord.mood.text),
+                    text = stringResource(state.statsRecord.mood.text),
                     style = TextStyles.Heading2xlExtraBold(),
-                    color = statsRecord.mood.palette.moodScreenMoodFaceColor
+                    color = state.statsRecord.mood.palette.moodScreenMoodFaceColor
                 )
                 VerticalSpacer(10.dp)
                 Row(
@@ -76,20 +75,20 @@ fun MoodUI(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     PreviousNextButton(
-                        enabled = hasPrevious,
+                        enabled = state.hasPrevious,
                         isPrevious = true,
-                        onClick = { onEvent(MoodEvent.OnPrevious) },
-                        color = statsRecord.mood.palette.color
+                        onClick = { state.onEvent(MoodEvent.OnPrevious) },
+                        color = state.statsRecord.mood.palette.color
                     )
                     MoodFace(
                         modifier = Modifier.size(96.dp),
-                        mood = statsRecord.mood
+                        mood = state.statsRecord.mood
                     )
                     PreviousNextButton(
-                        enabled = hasNext,
+                        enabled = state.hasNext,
                         isPrevious = false,
-                        onClick = { onEvent(MoodEvent.OnNext) },
-                        color = statsRecord.mood.palette.color
+                        onClick = { state.onEvent(MoodEvent.OnNext) },
+                        color = state.statsRecord.mood.palette.color
                     )
                 }
             }
@@ -98,16 +97,16 @@ fun MoodUI(
             item {
                 Column {
                     Text(
-                        text = statsRecord.description,
+                        text = state.statsRecord.description,
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
                     )
                     VerticalSpacer(40.dp)
                     MoodBarStatistic(
-                        statsRecords = statsRecords,
-                        currentStatsRecord = statsRecord,
-                        onClick = { onEvent(MoodEvent.OnSetMood(it)) }
+                        statsRecords = state.statsRecords,
+                        currentStatsRecord = state.statsRecord,
+                        onClick = { state.onEvent(MoodEvent.OnSetMood(it)) }
                     )
                     VerticalSpacer(20.dp)
                 }

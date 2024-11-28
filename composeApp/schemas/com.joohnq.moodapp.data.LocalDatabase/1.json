@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a44a02a2f5ad15f947728e72060ddc6e",
+    "identityHash": "6e8fca808c6c0c3542e2508b00c5484b",
     "entities": [
       {
         "tableName": "StatsRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` INTEGER NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -17,7 +17,7 @@
           {
             "fieldPath": "mood",
             "columnName": "mood",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -42,7 +42,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `medications_supplements` TEXT NOT NULL, `sought_help` TEXT NOT NULL, `physical_symptoms` TEXT NOT NULL, `date_created` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `medications_supplements` INTEGER NOT NULL, `sought_help` INTEGER NOT NULL, `physical_symptoms` INTEGER NOT NULL, `date_created` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -59,19 +59,19 @@
           {
             "fieldPath": "medicationsSupplements",
             "columnName": "medications_supplements",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "soughtHelp",
             "columnName": "sought_help",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "physicalSymptoms",
             "columnName": "physical_symptoms",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -210,7 +210,7 @@
       },
       {
         "tableName": "HealthJournalRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `stress_level` INTEGER NOT NULL, `stressors` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `stress_level` INTEGER NOT NULL, `stressors` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -221,7 +221,7 @@
           {
             "fieldPath": "mood",
             "columnName": "mood",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -265,7 +265,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a44a02a2f5ad15f947728e72060ddc6e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6e8fca808c6c0c3542e2508b00c5484b')"
     ]
   }
 }

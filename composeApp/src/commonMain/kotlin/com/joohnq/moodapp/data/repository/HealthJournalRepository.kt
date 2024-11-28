@@ -1,8 +1,8 @@
 package com.joohnq.moodapp.data.repository
 
-import com.joohnq.moodapp.data.converters.StressorsConverter
 import com.joohnq.moodapp.data.dao.HealthJournalRecordDAO
 import com.joohnq.moodapp.domain.HealthJournalRecord
+import com.joohnq.moodapp.util.helper.DatetimeManager
 
 interface HealthJournalRepository {
     suspend fun getHealthJournals(): List<HealthJournalRecord>
@@ -26,11 +26,9 @@ class HealthJournalRepositoryImpl(
     ): Boolean =
         try {
             healthJournalRecordDAO.addHealthJournal(
-                mood = healthJournalRecord.mood,
-                title = healthJournalRecord.title,
-                description = healthJournalRecord.description,
-                stressLevel = healthJournalRecord.stressLevel,
-                stressors = StressorsConverter().fromStressorsList(healthJournalRecord.stressors)
+                healthJournalRecord.copy(
+                    date = DatetimeManager.getCurrentDateTime(),
+                )
             )
             true
         } catch (e: Exception) {

@@ -31,11 +31,9 @@ data class SleepQualityRecord(
         fun setSleepQualityByMood(mood: Mood) =
             apply { this.sleepQuality = SleepQuality.fromMood(mood) }
 
-        fun setStartSleeping(startSleeping: String) = apply { this.startSleeping = startSleeping }
         fun setStartSleeping(hour: Int, minute: Int) =
             apply { this.startSleeping = DatetimeManager.formatTime(hour, minute) }
 
-        fun setEndSleeping(endSleeping: String) = apply { this.endSleeping = endSleeping }
         fun setEndSleeping(hour: Int, minute: Int) =
             apply { this.endSleeping = DatetimeManager.formatTime(hour, minute) }
 

@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.domain
 
-import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.ui.theme.Drawables
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
@@ -12,7 +11,7 @@ import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class PhysicalSymptoms(
-    val id: String,
+    val id: Int,
     @Contextual val text: StringResource,
     @Contextual val icon: Icon
 ) {
@@ -29,7 +28,7 @@ sealed class PhysicalSymptoms(
 
     @Serializable
     data object No : PhysicalSymptoms(
-        id = NO_PHYSICAL_PAIN,
+        id = NO,
         text = Res.string.no_physical_pain,
         icon = Icon(
             icon = Drawables.Icons.Close,
@@ -48,24 +47,19 @@ sealed class PhysicalSymptoms(
     )
 
     companion object {
-        private const val YES_VERY_PAINFUL = "0"
-        private const val NO_PHYSICAL_PAIN = "1"
-        private const val YES_JUST_A_BIT = "2"
+        private const val YES_VERY_PAINFUL = 0
+        private const val NO = 1
+        private const val YES_JUST_A_BIT = 2
 
-        fun toValue(src: String): PhysicalSymptoms = when (src) {
+        fun toValue(src: Int): PhysicalSymptoms = when (src) {
             YES_VERY_PAINFUL -> YesVeryPainful
-            NO_PHYSICAL_PAIN -> No
+            NO -> No
             YES_JUST_A_BIT -> YesJustABit
             else -> throw IllegalArgumentException("Unknown physical symptoms: $src")
         }
 
-        fun fromValue(physicalSymptoms: PhysicalSymptoms?): String = physicalSymptoms?.id.toString()
+        fun fromValue(physicalSymptoms: PhysicalSymptoms?): Int = physicalSymptoms?.id ?: -1
 
         fun getAll(): List<PhysicalSymptoms> = listOf(YesVeryPainful, No, YesJustABit)
-
-        fun getSaver(): Saver<PhysicalSymptoms?, String> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
-        )
     }
 }

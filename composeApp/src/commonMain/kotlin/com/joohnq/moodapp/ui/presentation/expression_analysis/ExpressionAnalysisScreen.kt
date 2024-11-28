@@ -52,6 +52,7 @@ class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
                 onSuccess = {
                     onNavigate(MoodScreen())
                     statsViewModel.onAction(StatsIntent.GetStatsRecords)
+                    statsViewModel.onAction(StatsIntent.ResetAddingStatus)
                 },
             )
         }

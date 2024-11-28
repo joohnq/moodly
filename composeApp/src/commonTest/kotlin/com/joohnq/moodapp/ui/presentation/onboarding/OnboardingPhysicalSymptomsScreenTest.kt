@@ -45,10 +45,9 @@ class OnboardingPhysicalSymptomsScreenTest : KoinTest {
     }
 
     @OptIn(ExperimentalTestApi::class) fun ComposeUiTest.perform(
-        value: String,
         expect: PhysicalSymptoms
     ) {
-        onNodeWithTag(value).performClick()
+        onNodeWithTag(expect.id.toString()).performClick()
         assertThat(onboardingViewModel.onboardingState.value.physicalSymptoms)
             .isEqualTo(expect)
     }
@@ -81,9 +80,9 @@ class OnboardingPhysicalSymptomsScreenTest : KoinTest {
 
             continueButton.assertDoesNotExist()
 
-            perform(PhysicalSymptoms.YesVeryPainful.id, PhysicalSymptoms.YesVeryPainful)
-            perform(PhysicalSymptoms.YesJustABit.id, PhysicalSymptoms.YesJustABit)
-            perform(PhysicalSymptoms.No.id, PhysicalSymptoms.No)
+            perform(PhysicalSymptoms.YesVeryPainful)
+            perform(PhysicalSymptoms.YesJustABit)
+            perform(PhysicalSymptoms.No)
 
             continueButton.assertExists()
         }
@@ -101,7 +100,7 @@ class OnboardingPhysicalSymptomsScreenTest : KoinTest {
             val continueButton = onNodeWithText("Continue")
             continueButton.assertDoesNotExist()
 
-            perform(PhysicalSymptoms.YesVeryPainful.id, PhysicalSymptoms.YesVeryPainful)
+            perform(PhysicalSymptoms.YesVeryPainful)
             continueButton.assertExists()
 
             continueButton.performClick()

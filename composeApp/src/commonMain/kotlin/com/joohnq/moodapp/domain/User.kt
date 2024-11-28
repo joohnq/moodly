@@ -21,14 +21,34 @@ data class User(
     val physicalSymptoms: PhysicalSymptoms,
     @ColumnInfo(name = DatabaseConstants.DATE_CREATED) val dateCreated: LocalDateTime
 ) {
-    companion object {
-        fun init(): User = User(
-            id = 1,
-            name = "",
-            medicationsSupplements = MedicationsSupplements.ImNotTakingAny,
-            soughtHelp = ProfessionalHelp.No,
-            physicalSymptoms = PhysicalSymptoms.No,
-            dateCreated = DatetimeManager.getCurrentDateTime()
+    class Builder {
+        private var id: Int = 1
+        private var name: String = ""
+        private var medicationsSupplements: MedicationsSupplements =
+            MedicationsSupplements.ImNotTakingAny
+        private var soughtHelp: ProfessionalHelp = ProfessionalHelp.No
+        private var physicalSymptoms: PhysicalSymptoms = PhysicalSymptoms.No
+        private var dateCreated: LocalDateTime = DatetimeManager.getCurrentDateTime()
+
+        fun setName(name: String) = apply { this.name = name }
+        fun setMedicationsSupplements(medicationsSupplements: MedicationsSupplements) =
+            apply { this.medicationsSupplements = medicationsSupplements }
+
+        fun setSoughtHelp(soughtHelp: ProfessionalHelp) = apply { this.soughtHelp = soughtHelp }
+        fun setPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) =
+            apply { this.physicalSymptoms = physicalSymptoms }
+
+        fun build() = User(
+            id = id,
+            name = name,
+            medicationsSupplements = medicationsSupplements,
+            soughtHelp = soughtHelp,
+            physicalSymptoms = physicalSymptoms,
+            dateCreated = dateCreated
         )
+    }
+
+    companion object {
+        fun init(): User = Builder().build()
     }
 }

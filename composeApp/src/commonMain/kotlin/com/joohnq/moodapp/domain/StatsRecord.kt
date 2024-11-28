@@ -35,11 +35,6 @@ data class StatsRecord(
     }
 
     companion object {
-        fun init(): StatsRecord = StatsRecord(
-            id = 0,
-            mood = Mood.Neutral,
-            description = "",
-            date = DatetimeManager.getCurrentDateTime()
-        )
+        fun init(): StatsRecord = Builder().build()
     }
 }

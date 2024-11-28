@@ -46,7 +46,7 @@ class OnboardingMedicationsSupplementsScreenTest : KoinTest {
 
     @OptIn(ExperimentalTestApi::class)
     private fun ComposeUiTest.perform(value: MedicationsSupplements) {
-        onNodeWithTag(value.id).performClick()
+        onNodeWithTag(value.id.toString()).performClick()
         assertThat(onboardingViewModel.onboardingState.value.medicationsSupplements)
             .isEqualTo(value)
     }

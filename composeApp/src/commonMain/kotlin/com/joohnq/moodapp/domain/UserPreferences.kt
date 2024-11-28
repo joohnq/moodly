@@ -15,12 +15,30 @@ data class UserPreferences(
     @ColumnInfo(name = DatabaseConstants.SKIP_GET_USER_NAME_SCREEN)
     val skipGetUserNameScreen: Boolean
 ) {
-    companion object {
-        fun init(): UserPreferences = UserPreferences(
-            id = 1,
-            skipWelcomeScreen = false,
-            skipOnboardingScreen = false,
-            skipGetUserNameScreen = false
+    class Builder {
+        private var id: Int = 1
+        private var skipWelcomeScreen: Boolean = false
+        private var skipOnboardingScreen: Boolean = false
+        private var skipGetUserNameScreen: Boolean = false
+
+        fun setSkipWelcomeScreen(skipWelcomeScreen: Boolean) =
+            apply { this.skipWelcomeScreen = skipWelcomeScreen }
+
+        fun setSkipOnboardingScreen(skipOnboardingScreen: Boolean) =
+            apply { this.skipOnboardingScreen = skipOnboardingScreen }
+
+        fun setSkipGetUserNameScreen(skipGetUserNameScreen: Boolean) =
+            apply { this.skipGetUserNameScreen = skipGetUserNameScreen }
+
+        fun build() = UserPreferences(
+            id = id,
+            skipWelcomeScreen = skipWelcomeScreen,
+            skipOnboardingScreen = skipOnboardingScreen,
+            skipGetUserNameScreen = skipGetUserNameScreen,
         )
+    }
+
+    companion object {
+        fun init(): UserPreferences = Builder().build()
     }
 }

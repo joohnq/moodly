@@ -109,7 +109,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.test)
             implementation(libs.turbine)
-            
+
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.bottom.sheet.navigator)
             implementation(libs.voyager.tab.navigator)
@@ -212,29 +212,29 @@ buildkonfig {
     }
 }
 
-//// Prevent the bug with room when generate an APK
-//tasks.withType<Test> {
-//    if (name == "mergeDebugAndroidTestAssets") {
-//        enabled = false
-//    }
-//}
-//
-//tasks.withType<Test> {
-//    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
-//        enabled = false
-//    }
-//}
-//
-//tasks.whenTaskAdded {
-//    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
-//        enabled = false
-//    }
-//}
-//
-//gradle.taskGraph.whenReady {
-//    allTasks.onEach { task ->
-//        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
-//            task.enabled = false
-//        }
-//    }
-//}
+// Prevent the bug with room when generate an APK
+tasks.withType<Test> {
+    if (name == "mergeDebugAndroidTestAssets") {
+        enabled = false
+    }
+}
+
+tasks.withType<Test> {
+    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
+        enabled = false
+    }
+}
+
+tasks.whenTaskAdded {
+    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
+        enabled = false
+    }
+}
+
+gradle.taskGraph.whenReady {
+    allTasks.onEach { task ->
+        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
+            task.enabled = false
+        }
+    }
+}

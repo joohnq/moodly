@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.domain
 
-import androidx.compose.runtime.saveable.Saver
 import com.joohnq.moodapp.ui.theme.Drawables
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
@@ -13,7 +12,7 @@ import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class MedicationsSupplements(
-    val id: String,
+    val id: Int,
     @Contextual val text: StringResource,
     @Contextual val icon: Icon
 ) {
@@ -59,12 +58,12 @@ sealed class MedicationsSupplements(
         )
 
     companion object {
-        private const val PRESCRIBED_MEDICATIONS = "0"
-        private const val OVER_THE_COUNTER_SUPPLEMENTS = "1"
-        private const val IM_NOT_TAKING_ANY = "2"
-        private const val PREFER_NOT_TO_SAY = "3"
+        private const val PRESCRIBED_MEDICATIONS = 0
+        private const val OVER_THE_COUNTER_SUPPLEMENTS = 1
+        private const val IM_NOT_TAKING_ANY = 2
+        private const val PREFER_NOT_TO_SAY = 3
 
-        fun toValue(src: String): MedicationsSupplements = when (src) {
+        fun toValue(src: Int): MedicationsSupplements = when (src) {
             PRESCRIBED_MEDICATIONS -> PrescribedMedications
             OVER_THE_COUNTER_SUPPLEMENTS -> OverTheCounterSupplements
             IM_NOT_TAKING_ANY -> ImNotTakingAny
@@ -72,19 +71,14 @@ sealed class MedicationsSupplements(
             else -> throw IllegalArgumentException("Unknown medications supplements option: $src")
         }
 
-        fun fromValue(medicationsSupplements: MedicationsSupplements?): String =
-            medicationsSupplements?.id.toString()
+        fun fromValue(medicationsSupplements: MedicationsSupplements?): Int =
+            medicationsSupplements?.id ?: -1
 
         fun getAll(): List<MedicationsSupplements> = listOf(
             PrescribedMedications,
             OverTheCounterSupplements,
             ImNotTakingAny,
             PreferNotToSay
-        )
-
-        fun getSaver(): Saver<MedicationsSupplements?, String> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
         )
     }
 }

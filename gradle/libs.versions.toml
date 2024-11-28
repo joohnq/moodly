@@ -33,6 +33,7 @@ uiToolingPreviewDesktop = "1.7.0"
 lifecycleViewModel = "2.8.3"
 coreI18n = "1.0.0-alpha01"
 buildkonfig = "0.15.2"
+mockmp = "1.17.0"
 generativeai = "0.9.0-1.0.1"
 voyagerNavigator = "1.1.0-beta02"
 voyagerBottomSheetNavigator = "1.1.0-beta02"
@@ -92,3 +93,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+mockmp = { id = "org.kodein.mock.mockmp", version.ref = "mockmp" }

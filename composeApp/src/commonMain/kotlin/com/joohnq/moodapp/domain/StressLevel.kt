@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.domain
 
-import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.Color
 import com.joohnq.moodapp.domain.palette.StressLevelPalette
 import com.joohnq.moodapp.ui.theme.Colors
@@ -148,11 +147,6 @@ sealed class StressLevel(
             Five
         )
 
-        fun getSaver(): Saver<StressLevel, Int> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
-        )
-
         fun getBrushGradient(): List<List<Color>> = listOf(
             listOf(Colors.Green50, Colors.Green50),
             listOf(Colors.Green50, Colors.Yellow50),
@@ -167,14 +161,6 @@ sealed class StressLevel(
             50f -> Three
             75f -> Four
             else -> Five
-        }
-
-        fun toSliderValue(stressLevel: StressLevel): Float = when (stressLevel) {
-            One -> 0f
-            Two -> 25f
-            Three -> 50f
-            Four -> 75f
-            else -> 100f
         }
     }
 }

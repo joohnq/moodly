@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.domain
 
-import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.joohnq.moodapp.domain.palette.MoodPalette
 import com.joohnq.moodapp.ui.theme.Colors
@@ -18,7 +17,7 @@ import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class Mood(
-    val id: String,
+    val id: Int,
     @Contextual val image: DrawableResource,
     @Contextual val imageVector: ImageVector,
     @Contextual val text: StringResource,
@@ -144,13 +143,13 @@ sealed class Mood(
         )
 
     companion object {
-        private const val DEPRESSED = "0"
-        private const val SAD = "1"
-        private const val NEUTRAL = "2"
-        private const val HAPPY = "3"
-        private const val OVERJOYED = "4"
+        private const val DEPRESSED = 0
+        private const val SAD = 1
+        private const val NEUTRAL = 2
+        private const val HAPPY = 3
+        private const val OVERJOYED = 4
 
-        fun toValue(src: String): Mood = when (src) {
+        fun toValue(src: Int): Mood = when (src) {
             DEPRESSED -> Depressed
             SAD -> Sad
             NEUTRAL -> Neutral
@@ -159,7 +158,7 @@ sealed class Mood(
             else -> throw IllegalArgumentException("Unknown mood: $src")
         }
 
-        fun fromValue(mood: Mood?): String = mood?.id.toString()
+        fun fromValue(mood: Mood?): Int = mood?.id ?: -1
 
         fun getAll(): List<Mood> = listOf(
             Depressed,
@@ -167,11 +166,6 @@ sealed class Mood(
             Neutral,
             Happy,
             Overjoyed
-        )
-
-        fun getSaver(): Saver<Mood, String> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
         )
     }
 }

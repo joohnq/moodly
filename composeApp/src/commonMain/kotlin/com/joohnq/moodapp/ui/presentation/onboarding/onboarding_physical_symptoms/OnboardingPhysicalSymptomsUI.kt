@@ -16,13 +16,13 @@ import com.joohnq.moodapp.domain.PhysicalSymptoms
 import com.joohnq.moodapp.ui.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingBaseComponent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.experiencing_physical_symptoms_title
 import moodapp.composeapp.generated.resources.select_one_answer
@@ -54,7 +54,7 @@ fun OnboardingPhysicalSymptomsUI(
         ) {
             options.forEach { option: PhysicalSymptoms ->
                 IconAndTextRadioButtonHorizontal(
-                    modifier = Modifier.fillMaxWidth().testTag(option.id),
+                    modifier = Modifier.fillMaxWidth().testTag(option.id.toString()),
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),

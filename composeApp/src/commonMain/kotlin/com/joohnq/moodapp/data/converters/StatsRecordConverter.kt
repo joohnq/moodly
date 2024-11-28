@@ -5,9 +5,9 @@ import com.joohnq.moodapp.domain.Mood
 
 class StatsRecordConverter {
     @TypeConverter
-    fun fromMood(value: Mood): String = Mood.fromValue(value)
+    fun fromMood(value: Mood): Int = Mood.fromValue(value)
 
     @TypeConverter
-    fun toMood(value: String): Mood = Mood.toValue(value)
+    fun toMood(value: Int): Mood = Mood.toValue(value)
 }
 

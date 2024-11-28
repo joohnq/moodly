@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.domain
 
-import androidx.compose.runtime.saveable.Saver
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import moodapp.composeapp.generated.resources.Res
@@ -10,7 +9,7 @@ import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class ProfessionalHelp(
-    val id: String,
+    val id: Int,
     @Contextual val text: StringResource,
     val value: Boolean
 ) {
@@ -29,23 +28,18 @@ sealed class ProfessionalHelp(
     )
 
     companion object {
-        private const val YES = "1"
-        private const val NO = "0"
+        private const val YES = 1
+        private const val NO = 0
 
-        fun toValue(src: String): ProfessionalHelp = when (src) {
+        fun toValue(src: Int): ProfessionalHelp = when (src) {
             YES -> Yes
             NO -> No
             else -> throw IllegalArgumentException("Unknown professional help option: $src")
         }
 
-        fun fromValue(professionalHelp: ProfessionalHelp?): String =
-            professionalHelp?.id.toString()
+        fun fromValue(professionalHelp: ProfessionalHelp?): Int =
+            professionalHelp?.id ?: -1
 
         fun getAll(): List<ProfessionalHelp> = listOf(Yes, No)
-
-        fun getSaver(): Saver<ProfessionalHelp?, String> = Saver(
-            save = { fromValue(it) },
-            restore = { toValue(it) }
-        )
     }
 }

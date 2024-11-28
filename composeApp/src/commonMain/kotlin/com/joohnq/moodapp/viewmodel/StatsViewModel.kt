@@ -58,7 +58,7 @@ class StatsViewModel(
     private fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch(dispatcher) {
         changeAddingStatus(UiState.Loading)
 
-        val res = statsRepository.addStats(statsRecord.mood, statsRecord.description)
+        val res = statsRepository.addStats(statsRecord)
 
         changeAddingStatus(
             if (res) UiState.Success(true) else UiState.Error(

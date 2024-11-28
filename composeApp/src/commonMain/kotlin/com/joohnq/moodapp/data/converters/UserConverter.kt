@@ -7,22 +7,22 @@ import com.joohnq.moodapp.domain.ProfessionalHelp
 
 class UserConverter {
     @TypeConverter
-    fun fromMedicationsSupplements(value: MedicationsSupplements): String =
+    fun fromMedicationsSupplements(value: MedicationsSupplements): Int =
         MedicationsSupplements.fromValue(value)
 
     @TypeConverter
-    fun toMedicationsSupplements(value: String): MedicationsSupplements =
+    fun toMedicationsSupplements(value: Int): MedicationsSupplements =
         MedicationsSupplements.toValue(value)
 
     @TypeConverter
-    fun fromPhysicalSymptoms(value: PhysicalSymptoms): String = PhysicalSymptoms.fromValue(value)
+    fun fromPhysicalSymptoms(value: PhysicalSymptoms): Int = PhysicalSymptoms.fromValue(value)
 
     @TypeConverter
-    fun toPhysicalSymptoms(value: String): PhysicalSymptoms = PhysicalSymptoms.toValue(value)
+    fun toPhysicalSymptoms(value: Int): PhysicalSymptoms = PhysicalSymptoms.toValue(value)
 
     @TypeConverter
-    fun fromProfessionalHelp(value: ProfessionalHelp): String = ProfessionalHelp.fromValue(value)
+    fun fromProfessionalHelp(value: ProfessionalHelp): Int = ProfessionalHelp.fromValue(value)
 
     @TypeConverter
-    fun toProfessionalHelp(value: String): ProfessionalHelp = ProfessionalHelp.toValue(value)
+    fun toProfessionalHelp(value: Int): ProfessionalHelp = ProfessionalHelp.toValue(value)
 }

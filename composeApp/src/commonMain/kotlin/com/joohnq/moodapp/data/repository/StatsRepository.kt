@@ -1,12 +1,12 @@
 package com.joohnq.moodapp.data.repository
 
-import com.joohnq.moodapp.domain.Mood
-import com.joohnq.moodapp.domain.StatsRecord
 import com.joohnq.moodapp.data.dao.StatsRecordDAO
+import com.joohnq.moodapp.domain.StatsRecord
+import com.joohnq.moodapp.util.helper.DatetimeManager
 
 interface StatsRepository {
     suspend fun getStats(): List<StatsRecord>
-    suspend fun addStats(mood: Mood, description: String): Boolean
+    suspend fun addStats(statsRecord: StatsRecord): Boolean
 }
 
 class StatsRepositoryImpl(
@@ -15,9 +15,9 @@ class StatsRepositoryImpl(
 
     override suspend fun getStats(): List<StatsRecord> = statsRecordDAO.getStats()
 
-    override suspend fun addStats(mood: Mood, description: String): Boolean =
+    override suspend fun addStats(statsRecord: StatsRecord): Boolean =
         try {
-            statsRecordDAO.addStats(mood, description)
+            statsRecordDAO.addStats(statsRecord.copy(date = DatetimeManager.getCurrentDateTime()))
             true
         } catch (e: Exception) {
             e.printStackTrace()

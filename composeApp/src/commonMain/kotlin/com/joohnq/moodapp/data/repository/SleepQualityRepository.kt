@@ -2,12 +2,11 @@ package com.joohnq.moodapp.data.repository
 
 import com.joohnq.moodapp.data.dao.SleepQualityRecordDAO
 import com.joohnq.moodapp.domain.SleepQualityRecord
+import com.joohnq.moodapp.util.helper.DatetimeManager
 
 interface SleepQualityRepository {
     suspend fun getSleepQualities(): List<SleepQualityRecord>
-    suspend fun addSleepQuality(
-        sleepQualityRecord: SleepQualityRecord
-    ): Boolean
+    suspend fun addSleepQuality(sleepQualityRecord: SleepQualityRecord): Boolean
 }
 
 class SleepQualityRepositoryImpl(
@@ -20,12 +19,7 @@ class SleepQualityRepositoryImpl(
         sleepQualityRecord: SleepQualityRecord
     ): Boolean =
         try {
-            sleepQualityRecordDAO.addSleepQuality(
-                sleepQuality = sleepQualityRecord.sleepQuality,
-                startSleeping = sleepQualityRecord.startSleeping,
-                endSleeping = sleepQualityRecord.endSleeping,
-                sleepInfluences = sleepQualityRecord.sleepInfluences
-            )
+            sleepQualityRecordDAO.addSleepQuality(sleepQualityRecord.copy(date = DatetimeManager.getCurrentDateTime()))
             true
         } catch (e: Exception) {
             e.printStackTrace()

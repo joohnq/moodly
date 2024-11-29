@@ -26,14 +26,13 @@ class FreudScoreScreen : CustomScreen<FreudScoreState>() {
             when (event) {
                 is FreudScoreEvent.OnGoBack -> onGoBack()
                 is FreudScoreEvent.OnNavigateToMoodScreen -> onNavigate(MoodScreen(event.statsRecord.id))
-
                 is FreudScoreEvent.OnAdd -> onNavigate(AddStatScreen())
             }
 
         return FreudScoreState(
             freudScore = statsState.freudScore,
             mapStatsRecords = mapStatsRecords,
-            onEvent = ::onEvent
+            onEvent = ::onEvent,
         )
     }
 

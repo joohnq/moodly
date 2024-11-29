@@ -35,8 +35,8 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
         fun onEvent(event: MoodEvent) =
             when (event) {
                 is MoodEvent.OnGoBack -> onGoBack(HomeScreen())
-                is MoodEvent.OnNext -> hasNext?.run { hasNext = this }
-                is MoodEvent.OnPrevious -> hasPrevious?.run { hasPrevious = this }
+                is MoodEvent.OnNext -> hasNext?.run { currentStatsRecord = this }
+                is MoodEvent.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
                 is MoodEvent.OnAddStatScreen -> onNavigate(AddStatScreen())
                 is MoodEvent.OnSetMood -> {
                     currentStatsRecord = event.statsRecord

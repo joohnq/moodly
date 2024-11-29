@@ -80,11 +80,11 @@ class UserPreferenceViewModel(
         }
 
     private fun addUserPreferences() = viewModelScope.launch(dispatcher) {
+        changeAddingStatus(UiState.Loading)
+
         val res = userPreferencesRepository.addUserPreferences(UserPreferences.init())
 
-        _userPreferencesState.update {
-            it.copy(adding = if (res) UiState.Success(res) else UiState.Error("Failure add user preferences"))
-        }
+        changeAddingStatus(if (res) UiState.Success(true) else UiState.Error("Failure add user preferences"))
     }
 
     private fun updateSkipWelcomeScreen(value: Boolean) =
@@ -118,5 +118,9 @@ class UserPreferenceViewModel(
         _userPreferencesState.update {
             it.copy(updating = UiState.Idle)
         }
+    }
+
+    private fun changeAddingStatus(status: UiState<Boolean>) {
+        _userPreferencesState.update { it.copy(adding = status) }
     }
 }

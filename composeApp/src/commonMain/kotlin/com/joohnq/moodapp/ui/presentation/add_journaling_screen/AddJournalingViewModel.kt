@@ -3,7 +3,6 @@ package com.joohnq.moodapp.ui.presentation.add_journaling_screen
 import androidx.lifecycle.ViewModel
 import com.joohnq.moodapp.domain.Mood
 import com.joohnq.moodapp.domain.Stressor
-import com.joohnq.moodapp.util.mappers.toggle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,10 +22,6 @@ sealed class AddingJournalingIntent {
     data class UpdateTitle(val title: String) : AddingJournalingIntent()
     data class UpdateDescription(val description: String) : AddingJournalingIntent()
     data class UpdateTitleError(val error: String?) : AddingJournalingIntent()
-    data class UpdateSliderValue(val sliderValue: Float) : AddingJournalingIntent()
-    data class UpdateSelectedStressStressors(val stressor: Stressor) :
-        AddingJournalingIntent()
-
     data object ResetState : AddingJournalingIntent()
 }
 
@@ -44,13 +39,6 @@ class AddJournalingViewModel : ViewModel() {
                 updateDescription(intent.description)
 
             is AddingJournalingIntent.UpdateMood -> updateAddingMood(intent.mood)
-            is AddingJournalingIntent.UpdateSelectedStressStressors -> updateSelectedStressStressors(
-                intent.stressor
-            )
-
-            is AddingJournalingIntent.UpdateSliderValue ->
-                updateSliderValue(intent.sliderValue)
-
             is AddingJournalingIntent.UpdateTitle -> updateTitle(intent.title)
             is AddingJournalingIntent.UpdateTitleError ->
                 updateTitleError(intent.error)
@@ -71,20 +59,6 @@ class AddJournalingViewModel : ViewModel() {
 
     private fun updateDescription(description: String) {
         _addingJournalingState.update { it.copy(description = description) }
-    }
-
-    private fun updateSliderValue(sliderValue: Float) {
-        _addingJournalingState.update { it.copy(sliderValue = sliderValue) }
-    }
-
-    private fun updateSelectedStressStressors(stressor: Stressor) {
-        _addingJournalingState.update {
-            it.copy(
-                selectedStressStressors = addingJournalingState.value.selectedStressStressors.toggle(
-                    stressor
-                )
-            )
-        }
     }
 
     private fun resetHeathJournal() {

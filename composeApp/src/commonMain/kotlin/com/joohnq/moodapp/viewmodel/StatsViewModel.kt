@@ -18,6 +18,7 @@ data class StatsState(
     val freudScore: FreudScore = FreudScore.init(),
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,
     val adding: UiState<Boolean> = UiState.Idle,
+    val deleting: UiState<Boolean> = UiState.Idle,
 )
 
 sealed class StatsIntent {

@@ -15,6 +15,8 @@ import com.joohnq.moodapp.ui.presentation.dashboard_screen.DashboardScreen
 import com.joohnq.moodapp.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.moodapp.ui.presentation.get_user_name.state.GetUserNameState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
+import com.joohnq.moodapp.viewmodel.GetUserNameIntent
+import com.joohnq.moodapp.viewmodel.GetUserNameViewModel
 import com.joohnq.moodapp.viewmodel.UserIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceIntent
 import com.joohnq.moodapp.viewmodel.UserPreferenceViewModel
@@ -25,22 +27,29 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
     @Composable
     override fun Screen(): GetUserNameState {
         val userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
+        val getUserNameViewModel: GetUserNameViewModel = sharedViewModel()
         val userViewModel: UserViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
         val userState by userViewModel.userState.collectAsState()
+        val getUserNameState by getUserNameViewModel.getUserNameState.collectAsState()
 
         fun onEvent(event: GetUserNameEvent) =
             when (event) {
                 GetUserNameEvent.OnContinue -> {
                     focusManager.clearFocus()
-                    userViewModel.onAction(UserIntent.UpdateUserName)
+                    try {
+                        if (getUserNameState.name.isEmpty()) throw Exception("Name can't be empty")
+                        userViewModel.onAction(UserIntent.UpdateUserName(getUserNameState.name))
+                    } catch (e: Exception) {
+                        getUserNameViewModel.onAction(GetUserNameIntent.UpdateUserNameError(e.message.toString()))
+                    }
                 }
             }
 
-        LaunchedEffect(userState.updating.status) {
-            userState.updating.status.fold(
+        LaunchedEffect(userState.updating) {
+            userState.updating.fold(
                 onError = {
                     scope.launch {
                         snackBarState.showSnackbar(it)
@@ -56,12 +65,12 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
         }
 
         return GetUserNameState(
-            name = userState.updating.name,
-            nameError = userState.updating.nameError,
+            getUserNameViewModelState = getUserNameState,
             snackBarState = snackBarState,
             onClearFocus = focusManager::clearFocus,
             onAction = userViewModel::onAction,
             onEvent = ::onEvent,
+            onGetAction = getUserNameViewModel::onAction
         )
     }
 

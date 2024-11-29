@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
@@ -55,15 +57,12 @@ import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 
 @Composable
-fun AllJournalsCard(
-    i: Int,
-    lastIndex: Int,
-    healthJournal: HealthJournalRecord,
-    onEvent: (AllJournalEvent) -> Unit,
+fun CardWithSwipeTorReveal(
+    content: @Composable (Shape, Modifier) -> Unit,
+    secondaryContent: (@Composable () -> Unit)? = null,
+    cardPadding: PaddingValues = PaddingValues(0.dp),
     onDelete: () -> Unit
 ) {
-    val mood = healthJournal.mood
-    val palette = mood.palette
     val scope = rememberCoroutineScope()
     var contextButtonsWidth by remember { mutableFloatStateOf(0f) }
     val offset = remember {
@@ -78,43 +77,10 @@ fun AllJournalsCard(
     }
 
     Row(modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max)) {
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(horizontal = 10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                    .background(color = if (i != 0) Colors.Brown80 else Colors.Transparent)
-            )
-            Column(
-                modifier = Modifier.size(50.dp)
-                    .background(
-                        color = Colors.Brown80,
-                        shape = Dimens.Shape.ExtraSmall
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    painter = painterResource(Drawables.Icons.Clock),
-                    contentDescription = stringResource(Res.string.hour),
-                    tint = Colors.White,
-                    modifier = Modifier.size(18.dp)
-                )
-                Text(
-                    text = DatetimeManager.formatTime(healthJournal.date),
-                    style = TextStyles.TextSmSemiBold(),
-                    color = Colors.White
-                )
-            }
-            Box(
-                modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                    .background(color = if (i != lastIndex) Colors.Brown80 else Colors.Transparent)
-            )
+        if (secondaryContent != null) {
+            secondaryContent()
         }
-        Box(modifier = Modifier.padding(end = 10.dp, top = 5.dp, bottom = 5.dp)) {
+        Box(modifier = Modifier.padding(cardPadding)) {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -146,9 +112,9 @@ fun AllJournalsCard(
                 }
             }
 
-            Card(
-                shape = if (!isExpanded) Dimens.Shape.Medium else Dimens.Shape.StartMedium,
-                modifier = Modifier
+            content(
+                if (!isExpanded) Dimens.Shape.Medium else Dimens.Shape.StartMedium,
+                Modifier
                     .offset { IntOffset(offset.value.roundToInt(), 0) }
                     .pointerInput(contextButtonsWidth) {
                         detectHorizontalDragGestures(
@@ -165,7 +131,28 @@ fun AllJournalsCard(
                                 isExpanded = offset.value <= -contextButtonsWidth / 2f
                             }
                         )
-                    },
+                    }
+            )
+        }
+    }
+}
+
+@Composable
+fun AllJournalsCard(
+    i: Int,
+    lastIndex: Int,
+    healthJournal: HealthJournalRecord,
+    onEvent: (AllJournalEvent) -> Unit,
+    onDelete: () -> Unit
+) {
+    val mood = healthJournal.mood
+    val palette = mood.palette
+
+    CardWithSwipeTorReveal(
+        content = { shape, modifier ->
+            Card(
+                shape = shape,
+                modifier = modifier,
                 colors = ComponentColors.Card.MainCardColors(),
                 onClick = {
                     onEvent(
@@ -218,6 +205,46 @@ fun AllJournalsCard(
                     )
                 }
             }
-        }
-    }
+        },
+        secondaryContent = {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(horizontal = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box(
+                    modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
+                        .background(color = if (i != 0) Colors.Brown80 else Colors.Transparent)
+                )
+                Column(
+                    modifier = Modifier.size(50.dp)
+                        .background(
+                            color = Colors.Brown80,
+                            shape = Dimens.Shape.ExtraSmall
+                        ),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        painter = painterResource(Drawables.Icons.Clock),
+                        contentDescription = stringResource(Res.string.hour),
+                        tint = Colors.White,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Text(
+                        text = DatetimeManager.formatTime(healthJournal.date),
+                        style = TextStyles.TextSmSemiBold(),
+                        color = Colors.White
+                    )
+                }
+                Box(
+                    modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
+                        .background(color = if (i != lastIndex) Colors.Brown80 else Colors.Transparent)
+                )
+            }
+        },
+        cardPadding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
+        onDelete = onDelete
+    )
 }

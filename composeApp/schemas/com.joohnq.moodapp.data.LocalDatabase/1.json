@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6e8fca808c6c0c3542e2508b00c5484b",
+    "identityHash": "decc73a6bb34145cbc4583c4173d9fca",
     "entities": [
       {
         "tableName": "StatsRecord",
@@ -210,7 +210,7 @@
       },
       {
         "tableName": "HealthJournalRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `stress_level` INTEGER NOT NULL, `stressors` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mood` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -237,18 +237,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "stressLevel",
-            "columnName": "stress_level",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "stressors",
-            "columnName": "stressors",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
             "fieldPath": "date",
             "columnName": "date",
             "affinity": "TEXT",
@@ -265,7 +253,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6e8fca808c6c0c3542e2508b00c5484b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'decc73a6bb34145cbc4583c4173d9fca')"
     ]
   }
 }

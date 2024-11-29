@@ -2,7 +2,6 @@ package com.joohnq.moodapp.data.repository
 
 import com.joohnq.moodapp.data.dao.HealthJournalRecordDAO
 import com.joohnq.moodapp.domain.HealthJournalRecord
-import com.joohnq.moodapp.domain.Stressor
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
@@ -67,7 +66,7 @@ class HealthJournalRepositoryTest {
     fun `test addHealthJournal with a success execution - should return true`() = runTest {
         //GIVEN
         val item =
-            HealthJournalRecord.Builder().setStressors(listOf(Stressor.Kids, Stressor.Work)).build()
+            HealthJournalRecord.Builder().build()
         everySuspend {
             healthJournalRecordDAO.addHealthJournal(any<HealthJournalRecord>())
         } returns Unit
@@ -87,7 +86,7 @@ class HealthJournalRepositoryTest {
     fun `test addHealthJournal with a failed execution - should return false`() = runTest {
         //GIVEN
         val item =
-            HealthJournalRecord.Builder().setStressors(listOf(Stressor.Kids, Stressor.Work)).build()
+            HealthJournalRecord.Builder().build()
 
         everySuspend {
             healthJournalRecordDAO.addHealthJournal(any<HealthJournalRecord>())
@@ -146,7 +145,7 @@ class HealthJournalRepositoryTest {
     fun `test updateHealthJournal with a success execution - should return true`() = runTest {
         //GIVEN
         val item =
-            HealthJournalRecord.Builder().setStressors(listOf(Stressor.Kids, Stressor.Work)).build()
+            HealthJournalRecord.Builder().build()
         everySuspend {
             healthJournalRecordDAO.updateHealthJournal(any<HealthJournalRecord>())
         } returns Unit
@@ -166,7 +165,7 @@ class HealthJournalRepositoryTest {
     fun `test updateHealthJournal with a failed execution - should return false`() = runTest {
         //GIVEN
         val item =
-            HealthJournalRecord.Builder().setStressors(listOf(Stressor.Kids, Stressor.Work)).build()
+            HealthJournalRecord.Builder().build()
         everySuspend {
             healthJournalRecordDAO.updateHealthJournal(any<HealthJournalRecord>())
         } throws Exception("Something went wrong")

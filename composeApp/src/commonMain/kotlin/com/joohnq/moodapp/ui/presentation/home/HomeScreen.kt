@@ -82,10 +82,6 @@ class HomeScreen : CustomTab<HomeState>() {
             healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
         }
 
-//        LaunchedEffect(Unit) {
-//            onNavigate(AllJournalScreen())
-//        }
-
         LaunchedEffect(
             statsState.statsRecords,
             userState.user,

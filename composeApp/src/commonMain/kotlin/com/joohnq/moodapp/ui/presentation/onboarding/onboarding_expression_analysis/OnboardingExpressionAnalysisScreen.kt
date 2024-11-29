@@ -13,12 +13,12 @@ import com.joohnq.moodapp.domain.User
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.get_user_name.GetUserNameScreen
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
+import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.event.OnboardingExpressionEvent
 import com.joohnq.moodapp.ui.presentation.onboarding.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.moodapp.ui.state.UiState
 import com.joohnq.moodapp.ui.state.UiState.Companion.fold
-import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingIntent
-import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityIntent
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsIntent
@@ -85,19 +85,19 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
             stressLevelState.adding,
             sleepQualityState.adding,
             statsState.adding,
-            userState.updating.status
+            userState.updating
         ) {
             UiState.fold(
                 stressLevelState.adding,
                 sleepQualityState.adding,
                 statsState.adding,
-                userState.updating.status,
+                userState.updating,
                 onAllSuccess = {
                     userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboardingScreen())
                     sleepQualityViewModel.onAction(SleepQualityIntent.ResetAddingStatus)
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
                     statsViewModel.onAction(StatsIntent.ResetAddingStatus)
-                    userViewModel.onAction(UserIntent.ResetUpdatingState)
+                    userViewModel.onAction(UserIntent.ResetUpdatingStatus)
                     onboardingViewModel.onAction(OnboardingIntent.ResetStatsRecord)
                 },
                 onAnyHasError = {

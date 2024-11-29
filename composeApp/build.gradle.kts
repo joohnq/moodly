@@ -115,6 +115,8 @@ kotlin {
             implementation(libs.voyager.tab.navigator)
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.koin)
+
+            implementation("app.cash.turbine:turbine:1.2.0")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

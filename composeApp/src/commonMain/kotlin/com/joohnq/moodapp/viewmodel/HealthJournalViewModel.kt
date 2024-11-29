@@ -25,6 +25,8 @@ sealed class HealthJournalIntent {
     data object ResetEditingStatus : HealthJournalIntent()
     data object ResetAddingState : HealthJournalIntent()
     data class DeleteHealthJournal(val id: Int) : HealthJournalIntent()
+    data class SetHealthJournalStateForTesting(val value: HealthJournalState) :
+        HealthJournalIntent()
 }
 
 data class HealthJournalState(
@@ -50,6 +52,9 @@ class HealthJournalViewModel(
             HealthJournalIntent.ResetDeletingStatus -> changeDeletingStatus(UiState.Idle)
             HealthJournalIntent.ResetEditingStatus -> changeEditingStatus(UiState.Idle)
             HealthJournalIntent.ResetAddingState -> changeAddingStatus(UiState.Idle)
+            is HealthJournalIntent.SetHealthJournalStateForTesting -> setHealthJournalStateForTesting(
+                intent.value
+            )
         }
     }
 
@@ -58,13 +63,9 @@ class HealthJournalViewModel(
     ) = viewModelScope.launch(dispatcher) {
         changeAddingStatus(UiState.Loading)
 
-        try {
-            val res =
-                healthJournalRepository.addHealthJournal(healthJournalRecord)
-            changeAddingStatus(UiState.Success(res))
-        } catch (e: Exception) {
-            changeAddingStatus(UiState.Error(e.message.toString()))
-        }
+        val res =
+            healthJournalRepository.addHealthJournal(healthJournalRecord)
+        changeAddingStatus(if (res) UiState.Success(res) else UiState.Error("Fail to add health journal"))
     }
 
     private fun updateHealthJournal(
@@ -72,13 +73,9 @@ class HealthJournalViewModel(
     ) = viewModelScope.launch(dispatcher) {
         changeEditingStatus(UiState.Loading)
 
-        try {
-            val res =
-                healthJournalRepository.updateHealthJournal(healthJournalRecord)
-            changeEditingStatus(UiState.Success(res))
-        } catch (e: Exception) {
-            changeEditingStatus(UiState.Error(e.message.toString()))
-        }
+        val res =
+            healthJournalRepository.updateHealthJournal(healthJournalRecord)
+        changeEditingStatus(if (res) UiState.Success(res) else UiState.Error("Fail to update health journal"))
     }
 
     private fun getHealthJournals() =
@@ -96,9 +93,12 @@ class HealthJournalViewModel(
     private fun deleteHealthJournal(id: Int) =
         viewModelScope.launch(dispatcher) {
             changeDeletingStatus(UiState.Loading)
-            try {
-                val res = healthJournalRepository.deleteHealthJournal(id)
-                changeDeletingStatus(UiState.Success(res))
+
+            val res = healthJournalRepository.deleteHealthJournal(id)
+
+            changeDeletingStatus(if (res) UiState.Success(true) else UiState.Error("Fail to delete"))
+
+            if (res)
                 _healthJournalState.update {
                     it.copy(
                         healthJournalRecords = UiState.Success(
@@ -107,9 +107,6 @@ class HealthJournalViewModel(
                         )
                     )
                 }
-            } catch (e: Exception) {
-                changeDeletingStatus(UiState.Error(e.message.toString()))
-            }
         }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {
@@ -122,5 +119,9 @@ class HealthJournalViewModel(
 
     private fun changeDeletingStatus(status: UiState<Boolean>) {
         _healthJournalState.update { it.copy(deleting = status) }
+    }
+
+    private fun setHealthJournalStateForTesting(state: HealthJournalState) {
+        _healthJournalState.update { state }
     }
 }

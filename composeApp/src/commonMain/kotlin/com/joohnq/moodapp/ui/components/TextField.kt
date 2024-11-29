@@ -181,9 +181,10 @@ fun CustomOutlinedTextField(
         placeholder = {
             Text(
                 text = stringResource(placeholder),
-                style = TextStyles.TextMdSemiBold()
+                style = TextStyles.TextMdBold()
             )
         },
+        maxLines = 1,
         trailingIcon = trailingIcon,
         colors = colors,
         textStyle = TextStyles.TextMdBold(),

@@ -24,9 +24,7 @@ import moodapp.composeapp.generated.resources.freud_score
 import moodapp.composeapp.generated.resources.mental_score_history
 import org.jetbrains.compose.resources.stringResource
 
-@Composable fun FreudScoreUI(
-    state: FreudScoreState,
-) {
+@Composable fun FreudScoreUI(state: FreudScoreState) {
     SharedPanelComponent(
         isDark = false,
         onGoBack = { state.onEvent(FreudScoreEvent.OnGoBack) },
@@ -61,13 +59,16 @@ import org.jetbrains.compose.resources.stringResource
                     SmallTitle(text = key)
                 }
                 items(items) { statsRecord ->
-                    MentalScoreHistoryItemWithHour(statsRecord) {
-                        state.onEvent(
-                            FreudScoreEvent.OnNavigateToMoodScreen(
-                                statsRecord
+                    MentalScoreHistoryItemWithHour(
+                        statsRecord = statsRecord,
+                        onClick = {
+                            state.onEvent(
+                                FreudScoreEvent.OnNavigateToMoodScreen(
+                                    statsRecord
+                                )
                             )
-                        )
-                    }
+                        },
+                    )
                 }
             }
         }

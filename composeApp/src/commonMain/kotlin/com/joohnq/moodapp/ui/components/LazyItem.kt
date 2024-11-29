@@ -26,12 +26,12 @@ import androidx.compose.ui.unit.sp
 import com.joohnq.moodapp.domain.StatsRecord
 import com.joohnq.moodapp.domain.Stressor
 import com.joohnq.moodapp.domain.TextRadioButtonColors
-import com.joohnq.moodapp.util.helper.DatetimeManager
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Dimens
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
+import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
+import com.joohnq.moodapp.util.helper.DatetimeManager
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -78,12 +78,15 @@ fun MentalHealthMetricItem(
 }
 
 @Composable
-fun MentalScoreHistoryItemWithHour(statsRecord: StatsRecord, onClick: () -> Unit) {
+fun MentalScoreHistoryItemWithHour(
+    statsRecord: StatsRecord,
+    onClick: () -> Unit,
+) {
     val hourAndMinutes = remember { DatetimeManager.formatTime(statsRecord.date) }
     val daySection = remember { DatetimeManager.getDaySection(statsRecord.date) }
 
     Card(
-        modifier = Modifier.fillMaxWidth().paddingHorizontalSmall(),
+        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
         colors = ComponentColors.Card.MainCardColors(),
         shape = Dimens.Shape.Medium,
         onClick = onClick,

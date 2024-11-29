@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.domain.HealthJournalRecord
 import com.joohnq.moodapp.ui.components.MainAlertDialog
+import com.joohnq.moodapp.ui.components.TextWithBackground
 import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
@@ -35,6 +36,7 @@ import com.joohnq.moodapp.ui.theme.ComponentColors
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
+import com.joohnq.moodapp.util.helper.DatetimeManager
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.delete_journal
@@ -98,8 +100,14 @@ import org.jetbrains.compose.resources.stringResource
             ) {
                 TopBar(
                     onGoBack = { state.onEvent(EditJournalingEvent.OnGoBack) },
-                    text = Res.string.edit_journal
-                )
+                    text = Res.string.edit_journal,
+                ) {
+                    TextWithBackground(
+                        text = DatetimeManager.formatDateTime(state.healthJournal.date),
+                        textColor = state.healthJournal.mood.palette.moodScreenMoodFaceColor,
+                        backgroundColor = state.healthJournal.mood.palette.subColor,
+                    )
+                }
             }
             VerticalSpacer(30.dp)
             TextField(

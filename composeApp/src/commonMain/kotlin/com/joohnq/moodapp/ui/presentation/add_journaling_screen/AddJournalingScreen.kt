@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.moodapp.domain.HealthJournalRecord
-import com.joohnq.moodapp.domain.StressLevel
 import com.joohnq.moodapp.sharedViewModel
 import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_journaling_screen.event.AddJournalingEvent
@@ -39,8 +38,8 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
                                 .setMood(addingHealthJournalState.mood!!)
                                 .setTitle(addingHealthJournalState.title)
                                 .setDescription(addingHealthJournalState.description)
-                                .setStressLevel(StressLevel.fromSliderValue(addingHealthJournalState.sliderValue))
-                                .setStressors(addingHealthJournalState.selectedStressStressors)
+//                                .setStressLevel(StressLevel.fromSliderValue(addingHealthJournalState.sliderValue))
+//                                .setStressors(addingHealthJournalState.selectedStressStressors)
                                 .build()
                         )
                     )
@@ -70,8 +69,6 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
             titleError = addingHealthJournalState.titleError,
             desc = addingHealthJournalState.description,
             onAddingAction = addJournalingViewModel::onAction,
-            sliderValue = addingHealthJournalState.sliderValue,
-            selectedStressStressors = addingHealthJournalState.selectedStressStressors,
             onEvent = ::onEvent
         )
     }

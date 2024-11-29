@@ -7,6 +7,7 @@ import com.joohnq.moodapp.util.helper.DatetimeManager
 interface StatsRepository {
     suspend fun getStats(): List<StatsRecord>
     suspend fun addStats(statsRecord: StatsRecord): Boolean
+    suspend fun deleteStat(id: Int): Boolean
 }
 
 class StatsRepositoryImpl(
@@ -18,6 +19,15 @@ class StatsRepositoryImpl(
     override suspend fun addStats(statsRecord: StatsRecord): Boolean =
         try {
             statsRecordDAO.addStats(statsRecord.copy(date = DatetimeManager.getCurrentDateTime()))
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+
+    override suspend fun deleteStat(id: Int): Boolean =
+        try {
+            statsRecordDAO.deleteStat(id)
             true
         } catch (e: Exception) {
             e.printStackTrace()

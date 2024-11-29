@@ -11,29 +11,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class UserAdding(
-    val status: UiState<Boolean> = UiState.Idle
-)
-
-data class UserUpdating(
-    val status: UiState<Boolean> = UiState.Idle,
-    val name: String = "",
-    val nameError: String? = null
-)
-
 data class UserState(
     val user: UiState<User> = UiState.Idle,
-    val adding: UserAdding = UserAdding(),
-    val updating: UserUpdating = UserUpdating()
+    val adding: UiState<Boolean> = UiState.Idle,
+    val updating: UiState<Boolean> = UiState.Idle,
 )
 
 sealed class UserIntent {
     data object InitUser : UserIntent()
     data object GetUser : UserIntent()
-    data class UpdateUpdatingUserName(val name: String) : UserIntent()
     data class UpdateUser(val user: User) : UserIntent()
-    data object UpdateUserName : UserIntent()
-    data object ResetUpdatingState : UserIntent()
+    data class UpdateUserName(val name: String) : UserIntent()
+    data object ResetUpdatingStatus : UserIntent()
 }
 
 class UserViewModel(
@@ -48,9 +37,8 @@ class UserViewModel(
             is UserIntent.InitUser -> initUser()
             is UserIntent.GetUser -> getUser()
             is UserIntent.UpdateUser -> updateUser(intent.user)
-            is UserIntent.UpdateUserName -> updateUserName()
-            UserIntent.ResetUpdatingState -> resetUpdatingState()
-            is UserIntent.UpdateUpdatingUserName -> updateUpdatingUserName(intent.name)
+            is UserIntent.UpdateUserName -> updateUserName(intent.name)
+            UserIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
         }
     }
 
@@ -72,23 +60,17 @@ class UserViewModel(
 
     private fun getUser() = viewModelScope.launch(dispatcher)
     {
-        _userState.update { it.copy(user = UiState.Loading) }
+        changeUserStatus(UiState.Loading)
 
         try {
             val user = userRepository.getUser()
-            _userState.update { it.copy(user = UiState.Success(user)) }
+            changeUserStatus(UiState.Success(user))
         } catch (e: Exception) {
-            _userState.update { it.copy(user = UiState.Error(e.message.toString())) }
+            changeUserStatus(UiState.Error(e.message.toString()))
         }
     }
 
-    private fun updateUserName() = viewModelScope.launch(dispatcher) {
-        val name = userState.value.updating.name
-        if (name.trim().isEmpty()) {
-            _userState.update { it.copy(updating = it.updating.copy(nameError = "Name is required")) }
-            return@launch
-        }
-
+    private fun updateUserName(name: String) = viewModelScope.launch(dispatcher) {
         changeUpdatingStatus(UiState.Loading)
 
         val res = userRepository.updateUserName(name)
@@ -100,17 +82,11 @@ class UserViewModel(
         )
     }
 
-    private fun updateUpdatingUserName(name: String) {
-        _userState.update {
-            it.copy(updating = it.updating.copy(name = name, nameError = null))
-        }
-    }
-
-    private fun resetUpdatingState() {
-        _userState.update { it.copy(updating = UserUpdating()) }
-    }
-
     private fun changeUpdatingStatus(status: UiState<Boolean>) {
-        _userState.update { it.copy(updating = it.updating.copy(status = status)) }
+        _userState.update { it.copy(updating = status) }
+    }
+
+    private fun changeUserStatus(status: UiState<User>) {
+        _userState.update { it.copy(user = status) }
     }
 }

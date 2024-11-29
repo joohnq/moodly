@@ -39,7 +39,8 @@ import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.moodapp.ui.theme.TextStyles
-import com.joohnq.moodapp.viewmodel.UserIntent
+import com.joohnq.moodapp.viewmodel.GetUserNameIntent
+import com.joohnq.moodapp.viewmodel.GetUserNameViewModelState
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.enter_your_name
 import moodapp.composeapp.generated.resources.how_we_can_call_you
@@ -51,7 +52,7 @@ import org.jetbrains.compose.resources.stringResource
 fun GetUserNameUI(
     state: GetUserNameState,
 ) {
-    val canContinue by derivedStateOf { state.name.isNotBlank() }
+    val canContinue by derivedStateOf { state.getUserNameViewModelState.name.isNotBlank() }
 
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
         Box(
@@ -100,8 +101,8 @@ fun GetUserNameUI(
                     modifier = Modifier.testTag(GetUserNameScreen.GetUserNameTestTag.TEXT_INPUT),
                     label = Res.string.name,
                     placeholder = Res.string.enter_your_name,
-                    text = state.name,
-                    errorText = state.nameError,
+                    text = state.getUserNameViewModelState.name,
+                    errorText = state.getUserNameViewModelState.nameError,
                     focusedBorderColor = Colors.Green50Alpha25,
                     leadingIcon = {
                         Icon(
@@ -112,7 +113,7 @@ fun GetUserNameUI(
                         )
                     },
                     colors = ComponentColors.TextField.MainTextFieldColors(),
-                    onValueChange = { state.onAction(UserIntent.UpdateUpdatingUserName(it)) },
+                    onValueChange = { state.onGetAction(GetUserNameIntent.UpdateUserName(it)) },
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue)
@@ -131,11 +132,14 @@ fun Preview() {
     GetUserNameUI(
         GetUserNameState(
             snackBarState = remember { SnackbarHostState() },
-            name = "dawd",
-            nameError = null,
+            getUserNameViewModelState = GetUserNameViewModelState(
+                name = "teste",
+                nameError = null
+            ),
             onEvent = {},
             onClearFocus = {},
-            onAction = {}
+            onAction = {},
+            onGetAction = {}
         )
     )
 }

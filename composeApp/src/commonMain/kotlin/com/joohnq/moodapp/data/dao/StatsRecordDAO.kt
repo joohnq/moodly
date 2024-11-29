@@ -13,4 +13,7 @@ interface StatsRecordDAO {
 
     @Query("SELECT * FROM ${DatabaseConstants.STATS_RECORD_DATABASE} ORDER BY date DESC")
     suspend fun getStats(): List<StatsRecord>
+
+    @Query("DELETE FROM ${DatabaseConstants.STATS_RECORD_DATABASE} WHERE id = :id")
+    suspend fun deleteStat(id: Int)
 }

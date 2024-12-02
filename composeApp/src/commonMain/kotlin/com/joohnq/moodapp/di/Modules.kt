@@ -23,12 +23,13 @@ import com.joohnq.moodapp.data.repository.UserRepository
 import com.joohnq.moodapp.data.repository.UserRepositoryImpl
 import com.joohnq.moodapp.ui.presentation.add_journaling_screen.AddJournalingViewModel
 import com.joohnq.moodapp.ui.presentation.add_sleep_quality.AddSleepQualityViewModel
-import com.joohnq.moodapp.ui.presentation.all_journals.AllJournalViewModel
-import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.EditJournalingViewModel
 import com.joohnq.moodapp.ui.presentation.add_stats.AddStatViewModel
 import com.joohnq.moodapp.ui.presentation.add_stress_level.AddStressLevelViewModel
-import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
+import com.joohnq.moodapp.ui.presentation.all_journals.AllJournalViewModel
+import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.EditJournalingViewModel
 import com.joohnq.moodapp.ui.presentation.onboarding.OnboardingViewModel
+import com.joohnq.moodapp.viewmodel.GetUserNameViewModel
+import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
@@ -58,6 +59,7 @@ val viewModelModule = module {
     singleOf(::AddSleepQualityViewModel)
     singleOf(::AddStatViewModel)
     singleOf(::AddStressLevelViewModel)
+    singleOf(::GetUserNameViewModel)
 }
 
 val sharedModule = module {

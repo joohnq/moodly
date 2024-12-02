@@ -10,7 +10,6 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.moodapp.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.moodapp.ui.presentation.edit_journaling_screen.EditJournalingScreen
-import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.HealthJournalIntent
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 import com.joohnq.moodapp.viewmodel.UserViewModel
@@ -23,7 +22,6 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
         val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
         val userState by userViewModel.userState.collectAsState()
-        val user = userState.user.getValue()
         val allJournalViewModel: AllJournalViewModel = sharedViewModel()
         val allJournalState by allJournalViewModel.allJournalViewModelState.collectAsState()
 
@@ -52,9 +50,9 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
 
         return AllJournalState(
             allJournalViewModelState = allJournalState,
-            dateCreated = user.dateCreated,
+            user = userState.user,
             onAllAction = allJournalViewModel::onAction,
-            healthJournalRecords = healthJournalState.healthJournalRecords.getValue(),
+            healthJournalRecords = healthJournalState.healthJournalRecords,
             onAction = healthJournalViewModel::onAction,
             onEvent = ::onEvent,
         )

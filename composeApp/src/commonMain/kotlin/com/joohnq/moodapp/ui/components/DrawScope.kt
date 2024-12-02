@@ -9,9 +9,9 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
 import com.joohnq.moodapp.domain.Mood
+import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.util.mappers.toDegrees
 import com.joohnq.moodapp.util.mappers.toRadians
-import com.joohnq.moodapp.ui.theme.Colors
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -74,7 +74,6 @@ fun DrawScope.drawSlice(
 
 fun DrawScope.drawCenterCircle(
     vectorPainter: VectorPainter,
-    extraPadding: Int,
     iconSize: Size = Size(55.5f, 84f)
 ) {
     val center = Offset(size.width / 2, size.height / 2)
@@ -89,7 +88,7 @@ fun DrawScope.drawCenterCircle(
     drawIntoCanvas {
         translate(
             left = center.x - (iconSize.width / 2),
-            top = (size.height / 4) - extraPadding
+            top = center.y - radius - (iconSize.height / 2)
         ) {
             with(vectorPainter) {
                 draw(iconSize)

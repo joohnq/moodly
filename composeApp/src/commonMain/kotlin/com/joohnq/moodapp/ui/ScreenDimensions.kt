@@ -5,7 +5,6 @@ import androidx.compose.ui.unit.Dp
 
 interface ScreenDimensionsInterface {
     val statusBarHeight: Int
-    val moodRatePadding: Int
     val osType: OSType
     @Composable fun deviceHeight(): Dp
 }
@@ -16,7 +15,6 @@ enum class OSType {
 
 expect class ScreenDimensions : ScreenDimensionsInterface {
     override val statusBarHeight: Int
-    override val moodRatePadding: Int
     override val osType: OSType
     @Composable override fun deviceHeight(): Dp
 }

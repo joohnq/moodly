@@ -37,29 +37,20 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
                 is StressStressorsEvent.OnGoBack -> onGoBack()
                 is StressStressorsEvent.OnContinue -> {
                     try {
-                        addStressLevelViewModel.onAction(
-                            AddStressLevelIntent.UpdateAddingOtherValue(
-                                ""
-                            )
-                        )
-
                         if (addStressLevelState.stressors.any { it::class == Stressor.Other::class } && addStressLevelState.otherValue.isEmpty()) throw Exception(
                             "Please type your other stressor"
-                        )
-
-                        addStressLevelViewModel.onAction(
-                            AddStressLevelIntent.UpdateAddingStressors(
-                                Stressor.Other(
-                                    addStressLevelState.otherValue
-                                )
-                            )
                         )
 
                         stressLevelViewModel.onAction(
                             StressLevelIntent.AddStressLevelRecord(
                                 StressLevelRecord.Builder()
                                     .setStressLevel(addStressLevelState.stressLevel)
-                                    .setStressors(addStressLevelState.stressors)
+                                    .setStressors(addStressLevelState.stressors
+                                        .filterNot { it is Stressor.Other }
+                                        .plus(
+                                            Stressor.Other(addStressLevelState.otherValue)
+                                        )
+                                    )
                                     .build()
                             )
                         )

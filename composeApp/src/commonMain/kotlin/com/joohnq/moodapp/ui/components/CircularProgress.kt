@@ -4,6 +4,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
@@ -73,18 +75,20 @@ fun CircularProgressWithDoubleText(
             strokeCap = StrokeCap.Round
         )
         Column(
-            modifier = Modifier.paddingHorizontalSmall(),
+            modifier = Modifier.padding(horizontal = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = firstText,
                 style = firstTextStyle,
-                color = textColor
+                color = textColor,
+                textAlign = TextAlign.Center
             )
             Text(
                 text = secondText,
                 style = secondTextStyle,
-                color = textColor
+                color = textColor,
+                textAlign = TextAlign.Center
             )
         }
     }

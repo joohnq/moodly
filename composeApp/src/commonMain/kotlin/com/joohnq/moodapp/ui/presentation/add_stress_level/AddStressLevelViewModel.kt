@@ -43,6 +43,7 @@ class AddStressLevelViewModel : ViewModel() {
         }
     }
 
+
     private fun updateAddingSliderValue(value: Float) {
         _addStressLevelState.update {
             it.copy(
@@ -61,7 +62,7 @@ class AddStressLevelViewModel : ViewModel() {
 
     private fun updateAddingOtherValue(otherValue: String) {
         _addStressLevelState.update {
-            it.copy(otherValue = otherValue)
+            it.copy(otherValue = otherValue, otherValueError = null)
         }
     }
 

@@ -9,7 +9,6 @@ import com.joohnq.moodapp.ui.presentation.add_journaling_screen.AddJournalingScr
 import com.joohnq.moodapp.ui.presentation.all_journals.AllJournalScreen
 import com.joohnq.moodapp.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.moodapp.ui.presentation.health_journal.state.HealthJournalState
-import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
 
 class HealthJournalScreen : CustomScreen<HealthJournalState>() {
@@ -28,7 +27,7 @@ class HealthJournalScreen : CustomScreen<HealthJournalState>() {
             }
 
         return HealthJournalState(
-            healthJournal = healthJournalState.healthJournalRecords.getValue(),
+            healthJournal = healthJournalState.healthJournalRecords,
             onEvent = ::onEvent
         )
     }

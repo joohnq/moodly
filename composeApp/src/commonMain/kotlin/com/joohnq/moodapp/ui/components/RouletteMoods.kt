@@ -21,7 +21,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun RouletteMoods(paddingBottom: Int, setSelectedMood: (Mood) -> Unit) {
+fun RouletteMoods(setSelectedMood: (Mood) -> Unit) {
     val moods =
         rememberSaveable {
             listOf(
@@ -74,6 +74,7 @@ fun RouletteMoods(paddingBottom: Int, setSelectedMood: (Mood) -> Unit) {
             moods
         )
         drawCenterCircle(radius = 270f, backgroundColor = Colors.Alpha15)
-        drawCenterCircle(targetVectorPainter, -(paddingBottom))
+//        drawCenterCircle(targetVectorPainter, -(paddingBottom))
+        drawCenterCircle(targetVectorPainter)
     }
 }

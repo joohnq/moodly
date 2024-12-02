@@ -72,7 +72,7 @@ sealed class Stressor(
         @Composable fun getText(stressors: List<Stressor>): String =
             stressors.map { stressor ->
                 if (stressor is Other) {
-                    stressor.id.replaceFirstChar { it.uppercase() }
+                    stressor.other.replaceFirstChar { it.uppercase() }
                 } else {
                     stringResource(stressor.text)
                 }

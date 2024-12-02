@@ -15,6 +15,7 @@ import com.joohnq.moodapp.ui.presentation.home.HomeScreen
 import com.joohnq.moodapp.ui.presentation.mood.event.MoodEvent
 import com.joohnq.moodapp.ui.presentation.mood.state.MoodState
 import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
+import com.joohnq.moodapp.ui.state.UiState.Companion.getValueOrNull
 import com.joohnq.moodapp.util.helper.StatsManager
 import com.joohnq.moodapp.viewmodel.StatsViewModel
 
@@ -25,8 +26,8 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
         val statsState by statsViewModel.statsState.collectAsState()
         var currentStatsRecord by remember {
             mutableStateOf(
-                statsState.statsRecords.getValue().find { it.id == id }
-                    ?: statsState.statsRecords.getValue().first()
+                statsState.statsRecords.getValueOrNull()?.find { it.id == id }
+                    ?: statsState.statsRecords.getValueOrNull()?.first()
             )
         }
         var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
@@ -44,24 +45,26 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
             }
 
         LaunchedEffect(currentStatsRecord) {
-            hasNext =
-                StatsManager.getNext(
-                    currentStatsRecord,
-                    statsState.statsRecords.getValue()
-                )
+            currentStatsRecord?.let {
+                hasNext =
+                    StatsManager.getNext(
+                        it,
+                        statsState.statsRecords.getValue()
+                    )
 
-            hasPrevious =
-                StatsManager.getPrevious(
-                    currentStatsRecord,
-                    statsState.statsRecords.getValue()
-                )
+                hasPrevious =
+                    StatsManager.getPrevious(
+                        it,
+                        statsState.statsRecords.getValue()
+                    )
+            }
         }
 
         return MoodState(
             statsRecord = currentStatsRecord,
             hasNext = hasNext != null,
             hasPrevious = hasPrevious != null,
-            statsRecords = statsState.statsRecords.getValue().reversed(),
+            statsRecords = statsState.statsRecords,
             onEvent = ::onEvent
         )
     }

@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 
 actual class ScreenDimensions(private val context: Context) : ScreenDimensionsInterface {
     actual override val statusBarHeight: Int = 20
-    actual override val moodRatePadding: Int = -20
     actual override val osType: OSType = OSType.ANDROID
     @Composable actual override fun deviceHeight(): Dp =
         LocalConfiguration.current.screenHeightDp.dp

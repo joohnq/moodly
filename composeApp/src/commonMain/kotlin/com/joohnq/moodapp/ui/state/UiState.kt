@@ -1,6 +1,5 @@
 package com.joohnq.moodapp.ui.state
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 
 sealed class UiState<out T> {
@@ -24,16 +23,18 @@ sealed class UiState<out T> {
             }
         }
 
-        fun onAllSuccess(
+        @Composable
+        fun onFold(
             vararg values: UiState<*>,
-            onAllSuccess: () -> Unit,
+            onAllSuccess: @Composable () -> Unit,
+            onLoading: @Composable () -> Unit,
         ) {
             if (values.all { it is Success }) {
                 onAllSuccess()
+            } else if (values.any { it is Loading }) {
+                onLoading()
             }
         }
-
-        fun allIsSuccess(vararg values: UiState<*>): Boolean = values.all { it is Success }
 
         @Composable
         fun allIsSuccessComposable(vararg values: UiState<*>): Boolean =
@@ -80,23 +81,6 @@ sealed class UiState<out T> {
         }
 
         @Composable
-        fun <T> UiState<T>.onSuccessComposable(
-            onSuccess: @Composable (T) -> Unit = {},
-        ) {
-            when (this) {
-                is Success -> onSuccess(this.data)
-                else -> {}
-            }
-        }
-
-        @Composable
-        fun <T> UiState<T>.getValueOrNull(): T? =
-            when (this) {
-                is Success -> this.data
-                else -> null
-            }
-
-        @Composable
         fun <T> UiState<T>.getValue(): T =
             when (this) {
                 is Success -> this.data
@@ -109,42 +93,17 @@ sealed class UiState<out T> {
                 else -> throw IllegalStateException("UiState is not Success")
             }
 
+        fun <T> UiState<List<T>>.getValueOrNull(): List<T>? =
+            when (this) {
+                is Success -> this.data
+                else -> null
+            }
+
         fun <T> UiState<T>.onSuccess(
             onSuccess: (T) -> Unit = {},
         ) {
             when (this) {
                 is Success -> onSuccess(this.data)
-                else -> {}
-            }
-        }
-
-        fun <T> UiState<T>.onLoading(
-            onLoading: () -> Unit
-        ) {
-            when (this) {
-                is Loading -> onLoading()
-                else -> {}
-            }
-        }
-
-        fun <T> UiState<T>.onError(
-            onError: (String) -> Unit
-        ) {
-            when (this) {
-                is Error -> onError(this.message)
-                else -> {}
-            }
-        }
-
-        suspend fun <T> UiState<T>.showErrorOrUnit(
-            snackBar: SnackbarHostState
-        ) {
-            when (this) {
-                is Error -> {
-                    val error = this.message
-                    snackBar.showSnackbar(error)
-                }
-
                 else -> {}
             }
         }

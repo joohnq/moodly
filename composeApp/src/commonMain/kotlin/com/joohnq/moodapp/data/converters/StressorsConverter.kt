@@ -8,7 +8,12 @@ import kotlinx.serialization.json.Json
 class StressorsConverter {
     @TypeConverter
     fun fromStressorsList(value: List<Stressor>): String =
-        Json.encodeToString(value.map { it.id })
+        Json.encodeToString(value.map {
+            if (it::class == Stressor.Other::class) {
+                val other = it as Stressor.Other
+                other.other
+            } else it.id
+        })
 
     @TypeConverter
     fun toStressorsList(value: String): List<Stressor> =

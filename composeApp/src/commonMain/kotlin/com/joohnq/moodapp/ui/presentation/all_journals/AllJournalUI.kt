@@ -25,6 +25,9 @@ import com.joohnq.moodapp.ui.components.TopBar
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.moodapp.ui.presentation.all_journals.state.AllJournalState
+import com.joohnq.moodapp.ui.presentation.loading.LoadingUI
+import com.joohnq.moodapp.ui.state.UiState
+import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Dimens
 import com.joohnq.moodapp.ui.theme.Drawables
@@ -40,113 +43,124 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AllJournalUI(state: AllJournalState) {
-    val healthJournalMap = StatsManager.getHealthJournalBasedOnUserEntry(
-        state.dateCreated,
-        state.healthJournalRecords
-    )
-    val keys = healthJournalMap.keys.toList()
-    val key = healthJournalMap.keys.find { it == state.allJournalViewModelState.selectedDateTime }
-        ?: healthJournalMap.keys.last()
-    val list = healthJournalMap[key]
-
-    if (state.allJournalViewModelState.openDeleteDialog)
-        MainAlertDialog(
-            onDismissRequest = {
-                state.onAllAction(
-                    AllJournalIntent.UpdateOpenDeleteDialog(false)
-                )
-            },
-            onConfirmation = {
-                state.onAllAction(
-                    AllJournalIntent.UpdateOpenDeleteDialog(false)
-                )
-                state.onEvent(AllJournalEvent.OnDelete)
-            },
-            dialogTitle = Res.string.delete_journal,
-            dialogText = Res.string.do_you_wish_to_remove_this_journal,
-            icon = Drawables.Icons.Trash,
-            backgroundColor = Colors.White
-        )
-
-    Scaffold(
-        containerColor = Colors.Brown10,
-        modifier = Modifier.fillMaxSize(),
-    ) { padding ->
-        Column(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier.background(
-                    color = Colors.Brown80,
-                    shape = Dimens.Shape.BottomMedium
-                ).padding(top = padding.calculateTopPadding(), bottom = 30.dp)
-            ) {
-                TopBar(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    isDark = false,
-                    onGoBack = { state.onEvent(AllJournalEvent.OnGoBack) },
-                )
-                VerticalSpacer(10.dp)
-                Text(
-                    text = stringResource(Res.string.my_journals),
-                    style = TextStyles.HeadingSmExtraBold(),
-                    color = Colors.White,
-                    modifier = Modifier.paddingHorizontalMedium()
-                )
-                VerticalSpacer(10.dp)
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(horizontal = 20.dp),
-                    state = rememberLazyListState(initialFirstVisibleItemIndex = keys.lastIndex)
-                ) {
-                    items(keys) { date ->
-                        val isSelected = date == state.allJournalViewModelState.selectedDateTime
-                        AllJournalDateCard(
-                            isSelected = isSelected,
-                            date = date,
-                            onAllAction = state.onAllAction,
-                        )
-                    }
-                }
-            }
-            VerticalSpacer(20.dp)
-            Text(
-                text = stringResource(Res.string.timeline),
-                style = TextStyles.TextLgExtraBold(),
-                color = Colors.Brown80,
-                modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
+    UiState.onFold(
+        state.user,
+        state.healthJournalRecords,
+        onLoading = { LoadingUI() },
+        onAllSuccess = {
+            val user = state.user.getValue()
+            val healthJournalRecords = state.healthJournalRecords.getValue()
+            val healthJournalMap = StatsManager.getHealthJournalBasedOnUserEntry(
+                user.dateCreated,
+                healthJournalRecords
             )
-            VerticalSpacer(20.dp)
-            if (list == null) {
-                Box(
-                    modifier = Modifier.height(250.dp).fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Empty",
-                        style = TextStyles.Text2xlExtraBold(),
-                        color = Colors.Brown100Alpha64,
-                    )
-                }
-            } else {
-                LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    itemsIndexed(list) { i, healthJournal ->
-                        AllJournalsCard(
-                            i = i,
-                            healthJournal = healthJournal,
-                            lastIndex = list.lastIndex,
-                            onEvent = state.onEvent,
-                            onDelete = {
-                                state.onAllAction(
-                                    AllJournalIntent.UpdateCurrentDeleteId(healthJournal.id)
-                                )
-                                state.onAllAction(
-                                    AllJournalIntent.UpdateOpenDeleteDialog(true)
+            val keys = healthJournalMap.keys.toList()
+            val key =
+                healthJournalMap.keys.find { it == state.allJournalViewModelState.selectedDateTime }
+                    ?: healthJournalMap.keys.last()
+            val list = healthJournalMap[key]
+
+            if (state.allJournalViewModelState.openDeleteDialog)
+                MainAlertDialog(
+                    onDismissRequest = {
+                        state.onAllAction(
+                            AllJournalIntent.UpdateOpenDeleteDialog(false)
+                        )
+                    },
+                    onConfirmation = {
+                        state.onAllAction(
+                            AllJournalIntent.UpdateOpenDeleteDialog(false)
+                        )
+                        state.onEvent(AllJournalEvent.OnDelete)
+                    },
+                    dialogTitle = Res.string.delete_journal,
+                    dialogText = Res.string.do_you_wish_to_remove_this_journal,
+                    icon = Drawables.Icons.Trash,
+                    backgroundColor = Colors.White
+                )
+
+            Scaffold(
+                containerColor = Colors.Brown10,
+                modifier = Modifier.fillMaxSize(),
+            ) { padding ->
+                Column(modifier = Modifier.fillMaxSize()) {
+                    Column(
+                        modifier = Modifier.background(
+                            color = Colors.Brown80,
+                            shape = Dimens.Shape.BottomMedium
+                        ).padding(top = padding.calculateTopPadding(), bottom = 30.dp)
+                    ) {
+                        TopBar(
+                            modifier = Modifier.paddingHorizontalMedium(),
+                            isDark = false,
+                            onGoBack = { state.onEvent(AllJournalEvent.OnGoBack) },
+                        )
+                        VerticalSpacer(10.dp)
+                        Text(
+                            text = stringResource(Res.string.my_journals),
+                            style = TextStyles.HeadingSmExtraBold(),
+                            color = Colors.White,
+                            modifier = Modifier.paddingHorizontalMedium()
+                        )
+                        VerticalSpacer(10.dp)
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            contentPadding = PaddingValues(horizontal = 20.dp),
+                            state = rememberLazyListState(initialFirstVisibleItemIndex = keys.lastIndex)
+                        ) {
+                            items(keys) { date ->
+                                val isSelected =
+                                    date == state.allJournalViewModelState.selectedDateTime
+                                AllJournalDateCard(
+                                    isSelected = isSelected,
+                                    date = date,
+                                    onAllAction = state.onAllAction,
                                 )
                             }
-                        )
+                        }
+                    }
+                    VerticalSpacer(20.dp)
+                    Text(
+                        text = stringResource(Res.string.timeline),
+                        style = TextStyles.TextLgExtraBold(),
+                        color = Colors.Brown80,
+                        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
+                    )
+                    VerticalSpacer(20.dp)
+                    if (list == null) {
+                        Box(
+                            modifier = Modifier.height(250.dp).fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Empty",
+                                style = TextStyles.Text2xlExtraBold(),
+                                color = Colors.Brown100Alpha64,
+                            )
+                        }
+                    } else {
+                        LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                            itemsIndexed(list) { i, healthJournal ->
+                                AllJournalsCard(
+                                    i = i,
+                                    healthJournal = healthJournal,
+                                    lastIndex = list.lastIndex,
+                                    onEvent = state.onEvent,
+                                    onDelete = {
+                                        state.onAllAction(
+                                            AllJournalIntent.UpdateCurrentDeleteId(healthJournal.id)
+                                        )
+                                        state.onAllAction(
+                                            AllJournalIntent.UpdateOpenDeleteDialog(true)
+                                        )
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
-    }
+    )
 }

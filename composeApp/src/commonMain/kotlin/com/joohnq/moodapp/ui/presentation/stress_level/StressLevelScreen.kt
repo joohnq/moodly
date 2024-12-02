@@ -8,7 +8,6 @@ import com.joohnq.moodapp.ui.CustomScreen
 import com.joohnq.moodapp.ui.presentation.add_stress_level.AddStressLevelScreen
 import com.joohnq.moodapp.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.moodapp.ui.presentation.stress_level.state.StressLevelState
-import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
 import com.joohnq.moodapp.viewmodel.StressLevelViewModel
 
 class StressLevelScreen : CustomScreen<StressLevelState>() {
@@ -27,7 +26,7 @@ class StressLevelScreen : CustomScreen<StressLevelState>() {
             }
 
         return StressLevelState(
-            stressLevelRecords = stressLevelState.stressLevelRecords.getValue(),
+            stressLevelRecords = stressLevelState.stressLevelRecords,
             onEvent = ::onEvent
         )
     }

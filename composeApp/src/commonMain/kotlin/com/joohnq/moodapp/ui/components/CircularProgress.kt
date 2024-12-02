@@ -4,6 +4,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalSmall
 
 @Composable
@@ -85,6 +87,18 @@ fun CircularProgressWithDoubleText(
                 color = textColor
             )
         }
+    }
+}
+
+@Composable
+fun CircularLoading(modifier: Modifier = Modifier) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(50.dp),
+            color = Colors.Brown60,
+            strokeWidth = 6.dp,
+            strokeCap = StrokeCap.Round
+        )
     }
 }
 

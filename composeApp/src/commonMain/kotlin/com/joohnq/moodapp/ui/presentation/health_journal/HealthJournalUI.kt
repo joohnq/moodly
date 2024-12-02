@@ -15,6 +15,8 @@ import com.joohnq.moodapp.ui.components.SharedPanelComponent
 import com.joohnq.moodapp.ui.components.VerticalSpacer
 import com.joohnq.moodapp.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.moodapp.ui.presentation.health_journal.state.HealthJournalState
+import com.joohnq.moodapp.ui.presentation.loading.LoadingUI
+import com.joohnq.moodapp.ui.state.UiState.Companion.foldComposable
 import com.joohnq.moodapp.ui.theme.Colors
 import com.joohnq.moodapp.ui.theme.Drawables
 import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -30,44 +32,50 @@ import org.jetbrains.compose.resources.stringResource
 fun HealthJournalUI(
     state: HealthJournalState
 ) {
-    val dayPerYear = remember { DatetimeManager.getHealthJournalsInYear(state.healthJournal) }
-    SharedPanelComponent(
-        isDark = false,
-        onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },
-        backgroundColor = Colors.Brown60,
-        backgroundImage = Drawables.Images.HealthJournalBackground,
-        panelTitle = Res.string.health_journal,
-        bodyTitle = Res.string.journal_history,
-        color = Colors.Brown50,
-        onAdd = { state.onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
-        panelContent = {
-            Column(
-                modifier = Modifier.paddingHorizontalMedium()
-                    .padding(top = it.calculateTopPadding()).fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = dayPerYear,
-                    style = TextStyles.Heading2xlExtraBold(),
-                    color = Colors.White
-                )
-                VerticalSpacer(10.dp)
-                Text(
-                    text = stringResource(Res.string.journals_this_year),
-                    style = TextStyles.TextXlSemiBold(),
-                    color = Colors.White
-                )
-            }
-        },
-        content = {
-            item {
-                VerticalSpacer(10.dp)
-                HealthJournalComponentColorful(
-                    healthJournals = state.healthJournal,
-                    onClick = { state.onEvent(HealthJournalEvent.OnClick(it)) }
-                )
-            }
+    state.healthJournal.foldComposable(
+        onLoading = { LoadingUI() },
+        onSuccess = { healthJournals ->
+            val dayPerYear =
+                remember { DatetimeManager.getHealthJournalsInYear(healthJournals) }
+            SharedPanelComponent(
+                isDark = false,
+                onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },
+                backgroundColor = Colors.Brown60,
+                backgroundImage = Drawables.Images.HealthJournalBackground,
+                panelTitle = Res.string.health_journal,
+                bodyTitle = Res.string.journal_history,
+                color = Colors.Brown50,
+                onAdd = { state.onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
+                panelContent = {
+                    Column(
+                        modifier = Modifier.paddingHorizontalMedium()
+                            .padding(top = it.calculateTopPadding()).fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = dayPerYear,
+                            style = TextStyles.Heading2xlExtraBold(),
+                            color = Colors.White
+                        )
+                        VerticalSpacer(10.dp)
+                        Text(
+                            text = stringResource(Res.string.journals_this_year),
+                            style = TextStyles.TextXlSemiBold(),
+                            color = Colors.White
+                        )
+                    }
+                },
+                content = {
+                    item {
+                        VerticalSpacer(10.dp)
+                        HealthJournalComponentColorful(
+                            healthJournals = healthJournals,
+                            onClick = { state.onEvent(HealthJournalEvent.OnClick(it)) }
+                        )
+                    }
+                }
+            )
         }
     )
 }

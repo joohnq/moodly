@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -45,6 +46,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.bundles.viewmodel)
+            implementation(libs.serialization)
         }
 
     }

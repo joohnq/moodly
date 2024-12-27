@@ -34,6 +34,8 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         commonMain.dependencies {
+            implementation(projects.feature.freudScore.domain)
+            
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

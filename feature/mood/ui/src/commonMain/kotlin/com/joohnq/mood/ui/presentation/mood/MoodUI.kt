@@ -27,7 +27,7 @@ import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.description
 import com.joohnq.shared.ui.mood
@@ -50,7 +50,7 @@ fun MoodUI(
             onAdd = { state.onEvent(MoodEvent.OnAddStatScreen) },
             topBarContent = {
                 TextWithBackground(
-                    text = DatetimeManager.formatDateTime(state.statsRecord.date),
+                    text = DatetimeProvider.formatDateTime(state.statsRecord.date),
                     textColor = state.statsRecord.mood.palette.moodScreenMoodFaceColor,
                     backgroundColor = state.statsRecord.mood.palette.subColor,
                 )

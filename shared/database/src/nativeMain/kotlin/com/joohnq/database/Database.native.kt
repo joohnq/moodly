@@ -1,13 +1,14 @@
-package com.joohnq.moodapp.data
+package com.joohnq.database
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.joohnq.database.LocalDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-actual class MyDatabaseInitializer {
+actual class LocalDatabaseInitializer {
     actual fun init(): RoomDatabase.Builder<LocalDatabase> {
         val dbFile = documentDirectory() + "/MyDatabase.db"
 

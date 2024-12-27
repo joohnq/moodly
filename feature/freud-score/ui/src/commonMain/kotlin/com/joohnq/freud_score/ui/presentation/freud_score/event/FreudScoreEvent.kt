@@ -1,6 +1,6 @@
-package com.joohnq.moodapp.ui.presentation.freud_score.event
+package com.joohnq.freud_score.ui.presentation.freud_score.event
 
-import com.joohnq.moodapp.domain.StatsRecord
+import com.joohnq.domain.entity.StatsRecord
 
 sealed class FreudScoreEvent {
     data object OnGoBack : FreudScoreEvent()

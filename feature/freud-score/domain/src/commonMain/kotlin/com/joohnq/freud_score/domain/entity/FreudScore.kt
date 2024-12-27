@@ -1,13 +1,12 @@
-package com.joohnq.moodapp.domain
+package com.joohnq.freud_score.domain.entity
 
-import com.joohnq.moodapp.domain.palette.FreudScorePalette
-import com.joohnq.moodapp.ui.theme.Colors
-import moodapp.composeapp.generated.resources.Res
+import com.joohnq.mood.ui.theme.Colors
 import moodapp.composeapp.generated.resources.at_risk
 import moodapp.composeapp.generated.resources.healthy
 import moodapp.composeapp.generated.resources.mostly_healthy
 import moodapp.composeapp.generated.resources.stable
 import moodapp.composeapp.generated.resources.unhealthy
+import moodapp.feature.freud_score.domain.generated.resources.Res
 import org.jetbrains.compose.resources.StringResource
 
 sealed class FreudScore(

@@ -24,7 +24,7 @@ import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.mood.util.helper.StatsManager
 import com.joohnq.mood.util.mappers.forEachMapComposable
 import com.joohnq.mood.util.mappers.items
@@ -45,7 +45,7 @@ fun HealthJournalComponent(
     healthJournals: List<HealthJournalRecord>
 ) {
     val dayOfWeek =
-        remember { DatetimeManager.getCurrentWeekDay(DatetimeManager.getCurrentDateTime()) }
+        remember { DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime()) }
     val healthJournalsMap: Map<LocalDate, List<HealthJournalRecord>?> =
         remember { StatsManager.getHealthJournal(healthJournals = healthJournals) }
     Box(
@@ -91,7 +91,7 @@ fun HealthJournalComponentColorful(
     healthJournals: List<HealthJournalRecord>,
     onClick: (LocalDate) -> Unit
 ) {
-    val dayOfWeek = DatetimeManager.getCurrentWeekDay(DatetimeManager.getCurrentDateTime())
+    val dayOfWeek = DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime())
     val weekChars = remember {
         listOf(
             Res.string.sunday_char,

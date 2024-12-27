@@ -30,7 +30,7 @@ import com.joohnq.mood.theme.ComponentColors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.stress_level.domain.entity.Stressor
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -82,8 +82,8 @@ fun MentalScoreHistoryItemWithHour(
     statsRecord: StatsRecord,
     onClick: () -> Unit,
 ) {
-    val hourAndMinutes = remember { DatetimeManager.formatTime(statsRecord.date) }
-    val daySection = remember { DatetimeManager.getDaySection(statsRecord.date) }
+    val hourAndMinutes = remember { DatetimeProvider.formatTime(statsRecord.date) }
+    val daySection = remember { DatetimeProvider.getDaySection(statsRecord.date) }
 
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

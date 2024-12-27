@@ -37,7 +37,7 @@ voyager = "1.1.0-beta02"
 navigationCommonKtx = "2.8.4"
 
 [libraries]
-compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
+charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModel" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCore" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
@@ -48,9 +48,9 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinCore" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 test-resources = { module = "com.goncalossilva:resources", version.ref = "resources" }
@@ -87,3 +87,9 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+
+[bundles]
+viewmodel = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-runtime-compose", "lifecycle-viewmodel"]
+koin = ["koin-compose", "koin-compose-viewmodel", "stately-common", "stately-concurrent-collections"]
+voyager = ["voyager-navigator", "voyager-transitions", "voyager-koin"]
+voyager-other = ["voyager-bottom-sheet-navigator", "voyager-tab-navigator"]

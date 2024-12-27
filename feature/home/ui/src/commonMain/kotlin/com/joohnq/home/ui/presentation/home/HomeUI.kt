@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.home
+package com.joohnq.home.ui.presentation.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,18 +13,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.ui.components.HomeTopBar
-import com.joohnq.moodapp.ui.components.MentalHealthMetrics
-import com.joohnq.moodapp.ui.components.MindfulTracker
-import com.joohnq.moodapp.ui.components.Title
-import com.joohnq.moodapp.ui.presentation.home.state.HomeState
-import com.joohnq.moodapp.ui.presentation.loading.LoadingUI
-import com.joohnq.moodapp.ui.state.UiState
-import com.joohnq.moodapp.ui.state.UiState.Companion.getValue
-import com.joohnq.moodapp.ui.theme.Colors
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.mental_health_metrics
-import moodapp.composeapp.generated.resources.mindful_tracker
+import com.joohnq.home.ui.presentation.home.state.HomeState
+import com.joohnq.mood.components.HomeTopBar
+import com.joohnq.mood.components.MentalHealthMetrics
+import com.joohnq.mood.components.MindfulTracker
+import com.joohnq.mood.components.Title
+import com.joohnq.mood.state.UiState
+import com.joohnq.mood.state.UiState.Companion.getValue
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.ui.presentation.loading.LoadingUI
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.mental_health_metrics
+import com.joohnq.shared.ui.mindful_tracker
 
 @Composable
 fun HomeUI(

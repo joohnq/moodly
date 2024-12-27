@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.home
+package com.joohnq.home.ui.presentation.home
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -9,31 +9,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.joohnq.moodapp.sharedViewModel
-import com.joohnq.moodapp.ui.CustomTab
-import com.joohnq.moodapp.ui.presentation.freud_score.FreudScoreScreen
-import com.joohnq.moodapp.ui.presentation.health_journal.HealthJournalScreen
-import com.joohnq.moodapp.ui.presentation.home.event.HomeEvent
-import com.joohnq.moodapp.ui.presentation.home.state.HomeState
-import com.joohnq.moodapp.ui.presentation.mood.MoodScreen
-import com.joohnq.moodapp.ui.presentation.sleep_quality.SleepQualityScreen
-import com.joohnq.moodapp.ui.presentation.stress_level.StressLevelScreen
-import com.joohnq.moodapp.ui.state.UiState
-import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.util.helper.DatetimeManager
-import com.joohnq.moodapp.viewmodel.HealthJournalIntent
-import com.joohnq.moodapp.viewmodel.HealthJournalViewModel
-import com.joohnq.moodapp.viewmodel.SleepQualityIntent
-import com.joohnq.moodapp.viewmodel.SleepQualityViewModel
-import com.joohnq.moodapp.viewmodel.StatsIntent
-import com.joohnq.moodapp.viewmodel.StatsViewModel
-import com.joohnq.moodapp.viewmodel.StressLevelIntent
-import com.joohnq.moodapp.viewmodel.StressLevelViewModel
-import com.joohnq.moodapp.viewmodel.UserIntent
-import com.joohnq.moodapp.viewmodel.UserViewModel
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.home.ui.presentation.home.event.HomeEvent
+import com.joohnq.home.ui.presentation.home.state.HomeState
+import com.joohnq.mood.CustomTab
+import com.joohnq.mood.sharedViewModel
+import com.joohnq.mood.state.UiState
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.ui.viewmodel.StatsIntent
+import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.home
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.user.ui.viewmodel.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.home
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -48,7 +43,7 @@ class HomeScreen : CustomTab<HomeState>() {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val today = DatetimeManager.formatDate()
-        val userState by userViewModel.userState.collectAsState()
+        val userState by userViewModel.state.collectAsState()
         val statsState by statsViewModel.statsState.collectAsState()
         val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
         val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
@@ -56,27 +51,27 @@ class HomeScreen : CustomTab<HomeState>() {
 
         fun onEvent(event: HomeEvent) =
             when (event) {
-                HomeEvent.OnNavigateToFreudScore ->
-                    onNavigate(FreudScoreScreen())
+                HomeEvent.OnNavigateToFreudScore -> {}
+//                    onNavigate(FreudScoreScreen())
 
-                HomeEvent.OnNavigateToMood ->
-                    onNavigate(MoodScreen())
+                HomeEvent.OnNavigateToMood -> {}
+//                    onNavigate(MoodScreen())
 
-                HomeEvent.OnNavigateToHealthJournal ->
-                    onNavigate(HealthJournalScreen())
+                HomeEvent.OnNavigateToHealthJournal -> {}
+//                    onNavigate(HealthJournalScreen())
 
                 HomeEvent.OnNavigateToMindfulJournal -> {}
 
-                HomeEvent.OnNavigateToSleepQuality ->
-                    onNavigate(SleepQualityScreen())
+                HomeEvent.OnNavigateToSleepQuality -> {}
+//                    onNavigate(SleepQualityScreen())
 
-                HomeEvent.OnNavigateToStressLevel ->
-                    onNavigate(StressLevelScreen())
+                HomeEvent.OnNavigateToStressLevel -> {}
+//                    onNavigate(StressLevelScreen())
             }
 
         SideEffect {
             statsViewModel.onAction(StatsIntent.GetStatsRecords)
-            userViewModel.onAction(UserIntent.GetUser)
+            userViewModel.onAction(UserViewModelIntent.GetUser)
             stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
             sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
             healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
@@ -122,15 +117,5 @@ class HomeScreen : CustomTab<HomeState>() {
             )
 
     @Composable
-    override fun UI(state: HomeState) {
-        if (
-            UiState.allIsSuccessComposable(
-                state.userName,
-                state.statsRecord,
-                state.healthJournal,
-                state.sleepQuality,
-                state.stressLevel
-            )
-        ) HomeUI(state = state)
-    }
+    override fun UI(state: HomeState) = HomeUI(state = state)
 }

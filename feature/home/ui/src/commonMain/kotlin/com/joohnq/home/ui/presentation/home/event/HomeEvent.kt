@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.home.event
+package com.joohnq.home.ui.presentation.home.event
 
 sealed class HomeEvent {
     data object OnNavigateToFreudScore : HomeEvent()

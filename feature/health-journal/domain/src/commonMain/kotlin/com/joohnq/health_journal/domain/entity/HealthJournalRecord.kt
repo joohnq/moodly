@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.joohnq.domain.entity.Mood
 import com.joohnq.health_journal.domain.constant.DatabaseConstants
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
@@ -21,7 +21,7 @@ data class HealthJournalRecord(
         private var mood: Mood = Mood.Neutral
         private var title: String = ""
         private var description: String = ""
-        private var date: LocalDateTime = DatetimeManager.getCurrentDateTime()
+        private var date: LocalDateTime = DatetimeProvider.getCurrentDateTime()
 
         fun setMood(mood: Mood) = apply { this.mood = mood }
         fun setTitle(title: String) = apply { this.title = title }

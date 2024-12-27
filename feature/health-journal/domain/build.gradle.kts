@@ -34,9 +34,10 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         commonMain.dependencies {
-            implementation(projects.shared.ui)
+            implementation(projects.shared.domain)
             implementation(projects.feature.healthJournal.domain)
             implementation(projects.feature.mood.domain)
+            implementation(projects.feature.freudScore.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

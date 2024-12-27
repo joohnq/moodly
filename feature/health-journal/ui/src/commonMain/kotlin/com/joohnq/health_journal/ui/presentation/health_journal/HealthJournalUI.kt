@@ -14,7 +14,7 @@ import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJour
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
 import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.state.UiState.Companion.foldComposable
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.mood.ui.components.HealthJournalComponentColorful
 import com.joohnq.mood.ui.components.SharedPanelComponent
 import com.joohnq.mood.ui.presentation.loading.LoadingUI
@@ -36,7 +36,7 @@ fun HealthJournalUI(
         onLoading = { LoadingUI() },
         onSuccess = { healthJournals ->
             val dayPerYear =
-                remember { DatetimeManager.getHealthJournalsInYear(healthJournals) }
+                remember { DatetimeProvider.getHealthJournalsInYear(healthJournals) }
             SharedPanelComponent(
                 isDark = false,
                 onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },

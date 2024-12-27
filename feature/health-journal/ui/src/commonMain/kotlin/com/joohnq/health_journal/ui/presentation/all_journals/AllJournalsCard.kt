@@ -47,7 +47,7 @@ import com.joohnq.mood.ui.theme.ComponentColors
 import com.joohnq.mood.ui.theme.Dimens
 import com.joohnq.mood.ui.theme.Drawables
 import com.joohnq.mood.ui.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import kotlinx.coroutines.launch
 import moodapp.composeapp.generated.resources.Res
 import moodapp.composeapp.generated.resources.hour
@@ -233,7 +233,7 @@ fun AllJournalsCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Text(
-                        text = DatetimeManager.formatTime(healthJournal.date),
+                        text = DatetimeProvider.formatTime(healthJournal.date),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.White
                     )

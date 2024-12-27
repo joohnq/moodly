@@ -35,7 +35,7 @@ import com.joohnq.mood.ui.theme.ComponentColors
 import com.joohnq.mood.ui.theme.Drawables
 import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.ui.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.mood.viewmodel.HealthJournalIntent
 import com.joohnq.mood.components.MainAlertDialog
 import moodapp.composeapp.generated.resources.Res
@@ -103,7 +103,7 @@ import org.jetbrains.compose.resources.stringResource
                     text = Res.string.edit_journal,
                 ) {
                     TextWithBackground(
-                        text = DatetimeManager.formatDateTime(state.healthJournal.date),
+                        text = DatetimeProvider.formatDateTime(state.healthJournal.date),
                         textColor = state.healthJournal.mood.palette.moodScreenMoodFaceColor,
                         backgroundColor = state.healthJournal.mood.palette.subColor,
                     )

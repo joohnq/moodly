@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.domain.palette
+package com.joohnq.freud_score.domain.entity
 
 import androidx.compose.ui.graphics.Color
 

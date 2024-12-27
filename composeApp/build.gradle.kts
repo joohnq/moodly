@@ -12,9 +12,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    alias(libs.plugins.serialization)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.buildkonfig)
 }
@@ -60,45 +60,36 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
+            implementation(projects.shared.ui)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.bundles.viewmodel)
+            implementation(libs.datetime)
+            implementation(libs.serialization)
+            implementation(libs.coroutines.core)
             implementation(libs.navigation.compose)
             implementation(libs.napier)
 
             // Koin
             api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            implementation(libs.lifecycle.viewmodel)
-
-            // Koin need these dependencies
-            implementation(libs.stately.common)
-            implementation(libs.stately.concurrent.collections)
+            implementation(libs.bundles.koin)
 
             // Room and SQLite
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
             // Charts
-            implementation(libs.compose.charts)
+            implementation(libs.charts)
 
             api(libs.generativeai)
 
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.bottom.sheet.navigator)
-            implementation(libs.voyager.tab.navigator)
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.koin)
+            implementation(libs.bundles.voyager)
+            implementation(libs.bundles.voyager.other)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -116,7 +107,7 @@ kotlin {
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.koin)
 
-            implementation("app.cash.turbine:turbine:1.2.0")
+            implementation(libs.turbine)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -174,7 +165,7 @@ dependencies {
     implementation(libs.androidx.core.i18n)
     implementation(libs.androidx.navigation.common.ktx)
     debugImplementation(compose.uiTooling)
-    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.coroutines.core)
     ksp(libs.room.compiler)
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)

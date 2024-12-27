@@ -21,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.Mood
 import com.joohnq.mood.components.AddSleepQualityTimePicker
 import com.joohnq.mood.components.ContinueButton
 import com.joohnq.mood.components.HorizontalSpacer
@@ -37,7 +36,7 @@ import com.joohnq.mood.theme.ComponentColors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.end_sleeping_time
 import com.joohnq.shared.ui.mood
@@ -54,7 +53,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AddSleepQualityUI(
     state: AddSleepQualityState
 ) {
-    val moods = remember { Mood.getAll() }
+    val moodsUI = remember { MoodUI.getAll() }
     val sleepInfluences = remember { SleepInfluences.getAll() }
     val startTimePickerState = rememberTimePickerState(
         initialHour = state.addSleepQualityViewModelState.startHour,
@@ -139,8 +138,8 @@ fun AddSleepQualityUI(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.start_sleeping_time,
-                    hour = DatetimeManager.formatInt(startTimePickerState.hour),
-                    minutes = DatetimeManager.formatInt(startTimePickerState.minute),
+                    hour = DatetimeProvider.formatInt(startTimePickerState.hour),
+                    minutes = DatetimeProvider.formatInt(startTimePickerState.minute),
                     isAfternoon = startTimePickerState.isAfternoon,
                     onClick = {
                         state.onAddAction(
@@ -152,8 +151,8 @@ fun AddSleepQualityUI(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.end_sleeping_time,
-                    hour = DatetimeManager.formatInt(endTimePickerState.hour),
-                    minutes = DatetimeManager.formatInt(endTimePickerState.minute),
+                    hour = DatetimeProvider.formatInt(endTimePickerState.hour),
+                    minutes = DatetimeProvider.formatInt(endTimePickerState.minute),
                     isAfternoon = endTimePickerState.isAfternoon,
                     onClick = {
                         state.onAddAction(AddSleepQualityIntent.UpdateShowEndTimePickerDialog(true))
@@ -166,7 +165,7 @@ fun AddSleepQualityUI(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
-                    items(moods) {
+                    items(moodsUI) {
                         MoodFace(
                             modifier = Modifier.size(32.dp),
                             mood = it,

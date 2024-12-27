@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.dashboard_screen
+package com.joohnq.home.ui.presentation.dashboard_screen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.joohnq.moodapp.ui.CustomScreenNothing
-import com.joohnq.moodapp.ui.components.DashboardBottomNavigation
-import com.joohnq.moodapp.ui.presentation.home.HomeScreen
+import com.joohnq.home.ui.presentation.home.HomeScreen
+import com.joohnq.mood.CustomScreenNothing
+import com.joohnq.mood.components.DashboardBottomNavigation
 
 class DashboardScreen : CustomScreenNothing() {
     @Composable

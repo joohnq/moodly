@@ -1,10 +1,10 @@
-package com.joohnq.moodapp.data
+package com.joohnq.database
 
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-actual class MyDatabaseInitializer(
+actual class LocalDatabaseInitializer(
     private val context: Context
 ) {
     actual fun init(): RoomDatabase.Builder<LocalDatabase> {

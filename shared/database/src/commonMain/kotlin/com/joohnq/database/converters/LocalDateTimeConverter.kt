@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.data.converters
+package com.joohnq.database.converters
 
 import androidx.room.TypeConverter
 import kotlinx.datetime.LocalDateTime

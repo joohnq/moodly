@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.ui.presentation.all_journals
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,7 @@ sealed class AllJournalIntent {
 }
 
 data class AllJournalViewModelState(
-    val selectedDateTime: LocalDate = DatetimeManager.getCurrentDateTime().date,
+    val selectedDateTime: LocalDate = DatetimeProvider.getCurrentDateTime().date,
     val openDeleteDialog: Boolean = false,
     val currentDeleteId: Int = -1,
 )

@@ -3,7 +3,7 @@ package com.joohnq.health_journal.data.repository
 import com.joohnq.health_journal.data.dao.HealthJournalRecordDAO
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.repository.HealthJournalRepository
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 
 class HealthJournalRepositoryImpl(
     private val healthJournalRecordDAO: HealthJournalRecordDAO
@@ -18,7 +18,7 @@ class HealthJournalRepositoryImpl(
         try {
             healthJournalRecordDAO.addHealthJournal(
                 healthJournalRecord.copy(
-                    date = DatetimeManager.getCurrentDateTime(),
+                    date = DatetimeProvider.getCurrentDateTime(),
                 )
             )
             true

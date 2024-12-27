@@ -32,7 +32,7 @@ import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingStat
 import com.joohnq.mood.components.HealthJournalCard
 import com.joohnq.mood.components.HealthJournalStatsCard
 import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.mood.ui.components.Title
 import com.joohnq.mood.ui.theme.Colors
 import com.joohnq.mood.ui.theme.ComponentColors
@@ -147,7 +147,7 @@ fun JournalingUI(
                 HealthJournalStatsCard(
                     modifier = Modifier.weight(1f),
                     icon = Drawables.Icons.Document,
-                    title = DatetimeManager.getHealthJournalsInYear(state.journals),
+                    title = DatetimeProvider.getHealthJournalsInYear(state.journals),
                     color = Colors.Green50,
                     backgroundColor = Colors.Green10,
                     desc = stringResource(Res.string.completed)

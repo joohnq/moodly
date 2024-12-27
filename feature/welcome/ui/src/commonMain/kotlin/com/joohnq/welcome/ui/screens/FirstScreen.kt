@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.welcome.screens
+package com.joohnq.welcome.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,21 +13,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.ui.components.ContinueButton
-import com.joohnq.moodapp.ui.components.TextWithSpan
-import com.joohnq.moodapp.ui.components.VerticalSpacer
-import com.joohnq.moodapp.ui.theme.Colors
-import com.joohnq.moodapp.ui.theme.Dimens
-import com.joohnq.moodapp.ui.theme.Drawables
-import com.joohnq.moodapp.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.moodapp.ui.theme.TextStyles
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.first_screen_desc
-import moodapp.composeapp.generated.resources.first_screen_image
-import moodapp.composeapp.generated.resources.first_screen_second_title
-import moodapp.composeapp.generated.resources.first_screen_title
-import moodapp.composeapp.generated.resources.first_screen_title_word
-import moodapp.composeapp.generated.resources.get_started
+import com.joohnq.mood.components.ContinueButton
+import com.joohnq.mood.components.TextWithSpan
+import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.Dimens
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.first_screen_desc
+import com.joohnq.shared.ui.first_screen_image
+import com.joohnq.shared.ui.first_screen_second_title
+import com.joohnq.shared.ui.first_screen_title
+import com.joohnq.shared.ui.first_screen_title_word
+import com.joohnq.shared.ui.get_started
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

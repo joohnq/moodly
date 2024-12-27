@@ -1,12 +1,12 @@
-package com.joohnq.moodapp.ui.presentation.welcome.screens
+package com.joohnq.welcome.ui.screens
 
 import androidx.compose.runtime.Composable
-import com.joohnq.moodapp.ui.theme.Colors
-import com.joohnq.moodapp.ui.theme.Drawables
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.intelligent_first_second_title
-import moodapp.composeapp.generated.resources.intelligent_first_span
-import moodapp.composeapp.generated.resources.two
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.intelligent_first_second_title
+import com.joohnq.shared.ui.intelligent_first_span
+import com.joohnq.shared.ui.two
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

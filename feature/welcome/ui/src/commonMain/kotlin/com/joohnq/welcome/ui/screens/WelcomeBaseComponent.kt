@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.ui.presentation.welcome.screens
+package com.joohnq.welcome.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,16 +21,16 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.moodapp.ui.ScreenDimensions
-import com.joohnq.moodapp.ui.components.IconContinueButton
-import com.joohnq.moodapp.ui.components.TextWithBackground
-import com.joohnq.moodapp.ui.components.TextWithSpan
-import com.joohnq.moodapp.ui.components.VerticalSpacer
-import com.joohnq.moodapp.ui.presentation.welcome.WelcomeScreen
-import com.joohnq.moodapp.ui.theme.Colors
-import com.joohnq.moodapp.ui.theme.ComponentColors
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.step
+import com.joohnq.mood.components.IconContinueButton
+import com.joohnq.mood.components.TextWithBackground
+import com.joohnq.mood.components.TextWithSpan
+import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.mood.ui.ScreenDimensions
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.step
+import com.joohnq.welcome.ui.WelcomeScreen
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

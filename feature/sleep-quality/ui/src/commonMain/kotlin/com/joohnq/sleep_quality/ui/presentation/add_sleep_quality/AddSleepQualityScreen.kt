@@ -11,6 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.CustomScreen
 import com.joohnq.mood.sharedViewModel
 import com.joohnq.mood.state.UiState.Companion.fold
+import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.toSleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.endSleeping
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.startSleeping
@@ -37,7 +38,7 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
                     sleepQualityViewModel.onAction(
                         SleepQualityIntent.AddSleepQualityRecord(
                             SleepQualityRecord(
-                                sleepQuality = addSleepQualityState.mood!!,
+                                sleepQuality = addSleepQualityState.mood!!.toSleepQuality(),
                                 sleepInfluences = addSleepQualityState.selectedSleepInfluences
                             ).startSleeping(
                                 addSleepQualityState.startHour,

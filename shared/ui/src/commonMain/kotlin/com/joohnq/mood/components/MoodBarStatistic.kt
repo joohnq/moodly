@@ -30,7 +30,7 @@ import com.joohnq.domain.entity.Mood
 import com.joohnq.domain.entity.StatsRecord
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 
 @Composable
 fun MoodBarStatistic(
@@ -125,7 +125,7 @@ fun MoodBarStatistic(
                         }
                     }
                     Text(
-                        text = DatetimeManager.formatShortDate(statsRecord.date.date),
+                        text = DatetimeProvider.formatShortDate(statsRecord.date.date),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

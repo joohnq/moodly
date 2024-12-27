@@ -19,7 +19,7 @@ import com.joohnq.mood.state.UiState
 import com.joohnq.mood.theme.Drawables
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.home
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
@@ -42,7 +42,7 @@ class HomeScreen : CustomTab<HomeState>() {
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
-        val today = DatetimeManager.formatDate()
+        val today = DatetimeProvider.formatDate()
         val userState by userViewModel.state.collectAsState()
         val statsState by statsViewModel.statsState.collectAsState()
         val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()

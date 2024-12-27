@@ -1,7 +1,6 @@
-package com.joohnq.mood.util.helper
+package com.joohnq.domain
 
-import com.joohnq.mood.domain.DaySection
-import com.joohnq.mood.domain.HealthJournalRecord
+import com.joohnq.domain.entity.DaySection
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -15,12 +14,12 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.until
 
-object DatetimeManager {
-    fun getCurrentDateTime(): LocalDateTime =
+object DatetimeProvider : IDatetimeProvider {
+    override fun getCurrentDateTime(): LocalDateTime =
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
     // Mon, 28 Oct 20224
-    fun formatDate(date: LocalDate = getCurrentDateTime().date): String =
+    override fun formatDate(date: LocalDate): String =
         date.format(LocalDate.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
             chars(", ")
@@ -32,13 +31,13 @@ object DatetimeManager {
         })
 
     // Mon, 28 Oct 20224
-    fun formatShortDate(date: LocalDate): String = date.format(LocalDate.Format {
+    override fun formatShortDate(date: LocalDate): String = date.format(LocalDate.Format {
         dayOfMonth()
         chars("/")
         monthNumber()
     })
 
-    fun formatDateTime(date: LocalDateTime = getCurrentDateTime()): String {
+    override fun formatDateTime(date: LocalDateTime): String {
         return date.format(LocalDateTime.Format {
             dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
             chars(", ")
@@ -54,7 +53,7 @@ object DatetimeManager {
         })
     }
 
-    fun getMonthDaysCount(
+    override fun getMonthDaysCount(
         date: LocalDateTime
     ): Int {
         val start = LocalDate(date.year, date.month, 1)
@@ -62,38 +61,30 @@ object DatetimeManager {
         return start.until(end, DateTimeUnit.DAY)
     }
 
-    fun getHealthJournalsInYear(
-        healthJournals: List<HealthJournalRecord?>,
-        date: LocalDateTime = getCurrentDateTime()
-    ): String {
-        val yearsDay = getDaysInYear(date.year)
-        val days = healthJournals.associateBy { it?.let { formatDate(date.date) } }.keys.size
-        return "$days/$yearsDay"
-    }
 
-    fun getCurrentWeekDay(date: LocalDateTime): Int =
+    override fun getCurrentWeekDay(date: LocalDateTime): Int =
         LocalDate(date.year, date.month, 1).dayOfWeek.ordinal
 
-    fun formatTime(date: LocalDateTime): String = date.format(LocalDateTime.Format {
+    override fun formatTime(date: LocalDateTime): String = date.format(LocalDateTime.Format {
         hour()
         char(':')
         minute()
     })
 
-    fun getDaySection(date: LocalDateTime): String = when (date.hour) {
+    override fun getDaySection(date: LocalDateTime): String = when (date.hour) {
         in 0..11 -> DaySection.Morning.text
         in 12..17 -> DaySection.Afternoon.text
         else -> DaySection.Evening.text
     }
 
-    private fun isLeapYear(year: Int): Boolean =
+    override fun isLeapYear(year: Int): Boolean =
         (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
 
-    private fun getDaysInYear(year: Int): Int =
+    override fun getDaysInYear(year: Int): Int =
         if (isLeapYear(year)) 366 else 365
 
-    fun formatInt(int: Int): String = if (int < 10) "0$int" else "$int"
+    override fun formatInt(int: Int): String = if (int < 10) "0$int" else "$int"
 
-    fun formatTime(hour: Int, minute: Int): String =
+    override fun formatTime(hour: Int, minute: Int): String =
         "${formatInt(hour)}:${formatInt(minute)}"
 }

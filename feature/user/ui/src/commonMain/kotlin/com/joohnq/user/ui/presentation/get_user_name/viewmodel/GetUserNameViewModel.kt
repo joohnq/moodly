@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class GetUserNameViewModel : ViewModel() {
-    private val _getUserNameState: MutableStateFlow<GetUserNameViewModelState> =
+    private val _state: MutableStateFlow<GetUserNameViewModelState> =
         MutableStateFlow(GetUserNameViewModelState())
-    val getUserNameState: StateFlow<GetUserNameViewModelState> = _getUserNameState
+    val state: StateFlow<GetUserNameViewModelState> = _state
 
     fun onAction(intent: GetUserNameIntent) {
         when (intent) {
@@ -19,18 +21,18 @@ class GetUserNameViewModel : ViewModel() {
     }
 
     private fun updateUserName(name: String) {
-        _getUserNameState.update {
+        _state.update {
             it.copy(name = name, nameError = null)
         }
     }
 
     private fun updateUserNameError(error: String?) {
-        _getUserNameState.update {
+        _state.update {
             it.copy(nameError = error)
         }
     }
 
     private fun resetState() {
-        _getUserNameState.update { GetUserNameViewModelState() }
+        _state.update { GetUserNameViewModelState() }
     }
 }

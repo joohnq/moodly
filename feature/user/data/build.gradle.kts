@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -9,18 +7,16 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+    alias(libs.plugins.sqldelight)
+//    id("app.cash.sqldelight") version "2.0.2"
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-    jvm("desktop")
 
     listOf(
         iosX64(),
@@ -34,9 +30,13 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+        androidMain.dependencies {
+            implementation(libs.androidx.startup.runtime)
+            implementation(libs.android.driver)
+        }
         commonMain.dependencies {
             implementation(projects.feature.user.domain)
+            implementation(projects.core.database)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -45,11 +45,41 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
             implementation(libs.serialization)
+            implementation(libs.bundles.koin)
+
+            implementation(libs.coroutines.extensions)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
+        }
+        nativeMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
         }
     }
+}
+
+sqldelight {
+    databases {
+        create("UserDatabaseSql") {
+            packageName.set("com.joohnq.user.database.user")
+            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/user"))
+            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/user")
+        }
+        create("UserPreferencesDatabaseSql") {
+            packageName.set("com.joohnq.user.database.user_preferences")
+            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/user_preferences"))
+            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/user_preferences")
+        }
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {
@@ -61,29 +91,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
-dependencies {
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.user.data.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.user.data"
-            packageVersion = "1.0.0"
-        }
     }
 }

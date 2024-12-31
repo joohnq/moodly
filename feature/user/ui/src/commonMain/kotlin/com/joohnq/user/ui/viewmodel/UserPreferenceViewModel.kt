@@ -13,7 +13,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class UserPreferenceViewModel(
     private val getUserPreferencesUseCase: GetUserPreferencesUseCase,
     private val addUserPreferencesUseCase: AddUserPreferencesUseCase,

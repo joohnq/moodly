@@ -1,17 +1,19 @@
 package com.joohnq.user.data.repository
 
 import com.joohnq.domain.entity.UserPreferences
-import com.joohnq.user.data.dao.UserPreferencesDAO
+import com.joohnq.domain.repository.UserPreferencesDataSource
+import com.joohnq.domain.repository.UserPreferencesRepository
+import org.koin.core.annotation.Single
 
-
-class UserPreferencesRepositoryImpl(private val userPreferencesDAO: UserPreferencesDAO) :
+@Single(binds = [UserPreferencesRepository::class])
+class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserPreferencesDataSource) :
     UserPreferencesRepository {
     override suspend fun getUserPreferences(): UserPreferences =
-        userPreferencesDAO.getUserPreferences()
+        userPreferencesDataSource.getUserPreferences()
 
     override suspend fun addUserPreferences(userPreferences: UserPreferences): Boolean =
         try {
-            userPreferencesDAO.addUserPreferences(userPreferences)
+            userPreferencesDataSource.addUserPreferences(userPreferences)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -20,7 +22,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDAO: UserPreferen
 
     override suspend fun insertUserPreferences(): Boolean =
         try {
-            userPreferencesDAO.addUserPreferences()
+            userPreferencesDataSource.addUserPreferences()
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -29,7 +31,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDAO: UserPreferen
 
     override suspend fun updateSkipWelcomeScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDAO.updateSkipWelcomeScreen(value)
+            userPreferencesDataSource.updateSkipWelcomeScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -38,7 +40,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDAO: UserPreferen
 
     override suspend fun updateSkipOnboardingScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDAO.updateSkipOnboardingScreen(value)
+            userPreferencesDataSource.updateSkipOnboardingScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -47,7 +49,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDAO: UserPreferen
 
     override suspend fun updateSkipGetUserNameScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDAO.updateSkipGetUserNameScreen(value)
+            userPreferencesDataSource.updateSkipGetUserNameScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()

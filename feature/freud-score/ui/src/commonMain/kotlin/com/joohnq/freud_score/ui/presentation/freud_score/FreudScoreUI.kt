@@ -10,30 +10,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.freud_score.ui.components.MentalScoreHistoryItemWithHour
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
-import com.joohnq.mood.components.MentalScoreHistoryItemWithHour
 import com.joohnq.mood.components.SharedPanelComponent
 import com.joohnq.mood.components.SmallTitle
+import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.use_case.GetStatGroupByDateUseCase
 import com.joohnq.mood.state.UiState.Companion.foldComposable
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.Drawables
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.ui.presentation.loading.LoadingUI
-import com.joohnq.mood.util.helper.StatsManager
 import com.joohnq.mood.util.mappers.forEachMap
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.freud_score
 import com.joohnq.shared.ui.mental_score_history
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 @Composable fun FreudScoreUI(state: FreudScoreState) {
     state.statsRecords.foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { statsRecords ->
+        onSuccess = { statsRecords: List<StatsRecord> ->
+            val getStatGroupByDateUseCase: GetStatGroupByDateUseCase = koinInject()
             val mapStatsRecords =
-                remember { StatsManager.getGroupByDate(statsRecords) }
+                remember { getStatGroupByDateUseCase(statsRecords) }
 
             SharedPanelComponent(
                 isDark = false,

@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -17,8 +16,6 @@ kotlin {
         }
     }
 
-    jvm("desktop")
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,8 +28,10 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+
         commonMain.dependencies {
+            implementation(projects.shared.domain)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -52,17 +51,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.freud_score.domain.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.freud_score.domain"
-            packageVersion = "1.0.0"
-        }
     }
 }

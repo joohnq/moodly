@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.2"
+agp = "8.7.3"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -11,8 +11,9 @@ androidx-lifecycle = "2.8.4"
 compose-plugin = "1.7.1"
 composeCharts = "0.0.17"
 koinCore = "4.0.0"
+koinAnnotation = "1.4.0"
 kotlin = "2.0.20"
-kotlinxCoroutines = "1.9.0"
+kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.7.3"
 napier = "2.7.1"
@@ -22,19 +23,17 @@ statelyCommon = "2.0.5"
 statelyConcurrentCollections = "2.1.0"
 truthish = "1.0.1"
 turbine = "1.2.0"
-room = "2.7.0-alpha11"
-ksp = "2.0.21-1.0.25"
-sqlite = "2.5.0-alpha11"
+ksp = "2.0.20-1.0.25"
 mokkery = "2.4.0"
 benchmarkCommon = "1.3.3"
-uiTestJunit4Desktop = "1.7.0"
-uiToolingPreviewDesktop = "1.7.1"
 lifecycleViewModel = "2.8.3"
 coreI18n = "1.0.0-alpha01"
 buildkonfig = "0.15.2"
 generativeai = "0.9.0-1.0.1"
 voyager = "1.1.0-beta02"
-navigationCommonKtx = "2.8.4"
+jetbrainsKotlinJvm = "2.1.0"
+startupRuntime = "1.2.0"
+sqldelight = "2.0.2"
 
 [libraries]
 charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
@@ -44,6 +43,8 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCore" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin-ksp = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinAnnotation" }
+koin-annotation = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotation" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
@@ -58,22 +59,18 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "stately
 stately-concurrent-collections = { module = "co.touchlab:stately-concurrent-collections", version.ref = "statelyConcurrentCollections" }
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
-androidx-benchmark-common = { group = "androidx.benchmark", name = "benchmark-common", version.ref = "benchmarkCommon" }
-kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-androidx-ui-test-junit4-desktop = { group = "androidx.compose.ui", name = "ui-test-junit4-desktop", version.ref = "uiTestJunit4Desktop" }
-ui-tooling-preview-desktop = { module = "org.jetbrains.compose.ui:ui-tooling-preview-desktop", version.ref = "uiToolingPreviewDesktop" }
-androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 generativeai = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -82,14 +79,15 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 [bundles]
 viewmodel = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-runtime-compose", "lifecycle-viewmodel"]
-koin = ["koin-compose", "koin-compose-viewmodel", "stately-common", "stately-concurrent-collections"]
+koin = ["koin-core", "koin-compose", "koin-compose-viewmodel", "stately-common", "stately-concurrent-collections", "koin-annotation"]
 voyager = ["voyager-navigator", "voyager-transitions", "voyager-koin"]
 voyager-other = ["voyager-bottom-sheet-navigator", "voyager-tab-navigator"]

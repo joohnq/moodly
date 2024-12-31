@@ -2,6 +2,7 @@ package com.joohnq.mood
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
+import org.koin.core.annotation.Single
 
 interface ScreenDimensionsInterface {
     val statusBarHeight: Int
@@ -10,9 +11,10 @@ interface ScreenDimensionsInterface {
 }
 
 enum class OSType {
-    IOS, ANDROID, DESKTOP
+    IOS, ANDROID
 }
 
+@Single
 expect class ScreenDimensions : ScreenDimensionsInterface {
     override val statusBarHeight: Int
     override val osType: OSType

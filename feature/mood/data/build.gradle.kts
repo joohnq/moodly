@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -7,17 +5,17 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-    jvm("desktop")
 
     listOf(
         iosX64(),
@@ -31,8 +29,13 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+        androidMain.dependencies {
+            implementation(libs.androidx.startup.runtime)
+            implementation(libs.android.driver)
+        }
         commonMain.dependencies {
+            implementation(projects.core.database)
+            implementation(projects.shared.domain)
             implementation(projects.feature.mood.domain)
 
             implementation(compose.runtime)
@@ -42,9 +45,37 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.room.runtime)
+            implementation(libs.datetime)
+
+            implementation(libs.bundles.koin)
+
+            implementation(libs.coroutines.extensions)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
+        }
+        nativeMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
         }
     }
+}
+
+sqldelight {
+    databases {
+        create("StatsDatabaseSql") {
+            packageName.set("com.joohnq.mood.database")
+            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/mood"))
+            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/mood")
+        }
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {
@@ -56,17 +87,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.mood.data.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.mood.data"
-            packageVersion = "1.0.0"
-        }
     }
 }

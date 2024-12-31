@@ -16,9 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.components.AddMoodRadioGroup
 import com.joohnq.mood.components.ButtonTextAndCheck
-import com.joohnq.mood.components.MoodFace
 import com.joohnq.mood.components.TopBar
 import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.theme.Colors
@@ -27,8 +25,11 @@ import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource
 import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.components.AddMoodRadioGroup
+import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.add_mood
 import com.joohnq.shared.ui.hey_name
@@ -79,7 +80,7 @@ fun AddStatScreenUI(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    mood = state.selectedMood,
+                    mood = selectedMoodResource,
                     backgroundColor = selectedMoodResource.palette.moodScreenMoodFaceBackgroundColor,
                     color = selectedMoodResource.palette.moodScreenMoodFaceColor
                 )
@@ -95,7 +96,7 @@ fun AddStatScreenUI(
                 AddMoodRadioGroup(
                     moodsSize = moodsResources.size,
                     moodIndex = moodIndex,
-                    selectedMood = state.selectedMood,
+                    selectedMood = selectedMoodResource,
                     setSelectedMood = {
                         state.onAddAction(
                             AddStatIntent.UpdateAddingStatsRecordMood(

@@ -2,10 +2,10 @@ package com.joohnq.mood.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.domain.entity.StatsRecord
-import com.joohnq.domain.use_case.AddStatsUseCase
-import com.joohnq.domain.use_case.DeleteStatsUseCase
-import com.joohnq.domain.use_case.GetStatsUseCase
+import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.use_case.AddStatsUseCase
+import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
+import com.joohnq.mood.domain.use_case.GetStatsUseCase
 import com.joohnq.mood.state.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class StatsViewModel(
     private val getStatsUseCase: GetStatsUseCase,
     private val deleteStatsUseCase: DeleteStatsUseCase,

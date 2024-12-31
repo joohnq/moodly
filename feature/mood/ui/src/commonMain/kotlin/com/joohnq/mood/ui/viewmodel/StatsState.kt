@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.viewmodel
 
-import com.joohnq.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.state.UiState
 
 data class StatsState(

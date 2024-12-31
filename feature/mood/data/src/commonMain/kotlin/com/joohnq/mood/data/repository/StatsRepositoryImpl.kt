@@ -1,18 +1,20 @@
 package com.joohnq.mood.data.repository
 
-import com.joohnq.domain.entity.StatsRecord
-import com.joohnq.domain.repository.StatsRepository
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.domain.DatetimeProvider
+import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.repository.StatsDataSource
+import com.joohnq.mood.domain.repository.StatsRepository
+import org.koin.core.annotation.Single
 
+@Single(binds = [StatsRepository::class])
 class StatsRepositoryImpl(
-    private val statsRecordDAO: StatsRecordDAO
+    private val statsDataSource: StatsDataSource,
 ) : StatsRepository {
-
-    override suspend fun getStats(): List<StatsRecord> = statsRecordDAO.getStats()
+    override suspend fun getStats(): List<StatsRecord> = statsDataSource.getStats()
 
     override suspend fun addStats(statsRecord: StatsRecord): Boolean =
         try {
-            statsRecordDAO.addStats(statsRecord.copy(date = DatetimeManager.getCurrentDateTime()))
+            statsDataSource.addStats(statsRecord.copy(date = DatetimeProvider.getCurrentDateTime()))
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -21,7 +23,7 @@ class StatsRepositoryImpl(
 
     override suspend fun deleteStat(id: Int): Boolean =
         try {
-            statsRecordDAO.deleteStat(id)
+            statsDataSource.deleteStat(id)
             true
         } catch (e: Exception) {
             e.printStackTrace()

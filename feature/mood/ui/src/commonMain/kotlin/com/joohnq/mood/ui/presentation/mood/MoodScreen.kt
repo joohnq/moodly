@@ -7,8 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.joohnq.domain.entity.StatsRecord
 import com.joohnq.mood.CustomScreen
+import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.use_case.GetNextStatUseCase
+import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
 import com.joohnq.mood.sharedViewModel
 import com.joohnq.mood.state.UiState.Companion.getValue
 import com.joohnq.mood.state.UiState.Companion.getValueOrNull
@@ -16,13 +18,15 @@ import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.mood.util.helper.StatsManager
+import org.koin.compose.koinInject
 
 class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
     @Composable
     override fun Screen(): MoodState {
         val statsViewModel: StatsViewModel = sharedViewModel()
         val statsState by statsViewModel.statsState.collectAsState()
+        val getNextStatUseCase: GetNextStatUseCase = koinInject()
+        val getPreviousStatUseCase: GetPreviousStatUseCase = koinInject()
         var currentStatsRecord by remember {
             mutableStateOf(
                 statsState.statsRecords.getValueOrNull()?.find { it.id == id }
@@ -47,13 +51,13 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
         LaunchedEffect(currentStatsRecord) {
             currentStatsRecord?.let {
                 hasNext =
-                    StatsManager.getNext(
+                    getNextStatUseCase(
                         it,
                         statsState.statsRecords.getValue()
                     )
 
                 hasPrevious =
-                    StatsManager.getPrevious(
+                    getPreviousStatUseCase(
                         it,
                         statsState.statsRecords.getValue()
                     )

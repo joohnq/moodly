@@ -1,0 +1,17 @@
+PRAGMA stat_version = 1;
+
+CREATE TABLE StatRecord (
+    id INTEGER PRIMARY KEY NOT NULL,
+    mood INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    date TEXT DEFAULT (datetime('now')) NOT NULL
+);
+
+getStats:
+SELECT * FROM StatRecord;
+
+addStats:
+INSERT INTO StatRecord (id, mood, description) VALUES (:id, :mood, :description);
+
+deleteStat:
+DELETE FROM StatRecord WHERE id = :id;

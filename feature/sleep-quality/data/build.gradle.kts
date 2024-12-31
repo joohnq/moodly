@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -8,17 +6,16 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-    jvm("desktop")
 
     listOf(
         iosX64(),
@@ -32,8 +29,12 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+        androidMain.dependencies {
+            implementation(libs.androidx.startup.runtime)
+            implementation(libs.android.driver)
+        }
         commonMain.dependencies {
+            implementation(projects.shared.domain)
             implementation(projects.feature.sleepQuality.domain)
 
             implementation(compose.runtime)
@@ -43,11 +44,36 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.room.runtime)
-            implementation(libs.serialization)
-        }
+            implementation(libs.datetime)
 
+            implementation(libs.serialization)
+            implementation(libs.bundles.koin)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
+        }
+        nativeMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
+        }
     }
+}
+
+sqldelight {
+    databases {
+        create("SleepQualityDatabaseSql") {
+            packageName.set("com.joohnq.sleep_quality.database")
+            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/sleep_quality"))
+            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/sleep_quality")
+        }
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {
@@ -59,17 +85,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.sleep_quality.data.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.sleep_quality.data"
-            packageVersion = "1.0.0"
-        }
     }
 }

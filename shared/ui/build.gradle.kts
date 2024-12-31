@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -17,8 +16,6 @@ kotlin {
         }
     }
 
-    jvm("desktop")
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,7 +28,7 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+
         commonMain.dependencies {
             implementation(projects.feature.freudScore.domain)
             implementation(projects.feature.stressLevel.domain)
@@ -48,7 +45,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.datetime)
-            implementation(libs.charts)
 
             // Koin
             api(libs.koin.core)
@@ -60,7 +56,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.ui"
+    namespace = "com.joohnq.shared.ui"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -75,16 +71,4 @@ compose.resources {
     publicResClass = true
     packageOfResClass = "com.joohnq.shared.ui"
     generateResClass = auto
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.ui.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.ui"
-            packageVersion = "1.0.0"
-        }
-    }
 }

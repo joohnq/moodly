@@ -8,34 +8,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
-import com.joohnq.domain.entity.Mood
 import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.util.mappers.toDegrees
 import com.joohnq.mood.util.mappers.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
-
-fun DrawScope.drawRoulette(
-    sliceAngle: Float,
-    rotation: Float,
-    painterResources: List<VectorPainter>,
-    moods: List<Mood>,
-) {
-    for (i in moods.indices) {
-        val startAngle = rotation + sliceAngle * i
-        val mood = moods[i]
-        drawSlice(
-            color = mood.palette.faceColor,
-            backgroundColor = mood.palette.faceBackgroundColor,
-            startAngle = startAngle.toDegrees().toFloat(),
-            sweepAngle = sliceAngle.toDegrees().toFloat(),
-            useCenter = true,
-            topLeft = Offset(0f, 0f),
-            size = size,
-            vectorPainter = painterResources[i]
-        )
-    }
-}
 
 fun DrawScope.drawSlice(
     color: Color,

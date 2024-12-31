@@ -2,8 +2,6 @@
 
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
@@ -14,7 +12,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.buildkonfig)
 }
@@ -29,13 +26,10 @@ kotlin {
     }
 
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-    jvm("desktop")
 
     listOf(
         iosX64(),
@@ -50,17 +44,40 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
-
         androidMain.dependencies {
+            implementation(projects.core.database)
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
+
         commonMain.dependencies {
+            implementation(projects.core.di)
+//            implementation(projects.core.database)
+            implementation(projects.core.ui)
             implementation(projects.shared.ui)
+
+            implementation(projects.feature.user.data)
+            implementation(projects.feature.user.domain)
+            implementation(projects.feature.user.ui)
+
+            implementation(projects.feature.mood.ui)
+            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.mood.data)
+
+            implementation(projects.feature.healthJournal.ui)
+            implementation(projects.feature.healthJournal.domain)
+            implementation(projects.feature.healthJournal.data)
+
+            implementation(projects.feature.sleepQuality.ui)
+            implementation(projects.feature.sleepQuality.domain)
+            implementation(projects.feature.sleepQuality.data)
+
+            implementation(projects.feature.stressLevel.ui)
+            implementation(projects.feature.stressLevel.domain)
+            implementation(projects.feature.stressLevel.data)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -76,12 +93,10 @@ kotlin {
             implementation(libs.napier)
 
             // Koin
-            api(libs.koin.core)
             implementation(libs.bundles.koin)
 
             // Room and SQLite
-            implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
+
 
             // Charts
             implementation(libs.charts)
@@ -109,14 +124,10 @@ kotlin {
 
             implementation(libs.turbine)
         }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
-
-            implementation(libs.ui.tooling.preview.desktop)
-        }
     }
 }
+
+
 
 android {
     namespace = libs.versions.android.packageName.get()
@@ -155,34 +166,12 @@ android {
     }
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 dependencies {
-    implementation(libs.androidx.benchmark.common)
-    implementation(libs.androidx.ui.test.junit4.desktop)
-    implementation(libs.androidx.core.i18n)
-    implementation(libs.androidx.navigation.common.ktx)
-    debugImplementation(compose.uiTooling)
-    implementation(libs.coroutines.core)
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
-}
-
-compose.desktop {
-    application {
-        mainClass = "${libs.versions.android.packageName.get()}.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = libs.versions.android.packageName.get()
-            packageVersion = libs.versions.android.versionName.get()
-        }
-    }
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 buildkonfig {

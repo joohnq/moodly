@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class OnboardingViewModel : ViewModel() {
     private val _state = MutableStateFlow(OnboardingViewModelState())
     val state: StateFlow<OnboardingViewModelState> = _state.asStateFlow()

@@ -13,14 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.Mood
 import com.joohnq.mood.components.IconContinueButton
-import com.joohnq.mood.components.MoodFace
-import com.joohnq.mood.components.RouletteMoods
 import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.ComponentColors
 import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.components.RouletteMoods
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.event.OnboardingMoodRateEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState

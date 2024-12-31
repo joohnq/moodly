@@ -27,27 +27,30 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.Mood
-import com.joohnq.mood.components.ContinueButton
-import com.joohnq.mood.ui.components.CustomOutlinedTextField
-import com.joohnq.mood.ui.components.ExpressionAnalysisTextField
-import com.joohnq.mood.ui.components.MediumTitle
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.components.TopBar
-import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.ComponentColors
-import com.joohnq.mood.ui.theme.Dimens
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.enter_the_title
-import moodapp.composeapp.generated.resources.journal_title
-import moodapp.composeapp.generated.resources.mood
-import moodapp.composeapp.generated.resources.new_journal_entry
-import moodapp.composeapp.generated.resources.write_your_entry
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
+import com.joohnq.mood.components.ContinueButton
+import com.joohnq.mood.components.CustomOutlinedTextField
+import com.joohnq.mood.components.ExpressionAnalysisTextField
+import com.joohnq.mood.components.MediumTitle
+import com.joohnq.mood.components.TopBar
+import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.mood.theme.Dimens
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
+import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.enter_the_title
+import com.joohnq.shared.ui.journal_title
+import com.joohnq.shared.ui.mood
+import com.joohnq.shared.ui.new_journal_entry
+import com.joohnq.shared.ui.write_your_entry
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -59,7 +62,7 @@ fun AddJournalingUI(
     }
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
-    val moods = remember { Mood.getAll() }
+    val moods = remember { MoodResource.getAll() }
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
@@ -102,19 +105,31 @@ fun AddJournalingUI(
                         .onFocusChanged { focusState ->
                             isFocused = focusState.isFocused
                         }.focusRequester(focusRequester),
-                    onValueChange = { state.onAddingAction(AddingJournalingIntent.UpdateTitle(it)) },
+                    onValueChange = {
+                        state.onAddingAction(
+                            AddingJournalingViewModelIntent.UpdateTitle(
+                                it
+                            )
+                        )
+                    },
                 )
                 MediumTitle(Res.string.mood)
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    items(moods) {
+                    items(moods) { resource ->
                         MoodFace(
                             modifier = Modifier.size(32.dp),
-                            mood = it,
-                            backgroundColor = if (state.selectedMood == it) it.palette.faceBackgroundColor else Colors.Gray30,
-                            color = if (state.selectedMood == it) it.palette.faceColor else Colors.Gray60,
-                            onClick = { state.onAddingAction(AddingJournalingIntent.UpdateMood(it)) }
+                            mood = resource,
+                            backgroundColor = if (state.selectedMood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                            color = if (state.selectedMood == resource) resource.palette.faceColor else Colors.Gray60,
+                            onClick = {
+                                state.onAddingAction(
+                                    AddingJournalingViewModelIntent.UpdateMood(
+                                        resource.toDomain()
+                                    )
+                                )
+                            }
                         )
                     }
                 }
@@ -123,7 +138,7 @@ fun AddJournalingUI(
                     text = state.desc,
                     onValueChange = {
                         state.onAddingAction(
-                            AddingJournalingIntent.UpdateDescription(it)
+                            AddingJournalingViewModelIntent.UpdateDescription(it)
                         )
                     }
                 )

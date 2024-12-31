@@ -16,10 +16,11 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
 import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,27 +28,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.joohnq.health_journal.ui.components.HealthJournalCard
+import com.joohnq.health_journal.ui.components.HealthJournalStatsCard
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
-import com.joohnq.mood.components.HealthJournalCard
-import com.joohnq.mood.components.HealthJournalStatsCard
+import com.joohnq.mood.components.Title
 import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.util.helper.DatetimeProvider
-import com.joohnq.mood.ui.components.Title
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.ComponentColors
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.ui.theme.TextStyles
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.all_journals
-import moodapp.composeapp.generated.resources.completed
-import moodapp.composeapp.generated.resources.document_your_mental_journal
-import moodapp.composeapp.generated.resources.emotion
-import moodapp.composeapp.generated.resources.journal_stats
-import moodapp.composeapp.generated.resources.more_journal_stats
-import moodapp.composeapp.generated.resources.no_data
-import moodapp.composeapp.generated.resources.your_entries
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.all_journals
+import com.joohnq.shared.ui.completed
+import com.joohnq.shared.ui.document_your_mental_journal
+import com.joohnq.shared.ui.emotion
+import com.joohnq.shared.ui.journal_stats
+import com.joohnq.shared.ui.more_journal_stats
+import com.joohnq.shared.ui.no_data
+import com.joohnq.shared.ui.your_entries
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -147,7 +148,7 @@ fun JournalingUI(
                 HealthJournalStatsCard(
                     modifier = Modifier.weight(1f),
                     icon = Drawables.Icons.Document,
-                    title = DatetimeProvider.getHealthJournalsInYear(state.journals),
+                    title = "",
                     color = Colors.Green50,
                     backgroundColor = Colors.Green10,
                     desc = stringResource(Res.string.completed)
@@ -155,7 +156,7 @@ fun JournalingUI(
                 HealthJournalStatsCard(
                     modifier = Modifier.weight(1f),
                     icon = Drawables.Icons.Chart,
-                    title = stringResource(if (state.journals.isEmpty()) Res.string.no_data else state.journals.first().mood.text),
+                    title = stringResource(if (state.journals.isEmpty()) Res.string.no_data else state.journals.first().mood.toResource().text),
                     color = Colors.Brown60,
                     backgroundColor = Colors.Brown10,
                     desc = stringResource(Res.string.emotion)

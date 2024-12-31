@@ -10,23 +10,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
+import com.joohnq.health_journal.ui.components.HealthJournalComponentColorful
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
+import com.joohnq.mood.components.SharedPanelComponent
 import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.state.UiState.Companion.foldComposable
-import com.joohnq.mood.util.helper.DatetimeProvider
-import com.joohnq.mood.ui.components.HealthJournalComponentColorful
-import com.joohnq.mood.ui.components.SharedPanelComponent
-import com.joohnq.mood.ui.presentation.loading.LoadingUI
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.ui.theme.TextStyles
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.health_journal
-import moodapp.composeapp.generated.resources.journal_history
-import moodapp.composeapp.generated.resources.journals_this_year
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.health_journal
+import com.joohnq.shared.ui.journal_history
+import com.joohnq.shared.ui.journals_this_year
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 @Composable
 fun HealthJournalUI(
@@ -34,9 +36,10 @@ fun HealthJournalUI(
 ) {
     state.healthJournal.foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { healthJournals ->
+        onSuccess = { healthJournals: List<HealthJournalRecord> ->
+            val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =
-                remember { DatetimeProvider.getHealthJournalsInYear(healthJournals) }
+                remember { getHealthJournalsInYearUseCase(healthJournals) }
             SharedPanelComponent(
                 isDark = false,
                 onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },

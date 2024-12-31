@@ -1,4 +1,4 @@
-package com.joohnq.mood.components
+package com.joohnq.health_journal.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,13 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.domain.DatetimeProvider
+import com.joohnq.freud_score.domain.entity.FreudScore
+import com.joohnq.freud_score.ui.FreudScoreResource.Companion.toResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalFreudScoreUseCase
+import com.joohnq.health_journal.domain.use_case.OrganizeByDateHealthJournalUseCase
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeProvider
-import com.joohnq.mood.util.helper.StatsManager
 import com.joohnq.mood.util.mappers.forEachMapComposable
 import com.joohnq.mood.util.mappers.items
 import com.joohnq.shared.ui.Res
@@ -38,6 +41,7 @@ import com.joohnq.shared.ui.tuesday_char
 import com.joohnq.shared.ui.wednesday_char
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 @Composable
 fun HealthJournalComponent(
@@ -46,8 +50,9 @@ fun HealthJournalComponent(
 ) {
     val dayOfWeek =
         remember { DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime()) }
+    val organizeByDateHealthJournalUseCase: OrganizeByDateHealthJournalUseCase = koinInject()
     val healthJournalsMap: Map<LocalDate, List<HealthJournalRecord>?> =
-        remember { StatsManager.getHealthJournal(healthJournals = healthJournals) }
+        remember { organizeByDateHealthJournalUseCase(healthJournals = healthJournals) }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -103,8 +108,9 @@ fun HealthJournalComponentColorful(
             Res.string.saturday_char,
         )
     }
+    val organizeByDateHealthJournalUseCase: OrganizeByDateHealthJournalUseCase = koinInject()
     val healthJournalsMap: Map<LocalDate, List<HealthJournalRecord>?> =
-        remember { StatsManager.getHealthJournal(healthJournals = healthJournals) }
+        remember { organizeByDateHealthJournalUseCase(healthJournals = healthJournals) }
 
     FlowRow(
         modifier = modifier.paddingHorizontalMedium(),
@@ -130,12 +136,12 @@ fun HealthJournalComponentColorful(
             )
         }
         healthJournalsMap.forEachMapComposable { _, healthJournal: List<HealthJournalRecord>? ->
-            val dayFreudScore = remember {
-                StatsManager.getHealthJournalFreudScore(
-                    healthJournal ?: emptyList()
-                )
-            }
-            val background = dayFreudScore?.palette?.backgroundColor ?: Colors.Brown20
+            val calculateHealthJournalFreudScoreUseCase: CalculateHealthJournalFreudScoreUseCase =
+                koinInject()
+            val dayFreudScore: FreudScore? =
+                remember { calculateHealthJournalFreudScoreUseCase(healthJournal ?: emptyList()) }
+            val resource = dayFreudScore?.toResource()
+            val background = resource?.palette?.backgroundColor ?: Colors.Brown20
             Box(
                 modifier = Modifier.weight(1f).aspectRatio(1f / 1f)
                     .background(color = background, shape = Dimens.Shape.Circle)

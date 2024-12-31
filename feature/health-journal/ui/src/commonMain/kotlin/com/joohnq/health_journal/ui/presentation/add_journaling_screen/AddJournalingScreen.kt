@@ -8,14 +8,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.state.UiState.Companion.fold
-import com.joohnq.mood.domain.HealthJournalRecord
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
-import com.joohnq.mood.viewmodel.HealthJournalIntent
-import com.joohnq.mood.viewmodel.HealthJournalViewModel
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddJournalingViewModel
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.mood.CustomScreen
+import com.joohnq.mood.sharedViewModel
+import com.joohnq.mood.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
 class AddJournalingScreen : CustomScreen<AddJournalingState>() {
@@ -25,8 +27,8 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
         val addJournalingViewModel: AddJournalingViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
-        val addingHealthJournalState by addJournalingViewModel.addingJournalingState.collectAsState()
-        val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
+        val addingHealthJournalState by addJournalingViewModel.state.collectAsState()
+        val healthJournalState by healthJournalViewModel.state.collectAsState()
 
         fun onEvent(event: AddJournalingEvent) =
             when (event) {
@@ -34,13 +36,11 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
                 AddJournalingEvent.OnAdd ->
                     healthJournalViewModel.onAction(
                         HealthJournalIntent.AddHealthJournal(
-                            HealthJournalRecord.Builder()
-                                .setMood(addingHealthJournalState.mood!!)
-                                .setTitle(addingHealthJournalState.title)
-                                .setDescription(addingHealthJournalState.description)
-//                                .setStressLevel(StressLevel.fromSliderValue(addingHealthJournalState.sliderValue))
-//                                .setStressors(addingHealthJournalState.selectedStressStressors)
-                                .build()
+                            HealthJournalRecord.init().copy(
+                                mood = addingHealthJournalState.mood!!,
+                                title = addingHealthJournalState.title,
+                                description = addingHealthJournalState.description
+                            )
                         )
                     )
             }
@@ -57,7 +57,7 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
 
         DisposableEffect(Unit) {
             onDispose {
-                addJournalingViewModel.onAction(AddingJournalingIntent.ResetState)
+                addJournalingViewModel.onAction(AddingJournalingViewModelIntent.ResetState)
                 healthJournalViewModel.onAction(HealthJournalIntent.ResetAddingState)
             }
         }

@@ -1,10 +1,10 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen.state
 
 import androidx.compose.material3.SnackbarHostState
-import com.joohnq.mood.domain.Mood
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddingJournalingIntent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
-import com.joohnq.mood.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.mood.domain.entity.Mood
 
 data class AddJournalingState(
     val snackBarState: SnackbarHostState,
@@ -12,7 +12,7 @@ data class AddJournalingState(
     val title: String,
     val titleError: String?,
     val desc: String,
-    val onAddingAction: (AddingJournalingIntent) -> Unit = {},
+    val onAddingAction: (AddingJournalingViewModelIntent) -> Unit = {},
     val onAction: (HealthJournalIntent) -> Unit = {},
     val onEvent: (AddJournalingEvent) -> Unit = {},
 )

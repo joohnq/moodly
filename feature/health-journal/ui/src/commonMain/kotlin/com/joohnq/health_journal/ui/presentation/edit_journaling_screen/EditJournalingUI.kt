@@ -24,33 +24,39 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.HealthJournalRecord
-import com.joohnq.mood.ui.components.TextWithBackground
-import com.joohnq.mood.ui.components.TopBar
-import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.domain.DatetimeProvider
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.ComponentColors
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.ui.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeProvider
-import com.joohnq.mood.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.mood.components.MainAlertDialog
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.delete_journal
-import moodapp.composeapp.generated.resources.do_you_wish_to_remove_this_journal
-import moodapp.composeapp.generated.resources.edit_journal
-import moodapp.composeapp.generated.resources.type_here_your_description
-import moodapp.composeapp.generated.resources.type_here_your_title
+import com.joohnq.mood.components.TextWithBackground
+import com.joohnq.mood.components.TopBar
+import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.delete_journal
+import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
+import com.joohnq.shared.ui.edit_journal
+import com.joohnq.shared.ui.type_here_your_description
+import com.joohnq.shared.ui.type_here_your_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable fun EditJournalingUI(
     state: EditJournalingState,
 ) {
     val titleFocusRequest = remember { FocusRequester() }
-    val descriptionFocusRequest = remember { FocusRequester() }
+    val descriptionFocusRequest = remember {
+        FocusRequester()
+    }
+    val mood = state.healthJournal.mood
+    val resource = mood.toResource()
 
     if (state.openDeleteDialog)
         MainAlertDialog(
@@ -104,8 +110,8 @@ import org.jetbrains.compose.resources.stringResource
                 ) {
                     TextWithBackground(
                         text = DatetimeProvider.formatDateTime(state.healthJournal.date),
-                        textColor = state.healthJournal.mood.palette.moodScreenMoodFaceColor,
-                        backgroundColor = state.healthJournal.mood.palette.subColor,
+                        textColor = resource.palette.moodScreenMoodFaceColor,
+                        backgroundColor = resource.palette.subColor,
                     )
                 }
             }

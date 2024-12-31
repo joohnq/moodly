@@ -4,17 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.mood.CustomTab
-import com.joohnq.mood.state.UiState.Companion.getValue
 import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.ui.presentation.all_journals.AllJournalScreen
-import com.joohnq.mood.ui.presentation.edit_journaling_screen.EditJournalingScreen
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.viewmodel.HealthJournalViewModel
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.journaling
+import com.joohnq.mood.state.UiState.Companion.getValue
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.journaling
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -22,7 +22,7 @@ class JournalingScreen : CustomTab<JournalingState>() {
     @Composable
     override fun Screen(): JournalingState {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
-        val journal by healthJournalViewModel.healthJournalState.collectAsState()
+        val journal by healthJournalViewModel.state.collectAsState()
 
         fun onEvent(event: JournalingEvent) =
             when (event) {

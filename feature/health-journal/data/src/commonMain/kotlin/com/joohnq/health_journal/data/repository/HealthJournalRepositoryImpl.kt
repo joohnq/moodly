@@ -1,22 +1,24 @@
 package com.joohnq.health_journal.data.repository
 
-import com.joohnq.health_journal.data.dao.HealthJournalRecordDAO
+import com.joohnq.domain.DatetimeProvider
+import com.joohnq.health_journal.domain.data_source.HealthJournalDataSource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.repository.HealthJournalRepository
-import com.joohnq.mood.util.helper.DatetimeProvider
+import org.koin.core.annotation.Single
 
+@Single(binds = [HealthJournalRepository::class])
 class HealthJournalRepositoryImpl(
-    private val healthJournalRecordDAO: HealthJournalRecordDAO
+    private val healthJournalDataSource: HealthJournalDataSource,
 ) : HealthJournalRepository {
 
     override suspend fun getHealthJournals(): List<HealthJournalRecord> =
-        healthJournalRecordDAO.getHealthJournals()
+        healthJournalDataSource.getHealthJournals()
 
     override suspend fun addHealthJournal(
-        healthJournalRecord: HealthJournalRecord
+        healthJournalRecord: HealthJournalRecord,
     ): Boolean =
         try {
-            healthJournalRecordDAO.addHealthJournal(
+            healthJournalDataSource.addHealthJournal(
                 healthJournalRecord.copy(
                     date = DatetimeProvider.getCurrentDateTime(),
                 )
@@ -29,7 +31,7 @@ class HealthJournalRepositoryImpl(
 
     override suspend fun deleteHealthJournal(id: Int): Boolean =
         try {
-            healthJournalRecordDAO.deleteHealthJournal(id)
+            healthJournalDataSource.deleteHealthJournal(id)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -38,7 +40,7 @@ class HealthJournalRepositoryImpl(
 
     override suspend fun updateHealthJournal(healthJournal: HealthJournalRecord): Boolean =
         try {
-            healthJournalRecordDAO.updateHealthJournal(healthJournal)
+            healthJournalDataSource.updateHealthJournal(healthJournal)
             true
         } catch (e: Exception) {
             e.printStackTrace()

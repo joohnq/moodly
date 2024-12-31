@@ -1,37 +1,25 @@
-package com.joohnq.health_journal.ui.presentation.all_journals
+package com.joohnq.health_journal.ui.presentation.all_journals.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.util.helper.DatetimeProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.LocalDate
+import org.koin.android.annotation.KoinViewModel
 
-sealed class AllJournalIntent {
-    data class UpdateSelectedDateTime(val selectedDateTime: LocalDate) : AllJournalIntent()
-    data class UpdateOpenDeleteDialog(val openDeleteDialog: Boolean) : AllJournalIntent()
-    data class UpdateCurrentDeleteId(val id: Int) : AllJournalIntent()
-    data class ResetState(val id: Int) : AllJournalIntent()
-}
-
-data class AllJournalViewModelState(
-    val selectedDateTime: LocalDate = DatetimeProvider.getCurrentDateTime().date,
-    val openDeleteDialog: Boolean = false,
-    val currentDeleteId: Int = -1,
-)
-
+@KoinViewModel
 class AllJournalViewModel : ViewModel() {
     private val _allJournalViewModelState = MutableStateFlow(AllJournalViewModelState())
     val allJournalViewModelState: StateFlow<AllJournalViewModelState> =
         _allJournalViewModelState.asStateFlow()
 
-    fun onAction(intent: AllJournalIntent) {
+    fun onAction(intent: AllJournalViewModelIntent) {
         when (intent) {
-            is AllJournalIntent.UpdateCurrentDeleteId -> updateCurrentDeleteId(intent.id)
-            is AllJournalIntent.UpdateOpenDeleteDialog -> updateOpenDeleteDialog(intent.openDeleteDialog)
-            is AllJournalIntent.UpdateSelectedDateTime -> updateSelectedDateTime(intent.selectedDateTime)
-            is AllJournalIntent.ResetState -> resetState()
+            is AllJournalViewModelIntent.UpdateCurrentDeleteId -> updateCurrentDeleteId(intent.id)
+            is AllJournalViewModelIntent.UpdateOpenDeleteDialog -> updateOpenDeleteDialog(intent.openDeleteDialog)
+            is AllJournalViewModelIntent.UpdateSelectedDateTime -> updateSelectedDateTime(intent.selectedDateTime)
+            is AllJournalViewModelIntent.ResetState -> resetState()
         }
     }
 

@@ -8,14 +8,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.state.UiState.Companion.getValue
-import com.joohnq.mood.state.UiState.Companion.onSuccess
-import com.joohnq.mood.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
-import com.joohnq.mood.viewmodel.HealthJournalIntent
-import com.joohnq.mood.viewmodel.HealthJournalViewModel
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingViewModel
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.mood.CustomScreen
+import com.joohnq.mood.sharedViewModel
+import com.joohnq.mood.state.UiState.Companion.getValue
+import com.joohnq.mood.state.UiState.Companion.onSuccess
 
 class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
     @Composable
@@ -23,7 +25,7 @@ class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
         val editJournalingViewModel: EditJournalingViewModel = sharedViewModel()
         val snackBarState = remember { SnackbarHostState() }
-        val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
+        val healthJournalState by healthJournalViewModel.state.collectAsState()
         val editingHealthJournalState by editJournalingViewModel.editJournalingState.collectAsState()
         val healthJournals = healthJournalState.healthJournalRecords.getValue()
         val isDifferent by derivedStateOf {

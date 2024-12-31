@@ -9,17 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.Dimens
-import com.joohnq.mood.ui.theme.TextStyles
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.Dimens
+import com.joohnq.mood.theme.TextStyles
 import kotlinx.datetime.LocalDate
 
 @Composable
 fun AllJournalDateCard(
     isSelected: Boolean,
     date: LocalDate,
-    onAllAction: (AllJournalIntent) -> Unit,
+    onAllAction: (AllJournalViewModelIntent) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,7 +28,7 @@ fun AllJournalDateCard(
             color = if (isSelected) Colors.White else Colors.Brown70,
             shape = Dimens.Shape.Circle
         ).padding(horizontal = 10.dp, vertical = 15.dp)
-            .clickable { onAllAction(AllJournalIntent.UpdateSelectedDateTime(date)) }
+            .clickable { onAllAction(AllJournalViewModelIntent.UpdateSelectedDateTime(date)) }
 //                                .then(
 //                                    if (isSelected) Modifier.border(
 //                                        3.dp,

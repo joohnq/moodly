@@ -139,14 +139,6 @@ sealed class StressLevelResource(
             listOf(Colors.Orange50, Colors.Orange50)
         )
 
-        fun fromSliderValue(value: Float): StressLevelResource = when (value) {
-            0f -> One
-            25f -> Two
-            50f -> Three
-            75f -> Four
-            else -> Five
-        }
-
         fun StressLevel.toResource(): StressLevelResource = when (this) {
             StressLevel.One -> One
             StressLevel.Two -> Two

@@ -1,4 +1,4 @@
-package com.joohnq.mood.components
+package com.joohnq.stress_level.ui.components
 
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.tween
@@ -14,10 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
+import com.joohnq.mood.domain.use_case.OrganizeStatRangeUseCase
 import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.util.helper.StatsManager
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.models.AnimationMode
 import ir.ehsannarmani.compose_charts.models.DividerProperties
@@ -29,13 +30,16 @@ import ir.ehsannarmani.compose_charts.models.LabelHelperProperties
 import ir.ehsannarmani.compose_charts.models.LabelProperties
 import ir.ehsannarmani.compose_charts.models.Line
 import ir.ehsannarmani.compose_charts.models.PopupProperties
+import org.koin.compose.koinInject
 
 @Composable
 fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
     val first = stressLevelRecords.last().stressLevel
+    val resource = first.toResource()
+    val organizeStatRangeUseCase: OrganizeStatRangeUseCase = koinInject()
     val newList =
         remember {
-            StatsManager.normalizeRange(stressLevelRecords.map {
+            organizeStatRangeUseCase(stressLevelRecords.map {
                 StressLevel.toPercent(it.stressLevel.level)
             })
         }
@@ -68,11 +72,11 @@ fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
                             label = "",
                             curvedEdges = true,
                             values = newList,
-                            color = SolidColor(first.palette.color),
+                            color = SolidColor(resource.palette.color),
                             strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
                             gradientAnimationDelay = 1000,
                             drawStyle = DrawStyle.Stroke(width = 3.dp),
-                            firstGradientFillColor = first.palette.color.copy(
+                            firstGradientFillColor = resource.palette.color.copy(
                                 alpha = .3f
                             ),
                             secondGradientFillColor = Colors.Transparent,

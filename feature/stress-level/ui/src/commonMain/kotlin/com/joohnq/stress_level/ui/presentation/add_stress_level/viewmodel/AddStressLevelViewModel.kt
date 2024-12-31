@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.add_stress_level
+package com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.mood.util.mappers.toggle
@@ -8,27 +8,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.android.annotation.KoinViewModel
 
-data class AddingStressLevelViewModelState(
-    val stressLevel: StressLevel = StressLevel.One,
-    val stressors: List<Stressor> = emptyList(),
-    val otherValue: String = "",
-    val otherValueError: String? = null,
-    val sliderValue: Float = 0f
-)
-
-sealed class AddStressLevelIntent {
-    data class UpdateAddingStressors(val stressor: Stressor) : AddStressLevelIntent()
-    data class UpdateAddingOtherValue(val value: String) : AddStressLevelIntent()
-    data class UpdateAddingOtherValueError(val error: String?) : AddStressLevelIntent()
-    data class UpdateAddingSliderValue(val sliderValue: Float) : AddStressLevelIntent()
-    data object ResetState : AddStressLevelIntent()
-}
-
+@KoinViewModel
 class AddStressLevelViewModel : ViewModel() {
-    private val _addStressLevelState = MutableStateFlow(AddingStressLevelViewModelState())
-    val addStressLevelState: StateFlow<AddingStressLevelViewModelState> =
-        _addStressLevelState.asStateFlow()
+    private val _state = MutableStateFlow(AddingStressLevelViewModelState())
+    val state: StateFlow<AddingStressLevelViewModelState> =
+        _state.asStateFlow()
 
     fun onAction(intent: AddStressLevelIntent) {
         when (intent) {
@@ -45,34 +31,33 @@ class AddStressLevelViewModel : ViewModel() {
 
 
     private fun updateAddingSliderValue(value: Float) {
-        _addStressLevelState.update {
+        _state.update {
             it.copy(
-                sliderValue = value, stressLevel = StressLevel.fromSliderValue(
-                    value
-                )
+                sliderValue = value,
+                stressLevel = StressLevel.fromSliderValue(value)
             )
         }
     }
 
     private fun updateAddingStressStressors(stressor: Stressor) {
-        _addStressLevelState.update {
-            it.copy(stressors = addStressLevelState.value.stressors.toggle(stressor))
+        _state.update {
+            it.copy(stressors = state.value.stressors.toggle(stressor))
         }
     }
 
     private fun updateAddingOtherValue(otherValue: String) {
-        _addStressLevelState.update {
+        _state.update {
             it.copy(otherValue = otherValue, otherValueError = null)
         }
     }
 
     private fun updateAddingOtherValueError(otherValueError: String?) {
-        _addStressLevelState.update {
+        _state.update {
             it.copy(otherValueError = otherValueError)
         }
     }
 
     private fun resetState() {
-        _addStressLevelState.update { AddingStressLevelViewModelState() }
+        _state.update { AddingStressLevelViewModelState() }
     }
 }

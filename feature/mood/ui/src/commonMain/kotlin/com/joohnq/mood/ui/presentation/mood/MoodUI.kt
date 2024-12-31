@@ -13,21 +13,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.domain.DatetimeProvider
 import com.joohnq.mood.components.CircularLoading
-import com.joohnq.mood.components.MoodBarStatistic
-import com.joohnq.mood.components.MoodFace
 import com.joohnq.mood.components.PreviousNextButton
 import com.joohnq.mood.components.SharedPanelComponent
 import com.joohnq.mood.components.TextWithBackground
 import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.state.UiState.Companion.foldComposable
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.Drawables
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.components.MoodBarStatistic
+import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
-import com.joohnq.mood.util.helper.DatetimeProvider
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.description
 import com.joohnq.shared.ui.mood
@@ -39,20 +41,21 @@ fun MoodUI(
     state: MoodState,
 ) {
     state.statsRecord?.run {
+        val resource = mood.toResource()
         SharedPanelComponent(
             isDark = true,
             onGoBack = { state.onEvent(MoodEvent.OnGoBack) },
-            backgroundColor = state.statsRecord.mood.palette.backgroundColor,
+            backgroundColor = resource.palette.backgroundColor,
             backgroundImage = Drawables.Images.MoodBackground,
             panelTitle = Res.string.mood,
             bodyTitle = Res.string.description,
-            color = state.statsRecord.mood.palette.subColor,
+            color = resource.palette.subColor,
             onAdd = { state.onEvent(MoodEvent.OnAddStatScreen) },
             topBarContent = {
                 TextWithBackground(
                     text = DatetimeProvider.formatDateTime(state.statsRecord.date),
-                    textColor = state.statsRecord.mood.palette.moodScreenMoodFaceColor,
-                    backgroundColor = state.statsRecord.mood.palette.subColor,
+                    textColor = resource.palette.moodScreenMoodFaceColor,
+                    backgroundColor = resource.palette.subColor,
                 )
             },
             panelContent = {
@@ -65,12 +68,12 @@ fun MoodUI(
                     Text(
                         text = stringResource(Res.string.your_mood_is),
                         style = TextStyles.TextXlBold(),
-                        color = state.statsRecord.mood.palette.moodScreenMoodFaceColor
+                        color = resource.palette.moodScreenMoodFaceColor
                     )
                     Text(
-                        text = stringResource(state.statsRecord.mood.text),
+                        text = stringResource(resource.text),
                         style = TextStyles.Heading2xlExtraBold(),
-                        color = state.statsRecord.mood.palette.moodScreenMoodFaceColor
+                        color = resource.palette.moodScreenMoodFaceColor
                     )
                     VerticalSpacer(10.dp)
                     Row(
@@ -82,17 +85,17 @@ fun MoodUI(
                             enabled = state.hasPrevious,
                             isPrevious = true,
                             onClick = { state.onEvent(MoodEvent.OnPrevious) },
-                            color = state.statsRecord.mood.palette.color
+                            color = resource.palette.color
                         )
                         MoodFace(
                             modifier = Modifier.size(96.dp),
-                            mood = state.statsRecord.mood
+                            mood = resource
                         )
                         PreviousNextButton(
                             enabled = state.hasNext,
                             isPrevious = false,
                             onClick = { state.onEvent(MoodEvent.OnNext) },
-                            color = state.statsRecord.mood.palette.color
+                            color = resource.palette.color
                         )
                     }
                 }
@@ -109,7 +112,7 @@ fun MoodUI(
                         VerticalSpacer(40.dp)
                         state.statsRecords.foldComposable(
                             onLoading = { CircularLoading(Modifier.fillMaxWidth().height(250.dp)) },
-                            onSuccess = { statsRecords ->
+                            onSuccess = { statsRecords: List<StatsRecord> ->
                                 MoodBarStatistic(
                                     statsRecords = statsRecords.reversed(),
                                     currentStatsRecord = state.statsRecord,

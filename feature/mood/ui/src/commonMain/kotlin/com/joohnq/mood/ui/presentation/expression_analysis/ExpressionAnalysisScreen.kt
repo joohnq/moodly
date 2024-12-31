@@ -8,12 +8,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.domain.entity.StatsRecord
 import com.joohnq.mood.CustomScreen
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.sharedViewModel
 import com.joohnq.mood.state.UiState.Companion.fold
-import com.joohnq.mood.ui.presentation.add_stats.AddStatIntent
-import com.joohnq.mood.ui.presentation.add_stats.AddStatViewModel
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
@@ -36,7 +36,7 @@ class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
                 ExpressionAnalysisEvent.OnAdd ->
                     statsViewModel.onAction(
                         StatsIntent.AddStatsRecord(
-                            StatsRecord(
+                            StatsRecord.init().copy(
                                 mood = addStatsState.mood,
                                 description = addStatsState.description
                             )

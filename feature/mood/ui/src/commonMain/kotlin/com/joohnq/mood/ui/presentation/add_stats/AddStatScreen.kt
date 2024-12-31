@@ -8,6 +8,7 @@ import com.joohnq.mood.sharedViewModel
 import com.joohnq.mood.state.UiState.Companion.getValue
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.user.ui.viewmodel.UserViewModel
 
@@ -22,7 +23,8 @@ class AddStatScreen : CustomScreen<AddStatState>() {
         fun onEvent(event: AddStatEvent) =
             when (event) {
                 AddStatEvent.OnGoBack -> onGoBack()
-                AddStatEvent.OnNavigateToExpressionAnalysis -> onNavigate(ExpressionAnalysisScreen())
+                AddStatEvent.OnNavigateToExpressionAnalysis ->
+                    onNavigate(ExpressionAnalysisScreen())
             }
 
         return AddStatState(

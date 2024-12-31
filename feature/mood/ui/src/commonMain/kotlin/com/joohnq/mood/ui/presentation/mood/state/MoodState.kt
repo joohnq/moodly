@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.presentation.mood.state
 
-import com.joohnq.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.state.UiState
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 

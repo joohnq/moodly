@@ -22,7 +22,7 @@ import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.ui.presentation.add_stats.AddStatIntent
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
 import com.joohnq.mood.util.constants.TestConstants

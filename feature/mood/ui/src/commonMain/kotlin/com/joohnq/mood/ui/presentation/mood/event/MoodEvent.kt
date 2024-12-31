@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.presentation.mood.event
 
-import com.joohnq.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.StatsRecord
 
 sealed class MoodEvent {
     data object OnPrevious : MoodEvent()

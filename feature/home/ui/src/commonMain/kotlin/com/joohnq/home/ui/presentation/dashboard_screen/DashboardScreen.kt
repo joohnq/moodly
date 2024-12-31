@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.joohnq.home.ui.components.DashboardBottomNavigation
 import com.joohnq.home.ui.presentation.home.HomeScreen
 import com.joohnq.mood.CustomScreenNothing
-import com.joohnq.mood.components.DashboardBottomNavigation
 
 class DashboardScreen : CustomScreenNothing() {
     @Composable

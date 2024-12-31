@@ -1,4 +1,4 @@
-package com.joohnq.mood.components
+package com.joohnq.home.ui.components
 
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.foundation.background
@@ -29,15 +29,17 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJournalingScreen
+import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
+import com.joohnq.home.ui.event.DashboardBottomNavigationEvent
+import com.joohnq.home.ui.presentation.home.HomeScreen
+import com.joohnq.mood.components.BottomNavigationActionButton
+import com.joohnq.mood.components.BottomNavigationAddButton
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.ComponentColors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.ui.event.DashboardBottomNavigationEvent
-import com.joohnq.mood.ui.presentation.add_journaling_screen.AddJournalingScreen
 import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
-import com.joohnq.mood.ui.presentation.home.HomeScreen
-import com.joohnq.mood.ui.presentation.journaling.JournalingScreen
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.add_health_journal
 import com.joohnq.shared.ui.add_mood

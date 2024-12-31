@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,6 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -17,7 +18,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+
 
     listOf(
         iosX64(),
@@ -31,10 +32,13 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+
         commonMain.dependencies {
+            implementation(projects.core.ui)
             implementation(projects.shared.ui)
+            implementation(projects.shared.domain)
             implementation(projects.feature.sleepQuality.domain)
+            implementation(projects.feature.mood.ui)
             implementation(projects.feature.mood.domain)
 
             implementation(compose.runtime)
@@ -45,11 +49,29 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.bundles.viewmodel)
+            implementation(libs.serialization)
+            implementation(libs.datetime)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.voyager)
+            implementation(libs.bundles.voyager.other)
         }
 
     }
 }
 
+ksp {
+    arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
+}
+
+
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
+}
 android {
     namespace = "com.joohnq.sleep_quality.ui"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -59,17 +81,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.sleep_quality.ui.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.sleep_quality.ui"
-            packageVersion = "1.0.0"
-        }
     }
 }

@@ -1,45 +1,20 @@
-package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.domain.entity.Mood
+import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.util.mappers.toggle
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.android.annotation.KoinViewModel
 
-data class AddSleepQualityStateViewModel(
-    val startHour: Int = 12,
-    val startMinute: Int = 0,
-    val endHour: Int = 12,
-    val endMinute: Int = 0,
-    val showStartTimePickerDialog: Boolean = false,
-    val showEndTimePickerDialog: Boolean = false,
-    val mood: Mood? = null,
-    val selectedSleepInfluences: List<SleepInfluences> = mutableListOf(),
-)
-
-sealed class AddSleepQualityIntent {
-    data class UpdateMood(val mood: Mood?) : AddSleepQualityIntent()
-    data class UpdateSelectedSleepInfluence(val sleepInfluence: SleepInfluences) :
-        AddSleepQualityIntent()
-
-    data class UpdateShowStartTimePickerDialog(val value: Boolean) :
-        AddSleepQualityIntent()
-
-    data class UpdateShowEndTimePickerDialog(val value: Boolean) :
-        AddSleepQualityIntent()
-
-    data class UpdateStartTime(val hour: Int, val minute: Int) : AddSleepQualityIntent()
-    data class UpdateEndTime(val hour: Int, val minute: Int) : AddSleepQualityIntent()
-    data object ResetState : AddSleepQualityIntent()
-}
-
+@KoinViewModel
 class AddSleepQualityViewModel : ViewModel() {
-    private val _addSleepQualityStateViewModel = MutableStateFlow(AddSleepQualityStateViewModel())
-    val addSleepQualityStateViewModel: StateFlow<AddSleepQualityStateViewModel> =
-        _addSleepQualityStateViewModel.asStateFlow()
+    private val _state = MutableStateFlow(AddSleepQualityStateViewModel())
+    val state: StateFlow<AddSleepQualityStateViewModel> =
+        _state.asStateFlow()
 
     fun onAction(intent: AddSleepQualityIntent) {
         when (intent) {
@@ -64,7 +39,7 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun updateMood(mood: Mood?) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(
                 mood = mood
             )
@@ -72,9 +47,9 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun updateSelectedSleepInfluences(sleepInfluences: SleepInfluences) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(
-                selectedSleepInfluences = addSleepQualityStateViewModel.value.selectedSleepInfluences.toggle(
+                selectedSleepInfluences = state.value.selectedSleepInfluences.toggle(
                     sleepInfluences
                 )
             )
@@ -82,19 +57,19 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun updateShowStartTimePickerDialog(value: Boolean) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(showStartTimePickerDialog = value)
         }
     }
 
     private fun updateShowEndTimePickerDialog(value: Boolean) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(showEndTimePickerDialog = value)
         }
     }
 
     private fun updateStartTime(hour: Int, minute: Int) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(
                 startHour = hour,
                 startMinute = minute
@@ -103,7 +78,7 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun updateEndTime(hour: Int, minute: Int) {
-        _addSleepQualityStateViewModel.update {
+        _state.update {
             it.copy(
                 endHour = hour,
                 endMinute = minute
@@ -112,6 +87,6 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun resetAdding() {
-        _addSleepQualityStateViewModel.update { AddSleepQualityStateViewModel() }
+        _state.update { AddSleepQualityStateViewModel() }
     }
 }

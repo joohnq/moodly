@@ -17,6 +17,8 @@ import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.endSl
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.startSleeping
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.state.AddSleepQualityState
+import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
+import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import kotlinx.coroutines.launch
@@ -29,7 +31,7 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
         val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-        val addSleepQualityState by addSleepQualityViewModel.addSleepQualityStateViewModel.collectAsState()
+        val addSleepQualityState by addSleepQualityViewModel.state.collectAsState()
 
         fun onEvent(event: AddSleepQualityEvent) =
             when (event) {
@@ -37,7 +39,7 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
                 AddSleepQualityEvent.OnAdd ->
                     sleepQualityViewModel.onAction(
                         SleepQualityIntent.AddSleepQualityRecord(
-                            SleepQualityRecord(
+                            SleepQualityRecord.init().copy(
                                 sleepQuality = addSleepQualityState.mood!!.toSleepQuality(),
                                 sleepInfluences = addSleepQualityState.selectedSleepInfluences
                             ).startSleeping(

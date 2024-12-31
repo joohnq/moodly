@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.presentation.loading.LoadingUI
 import com.joohnq.mood.components.HorizontalSpacer
 import com.joohnq.mood.components.SharedPanelComponent
 import com.joohnq.mood.components.SleepQualityCard
@@ -29,7 +30,7 @@ import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.Drawables
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.ui.presentation.loading.LoadingUI
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.end_sleeping
 import com.joohnq.shared.ui.mood
@@ -39,8 +40,10 @@ import com.joohnq.shared.ui.sleep_stats
 import com.joohnq.shared.ui.sleeping_influences
 import com.joohnq.shared.ui.start_sleeping
 import com.joohnq.shared.ui.to_word
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
+import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.toMood
 import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource.Companion.toResource
+import com.joohnq.sleep_quality.ui.SleepQualityResource.Companion.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.state.SleepQualityState
 import org.jetbrains.compose.resources.painterResource
@@ -55,6 +58,8 @@ fun SleepQualityUI(
         onLoading = { LoadingUI() },
         onSuccess = { sleepQualityRecords ->
             val last = sleepQualityRecords.last()
+            val mood = last.sleepQuality.toMood()
+            val resource = mood.toResource()
             val options = remember {
                 listOf(
                     SleepStatsItem(
@@ -62,7 +67,7 @@ fun SleepQualityUI(
                         title = Res.string.mood,
                     ) {
                         Text(
-                            text = stringResource(SleepQuality.toMood(last.sleepQuality).text),
+                            text = stringResource(resource.text),
                             style = TextStyles.TextMdSemiBold(),
                             color = Colors.Brown80
                         )
@@ -73,9 +78,9 @@ fun SleepQualityUI(
                     ) {
                         if (last.sleepInfluences.isNotEmpty())
                             FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                last.sleepInfluences.forEach {
+                                last.sleepInfluences.forEach { sleepInfluences ->
                                     TextWithBackground(
-                                        text = stringResource(it.title),
+                                        text = stringResource(sleepInfluences.toResource().title),
                                         backgroundColor = Colors.Green50,
                                         textColor = Colors.White
                                     )
@@ -89,11 +94,11 @@ fun SleepQualityUI(
                 containerColor = Colors.Brown10,
                 isDark = false,
                 onGoBack = { state.onEvent(SleepQualityEvent.OnGoBack) },
-                backgroundColor = last.sleepQuality.palette.color,
+                backgroundColor = resource.palette.color,
                 backgroundImage = Drawables.Images.SleepQualityBackground,
                 panelTitle = Res.string.sleep_quality,
                 bodyTitle = Res.string.sleep_stats,
-                color = last.sleepQuality.palette.backgroundColor,
+                color = resource.palette.backgroundColor,
                 onAdd = { state.onEvent(SleepQualityEvent.OnAdd) },
                 panelContent = {
                     Column(
@@ -114,7 +119,7 @@ fun SleepQualityUI(
                         )
                         VerticalSpacer(10.dp)
                         Text(
-                            text = stringResource(last.sleepQuality.firstText),
+                            text = stringResource(last.sleepQuality.toResource().firstText),
                             style = TextStyles.HeadingSmExtraBold(),
                             color = Colors.White
                         )

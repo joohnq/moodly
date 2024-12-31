@@ -1,50 +1,39 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import kotlinx.serialization.Contextual
+import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
 import kotlinx.serialization.Serializable
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.alcohol_consumption
-import moodapp.composeapp.generated.resources.anxiety
-import moodapp.composeapp.generated.resources.caffeine
-import moodapp.composeapp.generated.resources.chill_sleep_environment
-import moodapp.composeapp.generated.resources.excessive_screen_time
-import moodapp.composeapp.generated.resources.exposure_to_natural_light
-import moodapp.composeapp.generated.resources.high_stress
-import moodapp.composeapp.generated.resources.meditation
-import moodapp.composeapp.generated.resources.physical_activity
-import org.jetbrains.compose.resources.StringResource
 
 @Serializable
-sealed class SleepInfluences(val id: Int, @Contextual val title: StringResource) {
+sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
     data object NaturalLight :
-        SleepInfluences(id = NATURAL_LIGHT, title = Res.string.exposure_to_natural_light)
+        SleepInfluences(NATURAL_LIGHT.id)
 
     data object PhysicalActivity :
-        SleepInfluences(id = PHYSICAL_ACTIVITY, title = Res.string.physical_activity)
+        SleepInfluences(PHYSICAL_ACTIVITY.id)
 
     data object ChillSleepEnvironment :
-        SleepInfluences(id = CHILL_SLEEP_ENVIRONMENT, title = Res.string.chill_sleep_environment)
+        SleepInfluences(CHILL_SLEEP_ENVIRONMENT.id)
 
-    data object Meditation : SleepInfluences(id = MEDITATION, title = Res.string.meditation)
-    data object Caffeine : SleepInfluences(id = CAFFEINE, title = Res.string.caffeine)
+    data object Meditation : SleepInfluences(MEDITATION.id)
+    data object Caffeine : SleepInfluences(CAFFEINE.id)
     data object ExcessiveScreenTime :
-        SleepInfluences(id = EXCESSIVE_SCREEN_TIME, title = Res.string.excessive_screen_time)
+        SleepInfluences(EXCESSIVE_SCREEN_TIME.id)
 
-    data object HighStress : SleepInfluences(id = HIGH_STRESS, title = Res.string.high_stress)
-    data object Anxiety : SleepInfluences(id = ANXIETY, title = Res.string.anxiety)
+    data object HighStress : SleepInfluences(HIGH_STRESS.id)
+    data object Anxiety : SleepInfluences(ANXIETY.id)
     data object AlcoholConsumption :
-        SleepInfluences(id = ALCOHOL_CONSUMPTION, title = Res.string.alcohol_consumption)
+        SleepInfluences(ALCOHOL_CONSUMPTION.id)
 
     companion object {
-        private const val NATURAL_LIGHT = 0
-        private const val PHYSICAL_ACTIVITY = 1
-        private const val CHILL_SLEEP_ENVIRONMENT = 2
-        private const val MEDITATION = 3
-        private const val CAFFEINE = 4
-        private const val EXCESSIVE_SCREEN_TIME = 5
-        private const val HIGH_STRESS = 6
-        private const val ANXIETY = 7
-        private const val ALCOHOL_CONSUMPTION = 8
+        val NATURAL_LIGHT = DSleepInfluencesProperties(0)
+        val PHYSICAL_ACTIVITY = DSleepInfluencesProperties(1)
+        val CHILL_SLEEP_ENVIRONMENT = DSleepInfluencesProperties(2)
+        val MEDITATION = DSleepInfluencesProperties(3)
+        val CAFFEINE = DSleepInfluencesProperties(4)
+        val EXCESSIVE_SCREEN_TIME = DSleepInfluencesProperties(5)
+        val HIGH_STRESS = DSleepInfluencesProperties(6)
+        val ANXIETY = DSleepInfluencesProperties(7)
+        val ALCOHOL_CONSUMPTION = DSleepInfluencesProperties(8)
 
         fun getAll(): List<SleepInfluences> = listOf(
             NaturalLight,
@@ -59,18 +48,19 @@ sealed class SleepInfluences(val id: Int, @Contextual val title: StringResource)
         )
 
         fun toValue(src: Int): SleepInfluences = when (src) {
-            NATURAL_LIGHT -> NaturalLight
-            PHYSICAL_ACTIVITY -> PhysicalActivity
-            CHILL_SLEEP_ENVIRONMENT -> ChillSleepEnvironment
-            MEDITATION -> Meditation
-            CAFFEINE -> Caffeine
-            EXCESSIVE_SCREEN_TIME -> ExcessiveScreenTime
-            HIGH_STRESS -> HighStress
-            ANXIETY -> Anxiety
-            ALCOHOL_CONSUMPTION -> AlcoholConsumption
+            NATURAL_LIGHT.id -> NaturalLight
+            PHYSICAL_ACTIVITY.id -> PhysicalActivity
+            CHILL_SLEEP_ENVIRONMENT.id -> ChillSleepEnvironment
+            MEDITATION.id -> Meditation
+            CAFFEINE.id -> Caffeine
+            EXCESSIVE_SCREEN_TIME.id -> ExcessiveScreenTime
+            HIGH_STRESS.id -> HighStress
+            ANXIETY.id -> Anxiety
+            ALCOHOL_CONSUMPTION.id -> AlcoholConsumption
             else -> throw IllegalArgumentException("Unknown sleep influence option: $src")
         }
 
-        fun fromValue(sleepInfluences: SleepInfluences): Int = sleepInfluences.id
+        fun SleepInfluences?.fromValue(): Int = this?.id ?: -1
     }
 }
+

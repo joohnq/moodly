@@ -21,10 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.domain.DatetimeProvider
 import com.joohnq.mood.components.AddSleepQualityTimePicker
 import com.joohnq.mood.components.ContinueButton
 import com.joohnq.mood.components.HorizontalSpacer
-import com.joohnq.mood.components.MoodFace
 import com.joohnq.mood.components.TextRadioButton
 import com.joohnq.mood.components.TimePickerCard
 import com.joohnq.mood.components.TimePickerDialog
@@ -36,7 +36,9 @@ import com.joohnq.mood.theme.ComponentColors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeProvider
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
+import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.end_sleeping_time
 import com.joohnq.shared.ui.mood
@@ -44,8 +46,10 @@ import com.joohnq.shared.ui.new_sleep_quality
 import com.joohnq.shared.ui.sleeping_influences
 import com.joohnq.shared.ui.start_sleeping_time
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource.Companion.toResource
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.state.AddSleepQualityState
+import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,7 +57,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AddSleepQualityUI(
     state: AddSleepQualityState
 ) {
-    val moodsUI = remember { MoodUI.getAll() }
+    val moodsUI = remember { MoodResource.getAll() }
     val sleepInfluences = remember { SleepInfluences.getAll() }
     val startTimePickerState = rememberTimePickerState(
         initialHour = state.addSleepQualityViewModelState.startHour,
@@ -165,13 +169,14 @@ fun AddSleepQualityUI(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
-                    items(moodsUI) {
+                    items(moodsUI) { resource ->
+                        val domain = resource.toDomain()
                         MoodFace(
                             modifier = Modifier.size(32.dp),
-                            mood = it,
-                            backgroundColor = if (state.addSleepQualityViewModelState.mood == it) it.palette.faceBackgroundColor else Colors.Gray30,
-                            color = if (state.addSleepQualityViewModelState.mood == it) it.palette.faceColor else Colors.Gray60,
-                            onClick = { state.onAddAction(AddSleepQualityIntent.UpdateMood(it)) }
+                            mood = resource,
+                            backgroundColor = if (state.addSleepQualityViewModelState.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                            color = if (state.addSleepQualityViewModelState.mood == resource) resource.palette.faceColor else Colors.Gray60,
+                            onClick = { state.onAddAction(AddSleepQualityIntent.UpdateMood(domain)) }
                         )
                     }
                 }
@@ -182,18 +187,19 @@ fun AddSleepQualityUI(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
-                    items(sleepInfluences) {
+                    items(sleepInfluences) { sleepInfluences ->
+                        val resource = sleepInfluences.toResource()
                         TextRadioButton(
-                            text = stringResource(it.title),
+                            text = stringResource(resource.title),
                             selected = state.addSleepQualityViewModelState.selectedSleepInfluences.contains(
-                                it
+                                sleepInfluences
                             ),
                             colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                             shape = Dimens.Shape.Circle,
                             onClick = {
                                 state.onAddAction(
                                     AddSleepQualityIntent.UpdateSelectedSleepInfluence(
-                                        it
+                                        sleepInfluences
                                     )
                                 )
                             }

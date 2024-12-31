@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.domain.entity.Mood
+import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
 import kotlinx.serialization.Serializable
 

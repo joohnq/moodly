@@ -47,7 +47,7 @@ class HomeScreen : CustomTab<HomeState>() {
         val statsState by statsViewModel.statsState.collectAsState()
         val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
         val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-        val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
+        val healthJournalState by healthJournalViewModel.state.collectAsState()
 
         fun onEvent(event: HomeEvent) =
             when (event) {

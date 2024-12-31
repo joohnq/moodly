@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.joohnq.home.ui.components.MindfulTracker
 import com.joohnq.home.ui.presentation.home.state.HomeState
 import com.joohnq.mood.components.HomeTopBar
 import com.joohnq.mood.components.MentalHealthMetrics
-import com.joohnq.mood.components.MindfulTracker
 import com.joohnq.mood.components.Title
 import com.joohnq.mood.state.UiState
 import com.joohnq.mood.state.UiState.Companion.getValue

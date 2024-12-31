@@ -1,4 +1,4 @@
-package com.joohnq.mood.components
+package com.joohnq.home.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,13 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.Mood
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.components.MoodFace
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MentalHealthMetricsMoodComponent(modifier: Modifier = Modifier, mood: Mood?) {
+fun MentalHealthMetricsMoodComponent(modifier: Modifier = Modifier, mood: MoodResource?) {
     Column(
         modifier = modifier.size(120.dp),
         verticalArrangement = Arrangement.SpaceBetween

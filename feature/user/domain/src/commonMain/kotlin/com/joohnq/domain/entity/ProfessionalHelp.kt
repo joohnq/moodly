@@ -1,44 +1,29 @@
 package com.joohnq.domain.entity
 
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.no
-import com.joohnq.shared.ui.yes
-import kotlinx.serialization.Contextual
+import com.joohnq.domain.ProfessionalHelpProperties
 import kotlinx.serialization.Serializable
-import org.jetbrains.compose.resources.StringResource
 
 @Serializable
 sealed class ProfessionalHelp(
-    val id: Int,
-    @Contextual val text: StringResource,
-    val value: Boolean
-) {
+    override val id: Int,
+    override val value: Boolean
+) : ProfessionalHelpProperties {
     @Serializable
-    data object Yes : ProfessionalHelp(
-        id = NO,
-        text = Res.string.yes,
-        value = true
-    )
-
+    data object Yes : ProfessionalHelp(YES.id, YES.value)
     @Serializable
-    data object No : ProfessionalHelp(
-        id = YES,
-        text = Res.string.no,
-        value = false
-    )
+    data object No : ProfessionalHelp(NO.id, NO.value)
 
     companion object {
-        private const val YES = 1
-        private const val NO = 0
+        val YES = DProfessionalHelpProperties(1, true)
+        val NO = DProfessionalHelpProperties(0, false)
 
         fun toValue(src: Int): ProfessionalHelp = when (src) {
-            YES -> Yes
-            NO -> No
+            YES.id -> Yes
+            NO.id -> No
             else -> throw IllegalArgumentException("Unknown professional help option: $src")
         }
 
-        fun fromValue(professionalHelp: ProfessionalHelp?): Int =
-            professionalHelp?.id ?: -1
+        fun ProfessionalHelp?.fromValue(): Int = this?.id ?: -1
 
         fun getAll(): List<ProfessionalHelp> = listOf(Yes, No)
     }

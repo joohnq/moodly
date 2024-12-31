@@ -1,8 +1,8 @@
 package com.joohnq.domain.constant
 
 object DatabaseConstants {
-    const val USER_DATABASE = "User"
-    const val USER_PREFERENCES_DATABASE = "UserPreferences"
+    const val USER_DATABASE = "user_record"
+    const val USER_PREFERENCES_DATABASE = "user_preferences_record"
 
     const val MEDICATIONS_SUPPLEMENTS = "medications_supplements"
     const val SOUGHT_HELP = "sought_help"

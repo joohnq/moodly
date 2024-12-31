@@ -1,28 +1,21 @@
 package com.joohnq.user.data.converter
 
-import androidx.room.TypeConverter
 import com.joohnq.domain.entity.MedicationsSupplements
+import com.joohnq.domain.entity.MedicationsSupplements.Companion.fromValue
 import com.joohnq.domain.entity.PhysicalSymptoms
+import com.joohnq.domain.entity.PhysicalSymptoms.Companion.fromValue
 import com.joohnq.domain.entity.ProfessionalHelp
+import com.joohnq.domain.entity.ProfessionalHelp.Companion.fromValue
 
-class UserConverter {
-    @TypeConverter
-    fun fromMedicationsSupplements(value: MedicationsSupplements): Int =
-        MedicationsSupplements.fromValue(value)
+object UserConverter {
+    fun fromMedicationsSupplements(value: MedicationsSupplements): Long =
+        value.fromValue().toLong()
 
-    @TypeConverter
-    fun toMedicationsSupplements(value: Int): MedicationsSupplements =
-        MedicationsSupplements.toValue(value)
+    fun toMedicationsSupplements(value: Long): MedicationsSupplements =
+        MedicationsSupplements.toValue(value.toInt())
 
-    @TypeConverter
-    fun fromPhysicalSymptoms(value: PhysicalSymptoms): Int = PhysicalSymptoms.fromValue(value)
-
-    @TypeConverter
-    fun toPhysicalSymptoms(value: Int): PhysicalSymptoms = PhysicalSymptoms.toValue(value)
-
-    @TypeConverter
-    fun fromProfessionalHelp(value: ProfessionalHelp): Int = ProfessionalHelp.fromValue(value)
-
-    @TypeConverter
-    fun toProfessionalHelp(value: Int): ProfessionalHelp = ProfessionalHelp.toValue(value)
+    fun fromPhysicalSymptoms(value: PhysicalSymptoms): Long = value.fromValue().toLong()
+    fun toPhysicalSymptoms(value: Long): PhysicalSymptoms = PhysicalSymptoms.toValue(value.toInt())
+    fun fromProfessionalHelp(value: ProfessionalHelp): Long = value.fromValue().toLong()
+    fun toProfessionalHelp(value: Long): ProfessionalHelp = ProfessionalHelp.toValue(value.toInt())
 }

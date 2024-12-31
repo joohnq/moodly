@@ -13,13 +13,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class UserViewModel(
     private val initUserUseCase: InitUserUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val updateUserNameUseCase: UpdateUserNameUseCase,
-
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _state: MutableStateFlow<UserViewModelState> =

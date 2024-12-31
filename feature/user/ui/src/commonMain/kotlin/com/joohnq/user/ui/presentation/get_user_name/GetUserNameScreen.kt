@@ -32,7 +32,7 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
         val userState by userViewModel.state.collectAsState()
-        val getUserNameState by getUserNameViewModel.getUserNameState.collectAsState()
+        val getUserNameState by getUserNameViewModel.state.collectAsState()
 
         fun onEvent(event: GetUserNameEvent) =
             when (event) {

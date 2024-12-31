@@ -21,13 +21,13 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.joohnq.mood.ScreenDimensions
 import com.joohnq.mood.components.IconContinueButton
 import com.joohnq.mood.components.TextWithBackground
 import com.joohnq.mood.components.TextWithSpan
 import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.ui.ScreenDimensions
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.step
 import com.joohnq.welcome.ui.WelcomeScreen

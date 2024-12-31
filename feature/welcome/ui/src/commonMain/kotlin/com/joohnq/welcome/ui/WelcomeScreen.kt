@@ -11,9 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.CustomScreen
 import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.ui.state.UiState.Companion.fold
-import com.joohnq.mood.viewmodel.UserPreferenceIntent
+import com.joohnq.mood.state.UiState.Companion.fold
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.state.WelcomeState
 import kotlinx.coroutines.launch
 
@@ -45,7 +45,7 @@ class WelcomeScreen : CustomScreen<WelcomeState>() {
 
         DisposableEffect(Unit) {
             onDispose {
-                userPreferenceViewModel.onAction(UserPreferenceIntent.ResetUpdating)
+                userPreferenceViewModel.onAction(UserPreferenceViewModelIntent.ResetUpdating)
             }
         }
 

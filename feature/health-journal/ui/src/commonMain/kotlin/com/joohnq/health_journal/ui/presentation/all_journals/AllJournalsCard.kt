@@ -36,22 +36,23 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.HealthJournalRecord
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.components.TextEllipsis
-import com.joohnq.mood.ui.components.TextWithBackground
-import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.domain.DatetimeProvider
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.ComponentColors
-import com.joohnq.mood.ui.theme.Dimens
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.TextStyles
-import com.joohnq.mood.util.helper.DatetimeProvider
+import com.joohnq.mood.components.TextEllipsis
+import com.joohnq.mood.components.TextWithBackground
+import com.joohnq.mood.components.VerticalSpacer
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.mood.theme.Dimens
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.hour
+import com.joohnq.shared.ui.remove_journal
 import kotlinx.coroutines.launch
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.hour
-import moodapp.composeapp.generated.resources.remove_journal
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
@@ -146,7 +147,8 @@ fun AllJournalsCard(
     onDelete: () -> Unit
 ) {
     val mood = healthJournal.mood
-    val palette = mood.palette
+    val resource = mood.toResource()
+    val palette = resource.palette
 
     CardWithSwipeTorReveal(
         content = { shape, modifier ->
@@ -178,13 +180,13 @@ fun AllJournalsCard(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(20.dp),
-                                mood = mood,
+                                mood = resource,
                                 backgroundColor = Colors.White,
                                 color = palette.barFaceColor
                             )
                         }
                         TextWithBackground(
-                            text = stringResource(mood.text),
+                            text = stringResource(resource.text),
                             backgroundColor = palette.backgroundColor,
                             textColor = palette.color
                         )

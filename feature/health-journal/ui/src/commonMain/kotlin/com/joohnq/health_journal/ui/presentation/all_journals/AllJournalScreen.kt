@@ -5,14 +5,16 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
-import com.joohnq.mood.ui.presentation.edit_journaling_screen.EditJournalingScreen
-import com.joohnq.mood.viewmodel.HealthJournalIntent
-import com.joohnq.mood.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.viewmodel.UserViewModel
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.mood.CustomScreen
+import com.joohnq.mood.sharedViewModel
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.datetime.LocalDate
 
 class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<AllJournalState>() {
@@ -20,8 +22,8 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
     override fun Screen(): AllJournalState {
         val userViewModel: UserViewModel = sharedViewModel()
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
-        val healthJournalState by healthJournalViewModel.healthJournalState.collectAsState()
-        val userState by userViewModel.userState.collectAsState()
+        val healthJournalState by healthJournalViewModel.state.collectAsState()
+        val userState by userViewModel.state.collectAsState()
         val allJournalViewModel: AllJournalViewModel = sharedViewModel()
         val allJournalState by allJournalViewModel.allJournalViewModelState.collectAsState()
 
@@ -38,7 +40,11 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
 
         if (localDate != null) {
             LaunchedEffect(Unit) {
-                allJournalViewModel.onAction(AllJournalIntent.UpdateSelectedDateTime(localDate))
+                allJournalViewModel.onAction(
+                    AllJournalViewModelIntent.UpdateSelectedDateTime(
+                        localDate
+                    )
+                )
             }
         }
 

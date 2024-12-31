@@ -6,12 +6,13 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.plus
+import org.koin.core.annotation.Factory
 
-class OrganizeFromCreationHealthJournalFreudScoreUseCase {
+@Factory
+class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimeProvider: IDatetimeProvider) {
     operator fun invoke(
         creationDate: LocalDateTime,
         healthJournals: List<HealthJournalRecord>,
-        dateTimeProvider: IDatetimeProvider
     ): Map<LocalDate, List<HealthJournalRecord>?> {
         val currentDate = dateTimeProvider.getCurrentDateTime()
         val recordsByDay = healthJournals.groupBy { it.date.date }

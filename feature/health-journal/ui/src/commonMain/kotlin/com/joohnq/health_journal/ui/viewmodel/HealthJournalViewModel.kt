@@ -15,7 +15,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class HealthJournalViewModel(
     private val getHealthJournalsUseCase: GetHealthJournalsUseCase,
     private val deleteHealthJournalsUseCase: DeleteHealthJournalsUseCase,
@@ -23,8 +25,8 @@ class HealthJournalViewModel(
     private val addHealthJournalsUseCase: AddHealthJournalsUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private val _healthJournalState = MutableStateFlow(HealthJournalState())
-    val healthJournalState: StateFlow<HealthJournalState> = _healthJournalState.asStateFlow()
+    private val _state = MutableStateFlow(HealthJournalState())
+    val state: StateFlow<HealthJournalState> = _state.asStateFlow()
 
     fun onAction(intent: HealthJournalIntent) {
         when (intent) {
@@ -61,13 +63,13 @@ class HealthJournalViewModel(
 
     private fun getHealthJournals() =
         viewModelScope.launch(dispatcher) {
-            _healthJournalState.update { it.copy(healthJournalRecords = UiState.Loading) }
+            _state.update { it.copy(healthJournalRecords = UiState.Loading) }
 
             try {
                 val res = getHealthJournalsUseCase()
-                _healthJournalState.update { it.copy(healthJournalRecords = UiState.Success(res)) }
+                _state.update { it.copy(healthJournalRecords = UiState.Success(res)) }
             } catch (e: Exception) {
-                _healthJournalState.update { it.copy(healthJournalRecords = UiState.Error(e.message.toString())) }
+                _state.update { it.copy(healthJournalRecords = UiState.Error(e.message.toString())) }
             }
         }
 
@@ -80,7 +82,7 @@ class HealthJournalViewModel(
             changeDeletingStatus(if (res) UiState.Success(true) else UiState.Error("Fail to delete"))
 
             if (res)
-                _healthJournalState.update {
+                _state.update {
                     it.copy(
                         healthJournalRecords = UiState.Success(
                             it.healthJournalRecords.getValue()
@@ -91,18 +93,18 @@ class HealthJournalViewModel(
         }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {
-        _healthJournalState.update { it.copy(adding = status) }
+        _state.update { it.copy(adding = status) }
     }
 
     private fun changeEditingStatus(status: UiState<Boolean>) {
-        _healthJournalState.update { it.copy(editing = status) }
+        _state.update { it.copy(editing = status) }
     }
 
     private fun changeDeletingStatus(status: UiState<Boolean>) {
-        _healthJournalState.update { it.copy(deleting = status) }
+        _state.update { it.copy(deleting = status) }
     }
 
     private fun setHealthJournalStateForTesting(state: HealthJournalState) {
-        _healthJournalState.update { state }
+        _state.update { state }
     }
 }

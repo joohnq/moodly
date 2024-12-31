@@ -1,10 +1,10 @@
 package com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state
 
 import androidx.compose.material3.SnackbarHostState
-import com.joohnq.mood.domain.HealthJournalRecord
-import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingIntent
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
-import com.joohnq.mood.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 
 data class EditJournalingState(
     val snackBarState: SnackbarHostState,

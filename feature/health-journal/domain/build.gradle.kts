@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -8,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -18,7 +18,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+
 
     listOf(
         iosX64(),
@@ -32,10 +32,9 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+
         commonMain.dependencies {
             implementation(projects.shared.domain)
-            implementation(projects.feature.healthJournal.domain)
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.freudScore.domain)
 
@@ -49,10 +48,23 @@ kotlin {
             implementation(libs.datetime)
             implementation(libs.serialization)
 
-            implementation(libs.room.runtime)
+
+            implementation(libs.bundles.koin)
         }
+
     }
 }
+
+
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
+}
+
 
 android {
     namespace = "com.joohnq.health_journal.domain"
@@ -63,17 +75,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.health_journal.domain.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.health_journal.data"
-            packageVersion = "1.0.0"
-        }
     }
 }

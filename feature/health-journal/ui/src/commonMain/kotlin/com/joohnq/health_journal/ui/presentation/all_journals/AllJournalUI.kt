@@ -20,26 +20,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.domain.entity.User
+import com.joohnq.health_journal.domain.use_case.OrganizeFromCreationHealthJournalFreudScoreUseCase
+import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
+import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.mood.components.MainAlertDialog
+import com.joohnq.mood.components.TopBar
 import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.state.UiState
 import com.joohnq.mood.state.UiState.Companion.getValue
-import com.joohnq.mood.util.helper.StatsManager
-import com.joohnq.mood.ui.components.TopBar
-import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
-import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
-import com.joohnq.mood.ui.presentation.loading.LoadingUI
-import com.joohnq.mood.ui.theme.Colors
-import com.joohnq.mood.ui.theme.Dimens
-import com.joohnq.mood.ui.theme.Drawables
-import com.joohnq.mood.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.ui.theme.TextStyles
-import moodapp.composeapp.generated.resources.Res
-import moodapp.composeapp.generated.resources.delete_journal
-import moodapp.composeapp.generated.resources.do_you_wish_to_remove_this_journal
-import moodapp.composeapp.generated.resources.my_journals
-import moodapp.composeapp.generated.resources.timeline
+import com.joohnq.mood.theme.Colors
+import com.joohnq.mood.theme.Dimens
+import com.joohnq.mood.theme.Drawables
+import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.delete_journal
+import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
+import com.joohnq.shared.ui.my_journals
+import com.joohnq.shared.ui.timeline
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 @Composable
 fun AllJournalUI(state: AllJournalState) {
@@ -48,11 +51,13 @@ fun AllJournalUI(state: AllJournalState) {
         state.healthJournalRecords,
         onLoading = { LoadingUI() },
         onAllSuccess = {
-            val user = state.user.getValue()
+            val user: User = state.user.getValue()
             val healthJournalRecords = state.healthJournalRecords.getValue()
-            val healthJournalMap = StatsManager.getHealthJournalBasedOnUserEntry(
-                user.dateCreated,
-                healthJournalRecords
+            val organizeFromCreationHealthJournalFreudScoreUseCase: OrganizeFromCreationHealthJournalFreudScoreUseCase =
+                koinInject()
+            val healthJournalMap = organizeFromCreationHealthJournalFreudScoreUseCase(
+                creationDate = user.dateCreated,
+                healthJournals = healthJournalRecords
             )
             val keys = healthJournalMap.keys.toList()
             val key =
@@ -64,12 +69,12 @@ fun AllJournalUI(state: AllJournalState) {
                 MainAlertDialog(
                     onDismissRequest = {
                         state.onAllAction(
-                            AllJournalIntent.UpdateOpenDeleteDialog(false)
+                            AllJournalViewModelIntent.UpdateOpenDeleteDialog(false)
                         )
                     },
                     onConfirmation = {
                         state.onAllAction(
-                            AllJournalIntent.UpdateOpenDeleteDialog(false)
+                            AllJournalViewModelIntent.UpdateOpenDeleteDialog(false)
                         )
                         state.onEvent(AllJournalEvent.OnDelete)
                     },
@@ -149,10 +154,12 @@ fun AllJournalUI(state: AllJournalState) {
                                     onEvent = state.onEvent,
                                     onDelete = {
                                         state.onAllAction(
-                                            AllJournalIntent.UpdateCurrentDeleteId(healthJournal.id)
+                                            AllJournalViewModelIntent.UpdateCurrentDeleteId(
+                                                healthJournal.id
+                                            )
                                         )
                                         state.onAllAction(
-                                            AllJournalIntent.UpdateOpenDeleteDialog(true)
+                                            AllJournalViewModelIntent.UpdateOpenDeleteDialog(true)
                                         )
                                     }
                                 )

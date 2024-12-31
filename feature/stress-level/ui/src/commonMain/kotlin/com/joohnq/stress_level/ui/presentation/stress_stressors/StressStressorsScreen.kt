@@ -13,8 +13,8 @@ import com.joohnq.mood.sharedViewModel
 import com.joohnq.mood.state.UiState.Companion.fold
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
-import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelIntent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelViewModel
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
@@ -30,7 +30,7 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
         val snackBarState = remember { SnackbarHostState() }
         val scope = rememberCoroutineScope()
         val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-        val addStressLevelState by addStressLevelViewModel.addStressLevelState.collectAsState()
+        val addStressLevelState by addStressLevelViewModel.state.collectAsState()
 
         fun onEvent(event: StressStressorsEvent) =
             when (event) {
@@ -43,7 +43,7 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
 
                         stressLevelViewModel.onAction(
                             StressLevelIntent.AddStressLevelRecord(
-                                StressLevelRecord(
+                                StressLevelRecord.init().copy(
                                     stressLevel = addStressLevelState.stressLevel,
                                     stressors = addStressLevelState.stressors
                                         .filterNot { it is Stressor.Other }

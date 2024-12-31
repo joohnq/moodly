@@ -1,9 +1,11 @@
 package com.joohnq.stress_level.data.repository
 
-import com.joohnq.mood.util.helper.DatetimeManager
+import com.joohnq.domain.DatetimeProvider
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.domain.repository.StressLevelRepository
+import org.koin.core.annotation.Single
 
-
+@Single(binds = [StressLevelRepository::class])
 class StressLevelRepositoryImpl(
     private val stressLevelRecordDAO: StressLevelRecordDAO
 ) : StressLevelRepository {
@@ -14,7 +16,7 @@ class StressLevelRepositoryImpl(
         try {
             stressLevelRecordDAO.addStressLevel(
                 stressLevelRecord.copy(
-                    date = DatetimeManager.getCurrentDateTime(),
+                    date = DatetimeProvider.getCurrentDateTime(),
                 )
             )
             true

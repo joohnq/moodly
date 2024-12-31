@@ -1,26 +1,22 @@
 package com.joohnq.stress_level.domain.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.joohnq.mood.util.helper.DatetimeManager
-import com.joohnq.stress_level.domain.constant.DatabaseConstants
+import com.joohnq.domain.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
-@Entity(tableName = DatabaseConstants.STRESS_LEVEL_RECORD_DATABASE)
 @Serializable
 data class StressLevelRecord(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    @ColumnInfo(name = DatabaseConstants.STRESS_LEVEL)
+    val id: Int,
     val stressLevel: StressLevel,
-    val stressors: List<Stressor> = emptyList(),
-    val date: LocalDateTime = DatetimeManager.getCurrentDateTime()
+    val stressors: List<Stressor>,
+    val date: LocalDateTime,
 ) {
     companion object {
         fun init(): StressLevelRecord = StressLevelRecord(
-            stressLevel = StressLevel.Three
+            id = 0,
+            stressLevel = StressLevel.Three,
+            stressors = emptyList(),
+            date = DatetimeProvider.getCurrentDateTime()
         )
     }
 }

@@ -22,7 +22,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.components.ContinueButton
-import com.joohnq.mood.components.StressStressorCircle
 import com.joohnq.mood.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.mood.components.TopBar
 import com.joohnq.mood.components.VerticalSpacer
@@ -37,7 +36,9 @@ import com.joohnq.shared.ui.enter_your_stressor
 import com.joohnq.shared.ui.other
 import com.joohnq.shared.ui.select_stressors
 import com.joohnq.stress_level.domain.entity.Stressor
-import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelIntent
+import com.joohnq.stress_level.ui.StressorResource.Companion.toResource
+import com.joohnq.stress_level.ui.components.StressStressorCircle
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
 import org.jetbrains.compose.resources.stringResource
@@ -82,7 +83,7 @@ fun StressStressorsUI(
                 content = {
                     items(stressors) { stressor ->
                         StressStressorCircle(
-                            stressStressor = stressor,
+                            stressStressor = stressor.toResource(),
                             selected = state.addStressLevelViewModelState.stressors.contains(
                                 stressor
                             ),

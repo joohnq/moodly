@@ -16,22 +16,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.presentation.loading.LoadingUI
 import com.joohnq.mood.components.SharedPanelComponent
 import com.joohnq.mood.components.StressLevelCard
-import com.joohnq.mood.components.StressLevelChart
 import com.joohnq.mood.state.UiState.Companion.foldComposable
 import com.joohnq.mood.theme.Colors
 import com.joohnq.mood.theme.Dimens
 import com.joohnq.mood.theme.Drawables
 import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.ui.presentation.loading.LoadingUI
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.life_impact
 import com.joohnq.shared.ui.stress_analysis
 import com.joohnq.shared.ui.stress_level
 import com.joohnq.shared.ui.stressor
-import com.joohnq.stress_level.domain.entity.Stressor
+import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
+import com.joohnq.stress_level.ui.StressorResource
+import com.joohnq.stress_level.ui.StressorResource.Companion.toResource
+import com.joohnq.stress_level.ui.components.StressLevelChart
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.presentation.stress_level.state.StressLevelState
 import org.jetbrains.compose.resources.stringResource
@@ -44,15 +46,17 @@ fun StressLevelUI(
         onLoading = { LoadingUI() },
         onSuccess = { stressLevelRecords ->
             val stressLevelRecord = stressLevelRecords.last()
+            val resource = stressLevelRecord.stressLevel.toResource()
+
             SharedPanelComponent(
                 containerColor = Colors.White,
                 isDark = false,
                 onGoBack = { state.onEvent(StressLevelEvent.OnGoBack) },
-                backgroundColor = stressLevelRecord.stressLevel.palette.color,
+                backgroundColor = resource.palette.color,
                 backgroundImage = Drawables.Images.StressLevelBackground,
                 panelTitle = Res.string.stress_level,
                 bodyTitle = Res.string.stress_analysis,
-                color = stressLevelRecord.stressLevel.palette.backgroundColor,
+                color = resource.palette.backgroundColor,
                 onAdd = { state.onEvent(StressLevelEvent.OnAdd) },
                 panelContent = {
                     Column(
@@ -67,7 +71,7 @@ fun StressLevelUI(
                             color = Colors.White
                         )
                         Text(
-                            text = stringResource(stressLevelRecord.stressLevel.text),
+                            text = stringResource(resource.text),
                             style = TextStyles.TextXlSemiBold(),
                             color = Colors.White
                         )
@@ -83,7 +87,7 @@ fun StressLevelUI(
                                 modifier = Modifier.weight(1f).fillMaxHeight(),
                                 icon = Drawables.Icons.WarningOutlined,
                                 title = Res.string.stressor,
-                                value = Stressor.getText(stressLevelRecord.stressors),
+                                value = StressorResource.getText(stressLevelRecord.stressors.map { it.toResource() }),
                             ) {
                                 Column(
                                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
@@ -143,7 +147,7 @@ fun StressLevelUI(
                                 modifier = Modifier.weight(1f).fillMaxHeight(),
                                 icon = Drawables.Icons.Flag,
                                 title = Res.string.life_impact,
-                                value = stringResource(stressLevelRecord.stressLevel.lifeImpact),
+                                value = stringResource(resource.lifeImpact),
                             ) {
                                 StressLevelChart(
                                     stressLevelRecords = stressLevelRecords.takeLast(8)

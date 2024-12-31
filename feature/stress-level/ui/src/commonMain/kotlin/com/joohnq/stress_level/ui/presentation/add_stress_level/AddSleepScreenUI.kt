@@ -32,8 +32,10 @@ import com.joohnq.mood.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.add_stress_level
 import com.joohnq.shared.ui.whats_your_stress_level_today
+import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.state.AddStressLevelState
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,6 +43,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStressLevelScreenUI(
     state: AddStressLevelState,
 ) {
+    val resource = state.state.stressLevel.toResource()
     Scaffold(
         snackbarHost = { SnackbarHost(state.snackBarState) },
         containerColor = Colors.Brown10,
@@ -72,7 +75,7 @@ fun AddStressLevelScreenUI(
                 ) {
                     VerticalSlider(
                         modifier = Modifier.height(height),
-                        sliderValue = state.addStressLevelViewModelState.sliderValue,
+                        sliderValue = state.state.sliderValue,
                         setSliderValue = {
                             state.onAddAction(AddStressLevelIntent.UpdateAddingSliderValue(it))
                         },
@@ -82,12 +85,12 @@ fun AddStressLevelScreenUI(
                     )
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
-                            text = state.addStressLevelViewModelState.stressLevel.level.toString(),
+                            text = state.state.stressLevel.level.toString(),
                             style = TextStyles.DisplayLgExtraBold(),
                             color = Colors.Brown80
                         )
                         Text(
-                            text = stringResource(state.addStressLevelViewModelState.stressLevel.text),
+                            text = stringResource(resource.text),
                             style = TextStyles.TextXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End

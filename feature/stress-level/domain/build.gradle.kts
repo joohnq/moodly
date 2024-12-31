@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,6 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -17,7 +18,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+
 
     listOf(
         iosX64(),
@@ -31,8 +32,10 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
+
         commonMain.dependencies {
+            implementation(projects.shared.domain)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -40,11 +43,23 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.room.runtime)
+
             implementation(libs.datetime)
+            implementation(libs.serialization)
+            implementation(libs.bundles.koin)
         }
 
     }
+}
+
+
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp)
+    add("kspAndroid", libs.koin.ksp)
+    add("kspIosX64", libs.koin.ksp)
+    add("kspIosArm64", libs.koin.ksp)
+    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {
@@ -56,17 +71,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "com.joohnq.stress_level.domain.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.joohnq.stress_level.domain"
-            packageVersion = "1.0.0"
-        }
     }
 }

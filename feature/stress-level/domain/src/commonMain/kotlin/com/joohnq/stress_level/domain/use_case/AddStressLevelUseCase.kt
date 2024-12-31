@@ -2,8 +2,10 @@ package com.joohnq.stress_level.domain.use_case
 
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
+import org.koin.core.annotation.Factory
 
-class AddStressLevelUseCase(private val repository: StressLevelRepository) {
+@Factory
+class AddStressLevelUseCase(private val stressLevelRepository: StressLevelRepository) {
     suspend operator fun invoke(stressLevelRecord: StressLevelRecord): Boolean =
-        repository.addStressLevel(stressLevelRecord)
+        stressLevelRepository.addStressLevel(stressLevelRecord)
 }

@@ -15,6 +15,7 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.state.AddStressLevelState
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
@@ -28,7 +29,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
         val snackBarState = remember { SnackbarHostState() }
         val scope = rememberCoroutineScope()
         val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
-        val addStressLevelState by addStressLevelViewModel.addStressLevelState.collectAsState()
+        val addStressLevelState by addStressLevelViewModel.state.collectAsState()
 
         LaunchedEffect(stressLevelState.adding) {
             stressLevelState.adding.fold(
@@ -50,7 +51,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
                     } else {
                         stressLevelViewModel.onAction(
                             StressLevelIntent.AddStressLevelRecord(
-                                StressLevelRecord(
+                                StressLevelRecord.init().copy(
                                     stressLevel = StressLevel.One,
                                     stressors = listOf(Stressor.InPeace)
                                 )
@@ -65,7 +66,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
 
         return AddStressLevelState(
             snackBarState = snackBarState,
-            addStressLevelViewModelState = addStressLevelState,
+            state = addStressLevelState,
             onAction = stressLevelViewModel::onAction,
             onEvent = ::onEvent,
             onAddAction = addStressLevelViewModel::onAction

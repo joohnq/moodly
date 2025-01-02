@@ -9,6 +9,18 @@ plugins {
 }
 
 kotlin {
+    //Prevent the error: The same 'unique_name=runtime_commonMain'
+//    metadata {
+//        compilations.all {
+//            val compilationName = name
+//            compileTaskProvider.configure {
+//                if (this is KotlinCompileCommon) {
+//                    moduleName = "${project.group}:${project.name}_$compilationName"
+//                }
+//            }
+//        }
+//    }
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -40,6 +52,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -47,8 +60,8 @@ kotlin {
             implementation(libs.datetime)
 
             // Koin
-            api(libs.koin.core)
             implementation(libs.bundles.koin)
+
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.voyager.other)
         }

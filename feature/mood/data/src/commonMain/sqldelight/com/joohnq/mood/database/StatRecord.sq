@@ -1,5 +1,3 @@
-PRAGMA stat_version = 1;
-
 CREATE TABLE StatRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     mood INTEGER NOT NULL,

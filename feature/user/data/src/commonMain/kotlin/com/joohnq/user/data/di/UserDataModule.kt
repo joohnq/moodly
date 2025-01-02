@@ -1,7 +1,7 @@
 package com.joohnq.user.data.di
 
-import com.joohnq.domain.repository.UserDataSource
-import com.joohnq.domain.repository.UserPreferencesDataSource
+import com.joohnq.domain.data_source.UserDataSource
+import com.joohnq.domain.data_source.UserPreferencesDataSource
 import com.joohnq.domain.repository.UserPreferencesRepository
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.user.data.data_source.UserDataSourceImpl
@@ -18,8 +18,8 @@ val userDataModule = module {
     single<UserDatabaseSql> {
         UserDatabase(get()).invoke()
     }
-    singleOf(::UserDataSourceImpl) bind (UserDataSource::class)
-    singleOf(::UserPreferencesDataSourceImpl) bind (UserPreferencesDataSource::class)
-    singleOf(::UserRepositoryImpl) bind (UserRepository::class)
-    singleOf(::UserPreferencesRepositoryImpl) bind (UserPreferencesRepository::class)
+    singleOf(::UserDataSourceImpl) bind UserDataSource::class
+    singleOf(::UserPreferencesDataSourceImpl) bind UserPreferencesDataSource::class
+    singleOf(::UserRepositoryImpl) bind UserRepository::class
+    singleOf(::UserPreferencesRepositoryImpl) bind UserPreferencesRepository::class
 }

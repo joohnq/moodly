@@ -1,10 +1,11 @@
 package com.joohnq.user.data.repository
 
+import com.joohnq.core.database.executeTryCatchPrinting
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
-import com.joohnq.domain.repository.UserDataSource
+import com.joohnq.domain.data_source.UserDataSource
 import com.joohnq.domain.repository.UserRepository
 
 
@@ -14,65 +15,37 @@ class UserRepositoryImpl(
     override suspend fun getUser(): User? = dataSource.getUser()
 
     override suspend fun addUser(user: User): Boolean =
-        try {
+        executeTryCatchPrinting {
             dataSource.addUser(user)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun updateUser(user: User): Boolean =
-        try {
+        executeTryCatchPrinting {
             dataSource.updateUser(user)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun initUser(): Boolean =
-        try {
+        executeTryCatchPrinting {
             dataSource.initUser()
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun updateUserName(name: String) =
-        try {
+        executeTryCatchPrinting {
             dataSource.updateUserName(name)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp) =
-        try {
+        executeTryCatchPrinting {
             dataSource.updateSoughtHelp(soughtHelp)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) =
-        try {
+        executeTryCatchPrinting {
             dataSource.updatePhysicalSymptoms(physicalSymptoms)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 
     override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements) =
-        try {
+        executeTryCatchPrinting {
             dataSource.updateMedicationsSupplements(medicationsSupplements)
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
 }

@@ -3,14 +3,11 @@ package com.joohnq.domain.entity
 import com.joohnq.domain.ProfessionalHelpProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class ProfessionalHelp(
     override val id: Int,
-    override val value: Boolean
+    override val value: Boolean,
 ) : ProfessionalHelpProperties {
-    @Serializable
     data object Yes : ProfessionalHelp(YES.id, YES.value)
-    @Serializable
     data object No : ProfessionalHelp(NO.id, NO.value)
 
     companion object {

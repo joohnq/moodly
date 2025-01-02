@@ -41,13 +41,13 @@ import org.koin.compose.koinInject
 
             SharedPanelComponent(
                 isDark = false,
-                onGoBack = { state.onEvent(FreudScoreEvent.OnGoBack) },
+                onGoBack = { state.onEvent(FreudScoreEvent.GoBack) },
                 backgroundColor = state.freudScore.palette.backgroundColor,
                 backgroundImage = Drawables.Images.FreudScoreBackground,
                 panelTitle = Res.string.freud_score,
                 bodyTitle = Res.string.mental_score_history,
                 color = state.freudScore.palette.subColor,
-                onAdd = { state.onEvent(FreudScoreEvent.OnAdd) },
+                onAdd = { state.onEvent(FreudScoreEvent.Add) },
                 panelContent = {
                     Column(
                         modifier = Modifier.paddingHorizontalMedium()
@@ -81,7 +81,7 @@ import org.koin.compose.koinInject
                                 healthLevel = resource.healthLevel,
                                 onClick = {
                                     state.onEvent(
-                                        FreudScoreEvent.OnNavigateToMoodScreen(
+                                        FreudScoreEvent.NavigateToMoodScreen(
                                             statsRecord
                                         )
                                     )

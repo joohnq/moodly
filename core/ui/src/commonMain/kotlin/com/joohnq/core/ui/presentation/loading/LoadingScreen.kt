@@ -6,9 +6,9 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.domain.entity.UserPreferences
-import com.joohnq.mood.CustomScreenNothing
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.onSuccess
+import com.joohnq.shared.ui.CustomScreenNothing
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
 

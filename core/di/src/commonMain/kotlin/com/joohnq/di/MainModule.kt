@@ -1,14 +1,12 @@
 package com.joohnq.di
 
-import com.joohnq.domain.DatetimeProvider
-import com.joohnq.domain.IDatetimeProvider
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
-import org.koin.core.annotation.Module
+import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.shared.domain.IDatetimeProvider
+import org.koin.dsl.bind
+import org.koin.dsl.module
 
-@Module
-class MainModule {
-    fun provideIDatetimeProvider(): IDatetimeProvider = DatetimeProvider
-    fun provideIoCoroutineDispatcher(): CoroutineDispatcher = Dispatchers.IO
+val mainModule = module {
+    single {
+        DatetimeProvider
+    } bind IDatetimeProvider::class
 }

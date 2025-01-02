@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -5,23 +6,13 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.serialization)
-    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-
-    targets.configureEach {
-        compilations.configureEach {
-            compileTaskProvider.get().compilerOptions {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
-            }
         }
     }
 
@@ -38,43 +29,18 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.startup.runtime)
-            implementation(libs.android.driver)
-        }
         commonMain.dependencies {
-            implementation(projects.feature.user.domain)
-            implementation(projects.feature.user.data)
-            implementation(projects.feature.sleepQuality.domain)
-            implementation(projects.feature.sleepQuality.data)
-            implementation(projects.feature.stressLevel.domain)
-            implementation(projects.feature.stressLevel.data)
-            implementation(projects.feature.mood.domain)
-            implementation(projects.feature.mood.data)
-            implementation(projects.feature.healthJournal.domain)
-            implementation(projects.feature.healthJournal.data)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
             implementation(libs.datetime)
-            implementation(libs.bundles.koin)
-            implementation(libs.serialization)
-
-            implementation(libs.coroutines.extensions)
-        }
-        iosMain.dependencies {
-            implementation(libs.sqldelight.native.driver)
-        }
-        nativeMain.dependencies {
-            implementation(libs.sqldelight.native.driver)
         }
     }
-}
-
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp)
-    add("kspAndroid", libs.koin.ksp)
-    add("kspIosX64", libs.koin.ksp)
-    add("kspIosArm64", libs.koin.ksp)
-    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {

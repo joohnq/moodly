@@ -1,4 +1,4 @@
-package com.joohnq.user.ui.viewmodel
+package com.joohnq.user.ui.viewmodel.user
 
 import com.joohnq.domain.entity.User
 import com.joohnq.shared.ui.state.UiState

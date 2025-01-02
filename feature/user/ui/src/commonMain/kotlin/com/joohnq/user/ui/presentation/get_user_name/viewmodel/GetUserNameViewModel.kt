@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-
 class GetUserNameViewModel : ViewModel() {
     private val _state: MutableStateFlow<GetUserNameViewModelState> =
         MutableStateFlow(GetUserNameViewModelState())

@@ -9,9 +9,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.fold
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.state.WelcomeState

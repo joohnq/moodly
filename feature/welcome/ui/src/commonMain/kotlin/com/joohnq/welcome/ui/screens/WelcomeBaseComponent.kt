@@ -21,13 +21,13 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ScreenDimensions
-import com.joohnq.mood.components.IconContinueButton
-import com.joohnq.mood.components.TextWithBackground
-import com.joohnq.mood.components.TextWithSpan
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
+import com.joohnq.shared.ui.ScreenDimensions
+import com.joohnq.shared.ui.components.IconContinueButton
+import com.joohnq.shared.ui.components.TextWithBackground
+import com.joohnq.shared.ui.components.TextWithSpan
+import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.step
 import com.joohnq.welcome.ui.WelcomeScreen
@@ -46,7 +46,7 @@ fun MockScreen(
     span: String,
     secondTitle: String? = null,
     spanColor: Color,
-    onNext: () -> Unit
+    onNext: () -> Unit,
 ) {
     val screenDimensions: ScreenDimensions = koinInject()
     Box(

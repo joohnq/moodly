@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.domain.repository
+package com.joohnq.sleep_quality.domain.data_source
 
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 

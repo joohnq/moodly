@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.domain
+package com.joohnq.sleep_quality.domain.converter
 
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences
 import com.joohnq.sleep_quality.domain.entity.SleepQuality

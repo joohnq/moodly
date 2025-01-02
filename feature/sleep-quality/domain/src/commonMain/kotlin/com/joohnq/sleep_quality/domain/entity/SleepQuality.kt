@@ -4,24 +4,14 @@ import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class SleepQuality(
     override val id: Int,
     override val level: Int,
 ) : SleepQualityProperties {
-    @Serializable
     data object Excellent : SleepQuality(EXCELLENT.id, EXCELLENT.level)
-
-    @Serializable
     data object Good : SleepQuality(GOOD.id, GOOD.level)
-
-    @Serializable
     data object Fair : SleepQuality(FAIR.id, FAIR.level)
-
-    @Serializable
     data object Poor : SleepQuality(POOR.id, POOR.level)
-
-    @Serializable
     data object Worst : SleepQuality(WORST.id, WORST.level)
 
     companion object {

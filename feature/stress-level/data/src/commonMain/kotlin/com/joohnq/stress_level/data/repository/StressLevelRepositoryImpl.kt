@@ -1,20 +1,20 @@
 package com.joohnq.stress_level.data.repository
 
-import com.joohnq.domain.DatetimeProvider
+import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.stress_level.domain.data_source.StressLevelDataSource
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
-import org.koin.core.annotation.Single
 
-@Single(binds = [StressLevelRepository::class])
+
 class StressLevelRepositoryImpl(
-    private val stressLevelRecordDAO: StressLevelRecordDAO
+    private val dataSource: StressLevelDataSource,
 ) : StressLevelRepository {
     override suspend fun getStressLevels(): List<StressLevelRecord> =
-        stressLevelRecordDAO.getStressLevels()
+        dataSource.getStressLevels()
 
     override suspend fun addStressLevel(stressLevelRecord: StressLevelRecord) =
         try {
-            stressLevelRecordDAO.addStressLevel(
+            dataSource.addStressLevel(
                 stressLevelRecord.copy(
                     date = DatetimeProvider.getCurrentDateTime(),
                 )

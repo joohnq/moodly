@@ -2,23 +2,19 @@ package com.joohnq.stress_level.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.domain.use_case.GetStressLevelsUseCase
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
 class StressLevelViewModel(
     private val addStressLevelUseCase: AddStressLevelUseCase,
     private val getStressLevelsUseCase: GetStressLevelsUseCase,
-    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _stressLevelState = MutableStateFlow(StressLevelState())
     val stressLevelState: StateFlow<StressLevelState> = _stressLevelState.asStateFlow()
@@ -33,7 +29,7 @@ class StressLevelViewModel(
     }
 
     private fun getStressLevelRecords() =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             _stressLevelState.update { it.copy(stressLevelRecords = UiState.Loading) }
 
             try {
@@ -45,7 +41,7 @@ class StressLevelViewModel(
         }
 
     private fun addStressLevelRecord(stressLevelRecord: StressLevelRecord) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             changeAddingStatus(UiState.Loading)
 
             val res = addStressLevelUseCase(stressLevelRecord)

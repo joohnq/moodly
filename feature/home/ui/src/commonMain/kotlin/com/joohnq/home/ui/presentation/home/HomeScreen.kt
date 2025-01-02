@@ -9,28 +9,32 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
+import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.home.state.HomeState
-import com.joohnq.shared.ui.CustomTab
-import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared.util.helper.DatetimeProvider
+import com.joohnq.shared.domain.IDatetimeProvider
+import com.joohnq.shared.ui.CustomTab
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.home
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.getValue
+import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 class HomeScreen : CustomTab<HomeState>() {
     @Composable
@@ -41,12 +45,15 @@ class HomeScreen : CustomTab<HomeState>() {
         val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
+        val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
-        val today = DatetimeProvider.formatDate()
+        val dateTimeProvider: IDatetimeProvider = koinInject()
+        val today = dateTimeProvider.formatDate()
         val userState by userViewModel.state.collectAsState()
-        val statsState by statsViewModel.statsState.collectAsState()
-        val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-        val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
+        val freudScoreState by freudScoreViewModel.state.collectAsState()
+        val statsState by statsViewModel.state.collectAsState()
+        val sleepQualityState by sleepQualityViewModel.state.collectAsState()
+        val stressLevelState by stressLevelViewModel.state.collectAsState()
         val healthJournalState by healthJournalViewModel.state.collectAsState()
 
         fun onEvent(event: HomeEvent) =
@@ -77,6 +84,10 @@ class HomeScreen : CustomTab<HomeState>() {
             healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
         }
 
+        LaunchedEffect(statsState.statsRecords) {
+            freudScoreViewModel.onAction(FreudScoreViewModelIntent.GetFreudScore(statsState.statsRecords.getValue()))
+        }
+
         LaunchedEffect(
             statsState.statsRecords,
             userState.user,
@@ -99,7 +110,7 @@ class HomeScreen : CustomTab<HomeState>() {
             today = today,
             userName = userState.user,
             statsRecord = statsState.statsRecords,
-            freudScore = statsState.freudScore,
+            freudScore = freudScoreState.freudScore,
             healthJournal = healthJournalState.healthJournalRecords,
             sleepQuality = sleepQualityState.sleepQualityRecords,
             stressLevel = stressLevelState.stressLevelRecords,

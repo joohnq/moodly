@@ -13,18 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.home.ui.components.MentalHealthMetrics
 import com.joohnq.home.ui.components.MindfulTracker
 import com.joohnq.home.ui.presentation.home.state.HomeState
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.HomeTopBar
-import com.joohnq.shared.ui.components.MentalHealthMetrics
 import com.joohnq.shared.ui.components.Title
+import com.joohnq.shared.ui.mental_health_metrics
+import com.joohnq.shared.ui.mindful_tracker
 import com.joohnq.shared.ui.state.UiState
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.presentation.loading.LoadingUI
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.mental_health_metrics
-import com.joohnq.shared.ui.mindful_tracker
+import com.joohnq.sleep_quality.ui.SleepQualityResource.Companion.toResource
+import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 
 @Composable
 fun HomeUI(
@@ -68,10 +71,11 @@ fun HomeUI(
                     )
                     Title(Res.string.mindful_tracker)
                     MindfulTracker(
-                        sleepQuality = state.sleepQuality.getValue().last().sleepQuality,
-                        stressLevel = state.stressLevel.getValue().last().stressLevel,
+                        sleepQuality = state.sleepQuality.getValue()
+                            .last().sleepQuality.toResource(),
+                        stressLevel = state.stressLevel.getValue().last().stressLevel.toResource(),
                         moodTracker = state.statsRecord.getValue().take(3).reversed()
-                            .map { statsRecord -> statsRecord.mood },
+                            .map { statsRecord -> statsRecord.mood.toResource() },
                         onAction = state.onEvent
                     )
                 }

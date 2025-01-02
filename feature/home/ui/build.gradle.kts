@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -10,13 +9,10 @@ plugins {
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
-
 
     listOf(
         iosX64(),
@@ -30,7 +26,6 @@ kotlin {
     }
 
     sourceSets {
-
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.feature.stressLevel.ui)
@@ -46,6 +41,7 @@ kotlin {
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.mood.domain)
             implementation(projects.shared.ui)
+            implementation(projects.shared.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -55,10 +51,10 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            implementation(libs.bundles.koin)
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.voyager.other)
         }
-
     }
 }
 

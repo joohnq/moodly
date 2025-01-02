@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
+import com.joohnq.domain.validator.UserNameValidator
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
@@ -16,10 +17,11 @@ import com.joohnq.user.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.user.ui.presentation.get_user_name.state.GetUserNameState
 import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameIntent
 import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
-import com.joohnq.user.ui.viewmodel.UserViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class GetUserNameScreen : CustomScreen<GetUserNameState>() {
@@ -36,10 +38,10 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
 
         fun onEvent(event: GetUserNameEvent) =
             when (event) {
-                GetUserNameEvent.OnContinue -> {
+                GetUserNameEvent.Continue -> {
                     focusManager.clearFocus()
                     try {
-                        if (getUserNameState.name.isEmpty()) throw Exception("Name can't be empty")
+                        UserNameValidator(getUserNameState.name)
                         userViewModel.onAction(UserViewModelIntent.UpdateUserName(getUserNameState.name))
                     } catch (e: Exception) {
                         getUserNameViewModel.onAction(GetUserNameIntent.UpdateUserNameError(e.message.toString()))

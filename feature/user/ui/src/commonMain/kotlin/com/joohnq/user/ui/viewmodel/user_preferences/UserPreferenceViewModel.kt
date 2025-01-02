@@ -1,4 +1,4 @@
-package com.joohnq.user.ui.viewmodel
+package com.joohnq.user.ui.viewmodel.user_preferences
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -64,7 +64,7 @@ class UserPreferenceViewModel(
     private fun addUserPreferences() = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
 
-        val res = addUserPreferencesUseCase(UserPreferences.init())
+        val res = addUserPreferencesUseCase(UserPreferences())
 
         changeAddingStatus(if (res) UiState.Success(true) else UiState.Error("Failure add user preferences"))
     }

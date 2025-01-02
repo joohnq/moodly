@@ -119,7 +119,7 @@ fun GetUserNameUI(
                 if (canContinue)
                     ContinueButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                        onClick = { state.onEvent(GetUserNameEvent.OnContinue) }
+                        onClick = { state.onEvent(GetUserNameEvent.Continue) }
                     )
             }
         }

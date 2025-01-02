@@ -1,4 +1,4 @@
-package com.joohnq.user.ui.viewmodel
+package com.joohnq.user.ui.viewmodel.user_preferences
 
 sealed class UserPreferenceViewModelIntent {
     data object AddUserPreferences : UserPreferenceViewModelIntent()

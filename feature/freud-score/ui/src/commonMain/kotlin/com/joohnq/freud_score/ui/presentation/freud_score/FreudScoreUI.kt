@@ -14,19 +14,20 @@ import com.joohnq.core.ui.presentation.loading.LoadingUI
 import com.joohnq.freud_score.ui.components.MentalScoreHistoryItemWithHour
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
-import com.joohnq.shared.ui.components.SharedPanelComponent
-import com.joohnq.shared.ui.components.SmallTitle
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetStatGroupByDateUseCase
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.SharedPanelComponent
+import com.joohnq.shared.ui.components.SmallTitle
+import com.joohnq.shared.ui.freud_score
+import com.joohnq.shared.ui.mental_score_history
 import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.util.mappers.forEachMap
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.freud_score
-import com.joohnq.shared.ui.mental_score_history
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -72,8 +73,12 @@ import org.koin.compose.koinInject
                             SmallTitle(text = key)
                         }
                         items(items) { statsRecord ->
+                            val resource = statsRecord.mood.toResource()
                             MentalScoreHistoryItemWithHour(
-                                statsRecord = statsRecord,
+                                date = statsRecord.date,
+                                resource = resource,
+                                description = statsRecord.description,
+                                healthLevel = resource.healthLevel,
                                 onClick = {
                                     state.onEvent(
                                         FreudScoreEvent.OnNavigateToMoodScreen(

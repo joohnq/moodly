@@ -8,6 +8,7 @@ import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.ui.MoodResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.CircularProgressWithText
+import com.joohnq.shared.ui.components.FivePackIndicator
 import com.joohnq.shared.ui.components.MindfulTrackerCardColumn
 import com.joohnq.shared.ui.components.MindfulTrackerCardRow
 import com.joohnq.shared.ui.components.VerticalSpacer
@@ -18,7 +19,6 @@ import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.sleep_quality.ui.SleepQualityResource
 import com.joohnq.stress_level.ui.StressLevelResource
-import com.joohnq.stress_level.ui.components.StressLevelIndicator
 
 @Composable fun MindfulTracker(
     sleepQuality: SleepQualityResource,
@@ -81,7 +81,7 @@ import com.joohnq.stress_level.ui.components.StressLevelIndicator
         title = Res.string.stress_level,
         subtitle = stressLevel.subtitle,
         content = {
-            StressLevelIndicator(stressLevel)
+            FivePackIndicator(stressLevel.level, StressLevelResource::getBrushGradient)
         },
         onClick = { onAction(HomeEvent.OnNavigateToStressLevel) }
     )

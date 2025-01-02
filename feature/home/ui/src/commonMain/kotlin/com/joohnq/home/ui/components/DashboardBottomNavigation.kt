@@ -29,20 +29,18 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJournalingScreen
 import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.home.ui.event.DashboardBottomNavigationEvent
 import com.joohnq.home.ui.presentation.home.HomeScreen
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.add_health_journal
+import com.joohnq.shared.ui.add_mood
 import com.joohnq.shared.ui.components.BottomNavigationActionButton
 import com.joohnq.shared.ui.components.BottomNavigationAddButton
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_health_journal
-import com.joohnq.shared.ui.add_mood
 import org.jetbrains.compose.resources.painterResource
 import kotlin.math.roundToInt
 
@@ -136,11 +134,11 @@ fun DashboardBottomNavigation(
             isExpanded = isExpanded,
         ) { event ->
             when (event) {
-                DashboardBottomNavigationEvent.AddHealthJournal ->
-                    onNavigate(AddJournalingScreen())
+                DashboardBottomNavigationEvent.AddHealthJournal -> {}
+//                    onNavigate(AddJournalingScreen())
 
-                DashboardBottomNavigationEvent.AddMood ->
-                    onNavigate(AddStatScreen())
+                DashboardBottomNavigationEvent.AddMood -> {}
+//                    onNavigate(AddStatScreen())
 
                 DashboardBottomNavigationEvent.ToggleExpanded -> {
                     isExpanded = !isExpanded

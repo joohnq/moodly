@@ -8,11 +8,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.StatsRecord
 import com.joohnq.freud_score.ui.FreudScoreResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.components.HealthJournalComponent
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.CircularProgressWithDoubleText
@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MentalHealthMetrics(
-    freudScore: FreudScoreResource,
+    freudScore: FreudScoreResource?,
     statsRecord: StatsRecord,
     healthJournal: List<HealthJournalRecord>,
     onEvent: (HomeEvent) -> Unit,

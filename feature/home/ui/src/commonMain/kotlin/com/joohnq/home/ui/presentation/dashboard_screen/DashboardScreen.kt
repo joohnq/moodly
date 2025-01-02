@@ -8,7 +8,7 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.joohnq.home.ui.components.DashboardBottomNavigation
 import com.joohnq.home.ui.presentation.home.HomeScreen
-import com.joohnq.mood.CustomScreenNothing
+import com.joohnq.shared.ui.CustomScreenNothing
 
 class DashboardScreen : CustomScreenNothing() {
     @Composable

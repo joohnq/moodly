@@ -5,17 +5,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
-import com.joohnq.mood.components.CircularProgressWithText
-import com.joohnq.mood.components.MindfulTrackerCardColumn
-import com.joohnq.mood.components.MindfulTrackerCardRow
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.CircularProgressWithText
+import com.joohnq.shared.ui.components.MindfulTrackerCardColumn
+import com.joohnq.shared.ui.components.MindfulTrackerCardRow
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.mood_tracker
 import com.joohnq.shared.ui.stress_level
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.sleep_quality.ui.SleepQualityResource
 import com.joohnq.stress_level.ui.StressLevelResource
 import com.joohnq.stress_level.ui.components.StressLevelIndicator
@@ -24,7 +24,7 @@ import com.joohnq.stress_level.ui.components.StressLevelIndicator
     sleepQuality: SleepQualityResource,
     stressLevel: StressLevelResource,
     moodTracker: List<MoodResource>,
-    onAction: (HomeEvent) -> Unit
+    onAction: (HomeEvent) -> Unit,
 ) {
     MindfulTrackerCardRow(icon = Drawables.Icons.HospitalBed,
         color = sleepQuality.palette.color,

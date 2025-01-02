@@ -5,7 +5,7 @@ import com.joohnq.domain.entity.User
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 

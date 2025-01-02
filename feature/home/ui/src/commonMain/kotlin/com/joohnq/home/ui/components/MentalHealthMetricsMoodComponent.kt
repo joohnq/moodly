@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

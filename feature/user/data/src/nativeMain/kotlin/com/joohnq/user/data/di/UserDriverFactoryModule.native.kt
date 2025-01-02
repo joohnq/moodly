@@ -1,19 +1,10 @@
 package com.joohnq.user.data.di
 
-import com.joohnq.health_journal.data.driver.HealthJournalDriverFactory
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
+import com.joohnq.user.data.driver.UserDriverFactory
+import org.koin.core.module.Module
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
-@Module
-@ComponentScan
-actual class UserDriverFactoryModule {
-    @Single
-    fun provideDriverFactory(): HealthJournalDriverFactory =
-        HealthJournalDriverFactory()
-
-
-    @Single
-    fun provideUserPreferencesDriverFactory(): UserPreferencesDriverFactory =
-        UserPreferencesDriverFactory()
+actual val userDriverFactoryModule: Module = module {
+    singleOf(::UserDriverFactory)
 }

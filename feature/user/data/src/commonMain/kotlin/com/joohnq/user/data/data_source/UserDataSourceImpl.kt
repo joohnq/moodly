@@ -1,25 +1,30 @@
 package com.joohnq.user.data.data_source
 
+import com.joohnq.core.database.converters.LocalDateTimeConverter
+import com.joohnq.domain.UserConverter
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.repository.UserDataSource
-import com.joohnq.user.data.converter.UserConverter
-import com.joohnq.user.database.user.UserDatabaseSql
+import com.joohnq.user.database.UserDatabaseSql
+
 
 class UserDataSourceImpl(private val database: UserDatabaseSql) : UserDataSource {
     private val query = database.userQueries
-    override fun getUser(): User? {
-        val res = query.getUser(1).executeAsOneOrNull() ?: return null
-        return User(
-            id = res.id.toInt(),
-            name = res.name,
-            medicationsSupplements = UserConverter.toMedicationsSupplements(res.medicationsSupplements),
-            physicalSymptoms = UserConverter.toPhysicalSymptoms(res.physicalSymptoms),
-            soughtHelp = UserConverter.toProfessionalHelp(res.soughtHelp)
-        )
-    }
+    override fun getUser(): User? =
+        query.getUser(mapper = { id, name, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
+            User(
+                id = id.toInt(),
+                name = name,
+                medicationsSupplements = UserConverter.toMedicationsSupplements(
+                    medicationsSupplements
+                ),
+                soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
+                physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
+                dateCreated = LocalDateTimeConverter.toLocalDateTime(dateCreated)
+            )
+        }).executeAsOneOrNull()
 
     override suspend fun addUser(user: User): Boolean = try {
         query.addUser(
@@ -36,7 +41,6 @@ class UserDataSourceImpl(private val database: UserDatabaseSql) : UserDataSource
 
     override suspend fun updateUser(user: User): Boolean = try {
         query.updateUser(
-            id = user.id.toLong(),
             name = user.name,
             medicationsSupplements = UserConverter.fromMedicationsSupplements(user.medicationsSupplements),
             physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),

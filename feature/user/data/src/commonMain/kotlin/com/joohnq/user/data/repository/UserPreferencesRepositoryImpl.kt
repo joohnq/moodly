@@ -3,17 +3,16 @@ package com.joohnq.user.data.repository
 import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.repository.UserPreferencesDataSource
 import com.joohnq.domain.repository.UserPreferencesRepository
-import org.koin.core.annotation.Single
 
-@Single(binds = [UserPreferencesRepository::class])
-class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserPreferencesDataSource) :
+
+class UserPreferencesRepositoryImpl(private val dataSource: UserPreferencesDataSource) :
     UserPreferencesRepository {
-    override suspend fun getUserPreferences(): UserPreferences =
-        userPreferencesDataSource.getUserPreferences()
+    override suspend fun getUserPreferences(): UserPreferences? =
+        dataSource.getUserPreferences()
 
     override suspend fun addUserPreferences(userPreferences: UserPreferences): Boolean =
         try {
-            userPreferencesDataSource.addUserPreferences(userPreferences)
+            dataSource.addUserPreferences(userPreferences)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -22,7 +21,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserP
 
     override suspend fun insertUserPreferences(): Boolean =
         try {
-            userPreferencesDataSource.addUserPreferences()
+            dataSource.addUserPreferences(UserPreferences())
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -31,7 +30,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserP
 
     override suspend fun updateSkipWelcomeScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDataSource.updateSkipWelcomeScreen(value)
+            dataSource.updateSkipWelcomeScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -40,7 +39,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserP
 
     override suspend fun updateSkipOnboardingScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDataSource.updateSkipOnboardingScreen(value)
+            dataSource.updateSkipOnboardingScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -49,7 +48,7 @@ class UserPreferencesRepositoryImpl(private val userPreferencesDataSource: UserP
 
     override suspend fun updateSkipGetUserNameScreen(value: Boolean): Boolean =
         try {
-            userPreferencesDataSource.updateSkipGetUserNameScreen(value)
+            dataSource.updateSkipGetUserNameScreen(value)
             true
         } catch (e: Exception) {
             e.printStackTrace()

@@ -1,0 +1,19 @@
+CREATE TABLE HealthJournal (
+    id INTEGER PRIMARY KEY NOT NULL,
+    mood INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    date TEXT DEFAULT (datetime('now')) NOT NULL
+);
+
+getHealthJournals:
+SELECT * FROM HealthJournal;
+
+addHealthJournal:
+INSERT INTO HealthJournal (id, mood, title, description) VALUES (:id, :mood, :title, :description);
+
+deleteHealthJournal:
+DELETE FROM HealthJournal WHERE id = :id;
+
+updateHealthJournal:
+UPDATE HealthJournal SET mood = :mood, title = :title, description = :description WHERE id = :id;

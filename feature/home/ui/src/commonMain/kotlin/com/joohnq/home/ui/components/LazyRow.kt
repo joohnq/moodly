@@ -13,16 +13,16 @@ import com.joohnq.freud_score.ui.FreudScoreResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.components.HealthJournalComponent
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
-import com.joohnq.mood.components.CircularProgressWithDoubleText
-import com.joohnq.mood.components.MentalHealthMetricItem
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.CircularProgressWithDoubleText
+import com.joohnq.shared.ui.components.MentalHealthMetricItem
 import com.joohnq.shared.ui.freud_score
 import com.joohnq.shared.ui.health_journal
 import com.joohnq.shared.ui.mood
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

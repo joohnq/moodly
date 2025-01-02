@@ -33,12 +33,12 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJourna
 import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.home.ui.event.DashboardBottomNavigationEvent
 import com.joohnq.home.ui.presentation.home.HomeScreen
-import com.joohnq.mood.components.BottomNavigationActionButton
-import com.joohnq.mood.components.BottomNavigationAddButton
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.Drawables
+import com.joohnq.shared.ui.components.BottomNavigationActionButton
+import com.joohnq.shared.ui.components.BottomNavigationAddButton
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.add_health_journal
@@ -105,7 +105,7 @@ fun AddButton(
 
 @Composable
 fun DashboardBottomNavigation(
-    onNavigateScreen: (Screen) -> Unit
+    onNavigateScreen: (Screen) -> Unit,
 ) {
     var isExpanded by remember { mutableStateOf(false) }
 

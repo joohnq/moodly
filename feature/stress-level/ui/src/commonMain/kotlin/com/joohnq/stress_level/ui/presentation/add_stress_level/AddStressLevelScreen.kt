@@ -13,10 +13,10 @@ import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
+import com.joohnq.stress_level.ui.StressLevelResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.state.AddStressLevelState
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
-import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
         val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
         val snackBarState = remember { SnackbarHostState() }
         val scope = rememberCoroutineScope()
-        val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
+        val stressLevelState by stressLevelViewModel.state.collectAsState()
         val addStressLevelState by addStressLevelViewModel.state.collectAsState()
 
         LaunchedEffect(stressLevelState.adding) {
@@ -44,14 +44,14 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
 
         fun onEvent(event: AddStressLevelEvent) {
             when (event) {
-                AddStressLevelEvent.OnGoBack -> onGoBack()
-                AddStressLevelEvent.OnContinue -> {
-                    if (addStressLevelState.stressLevel != StressLevel.One) {
-                        onNavigate(StressStressorsScreen())
+                AddStressLevelEvent.GoBack -> onGoBack()
+                AddStressLevelEvent.Continue -> {
+                    if (addStressLevelState.stressLevel != StressLevelResource.One) {
+//                        onNavigate(StressStressorsScreen())
                     } else {
                         stressLevelViewModel.onAction(
                             StressLevelIntent.AddStressLevelRecord(
-                                StressLevelRecord.init().copy(
+                                StressLevelRecord().copy(
                                     stressLevel = StressLevel.One,
                                     stressors = listOf(Stressor.InPeace)
                                 )
@@ -60,7 +60,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
                     }
                 }
 
-                AddStressLevelEvent.OnPopUpToStressLevelLevel -> onGoBack()
+                AddStressLevelEvent.PopUpToStressLevelLevel -> onGoBack()
             }
         }
 

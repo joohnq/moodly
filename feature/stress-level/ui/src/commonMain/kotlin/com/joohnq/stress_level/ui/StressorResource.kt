@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 
 sealed class StressorResource(
     val text: StringResource,
-    override val id: String
+    override val id: String,
 ) : StressorProperties {
     data object Work : StressorResource(text = Res.string.work, id = WORK.id)
     data object Relationship :
@@ -62,6 +62,8 @@ sealed class StressorResource(
             InPeace -> Stressor.InPeace
             is Other -> Stressor.Other(other)
         }
+
+        fun List<StressorResource>.toDomain(): List<Stressor> = map { it.toDomain() }
 
         @Composable fun getText(stressors: List<StressorResource>): String =
             stressors.map { stressor ->

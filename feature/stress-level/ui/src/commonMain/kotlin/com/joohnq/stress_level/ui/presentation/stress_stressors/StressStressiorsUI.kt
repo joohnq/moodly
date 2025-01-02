@@ -21,23 +21,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.add_stress_level
 import com.joohnq.shared.ui.components.ContinueButton
+import com.joohnq.shared.ui.components.TextBubble
 import com.joohnq.shared.ui.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.shared.ui.components.TopBar
 import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.enter_your_stressor
+import com.joohnq.shared.ui.other
+import com.joohnq.shared.ui.select_stressors
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.util.constants.TestConstants
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_stress_level
-import com.joohnq.shared.ui.enter_your_stressor
-import com.joohnq.shared.ui.other
-import com.joohnq.shared.ui.select_stressors
 import com.joohnq.stress_level.domain.entity.Stressor
-import com.joohnq.stress_level.ui.StressorResource.Companion.toResource
-import com.joohnq.stress_level.ui.components.StressStressorCircle
+import com.joohnq.stress_level.ui.StressorResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
@@ -47,7 +47,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressStressorsUI(
     state: StressStressorsState,
 ) {
-    val stressors = remember { Stressor.getAll() }
+    val stressors = remember { StressorResource.getAll() }
     val canContinue by derivedStateOf { state.addStressLevelViewModelState.stressors.isNotEmpty() }
     val containOtherInStressors by derivedStateOf { state.addStressLevelViewModelState.stressors.any { it::class == Stressor.Other::class } }
 
@@ -65,7 +65,7 @@ fun StressStressorsUI(
         ) {
             TopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { state.onEvent(StressStressorsEvent.OnGoBack) }
+                onGoBack = { state.onEvent(StressStressorsEvent.GoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -82,18 +82,16 @@ fun StressStressorsUI(
                 modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                 content = {
                     items(stressors) { stressor ->
-                        StressStressorCircle(
-                            stressStressor = stressor.toResource(),
+                        TextBubble(
+                            text = stressor.text,
+                            onClick = {
+                                state.onAddAction(
+                                    AddStressLevelIntent.UpdateAddingStressors(stressor)
+                                )
+                            },
                             selected = state.addStressLevelViewModelState.stressors.contains(
                                 stressor
                             ),
-                            onClick = {
-                                state.onAddAction(
-                                    AddStressLevelIntent.UpdateAddingStressors(
-                                        stressor
-                                    )
-                                )
-                            }
                         )
                     }
                 },
@@ -117,7 +115,7 @@ fun StressStressorsUI(
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
                         .testTag(TestConstants.CONTINUE_BUTTON),
-                    onClick = { state.onEvent(StressStressorsEvent.OnContinue) }
+                    onClick = { state.onEvent(StressStressorsEvent.Continue) }
                 )
         }
     }

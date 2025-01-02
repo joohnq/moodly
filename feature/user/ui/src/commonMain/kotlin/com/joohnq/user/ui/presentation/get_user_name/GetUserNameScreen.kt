@@ -9,9 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.fold
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.user.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.user.ui.presentation.get_user_name.state.GetUserNameState
 import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameIntent
@@ -49,9 +49,9 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
 
         LaunchedEffect(userState.updating) {
             userState.updating.fold(
-                onError = {
+                onError = { error: String ->
                     scope.launch {
-                        snackBarState.showSnackbar(it)
+                        snackBarState.showSnackbar(error)
                     }
                 },
                 onSuccess = {

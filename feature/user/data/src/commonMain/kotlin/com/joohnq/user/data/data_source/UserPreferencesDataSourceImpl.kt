@@ -3,9 +3,10 @@ package com.joohnq.user.data.data_source
 import com.joohnq.core.database.converters.BooleanConverter
 import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.repository.UserPreferencesDataSource
-import com.joohnq.user.database.user_preferences.UserPreferencesDatabaseSql
+import com.joohnq.user.database.UserDatabaseSql
 
-class UserPreferencesDataSourceImpl(private val database: UserPreferencesDatabaseSql) :
+
+class UserPreferencesDataSourceImpl(private val database: UserDatabaseSql) :
     UserPreferencesDataSource {
     private val query = database.userPreferencesQueries
     override suspend fun getUserPreferences(): UserPreferences? {

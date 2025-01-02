@@ -1,6 +1,6 @@
 package com.joohnq.domain.entity
 
-import com.joohnq.domain.DatetimeProvider
+import com.joohnq.shared.domain.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 

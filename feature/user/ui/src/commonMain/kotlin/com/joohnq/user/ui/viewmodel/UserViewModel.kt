@@ -7,21 +7,18 @@ import com.joohnq.domain.use_case.user.GetUserUseCase
 import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
 import com.joohnq.domain.use_case.user.UpdateUserUseCase
-import com.joohnq.mood.state.UiState
-import kotlinx.coroutines.CoroutineDispatcher
+import com.joohnq.shared.ui.state.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
+
 class UserViewModel(
     private val initUserUseCase: InitUserUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val updateUserNameUseCase: UpdateUserNameUseCase,
-    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _state: MutableStateFlow<UserViewModelState> =
         MutableStateFlow(UserViewModelState())
@@ -37,11 +34,11 @@ class UserViewModel(
         }
     }
 
-    private fun initUser() = viewModelScope.launch(dispatcher) {
+    private fun initUser() = viewModelScope.launch {
         initUserUseCase()
     }
 
-    private fun updateUser(user: User) = viewModelScope.launch(dispatcher) {
+    private fun updateUser(user: User) = viewModelScope.launch {
         changeUpdatingStatus(UiState.Loading)
 
         val res = updateUserUseCase(user)
@@ -53,8 +50,7 @@ class UserViewModel(
         )
     }
 
-    private fun getUser() = viewModelScope.launch(dispatcher)
-    {
+    private fun getUser() = viewModelScope.launch {
         changeUserStatus(UiState.Loading)
 
         try {
@@ -65,7 +61,7 @@ class UserViewModel(
         }
     }
 
-    private fun updateUserName(name: String) = viewModelScope.launch(dispatcher) {
+    private fun updateUserName(name: String) = viewModelScope.launch {
         changeUpdatingStatus(UiState.Loading)
 
         val res = updateUserNameUseCase(name)

@@ -7,52 +7,19 @@ import com.joohnq.domain.repository.UserRepository
 import com.joohnq.user.data.data_source.UserDataSourceImpl
 import com.joohnq.user.data.data_source.UserPreferencesDataSourceImpl
 import com.joohnq.user.data.database.UserDatabase
-import com.joohnq.user.data.database.UserPreferencesDatabase
-import com.joohnq.user.data.driver.UserDriverFactory
-import com.joohnq.user.data.driver.UserPreferencesDriverFactory
 import com.joohnq.user.data.repository.UserPreferencesRepositoryImpl
 import com.joohnq.user.data.repository.UserRepositoryImpl
-import com.joohnq.user.database.user.UserDatabaseSql
-import com.joohnq.user.database.user_preferences.UserPreferencesDatabaseSql
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
+import com.joohnq.user.database.UserDatabaseSql
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
+import org.koin.dsl.module
 
-@Module(includes = [UserDriverFactoryModule::class])
-@ComponentScan
-class UserDataModule {
-    @Single
-    fun provideUserDatabase(
-        userDriverFactory: UserDriverFactory,
-    ): UserDatabaseSql = UserDatabase(userDriverFactory = userDriverFactory).invoke()
-
-    @Single
-    fun provideUserPreferencesDatabase(
-        userPreferencesDriverFactory: UserPreferencesDriverFactory,
-    ): UserPreferencesDatabaseSql =
-        UserPreferencesDatabase(userPreferencesDriverFactory = userPreferencesDriverFactory).invoke()
-
-    @Single(binds = [UserDataSource::class])
-    fun provideUserDatabase(
-        database: UserDatabaseSql,
-    ): UserDataSource = UserDataSourceImpl(database = database)
-
-    @Single(binds = [UserPreferencesDataSource::class])
-    fun provideUserPreferencesDatabase(
-        database: UserPreferencesDatabaseSql,
-    ): UserPreferencesDataSource = UserPreferencesDataSourceImpl(database = database)
-
-    @Single(binds = [UserRepository::class])
-    fun provideUserRepository(
-        userDataSource: UserDataSource,
-    ): UserRepository = UserRepositoryImpl(
-        userDataSource = userDataSource
-    )
-
-    @Single(binds = [UserPreferencesRepository::class])
-    fun provideUserPreferencesRepository(
-        userPreferencesDataSource: UserPreferencesDataSource,
-    ): UserPreferencesRepository = UserPreferencesRepositoryImpl(
-        userPreferencesDataSource = userPreferencesDataSource
-    )
+val userDataModule = module {
+    single<UserDatabaseSql> {
+        UserDatabase(get()).invoke()
+    }
+    singleOf(::UserDataSourceImpl) bind (UserDataSource::class)
+    singleOf(::UserPreferencesDataSourceImpl) bind (UserPreferencesDataSource::class)
+    singleOf(::UserRepositoryImpl) bind (UserRepository::class)
+    singleOf(::UserPreferencesRepositoryImpl) bind (UserPreferencesRepository::class)
 }

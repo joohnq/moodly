@@ -1,7 +1,7 @@
 package com.joohnq.user.ui.viewmodel
 
 import com.joohnq.domain.entity.User
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 
 data class UserViewModelState(
     val user: UiState<User> = UiState.Idle,

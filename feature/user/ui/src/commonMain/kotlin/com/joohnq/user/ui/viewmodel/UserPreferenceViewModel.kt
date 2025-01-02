@@ -8,21 +8,17 @@ import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipGetUserNameScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeScreenUseCase
-import com.joohnq.mood.state.UiState
-import kotlinx.coroutines.CoroutineDispatcher
+import com.joohnq.shared.ui.state.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
 class UserPreferenceViewModel(
     private val getUserPreferencesUseCase: GetUserPreferencesUseCase,
     private val addUserPreferencesUseCase: AddUserPreferencesUseCase,
     private val updateSkipWelcomeScreenUseCase: UpdateSkipWelcomeScreenUseCase,
     private val updateSkipOnboardingScreenUseCase: UpdateSkipOnboardingScreenUseCase,
     private val updateSkipGetUserNameScreenUseCase: UpdateSkipGetUserNameScreenUseCase,
-    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _state:
             MutableStateFlow<UserPreferenceViewModelState> =
@@ -49,7 +45,7 @@ class UserPreferenceViewModel(
     }
 
     private fun getUserPreferences() =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             _state.update {
                 it.copy(userPreferences = UiState.Loading)
             }
@@ -65,7 +61,7 @@ class UserPreferenceViewModel(
             }
         }
 
-    private fun addUserPreferences() = viewModelScope.launch(dispatcher) {
+    private fun addUserPreferences() = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
 
         val res = addUserPreferencesUseCase(UserPreferences.init())
@@ -74,7 +70,7 @@ class UserPreferenceViewModel(
     }
 
     private fun updateSkipWelcomeScreen(value: Boolean) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             val res = updateSkipWelcomeScreenUseCase(value)
 
             _state.update {
@@ -83,7 +79,7 @@ class UserPreferenceViewModel(
         }
 
     private fun updateSkipOnboardingScreen(value: Boolean) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             val res = updateSkipOnboardingScreenUseCase(value)
 
             _state.update {
@@ -92,7 +88,7 @@ class UserPreferenceViewModel(
         }
 
     private fun updateSkipGetUserNameScreen(value: Boolean) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             val res = updateSkipGetUserNameScreenUseCase(value)
 
             _state.update {

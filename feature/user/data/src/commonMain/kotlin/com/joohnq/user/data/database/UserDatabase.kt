@@ -1,11 +1,12 @@
 package com.joohnq.user.data.database
 
 import com.joohnq.user.data.driver.UserDriverFactory
-import com.joohnq.user.database.user.UserDatabaseSql
+import com.joohnq.user.database.UserDatabaseSql
 
-class UserDatabase(private val userDriverFactory: UserDriverFactory) {
+
+class UserDatabase(private val driverFactory: UserDriverFactory) {
     operator fun invoke(): UserDatabaseSql =
-        UserDatabaseSql(userDriverFactory.createDriver())
+        UserDatabaseSql(driverFactory.createDriver())
 
     companion object {
         const val DATABASE_NAME = "user.db"

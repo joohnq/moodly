@@ -6,17 +6,16 @@ import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.repository.UserDataSource
 import com.joohnq.domain.repository.UserRepository
-import org.koin.core.annotation.Single
 
-@Single(binds = [UserRepository::class])
+
 class UserRepositoryImpl(
-    private val userDataSource: UserDataSource,
+    private val dataSource: UserDataSource,
 ) : UserRepository {
-    override suspend fun getUser(): User? = userDataSource.getUser()
+    override suspend fun getUser(): User? = dataSource.getUser()
 
     override suspend fun addUser(user: User): Boolean =
         try {
-            userDataSource.addUser(user)
+            dataSource.addUser(user)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -25,7 +24,7 @@ class UserRepositoryImpl(
 
     override suspend fun updateUser(user: User): Boolean =
         try {
-            userDataSource.updateUser(user)
+            dataSource.updateUser(user)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -34,7 +33,7 @@ class UserRepositoryImpl(
 
     override suspend fun initUser(): Boolean =
         try {
-            userDataSource.initUser()
+            dataSource.initUser()
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -43,7 +42,7 @@ class UserRepositoryImpl(
 
     override suspend fun updateUserName(name: String) =
         try {
-            userDataSource.updateUserName(name)
+            dataSource.updateUserName(name)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -52,7 +51,7 @@ class UserRepositoryImpl(
 
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp) =
         try {
-            userDataSource.updateSoughtHelp(soughtHelp)
+            dataSource.updateSoughtHelp(soughtHelp)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -61,7 +60,7 @@ class UserRepositoryImpl(
 
     override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) =
         try {
-            userDataSource.updatePhysicalSymptoms(physicalSymptoms)
+            dataSource.updatePhysicalSymptoms(physicalSymptoms)
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -70,7 +69,7 @@ class UserRepositoryImpl(
 
     override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements) =
         try {
-            userDataSource.updateMedicationsSupplements(medicationsSupplements)
+            dataSource.updateMedicationsSupplements(medicationsSupplements)
             true
         } catch (e: Exception) {
             e.printStackTrace()

@@ -17,19 +17,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.SharedPanelComponent
 import com.joohnq.shared.ui.components.StressLevelCard
+import com.joohnq.shared.ui.life_impact
 import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
+import com.joohnq.shared.ui.stress_analysis
+import com.joohnq.shared.ui.stress_level
+import com.joohnq.shared.ui.stressor
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.life_impact
-import com.joohnq.shared.ui.stress_analysis
-import com.joohnq.shared.ui.stress_level
-import com.joohnq.shared.ui.stressor
 import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import com.joohnq.stress_level.ui.StressorResource
 import com.joohnq.stress_level.ui.StressorResource.Companion.toResource
@@ -45,19 +45,19 @@ fun StressLevelUI(
     state.stressLevelRecords.foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { stressLevelRecords ->
-            val stressLevelRecord = stressLevelRecords.last()
-            val resource = stressLevelRecord.stressLevel.toResource()
+            val record = stressLevelRecords.last()
+            val resource = record.stressLevel.toResource()
 
             SharedPanelComponent(
                 containerColor = Colors.White,
                 isDark = false,
-                onGoBack = { state.onEvent(StressLevelEvent.OnGoBack) },
+                onGoBack = { state.onEvent(StressLevelEvent.GoBack) },
                 backgroundColor = resource.palette.color,
                 backgroundImage = Drawables.Images.StressLevelBackground,
                 panelTitle = Res.string.stress_level,
                 bodyTitle = Res.string.stress_analysis,
                 color = resource.palette.backgroundColor,
-                onAdd = { state.onEvent(StressLevelEvent.OnAdd) },
+                onAdd = { state.onEvent(StressLevelEvent.Add) },
                 panelContent = {
                     Column(
                         modifier = Modifier.paddingHorizontalMedium()
@@ -66,7 +66,7 @@ fun StressLevelUI(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = stressLevelRecord.stressLevel.level.toString(),
+                            text = resource.level.toString(),
                             style = TextStyles.DisplayMdExtraBold(),
                             color = Colors.White
                         )
@@ -87,7 +87,7 @@ fun StressLevelUI(
                                 modifier = Modifier.weight(1f).fillMaxHeight(),
                                 icon = Drawables.Icons.WarningOutlined,
                                 title = Res.string.stressor,
-                                value = StressorResource.getText(stressLevelRecord.stressors.map { it.toResource() }),
+                                value = StressorResource.getText(record.stressors.map { it.toResource() }),
                             ) {
                                 Column(
                                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
@@ -149,9 +149,7 @@ fun StressLevelUI(
                                 title = Res.string.life_impact,
                                 value = stringResource(resource.lifeImpact),
                             ) {
-                                StressLevelChart(
-                                    stressLevelRecords = stressLevelRecords.takeLast(8)
-                                )
+                                StressLevelChart(stressLevelRecords = stressLevelRecords)
                             }
                         }
                     }

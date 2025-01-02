@@ -1,7 +1,6 @@
 package com.joohnq.stress_level.domain.entity
 
 import com.joohnq.stress_level.domain.StressLevelProperties
-import kotlinx.serialization.Serializable
 
 sealed class StressLevel(
     override val id: Int,
@@ -47,14 +46,6 @@ sealed class StressLevel(
         }
 
         fun StressLevel?.fromValue(): Int = this?.id ?: -1
-
-        fun fromSliderValue(value: Float): StressLevel = when (value) {
-            0f -> One
-            25f -> Two
-            50f -> Three
-            75f -> Four
-            else -> Five
-        }
 
         fun getAll(): List<StressLevel> = listOf(
             One,

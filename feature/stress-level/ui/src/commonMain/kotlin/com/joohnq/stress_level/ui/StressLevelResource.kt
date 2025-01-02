@@ -1,7 +1,6 @@
 package com.joohnq.stress_level.ui
 
 import androidx.compose.ui.graphics.Color
-import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.five_number
 import com.joohnq.shared.ui.four_number
@@ -15,6 +14,7 @@ import com.joohnq.shared.ui.mild
 import com.joohnq.shared.ui.moderate
 import com.joohnq.shared.ui.none
 import com.joohnq.shared.ui.one_number
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.three_number
 import com.joohnq.shared.ui.two_number
 import com.joohnq.shared.ui.very_high
@@ -131,13 +131,13 @@ sealed class StressLevelResource(
             Five
         )
 
-        fun getBrushGradient(): List<List<Color>> = listOf(
+        fun getBrushGradient(i: Int): List<Color> = listOf(
             listOf(Colors.Green50, Colors.Green50),
             listOf(Colors.Green50, Colors.Yellow50),
             listOf(Colors.Yellow50, Colors.Yellow50),
             listOf(Colors.Yellow50, Colors.Orange50),
             listOf(Colors.Orange50, Colors.Orange50)
-        )
+        )[i]
 
         fun StressLevel.toResource(): StressLevelResource = when (this) {
             StressLevel.One -> One
@@ -153,6 +153,14 @@ sealed class StressLevelResource(
             Three -> StressLevel.Three
             Four -> StressLevel.Four
             Five -> StressLevel.Five
+        }
+
+        fun fromSliderValue(value: Float): StressLevelResource = when (value) {
+            0f -> One
+            25f -> Two
+            50f -> Three
+            75f -> Four
+            else -> Five
         }
     }
 }

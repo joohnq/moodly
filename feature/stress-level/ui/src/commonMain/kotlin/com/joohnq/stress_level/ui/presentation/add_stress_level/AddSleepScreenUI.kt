@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.add_stress_level
 import com.joohnq.shared.ui.components.ContinueButton
 import com.joohnq.shared.ui.components.SleepQualityThumb
 import com.joohnq.shared.ui.components.SleepQualityTrack
@@ -29,10 +31,7 @@ import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_stress_level
 import com.joohnq.shared.ui.whats_your_stress_level_today
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.state.AddStressLevelState
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
@@ -43,7 +42,6 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStressLevelScreenUI(
     state: AddStressLevelState,
 ) {
-    val resource = state.state.stressLevel.toResource()
     Scaffold(
         snackbarHost = { SnackbarHost(state.snackBarState) },
         containerColor = Colors.Brown10,
@@ -58,7 +56,7 @@ fun AddStressLevelScreenUI(
             ) {
                 TopBar(
                     text = Res.string.add_stress_level,
-                    onGoBack = { state.onEvent(AddStressLevelEvent.OnGoBack) }
+                    onGoBack = { state.onEvent(AddStressLevelEvent.GoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -90,7 +88,7 @@ fun AddStressLevelScreenUI(
                             color = Colors.Brown80
                         )
                         Text(
-                            text = stringResource(resource.text),
+                            text = stringResource(state.state.stressLevel.text),
                             style = TextStyles.TextXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End
@@ -100,7 +98,7 @@ fun AddStressLevelScreenUI(
                 VerticalSpacer(24.dp)
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { state.onEvent(AddStressLevelEvent.OnContinue) }
+                    onClick = { state.onEvent(AddStressLevelEvent.Continue) }
                 )
             }
         }

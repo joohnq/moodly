@@ -1,7 +1,6 @@
 package com.joohnq.stress_level.domain.entity
 
 import com.joohnq.stress_level.domain.StressorProperties
-import kotlinx.serialization.Serializable
 
 sealed class Stressor(
     override val id: String,
@@ -39,6 +38,9 @@ sealed class Stressor(
 
         fun getAll(): List<Stressor> =
             listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other())
+
+        fun containOther(stressors: List<Stressor>): Boolean =
+            stressors.any { it::class == Other::class }
     }
 }
 

@@ -15,6 +15,7 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
@@ -36,8 +37,8 @@ class AddJournalingScreen : CustomScreen<AddJournalingState>() {
                 AddJournalingEvent.OnAdd ->
                     healthJournalViewModel.onAction(
                         HealthJournalIntent.AddHealthJournal(
-                            HealthJournalRecord.init().copy(
-                                mood = addingHealthJournalState.mood!!,
+                            HealthJournalRecord(
+                                mood = addingHealthJournalState.mood!!.toDomain(),
                                 title = addingHealthJournalState.title,
                                 description = addingHealthJournalState.description
                             )

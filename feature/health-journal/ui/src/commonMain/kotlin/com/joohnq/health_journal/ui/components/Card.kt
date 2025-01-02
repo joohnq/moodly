@@ -35,10 +35,10 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun HealthJournalCard(journal: HealthJournalRecord, onClick: () -> Unit) {
-    val mood = journal.mood
-    val resource = mood.toResource()
-    val palette = resource.palette
+fun HealthJournalCard(
+    journal: HealthJournalRecord, onClick: () -> Unit,
+) {
+    val resource = journal.mood.toResource()
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
         colors = ComponentColors.Card.MainCardColors(),
@@ -55,16 +55,16 @@ fun HealthJournalCard(journal: HealthJournalRecord, onClick: () -> Unit) {
             ) {
                 Box(
                     modifier = Modifier.size(48.dp).background(
-                        color = palette.color,
+                        color = resource.palette.color,
                         shape = Dimens.Shape.Small
                     ),
                     contentAlignment = Alignment.Center
                 ) {
                     MoodFace(
-                        mood = mood.toResource(),
+                        mood = resource,
                         modifier = Modifier.size(24.dp),
                         backgroundColor = Colors.White,
-                        color = palette.color
+                        color = resource.palette.color
                     )
                 }
             }
@@ -77,8 +77,8 @@ fun HealthJournalCard(journal: HealthJournalRecord, onClick: () -> Unit) {
                         Res.string.mood_show,
                         stringResource(resource.text)
                     ).uppercase(),
-                    backgroundColor = palette.backgroundColor,
-                    textColor = palette.color
+                    backgroundColor = resource.palette.backgroundColor,
+                    textColor = resource.palette.color
                 )
                 TextEllipsis(
                     text = journal.title,
@@ -102,7 +102,7 @@ fun HealthJournalStatsCard(
     title: String,
     color: Color,
     backgroundColor: Color,
-    desc: String,
+    description: String,
 ) {
     Card(
         modifier = modifier,
@@ -120,7 +120,7 @@ fun HealthJournalStatsCard(
             ) {
                 Icon(
                     painter = painterResource(icon),
-                    contentDescription = desc,
+                    contentDescription = description,
                     tint = color,
                     modifier = Modifier.size(24.dp)
                 )
@@ -135,7 +135,7 @@ fun HealthJournalStatsCard(
                     color = Colors.Brown80
                 )
                 Text(
-                    text = desc,
+                    text = description,
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown100Alpha64
                 )

@@ -7,11 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-
 class EditJournalingViewModel : ViewModel() {
-    private val _editJournalingState = MutableStateFlow(EditJournalingState())
-    val editJournalingState: StateFlow<EditJournalingState> =
-        _editJournalingState.asStateFlow()
+    private val _state = MutableStateFlow(EditJournalingState())
+    val state: StateFlow<EditJournalingState> =
+        _state.asStateFlow()
 
     fun onAction(intent: EditJournalingIntent) {
         when (intent) {
@@ -39,7 +38,7 @@ class EditJournalingViewModel : ViewModel() {
         val healthJournal =
             healthJournalRecords.find { it.id == id } ?: return
 
-        _editJournalingState.update {
+        _state.update {
             it.copy(
                 currentHealthJournalRecord = healthJournal,
                 editingHealthJournalRecord = healthJournal
@@ -48,7 +47,7 @@ class EditJournalingViewModel : ViewModel() {
     }
 
     private fun updateTitle(title: String) {
-        _editJournalingState.update {
+        _state.update {
             it.copy(
                 editingHealthJournalRecord = it.editingHealthJournalRecord.copy(title = title)
             )
@@ -56,11 +55,11 @@ class EditJournalingViewModel : ViewModel() {
     }
 
     private fun updateIsEditing(value: Boolean) {
-        _editJournalingState.update { it.copy(isEditing = value) }
+        _state.update { it.copy(isEditing = value) }
     }
 
     private fun updateDescription(description: String) {
-        _editJournalingState.update {
+        _state.update {
             it.copy(
                 editingHealthJournalRecord = it.editingHealthJournalRecord.copy(
                     description = description
@@ -70,7 +69,7 @@ class EditJournalingViewModel : ViewModel() {
     }
 
     private fun updateOpenDeleteDialog(value: Boolean) {
-        _editJournalingState.update {
+        _state.update {
             it.copy(
                 openDeleteDialog = value
             )
@@ -78,6 +77,6 @@ class EditJournalingViewModel : ViewModel() {
     }
 
     private fun resetState() {
-        _editJournalingState.update { EditJournalingState() }
+        _state.update { EditJournalingState() }
     }
 }

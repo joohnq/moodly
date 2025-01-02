@@ -9,12 +9,13 @@ import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.UpdateHealthJournalsUseCase
 import com.joohnq.shared.ui.state.UiState
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
+import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
+import com.joohnq.shared.ui.state.UiState.Companion.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
 
 class HealthJournalViewModel(
     private val getHealthJournalsUseCase: GetHealthJournalsUseCase,
@@ -44,50 +45,44 @@ class HealthJournalViewModel(
         healthJournalRecord: HealthJournalRecord,
     ) = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
-
-        val res = addHealthJournalsUseCase(healthJournalRecord)
-        changeAddingStatus(if (res) UiState.Success(res) else UiState.Error("Fail to add health journal"))
+        val res = addHealthJournalsUseCase(healthJournalRecord).toUiState()
+        changeAddingStatus(res)
     }
 
     private fun updateHealthJournal(
         healthJournalRecord: HealthJournalRecord,
     ) = viewModelScope.launch {
         changeEditingStatus(UiState.Loading)
-
-        val res = updateHealthJournalsUseCase(healthJournalRecord)
-        changeEditingStatus(if (res) UiState.Success(res) else UiState.Error("Fail to update health journal"))
+        val res = updateHealthJournalsUseCase(healthJournalRecord).toUiState()
+        changeEditingStatus(res)
     }
 
     private fun getHealthJournals() =
         viewModelScope.launch {
-            _state.update { it.copy(healthJournalRecords = UiState.Loading) }
-
-            try {
-                val res = getHealthJournalsUseCase()
-                _state.update { it.copy(healthJournalRecords = UiState.Success(res)) }
-            } catch (e: Exception) {
-                _state.update { it.copy(healthJournalRecords = UiState.Error(e.message.toString())) }
-            }
+            changeHealthJournalRecordsStatus(UiState.Loading)
+            val res = getHealthJournalsUseCase().toUiState()
+            changeHealthJournalRecordsStatus(res)
         }
 
     private fun deleteHealthJournal(id: Int) =
         viewModelScope.launch {
             changeDeletingStatus(UiState.Loading)
+            val res = deleteHealthJournalsUseCase(id).toUiState()
+            changeDeletingStatus(res)
 
-            val res = deleteHealthJournalsUseCase(id)
-
-            changeDeletingStatus(if (res) UiState.Success(true) else UiState.Error("Fail to delete"))
-
-            if (res)
-                _state.update {
-                    it.copy(
-                        healthJournalRecords = UiState.Success(
-                            it.healthJournalRecords.getValue()
-                                .filter { item -> item.id != id }
-                        )
+            res.onSuccess {
+                changeHealthJournalRecordsStatus(
+                    UiState.Success(
+                        state.value.healthJournalRecords.getValue()
+                            .filter { item -> item.id != id }
                     )
-                }
+                )
+            }
         }
+
+    private fun changeHealthJournalRecordsStatus(status: UiState<List<HealthJournalRecord>>) {
+        _state.update { it.copy(healthJournalRecords = status) }
+    }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {
         _state.update { it.copy(adding = status) }

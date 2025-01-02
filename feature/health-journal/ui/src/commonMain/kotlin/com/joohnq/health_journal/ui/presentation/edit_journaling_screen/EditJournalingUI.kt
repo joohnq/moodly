@@ -25,6 +25,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.health_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
@@ -170,7 +171,7 @@ fun Preview() {
         EditJournalingState(
             snackBarState = remember { SnackbarHostState() },
             isEditing = true,
-            healthJournal = HealthJournalRecord.init(),
+            healthJournal = HealthJournalRecord(),
             openDeleteDialog = false,
             canSave = false,
         )

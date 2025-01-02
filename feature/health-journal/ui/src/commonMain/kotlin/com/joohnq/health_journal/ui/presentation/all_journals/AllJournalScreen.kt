@@ -7,14 +7,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
-import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
-import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import kotlinx.datetime.LocalDate
 
 class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<AllJournalState>() {
@@ -25,12 +24,13 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
         val healthJournalState by healthJournalViewModel.state.collectAsState()
         val userState by userViewModel.state.collectAsState()
         val allJournalViewModel: AllJournalViewModel = sharedViewModel()
-        val allJournalState by allJournalViewModel.allJournalViewModelState.collectAsState()
+        val allJournalState by allJournalViewModel.state.collectAsState()
 
         fun onEvent(event: AllJournalEvent) =
             when (event) {
                 AllJournalEvent.OnGoBack -> onGoBack()
-                is AllJournalEvent.OnSelectJournal -> onNavigate(EditJournalingScreen(event.id))
+                is AllJournalEvent.OnSelectJournal -> {}
+//                    onNavigate(EditJournalingScreen(event.id))
                 AllJournalEvent.OnDelete -> healthJournalViewModel.onAction(
                     HealthJournalIntent.DeleteHealthJournal(
                         allJournalState.currentDeleteId
@@ -41,9 +41,7 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
         if (localDate != null) {
             LaunchedEffect(Unit) {
                 allJournalViewModel.onAction(
-                    AllJournalViewModelIntent.UpdateSelectedDateTime(
-                        localDate
-                    )
+                    AllJournalViewModelIntent.UpdateSelectedDateTime(localDate)
                 )
             }
         }

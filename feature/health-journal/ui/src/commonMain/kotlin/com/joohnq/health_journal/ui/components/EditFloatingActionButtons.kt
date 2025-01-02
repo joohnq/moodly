@@ -1,4 +1,4 @@
-package com.joohnq.health_journal.ui.presentation.edit_journaling_screen
+package com.joohnq.health_journal.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,15 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.edit_journal
 import com.joohnq.shared.ui.editing
 import com.joohnq.shared.ui.remove_journal
 import com.joohnq.shared.ui.save
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

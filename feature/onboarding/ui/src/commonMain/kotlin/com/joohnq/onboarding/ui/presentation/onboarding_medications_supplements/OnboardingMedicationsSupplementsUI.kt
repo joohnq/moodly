@@ -15,16 +15,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.entity.MedicationsSupplements
-import com.joohnq.mood.components.IconAndTextRadioButtonVertical
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.event.OnboardingMedicationsSupplementsEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.state.OnboardingMedicationsSupplementsState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.IconAndTextRadioButtonVertical
 import com.joohnq.shared.ui.medications_supplements_title
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.user.ui.MedicationsSupplementsResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -49,11 +50,12 @@ fun OnboardingMedicationsSupplementsUI(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(options) { option: MedicationsSupplements ->
+                val resource = option.toResource()
                 IconAndTextRadioButtonVertical(
                     modifier = Modifier.fillMaxSize().aspectRatio(1f),
                     paddingValues = PaddingValues(all = 16.dp),
-                    text = stringResource(option.text),
-                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
+                    text = stringResource(resource.text),
+                    icon = resource.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,

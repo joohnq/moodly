@@ -19,13 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.components.ContinueButton
-import com.joohnq.mood.components.TextWithBackground
-import com.joohnq.mood.components.TopBar
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.components.ContinueButton
+import com.joohnq.shared.ui.components.TextWithBackground
+import com.joohnq.shared.ui.components.TopBar
+import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.assessments
 import com.joohnq.shared.ui.page_of
@@ -43,7 +43,7 @@ fun OnboardingBaseComponent(
     isContinueButtonVisible: Boolean = true,
     onGoBack: () -> Unit,
     onContinue: () -> Unit = {},
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarState) },

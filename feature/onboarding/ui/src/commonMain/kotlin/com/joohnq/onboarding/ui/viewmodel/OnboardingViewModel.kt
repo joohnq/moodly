@@ -2,19 +2,17 @@ package com.joohnq.onboarding.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.domain.entity.MedicationsSupplements
-import com.joohnq.domain.entity.Mood
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
-import com.joohnq.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.stress_level.domain.entity.StressLevel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
 class OnboardingViewModel : ViewModel() {
     private val _state = MutableStateFlow(OnboardingViewModelState())
     val state: StateFlow<OnboardingViewModelState> = _state.asStateFlow()

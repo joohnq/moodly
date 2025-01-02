@@ -3,12 +3,11 @@ package com.joohnq.onboarding.ui.presentation.onboarding_mood_rate
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.event.OnboardingMoodRateEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState
-import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.OnboardingProfessionalHelpScreen
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 
 class OnboardingMoodRateScreen : CustomScreen<OnboardingMoodRateState>() {
     @Composable
@@ -18,10 +17,11 @@ class OnboardingMoodRateScreen : CustomScreen<OnboardingMoodRateState>() {
 
         fun onEvent(event: OnboardingMoodRateEvent) =
             when (event) {
-                OnboardingMoodRateEvent.OnNavigateToOnboardingProfessionalHelpScreen ->
-                    onNavigate(OnboardingProfessionalHelpScreen())
+                OnboardingMoodRateEvent.OnNavigateToOnboardingProfessionalHelpScreen -> {}
+//                    onNavigate(OnboardingProfessionalHelpScreen())
 
-                OnboardingMoodRateEvent.OnGoBack -> onGoBack()
+                OnboardingMoodRateEvent.OnGoBack -> {}
+//                    onGoBack()
             }
 
         return OnboardingMoodRateState(

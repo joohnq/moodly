@@ -16,18 +16,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.DatetimeProvider
-import com.joohnq.mood.components.CircularProgressWithText
-import com.joohnq.mood.components.HorizontalSpacer
-import com.joohnq.mood.components.TextEllipsis
-import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.shared.ui.components.CircularProgressWithText
+import com.joohnq.shared.ui.components.HorizontalSpacer
+import com.joohnq.shared.ui.components.TextEllipsis
+import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

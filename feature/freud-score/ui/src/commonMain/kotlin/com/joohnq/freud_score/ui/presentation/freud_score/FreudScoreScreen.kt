@@ -7,8 +7,8 @@ import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.ui.FreudScoreResource.Companion.toResource
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.mood.ui.viewmodel.StatsState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 

@@ -3,7 +3,7 @@ package com.joohnq.freud_score.ui
 import com.joohnq.freud_score.domain.FreudScoreProperties
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
-import com.joohnq.mood.theme.Colors
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.at_risk
 import com.joohnq.shared.ui.healthy
@@ -15,7 +15,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class FreudScoreResource(
     override val score: Int,
     val title: StringResource,
-    val palette: FreudScorePalette
+    val palette: FreudScorePalette,
 ) : FreudScoreProperties {
     data class Healthy(
         override val score: Int,

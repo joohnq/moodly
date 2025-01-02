@@ -1,4 +1,4 @@
-package com.joohnq.mood.domain.repository
+package com.joohnq.mood.domain.data_source
 
 import com.joohnq.mood.domain.entity.StatsRecord
 

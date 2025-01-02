@@ -2,15 +2,13 @@ package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.util.mappers.toggle
+import com.joohnq.shared.ui.util.mappers.toggle
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
 class AddSleepQualityViewModel : ViewModel() {
     private val _state = MutableStateFlow(AddSleepQualityStateViewModel())
     val state: StateFlow<AddSleepQualityStateViewModel> =

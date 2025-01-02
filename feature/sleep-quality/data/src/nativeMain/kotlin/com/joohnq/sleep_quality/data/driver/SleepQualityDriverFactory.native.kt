@@ -1,17 +1,20 @@
 package com.joohnq.sleep_quality.data.driver
 
 import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import co.touchlab.sqliter.DatabaseConfiguration
+import com.joohnq.sleep_quality.data.database.SleepQualityDatabase
+import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 
-actual class SleepQualityDriverFactory() {
+actual class SleepQualityDriverFactory {
     actual fun createDriver(): SqlDriver =
-        AndroidSqliteDriver(
-            StatsDatabaseSql.Schema,
-            context,
-            StatsDatabase.DATABASE_NAME,
-            callback = object : AndroidSqliteDriver.Callback(StatsDatabaseSql.Schema) {
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    db.setForeignKeyConstraintsEnabled(true)
-                }
+        NativeSqliteDriver(
+            SleepQualityDatabaseSql.Schema,
+            SleepQualityDatabase.DATABASE_NAME,
+            onConfiguration = { config: DatabaseConfiguration ->
+                config.copy(
+                    extendedConfig = DatabaseConfiguration.Extended(foreignKeyConstraints = true)
+                )
             }
         )
 }

@@ -3,8 +3,8 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.state.SleepQualityState
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel

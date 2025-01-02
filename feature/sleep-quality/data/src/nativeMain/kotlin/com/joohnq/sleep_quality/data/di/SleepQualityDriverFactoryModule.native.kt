@@ -1,14 +1,10 @@
 package com.joohnq.sleep_quality.data.di
 
 import com.joohnq.sleep_quality.data.driver.SleepQualityDriverFactory
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
+import org.koin.core.module.Module
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
-@Module
-@ComponentScan
-actual class SleepQualityDriverFactoryModule {
-    @Single
-    fun provideSleepQualityDriverFactory(): SleepQualityDriverFactory =
-        SleepQualityDriverFactory()
+actual val sleepQualityDriverFactoryModule: Module = module {
+    singleOf(::SleepQualityDriverFactory)
 }

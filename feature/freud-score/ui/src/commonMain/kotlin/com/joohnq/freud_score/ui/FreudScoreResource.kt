@@ -3,12 +3,12 @@ package com.joohnq.freud_score.ui
 import com.joohnq.freud_score.domain.FreudScoreProperties
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
-import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.at_risk
 import com.joohnq.shared.ui.healthy
 import com.joohnq.shared.ui.mostly_healthy
 import com.joohnq.shared.ui.stable
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.unhealthy
 import org.jetbrains.compose.resources.StringResource
 
@@ -78,8 +78,6 @@ sealed class FreudScoreResource(
     )
 
     companion object {
-        fun init(): FreudScoreResource = Stable(50)
-
         fun FreudScore.toResource(): FreudScoreResource =
             when (this) {
                 is FreudScore.Healthy -> Healthy(score)
@@ -87,15 +85,6 @@ sealed class FreudScoreResource(
                 is FreudScore.Stable -> Stable(score)
                 is FreudScore.AtRisk -> AtRisk(score)
                 is FreudScore.Unhealthy -> Unhealthy(score)
-            }
-
-        fun FreudScoreResource.toDomain(): FreudScore =
-            when (this) {
-                is Healthy -> FreudScore.Healthy(score)
-                is MostlyHealthy -> FreudScore.MostlyHealthy(score)
-                is Stable -> FreudScore.Stable(score)
-                is AtRisk -> FreudScore.AtRisk(score)
-                is Unhealthy -> FreudScore.Unhealthy(score)
             }
     }
 }

@@ -16,8 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.MoodResource
 import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.components.CircularProgressWithText
 import com.joohnq.shared.ui.components.HorizontalSpacer
@@ -28,16 +27,19 @@ import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
+import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MentalScoreHistoryItemWithHour(
-    statsRecord: StatsRecord,
+    date: LocalDateTime,
+    resource: MoodResource,
+    description: String,
+    healthLevel: Int,
     onClick: () -> Unit,
 ) {
-    val hourAndMinutes = remember { DatetimeProvider.formatTime(statsRecord.date) }
-    val daySection = remember { DatetimeProvider.getDaySection(statsRecord.date) }
-    val resource = statsRecord.mood.toResource()
+    val hourAndMinutes = remember { DatetimeProvider.formatTime(date) }
+    val daySection = remember { DatetimeProvider.getDaySection(date) }
 
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
@@ -81,7 +83,7 @@ fun MentalScoreHistoryItemWithHour(
                 )
                 VerticalSpacer(5.dp)
                 TextEllipsis(
-                    text = statsRecord.description,
+                    text = description,
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown100Alpha64,
                 )
@@ -89,12 +91,12 @@ fun MentalScoreHistoryItemWithHour(
             HorizontalSpacer(20.dp)
             CircularProgressWithText(
                 modifier = Modifier.size(64.dp),
-                text = statsRecord.mood.healthLevel.toString(),
+                text = healthLevel.toString(),
                 textStyle = TextStyles.TextXsBold(),
                 textColor = Colors.Brown80,
                 color = resource.palette.color,
                 backgroundColor = resource.palette.backgroundColor,
-                progress = { statsRecord.mood.healthLevel / 100f },
+                progress = { healthLevel / 100f },
             )
         }
     }

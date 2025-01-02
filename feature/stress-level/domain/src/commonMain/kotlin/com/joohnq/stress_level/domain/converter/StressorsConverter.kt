@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.domain
+package com.joohnq.stress_level.domain.converter
 
 import com.joohnq.stress_level.domain.entity.Stressor
 import kotlinx.serialization.encodeToString

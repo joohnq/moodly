@@ -14,6 +14,6 @@ val stressLevelDataModule = module {
     single<StressLevelDatabaseSql> {
         StressLevelDatabase(get()).invoke()
     }
-    singleOf(::StressLevelDataSourceImpl) bind (StressLevelDataSource::class)
-    singleOf(::StressLevelRepositoryImpl) bind (StressLevelRepository::class)
+    singleOf(::StressLevelDataSourceImpl) bind StressLevelDataSource::class
+    singleOf(::StressLevelRepositoryImpl) bind StressLevelRepository::class
 }

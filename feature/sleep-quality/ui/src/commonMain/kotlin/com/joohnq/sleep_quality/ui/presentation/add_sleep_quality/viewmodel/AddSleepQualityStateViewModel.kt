@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
-import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource
 
 data class AddSleepQualityStateViewModel(
     val startHour: Int = 12,
@@ -10,6 +10,6 @@ data class AddSleepQualityStateViewModel(
     val endMinute: Int = 0,
     val showStartTimePickerDialog: Boolean = false,
     val showEndTimePickerDialog: Boolean = false,
-    val mood: Mood? = null,
-    val selectedSleepInfluences: List<SleepInfluences> = mutableListOf(),
+    val mood: MoodResource? = null,
+    val selectedSleepInfluences: List<SleepInfluencesResource> = mutableListOf(),
 )

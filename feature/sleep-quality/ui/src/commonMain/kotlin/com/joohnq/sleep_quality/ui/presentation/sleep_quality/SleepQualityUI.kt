@@ -93,13 +93,13 @@ fun SleepQualityUI(
             SharedPanelComponent(
                 containerColor = Colors.Brown10,
                 isDark = false,
-                onGoBack = { state.onEvent(SleepQualityEvent.OnGoBack) },
+                onGoBack = { state.onEvent(SleepQualityEvent.GoBack) },
                 backgroundColor = resource.palette.color,
                 backgroundImage = Drawables.Images.SleepQualityBackground,
                 panelTitle = Res.string.sleep_quality,
                 bodyTitle = Res.string.sleep_stats,
                 color = resource.palette.backgroundColor,
-                onAdd = { state.onEvent(SleepQualityEvent.OnAdd) },
+                onAdd = { state.onEvent(SleepQualityEvent.Add) },
                 panelContent = {
                     Column(
                         modifier = Modifier

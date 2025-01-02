@@ -10,8 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.event.OnboardingStressLevelEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.state.OnboardingStressLevelState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
@@ -22,7 +22,7 @@ import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.stress_level.domain.entity.StressLevel
+import com.joohnq.stress_level.ui.StressLevelResource
 import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -30,14 +30,14 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingStressLevelUI(
     state: OnboardingStressLevelState,
 ) {
-    val options: List<StressLevel> = remember { StressLevel.getAll() }
+    val options: List<StressLevelResource> = remember { StressLevelResource.getAll() }
     val selectedOption = state.selectedOption.toResource()
 
     OnboardingBaseComponent(
         page = 6,
         title = Res.string.stress_rate_title,
-        onGoBack = { state.onEvent(OnboardingStressLevelEvent.OnGoBack) },
-        onContinue = { state.onEvent(OnboardingStressLevelEvent.OnNavigateToOnboardingExpressionAnalysisScreen) }
+        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
             text = stringResource(selectedOption.value),
@@ -49,11 +49,10 @@ fun OnboardingStressLevelUI(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            options.forEach { option: StressLevel ->
-                val resource = option.toResource()
+            options.forEach { option: StressLevelResource ->
                 TextRadioButton(
                     modifier = Modifier.weight(1f).aspectRatio(1f).testTag(option.id.toString()),
-                    text = stringResource(resource.value),
+                    text = option.value,
                     selected = state.selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),

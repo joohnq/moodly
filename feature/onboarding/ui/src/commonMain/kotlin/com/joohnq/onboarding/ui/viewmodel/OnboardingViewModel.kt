@@ -76,7 +76,7 @@ class OnboardingViewModel : ViewModel() {
     }
 
     private fun resetStatsRecord() {
-        _state.update { it.copy(statsRecord = StatsRecord.init()) }
+        _state.update { it.copy(statsRecord = StatsRecord()) }
     }
 
     private fun setOnboardingStateForTesting(onboardingViewModelState: OnboardingViewModelState) {

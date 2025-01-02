@@ -10,7 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.entity.User
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.event.OnboardingExpressionEvent
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
@@ -24,10 +24,10 @@ import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
-import com.joohnq.user.ui.viewmodel.UserViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import kotlinx.coroutines.launch
 
 class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnalysisState>() {
@@ -43,24 +43,24 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
         val snackBarState = remember { SnackbarHostState() }
         val onboardingState by onboardingViewModel.state.collectAsState()
         val userState by userViewModel.state.collectAsState()
-        val statsState by statsViewModel.statsState.collectAsState()
-        val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
-        val stressLevelState by stressLevelViewModel.stressLevelState.collectAsState()
+        val statsState by statsViewModel.state.collectAsState()
+        val sleepQualityState by sleepQualityViewModel.state.collectAsState()
+        val stressLevelState by stressLevelViewModel.state.collectAsState()
         val userPreferencesState by userPreferencesViewModel.state.collectAsState()
 
-        fun onEvent(event: OnboardingExpressionEvent) =
+        fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingExpressionEvent.OnContinue -> {
+                OnboardingEvent.OnNavigateToNext -> {
                     sleepQualityViewModel.onAction(
                         SleepQualityIntent.AddSleepQualityRecord(
-                            SleepQualityRecord.init().copy(
+                            SleepQualityRecord(
                                 sleepQuality = onboardingState.sleepQuality
                             )
                         )
                     )
                     stressLevelViewModel.onAction(
                         StressLevelIntent.AddStressLevelRecord(
-                            StressLevelRecord.init().copy(
+                            StressLevelRecord(
                                 stressLevel = onboardingState.stressLevel
                             )
                         )
@@ -68,7 +68,7 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
                     statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.statsRecord))
                     userViewModel.onAction(
                         UserViewModelIntent.UpdateUser(
-                            User.init().copy(
+                            User(
                                 physicalSymptoms = onboardingState.physicalSymptoms!!,
                                 medicationsSupplements = onboardingState.medicationsSupplements!!,
                                 soughtHelp = onboardingState.soughtHelp!!
@@ -77,7 +77,7 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
                     )
                 }
 
-                OnboardingExpressionEvent.OnGoBack -> {}
+                OnboardingEvent.OnGoBack -> {}
             }
 
         LaunchedEffect(

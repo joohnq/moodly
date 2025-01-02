@@ -3,7 +3,7 @@ package com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.event.OnboardingSleepQualityEvent
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.state.OnboardingSleepQualityState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared.ui.CustomScreen
@@ -15,12 +15,12 @@ class OnboardingSleepQualityScreen : CustomScreen<OnboardingSleepQualityState>()
         val onboardingViewModel: OnboardingViewModel = sharedViewModel()
         val onboardingState by onboardingViewModel.state.collectAsState()
 
-        fun onEvent(event: OnboardingSleepQualityEvent) =
+        fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingSleepQualityEvent.OnNavigateToOnboardingMedicationSupplementsScreen -> {}
+                OnboardingEvent.OnNavigateToNext -> {}
 //                    onNavigate(OnboardingMedicationsSupplementsScreen())
 
-                OnboardingSleepQualityEvent.OnGoBack -> {}
+                OnboardingEvent.OnGoBack -> {}
 //                    onGoBack()
             }
 

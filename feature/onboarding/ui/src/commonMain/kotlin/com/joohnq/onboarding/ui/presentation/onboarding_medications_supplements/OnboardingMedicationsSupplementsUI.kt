@@ -2,7 +2,6 @@ package com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.entity.MedicationsSupplements
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.event.OnboardingMedicationsSupplementsEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.state.OnboardingMedicationsSupplementsState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
@@ -25,22 +24,22 @@ import com.joohnq.shared.ui.medications_supplements_title
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.user.ui.MedicationsSupplementsResource.Companion.toResource
+import com.joohnq.user.ui.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun OnboardingMedicationsSupplementsUI(
     state: OnboardingMedicationsSupplementsState,
 ) {
-    val options: List<MedicationsSupplements> = remember { MedicationsSupplements.getAll() }
+    val options: List<MedicationsSupplementsResource> =
+        remember { MedicationsSupplementsResource.getAll() }
 
     OnboardingBaseComponent(
         page = 5,
         title = Res.string.medications_supplements_title,
         isContinueButtonVisible = state.selectedOption != null,
-        onGoBack = { state.onEvent(OnboardingMedicationsSupplementsEvent.OnGoBack) },
-        onContinue = { state.onEvent(OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen) },
+        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) },
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -49,22 +48,19 @@ fun OnboardingMedicationsSupplementsUI(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            items(options) { option: MedicationsSupplements ->
-                val resource = option.toResource()
+            items(options) { option: MedicationsSupplementsResource ->
                 IconAndTextRadioButtonVertical(
                     modifier = Modifier.fillMaxSize().aspectRatio(1f),
                     paddingValues = PaddingValues(all = 16.dp),
-                    text = stringResource(resource.text),
-                    icon = resource.icon.copy(modifier = Modifier.size(Dimens.Icon)),
+                    text = stringResource(option.text),
+                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextMdBold(),
                     onClick = {
                         state.onAction(
-                            OnboardingViewModelIntent.UpdateUserMedicationsSupplements(
-                                option
-                            )
+                            OnboardingViewModelIntent.UpdateUserMedicationsSupplements(option)
                         )
                     }
                 )

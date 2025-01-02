@@ -3,7 +3,7 @@ package com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.event.OnboardingMedicationsSupplementsEvent
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.state.OnboardingMedicationsSupplementsState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared.ui.CustomScreen
@@ -16,12 +16,12 @@ class OnboardingMedicationsSupplementsScreen :
         val onboardingViewModel: OnboardingViewModel = sharedViewModel()
         val onboardingState by onboardingViewModel.state.collectAsState()
 
-        fun onEvent(event: OnboardingMedicationsSupplementsEvent) =
+        fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingMedicationsSupplementsEvent.OnNavigateToOnboardingStressLevelScreen -> {}
+                OnboardingEvent.OnNavigateToNext -> {}
 //                    onNavigate(OnboardingStressLevelScreen())
 
-                OnboardingMedicationsSupplementsEvent.OnGoBack -> {}
+                OnboardingEvent.OnGoBack -> {}
 //                    onGoBack()
             }
 

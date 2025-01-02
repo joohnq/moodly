@@ -14,12 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.event.OnboardingMoodRateEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
@@ -41,7 +40,7 @@ fun OnboardingMoodRateUI(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onGoBack = { state.onEvent(OnboardingMoodRateEvent.OnGoBack) },
+        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
     ) {
         Text(
             text = stringResource(
@@ -65,7 +64,7 @@ fun OnboardingMoodRateUI(
         IconContinueButton(
             modifier = Modifier.size(60.dp),
             colors = ComponentColors.IconButton.ContinueButtonColors(),
-            onClick = { state.onEvent(OnboardingMoodRateEvent.OnNavigateToOnboardingProfessionalHelpScreen) }
+            onClick = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
         )
     }
 
@@ -79,7 +78,7 @@ fun OnboardingMoodRateUI(
             contentAlignment = Alignment.TopCenter
         ) {
             RouletteMoods(
-                setSelectedMood = { state.onAction(OnboardingViewModelIntent.UpdateMood(it.toDomain())) }
+                setSelectedMood = { state.onAction(OnboardingViewModelIntent.UpdateMood(it)) }
             )
         }
     }

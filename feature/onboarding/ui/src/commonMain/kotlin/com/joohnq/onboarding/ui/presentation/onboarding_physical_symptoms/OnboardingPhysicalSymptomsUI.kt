@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.entity.PhysicalSymptoms
+import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
@@ -26,6 +26,7 @@ import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.user.ui.PhysicalSymptomsResource
 import com.joohnq.user.ui.PhysicalSymptomsResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -33,14 +34,14 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingPhysicalSymptomsUI(
     state: OnboardingPhysicalSymptomsState,
 ) {
-    val options = remember { PhysicalSymptoms.getAll() }
+    val options = remember { PhysicalSymptomsResource.getAll() }
 
     OnboardingBaseComponent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = state.selectedOption != null,
-        onGoBack = { state.onEvent(OnboardingPhysicalSymptomsEvent.OnGoBack) },
-        onContinue = { state.onEvent(OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen) }
+        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -53,22 +54,19 @@ fun OnboardingPhysicalSymptomsUI(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            options.forEach { option: PhysicalSymptoms ->
-                val resource = option.toResource()
+            options.forEach { option: PhysicalSymptomsResource ->
                 IconAndTextRadioButtonHorizontal(
                     modifier = Modifier.fillMaxWidth().testTag(option.id.toString()),
                     paddingValues = PaddingValues(all = 16.dp),
-                    text = stringResource(resource.text),
-                    icon = resource.icon.copy(modifier = Modifier.size(Dimens.Icon)),
+                    text = stringResource(option.text),
+                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),
                     onClick = {
                         state.onAction(
-                            OnboardingViewModelIntent.UpdateUserPhysicalSymptoms(
-                                option
-                            )
+                            OnboardingViewModelIntent.UpdateUserPhysicalSymptoms(option)
                         )
                     }
                 )

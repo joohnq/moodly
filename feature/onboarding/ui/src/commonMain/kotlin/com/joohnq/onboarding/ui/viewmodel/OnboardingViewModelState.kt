@@ -11,7 +11,7 @@ data class OnboardingViewModelState(
     val physicalSymptoms: PhysicalSymptoms? = null,
     val soughtHelp: ProfessionalHelp? = null,
     val medicationsSupplements: MedicationsSupplements? = null,
-    val statsRecord: StatsRecord = StatsRecord.init(),
+    val statsRecord: StatsRecord = StatsRecord(),
     val sleepQuality: SleepQuality = SleepQuality.Worst,
     val stressLevel: StressLevel = StressLevel.Three,
     val sliderValue: Float = 0f,

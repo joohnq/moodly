@@ -3,8 +3,8 @@ package com.joohnq.stress_level.ui.presentation.stress_level
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.presentation.stress_level.state.StressLevelState

@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joohnq.domain.entity.TextRadioButtonColors
-import com.joohnq.mood.components.CalculateTextWidth
-import com.joohnq.mood.components.TextRadioButton
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Dimens
+import com.joohnq.shared.ui.components.CalculateTextWidth
+import com.joohnq.shared.ui.components.TextRadioButton
+import com.joohnq.shared.domain.entity.TextRadioButtonColors
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.stress_level.ui.StressorResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -19,7 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressStressorCircle(
     stressStressor: StressorResource,
     selected: Boolean,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val fontSize = 18.sp
     val text = stringResource(stressStressor.text)

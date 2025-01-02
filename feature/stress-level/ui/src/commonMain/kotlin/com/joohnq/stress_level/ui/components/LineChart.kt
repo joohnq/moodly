@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.use_case.OrganizeStatRangeUseCase
-import com.joohnq.mood.theme.Colors
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource

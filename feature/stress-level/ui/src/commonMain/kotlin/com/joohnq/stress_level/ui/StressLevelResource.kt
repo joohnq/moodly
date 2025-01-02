@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui
 
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.theme.Colors
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.five_number
 import com.joohnq.shared.ui.four_number

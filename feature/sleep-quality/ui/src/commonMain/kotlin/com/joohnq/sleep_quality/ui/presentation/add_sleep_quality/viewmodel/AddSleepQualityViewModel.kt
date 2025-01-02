@@ -1,9 +1,9 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.ui.MoodResource
 import com.joohnq.shared.ui.util.mappers.toggle
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,7 +36,7 @@ class AddSleepQualityViewModel : ViewModel() {
         }
     }
 
-    private fun updateMood(mood: Mood?) {
+    private fun updateMood(mood: MoodResource?) {
         _state.update {
             it.copy(
                 mood = mood
@@ -44,7 +44,7 @@ class AddSleepQualityViewModel : ViewModel() {
         }
     }
 
-    private fun updateSelectedSleepInfluences(sleepInfluences: SleepInfluences) {
+    private fun updateSelectedSleepInfluences(sleepInfluences: SleepInfluencesResource) {
         _state.update {
             it.copy(
                 selectedSleepInfluences = state.value.selectedSleepInfluences.toggle(

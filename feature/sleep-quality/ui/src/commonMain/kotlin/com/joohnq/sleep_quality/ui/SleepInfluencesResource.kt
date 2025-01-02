@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.StringResource
 @Serializable
 sealed class SleepInfluencesResource(
     override val id: Int,
-    @Contextual val title: StringResource
+    @Contextual val title: StringResource,
 ) : SleepInfluencesProperties {
     data object NaturalLight :
         SleepInfluencesResource(id = NATURAL_LIGHT.id, title = Res.string.exposure_to_natural_light)
@@ -95,5 +95,7 @@ sealed class SleepInfluencesResource(
             Anxiety -> SleepInfluences.Anxiety
             AlcoholConsumption -> SleepInfluences.AlcoholConsumption
         }
+
+        fun List<SleepInfluencesResource>.toDomain(): List<SleepInfluences> = map { it.toDomain() }
     }
 }

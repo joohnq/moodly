@@ -2,7 +2,6 @@ package com.joohnq.sleep_quality.domain.entity
 
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
-import kotlinx.serialization.Serializable
 
 sealed class SleepQuality(
     override val id: Int,
@@ -40,14 +39,6 @@ sealed class SleepQuality(
             Worst
         )
 
-        fun Mood.toSleepQuality(): SleepQuality =
-            when (this) {
-                Mood.Depressed -> Worst
-                Mood.Sad -> Poor
-                Mood.Neutral -> Fair
-                Mood.Happy -> Good
-                Mood.Overjoyed -> Excellent
-            }
 
         fun SleepQuality.toMood(): Mood = when (this) {
             Excellent -> Mood.Overjoyed

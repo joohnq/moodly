@@ -1,11 +1,11 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
-import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource
 
 sealed class AddSleepQualityIntent {
-    data class UpdateMood(val mood: Mood?) : AddSleepQualityIntent()
-    data class UpdateSelectedSleepInfluence(val sleepInfluence: SleepInfluences) :
+    data class UpdateMood(val mood: MoodResource?) : AddSleepQualityIntent()
+    data class UpdateSelectedSleepInfluence(val sleepInfluence: SleepInfluencesResource) :
         AddSleepQualityIntent()
 
     data class UpdateShowStartTimePickerDialog(val value: Boolean) :

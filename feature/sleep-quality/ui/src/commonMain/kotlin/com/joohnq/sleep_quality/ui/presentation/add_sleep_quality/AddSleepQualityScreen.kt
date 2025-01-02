@@ -8,13 +8,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.mood.ui.MoodResource.Companion.toSleepQuality
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
-import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.toSleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.endSleeping
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.startSleeping
+import com.joohnq.sleep_quality.ui.SleepInfluencesResource.Companion.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.state.AddSleepQualityState
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
@@ -30,7 +31,7 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
         val addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
-        val sleepQualityState by sleepQualityViewModel.sleepQualityState.collectAsState()
+        val sleepQualityState by sleepQualityViewModel.state.collectAsState()
         val addSleepQualityState by addSleepQualityViewModel.state.collectAsState()
 
         fun onEvent(event: AddSleepQualityEvent) =
@@ -39,9 +40,9 @@ class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
                 AddSleepQualityEvent.OnAdd ->
                     sleepQualityViewModel.onAction(
                         SleepQualityIntent.AddSleepQualityRecord(
-                            SleepQualityRecord.init().copy(
+                            SleepQualityRecord(
                                 sleepQuality = addSleepQualityState.mood!!.toSleepQuality(),
-                                sleepInfluences = addSleepQualityState.selectedSleepInfluences
+                                sleepInfluences = addSleepQualityState.selectedSleepInfluences.toDomain(),
                             ).startSleeping(
                                 addSleepQualityState.startHour,
                                 addSleepQualityState.startMinute

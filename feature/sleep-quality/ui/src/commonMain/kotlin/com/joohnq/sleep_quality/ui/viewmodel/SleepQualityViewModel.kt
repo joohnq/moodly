@@ -3,6 +3,7 @@ package com.joohnq.sleep_quality.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.toUiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
@@ -16,8 +17,8 @@ class SleepQualityViewModel(
     private val addSleepQualityUseCase: AddSleepQualityUseCase,
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
 ) : ViewModel() {
-    private val _sleepQualityState = MutableStateFlow(SleepQualityState())
-    val sleepQualityState: StateFlow<SleepQualityState> = _sleepQualityState.asStateFlow()
+    private val _state = MutableStateFlow(SleepQualityState())
+    val state: StateFlow<SleepQualityState> = _state.asStateFlow()
 
     fun onAction(intent: SleepQualityIntent) {
         when (intent) {
@@ -31,28 +32,24 @@ class SleepQualityViewModel(
 
     private fun getSleepQualityRecords() {
         viewModelScope.launch {
-            _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Loading) }
-            try {
-                val res = getSleepQualitiesUseCase()
-                _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Success(res)) }
-            } catch (e: Exception) {
-                _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Error(e.message.toString())) }
-            }
+            changeSleepQualityRecordsStatus(UiState.Loading)
+            val res = getSleepQualitiesUseCase().toUiState()
+            changeSleepQualityRecordsStatus(res)
         }
     }
 
     private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
         viewModelScope.launch {
             changeAddingStatus(UiState.Loading)
-            val res = addSleepQualityUseCase(sleepQualityRecord)
-            changeAddingStatus(
-                if (res) UiState.Success(true) else UiState.Error(
-                    "Fail to add sleep quality record"
-                )
-            )
+            val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
+            changeAddingStatus(res)
         }
 
+    private fun changeSleepQualityRecordsStatus(status: UiState<List<SleepQualityRecord>>) {
+        _state.update { it.copy(sleepQualityRecords = status) }
+    }
+
     private fun changeAddingStatus(status: UiState<Boolean>) {
-        _sleepQualityState.update { it.copy(adding = status) }
+        _state.update { it.copy(adding = status) }
     }
 }

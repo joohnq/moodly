@@ -1,6 +1,6 @@
 package com.joohnq.health_journal.domain.entity
 
-import com.joohnq.domain.DatetimeProvider
+import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.mood.domain.entity.Mood
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable

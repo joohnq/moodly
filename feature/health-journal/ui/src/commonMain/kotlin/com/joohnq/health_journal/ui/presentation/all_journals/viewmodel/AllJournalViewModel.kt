@@ -6,9 +6,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.LocalDate
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
+
 class AllJournalViewModel : ViewModel() {
     private val _allJournalViewModelState = MutableStateFlow(AllJournalViewModelState())
     val allJournalViewModelState: StateFlow<AllJournalViewModelState> =

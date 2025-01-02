@@ -25,10 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.edit_journal
 import com.joohnq.shared.ui.editing
@@ -43,7 +43,7 @@ fun EditFloatingActionButtons(
     canSave: Boolean,
     onEditingAction: (EditJournalingIntent) -> Unit,
     onEvent: (EditJournalingEvent) -> Unit,
-    requestTitleFocus: () -> Unit
+    requestTitleFocus: () -> Unit,
 ) {
     Box(
         modifier = Modifier.imePadding().fillMaxWidth(),

@@ -16,13 +16,13 @@ import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.components.HealthJournalComponentColorful
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
-import com.joohnq.mood.components.SharedPanelComponent
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.state.UiState.Companion.foldComposable
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.components.SharedPanelComponent
+import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.health_journal
 import com.joohnq.shared.ui.journal_history
@@ -32,7 +32,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun HealthJournalUI(
-    state: HealthJournalState
+    state: HealthJournalState,
 ) {
     state.healthJournal.foldComposable(
         onLoading = { LoadingUI() },

@@ -19,18 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.DatetimeProvider
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.ui.FreudScoreResource.Companion.toResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalFreudScoreUseCase
 import com.joohnq.health_journal.domain.use_case.OrganizeByDateHealthJournalUseCase
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.theme.TextStyles
-import com.joohnq.mood.util.mappers.forEachMapComposable
-import com.joohnq.mood.util.mappers.items
+import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.friday_char
 import com.joohnq.shared.ui.monday_char
@@ -38,6 +36,8 @@ import com.joohnq.shared.ui.saturday_char
 import com.joohnq.shared.ui.sunday_char
 import com.joohnq.shared.ui.thursday_char
 import com.joohnq.shared.ui.tuesday_char
+import com.joohnq.shared.ui.util.mappers.forEachMapComposable
+import com.joohnq.shared.ui.util.mappers.items
 import com.joohnq.shared.ui.wednesday_char
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
@@ -46,7 +46,7 @@ import org.koin.compose.koinInject
 @Composable
 fun HealthJournalComponent(
     modifier: Modifier = Modifier,
-    healthJournals: List<HealthJournalRecord>
+    healthJournals: List<HealthJournalRecord>,
 ) {
     val dayOfWeek =
         remember { DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime()) }
@@ -94,7 +94,7 @@ fun HealthJournalComponent(
 fun HealthJournalComponentColorful(
     modifier: Modifier = Modifier,
     healthJournals: List<HealthJournalRecord>,
-    onClick: (LocalDate) -> Unit
+    onClick: (LocalDate) -> Unit,
 ) {
     val dayOfWeek = DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime())
     val weekChars = remember {

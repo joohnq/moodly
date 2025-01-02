@@ -6,7 +6,7 @@ import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJourn
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelState
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 
 data class AllJournalState(
     val allJournalViewModelState: AllJournalViewModelState,
@@ -14,5 +14,5 @@ data class AllJournalState(
     val healthJournalRecords: UiState<List<HealthJournalRecord>>,
     val onAction: (HealthJournalIntent) -> Unit,
     val onAllAction: (AllJournalViewModelIntent) -> Unit,
-    val onEvent: (AllJournalEvent) -> Unit
+    val onEvent: (AllJournalEvent) -> Unit,
 )

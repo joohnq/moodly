@@ -10,10 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.TextStyles
+import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.TextStyles
 import kotlinx.datetime.LocalDate
 
 @Composable

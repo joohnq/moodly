@@ -7,20 +7,20 @@ import com.joohnq.mood.domain.use_case.AddStatsUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetStatsUseCase
 import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-
 class StatsViewModel(
     private val getStatsUseCase: GetStatsUseCase,
     private val deleteStatsUseCase: DeleteStatsUseCase,
     private val addStatsUseCase: AddStatsUseCase,
 ) : ViewModel() {
-    private val _statsState = MutableStateFlow(StatsState())
-    val statsState: StateFlow<StatsState> = _statsState.asStateFlow()
+    private val _state = MutableStateFlow(StatsState())
+    val state: StateFlow<StatsState> = _state.asStateFlow()
 
     fun onAction(intent: StatsIntent) {
         when (intent) {
@@ -33,29 +33,22 @@ class StatsViewModel(
 
     private fun getStatsRecords() =
         viewModelScope.launch {
-            _statsState.update { it.copy(statsRecords = UiState.Loading) }
-
-            try {
-                val res = getStatsUseCase()
-                _statsState.update { it.copy(statsRecords = UiState.Success(res)) }
-            } catch (e: Exception) {
-                _statsState.update { it.copy(statsRecords = UiState.Error(e.message.toString())) }
-            }
+            changeStatsRecordsStatus(UiState.Loading)
+            val res = getStatsUseCase().toUiState()
+            changeStatsRecordsStatus(res)
         }
 
     private fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
+        val res = addStatsUseCase(statsRecord).toUiState()
+        changeAddingStatus(res)
+    }
 
-        val res = addStatsUseCase(statsRecord)
-
-        changeAddingStatus(
-            if (res) UiState.Success(true) else UiState.Error(
-                "Fail to add stats record"
-            )
-        )
+    private fun changeStatsRecordsStatus(status: UiState<List<StatsRecord>>) {
+        _state.update { it.copy(statsRecords = status) }
     }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {
-        _statsState.update { it.copy(adding = status) }
+        _state.update { it.copy(adding = status) }
     }
 }

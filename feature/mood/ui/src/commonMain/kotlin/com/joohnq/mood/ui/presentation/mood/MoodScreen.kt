@@ -7,24 +7,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetNextStatUseCase
 import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
-import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
-import com.joohnq.shared.ui.state.UiState.Companion.getValueOrNull
-import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.getValue
+import com.joohnq.shared.ui.state.UiState.Companion.getValueOrNull
 import org.koin.compose.koinInject
 
 class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
     @Composable
     override fun Screen(): MoodState {
         val statsViewModel: StatsViewModel = sharedViewModel()
-        val statsState by statsViewModel.statsState.collectAsState()
+        val statsState by statsViewModel.state.collectAsState()
         val getNextStatUseCase: GetNextStatUseCase = koinInject()
         val getPreviousStatUseCase: GetPreviousStatUseCase = koinInject()
         var currentStatsRecord by remember {
@@ -42,7 +41,8 @@ class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
 //                    onGoBack(HomeScreen())
                 is MoodEvent.OnNext -> hasNext?.run { currentStatsRecord = this }
                 is MoodEvent.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
-                is MoodEvent.OnAddStatScreen -> onNavigate(AddStatScreen())
+                is MoodEvent.OnAddStatScreen -> {}
+//                    onNavigate(AddStatScreen())
                 is MoodEvent.OnSetMood -> {
                     currentStatsRecord = event.statsRecord
                 }

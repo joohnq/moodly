@@ -8,17 +8,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
-import com.joohnq.mood.ui.presentation.mood.MoodScreen
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
 class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
@@ -28,16 +28,16 @@ class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
         val addStatsViewModel: AddStatViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
-        val statsState by statsViewModel.statsState.collectAsState()
-        val addStatsState by addStatsViewModel.addStatState.collectAsState()
+        val statsState by statsViewModel.state.collectAsState()
+        val addStatsState by addStatsViewModel.state.collectAsState()
 
         fun onEvent(event: ExpressionAnalysisEvent) =
             when (event) {
                 ExpressionAnalysisEvent.OnAdd ->
                     statsViewModel.onAction(
                         StatsIntent.AddStatsRecord(
-                            StatsRecord.init().copy(
-                                mood = addStatsState.mood,
+                            StatsRecord(
+                                mood = addStatsState.mood.toDomain(),
                                 description = addStatsState.description
                             )
                         )
@@ -50,7 +50,7 @@ class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
             statsState.adding.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
-                    onNavigate(MoodScreen())
+//                    onNavigate(MoodScreen())
                     statsViewModel.onAction(StatsIntent.GetStatsRecords)
                     statsViewModel.onAction(StatsIntent.ResetAddingStatus)
                 },

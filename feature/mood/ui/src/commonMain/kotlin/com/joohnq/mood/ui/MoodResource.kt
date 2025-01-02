@@ -12,6 +12,7 @@ import com.joohnq.shared.ui.overjoyed
 import com.joohnq.shared.ui.sad
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
@@ -171,6 +172,8 @@ sealed class MoodResource(
                 is Mood.Overjoyed -> Overjoyed
             }
 
+        fun List<Mood>.toResource(): List<MoodResource> = map { it.toResource() }
+
         fun MoodResource.toDomain(): Mood =
             when (this) {
                 Depressed -> Mood.Depressed
@@ -178,6 +181,15 @@ sealed class MoodResource(
                 Neutral -> Mood.Neutral
                 Happy -> Mood.Happy
                 Overjoyed -> Mood.Overjoyed
+            }
+
+        fun MoodResource.toSleepQuality(): SleepQuality =
+            when (this) {
+                Depressed -> SleepQuality.Worst
+                Sad -> SleepQuality.Poor
+                Neutral -> SleepQuality.Fair
+                Happy -> SleepQuality.Good
+                Overjoyed -> SleepQuality.Excellent
             }
     }
 }

@@ -142,21 +142,21 @@ fun MoodBarStatistic(
 @Preview @Composable fun MoodBarStatisticPreview() {
     MoodBarStatistic(
         listOf(
-            StatsRecord.init().copy(mood = Mood.Depressed),
+            StatsRecord(mood = Mood.Depressed),
         ),
-        currentStatsRecord = StatsRecord.init().copy(mood = Mood.Depressed)
+        currentStatsRecord = StatsRecord(mood = Mood.Depressed)
     )
 }
 
 @Preview @Composable fun MoodBarStatisticPreview2() {
     MoodBarStatistic(
         statsRecords = listOf(
-            StatsRecord.init().copy(mood = Mood.Neutral),
-            StatsRecord.init().copy(mood = Mood.Sad),
-            StatsRecord.init().copy(mood = Mood.Overjoyed),
-            StatsRecord.init().copy(mood = Mood.Depressed),
+            StatsRecord(mood = Mood.Neutral),
+            StatsRecord(mood = Mood.Sad),
+            StatsRecord(mood = Mood.Overjoyed),
+            StatsRecord(mood = Mood.Depressed),
         ),
-        currentStatsRecord = StatsRecord.init().copy(mood = Mood.Sad)
+        currentStatsRecord = StatsRecord(mood = Mood.Sad)
     )
 }
 

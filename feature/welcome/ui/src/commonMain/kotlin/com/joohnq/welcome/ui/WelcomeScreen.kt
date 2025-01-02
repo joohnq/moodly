@@ -12,8 +12,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.state.WelcomeState
 import kotlinx.coroutines.launch
 

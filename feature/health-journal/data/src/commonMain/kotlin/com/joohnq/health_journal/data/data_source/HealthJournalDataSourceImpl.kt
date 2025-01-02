@@ -1,11 +1,11 @@
 package com.joohnq.health_journal.data.data_source
 
 import com.joohnq.core.database.converters.LocalDateTimeConverter
+import com.joohnq.core.database.executeTryCatch
 import com.joohnq.health_journal.database.HealthJournalDatabaseSql
 import com.joohnq.health_journal.domain.data_source.HealthJournalDataSource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.mood.domain.StatsRecordConverter
-
+import com.joohnq.mood.domain.converter.StatsRecordConverter
 
 class HealthJournalDataSourceImpl(private val database: HealthJournalDatabaseSql) :
     HealthJournalDataSource {
@@ -22,39 +22,29 @@ class HealthJournalDataSourceImpl(private val database: HealthJournalDatabaseSql
         }.executeAsList()
 
     override suspend fun addHealthJournal(healthJournalRecord: HealthJournalRecord): Boolean =
-        try {
+        executeTryCatch {
             query.addHealthJournal(
                 id = healthJournalRecord.id.toLong(),
                 mood = StatsRecordConverter.fromMood(healthJournalRecord.mood),
                 title = healthJournalRecord.title,
                 description = healthJournalRecord.description,
             )
-            true
-        } catch (e: Exception) {
-            false
         }
 
     override suspend fun deleteHealthJournal(id: Int): Boolean =
-        try {
+        executeTryCatch {
             query.deleteHealthJournal(
                 id = id.toLong()
             )
-            true
-        } catch (e: Exception) {
-            false
         }
 
     override suspend fun updateHealthJournal(healthJournal: HealthJournalRecord): Boolean =
-        try {
+        executeTryCatch {
             query.updateHealthJournal(
                 mood = StatsRecordConverter.fromMood(healthJournal.mood),
                 title = healthJournal.title,
                 description = healthJournal.description,
                 id = healthJournal.id.toLong()
             )
-            true
-        } catch (e: Exception) {
-            false
         }
-
 }

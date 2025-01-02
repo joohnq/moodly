@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-//    //    alias(libs.plugins.ksp)
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
 }
@@ -66,8 +65,6 @@ kotlin {
             implementation(libs.datetime)
 
             implementation(libs.bundles.koin)
-
-
             implementation(libs.coroutines.extensions)
         }
         iosMain.dependencies {

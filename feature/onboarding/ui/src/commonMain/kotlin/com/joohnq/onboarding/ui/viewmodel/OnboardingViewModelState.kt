@@ -3,7 +3,7 @@ package com.joohnq.onboarding.ui.viewmodel
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
-import com.joohnq.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.stress_level.domain.entity.StressLevel
 
@@ -14,5 +14,5 @@ data class OnboardingViewModelState(
     val statsRecord: StatsRecord = StatsRecord.init(),
     val sleepQuality: SleepQuality = SleepQuality.Worst,
     val stressLevel: StressLevel = StressLevel.Three,
-    val sliderValue: Float = 0f
+    val sliderValue: Float = 0f,
 )

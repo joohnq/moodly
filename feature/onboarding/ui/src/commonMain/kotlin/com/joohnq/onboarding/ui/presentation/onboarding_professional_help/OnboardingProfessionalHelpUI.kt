@@ -8,16 +8,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.entity.ProfessionalHelp
-import com.joohnq.mood.components.TextRadioButton
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.Drawables
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.state.OnboardingProfessionalHelpState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.TextRadioButton
 import com.joohnq.shared.ui.sought_professional_help_title
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.user.ui.ProfessionalHelpResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -38,10 +39,11 @@ fun OnboardingProfessionalHelpUI(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            options.forEach { option ->
+            options.forEach { option: ProfessionalHelp ->
+                val resource = option.toResource()
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(option.text),
+                    text = stringResource(resource.text),
                     selected = state.selectedOption == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),

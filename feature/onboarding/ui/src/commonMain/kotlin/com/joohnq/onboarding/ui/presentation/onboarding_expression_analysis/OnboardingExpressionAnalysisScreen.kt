@@ -8,26 +8,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.entity.User
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState
-import com.joohnq.mood.state.UiState.Companion.fold
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.event.OnboardingExpressionEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
 import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
 import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.ui.viewmodel.UserViewModelIntent
 import kotlinx.coroutines.launch
 
 class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnalysisState>() {
@@ -53,16 +53,16 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
                 OnboardingExpressionEvent.OnContinue -> {
                     sleepQualityViewModel.onAction(
                         SleepQualityIntent.AddSleepQualityRecord(
-                            SleepQualityRecord.Builder()
-                                .setSleepQuality(sleepQuality = onboardingState.sleepQuality)
-                                .build()
+                            SleepQualityRecord.init().copy(
+                                sleepQuality = onboardingState.sleepQuality
+                            )
                         )
                     )
                     stressLevelViewModel.onAction(
                         StressLevelIntent.AddStressLevelRecord(
-                            StressLevelRecord.Builder()
-                                .setStressLevel(onboardingState.stressLevel)
-                                .build()
+                            StressLevelRecord.init().copy(
+                                stressLevel = onboardingState.stressLevel
+                            )
                         )
                     )
                     statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.statsRecord))
@@ -77,7 +77,7 @@ class OnboardingExpressionAnalysisScreen : CustomScreen<OnboardingExpressionAnal
                     )
                 }
 
-                OnboardingExpressionEvent.OnGoBack -> onGoBack()
+                OnboardingExpressionEvent.OnGoBack -> {}
             }
 
         LaunchedEffect(

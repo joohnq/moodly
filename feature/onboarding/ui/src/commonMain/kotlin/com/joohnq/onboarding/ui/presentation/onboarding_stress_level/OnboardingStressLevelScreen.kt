@@ -3,12 +3,11 @@ package com.joohnq.onboarding.ui.presentation.onboarding_stress_level
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.OnboardingExpressionAnalysisScreen
 import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.event.OnboardingStressLevelEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.state.OnboardingStressLevelState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 
 class OnboardingStressLevelScreen : CustomScreen<OnboardingStressLevelState>() {
     @Composable
@@ -18,10 +17,11 @@ class OnboardingStressLevelScreen : CustomScreen<OnboardingStressLevelState>() {
 
         fun onEvent(event: OnboardingStressLevelEvent) =
             when (event) {
-                OnboardingStressLevelEvent.OnNavigateToOnboardingExpressionAnalysisScreen ->
-                    onNavigate(OnboardingExpressionAnalysisScreen())
+                OnboardingStressLevelEvent.OnNavigateToOnboardingExpressionAnalysisScreen -> {}
+//                    onNavigate(OnboardingExpressionAnalysisScreen())
 
-                OnboardingStressLevelEvent.OnGoBack -> onGoBack()
+                OnboardingStressLevelEvent.OnGoBack -> {}
+//                    onGoBack()
             }
 
         return OnboardingStressLevelState(

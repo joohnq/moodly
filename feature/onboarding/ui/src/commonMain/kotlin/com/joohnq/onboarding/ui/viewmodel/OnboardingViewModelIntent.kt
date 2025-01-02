@@ -1,9 +1,9 @@
 package com.joohnq.onboarding.ui.viewmodel
 
 import com.joohnq.domain.entity.MedicationsSupplements
-import com.joohnq.domain.entity.Mood
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
+import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.stress_level.domain.entity.StressLevel
 

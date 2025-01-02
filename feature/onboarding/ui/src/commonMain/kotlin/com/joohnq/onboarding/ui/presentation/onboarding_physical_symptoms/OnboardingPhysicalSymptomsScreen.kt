@@ -3,12 +3,11 @@ package com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
-import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.OnboardingSleepQualityScreen
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 
 class OnboardingPhysicalSymptomsScreen : CustomScreen<OnboardingPhysicalSymptomsState>() {
     @Composable
@@ -18,10 +17,11 @@ class OnboardingPhysicalSymptomsScreen : CustomScreen<OnboardingPhysicalSymptoms
 
         fun onEvent(event: OnboardingPhysicalSymptomsEvent) =
             when (event) {
-                OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen ->
-                    onNavigate(OnboardingSleepQualityScreen())
+                OnboardingPhysicalSymptomsEvent.OnNavigateOnboardingSleepQualityScreen -> {}
+//                    onNavigate(OnboardingSleepQualityScreen())
 
-                OnboardingPhysicalSymptomsEvent.OnGoBack -> onGoBack()
+                OnboardingPhysicalSymptomsEvent.OnGoBack -> {}
+//                    onGoBack()
             }
 
         return OnboardingPhysicalSymptomsState(

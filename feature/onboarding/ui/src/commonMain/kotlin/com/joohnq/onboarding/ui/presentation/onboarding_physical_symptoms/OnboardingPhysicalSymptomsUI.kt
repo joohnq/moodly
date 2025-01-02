@@ -13,24 +13,25 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.entity.PhysicalSymptoms
-import com.joohnq.mood.components.IconAndTextRadioButtonHorizontal
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.event.OnboardingPhysicalSymptomsEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.IconAndTextRadioButtonHorizontal
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.experiencing_physical_symptoms_title
 import com.joohnq.shared.ui.select_one_answer
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.user.ui.PhysicalSymptomsResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsUI(
-    state: OnboardingPhysicalSymptomsState
+    state: OnboardingPhysicalSymptomsState,
 ) {
     val options = remember { PhysicalSymptoms.getAll() }
 
@@ -53,11 +54,12 @@ fun OnboardingPhysicalSymptomsUI(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             options.forEach { option: PhysicalSymptoms ->
+                val resource = option.toResource()
                 IconAndTextRadioButtonHorizontal(
                     modifier = Modifier.fillMaxWidth().testTag(option.id.toString()),
                     paddingValues = PaddingValues(all = 16.dp),
-                    text = stringResource(option.text),
-                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
+                    text = stringResource(resource.text),
+                    icon = resource.icon.copy(modifier = Modifier.size(Dimens.Icon)),
                     selected = state.selectedOption == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,

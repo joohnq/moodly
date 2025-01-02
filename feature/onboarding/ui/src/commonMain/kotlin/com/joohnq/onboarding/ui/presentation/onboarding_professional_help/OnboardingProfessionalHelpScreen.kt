@@ -3,12 +3,11 @@ package com.joohnq.onboarding.ui.presentation.onboarding_professional_help
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.OnboardingPhysicalSymptomsScreen
 import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.event.OnboardingProfessionalHelpEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.state.OnboardingProfessionalHelpState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 
 class OnboardingProfessionalHelpScreen : CustomScreen<OnboardingProfessionalHelpState>() {
     @Composable
@@ -18,10 +17,11 @@ class OnboardingProfessionalHelpScreen : CustomScreen<OnboardingProfessionalHelp
 
         fun onEvent(event: OnboardingProfessionalHelpEvent) =
             when (event) {
-                OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen ->
-                    onNavigate(OnboardingPhysicalSymptomsScreen())
+                OnboardingProfessionalHelpEvent.OnNavigateToOnboardingPhysicalSymptomsScreen -> {}
+//                    onNavigate(OnboardingPhysicalSymptomsScreen())
 
-                OnboardingProfessionalHelpEvent.OnGoBack -> onGoBack()
+                OnboardingProfessionalHelpEvent.OnGoBack -> {}
+//                    onGoBack()
             }
 
         return OnboardingProfessionalHelpState(

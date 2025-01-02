@@ -15,23 +15,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.Mood
-import com.joohnq.mood.components.DoubleText
-import com.joohnq.mood.components.MoodFace
-import com.joohnq.mood.components.SleepQualityThumb
-import com.joohnq.mood.components.SleepQualityTrack
-import com.joohnq.mood.components.VerticalSlider
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingVerticalLarge
+import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.event.OnboardingSleepQualityEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.state.OnboardingSleepQualityState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.DoubleText
+import com.joohnq.shared.ui.components.SleepQualityThumb
+import com.joohnq.shared.ui.components.SleepQualityTrack
+import com.joohnq.shared.ui.components.VerticalSlider
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.sleep_quality_title
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingVerticalLarge
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
+import com.joohnq.sleep_quality.ui.SleepQualityResource.Companion.toResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,9 +59,10 @@ fun OnboardingSleepQualityUI(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQuality ->
+                        val resource = sleepQuality.toResource()
                         DoubleText(
-                            firstText = sleepQuality.firstText,
-                            secondText = sleepQuality.secondText,
+                            firstText = resource.firstText,
+                            secondText = resource.secondText,
                             color = if (state.selectedSleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
                         )
                     }
@@ -72,9 +75,7 @@ fun OnboardingSleepQualityUI(
                         state.onAction(OnboardingViewModelIntent.UpdateSliderValue(it))
                         state.onAction(
                             OnboardingViewModelIntent.UpdateSleepQuality(
-                                SleepQuality.fromSliderValue(
-                                    it
-                                )
+                                SleepQuality.fromSliderValue(it)
                             )
                         )
                     },
@@ -87,11 +88,12 @@ fun OnboardingSleepQualityUI(
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
                 ) {
-                    moods.forEach { mood ->
+                    moods.forEach { mood: Mood ->
+                        val resource = mood.toResource()
                         Column {
                             MoodFace(
                                 modifier = Modifier.size(48.dp),
-                                mood = mood,
+                                mood = resource,
                             )
                         }
                     }

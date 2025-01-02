@@ -13,12 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.components.IconContinueButton
-import com.joohnq.mood.components.VerticalSpacer
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.TextStyles
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
+import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
@@ -26,14 +23,20 @@ import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.event.Onboardi
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.IconContinueButton
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.mood_rate_desc
 import com.joohnq.shared.ui.mood_rate_title
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingMoodRateUI(
     state: OnboardingMoodRateState,
 ) {
+    val resource = state.selectedMood.toResource()
     OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
@@ -43,7 +46,7 @@ fun OnboardingMoodRateUI(
         Text(
             text = stringResource(
                 Res.string.mood_rate_desc,
-                stringResource(state.selectedMood.text)
+                stringResource(resource.text)
             ),
             style = TextStyles.TextXlSemiBold(),
             color = Colors.Brown100Alpha64,
@@ -51,7 +54,7 @@ fun OnboardingMoodRateUI(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            mood = state.selectedMood,
+            mood = resource,
         )
         VerticalSpacer(24.dp)
     }
@@ -76,7 +79,7 @@ fun OnboardingMoodRateUI(
             contentAlignment = Alignment.TopCenter
         ) {
             RouletteMoods(
-                setSelectedMood = { state.onAction(OnboardingViewModelIntent.UpdateMood(it)) }
+                setSelectedMood = { state.onAction(OnboardingViewModelIntent.UpdateMood(it.toDomain())) }
             )
         }
     }

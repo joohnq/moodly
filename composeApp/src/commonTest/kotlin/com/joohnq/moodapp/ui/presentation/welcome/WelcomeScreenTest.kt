@@ -41,7 +41,6 @@ class WelcomeScreenTest : KoinTest {
             single<UserPreferenceViewModel> {
                 UserPreferenceViewModel(
                     userPreferencesRepository = userPreferenceRepository,
-                    dispatcher = get()
                 )
             }
         }

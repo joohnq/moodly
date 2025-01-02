@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -9,20 +8,7 @@ plugins {
 }
 
 kotlin {
-    //Prevent the error: The same 'unique_name=runtime_commonMain'
-//    metadata {
-//        compilations.all {
-//            val compilationName = name
-//            compileTaskProvider.configure {
-//                if (this is KotlinCompileCommon) {
-//                    moduleName = "${project.group}:${project.name}_$compilationName"
-//                }
-//            }
-//        }
-//    }
-
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -40,7 +26,6 @@ kotlin {
     }
 
     sourceSets {
-
         commonMain.dependencies {
             implementation(projects.feature.freudScore.domain)
             implementation(projects.feature.stressLevel.domain)
@@ -59,11 +44,10 @@ kotlin {
 
             implementation(libs.datetime)
 
-            // Koin
             implementation(libs.bundles.koin)
-
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.voyager.other)
+            implementation(libs.charts)
         }
     }
 }

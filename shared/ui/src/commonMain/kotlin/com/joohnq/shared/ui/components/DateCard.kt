@@ -1,4 +1,4 @@
-package com.joohnq.health_journal.ui.presentation.all_journals
+package com.joohnq.shared.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,18 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
-import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
 import kotlinx.datetime.LocalDate
 
 @Composable
-fun AllJournalDateCard(
+fun DateCard(
     isSelected: Boolean,
     date: LocalDate,
-    onAllAction: (AllJournalViewModelIntent) -> Unit,
+    onClick: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -28,14 +26,7 @@ fun AllJournalDateCard(
             color = if (isSelected) Colors.White else Colors.Brown70,
             shape = Dimens.Shape.Circle
         ).padding(horizontal = 10.dp, vertical = 15.dp)
-            .clickable { onAllAction(AllJournalViewModelIntent.UpdateSelectedDateTime(date)) }
-//                                .then(
-//                                    if (isSelected) Modifier.border(
-//                                        3.dp,
-//                                        color = Colors.Brown100Alpha64,
-//                                        shape = Dimens.Shape.Circle
-//                                    ) else Modifier
-//                                )
+            .clickable { onClick() }
     ) {
         Text(
             text = "daw",

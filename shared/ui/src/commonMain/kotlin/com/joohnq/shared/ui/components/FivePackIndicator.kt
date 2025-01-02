@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.components
+package com.joohnq.shared.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,20 +10,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.stress_level.ui.StressLevelResource
 
 @Composable
-fun StressLevelIndicator(stressLevel: StressLevelResource) {
+fun FivePackIndicator(level: Int, brushGradient: (Int) -> List<Color>) {
     BoxWithConstraints {
         val boxWidth = (maxWidth - 16.dp) / 5
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             for (i in 1..5) {
-                val isSelected = i <= stressLevel.level
+                val isSelected = i <= level
                 val background = if (isSelected) Modifier.background(
-                    brush = Brush.linearGradient(StressLevelResource.getBrushGradient()[i - 1]),
+                    brush = Brush.linearGradient(brushGradient(i - 1)),
                     shape = Dimens.Shape.Circle
                 )
                 else Modifier.background(

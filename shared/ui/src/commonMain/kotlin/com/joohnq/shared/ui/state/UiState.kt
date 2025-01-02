@@ -13,7 +13,7 @@ sealed class UiState<out T> {
             onLoading: () -> Unit = {},
             onIdle: () -> Unit = {},
             onSuccess: (T) -> Unit = {},
-            onError: (String) -> Unit = {}
+            onError: (String) -> Unit = {},
         ) {
             when (this) {
                 is Loading -> onLoading()
@@ -42,7 +42,7 @@ sealed class UiState<out T> {
 
         fun onAnyError(
             vararg values: UiState<*>,
-            onAnyHasError: (String) -> Unit
+            onAnyHasError: (String) -> Unit,
         ) {
             values.filterIsInstance<Error>().firstOrNull()?.let { errorState ->
                 onAnyHasError(errorState.message)
@@ -53,7 +53,7 @@ sealed class UiState<out T> {
         fun fold(
             vararg values: UiState<*>,
             onAllSuccess: () -> Unit,
-            onAnyHasError: (String) -> Unit
+            onAnyHasError: (String) -> Unit,
         ) {
             values.filterIsInstance<Error>().firstOrNull()?.let { errorState ->
                 onAnyHasError(errorState.message)
@@ -70,7 +70,7 @@ sealed class UiState<out T> {
             onLoading: @Composable () -> Unit = {},
             onIdle: @Composable () -> Unit = {},
             onSuccess: @Composable (T) -> Unit = {},
-            onError: @Composable (String) -> Unit = {}
+            onError: @Composable (String) -> Unit = {},
         ) {
             when (this) {
                 is Loading -> onLoading()
@@ -106,6 +106,13 @@ sealed class UiState<out T> {
                 is Success -> onSuccess(this.data)
                 else -> {}
             }
+        }
+
+        fun <T> Result<T>.toUiState(): UiState<T> {
+            return fold(
+                onSuccess = { item -> Success(item) },
+                onFailure = { error -> Error(error.message.toString()) }
+            )
         }
     }
 }

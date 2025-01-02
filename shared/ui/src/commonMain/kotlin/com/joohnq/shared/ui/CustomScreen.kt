@@ -10,12 +10,12 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 
-abstract class CustomScreen<T> : Screen {
-    private var _navigator: Navigator? = null
+abstract class CustomScreen<T> {
+    private var _navigator: ? = null
     private val navigator: Navigator get() = _navigator!!
 
     @Composable
-    override fun Content() {
+    fun Content() {
         _navigator = LocalNavigator.currentOrThrow
         DisposableEffect(Unit) {
             onDispose {

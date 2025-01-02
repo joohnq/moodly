@@ -1,6 +1,14 @@
 package com.joohnq.moodapp.di
 
-expect class KoinInitializer {
-    fun init()
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
+
+class KoinInitializer {
+    fun init(config: KoinAppDeclaration? = null) = startKoin {
+        modules(
+            appModule,
+        )
+        config?.invoke(this)
+    }
 }
 

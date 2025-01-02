@@ -2,6 +2,7 @@
 
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
@@ -11,7 +12,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.ksp)
+//    //    alias(libs.plugins.ksp)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.buildkonfig)
 }
@@ -26,6 +27,7 @@ kotlin {
     }
 
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -45,19 +47,17 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(projects.core.database)
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
-
         commonMain.dependencies {
             implementation(projects.core.di)
-//            implementation(projects.core.database)
             implementation(projects.core.ui)
             implementation(projects.shared.ui)
+            implementation(projects.feature.onboarding.ui)
 
             implementation(projects.feature.user.data)
             implementation(projects.feature.user.domain)
@@ -82,6 +82,8 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.material)
+            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -95,13 +97,6 @@ kotlin {
             // Koin
             implementation(libs.bundles.koin)
 
-            // Room and SQLite
-
-
-            // Charts
-            implementation(libs.charts)
-
-            api(libs.generativeai)
 
             implementation(libs.bundles.voyager)
             implementation(libs.bundles.voyager.other)
@@ -126,8 +121,6 @@ kotlin {
         }
     }
 }
-
-
 
 android {
     namespace = libs.versions.android.packageName.get()
@@ -164,14 +157,6 @@ android {
     buildFeatures {
         compose = true
     }
-}
-
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp)
-    add("kspAndroid", libs.koin.ksp)
-    add("kspIosX64", libs.koin.ksp)
-    add("kspIosArm64", libs.koin.ksp)
-    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 buildkonfig {

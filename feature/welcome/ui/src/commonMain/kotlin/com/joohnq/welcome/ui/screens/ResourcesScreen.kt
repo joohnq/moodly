@@ -1,8 +1,8 @@
 package com.joohnq.welcome.ui.screens
 
 import androidx.compose.runtime.Composable
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.Drawables
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.resource_first_title
 import com.joohnq.shared.ui.resource_second_title

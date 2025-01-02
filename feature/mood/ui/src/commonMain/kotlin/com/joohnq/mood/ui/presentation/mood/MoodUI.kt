@@ -37,9 +37,7 @@ import com.joohnq.shared.ui.your_mood_is
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoodUI(
-    state: MoodState,
-) {
+fun MoodUI(state: MoodState) {
     state.statsRecord?.run {
         val resource = mood.toResource()
         SharedPanelComponent(

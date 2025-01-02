@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.ui.MoodResource
-import com.joohnq.mood.ui.MoodResource.Companion.toDomain
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.AddMoodRadioGroup
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
@@ -42,7 +40,7 @@ fun AddStatScreenUI(
     state: AddStatState,
 ) {
     val moodsResources by remember { mutableStateOf(MoodResource.getAll()) }
-    val selectedMoodResource = state.selectedMood.toResource()
+    val selectedMoodResource = state.selectedMood
     val moodIndex = selectedMoodResource.id
 
     Scaffold(
@@ -99,9 +97,7 @@ fun AddStatScreenUI(
                     selectedMood = selectedMoodResource,
                     setSelectedMood = {
                         state.onAddAction(
-                            AddStatIntent.UpdateAddingStatsRecordMood(
-                                moodsResources[it].toDomain()
-                            )
+                            AddStatIntent.UpdateAddingStatsRecordMood(moodsResources[it])
                         )
                     }
                 )

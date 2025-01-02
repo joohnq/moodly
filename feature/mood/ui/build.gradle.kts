@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -7,12 +6,10 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
-    //    alias(libs.plugins.ksp)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -34,6 +31,7 @@ kotlin {
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.user.ui)
             implementation(projects.feature.user.domain)
+            implementation(projects.feature.sleepQuality.domain)
             implementation(projects.shared.ui)
             implementation(projects.shared.domain)
 

@@ -1,4 +1,4 @@
-package com.joohnq.mood.domain
+package com.joohnq.mood.domain.converter
 
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.Mood.Companion.fromValue

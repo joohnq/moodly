@@ -1,11 +1,11 @@
 package com.joohnq.mood.data.data_source
 
 import com.joohnq.core.database.converters.LocalDateTimeConverter
+import com.joohnq.core.database.executeTryCatch
 import com.joohnq.mood.database.StatsDatabaseSql
-import com.joohnq.mood.domain.StatsRecordConverter
+import com.joohnq.mood.domain.converter.StatsRecordConverter
+import com.joohnq.mood.domain.data_source.StatsDataSource
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.domain.repository.StatsDataSource
-
 
 class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSource {
     private val query = database.statRecordQueries
@@ -20,22 +20,16 @@ class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSou
         }.executeAsList()
 
     override suspend fun addStats(statsRecord: StatsRecord): Boolean =
-        try {
+        executeTryCatch {
             query.addStats(
                 id = statsRecord.id.toLong(),
                 mood = StatsRecordConverter.fromMood(statsRecord.mood),
                 description = statsRecord.description
             )
-            true
-        } catch (e: Exception) {
-            false
         }
 
     override suspend fun deleteStat(id: Int): Boolean =
-        try {
+        executeTryCatch {
             query.deleteStat(id.toLong())
-            true
-        } catch (e: Exception) {
-            false
         }
 }

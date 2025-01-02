@@ -1,27 +1,15 @@
 package com.joohnq.mood.domain.entity
 
-import com.joohnq.mood.domain.DMoodProperties
 import com.joohnq.mood.domain.MoodProperties
-import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class Mood(
     override val id: Int,
     override val healthLevel: Int,
 ) : MoodProperties {
-    @Serializable
     data object Depressed : Mood(id = DEPRESSED.id, healthLevel = DEPRESSED.healthLevel)
-
-    @Serializable
     data object Sad : Mood(id = SAD.id, healthLevel = SAD.healthLevel)
-
-    @Serializable
     data object Neutral : Mood(id = NEUTRAL.id, healthLevel = NEUTRAL.healthLevel)
-
-    @Serializable
     data object Happy : Mood(id = HAPPY.id, healthLevel = HAPPY.healthLevel)
-
-    @Serializable
     data object Overjoyed : Mood(id = OVERJOYED.id, healthLevel = OVERJOYED.healthLevel)
 
     companion object {

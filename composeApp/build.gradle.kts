@@ -12,7 +12,6 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
-//    //    alias(libs.plugins.ksp)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.buildkonfig)
 }
@@ -57,7 +56,10 @@ kotlin {
             implementation(projects.core.di)
             implementation(projects.core.ui)
             implementation(projects.shared.ui)
+            implementation(projects.feature.freudScore.ui)
             implementation(projects.feature.onboarding.ui)
+
+            implementation(projects.feature.home.ui)
 
             implementation(projects.feature.user.data)
             implementation(projects.feature.user.domain)

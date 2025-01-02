@@ -9,8 +9,8 @@ import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.shared.ui.CustomScreenNothing
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 
 class LoadingScreen : CustomScreenNothing() {
     @Composable

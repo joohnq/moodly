@@ -6,10 +6,10 @@ import androidx.compose.runtime.SideEffect
 import cafe.adriel.voyager.navigator.Navigator
 import com.joohnq.core.ui.presentation.loading.LoadingScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModel
-import com.joohnq.user.ui.viewmodel.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.user.ui.viewmodel.UserViewModel
-import com.joohnq.user.ui.viewmodel.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import org.koin.compose.KoinContext
 
 @Composable

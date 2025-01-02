@@ -23,11 +23,13 @@ import com.joohnq.shared.domain.entity.Icon
 import com.joohnq.shared.domain.entity.TextRadioButtonColors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.TextStyles
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TextRadioButton(
     modifier: Modifier = Modifier,
-    text: String,
+    text: StringResource,
     selected: Boolean,
     colors: TextRadioButtonColors,
     shape: Shape,
@@ -46,7 +48,7 @@ fun TextRadioButton(
         ) else null,
     ) {
         Text(
-            text = text,
+            text = stringResource(text),
             style = TextStyles.TextLgExtraBold(),
         )
     }

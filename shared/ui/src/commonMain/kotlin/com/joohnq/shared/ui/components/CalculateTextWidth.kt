@@ -7,12 +7,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun CalculateTextWidth(text: String, fontSize: TextUnit): Dp {
+fun CalculateTextWidth(text: StringResource, fontSize: TextUnit): Dp {
     val textMeasurer = rememberTextMeasurer()
     val textLayoutResult = textMeasurer.measure(
-        text = text,
+        text = stringResource(text),
         style = TextStyle(fontSize = fontSize)
     )
     val textWidthPx = textLayoutResult.size.width

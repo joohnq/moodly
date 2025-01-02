@@ -30,9 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.ui.MoodResource
-import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.ContinueButton
@@ -125,9 +123,7 @@ fun AddJournalingUI(
                             color = if (state.selectedMood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {
                                 state.onAddingAction(
-                                    AddingJournalingViewModelIntent.UpdateMood(
-                                        resource.toDomain()
-                                    )
+                                    AddingJournalingViewModelIntent.UpdateMood(resource)
                                 )
                             }
                         )
@@ -163,7 +159,7 @@ fun Preview() {
     AddJournalingUI(
         AddJournalingState(
             snackBarState = remember { SnackbarHostState() },
-            selectedMood = Mood.Happy,
+            selectedMood = MoodResource.Happy,
             title = "title",
             titleError = null,
             desc = "desc",

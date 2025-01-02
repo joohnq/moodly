@@ -103,9 +103,7 @@ fun JournalingUI(
                     modifier = Modifier.heightIn(min = 250.dp)
                 ) {
                     items(state.journals) { journal ->
-                        HealthJournalCard(
-                            journal = journal,
-                        ) {
+                        HealthJournalCard(journal) {
                             state.onEvent(
                                 JournalingEvent.OnNavigateToEditJournalingScreen(journal.id)
                             )
@@ -151,7 +149,7 @@ fun JournalingUI(
                     title = "",
                     color = Colors.Green50,
                     backgroundColor = Colors.Green10,
-                    desc = stringResource(Res.string.completed)
+                    description = stringResource(Res.string.completed)
                 )
                 HealthJournalStatsCard(
                     modifier = Modifier.weight(1f),
@@ -159,7 +157,7 @@ fun JournalingUI(
                     title = stringResource(if (state.journals.isEmpty()) Res.string.no_data else state.journals.first().mood.toResource().text),
                     color = Colors.Brown60,
                     backgroundColor = Colors.Brown10,
-                    desc = stringResource(Res.string.emotion)
+                    description = stringResource(Res.string.emotion)
                 )
             }
         }

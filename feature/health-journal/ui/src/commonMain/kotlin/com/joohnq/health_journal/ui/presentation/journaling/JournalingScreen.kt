@@ -4,17 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
-import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.shared.ui.CustomTab
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.journaling
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.journaling
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -26,10 +24,11 @@ class JournalingScreen : CustomTab<JournalingState>() {
 
         fun onEvent(event: JournalingEvent) =
             when (event) {
-                is JournalingEvent.OnNavigateToEditJournalingScreen ->
-                    onNavigate(EditJournalingScreen(event.id), false)
+                is JournalingEvent.OnNavigateToEditJournalingScreen -> {}
+//                    onNavigate(EditJournalingScreen(event.id), false)
 
-                JournalingEvent.OnNavigateToAllJournals -> onNavigate(AllJournalScreen())
+                JournalingEvent.OnNavigateToAllJournals -> {}
+//                    onNavigate(AllJournalScreen())
             }
 
         return JournalingState(

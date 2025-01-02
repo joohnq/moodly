@@ -26,7 +26,7 @@ class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
         val editJournalingViewModel: EditJournalingViewModel = sharedViewModel()
         val snackBarState = remember { SnackbarHostState() }
         val healthJournalState by healthJournalViewModel.state.collectAsState()
-        val editingHealthJournalState by editJournalingViewModel.editJournalingState.collectAsState()
+        val editingHealthJournalState by editJournalingViewModel.state.collectAsState()
         val healthJournals = healthJournalState.healthJournalRecords.getValue()
         val isDifferent by derivedStateOf {
             editingHealthJournalState.editingHealthJournalRecord.title != editingHealthJournalState.currentHealthJournalRecord.title ||

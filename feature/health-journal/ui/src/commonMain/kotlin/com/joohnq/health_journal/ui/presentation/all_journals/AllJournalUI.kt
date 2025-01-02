@@ -23,12 +23,18 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.presentation.loading.LoadingUI
 import com.joohnq.domain.entity.User
 import com.joohnq.health_journal.domain.use_case.OrganizeFromCreationHealthJournalFreudScoreUseCase
+import com.joohnq.health_journal.ui.components.AllJournalsCard
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
+import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.DateCard
 import com.joohnq.shared.ui.components.MainAlertDialog
 import com.joohnq.shared.ui.components.TopBar
 import com.joohnq.shared.ui.components.VerticalSpacer
+import com.joohnq.shared.ui.delete_journal
+import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
+import com.joohnq.shared.ui.my_journals
 import com.joohnq.shared.ui.state.UiState
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.theme.Colors
@@ -36,10 +42,6 @@ import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.delete_journal
-import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
-import com.joohnq.shared.ui.my_journals
 import com.joohnq.shared.ui.timeline
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -117,10 +119,16 @@ fun AllJournalUI(state: AllJournalState) {
                             items(keys) { date ->
                                 val isSelected =
                                     date == state.allJournalViewModelState.selectedDateTime
-                                AllJournalDateCard(
+                                DateCard(
                                     isSelected = isSelected,
                                     date = date,
-                                    onAllAction = state.onAllAction,
+                                    onClick = {
+                                        state.onAllAction(
+                                            AllJournalViewModelIntent.UpdateSelectedDateTime(
+                                                date
+                                            )
+                                        )
+                                    },
                                 )
                             }
                         }

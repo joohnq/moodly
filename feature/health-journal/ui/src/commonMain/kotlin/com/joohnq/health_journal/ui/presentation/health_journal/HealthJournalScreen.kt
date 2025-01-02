@@ -3,8 +3,6 @@ package com.joohnq.health_journal.ui.presentation.health_journal
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJournalingScreen
-import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
@@ -22,12 +20,11 @@ class HealthJournalScreen : CustomScreen<HealthJournalState>() {
                 HealthJournalEvent.OnGoBack ->
                     onGoBack()
 
-                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigate(
-                    AddJournalingScreen()
-                )
+                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> {}
+//                    onNavigate(AddJournalingScreen())
 
-                is HealthJournalEvent.OnClick ->
-                    onNavigate(AllJournalScreen(event.localDate))
+                is HealthJournalEvent.OnClick -> {}
+//                    onNavigate(AllJournalScreen(event.localDate))
             }
 
         return HealthJournalState(

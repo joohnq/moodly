@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.ui
 
-import com.joohnq.mood.theme.Colors
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.excellent
 import com.joohnq.shared.ui.fair
@@ -22,7 +22,7 @@ sealed class SleepQualityResource(
     override val level: Int,
     val firstText: StringResource,
     val secondText: StringResource,
-    val palette: SleepQualityPalette
+    val palette: SleepQualityPalette,
 ) : SleepQualityProperties {
 
     data object Excellent : SleepQualityResource(

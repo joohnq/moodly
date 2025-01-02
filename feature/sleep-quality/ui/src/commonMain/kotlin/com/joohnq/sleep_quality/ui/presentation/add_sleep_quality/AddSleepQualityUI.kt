@@ -21,30 +21,30 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.DatetimeProvider
-import com.joohnq.mood.components.AddSleepQualityTimePicker
-import com.joohnq.mood.components.ContinueButton
-import com.joohnq.mood.components.HorizontalSpacer
-import com.joohnq.mood.components.TextRadioButton
-import com.joohnq.mood.components.TimePickerCard
-import com.joohnq.mood.components.TimePickerDialog
-import com.joohnq.mood.components.Title
-import com.joohnq.mood.components.TopBar
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource
 import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.AddSleepQualityTimePicker
+import com.joohnq.shared.ui.components.ContinueButton
+import com.joohnq.shared.ui.components.HorizontalSpacer
+import com.joohnq.shared.ui.components.TextRadioButton
+import com.joohnq.shared.ui.components.TimePickerCard
+import com.joohnq.shared.ui.components.TimePickerDialog
+import com.joohnq.shared.ui.components.Title
+import com.joohnq.shared.ui.components.TopBar
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.end_sleeping_time
 import com.joohnq.shared.ui.mood
 import com.joohnq.shared.ui.new_sleep_quality
 import com.joohnq.shared.ui.sleeping_influences
 import com.joohnq.shared.ui.start_sleeping_time
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences
 import com.joohnq.sleep_quality.ui.SleepInfluencesResource.Companion.toResource
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
@@ -55,7 +55,7 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddSleepQualityUI(
-    state: AddSleepQualityState
+    state: AddSleepQualityState,
 ) {
     val moodsUI = remember { MoodResource.getAll() }
     val sleepInfluences = remember { SleepInfluences.getAll() }

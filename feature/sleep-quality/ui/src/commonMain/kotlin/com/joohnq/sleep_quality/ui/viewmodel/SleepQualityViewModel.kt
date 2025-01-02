@@ -2,23 +2,19 @@ package com.joohnq.sleep_quality.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
 class SleepQualityViewModel(
     private val addSleepQualityUseCase: AddSleepQualityUseCase,
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
-    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _sleepQualityState = MutableStateFlow(SleepQualityState())
     val sleepQualityState: StateFlow<SleepQualityState> = _sleepQualityState.asStateFlow()
@@ -34,7 +30,7 @@ class SleepQualityViewModel(
     }
 
     private fun getSleepQualityRecords() {
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             _sleepQualityState.update { it.copy(sleepQualityRecords = UiState.Loading) }
             try {
                 val res = getSleepQualitiesUseCase()
@@ -46,7 +42,7 @@ class SleepQualityViewModel(
     }
 
     private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             changeAddingStatus(UiState.Loading)
             val res = addSleepQualityUseCase(sleepQualityRecord)
             changeAddingStatus(

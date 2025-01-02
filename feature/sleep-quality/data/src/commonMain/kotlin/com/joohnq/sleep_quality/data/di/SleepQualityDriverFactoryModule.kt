@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.data.di
 
-import org.koin.core.annotation.Module
+import org.koin.core.module.Module
 
-@Module
-expect class SleepQualityDriverFactoryModule
+expect val sleepQualityDriverFactoryModule: Module

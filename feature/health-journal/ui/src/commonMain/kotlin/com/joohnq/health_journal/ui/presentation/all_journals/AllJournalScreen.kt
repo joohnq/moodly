@@ -12,8 +12,8 @@ import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJourn
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.datetime.LocalDate
 

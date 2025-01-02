@@ -1,14 +1,13 @@
 package com.joohnq.health_journal.domain.use_case
 
-import com.joohnq.domain.IDatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.shared.domain.IDatetimeProvider
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.plus
-import org.koin.core.annotation.Factory
 
-@Factory
+
 class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimeProvider: IDatetimeProvider) {
     operator fun invoke(
         creationDate: LocalDateTime,
@@ -25,7 +24,7 @@ class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimePro
 
     private fun generateDateSequence(
         creationDate: LocalDateTime,
-        currentDate: LocalDateTime
+        currentDate: LocalDateTime,
     ): Sequence<LocalDate> {
         return generateSequence(creationDate.date) { current ->
             val nextDate = current.plus(1, DateTimeUnit.DAY)

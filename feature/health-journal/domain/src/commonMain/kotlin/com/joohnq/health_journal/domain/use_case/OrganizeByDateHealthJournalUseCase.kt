@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.domain.use_case
 
-import com.joohnq.domain.IDatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.shared.domain.IDatetimeProvider
 import kotlinx.datetime.LocalDate
 
 class OrganizeByDateHealthJournalUseCase(private val dateTimeProvider: IDatetimeProvider) {

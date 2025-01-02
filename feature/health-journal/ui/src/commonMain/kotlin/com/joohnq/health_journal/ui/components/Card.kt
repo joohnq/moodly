@@ -20,16 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.mood.components.TextEllipsis
-import com.joohnq.mood.components.TextWithBackground
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.TextEllipsis
+import com.joohnq.shared.ui.components.TextWithBackground
 import com.joohnq.shared.ui.mood_show
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.TextStyles
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -102,7 +102,7 @@ fun HealthJournalStatsCard(
     title: String,
     color: Color,
     backgroundColor: Color,
-    desc: String
+    desc: String,
 ) {
     Card(
         modifier = modifier,

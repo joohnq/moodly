@@ -36,22 +36,22 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
-import com.joohnq.mood.components.TextEllipsis
-import com.joohnq.mood.components.TextWithBackground
-import com.joohnq.mood.components.VerticalSpacer
-import com.joohnq.mood.theme.Colors
-import com.joohnq.mood.theme.ComponentColors
-import com.joohnq.mood.theme.Dimens
-import com.joohnq.mood.theme.Drawables
-import com.joohnq.mood.theme.TextStyles
 import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.Res
+import com.joohnq.shared.ui.components.TextEllipsis
+import com.joohnq.shared.ui.components.TextWithBackground
+import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.hour
 import com.joohnq.shared.ui.remove_journal
+import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.shared.ui.theme.Dimens
+import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared.ui.theme.TextStyles
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -62,7 +62,7 @@ fun CardWithSwipeTorReveal(
     content: @Composable (Shape, Modifier) -> Unit,
     secondaryContent: (@Composable () -> Unit)? = null,
     cardPadding: PaddingValues = PaddingValues(0.dp),
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     var contextButtonsWidth by remember { mutableFloatStateOf(0f) }
@@ -144,7 +144,7 @@ fun AllJournalsCard(
     lastIndex: Int,
     healthJournal: HealthJournalRecord,
     onEvent: (AllJournalEvent) -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
     val mood = healthJournal.mood
     val resource = mood.toResource()

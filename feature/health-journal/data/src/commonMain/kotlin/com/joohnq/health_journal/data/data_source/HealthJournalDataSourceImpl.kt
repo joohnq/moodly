@@ -4,24 +4,22 @@ import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.health_journal.database.HealthJournalDatabaseSql
 import com.joohnq.health_journal.domain.data_source.HealthJournalDataSource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.healthjournal.database.HealthJournal
 import com.joohnq.mood.domain.StatsRecordConverter
-import org.koin.core.annotation.Single
 
-@Single(binds = [HealthJournalDataSource::class])
+
 class HealthJournalDataSourceImpl(private val database: HealthJournalDatabaseSql) :
     HealthJournalDataSource {
-    private val query = database.healthJournalQueries
+    private val query = database.healthJournalRecordQueries
     override suspend fun getHealthJournals(): List<HealthJournalRecord> =
-        query.getHealthJournals().executeAsList().map { healthJournal: HealthJournal ->
+        query.getHealthJournals { id, mood, title, description, date ->
             HealthJournalRecord(
-                id = healthJournal.id.toInt(),
-                mood = StatsRecordConverter.toMood(healthJournal.mood),
-                title = healthJournal.title,
-                description = healthJournal.description,
-                date = LocalDateTimeConverter.toLocalDateTime(healthJournal.date)
+                id = id.toInt(),
+                mood = StatsRecordConverter.toMood(mood),
+                title = title,
+                description = description,
+                date = LocalDateTimeConverter.toLocalDateTime(date)
             )
-        }
+        }.executeAsList()
 
     override suspend fun addHealthJournal(healthJournalRecord: HealthJournalRecord): Boolean =
         try {

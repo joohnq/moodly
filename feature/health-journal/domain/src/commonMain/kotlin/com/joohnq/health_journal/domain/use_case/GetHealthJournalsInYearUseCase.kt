@@ -1,10 +1,9 @@
 package com.joohnq.health_journal.domain.use_case
 
-import com.joohnq.domain.IDatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import org.koin.core.annotation.Factory
+import com.joohnq.shared.domain.IDatetimeProvider
 
-@Factory
+
 class GetHealthJournalsInYearUseCase(private val dateTimeProvider: IDatetimeProvider) {
     operator fun invoke(
         healthJournals: List<HealthJournalRecord?>,

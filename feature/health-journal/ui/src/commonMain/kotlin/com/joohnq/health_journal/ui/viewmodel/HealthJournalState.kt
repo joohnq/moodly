@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.ui.viewmodel
 
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.mood.state.UiState
+import com.joohnq.shared.ui.state.UiState
 
 data class HealthJournalState(
     val healthJournalRecords: UiState<List<HealthJournalRecord>> = UiState.Idle,

@@ -9,10 +9,10 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJour
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.CustomTab
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.getValue
-import com.joohnq.mood.theme.Drawables
+import com.joohnq.shared.ui.CustomTab
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.getValue
+import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.journaling
 import org.jetbrains.compose.resources.painterResource

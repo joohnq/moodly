@@ -8,8 +8,8 @@ import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
 
 class HealthJournalScreen : CustomScreen<HealthJournalState>() {
     @Composable

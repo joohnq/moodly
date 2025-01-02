@@ -7,23 +7,20 @@ import com.joohnq.health_journal.domain.use_case.AddHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.DeleteHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.UpdateHealthJournalsUseCase
-import com.joohnq.mood.state.UiState
-import com.joohnq.mood.state.UiState.Companion.getValue
-import kotlinx.coroutines.CoroutineDispatcher
+import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 
-@KoinViewModel
+
 class HealthJournalViewModel(
     private val getHealthJournalsUseCase: GetHealthJournalsUseCase,
     private val deleteHealthJournalsUseCase: DeleteHealthJournalsUseCase,
     private val updateHealthJournalsUseCase: UpdateHealthJournalsUseCase,
     private val addHealthJournalsUseCase: AddHealthJournalsUseCase,
-    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _state = MutableStateFlow(HealthJournalState())
     val state: StateFlow<HealthJournalState> = _state.asStateFlow()
@@ -44,8 +41,8 @@ class HealthJournalViewModel(
     }
 
     private fun addHealthJournal(
-        healthJournalRecord: HealthJournalRecord
-    ) = viewModelScope.launch(dispatcher) {
+        healthJournalRecord: HealthJournalRecord,
+    ) = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
 
         val res = addHealthJournalsUseCase(healthJournalRecord)
@@ -53,8 +50,8 @@ class HealthJournalViewModel(
     }
 
     private fun updateHealthJournal(
-        healthJournalRecord: HealthJournalRecord
-    ) = viewModelScope.launch(dispatcher) {
+        healthJournalRecord: HealthJournalRecord,
+    ) = viewModelScope.launch {
         changeEditingStatus(UiState.Loading)
 
         val res = updateHealthJournalsUseCase(healthJournalRecord)
@@ -62,7 +59,7 @@ class HealthJournalViewModel(
     }
 
     private fun getHealthJournals() =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             _state.update { it.copy(healthJournalRecords = UiState.Loading) }
 
             try {
@@ -74,7 +71,7 @@ class HealthJournalViewModel(
         }
 
     private fun deleteHealthJournal(id: Int) =
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             changeDeletingStatus(UiState.Loading)
 
             val res = deleteHealthJournalsUseCase(id)

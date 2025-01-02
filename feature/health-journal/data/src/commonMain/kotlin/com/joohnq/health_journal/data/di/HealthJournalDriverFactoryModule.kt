@@ -1,6 +1,5 @@
 package com.joohnq.health_journal.data.di
 
-import org.koin.core.annotation.Module
+import org.koin.core.module.Module
 
-@Module
-expect class HealthJournalDriverFactoryModule
+expect val healthJournalDriverFactory: Module

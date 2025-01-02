@@ -1,17 +1,32 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.ksp)
+//    //    alias(libs.plugins.ksp)
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
 }
 
 kotlin {
+    //Prevent the error: The same 'unique_name=runtime_commonMain'
+    metadata {
+        compilations.all {
+            val compilationName = name
+            compileTaskProvider.configure {
+                if (this is KotlinCompileCommon) {
+                    moduleName = "${project.group}:${project.name}_$compilationName"
+                }
+            }
+        }
+    }
+
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -25,6 +40,7 @@ kotlin {
         it.binaries.framework {
             baseName = "data"
             isStatic = true
+            linkerOpts.add("-lsqlite3")
         }
     }
 
@@ -42,6 +58,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -49,6 +66,7 @@ kotlin {
             implementation(libs.datetime)
 
             implementation(libs.bundles.koin)
+
 
             implementation(libs.coroutines.extensions)
         }
@@ -69,14 +87,6 @@ sqldelight {
             migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/health_journal")
         }
     }
-}
-
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp)
-    add("kspAndroid", libs.koin.ksp)
-    add("kspIosX64", libs.koin.ksp)
-    add("kspIosArm64", libs.koin.ksp)
-    add("kspIosSimulatorArm64", libs.koin.ksp)
 }
 
 android {

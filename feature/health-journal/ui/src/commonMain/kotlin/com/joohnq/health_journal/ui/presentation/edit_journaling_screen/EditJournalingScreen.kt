@@ -14,10 +14,10 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmode
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.getValue
-import com.joohnq.mood.state.UiState.Companion.onSuccess
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.getValue
+import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
 
 class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
     @Composable

@@ -15,9 +15,9 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.mood.CustomScreen
-import com.joohnq.mood.sharedViewModel
-import com.joohnq.mood.state.UiState.Companion.fold
+import com.joohnq.shared.ui.CustomScreen
+import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared.ui.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
 class AddJournalingScreen : CustomScreen<AddJournalingState>() {

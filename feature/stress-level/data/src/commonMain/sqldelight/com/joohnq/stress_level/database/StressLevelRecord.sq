@@ -1,0 +1,13 @@
+CREATE TABLE StressLevelRecord (
+    id INTEGER PRIMARY KEY NOT NULL,
+    stressLevel INTEGER NOT NULL,
+    stressors TEXT NOT NULL,
+    date TEXT DEFAULT (datetime('now')) NOT NULL
+);
+
+getStressLevels:
+SELECT * FROM StressLevelRecord;
+
+addStressLevel:
+INSERT INTO StressLevelRecord (stressLevel, stressors)
+VALUES (:stressLevel, :stressors);

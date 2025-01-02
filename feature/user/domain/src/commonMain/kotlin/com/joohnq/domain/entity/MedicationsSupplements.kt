@@ -3,20 +3,12 @@ package com.joohnq.domain.entity
 import com.joohnq.domain.MedicationsSupplementsProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class MedicationsSupplements(
     override val id: Int,
 ) : MedicationsSupplementsProperties {
-    @Serializable
     data object PrescribedMedications : MedicationsSupplements(PRESCRIBED_MEDICATIONS.id)
-
-    @Serializable
     data object OverTheCounterSupplements : MedicationsSupplements(OVER_THE_COUNTER_SUPPLEMENTS.id)
-
-    @Serializable
     data object ImNotTakingAny : MedicationsSupplements(IM_NOT_TAKING_ANY.id)
-
-    @Serializable
     data object PreferNotToSay : MedicationsSupplements(PREFER_NOT_TO_SAY.id)
 
     companion object {

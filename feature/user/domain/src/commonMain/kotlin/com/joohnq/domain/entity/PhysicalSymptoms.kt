@@ -3,17 +3,11 @@ package com.joohnq.domain.entity
 import com.joohnq.domain.PhysicalSymptomsProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class PhysicalSymptoms(
     override val id: Int,
 ) : PhysicalSymptomsProperties {
-    @Serializable
     data object YesVeryPainful : PhysicalSymptoms(YES_VERY_PAINFUL.id)
-
-    @Serializable
     data object No : PhysicalSymptoms(NO.id)
-
-    @Serializable
     data object YesJustABit : PhysicalSymptoms(YES_JUST_A_BIT.id)
 
     companion object {

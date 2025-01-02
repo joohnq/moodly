@@ -1,4 +1,4 @@
-package com.joohnq.domain
+package com.joohnq.domain.converter
 
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.fromValue

@@ -1,4 +1,4 @@
-package com.joohnq.domain.repository
+package com.joohnq.domain.data_source
 
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms

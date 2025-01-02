@@ -3,32 +3,16 @@ package com.joohnq.stress_level.domain.entity
 import com.joohnq.stress_level.domain.StressorProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class Stressor(
-    override val id: String
+    override val id: String,
 ) : StressorProperties {
-    @Serializable
     data object Work : Stressor(WORK.id)
-
-    @Serializable
     data object Relationship : Stressor(RELATIONSHIP.id)
-
-    @Serializable
     data object Kids : Stressor(KIDS.id)
-
-    @Serializable
     data object Life : Stressor(LIFE.id)
-
-    @Serializable
     data object Finances : Stressor(FINANCES.id)
-
-    @Serializable
     data object Loneliness : Stressor(LONELINESS.id)
-
-    @Serializable
     data object InPeace : Stressor(IN_PEACE.id)
-
-    @Serializable
     data class Other(val other: String = "") : Stressor(other)
 
     companion object {

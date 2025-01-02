@@ -4,14 +4,13 @@ import com.joohnq.shared.domain.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable
 
-@Serializable
 data class SleepQualityRecord(
-    val id: Int,
-    val sleepQuality: SleepQuality,
-    val startSleeping: String,
-    val endSleeping: String,
-    val sleepInfluences: List<SleepInfluences>,
-    val date: LocalDateTime,
+    val id: Int = 0,
+    val sleepQuality: SleepQuality = SleepQuality.Fair,
+    val startSleeping: String = "--:--",
+    val endSleeping: String = "--:--",
+    val sleepInfluences: List<SleepInfluences> = emptyList(),
+    val date: LocalDateTime = DatetimeProvider.getCurrentDateTime(),
 ) {
     companion object {
         fun SleepQualityRecord.startSleeping(hour: Int, minute: Int): SleepQualityRecord =
@@ -23,14 +22,5 @@ data class SleepQualityRecord(
             this.copy(
                 endSleeping = DatetimeProvider.formatTime(hour, minute)
             )
-
-        fun init(): SleepQualityRecord = SleepQualityRecord(
-            id = 0,
-            sleepQuality = SleepQuality.Fair,
-            startSleeping = "--:--",
-            endSleeping = "--:--",
-            sleepInfluences = emptyList(),
-            date = DatetimeProvider.getCurrentDateTime(),
-        )
     }
 }

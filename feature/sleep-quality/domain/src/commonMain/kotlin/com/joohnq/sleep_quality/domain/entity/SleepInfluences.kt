@@ -3,7 +3,6 @@ package com.joohnq.sleep_quality.domain.entity
 import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
     data object NaturalLight :
         SleepInfluences(NATURAL_LIGHT.id)

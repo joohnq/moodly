@@ -41,12 +41,11 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.bundles.viewmodel)
 
             implementation(libs.bundles.koin)
 
             implementation(libs.datetime)
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
         }
     }
 }

@@ -17,7 +17,7 @@ import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelInte
 import com.joohnq.welcome.ui.state.WelcomeState
 import kotlinx.coroutines.launch
 
-class WelcomeScreen : CustomScreen<WelcomeState>() {
+class WelcomeScreen(private val onNavigateToOnboarding: () -> Unit) : CustomScreen<WelcomeState>() {
     @Composable
     override fun Screen(): WelcomeState {
         val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
@@ -26,6 +26,12 @@ class WelcomeScreen : CustomScreen<WelcomeState>() {
         val scope = rememberCoroutineScope()
         val userPreferencesState by userPreferenceViewModel.state.collectAsState()
 
+        fun onError(message: String) {
+            scope.launch {
+                snackBarState.showSnackbar(message)
+            }
+        }
+
         fun onNext() {
             scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
         }
@@ -33,13 +39,9 @@ class WelcomeScreen : CustomScreen<WelcomeState>() {
         LaunchedEffect(userPreferencesState.updating) {
             userPreferencesState.updating.fold(
                 onSuccess = {
-//                    onNavigate(OnboardingMoodRateScreen(), true)
+                    onNavigateToOnboarding()
                 },
-                onError = {
-                    scope.launch {
-                        snackBarState.showSnackbar(it)
-                    }
-                }
+                onError = ::onError
             )
         }
 

@@ -2,7 +2,6 @@ package com.joohnq.sleep_quality.domain.entity
 
 import com.joohnq.shared.domain.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
-import kotlinx.serialization.Serializable
 
 data class SleepQualityRecord(
     val id: Int = 0,

@@ -5,5 +5,5 @@ import com.joohnq.domain.repository.UserRepository
 
 
 class AddUserUseCase(private val userRepository: UserRepository) {
-    suspend operator fun invoke(user: User): Boolean = userRepository.addUser(user)
+    suspend operator fun invoke(user: User): Result<Boolean> = userRepository.addUser(user)
 }

@@ -6,12 +6,11 @@ import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
 
 interface UserRepository {
-    suspend fun getUser(): User?
-    suspend fun addUser(user: User): Boolean
-    suspend fun updateUser(user: User): Boolean
-    suspend fun initUser(): Boolean
-    suspend fun updateUserName(name: String): Boolean
-    suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Boolean
-    suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Boolean
-    suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Boolean
+    suspend fun getUser(): Result<User>
+    suspend fun addUser(user: User): Result<Boolean>
+    suspend fun updateUser(user: User): Result<Boolean>
+    suspend fun updateUserName(name: String): Result<Boolean>
+    suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean>
+    suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Result<Boolean>
+    suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean>
 }

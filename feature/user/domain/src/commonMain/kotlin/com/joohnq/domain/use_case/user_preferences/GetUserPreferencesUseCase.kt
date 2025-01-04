@@ -4,6 +4,6 @@ import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.repository.UserPreferencesRepository
 
 class GetUserPreferencesUseCase(private val userPreferencesRepository: UserPreferencesRepository) {
-    suspend operator fun invoke(): UserPreferences =
-        userPreferencesRepository.getUserPreferences() ?: UserPreferences()
+    suspend operator fun invoke(): Result<UserPreferences> =
+        userPreferencesRepository.getUserPreferences()
 }

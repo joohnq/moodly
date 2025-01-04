@@ -5,5 +5,5 @@ import com.joohnq.domain.repository.UserRepository
 
 
 class GetUserUseCase(private val userRepository: UserRepository) {
-    suspend operator fun invoke(): User = userRepository.getUser() ?: User()
+    suspend operator fun invoke(): Result<User> = userRepository.getUser()
 }

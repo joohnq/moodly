@@ -1,7 +1,6 @@
 package com.joohnq.domain.entity
 
 import com.joohnq.domain.MedicationsSupplementsProperties
-import kotlinx.serialization.Serializable
 
 sealed class MedicationsSupplements(
     override val id: Int,

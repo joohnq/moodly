@@ -1,7 +1,6 @@
 package com.joohnq.domain.entity
 
 import com.joohnq.domain.PhysicalSymptomsProperties
-import kotlinx.serialization.Serializable
 
 sealed class PhysicalSymptoms(
     override val id: Int,

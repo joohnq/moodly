@@ -11,7 +11,7 @@ getUser:
 SELECT * FROM User WHERE id = 1;
 
 addUser:
-INSERT INTO User (id, name, medicationsSupplements, soughtHelp, physicalSymptoms) VALUES (:id, :name, :medicationsSupplements, :soughtHelp, :physicalSymptoms);
+INSERT OR IGNORE INTO User (id, name, medicationsSupplements, soughtHelp, physicalSymptoms) VALUES (:id, :name, :medicationsSupplements, :soughtHelp, :physicalSymptoms);
 
 updateUser:
 UPDATE User SET name = :name, medicationsSupplements = :medicationsSupplements, soughtHelp = :soughtHelp, physicalSymptoms = :physicalSymptoms WHERE id = 1;

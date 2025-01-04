@@ -4,5 +4,5 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 
 interface StressLevelDataSource {
     suspend fun getStressLevels(): List<StressLevelRecord>
-    suspend fun addStressLevel(stressLevelRecord: StressLevelRecord): Boolean
+    suspend fun addStressLevel(stressLevelRecord: StressLevelRecord)
 }

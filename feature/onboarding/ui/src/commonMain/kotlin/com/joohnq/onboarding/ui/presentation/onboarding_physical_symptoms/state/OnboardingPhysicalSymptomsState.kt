@@ -1,11 +1,11 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state
 
-import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.user.ui.PhysicalSymptomsResource
 
 data class OnboardingPhysicalSymptomsState(
-    val selectedOption: PhysicalSymptoms?,
+    val selectedOption: PhysicalSymptomsResource?,
     val onEvent: (OnboardingEvent) -> Unit = {},
     val onAction: (OnboardingViewModelIntent) -> Unit = {},
 )

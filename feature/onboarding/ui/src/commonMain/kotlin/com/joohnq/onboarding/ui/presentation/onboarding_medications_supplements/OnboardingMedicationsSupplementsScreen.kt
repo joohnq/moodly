@@ -9,7 +9,10 @@ import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 
-class OnboardingMedicationsSupplementsScreen :
+class OnboardingMedicationsSupplementsScreen(
+    private val onNavigateToStressLevel: () -> Unit,
+    private val onGoBack: () -> Unit,
+) :
     CustomScreen<OnboardingMedicationsSupplementsState>() {
     @Composable
     override fun Screen(): OnboardingMedicationsSupplementsState {
@@ -18,11 +21,11 @@ class OnboardingMedicationsSupplementsScreen :
 
         fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingEvent.OnNavigateToNext -> {}
-//                    onNavigate(OnboardingStressLevelScreen())
+                OnboardingEvent.OnNavigateToNext ->
+                    onNavigateToStressLevel()
 
-                OnboardingEvent.OnGoBack -> {}
-//                    onGoBack()
+                OnboardingEvent.OnGoBack ->
+                    onGoBack()
             }
 
         return OnboardingMedicationsSupplementsState(

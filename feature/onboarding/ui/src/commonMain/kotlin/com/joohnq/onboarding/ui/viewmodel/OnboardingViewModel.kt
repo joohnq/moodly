@@ -1,13 +1,14 @@
 package com.joohnq.onboarding.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.domain.entity.MedicationsSupplements
-import com.joohnq.domain.entity.PhysicalSymptoms
-import com.joohnq.domain.entity.ProfessionalHelp
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
-import com.joohnq.stress_level.domain.entity.StressLevel
+import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.MoodResource.Companion.toDomain
+import com.joohnq.sleep_quality.ui.SleepQualityResource
+import com.joohnq.stress_level.ui.StressLevelResource
+import com.joohnq.user.ui.MedicationsSupplementsResource
+import com.joohnq.user.ui.PhysicalSymptomsResource
+import com.joohnq.user.ui.ProfessionalHelpResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,29 +46,29 @@ class OnboardingViewModel : ViewModel() {
         _state.update { it.copy(sliderValue = sliderValue) }
     }
 
-    private fun updateSleepQuality(sleepQuality: SleepQuality) {
+    private fun updateSleepQuality(sleepQuality: SleepQualityResource) {
         _state.update { it.copy(sleepQuality = sleepQuality) }
     }
 
-    private fun updateStressLevel(stressLevel: StressLevel) {
+    private fun updateStressLevel(stressLevel: StressLevelResource) {
         _state.update { it.copy(stressLevel = stressLevel) }
     }
 
-    private fun updateMood(mood: Mood) {
-        _state.update { it.copy(statsRecord = it.statsRecord.copy(mood = mood)) }
+    private fun updateMood(mood: MoodResource) {
+        _state.update { it.copy(statsRecord = it.statsRecord.copy(mood = mood.toDomain())) }
     }
 
     private fun updateUserMedicationsSupplements(
-        medicationsSupplements: MedicationsSupplements?,
+        medicationsSupplements: MedicationsSupplementsResource?,
     ) {
         _state.update { it.copy(medicationsSupplements = medicationsSupplements) }
     }
 
-    private fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptoms?) {
+    private fun updateUserPhysicalSymptoms(physicalSymptoms: PhysicalSymptomsResource?) {
         _state.update { it.copy(physicalSymptoms = physicalSymptoms) }
     }
 
-    private fun updateUserSoughtHelp(soughtHelp: ProfessionalHelp?) {
+    private fun updateUserSoughtHelp(soughtHelp: ProfessionalHelpResource?) {
         _state.update { it.copy(soughtHelp = soughtHelp) }
     }
 

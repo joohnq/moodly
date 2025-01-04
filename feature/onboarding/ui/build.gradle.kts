@@ -49,8 +49,6 @@ kotlin {
             implementation(libs.datetime)
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
         }
     }
 }

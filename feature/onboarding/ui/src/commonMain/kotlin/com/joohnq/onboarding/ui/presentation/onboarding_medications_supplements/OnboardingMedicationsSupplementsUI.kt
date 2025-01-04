@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.state.OnboardingMedicationsSupplementsState
@@ -75,7 +74,7 @@ fun OnboardingMedicationsSupplementsUI(
 fun Preview() {
     OnboardingMedicationsSupplementsUI(
         OnboardingMedicationsSupplementsState(
-            selectedOption = MedicationsSupplements.PrescribedMedications,
+            selectedOption = MedicationsSupplementsResource.PrescribedMedications,
             onEvent = {},
             onAction = {}
         )

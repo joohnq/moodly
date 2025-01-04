@@ -12,7 +12,12 @@ import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 
-class LoadingScreen : CustomScreenNothing() {
+class LoadingScreen(
+    private val onNavigateToWelcome: () -> Unit,
+    private val onNavigateToOnboarding: () -> Unit,
+    private val onNavigateToGetUserName: () -> Unit,
+    private val onNavigateToDashboard: () -> Unit,
+) : CustomScreenNothing() {
     @Composable
     override fun Screen() {
         val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
@@ -26,25 +31,10 @@ class LoadingScreen : CustomScreenNothing() {
         {
             userPreferencesState.userPreferences.onSuccess { userPreferences: UserPreferences ->
                 when (false) {
-                    userPreferences.skipWelcomeScreen -> {
-//                        onNavigate(WelcomeScreen(), true)
-                        return@onSuccess
-                    }
-
-                    userPreferences.skipOnboardingScreen -> {
-//                        onNavigate(OnboardingMoodRateScreen(), true)
-                        return@onSuccess
-                    }
-
-                    userPreferences.skipGetUserNameScreen -> {
-//                        onNavigate(GetUserNameScreen(), true)
-                        return@onSuccess
-                    }
-
-                    else -> {
-//                        onNavigate(DashboardScreen(), false)
-                        return@onSuccess
-                    }
+                    userPreferences.skipWelcomeScreen -> onNavigateToWelcome()
+                    userPreferences.skipOnboardingScreen -> onNavigateToOnboarding()
+                    userPreferences.skipGetUserNameScreen -> onNavigateToGetUserName()
+                    else -> onNavigateToDashboard()
                 }
             }
         }

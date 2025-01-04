@@ -2,7 +2,6 @@
 
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
@@ -26,7 +25,6 @@ kotlin {
     }
 
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -53,9 +51,12 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
+            implementation(projects.core.navigation)
             implementation(projects.core.di)
             implementation(projects.core.ui)
             implementation(projects.shared.ui)
+
+            implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.ui)
             implementation(projects.feature.onboarding.ui)
 
@@ -89,19 +90,12 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.bundles.viewmodel)
+
             implementation(libs.datetime)
-            implementation(libs.serialization)
             implementation(libs.coroutines.core)
             implementation(libs.navigation.compose)
-            implementation(libs.napier)
 
-            // Koin
             implementation(libs.bundles.koin)
-
-
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -112,12 +106,6 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.test)
             implementation(libs.turbine)
-
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.bottom.sheet.navigator)
-            implementation(libs.voyager.tab.navigator)
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.koin)
 
             implementation(libs.turbine)
         }

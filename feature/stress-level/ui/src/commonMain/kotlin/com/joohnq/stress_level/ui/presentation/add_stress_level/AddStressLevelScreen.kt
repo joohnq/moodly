@@ -21,7 +21,10 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import kotlinx.coroutines.launch
 
-class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
+class AddStressLevelScreen(
+    private val onNavigateToStressStressors: () -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<AddStressLevelState>() {
     @Composable
     override fun Screen(): AddStressLevelState {
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
@@ -47,7 +50,7 @@ class AddStressLevelScreen : CustomScreen<AddStressLevelState>() {
                 AddStressLevelEvent.GoBack -> onGoBack()
                 AddStressLevelEvent.Continue -> {
                     if (addStressLevelState.stressLevel != StressLevelResource.One) {
-//                        onNavigate(StressStressorsScreen())
+                        onNavigateToStressStressors()
                     } else {
                         stressLevelViewModel.onAction(
                             StressLevelIntent.AddStressLevelRecord(

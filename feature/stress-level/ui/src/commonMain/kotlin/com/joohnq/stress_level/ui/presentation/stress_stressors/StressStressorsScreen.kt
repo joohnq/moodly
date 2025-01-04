@@ -23,7 +23,10 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import kotlinx.coroutines.launch
 
-class StressStressorsScreen : CustomScreen<StressStressorsState>() {
+class StressStressorsScreen(
+    private val onGoBack: () -> Unit,
+    private val onGoBackToStressLevel: () -> Unit,
+) : CustomScreen<StressStressorsState>() {
     @Composable
     override fun Screen(): StressStressorsState {
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
@@ -68,7 +71,7 @@ class StressStressorsScreen : CustomScreen<StressStressorsState>() {
             stressLevelState.adding.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
-//                    onGoBack(StressLevelScreen())
+                    onGoBackToStressLevel()
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
                     stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 },

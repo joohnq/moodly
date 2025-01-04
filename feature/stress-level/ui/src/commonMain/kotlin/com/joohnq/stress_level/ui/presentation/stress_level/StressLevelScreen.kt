@@ -9,7 +9,10 @@ import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEve
 import com.joohnq.stress_level.ui.presentation.stress_level.state.StressLevelState
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 
-class StressLevelScreen : CustomScreen<StressLevelState>() {
+class StressLevelScreen(
+    private val onNavigateAddStressLevel: () -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<StressLevelState>() {
     @Composable
     override fun Screen(): StressLevelState {
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
@@ -17,11 +20,8 @@ class StressLevelScreen : CustomScreen<StressLevelState>() {
 
         fun onEvent(event: StressLevelEvent) =
             when (event) {
-                is StressLevelEvent.Add -> {
-//                    onNavigate(AddStressLevelScreen())
-                }
-
-                is StressLevelEvent.GoBack -> onGoBack()
+                is StressLevelEvent.Add -> onNavigateAddStressLevel
+                is StressLevelEvent.GoBack -> onGoBack
             }
 
         return StressLevelState(

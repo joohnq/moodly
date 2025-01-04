@@ -11,6 +11,7 @@ import org.koin.dsl.module
 
 val moodDataModule = module {
     singleOf(::StatsDatabase)
+    singleOf(StatsDatabase::invoke)
     singleOf(::StatsDataSourceImpl) bind StatsDataSource::class
     singleOf(::StatsRepositoryImpl) bind StatsRepository::class
 }

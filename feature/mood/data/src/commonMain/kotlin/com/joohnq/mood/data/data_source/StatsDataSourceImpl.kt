@@ -1,11 +1,13 @@
 package com.joohnq.mood.data.data_source
 
 import com.joohnq.core.database.converters.LocalDateTimeConverter
-import com.joohnq.core.database.executeTryCatch
 import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.converter.StatsRecordConverter
 import com.joohnq.mood.domain.data_source.StatsDataSource
 import com.joohnq.mood.domain.entity.StatsRecord
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
 class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSource {
     private val query = database.statRecordQueries
@@ -19,8 +21,8 @@ class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSou
             )
         }.executeAsList()
 
-    override suspend fun addStats(statsRecord: StatsRecord): Boolean =
-        executeTryCatch {
+    override suspend fun addStats(statsRecord: StatsRecord) =
+        withContext(Dispatchers.IO) {
             query.addStats(
                 id = statsRecord.id.toLong(),
                 mood = StatsRecordConverter.fromMood(statsRecord.mood),
@@ -28,8 +30,8 @@ class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSou
             )
         }
 
-    override suspend fun deleteStat(id: Int): Boolean =
-        executeTryCatch {
+    override suspend fun deleteStat(id: Int) =
+        withContext(Dispatchers.IO) {
             query.deleteStat(id.toLong())
         }
 }

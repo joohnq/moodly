@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -39,24 +40,27 @@ fun MentalHealthMetrics(
         contentPadding = PaddingValues(horizontal = 20.dp)
     ) {
         item {
-            MentalHealthMetricItem(
-                title = Res.string.freud_score,
-                icon = Drawables.Icons.Heart,
-                backgroundColor = freudScore.palette.backgroundColor,
-                onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
-            ) {
-                CircularProgressWithDoubleText(
-                    modifier = it.size(130.dp),
-                    color = freudScore.palette.color,
-                    backgroundColor = freudScore.palette.subColor,
-                    progress = { freudScore.score.toFloat() / 100 },
-                    firstText = freudScore.score.toString(),
-                    firstTextStyle = TextStyles.Text2xlExtraBold(),
-                    secondText = stringResource(freudScore.title),
-                    secondTextStyle = TextStyles.TextSmSemiBold(),
-                    textColor = freudScore.palette.color
-                )
-            }
+            if (freudScore == null)
+                CircularProgressIndicator()
+            else
+                MentalHealthMetricItem(
+                    title = Res.string.freud_score,
+                    icon = Drawables.Icons.Heart,
+                    backgroundColor = freudScore.palette.backgroundColor,
+                    onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
+                ) {
+                    CircularProgressWithDoubleText(
+                        modifier = it.size(130.dp),
+                        color = freudScore.palette.color,
+                        backgroundColor = freudScore.palette.subColor,
+                        progress = { freudScore.score.toFloat() / 100 },
+                        firstText = freudScore.score.toString(),
+                        firstTextStyle = TextStyles.Text2xlExtraBold(),
+                        secondText = stringResource(freudScore.title),
+                        secondTextStyle = TextStyles.TextSmSemiBold(),
+                        textColor = freudScore.palette.color
+                    )
+                }
         }
         item {
             MentalHealthMetricItem(

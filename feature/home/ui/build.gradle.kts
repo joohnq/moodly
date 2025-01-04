@@ -27,6 +27,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.navigation)
             implementation(projects.core.ui)
             implementation(projects.feature.stressLevel.ui)
             implementation(projects.feature.stressLevel.domain)
@@ -51,9 +52,10 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            implementation(libs.navigation.compose)
+
+            implementation(libs.datetime)
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
         }
     }
 }

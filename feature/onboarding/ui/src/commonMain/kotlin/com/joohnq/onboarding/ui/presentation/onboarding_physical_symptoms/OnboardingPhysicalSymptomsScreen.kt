@@ -9,7 +9,11 @@ import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 
-class OnboardingPhysicalSymptomsScreen : CustomScreen<OnboardingPhysicalSymptomsState>() {
+class OnboardingPhysicalSymptomsScreen(
+    private val onNavigateToSleepQuality: () -> Unit,
+    private val onGoBack: () -> Unit,
+) :
+    CustomScreen<OnboardingPhysicalSymptomsState>() {
     @Composable
     override fun Screen(): OnboardingPhysicalSymptomsState {
         val onboardingViewModel: OnboardingViewModel = sharedViewModel()
@@ -17,11 +21,9 @@ class OnboardingPhysicalSymptomsScreen : CustomScreen<OnboardingPhysicalSymptoms
 
         fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingEvent.OnNavigateToNext -> {}
-//                    onNavigate(OnboardingSleepQualityScreen())
-
-                OnboardingEvent.OnGoBack -> {}
-//                    onGoBack()
+                OnboardingEvent.OnNavigateToNext -> onNavigateToSleepQuality()
+                OnboardingEvent.OnGoBack ->
+                    onGoBack()
             }
 
         return OnboardingPhysicalSymptomsState(

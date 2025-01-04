@@ -9,7 +9,11 @@ import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 
-class OnboardingStressLevelScreen : CustomScreen<OnboardingStressLevelState>() {
+class OnboardingStressLevelScreen(
+    private val onNavigateToExpressionAnalysis: () -> Unit,
+    private val onGoBack: () -> Unit,
+) :
+    CustomScreen<OnboardingStressLevelState>() {
     @Composable
     override fun Screen(): OnboardingStressLevelState {
         val onboardingViewModel: OnboardingViewModel = sharedViewModel()
@@ -17,11 +21,11 @@ class OnboardingStressLevelScreen : CustomScreen<OnboardingStressLevelState>() {
 
         fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingEvent.OnNavigateToNext -> {}
-//                    onNavigate(OnboardingExpressionAnalysisScreen())
+                OnboardingEvent.OnNavigateToNext ->
+                    onNavigateToExpressionAnalysis()
 
-                OnboardingEvent.OnGoBack -> {}
-//                    onGoBack()
+                OnboardingEvent.OnGoBack ->
+                    onGoBack()
             }
 
         return OnboardingStressLevelState(

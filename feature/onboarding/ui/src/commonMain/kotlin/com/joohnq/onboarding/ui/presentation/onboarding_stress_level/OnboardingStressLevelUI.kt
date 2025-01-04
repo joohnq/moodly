@@ -23,7 +23,6 @@ import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.stress_level.ui.StressLevelResource
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -31,7 +30,6 @@ fun OnboardingStressLevelUI(
     state: OnboardingStressLevelState,
 ) {
     val options: List<StressLevelResource> = remember { StressLevelResource.getAll() }
-    val selectedOption = state.selectedOption.toResource()
 
     OnboardingBaseComponent(
         page = 6,
@@ -40,7 +38,7 @@ fun OnboardingStressLevelUI(
         onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
-            text = stringResource(selectedOption.value),
+            text = stringResource(state.selectedOption.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -62,7 +60,7 @@ fun OnboardingStressLevelUI(
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(selectedOption.text),
+            text = stringResource(state.selectedOption.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )

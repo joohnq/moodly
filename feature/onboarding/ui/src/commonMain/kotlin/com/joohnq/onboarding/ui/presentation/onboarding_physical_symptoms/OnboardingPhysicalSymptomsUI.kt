@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
@@ -27,7 +26,6 @@ import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.user.ui.PhysicalSymptomsResource
-import com.joohnq.user.ui.PhysicalSymptomsResource.Companion.toResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

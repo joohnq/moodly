@@ -2,8 +2,12 @@ package com.joohnq.shared.ui
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable inline fun <reified T : ViewModel> sharedViewModel(): T {
-    return koinViewModel<T>()
+//    val scope = currentKoinScope()
+//    return viewModel {
+//        scope.get<T>()
+//    }
+    return koinInject()
 }

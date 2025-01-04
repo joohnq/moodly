@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared.domain.entity.Icon
+import com.joohnq.shared.domain.entity.DIcon
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.add
 import com.joohnq.shared.ui.continue_word
@@ -43,7 +43,7 @@ fun ButtonTextAndIcon(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: StringResource,
-    icon: Icon,
+    icon: DIcon,
     colors: ButtonColors,
     shape: Shape,
     onClick: () -> Unit,
@@ -82,7 +82,7 @@ fun ContinueButton(
         enabled = enabled,
         colors = ComponentColors.Button.MainButtonColors(),
         shape = Dimens.Shape.Circle,
-        icon = Icon(
+        icon = DIcon(
             icon = Drawables.Icons.Arrow,
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = Res.string.continue_word
@@ -102,7 +102,7 @@ fun ButtonTextAndCheck(
         text = text,
         colors = ComponentColors.Button.MainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
-        icon = Icon(
+        icon = DIcon(
             icon = Drawables.Icons.Check,
             tint = Colors.Brown80,
             modifier = Modifier.size(Dimens.Icon),
@@ -134,7 +134,7 @@ fun BackButton(
         onClick = onClick,
     ) {
         Icon(
-            Icon(
+            DIcon(
                 icon = Drawables.Icons.ArrowOpen,
                 tint = color,
                 modifier = Modifier.size(Dimens.Icon),

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -41,12 +42,11 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.serialization)
 
             implementation(libs.datetime)
 
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
             implementation(libs.charts)
         }
     }

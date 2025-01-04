@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.ui.MoodResource
-import com.joohnq.mood.ui.MoodResource.Companion.toDomain
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.Res
@@ -170,13 +169,12 @@ fun AddSleepQualityUI(
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
                     items(moodsUI) { resource ->
-                        val domain = resource.toDomain()
                         MoodFace(
                             modifier = Modifier.size(32.dp),
                             mood = resource,
                             backgroundColor = if (state.addSleepQualityViewModelState.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
                             color = if (state.addSleepQualityViewModelState.mood == resource) resource.palette.faceColor else Colors.Gray60,
-                            onClick = { state.onAddAction(AddSleepQualityIntent.UpdateMood(domain)) }
+                            onClick = { state.onAddAction(AddSleepQualityIntent.UpdateMood(resource)) }
                         )
                     }
                 }
@@ -190,16 +188,16 @@ fun AddSleepQualityUI(
                     items(sleepInfluences) { sleepInfluences ->
                         val resource = sleepInfluences.toResource()
                         TextRadioButton(
-                            text = stringResource(resource.title),
+                            text = resource.title,
                             selected = state.addSleepQualityViewModelState.selectedSleepInfluences.contains(
-                                sleepInfluences
+                                resource
                             ),
                             colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                             shape = Dimens.Shape.Circle,
                             onClick = {
                                 state.onAddAction(
                                     AddSleepQualityIntent.UpdateSelectedSleepInfluence(
-                                        sleepInfluences
+                                        resource
                                     )
                                 )
                             }

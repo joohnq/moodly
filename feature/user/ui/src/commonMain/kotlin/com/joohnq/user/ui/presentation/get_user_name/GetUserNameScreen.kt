@@ -21,10 +21,12 @@ import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class GetUserNameScreen : CustomScreen<GetUserNameState>() {
+class GetUserNameScreen(
+    private val onNavigateToDashboardScreen: () -> Unit,
+) :
+    CustomScreen<GetUserNameState>() {
     @Composable
     override fun Screen(): GetUserNameState {
         val userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
@@ -57,7 +59,7 @@ class GetUserNameScreen : CustomScreen<GetUserNameState>() {
                     }
                 },
                 onSuccess = {
-//                    onNavigate(DashboardScreen(), true)
+                    onNavigateToDashboardScreen()
                     userPreferencesViewModel.onAction(
                         UserPreferenceViewModelIntent.UpdateSkipGetUserNameScreen()
                     )

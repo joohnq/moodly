@@ -9,6 +9,7 @@ import com.joohnq.domain.use_case.user_preferences.UpdateSkipGetUserNameScreenUs
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeScreenUseCase
 import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -40,66 +41,47 @@ class UserPreferenceViewModel(
             UserPreferenceViewModelIntent.AddUserPreferences -> addUserPreferences()
             UserPreferenceViewModelIntent.LogoutUserPreferences -> {}
 
-            UserPreferenceViewModelIntent.ResetUpdating -> resetUpdating()
+            UserPreferenceViewModelIntent.ResetUpdating -> changeUpdatingStatus(UiState.Idle)
         }
     }
 
     private fun getUserPreferences() =
         viewModelScope.launch {
-            _state.update {
-                it.copy(userPreferences = UiState.Loading)
-            }
-            try {
-                val res = getUserPreferencesUseCase()
-                _state.update {
-                    it.copy(userPreferences = UiState.Success(res))
-                }
-            } catch (e: Exception) {
-                _state.update {
-                    it.copy(userPreferences = UiState.Error(e.message.toString()))
-                }
-            }
+            changeUserPreferencesStatus(UiState.Loading)
+            val res = getUserPreferencesUseCase().toUiState()
+            changeUserPreferencesStatus(res)
         }
 
     private fun addUserPreferences() = viewModelScope.launch {
         changeAddingStatus(UiState.Loading)
-
-        val res = addUserPreferencesUseCase(UserPreferences())
-
-        changeAddingStatus(if (res) UiState.Success(true) else UiState.Error("Failure add user preferences"))
+        val res = addUserPreferencesUseCase(UserPreferences()).toUiState()
+        changeAddingStatus(res)
     }
 
     private fun updateSkipWelcomeScreen(value: Boolean) =
         viewModelScope.launch {
-            val res = updateSkipWelcomeScreenUseCase(value)
-
-            _state.update {
-                it.copy(updating = if (res) UiState.Success(res) else UiState.Error("Failure when skipping onboarding screen"))
-            }
+            val res = updateSkipWelcomeScreenUseCase(value).toUiState()
+            changeUpdatingStatus(res)
         }
 
     private fun updateSkipOnboardingScreen(value: Boolean) =
         viewModelScope.launch {
-            val res = updateSkipOnboardingScreenUseCase(value)
-
-            _state.update {
-                it.copy(updating = if (res) UiState.Success(res) else UiState.Error("Failure when skipping onboarding screen"))
-            }
+            val res = updateSkipOnboardingScreenUseCase(value).toUiState()
+            changeUpdatingStatus(res)
         }
 
     private fun updateSkipGetUserNameScreen(value: Boolean) =
         viewModelScope.launch {
-            val res = updateSkipGetUserNameScreenUseCase(value)
-
-            _state.update {
-                it.copy(updating = if (res) UiState.Success(res) else UiState.Error("Failure when skipping get user name screen"))
-            }
+            val res = updateSkipGetUserNameScreenUseCase(value).toUiState()
+            changeUpdatingStatus(res)
         }
 
-    private fun resetUpdating() {
-        _state.update {
-            it.copy(updating = UiState.Idle)
-        }
+    private fun changeUserPreferencesStatus(status: UiState<UserPreferences>) {
+        _state.update { it.copy(userPreferences = status) }
+    }
+
+    private fun changeUpdatingStatus(status: UiState<Boolean>) {
+        _state.update { it.copy(updating = status) }
     }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {

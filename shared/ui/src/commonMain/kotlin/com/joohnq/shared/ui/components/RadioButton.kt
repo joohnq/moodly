@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared.domain.entity.Icon
+import com.joohnq.shared.domain.entity.DIcon
 import com.joohnq.shared.domain.entity.TextRadioButtonColors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.TextStyles
@@ -59,7 +59,7 @@ fun IconAndTextRadioButtonHorizontal(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     text: String,
-    icon: Icon,
+    icon: DIcon,
     selected: Boolean,
     colors: TextRadioButtonColors,
     shape: Shape,
@@ -108,7 +108,7 @@ fun IconAndTextRadioButtonVertical(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     text: String,
-    icon: Icon,
+    icon: DIcon,
     selected: Boolean,
     colors: TextRadioButtonColors,
     shape: Shape,

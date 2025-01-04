@@ -9,10 +9,10 @@ getUserPreferences:
 SELECT * FROM UserPreferences WHERE id = 1;
 
 addUserPreferences:
-INSERT INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipGetUserNameScreen) VALUES (1, :skipWelcomeScreen, :skipOnboardingScreen, :skipGetUserNameScreen);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipGetUserNameScreen) VALUES (1, :skipWelcomeScreen, :skipOnboardingScreen, :skipGetUserNameScreen);
 
 insertUserPreferences:
-INSERT INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipGetUserNameScreen) VALUES (1, 0, 0, 0);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipGetUserNameScreen) VALUES (1, 0, 0, 0);
 
 updateSkipWelcomeScreen:
 UPDATE UserPreferences SET skipWelcomeScreen = :value WHERE id = 1;

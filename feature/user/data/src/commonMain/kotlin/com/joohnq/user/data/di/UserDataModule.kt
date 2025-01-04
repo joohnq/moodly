@@ -9,15 +9,13 @@ import com.joohnq.user.data.data_source.UserPreferencesDataSourceImpl
 import com.joohnq.user.data.database.UserDatabase
 import com.joohnq.user.data.repository.UserPreferencesRepositoryImpl
 import com.joohnq.user.data.repository.UserRepositoryImpl
-import com.joohnq.user.database.UserDatabaseSql
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val userDataModule = module {
-    single<UserDatabaseSql> {
-        UserDatabase(get()).invoke()
-    }
+    singleOf(::UserDatabase)
+    singleOf(UserDatabase::invoke)
     singleOf(::UserDataSourceImpl) bind UserDataSource::class
     singleOf(::UserPreferencesDataSourceImpl) bind UserPreferencesDataSource::class
     singleOf(::UserRepositoryImpl) bind UserRepository::class

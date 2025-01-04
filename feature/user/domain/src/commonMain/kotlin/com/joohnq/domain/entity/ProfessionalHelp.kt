@@ -1,7 +1,6 @@
 package com.joohnq.domain.entity
 
 import com.joohnq.domain.ProfessionalHelpProperties
-import kotlinx.serialization.Serializable
 
 sealed class ProfessionalHelp(
     override val id: Int,

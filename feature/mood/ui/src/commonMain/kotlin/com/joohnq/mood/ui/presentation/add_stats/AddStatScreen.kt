@@ -6,13 +6,15 @@ import androidx.compose.runtime.getValue
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
-import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
-class AddStatScreen : CustomScreen<AddStatState>() {
+class AddStatScreen(
+    private val onNavigateToExpressionAnalysis: () -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<AddStatState>() {
     @Composable
     override fun Screen(): AddStatState {
         val addStatsViewModel: AddStatViewModel = sharedViewModel()
@@ -22,9 +24,8 @@ class AddStatScreen : CustomScreen<AddStatState>() {
 
         fun onEvent(event: AddStatEvent) =
             when (event) {
-                AddStatEvent.OnGoBack -> onGoBack()
-                AddStatEvent.OnNavigateToExpressionAnalysis -> {}
-//                    onNavigate(ExpressionAnalysisScreen())
+                AddStatEvent.OnGoBack -> onGoBack
+                AddStatEvent.OnNavigateToExpressionAnalysis -> onNavigateToExpressionAnalysis
             }
 
         return AddStatState(

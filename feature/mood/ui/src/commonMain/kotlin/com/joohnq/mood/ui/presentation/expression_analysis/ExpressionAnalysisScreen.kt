@@ -21,7 +21,11 @@ import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
-class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
+class ExpressionAnalysisScreen(
+    private val onNavigateToMood: () -> Unit,
+    private val onGoBack: () -> Unit,
+) :
+    CustomScreen<ExpressionAnalysisState>() {
     @Composable
     override fun Screen(): ExpressionAnalysisState {
         val statsViewModel: StatsViewModel = sharedViewModel()
@@ -50,7 +54,7 @@ class ExpressionAnalysisScreen : CustomScreen<ExpressionAnalysisState>() {
             statsState.adding.fold(
                 onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
                 onSuccess = {
-//                    onNavigate(MoodScreen())
+                    onNavigateToMood()
                     statsViewModel.onAction(StatsIntent.GetStatsRecords)
                     statsViewModel.onAction(StatsIntent.ResetAddingStatus)
                 },

@@ -8,6 +8,7 @@ import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
 import com.joohnq.domain.use_case.user.UpdateUserUseCase
 import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.ui.state.UiState.Companion.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -39,22 +40,16 @@ class UserViewModel(
 
     private fun updateUser(user: User) = viewModelScope.launch {
         changeUpdatingStatus(UiState.Loading)
-
-        val res = updateUserUseCase(user)
-
-        changeUpdatingStatus(
-            if (res) UiState.Success(true) else UiState.Error(
-                "Failure to set user"
-            )
-        )
+        val res = updateUserUseCase(user).toUiState()
+        changeUpdatingStatus(res)
     }
 
     private fun getUser() = viewModelScope.launch {
         changeUserStatus(UiState.Loading)
 
         try {
-            val user = getUserUseCase()
-            changeUserStatus(UiState.Success(user))
+            val user = getUserUseCase().toUiState()
+            changeUserStatus(user)
         } catch (e: Exception) {
             changeUserStatus(UiState.Error(e.message.toString()))
         }
@@ -62,14 +57,8 @@ class UserViewModel(
 
     private fun updateUserName(name: String) = viewModelScope.launch {
         changeUpdatingStatus(UiState.Loading)
-
-        val res = updateUserNameUseCase(name)
-
-        changeUpdatingStatus(
-            if (res) UiState.Success(true) else UiState.Error(
-                "Failure to set user"
-            )
-        )
+        val res = updateUserNameUseCase(name).toUiState()
+        changeUpdatingStatus(res)
     }
 
     private fun changeUpdatingStatus(status: UiState<Boolean>) {

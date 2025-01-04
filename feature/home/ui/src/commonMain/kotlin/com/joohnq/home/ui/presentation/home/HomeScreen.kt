@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
@@ -18,13 +17,10 @@ import com.joohnq.home.ui.presentation.home.state.HomeState
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.shared.domain.IDatetimeProvider
-import com.joohnq.shared.ui.CustomTab
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.home
+import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
-import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
@@ -32,11 +28,9 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
-class HomeScreen : CustomTab<HomeState>() {
+class HomeScreen : CustomScreen<HomeState>() {
     @Composable
     override fun Screen(): HomeState {
         val snackBarHostState = remember { SnackbarHostState() }
@@ -117,15 +111,6 @@ class HomeScreen : CustomTab<HomeState>() {
             onEvent = ::onEvent
         )
     }
-
-    override val options: TabOptions
-        @Composable
-        get() =
-            TabOptions(
-                icon = painterResource(Drawables.Icons.Home),
-                title = stringResource(Res.string.home),
-                index = 0u
-            )
 
     @Composable
     override fun UI(state: HomeState) = HomeUI(state = state)

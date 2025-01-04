@@ -47,9 +47,6 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.datetime)
             implementation(libs.bundles.koin)
-
-            implementation(libs.bundles.voyager)
-            implementation(libs.bundles.voyager.other)
         }
     }
 }

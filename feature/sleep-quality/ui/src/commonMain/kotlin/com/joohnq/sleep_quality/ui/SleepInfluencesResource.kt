@@ -21,14 +21,11 @@ import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.HIGH_STR
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.MEDITATION
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.NATURAL_LIGHT
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.StringResource
 
-@Serializable
 sealed class SleepInfluencesResource(
     override val id: Int,
-    @Contextual val title: StringResource,
+    val title: StringResource,
 ) : SleepInfluencesProperties {
     data object NaturalLight :
         SleepInfluencesResource(id = NATURAL_LIGHT.id, title = Res.string.exposure_to_natural_light)

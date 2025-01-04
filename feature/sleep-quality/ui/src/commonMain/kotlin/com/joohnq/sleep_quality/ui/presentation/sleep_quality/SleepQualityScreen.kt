@@ -9,7 +9,10 @@ import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQuality
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.state.SleepQualityState
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 
-class SleepQualityScreen : CustomScreen<SleepQualityState>() {
+class SleepQualityScreen(
+    private val onNavigateAddSleepQuality: () -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<SleepQualityState>() {
     @Composable
     override fun Screen(): SleepQualityState {
         val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
@@ -17,10 +20,8 @@ class SleepQualityScreen : CustomScreen<SleepQualityState>() {
 
         fun onEvent(event: SleepQualityEvent) =
             when (event) {
-                SleepQualityEvent.Add -> {}
-//                    onNavigate(AddSleepQualityScreen())
-
-                SleepQualityEvent.GoBack -> onGoBack()
+                SleepQualityEvent.Add -> onNavigateAddSleepQuality
+                SleepQualityEvent.GoBack -> onGoBack
             }
 
 

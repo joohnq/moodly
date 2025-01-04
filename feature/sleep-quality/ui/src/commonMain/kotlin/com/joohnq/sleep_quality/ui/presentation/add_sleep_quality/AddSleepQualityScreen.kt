@@ -24,7 +24,9 @@ import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import kotlinx.coroutines.launch
 
-class AddSleepQualityScreen : CustomScreen<AddSleepQualityState>() {
+class AddSleepQualityScreen(
+    private val onGoBack: () -> Unit,
+) : CustomScreen<AddSleepQualityState>() {
     @Composable
     override fun Screen(): AddSleepQualityState {
         val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()

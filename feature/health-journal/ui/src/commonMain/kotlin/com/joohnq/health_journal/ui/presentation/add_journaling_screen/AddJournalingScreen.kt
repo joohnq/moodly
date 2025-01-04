@@ -21,7 +21,7 @@ import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
-class AddJournalingScreen : CustomScreen<AddJournalingState>() {
+class AddJournalingScreen(private val onGoBack: () -> Unit) : CustomScreen<AddJournalingState>() {
     @Composable
     override fun Screen(): AddJournalingState {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()

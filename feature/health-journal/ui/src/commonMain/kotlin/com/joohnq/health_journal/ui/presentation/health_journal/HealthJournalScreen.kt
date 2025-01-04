@@ -9,7 +9,11 @@ import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 
-class HealthJournalScreen : CustomScreen<HealthJournalState>() {
+class HealthJournalScreen(
+    private val onNavigateAddJournaling: () -> Unit,
+    private val onNavigateAllJournaling: () -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<HealthJournalState>() {
     @Composable
     override fun Screen(): HealthJournalState {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
@@ -17,14 +21,9 @@ class HealthJournalScreen : CustomScreen<HealthJournalState>() {
 
         fun onEvent(event: HealthJournalEvent) =
             when (event) {
-                HealthJournalEvent.OnGoBack ->
-                    onGoBack()
-
-                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> {}
-//                    onNavigate(AddJournalingScreen())
-
-                is HealthJournalEvent.OnClick -> {}
-//                    onNavigate(AllJournalScreen(event.localDate))
+                HealthJournalEvent.OnGoBack -> onGoBack
+                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigateAddJournaling
+                is HealthJournalEvent.OnClick -> onNavigateAllJournaling
             }
 
         return HealthJournalState(

@@ -19,7 +19,8 @@ import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
 
-class EditJournalingScreen(val id: Int) : CustomScreen<EditJournalingState>() {
+class EditJournalingScreen(val id: Int, private val onGoBack: () -> Unit) :
+    CustomScreen<EditJournalingState>() {
     @Composable
     override fun Screen(): EditJournalingState {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()

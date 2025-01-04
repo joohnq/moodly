@@ -2,21 +2,21 @@ package com.joohnq.health_journal.ui.presentation.all_journals
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
-import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import kotlinx.datetime.LocalDate
 
-class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<AllJournalState>() {
+class AllJournalScreen(
+    private val onNavigateEditJournaling: (Int) -> Unit,
+    private val onGoBack: () -> Unit,
+) : CustomScreen<AllJournalState>() {
     @Composable
     override fun Screen(): AllJournalState {
         val userViewModel: UserViewModel = sharedViewModel()
@@ -29,8 +29,7 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
         fun onEvent(event: AllJournalEvent) =
             when (event) {
                 AllJournalEvent.OnGoBack -> onGoBack()
-                is AllJournalEvent.OnSelectJournal -> {}
-//                    onNavigate(EditJournalingScreen(event.id))
+                is AllJournalEvent.OnSelectJournal -> onNavigateEditJournaling(event.id)
                 AllJournalEvent.OnDelete -> healthJournalViewModel.onAction(
                     HealthJournalIntent.DeleteHealthJournal(
                         allJournalState.currentDeleteId
@@ -38,13 +37,13 @@ class AllJournalScreen(private val localDate: LocalDate? = null) : CustomScreen<
                 )
             }
 
-        if (localDate != null) {
-            LaunchedEffect(Unit) {
-                allJournalViewModel.onAction(
-                    AllJournalViewModelIntent.UpdateSelectedDateTime(localDate)
-                )
-            }
-        }
+//        if (localDate != null) {
+//            LaunchedEffect(Unit) {
+//                allJournalViewModel.onAction(
+//                    AllJournalViewModelIntent.UpdateSelectedDateTime(localDate)
+//                )
+//            }
+//        }
 
         DisposableEffect(Unit) {
             onDispose {

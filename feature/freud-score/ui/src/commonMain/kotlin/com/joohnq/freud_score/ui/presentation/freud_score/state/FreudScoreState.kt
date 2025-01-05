@@ -1,9 +1,9 @@
 package com.joohnq.freud_score.ui.presentation.freud_score.state
 
-import com.joohnq.freud_score.ui.FreudScoreResource
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
+import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.domain.entity.UiState
 
 data class FreudScoreState(
     val freudScore: FreudScoreResource,

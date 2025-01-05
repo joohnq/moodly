@@ -1,8 +1,7 @@
-package com.joohnq.freud_score.ui
+package com.joohnq.freud_score.ui.resource
 
-import com.joohnq.freud_score.domain.FreudScoreProperties
-import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
+import com.joohnq.freud_score.domain.property.FreudScoreProperties
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.at_risk
 import com.joohnq.shared.ui.healthy
@@ -76,15 +75,4 @@ sealed class FreudScoreResource(
             backgroundColor = Colors.Purple40
         )
     )
-
-    companion object {
-        fun FreudScore.toResource(): FreudScoreResource =
-            when (this) {
-                is FreudScore.Healthy -> Healthy(score)
-                is FreudScore.MostlyHealthy -> MostlyHealthy(score)
-                is FreudScore.Stable -> Stable(score)
-                is FreudScore.AtRisk -> AtRisk(score)
-                is FreudScore.Unhealthy -> Unhealthy(score)
-            }
-    }
 }

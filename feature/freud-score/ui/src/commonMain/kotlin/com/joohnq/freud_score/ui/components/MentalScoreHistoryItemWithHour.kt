@@ -16,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.components.CircularProgressWithText
 import com.joohnq.shared.ui.components.HorizontalSpacer

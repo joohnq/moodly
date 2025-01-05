@@ -16,13 +16,13 @@ import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetStatGroupByDateUseCase
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.shared.domain.mapper.foldComposable
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.SharedPanelComponent
 import com.joohnq.shared.ui.components.SmallTitle
 import com.joohnq.shared.ui.freud_score
 import com.joohnq.shared.ui.mental_score_history
-import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium

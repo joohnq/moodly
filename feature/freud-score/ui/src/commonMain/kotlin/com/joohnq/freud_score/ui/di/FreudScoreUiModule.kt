@@ -1,9 +1,5 @@
 package com.joohnq.freud_score.ui.di
 
-import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
+import org.koin.core.module.Module
 
-val freudScoreUiModule = module {
-    singleOf(::FreudScoreViewModel)
-}
+expect val freudScoreUiModule: Module

@@ -1,7 +1,7 @@
 package com.joohnq.freud_score.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.freud_score.ui.FreudScoreResource.Companion.toResource
+import com.joohnq.freud_score.ui.mapper.toResource
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.CalculateStatsFreudScore
 import kotlinx.coroutines.flow.MutableStateFlow

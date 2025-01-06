@@ -32,33 +32,6 @@ sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
         val HIGH_STRESS = DSleepInfluencesProperties(6)
         val ANXIETY = DSleepInfluencesProperties(7)
         val ALCOHOL_CONSUMPTION = DSleepInfluencesProperties(8)
-
-        fun getAll(): List<SleepInfluences> = listOf(
-            NaturalLight,
-            PhysicalActivity,
-            ChillSleepEnvironment,
-            Meditation,
-            Caffeine,
-            ExcessiveScreenTime,
-            HighStress,
-            Anxiety,
-            AlcoholConsumption
-        )
-
-        fun toValue(src: Int): SleepInfluences = when (src) {
-            NATURAL_LIGHT.id -> NaturalLight
-            PHYSICAL_ACTIVITY.id -> PhysicalActivity
-            CHILL_SLEEP_ENVIRONMENT.id -> ChillSleepEnvironment
-            MEDITATION.id -> Meditation
-            CAFFEINE.id -> Caffeine
-            EXCESSIVE_SCREEN_TIME.id -> ExcessiveScreenTime
-            HIGH_STRESS.id -> HighStress
-            ANXIETY.id -> Anxiety
-            ALCOHOL_CONSUMPTION.id -> AlcoholConsumption
-            else -> throw IllegalArgumentException("Unknown sleep influence option: $src")
-        }
-
-        fun SleepInfluences?.fromValue(): Int = this?.id ?: -1
     }
 }
 

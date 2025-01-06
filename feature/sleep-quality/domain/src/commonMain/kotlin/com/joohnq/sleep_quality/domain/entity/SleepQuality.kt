@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
 
 sealed class SleepQuality(
@@ -19,42 +18,6 @@ sealed class SleepQuality(
         val FAIR = DSleepQualityProperties(3, 3)
         val POOR = DSleepQualityProperties(2, 2)
         val WORST = DSleepQualityProperties(1, 1)
-
-        fun toValue(src: Int): SleepQuality = when (src) {
-            EXCELLENT.id -> Excellent
-            GOOD.id -> Good
-            FAIR.id -> Fair
-            POOR.id -> Poor
-            WORST.id -> Worst
-            else -> throw IllegalArgumentException("Unknown sleep quality option: $src")
-        }
-
-        fun SleepQuality?.fromValue(): Int = this?.id ?: -1
-
-        fun getAll(): List<SleepQuality> = listOf(
-            Excellent,
-            Good,
-            Fair,
-            Poor,
-            Worst
-        )
-
-
-        fun SleepQuality.toMood(): Mood = when (this) {
-            Excellent -> Mood.Overjoyed
-            Good -> Mood.Happy
-            Fair -> Mood.Neutral
-            Poor -> Mood.Sad
-            Worst -> Mood.Depressed
-        }
-
-        fun fromSliderValue(value: Float): SleepQuality = when (value) {
-            0f -> Worst
-            25f -> Poor
-            50f -> Fair
-            75f -> Good
-            else -> Excellent
-        }
     }
 }
 

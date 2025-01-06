@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui
+package com.joohnq.sleep_quality.ui.resource
 
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.alcohol_consumption
@@ -11,7 +11,6 @@ import com.joohnq.shared.ui.high_stress
 import com.joohnq.shared.ui.meditation
 import com.joohnq.shared.ui.physical_activity
 import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ANXIETY
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.CAFFEINE
@@ -55,44 +54,4 @@ sealed class SleepInfluencesResource(
     data object Anxiety : SleepInfluencesResource(id = ANXIETY.id, title = Res.string.anxiety)
     data object AlcoholConsumption :
         SleepInfluencesResource(id = ALCOHOL_CONSUMPTION.id, title = Res.string.alcohol_consumption)
-
-    companion object {
-        fun getAll(): List<SleepInfluencesResource> = listOf(
-            NaturalLight,
-            PhysicalActivity,
-            ChillSleepEnvironment,
-            Meditation,
-            Caffeine,
-            ExcessiveScreenTime,
-            HighStress,
-            Anxiety,
-            AlcoholConsumption
-        )
-
-        fun SleepInfluences.toResource(): SleepInfluencesResource = when (this) {
-            SleepInfluences.NaturalLight -> NaturalLight
-            SleepInfluences.PhysicalActivity -> PhysicalActivity
-            SleepInfluences.ChillSleepEnvironment -> ChillSleepEnvironment
-            SleepInfluences.Meditation -> Meditation
-            SleepInfluences.Caffeine -> Caffeine
-            SleepInfluences.ExcessiveScreenTime -> ExcessiveScreenTime
-            SleepInfluences.HighStress -> HighStress
-            SleepInfluences.Anxiety -> Anxiety
-            SleepInfluences.AlcoholConsumption -> AlcoholConsumption
-        }
-
-        fun SleepInfluencesResource.toDomain(): SleepInfluences = when (this) {
-            NaturalLight -> SleepInfluences.NaturalLight
-            PhysicalActivity -> SleepInfluences.PhysicalActivity
-            ChillSleepEnvironment -> SleepInfluences.ChillSleepEnvironment
-            Meditation -> SleepInfluences.Meditation
-            Caffeine -> SleepInfluences.Caffeine
-            ExcessiveScreenTime -> SleepInfluences.ExcessiveScreenTime
-            HighStress -> SleepInfluences.HighStress
-            Anxiety -> SleepInfluences.Anxiety
-            AlcoholConsumption -> SleepInfluences.AlcoholConsumption
-        }
-
-        fun List<SleepInfluencesResource>.toDomain(): List<SleepInfluences> = map { it.toDomain() }
-    }
 }

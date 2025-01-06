@@ -8,14 +8,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.ui.MoodResource.Companion.toSleepQuality
+import com.joohnq.mood.ui.mapper.toSleepQuality
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.endSleeping
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord.Companion.startSleeping
-import com.joohnq.sleep_quality.ui.SleepInfluencesResource.Companion.toDomain
+import com.joohnq.sleep_quality.domain.mapper.endSleeping
+import com.joohnq.sleep_quality.domain.mapper.startSleeping
+import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.state.AddSleepQualityState
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
@@ -35,6 +35,10 @@ class AddSleepQualityScreen(
         val snackBarState = remember { SnackbarHostState() }
         val sleepQualityState by sleepQualityViewModel.state.collectAsState()
         val addSleepQualityState by addSleepQualityViewModel.state.collectAsState()
+
+        fun onError(message: String) {
+            scope.launch { snackBarState.showSnackbar(message) }
+        }
 
         fun onEvent(event: AddSleepQualityEvent) =
             when (event) {
@@ -58,7 +62,7 @@ class AddSleepQualityScreen(
 
         LaunchedEffect(sleepQualityState.adding) {
             sleepQualityState.adding.fold(
-                onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
+                onError = ::onError,
                 onSuccess = {
                     onEvent(AddSleepQualityEvent.OnGoBack)
                     sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)

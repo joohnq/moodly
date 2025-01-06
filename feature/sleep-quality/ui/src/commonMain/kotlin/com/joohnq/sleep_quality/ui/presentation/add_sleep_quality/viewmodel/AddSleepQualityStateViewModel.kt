@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
-import com.joohnq.mood.ui.MoodResource
-import com.joohnq.sleep_quality.ui.SleepInfluencesResource
+import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
 
 data class AddSleepQualityStateViewModel(
     val startHour: Int = 12,

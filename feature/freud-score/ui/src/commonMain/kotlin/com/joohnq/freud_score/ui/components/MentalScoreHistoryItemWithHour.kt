@@ -16,17 +16,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.ui.components.CircularProgressWithText
-import com.joohnq.shared.ui.components.HorizontalSpacer
-import com.joohnq.shared.ui.components.TextEllipsis
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.ComponentColors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.components.CircularProgressWithText
+import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.TextEllipsis
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.stringResource
 

@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 
 class JournalingScreen(
     private val onNavigateToEditJournaling: (Int) -> Unit,

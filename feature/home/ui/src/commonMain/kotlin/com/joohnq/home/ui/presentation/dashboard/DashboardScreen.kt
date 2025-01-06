@@ -16,14 +16,14 @@ import com.joohnq.home.ui.components.DashboardBottomNavigation
 import com.joohnq.home.ui.components.TabItem
 import com.joohnq.home.ui.presentation.home.HomeScreen
 import com.joohnq.navigation.Destination
-import com.joohnq.shared.domain.entity.DIcon
-import com.joohnq.shared.ui.CustomScreenNoUI
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.home
-import com.joohnq.shared.ui.journaling
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.core.ui.entity.DIcon
+import com.joohnq.shared_resources.CustomScreenNoUI
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.home
+import com.joohnq.shared_resources.journaling
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
 
 class DashboardScreen(
     private val onNavigateAddJournaling: () -> Unit,

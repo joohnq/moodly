@@ -53,8 +53,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.navigation)
             implementation(projects.core.di)
-            implementation(projects.core.ui)
-            implementation(projects.shared.ui)
+            implementation(projects.sharedResources)
 
             implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.ui)
@@ -81,6 +80,8 @@ kotlin {
             implementation(projects.feature.stressLevel.ui)
             implementation(projects.feature.stressLevel.domain)
             implementation(projects.feature.stressLevel.data)
+
+            implementation(projects.feature.loading.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

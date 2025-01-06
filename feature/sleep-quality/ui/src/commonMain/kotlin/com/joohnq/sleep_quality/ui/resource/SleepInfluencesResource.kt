@@ -1,15 +1,15 @@
 package com.joohnq.sleep_quality.ui.resource
 
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.alcohol_consumption
-import com.joohnq.shared.ui.anxiety
-import com.joohnq.shared.ui.caffeine
-import com.joohnq.shared.ui.chill_sleep_environment
-import com.joohnq.shared.ui.excessive_screen_time
-import com.joohnq.shared.ui.exposure_to_natural_light
-import com.joohnq.shared.ui.high_stress
-import com.joohnq.shared.ui.meditation
-import com.joohnq.shared.ui.physical_activity
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.alcohol_consumption
+import com.joohnq.shared_resources.anxiety
+import com.joohnq.shared_resources.caffeine
+import com.joohnq.shared_resources.chill_sleep_environment
+import com.joohnq.shared_resources.excessive_screen_time
+import com.joohnq.shared_resources.exposure_to_natural_light
+import com.joohnq.shared_resources.high_stress
+import com.joohnq.shared_resources.meditation
+import com.joohnq.shared_resources.physical_activity
 import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ANXIETY

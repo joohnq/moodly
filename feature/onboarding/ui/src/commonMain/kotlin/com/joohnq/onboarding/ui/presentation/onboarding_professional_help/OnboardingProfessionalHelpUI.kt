@@ -11,12 +11,12 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.state.OnboardingProfessionalHelpState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.components.TextRadioButton
-import com.joohnq.shared.ui.sought_professional_help_title
-import com.joohnq.shared.ui.theme.ComponentColors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.TextRadioButton
+import com.joohnq.shared_resources.sought_professional_help_title
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.user.ui.mapper.getAllProfessionalHelpResource
 import com.joohnq.user.ui.resource.ProfessionalHelpResource
 

@@ -13,7 +13,7 @@ import com.joohnq.moodapp.navigation.onboardingNavigation
 import com.joohnq.moodapp.navigation.welcomeNavigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel

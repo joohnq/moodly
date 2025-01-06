@@ -28,11 +28,11 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.ui)
-            implementation(projects.shared.ui)
-            implementation(projects.shared.domain)
+            implementation(projects.sharedResources)
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.freudScore.domain)
             implementation(projects.feature.mood.ui)
+            implementation(projects.feature.loading.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

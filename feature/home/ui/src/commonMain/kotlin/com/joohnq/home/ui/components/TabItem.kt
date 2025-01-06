@@ -6,9 +6,9 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared.domain.entity.DIcon
-import com.joohnq.shared.ui.components.Icon
-import com.joohnq.shared.ui.theme.ComponentColors
+import com.joohnq.core.ui.entity.DIcon
+import com.joohnq.shared_resources.components.Icon
+import com.joohnq.shared_resources.theme.ComponentColors
 
 @Composable
 fun RowScope.TabItem(

@@ -1,12 +1,12 @@
 package com.joohnq.welcome.ui.screens
 
 import androidx.compose.runtime.Composable
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.intelligent_first_second_title
-import com.joohnq.shared.ui.intelligent_first_span
-import com.joohnq.shared.ui.two
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.intelligent_first_second_title
+import com.joohnq.shared_resources.intelligent_first_span
+import com.joohnq.shared_resources.two
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

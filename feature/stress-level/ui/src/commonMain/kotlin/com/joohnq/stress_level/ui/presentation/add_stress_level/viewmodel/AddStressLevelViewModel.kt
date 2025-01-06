@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.shared.ui.util.mappers.toggle
+import com.joohnq.shared_resources.util.mappers.toggle
 import com.joohnq.stress_level.ui.mapper.fromSliderValueToStressLevelResource
 import com.joohnq.stress_level.ui.resource.StressorResource
 import kotlinx.coroutines.flow.MutableStateFlow

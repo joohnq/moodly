@@ -3,12 +3,12 @@ package com.joohnq.user.ui.resource
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.NO
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL
-import com.joohnq.shared.domain.entity.DIcon
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.no_physical_pain
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.yes_but_just_a_bit
-import com.joohnq.shared.ui.yes_very_painful
+import com.joohnq.core.ui.entity.DIcon
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.no_physical_pain
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.yes_but_just_a_bit
+import com.joohnq.shared_resources.yes_very_painful
 import org.jetbrains.compose.resources.StringResource
 
 sealed class PhysicalSymptomsResource(

@@ -1,8 +1,8 @@
 package com.joohnq.sleep_quality.data.repository
 
 import com.joohnq.core.database.executeTryCatchPrinting
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.domain.toResult
+import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.toResult
 import com.joohnq.sleep_quality.domain.data_source.SleepQualityDataSource
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository

@@ -25,15 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.edit_journal
-import com.joohnq.shared.ui.editing
-import com.joohnq.shared.ui.remove_journal
-import com.joohnq.shared.ui.save
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.edit_journal
+import com.joohnq.shared_resources.editing
+import com.joohnq.shared_resources.remove_journal
+import com.joohnq.shared_resources.save
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

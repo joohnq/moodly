@@ -8,8 +8,8 @@ import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.mood.ui.viewmodel.StatsState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 
 class FreudScoreScreen(
     private val onGoBack: () -> Unit,

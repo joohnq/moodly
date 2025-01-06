@@ -2,13 +2,13 @@ package com.joohnq.freud_score.ui.resource
 
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
 import com.joohnq.freud_score.domain.property.FreudScoreProperties
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.at_risk
-import com.joohnq.shared.ui.healthy
-import com.joohnq.shared.ui.mostly_healthy
-import com.joohnq.shared.ui.stable
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.unhealthy
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.at_risk
+import com.joohnq.shared_resources.healthy
+import com.joohnq.shared_resources.mostly_healthy
+import com.joohnq.shared_resources.stable
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.unhealthy
 import org.jetbrains.compose.resources.StringResource
 
 sealed class FreudScoreResource(

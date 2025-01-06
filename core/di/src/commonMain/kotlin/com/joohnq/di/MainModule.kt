@@ -1,7 +1,7 @@
 package com.joohnq.di
 
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.domain.IDatetimeProvider
+import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.IDatetimeProvider
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

@@ -28,7 +28,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.navigation)
-            implementation(projects.core.ui)
             implementation(projects.feature.stressLevel.ui)
             implementation(projects.feature.stressLevel.domain)
             implementation(projects.feature.sleepQuality.ui)
@@ -41,8 +40,9 @@ kotlin {
             implementation(projects.feature.user.domain)
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.mood.domain)
-            implementation(projects.shared.ui)
-            implementation(projects.shared.domain)
+            implementation(projects.sharedResources)
+            implementation(projects.feature.loading.ui)
+            implementation(projects.core.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

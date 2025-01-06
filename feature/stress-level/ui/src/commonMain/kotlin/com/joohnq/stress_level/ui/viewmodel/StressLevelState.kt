@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.ui.viewmodel
 
-import com.joohnq.shared.domain.entity.UiState
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 
 data class StressLevelState(

@@ -27,11 +27,6 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.shared.ui)
-            implementation(projects.shared.domain)
-            implementation(projects.feature.user.ui)
-            implementation(projects.feature.user.domain)
-
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -39,9 +34,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-
-            implementation(libs.bundles.viewmodel)
-            implementation(libs.bundles.koin)
+            implementation(libs.datetime)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.mapper
 
-import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.EXCELLENT
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.FAIR

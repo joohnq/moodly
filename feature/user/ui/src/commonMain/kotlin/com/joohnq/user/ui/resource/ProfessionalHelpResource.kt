@@ -2,9 +2,9 @@ package com.joohnq.user.ui.resource
 
 import com.joohnq.domain.entity.ProfessionalHelp.Companion.NO
 import com.joohnq.domain.entity.ProfessionalHelp.Companion.YES
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.no
-import com.joohnq.shared.ui.yes
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.no
+import com.joohnq.shared_resources.yes
 import org.jetbrains.compose.resources.StringResource
 
 sealed class ProfessionalHelpResource(

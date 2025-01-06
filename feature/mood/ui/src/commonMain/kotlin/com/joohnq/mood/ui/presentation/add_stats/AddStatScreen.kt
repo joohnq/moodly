@@ -3,12 +3,12 @@ package com.joohnq.mood.ui.presentation.add_stats
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
-import com.joohnq.shared.domain.mapper.getValue
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
 class AddStatScreen(

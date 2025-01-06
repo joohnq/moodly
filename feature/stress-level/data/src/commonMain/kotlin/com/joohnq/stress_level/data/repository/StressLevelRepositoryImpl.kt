@@ -1,8 +1,8 @@
 package com.joohnq.stress_level.data.repository
 
 import com.joohnq.core.database.executeTryCatchPrinting
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.domain.toResult
+import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.toResult
 import com.joohnq.stress_level.domain.data_source.StressLevelDataSource
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository

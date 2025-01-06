@@ -27,8 +27,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.shared.ui)
-            implementation(projects.shared.domain)
+            implementation(projects.sharedResources)
+            implementation(projects.core.ui)
             implementation(projects.feature.user.ui)
 
             implementation(compose.runtime)
@@ -45,7 +45,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohhq.welcome.ui"
+    namespace = "com.joohnq.welcome.ui"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

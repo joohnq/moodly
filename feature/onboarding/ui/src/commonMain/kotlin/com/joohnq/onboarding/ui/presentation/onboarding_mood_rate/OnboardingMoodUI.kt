@@ -21,14 +21,14 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.components.IconContinueButton
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.mood_rate_desc
-import com.joohnq.shared.ui.mood_rate_title
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.ComponentColors
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.IconContinueButton
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.mood_rate_desc
+import com.joohnq.shared_resources.mood_rate_title
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -10,13 +10,13 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.components.ExpressionAnalysisTextField
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.expression_analysis_desc
-import com.joohnq.shared.ui.expression_analysis_title
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.expression_analysis_desc
+import com.joohnq.shared_resources.expression_analysis_title
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared.ui.components.drawCenterCircle
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.components.drawCenterCircle
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt

@@ -1,10 +1,10 @@
 package com.joohnq.user.data.repository
 
 import com.joohnq.core.database.executeTryCatchPrinting
+import com.joohnq.core.ui.toResultNull
 import com.joohnq.domain.data_source.UserPreferencesDataSource
 import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.repository.UserPreferencesRepository
-import com.joohnq.shared.domain.toResultNull
 
 class UserPreferencesRepositoryImpl(private val dataSource: UserPreferencesDataSource) :
     UserPreferencesRepository {

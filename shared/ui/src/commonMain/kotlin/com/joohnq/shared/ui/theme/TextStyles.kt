@@ -31,18 +31,6 @@ object TextStyles {
     )
 
     @Composable
-    fun HeadingSmSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
-        fontSize = 30.sp,
-    )
-
-    @Composable
-    fun HeadingXsExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
-        fontSize = 24.sp
-    )
-
-    @Composable
     fun ParagraphLg() = TextStyle(
         fontFamily = FontFamily.Urbanist.Medium(),
         fontSize = 18.sp,

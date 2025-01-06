@@ -419,5 +419,4 @@ object ComponentColors {
                 errorSuffixColor = Color.Unspecified
             )
     }
-
 }

@@ -53,8 +53,11 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.navigation)
             implementation(projects.core.di)
+            implementation(projects.core.ui)
             implementation(projects.sharedResources)
 
+            implementation(projects.feature.auth.ui)
+            
             implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.ui)
             implementation(projects.feature.onboarding.ui)

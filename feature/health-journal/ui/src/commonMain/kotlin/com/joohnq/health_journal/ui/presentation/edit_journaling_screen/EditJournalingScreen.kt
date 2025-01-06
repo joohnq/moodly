@@ -8,16 +8,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
 
 class EditJournalingScreen(val id: Int, private val onGoBack: () -> Unit) :
     CustomScreen<EditJournalingState>() {

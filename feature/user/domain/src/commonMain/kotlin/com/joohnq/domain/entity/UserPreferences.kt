@@ -4,5 +4,5 @@ data class UserPreferences(
     val id: Int = 1,
     val skipWelcomeScreen: Boolean = false,
     val skipOnboardingScreen: Boolean = false,
-    val skipGetUserNameScreen: Boolean = false,
+    val skipUserNameScreen: Boolean = false,
 )

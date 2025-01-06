@@ -7,8 +7,8 @@ import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.use_case.user_preferences.AddUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
-import com.joohnq.domain.use_case.user_preferences.UpdateSkipGetUserNameScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingScreenUseCase
+import com.joohnq.domain.use_case.user_preferences.UpdateSkipUserNameScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeScreenUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,7 +19,7 @@ class UserPreferenceViewModel(
     private val addUserPreferencesUseCase: AddUserPreferencesUseCase,
     private val updateSkipWelcomeScreenUseCase: UpdateSkipWelcomeScreenUseCase,
     private val updateSkipOnboardingScreenUseCase: UpdateSkipOnboardingScreenUseCase,
-    private val updateSkipGetUserNameScreenUseCase: UpdateSkipGetUserNameScreenUseCase,
+    private val updateSkipUserNameScreenUseCase: UpdateSkipUserNameScreenUseCase,
 ) : ViewModel() {
     private val _state:
             MutableStateFlow<UserPreferenceViewModelState> =
@@ -29,8 +29,8 @@ class UserPreferenceViewModel(
     fun onAction(intent: UserPreferenceViewModelIntent) {
         when (intent) {
             is UserPreferenceViewModelIntent.GetUserPreferences -> getUserPreferences()
-            is UserPreferenceViewModelIntent.UpdateSkipGetUserNameScreen ->
-                updateSkipGetUserNameScreen(value = true)
+            is UserPreferenceViewModelIntent.UpdateSkipUserNameScreen ->
+                updateSkipUserNameScreen(value = true)
 
             is UserPreferenceViewModelIntent.UpdateSkipOnboardingScreen ->
                 updateSkipOnboardingScreen(value = true)
@@ -70,9 +70,9 @@ class UserPreferenceViewModel(
             changeUpdatingStatus(res)
         }
 
-    private fun updateSkipGetUserNameScreen(value: Boolean) =
+    private fun updateSkipUserNameScreen(value: Boolean) =
         viewModelScope.launch {
-            val res = updateSkipGetUserNameScreenUseCase(value).toUiState()
+            val res = updateSkipUserNameScreenUseCase(value).toUiState()
             changeUpdatingStatus(res)
         }
 

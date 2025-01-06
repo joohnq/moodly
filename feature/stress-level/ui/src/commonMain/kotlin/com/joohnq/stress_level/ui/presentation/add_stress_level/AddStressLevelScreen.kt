@@ -7,9 +7,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor

@@ -7,21 +7,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.getValueOrNull
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetNextStatUseCase
 import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
 import org.koin.compose.koinInject
 
 class MoodScreen(
     val id: Int? = null,
-    private val onGoBack: () -> Unit,
+    private val onNavigateBackToHome: () -> Unit,
     private val onNavigateAddStat: () -> Unit,
 ) : CustomScreen<MoodState>() {
     @Composable
@@ -43,7 +43,7 @@ class MoodScreen(
 
         fun onEvent(event: MoodEvent) =
             when (event) {
-                is MoodEvent.OnGoBack -> onGoBack()
+                is MoodEvent.OnGoBack -> onNavigateBackToHome()
                 is MoodEvent.OnNext -> hasNext?.run { currentStatsRecord = this }
                 is MoodEvent.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
                 is MoodEvent.OnAddStatScreen -> onNavigateAddStat()

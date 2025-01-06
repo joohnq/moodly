@@ -10,18 +10,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.joohnq.core.ui.CustomScreenNoUI
+import com.joohnq.core.ui.entity.DIcon
 import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.home.ui.BottomItem
 import com.joohnq.home.ui.components.DashboardBottomNavigation
 import com.joohnq.home.ui.components.TabItem
 import com.joohnq.home.ui.presentation.home.HomeScreen
 import com.joohnq.navigation.Destination
-import com.joohnq.core.ui.entity.DIcon
-import com.joohnq.shared_resources.CustomScreenNoUI
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.chat
 import com.joohnq.shared_resources.home
 import com.joohnq.shared_resources.journaling
-import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.profile
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 
@@ -43,15 +44,18 @@ class DashboardScreen(
         val navBackStackEntry by navigator.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
+        fun isCurrentRoute(route: String?): Boolean =
+            currentDestination?.hierarchy?.any { it.route == route } == true
+
         fun onNavigate(destination: Destination) {
-            navigator.navigate(destination)
+            if (!isCurrentRoute(destination::class.qualifiedName))
+                navigator.navigate(destination)
         }
 
         val bottomItems = listOf(
             BottomItem(
                 icon = DIcon(
                     icon = Drawables.Icons.Home,
-                    tint = Colors.Brown80,
                     modifier = Modifier.size(Dimens.Icon),
                     contentDescription = Res.string.home
                 ),
@@ -60,32 +64,58 @@ class DashboardScreen(
             ),
             BottomItem(
                 icon = DIcon(
+                    icon = Drawables.Icons.Chat,
+                    modifier = Modifier.size(Dimens.Icon),
+                    contentDescription = Res.string.chat
+                ),
+                title = Res.string.chat,
+                route = Destination.App.DashBoard.Home
+            ),
+            BottomItem(
+                icon = DIcon(
                     icon = Drawables.Icons.Document,
-                    tint = Colors.Brown80,
                     modifier = Modifier.size(Dimens.Icon),
                     contentDescription = Res.string.journaling
                 ),
                 title = Res.string.journaling,
                 route = Destination.App.DashBoard.Journaling,
+            ),
+            BottomItem(
+                icon = DIcon(
+                    icon = Drawables.Icons.Profile,
+                    modifier = Modifier.size(Dimens.Icon),
+                    contentDescription = Res.string.profile
+                ),
+                title = Res.string.profile,
+                route = Destination.App.DashBoard.Journaling,
             )
         )
+
+        @Composable
+        fun BottomItem<out Destination>.createTabItem() {
+            val isSelected = isCurrentRoute(route::class.qualifiedName)
+            return TabItem(
+                icon = icon,
+                selected = isSelected,
+                onNavigate = { onNavigate(route) }
+            )
+        }
 
         Scaffold(
             bottomBar = {
                 DashboardBottomNavigation(
+                    left = {
+                        bottomItems.take(2).forEach { item ->
+                            item.createTabItem()
+                        }
+                    },
+                    right = {
+                        bottomItems.takeLast(2).forEach { item ->
+                            item.createTabItem()
+                        }
+                    },
                     onNavigateAddJournaling = onNavigateAddJournaling,
                     onNavigateAddStatScreen = onNavigateAddStatScreen,
-                    items = {
-                        bottomItems.forEach { item ->
-                            val isSelected =
-                                currentDestination?.hierarchy?.any { it.route == item.route::class.qualifiedName } == true
-                            TabItem(
-                                icon = item.icon,
-                                selected = isSelected,
-                                onNavigate = { onNavigate(item.route) }
-                            )
-                        }
-                    }
                 )
             }
         ) { _ ->

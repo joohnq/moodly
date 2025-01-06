@@ -31,7 +31,7 @@ fun NavGraphBuilder.dashboardNavigation(
             DashboardScreen(
                 onNavigateAddJournaling = {
                     onNavigate(
-                        Destination.App.DashBoard.Journaling,
+                        Destination.App.AddJournaling,
                         false
                     )
                 },
@@ -57,7 +57,12 @@ fun NavGraphBuilder.dashboardNavigation(
                     )
                 },
                 onNavigateToStressLevel = { onNavigate(Destination.App.StressLevel, false) },
-                onNavigateToEditJournaling = { onNavigate(Destination.App.EditJournaling, false) },
+                onNavigateToEditJournaling = { id ->
+                    onNavigate(
+                        Destination.App.EditJournaling(id),
+                        false
+                    )
+                },
                 onNavigateToAllJournals = { onNavigate(Destination.App.AllJournals, false) },
             ).Content()
         }
@@ -99,7 +104,9 @@ fun NavGraphBuilder.dashboardNavigation(
             val mood = backStackEntry.toRoute<Destination.App.Mood>()
             MoodScreen(
                 id = mood.id,
-                onGoBack = onGoBack,
+                onNavigateBackToHome = {
+                    onNavigateBack(Destination.App.DashBoard)
+                },
                 onNavigateAddStat = {
                     onNavigate(
                         Destination.App.AddStat,
@@ -146,7 +153,7 @@ fun NavGraphBuilder.dashboardNavigation(
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
-                onGoBackToStressLevel = { onNavigateBack(Destination.App.StressLevel) }
+                onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressLevel) }
             ).Content()
         }
         composable<Destination.App.SleepQuality> {
@@ -160,25 +167,25 @@ fun NavGraphBuilder.dashboardNavigation(
                 onGoBack = onGoBack
             ).Content()
         }
-        composable<Destination.App.AddJournalingScreen> {
+        composable<Destination.App.AddJournaling> {
             AddJournalingScreen(
                 onGoBack = onGoBack
             ).Content()
         }
-        composable<Destination.App.EditJournalingScreen> { backStackEntry ->
+        composable<Destination.App.EditJournaling> { backStackEntry ->
             val editJournalingScreen =
-                backStackEntry.toRoute<Destination.App.EditJournalingScreen>()
+                backStackEntry.toRoute<Destination.App.EditJournaling>()
             EditJournalingScreen(
                 id = editJournalingScreen.id,
                 onGoBack = onGoBack
             ).Content()
         }
-        composable<Destination.App.AllJournalScreen> {
+        composable<Destination.App.AllJournal> {
             AllJournalScreen(
                 onGoBack = onGoBack,
                 onNavigateEditJournaling = { id ->
                     onNavigate(
-                        Destination.App.EditJournalingScreen(id),
+                        Destination.App.EditJournaling(id),
                         false
                     )
                 }

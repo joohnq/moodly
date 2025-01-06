@@ -4,13 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.joohnq.core.ui.CustomScreen
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
 class AllJournalScreen(

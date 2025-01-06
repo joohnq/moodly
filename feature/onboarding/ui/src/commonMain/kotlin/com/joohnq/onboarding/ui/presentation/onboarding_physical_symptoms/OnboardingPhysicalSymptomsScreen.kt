@@ -22,8 +22,7 @@ class OnboardingPhysicalSymptomsScreen(
         fun onEvent(event: OnboardingEvent) =
             when (event) {
                 OnboardingEvent.OnNavigateToNext -> onNavigateToSleepQuality()
-                OnboardingEvent.OnGoBack ->
-                    onGoBack()
+                OnboardingEvent.OnGoBack -> onGoBack()
             }
 
         return OnboardingPhysicalSymptomsState(

@@ -14,21 +14,18 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.ui.SleepQualityResource.Companion.toDomain
+import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toDomain
+import com.joohnq.stress_level.ui.mapper.toDomain
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.joohnq.user.ui.MedicationsSupplementsResource.Companion.toDomain
-import com.joohnq.user.ui.PhysicalSymptomsResource.Companion.toDomain
-import com.joohnq.user.ui.ProfessionalHelpResource.Companion.toDomain
+import com.joohnq.user.ui.mapper.toDomain
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
@@ -124,7 +121,7 @@ class OnboardingExpressionAnalysisScreen(
             statsState.adding,
             userState.updating
         ) {
-            UiState.fold(
+            fold(
                 stressLevelState.adding,
                 sleepQualityState.adding,
                 statsState.adding,

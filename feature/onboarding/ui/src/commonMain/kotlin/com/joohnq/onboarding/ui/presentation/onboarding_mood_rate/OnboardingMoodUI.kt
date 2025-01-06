@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState

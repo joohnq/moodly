@@ -25,14 +25,15 @@ import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.user.ui.PhysicalSymptomsResource
+import com.joohnq.user.ui.mapper.getAllPhysicalSymptomsResource
+import com.joohnq.user.ui.resource.PhysicalSymptomsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsUI(
     state: OnboardingPhysicalSymptomsState,
 ) {
-    val options = remember { PhysicalSymptomsResource.getAll() }
+    val options = remember { getAllPhysicalSymptomsResource() }
 
     OnboardingBaseComponent(
         page = 3,

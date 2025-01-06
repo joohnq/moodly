@@ -15,9 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.state.OnboardingSleepQualityState
@@ -32,16 +31,17 @@ import com.joohnq.shared.ui.sleep_quality_title
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingVerticalLarge
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
-import com.joohnq.sleep_quality.ui.SleepQualityResource
+import com.joohnq.sleep_quality.ui.mapper.fromSliderValueToSleepQualityResource
+import com.joohnq.sleep_quality.ui.mapper.getAllSleepQualityResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingSleepQualityUI(
     state: OnboardingSleepQualityState,
 ) {
-    val moods = remember { Mood.getAll().reversed() }
-    val sleepQualityOptions: List<SleepQualityResource> = remember { SleepQualityResource.getAll() }
+    val moods = remember { getAllMoodResource().reversed() }
+    val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
 
     OnboardingBaseComponent(
         page = 4,
@@ -74,7 +74,7 @@ fun OnboardingSleepQualityUI(
                         state.onAction(OnboardingViewModelIntent.UpdateSliderValue(it))
                         state.onAction(
                             OnboardingViewModelIntent.UpdateSleepQuality(
-                                SleepQualityResource.fromSliderValue(it)
+                                it.fromSliderValueToSleepQualityResource()
                             )
                         )
                     },
@@ -87,12 +87,11 @@ fun OnboardingSleepQualityUI(
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
                 ) {
-                    moods.forEach { mood: Mood ->
-                        val resource = mood.toResource()
+                    moods.forEach { mood ->
                         Column {
                             MoodFace(
                                 modifier = Modifier.size(48.dp),
-                                mood = resource,
+                                mood = mood,
                             )
                         }
                     }

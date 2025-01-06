@@ -28,6 +28,14 @@ import com.joohnq.shared.ui.theme.Drawables
 class DashboardScreen(
     private val onNavigateAddJournaling: () -> Unit,
     private val onNavigateAddStatScreen: () -> Unit,
+    private val onNavigateFreudScore: () -> Unit,
+    private val onNavigateToMood: () -> Unit,
+    private val onNavigateToHealthJournal: () -> Unit,
+    private val onNavigateToMindfulJournal: () -> Unit,
+    private val onNavigateToSleepQuality: () -> Unit,
+    private val onNavigateToStressLevel: () -> Unit,
+    private val onNavigateToEditJournaling: (Int) -> Unit,
+    private val onNavigateToAllJournals: () -> Unit,
 ) : CustomScreenNoUI() {
     @Composable
     override fun Screen() {
@@ -48,7 +56,7 @@ class DashboardScreen(
                     contentDescription = Res.string.home
                 ),
                 title = Res.string.home,
-                route = Destination.Dashboard.Home
+                route = Destination.App.DashBoard.Home
             ),
             BottomItem(
                 icon = DIcon(
@@ -58,7 +66,7 @@ class DashboardScreen(
                     contentDescription = Res.string.journaling
                 ),
                 title = Res.string.journaling,
-                route = Destination.Dashboard.Journaling,
+                route = Destination.App.DashBoard.Journaling,
             )
         )
 
@@ -74,16 +82,30 @@ class DashboardScreen(
                             TabItem(
                                 icon = item.icon,
                                 selected = isSelected,
-                                onNavigate = { onNavigate(Destination.Dashboard.Home) }
+                                onNavigate = { onNavigate(item.route) }
                             )
                         }
                     }
                 )
             }
         ) { _ ->
-            NavHost(navigator, startDestination = Destination.Dashboard.Home) {
-                composable<Destination.Dashboard.Home> { HomeScreen().Content() }
-                composable<Destination.Dashboard.Journaling> { JournalingScreen().Content() }
+            NavHost(navigator, startDestination = Destination.App.DashBoard.Home) {
+                composable<Destination.App.DashBoard.Home> {
+                    HomeScreen(
+                        onNavigateFreudScore = onNavigateFreudScore,
+                        onNavigateToMood = onNavigateToMood,
+                        onNavigateToHealthJournal = onNavigateToHealthJournal,
+                        onNavigateToMindfulJournal = onNavigateToMindfulJournal,
+                        onNavigateToSleepQuality = onNavigateToSleepQuality,
+                        onNavigateToStressLevel = onNavigateToStressLevel
+                    )
+                }
+                composable<Destination.App.DashBoard.Journaling> {
+                    JournalingScreen(
+                        onNavigateToEditJournaling = onNavigateToEditJournaling,
+                        onNavigateToAllJournals = onNavigateToAllJournals
+                    ).Content()
+                }
             }
         }
     }

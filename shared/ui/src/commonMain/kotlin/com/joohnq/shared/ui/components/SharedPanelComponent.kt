@@ -3,11 +3,13 @@ package com.joohnq.shared.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared.ui.theme.Colors
@@ -81,6 +83,8 @@ import org.jetbrains.compose.resources.StringResource
             item {
                 Column {
                     PanelContent(
+                        modifier = Modifier.fillMaxWidth()
+                            .fillParentMaxHeight(0.5f),
                         isDark = isDark,
                         padding = padding,
                         text = panelTitle,

@@ -17,25 +17,25 @@ import com.joohnq.core.ui.presentation.loading.LoadingUI
 import com.joohnq.home.ui.components.MentalHealthMetrics
 import com.joohnq.home.ui.components.MindfulTracker
 import com.joohnq.home.ui.presentation.home.state.HomeState
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.shared.domain.mapper.getValue
+import com.joohnq.shared.domain.mapper.onFold
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.HomeTopBar
 import com.joohnq.shared.ui.components.Title
 import com.joohnq.shared.ui.mental_health_metrics
 import com.joohnq.shared.ui.mindful_tracker
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.sleep_quality.ui.SleepQualityResource.Companion.toResource
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
+import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.stress_level.ui.mapper.toResource
 
 @Composable
 fun HomeUI(
     state: HomeState,
 ) {
-    UiState.onFold(
+    onFold(
         state.statsRecord,
-        state.userName,
+        state.user,
         state.stressLevel,
         state.healthJournal,
         state.sleepQuality,
@@ -59,7 +59,7 @@ fun HomeUI(
                         modifier = Modifier.padding(
                             top = padding.calculateTopPadding(),
                         ),
-                        userName = state.userName.getValue().name,
+                        userName = state.user.getValue().name,
                         date = state.today
                     )
                     Title(Res.string.mental_health_metrics)

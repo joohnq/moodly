@@ -9,9 +9,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.state.WelcomeState
@@ -38,9 +38,7 @@ class WelcomeScreen(private val onNavigateToOnboarding: () -> Unit) : CustomScre
 
         LaunchedEffect(userPreferencesState.updating) {
             userPreferencesState.updating.fold(
-                onSuccess = {
-                    onNavigateToOnboarding()
-                },
+                onSuccess = { onNavigateToOnboarding() },
                 onError = ::onError
             )
         }

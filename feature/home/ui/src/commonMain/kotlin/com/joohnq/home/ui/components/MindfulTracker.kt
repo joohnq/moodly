@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.CircularProgressWithText
 import com.joohnq.shared.ui.components.FivePackIndicator
@@ -17,8 +17,9 @@ import com.joohnq.shared.ui.stress_level
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.sleep_quality.ui.SleepQualityResource
-import com.joohnq.stress_level.ui.StressLevelResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.stress_level.ui.mapper.getBrushGradient
+import com.joohnq.stress_level.ui.resource.StressLevelResource
 
 @Composable fun MindfulTracker(
     sleepQuality: SleepQualityResource,
@@ -81,7 +82,7 @@ import com.joohnq.stress_level.ui.StressLevelResource
         title = Res.string.stress_level,
         subtitle = stressLevel.subtitle,
         content = {
-            FivePackIndicator(stressLevel.level, StressLevelResource::getBrushGradient)
+            FivePackIndicator(stressLevel.level, ::getBrushGradient)
         },
         onClick = { onAction(HomeEvent.OnNavigateToStressLevel) }
     )

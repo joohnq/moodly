@@ -1,6 +1,5 @@
-package com.joohnq.user.ui
+package com.joohnq.user.ui.resource
 
-import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.NO
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL
@@ -43,20 +42,4 @@ sealed class PhysicalSymptomsResource(
             contentDescription = Res.string.yes_but_just_a_bit
         )
     )
-
-    companion object {
-        fun getAll(): List<PhysicalSymptomsResource> = listOf(YesVeryPainful, No, YesJustABit)
-
-        fun PhysicalSymptoms.toResource(): PhysicalSymptomsResource = when (this) {
-            PhysicalSymptoms.YesVeryPainful -> YesVeryPainful
-            PhysicalSymptoms.No -> No
-            PhysicalSymptoms.YesJustABit -> YesJustABit
-        }
-
-        fun PhysicalSymptomsResource.toDomain(): PhysicalSymptoms = when (this) {
-            YesVeryPainful -> PhysicalSymptoms.YesVeryPainful
-            No -> PhysicalSymptoms.No
-            YesJustABit -> PhysicalSymptoms.YesJustABit
-        }
-    }
 }

@@ -1,21 +1,22 @@
 package com.joohnq.domain.converter
 
 import com.joohnq.domain.entity.MedicationsSupplements
-import com.joohnq.domain.entity.MedicationsSupplements.Companion.fromValue
 import com.joohnq.domain.entity.PhysicalSymptoms
-import com.joohnq.domain.entity.PhysicalSymptoms.Companion.fromValue
 import com.joohnq.domain.entity.ProfessionalHelp
-import com.joohnq.domain.entity.ProfessionalHelp.Companion.fromValue
+import com.joohnq.domain.mapper.toInt
+import com.joohnq.domain.mapper.toMedicationsSupplements
+import com.joohnq.domain.mapper.toPhysicalSymptoms
+import com.joohnq.domain.mapper.toProfessionalHelp
 
 object UserConverter {
     fun fromMedicationsSupplements(value: MedicationsSupplements): Long =
-        value.fromValue().toLong()
+        value.toInt().toLong()
 
     fun toMedicationsSupplements(value: Long): MedicationsSupplements =
-        MedicationsSupplements.toValue(value.toInt())
+        value.toInt().toMedicationsSupplements()
 
-    fun fromPhysicalSymptoms(value: PhysicalSymptoms): Long = value.fromValue().toLong()
-    fun toPhysicalSymptoms(value: Long): PhysicalSymptoms = PhysicalSymptoms.toValue(value.toInt())
-    fun fromProfessionalHelp(value: ProfessionalHelp): Long = value.fromValue().toLong()
-    fun toProfessionalHelp(value: Long): ProfessionalHelp = ProfessionalHelp.toValue(value.toInt())
+    fun fromPhysicalSymptoms(value: PhysicalSymptoms): Long = value.toInt().toLong()
+    fun toPhysicalSymptoms(value: Long): PhysicalSymptoms = value.toInt().toPhysicalSymptoms()
+    fun fromProfessionalHelp(value: ProfessionalHelp): Long = value.toInt().toLong()
+    fun toProfessionalHelp(value: Long): ProfessionalHelp = value.toInt().toProfessionalHelp()
 }

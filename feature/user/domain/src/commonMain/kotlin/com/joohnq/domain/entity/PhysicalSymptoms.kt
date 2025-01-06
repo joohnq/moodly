@@ -1,6 +1,6 @@
 package com.joohnq.domain.entity
 
-import com.joohnq.domain.PhysicalSymptomsProperties
+import com.joohnq.domain.property.PhysicalSymptomsProperties
 
 sealed class PhysicalSymptoms(
     override val id: Int,
@@ -13,17 +13,6 @@ sealed class PhysicalSymptoms(
         val YES_VERY_PAINFUL = DPhysicalSymptomsProperties(0)
         val NO = DPhysicalSymptomsProperties(1)
         val YES_JUST_A_BIT = DPhysicalSymptomsProperties(2)
-
-        fun toValue(src: Int): PhysicalSymptoms = when (src) {
-            YES_VERY_PAINFUL.id -> YesVeryPainful
-            NO.id -> No
-            YES_JUST_A_BIT.id -> YesJustABit
-            else -> throw IllegalArgumentException("Unknown physical symptoms: $src")
-        }
-
-        fun PhysicalSymptoms?.fromValue(): Int = this?.id ?: -1
-
-        fun getAll(): List<PhysicalSymptoms> = listOf(YesVeryPainful, No, YesJustABit)
     }
 }
 

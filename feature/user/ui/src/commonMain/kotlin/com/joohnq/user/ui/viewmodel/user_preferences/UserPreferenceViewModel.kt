@@ -8,8 +8,8 @@ import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipGetUserNameScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeScreenUseCase
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.toUiState
+import com.joohnq.shared.domain.entity.UiState
+import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

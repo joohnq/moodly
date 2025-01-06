@@ -1,11 +1,10 @@
-package com.joohnq.user.ui
+package com.joohnq.user.ui.resource
 
-import com.joohnq.domain.MedicationsSupplementsProperties
-import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.IM_NOT_TAKING_ANY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.OVER_THE_COUNTER_SUPPLEMENTS
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PRESCRIBED_MEDICATIONS
+import com.joohnq.domain.property.MedicationsSupplementsProperties
 import com.joohnq.shared.domain.entity.DIcon
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.im_not_taking_any
@@ -56,27 +55,4 @@ sealed class MedicationsSupplementsResource(
                 contentDescription = Res.string.prefer_not_to_say
             )
         )
-
-    companion object {
-        fun getAll(): List<MedicationsSupplementsResource> = listOf(
-            PrescribedMedications,
-            OverTheCounterSupplements,
-            ImNotTakingAny,
-            PreferNotToSay
-        )
-
-        fun MedicationsSupplements.toResource(): MedicationsSupplementsResource = when (this) {
-            MedicationsSupplements.PrescribedMedications -> PrescribedMedications
-            MedicationsSupplements.OverTheCounterSupplements -> OverTheCounterSupplements
-            MedicationsSupplements.ImNotTakingAny -> ImNotTakingAny
-            MedicationsSupplements.PreferNotToSay -> PreferNotToSay
-        }
-
-        fun MedicationsSupplementsResource.toDomain(): MedicationsSupplements = when (this) {
-            PrescribedMedications -> MedicationsSupplements.PrescribedMedications
-            OverTheCounterSupplements -> MedicationsSupplements.OverTheCounterSupplements
-            ImNotTakingAny -> MedicationsSupplements.ImNotTakingAny
-            PreferNotToSay -> MedicationsSupplements.PreferNotToSay
-        }
-    }
 }

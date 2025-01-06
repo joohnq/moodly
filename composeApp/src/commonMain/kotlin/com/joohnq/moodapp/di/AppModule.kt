@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.di
 
-import com.joohnq.di.coreModule
+import com.joohnq.auth.ui.di.authUiModule
+import com.joohnq.di.coreDiModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.ui.di.freudScoreUiModule
 import com.joohnq.health_journal.data.di.healthJournalDataModule
@@ -12,7 +13,6 @@ import com.joohnq.mood.data.di.moodDriverFactoryModule
 import com.joohnq.mood.domain.di.moodDomainModule
 import com.joohnq.mood.ui.di.moodUiModule
 import com.joohnq.onboarding.ui.di.onboardingUiModule
-import com.joohnq.shared_resources.di.sharedResourceModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.domain.di.sleepQualityDomainModule
@@ -42,12 +42,12 @@ val appModule = listOf(
     userDataModule,
     userDomainModule,
     userUiModule,
-    coreModule,
+    coreDiModule,
     onboardingUiModule,
+    authUiModule,
     healthJournalDriverFactory,
     moodDriverFactoryModule,
     sleepQualityDriverFactoryModule,
     stressLevelDriverFactoryModule,
     userDriverFactoryModule,
-    sharedResourceModule
 )

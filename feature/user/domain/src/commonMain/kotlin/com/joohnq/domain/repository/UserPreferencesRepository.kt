@@ -8,5 +8,5 @@ interface UserPreferencesRepository {
     suspend fun insertUserPreferences(): Result<Boolean>
     suspend fun updateSkipWelcomeScreen(value: Boolean): Result<Boolean>
     suspend fun updateSkipOnboardingScreen(value: Boolean): Result<Boolean>
-    suspend fun updateSkipGetUserNameScreen(value: Boolean): Result<Boolean>
+    suspend fun updateSkipUserNameScreen(value: Boolean): Result<Boolean>
 }

@@ -8,5 +8,5 @@ interface UserPreferencesDataSource {
     suspend fun insertUserPreferences()
     suspend fun updateSkipWelcomeScreen(value: Boolean)
     suspend fun updateSkipOnboardingScreen(value: Boolean)
-    suspend fun updateSkipGetUserNameScreen(value: Boolean)
+    suspend fun updateSkipUserNameScreen(value: Boolean)
 }

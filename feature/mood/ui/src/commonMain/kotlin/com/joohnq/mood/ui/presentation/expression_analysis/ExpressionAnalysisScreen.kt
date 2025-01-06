@@ -8,7 +8,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
@@ -17,8 +19,6 @@ import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnaly
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
 import kotlinx.coroutines.launch
 
 class ExpressionAnalysisScreen(

@@ -13,12 +13,12 @@ class UserPreferencesDataSourceImpl(private val database: UserDatabaseSql) :
     private val query = database.userPreferencesQueries
     override suspend fun getUserPreferences(): UserPreferences? =
         withContext(Dispatchers.IO) {
-            query.getUserPreferences { id, skipWelcomeScreen, skipOnboardingScreen, skipGetUserNameScreen ->
+            query.getUserPreferences { id, skipWelcomeScreen, skipOnboardingScreen, skipUserNameScreen ->
                 UserPreferences(
                     id = id.toInt(),
                     skipWelcomeScreen = BooleanConverter.toValue(skipWelcomeScreen),
                     skipOnboardingScreen = BooleanConverter.toValue(skipOnboardingScreen),
-                    skipGetUserNameScreen = BooleanConverter.toValue(skipGetUserNameScreen)
+                    skipUserNameScreen = BooleanConverter.toValue(skipUserNameScreen)
                 )
             }.executeAsOneOrNull()
         }
@@ -28,7 +28,7 @@ class UserPreferencesDataSourceImpl(private val database: UserDatabaseSql) :
             query.addUserPreferences(
                 skipWelcomeScreen = BooleanConverter.fromValue(userPreferences.skipWelcomeScreen),
                 skipOnboardingScreen = BooleanConverter.fromValue(userPreferences.skipOnboardingScreen),
-                skipGetUserNameScreen = BooleanConverter.fromValue(userPreferences.skipGetUserNameScreen)
+                skipUserNameScreen = BooleanConverter.fromValue(userPreferences.skipUserNameScreen)
             )
         }
 
@@ -47,8 +47,8 @@ class UserPreferencesDataSourceImpl(private val database: UserDatabaseSql) :
             query.updateSkipOnboardingScreen(BooleanConverter.fromValue(value))
         }
 
-    override suspend fun updateSkipGetUserNameScreen(value: Boolean) =
+    override suspend fun updateSkipUserNameScreen(value: Boolean) =
         withContext(Dispatchers.IO) {
-            query.updateSkipGetUserNameScreen(BooleanConverter.fromValue(value))
+            query.updateSkipUserNameScreen(BooleanConverter.fromValue(value))
         }
 }

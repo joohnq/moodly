@@ -8,9 +8,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.mapper.containOther
 import com.joohnq.stress_level.ui.mapper.toDomain
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 class StressStressorsScreen(
     private val onGoBack: () -> Unit,
-    private val onGoBackToStressLevel: () -> Unit,
+    private val onNavigateBackToStressLevel: () -> Unit,
 ) : CustomScreen<StressStressorsState>() {
     @Composable
     override fun Screen(): StressStressorsState {
@@ -77,7 +77,7 @@ class StressStressorsScreen(
             stressLevelState.adding.fold(
                 onError = ::onError,
                 onSuccess = {
-                    onGoBackToStressLevel()
+                    onNavigateBackToStressLevel()
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
                     stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 },

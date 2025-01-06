@@ -26,7 +26,8 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DashboardBottomNavigation(
-    items: @Composable RowScope.() -> Unit,
+    left: @Composable RowScope.() -> Unit,
+    right: @Composable RowScope.() -> Unit,
     onNavigateAddJournaling: () -> Unit,
     onNavigateAddStatScreen: () -> Unit,
 ) {
@@ -39,7 +40,7 @@ fun DashboardBottomNavigation(
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().padding(10.dp)
+            modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp)
                 .height(100.dp)
                 .paint(
                     painter = painterResource(Drawables.Shape.BottomNavigation),
@@ -47,7 +48,21 @@ fun DashboardBottomNavigation(
                     alignment = Alignment.Center,
                 ),
         ) {
-            items()
+            val rowModifier = Modifier
+                .weight(1f)
+            val extremities = 15.dp
+            val between = 55.dp
+
+            Row(
+                modifier = rowModifier
+                    .padding(start = extremities, end = between),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) { left() }
+            Row(
+                modifier = rowModifier
+                    .padding(start = between, end = extremities),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) { right() }
         }
         AddButton(
             isExpanded = isExpanded,

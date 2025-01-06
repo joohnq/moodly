@@ -14,7 +14,7 @@ sealed class UserPreferenceViewModelIntent {
         val value: Boolean = true,
     ) : UserPreferenceViewModelIntent()
 
-    data class UpdateSkipGetUserNameScreen(
+    data class UpdateSkipUserNameScreen(
         val value: Boolean = true,
     ) : UserPreferenceViewModelIntent()
 }

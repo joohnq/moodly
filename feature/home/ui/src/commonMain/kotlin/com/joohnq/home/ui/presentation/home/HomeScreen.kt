@@ -12,6 +12,7 @@ import com.joohnq.core.ui.IDatetimeProvider
 import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.onAnyError
 import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
@@ -20,7 +21,6 @@ import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.home.state.HomeState
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent

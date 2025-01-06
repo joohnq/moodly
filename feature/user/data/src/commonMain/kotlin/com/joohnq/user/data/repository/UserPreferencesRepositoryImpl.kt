@@ -31,8 +31,8 @@ class UserPreferencesRepositoryImpl(private val dataSource: UserPreferencesDataS
             dataSource.updateSkipOnboardingScreen(value)
         }
 
-    override suspend fun updateSkipGetUserNameScreen(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipUserNameScreen(value: Boolean): Result<Boolean> =
         executeTryCatchPrinting {
-            dataSource.updateSkipGetUserNameScreen(value)
+            dataSource.updateSkipUserNameScreen(value)
         }
 }

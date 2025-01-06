@@ -8,10 +8,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
+import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toSleepQuality
-import com.joohnq.shared_resources.CustomScreen
-import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.mapper.endSleeping
 import com.joohnq.sleep_quality.domain.mapper.startSleeping

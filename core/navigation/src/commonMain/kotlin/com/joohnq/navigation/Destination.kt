@@ -37,10 +37,8 @@ sealed class Destination {
         @Serializable data object AddSleepQuality : Destination()
         @Serializable data object AddJournaling : Destination()
         @Serializable data object AllJournaling : Destination()
-        @Serializable data object EditJournaling : Destination()
         @Serializable data object AllJournals : Destination()
-        @Serializable data object AddJournalingScreen : Destination()
-        @Serializable data class EditJournalingScreen(val id: Int) : Destination()
-        @Serializable data object AllJournalScreen : Destination()
+        @Serializable data class EditJournaling(val id: Int) : Destination()
+        @Serializable data object AllJournal : Destination()
     }
 }

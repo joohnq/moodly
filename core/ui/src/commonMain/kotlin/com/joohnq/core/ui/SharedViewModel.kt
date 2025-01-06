@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.core.ui
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
@@ -10,5 +10,5 @@ import org.koin.compose.currentKoinScope
     return viewModel {
         scope.get<T>()
     }
-//    return koinInject()
+//    return koinViewModel<T>()
 }

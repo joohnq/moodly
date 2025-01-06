@@ -5,7 +5,7 @@ import com.joohnq.core.ui.IDatetimeProvider
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val coreModule = module {
+val coreDiModule = module {
     single {
         DatetimeProvider
     } bind IDatetimeProvider::class

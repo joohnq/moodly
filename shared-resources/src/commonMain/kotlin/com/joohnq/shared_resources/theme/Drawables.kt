@@ -30,6 +30,7 @@ import com.joohnq.shared_resources.ic_mood_neutral
 import com.joohnq.shared_resources.ic_moon
 import com.joohnq.shared_resources.ic_more_horizontal
 import com.joohnq.shared_resources.ic_nothing
+import com.joohnq.shared_resources.ic_profile
 import com.joohnq.shared_resources.ic_question
 import com.joohnq.shared_resources.ic_redo
 import com.joohnq.shared_resources.ic_resize
@@ -105,6 +106,7 @@ object Drawables {
         val Undo = Res.drawable.ic_undo
         val Redo = Res.drawable.ic_redo
         val Minus = Res.drawable.ic_minus
+        val Profile = Res.drawable.ic_profile
     }
 
     object Images {

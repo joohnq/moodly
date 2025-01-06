@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.greeting
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -27,7 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
     Column(
         modifier = Modifier.fillMaxSize().background(
-            color = Colors.White, shape = Dimens.Shape.BottomMedium
+            color = Colors.Brown80, shape = Dimens.Shape.BottomLarge
         ).padding(20.dp).then(modifier)
     ) {
         Row {
@@ -38,15 +40,17 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, date: String) {
                 Icon(
                     painter = painterResource(Drawables.Icons.Calendar),
                     modifier = Modifier.size(20.dp),
-                    tint = Colors.Brown80,
+                    tint = Colors.Brown40,
                     contentDescription = null
                 )
-                Text(text = date, style = TextStyles.TextSmBold(), color = Colors.Brown100Alpha64)
+                Text(text = date, style = TextStyles.TextSmBold(), color = Colors.White)
             }
         }
         VerticalSpacer(10.dp)
         Text(
-            text = "Hi, $userName", style = TextStyles.HeadingSmExtraBold(), color = Colors.Brown80
+            text = stringResource(Res.string.greeting, userName),
+            style = TextStyles.HeadingSmExtraBold(),
+            color = Colors.White
         )
     }
 }

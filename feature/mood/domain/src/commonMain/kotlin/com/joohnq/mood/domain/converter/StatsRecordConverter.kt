@@ -1,10 +1,11 @@
 package com.joohnq.mood.domain.converter
 
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.Mood.Companion.fromValue
+import com.joohnq.mood.domain.mapper.toInt
+import com.joohnq.mood.domain.mapper.toMood
 
 object StatsRecordConverter {
-    fun fromMood(value: Mood?): Long = value.fromValue().toLong()
-    fun toMood(value: Long): Mood = Mood.toValue(value.toInt())
+    fun fromMood(value: Mood?): Long = value.toInt().toLong()
+    fun toMood(value: Long): Mood = value.toInt().toMood()
 }
 

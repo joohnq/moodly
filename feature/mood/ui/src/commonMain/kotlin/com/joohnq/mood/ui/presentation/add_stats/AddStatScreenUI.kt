@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.MoodResource
 import com.joohnq.mood.ui.components.AddMoodRadioGroup
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStatScreenUI(
     state: AddStatState,
 ) {
-    val moodsResources by remember { mutableStateOf(MoodResource.getAll()) }
+    val moodsResources by remember { mutableStateOf(getAllMoodResource()) }
     val selectedMoodResource = state.selectedMood
     val moodIndex = selectedMoodResource.id
 

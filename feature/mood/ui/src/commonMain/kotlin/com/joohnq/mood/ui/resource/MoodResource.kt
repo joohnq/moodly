@@ -1,9 +1,13 @@
-package com.joohnq.mood.ui
+package com.joohnq.mood.ui.resource
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.joohnq.mood.domain.MoodProperties
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.domain.entity.Mood.Companion.DEPRESSED
+import com.joohnq.mood.domain.entity.Mood.Companion.HAPPY
+import com.joohnq.mood.domain.entity.Mood.Companion.NEUTRAL
+import com.joohnq.mood.domain.entity.Mood.Companion.OVERJOYED
+import com.joohnq.mood.domain.entity.Mood.Companion.SAD
 import com.joohnq.mood.domain.entity.MoodPalette
+import com.joohnq.mood.domain.property.MoodProperties
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.depressed
 import com.joohnq.shared.ui.happy
@@ -12,7 +16,6 @@ import com.joohnq.shared.ui.overjoyed
 import com.joohnq.shared.ui.sad
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
@@ -26,11 +29,11 @@ sealed class MoodResource(
 ) : MoodProperties {
     data object Depressed :
         MoodResource(
-            id = DEPRESSED,
+            id = DEPRESSED.id,
             image = Drawables.Mood.Depressed,
             imageVector = Drawables.Mood.DepressedVectorPainter,
             text = Res.string.depressed,
-            healthLevel = 20,
+            healthLevel = DEPRESSED.healthLevel,
             palette = MoodPalette(
                 faceBackgroundColor = Colors.Purple30,
                 faceColor = Colors.Purple90,
@@ -48,11 +51,11 @@ sealed class MoodResource(
         )
 
     data object Sad : MoodResource(
-        id = SAD,
+        id = SAD.id,
         image = Drawables.Mood.Sad,
         imageVector = Drawables.Mood.SadVectorPainter,
         text = Res.string.sad,
-        healthLevel = 40,
+        healthLevel = SAD.healthLevel,
         palette = MoodPalette(
             faceBackgroundColor = Colors.Orange40,
             faceColor = Colors.Orange90,
@@ -71,12 +74,12 @@ sealed class MoodResource(
 
     data object Neutral :
         MoodResource(
-            NEUTRAL,
-            Drawables.Mood.Neutral,
-            Drawables.Mood.NeutralVectorPainter,
-            Res.string.neutral,
-            60,
-            MoodPalette(
+            id = NEUTRAL.id,
+            image = Drawables.Mood.Neutral,
+            imageVector = Drawables.Mood.NeutralVectorPainter,
+            text = Res.string.neutral,
+            healthLevel = NEUTRAL.healthLevel,
+            palette = MoodPalette(
                 faceBackgroundColor = Colors.Brown60,
                 faceColor = Colors.Brown90,
                 backgroundColor = Colors.Brown20,
@@ -93,11 +96,11 @@ sealed class MoodResource(
         )
 
     data object Happy : MoodResource(
-        id = HAPPY,
+        id = HAPPY.id,
         image = Drawables.Mood.Happy,
         imageVector = Drawables.Mood.HappyVectorPainter,
         text = Res.string.happy,
-        healthLevel = 80,
+        healthLevel = HAPPY.healthLevel,
         palette = MoodPalette(
             faceBackgroundColor = Colors.Yellow40,
             faceColor = Colors.Yellow90,
@@ -116,11 +119,11 @@ sealed class MoodResource(
 
     data object Overjoyed :
         MoodResource(
-            id = OVERJOYED,
+            id = OVERJOYED.id,
             image = Drawables.Mood.Overjoyed,
             imageVector = Drawables.Mood.OverjoyedVectorPainter,
             text = Res.string.overjoyed,
-            healthLevel = 100,
+            healthLevel = OVERJOYED.healthLevel,
             palette = MoodPalette(
                 faceBackgroundColor = Colors.Green50,
                 faceColor = Colors.Green90,
@@ -136,60 +139,4 @@ sealed class MoodResource(
                 barFaceColor = Colors.Green70,
             )
         )
-
-    companion object {
-        private const val DEPRESSED = 0
-        private const val SAD = 1
-        private const val NEUTRAL = 2
-        private const val HAPPY = 3
-        private const val OVERJOYED = 4
-
-        fun toValue(src: Int): MoodResource = when (src) {
-            DEPRESSED -> Depressed
-            SAD -> Sad
-            NEUTRAL -> Neutral
-            HAPPY -> Happy
-            OVERJOYED -> Overjoyed
-            else -> throw IllegalArgumentException("Unknown mood: $src")
-        }
-
-        fun MoodResource.fromValue(): Int = this.id
-
-        fun getAll(): List<MoodResource> = listOf(
-            Depressed,
-            Sad,
-            Neutral,
-            Happy,
-            Overjoyed
-        )
-
-        fun Mood.toResource(): MoodResource =
-            when (this) {
-                is Mood.Depressed -> Depressed
-                is Mood.Sad -> Sad
-                is Mood.Neutral -> Neutral
-                is Mood.Happy -> Happy
-                is Mood.Overjoyed -> Overjoyed
-            }
-
-        fun List<Mood>.toResource(): List<MoodResource> = map { it.toResource() }
-
-        fun MoodResource.toDomain(): Mood =
-            when (this) {
-                Depressed -> Mood.Depressed
-                Sad -> Mood.Sad
-                Neutral -> Mood.Neutral
-                Happy -> Mood.Happy
-                Overjoyed -> Mood.Overjoyed
-            }
-
-        fun MoodResource.toSleepQuality(): SleepQuality =
-            when (this) {
-                Depressed -> SleepQuality.Worst
-                Sad -> SleepQuality.Poor
-                Neutral -> SleepQuality.Fair
-                Happy -> SleepQuality.Good
-                Overjoyed -> SleepQuality.Excellent
-            }
-    }
 }

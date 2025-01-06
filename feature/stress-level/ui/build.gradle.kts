@@ -29,10 +29,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.feature.stressLevel.domain)
-            implementation(projects.shared.ui)
-            implementation(projects.shared.domain)
-            implementation(projects.feature.mood.domain)
+            implementation(projects.sharedResources)
             implementation(projects.core.ui)
+            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.loading.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

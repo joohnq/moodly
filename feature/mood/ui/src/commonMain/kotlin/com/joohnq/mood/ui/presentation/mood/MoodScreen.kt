@@ -7,16 +7,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.joohnq.core.ui.mapper.getValue
+import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetNextStatUseCase
 import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.shared.domain.mapper.getValue
-import com.joohnq.shared.domain.mapper.getValueOrNull
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 import org.koin.compose.koinInject
 
 class MoodScreen(

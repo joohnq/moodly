@@ -1,13 +1,13 @@
 package com.joohnq.user.data.repository
 
 import com.joohnq.core.database.executeTryCatchPrinting
+import com.joohnq.core.ui.toResultNull
 import com.joohnq.domain.data_source.UserDataSource
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.repository.UserRepository
-import com.joohnq.shared.domain.toResultNull
 
 class UserRepositoryImpl(
     private val dataSource: UserDataSource,

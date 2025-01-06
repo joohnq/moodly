@@ -1,13 +1,13 @@
 package com.joohnq.welcome.ui.screens
 
 import androidx.compose.runtime.Composable
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.resource_first_title
-import com.joohnq.shared.ui.resource_second_title
-import com.joohnq.shared.ui.resource_span
-import com.joohnq.shared.ui.three
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.resource_first_title
+import com.joohnq.shared_resources.resource_second_title
+import com.joohnq.shared_resources.resource_span
+import com.joohnq.shared_resources.three
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -15,20 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared.ui.components.ContinueButton
-import com.joohnq.shared.ui.components.ExpressionAnalysisTextField
-import com.joohnq.shared.ui.components.TopBar
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
-import com.joohnq.shared.ui.util.constants.TestConstants
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.expression_analysis_desc
-import com.joohnq.shared.ui.expression_analysis_title
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.expression_analysis_desc
+import com.joohnq.shared_resources.expression_analysis_title
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -71,7 +70,7 @@ fun ExpressionAnalysisUI(
             VerticalSpacer(24.dp)
             if (state.description.isNotEmpty())
                 ContinueButton(
-                    modifier = Modifier.fillMaxWidth().testTag(TestConstants.CONTINUE_BUTTON),
+                    modifier = Modifier.fillMaxWidth().testTag("CONTINUE_BUTTON"),
                     onClick = { state.onEvent(ExpressionAnalysisEvent.OnAdd) }
                 )
         }

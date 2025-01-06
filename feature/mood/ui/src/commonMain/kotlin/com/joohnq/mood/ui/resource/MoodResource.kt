@@ -8,14 +8,14 @@ import com.joohnq.mood.domain.entity.Mood.Companion.OVERJOYED
 import com.joohnq.mood.domain.entity.Mood.Companion.SAD
 import com.joohnq.mood.domain.entity.MoodPalette
 import com.joohnq.mood.domain.property.MoodProperties
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.depressed
-import com.joohnq.shared.ui.happy
-import com.joohnq.shared.ui.neutral
-import com.joohnq.shared.ui.overjoyed
-import com.joohnq.shared.ui.sad
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.depressed
+import com.joohnq.shared_resources.happy
+import com.joohnq.shared_resources.neutral
+import com.joohnq.shared_resources.overjoyed
+import com.joohnq.shared_resources.sad
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 

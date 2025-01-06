@@ -2,14 +2,14 @@ package com.joohnq.user.ui.viewmodel.user_preferences
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.core.ui.entity.UiState
+import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.domain.use_case.user_preferences.AddUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipGetUserNameScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingScreenUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeScreenUseCase
-import com.joohnq.shared.domain.entity.UiState
-import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

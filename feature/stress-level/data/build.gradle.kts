@@ -49,7 +49,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.database)
             implementation(projects.feature.stressLevel.domain)
-            implementation(projects.shared.domain)
+            implementation(projects.core.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

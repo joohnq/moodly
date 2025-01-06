@@ -3,7 +3,7 @@ package com.joohnq.moodapp.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.joohnq.core.ui.presentation.loading.LoadingScreen
+import com.joohnq.moodapp.presentation.loading.LoadingScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 

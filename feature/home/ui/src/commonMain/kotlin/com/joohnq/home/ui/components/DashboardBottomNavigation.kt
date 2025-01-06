@@ -20,8 +20,8 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.home.ui.event.DashboardBottomNavigationEvent
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

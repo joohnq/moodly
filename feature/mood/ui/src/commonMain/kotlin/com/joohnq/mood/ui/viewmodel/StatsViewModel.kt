@@ -2,12 +2,12 @@ package com.joohnq.mood.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.core.ui.entity.UiState
+import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.AddStatsUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetStatsUseCase
-import com.joohnq.shared.domain.entity.UiState
-import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

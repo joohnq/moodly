@@ -2,15 +2,15 @@ package com.joohnq.health_journal.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.core.ui.entity.UiState
+import com.joohnq.core.ui.mapper.getValue
+import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.AddHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.DeleteHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.UpdateHealthJournalsUseCase
-import com.joohnq.shared.domain.entity.UiState
-import com.joohnq.shared.domain.mapper.getValue
-import com.joohnq.shared.domain.mapper.onSuccess
-import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

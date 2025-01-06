@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.mapper.fold
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
@@ -16,9 +17,8 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.mood.ui.mapper.toDomain
-import com.joohnq.shared.domain.mapper.fold
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 import kotlinx.coroutines.launch
 
 class AddJournalingScreen(private val onGoBack: () -> Unit) : CustomScreen<AddJournalingState>() {

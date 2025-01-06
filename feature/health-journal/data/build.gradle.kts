@@ -47,7 +47,7 @@ kotlin {
             implementation(libs.android.driver)
         }
         commonMain.dependencies {
-            implementation(projects.shared.domain)
+            implementation(projects.core.ui)
             implementation(projects.core.database)
             implementation(projects.feature.healthJournal.domain)
             implementation(projects.feature.mood.domain)

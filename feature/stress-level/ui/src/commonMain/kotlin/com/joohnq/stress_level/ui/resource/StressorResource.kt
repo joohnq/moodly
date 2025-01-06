@@ -1,14 +1,14 @@
 package com.joohnq.stress_level.ui.resource
 
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.finances
-import com.joohnq.shared.ui.in_peace
-import com.joohnq.shared.ui.kids
-import com.joohnq.shared.ui.life
-import com.joohnq.shared.ui.loneliness
-import com.joohnq.shared.ui.other
-import com.joohnq.shared.ui.relationship
-import com.joohnq.shared.ui.work
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.finances
+import com.joohnq.shared_resources.in_peace
+import com.joohnq.shared_resources.kids
+import com.joohnq.shared_resources.life
+import com.joohnq.shared_resources.loneliness
+import com.joohnq.shared_resources.other
+import com.joohnq.shared_resources.relationship
+import com.joohnq.shared_resources.work
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.FINANCES
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.IN_PEACE
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.KIDS

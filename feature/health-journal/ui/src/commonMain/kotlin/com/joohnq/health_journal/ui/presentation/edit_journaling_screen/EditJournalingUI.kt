@@ -24,6 +24,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
@@ -31,22 +32,21 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.Ed
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.components.MainAlertDialog
-import com.joohnq.shared.ui.components.TextWithBackground
-import com.joohnq.shared.ui.components.TopBar
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.delete_journal
-import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
-import com.joohnq.shared.ui.edit_journal
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.ComponentColors
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.shared.ui.type_here_your_description
-import com.joohnq.shared.ui.type_here_your_title
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.MainAlertDialog
+import com.joohnq.shared_resources.components.TextWithBackground
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.delete_journal
+import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
+import com.joohnq.shared_resources.edit_journal
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.type_here_your_description
+import com.joohnq.shared_resources.type_here_your_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable fun EditJournalingUI(

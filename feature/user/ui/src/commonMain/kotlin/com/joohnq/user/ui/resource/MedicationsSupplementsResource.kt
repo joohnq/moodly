@@ -1,17 +1,17 @@
 package com.joohnq.user.ui.resource
 
+import com.joohnq.core.ui.entity.DIcon
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.IM_NOT_TAKING_ANY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.OVER_THE_COUNTER_SUPPLEMENTS
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PRESCRIBED_MEDICATIONS
 import com.joohnq.domain.property.MedicationsSupplementsProperties
-import com.joohnq.shared.domain.entity.DIcon
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.im_not_taking_any
-import com.joohnq.shared.ui.over_the_counter_supplements
-import com.joohnq.shared.ui.prefer_not_to_say
-import com.joohnq.shared.ui.prescribed_medications
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.im_not_taking_any
+import com.joohnq.shared_resources.over_the_counter_supplements
+import com.joohnq.shared_resources.prefer_not_to_say
+import com.joohnq.shared_resources.prescribed_medications
+import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.StringResource
 
 sealed class MedicationsSupplementsResource(

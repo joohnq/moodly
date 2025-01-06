@@ -21,21 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_stress_level
-import com.joohnq.shared.ui.components.ContinueButton
-import com.joohnq.shared.ui.components.TextBubble
-import com.joohnq.shared.ui.components.TextFieldWithLabelAndDoubleBorder
-import com.joohnq.shared.ui.components.TopBar
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.enter_your_stressor
-import com.joohnq.shared.ui.other
-import com.joohnq.shared.ui.select_stressors
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.ComponentColors
-import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.shared.ui.util.constants.TestConstants
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.add_stress_level
+import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.TextBubble
+import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.enter_your_stressor
+import com.joohnq.shared_resources.other
+import com.joohnq.shared_resources.select_stressors
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.getAllStressorResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
@@ -114,7 +113,7 @@ fun StressStressorsUI(
             if (canContinue)
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
-                        .testTag(TestConstants.CONTINUE_BUTTON),
+                        .testTag("CONTINUE_BUTTON"),
                     onClick = { state.onEvent(StressStressorsEvent.Continue) }
                 )
         }

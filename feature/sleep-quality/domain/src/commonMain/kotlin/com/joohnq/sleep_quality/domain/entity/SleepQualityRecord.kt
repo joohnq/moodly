@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.core.ui.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 
 data class SleepQualityRecord(

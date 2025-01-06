@@ -26,14 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.shared.domain.DatetimeProvider
-import com.joohnq.shared.ui.components.calculateTextHeight
-import com.joohnq.shared.ui.components.dashedLine
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.components.calculateTextHeight
+import com.joohnq.shared_resources.components.dashedLine
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
 fun MoodBarStatistic(

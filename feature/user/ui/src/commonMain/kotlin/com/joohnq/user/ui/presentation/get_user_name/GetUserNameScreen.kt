@@ -9,10 +9,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
+import com.joohnq.core.ui.mapper.fold
 import com.joohnq.domain.validator.UserNameValidator
-import com.joohnq.shared.domain.mapper.fold
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.user.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.user.ui.presentation.get_user_name.state.GetUserNameState
 import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameIntent

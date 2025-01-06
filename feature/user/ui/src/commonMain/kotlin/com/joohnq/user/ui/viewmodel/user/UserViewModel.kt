@@ -2,13 +2,13 @@ package com.joohnq.user.ui.viewmodel.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.core.ui.entity.UiState
+import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.use_case.user.GetUserUseCase
 import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
 import com.joohnq.domain.use_case.user.UpdateUserUseCase
-import com.joohnq.shared.domain.entity.UiState
-import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

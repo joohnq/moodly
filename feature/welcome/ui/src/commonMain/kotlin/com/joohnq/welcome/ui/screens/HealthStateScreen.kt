@@ -1,13 +1,13 @@
 package com.joohnq.welcome.ui.screens
 
 import androidx.compose.runtime.Composable
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.health_state_first_title
-import com.joohnq.shared.ui.health_state_second_title
-import com.joohnq.shared.ui.health_state_span
-import com.joohnq.shared.ui.one
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.health_state_first_title
+import com.joohnq.shared_resources.health_state_second_title
+import com.joohnq.shared_resources.health_state_span
+import com.joohnq.shared_resources.one
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -6,7 +6,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.screens.CommunityScreen
 import com.joohnq.welcome.ui.screens.FirstScreen

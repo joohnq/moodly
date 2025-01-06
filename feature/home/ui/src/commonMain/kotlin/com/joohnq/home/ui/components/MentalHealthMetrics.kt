@@ -15,15 +15,15 @@ import com.joohnq.health_journal.ui.components.HealthJournalComponent
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.components.CircularProgressWithDoubleText
-import com.joohnq.shared.ui.components.MentalHealthMetricItem
-import com.joohnq.shared.ui.freud_score
-import com.joohnq.shared.ui.health_journal
-import com.joohnq.shared.ui.mood
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.CircularProgressWithDoubleText
+import com.joohnq.shared_resources.components.MentalHealthMetricItem
+import com.joohnq.shared_resources.freud_score
+import com.joohnq.shared_resources.health_journal
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

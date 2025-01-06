@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.state.OnboardingStressLevelState
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 
 class OnboardingStressLevelScreen(
     private val onNavigateToExpressionAnalysis: () -> Unit,

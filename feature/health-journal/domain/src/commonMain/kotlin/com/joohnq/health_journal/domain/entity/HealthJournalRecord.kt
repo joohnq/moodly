@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.domain.entity
 
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.shared.domain.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 
 data class HealthJournalRecord(

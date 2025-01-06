@@ -9,8 +9,8 @@ import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalSt
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
-import com.joohnq.shared.ui.CustomScreen
-import com.joohnq.shared.ui.sharedViewModel
+import com.joohnq.shared_resources.CustomScreen
+import com.joohnq.shared_resources.sharedViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
 class AllJournalScreen(

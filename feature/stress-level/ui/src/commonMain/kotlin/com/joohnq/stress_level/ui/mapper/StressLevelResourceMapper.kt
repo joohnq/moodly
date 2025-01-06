@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.mapper
 
 import androidx.compose.ui.graphics.Color
-import com.joohnq.shared.ui.theme.Colors
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource.Five

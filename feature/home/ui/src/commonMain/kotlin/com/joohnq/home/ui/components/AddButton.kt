@@ -13,14 +13,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.joohnq.home.ui.event.DashboardBottomNavigationEvent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_health_journal
-import com.joohnq.shared.ui.add_mood
-import com.joohnq.shared.ui.components.BottomNavigationActionButton
-import com.joohnq.shared.ui.components.BottomNavigationAddButton
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.Dimens
-import com.joohnq.shared.ui.theme.Drawables
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.add_health_journal
+import com.joohnq.shared_resources.add_mood
+import com.joohnq.shared_resources.components.BottomNavigationActionButton
+import com.joohnq.shared_resources.components.BottomNavigationAddButton
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
 import kotlin.math.roundToInt
 
 @Composable

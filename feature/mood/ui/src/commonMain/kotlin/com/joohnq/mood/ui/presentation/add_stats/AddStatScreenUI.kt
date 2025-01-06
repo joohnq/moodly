@@ -22,17 +22,17 @@ import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
-import com.joohnq.shared.ui.Res
-import com.joohnq.shared.ui.add_mood
-import com.joohnq.shared.ui.components.ButtonTextAndCheck
-import com.joohnq.shared.ui.components.TopBar
-import com.joohnq.shared.ui.components.VerticalSpacer
-import com.joohnq.shared.ui.hey_name
-import com.joohnq.shared.ui.how_are_you_feeling_this_day
-import com.joohnq.shared.ui.set_mood
-import com.joohnq.shared.ui.theme.Colors
-import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared.ui.theme.TextStyles
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.add_mood
+import com.joohnq.shared_resources.components.ButtonTextAndCheck
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.hey_name
+import com.joohnq.shared_resources.how_are_you_feeling_this_day
+import com.joohnq.shared_resources.set_mood
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

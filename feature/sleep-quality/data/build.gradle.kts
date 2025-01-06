@@ -48,7 +48,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.core.database)
-            implementation(projects.shared.domain)
+            implementation(projects.core.ui)
             implementation(projects.feature.sleepQuality.domain)
 
             implementation(compose.runtime)

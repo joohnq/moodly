@@ -1,4 +1,4 @@
-package com.joohnq.domain
+package com.joohnq.domain.property
 
 interface ProfessionalHelpProperties {
     val id: Int

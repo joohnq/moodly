@@ -10,9 +10,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.domain.validator.UserNameValidator
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.user.ui.presentation.get_user_name.event.GetUserNameEvent
 import com.joohnq.user.ui.presentation.get_user_name.state.GetUserNameState
 import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameIntent
@@ -38,6 +38,12 @@ class GetUserNameScreen(
         val userState by userViewModel.state.collectAsState()
         val getUserNameState by getUserNameViewModel.state.collectAsState()
 
+        fun onError(error: String) {
+            scope.launch {
+                snackBarState.showSnackbar(error)
+            }
+        }
+
         fun onEvent(event: GetUserNameEvent) =
             when (event) {
                 GetUserNameEvent.Continue -> {
@@ -53,16 +59,12 @@ class GetUserNameScreen(
 
         LaunchedEffect(userState.updating) {
             userState.updating.fold(
-                onError = { error: String ->
-                    scope.launch {
-                        snackBarState.showSnackbar(error)
-                    }
-                },
+                onError = ::onError,
                 onSuccess = {
-                    onNavigateToDashboardScreen()
                     userPreferencesViewModel.onAction(
                         UserPreferenceViewModelIntent.UpdateSkipGetUserNameScreen()
                     )
+                    onNavigateToDashboardScreen()
                 }
             )
         }

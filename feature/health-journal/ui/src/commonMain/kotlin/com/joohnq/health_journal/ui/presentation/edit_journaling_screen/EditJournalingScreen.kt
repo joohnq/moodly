@@ -48,10 +48,7 @@ class EditJournalingScreen(val id: Int, private val onGoBack: () -> Unit) :
 
         LaunchedEffect(Unit) {
             editJournalingViewModel.onAction(
-                EditJournalingIntent.GetEditJournaling(
-                    id,
-                    healthJournals
-                )
+                EditJournalingIntent.GetEditJournaling(id, healthJournals)
             )
         }
 

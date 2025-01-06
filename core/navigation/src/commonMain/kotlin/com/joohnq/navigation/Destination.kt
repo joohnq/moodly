@@ -39,5 +39,8 @@ sealed class Destination {
         @Serializable data object AllJournaling : Destination()
         @Serializable data object EditJournaling : Destination()
         @Serializable data object AllJournals : Destination()
+        @Serializable data object AddJournalingScreen : Destination()
+        @Serializable data class EditJournalingScreen(val id: Int) : Destination()
+        @Serializable data object AllJournalScreen : Destination()
     }
 }

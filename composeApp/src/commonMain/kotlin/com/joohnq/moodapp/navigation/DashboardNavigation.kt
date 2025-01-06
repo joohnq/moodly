@@ -5,6 +5,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.joohnq.freud_score.ui.presentation.freud_score.FreudScoreScreen
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJournalingScreen
+import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
+import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.health_journal.ui.presentation.health_journal.HealthJournalScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
@@ -155,6 +158,30 @@ fun NavGraphBuilder.dashboardNavigation(
         composable<Destination.App.AddSleepQuality> {
             AddSleepQualityScreen(
                 onGoBack = onGoBack
+            ).Content()
+        }
+        composable<Destination.App.AddJournalingScreen> {
+            AddJournalingScreen(
+                onGoBack = onGoBack
+            ).Content()
+        }
+        composable<Destination.App.EditJournalingScreen> { backStackEntry ->
+            val editJournalingScreen =
+                backStackEntry.toRoute<Destination.App.EditJournalingScreen>()
+            EditJournalingScreen(
+                id = editJournalingScreen.id,
+                onGoBack = onGoBack
+            ).Content()
+        }
+        composable<Destination.App.AllJournalScreen> {
+            AllJournalScreen(
+                onGoBack = onGoBack,
+                onNavigateEditJournaling = { id ->
+                    onNavigate(
+                        Destination.App.EditJournalingScreen(id),
+                        false
+                    )
+                }
             ).Content()
         }
     }

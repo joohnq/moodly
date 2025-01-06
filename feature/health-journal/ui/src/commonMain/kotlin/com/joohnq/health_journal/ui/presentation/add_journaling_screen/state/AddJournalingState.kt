@@ -4,7 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 
 data class AddJournalingState(
     val snackBarState: SnackbarHostState,

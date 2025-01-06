@@ -27,6 +27,8 @@ import com.joohnq.health_journal.ui.components.AllJournalsCard
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
+import com.joohnq.shared.domain.mapper.getValue
+import com.joohnq.shared.domain.mapper.onFold
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.DateCard
 import com.joohnq.shared.ui.components.MainAlertDialog
@@ -35,8 +37,6 @@ import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.delete_journal
 import com.joohnq.shared.ui.do_you_wish_to_remove_this_journal
 import com.joohnq.shared.ui.my_journals
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
@@ -48,7 +48,7 @@ import org.koin.compose.koinInject
 
 @Composable
 fun AllJournalUI(state: AllJournalState) {
-    UiState.onFold(
+    onFold(
         state.user,
         state.healthJournalRecords,
         onLoading = { LoadingUI() },

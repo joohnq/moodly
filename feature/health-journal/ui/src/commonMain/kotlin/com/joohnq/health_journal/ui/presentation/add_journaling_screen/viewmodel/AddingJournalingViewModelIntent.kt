@@ -1,6 +1,6 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 
 sealed class AddingJournalingViewModelIntent {
     data class UpdateMood(val mood: MoodResource?) : AddingJournalingViewModelIntent()

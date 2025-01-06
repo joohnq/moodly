@@ -30,7 +30,7 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.Ed
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.MainAlertDialog

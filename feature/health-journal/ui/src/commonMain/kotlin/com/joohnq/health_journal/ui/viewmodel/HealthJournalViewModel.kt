@@ -7,10 +7,10 @@ import com.joohnq.health_journal.domain.use_case.AddHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.DeleteHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.UpdateHealthJournalsUseCase
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
-import com.joohnq.shared.ui.state.UiState.Companion.onSuccess
-import com.joohnq.shared.ui.state.UiState.Companion.toUiState
+import com.joohnq.shared.domain.entity.UiState
+import com.joohnq.shared.domain.mapper.getValue
+import com.joohnq.shared.domain.mapper.onSuccess
+import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -30,8 +30,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
-import com.joohnq.mood.ui.MoodResource
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.mapper.getAllMoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.ContinueButton
 import com.joohnq.shared.ui.components.CustomOutlinedTextField
@@ -60,7 +61,7 @@ fun AddJournalingUI(
     }
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
-    val moods = remember { MoodResource.getAll() }
+    val moods = remember { getAllMoodResource() }
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),

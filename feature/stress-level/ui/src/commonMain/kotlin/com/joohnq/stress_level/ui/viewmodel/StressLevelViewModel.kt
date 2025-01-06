@@ -2,8 +2,8 @@ package com.joohnq.stress_level.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.toUiState
+import com.joohnq.shared.domain.entity.UiState
+import com.joohnq.shared.domain.mapper.toUiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.domain.use_case.GetStressLevelsUseCase

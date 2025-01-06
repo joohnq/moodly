@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.domain.entity
 
-import com.joohnq.stress_level.domain.StressLevelProperties
+import com.joohnq.stress_level.domain.property.StressLevelProperties
 
 sealed class StressLevel(
     override val id: Int,
@@ -27,33 +27,6 @@ sealed class StressLevel(
         val THREE = DStressLevelProperties(3, 3)
         val FOUR = DStressLevelProperties(4, 4)
         val FIVE = DStressLevelProperties(5, 5)
-
-        fun toValue(src: Int): StressLevel = when (src) {
-            ONE.id -> One
-            TWO.id -> Two
-            THREE.id -> Three
-            FOUR.id -> Four
-            FIVE.id -> Five
-            else -> throw IllegalArgumentException("Unknown stress rate option: $src")
-        }
-
-        fun toPercent(level: Int): Double = when (level) {
-            1 -> 0.0
-            2 -> 20.0
-            3 -> 40.0
-            4 -> 60.0
-            else -> 100.0
-        }
-
-        fun StressLevel?.fromValue(): Int = this?.id ?: -1
-
-        fun getAll(): List<StressLevel> = listOf(
-            One,
-            Two,
-            Three,
-            Four,
-            Five
-        )
     }
 }
 

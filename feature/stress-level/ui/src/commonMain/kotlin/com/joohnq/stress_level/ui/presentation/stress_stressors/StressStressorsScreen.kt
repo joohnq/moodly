@@ -8,13 +8,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.domain.entity.Stressor
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toDomain
-import com.joohnq.stress_level.ui.StressorResource.Companion.toDomain
+import com.joohnq.stress_level.domain.mapper.containOther
+import com.joohnq.stress_level.ui.mapper.toDomain
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
@@ -36,12 +35,19 @@ class StressStressorsScreen(
         val stressLevelState by stressLevelViewModel.state.collectAsState()
         val addStressLevelState by addStressLevelViewModel.state.collectAsState()
 
+        fun containsOther(): Boolean =
+            addStressLevelState.stressors.toDomain().containOther()
+
+        fun onError(error: String) {
+            scope.launch { snackBarState.showSnackbar(error) }
+        }
+
         fun onEvent(event: StressStressorsEvent) =
             when (event) {
                 is StressStressorsEvent.GoBack -> onGoBack()
                 is StressStressorsEvent.Continue -> {
                     try {
-                        if (Stressor.containOther(addStressLevelState.stressors.toDomain()) && addStressLevelState.otherValue.isEmpty()) throw Exception(
+                        if (containsOther() && addStressLevelState.otherValue.isEmpty()) throw Exception(
                             "Please type your other stressor"
                         )
 
@@ -62,14 +68,14 @@ class StressStressorsScreen(
             }
 
         LaunchedEffect(addStressLevelState.stressors) {
-            if (Stressor.containOther(addStressLevelState.stressors.toDomain())) {
+            if (containsOther()) {
                 addStressLevelViewModel.onAction(AddStressLevelIntent.UpdateAddingOtherValue(""))
             }
         }
 
         LaunchedEffect(stressLevelState.adding) {
             stressLevelState.adding.fold(
-                onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
+                onError = ::onError,
                 onSuccess = {
                     onGoBackToStressLevel()
                     stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)

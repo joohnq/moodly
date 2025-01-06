@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel
 
-import com.joohnq.stress_level.ui.StressLevelResource
-import com.joohnq.stress_level.ui.StressorResource
+import com.joohnq.stress_level.ui.resource.StressLevelResource
+import com.joohnq.stress_level.ui.resource.StressorResource
 
 data class AddingStressLevelViewModelState(
     val stressLevel: StressLevelResource = StressLevelResource.One,

@@ -37,6 +37,13 @@ object Dimens {
             bottomEnd = 20.dp
         )
 
+        val BottomLarge = RoundedCornerShape(
+            topStart = 0.dp,
+            topEnd = 0.dp,
+            bottomStart = 30.dp,
+            bottomEnd = 30.dp
+        )
+
         val StartMedium = RoundedCornerShape(
             topStart = 20.dp,
             topEnd = 0.dp,

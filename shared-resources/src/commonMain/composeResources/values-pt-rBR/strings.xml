@@ -192,4 +192,7 @@
     <string name="type_here_your_title">Digite seu título aqui</string>
     <string name="type_here_your_description">Digite sua descrição aqui</string>
     <string name="add_health_journal">Adicionar Diário de Saúde</string>
+    <string name="greeting">Olá, %1$s</string>
+    <string name="profile">Perfil</string>
+    <string name="chat">Bate-Papo</string>
 </resources>

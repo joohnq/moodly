@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.core.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable

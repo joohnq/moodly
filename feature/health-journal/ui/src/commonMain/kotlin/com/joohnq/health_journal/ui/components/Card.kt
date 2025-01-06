@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.TextEllipsis
 import com.joohnq.shared.ui.components.TextWithBackground

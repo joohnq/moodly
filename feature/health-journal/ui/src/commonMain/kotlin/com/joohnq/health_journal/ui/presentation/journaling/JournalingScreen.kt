@@ -8,38 +8,31 @@ import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingStat
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
 
-class JournalingScreen : CustomScreen<JournalingState>() {
+class JournalingScreen(
+    private val onNavigateToEditJournaling: (Int) -> Unit,
+    private val onNavigateToAllJournals: () -> Unit,
+) : CustomScreen<JournalingState>() {
     @Composable
     override fun Screen(): JournalingState {
         val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
         val journal by healthJournalViewModel.state.collectAsState()
 
-        fun onEvent(event: JournalingEvent) =
+        fun onEvent(event: JournalingEvent) {
             when (event) {
-                is JournalingEvent.OnNavigateToEditJournalingScreen -> {}
-//                    onNavigate(EditJournalingScreen(event.id), false)
+                is JournalingEvent.OnNavigateToEditJournalingScreen -> onNavigateToEditJournaling(
+                    event.id
+                )
 
-                JournalingEvent.OnNavigateToAllJournals -> {}
-//                    onNavigate(AllJournalScreen())
+                JournalingEvent.OnNavigateToAllJournals -> onNavigateToAllJournals()
             }
+        }
 
         return JournalingState(
-            journals = journal.healthJournalRecords.getValue(),
+            journals = journal.healthJournalRecords,
             onEvent = ::onEvent
         )
     }
-
-//    override val options: TabOptions
-//        @Composable
-//        get() =
-//            TabOptions(
-//                icon = painterResource(Drawables.Icons.Chat),
-//                title = stringResource(Res.string.journaling),
-//                index = 1u
-//            )
-
 
     @Composable
     override fun UI(state: JournalingState) = JournalingUI(state)

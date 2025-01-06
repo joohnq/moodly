@@ -21,9 +21,9 @@ class HealthJournalScreen(
 
         fun onEvent(event: HealthJournalEvent) =
             when (event) {
-                HealthJournalEvent.OnGoBack -> onGoBack
-                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigateAddJournaling
-                is HealthJournalEvent.OnClick -> onNavigateAllJournaling
+                HealthJournalEvent.OnGoBack -> onGoBack()
+                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigateAddJournaling()
+                is HealthJournalEvent.OnClick -> onNavigateAllJournaling()
             }
 
         return HealthJournalState(

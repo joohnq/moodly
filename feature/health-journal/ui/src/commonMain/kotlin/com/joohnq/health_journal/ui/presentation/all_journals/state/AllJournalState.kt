@@ -6,7 +6,7 @@ import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJourn
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelState
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
-import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.domain.entity.UiState
 
 data class AllJournalState(
     val allJournalViewModelState: AllJournalViewModelState,

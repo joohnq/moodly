@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

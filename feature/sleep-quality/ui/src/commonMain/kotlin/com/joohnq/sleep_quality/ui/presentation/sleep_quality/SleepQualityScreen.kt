@@ -13,6 +13,7 @@ class SleepQualityScreen(
     private val onNavigateAddSleepQuality: () -> Unit,
     private val onGoBack: () -> Unit,
 ) : CustomScreen<SleepQualityState>() {
+
     @Composable
     override fun Screen(): SleepQualityState {
         val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
@@ -20,10 +21,9 @@ class SleepQualityScreen(
 
         fun onEvent(event: SleepQualityEvent) =
             when (event) {
-                SleepQualityEvent.Add -> onNavigateAddSleepQuality
-                SleepQualityEvent.GoBack -> onGoBack
+                SleepQualityEvent.Add -> onNavigateAddSleepQuality()
+                SleepQualityEvent.GoBack -> onGoBack()
             }
-
 
         return SleepQualityState(
             sleepQualityRecords = sleepQualityState.sleepQualityRecords,

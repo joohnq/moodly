@@ -1,6 +1,5 @@
-package com.joohnq.sleep_quality.ui
+package com.joohnq.sleep_quality.ui.resource
 
-import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.excellent
 import com.joohnq.shared.ui.fair
@@ -10,6 +9,7 @@ import com.joohnq.shared.ui.minus_three_hours
 import com.joohnq.shared.ui.poor
 import com.joohnq.shared.ui.seven_nine_hours
 import com.joohnq.shared.ui.six_seven_hours
+import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.three_four_hours
 import com.joohnq.shared.ui.worst
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
@@ -84,38 +84,4 @@ sealed class SleepQualityResource(
             color = Colors.Purple50
         )
     )
-
-    companion object {
-        fun getAll(): List<SleepQualityResource> = listOf(
-            Excellent,
-            Good,
-            Fair,
-            Poor,
-            Worst
-        )
-
-        fun SleepQuality.toResource(): SleepQualityResource = when (this) {
-            SleepQuality.Excellent -> Excellent
-            SleepQuality.Good -> Good
-            SleepQuality.Fair -> Fair
-            SleepQuality.Poor -> Poor
-            SleepQuality.Worst -> Worst
-        }
-
-        fun SleepQualityResource.toDomain(): SleepQuality = when (this) {
-            Excellent -> SleepQuality.Excellent
-            Good -> SleepQuality.Good
-            Fair -> SleepQuality.Fair
-            Poor -> SleepQuality.Poor
-            Worst -> SleepQuality.Worst
-        }
-
-        fun fromSliderValue(value: Float): SleepQualityResource = when (value) {
-            0f -> Worst
-            25f -> Poor
-            50f -> Fair
-            75f -> Good
-            else -> Excellent
-        }
-    }
 }

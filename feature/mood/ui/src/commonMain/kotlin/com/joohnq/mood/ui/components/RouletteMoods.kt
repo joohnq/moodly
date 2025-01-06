@@ -13,7 +13,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.mapper.getAllMoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared.ui.components.drawCenterCircle
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
@@ -24,7 +25,7 @@ import kotlin.math.roundToInt
 @Composable
 fun RouletteMoods(setSelectedMood: (MoodResource) -> Unit) {
     val moods = rememberSaveable {
-        MoodResource.getAll() + MoodResource.getAll()
+        getAllMoodResource() + getAllMoodResource()
     }
     val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Mood.TargetVectorPainter)

@@ -6,9 +6,9 @@ import androidx.compose.runtime.getValue
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
 import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
+import com.joohnq.shared.domain.mapper.getValue
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
 class AddStatScreen(
@@ -24,8 +24,8 @@ class AddStatScreen(
 
         fun onEvent(event: AddStatEvent) =
             when (event) {
-                AddStatEvent.OnGoBack -> onGoBack
-                AddStatEvent.OnNavigateToExpressionAnalysis -> onNavigateToExpressionAnalysis
+                AddStatEvent.OnGoBack -> onGoBack()
+                AddStatEvent.OnNavigateToExpressionAnalysis -> onNavigateToExpressionAnalysis()
             }
 
         return AddStatState(

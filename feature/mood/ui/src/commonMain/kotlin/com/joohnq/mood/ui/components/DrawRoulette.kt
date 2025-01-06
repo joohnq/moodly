@@ -3,7 +3,7 @@ package com.joohnq.mood.ui.components
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.VectorPainter
-import com.joohnq.mood.ui.MoodResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared.ui.components.drawSlice
 import com.joohnq.shared.ui.util.mappers.toDegrees
 

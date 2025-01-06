@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared.domain.DatetimeProvider
 import com.joohnq.shared.ui.components.calculateTextHeight
 import com.joohnq.shared.ui.components.dashedLine

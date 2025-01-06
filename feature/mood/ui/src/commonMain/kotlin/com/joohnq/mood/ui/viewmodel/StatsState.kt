@@ -1,7 +1,7 @@
 package com.joohnq.mood.ui.viewmodel
 
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared.ui.state.UiState
+import com.joohnq.shared.domain.entity.UiState
 
 data class StatsState(
     val statsRecords: UiState<List<StatsRecord>> = UiState.Idle,

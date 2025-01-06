@@ -14,12 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.ui.MoodResource.Companion.toResource
 import com.joohnq.mood.ui.components.MoodBarStatistic
 import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.shared.domain.DatetimeProvider
+import com.joohnq.shared.domain.mapper.foldComposable
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.CircularLoading
 import com.joohnq.shared.ui.components.PreviousNextButton
@@ -28,7 +29,6 @@ import com.joohnq.shared.ui.components.TextWithBackground
 import com.joohnq.shared.ui.components.VerticalSpacer
 import com.joohnq.shared.ui.description
 import com.joohnq.shared.ui.mood
-import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
 import com.joohnq.shared.ui.theme.Colors
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium

@@ -9,16 +9,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.ui.MoodResource.Companion.toDomain
+import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.shared.domain.mapper.fold
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.fold
 import kotlinx.coroutines.launch
 
 class ExpressionAnalysisScreen(
@@ -34,6 +34,9 @@ class ExpressionAnalysisScreen(
         val snackBarState = remember { SnackbarHostState() }
         val statsState by statsViewModel.state.collectAsState()
         val addStatsState by addStatsViewModel.state.collectAsState()
+
+        fun onError(error: String) =
+            scope.launch { snackBarState.showSnackbar(error) }
 
         fun onEvent(event: ExpressionAnalysisEvent) =
             when (event) {
@@ -52,7 +55,7 @@ class ExpressionAnalysisScreen(
 
         LaunchedEffect(statsState.adding) {
             statsState.adding.fold(
-                onError = { error -> scope.launch { snackBarState.showSnackbar(error) } },
+                onError = ::onError,
                 onSuccess = {
                     onNavigateToMood()
                     statsViewModel.onAction(StatsIntent.GetStatsRecords)

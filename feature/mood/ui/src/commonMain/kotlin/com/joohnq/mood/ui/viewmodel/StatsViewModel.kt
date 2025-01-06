@@ -6,8 +6,8 @@ import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.AddStatsUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetStatsUseCase
-import com.joohnq.shared.ui.state.UiState
-import com.joohnq.shared.ui.state.UiState.Companion.toUiState
+import com.joohnq.shared.domain.entity.UiState
+import com.joohnq.shared.domain.mapper.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

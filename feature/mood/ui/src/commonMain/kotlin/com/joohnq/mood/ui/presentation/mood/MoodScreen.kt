@@ -13,54 +13,51 @@ import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.presentation.mood.state.MoodState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.shared.domain.mapper.getValue
+import com.joohnq.shared.domain.mapper.getValueOrNull
 import com.joohnq.shared.ui.CustomScreen
 import com.joohnq.shared.ui.sharedViewModel
-import com.joohnq.shared.ui.state.UiState.Companion.getValue
-import com.joohnq.shared.ui.state.UiState.Companion.getValueOrNull
 import org.koin.compose.koinInject
 
-class MoodScreen(val id: Int? = null) : CustomScreen<MoodState>() {
+class MoodScreen(
+    val id: Int? = null,
+    private val onGoBack: () -> Unit,
+    private val onNavigateAddStat: () -> Unit,
+) : CustomScreen<MoodState>() {
     @Composable
     override fun Screen(): MoodState {
         val statsViewModel: StatsViewModel = sharedViewModel()
         val statsState by statsViewModel.state.collectAsState()
         val getNextStatUseCase: GetNextStatUseCase = koinInject()
         val getPreviousStatUseCase: GetPreviousStatUseCase = koinInject()
-        var currentStatsRecord by remember {
-            mutableStateOf(
-                statsState.statsRecords.getValueOrNull()?.find { it.id == id }
-                    ?: statsState.statsRecords.getValueOrNull()?.first()
-            )
-        }
         var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
         var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
 
+        fun getCurrentStatsRecord(): StatsRecord? =
+            statsState.statsRecords.getValueOrNull()?.find { it.id == id }
+                ?: statsState.statsRecords.getValueOrNull()?.first()
+
+        var currentStatsRecord by remember {
+            mutableStateOf(getCurrentStatsRecord())
+        }
+
         fun onEvent(event: MoodEvent) =
             when (event) {
-                is MoodEvent.OnGoBack -> {}
-//                    onGoBack(HomeScreen())
+                is MoodEvent.OnGoBack -> onGoBack()
                 is MoodEvent.OnNext -> hasNext?.run { currentStatsRecord = this }
                 is MoodEvent.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
-                is MoodEvent.OnAddStatScreen -> {}
-//                    onNavigate(AddStatScreen())
+                is MoodEvent.OnAddStatScreen -> onNavigateAddStat()
                 is MoodEvent.OnSetMood -> {
                     currentStatsRecord = event.statsRecord
                 }
             }
 
         LaunchedEffect(currentStatsRecord) {
-            currentStatsRecord?.let {
-                hasNext =
-                    getNextStatUseCase(
-                        it,
-                        statsState.statsRecords.getValue()
-                    )
+            currentStatsRecord?.let { statRecord ->
+                hasNext = getNextStatUseCase(statRecord, statsState.statsRecords.getValue())
 
                 hasPrevious =
-                    getPreviousStatUseCase(
-                        it,
-                        statsState.statsRecords.getValue()
-                    )
+                    getPreviousStatUseCase(statRecord, statsState.statsRecords.getValue())
             }
         }
 

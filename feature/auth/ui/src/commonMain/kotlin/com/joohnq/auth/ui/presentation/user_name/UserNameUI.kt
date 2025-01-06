@@ -1,4 +1,4 @@
-package com.joohnq.user.ui.presentation.get_user_name
+package com.joohnq.auth.ui.presentation.user_name
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
@@ -28,6 +28,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.auth.ui.presentation.user_name.event.UserNameEvent
+import com.joohnq.auth.ui.presentation.user_name.state.UserNameState
+import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
+import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameViewModelState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
@@ -41,16 +45,12 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.user.ui.presentation.get_user_name.event.GetUserNameEvent
-import com.joohnq.user.ui.presentation.get_user_name.state.GetUserNameState
-import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameIntent
-import com.joohnq.user.ui.presentation.get_user_name.viewmodel.GetUserNameViewModelState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun GetUserNameUI(
-    state: GetUserNameState,
+fun UserNameUI(
+    state: UserNameState,
 ) {
     val canContinue by derivedStateOf { state.state.name.isNotBlank() }
 
@@ -98,7 +98,7 @@ fun GetUserNameUI(
                 )
                 VerticalSpacer(48.dp)
                 TextFieldWithLabelAndDoubleBorder(
-                    modifier = Modifier.testTag(GetUserNameScreen.GetUserNameTestTag.TEXT_INPUT),
+                    modifier = Modifier.testTag(UserNameScreen.GetUserNameTestTag.TEXT_INPUT),
                     label = Res.string.name,
                     placeholder = Res.string.enter_your_name,
                     text = state.state.name,
@@ -113,13 +113,13 @@ fun GetUserNameUI(
                         )
                     },
                     colors = ComponentColors.TextField.MainTextFieldColors(),
-                    onValueChange = { state.onGetAction(GetUserNameIntent.UpdateUserName(it)) },
+                    onValueChange = { state.onGetAction(UserNameIntent.UpdateUserName(it)) },
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue)
                     ContinueButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
-                        onClick = { state.onEvent(GetUserNameEvent.Continue) }
+                        onClick = { state.onEvent(UserNameEvent.Continue) }
                     )
             }
         }
@@ -129,10 +129,10 @@ fun GetUserNameUI(
 @Preview
 @Composable
 fun Preview() {
-    GetUserNameUI(
-        GetUserNameState(
+    UserNameUI(
+        UserNameState(
             snackBarState = remember { SnackbarHostState() },
-            state = GetUserNameViewModelState(
+            state = UserNameViewModelState(
                 name = "teste",
                 nameError = null
             ),

@@ -21,11 +21,8 @@ class OnboardingSleepQualityScreen(
 
         fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingEvent.OnNavigateToNext ->
-                    onNavigateToMedicationsSupplements()
-
-                OnboardingEvent.OnGoBack ->
-                    onGoBack()
+                OnboardingEvent.OnNavigateToNext -> onNavigateToMedicationsSupplements()
+                OnboardingEvent.OnGoBack -> onGoBack()
             }
 
         return OnboardingSleepQualityState(

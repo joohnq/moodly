@@ -1,11 +1,11 @@
 package com.joohnq.onboarding.ui.viewmodel
 
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.sleep_quality.ui.SleepQualityResource
-import com.joohnq.stress_level.ui.StressLevelResource
-import com.joohnq.user.ui.MedicationsSupplementsResource
-import com.joohnq.user.ui.PhysicalSymptomsResource
-import com.joohnq.user.ui.ProfessionalHelpResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.stress_level.ui.resource.StressLevelResource
+import com.joohnq.user.ui.resource.MedicationsSupplementsResource
+import com.joohnq.user.ui.resource.PhysicalSymptomsResource
+import com.joohnq.user.ui.resource.ProfessionalHelpResource
 
 data class OnboardingViewModelState(
     val physicalSymptoms: PhysicalSymptomsResource? = null,

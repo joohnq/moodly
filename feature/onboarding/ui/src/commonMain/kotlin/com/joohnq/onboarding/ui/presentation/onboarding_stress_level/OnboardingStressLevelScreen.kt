@@ -21,11 +21,8 @@ class OnboardingStressLevelScreen(
 
         fun onEvent(event: OnboardingEvent) =
             when (event) {
-                OnboardingEvent.OnNavigateToNext ->
-                    onNavigateToExpressionAnalysis()
-
-                OnboardingEvent.OnGoBack ->
-                    onGoBack()
+                OnboardingEvent.OnNavigateToNext -> onNavigateToExpressionAnalysis()
+                OnboardingEvent.OnGoBack -> onGoBack()
             }
 
         return OnboardingStressLevelState(

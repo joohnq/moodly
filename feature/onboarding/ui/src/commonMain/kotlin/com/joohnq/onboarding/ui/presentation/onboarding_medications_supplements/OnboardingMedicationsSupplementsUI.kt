@@ -23,7 +23,8 @@ import com.joohnq.shared.ui.medications_supplements_title
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.user.ui.MedicationsSupplementsResource
+import com.joohnq.user.ui.mapper.getAllMedicationsSupplementsResource
+import com.joohnq.user.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -31,7 +32,7 @@ fun OnboardingMedicationsSupplementsUI(
     state: OnboardingMedicationsSupplementsState,
 ) {
     val options: List<MedicationsSupplementsResource> =
-        remember { MedicationsSupplementsResource.getAll() }
+        remember { getAllMedicationsSupplementsResource() }
 
     OnboardingBaseComponent(
         page = 5,

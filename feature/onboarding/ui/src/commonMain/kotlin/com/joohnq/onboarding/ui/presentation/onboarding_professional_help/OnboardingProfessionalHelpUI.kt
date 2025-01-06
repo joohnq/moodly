@@ -17,13 +17,14 @@ import com.joohnq.shared.ui.sought_professional_help_title
 import com.joohnq.shared.ui.theme.ComponentColors
 import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
-import com.joohnq.user.ui.ProfessionalHelpResource
+import com.joohnq.user.ui.mapper.getAllProfessionalHelpResource
+import com.joohnq.user.ui.resource.ProfessionalHelpResource
 
 @Composable
 fun OnboardingProfessionalHelpUI(
     state: OnboardingProfessionalHelpState,
 ) {
-    val options = rememberSaveable { ProfessionalHelpResource.getAll() }
+    val options = rememberSaveable { getAllProfessionalHelpResource() }
 
     OnboardingBaseComponent(
         page = 2,

@@ -13,7 +13,7 @@ fun NavGraphBuilder.authNavigation(
     navigation<NavigationGraph.Auth>(startDestination = Destination.Auth) {
         composable<Destination.Auth> {
             GetUserNameScreen(
-                onNavigateToDashboardScreen = { onNavigateGraph(NavigationGraph.Dashboard, true) }
+                onNavigateToDashboardScreen = { onNavigateGraph(NavigationGraph.App, true) }
             ).Content()
         }
     }

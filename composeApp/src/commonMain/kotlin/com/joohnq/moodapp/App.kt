@@ -40,6 +40,10 @@ fun App() {
             }
         }
 
+        fun NavHostController.onNavigateBack(destination: Destination) {
+            popBackStack(destination, inclusive = false)
+        }
+
         fun NavHostController.onNavigateGraph(graph: NavigationGraph, finish: Boolean = false) {
             navigate(graph) {
                 if (finish) {
@@ -72,6 +76,8 @@ fun App() {
                 )
                 dashboardNavigation(
                     onNavigate = navHostController::onNavigate,
+                    onNavigateBack = navHostController::onNavigateBack,
+                    onGoBack = navHostController::onGoBack,
                 )
             }
         }

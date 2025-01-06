@@ -23,7 +23,7 @@ fun NavGraphBuilder.loadingNavigation(
                     onNavigateGraph(NavigationGraph.Auth, true)
                 },
                 onNavigateToDashboard = {
-                    onNavigateGraph(NavigationGraph.Dashboard, true)
+                    onNavigateGraph(NavigationGraph.App, true)
                 }
             ).Content()
         }

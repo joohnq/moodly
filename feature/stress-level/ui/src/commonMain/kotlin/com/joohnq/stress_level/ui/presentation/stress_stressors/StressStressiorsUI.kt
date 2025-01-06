@@ -37,7 +37,7 @@ import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMed
 import com.joohnq.shared.ui.theme.TextStyles
 import com.joohnq.shared.ui.util.constants.TestConstants
 import com.joohnq.stress_level.domain.entity.Stressor
-import com.joohnq.stress_level.ui.StressorResource
+import com.joohnq.stress_level.ui.mapper.getAllStressorResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
@@ -47,7 +47,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressStressorsUI(
     state: StressStressorsState,
 ) {
-    val stressors = remember { StressorResource.getAll() }
+    val stressors = remember { getAllStressorResource() }
     val canContinue by derivedStateOf { state.addStressLevelViewModelState.stressors.isNotEmpty() }
     val containOtherInStressors by derivedStateOf { state.addStressLevelViewModelState.stressors.any { it::class == Stressor.Other::class } }
 

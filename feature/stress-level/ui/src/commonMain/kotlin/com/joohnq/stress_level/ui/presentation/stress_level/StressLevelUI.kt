@@ -17,11 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.presentation.loading.LoadingUI
+import com.joohnq.shared.domain.mapper.foldComposable
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.components.SharedPanelComponent
 import com.joohnq.shared.ui.components.StressLevelCard
 import com.joohnq.shared.ui.life_impact
-import com.joohnq.shared.ui.state.UiState.Companion.foldComposable
 import com.joohnq.shared.ui.stress_analysis
 import com.joohnq.shared.ui.stress_level
 import com.joohnq.shared.ui.stressor
@@ -30,10 +30,9 @@ import com.joohnq.shared.ui.theme.Dimens
 import com.joohnq.shared.ui.theme.Drawables
 import com.joohnq.shared.ui.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared.ui.theme.TextStyles
-import com.joohnq.stress_level.ui.StressLevelResource.Companion.toResource
-import com.joohnq.stress_level.ui.StressorResource
-import com.joohnq.stress_level.ui.StressorResource.Companion.toResource
 import com.joohnq.stress_level.ui.components.StressLevelChart
+import com.joohnq.stress_level.ui.mapper.getText
+import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.presentation.stress_level.state.StressLevelState
 import org.jetbrains.compose.resources.stringResource
@@ -87,7 +86,7 @@ fun StressLevelUI(
                                 modifier = Modifier.weight(1f).fillMaxHeight(),
                                 icon = Drawables.Icons.WarningOutlined,
                                 title = Res.string.stressor,
-                                value = StressorResource.getText(record.stressors.map { it.toResource() }),
+                                value = record.stressors.toResource().getText(),
                             ) {
                                 Column(
                                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

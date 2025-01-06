@@ -20,8 +20,8 @@ class StressLevelScreen(
 
         fun onEvent(event: StressLevelEvent) =
             when (event) {
-                is StressLevelEvent.Add -> onNavigateAddStressLevel
-                is StressLevelEvent.GoBack -> onGoBack
+                is StressLevelEvent.Add -> onNavigateAddStressLevel()
+                is StressLevelEvent.GoBack -> onGoBack()
             }
 
         return StressLevelState(

@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.domain.entity
 
-import com.joohnq.stress_level.domain.StressorProperties
+import com.joohnq.stress_level.domain.property.StressorProperties
 
 sealed class Stressor(
     override val id: String,
@@ -22,25 +22,6 @@ sealed class Stressor(
         val FINANCES = DStressorProperties("4")
         val LONELINESS = DStressorProperties("5")
         val IN_PEACE = DStressorProperties("7")
-
-        fun toValue(src: String): Stressor = when (src) {
-            WORK.id -> Work
-            RELATIONSHIP.id -> Relationship
-            KIDS.id -> Kids
-            LIFE.id -> Life
-            LONELINESS.id -> Loneliness
-            FINANCES.id -> Finances
-            IN_PEACE.id -> InPeace
-            else -> Other(src)
-        }
-
-        fun Stressor?.fromValue(): String = this?.id ?: ""
-
-        fun getAll(): List<Stressor> =
-            listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other())
-
-        fun containOther(stressors: List<Stressor>): Boolean =
-            stressors.any { it::class == Other::class }
     }
 }
 

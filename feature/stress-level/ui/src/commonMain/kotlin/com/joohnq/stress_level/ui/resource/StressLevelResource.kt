@@ -1,6 +1,5 @@
-package com.joohnq.stress_level.ui
+package com.joohnq.stress_level.ui.resource
 
-import androidx.compose.ui.graphics.Color
 import com.joohnq.shared.ui.Res
 import com.joohnq.shared.ui.five_number
 import com.joohnq.shared.ui.four_number
@@ -23,10 +22,13 @@ import com.joohnq.shared.ui.you_are_extremely_stressed_out
 import com.joohnq.shared.ui.you_are_neutral
 import com.joohnq.shared.ui.you_are_not_stressed_out
 import com.joohnq.shared.ui.you_are_very_stressed_out
-import com.joohnq.stress_level.domain.StressLevelProperties
-import com.joohnq.stress_level.domain.entity.DStressLevelProperties
-import com.joohnq.stress_level.domain.entity.StressLevel
+import com.joohnq.stress_level.domain.entity.StressLevel.Companion.FIVE
+import com.joohnq.stress_level.domain.entity.StressLevel.Companion.FOUR
+import com.joohnq.stress_level.domain.entity.StressLevel.Companion.ONE
+import com.joohnq.stress_level.domain.entity.StressLevel.Companion.THREE
+import com.joohnq.stress_level.domain.entity.StressLevel.Companion.TWO
 import com.joohnq.stress_level.domain.entity.StressLevelPalette
+import com.joohnq.stress_level.domain.property.StressLevelProperties
 import org.jetbrains.compose.resources.StringResource
 
 sealed class StressLevelResource(
@@ -107,60 +109,4 @@ sealed class StressLevelResource(
                 backgroundColor = Colors.Orange10,
             ),
         )
-
-    companion object {
-        val ONE = DStressLevelProperties(1, 1)
-        val TWO = DStressLevelProperties(2, 2)
-        val THREE = DStressLevelProperties(3, 3)
-        val FOUR = DStressLevelProperties(4, 4)
-        val FIVE = DStressLevelProperties(5, 5)
-
-        fun toPercent(level: Int): Double = when (level) {
-            1 -> 0.0
-            2 -> 20.0
-            3 -> 40.0
-            4 -> 60.0
-            else -> 100.0
-        }
-
-        fun getAll(): List<StressLevelResource> = listOf(
-            One,
-            Two,
-            Three,
-            Four,
-            Five
-        )
-
-        fun getBrushGradient(i: Int): List<Color> = listOf(
-            listOf(Colors.Green50, Colors.Green50),
-            listOf(Colors.Green50, Colors.Yellow50),
-            listOf(Colors.Yellow50, Colors.Yellow50),
-            listOf(Colors.Yellow50, Colors.Orange50),
-            listOf(Colors.Orange50, Colors.Orange50)
-        )[i]
-
-        fun StressLevel.toResource(): StressLevelResource = when (this) {
-            StressLevel.One -> One
-            StressLevel.Two -> Two
-            StressLevel.Three -> Three
-            StressLevel.Four -> Four
-            StressLevel.Five -> Five
-        }
-
-        fun StressLevelResource.toDomain(): StressLevel = when (this) {
-            One -> StressLevel.One
-            Two -> StressLevel.Two
-            Three -> StressLevel.Three
-            Four -> StressLevel.Four
-            Five -> StressLevel.Five
-        }
-
-        fun fromSliderValue(value: Float): StressLevelResource = when (value) {
-            0f -> One
-            25f -> Two
-            50f -> Three
-            75f -> Four
-            else -> Five
-        }
-    }
 }

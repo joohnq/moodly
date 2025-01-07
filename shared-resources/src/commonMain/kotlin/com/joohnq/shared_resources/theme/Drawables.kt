@@ -13,6 +13,7 @@ import com.joohnq.shared_resources.ic_arrow
 import com.joohnq.shared_resources.ic_arrow_chevron
 import com.joohnq.shared_resources.ic_arrow_open
 import com.joohnq.shared_resources.ic_calendar
+import com.joohnq.shared_resources.ic_camera
 import com.joohnq.shared_resources.ic_chart
 import com.joohnq.shared_resources.ic_chat
 import com.joohnq.shared_resources.ic_check
@@ -24,6 +25,7 @@ import com.joohnq.shared_resources.ic_drug_store
 import com.joohnq.shared_resources.ic_edit
 import com.joohnq.shared_resources.ic_edit_2
 import com.joohnq.shared_resources.ic_flag
+import com.joohnq.shared_resources.ic_gallery
 import com.joohnq.shared_resources.ic_happy_face
 import com.joohnq.shared_resources.ic_head
 import com.joohnq.shared_resources.ic_heart
@@ -116,6 +118,8 @@ object Drawables {
         val Profile = Res.drawable.ic_profile
         val SimpleTarget = Res.drawable.ic_simple_target
         val PhotoPicker = Res.drawable.ic_photo_picker
+        val Gallery = Res.drawable.ic_gallery
+        val Camera = Res.drawable.ic_camera
     }
 
     object Images {

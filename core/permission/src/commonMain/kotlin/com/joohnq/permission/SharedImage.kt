@@ -1,4 +1,4 @@
-package com.joohnq.auth.ui
+package com.joohnq.permission
 
 import androidx.compose.ui.graphics.ImageBitmap
 

@@ -7,10 +7,10 @@ android-versionCode = "1"
 android-versionName = "1.0.0"
 android-packageName = "com.joohnq.moodapp"
 androidx-activityCompose = "1.9.3"
-androidx-lifecycle = "2.8.4"
+androidx-lifecycle = "2.9.0-alpha01"
 compose-plugin = "1.7.1"
 composeCharts = "0.0.17"
-koinCore = "4.0.0"
+koinCore = "4.1.0-Beta3"
 kotlin = "2.1.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
@@ -38,7 +38,6 @@ koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", ver
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinCore" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
@@ -69,5 +68,5 @@ buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig"
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]
-viewmodel = ["lifecycle-viewmodel"]
+viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]
 koin = ["koin-core", "koin-compose", "koin-compose-viewmodel"]

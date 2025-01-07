@@ -35,7 +35,7 @@ class UserNameScreen(
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
         val userState by userViewModel.state.collectAsState()
-        val getUserNameState by userNameViewModel.state.collectAsState()
+        val userNameState by userNameViewModel.state.collectAsState()
 
         fun onError(error: String) {
             scope.launch {
@@ -48,8 +48,8 @@ class UserNameScreen(
                 UserNameEvent.Continue -> {
                     focusManager.clearFocus()
                     try {
-                        UserNameValidator(getUserNameState.name)
-                        userViewModel.onAction(UserViewModelIntent.UpdateUserName(getUserNameState.name))
+                        UserNameValidator(userNameState.name)
+                        userViewModel.onAction(UserViewModelIntent.UpdateUserName(userNameState.name))
                     } catch (e: Exception) {
                         userNameViewModel.onAction(UserNameIntent.UpdateUserNameError(e.message.toString()))
                     }
@@ -69,7 +69,7 @@ class UserNameScreen(
         }
 
         return UserNameState(
-            state = getUserNameState,
+            state = userNameState,
             snackBarState = snackBarState,
             onClearFocus = focusManager::clearFocus,
             onAction = userViewModel::onAction,
@@ -81,7 +81,7 @@ class UserNameScreen(
     @Composable
     override fun UI(state: UserNameState) = UserNameUI(state)
 
-    object GetUserNameTestTag {
+    object UserNameTestTag {
         const val TEXT_INPUT = "TEXT_INPUT"
     }
 }

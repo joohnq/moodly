@@ -9,9 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-class SleepQualityDataSourceImpl(private val database: SleepQualityDatabaseSql) :
-    SleepQualityDataSource {
+class SleepQualityDataSourceImpl(
+    private val database: SleepQualityDatabaseSql,
+) : SleepQualityDataSource {
     private val query = database.sleepQualityRecordQueries
+
     override suspend fun getSleepQualities(): List<SleepQualityRecord> =
         withContext(Dispatchers.IO) {
             query.getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, date ->

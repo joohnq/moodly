@@ -7,8 +7,5 @@ import org.koin.compose.currentKoinScope
 
 @Composable inline fun <reified T : ViewModel> sharedViewModel(): T {
     val scope = currentKoinScope()
-    return viewModel {
-        scope.get<T>()
-    }
-//    return koinViewModel<T>()
+    return viewModel { scope.get<T>() }
 }

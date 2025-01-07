@@ -1,6 +1,11 @@
 package com.joohnq.shared_resources.theme
 
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.avatar_arrow_down
+import com.joohnq.shared_resources.avatar_arrow_up
+import com.joohnq.shared_resources.avatar_cloud
+import com.joohnq.shared_resources.avatar_pie_chart
+import com.joohnq.shared_resources.avatar_time
 import com.joohnq.shared_resources.freud_score_background
 import com.joohnq.shared_resources.health_journal_background
 import com.joohnq.shared_resources.ic_add
@@ -30,11 +35,13 @@ import com.joohnq.shared_resources.ic_mood_neutral
 import com.joohnq.shared_resources.ic_moon
 import com.joohnq.shared_resources.ic_more_horizontal
 import com.joohnq.shared_resources.ic_nothing
+import com.joohnq.shared_resources.ic_photo_picker
 import com.joohnq.shared_resources.ic_profile
 import com.joohnq.shared_resources.ic_question
 import com.joohnq.shared_resources.ic_redo
 import com.joohnq.shared_resources.ic_resize
 import com.joohnq.shared_resources.ic_sad_face
+import com.joohnq.shared_resources.ic_simple_target
 import com.joohnq.shared_resources.ic_sleep
 import com.joohnq.shared_resources.ic_sun
 import com.joohnq.shared_resources.ic_trash
@@ -107,6 +114,8 @@ object Drawables {
         val Redo = Res.drawable.ic_redo
         val Minus = Res.drawable.ic_minus
         val Profile = Res.drawable.ic_profile
+        val SimpleTarget = Res.drawable.ic_simple_target
+        val PhotoPicker = Res.drawable.ic_photo_picker
     }
 
     object Images {
@@ -124,6 +133,12 @@ object Drawables {
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image
+
+        val AvatarArrowDown = Res.drawable.avatar_arrow_down
+        val AvatarArrowUp = Res.drawable.avatar_arrow_up
+        val AvatarCloud = Res.drawable.avatar_cloud
+        val AvatarPieChart = Res.drawable.avatar_pie_chart
+        val AvatarTime = Res.drawable.avatar_time
     }
 
     object Mood {

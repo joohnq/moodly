@@ -19,7 +19,7 @@ fun NavGraphBuilder.loadingNavigation(
                 onNavigateToOnboarding = {
                     onNavigateGraph(NavigationGraph.Onboarding, true)
                 },
-                onNavigateToGetUserName = {
+                onNavigateToUserName = {
                     onNavigateGraph(NavigationGraph.Auth, true)
                 },
                 onNavigateToDashboard = {

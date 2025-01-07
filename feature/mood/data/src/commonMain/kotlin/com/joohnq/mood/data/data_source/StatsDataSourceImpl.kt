@@ -24,7 +24,6 @@ class StatsDataSourceImpl(private val database: StatsDatabaseSql) : StatsDataSou
     override suspend fun addStats(statsRecord: StatsRecord) =
         withContext(Dispatchers.IO) {
             query.addStats(
-                id = statsRecord.id.toLong(),
                 mood = StatsRecordConverter.fromMood(statsRecord.mood),
                 description = statsRecord.description
             )

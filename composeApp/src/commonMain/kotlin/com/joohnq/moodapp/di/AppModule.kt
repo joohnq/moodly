@@ -1,6 +1,7 @@
 package com.joohnq.moodapp.di
 
 import com.joohnq.auth.ui.di.authUiModule
+import com.joohnq.core.ui.di.coreUiModule
 import com.joohnq.di.coreDiModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.ui.di.freudScoreUiModule
@@ -43,6 +44,7 @@ val appModule = listOf(
     userDomainModule,
     userUiModule,
     coreDiModule,
+    coreUiModule,
     onboardingUiModule,
     authUiModule,
     healthJournalDriverFactory,

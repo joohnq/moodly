@@ -23,7 +23,7 @@ fun WelcomeUI(
         snackbarHost = {
             SnackbarHost(
                 hostState = state.snackBarState, modifier = Modifier.testTag(
-                    WelcomeScreen.WelcomeTestTag.SNACK_BAR
+                    "WelcomeScreen.WelcomeTestTag.SNACK_BAR"
                 )
             )
         },
@@ -31,7 +31,7 @@ fun WelcomeUI(
     ) { _ ->
         HorizontalPager(
             state = state.pagerState,
-            modifier = Modifier.testTag(WelcomeScreen.WelcomeTestTag.HORIZONTAL_PAGER),
+            modifier = Modifier.testTag("WelcomeScreen.WelcomeTestTag.HORIZONTAL_PAGER"),
             key = { it }
         ) { page ->
             when (page) {

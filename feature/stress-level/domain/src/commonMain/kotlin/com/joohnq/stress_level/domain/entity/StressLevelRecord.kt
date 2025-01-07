@@ -4,7 +4,7 @@ import com.joohnq.core.ui.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 
 data class StressLevelRecord(
-    val id: Int = 0,
+    val id: Int = -1,
     val stressLevel: StressLevel = StressLevel.Three,
     val stressors: List<Stressor> = emptyList(),
     val date: LocalDateTime = DatetimeProvider.getCurrentDateTime(),

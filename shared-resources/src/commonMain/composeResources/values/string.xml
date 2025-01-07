@@ -191,4 +191,8 @@
     <string name="greeting">Hi, %1$s</string>
     <string name="profile">Profile</string>
     <string name="chat">Chat</string>
+    <string name="profile_setup">Profile Setup</string>
+    <string name="select_your_avatar">Select your Avatar</string>
+    <string name="we_have_a_set_of_customizable">We have a set of customizable avatar. Or you can upload your own image from your local file.</string>
+    <string name="or_upload_your_profile">Or upload your profile</string>
 </resources>

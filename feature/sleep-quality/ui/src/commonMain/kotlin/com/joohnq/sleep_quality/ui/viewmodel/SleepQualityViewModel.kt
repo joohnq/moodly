@@ -20,6 +20,9 @@ class SleepQualityViewModel(
     private val _state = MutableStateFlow(SleepQualityState())
     val state: StateFlow<SleepQualityState> = _state.asStateFlow()
 
+    var item = MutableStateFlow(SleepQualityState())
+        private set
+
     fun onAction(intent: SleepQualityIntent) {
         when (intent) {
             SleepQualityIntent.GetSleepQualityRecords -> getSleepQualityRecords()
@@ -30,13 +33,12 @@ class SleepQualityViewModel(
         }
     }
 
-    private fun getSleepQualityRecords() {
+    private fun getSleepQualityRecords() =
         viewModelScope.launch {
             changeSleepQualityRecordsStatus(UiState.Loading)
             val res = getSleepQualitiesUseCase().toUiState()
             changeSleepQualityRecordsStatus(res)
         }
-    }
 
     private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
         viewModelScope.launch {

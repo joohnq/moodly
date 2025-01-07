@@ -4,7 +4,7 @@ import com.joohnq.core.ui.DatetimeProvider
 import kotlinx.datetime.LocalDateTime
 
 data class SleepQualityRecord(
-    val id: Int = 0,
+    val id: Int = -1,
     val sleepQuality: SleepQuality = SleepQuality.Fair,
     val startSleeping: String = "--:--",
     val endSleeping: String = "--:--",

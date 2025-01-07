@@ -30,7 +30,6 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.step
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.welcome.ui.WelcomeScreen
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -112,7 +111,7 @@ fun MockScreen(
                 VerticalSpacer(24.dp)
                 IconContinueButton(
                     modifier = Modifier.size(60.dp)
-                        .testTag(WelcomeScreen.WelcomeTestTag.GO_NEXT + index),
+                        .testTag("WelcomeScreen.WelcomeTestTag.GO_NEXT + index"),
                     colors = ComponentColors.IconButton.ContinueButtonColors(),
                     onClick = onNext
                 )

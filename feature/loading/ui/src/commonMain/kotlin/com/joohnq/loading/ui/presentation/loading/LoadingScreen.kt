@@ -15,7 +15,7 @@ import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelInte
 class LoadingScreen(
     private val onNavigateToWelcome: () -> Unit,
     private val onNavigateToOnboarding: () -> Unit,
-    private val onNavigateToGetUserName: () -> Unit,
+    private val onNavigateToUserName: () -> Unit,
     private val onNavigateToDashboard: () -> Unit,
 ) : CustomScreenNothing() {
     @Composable
@@ -33,7 +33,7 @@ class LoadingScreen(
                 when (false) {
                     userPreferences.skipWelcomeScreen -> onNavigateToWelcome()
                     userPreferences.skipOnboardingScreen -> onNavigateToOnboarding()
-                    userPreferences.skipUserNameScreen -> onNavigateToGetUserName()
+                    userPreferences.skipUserNameScreen -> onNavigateToUserName()
                     else -> onNavigateToDashboard()
                 }
             }

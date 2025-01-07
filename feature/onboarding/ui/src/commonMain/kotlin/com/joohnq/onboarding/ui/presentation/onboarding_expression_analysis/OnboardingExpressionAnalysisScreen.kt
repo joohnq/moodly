@@ -33,7 +33,7 @@ import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelInte
 import kotlinx.coroutines.launch
 
 class OnboardingExpressionAnalysisScreen(
-    private val onNavigateToGetUserName: () -> Unit,
+    private val onNavigateToUserName: () -> Unit,
     private val onGoBack: () -> Unit,
 ) : CustomScreen<OnboardingExpressionAnalysisState>() {
     @Composable
@@ -137,7 +137,7 @@ class OnboardingExpressionAnalysisScreen(
             userPreferencesState.updating.fold(
                 onSuccess = {
                     resetStates()
-                    onNavigateToGetUserName()
+                    onNavigateToUserName()
                 },
                 onError = ::onError
             )

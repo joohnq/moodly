@@ -69,7 +69,7 @@ fun NavGraphBuilder.onboardingNavigation(
         }
         composable<Destination.Onboarding.ExpressionAnalysis> {
             OnboardingExpressionAnalysisScreen(
-                onNavigateToGetUserName = {
+                onNavigateToUserName = {
                     onNavigateGraph(NavigationGraph.Auth, true)
                 },
                 onGoBack = onGoBack

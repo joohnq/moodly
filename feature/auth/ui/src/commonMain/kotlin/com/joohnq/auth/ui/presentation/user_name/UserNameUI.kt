@@ -98,7 +98,7 @@ fun UserNameUI(
                 )
                 VerticalSpacer(48.dp)
                 TextFieldWithLabelAndDoubleBorder(
-                    modifier = Modifier.testTag(UserNameScreen.GetUserNameTestTag.TEXT_INPUT),
+                    modifier = Modifier.testTag(UserNameScreen.UserNameTestTag.TEXT_INPUT),
                     label = Res.string.name,
                     placeholder = Res.string.enter_your_name,
                     text = state.state.name,

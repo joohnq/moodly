@@ -9,7 +9,7 @@ getStats:
 SELECT * FROM StatRecord;
 
 addStats:
-INSERT INTO StatRecord (id, mood, description) VALUES (:id, :mood, :description);
+INSERT INTO StatRecord (mood, description) VALUES (:mood, :description);
 
 deleteStat:
 DELETE FROM StatRecord WHERE id = :id;

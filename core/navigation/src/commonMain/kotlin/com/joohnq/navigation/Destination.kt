@@ -17,7 +17,11 @@ sealed class Destination {
         @Serializable data object ExpressionAnalysis : Destination()
     }
 
-    @Serializable data object Auth : Destination()
+    @Serializable data object Auth : Destination() {
+        @Serializable data object Avatar : Destination()
+        @Serializable data object UserName : Destination()
+    }
+
     @Serializable data object App : Destination() {
         @Serializable data object DashBoard : Destination() {
             @Serializable data object Home : Destination()

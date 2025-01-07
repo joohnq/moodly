@@ -5,7 +5,7 @@ import com.joohnq.mood.domain.entity.Mood
 import kotlinx.datetime.LocalDateTime
 
 data class HealthJournalRecord(
-    val id: Int = 0,
+    val id: Int = -1,
     val mood: Mood = Mood.Neutral,
     val title: String = "",
     val description: String = "",

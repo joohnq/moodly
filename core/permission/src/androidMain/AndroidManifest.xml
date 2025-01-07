@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <provider
-            android:name="com.joohnq.auth.ui.ComposeFileProvider"
+            android:name="com.joohnq.permission.ComposeFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -10,15 +10,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.ImageBitmap
-import com.joohnq.auth.ui.PermissionCallback
-import com.joohnq.auth.ui.PermissionStatus
-import com.joohnq.auth.ui.PermissionType
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
-import com.joohnq.auth.ui.createPermissionsManager
-import com.joohnq.auth.ui.rememberCameraManager
-import com.joohnq.auth.ui.rememberGalleryManager
 import com.joohnq.core.ui.CustomScreen
+import com.joohnq.permission.PermissionCallback
+import com.joohnq.permission.PermissionStatus
+import com.joohnq.permission.PermissionType
+import com.joohnq.permission.createPermissionsManager
+import com.joohnq.permission.rememberCameraManager
+import com.joohnq.permission.rememberGalleryManager
 import com.joohnq.shared_resources.theme.Drawables
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
@@ -73,9 +73,8 @@ class AvatarScreen : CustomScreen<AvatarState>() {
                     }
                 }
             }
-
-
-        })
+        }
+        )
 
         val cameraManager = rememberCameraManager {
             coroutineScope.launch {

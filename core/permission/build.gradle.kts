@@ -20,19 +20,17 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "ui"
+            baseName = "permission"
             isStatic = true
         }
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation("com.google.accompanist:accompanist-permissions:0.37.0")
+            implementation("androidx.activity:activity-compose:1.9.3")
+        }
         commonMain.dependencies {
-            implementation(projects.feature.user.ui)
-            implementation(projects.core.ui)
-            implementation(projects.core.permission)
-            implementation(projects.sharedResources)
-            implementation(projects.feature.user.domain)
-
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -40,9 +38,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-
-            implementation(libs.bundles.viewmodel)
-            implementation(libs.bundles.koin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -51,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.ui"
+    namespace = "com.joohnq.permission"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -61,4 +56,3 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
-

@@ -40,7 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ButtonTextAndIcon(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.height(56.dp),
     enabled: Boolean = true,
     text: StringResource,
     icon: DIcon,
@@ -49,7 +49,7 @@ fun ButtonTextAndIcon(
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = modifier.height(56.dp),
+        modifier = modifier,
         colors = colors,
         enabled = enabled,
         shape = shape,
@@ -77,7 +77,7 @@ fun ContinueButton(
     onClick: () -> Unit,
 ) {
     ButtonTextAndIcon(
-        modifier = modifier,
+        modifier = modifier.height(56.dp),
         text = text,
         enabled = enabled,
         colors = ComponentColors.Button.MainButtonColors(),

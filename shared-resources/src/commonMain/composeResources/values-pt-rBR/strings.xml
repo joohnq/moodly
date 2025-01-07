@@ -194,5 +194,11 @@
     <string name="add_health_journal">Adicionar Diário de Saúde</string>
     <string name="greeting">Olá, %1$s</string>
     <string name="profile">Perfil</string>
-    <string name="chat">Bate-Papo</string>
+    <string name="chat">Bate-papo</string>
+    <string name="profile_setup">Configuração do Perfil</string>
+    <string name="select_your_avatar">Selecione seu avatar</string>
+    <string name="we_have_a_set_of_customizable">Nós temos um conjunto de avatares personalizáveis. Ou você pode selecionar sua própria imagem a partir de um arquivo local.</string>
+    <string name="or_upload_your_profile">Ou selecione a sua foto</string>
+    <string name="camera">Câmera</string>
+    <string name="gallery">Galeria</string>
 </resources>

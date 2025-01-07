@@ -27,6 +27,7 @@ generativeai = "0.9.0-1.0.1"
 startupRuntime = "1.2.0"
 sqldelight = "2.0.2"
 benchmarkCommon = "1.3.3"
+firebaseCrashlyticsBuildtools = "3.0.2"
 
 [libraries]
 charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
@@ -54,6 +55,7 @@ sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", versi
 coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
 androidx-benchmark-common = { group = "androidx.benchmark", name = "benchmark-common", version.ref = "benchmarkCommon" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

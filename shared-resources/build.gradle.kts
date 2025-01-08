@@ -26,9 +26,17 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(compose.material3)
+            implementation(compose.material)
+            implementation(compose.ui)
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
+        }
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.feature.sleepQuality.domain)
+            implementation(projects.core.storage.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -40,6 +48,13 @@ kotlin {
 
             implementation(libs.datetime)
             implementation(libs.charts)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+            implementation(libs.ktor.client.core)
+        }
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

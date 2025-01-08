@@ -10,18 +10,19 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.onFold
+import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MentalHealthMetrics
 import com.joohnq.home.ui.components.MindfulTracker
 import com.joohnq.home.ui.presentation.home.state.HomeState
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.HomeTopBar
 import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.mental_health_metrics
 import com.joohnq.shared_resources.mindful_tracker
@@ -41,6 +42,12 @@ fun HomeUI(
         state.sleepQuality,
         onLoading = { LoadingUI() },
         onAllSuccess = {
+            val user = state.user.getValue()
+
+            SideEffect {
+                println("USERRRRRRRRRRRRRR" + user.image)
+            }
+
             Scaffold(
                 containerColor = Colors.Brown10,
                 modifier = Modifier.fillMaxSize()
@@ -59,7 +66,8 @@ fun HomeUI(
                         modifier = Modifier.padding(
                             top = padding.calculateTopPadding(),
                         ),
-                        userName = state.user.getValue().name,
+                        userName = user.name,
+                        image = user.image,
                         date = state.today
                     )
                     Title(Res.string.mental_health_metrics)

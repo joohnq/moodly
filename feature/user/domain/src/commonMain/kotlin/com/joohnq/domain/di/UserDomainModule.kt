@@ -6,6 +6,8 @@ import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateMedicationsSupplementsUseCase
 import com.joohnq.domain.use_case.user.UpdatePhysicalSymptomsUseCase
 import com.joohnq.domain.use_case.user.UpdateSoughtHelpUseCase
+import com.joohnq.domain.use_case.user.UpdateUserImageBitmapUseCase
+import com.joohnq.domain.use_case.user.UpdateUserImageDrawableUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
 import com.joohnq.domain.use_case.user.UpdateUserUseCase
 import com.joohnq.domain.use_case.user_preferences.AddUserPreferencesUseCase
@@ -30,6 +32,8 @@ val userDomainModule = module {
     factoryOf(::GetUserPreferencesUseCase)
     factoryOf(::InsertUserPreferencesUseCase)
     factoryOf(::UpdateSkipUserNameScreenUseCase)
+    factoryOf(::UpdateUserImageBitmapUseCase)
+    factoryOf(::UpdateUserImageDrawableUseCase)
     factoryOf(::UpdateSkipOnboardingScreenUseCase)
     factoryOf(::UpdateSkipWelcomeScreenUseCase)
 }

@@ -3,23 +3,32 @@ package com.joohnq.user.data.data_source
 import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.domain.converter.UserConverter
 import com.joohnq.domain.data_source.UserDataSource
+import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
+import com.joohnq.domain.mapper.toImageType
+import com.joohnq.domain.mapper.toValue
+import com.joohnq.storage.domain.FileStorage
 import com.joohnq.user.database.UserDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-class UserDataSourceImpl(private val database: UserDatabaseSql) : UserDataSource {
+class UserDataSourceImpl(
+    private val database: UserDatabaseSql,
+    private val fileStorage: FileStorage,
+) : UserDataSource {
     private val query = database.userQueries
     override suspend fun getUser(): User? =
         withContext(Dispatchers.IO) {
-            query.getUser(mapper = { id, name, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
+            query.getUser(mapper = { id, name, image, imageType, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
                 User(
                     id = id.toInt(),
                     name = name,
+                    image = image,
+                    imageType = imageType.toImageType(),
                     medicationsSupplements = UserConverter.toMedicationsSupplements(
                         medicationsSupplements
                     ),
@@ -35,6 +44,8 @@ class UserDataSourceImpl(private val database: UserDatabaseSql) : UserDataSource
             query.addUser(
                 id = user.id.toLong(),
                 name = user.name,
+                image = user.image,
+                imageType = user.imageType.name,
                 medicationsSupplements = UserConverter.fromMedicationsSupplements(user.medicationsSupplements),
                 physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),
                 soughtHelp = UserConverter.fromProfessionalHelp(user.soughtHelp)
@@ -56,6 +67,10 @@ class UserDataSourceImpl(private val database: UserDatabaseSql) : UserDataSource
             query.updateUserName(name)
         }
 
+    override suspend fun updateUserImage(value: String, imageType: ImageType) =
+        withContext(Dispatchers.IO) {
+            query.updateUserImage(value, imageType.toValue())
+        }
 
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp) =
         withContext(Dispatchers.IO) {

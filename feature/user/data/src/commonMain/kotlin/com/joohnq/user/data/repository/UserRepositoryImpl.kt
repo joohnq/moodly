@@ -3,6 +3,7 @@ package com.joohnq.user.data.repository
 import com.joohnq.core.database.executeTryCatchPrinting
 import com.joohnq.core.ui.toResultNull
 import com.joohnq.domain.data_source.UserDataSource
+import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.PhysicalSymptoms
 import com.joohnq.domain.entity.ProfessionalHelp
@@ -28,6 +29,11 @@ class UserRepositoryImpl(
     override suspend fun updateUserName(name: String): Result<Boolean> =
         executeTryCatchPrinting {
             dataSource.updateUserName(name)
+        }
+
+    override suspend fun updateUserImage(value: String, imageType: ImageType): Result<Boolean> =
+        executeTryCatchPrinting {
+            dataSource.updateUserImage(value, imageType)
         }
 
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean> =

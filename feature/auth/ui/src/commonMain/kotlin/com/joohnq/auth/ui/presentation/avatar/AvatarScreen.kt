@@ -3,6 +3,9 @@ package com.joohnq.auth.ui.presentation.avatar
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,10 +16,9 @@ import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
-import com.joohnq.auth.ui.saveImage
 import com.joohnq.core.ui.CustomScreen
+import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.core.ui.toByteArray
 import com.joohnq.permission.PermissionCallback
 import com.joohnq.permission.PermissionStatus
 import com.joohnq.permission.PermissionType
@@ -25,11 +27,12 @@ import com.joohnq.permission.rememberCameraManager
 import com.joohnq.permission.rememberGalleryManager
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import kotlinx.coroutines.launch
 
-class AvatarScreen : CustomScreen<AvatarState>() {
+class AvatarScreen(
+    private val onNavigateToUserName: () -> Unit,
+) : CustomScreen<AvatarState>() {
     @Composable
     override fun Screen(): AvatarState {
         val snackBarState = remember { SnackbarHostState() }
@@ -43,6 +46,7 @@ class AvatarScreen : CustomScreen<AvatarState>() {
         val pagerState = rememberPagerState(pageCount = { images.size })
 
         val userViewModel: UserViewModel = sharedViewModel()
+        val userState by userViewModel.state.collectAsState()
         val scope = rememberCoroutineScope()
         var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
         var imageSourceOptionDialog by remember { mutableStateOf(value = false) }
@@ -73,15 +77,13 @@ class AvatarScreen : CustomScreen<AvatarState>() {
 
         val cameraManager = rememberCameraManager {
             scope.launch {
-                val bitmap = it?.toImageBitmap()
-                imageBitmap = bitmap
+                imageBitmap = it?.toImageBitmap()
             }
         }
 
         val galleryManager = rememberGalleryManager {
             scope.launch {
-                val bitmap = it?.toImageBitmap()
-                imageBitmap = bitmap
+                imageBitmap = it?.toImageBitmap()
             }
         }
         if (imageSourceOptionDialog) {
@@ -131,16 +133,10 @@ class AvatarScreen : CustomScreen<AvatarState>() {
             )
         }
 
-        fun setImage(
-            imageBitmap: ImageBitmap,
-            directory: String = "avatar",
-        ): String {
-            val biteArray = imageBitmap.toByteArray()
-            return saveImage(
-                directory = directory,
-                fileName = "avatar.png",
-                data = biteArray
-            )
+        fun onError(error: String) {
+            scope.launch {
+                snackBarState.showSnackbar(error)
+            }
         }
 
         fun onEvent(event: AvatarEvent) {
@@ -150,17 +146,30 @@ class AvatarScreen : CustomScreen<AvatarState>() {
                 }
 
                 AvatarEvent.OnContinue -> {
-                    if (imageBitmap != null) {
-                        scope.launch(Dispatchers.IO) {
-                            val res = setImage(imageBitmap!!)
-                            println("RESSSSSSSSSSSSSS: $res")
-                        }
-                    }
+                    val action = if (imageBitmap == null)
+                        UserViewModelIntent.UpdateUserImageDrawable(Drawables.Images.AvatarTime)
+                    else
+                        UserViewModelIntent.UpdateUserImageBitmap(imageBitmap!!)
+
+                    userViewModel.onAction(action)
                 }
             }
         }
 
+        LaunchedEffect(userState.updating) {
+            userState.updating.fold(
+                onError = ::onError,
+                onSuccess = {
+                    onNavigateToUserName()
+                }
+            )
+        }
 
+        DisposableEffect(Unit) {
+            onDispose {
+                userViewModel.onAction(UserViewModelIntent.ResetUpdatingStatus)
+            }
+        }
 
         return AvatarState(
             snackBarState = snackBarState,

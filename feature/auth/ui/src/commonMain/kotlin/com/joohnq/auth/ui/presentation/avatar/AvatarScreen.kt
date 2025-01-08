@@ -1,6 +1,5 @@
 package com.joohnq.auth.ui.presentation.avatar
 
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -12,7 +11,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.ImageBitmap
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
+import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
+import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
+import com.joohnq.auth.ui.saveImage
 import com.joohnq.core.ui.CustomScreen
+import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.core.ui.toByteArray
 import com.joohnq.permission.PermissionCallback
 import com.joohnq.permission.PermissionStatus
 import com.joohnq.permission.PermissionType
@@ -20,20 +24,10 @@ import com.joohnq.permission.createPermissionsManager
 import com.joohnq.permission.rememberCameraManager
 import com.joohnq.permission.rememberGalleryManager
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.DrawableResource
-
-data class AvatarState(
-    val snackBarState: SnackbarHostState,
-    val pagerState: PagerState,
-    val images: List<DrawableResource> = emptyList(),
-    val onEvent: (AvatarEvent) -> Unit = {},
-    val imageBitmap: ImageBitmap? = null,
-)
-
-sealed class AvatarEvent {
-    data object OnPickAvatar : AvatarEvent()
-}
 
 class AvatarScreen : CustomScreen<AvatarState>() {
     @Composable
@@ -48,7 +42,8 @@ class AvatarScreen : CustomScreen<AvatarState>() {
         )
         val pagerState = rememberPagerState(pageCount = { images.size })
 
-        val coroutineScope = rememberCoroutineScope()
+        val userViewModel: UserViewModel = sharedViewModel()
+        val scope = rememberCoroutineScope()
         var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
         var imageSourceOptionDialog by remember { mutableStateOf(value = false) }
         var launchCamera by remember { mutableStateOf(value = false) }
@@ -77,14 +72,14 @@ class AvatarScreen : CustomScreen<AvatarState>() {
         )
 
         val cameraManager = rememberCameraManager {
-            coroutineScope.launch {
+            scope.launch {
                 val bitmap = it?.toImageBitmap()
                 imageBitmap = bitmap
             }
         }
 
         val galleryManager = rememberGalleryManager {
-            coroutineScope.launch {
+            scope.launch {
                 val bitmap = it?.toImageBitmap()
                 imageBitmap = bitmap
             }
@@ -132,8 +127,20 @@ class AvatarScreen : CustomScreen<AvatarState>() {
                 },
                 onNegativeClick = {
                     permissionRationalDialog = false
-                })
+                }
+            )
+        }
 
+        fun setImage(
+            imageBitmap: ImageBitmap,
+            directory: String = "avatar",
+        ): String {
+            val biteArray = imageBitmap.toByteArray()
+            return saveImage(
+                directory = directory,
+                fileName = "avatar.png",
+                data = biteArray
+            )
         }
 
         fun onEvent(event: AvatarEvent) {
@@ -141,8 +148,19 @@ class AvatarScreen : CustomScreen<AvatarState>() {
                 AvatarEvent.OnPickAvatar -> {
                     imageSourceOptionDialog = true
                 }
+
+                AvatarEvent.OnContinue -> {
+                    if (imageBitmap != null) {
+                        scope.launch(Dispatchers.IO) {
+                            val res = setImage(imageBitmap!!)
+                            println("RESSSSSSSSSSSSSS: $res")
+                        }
+                    }
+                }
             }
         }
+
+
 
         return AvatarState(
             snackBarState = snackBarState,

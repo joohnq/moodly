@@ -43,9 +43,12 @@ kotlin {
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
+
+            implementation(libs.squareup.okio)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+//            implementation(libs.okio.nodefilesystem)
         }
     }
 }

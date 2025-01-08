@@ -27,8 +27,8 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation("com.google.accompanist:accompanist-permissions:0.37.0")
-            implementation("androidx.activity:activity-compose:1.9.3")
+            implementation(libs.accompanist.permissions)
+            implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -38,6 +38,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.bundles.koin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

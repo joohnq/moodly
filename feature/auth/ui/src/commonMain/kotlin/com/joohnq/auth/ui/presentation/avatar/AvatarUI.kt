@@ -31,6 +31,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
+import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -157,10 +159,9 @@ fun AvatarUI(state: AvatarState) {
                 }
             }
             ContinueButton(
-                modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
-            ) {
-
-            }
+                modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                onClick = { state.onEvent(AvatarEvent.OnContinue) }
+            )
         }
     }
 }

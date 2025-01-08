@@ -57,7 +57,7 @@ kotlin {
             implementation(projects.sharedResources)
 
             implementation(projects.feature.auth.ui)
-            
+
             implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.ui)
             implementation(projects.feature.onboarding.ui)

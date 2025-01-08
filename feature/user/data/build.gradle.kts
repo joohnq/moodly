@@ -50,6 +50,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.feature.user.domain)
             implementation(projects.core.database)
+            implementation(projects.core.storage.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

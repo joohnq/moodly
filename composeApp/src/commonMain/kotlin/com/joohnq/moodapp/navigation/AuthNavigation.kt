@@ -9,11 +9,14 @@ import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 
 fun NavGraphBuilder.authNavigation(
+    onNavigate: (Destination) -> Unit,
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
 ) {
     navigation<NavigationGraph.Auth>(startDestination = Destination.Auth.Avatar) {
         composable<Destination.Auth.Avatar> {
-            AvatarScreen().Content()
+            AvatarScreen(
+                onNavigateToUserName = { onNavigate(Destination.Auth.UserName) }
+            ).Content()
         }
         composable<Destination.Auth.UserName> {
             UserNameScreen(

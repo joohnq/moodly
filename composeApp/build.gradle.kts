@@ -54,6 +54,7 @@ kotlin {
             implementation(projects.core.navigation)
             implementation(projects.core.di)
             implementation(projects.core.ui)
+            implementation(projects.core.storage.data)
             implementation(projects.sharedResources)
 
             implementation(projects.feature.auth.ui)

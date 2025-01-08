@@ -72,6 +72,7 @@ fun App() {
                     onGoBack = navHostController::onGoBack
                 )
                 authNavigation(
+                    onNavigate = navHostController::onNavigate,
                     onNavigateGraph = navHostController::onNavigateGraph
                 )
                 dashboardNavigation(

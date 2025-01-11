@@ -28,6 +28,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.test)
             implementation(projects.core.ui)
             implementation(projects.feature.mood.domain)
 

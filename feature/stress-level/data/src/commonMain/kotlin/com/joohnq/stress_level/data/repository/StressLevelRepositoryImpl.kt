@@ -1,24 +1,35 @@
 package com.joohnq.stress_level.data.repository
 
-import com.joohnq.core.database.executeTryCatchPrinting
-import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.core.ui.toResult
-import com.joohnq.stress_level.domain.data_source.StressLevelDataSource
+import com.joohnq.core.database.converters.LocalDateTimeConverter
+import com.joohnq.core.database.executeTryCatchResult
+import com.joohnq.stress_level.database.StressLevelDatabaseSql
+import com.joohnq.stress_level.domain.converter.StressLevelRecordConverter
+import com.joohnq.stress_level.domain.converter.StressorsConverter
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
 
 class StressLevelRepositoryImpl(
-    private val dataSource: StressLevelDataSource,
+    private val database: StressLevelDatabaseSql,
 ) : StressLevelRepository {
+    private val query = database.stressLevelRecordQueries
     override suspend fun getStressLevels(): Result<List<StressLevelRecord>> =
-        dataSource.getStressLevels().toResult()
+        executeTryCatchResult {
+            query.getStressLevels { id, stressLevel, stressors, date ->
+                StressLevelRecord(
+                    id = id.toInt(),
+                    stressLevel = StressLevelRecordConverter.toStressLevel(stressLevel),
+                    stressors = StressorsConverter.toStressorsList(stressors),
+                    date = LocalDateTimeConverter.toLocalDateTime(date)
+                )
+            }.executeAsList()
+        }
 
     override suspend fun addStressLevel(stressLevelRecord: StressLevelRecord): Result<Boolean> =
-        executeTryCatchPrinting {
-            dataSource.addStressLevel(
-                stressLevelRecord.copy(
-                    date = DatetimeProvider.getCurrentDateTime(),
-                )
+        executeTryCatchResult {
+            query.addStressLevel(
+                stressLevel = StressLevelRecordConverter.fromStressLevel(stressLevelRecord.stressLevel),
+                stressors = StressorsConverter.fromStressorsList(stressLevelRecord.stressors)
             )
+            true
         }
 }

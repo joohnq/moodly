@@ -63,6 +63,10 @@ kotlin {
             implementation(libs.bundles.koin)
             implementation(libs.coroutines.extensions)
         }
+        commonTest.dependencies {
+            implementation(projects.core.test)
+            implementation(libs.bundles.test)
+        }
         iosMain.dependencies {
             implementation(libs.sqldelight.native.driver)
         }

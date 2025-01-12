@@ -29,7 +29,6 @@ class HealthJournalRepositoryImpl(
     ): Result<Boolean> =
         executeTryCatchResult {
             query.addHealthJournal(
-                id = healthJournalRecord.id.toLong(),
                 mood = StatsRecordConverter.fromMood(healthJournalRecord.mood),
                 title = healthJournalRecord.title,
                 description = healthJournalRecord.description,

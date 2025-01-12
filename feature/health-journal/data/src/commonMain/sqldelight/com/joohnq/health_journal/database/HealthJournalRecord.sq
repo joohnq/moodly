@@ -10,7 +10,7 @@ getHealthJournals:
 SELECT * FROM HealthJournal;
 
 addHealthJournal:
-INSERT INTO HealthJournal (id, mood, title, description) VALUES (:id, :mood, :title, :description);
+INSERT INTO HealthJournal (mood, title, description) VALUES (:mood, :title, :description);
 
 deleteHealthJournal:
 DELETE FROM HealthJournal WHERE id = :id;

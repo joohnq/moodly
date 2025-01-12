@@ -40,7 +40,7 @@ fun WelcomeUI(
                 2 -> IntelligentScreen(onNext = state.onNext)
                 3 -> ResourcesScreen(onNext = state.onNext)
                 4 -> CommunityScreen {
-                    state.onAction(UserPreferenceViewModelIntent.UpdateSkipWelcomeScreen())
+                    state.onAction(UserPreferenceViewModelIntent.UpdateSkipWelcome())
                 }
             }
         }

@@ -1,4 +1,4 @@
-CREATE TABLE StatRecord (
+CREATE TABLE IF NOT EXISTS StatRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     mood INTEGER NOT NULL,
     description TEXT NOT NULL,

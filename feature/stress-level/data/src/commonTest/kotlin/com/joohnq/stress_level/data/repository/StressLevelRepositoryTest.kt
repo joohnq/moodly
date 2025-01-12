@@ -2,7 +2,7 @@ package com.joohnq.stress_level.data.repository
 
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
-import com.joohnq.core.test.assertThatContains
+import com.joohnq.core.test.assertThatOneOfContains
 import com.joohnq.core.test.createTestDriver
 import com.joohnq.stress_level.data.database.StressLevelDatabase
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
@@ -42,10 +42,10 @@ class StressLevelRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.stressLevel == StressLevel.Three && it.stressors.isEmpty()
             }
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 2 && it.stressLevel == StressLevel.One && it.stressors == listOf(
                     Stressor.Work
                 )
@@ -61,7 +61,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.stressLevel == StressLevel.Three && it.stressors.isEmpty()
             }
         }

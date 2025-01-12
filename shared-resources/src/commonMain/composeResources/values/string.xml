@@ -198,4 +198,7 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="select_an_image_source">Select an Image Source</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="to_set_your_profile_picture">To set your profile picture, please grant this permission. You can manage permissions in your device settings</string>
+    <string name="settings">Settings</string>
 </resources>

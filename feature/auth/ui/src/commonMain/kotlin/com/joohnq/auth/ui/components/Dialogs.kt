@@ -38,6 +38,7 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,11 +103,10 @@ fun ImageSourceOptionDialog(
 
 @Composable
 fun AlertMessageDialog(
-    title: String,
-    message: String? = null,
-    resource: String? = "ic_error_dialog.xml",
-    positiveButtonText: String? = null,
-    negativeButtonText: String? = null,
+    title: StringResource,
+    message: StringResource? = null,
+    positiveButtonText: StringResource? = null,
+    negativeButtonText: StringResource? = null,
     onPositiveClick: () -> Unit = {},
     onNegativeClick: () -> Unit = {},
 ) {
@@ -126,16 +126,9 @@ fun AlertMessageDialog(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                resource?.let {
-//                    Image(
-//                        modifier = Modifier.size(100.dp),
-//                        painter = painterResource(it),
-//                        contentDescription = null
-//                    )
-                }
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = title,
+                    text = stringResource(title),
                     style = TextStyles.TextXlExtraBold(),
                     fontWeight = FontWeight.Medium,
                     color = Colors.Brown80,
@@ -144,7 +137,7 @@ fun AlertMessageDialog(
                 Spacer(modifier = Modifier.height(10.dp))
                 message?.let {
                     Text(
-                        text = it,
+                        text = stringResource(it),
                         style = TextStyles.TextMdSemiBold(),
                         fontWeight = FontWeight.Medium,
                         color = Colors.Brown100Alpha64,
@@ -163,7 +156,11 @@ fun AlertMessageDialog(
                                 onNegativeClick()
                             }
                         ) {
-                            Text(text = it, textAlign = TextAlign.Center, maxLines = 1)
+                            Text(
+                                text = stringResource(it),
+                                textAlign = TextAlign.Center,
+                                maxLines = 1
+                            )
                         }
 
                         Spacer(modifier = Modifier.width(6.dp))
@@ -174,7 +171,11 @@ fun AlertMessageDialog(
                                 onPositiveClick()
                             }
                         ) {
-                            Text(text = it, textAlign = TextAlign.Center, maxLines = 1)
+                            Text(
+                                text = stringResource(it),
+                                textAlign = TextAlign.Center,
+                                maxLines = 1
+                            )
                         }
                     }
                 }

@@ -55,6 +55,7 @@ class OnboardingExpressionAnalysisScreen(
 
         fun onError(message: String) {
             scope.launch {
+                println("Errrrrroooo $message")
                 snackBarState.showSnackbar(message)
             }
         }
@@ -127,7 +128,7 @@ class OnboardingExpressionAnalysisScreen(
                 statsState.adding,
                 userState.updating,
                 onAllSuccess = {
-                    userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipOnboardingScreen())
+                    userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipOnboarding())
                 },
                 onAnyHasError = ::onError
             )

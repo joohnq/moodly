@@ -1,5 +1,6 @@
 package com.joohnq.home.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.constant.UserFileStorageConstants
+import com.joohnq.domain.entity.ImageType
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ImageCache
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -22,11 +24,19 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun HomeTopBar(modifier: Modifier = Modifier, userName: String, image: String?, date: String) {
+fun HomeTopBar(
+    modifier: Modifier = Modifier,
+    userName: String,
+    images: List<DrawableResource>,
+    image: String?,
+    imageType: ImageType,
+    date: String,
+) {
     Column(
         modifier = Modifier.fillMaxSize().background(
             color = Colors.Brown80, shape = Dimens.Shape.BottomLarge
@@ -52,10 +62,21 @@ fun HomeTopBar(modifier: Modifier = Modifier, userName: String, image: String?, 
             verticalAlignment = Alignment.CenterVertically
         ) {
             image?.let {
-                ImageCache(
-                    directory = UserFileStorageConstants.AVATAR_DIRECTORY,
-                    fileName = UserFileStorageConstants.AVATAR_FILE_NAME
-                )
+                when (imageType) {
+                    ImageType.DEVICE -> {
+                        ImageCache(
+                            directory = UserFileStorageConstants.AVATAR_DIRECTORY,
+                            fileName = UserFileStorageConstants.AVATAR_FILE_NAME
+                        )
+                    }
+
+                    ImageType.DRAWABLE -> {
+                        Image(
+                            painter = painterResource(images[it.toInt()]),
+                            contentDescription = it
+                        )
+                    }
+                }
             }
             Text(
                 text = stringResource(Res.string.greeting, userName),

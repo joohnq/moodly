@@ -64,6 +64,7 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
 
+            implementation(libs.coroutines.extensions)
         }
         commonTest.dependencies {
             implementation(projects.core.test)
@@ -82,8 +83,6 @@ sqldelight {
     databases {
         create("SleepQualityDatabaseSql") {
             packageName.set("com.joohnq.sleep_quality.database")
-            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/sleep_quality"))
-            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/sleep_quality")
         }
     }
 }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -27,6 +26,7 @@ import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.mental_health_metrics
 import com.joohnq.shared_resources.mindful_tracker
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.stress_level.ui.mapper.toResource
 
@@ -43,10 +43,6 @@ fun HomeUI(
         onLoading = { LoadingUI() },
         onAllSuccess = {
             val user = state.user.getValue()
-
-            SideEffect {
-                println("USERRRRRRRRRRRRRR" + user.image)
-            }
 
             Scaffold(
                 containerColor = Colors.Brown10,
@@ -67,7 +63,9 @@ fun HomeUI(
                             top = padding.calculateTopPadding(),
                         ),
                         userName = user.name,
+                        images = Drawables.Avatar.avatars,
                         image = user.image,
+                        imageType = user.imageType,
                         date = state.today
                     )
                     Title(Res.string.mental_health_metrics)

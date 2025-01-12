@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.DrawableResource
 
 class UserViewModel(
     private val initUserUseCase: InitUserUseCase,
@@ -38,7 +37,7 @@ class UserViewModel(
             is UserViewModelIntent.UpdateUserImageBitmap -> updateUserImageBitmap(intent.image)
             is UserViewModelIntent.UpdateUserName -> updateUserName(intent.name)
             UserViewModelIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
-            is UserViewModelIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.drawable)
+            is UserViewModelIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.i)
         }
     }
 
@@ -69,9 +68,9 @@ class UserViewModel(
         changeUpdatingStatus(res)
     }
 
-    private fun updateUserImageDrawable(drawable: DrawableResource) = viewModelScope.launch {
+    private fun updateUserImageDrawable(i: Int) = viewModelScope.launch {
         changeUpdatingStatus(UiState.Loading)
-        val res = updateUserImageDrawableUseCase(drawable).toUiState()
+        val res = updateUserImageDrawableUseCase(i).toUiState()
         changeUpdatingStatus(res)
     }
 

@@ -1,4 +1,4 @@
-CREATE TABLE UserPreferences (
+CREATE TABLE IF NOT EXISTS UserPreferences (
     id INTEGER PRIMARY KEY NOT NULL,
     skipWelcome INTEGER NOT NULL DEFAULT 0,
     skipOnboarding INTEGER NOT NULL DEFAULT 0,

@@ -6,7 +6,7 @@ import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
 import kotlinx.datetime.LocalDateTime
 
-class SleepQualityRepositoryFake : SleepQualityRepository, CustomFake() {
+class SleepQualityRepositoryFake : SleepQualityRepository, CustomFake {
     override var shouldThrowError: Boolean = false
     private val items = mutableListOf(
         SleepQualityRecord(

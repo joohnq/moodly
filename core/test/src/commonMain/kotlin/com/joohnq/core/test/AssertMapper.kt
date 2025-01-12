@@ -10,7 +10,7 @@ suspend fun <T> assertDoesNotThrow(block: suspend () -> T): T =
         fail("An exception was thrown: ${e.message}")
     }
 
-infix fun <T> List<T>.assertThatContains(comparator: (T) -> Boolean) {
+infix fun <T> List<T>.assertThatOneOfContains(comparator: (T) -> Boolean) {
     assertThat(find(comparator)).isNotNull()
 }
 

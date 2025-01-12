@@ -11,7 +11,7 @@ interface UserRepository {
     suspend fun addUser(user: User): Result<Boolean>
     suspend fun updateUser(user: User): Result<Boolean>
     suspend fun updateUserName(name: String): Result<Boolean>
-    suspend fun updateUserImage(value: String, imageType: ImageType): Result<Boolean>
+    suspend fun updateUserImage(image: String, imageType: ImageType): Result<Boolean>
     suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean>
     suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Result<Boolean>
     suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean>

@@ -1,4 +1,4 @@
-CREATE TABLE HealthJournal (
+CREATE TABLE IF NOT EXISTS HealthJournalRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     mood INTEGER NOT NULL,
     title TEXT NOT NULL,
@@ -7,13 +7,13 @@ CREATE TABLE HealthJournal (
 );
 
 getHealthJournals:
-SELECT * FROM HealthJournal;
+SELECT * FROM HealthJournalRecord;
 
 addHealthJournal:
-INSERT INTO HealthJournal (mood, title, description) VALUES (:mood, :title, :description);
+INSERT INTO HealthJournalRecord (mood, title, description) VALUES (:mood, :title, :description);
 
 deleteHealthJournal:
-DELETE FROM HealthJournal WHERE id = :id;
+DELETE FROM HealthJournalRecord WHERE id = :id;
 
 updateHealthJournal:
-UPDATE HealthJournal SET mood = :mood, title = :title, description = :description WHERE id = :id;
+UPDATE HealthJournalRecord SET mood = :mood, title = :title, description = :description WHERE id = :id;

@@ -10,7 +10,6 @@ actual typealias ImageFormat = Bitmap.CompressFormat
 actual fun ImageBitmap.toByteArray(
     format: ImageFormat,
 ): ByteArray {
-
     return ByteArrayOutputStream().use {
         asAndroidBitmap().compress(format, 100, it)
         it.toByteArray()

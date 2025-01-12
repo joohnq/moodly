@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -42,10 +43,6 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.androidx.startup.runtime)
-            implementation(libs.android.driver)
-        }
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.core.database)
@@ -64,6 +61,14 @@ kotlin {
 
             implementation(libs.bundles.koin)
             implementation(libs.coroutines.extensions)
+        }
+        commonTest.dependencies {
+            implementation(projects.core.test)
+            implementation(libs.bundles.test)
+        }
+        androidMain.dependencies {
+            implementation(libs.androidx.startup.runtime)
+            implementation(libs.android.driver)
         }
         iosMain.dependencies {
             implementation(libs.sqldelight.native.driver)
@@ -95,3 +100,4 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+

@@ -61,7 +61,7 @@ class UserNameScreen(
                 onError = ::onError,
                 onSuccess = {
                     userPreferencesViewModel.onAction(
-                        UserPreferenceViewModelIntent.UpdateSkipUserNameScreen()
+                        UserPreferenceViewModelIntent.UpdateSkipAuth()
                     )
                     onNavigateToDashboardScreen()
                 }

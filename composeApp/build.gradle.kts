@@ -1,7 +1,4 @@
-@file:OptIn(ExperimentalComposeLibrary::class)
-
 import com.codingfeline.buildkonfig.compiler.FieldSpec
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
@@ -11,7 +8,6 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.mokkery)
     alias(libs.plugins.buildkonfig)
 }
 
@@ -97,22 +93,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.datetime)
-            implementation(libs.coroutines.core)
             implementation(libs.navigation.compose)
 
             implementation(libs.bundles.koin)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(kotlin("test-annotations-common"))
-            implementation(libs.truthish)
-            implementation(compose.uiTest)
-            implementation(libs.test.resources)
-            implementation(libs.koin.core)
-            implementation(libs.koin.test)
-            implementation(libs.turbine)
-
-            implementation(libs.turbine)
         }
     }
 }
@@ -131,6 +114,8 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = libs.versions.android.versionCode.get().toInt()
         versionName = libs.versions.android.versionName.get()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     packaging {
         resources {
@@ -146,8 +131,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-
-//        isCoreLibraryDesugaringEnabled = true
     }
     buildFeatures {
         compose = true
@@ -171,32 +154,5 @@ buildkonfig {
             "GEMINI_API_KEY",
             localProperties["gemini_api_key"]?.toString() ?: ""
         )
-    }
-}
-
-// Prevent the bug with room when generate an APK
-tasks.withType<Test> {
-    if (name == "mergeDebugAndroidTestAssets") {
-        enabled = false
-    }
-}
-
-tasks.withType<Test> {
-    if (name == "copyRoomSchemasToAndroidTestAssetsDebugAndroidTest") {
-        enabled = false
-    }
-}
-
-tasks.whenTaskAdded {
-    if (name.contains("copyRoomSchemasToAndroidTestAssetsDebugAndroidTest")) {
-        enabled = false
-    }
-}
-
-gradle.taskGraph.whenReady {
-    allTasks.onEach { task ->
-        if (task.name.contains("androidTest") || task.name.contains("connectedAndroidTest")) {
-            task.enabled = false
-        }
     }
 }

@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
+import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModelState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -134,9 +135,9 @@ fun AvatarUI(state: AvatarState) {
                         onClick = { state.onEvent(AvatarEvent.OnPickAvatar) },
                         modifier = Modifier.size(96.dp)
                     ) {
-                        if (state.imageBitmap != null) {
+                        if (state.avatarState.imageBitmap != null) {
                             Image(
-                                bitmap = state.imageBitmap,
+                                bitmap = state.avatarState.imageBitmap,
                                 contentDescription = "Profile",
                                 modifier = Modifier.size(100.dp),
                                 contentScale = ContentScale.Crop
@@ -173,6 +174,7 @@ fun AvatarPreview() {
         AvatarState(
             snackBarState = remember { SnackbarHostState() },
             pagerState = rememberPagerState(initialPage = 0, pageCount = { 5 }),
+            avatarState = AvatarViewModelState()
         )
     )
 }

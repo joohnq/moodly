@@ -1,4 +1,4 @@
-CREATE TABLE StressLevelRecord (
+CREATE TABLE IF NOT EXISTS StressLevelRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     stressLevel INTEGER NOT NULL,
     stressors TEXT NOT NULL,
@@ -9,5 +9,4 @@ getStressLevels:
 SELECT * FROM StressLevelRecord;
 
 addStressLevel:
-INSERT INTO StressLevelRecord (stressLevel, stressors)
-VALUES (:stressLevel, :stressors);
+INSERT INTO StressLevelRecord (stressLevel, stressors) VALUES (:stressLevel, :stressors);

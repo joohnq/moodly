@@ -11,11 +11,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.runtime.snapshotFlow
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
+import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
+import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModelIntent
 import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
@@ -25,7 +27,12 @@ import com.joohnq.permission.PermissionType
 import com.joohnq.permission.createPermissionsManager
 import com.joohnq.permission.rememberCameraManager
 import com.joohnq.permission.rememberGalleryManager
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.cancel
+import com.joohnq.shared_resources.permission_required
+import com.joohnq.shared_resources.settings
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import kotlinx.coroutines.launch
@@ -36,19 +43,13 @@ class AvatarScreen(
     @Composable
     override fun Screen(): AvatarState {
         val snackBarState = remember { SnackbarHostState() }
-        val images = listOf(
-            Drawables.Images.AvatarCloud,
-            Drawables.Images.AvatarTime,
-            Drawables.Images.AvatarArrowUp,
-            Drawables.Images.AvatarArrowDown,
-            Drawables.Images.AvatarPieChart,
-        )
+        val images = Drawables.Avatar.avatars
         val pagerState = rememberPagerState(pageCount = { images.size })
-
+        val avatarViewModel: AvatarViewModel = sharedViewModel()
+        val avatarState by avatarViewModel.state.collectAsState()
         val userViewModel: UserViewModel = sharedViewModel()
         val userState by userViewModel.state.collectAsState()
         val scope = rememberCoroutineScope()
-        var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
         var imageSourceOptionDialog by remember { mutableStateOf(value = false) }
         var launchCamera by remember { mutableStateOf(value = false) }
         var launchGallery by remember { mutableStateOf(value = false) }
@@ -77,13 +78,13 @@ class AvatarScreen(
 
         val cameraManager = rememberCameraManager {
             scope.launch {
-                imageBitmap = it?.toImageBitmap()
+                avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageBitmap(it?.toImageBitmap()))
             }
         }
 
         val galleryManager = rememberGalleryManager {
             scope.launch {
-                imageBitmap = it?.toImageBitmap()
+                avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageBitmap(it?.toImageBitmap()))
             }
         }
         if (imageSourceOptionDialog) {
@@ -118,14 +119,13 @@ class AvatarScreen(
             launchSetting = false
         }
         if (permissionRationalDialog) {
-            AlertMessageDialog(title = "Permission Required",
-                message = "To set your profile picture, please grant this permission. You can manage permissions in your device settings.",
-                positiveButtonText = "Settings",
-                negativeButtonText = "Cancel",
+            AlertMessageDialog(title = Res.string.permission_required,
+                message = Res.string.to_set_your_profile_picture,
+                positiveButtonText = Res.string.settings,
+                negativeButtonText = Res.string.cancel,
                 onPositiveClick = {
                     permissionRationalDialog = false
                     launchSetting = true
-
                 },
                 onNegativeClick = {
                     permissionRationalDialog = false
@@ -146,10 +146,10 @@ class AvatarScreen(
                 }
 
                 AvatarEvent.OnContinue -> {
-                    val action = if (imageBitmap == null)
-                        UserViewModelIntent.UpdateUserImageDrawable(Drawables.Images.AvatarTime)
+                    val action = if (avatarState.imageBitmap == null)
+                        UserViewModelIntent.UpdateUserImageDrawable(avatarState.selectedDrawableIndex)
                     else
-                        UserViewModelIntent.UpdateUserImageBitmap(imageBitmap!!)
+                        UserViewModelIntent.UpdateUserImageBitmap(avatarState.imageBitmap!!)
 
                     userViewModel.onAction(action)
                 }
@@ -171,12 +171,18 @@ class AvatarScreen(
             }
         }
 
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.currentPage }.collect { page ->
+                avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageDrawableIndex(page))
+            }
+        }
+
         return AvatarState(
             snackBarState = snackBarState,
             pagerState = pagerState,
             images = images,
             onEvent = ::onEvent,
-            imageBitmap = imageBitmap
+            avatarState = avatarState
         )
     }
 

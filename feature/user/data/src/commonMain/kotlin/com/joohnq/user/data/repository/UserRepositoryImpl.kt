@@ -66,9 +66,9 @@ class UserRepositoryImpl(
             true
         }
 
-    override suspend fun updateUserImage(value: String, imageType: ImageType): Result<Boolean> =
+    override suspend fun updateUserImage(image: String, imageType: ImageType): Result<Boolean> =
         executeTryCatchResult {
-            query.updateUserImage(value, imageType.toValue())
+            query.updateUserImage(image, imageType.toValue())
             true
         }
 

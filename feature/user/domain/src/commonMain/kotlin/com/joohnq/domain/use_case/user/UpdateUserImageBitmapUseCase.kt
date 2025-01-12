@@ -18,7 +18,7 @@ class UpdateUserImageBitmapUseCase(
         )
 
         return userRepository.updateUserImage(
-            value = value,
+            image = value,
             imageType = ImageType.DEVICE
         )
     }

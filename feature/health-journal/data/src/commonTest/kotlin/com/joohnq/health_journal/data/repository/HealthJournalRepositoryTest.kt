@@ -2,7 +2,7 @@ package com.joohnq.health_journal.data.repository
 
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
-import com.joohnq.core.test.assertThatContains
+import com.joohnq.core.test.assertThatOneOfContains
 import com.joohnq.core.test.createTestDriver
 import com.joohnq.health_journal.data.database.HealthJournalDatabase
 import com.joohnq.health_journal.database.HealthJournalDatabaseSql
@@ -42,10 +42,10 @@ class HealthJournalRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.mood == Mood.Overjoyed && it.title == "title" && it.description == "description"
             }
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 2 && it.mood == Mood.Happy && it.title == "title 2" && it.description == "description 2"
             }
         }
@@ -59,7 +59,7 @@ class HealthJournalRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.mood == Mood.Overjoyed && it.title == "title" && it.description == "description"
             }
         }
@@ -76,7 +76,7 @@ class HealthJournalRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 2 && it.mood == Mood.Happy && it.title == "title 2" && it.description == "description 2"
             }
 

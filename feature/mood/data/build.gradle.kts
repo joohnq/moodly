@@ -80,8 +80,6 @@ sqldelight {
     databases {
         create("StatsDatabaseSql") {
             packageName.set("com.joohnq.mood.database")
-            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/mood"))
-            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/mood")
         }
     }
 }

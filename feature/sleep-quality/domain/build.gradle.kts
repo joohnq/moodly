@@ -28,8 +28,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.test)
             implementation(projects.core.ui)
+            implementation(projects.core.test)
             implementation(projects.feature.mood.domain)
 
             implementation(compose.runtime)
@@ -42,7 +42,6 @@ kotlin {
 
             implementation(libs.datetime)
             implementation(libs.serialization)
-            implementation(libs.bundles.koin)
             implementation(libs.bundles.koin)
         }
     }

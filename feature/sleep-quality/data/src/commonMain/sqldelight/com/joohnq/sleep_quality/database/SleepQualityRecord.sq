@@ -1,4 +1,4 @@
-CREATE TABLE SleepQualityRecord (
+CREATE TABLE IF NOT EXISTS SleepQualityRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     sleepQuality INTEGER NOT NULL,
     startSleeping TEXT NOT NULL,

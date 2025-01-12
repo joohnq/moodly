@@ -164,4 +164,14 @@ object Drawables {
     object Shape {
         val BottomNavigation = Res.drawable.shape_bottom_navigation
     }
+
+    object Avatar {
+        val avatars = listOf(
+            Drawables.Images.AvatarCloud,
+            Drawables.Images.AvatarTime,
+            Drawables.Images.AvatarArrowUp,
+            Drawables.Images.AvatarArrowDown,
+            Drawables.Images.AvatarPieChart,
+        )
+    }
 }

@@ -63,6 +63,8 @@ kotlin {
 
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
+
+            implementation(libs.coroutines.extensions)
         }
         commonTest.dependencies {
             implementation(projects.core.test)
@@ -81,8 +83,6 @@ sqldelight {
     databases {
         create("StressLevelDatabaseSql") {
             packageName.set("com.joohnq.stress_level.database")
-            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schema/stress_level"))
-            migrationOutputDirectory = file("src/commonMain/sqldelight/migrations/stress_level")
         }
     }
 }

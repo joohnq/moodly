@@ -31,9 +31,9 @@ class LoadingScreen(
         {
             userPreferencesState.userPreferences.onSuccess { userPreferences: UserPreferences ->
                 when (false) {
-                    userPreferences.skipWelcomeScreen -> onNavigateToWelcome()
-                    userPreferences.skipOnboardingScreen -> onNavigateToOnboarding()
-                    userPreferences.skipUserNameScreen -> onNavigateToUserName()
+                    userPreferences.skipWelcome -> onNavigateToWelcome()
+                    userPreferences.skipOnboarding -> onNavigateToOnboarding()
+                    userPreferences.skipAuth -> onNavigateToUserName()
                     else -> onNavigateToDashboard()
                 }
             }

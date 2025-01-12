@@ -2,7 +2,7 @@ package com.joohnq.mood.data.repository
 
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
-import com.joohnq.core.test.assertThatContains
+import com.joohnq.core.test.assertThatOneOfContains
 import com.joohnq.core.test.createTestDriver
 import com.joohnq.mood.data.database.StatsDatabase
 import com.joohnq.mood.database.StatsDatabaseSql
@@ -42,10 +42,10 @@ class StatsRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.mood == Mood.Overjoyed && it.description == "description"
             }
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 2 && it.mood == Mood.Happy && it.description == "description 2"
             }
         }
@@ -67,7 +67,7 @@ class StatsRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 1 && it.mood == Mood.Depressed && it.description == "description 3"
             }
         }
@@ -84,7 +84,7 @@ class StatsRepositoryTest : RobolectricTests() {
 
             //THEN
             assertThat(items.isNotEmpty())
-            items assertThatContains {
+            items assertThatOneOfContains {
                 it.id == 2 && it.mood == Mood.Happy && it.description == "description 2"
             }
 

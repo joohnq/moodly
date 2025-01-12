@@ -5,7 +5,7 @@ import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.repository.StatsRepository
 
-class StatsRepositoryFake : StatsRepository, CustomFake() {
+class StatsRepositoryFake : StatsRepository, CustomFake {
     override var shouldThrowError = false
     val items = mutableListOf(
         StatsRecord(

@@ -39,7 +39,7 @@ fun HealthJournalUI(
         onSuccess = { healthJournals: List<HealthJournalRecord> ->
             val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =
-                remember { getHealthJournalsInYearUseCase(healthJournals) }
+                remember { getHealthJournalsInYearUseCase(healthJournals = healthJournals) }
             SharedPanelComponent(
                 isDark = false,
                 onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },

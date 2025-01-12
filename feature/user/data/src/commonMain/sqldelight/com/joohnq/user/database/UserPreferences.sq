@@ -1,24 +1,24 @@
 CREATE TABLE UserPreferences (
     id INTEGER PRIMARY KEY NOT NULL,
-    skipWelcomeScreen INTEGER NOT NULL DEFAULT 0,
-    skipOnboardingScreen INTEGER NOT NULL DEFAULT 0,
-    skipUserNameScreen INTEGER NOT NULL DEFAULT 0
+    skipWelcome INTEGER NOT NULL DEFAULT 0,
+    skipOnboarding INTEGER NOT NULL DEFAULT 0,
+    skipUserName INTEGER NOT NULL DEFAULT 0
 );
 
 getUserPreferences:
 SELECT * FROM UserPreferences WHERE id = 1;
 
 addUserPreferences:
-INSERT OR IGNORE INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipUserNameScreen) VALUES (1, :skipWelcomeScreen, :skipOnboardingScreen, :skipUserNameScreen);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipUserName) VALUES (1, :skipWelcome, :skipOnboarding, :skipAuth);
 
 insertUserPreferences:
-INSERT OR IGNORE INTO UserPreferences (id, skipWelcomeScreen, skipOnboardingScreen, skipUserNameScreen) VALUES (1, 0, 0, 0);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipUserName) VALUES (1, 0, 0, 0);
 
-updateSkipWelcomeScreen:
-UPDATE UserPreferences SET skipWelcomeScreen = :value WHERE id = 1;
+updateSkipWelcome:
+UPDATE UserPreferences SET skipWelcome = :value WHERE id = 1;
 
-updateSkipOnboardingScreen:
-UPDATE UserPreferences SET skipOnboardingScreen = :value WHERE id = 1;
+updateSkipOnboarding:
+UPDATE UserPreferences SET skipOnboarding = :value WHERE id = 1;
 
-updateSkipUserNameScreen:
-UPDATE UserPreferences SET skipUserNameScreen = :value WHERE id = 1;
+updateSkipAuth:
+UPDATE UserPreferences SET skipUserName = :value WHERE id = 1;

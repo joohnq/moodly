@@ -6,15 +6,15 @@ sealed class UserPreferenceViewModelIntent {
     data object LogoutUserPreferences : UserPreferenceViewModelIntent()
     data object ResetUpdating : UserPreferenceViewModelIntent()
 
-    data class UpdateSkipWelcomeScreen(
+    data class UpdateSkipWelcome(
         val value: Boolean = true,
     ) : UserPreferenceViewModelIntent()
 
-    data class UpdateSkipOnboardingScreen(
+    data class UpdateSkipOnboarding(
         val value: Boolean = true,
     ) : UserPreferenceViewModelIntent()
 
-    data class UpdateSkipUserNameScreen(
+    data class UpdateSkipAuth(
         val value: Boolean = true,
     ) : UserPreferenceViewModelIntent()
 }

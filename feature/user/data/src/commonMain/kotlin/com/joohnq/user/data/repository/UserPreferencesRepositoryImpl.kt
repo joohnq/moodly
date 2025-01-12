@@ -11,12 +11,12 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
     private val query = database.userPreferencesQueries
     override suspend fun getUserPreferences(): Result<UserPreferences> =
         executeTryCatchResult {
-            query.getUserPreferences { id, skipWelcomeScreen, skipOnboardingScreen, skipUserNameScreen ->
+            query.getUserPreferences { id, skipWelcome, skipOnboarding, skipAuth ->
                 UserPreferences(
                     id = id.toInt(),
-                    skipWelcomeScreen = BooleanConverter.toValue(skipWelcomeScreen),
-                    skipOnboardingScreen = BooleanConverter.toValue(skipOnboardingScreen),
-                    skipUserNameScreen = BooleanConverter.toValue(skipUserNameScreen)
+                    skipWelcome = BooleanConverter.toValue(skipWelcome),
+                    skipOnboarding = BooleanConverter.toValue(skipOnboarding),
+                    skipAuth = BooleanConverter.toValue(skipAuth)
                 )
             }.executeAsOneOrNull() ?: throw Exception("User preferences not found")
         }
@@ -24,9 +24,9 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
     override suspend fun addUserPreferences(userPreferences: UserPreferences): Result<Boolean> =
         executeTryCatchResult {
             query.addUserPreferences(
-                skipWelcomeScreen = BooleanConverter.fromValue(userPreferences.skipWelcomeScreen),
-                skipOnboardingScreen = BooleanConverter.fromValue(userPreferences.skipOnboardingScreen),
-                skipUserNameScreen = BooleanConverter.fromValue(userPreferences.skipUserNameScreen)
+                skipWelcome = BooleanConverter.fromValue(userPreferences.skipWelcome),
+                skipOnboarding = BooleanConverter.fromValue(userPreferences.skipOnboarding),
+                skipAuth = BooleanConverter.fromValue(userPreferences.skipAuth)
             )
             true
         }
@@ -37,21 +37,21 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
             true
         }
 
-    override suspend fun updateSkipWelcomeScreen(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipWelcome(value: Boolean): Result<Boolean> =
         executeTryCatchResult {
-            query.updateSkipWelcomeScreen(BooleanConverter.fromValue(value))
+            query.updateSkipWelcome(BooleanConverter.fromValue(value))
             true
         }
 
-    override suspend fun updateSkipOnboardingScreen(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipOnboarding(value: Boolean): Result<Boolean> =
         executeTryCatchResult {
-            query.updateSkipOnboardingScreen(BooleanConverter.fromValue(value))
+            query.updateSkipOnboarding(BooleanConverter.fromValue(value))
             true
         }
 
-    override suspend fun updateSkipUserNameScreen(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipAuth(value: Boolean): Result<Boolean> =
         executeTryCatchResult {
-            query.updateSkipUserNameScreen(BooleanConverter.fromValue(value))
+            query.updateSkipAuth(BooleanConverter.fromValue(value))
             true
         }
 }

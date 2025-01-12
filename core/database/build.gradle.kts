@@ -25,7 +25,6 @@ kotlin {
             linkerOpts.add("-lsqlite3")
         }
     }
-
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)

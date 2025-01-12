@@ -4,11 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-suspend fun executeTryCatchPrinting(block: suspend () -> Unit): Result<Boolean> =
+suspend fun <T> executeTryCatchResult(block: suspend () -> T): Result<T> =
     withContext(Dispatchers.IO) {
         try {
-            block()
-            Result.success(true)
+            Result.success(block())
         } catch (e: Exception) {
             Result.failure(e)
         }

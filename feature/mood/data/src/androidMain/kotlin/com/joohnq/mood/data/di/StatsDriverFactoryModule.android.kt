@@ -1,10 +1,14 @@
 package com.joohnq.mood.data.di
 
+import android.content.Context
+import app.cash.sqldelight.db.SqlDriver
 import com.joohnq.mood.data.driver.StatsDriverFactory
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 actual val moodDriverFactoryModule: Module = module {
-    singleOf(::StatsDriverFactory)
+    single<SqlDriver> {
+        val context = get<Context>()
+        StatsDriverFactory(context).createDriver()
+    }
 }

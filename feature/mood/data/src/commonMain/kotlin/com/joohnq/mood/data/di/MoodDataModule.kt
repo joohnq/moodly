@@ -1,14 +1,18 @@
 package com.joohnq.mood.data.di
 
+import app.cash.sqldelight.db.SqlDriver
 import com.joohnq.mood.data.database.StatsDatabase
 import com.joohnq.mood.data.repository.StatsRepositoryImpl
+import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.repository.StatsRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val moodDataModule = module {
-    singleOf(::StatsDatabase)
-    singleOf(StatsDatabase::invoke)
+    single<StatsDatabaseSql> {
+        val driver = get<SqlDriver>()
+        StatsDatabase(driver).invoke()
+    }
     singleOf(::StatsRepositoryImpl) bind StatsRepository::class
 }

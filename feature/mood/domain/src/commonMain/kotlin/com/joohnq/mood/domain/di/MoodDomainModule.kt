@@ -1,7 +1,7 @@
 package com.joohnq.mood.domain.di
 
 import com.joohnq.mood.domain.use_case.AddStatsUseCase
-import com.joohnq.mood.domain.use_case.CalculateStatsFreudScore
+import com.joohnq.mood.domain.use_case.CalculateStatsFreudScoreUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetNextStatUseCase
 import com.joohnq.mood.domain.use_case.GetPreviousStatUseCase
@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 val moodDomainModule = module {
     factoryOf(::AddStatsUseCase)
-    factoryOf(::CalculateStatsFreudScore)
+    factoryOf(::CalculateStatsFreudScoreUseCase)
     factoryOf(::DeleteStatsUseCase)
     factoryOf(::GetNextStatUseCase)
     factoryOf(::GetPreviousStatUseCase)

@@ -2,7 +2,7 @@ package com.joohnq.health_journal.domain.use_case
 
 import com.joohnq.health_journal.domain.fake.HealthJournalRepositoryFake
 import com.varabyte.truthish.assertThat
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -22,7 +22,7 @@ class DeleteHealthJournalsUseCaseTest {
 
     @Test
     fun `GIVEN a valid request WHEN calling deleteHealthJournalsUseCase THEN should return true`() =
-        runTest {
+        runBlocking {
             //WHEN
             val res = useCase.invoke(ID).getOrNull()
 
@@ -31,8 +31,18 @@ class DeleteHealthJournalsUseCaseTest {
         }
 
     @Test
+    fun `GIVEN a invalid id WHEN calling deleteHealthJournalsUseCase THEN should return exception in failure`() =
+        runBlocking {
+            //WHEN
+            val res = useCase.invoke(10).exceptionOrNull()
+
+            //THEN
+            assertThat(res?.message).isEqualTo("Health journal with id not founded")
+        }
+
+    @Test
     fun `GIVEN a invalid request WHEN calling deleteHealthJournalsUseCase THEN should return exception in failure`() =
-        runTest {
+        runBlocking {
             repository.updateShouldThrowError(true)
             //WHEN
             val res = useCase.invoke(ID).exceptionOrNull()

@@ -3,7 +3,7 @@ package com.joohnq.health_journal.domain.use_case
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.fake.HealthJournalRepositoryFake
 import com.varabyte.truthish.assertThat
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -23,7 +23,7 @@ class AddHealthJournalsUseCaseTest {
 
     @Test
     fun `GIVEN a valid request WHEN calling addHealthJournalsUseCase THEN should return true`() =
-        runTest {
+        runBlocking {
             //WHEN
             val res = useCase.invoke(item).getOrNull()
 
@@ -33,7 +33,7 @@ class AddHealthJournalsUseCaseTest {
 
     @Test
     fun `GIVEN a invalid request WHEN calling addHealthJournalsUseCase THEN should return exception in failure`() =
-        runTest {
+        runBlocking {
             repository.updateShouldThrowError(true)
             //WHEN
             val res = useCase.invoke(item).exceptionOrNull()

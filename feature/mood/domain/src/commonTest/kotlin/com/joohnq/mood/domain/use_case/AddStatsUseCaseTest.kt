@@ -1,15 +1,37 @@
 package com.joohnq.mood.domain.use_case
 
-import com.joohnq.mood.domain.repository.StatsRepository
-import kotlin.test.BeforeTest
+import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.fake.StatsRepositoryFake
+import com.varabyte.truthish.assertThat
+import kotlinx.coroutines.runBlocking
+import kotlin.test.Test
 
 class AddStatsUseCaseTest {
-    private lateinit var useCase: AddStatsUseCase
-    private lateinit var repository: StatsRepository
-
-    @BeforeTest
-    fun setUp() {
-        repository = StatsRepositoryFake()
-        useCase = AddStatsUseCase(repository)
+    companion object {
+        val item = StatsRecord()
     }
+
+    private var repository: StatsRepositoryFake = StatsRepositoryFake()
+    private var useCase: AddStatsUseCase = AddStatsUseCase(repository)
+
+    @Test
+    fun `GIVEN a valid request WHEN calling addStatsUseCase THEN should return true`() =
+        runBlocking {
+            //WHEN
+            val res = useCase.invoke(item).getOrNull()
+
+            //THEN
+            assertThat(res).isEqualTo(true)
+        }
+
+    @Test
+    fun `GIVEN a invalid request WHEN calling addStatsUseCase THEN should return exception in failure`() =
+        runBlocking {
+            repository.updateShouldThrowError(true)
+            //WHEN
+            val res = useCase.invoke(item).exceptionOrNull()
+
+            //THEN
+            assertThat(res?.message).isEqualTo("Failed to add stat")
+        }
 }

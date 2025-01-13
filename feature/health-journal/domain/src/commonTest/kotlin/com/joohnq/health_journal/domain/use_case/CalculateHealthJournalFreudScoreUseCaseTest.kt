@@ -4,7 +4,7 @@ import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -18,61 +18,76 @@ class CalculateHealthJournalFreudScoreUseCaseTest {
 
     @Test
     fun `test CalculateHealthJournalFreudScoreUseCase Healthy`() =
-        runTest {
+        runBlocking {
             val res = useCase.invoke(
                 listOf(
                     HealthJournalRecord(
                         mood = Mood.Overjoyed,
                     ),
-                )
-            )
-            assertThat(res).isEqualTo(FreudScore.Healthy(100))
-        }
-
-    @Test
-    fun `test CalculateHealthJournalFreudScoreUseCase Happy`() =
-        runTest {
-            val res = useCase.invoke(
-                listOf(
                     HealthJournalRecord(
                         mood = Mood.Happy,
                     ),
                 )
             )
-            assertThat(res).isEqualTo(FreudScore.MostlyHealthy(80))
+            assertThat(res).isEqualTo(FreudScore.Healthy(90))
         }
 
     @Test
-    fun `test CalculateHealthJournalFreudScoreUseCase Stable`() =
-        runTest {
+    fun `test CalculateHealthJournalFreudScoreUseCase Happy`() =
+        runBlocking {
             val res = useCase.invoke(
                 listOf(
+                    HealthJournalRecord(
+                        mood = Mood.Happy,
+                    ),
                     HealthJournalRecord(
                         mood = Mood.Neutral,
                     ),
                 )
             )
-            assertThat(res).isEqualTo(FreudScore.Stable(60))
+            assertThat(res).isEqualTo(FreudScore.MostlyHealthy(70))
         }
 
     @Test
-    fun `test CalculateHealthJournalFreudScoreUseCase AtRisk`() =
-        runTest {
+    fun `test CalculateHealthJournalFreudScoreUseCase Stable`() =
+        runBlocking {
             val res = useCase.invoke(
                 listOf(
+                    HealthJournalRecord(
+                        mood = Mood.Neutral,
+                    ),
                     HealthJournalRecord(
                         mood = Mood.Sad,
                     ),
                 )
             )
-            assertThat(res).isEqualTo(FreudScore.AtRisk(40))
+            assertThat(res).isEqualTo(FreudScore.Stable(50))
+        }
+
+    @Test
+    fun `test CalculateHealthJournalFreudScoreUseCase AtRisk`() =
+        runBlocking {
+            val res = useCase.invoke(
+                listOf(
+                    HealthJournalRecord(
+                        mood = Mood.Sad,
+                    ),
+                    HealthJournalRecord(
+                        mood = Mood.Depressed,
+                    ),
+                )
+            )
+            assertThat(res).isEqualTo(FreudScore.AtRisk(30))
         }
 
     @Test
     fun `test CalculateHealthJournalFreudScoreUseCase Unhealthy`() =
-        runTest {
+        runBlocking {
             val res = useCase.invoke(
                 listOf(
+                    HealthJournalRecord(
+                        mood = Mood.Depressed,
+                    ),
                     HealthJournalRecord(
                         mood = Mood.Depressed,
                     ),

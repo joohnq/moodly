@@ -4,7 +4,7 @@ import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
@@ -53,7 +53,7 @@ class OrganizeFromCreationHealthJournalFreudScoreUseCaseTest {
 
     @Test
     fun `test OrganizeFromCreationHealthJournalFreudScoreUseCase`() =
-        runTest {
+        runBlocking {
             val res = useCase.invoke(
                 creationDate = LocalDateTime(2025, 1, 1, 0, 0, 0),
                 currentDate = LocalDateTime(2025, 1, 3, 0, 0, 0),

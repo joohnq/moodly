@@ -4,7 +4,7 @@ import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -51,8 +51,8 @@ class OrganizeByDateHealthJournalUseCaseTest {
     }
 
     @Test
-    fun `test OrganizeByDateHealthJournalUseCase Healthy`() =
-        runTest {
+    fun `test OrganizeByDateHealthJournalUseCase`() =
+        runBlocking {
             val res = useCase.invoke(healthJournals = items)
             assertThat(res).isEqualTo(
                 mapOf(

@@ -10,9 +10,9 @@ import kotlinx.datetime.plus
 class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimeProvider: IDatetimeProvider) {
     operator fun invoke(
         creationDate: LocalDateTime,
+        currentDate: LocalDateTime = dateTimeProvider.getCurrentDateTime(),
         healthJournals: List<HealthJournalRecord>,
     ): Map<LocalDate, List<HealthJournalRecord>?> {
-        val currentDate = dateTimeProvider.getCurrentDateTime()
         val recordsByDay = healthJournals.groupBy { it.date.date }
         val dateSequence = generateDateSequence(creationDate, currentDate)
         return dateSequence.associate { date ->

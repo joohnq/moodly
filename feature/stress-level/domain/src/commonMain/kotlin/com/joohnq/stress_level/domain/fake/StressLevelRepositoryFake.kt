@@ -33,7 +33,7 @@ class StressLevelRepositoryFake : StressLevelRepository, CustomFake {
     }
 
     override suspend fun addStressLevel(stressLevelRecord: StressLevelRecord): Result<Boolean> {
-        if (shouldThrowError) return Result.failure(Exception("Failed to add stress levels"))
+        if (shouldThrowError) return Result.failure(Exception("Failed to add stress level"))
 
         items.add(stressLevelRecord)
 

@@ -44,6 +44,9 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test)
+        }
     }
 }
 

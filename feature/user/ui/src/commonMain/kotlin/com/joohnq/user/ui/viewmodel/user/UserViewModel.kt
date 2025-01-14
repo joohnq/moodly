@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.User
+import com.joohnq.domain.use_case.user.AddUserUseCase
 import com.joohnq.domain.use_case.user.GetUserUseCase
-import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateUserImageBitmapUseCase
 import com.joohnq.domain.use_case.user.UpdateUserImageDrawableUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UserViewModel(
-    private val initUserUseCase: InitUserUseCase,
+    private val addUserUseCase: AddUserUseCase,
     private val updateUserUseCase: UpdateUserUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val updateUserNameUseCase: UpdateUserNameUseCase,
@@ -31,18 +31,20 @@ class UserViewModel(
 
     fun onAction(intent: UserViewModelIntent) {
         when (intent) {
-            is UserViewModelIntent.InitUser -> initUser()
             is UserViewModelIntent.GetUser -> getUser()
             is UserViewModelIntent.UpdateUser -> updateUser(intent.user)
             is UserViewModelIntent.UpdateUserImageBitmap -> updateUserImageBitmap(intent.image)
             is UserViewModelIntent.UpdateUserName -> updateUserName(intent.name)
             UserViewModelIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
             is UserViewModelIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.i)
+            UserViewModelIntent.InitUser -> addUser()
         }
     }
 
-    private fun initUser() = viewModelScope.launch {
-        initUserUseCase()
+    private fun addUser() = viewModelScope.launch {
+        changeAddingStatus(UiState.Loading)
+        val res = addUserUseCase(User()).toUiState()
+        changeAddingStatus(res)
     }
 
     private fun updateUser(user: User) = viewModelScope.launch {
@@ -53,13 +55,8 @@ class UserViewModel(
 
     private fun getUser() = viewModelScope.launch {
         changeUserStatus(UiState.Loading)
-
-        try {
-            val user = getUserUseCase().toUiState()
-            changeUserStatus(user)
-        } catch (e: Exception) {
-            changeUserStatus(UiState.Error(e.message.toString()))
-        }
+        val res = getUserUseCase().toUiState()
+        changeUserStatus(res)
     }
 
     private fun updateUserImageBitmap(image: ImageBitmap) = viewModelScope.launch {
@@ -78,6 +75,10 @@ class UserViewModel(
         changeUpdatingStatus(UiState.Loading)
         val res = updateUserNameUseCase(name).toUiState()
         changeUpdatingStatus(res)
+    }
+
+    private fun changeAddingStatus(status: UiState<Boolean>) {
+        _state.update { it.copy(adding = status) }
     }
 
     private fun changeUpdatingStatus(status: UiState<Boolean>) {

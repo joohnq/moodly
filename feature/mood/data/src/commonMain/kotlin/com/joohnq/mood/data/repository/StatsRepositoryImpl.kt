@@ -7,6 +7,7 @@ import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.converter.StatsRecordConverter
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.repository.StatsRepository
+import kotlinx.datetime.LocalDate
 
 class StatsRepositoryImpl(
     private val database: StatsDatabaseSql,
@@ -19,14 +20,26 @@ class StatsRepositoryImpl(
                     id = id.toInt(),
                     mood = StatsRecordConverter.toMood(mood),
                     description = description,
-                    date = LocalDateTimeConverter.toLocalDateTime(date)
+                    date = LocalDateTimeConverter.toLocalDate(date)
                 )
             }.executeAsList()
         }
 
+    override suspend fun getStatByDate(date: LocalDate): Result<StatsRecord?> =
+        executeTryCatchResult {
+            query.getStatByDate(date.toString()) { id, mood, description, date ->
+                StatsRecord(
+                    id = id.toInt(),
+                    mood = StatsRecordConverter.toMood(mood),
+                    description = description,
+                    date = LocalDateTimeConverter.toLocalDate(date)
+                )
+            }.executeAsOneOrNull()
+        }
+
     override suspend fun addStats(statsRecord: StatsRecord): Result<Boolean> =
         executeTryCatchResult {
-            val item = statsRecord.copy(date = DatetimeProvider.getCurrentDateTime())
+            val item = statsRecord.copy(date = DatetimeProvider.getCurrentDateTime().date)
             query.addStats(
                 mood = StatsRecordConverter.fromMood(item.mood),
                 description = statsRecord.description

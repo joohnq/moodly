@@ -51,7 +51,7 @@ fun MoodUI(state: MoodState) {
             onAdd = { state.onEvent(MoodEvent.OnAddStatScreen) },
             topBarContent = {
                 TextWithBackground(
-                    text = DatetimeProvider.formatDateTime(state.statsRecord.date),
+                    text = DatetimeProvider.formatDate(state.statsRecord.date),
                     textColor = resource.palette.moodScreenMoodFaceColor,
                     backgroundColor = resource.palette.subColor,
                 )

@@ -10,16 +10,18 @@ import com.joohnq.domain.repository.UserRepository
 
 class UserRepositoryFake : UserRepository, CustomFake {
     override var shouldThrowError: Boolean = false
-    private var item = User()
+    private var item: User? = null
 
     override suspend fun getUser(): Result<User> {
         if (shouldThrowError) return Result.failure(Exception("Failed to get user"))
 
-        return Result.success(item)
+        return item?.let { Result.success(it) } ?: Result.failure(Exception("User not found"))
     }
 
     override suspend fun addUser(user: User): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to add user"))
+
+        item = user
 
         return Result.success(true)
     }
@@ -35,7 +37,7 @@ class UserRepositoryFake : UserRepository, CustomFake {
     override suspend fun updateUserName(name: String): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to update user name"))
 
-        item = item.copy(name = name)
+        item = item?.copy(name = name)
 
         return Result.success(true)
     }
@@ -43,7 +45,7 @@ class UserRepositoryFake : UserRepository, CustomFake {
     override suspend fun updateUserImage(image: String, imageType: ImageType): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to update user name"))
 
-        item = item.copy(image = image, imageType = imageType)
+        item = item?.copy(image = image, imageType = imageType)
 
         return Result.success(true)
     }
@@ -51,7 +53,7 @@ class UserRepositoryFake : UserRepository, CustomFake {
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to update user sought help"))
 
-        item = item.copy(soughtHelp = soughtHelp)
+        item = item?.copy(soughtHelp = soughtHelp)
 
         return Result.success(true)
     }
@@ -59,7 +61,7 @@ class UserRepositoryFake : UserRepository, CustomFake {
     override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to update user physical symptoms"))
 
-        item = item.copy(physicalSymptoms = physicalSymptoms)
+        item = item?.copy(physicalSymptoms = physicalSymptoms)
 
         return Result.success(true)
     }
@@ -67,7 +69,7 @@ class UserRepositoryFake : UserRepository, CustomFake {
     override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean> {
         if (shouldThrowError) return Result.failure(Exception("Failed to update user medications supplements"))
 
-        item = item.copy(medicationsSupplements = medicationsSupplements)
+        item = item?.copy(medicationsSupplements = medicationsSupplements)
 
         return Result.success(true)
     }

@@ -12,11 +12,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.CircularProgressWithText
 import com.joohnq.shared_resources.components.HorizontalSpacer
@@ -27,19 +25,19 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MentalScoreHistoryItemWithHour(
-    date: LocalDateTime,
+    date: LocalDate,
     resource: MoodResource,
     description: String,
     healthLevel: Int,
     onClick: () -> Unit,
 ) {
-    val hourAndMinutes = remember { DatetimeProvider.formatTime(date) }
-    val daySection = remember { DatetimeProvider.getDaySection(date) }
+//    val hourAndMinutes = remember { DatetimeProvider.formatTime(date) }
+//    val daySection = remember { DatetimeProvider.getDaySection(date) }
 
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
@@ -60,16 +58,16 @@ fun MentalScoreHistoryItemWithHour(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = daySection,
-                    style = TextStyles.LabelSm(),
-                    color = Colors.Brown100Alpha64
-                )
-                Text(
-                    text = hourAndMinutes,
-                    style = TextStyles.TextLgExtraBold(),
-                    color = Colors.Brown80
-                )
+//                Text(
+//                    text = daySection,
+//                    style = TextStyles.LabelSm(),
+//                    color = Colors.Brown100Alpha64
+//                )
+//                Text(
+//                    text = hourAndMinutes,
+//                    style = TextStyles.TextLgExtraBold(),
+//                    color = Colors.Brown80
+//                )
             }
             HorizontalSpacer(20.dp)
             Column(

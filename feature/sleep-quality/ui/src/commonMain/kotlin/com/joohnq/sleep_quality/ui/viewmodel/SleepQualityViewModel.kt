@@ -7,6 +7,7 @@ import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.domain.use_case.GetSleepQualityByDateUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,12 +17,10 @@ import kotlinx.coroutines.launch
 class SleepQualityViewModel(
     private val addSleepQualityUseCase: AddSleepQualityUseCase,
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
+    private val getSleepQualityByDateUseCase: GetSleepQualityByDateUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(SleepQualityState())
     val state: StateFlow<SleepQualityState> = _state.asStateFlow()
-
-    var item = MutableStateFlow(SleepQualityState())
-        private set
 
     fun onAction(intent: SleepQualityIntent) {
         when (intent) {

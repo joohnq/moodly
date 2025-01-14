@@ -1,5 +1,6 @@
 package com.joohnq.health_journal.data.repository
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -11,7 +12,6 @@ import com.joohnq.health_journal.domain.repository.HealthJournalRepository
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -95,14 +95,14 @@ class HealthJournalRepositoryTest : RobolectricTests() {
                 mood = Mood.Overjoyed,
                 title = "title",
                 description = "description",
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                date = CoreTestConstants.FAKE_DATE
             ),
             HealthJournalRecord(
                 id = 2,
                 mood = Mood.Happy,
                 title = "title 2",
                 description = "description 2",
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                date = CoreTestConstants.FAKE_DATE
             )
         )
     }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -53,6 +54,11 @@ kotlin {
 
             implementation(libs.datetime)
         }
+        commonTest.dependencies {
+            implementation(libs.bundles.test)
+            implementation(libs.turbine)
+            implementation(libs.napier)
+        }
     }
 }
 
@@ -66,7 +72,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
-dependencies {
-    implementation(libs.androidx.benchmark.common)
 }

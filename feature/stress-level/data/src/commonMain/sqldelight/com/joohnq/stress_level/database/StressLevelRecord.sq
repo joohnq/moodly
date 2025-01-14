@@ -2,11 +2,14 @@ CREATE TABLE IF NOT EXISTS StressLevelRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     stressLevel INTEGER NOT NULL,
     stressors TEXT NOT NULL,
-    date TEXT DEFAULT (datetime('now')) NOT NULL
+    date TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
 );
 
 getStressLevels:
 SELECT * FROM StressLevelRecord;
+
+getStressLevelByDate:
+SELECT * FROM StressLevelRecord WHERE date = :date;
 
 addStressLevel:
 INSERT INTO StressLevelRecord (stressLevel, stressors) VALUES (:stressLevel, :stressors);

@@ -1,6 +1,4 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,7 +6,6 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -123,9 +120,23 @@ android {
         }
     }
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -134,25 +145,5 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-}
-
-buildkonfig {
-    packageName = libs.versions.android.packageName.get()
-    defaultConfigs {
-        val localPropsFile = rootProject.file("local.properties")
-        val localProperties = Properties()
-        if (localPropsFile.exists()) {
-            runCatching {
-                localProperties.load(localPropsFile.inputStream())
-            }.getOrElse {
-                it.printStackTrace()
-            }
-        }
-        buildConfigField(
-            FieldSpec.Type.STRING,
-            "GEMINI_API_KEY",
-            localProperties["gemini_api_key"]?.toString() ?: ""
-        )
     }
 }

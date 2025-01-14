@@ -4,8 +4,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import com.joohnq.domain.entity.User
 
 sealed class UserViewModelIntent {
-    data object InitUser : UserViewModelIntent()
     data object GetUser : UserViewModelIntent()
+    data object InitUser : UserViewModelIntent()
     data class UpdateUser(val user: User) : UserViewModelIntent()
     data class UpdateUserName(val name: String) : UserViewModelIntent()
     data class UpdateUserImageBitmap(val image: ImageBitmap) : UserViewModelIntent()

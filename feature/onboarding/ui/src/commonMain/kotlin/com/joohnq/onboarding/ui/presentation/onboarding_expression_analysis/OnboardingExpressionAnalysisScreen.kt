@@ -28,8 +28,8 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.mapper.toDomain
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
 class OnboardingExpressionAnalysisScreen(
@@ -43,7 +43,7 @@ class OnboardingExpressionAnalysisScreen(
         val statsViewModel: StatsViewModel = sharedViewModel()
         val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
         val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-        val userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
+        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
         val onboardingState by onboardingViewModel.state.collectAsState()

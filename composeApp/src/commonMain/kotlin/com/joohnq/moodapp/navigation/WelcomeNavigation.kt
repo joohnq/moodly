@@ -14,7 +14,7 @@ fun NavGraphBuilder.welcomeNavigation(
         composable<Destination.Welcome> {
             WelcomeScreen(
                 onNavigateToOnboarding = { onNavigateGraph(NavigationGraph.Onboarding, true) }
-            ).Content()
+            )
         }
     }
 }

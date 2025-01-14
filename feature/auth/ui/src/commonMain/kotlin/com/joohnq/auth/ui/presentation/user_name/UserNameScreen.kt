@@ -19,8 +19,8 @@ import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.validator.UserNameValidator
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
 class UserNameScreen(
@@ -28,7 +28,7 @@ class UserNameScreen(
 ) : CustomScreen<UserNameState>() {
     @Composable
     override fun Screen(): UserNameState {
-        val userPreferencesViewModel: UserPreferenceViewModel = sharedViewModel()
+        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
         val userNameViewModel: UserNameViewModel = sharedViewModel()
         val userViewModel: UserViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()

@@ -4,16 +4,15 @@ import com.joohnq.core.ui.IDatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.plus
 
 class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimeProvider: IDatetimeProvider) {
     operator fun invoke(
-        creationDate: LocalDateTime,
-        currentDate: LocalDateTime = dateTimeProvider.getCurrentDateTime(),
+        creationDate: LocalDate,
+        currentDate: LocalDate = dateTimeProvider.getCurrentDateTime().date,
         healthJournals: List<HealthJournalRecord>,
     ): Map<LocalDate, List<HealthJournalRecord>?> {
-        val recordsByDay = healthJournals.groupBy { it.date.date }
+        val recordsByDay = healthJournals.groupBy { it.date }
         val dateSequence = generateDateSequence(creationDate, currentDate)
         return dateSequence.associate { date ->
             val localDate = LocalDate(date.year, date.month, date.dayOfMonth)
@@ -22,12 +21,12 @@ class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimePro
     }
 
     private fun generateDateSequence(
-        creationDate: LocalDateTime,
-        currentDate: LocalDateTime,
+        creationDate: LocalDate,
+        currentDate: LocalDate,
     ): Sequence<LocalDate> {
-        return generateSequence(creationDate.date) { current ->
+        return generateSequence(creationDate) { current ->
             val nextDate = current.plus(1, DateTimeUnit.DAY)
-            if (nextDate <= currentDate.date) nextDate else null
+            if (nextDate <= currentDate) nextDate else null
         }
     }
 }

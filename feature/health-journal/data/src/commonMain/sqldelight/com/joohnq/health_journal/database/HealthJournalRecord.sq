@@ -3,11 +3,14 @@ CREATE TABLE IF NOT EXISTS HealthJournalRecord (
     mood INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    date TEXT DEFAULT (datetime('now')) NOT NULL
+    date TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
 );
 
 getHealthJournals:
 SELECT * FROM HealthJournalRecord;
+
+getHealthJournalByDate:
+SELECT * FROM HealthJournalRecord WHERE date = :date;
 
 addHealthJournal:
 INSERT INTO HealthJournalRecord (mood, title, description) VALUES (:mood, :title, :description);

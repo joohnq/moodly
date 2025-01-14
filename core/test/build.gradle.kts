@@ -24,7 +24,7 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
+        androidUnitTest.dependencies {
             implementation(libs.androidx.startup.runtime)
             implementation(libs.android.driver)
 
@@ -33,14 +33,14 @@ kotlin {
             implementation(libs.junit)
         }
         commonMain.dependencies {
+            implementation(libs.datetime)
+        }
+        commonTest.dependencies {
             implementation(projects.core.database)
             implementation(libs.bundles.test)
             implementation(libs.coroutines.extensions)
         }
-        iosMain.dependencies {
-            implementation(libs.sqldelight.native.driver)
-        }
-        nativeMain.dependencies {
+        nativeTest.dependencies {
             implementation(libs.sqldelight.native.driver)
         }
     }
@@ -56,4 +56,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+}
+dependencies {
+    implementation(libs.androidx.core.ktx)
 }

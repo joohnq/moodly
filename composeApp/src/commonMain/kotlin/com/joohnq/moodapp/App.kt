@@ -1,5 +1,7 @@
 package com.joohnq.moodapp
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -7,8 +9,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.moodapp.navigation.authNavigation
-import com.joohnq.moodapp.navigation.dashboardNavigation
 import com.joohnq.moodapp.navigation.loadingNavigation
 import com.joohnq.moodapp.navigation.onboardingNavigation
 import com.joohnq.moodapp.navigation.welcomeNavigation
@@ -16,18 +18,18 @@ import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import org.koin.compose.KoinContext
 
 @Composable
 fun App() {
     KoinContext {
         val userViewModel: UserViewModel = sharedViewModel()
-        val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
+        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
 
         SideEffect {
-            userPreferenceViewModel.onAction(UserPreferenceViewModelIntent.AddUserPreferences)
+            userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.AddUserPreferences)
             userViewModel.onAction(UserViewModelIntent.InitUser)
         }
 
@@ -59,7 +61,14 @@ fun App() {
 
         MaterialTheme {
             val navHostController = rememberNavController()
-            NavHost(navController = navHostController, startDestination = NavigationGraph.Loading) {
+            NavHost(
+                navController = navHostController,
+                startDestination = NavigationGraph.Loading,
+                enterTransition = { EnterTransition.None },
+                exitTransition = { ExitTransition.None },
+                popExitTransition = { ExitTransition.None },
+                popEnterTransition = { EnterTransition.None },
+            ) {
                 loadingNavigation(
                     onNavigateGraph = navHostController::onNavigateGraph
                 )
@@ -75,7 +84,7 @@ fun App() {
                     onNavigate = navHostController::onNavigate,
                     onNavigateGraph = navHostController::onNavigateGraph
                 )
-                dashboardNavigation(
+                appNavigation(
                     onNavigate = navHostController::onNavigate,
                     onNavigateBack = navHostController::onNavigateBack,
                     onGoBack = navHostController::onGoBack,

@@ -9,8 +9,8 @@ import com.joohnq.core.ui.CustomScreenNothing
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.entity.UserPreferences
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 
 class LoadingScreen(
     private val onNavigateToWelcome: () -> Unit,
@@ -20,11 +20,11 @@ class LoadingScreen(
 ) : CustomScreenNothing() {
     @Composable
     override fun Screen() {
-        val userPreferenceViewModel: UserPreferenceViewModel = sharedViewModel()
-        val userPreferencesState by userPreferenceViewModel.state.collectAsState()
+        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
+        val userPreferencesState by userPreferencesViewModel.state.collectAsState()
 
         SideEffect {
-            userPreferenceViewModel.onAction(UserPreferenceViewModelIntent.GetUserPreferences)
+            userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.GetUserPreferences)
         }
 
         LaunchedEffect(userPreferencesState.userPreferences)

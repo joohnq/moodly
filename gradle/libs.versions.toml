@@ -26,7 +26,6 @@ truthish = "1.0.1"
 turbine = "1.2.0"
 mokkery = "2.6.1"
 lifecycleViewModel = "2.8.7"
-buildkonfig = "0.15.2"
 generativeai = "0.9.0-1.0.1"
 startupRuntime = "1.2.0"
 sqldelight = "2.0.2"
@@ -88,7 +87,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 mockative = { id = "id.mockative", version.ref = "mockative" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]

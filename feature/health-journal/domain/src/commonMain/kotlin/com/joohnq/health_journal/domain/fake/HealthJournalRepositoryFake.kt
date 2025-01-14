@@ -1,10 +1,11 @@
 package com.joohnq.health_journal.domain.fake
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.CustomFake
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.repository.HealthJournalRepository
 import com.joohnq.mood.domain.entity.Mood
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 
 class HealthJournalRepositoryFake : HealthJournalRepository, CustomFake {
     override var shouldThrowError: Boolean = false
@@ -13,14 +14,14 @@ class HealthJournalRepositoryFake : HealthJournalRepository, CustomFake {
             id = 1,
             title = "title",
             description = "description",
-            date = LocalDateTime(2022, 1, 1, 0, 0, 0),
+            date = CoreTestConstants.FAKE_DATE,
             mood = Mood.Depressed
         ),
         HealthJournalRecord(
             id = 2,
             title = "title 2",
             description = "description 2",
-            date = LocalDateTime(2024, 1, 1, 0, 0, 0),
+            date = CoreTestConstants.FAKE_DATE,
             mood = Mood.Neutral
         )
     )
@@ -29,6 +30,12 @@ class HealthJournalRepositoryFake : HealthJournalRepository, CustomFake {
         if (shouldThrowError) return Result.failure(Exception("Failed to get health journals"))
 
         return Result.success(items)
+    }
+
+    override suspend fun getHealthJournalByDate(date: LocalDate): Result<HealthJournalRecord?> {
+        if (shouldThrowError) return Result.failure(Exception("Failed to get health journals"))
+
+        return Result.success(items.find { it.date == date })
     }
 
     override suspend fun addHealthJournal(healthJournalRecord: HealthJournalRecord): Result<Boolean> {

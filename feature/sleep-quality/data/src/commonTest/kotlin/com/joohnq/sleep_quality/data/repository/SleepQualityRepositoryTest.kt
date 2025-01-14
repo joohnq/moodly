@@ -1,5 +1,6 @@
 package com.joohnq.sleep_quality.data.repository
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -12,7 +13,6 @@ import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -74,7 +74,7 @@ class SleepQualityRepositoryTest : RobolectricTests() {
                 startSleeping = "00:00",
                 endSleeping = "08:00",
                 sleepInfluences = listOf(),
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0),
+                date = CoreTestConstants.FAKE_DATE,
             ),
             SleepQualityRecord(
                 id = 2,
@@ -84,7 +84,7 @@ class SleepQualityRepositoryTest : RobolectricTests() {
                 sleepInfluences = listOf(
                     SleepInfluences.Anxiety
                 ),
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0),
+                date = CoreTestConstants.FAKE_DATE,
             )
         )
     }

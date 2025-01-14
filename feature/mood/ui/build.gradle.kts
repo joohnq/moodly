@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -47,6 +48,10 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
             implementation(libs.datetime)
+        }
+        commonTest.dependencies {
+            implementation(libs.bundles.test)
+            implementation(libs.turbine)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.joohnq.home.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.domain.constant.UserFileStorageConstants
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.AvatarImage
 import com.joohnq.shared_resources.components.ImageCache
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.greeting
@@ -71,9 +71,8 @@ fun HomeTopBar(
                     }
 
                     ImageType.DRAWABLE -> {
-                        Image(
-                            painter = painterResource(images[it.toInt()]),
-                            contentDescription = it
+                        AvatarImage(
+                            painterResource(images[it.toInt()])
                         )
                     }
                 }

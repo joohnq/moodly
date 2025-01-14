@@ -9,6 +9,7 @@ import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.AddHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.DeleteHealthJournalsUseCase
+import com.joohnq.health_journal.domain.use_case.GetHealthJournalsByDate
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.UpdateHealthJournalsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class HealthJournalViewModel(
     private val getHealthJournalsUseCase: GetHealthJournalsUseCase,
+    private val getHealthJournalsByDate: GetHealthJournalsByDate,
     private val deleteHealthJournalsUseCase: DeleteHealthJournalsUseCase,
     private val updateHealthJournalsUseCase: UpdateHealthJournalsUseCase,
     private val addHealthJournalsUseCase: AddHealthJournalsUseCase,

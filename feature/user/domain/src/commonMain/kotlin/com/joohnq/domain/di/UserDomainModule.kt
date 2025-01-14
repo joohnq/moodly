@@ -2,7 +2,6 @@ package com.joohnq.domain.di
 
 import com.joohnq.domain.use_case.user.AddUserUseCase
 import com.joohnq.domain.use_case.user.GetUserUseCase
-import com.joohnq.domain.use_case.user.InitUserUseCase
 import com.joohnq.domain.use_case.user.UpdateMedicationsSupplementsUseCase
 import com.joohnq.domain.use_case.user.UpdatePhysicalSymptomsUseCase
 import com.joohnq.domain.use_case.user.UpdateSoughtHelpUseCase
@@ -22,7 +21,6 @@ import org.koin.dsl.module
 val userDomainModule = module {
     factoryOf(::AddUserUseCase)
     factoryOf(::GetUserUseCase)
-    factoryOf(::InitUserUseCase)
     factoryOf(::UpdateMedicationsSupplementsUseCase)
     factoryOf(::UpdatePhysicalSymptomsUseCase)
     factoryOf(::UpdateSoughtHelpUseCase)

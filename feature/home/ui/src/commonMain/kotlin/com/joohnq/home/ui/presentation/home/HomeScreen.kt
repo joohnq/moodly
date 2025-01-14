@@ -3,11 +3,10 @@ package com.joohnq.home.ui.presentation.home
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.joohnq.core.ui.IDatetimeProvider
 import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.onAnyError
@@ -52,12 +51,12 @@ fun HomeScreen(
     val dateTimeProvider: IDatetimeProvider = koinInject()
     val today = dateTimeProvider.formatDate()
 
-    val userState by userViewModel.state.collectAsState()
-    val freudScoreState by freudScoreViewModel.state.collectAsState()
-    val statsState by statsViewModel.state.collectAsState()
-    val sleepQualityState by sleepQualityViewModel.state.collectAsState()
-    val stressLevelState by stressLevelViewModel.state.collectAsState()
-    val healthJournalState by healthJournalViewModel.state.collectAsState()
+    val userState by userViewModel.state.collectAsStateWithLifecycle()
+    val freudScoreState by freudScoreViewModel.state.collectAsStateWithLifecycle()
+    val statsState by statsViewModel.state.collectAsStateWithLifecycle()
+    val sleepQualityState by sleepQualityViewModel.state.collectAsStateWithLifecycle()
+    val stressLevelState by stressLevelViewModel.state.collectAsStateWithLifecycle()
+    val healthJournalState by healthJournalViewModel.state.collectAsStateWithLifecycle()
 
     fun onError(error: String) {
         scope.launch {
@@ -75,7 +74,7 @@ fun HomeScreen(
             HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel()
         }
 
-    SideEffect {
+    LaunchedEffect(Unit) {
         statsViewModel.onAction(StatsIntent.GetStatsRecords)
         userViewModel.onAction(UserViewModelIntent.GetUser)
         stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)

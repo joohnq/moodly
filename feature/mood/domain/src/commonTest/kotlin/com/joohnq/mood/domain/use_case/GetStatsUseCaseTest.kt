@@ -1,11 +1,13 @@
 package com.joohnq.mood.domain.use_case
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.fake.StatsRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.plus
 import kotlin.test.Test
 
 class GetStatsUseCaseTest {
@@ -24,12 +26,12 @@ class GetStatsUseCaseTest {
                     StatsRecord(
                         id = 1,
                         mood = Mood.Sad,
-                        date = LocalDateTime(2025, 1, 1, 1, 0, 0)
+                        date = CoreTestConstants.FAKE_DATE
                     ),
                     StatsRecord(
                         id = 2,
                         mood = Mood.Happy,
-                        date = LocalDateTime(2025, 1, 2, 1, 0, 0)
+                        date = CoreTestConstants.FAKE_DATE.plus(1, DateTimeUnit.DAY)
                     )
                 )
             )

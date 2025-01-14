@@ -128,7 +128,7 @@ fun MoodBarStatistic(
                         }
                     }
                     Text(
-                        text = DatetimeProvider.formatShortDate(statsRecord.date.date),
+                        text = DatetimeProvider.formatShortDate(statsRecord.date),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

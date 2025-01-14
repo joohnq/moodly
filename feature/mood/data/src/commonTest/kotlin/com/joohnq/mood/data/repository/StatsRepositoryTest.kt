@@ -1,5 +1,6 @@
 package com.joohnq.mood.data.repository
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -11,7 +12,6 @@ import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.repository.StatsRepository
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -58,7 +58,7 @@ class StatsRepositoryTest : RobolectricTests() {
                 id = 3,
                 mood = Mood.Depressed,
                 description = "description 3",
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                date = CoreTestConstants.FAKE_DATE
             )
 
             //WHEN
@@ -102,13 +102,13 @@ class StatsRepositoryTest : RobolectricTests() {
                 id = 1,
                 mood = Mood.Overjoyed,
                 description = "description",
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                date = CoreTestConstants.FAKE_DATE
             ),
             StatsRecord(
                 id = 2,
                 mood = Mood.Happy,
                 description = "description 2",
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                date = CoreTestConstants.FAKE_DATE
             )
         )
     }

@@ -11,7 +11,7 @@ class OrganizeByDateHealthJournalUseCase(private val dateTimeProvider: IDatetime
         monthDaysCount: Int = dateTimeProvider.getMonthDaysCount(date),
         healthJournals: List<HealthJournalRecord>,
     ): Map<LocalDate, List<HealthJournalRecord>?> {
-        val recordsByDay = healthJournals.groupBy { it.date.date }
+        val recordsByDay = healthJournals.groupBy { it.date }
 
         return (1..monthDaysCount).associate { day ->
             val localDate = LocalDate(date.year, date.month, day)

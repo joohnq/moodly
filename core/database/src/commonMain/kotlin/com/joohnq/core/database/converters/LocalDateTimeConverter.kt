@@ -1,9 +1,8 @@
 package com.joohnq.core.database.converters
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 
 object LocalDateTimeConverter {
-    fun fromLocalDateTime(date: LocalDateTime): String = date.toString()
-    fun toLocalDateTime(dateString: String): LocalDateTime =
-        LocalDateTime.parse(dateString.replace(" ", "T"))
+    fun toLocalDate(dateString: String): LocalDate =
+        LocalDate.parse(dateString)
 }

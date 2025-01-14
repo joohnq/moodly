@@ -5,7 +5,6 @@ import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.fake.SleepQualityRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.Test
 
 class GetSleepQualityUseCaseTest {
@@ -27,7 +26,7 @@ class GetSleepQualityUseCaseTest {
                         startSleeping = "00:00",
                         endSleeping = "06:00",
                         sleepInfluences = listOf(),
-                        date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                        date = CoreTestConstants.FAKE_DATE
                     )
                 )
             )

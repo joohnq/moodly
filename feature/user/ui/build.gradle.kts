@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -39,8 +40,16 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.bundles.viewmodel)
+            implementation(libs.datetime)
+
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.koin)
+        }
+        commonTest.dependencies {
+            implementation(projects.core.storage.domain)
+            implementation(projects.core.test)
+            implementation(libs.bundles.test)
+            implementation(libs.turbine)
         }
     }
 }

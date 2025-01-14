@@ -1,12 +1,12 @@
 package com.joohnq.stress_level.domain.use_case
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.domain.fake.StressLevelRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.Test
 
 class GetStressLevelUseCaseTest {
@@ -26,7 +26,7 @@ class GetStressLevelUseCaseTest {
                         id = 1,
                         stressLevel = StressLevel.One,
                         stressors = listOf(),
-                        date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                        date = CoreTestConstants.FAKE_DATE
                     ),
                     StressLevelRecord(
                         id = 2,
@@ -34,7 +34,7 @@ class GetStressLevelUseCaseTest {
                         stressors = listOf(
                             Stressor.Work
                         ),
-                        date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+                        date = CoreTestConstants.FAKE_DATE
                     )
                 )
             )

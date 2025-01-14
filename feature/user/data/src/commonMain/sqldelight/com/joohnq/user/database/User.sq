@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS User(
     medicationsSupplements INTEGER NOT NULL,
     soughtHelp INTEGER NOT NULL,
     physicalSymptoms INTEGER NOT NULL,
-    dateCreated TEXT DEFAULT (datetime('now')) NOT NULL
+    dateCreated TEXT DEFAULT CURRENT_DATE NOT NULL
 );
 
 getUser:

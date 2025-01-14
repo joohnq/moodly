@@ -30,7 +30,7 @@ class UserRepositoryImpl(
                     ),
                     soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
                     physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
-                    dateCreated = LocalDateTimeConverter.toLocalDateTime(dateCreated)
+                    dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
                 )
             }).executeAsOneOrNull() ?: throw Exception("User not found")
         }

@@ -6,6 +6,7 @@ import com.joohnq.health_journal.database.HealthJournalDatabaseSql
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.repository.HealthJournalRepository
 import com.joohnq.mood.domain.converter.StatsRecordConverter
+import kotlinx.datetime.LocalDate
 
 class HealthJournalRepositoryImpl(
     private val database: HealthJournalDatabaseSql,
@@ -19,9 +20,22 @@ class HealthJournalRepositoryImpl(
                     mood = StatsRecordConverter.toMood(mood),
                     title = title,
                     description = description,
-                    date = LocalDateTimeConverter.toLocalDateTime(date)
+                    date = LocalDateTimeConverter.toLocalDate(date)
                 )
             }.executeAsList()
+        }
+
+    override suspend fun getHealthJournalByDate(date: LocalDate): Result<HealthJournalRecord?> =
+        executeTryCatchResult {
+            query.getHealthJournalByDate(date.toString()) { id, mood, title, description, date ->
+                HealthJournalRecord(
+                    id = id.toInt(),
+                    mood = StatsRecordConverter.toMood(mood),
+                    title = title,
+                    description = description,
+                    date = LocalDateTimeConverter.toLocalDate(date)
+                )
+            }.executeAsOneOrNull()
         }
 
     override suspend fun addHealthJournal(

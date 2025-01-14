@@ -8,7 +8,7 @@ class GetStatGroupByDateUseCase() {
         statsRecords: List<StatsRecord>,
     ): Map<LocalDate, List<StatsRecord>> =
         statsRecords
-            .groupBy { it.date.date }
+            .groupBy { it.date }
             .map { (key, value) ->
                 key to value
             }

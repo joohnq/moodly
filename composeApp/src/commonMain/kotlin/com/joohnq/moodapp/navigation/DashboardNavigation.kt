@@ -21,7 +21,7 @@ import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelSc
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
 
-fun NavGraphBuilder.dashboardNavigation(
+fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination, Boolean) -> Unit,
     onNavigateBack: (Destination) -> Unit,
     onGoBack: () -> Unit,
@@ -81,7 +81,7 @@ fun NavGraphBuilder.dashboardNavigation(
                         false
                     )
                 }
-            ).Content()
+            )
         }
         composable<Destination.App.HealthJournal> {
             HealthJournalScreen(
@@ -124,7 +124,7 @@ fun NavGraphBuilder.dashboardNavigation(
                     )
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.ExpressionAnalysis> {
             ExpressionAnalysisScreen(

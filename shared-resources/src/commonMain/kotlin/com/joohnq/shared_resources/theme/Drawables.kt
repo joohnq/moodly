@@ -167,11 +167,11 @@ object Drawables {
 
     object Avatar {
         val avatars = listOf(
-            Drawables.Images.AvatarCloud,
-            Drawables.Images.AvatarTime,
-            Drawables.Images.AvatarArrowUp,
-            Drawables.Images.AvatarArrowDown,
-            Drawables.Images.AvatarPieChart,
+            Images.AvatarCloud,
+            Images.AvatarTime,
+            Images.AvatarArrowUp,
+            Images.AvatarArrowDown,
+            Images.AvatarPieChart,
         )
     }
 }

@@ -5,16 +5,15 @@ import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class OrganizeByDateHealthJournalUseCaseTest {
     companion object {
-        private val lastYear = LocalDateTime(2024, 1, 10, 0, 0, 0)
-        private val standard = LocalDateTime(2025, 1, 10, 0, 0, 0)
-        private val today = LocalDateTime(2025, 1, 10, 0, 0, 0)
-        private val yesterday = LocalDateTime(2025, 1, 9, 0, 0, 0)
+        private val lastYear = LocalDate(2024, 1, 10)
+        private val today = LocalDate(2025, 1, 10)
+        private val yesterday = LocalDate(2025, 1, 9)
         val items = listOf(
             HealthJournalRecord(
                 mood = Mood.Overjoyed,

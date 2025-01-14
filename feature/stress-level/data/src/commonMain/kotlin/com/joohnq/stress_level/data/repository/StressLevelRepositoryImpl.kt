@@ -7,6 +7,7 @@ import com.joohnq.stress_level.domain.converter.StressLevelRecordConverter
 import com.joohnq.stress_level.domain.converter.StressorsConverter
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
+import kotlinx.datetime.LocalDate
 
 class StressLevelRepositoryImpl(
     private val database: StressLevelDatabaseSql,
@@ -19,9 +20,21 @@ class StressLevelRepositoryImpl(
                     id = id.toInt(),
                     stressLevel = StressLevelRecordConverter.toStressLevel(stressLevel),
                     stressors = StressorsConverter.toStressorsList(stressors),
-                    date = LocalDateTimeConverter.toLocalDateTime(date)
+                    date = LocalDateTimeConverter.toLocalDate(date)
                 )
             }.executeAsList()
+        }
+
+    override suspend fun getStressLevelByDate(date: LocalDate): Result<StressLevelRecord?> =
+        executeTryCatchResult {
+            query.getStressLevelByDate(date.toString()) { id, stressLevel, stressors, date ->
+                StressLevelRecord(
+                    id = id.toInt(),
+                    stressLevel = StressLevelRecordConverter.toStressLevel(stressLevel),
+                    stressors = StressorsConverter.toStressorsList(stressors),
+                    date = LocalDateTimeConverter.toLocalDate(date)
+                )
+            }.executeAsOneOrNull()
         }
 
     override suspend fun addStressLevel(stressLevelRecord: StressLevelRecord): Result<Boolean> =

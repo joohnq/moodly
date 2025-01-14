@@ -1,10 +1,11 @@
 package com.joohnq.sleep_quality.domain.fake
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.CustomFake
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 
 class SleepQualityRepositoryFake : SleepQualityRepository, CustomFake {
     override var shouldThrowError: Boolean = false
@@ -15,7 +16,7 @@ class SleepQualityRepositoryFake : SleepQualityRepository, CustomFake {
             startSleeping = "00:00",
             endSleeping = "06:00",
             sleepInfluences = listOf(),
-            date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+            date = CoreTestConstants.FAKE_DATE
         )
     )
 
@@ -23,6 +24,12 @@ class SleepQualityRepositoryFake : SleepQualityRepository, CustomFake {
         if (shouldThrowError) return Result.failure(Exception("Failed to get sleep qualities"))
 
         return Result.success(items)
+    }
+
+    override suspend fun getSleepQualityByDate(date: LocalDate): Result<SleepQualityRecord?> {
+        if (shouldThrowError) return Result.failure(Exception("Failed to get sleep qualities"))
+
+        return Result.success(items.find { it.date == date })
     }
 
     override suspend fun addSleepQuality(sleepQualityRecord: SleepQualityRecord): Result<Boolean> {

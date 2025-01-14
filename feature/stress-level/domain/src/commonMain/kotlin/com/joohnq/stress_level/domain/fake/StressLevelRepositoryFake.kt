@@ -5,7 +5,7 @@ import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 
 class StressLevelRepositoryFake : StressLevelRepository, CustomFake {
     override var shouldThrowError: Boolean = false
@@ -14,7 +14,7 @@ class StressLevelRepositoryFake : StressLevelRepository, CustomFake {
             id = 1,
             stressLevel = StressLevel.One,
             stressors = listOf(),
-            date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+            date = LocalDate(2025, 1, 1)
         ),
         StressLevelRecord(
             id = 2,
@@ -22,7 +22,7 @@ class StressLevelRepositoryFake : StressLevelRepository, CustomFake {
             stressors = listOf(
                 Stressor.Work
             ),
-            date = LocalDateTime(2025, 1, 1, 0, 0, 0)
+            date = LocalDate(2025, 1, 1)
         )
     )
 
@@ -30,6 +30,12 @@ class StressLevelRepositoryFake : StressLevelRepository, CustomFake {
         if (shouldThrowError) return Result.failure(Exception("Failed to get stress levels"))
 
         return Result.success(items)
+    }
+
+    override suspend fun getStressLevelByDate(date: LocalDate): Result<StressLevelRecord?> {
+        if (shouldThrowError) return Result.failure(Exception("Failed to get stress level by data"))
+
+        return Result.success(items.find { it.date == date })
     }
 
     override suspend fun addStressLevel(stressLevelRecord: StressLevelRecord): Result<Boolean> {

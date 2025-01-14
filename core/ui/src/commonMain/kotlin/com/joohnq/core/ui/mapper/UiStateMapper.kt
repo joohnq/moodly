@@ -12,7 +12,7 @@ fun <T> UiState<T>.fold(
     when (this) {
         is UiState.Loading -> onLoading()
         is UiState.Success -> onSuccess(this.data)
-        is UiState.Error -> onError(this.message)
+        is UiState.Error -> onError(this.exception.message.toString())
         is UiState.Idle -> onIdle()
     }
 
@@ -34,7 +34,7 @@ fun onAnyError(
     onAnyHasError: (String) -> Unit,
 ) {
     values.filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        onAnyHasError(errorState.message)
+        onAnyHasError(errorState.exception.message.toString())
         return
     }
 }
@@ -45,7 +45,7 @@ fun fold(
     onAnyHasError: (String) -> Unit,
 ) {
     values.filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        onAnyHasError(errorState.message)
+        onAnyHasError(errorState.exception.message.toString())
         return
     }
 
@@ -63,7 +63,7 @@ fun <T> UiState<T>.foldComposable(
 ) = when (this) {
     is UiState.Loading -> onLoading()
     is UiState.Success -> onSuccess(this.data)
-    is UiState.Error -> onError(this.message)
+    is UiState.Error -> onError(this.exception.message.toString())
     is UiState.Idle -> onIdle()
 }
 
@@ -96,5 +96,5 @@ fun <T> UiState<T>.onSuccess(
 fun <T> Result<T>.toUiState(): UiState<T> =
     fold(
         onSuccess = { item -> UiState.Success(item) },
-        onFailure = { error -> UiState.Error(error.message.toString()) }
+        onFailure = { error -> UiState.Error(error) }
     )

@@ -7,6 +7,6 @@ class UpdateUserImageDrawableUseCase(private val userRepository: UserRepository)
     suspend operator fun invoke(i: Int): Result<Boolean> =
         userRepository.updateUserImage(
             image = i.toString(),
-            imageType = ImageType.DEVICE
+            imageType = ImageType.DRAWABLE
         )
 }

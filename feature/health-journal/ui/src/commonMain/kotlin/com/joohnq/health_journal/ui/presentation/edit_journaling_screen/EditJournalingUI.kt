@@ -110,7 +110,7 @@ import org.jetbrains.compose.resources.stringResource
                     text = Res.string.edit_journal,
                 ) {
                     TextWithBackground(
-                        text = DatetimeProvider.formatDateTime(state.healthJournal.date),
+                        text = DatetimeProvider.formatDate(state.healthJournal.date),
                         textColor = resource.palette.moodScreenMoodFaceColor,
                         backgroundColor = resource.palette.subColor,
                     )

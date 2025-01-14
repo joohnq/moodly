@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.freud_score.ui.components.MentalScoreHistoryItemWithHour
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
@@ -70,7 +71,7 @@ import org.koin.compose.koinInject
                 content = {
                     mapStatsRecords.forEachMap { key, items ->
                         item {
-                            SmallTitle(text = key)
+                            SmallTitle(text = DatetimeProvider.formatDate(key))
                         }
                         items(items) { statsRecord ->
                             val resource = statsRecord.mood.toResource()

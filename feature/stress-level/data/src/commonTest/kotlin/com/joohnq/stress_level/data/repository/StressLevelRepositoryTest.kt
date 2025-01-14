@@ -12,7 +12,6 @@ import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.domain.repository.StressLevelRepository
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -72,7 +71,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
                 id = 1,
                 stressLevel = StressLevel.Three,
                 stressors = listOf(),
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0),
+                date = CoreTestConstants.FAKE_DATE,
             ),
             StressLevelRecord(
                 id = 2,
@@ -80,7 +79,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
                 stressors = listOf(
                     Stressor.Work
                 ),
-                date = LocalDateTime(2025, 1, 1, 0, 0, 0),
+                date = CoreTestConstants.FAKE_DATE,
             )
         )
     }

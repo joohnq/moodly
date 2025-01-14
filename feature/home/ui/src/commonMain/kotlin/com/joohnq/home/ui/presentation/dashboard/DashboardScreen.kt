@@ -19,10 +19,8 @@ import com.joohnq.home.ui.components.TabItem
 import com.joohnq.home.ui.presentation.home.HomeScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.chat
 import com.joohnq.shared_resources.home
 import com.joohnq.shared_resources.journaling
-import com.joohnq.shared_resources.profile
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 
@@ -64,15 +62,6 @@ class DashboardScreen(
             ),
             BottomItem(
                 icon = DIcon(
-                    icon = Drawables.Icons.Chat,
-                    modifier = Modifier.size(Dimens.Icon),
-                    contentDescription = Res.string.chat
-                ),
-                title = Res.string.chat,
-                route = Destination.App.DashBoard.Home
-            ),
-            BottomItem(
-                icon = DIcon(
                     icon = Drawables.Icons.Document,
                     modifier = Modifier.size(Dimens.Icon),
                     contentDescription = Res.string.journaling
@@ -80,15 +69,6 @@ class DashboardScreen(
                 title = Res.string.journaling,
                 route = Destination.App.DashBoard.Journaling,
             ),
-            BottomItem(
-                icon = DIcon(
-                    icon = Drawables.Icons.Profile,
-                    modifier = Modifier.size(Dimens.Icon),
-                    contentDescription = Res.string.profile
-                ),
-                title = Res.string.profile,
-                route = Destination.App.DashBoard.Journaling,
-            )
         )
 
         @Composable
@@ -105,14 +85,10 @@ class DashboardScreen(
             bottomBar = {
                 DashboardBottomNavigation(
                     left = {
-                        bottomItems.take(2).forEach { item ->
-                            item.createTabItem()
-                        }
+                        bottomItems[0].createTabItem()
                     },
                     right = {
-                        bottomItems.takeLast(2).forEach { item ->
-                            item.createTabItem()
-                        }
+                        bottomItems[1].createTabItem()
                     },
                     onNavigateAddJournaling = onNavigateAddJournaling,
                     onNavigateAddStatScreen = onNavigateAddStatScreen,

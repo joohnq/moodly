@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.rememberPainter
@@ -16,6 +17,11 @@ fun ImageCache(directory: String, fileName: String) {
     val systemTemporaryPath = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
     val painter = rememberPainter("${systemTemporaryPath / directory / fileName}")
 
+    AvatarImage(painter)
+}
+
+@Composable
+fun AvatarImage(painter: Painter) {
     Image(
         painter = painter,
         contentDescription = null,

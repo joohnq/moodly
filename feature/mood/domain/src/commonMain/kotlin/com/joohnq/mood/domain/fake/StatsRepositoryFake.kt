@@ -1,10 +1,13 @@
 package com.joohnq.mood.domain.fake
 
+import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.CustomFake
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.repository.StatsRepository
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 class StatsRepositoryFake : StatsRepository, CustomFake {
     override var shouldThrowError = false
@@ -12,12 +15,12 @@ class StatsRepositoryFake : StatsRepository, CustomFake {
         StatsRecord(
             id = 1,
             mood = Mood.Sad,
-            date = LocalDateTime(2025, 1, 1, 1, 0, 0)
+            date = CoreTestConstants.FAKE_DATE
         ),
         StatsRecord(
             id = 2,
             mood = Mood.Happy,
-            date = LocalDateTime(2025, 1, 2, 1, 0, 0)
+            date = CoreTestConstants.FAKE_DATE.plus(1, DateTimeUnit.DAY)
         )
     )
 
@@ -25,6 +28,12 @@ class StatsRepositoryFake : StatsRepository, CustomFake {
         if (shouldThrowError) return Result.failure(Exception("Failed to get stats"))
 
         return Result.success(items)
+    }
+
+    override suspend fun getStatByDate(date: LocalDate): Result<StatsRecord?> {
+        if (shouldThrowError) return Result.failure(Exception("Failed to get stats"))
+
+        return Result.success(items.find { it.date == date })
     }
 
     override suspend fun addStats(statsRecord: StatsRecord): Result<Boolean> {

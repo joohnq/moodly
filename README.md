@@ -8,6 +8,23 @@ A UI é cuidadosamente desenhada (desenvolvido por: [www.stranghelix.bio](https:
 
 <img width="1600" alt="Thumbnail Horizontal" src="https://github.com/user-attachments/assets/a2e457e1-f20b-436d-9e20-76c541e67230">
 
+
+https://github.com/user-attachments/assets/221334b9-6d55-492c-b710-966a94e2baf3
+
+
+
+https://github.com/user-attachments/assets/7165a8a9-0e5e-4a09-a3db-479465f1f6af
+
+
+
+https://github.com/user-attachments/assets/d4f6cd1d-80c6-4133-8492-115f3ed7bc3d
+
+
+
+https://github.com/user-attachments/assets/d9e2bf60-3bda-4a90-a213-1e10e4718087
+
+
+
 ## 💡 Funcionalidades
 
 - **Salvar humor diário** 😃: Registre facilmente seu estado emocional, escolhendo entre diferentes níveis de humor (depressivo, triste, neutro, feliz e super contente) com uma interface visual rica e interativa.

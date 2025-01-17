@@ -14,6 +14,7 @@ import com.joohnq.mood.data.di.moodDriverFactoryModule
 import com.joohnq.mood.domain.di.moodDomainModule
 import com.joohnq.mood.ui.di.moodUiModule
 import com.joohnq.onboarding.ui.di.onboardingUiModule
+import com.joohnq.security.data.di.securityAuthenticationModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.domain.di.sleepQualityDomainModule
@@ -53,5 +54,6 @@ val appModule = listOf(
     sleepQualityDriverFactoryModule,
     stressLevelDriverFactoryModule,
     userDriverFactoryModule,
-    coreStorageModule
+    coreStorageModule,
+    securityAuthenticationModule
 )

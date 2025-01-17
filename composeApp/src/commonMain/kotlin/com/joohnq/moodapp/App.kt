@@ -13,6 +13,7 @@ import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.moodapp.navigation.authNavigation
 import com.joohnq.moodapp.navigation.loadingNavigation
 import com.joohnq.moodapp.navigation.onboardingNavigation
+import com.joohnq.moodapp.navigation.securityNavigation
 import com.joohnq.moodapp.navigation.welcomeNavigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
@@ -81,6 +82,9 @@ fun App() {
                     onGoBack = navHostController::onGoBack
                 )
                 authNavigation(
+                    onNavigate = navHostController::onNavigate,
+                )
+                securityNavigation(
                     onNavigate = navHostController::onNavigate,
                     onNavigateGraph = navHostController::onNavigateGraph
                 )

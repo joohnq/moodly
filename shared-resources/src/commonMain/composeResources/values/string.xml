@@ -202,4 +202,7 @@
     <string name="to_set_your_profile_picture">To set your profile picture, please grant this permission. You can manage permissions in your device settings</string>
     <string name="settings">Settings</string>
     <string name="empty">Empty</string>
+    <string name="security_setup">Security Setup</string>
+    <string name="skip">Skip</string>
+    <string name="scan_your_device_security">Scan your device security method to make your account more secure.</string>
 </resources>

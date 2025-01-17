@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.mood.ui.components.MoodFace
@@ -131,11 +133,11 @@ fun AllJournalsCard(
                         tint = Colors.White,
                         modifier = Modifier.size(18.dp)
                     )
-//                    Text(
-//                        text = DatetimeProvider.formatTime(healthJournal.date),
-//                        style = TextStyles.TextSmSemiBold(),
-//                        color = Colors.White
-//                    )
+                    Text(
+                        text = DatetimeProvider.formatTime(healthJournal.createdAt),
+                        style = TextStyles.TextSmSemiBold(),
+                        color = Colors.White
+                    )
                 }
                 Box(
                     modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()

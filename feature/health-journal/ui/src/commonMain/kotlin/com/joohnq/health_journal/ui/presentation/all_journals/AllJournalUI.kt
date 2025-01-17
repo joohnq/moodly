@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.getValue
+import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.core.ui.mapper.onFold
 import com.joohnq.domain.entity.User
 import com.joohnq.health_journal.domain.use_case.OrganizeFromCreationHealthJournalFreudScoreUseCase
@@ -53,8 +53,8 @@ fun AllJournalUI(state: AllJournalState) {
         state.healthJournalRecords,
         onLoading = { LoadingUI() },
         onAllSuccess = {
-            val user: User = state.user.getValue()
-            val healthJournalRecords = state.healthJournalRecords.getValue()
+            val user: User = state.user.getValueOrNull()!!
+            val healthJournalRecords = state.healthJournalRecords.getValueOrNull()
             val organizeFromCreationHealthJournalFreudScoreUseCase: OrganizeFromCreationHealthJournalFreudScoreUseCase =
                 koinInject()
             val healthJournalMap = organizeFromCreationHealthJournalFreudScoreUseCase(

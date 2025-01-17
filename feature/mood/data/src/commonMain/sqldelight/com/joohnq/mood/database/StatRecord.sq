@@ -2,17 +2,11 @@ CREATE TABLE IF NOT EXISTS StatRecord (
     id INTEGER PRIMARY KEY NOT NULL,
     mood INTEGER NOT NULL,
     description TEXT NOT NULL,
-    date TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
+    createdAt TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
 );
 
 getStats:
-SELECT * FROM StatRecord;
-
-getStatsByDate:
-SELECT * FROM StatRecord WHERE date = :date;
-
-getStatByDate:
-SELECT * FROM StatRecord WHERE date = :date;
+SELECT * FROM StatRecord ORDER BY createdAt DESC;
 
 addStats:
 INSERT INTO StatRecord (mood, description) VALUES (:mood, :description);

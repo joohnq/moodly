@@ -12,8 +12,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -34,6 +32,7 @@ import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.MainAlertDialog
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -78,10 +77,10 @@ import org.jetbrains.compose.resources.stringResource
             backgroundColor = Colors.White
         )
 
-    Scaffold(
+    ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(state.snackBarState) },
+        snackBarHostState = state.snackBarState,
         floatingActionButton = {
             EditFloatingActionButtons(
                 isEditing = state.isEditing,
@@ -110,7 +109,7 @@ import org.jetbrains.compose.resources.stringResource
                     text = Res.string.edit_journal,
                 ) {
                     TextWithBackground(
-                        text = DatetimeProvider.formatDate(state.healthJournal.date),
+                        text = DatetimeProvider.formatDate(state.healthJournal.createdAt.date),
                         textColor = resource.palette.moodScreenMoodFaceColor,
                         backgroundColor = resource.palette.subColor,
                     )

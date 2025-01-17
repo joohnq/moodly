@@ -12,8 +12,7 @@ import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 class OnboardingMoodRateScreen(
     private val onNavigateToProfessionalHelp: () -> Unit,
     private val onGoBack: () -> Unit,
-) :
-    CustomScreen<OnboardingMoodRateState>() {
+) : CustomScreen<OnboardingMoodRateState>() {
     @Composable
     override fun Screen(): OnboardingMoodRateState {
         val onboardingViewModel: OnboardingViewModel = sharedViewModel()

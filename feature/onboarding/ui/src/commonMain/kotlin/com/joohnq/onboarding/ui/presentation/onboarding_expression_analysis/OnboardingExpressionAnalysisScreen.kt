@@ -11,6 +11,7 @@ import com.joohnq.core.ui.CustomScreen
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.entity.User
+import com.joohnq.mood.ui.viewmodel.StatSideEffect
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
@@ -20,16 +21,19 @@ import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualitySideEffect
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.toDomain
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.mapper.toDomain
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class OnboardingExpressionAnalysisScreen(
@@ -55,7 +59,6 @@ class OnboardingExpressionAnalysisScreen(
 
         fun onError(message: String) {
             scope.launch {
-                println("Errrrrroooo $message")
                 snackBarState.showSnackbar(message)
             }
         }
@@ -97,9 +100,6 @@ class OnboardingExpressionAnalysisScreen(
         }
 
         fun resetStates() {
-            sleepQualityViewModel.onAction(SleepQualityIntent.ResetAddingStatus)
-            stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
-            statsViewModel.onAction(StatsIntent.ResetAddingStatus)
             userViewModel.onAction(UserViewModelIntent.ResetUpdatingStatus)
             onboardingViewModel.onAction(OnboardingViewModelIntent.ResetStatsRecord)
         }
@@ -117,21 +117,21 @@ class OnboardingExpressionAnalysisScreen(
             }
 
         LaunchedEffect(
-            stressLevelState.adding,
-            sleepQualityState.adding,
-            statsState.adding,
-            userState.updating
+            stressLevelViewModel,
+            sleepQualityViewModel,
+            statsViewModel
         ) {
-            fold(
-                stressLevelState.adding,
-                sleepQualityState.adding,
-                statsState.adding,
-                userState.updating,
-                onAllSuccess = {
+            combine(
+                stressLevelViewModel.sideEffect,
+                sleepQualityViewModel.sideEffect,
+                statsViewModel.sideEffect
+            ) { stressSideEffect, sleepSideEffect, statsSideEffect ->
+                Triple(stressSideEffect, sleepSideEffect, statsSideEffect)
+            }.collect { (stressSideEffect, sleepSideEffect, statsSideEffect) ->
+                if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is StatSideEffect.StatsAdded) {
                     userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipOnboarding())
-                },
-                onAnyHasError = ::onError
-            )
+                }
+            }
         }
 
         LaunchedEffect(userPreferencesState.updating) {

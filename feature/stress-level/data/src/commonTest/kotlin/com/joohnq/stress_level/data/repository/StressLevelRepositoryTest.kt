@@ -71,7 +71,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
                 id = 1,
                 stressLevel = StressLevel.Three,
                 stressors = listOf(),
-                date = CoreTestConstants.FAKE_DATE,
+                createdAt = CoreTestConstants.FAKE_DATE,
             ),
             StressLevelRecord(
                 id = 2,
@@ -79,7 +79,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
                 stressors = listOf(
                     Stressor.Work
                 ),
-                date = CoreTestConstants.FAKE_DATE,
+                createdAt = CoreTestConstants.FAKE_DATE,
             )
         )
     }

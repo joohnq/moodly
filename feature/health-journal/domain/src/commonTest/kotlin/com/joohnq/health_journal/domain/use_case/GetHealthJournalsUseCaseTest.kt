@@ -1,6 +1,5 @@
 package com.joohnq.health_journal.domain.use_case
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.fake.HealthJournalRepositoryFake
 import com.joohnq.mood.domain.entity.Mood
@@ -32,14 +31,14 @@ class GetHealthJournalsUseCaseTest {
                         id = 1,
                         title = "title",
                         description = "description",
-                        date = CoreTestConstants.FAKE_DATE,
+                        createdAt = CoreTestConstants.FAKE_DATE,
                         mood = Mood.Depressed
                     ),
                     HealthJournalRecord(
                         id = 2,
                         title = "title 2",
                         description = "description 2",
-                        date = CoreTestConstants.FAKE_DATE,
+                        createdAt = CoreTestConstants.FAKE_DATE,
                         mood = Mood.Neutral
                     )
                 )

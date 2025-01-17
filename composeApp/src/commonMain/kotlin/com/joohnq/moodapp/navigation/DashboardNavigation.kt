@@ -20,6 +20,7 @@ import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
+import kotlinx.datetime.LocalDate
 
 fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination, Boolean) -> Unit,
@@ -63,7 +64,7 @@ fun NavGraphBuilder.appNavigation(
                         false
                     )
                 },
-                onNavigateToAllJournals = { onNavigate(Destination.App.AllJournals, false) },
+                onNavigateToAllJournals = { onNavigate(Destination.App.AllJournals(), false) },
             ).Content()
         }
         composable<Destination.App.FreudScore> {
@@ -85,15 +86,15 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.HealthJournal> {
             HealthJournalScreen(
-                onNavigateAddJournaling = {
+                onNavigateAddHealthJournal = {
                     onNavigate(
                         Destination.App.AddJournaling,
                         false
                     )
                 },
-                onNavigateAllJournaling = {
+                onNavigateAllJournals = {
                     onNavigate(
-                        Destination.App.AllJournaling,
+                        Destination.App.AllJournals(it.toString()),
                         false
                     )
                 },
@@ -129,7 +130,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.ExpressionAnalysis> {
             ExpressionAnalysisScreen(
                 onNavigateToMood = {
-                    onNavigateBack(Destination.App.Mood())
+                    onNavigate(Destination.App.Mood(), false)
                 },
                 onGoBack = onGoBack
             ).Content()
@@ -173,15 +174,21 @@ fun NavGraphBuilder.appNavigation(
             ).Content()
         }
         composable<Destination.App.EditJournaling> { backStackEntry ->
-            val editJournalingScreen =
+            val editJournaling =
                 backStackEntry.toRoute<Destination.App.EditJournaling>()
             EditJournalingScreen(
-                id = editJournalingScreen.id,
+                id = editJournaling.id,
                 onGoBack = onGoBack
             ).Content()
         }
-        composable<Destination.App.AllJournal> {
+        composable<Destination.App.AllJournals> { backStackEntry ->
+            val allJournals =
+                backStackEntry.toRoute<Destination.App.AllJournals>()
+
+            val date = allJournals.localDate?.let { LocalDate.parse(it) }
+
             AllJournalScreen(
+                localDate = date,
                 onGoBack = onGoBack,
                 onNavigateEditJournaling = { id ->
                     onNavigate(

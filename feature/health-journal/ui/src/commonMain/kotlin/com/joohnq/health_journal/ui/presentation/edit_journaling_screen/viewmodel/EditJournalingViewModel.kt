@@ -29,19 +29,16 @@ class EditJournalingViewModel : ViewModel() {
             is EditJournalingIntent.UpdateIsEditing ->
                 updateIsEditing(intent.value)
 
-            is EditJournalingIntent.GetEditJournaling ->
-                getEditingHealthJournal(intent.id, intent.healthJournalRecords)
+            is EditJournalingIntent.SetEditJournaling ->
+                setEditingHealthJournal(intent.healthJournalRecord)
         }
     }
 
-    private fun getEditingHealthJournal(id: Int, healthJournalRecords: List<HealthJournalRecord>) {
-        val healthJournal =
-            healthJournalRecords.find { it.id == id } ?: return
-
+    private fun setEditingHealthJournal(healthJournalRecord: HealthJournalRecord) {
         _state.update {
             it.copy(
-                currentHealthJournalRecord = healthJournal,
-                editingHealthJournalRecord = healthJournal
+                currentHealthJournalRecord = healthJournalRecord,
+                editingHealthJournalRecord = healthJournalRecord
             )
         }
     }

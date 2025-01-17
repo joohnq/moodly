@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +19,7 @@ import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnaly
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.expression_analysis_desc
@@ -34,10 +33,10 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisUI(
     state: ExpressionAnalysisState,
 ) {
-    Scaffold(
-        snackbarHost = { SnackbarHost(state.snackBarState) },
+    ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
+        snackBarHostState = state.snackBarState
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()

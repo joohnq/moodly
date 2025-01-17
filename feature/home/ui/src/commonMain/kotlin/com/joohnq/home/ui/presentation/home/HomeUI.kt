@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.getValue
+import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.core.ui.mapper.onFold
 import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MentalHealthMetrics
@@ -42,7 +42,7 @@ fun HomeUI(
         state.sleepQuality,
         onLoading = { LoadingUI() },
         onAllSuccess = {
-            val user = state.user.getValue()
+            val user = state.user.getValueOrNull()!!
 
             Scaffold(
                 containerColor = Colors.Brown10,
@@ -71,16 +71,17 @@ fun HomeUI(
                     Title(Res.string.mental_health_metrics)
                     MentalHealthMetrics(
                         freudScore = state.freudScore,
-                        statsRecord = state.statsRecord.getValue().first(),
-                        healthJournal = state.healthJournal.getValue(),
+                        statsRecord = state.statsRecord.getValueOrNull().first(),
+                        healthJournal = state.healthJournal.getValueOrNull(),
                         onEvent = state.onEvent
                     )
                     Title(Res.string.mindful_tracker)
                     MindfulTracker(
-                        sleepQuality = state.sleepQuality.getValue()
-                            .last().sleepQuality.toResource(),
-                        stressLevel = state.stressLevel.getValue().last().stressLevel.toResource(),
-                        moodTracker = state.statsRecord.getValue().take(3).reversed()
+                        sleepQuality = state.sleepQuality.getValueOrNull()
+                            .first().sleepQuality.toResource(),
+                        stressLevel = state.stressLevel.getValueOrNull()
+                            .first().stressLevel.toResource(),
+                        moodTracker = state.statsRecord.getValueOrNull().take(3).reversed()
                             .map { statsRecord -> statsRecord.mood.toResource() },
                         onAction = state.onEvent
                     )

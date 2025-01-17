@@ -145,9 +145,9 @@ fun HealthJournalComponentColorful(
             Box(
                 modifier = Modifier.weight(1f).aspectRatio(1f / 1f)
                     .background(color = background, shape = Dimens.Shape.Circle)
-                    .then(if (healthJournal?.firstOrNull()?.date != null)
+                    .then(if (healthJournal?.firstOrNull()?.createdAt != null)
                         Modifier.clickable {
-                            onClick(healthJournal.firstOrNull()?.date!!)
+                            onClick(healthJournal.firstOrNull()?.createdAt?.date!!)
                         }
                     else Modifier)
             )

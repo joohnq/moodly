@@ -1,6 +1,5 @@
 package com.joohnq.health_journal.data.repository
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -95,14 +94,14 @@ class HealthJournalRepositoryTest : RobolectricTests() {
                 mood = Mood.Overjoyed,
                 title = "title",
                 description = "description",
-                date = CoreTestConstants.FAKE_DATE
+                createdAt = CoreTestConstants.FAKE_DATE
             ),
             HealthJournalRecord(
                 id = 2,
                 mood = Mood.Happy,
                 title = "title 2",
                 description = "description 2",
-                date = CoreTestConstants.FAKE_DATE
+                createdAt = CoreTestConstants.FAKE_DATE
             )
         )
     }

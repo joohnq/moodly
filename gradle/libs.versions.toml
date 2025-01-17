@@ -36,6 +36,7 @@ ktor = "3.0.3"
 coreKtx = "1.6.1"
 mockative = "3.0.1"
 testng = "6.9.6"
+uiAndroid = "1.7.6"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -76,6 +77,7 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktor" }
 androidx-core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtx" }
 testng = { group = "org.testng", name = "testng", version.ref = "testng" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

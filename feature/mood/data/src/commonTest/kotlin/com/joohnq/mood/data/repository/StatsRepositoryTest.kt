@@ -1,6 +1,5 @@
 package com.joohnq.mood.data.repository
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -58,7 +57,7 @@ class StatsRepositoryTest : RobolectricTests() {
                 id = 3,
                 mood = Mood.Depressed,
                 description = "description 3",
-                date = CoreTestConstants.FAKE_DATE
+                createdAt = CoreTestConstants.FAKE_DATE
             )
 
             //WHEN
@@ -102,13 +101,13 @@ class StatsRepositoryTest : RobolectricTests() {
                 id = 1,
                 mood = Mood.Overjoyed,
                 description = "description",
-                date = CoreTestConstants.FAKE_DATE
+                createdAt = CoreTestConstants.FAKE_DATE
             ),
             StatsRecord(
                 id = 2,
                 mood = Mood.Happy,
                 description = "description 2",
-                date = CoreTestConstants.FAKE_DATE
+                createdAt = CoreTestConstants.FAKE_DATE
             )
         )
     }

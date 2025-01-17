@@ -5,5 +5,4 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 
 data class StressLevelState(
     val stressLevelRecords: UiState<List<StressLevelRecord>> = UiState.Idle,
-    val adding: UiState<Boolean> = UiState.Idle,
 )

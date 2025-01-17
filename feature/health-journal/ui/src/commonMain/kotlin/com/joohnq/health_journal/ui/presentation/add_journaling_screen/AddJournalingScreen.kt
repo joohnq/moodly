@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.CustomScreen
-import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
@@ -17,6 +16,7 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.Add
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddJournalingViewModel
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
+import com.joohnq.health_journal.ui.viewmodel.HealthJournalSideEffect
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.mood.ui.mapper.toDomain
 import kotlinx.coroutines.launch
@@ -29,9 +29,9 @@ class AddJournalingScreen(private val onGoBack: () -> Unit) : CustomScreen<AddJo
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
         val addingHealthJournalState by addJournalingViewModel.state.collectAsState()
-        val healthJournalState by healthJournalViewModel.state.collectAsState()
 
-        fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
+        fun onError(error: Throwable) =
+            scope.launch { snackBarState.showSnackbar(error.message.toString()) }
 
         fun onEvent(event: AddJournalingEvent) =
             when (event) {
@@ -48,20 +48,25 @@ class AddJournalingScreen(private val onGoBack: () -> Unit) : CustomScreen<AddJo
                     )
             }
 
-        LaunchedEffect(healthJournalState.adding) {
-            healthJournalState.adding.fold(
-                onError = ::onError,
-                onSuccess = {
-                    onEvent(AddJournalingEvent.OnGoBack)
-                    healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
-                },
-            )
+        LaunchedEffect(healthJournalViewModel) {
+            scope.launch {
+                healthJournalViewModel.sideEffect.collect { effect ->
+                    when (effect) {
+                        HealthJournalSideEffect.HealthJournalAdded -> {
+                            onEvent(AddJournalingEvent.OnGoBack)
+                            healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
+                        }
+
+                        is HealthJournalSideEffect.ShowError -> onError(effect.error)
+                        else -> Unit
+                    }
+                }
+            }
         }
 
         DisposableEffect(Unit) {
             onDispose {
                 addJournalingViewModel.onAction(AddingJournalingViewModelIntent.ResetState)
-                healthJournalViewModel.onAction(HealthJournalIntent.ResetAddingState)
             }
         }
 

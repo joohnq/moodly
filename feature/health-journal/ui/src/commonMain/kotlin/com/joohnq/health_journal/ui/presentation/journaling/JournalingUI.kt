@@ -24,11 +24,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.components.HealthJournalCard
 import com.joohnq.health_journal.ui.components.HealthJournalStatsCard
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
@@ -42,6 +44,7 @@ import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.document_your_mental_journal
 import com.joohnq.shared_resources.emotion
+import com.joohnq.shared_resources.empty
 import com.joohnq.shared_resources.journal_stats
 import com.joohnq.shared_resources.more_journal_stats
 import com.joohnq.shared_resources.no_data
@@ -53,6 +56,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.your_entries
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -62,6 +66,9 @@ fun JournalingUI(
     state.journals.foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { healthJournals ->
+            val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
+            val dayPerYear =
+                remember { getHealthJournalsInYearUseCase(healthJournals = healthJournals) }
             Scaffold(
                 containerColor = Colors.Brown10,
                 modifier = Modifier.fillMaxSize()
@@ -98,7 +105,7 @@ fun JournalingUI(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "Empty",
+                                text = stringResource(Res.string.empty),
                                 style = TextStyles.Text2xlExtraBold(),
                                 color = Colors.Brown100Alpha64,
                             )
@@ -152,7 +159,7 @@ fun JournalingUI(
                         HealthJournalStatsCard(
                             modifier = Modifier.weight(1f),
                             icon = Drawables.Icons.Document,
-                            title = "",
+                            title = dayPerYear,
                             color = Colors.Green50,
                             backgroundColor = Colors.Green10,
                             description = stringResource(Res.string.completed)

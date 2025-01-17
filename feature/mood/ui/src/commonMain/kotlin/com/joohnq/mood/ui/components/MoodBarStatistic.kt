@@ -121,14 +121,14 @@ fun MoodBarStatistic(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
-                                mood = resource,
+                                mood = statsRecord.mood.toResource(),
                                 backgroundColor = barFaceColor,
                                 color = background
                             )
                         }
                     }
                     Text(
-                        text = DatetimeProvider.formatShortDate(statsRecord.date),
+                        text = DatetimeProvider.formatShortDate(statsRecord.createdAt.date),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

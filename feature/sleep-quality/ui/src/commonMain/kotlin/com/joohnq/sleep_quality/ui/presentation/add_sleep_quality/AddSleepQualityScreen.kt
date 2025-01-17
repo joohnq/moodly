@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.CustomScreen
-import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toSleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
@@ -21,6 +20,7 @@ import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.state.AddSleep
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualitySideEffect
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import kotlinx.coroutines.launch
 
@@ -33,11 +33,10 @@ class AddSleepQualityScreen(
         val addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val snackBarState = remember { SnackbarHostState() }
-        val sleepQualityState by sleepQualityViewModel.state.collectAsState()
         val addSleepQualityState by addSleepQualityViewModel.state.collectAsState()
 
-        fun onError(message: String) {
-            scope.launch { snackBarState.showSnackbar(message) }
+        fun onError(error: Throwable) {
+            scope.launch { snackBarState.showSnackbar(error.message.toString()) }
         }
 
         fun onEvent(event: AddSleepQualityEvent) =
@@ -60,15 +59,19 @@ class AddSleepQualityScreen(
                     )
             }
 
-        LaunchedEffect(sleepQualityState.adding) {
-            sleepQualityState.adding.fold(
-                onError = ::onError,
-                onSuccess = {
-                    onEvent(AddSleepQualityEvent.OnGoBack)
-                    sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
-                    sleepQualityViewModel.onAction(SleepQualityIntent.ResetAddingStatus)
-                },
-            )
+        LaunchedEffect(sleepQualityViewModel) {
+            scope.launch {
+                sleepQualityViewModel.sideEffect.collect { event ->
+                    when (event) {
+                        is SleepQualitySideEffect.SleepQualityAdded -> {
+                            onEvent(AddSleepQualityEvent.OnGoBack)
+                            sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
+                        }
+
+                        is SleepQualitySideEffect.ShowError -> onError(event.error)
+                    }
+                }
+            }
         }
 
         DisposableEffect(Unit) {

@@ -26,7 +26,7 @@ class GetSleepQualityUseCaseTest {
                         startSleeping = "00:00",
                         endSleeping = "06:00",
                         sleepInfluences = listOf(),
-                        date = CoreTestConstants.FAKE_DATE
+                        createdAt = CoreTestConstants.FAKE_DATE
                     )
                 )
             )

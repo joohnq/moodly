@@ -1,6 +1,5 @@
 package com.joohnq.stress_level.domain.use_case
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
@@ -26,7 +25,7 @@ class GetStressLevelUseCaseTest {
                         id = 1,
                         stressLevel = StressLevel.One,
                         stressors = listOf(),
-                        date = CoreTestConstants.FAKE_DATE
+                        createdAt = CoreTestConstants.FAKE_DATE
                     ),
                     StressLevelRecord(
                         id = 2,
@@ -34,7 +33,7 @@ class GetStressLevelUseCaseTest {
                         stressors = listOf(
                             Stressor.Work
                         ),
-                        date = CoreTestConstants.FAKE_DATE
+                        createdAt = CoreTestConstants.FAKE_DATE
                     )
                 )
             )

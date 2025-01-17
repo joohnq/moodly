@@ -40,9 +40,7 @@ sealed class Destination {
         @Serializable data object SleepQuality : Destination()
         @Serializable data object AddSleepQuality : Destination()
         @Serializable data object AddJournaling : Destination()
-        @Serializable data object AllJournaling : Destination()
-        @Serializable data object AllJournals : Destination()
+        @Serializable data class AllJournals(val localDate: String? = null) : Destination()
         @Serializable data class EditJournaling(val id: Int) : Destination()
-        @Serializable data object AllJournal : Destination()
     }
 }

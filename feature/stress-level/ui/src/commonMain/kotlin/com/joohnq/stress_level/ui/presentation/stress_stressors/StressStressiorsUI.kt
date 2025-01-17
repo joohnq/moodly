@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -24,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextBubble
 import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.shared_resources.components.TopBar
@@ -50,8 +49,8 @@ fun StressStressorsUI(
     val canContinue by derivedStateOf { state.addStressLevelViewModelState.stressors.isNotEmpty() }
     val containOtherInStressors by derivedStateOf { state.addStressLevelViewModelState.stressors.any { it::class == Stressor.Other::class } }
 
-    Scaffold(
-        snackbarHost = { SnackbarHost(state.snackBarState) },
+    ScaffoldSnackBar(
+        snackBarHostState = state.snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
     ) { padding ->

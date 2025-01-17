@@ -1,7 +1,7 @@
 package com.joohnq.health_journal.ui.presentation.all_journals
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.CustomScreen
@@ -9,11 +9,14 @@ import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.state.AllJournalState
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
+import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModelIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import kotlinx.datetime.LocalDate
 
 class AllJournalScreen(
+    private val localDate: LocalDate? = null,
     private val onNavigateEditJournaling: (Int) -> Unit,
     private val onGoBack: () -> Unit,
 ) : CustomScreen<AllJournalState>() {
@@ -37,17 +40,9 @@ class AllJournalScreen(
                 )
             }
 
-//        if (localDate != null) {
-//            LaunchedEffect(Unit) {
-//                allJournalViewModel.onAction(
-//                    AllJournalViewModelIntent.UpdateSelectedDateTime(localDate)
-//                )
-//            }
-//        }
-
-        DisposableEffect(Unit) {
-            onDispose {
-                healthJournalViewModel.onAction(HealthJournalIntent.ResetDeletingStatus)
+        localDate?.let {
+            LaunchedEffect(Unit) {
+                allJournalViewModel.onAction(AllJournalViewModelIntent.UpdateSelectedDateTime(it))
             }
         }
 

@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -26,13 +22,13 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun DashboardBottomNavigation(
+    isExpanded: Boolean,
+    switchIsExpanded: () -> Unit,
     left: @Composable RowScope.() -> Unit,
     right: @Composable RowScope.() -> Unit,
     onNavigateAddJournaling: () -> Unit,
     onNavigateAddStatScreen: () -> Unit,
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     Box(
         contentAlignment = Alignment.BottomCenter,
         modifier = Modifier.fillMaxSize().background(color = Colors.Transparent)
@@ -71,7 +67,7 @@ fun DashboardBottomNavigation(
                 DashboardBottomNavigationEvent.AddHealthJournal -> onNavigateAddJournaling()
                 DashboardBottomNavigationEvent.AddMood -> onNavigateAddStatScreen()
                 DashboardBottomNavigationEvent.ToggleExpanded -> {
-                    isExpanded = !isExpanded
+                    switchIsExpanded()
                 }
             }
         }

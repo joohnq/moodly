@@ -6,7 +6,6 @@ import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import com.joohnq.sleep_quality.domain.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
-import kotlinx.datetime.LocalDate
 
 class SleepQualityRepositoryImpl(
     private val database: SleepQualityDatabaseSql,
@@ -14,30 +13,16 @@ class SleepQualityRepositoryImpl(
     private val query = database.sleepQualityRecordQueries
     override suspend fun getSleepQualities(): Result<List<SleepQualityRecord>> =
         executeTryCatchResult {
-            query.getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, date ->
+            query.getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, createdAt ->
                 SleepQualityRecord(
                     id = id.toInt(),
                     sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
                     startSleeping = startSleeping,
                     endSleeping = endSleeping,
                     sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
-                    date = LocalDateTimeConverter.toLocalDate(date)
+                    createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
                 )
             }.executeAsList()
-        }
-
-    override suspend fun getSleepQualityByDate(date: LocalDate): Result<SleepQualityRecord?> =
-        executeTryCatchResult {
-            query.getSleepQualityByDate(date.toString()) { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, date ->
-                SleepQualityRecord(
-                    id = id.toInt(),
-                    sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
-                    startSleeping = startSleeping,
-                    endSleeping = endSleeping,
-                    sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
-                    date = LocalDateTimeConverter.toLocalDate(date)
-                )
-            }.executeAsOneOrNull()
         }
 
     override suspend fun addSleepQuality(

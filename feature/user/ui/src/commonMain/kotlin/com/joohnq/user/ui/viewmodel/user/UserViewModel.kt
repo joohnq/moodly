@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
+import com.joohnq.core.ui.mapper.onFailure
+import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.use_case.user.AddUserUseCase
@@ -12,8 +14,10 @@ import com.joohnq.domain.use_case.user.UpdateUserImageBitmapUseCase
 import com.joohnq.domain.use_case.user.UpdateUserImageDrawableUseCase
 import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
 import com.joohnq.domain.use_case.user.UpdateUserUseCase
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -28,6 +32,9 @@ class UserViewModel(
     private val _state: MutableStateFlow<UserViewModelState> =
         MutableStateFlow(UserViewModelState())
     val state: StateFlow<UserViewModelState> = _state
+
+    private val _sideEffect = Channel<UserSideEffect>(Channel.BUFFERED)
+    val sideEffect = _sideEffect.receiveAsFlow()
 
     fun onAction(intent: UserViewModelIntent) {
         when (intent) {
@@ -60,21 +67,31 @@ class UserViewModel(
     }
 
     private fun updateUserImageBitmap(image: ImageBitmap) = viewModelScope.launch {
-        changeUpdatingStatus(UiState.Loading)
         val res = updateUserImageBitmapUseCase(image).toUiState()
-        changeUpdatingStatus(res)
+        res.onSuccess {
+            _sideEffect.send(UserSideEffect.AvatarSavedSuccess)
+        }.onFailure {
+            _sideEffect.send(UserSideEffect.ShowError(it))
+        }
     }
 
     private fun updateUserImageDrawable(i: Int) = viewModelScope.launch {
-        changeUpdatingStatus(UiState.Loading)
         val res = updateUserImageDrawableUseCase(i).toUiState()
-        changeUpdatingStatus(res)
+
+        res.onSuccess {
+            _sideEffect.send(UserSideEffect.AvatarSavedSuccess)
+        }.onFailure {
+            _sideEffect.send(UserSideEffect.ShowError(it))
+        }
     }
 
     private fun updateUserName(name: String) = viewModelScope.launch {
-        changeUpdatingStatus(UiState.Loading)
         val res = updateUserNameUseCase(name).toUiState()
-        changeUpdatingStatus(res)
+        res.onSuccess {
+            _sideEffect.send(UserSideEffect.UserNameUpdatedSuccess)
+        }.onFailure {
+            _sideEffect.send(UserSideEffect.ShowError(it))
+        }
     }
 
     private fun changeAddingStatus(status: UiState<Boolean>) {

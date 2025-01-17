@@ -27,7 +27,6 @@ import com.joohnq.shared_resources.add_mood
 import com.joohnq.shared_resources.components.ButtonTextAndCheck
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.hey_name
 import com.joohnq.shared_resources.how_are_you_feeling_this_day
 import com.joohnq.shared_resources.set_mood
 import com.joohnq.shared_resources.theme.Colors
@@ -63,12 +62,6 @@ fun AddStatScreenUI(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    text = stringResource(Res.string.hey_name, state.username),
-                    style = TextStyles.TextXlSemiBold(),
-                    color = Colors.White,
-                    textAlign = TextAlign.Center
-                )
                 Text(
                     text = stringResource(Res.string.how_are_you_feeling_this_day),
                     style = TextStyles.HeadingMdExtraBold(),

@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +32,7 @@ import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameViewModelState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.enter_your_name
@@ -74,9 +73,9 @@ fun UserNameUI(
                 tint = Colors.White
             )
         }
-        Scaffold(
+        ScaffoldSnackBar(
             containerColor = Colors.Brown10,
-            snackbarHost = { SnackbarHost(hostState = state.snackBarState) },
+            snackBarHostState = state.snackBarState,
             modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp, bottom = 20.dp)
                 .pointerInput(Unit) {
                     detectTapGestures(onTap = {

@@ -56,7 +56,7 @@ fun App() {
         }
 
         fun NavHostController.onGoBack() {
-            navigateUp()
+            popBackStack()
         }
 
         MaterialTheme {

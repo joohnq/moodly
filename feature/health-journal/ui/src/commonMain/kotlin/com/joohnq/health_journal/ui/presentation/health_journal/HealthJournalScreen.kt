@@ -8,10 +8,11 @@ import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import kotlinx.datetime.LocalDate
 
 class HealthJournalScreen(
-    private val onNavigateAddJournaling: () -> Unit,
-    private val onNavigateAllJournaling: () -> Unit,
+    private val onNavigateAddHealthJournal: () -> Unit,
+    private val onNavigateAllJournals: (LocalDate) -> Unit,
     private val onGoBack: () -> Unit,
 ) : CustomScreen<HealthJournalState>() {
     @Composable
@@ -22,8 +23,8 @@ class HealthJournalScreen(
         fun onEvent(event: HealthJournalEvent) =
             when (event) {
                 HealthJournalEvent.OnGoBack -> onGoBack()
-                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigateAddJournaling()
-                is HealthJournalEvent.OnClick -> onNavigateAllJournaling()
+                HealthJournalEvent.OnNavigateToAddHealthJournalScreen -> onNavigateAddHealthJournal()
+                is HealthJournalEvent.OnClick -> onNavigateAllJournals(event.localDate)
             }
 
         return HealthJournalState(

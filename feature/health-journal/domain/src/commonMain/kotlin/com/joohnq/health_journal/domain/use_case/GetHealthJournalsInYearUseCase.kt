@@ -11,8 +11,8 @@ class GetHealthJournalsInYearUseCase(private val dateTimeProvider: IDatetimeProv
         healthJournals: List<HealthJournalRecord?>,
     ): String {
         val days =
-            healthJournals.filter { it?.date?.year == date.year }
-                .associateBy { it?.date }.keys.size
+            healthJournals.filter { it?.createdAt?.year == date.year }
+                .associateBy { it?.createdAt?.date }.keys.size
         return "$days/$yearsDay"
     }
 }

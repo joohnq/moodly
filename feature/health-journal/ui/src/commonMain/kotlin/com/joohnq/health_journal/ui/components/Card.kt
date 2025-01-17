@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
@@ -51,7 +52,8 @@ fun HealthJournalCard(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier.size(48.dp).background(
@@ -67,6 +69,11 @@ fun HealthJournalCard(
                         color = resource.palette.color
                     )
                 }
+                Text(
+                    text = DatetimeProvider.formatCompleteDate(journal.createdAt.date),
+                    style = TextStyles.TextSmSemiBold(),
+                    color = Colors.Brown80
+                )
             }
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),

@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
@@ -28,6 +26,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AddSleepQualityTimePicker
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextRadioButton
 import com.joohnq.shared_resources.components.TimePickerCard
 import com.joohnq.shared_resources.components.TimePickerDialog
@@ -112,10 +111,10 @@ fun AddSleepQualityUI(
         }
     }
 
-    Scaffold(
+    ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(state.snackBarState) }
+        snackBarHostState = state.snackBarState
     ) { padding ->
         Column(
             Modifier.fillMaxSize()

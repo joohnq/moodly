@@ -4,6 +4,6 @@ import com.joohnq.mood.domain.entity.StatsRecord
 
 class GetPreviousStatUseCase {
     operator fun invoke(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
-        statsRecords.filter { it.date < statsRecord.date }
-            .maxByOrNull { it.date }
+        statsRecords.filter { it.createdAt < statsRecord.createdAt }
+            .maxByOrNull { it.createdAt }
 }

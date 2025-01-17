@@ -25,7 +25,10 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     sourceSets {
+        val desktopMain by getting
         androidMain.dependencies {
             implementation(compose.material3)
             implementation(compose.material)
@@ -69,6 +72,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+}
+dependencies {
+    implementation(libs.androidx.ui.android)
 }
 
 compose.resources {

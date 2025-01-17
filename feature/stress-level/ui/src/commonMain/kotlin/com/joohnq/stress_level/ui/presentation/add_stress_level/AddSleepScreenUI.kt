@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
 import com.joohnq.shared_resources.components.TopBar
@@ -42,8 +41,8 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStressLevelScreenUI(
     state: AddStressLevelState,
 ) {
-    Scaffold(
-        snackbarHost = { SnackbarHost(state.snackBarState) },
+    ScaffoldSnackBar(
+        snackBarHostState = state.snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
     ) { padding ->

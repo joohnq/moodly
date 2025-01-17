@@ -18,8 +18,6 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +34,7 @@ import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModelState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.or_upload_your_profile
 import com.joohnq.shared_resources.profile_setup
@@ -46,17 +45,45 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.we_have_a_set_of_customizable
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
+fun AvatarImagesHorizontalPager(images: List<DrawableResource>) {
+    val avatarSize = 180.dp
+    val pagerState = rememberPagerState(pageCount = { images.size })
+    BoxWithConstraints {
+        HorizontalPager(
+            state = pagerState,
+            pageSize = PageSize.Fixed(avatarSize),
+            contentPadding = PaddingValues(horizontal = (maxWidth / 2) - (avatarSize / 2)),
+            pageSpacing = 20.dp
+        ) { page ->
+            Image(
+                painter = painterResource(images[page]),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(Dimens.Shape.Circle)
+                    .border(
+                        width = 8.dp,
+                        color = Colors.White,
+                        shape = Dimens.Shape.Circle
+                    ),
+            )
+        }
+    }
+}
+
+@Composable
 fun AvatarUI(state: AvatarState) {
-    Scaffold(
+    ScaffoldSnackBar(
         containerColor = Colors.Brown10,
-        snackbarHost = { SnackbarHost(hostState = state.snackBarState) },
+        snackBarHostState = state.snackBarState,
         modifier = Modifier.fillMaxSize()
     ) { padding ->
-        val avatarSize = 180.dp
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -83,28 +110,10 @@ fun AvatarUI(state: AvatarState) {
                         tint = Colors.Brown80
                     )
                     VerticalSpacer(10.dp)
-                    BoxWithConstraints {
-                        HorizontalPager(
-                            state = state.pagerState,
-                            pageSize = PageSize.Fixed(avatarSize),
-                            contentPadding = PaddingValues(horizontal = (maxWidth / 2) - (avatarSize / 2)),
-                            pageSpacing = 20.dp
-                        ) { page ->
-                            Image(
-                                painter = painterResource(state.images[page]),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(1f)
-                                    .clip(Dimens.Shape.Circle)
-                                    .border(
-                                        width = 8.dp,
-                                        color = Colors.White,
-                                        shape = Dimens.Shape.Circle
-                                    ),
-                            )
-                        }
-                    }
+                    AvatarImagesHorizontalPager(
+//                        pagerState = state.pagerState,
+                        images = state.images
+                    )
                     VerticalSpacer(10.dp)
                     Icon(
                         painter = painterResource(Drawables.Icons.SimpleTarget),

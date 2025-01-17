@@ -8,13 +8,12 @@ fun <T> UiState<T>.fold(
     onIdle: () -> Unit = {},
     onSuccess: (T) -> Unit = {},
     onError: (String) -> Unit = {},
-) =
-    when (this) {
-        is UiState.Loading -> onLoading()
-        is UiState.Success -> onSuccess(this.data)
-        is UiState.Error -> onError(this.exception.message.toString())
-        is UiState.Idle -> onIdle()
-    }
+) = when (this) {
+    is UiState.Loading -> onLoading()
+    is UiState.Success -> onSuccess(this.data)
+    is UiState.Error -> onError(this.exception.message.toString())
+    is UiState.Idle -> onIdle()
+}
 
 @Composable
 fun onFold(
@@ -39,21 +38,6 @@ fun onAnyError(
     }
 }
 
-fun fold(
-    vararg values: UiState<*>,
-    onAllSuccess: () -> Unit,
-    onAnyHasError: (String) -> Unit,
-) {
-    values.filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        onAnyHasError(errorState.exception.message.toString())
-        return
-    }
-
-    if (values.all { it is UiState.Success }) {
-        onAllSuccess()
-    }
-}
-
 @Composable
 fun <T> UiState<T>.foldComposable(
     onLoading: @Composable () -> Unit = {},
@@ -68,29 +52,38 @@ fun <T> UiState<T>.foldComposable(
 }
 
 @Composable
-fun <T> UiState<T>.getValue(): T =
-    when (this) {
-        is UiState.Success -> this.data
-        else -> throw IllegalStateException("UiState is not Success")
-    }
-
-fun <T> UiState<List<T>>.getValue(): List<T> =
-    when (this) {
-        is UiState.Success -> this.data
-        else -> throw IllegalStateException("UiState is not Success")
-    }
-
-fun <T> UiState<List<T>>.getValueOrNull(): List<T>? =
+fun <T> UiState<T>.getValueOrNull(): T? =
     when (this) {
         is UiState.Success -> this.data
         else -> null
     }
 
-fun <T> UiState<T>.onSuccess(
-    onSuccess: (T) -> Unit = {},
-) = when (this) {
-    is UiState.Success -> onSuccess(this.data)
-    else -> {}
+fun <T> UiState<List<T>>.getValueOrNull(): List<T> =
+    when (this) {
+        is UiState.Success -> this.data
+        else -> emptyList()
+    }
+
+inline fun <T> UiState<T>.onSuccess(
+    block: (T) -> Unit = {},
+): UiState<T> = when (this) {
+    is UiState.Success -> {
+        block(this.data)
+        this
+    }
+
+    else -> this
+}
+
+inline fun <T> UiState<T>.onFailure(
+    block: (Throwable) -> Unit = {},
+): UiState<T> = when (this) {
+    is UiState.Error -> {
+        block(this.exception)
+        this
+    }
+
+    else -> this
 }
 
 fun <T> Result<T>.toUiState(): UiState<T> =

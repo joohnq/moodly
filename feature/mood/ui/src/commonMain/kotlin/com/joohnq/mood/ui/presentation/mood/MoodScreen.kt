@@ -8,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.joohnq.core.ui.CustomScreen
-import com.joohnq.core.ui.mapper.getValue
 import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.domain.entity.StatsRecord
@@ -54,10 +53,10 @@ class MoodScreen(
 
         LaunchedEffect(currentStatsRecord) {
             currentStatsRecord?.let { statRecord ->
-                hasNext = getNextStatUseCase(statRecord, statsState.statsRecords.getValue())
+                hasNext = getNextStatUseCase(statRecord, statsState.statsRecords.getValueOrNull())
 
                 hasPrevious =
-                    getPreviousStatUseCase(statRecord, statsState.statsRecords.getValue())
+                    getPreviousStatUseCase(statRecord, statsState.statsRecords.getValueOrNull())
             }
         }
 

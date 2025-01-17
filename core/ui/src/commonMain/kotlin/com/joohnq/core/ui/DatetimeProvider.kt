@@ -30,11 +30,19 @@ object DatetimeProvider : IDatetimeProvider {
             year()
         })
 
-    // Mon, 28 Oct 20224
+    // 10/12
     override fun formatShortDate(date: LocalDate): String = date.format(LocalDate.Format {
         dayOfMonth()
         chars("/")
         monthNumber()
+    })
+
+    override fun formatCompleteDate(date: LocalDate): String = date.format(LocalDate.Format {
+        dayOfMonth()
+        chars("/")
+        monthNumber()
+        chars("/")
+        year()
     })
 
     override fun formatDateTime(date: LocalDateTime): String {

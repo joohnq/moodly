@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.CustomScreen
-import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.mapper.containOther
@@ -19,6 +18,7 @@ import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStr
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import kotlinx.coroutines.launch
 
@@ -32,14 +32,13 @@ class StressStressorsScreen(
         val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
         val snackBarState = remember { SnackbarHostState() }
         val scope = rememberCoroutineScope()
-        val stressLevelState by stressLevelViewModel.state.collectAsState()
         val addStressLevelState by addStressLevelViewModel.state.collectAsState()
 
         fun containsOther(): Boolean =
             addStressLevelState.stressors.toDomain().containOther()
 
-        fun onError(error: String) {
-            scope.launch { snackBarState.showSnackbar(error) }
+        fun onError(error: Throwable) {
+            scope.launch { snackBarState.showSnackbar(error.message.toString()) }
         }
 
         fun onEvent(event: StressStressorsEvent) =
@@ -73,15 +72,19 @@ class StressStressorsScreen(
             }
         }
 
-        LaunchedEffect(stressLevelState.adding) {
-            stressLevelState.adding.fold(
-                onError = ::onError,
-                onSuccess = {
-                    onNavigateBackToStressLevel()
-                    stressLevelViewModel.onAction(StressLevelIntent.ResetAddingStatus)
-                    stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
-                },
-            )
+        LaunchedEffect(stressLevelViewModel) {
+            scope.launch {
+                stressLevelViewModel.sideEffect.collect { event ->
+                    when (event) {
+                        is StressLevelSideEffect.StressLevelAdded -> {
+                            onNavigateBackToStressLevel()
+                            stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
+                        }
+
+                        is StressLevelSideEffect.ShowError -> onError(event.error)
+                    }
+                }
+            }
         }
 
         DisposableEffect(Unit) {

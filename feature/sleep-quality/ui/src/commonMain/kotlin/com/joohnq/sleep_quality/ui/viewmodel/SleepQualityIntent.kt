@@ -6,6 +6,4 @@ sealed class SleepQualityIntent {
     data object GetSleepQualityRecords : SleepQualityIntent()
     data class AddSleepQualityRecord(val sleepQualityRecord: SleepQualityRecord) :
         SleepQualityIntent()
-
-    data object ResetAddingStatus : SleepQualityIntent()
 }

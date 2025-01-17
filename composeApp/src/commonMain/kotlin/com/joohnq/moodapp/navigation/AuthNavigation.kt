@@ -16,7 +16,7 @@ fun NavGraphBuilder.authNavigation(
         composable<Destination.Auth.Avatar> {
             AvatarScreen(
                 onNavigateToUserName = { onNavigate(Destination.Auth.UserName) }
-            ).Content()
+            )
         }
         composable<Destination.Auth.UserName> {
             UserNameScreen(

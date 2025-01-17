@@ -76,7 +76,7 @@ import org.koin.compose.koinInject
                         items(items) { statsRecord ->
                             val resource = statsRecord.mood.toResource()
                             MentalScoreHistoryItemWithHour(
-                                date = statsRecord.date,
+                                date = statsRecord.createdAt.date,
                                 resource = resource,
                                 description = statsRecord.description,
                                 healthLevel = resource.healthLevel,

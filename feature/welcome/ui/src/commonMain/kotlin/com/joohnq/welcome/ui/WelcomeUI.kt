@@ -1,11 +1,10 @@
 package com.joohnq.welcome.ui
 
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.welcome.ui.screens.CommunityScreen
@@ -19,14 +18,8 @@ import com.joohnq.welcome.ui.state.WelcomeState
 fun WelcomeUI(
     state: WelcomeState,
 ) {
-    Scaffold(
-        snackbarHost = {
-            SnackbarHost(
-                hostState = state.snackBarState, modifier = Modifier.testTag(
-                    "WelcomeScreen.WelcomeTestTag.SNACK_BAR"
-                )
-            )
-        },
+    ScaffoldSnackBar(
+        snackBarHostState = state.snackBarState,
         containerColor = Colors.White
     ) { _ ->
         HorizontalPager(

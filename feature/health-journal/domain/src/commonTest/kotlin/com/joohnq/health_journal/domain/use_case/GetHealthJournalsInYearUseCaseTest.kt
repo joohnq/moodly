@@ -18,27 +18,27 @@ class GetHealthJournalsInYearUseCaseTest {
         val items = listOf(
             HealthJournalRecord(
                 mood = Mood.Overjoyed,
-                date = today
+                createdAt = today
             ),
             HealthJournalRecord(
                 mood = Mood.Happy,
-                date = today
+                createdAt = today
             ),
             HealthJournalRecord(
                 mood = Mood.Neutral,
-                date = today
+                createdAt = today
             ),
             HealthJournalRecord(
                 mood = Mood.Sad,
-                date = yesterday
+                createdAt = yesterday
             ),
             HealthJournalRecord(
                 mood = Mood.Sad,
-                date = yesterday
+                createdAt = yesterday
             ),
             HealthJournalRecord(
                 mood = Mood.Sad,
-                date = lastYear
+                createdAt = lastYear
             ),
         )
     }

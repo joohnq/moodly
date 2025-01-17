@@ -42,7 +42,6 @@ fun PanelContent(
     topBarContent: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
-//    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
     Box(
         modifier = modifier
             .background(color = backgroundColor)
@@ -59,25 +58,15 @@ fun PanelContent(
             contentAlignment = Alignment.TopCenter,
             modifier = Modifier.fillMaxSize()
         ) {
-            if (isDark) {
-                TopBar(
-                    modifier = Modifier
-                        .padding(top = padding.calculateTopPadding())
-                        .paddingHorizontalMedium(),
-                    text = text,
-                    onGoBack = onGoBack,
-                    content = topBarContent
-                )
-            } else {
-                TopBar(
-                    modifier = Modifier
-                        .padding(top = padding.calculateTopPadding())
-                        .paddingHorizontalMedium(),
-                    isDark = false,
-                    text = text,
-                    onGoBack = onGoBack
-                )
-            }
+            TopBar(
+                modifier = Modifier
+                    .padding(top = padding.calculateTopPadding())
+                    .paddingHorizontalMedium(),
+                isDark = isDark,
+                text = text,
+                onGoBack = onGoBack,
+                content = topBarContent
+            )
         }
 
         Box(
@@ -108,6 +97,5 @@ fun PanelContent(
             }
         }
     }
-//    }
 }
 

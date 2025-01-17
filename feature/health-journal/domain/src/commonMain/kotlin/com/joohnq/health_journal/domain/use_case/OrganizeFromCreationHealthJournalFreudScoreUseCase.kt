@@ -12,12 +12,9 @@ class OrganizeFromCreationHealthJournalFreudScoreUseCase(private val dateTimePro
         currentDate: LocalDate = dateTimeProvider.getCurrentDateTime().date,
         healthJournals: List<HealthJournalRecord>,
     ): Map<LocalDate, List<HealthJournalRecord>?> {
-        val recordsByDay = healthJournals.groupBy { it.date }
+        val recordsByDay = healthJournals.groupBy { it.createdAt.date }
         val dateSequence = generateDateSequence(creationDate, currentDate)
-        return dateSequence.associate { date ->
-            val localDate = LocalDate(date.year, date.month, date.dayOfMonth)
-            localDate to recordsByDay[localDate]
-        }
+        return dateSequence.associateWith { date -> recordsByDay[date] }
     }
 
     private fun generateDateSequence(

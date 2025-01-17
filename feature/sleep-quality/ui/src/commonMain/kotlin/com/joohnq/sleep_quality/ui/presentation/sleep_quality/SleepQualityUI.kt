@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
@@ -55,10 +56,10 @@ fun SleepQualityUI(
     state.sleepQualityRecords.foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { sleepQualityRecords ->
-            val last = sleepQualityRecords.last()
-            val sleepQuality = last.sleepQuality.toResource()
-            val sleepInfluences = last.sleepInfluences.toResource()
-            val mood = last.sleepQuality.toResource().toMood()
+            val selected = sleepQualityRecords.first()
+            val sleepQuality = selected.sleepQuality.toResource()
+            val sleepInfluences = selected.sleepInfluences.toResource()
+            val mood = selected.sleepQuality.toResource().toMood()
             val options = remember {
                 listOf(
                     SleepStatsItem(
@@ -99,6 +100,13 @@ fun SleepQualityUI(
                 bodyTitle = Res.string.sleep_stats,
                 color = mood.palette.backgroundColor,
                 onAdd = { state.onEvent(SleepQualityEvent.Add) },
+                topBarContent = {
+                    TextWithBackground(
+                        text = DatetimeProvider.formatDate(selected.createdAt.date),
+                        textColor = sleepQuality.palette.color,
+                        backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
+                    )
+                },
                 panelContent = {
                     Column(
                         modifier = Modifier
@@ -111,7 +119,7 @@ fun SleepQualityUI(
                         Text(
                             text = stringResource(
                                 Res.string.sleep_quality_level,
-                                last.sleepQuality.level
+                                selected.sleepQuality.level
                             ),
                             style = TextStyles.Heading2xlExtraBold(),
                             color = Colors.White
@@ -146,7 +154,7 @@ fun SleepQualityUI(
                             }
                             HorizontalSpacer(10.dp)
                             Text(
-                                text = last.startSleeping,
+                                text = selected.startSleeping,
                                 style = TextStyles.TextMdSemiBold(),
                                 color = Colors.Brown80
                             )
@@ -173,7 +181,7 @@ fun SleepQualityUI(
                             }
                             HorizontalSpacer(10.dp)
                             Text(
-                                text = last.endSleeping,
+                                text = selected.endSleeping,
                                 style = TextStyles.TextMdSemiBold(),
                                 color = Colors.Brown80
                             )

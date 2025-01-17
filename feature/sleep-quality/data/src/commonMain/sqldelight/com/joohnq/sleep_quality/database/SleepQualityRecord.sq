@@ -4,14 +4,11 @@ CREATE TABLE IF NOT EXISTS SleepQualityRecord (
     startSleeping TEXT NOT NULL,
     endSleeping TEXT NOT NULL,
     sleepInfluences TEXT NOT NULL,
-    date TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
+    createdAt TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
 );
 
 getSleepQualities:
-SELECT * FROM SleepQualityRecord;
-
-getSleepQualityByDate:
-SELECT * FROM SleepQualityRecord WHERE date = :date;
+SELECT * FROM SleepQualityRecord ORDER BY createdAt DESC;
 
 addSleepQuality:
 INSERT INTO SleepQualityRecord (sleepQuality, startSleeping, endSleeping, sleepInfluences)

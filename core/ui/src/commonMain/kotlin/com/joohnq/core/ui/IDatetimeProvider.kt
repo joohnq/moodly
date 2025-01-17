@@ -11,6 +11,7 @@ interface IDatetimeProvider {
 
     // Mon, 28 Oct 20224
     fun formatShortDate(date: LocalDate): String
+    fun formatCompleteDate(date: LocalDate): String
     fun formatDateTime(date: LocalDateTime = getCurrentDateTime()): String
     fun getMonthDaysCount(
         date: LocalDateTime,

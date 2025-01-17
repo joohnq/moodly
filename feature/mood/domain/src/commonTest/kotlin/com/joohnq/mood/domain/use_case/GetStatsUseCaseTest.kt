@@ -1,6 +1,5 @@
 package com.joohnq.mood.domain.use_case
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.fake.StatsRepositoryFake
@@ -26,12 +25,12 @@ class GetStatsUseCaseTest {
                     StatsRecord(
                         id = 1,
                         mood = Mood.Sad,
-                        date = CoreTestConstants.FAKE_DATE
+                        createdAt = CoreTestConstants.FAKE_DATE
                     ),
                     StatsRecord(
                         id = 2,
                         mood = Mood.Happy,
-                        date = CoreTestConstants.FAKE_DATE.plus(1, DateTimeUnit.DAY)
+                        createdAt = CoreTestConstants.FAKE_DATE.plus(1, DateTimeUnit.DAY)
                     )
                 )
             )

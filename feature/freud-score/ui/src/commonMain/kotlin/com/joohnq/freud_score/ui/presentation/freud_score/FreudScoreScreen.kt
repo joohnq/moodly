@@ -27,6 +27,7 @@ fun FreudScoreScreen(
             is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.statsRecord.id)
             is FreudScoreEvent.Add -> onNavigateAddStat()
         }
+
     FreudScoreUI(
         FreudScoreState(
             freudScore = freudScoreState.freudScore!!,

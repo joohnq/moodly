@@ -1,32 +1,18 @@
 package com.joohnq.home.ui.presentation.home
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.joohnq.core.ui.IDatetimeProvider
-import com.joohnq.core.ui.mapper.getValue
-import com.joohnq.core.ui.mapper.onAnyError
-import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
-import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModelIntent
-import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.home.state.HomeState
-import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
-import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 @Composable
@@ -38,9 +24,6 @@ fun HomeScreen(
     onNavigateToSleepQuality: () -> Unit,
     onNavigateToStressLevel: () -> Unit,
 ) {
-    val snackBarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-
     val statsViewModel: StatsViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
     val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
@@ -58,12 +41,6 @@ fun HomeScreen(
     val stressLevelState by stressLevelViewModel.state.collectAsStateWithLifecycle()
     val healthJournalState by healthJournalViewModel.state.collectAsStateWithLifecycle()
 
-    fun onError(error: String) {
-        scope.launch {
-            snackBarHostState.showSnackbar(error)
-        }
-    }
-
     fun onEvent(event: HomeEvent) =
         when (event) {
             HomeEvent.OnNavigateToFreudScore -> onNavigateFreudScore()
@@ -73,37 +50,6 @@ fun HomeScreen(
             HomeEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
             HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel()
         }
-
-    LaunchedEffect(Unit) {
-        statsViewModel.onAction(StatsIntent.GetStatsRecords)
-        userViewModel.onAction(UserViewModelIntent.GetUser)
-        stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
-        sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
-        healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
-    }
-
-    LaunchedEffect(statsState.statsRecords) {
-        statsState.statsRecords.onSuccess {
-            freudScoreViewModel.onAction(FreudScoreViewModelIntent.GetFreudScore(statsState.statsRecords.getValue()))
-        }
-    }
-
-    LaunchedEffect(
-        statsState.statsRecords,
-        userState.user,
-        stressLevelState.stressLevelRecords,
-        sleepQualityState.sleepQualityRecords,
-        healthJournalState.healthJournalRecords,
-    ) {
-        onAnyError(
-            statsState.statsRecords,
-            userState.user,
-            stressLevelState.stressLevelRecords,
-            sleepQualityState.sleepQualityRecords,
-            sleepQualityState.sleepQualityRecords,
-            onAnyHasError = ::onError
-        )
-    }
 
     HomeUI(
         HomeState(

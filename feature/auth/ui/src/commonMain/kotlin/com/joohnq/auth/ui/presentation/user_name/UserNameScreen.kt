@@ -14,9 +14,9 @@ import com.joohnq.auth.ui.presentation.user_name.state.UserNameState
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameViewModel
 import com.joohnq.core.ui.CustomScreen
-import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.validator.UserNameValidator
+import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
@@ -34,12 +34,11 @@ class UserNameScreen(
         val scope = rememberCoroutineScope()
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
-        val userState by userViewModel.state.collectAsState()
         val userNameState by userNameViewModel.state.collectAsState()
 
-        fun onError(error: String) {
+        fun onError(error: Throwable) {
             scope.launch {
-                snackBarState.showSnackbar(error)
+                snackBarState.showSnackbar(error.message.toString())
             }
         }
 
@@ -56,16 +55,22 @@ class UserNameScreen(
                 }
             }
 
-        LaunchedEffect(userState.updating) {
-            userState.updating.fold(
-                onError = ::onError,
-                onSuccess = {
-                    userPreferencesViewModel.onAction(
-                        UserPreferenceViewModelIntent.UpdateSkipAuth()
-                    )
-                    onNavigateToDashboardScreen()
+        LaunchedEffect(userViewModel) {
+            scope.launch {
+                userViewModel.sideEffect.collect { event ->
+                    when (event) {
+                        is UserSideEffect.UserNameUpdatedSuccess -> {
+                            userPreferencesViewModel.onAction(
+                                UserPreferenceViewModelIntent.UpdateSkipAuth()
+                            )
+                            onNavigateToDashboardScreen()
+                        }
+
+                        is UserSideEffect.ShowError -> onError(event.error)
+                        else -> {}
+                    }
                 }
-            )
+            }
         }
 
         return UserNameState(

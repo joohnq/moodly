@@ -6,11 +6,12 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmode
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 actual val healthJournalUiModule: Module = module {
     singleOf(::HealthJournalViewModel)
-    singleOf(::AddJournalingViewModel)
-    singleOf(::AllJournalViewModel)
-    singleOf(::EditJournalingViewModel)
+    viewModelOf(::AddJournalingViewModel)
+    viewModelOf(::AllJournalViewModel)
+    viewModelOf(::EditJournalingViewModel)
 }

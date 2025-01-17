@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.data.repository
 
-import com.joohnq.core.test.CoreTestConstants
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
@@ -74,7 +73,7 @@ class SleepQualityRepositoryTest : RobolectricTests() {
                 startSleeping = "00:00",
                 endSleeping = "08:00",
                 sleepInfluences = listOf(),
-                date = CoreTestConstants.FAKE_DATE,
+                createdAt = CoreTestConstants.FAKE_DATE,
             ),
             SleepQualityRecord(
                 id = 2,
@@ -84,7 +83,7 @@ class SleepQualityRepositoryTest : RobolectricTests() {
                 sleepInfluences = listOf(
                     SleepInfluences.Anxiety
                 ),
-                date = CoreTestConstants.FAKE_DATE,
+                createdAt = CoreTestConstants.FAKE_DATE,
             )
         )
     }

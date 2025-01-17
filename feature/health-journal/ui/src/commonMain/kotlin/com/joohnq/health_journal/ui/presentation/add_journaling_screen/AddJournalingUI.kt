@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -38,6 +36,7 @@ import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.CustomOutlinedTextField
 import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.MediumTitle
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.enter_the_title
@@ -62,10 +61,11 @@ fun AddJournalingUI(
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
     val moods = remember { getAllMoodResource() }
-    Scaffold(
+
+    ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(state.snackBarState) }
+        snackBarHostState = state.snackBarState
     ) { padding ->
         Column(
             modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState())

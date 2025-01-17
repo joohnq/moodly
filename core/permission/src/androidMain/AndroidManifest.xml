@@ -6,7 +6,7 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <provider
             android:name="com.joohnq.permission.ComposeFileProvider"
             android:authorities="${applicationId}.provider"

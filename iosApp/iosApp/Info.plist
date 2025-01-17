@@ -47,9 +47,12 @@
 
 	<!-- Info.plist -->
     <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera for...</string>
+    <string>We need access to your camera for get a photo to your avatar</string>
 
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library for...</string>
+    <string>We need access to your photo library for get a photo to your avatar</string>
+
+     <key>NSFaceIDUsageDescription</key>
+     <string>We need access to your photo library for lock the app</string>
 </dict>
 </plist>

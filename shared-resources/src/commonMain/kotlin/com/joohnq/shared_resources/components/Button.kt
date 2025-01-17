@@ -11,6 +11,7 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +38,35 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+
+@Composable
+fun ButtonOutlined(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    text: StringResource,
+    colors: ButtonColors,
+    shape: Shape,
+    onClick: () -> Unit,
+) {
+    OutlinedButton(
+        modifier = modifier.height(56.dp),
+        colors = colors,
+        enabled = enabled,
+        shape = shape,
+        onClick = onClick,
+        border = BorderStroke(2.dp, colors.contentColor)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = stringResource(text),
+                style = TextStyles.TextLgExtraBold(),
+            )
+        }
+    }
+}
 
 @Composable
 fun ButtonTextAndIcon(
@@ -87,6 +117,23 @@ fun ContinueButton(
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = Res.string.continue_word
         ),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun SecondaryButton(
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    text: StringResource,
+    onClick: () -> Unit,
+) {
+    ButtonOutlined(
+        modifier = modifier.height(56.dp),
+        text = text,
+        enabled = enabled,
+        colors = ComponentColors.Button.MainButtonColorsInverted(),
+        shape = Dimens.Shape.Circle,
         onClick = onClick
     )
 }

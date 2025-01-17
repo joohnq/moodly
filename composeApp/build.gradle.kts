@@ -49,6 +49,8 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.storage.data)
             implementation(projects.sharedResources)
+            implementation(projects.feature.security.data)
+            implementation(projects.feature.security.ui)
 
             implementation(projects.feature.auth.ui)
 

@@ -25,10 +25,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
-
     sourceSets {
-        val desktopMain by getting
         androidMain.dependencies {
             implementation(compose.material3)
             implementation(compose.material)

@@ -32,6 +32,7 @@ kotlin {
             implementation(projects.core.permission)
             implementation(projects.sharedResources)
             implementation(projects.feature.user.domain)
+            implementation(projects.feature.security.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -61,4 +62,3 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
-

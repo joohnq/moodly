@@ -111,7 +111,6 @@ fun AvatarUI(state: AvatarState) {
                     )
                     VerticalSpacer(10.dp)
                     AvatarImagesHorizontalPager(
-//                        pagerState = state.pagerState,
                         images = state.images
                     )
                     VerticalSpacer(10.dp)

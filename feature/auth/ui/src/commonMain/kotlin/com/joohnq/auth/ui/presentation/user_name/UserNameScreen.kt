@@ -19,16 +19,13 @@ import com.joohnq.domain.validator.UserNameValidator
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
 class UserNameScreen(
-    private val onNavigateToDashboardScreen: () -> Unit,
+    private val onNavigateToSecurity: () -> Unit,
 ) : CustomScreen<UserNameState>() {
     @Composable
     override fun Screen(): UserNameState {
-        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
         val userNameViewModel: UserNameViewModel = sharedViewModel()
         val userViewModel: UserViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
@@ -60,10 +57,7 @@ class UserNameScreen(
                 userViewModel.sideEffect.collect { event ->
                     when (event) {
                         is UserSideEffect.UserNameUpdatedSuccess -> {
-                            userPreferencesViewModel.onAction(
-                                UserPreferenceViewModelIntent.UpdateSkipAuth()
-                            )
-                            onNavigateToDashboardScreen()
+                            onNavigateToSecurity()
                         }
 
                         is UserSideEffect.ShowError -> onError(event.error)

@@ -10,7 +10,6 @@ import com.joohnq.navigation.NavigationGraph
 
 fun NavGraphBuilder.authNavigation(
     onNavigate: (Destination) -> Unit,
-    onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
 ) {
     navigation<NavigationGraph.Auth>(startDestination = Destination.Auth.Avatar) {
         composable<Destination.Auth.Avatar> {
@@ -20,7 +19,7 @@ fun NavGraphBuilder.authNavigation(
         }
         composable<Destination.Auth.UserName> {
             UserNameScreen(
-                onNavigateToDashboardScreen = { onNavigateGraph(NavigationGraph.App, true) }
+                onNavigateToSecurity = { onNavigate(Destination.Auth.Security) }
             ).Content()
         }
     }

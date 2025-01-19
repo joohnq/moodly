@@ -3,7 +3,7 @@ package com.joohnq.moodapp.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.joohnq.moodapp.presentation.loading.LoadingScreen
+import com.joohnq.loading.ui.presentation.loading.LoadingScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 
@@ -19,12 +19,15 @@ fun NavGraphBuilder.loadingNavigation(
                 onNavigateToOnboarding = {
                     onNavigateGraph(NavigationGraph.Onboarding, true)
                 },
-                onNavigateToUserName = {
+                onNavigateToAuth = {
                     onNavigateGraph(NavigationGraph.Auth, true)
+                },
+                onNavigateToSecurity = {
+                    onNavigateGraph(NavigationGraph.Security, true)
                 },
                 onNavigateToDashboard = {
                     onNavigateGraph(NavigationGraph.App, true)
-                }
+                },
             ).Content()
         }
     }

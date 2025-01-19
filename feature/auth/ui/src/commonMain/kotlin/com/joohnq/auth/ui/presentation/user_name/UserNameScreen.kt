@@ -19,6 +19,8 @@ import com.joohnq.domain.validator.UserNameValidator
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
 class UserNameScreen(
@@ -28,6 +30,7 @@ class UserNameScreen(
     override fun Screen(): UserNameState {
         val userNameViewModel: UserNameViewModel = sharedViewModel()
         val userViewModel: UserViewModel = sharedViewModel()
+        val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
         val scope = rememberCoroutineScope()
         val focusManager: FocusManager = LocalFocusManager.current
         val snackBarState = remember { SnackbarHostState() }
@@ -57,6 +60,11 @@ class UserNameScreen(
                 userViewModel.sideEffect.collect { event ->
                     when (event) {
                         is UserSideEffect.UserNameUpdatedSuccess -> {
+                            userPreferencesViewModel.onAction(
+                                UserPreferenceViewModelIntent.UpdateSkipAuth(
+                                    true
+                                )
+                            )
                             onNavigateToSecurity()
                         }
 

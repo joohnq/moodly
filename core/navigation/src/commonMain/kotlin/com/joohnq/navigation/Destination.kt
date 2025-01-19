@@ -26,6 +26,7 @@ sealed class Destination {
     @Serializable data object Security : Destination() {
         @Serializable data object Security : Destination()
         @Serializable data object SecurityConfirmed : Destination()
+        @Serializable data object PIN : Destination()
     }
 
     @Serializable data object App : Destination() {

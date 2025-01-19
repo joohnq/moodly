@@ -1,6 +1,5 @@
 package com.joohnq.shared_resources.components
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +19,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalSmall
 
 @Composable
-@Preview
 fun CircularProgressWithText(
     modifier: Modifier = Modifier,
     color: Color,
@@ -53,7 +51,6 @@ fun CircularProgressWithText(
 }
 
 @Composable
-@Preview
 fun CircularProgressWithDoubleText(
     modifier: Modifier = Modifier,
     color: Color,

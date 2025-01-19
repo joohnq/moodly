@@ -1,6 +1,5 @@
 package com.joohnq.auth.ui.presentation.user_name
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -125,7 +124,6 @@ fun UserNameUI(
     }
 }
 
-@Preview
 @Composable
 fun Preview() {
     UserNameUI(

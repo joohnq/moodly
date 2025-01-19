@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.ScreenDimensions
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.IconContinueButton
 import com.joohnq.shared_resources.components.TextWithBackground
@@ -33,7 +32,6 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
 
 @Composable
 fun MockScreen(
@@ -47,7 +45,6 @@ fun MockScreen(
     spanColor: Color,
     onNext: () -> Unit,
 ) {
-    val screenDimensions: ScreenDimensions = koinInject()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -73,8 +70,8 @@ fun MockScreen(
         ) {
             Box(
                 Modifier
-                    .fillMaxWidth()
-                    .padding(top = screenDimensions.statusBarHeight.dp),
+                    .fillMaxWidth(),
+//                    .padding(top = screenDimensions.statusBarHeight.dp),
                 contentAlignment = Alignment.Center
             ) {
                 TextWithBackground(

@@ -1,6 +1,5 @@
 package com.joohnq.health_journal.ui.presentation.edit_journaling_screen
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -23,7 +21,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.state.EditJournalingState
@@ -161,18 +158,4 @@ import org.jetbrains.compose.resources.stringResource
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    EditJournalingUI(
-        EditJournalingState(
-            snackBarState = remember { SnackbarHostState() },
-            isEditing = true,
-            healthJournal = HealthJournalRecord(),
-            openDeleteDialog = false,
-            canSave = false,
-        )
-    )
 }

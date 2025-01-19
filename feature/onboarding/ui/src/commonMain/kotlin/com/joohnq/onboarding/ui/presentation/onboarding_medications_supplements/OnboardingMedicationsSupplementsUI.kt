@@ -1,6 +1,5 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -67,17 +66,4 @@ fun OnboardingMedicationsSupplementsUI(
             }
         }
     }
-}
-
-
-@Preview
-@Composable
-fun Preview() {
-    OnboardingMedicationsSupplementsUI(
-        OnboardingMedicationsSupplementsState(
-            selectedOption = MedicationsSupplementsResource.PrescribedMedications,
-            onEvent = {},
-            onAction = {}
-        )
-    )
 }

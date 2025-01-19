@@ -204,5 +204,10 @@
     <string name="empty">Empty</string>
     <string name="security_setup">Security Setup</string>
     <string name="skip">Skip</string>
-    <string name="scan_your_device_security">Scan your device security method to make your account more secure.</string>
+    <string name="scan_with_your_device_security">Scan with your device security method to make your account more secure.</string>
+    <string name="security_setup_completed">Security Setup Completed</string>
+    <string name="now_every_time_you_open_the_app">Now, every time you open the app, you will be asked to pass in the security method to make your account more secure.</string>
+    <string name="set_a_pin">Set a PIN</string>
+    <string name="pin_setup">PIN Setup</string>
+    <string name="enter_a_four_digit_pin">Enter a four digit PIN</string>
 </resources>

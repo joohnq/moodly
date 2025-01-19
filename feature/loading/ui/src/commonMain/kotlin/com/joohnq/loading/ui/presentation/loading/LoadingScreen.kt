@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.presentation.loading
+package com.joohnq.loading.ui.presentation.loading
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,13 +9,15 @@ import com.joohnq.core.ui.CustomScreenNothing
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.entity.UserPreferences
+import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 
 class LoadingScreen(
     private val onNavigateToWelcome: () -> Unit,
     private val onNavigateToOnboarding: () -> Unit,
-    private val onNavigateToUserName: () -> Unit,
+    private val onNavigateToAuth: () -> Unit,
+    private val onNavigateToSecurity: () -> Unit,
     private val onNavigateToDashboard: () -> Unit,
 ) : CustomScreenNothing() {
     @Composable
@@ -33,7 +35,8 @@ class LoadingScreen(
                 when (false) {
                     userPreferences.skipWelcome -> onNavigateToWelcome()
                     userPreferences.skipOnboarding -> onNavigateToOnboarding()
-                    userPreferences.skipAuth -> onNavigateToUserName()
+                    userPreferences.skipAuth -> onNavigateToAuth()
+                    userPreferences.skipSecurity -> onNavigateToSecurity()
                     else -> onNavigateToDashboard()
                 }
             }

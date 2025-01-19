@@ -15,6 +15,7 @@ import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 class SecurityScreen(
     private val onNavigateToSecurityConfirmed: () -> Unit,
     private val onNavigateToDashboard: () -> Unit,
+    private val onNavigatePIN: () -> Unit,
 ) : CustomScreen<SecurityState>() {
     @Composable
     override fun Screen(): SecurityState {
@@ -40,6 +41,8 @@ class SecurityScreen(
                     )
                     onNavigateToDashboard()
                 }
+
+                SecurityEvent.OnSetPin -> onNavigatePIN()
             }
         }
 

@@ -19,8 +19,9 @@ import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.SecondaryButton
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.scan_your_device_security
+import com.joohnq.shared_resources.scan_with_your_device_security
 import com.joohnq.shared_resources.security_setup
+import com.joohnq.shared_resources.set_a_pin
 import com.joohnq.shared_resources.skip
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -67,7 +68,7 @@ fun SecurityUI(state: SecurityState) {
                 )
                 VerticalSpacer(12.dp)
                 Text(
-                    text = stringResource(Res.string.scan_your_device_security),
+                    text = stringResource(Res.string.scan_with_your_device_security),
                     style = TextStyles.ParagraphMd(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
@@ -77,6 +78,11 @@ fun SecurityUI(state: SecurityState) {
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     onClick = { state.onEvent(SecurityEvent.OnContinue) }
+                )
+                SecondaryButton(
+                    modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                    text = Res.string.set_a_pin,
+                    onClick = { state.onEvent(SecurityEvent.OnSetPin) }
                 )
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

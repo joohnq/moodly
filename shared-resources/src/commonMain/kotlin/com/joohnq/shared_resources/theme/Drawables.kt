@@ -65,6 +65,8 @@ import com.joohnq.shared_resources.mood_neutral
 import com.joohnq.shared_resources.mood_overjoyed
 import com.joohnq.shared_resources.mood_sad
 import com.joohnq.shared_resources.onboarding_sought_professional_help_image
+import com.joohnq.shared_resources.security_confirmed_background
+import com.joohnq.shared_resources.security_confirmed_image
 import com.joohnq.shared_resources.security_image
 import com.joohnq.shared_resources.shape_bottom_navigation
 import com.joohnq.shared_resources.sleep_quality_background
@@ -144,7 +146,11 @@ object Drawables {
         val AvatarCloud = Res.drawable.avatar_cloud
         val AvatarPieChart = Res.drawable.avatar_pie_chart
         val AvatarTime = Res.drawable.avatar_time
+
         val SecurityImage = Res.drawable.security_image
+
+        val SecurityConfirmedImage = Res.drawable.security_confirmed_image
+        val SecurityConfirmedBackground = Res.drawable.security_confirmed_background
     }
 
     object Mood {

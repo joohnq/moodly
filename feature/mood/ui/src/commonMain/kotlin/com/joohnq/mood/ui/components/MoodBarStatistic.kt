@@ -1,6 +1,5 @@
 package com.joohnq.mood.ui.components
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.components.calculateTextHeight
@@ -137,26 +135,5 @@ fun MoodBarStatistic(
             }
         }
     }
-}
-
-@Preview @Composable fun MoodBarStatisticPreview() {
-    MoodBarStatistic(
-        listOf(
-            StatsRecord(mood = Mood.Depressed),
-        ),
-        currentStatsRecord = StatsRecord(mood = Mood.Depressed)
-    )
-}
-
-@Preview @Composable fun MoodBarStatisticPreview2() {
-    MoodBarStatistic(
-        statsRecords = listOf(
-            StatsRecord(mood = Mood.Neutral),
-            StatsRecord(mood = Mood.Sad),
-            StatsRecord(mood = Mood.Overjoyed),
-            StatsRecord(mood = Mood.Depressed),
-        ),
-        currentStatsRecord = StatsRecord(mood = Mood.Sad)
-    )
 }
 

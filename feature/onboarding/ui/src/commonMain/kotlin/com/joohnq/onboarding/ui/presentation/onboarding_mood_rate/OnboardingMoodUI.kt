@@ -1,6 +1,5 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_mood_rate
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
 import com.joohnq.mood.ui.mapper.toResource
@@ -82,16 +80,4 @@ fun OnboardingMoodRateUI(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    OnboardingMoodRateUI(
-        OnboardingMoodRateState(
-            selectedMood = Mood.Happy,
-            onEvent = {},
-            onAction = {},
-        )
-    )
 }

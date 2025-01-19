@@ -1,6 +1,5 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -30,7 +28,6 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.Add
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
-import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.CustomOutlinedTextField
@@ -152,37 +149,5 @@ fun AddJournalingUI(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    AddJournalingUI(
-        AddJournalingState(
-            snackBarState = remember { SnackbarHostState() },
-            selectedMood = MoodResource.Happy,
-            title = "title",
-            titleError = null,
-            desc = "desc",
-            onAddingAction = {},
-            onEvent = {}
-        )
-    )
-}
-
-@Preview
-@Composable
-fun Preview2() {
-    AddJournalingUI(
-        AddJournalingState(
-            snackBarState = remember { SnackbarHostState() },
-            selectedMood = null,
-            title = "",
-            titleError = null,
-            desc = "",
-            onAddingAction = {},
-            onEvent = {}
-        )
-    )
 }
 

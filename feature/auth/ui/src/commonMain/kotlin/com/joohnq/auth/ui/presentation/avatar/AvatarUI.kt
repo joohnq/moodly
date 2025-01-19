@@ -1,6 +1,5 @@
 package com.joohnq.auth.ui.presentation.avatar
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -175,7 +174,6 @@ fun AvatarUI(state: AvatarState) {
     }
 }
 
-@Preview
 @Composable
 fun AvatarPreview() {
     AvatarUI(

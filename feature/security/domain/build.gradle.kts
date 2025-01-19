@@ -22,6 +22,9 @@ kotlin {
             isStatic = true
         }
     }
+
+    sourceSets {
+    }
 }
 
 android {

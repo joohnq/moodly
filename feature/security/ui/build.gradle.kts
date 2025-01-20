@@ -26,6 +26,9 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.ui.tooling)
+        }
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.feature.security.domain)

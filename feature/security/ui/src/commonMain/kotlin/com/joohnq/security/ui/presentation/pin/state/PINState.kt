@@ -12,4 +12,5 @@ data class PINState(
     val focusRequesters: List<FocusRequester>,
     val onAction: (PINViewModelIntent) -> Unit,
     val onEvent: (PINEvent) -> Unit,
+    val canContinue: Boolean,
 )

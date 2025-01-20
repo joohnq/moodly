@@ -7,6 +7,12 @@ import androidx.compose.ui.unit.sp
 
 object TextStyles {
     @Composable
+    fun HeadingLgExtraBold(): TextStyle = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 48.sp
+    )
+
+    @Composable
     fun HeadingSpanSmExtraBold(): SpanStyle = SpanStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 30.sp

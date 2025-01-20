@@ -4,6 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
@@ -30,6 +31,9 @@ class PINScreen(
         }
         val focusManager = LocalFocusManager.current
         val keyboardManager = LocalSoftwareKeyboardController.current
+        val canContinue by derivedStateOf {
+            state.code.none { it == null }
+        }
 
         LaunchedEffect(state.focusedIndex) {
             state.focusedIndex?.let { i ->
@@ -72,7 +76,8 @@ class PINScreen(
                 }
                 pinViewModel.onAction(action)
             },
-            focusRequesters = focusRequesters
+            focusRequesters = focusRequesters,
+            canContinue = canContinue
         )
     }
 

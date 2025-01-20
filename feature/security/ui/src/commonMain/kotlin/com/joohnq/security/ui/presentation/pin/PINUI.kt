@@ -1,9 +1,10 @@
 package com.joohnq.security.ui.presentation.pin
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -27,7 +28,8 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -60,7 +62,7 @@ fun OTPInputField(
     onNumberChanged: (Int?) -> Unit,
     onKeyboardBack: () -> Unit,
 ) {
-    val text by remember {
+    val text by remember(number) {
         mutableStateOf(
             TextFieldValue(
                 text = number?.toString().orEmpty(), selection = TextRange(
@@ -73,7 +75,6 @@ fun OTPInputField(
         mutableStateOf(false)
     }
     val textColor = when {
-        number == null -> Colors.Brown100Alpha64
         isFocused -> Colors.White
         else -> Colors.Brown80
     }
@@ -81,7 +82,15 @@ fun OTPInputField(
 
     Box(
         modifier = modifier.background(color = backgroundColor, shape = Dimens.Shape.Circle)
-            .aspectRatio(2 / 3f),
+            .aspectRatio(2 / 3f).then(
+                if (isFocused) {
+                    Modifier.border(
+                        width = 4.dp,
+                        color = Colors.Green50Alpha25,
+                        shape = Dimens.Shape.Circle
+                    )
+                } else Modifier
+            ),
         contentAlignment = Alignment.Center
     ) {
         BasicTextField(
@@ -92,18 +101,19 @@ fun OTPInputField(
                     onNumberChanged(new.toIntOrNull())
                 }
             },
-            cursorBrush = SolidColor(Colors.Brown80),
             singleLine = true,
-            textStyle = TextStyles.TextXlExtraBold()
-                .copy(color = textColor),
+            cursorBrush = SolidColor(Colors.Transparent),
+            textStyle = TextStyles.HeadingLgExtraBold()
+                .copy(color = textColor, textAlign = TextAlign.Center),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
+                keyboardType = KeyboardType.NumberPassword
             ),
             modifier = Modifier.padding(10.dp).focusRequester(focusRequester).onFocusChanged {
                 isFocused = it.isFocused
                 onFocusChanged(it.isFocused)
-            }.onKeyEvent { event ->
-                val wasPressed = event.key == Key.Enter
+            }.onPreviewKeyEvent { event ->
+                val wasPressed =
+                    event.key == Key.Backspace || event.key.keyCode == 4.toLong()
                 if (wasPressed && number == null) {
                     onKeyboardBack()
                 }
@@ -114,7 +124,8 @@ fun OTPInputField(
                 if (!isFocused && number == null) {
                     Text(
                         text = "0",
-                        style = TextStyles.TextXlExtraBold(),
+                        style = TextStyles.HeadingLgExtraBold()
+                            .copy(color = Colors.Brown100Alpha64),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier.fillMaxSize().wrapContentSize()
                     )
@@ -130,6 +141,7 @@ fun PINUI(state: PINState) {
         containerColor = Colors.Brown10,
         snackBarHostState = state.snackBarState,
         modifier = Modifier.fillMaxSize()
+            .pointerInput(Unit) { detectTapGestures(onTap = { state.onEvent(PINEvent.OnClearFocus) }) }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -160,29 +172,33 @@ fun PINUI(state: PINState) {
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
                 )
-                BoxWithConstraints {
-                    Row {
-                        state.pinViewModelState.code.forEachIndexed { i, number ->
-                            OTPInputField(
-                                modifier = Modifier.weight(1f),
-                                number = number,
-                                focusRequester = state.focusRequesters[i],
-                                onFocusChanged = { isFocused ->
-                                    if (isFocused) {
-                                        state.onAction(PINViewModelIntent.OnChangeFieldFocused(i))
-                                    }
-                                },
-                                onNumberChanged = { newNumber ->
-                                    state.onAction(
-                                        PINViewModelIntent.OnEnterNumber(
-                                            newNumber,
-                                            i
-                                        )
+                VerticalSpacer(48.dp)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        10.dp,
+                        alignment = Alignment.CenterHorizontally
+                    )
+                ) {
+                    state.pinViewModelState.code.forEachIndexed { i, number ->
+                        OTPInputField(
+                            modifier = Modifier.weight(1f),
+                            number = number,
+                            focusRequester = state.focusRequesters[i],
+                            onFocusChanged = { isFocused ->
+                                if (isFocused) {
+                                    state.onAction(PINViewModelIntent.OnChangeFieldFocused(i))
+                                }
+                            },
+                            onNumberChanged = { newNumber ->
+                                state.onAction(
+                                    PINViewModelIntent.OnEnterNumber(
+                                        index = i,
+                                        number = newNumber
                                     )
-                                },
-                                onKeyboardBack = { state.onAction(PINViewModelIntent.OnKeyboardBack) },
-                            )
-                        }
+                                )
+                            },
+                            onKeyboardBack = { state.onAction(PINViewModelIntent.OnKeyboardBack) },
+                        )
                     }
                 }
             }

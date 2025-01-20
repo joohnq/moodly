@@ -63,7 +63,8 @@ fun App() {
                 )
                 securityNavigation(
                     onNavigate = navHostController::onNavigate,
-                    onNavigateGraph = navHostController::onNavigateGraph
+                    onNavigateGraph = navHostController::onNavigateGraph,
+                    onGoBack = navHostController::onGoBack
                 )
                 appNavigation(
                     onNavigate = navHostController::onNavigate,

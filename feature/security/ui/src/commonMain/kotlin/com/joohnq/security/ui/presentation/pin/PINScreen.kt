@@ -55,6 +55,10 @@ class PINScreen(
                 }
 
                 PINEvent.OnGoBack -> onGoBack()
+                PINEvent.OnClearFocus -> {
+                    focusManager.clearFocus()
+                    keyboardManager?.hide()
+                }
             }
         }
 

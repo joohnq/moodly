@@ -29,14 +29,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.components.HealthJournalCard
 import com.joohnq.health_journal.ui.components.HealthJournalStatsCard
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
-import com.joohnq.health_journal.ui.presentation.journaling.state.JournalingState
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_journals
 import com.joohnq.shared_resources.completed
@@ -54,6 +54,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.your_entries
+import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -61,10 +62,11 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun JournalingUI(
-    state: JournalingState,
+    journals: UiState<List<HealthJournalRecord>>,
+    onEvent: (JournalingEvent) -> Unit = {},
 ) {
-    state.journals.foldComposable(
-        onLoading = { LoadingUI() },
+    journals.foldComposable(
+        onLoading = { SplashScreenUI() },
         onSuccess = { healthJournals ->
             val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =
@@ -118,7 +120,7 @@ fun JournalingUI(
                         ) {
                             items(healthJournals) { journal ->
                                 HealthJournalCard(journal) {
-                                    state.onEvent(
+                                    onEvent(
                                         JournalingEvent.OnNavigateToEditJournalingScreen(journal.id)
                                     )
                                 }
@@ -139,7 +141,7 @@ fun JournalingUI(
                         FilledIconButton(
                             modifier = Modifier.size(48.dp),
                             colors = ComponentColors.IconButton.TransparentButton(Colors.Brown100Alpha64),
-                            onClick = { state.onEvent(JournalingEvent.OnNavigateToAllJournals) }
+                            onClick = { onEvent(JournalingEvent.OnNavigateToAllJournals) }
                         ) {
                             Icon(
                                 painter = painterResource(Drawables.Icons.MoreHorizontal),

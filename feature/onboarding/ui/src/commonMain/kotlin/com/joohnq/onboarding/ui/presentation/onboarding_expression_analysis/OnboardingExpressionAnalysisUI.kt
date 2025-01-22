@@ -1,15 +1,13 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.state.OnboardingExpressionAnalysisState
-import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -21,15 +19,18 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingExpressionAnalysisUI(
-    state: OnboardingExpressionAnalysisState,
+    snackBarState: SnackbarHostState,
+    description: String,
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 7,
-        snackBarState = state.snackBarState,
+        snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
-        isContinueButtonVisible = state.desc.isNotEmpty(),
-        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) },
-        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
+        isContinueButtonVisible = description.isNotEmpty(),
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),
@@ -39,11 +40,10 @@ fun OnboardingExpressionAnalysisUI(
         )
         VerticalSpacer(24.dp)
         ExpressionAnalysisTextField(
-            modifier = Modifier.testTag(OnboardingExpressionAnalysisScreen.OnboardingExpressionTestTag.TEXT_INPUT),
-            text = state.desc,
+            text = description,
             onValueChange = {
-                state.onAction(
-                    OnboardingViewModelIntent.UpdateStatsRecordDescription(
+                onAction(
+                    OnboardingIntent.UpdateStatsRecordDescription(
                         it
                     )
                 )

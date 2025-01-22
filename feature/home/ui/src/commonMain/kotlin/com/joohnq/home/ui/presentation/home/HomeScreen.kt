@@ -8,7 +8,6 @@ import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
-import com.joohnq.home.ui.presentation.home.state.HomeState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
@@ -52,15 +51,13 @@ fun HomeScreen(
         }
 
     HomeUI(
-        HomeState(
-            today = today,
-            user = userState.user,
-            statsRecord = statsState.statsRecords,
-            freudScore = freudScoreState.freudScore,
-            healthJournal = healthJournalState.healthJournalRecords,
-            sleepQuality = sleepQualityState.sleepQualityRecords,
-            stressLevel = stressLevelState.stressLevelRecords,
-            onEvent = ::onEvent
-        )
+        today = today,
+        user = userState.user,
+        statsRecord = statsState.statsRecords,
+        freudScore = freudScoreState.freudScore,
+        healthJournal = healthJournalState.healthJournalRecords,
+        sleepQuality = sleepQualityState.sleepQualityRecords,
+        stressLevel = stressLevelState.stressLevelRecords,
+        onEvent = ::onEvent
     )
 }

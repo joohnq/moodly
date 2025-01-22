@@ -53,7 +53,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.GetUserPreferences)
+                viewModel.onAction(UserPreferenceIntent.GetUserPreferences)
 
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Success(UserPreferences()))
@@ -73,7 +73,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.GetUserPreferences)
+                viewModel.onAction(UserPreferenceIntent.GetUserPreferences)
 
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().userPreferences).isEqualTo(UiState.Error(exception))
@@ -88,7 +88,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.AddUserPreferences)
+                viewModel.onAction(UserPreferenceIntent.AddUserPreferences)
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
@@ -108,7 +108,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.AddUserPreferences)
+                viewModel.onAction(UserPreferenceIntent.AddUserPreferences)
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))
@@ -123,7 +123,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipWelcome(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipWelcome(true))
 
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
             }
@@ -142,7 +142,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipWelcome(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipWelcome(true))
 
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }
@@ -156,7 +156,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipOnboarding(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipOnboarding(true))
 
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
             }
@@ -175,7 +175,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipOnboarding(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipOnboarding(true))
 
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }
@@ -189,7 +189,7 @@ class UserPreferencesViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipAuth(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipAuth(true))
 
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
             }
@@ -207,7 +207,7 @@ class UserPreferencesViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserPreferenceViewModelIntent.UpdateSkipAuth(true))
+                viewModel.onAction(UserPreferenceIntent.UpdateSkipAuth(true))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }
         }

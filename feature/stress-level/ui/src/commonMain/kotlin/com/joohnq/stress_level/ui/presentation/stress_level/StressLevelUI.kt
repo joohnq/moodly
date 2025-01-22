@@ -17,8 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.StressLevelCard
@@ -32,19 +32,21 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
+import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.components.StressLevelChart
 import com.joohnq.stress_level.ui.mapper.getText
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
-import com.joohnq.stress_level.ui.presentation.stress_level.state.StressLevelState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelUI(
-    state: StressLevelState,
+    stressLevelRecords: UiState<List<StressLevelRecord>>,
+    onEvent: (StressLevelEvent) -> Unit = {},
 ) {
-    state.stressLevelRecords.foldComposable(
-        onLoading = { LoadingUI() },
+    stressLevelRecords.foldComposable(
+        onLoading = { SplashScreenUI() },
         onSuccess = { stressLevelRecords ->
             val record = stressLevelRecords.first()
             val resource = record.stressLevel.toResource()
@@ -52,13 +54,13 @@ fun StressLevelUI(
             SharedPanelComponent(
                 containerColor = Colors.White,
                 isDark = false,
-                onGoBack = { state.onEvent(StressLevelEvent.GoBack) },
+                onGoBack = { onEvent(StressLevelEvent.GoBack) },
                 backgroundColor = resource.palette.color,
                 backgroundImage = Drawables.Images.StressLevelBackground,
                 panelTitle = Res.string.stress_level,
                 bodyTitle = Res.string.stress_analysis,
                 color = resource.palette.backgroundColor,
-                onAdd = { state.onEvent(StressLevelEvent.Add) },
+                onAdd = { onEvent(StressLevelEvent.Add) },
                 topBarContent = {
                     TextWithBackground(
                         text = DatetimeProvider.formatDate(record.createdAt.date),

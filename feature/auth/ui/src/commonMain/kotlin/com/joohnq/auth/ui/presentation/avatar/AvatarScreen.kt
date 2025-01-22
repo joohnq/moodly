@@ -15,9 +15,8 @@ import androidx.compose.runtime.snapshotFlow
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
-import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
+import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
-import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModelIntent
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.permission.PermissionCallback
 import com.joohnq.permission.PermissionStatus
@@ -31,9 +30,9 @@ import com.joohnq.shared_resources.permission_required
 import com.joohnq.shared_resources.settings
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.to_set_your_profile_picture
+import com.joohnq.user.ui.viewmodel.user.UserIntent
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 import kotlinx.coroutines.launch
 
 @Composable
@@ -74,12 +73,12 @@ fun AvatarScreen(
         })
     val cameraManager = rememberCameraManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onAction(AvatarIntent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     val galleryManager = rememberGalleryManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onAction(AvatarIntent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     if (imageSourceOptionDialog) {
@@ -142,9 +141,9 @@ fun AvatarScreen(
 
             AvatarEvent.OnContinue -> {
                 val action = if (avatarState.imageBitmap == null)
-                    UserViewModelIntent.UpdateUserImageDrawable(avatarState.selectedDrawableIndex)
+                    UserIntent.UpdateUserImageDrawable(avatarState.selectedDrawableIndex)
                 else
-                    UserViewModelIntent.UpdateUserImageBitmap(avatarState.imageBitmap!!)
+                    UserIntent.UpdateUserImageBitmap(avatarState.imageBitmap!!)
 
                 userViewModel.onAction(action)
             }
@@ -168,23 +167,21 @@ fun AvatarScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            userViewModel.onAction(UserViewModelIntent.ResetUpdatingStatus)
+            userViewModel.onAction(UserIntent.ResetUpdatingStatus)
         }
     }
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            avatarViewModel.onAction(AvatarViewModelIntent.UpdateImageDrawableIndex(page))
+            avatarViewModel.onAction(AvatarIntent.UpdateImageDrawableIndex(page))
         }
     }
 
     AvatarUI(
-        AvatarState(
-            snackBarState = snackBarState,
-            pagerState = pagerState,
-            images = images,
-            onEvent = ::onEvent,
-            avatarState = avatarState
-        )
+        snackBarState = snackBarState,
+        pagerState = pagerState,
+        images = images,
+        onEvent = ::onEvent,
+        avatarState = avatarState
     )
 }

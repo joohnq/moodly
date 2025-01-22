@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -24,8 +25,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.state.AddJournalingState
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingViewModelIntent
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingIntent
+import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingState
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.shared_resources.Res
@@ -50,10 +51,13 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun AddJournalingUI(
-    state: AddJournalingState,
+    snackBarState: SnackbarHostState,
+    state: AddingJournalingState,
+    onAction: (AddingJournalingIntent) -> Unit = {},
+    onEvent: (AddJournalingEvent) -> Unit = {},
 ) {
     val canContinue by derivedStateOf {
-        state.title.isNotEmpty() && state.selectedMood != null && state.desc.isNotEmpty()
+        state.title.isNotEmpty() && state.mood != null && state.description.isNotEmpty()
     }
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
@@ -62,7 +66,7 @@ fun AddJournalingUI(
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackBarHostState = state.snackBarState
+        snackBarHostState = snackBarState
     ) { padding ->
         Column(
             modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState())
@@ -72,7 +76,7 @@ fun AddJournalingUI(
                     .paddingHorizontalMedium(),
             ) {
                 TopBar(
-                    onGoBack = { state.onEvent(AddJournalingEvent.OnGoBack) },
+                    onGoBack = { onEvent(AddJournalingEvent.OnGoBack) },
                     text = Res.string.new_journal_entry
                 )
                 MediumTitle(Res.string.journal_title)
@@ -102,8 +106,8 @@ fun AddJournalingUI(
                             isFocused = focusState.isFocused
                         }.focusRequester(focusRequester),
                     onValueChange = {
-                        state.onAddingAction(
-                            AddingJournalingViewModelIntent.UpdateTitle(
+                        onAction(
+                            AddingJournalingIntent.UpdateTitle(
                                 it
                             )
                         )
@@ -117,11 +121,11 @@ fun AddJournalingUI(
                         MoodFace(
                             modifier = Modifier.size(32.dp),
                             mood = resource,
-                            backgroundColor = if (state.selectedMood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
-                            color = if (state.selectedMood == resource) resource.palette.faceColor else Colors.Gray60,
+                            backgroundColor = if (state.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                            color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {
-                                state.onAddingAction(
-                                    AddingJournalingViewModelIntent.UpdateMood(resource)
+                                onAction(
+                                    AddingJournalingIntent.UpdateMood(resource)
                                 )
                             }
                         )
@@ -129,10 +133,10 @@ fun AddJournalingUI(
                 }
                 MediumTitle(Res.string.write_your_entry)
                 ExpressionAnalysisTextField(
-                    text = state.desc,
+                    text = state.description,
                     onValueChange = {
-                        state.onAddingAction(
-                            AddingJournalingViewModelIntent.UpdateDescription(it)
+                        onAction(
+                            AddingJournalingIntent.UpdateDescription(it)
                         )
                     }
                 )
@@ -144,7 +148,7 @@ fun AddJournalingUI(
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = canContinue,
-                    onClick = { state.onEvent(AddJournalingEvent.OnAdd) }
+                    onClick = { onEvent(AddJournalingEvent.OnAdd) }
                 )
             }
         }

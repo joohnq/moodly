@@ -5,7 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
-import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
 
 @Composable
@@ -14,7 +13,7 @@ fun AddStatScreen(
     onGoBack: () -> Unit,
 ) {
     val addStatsViewModel: AddStatViewModel = sharedViewModel()
-    val addStatsState by addStatsViewModel.state.collectAsState()
+    val state by addStatsViewModel.state.collectAsState()
 
     fun onEvent(event: AddStatEvent) =
         when (event) {
@@ -24,10 +23,8 @@ fun AddStatScreen(
         }
 
     AddStatScreenUI(
-        AddStatState(
-            selectedMood = addStatsState.mood,
-            onEvent = ::onEvent,
-            onAddAction = addStatsViewModel::onAction
-        )
+        state = state,
+        onEvent = ::onEvent,
+        onAction = addStatsViewModel::onAction
     )
 }

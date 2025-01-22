@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.update
 
 class FreudScoreViewModel(private val calculateStatsFreudScoreUseCase: CalculateStatsFreudScoreUseCase) :
     ViewModel() {
-    private val _state = MutableStateFlow(FreudScoreViewModelState())
-    val state: StateFlow<FreudScoreViewModelState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(FreudScoreState())
+    val state: StateFlow<FreudScoreState> = _state.asStateFlow()
 
-    fun onAction(intent: FreudScoreViewModelIntent) {
+    fun onAction(intent: FreudScoreIntent) {
         when (intent) {
-            is FreudScoreViewModelIntent.GetFreudScore -> getFreudScore(intent.statsRecords)
+            is FreudScoreIntent.GetFreudScore -> getFreudScore(intent.statsRecords)
         }
     }
 

@@ -29,22 +29,22 @@ class UserViewModel(
     private val updateUserImageBitmapUseCase: UpdateUserImageBitmapUseCase,
     private val updateUserImageDrawableUseCase: UpdateUserImageDrawableUseCase,
 ) : ViewModel() {
-    private val _state: MutableStateFlow<UserViewModelState> =
-        MutableStateFlow(UserViewModelState())
-    val state: StateFlow<UserViewModelState> = _state
+    private val _state: MutableStateFlow<UserState> =
+        MutableStateFlow(UserState())
+    val state: StateFlow<UserState> = _state
 
     private val _sideEffect = Channel<UserSideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(intent: UserViewModelIntent) {
+    fun onAction(intent: UserIntent) {
         when (intent) {
-            is UserViewModelIntent.GetUser -> getUser()
-            is UserViewModelIntent.UpdateUser -> updateUser(intent.user)
-            is UserViewModelIntent.UpdateUserImageBitmap -> updateUserImageBitmap(intent.image)
-            is UserViewModelIntent.UpdateUserName -> updateUserName(intent.name)
-            UserViewModelIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
-            is UserViewModelIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.i)
-            UserViewModelIntent.InitUser -> addUser()
+            is UserIntent.GetUser -> getUser()
+            is UserIntent.UpdateUser -> updateUser(intent.user)
+            is UserIntent.UpdateUserImageBitmap -> updateUserImageBitmap(intent.image)
+            is UserIntent.UpdateUserName -> updateUserName(intent.name)
+            UserIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
+            is UserIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.i)
+            UserIntent.InitUser -> addUser()
         }
     }
 

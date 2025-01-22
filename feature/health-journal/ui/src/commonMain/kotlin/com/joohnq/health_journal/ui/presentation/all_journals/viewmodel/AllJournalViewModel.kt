@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.update
 import kotlinx.datetime.LocalDate
 
 class AllJournalViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AllJournalViewModelState())
-    val state: StateFlow<AllJournalViewModelState> =
+    private val _state = MutableStateFlow(AllJournalState())
+    val state: StateFlow<AllJournalState> =
         _state.asStateFlow()
 
-    fun onAction(intent: AllJournalViewModelIntent) {
+    fun onAction(intent: AllJournalIntent) {
         when (intent) {
-            is AllJournalViewModelIntent.UpdateCurrentDeleteId -> updateCurrentDeleteId(intent.id)
-            is AllJournalViewModelIntent.UpdateOpenDeleteDialog -> updateOpenDeleteDialog(intent.openDeleteDialog)
-            is AllJournalViewModelIntent.UpdateSelectedDateTime -> updateSelectedDateTime(intent.selectedDateTime)
-            is AllJournalViewModelIntent.ResetState -> resetState()
+            is AllJournalIntent.UpdateCurrentDeleteId -> updateCurrentDeleteId(intent.id)
+            is AllJournalIntent.UpdateOpenDeleteDialog -> updateOpenDeleteDialog(intent.openDeleteDialog)
+            is AllJournalIntent.UpdateSelectedDateTime -> updateSelectedDateTime(intent.selectedDateTime)
+            is AllJournalIntent.ResetState -> resetState()
         }
     }
 
@@ -41,7 +41,7 @@ class AllJournalViewModel : ViewModel() {
 
     private fun resetState() {
         _state.update {
-            AllJournalViewModelState()
+            AllJournalState()
         }
     }
 }

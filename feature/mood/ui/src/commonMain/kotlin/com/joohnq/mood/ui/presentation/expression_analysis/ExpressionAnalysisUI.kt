@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
-import com.joohnq.mood.ui.presentation.expression_analysis.state.ExpressionAnalysisState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
@@ -31,19 +31,22 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ExpressionAnalysisUI(
-    state: ExpressionAnalysisState,
+    snackBarState: SnackbarHostState,
+    description: String,
+    onAddAction: (AddStatIntent) -> Unit = {},
+    onEvent: (ExpressionAnalysisEvent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
-        snackBarHostState = state.snackBarState
+        snackBarHostState = snackBarState
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(onGoBack = { state.onEvent(ExpressionAnalysisEvent.OnGoBack) })
+            TopBar(onGoBack = { onEvent(ExpressionAnalysisEvent.OnGoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -59,18 +62,18 @@ fun ExpressionAnalysisUI(
             )
             VerticalSpacer(24.dp)
             ExpressionAnalysisTextField(
-                text = state.description,
+                text = description,
                 onValueChange = {
-                    state.onAddAction(
+                    onAddAction(
                         AddStatIntent.UpdateAddingStatsRecordDescription(it)
                     )
                 }
             )
             VerticalSpacer(24.dp)
-            if (state.description.isNotEmpty())
+            if (description.isNotEmpty())
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().testTag("CONTINUE_BUTTON"),
-                    onClick = { state.onEvent(ExpressionAnalysisEvent.OnAdd) }
+                    onClick = { onEvent(ExpressionAnalysisEvent.OnAdd) }
                 )
         }
     }

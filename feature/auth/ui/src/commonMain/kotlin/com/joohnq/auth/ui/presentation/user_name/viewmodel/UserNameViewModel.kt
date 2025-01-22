@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class UserNameViewModel : ViewModel() {
-    private val _state: MutableStateFlow<UserNameViewModelState> =
-        MutableStateFlow(UserNameViewModelState())
-    val state: StateFlow<UserNameViewModelState> = _state
+    private val _state: MutableStateFlow<UserNameState> =
+        MutableStateFlow(UserNameState())
+    val state: StateFlow<UserNameState> = _state
 
     fun onAction(intent: UserNameIntent) {
         when (intent) {
@@ -31,6 +31,6 @@ class UserNameViewModel : ViewModel() {
     }
 
     private fun resetState() {
-        _state.update { UserNameViewModelState() }
+        _state.update { UserNameState() }
     }
 }

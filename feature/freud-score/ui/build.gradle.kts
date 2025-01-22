@@ -32,7 +32,7 @@ kotlin {
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.freudScore.domain)
             implementation(projects.feature.mood.ui)
-            implementation(projects.feature.loading.ui)
+            implementation(projects.feature.splash.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

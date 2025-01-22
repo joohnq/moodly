@@ -2,17 +2,18 @@ CREATE TABLE IF NOT EXISTS UserPreferences (
     id INTEGER PRIMARY KEY NOT NULL,
     skipWelcome INTEGER NOT NULL DEFAULT 0,
     skipOnboarding INTEGER NOT NULL DEFAULT 0,
-    skipUserName INTEGER NOT NULL DEFAULT 0
+    skipAuth INTEGER NOT NULL DEFAULT 0,
+    skipSecurity INTEGER NOT NULL DEFAULT 0
 );
 
 getUserPreferences:
 SELECT * FROM UserPreferences WHERE id = 1;
 
 addUserPreferences:
-INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipUserName) VALUES (1, :skipWelcome, :skipOnboarding, :skipAuth);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipAuth, skipSecurity) VALUES (1, :skipWelcome, :skipOnboarding, :skipAuth, :skipSecurity);
 
 insertUserPreferences:
-INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipUserName) VALUES (1, 0, 0, 0);
+INSERT OR IGNORE INTO UserPreferences (id, skipWelcome, skipOnboarding, skipAuth, skipSecurity) VALUES (1, 0, 0, 0, 0);
 
 updateSkipWelcome:
 UPDATE UserPreferences SET skipWelcome = :value WHERE id = 1;
@@ -21,4 +22,7 @@ updateSkipOnboarding:
 UPDATE UserPreferences SET skipOnboarding = :value WHERE id = 1;
 
 updateSkipAuth:
-UPDATE UserPreferences SET skipUserName = :value WHERE id = 1;
+UPDATE UserPreferences SET skipAuth = :value WHERE id = 1;
+
+updateSkipSecurity:
+UPDATE UserPreferences SET skipSecurity = :value WHERE id = 1;

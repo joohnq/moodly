@@ -62,7 +62,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().user).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.GetUser)
+                viewModel.onAction(UserIntent.GetUser)
                 assertThat(awaitItem().user).isEqualTo(UiState.Loading)
                 awaitItem().user assertThatContains {
                     it is UiState.Success && it.data.id == 1 && it.data.name == "" && it.data.image == null
@@ -82,7 +82,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().user).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.GetUser)
+                viewModel.onAction(UserIntent.GetUser)
                 assertThat(awaitItem().user).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().user).isEqualTo(UiState.Error(exception))
             }
@@ -95,7 +95,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.UpdateUser(User(name = "JH")))
+                viewModel.onAction(UserIntent.UpdateUser(User(name = "JH")))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
             }
@@ -113,7 +113,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.UpdateUser(User(name = "JH")))
+                viewModel.onAction(UserIntent.UpdateUser(User(name = "JH")))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }
@@ -129,7 +129,7 @@ class UserViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
                 viewModel.onAction(
-                    UserViewModelIntent.UpdateUserImageBitmap(
+                    UserIntent.UpdateUserImageBitmap(
                         bitmap
                     )
                 )
@@ -147,7 +147,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.UpdateUserImageBitmap(bitmap))
+                viewModel.onAction(UserIntent.UpdateUserImageBitmap(bitmap))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error("Error to save image"))
             }
@@ -161,7 +161,7 @@ class UserViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
                 viewModel.onAction(
-                    UserViewModelIntent.UpdateUserImageDrawable(0)
+                    UserIntent.UpdateUserImageDrawable(0)
                 )
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
@@ -178,7 +178,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.UpdateUserImageDrawable(0))
+                viewModel.onAction(UserIntent.UpdateUserImageDrawable(0))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }
@@ -192,7 +192,7 @@ class UserViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
                 viewModel.onAction(
-                    UserViewModelIntent.UpdateUserName("name")
+                    UserIntent.UpdateUserName("name")
                 )
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Success(true))
@@ -209,7 +209,7 @@ class UserViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().updating).isEqualTo(UiState.Idle)
-                viewModel.onAction(UserViewModelIntent.UpdateUserName("name"))
+                viewModel.onAction(UserIntent.UpdateUserName("name"))
                 assertThat(awaitItem().updating).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().updating).isEqualTo(UiState.Error(exception))
             }

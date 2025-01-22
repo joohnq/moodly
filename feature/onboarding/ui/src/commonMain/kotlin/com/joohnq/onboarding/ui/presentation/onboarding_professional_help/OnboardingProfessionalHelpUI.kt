@@ -9,8 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_professional_help.state.OnboardingProfessionalHelpState
-import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.TextRadioButton
 import com.joohnq.shared_resources.sought_professional_help_title
@@ -22,7 +21,9 @@ import com.joohnq.user.ui.resource.ProfessionalHelpResource
 
 @Composable
 fun OnboardingProfessionalHelpUI(
-    state: OnboardingProfessionalHelpState,
+    soughtHelp: ProfessionalHelpResource?,
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {},
 ) {
     val options = rememberSaveable { getAllProfessionalHelpResource() }
 
@@ -30,9 +31,9 @@ fun OnboardingProfessionalHelpUI(
         page = 2,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = state.selectedOption != null,
-        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
+        isContinueButtonVisible = soughtHelp != null,
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -42,10 +43,10 @@ fun OnboardingProfessionalHelpUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
                     text = option.text,
-                    selected = state.selectedOption == option,
+                    selected = soughtHelp == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    onClick = { state.onAction(OnboardingViewModelIntent.UpdateUserSoughtHelp(option)) }
+                    onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
                 )
             }
         }

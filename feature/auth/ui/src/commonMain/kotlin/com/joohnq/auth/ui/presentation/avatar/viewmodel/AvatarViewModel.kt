@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class AvatarViewModel : ViewModel() {
-    private val _state: MutableStateFlow<AvatarViewModelState> =
-        MutableStateFlow(AvatarViewModelState())
-    val state: StateFlow<AvatarViewModelState> = _state
+    private val _state: MutableStateFlow<AvatarState> =
+        MutableStateFlow(AvatarState())
+    val state: StateFlow<AvatarState> = _state
 
-    fun onAction(intent: AvatarViewModelIntent) {
+    fun onAction(intent: AvatarIntent) {
         when (intent) {
-            is AvatarViewModelIntent.UpdateImageBitmap -> updateImageBitmap(intent.imageBitmap)
-            is AvatarViewModelIntent.UpdateImageDrawableIndex -> updateImageDrawableIndex(intent.i)
+            is AvatarIntent.UpdateImageBitmap -> updateImageBitmap(intent.imageBitmap)
+            is AvatarIntent.UpdateImageDrawableIndex -> updateImageDrawableIndex(intent.i)
         }
     }
 

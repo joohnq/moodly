@@ -9,6 +9,7 @@ import com.joohnq.domain.use_case.user_preferences.AddUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipAuthUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingUseCase
+import com.joohnq.domain.use_case.user_preferences.UpdateSkipSecurityUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,28 +21,29 @@ class UserPreferencesViewModel(
     private val updateSkipWelcomeUseCase: UpdateSkipWelcomeUseCase,
     private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     private val updateSkipAuthUseCase: UpdateSkipAuthUseCase,
+    private val updateSkipSecurityUseCase: UpdateSkipSecurityUseCase,
 ) : ViewModel() {
     private val _state:
-            MutableStateFlow<UserPreferenceViewModelState> =
-        MutableStateFlow(UserPreferenceViewModelState())
-    val state: MutableStateFlow<UserPreferenceViewModelState> = _state
+            MutableStateFlow<UserPreferenceState> =
+        MutableStateFlow(UserPreferenceState())
+    val state: MutableStateFlow<UserPreferenceState> = _state
 
-    fun onAction(intent: UserPreferenceViewModelIntent) {
+    fun onAction(intent: UserPreferenceIntent) {
         when (intent) {
-            is UserPreferenceViewModelIntent.GetUserPreferences -> getUserPreferences()
-            is UserPreferenceViewModelIntent.UpdateSkipAuth ->
+            is UserPreferenceIntent.GetUserPreferences -> getUserPreferences()
+            is UserPreferenceIntent.UpdateSkipAuth ->
                 updateSkipAuth(value = true)
 
-            is UserPreferenceViewModelIntent.UpdateSkipOnboarding ->
+            is UserPreferenceIntent.UpdateSkipOnboarding ->
                 updateSkipOnboarding(value = true)
 
-            is UserPreferenceViewModelIntent.UpdateSkipWelcome ->
+            is UserPreferenceIntent.UpdateSkipWelcome ->
                 updateSkipWelcome(value = true)
 
-            UserPreferenceViewModelIntent.AddUserPreferences -> addUserPreferences()
-            UserPreferenceViewModelIntent.LogoutUserPreferences -> {}
+            UserPreferenceIntent.AddUserPreferences -> addUserPreferences()
 
-            UserPreferenceViewModelIntent.ResetUpdating -> changeUpdatingStatus(UiState.Idle)
+            UserPreferenceIntent.ResetUpdating -> changeUpdatingStatus(UiState.Idle)
+            is UserPreferenceIntent.UpdateSkipSecurity -> updateSkipSecurity(value = true)
         }
     }
 
@@ -73,6 +75,12 @@ class UserPreferencesViewModel(
     private fun updateSkipAuth(value: Boolean) =
         viewModelScope.launch {
             val res = updateSkipAuthUseCase(value).toUiState()
+            changeUpdatingStatus(res)
+        }
+
+    private fun updateSkipSecurity(value: Boolean) =
+        viewModelScope.launch {
+            val res = updateSkipSecurityUseCase(value).toUiState()
             changeUpdatingStatus(res)
         }
 

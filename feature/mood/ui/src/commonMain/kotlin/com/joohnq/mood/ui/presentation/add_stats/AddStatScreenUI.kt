@@ -20,8 +20,8 @@ import com.joohnq.mood.ui.components.AddMoodRadioGroup
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
-import com.joohnq.mood.ui.presentation.add_stats.state.AddStatState
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
+import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_mood
 import com.joohnq.shared_resources.components.ButtonTextAndCheck
@@ -37,10 +37,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddStatScreenUI(
     state: AddStatState,
+    onAction: (AddStatIntent) -> Unit,
+    onEvent: (AddStatEvent) -> Unit,
 ) {
     val moodsResources by remember { mutableStateOf(getAllMoodResource()) }
-    val selectedMoodResource = state.selectedMood
-    val moodIndex = selectedMoodResource.id
+    val moodIndex = state.mood.id
 
     Scaffold(
         containerColor = Colors.Brown10,
@@ -48,14 +49,14 @@ fun AddStatScreenUI(
     ) { padding ->
         Column(
             Modifier.fillMaxSize()
-                .background(color = selectedMoodResource.palette.moodScreenBackgroundColor)
+                .background(color = state.mood.palette.moodScreenBackgroundColor)
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
             TopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { state.onEvent(AddStatEvent.OnGoBack) }
+                onGoBack = { onEvent(AddStatEvent.OnGoBack) }
             )
             VerticalSpacer(50.dp)
             Column(
@@ -71,13 +72,13 @@ fun AddStatScreenUI(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    mood = selectedMoodResource,
-                    backgroundColor = selectedMoodResource.palette.moodScreenMoodFaceBackgroundColor,
-                    color = selectedMoodResource.palette.moodScreenMoodFaceColor
+                    mood = state.mood,
+                    backgroundColor = state.mood.palette.moodScreenMoodFaceBackgroundColor,
+                    color = state.mood.palette.moodScreenMoodFaceColor
                 )
                 VerticalSpacer(48.dp)
                 Text(
-                    text = stringResource(selectedMoodResource.text),
+                    text = stringResource(state.mood.text),
                     style = TextStyles.Text2xlSemiBold(),
                     color = Colors.White,
                     textAlign = TextAlign.Center
@@ -87,9 +88,9 @@ fun AddStatScreenUI(
                 AddMoodRadioGroup(
                     moodsSize = moodsResources.size,
                     moodIndex = moodIndex,
-                    selectedMood = selectedMoodResource,
+                    selectedMood = state.mood,
                     setSelectedMood = {
-                        state.onAddAction(
+                        onAction(
                             AddStatIntent.UpdateAddingStatsRecordMood(moodsResources[it])
                         )
                     }
@@ -98,7 +99,7 @@ fun AddStatScreenUI(
                 ButtonTextAndCheck(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.set_mood,
-                    onClick = { state.onEvent(AddStatEvent.OnNavigateToExpressionAnalysis) }
+                    onClick = { onEvent(AddStatEvent.OnNavigateToExpressionAnalysis) }
                 )
             }
         }

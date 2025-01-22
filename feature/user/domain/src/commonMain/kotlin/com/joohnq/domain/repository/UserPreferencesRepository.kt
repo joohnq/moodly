@@ -9,4 +9,5 @@ interface UserPreferencesRepository {
     suspend fun updateSkipWelcome(value: Boolean): Result<Boolean>
     suspend fun updateSkipOnboarding(value: Boolean): Result<Boolean>
     suspend fun updateSkipAuth(value: Boolean): Result<Boolean>
+    suspend fun updateSkipSecurity(value: Boolean): Result<Boolean>
 }

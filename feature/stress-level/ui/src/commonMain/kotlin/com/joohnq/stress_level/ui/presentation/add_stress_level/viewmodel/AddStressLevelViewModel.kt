@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AddStressLevelViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddingStressLevelViewModelState())
-    val state: StateFlow<AddingStressLevelViewModelState> =
+    private val _state = MutableStateFlow(AddingStressLevelState())
+    val state: StateFlow<AddingStressLevelState> =
         _state.asStateFlow()
 
     fun onAction(intent: AddStressLevelIntent) {
@@ -55,6 +55,6 @@ class AddStressLevelViewModel : ViewModel() {
     }
 
     private fun resetState() {
-        _state.update { AddingStressLevelViewModelState() }
+        _state.update { AddingStressLevelState() }
     }
 }

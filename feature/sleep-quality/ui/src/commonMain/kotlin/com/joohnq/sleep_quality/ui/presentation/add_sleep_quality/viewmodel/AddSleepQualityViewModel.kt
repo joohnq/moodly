@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AddSleepQualityViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddSleepQualityStateViewModel())
-    val state: StateFlow<AddSleepQualityStateViewModel> =
+    private val _state = MutableStateFlow(AddSleepQualityState())
+    val state: StateFlow<AddSleepQualityState> =
         _state.asStateFlow()
 
     fun onAction(intent: AddSleepQualityIntent) {
@@ -85,6 +85,6 @@ class AddSleepQualityViewModel : ViewModel() {
     }
 
     private fun resetAdding() {
-        _state.update { AddSleepQualityStateViewModel() }
+        _state.update { AddSleepQualityState() }
     }
 }

@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.ui.viewmodel
 
-sealed class StressLevelSideEffect {
-    data object StressLevelAdded : StressLevelSideEffect()
-    data class ShowError(val error: Throwable) : StressLevelSideEffect()
+sealed interface StressLevelSideEffect {
+    data object StressLevelAdded : StressLevelSideEffect
+    data class ShowError(val error: Throwable) : StressLevelSideEffect
 } 

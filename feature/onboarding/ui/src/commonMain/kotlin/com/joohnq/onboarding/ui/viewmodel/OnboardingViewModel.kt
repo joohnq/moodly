@@ -15,29 +15,29 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class OnboardingViewModel : ViewModel() {
-    private val _state = MutableStateFlow(OnboardingViewModelState())
-    val state: StateFlow<OnboardingViewModelState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(OnboardingState())
+    val state: StateFlow<OnboardingState> = _state.asStateFlow()
 
-    fun onAction(intent: OnboardingViewModelIntent) {
+    fun onAction(intent: OnboardingIntent) {
         when (intent) {
-            is OnboardingViewModelIntent.ResetStatsRecord -> resetStatsRecord()
-            is OnboardingViewModelIntent.UpdateMood -> updateMood(intent.mood)
-            is OnboardingViewModelIntent.UpdateSleepQuality -> updateSleepQuality(intent.sleepQuality)
-            is OnboardingViewModelIntent.UpdateStatsRecordDescription ->
+            is OnboardingIntent.ResetStatsRecord -> resetStatsRecord()
+            is OnboardingIntent.UpdateMood -> updateMood(intent.mood)
+            is OnboardingIntent.UpdateSleepQuality -> updateSleepQuality(intent.sleepQuality)
+            is OnboardingIntent.UpdateStatsRecordDescription ->
                 updateStatsRecordDescription(intent.description)
 
-            is OnboardingViewModelIntent.UpdateStressLevel -> updateStressLevel(intent.stressLevel)
-            is OnboardingViewModelIntent.UpdateUserMedicationsSupplements -> updateUserMedicationsSupplements(
+            is OnboardingIntent.UpdateStressLevel -> updateStressLevel(intent.stressLevel)
+            is OnboardingIntent.UpdateUserMedicationsSupplements -> updateUserMedicationsSupplements(
                 intent.medicationsSupplements
             )
 
-            is OnboardingViewModelIntent.UpdateUserPhysicalSymptoms ->
+            is OnboardingIntent.UpdateUserPhysicalSymptoms ->
                 updateUserPhysicalSymptoms(intent.physicalSymptoms)
 
-            is OnboardingViewModelIntent.UpdateUserSoughtHelp -> updateUserSoughtHelp(intent.soughtHelp)
-            is OnboardingViewModelIntent.UpdateSliderValue -> updateSliderValue(intent.sliderValue)
-            is OnboardingViewModelIntent.SetOnboardingViewModelStateForTesting -> setOnboardingStateForTesting(
-                intent.onboardingViewModelState
+            is OnboardingIntent.UpdateUserSoughtHelp -> updateUserSoughtHelp(intent.soughtHelp)
+            is OnboardingIntent.UpdateSliderValue -> updateSliderValue(intent.sliderValue)
+            is OnboardingIntent.SetOnboardingStateForTesting -> setOnboardingStateForTesting(
+                intent.onboardingState
             )
         }
     }
@@ -80,7 +80,7 @@ class OnboardingViewModel : ViewModel() {
         _state.update { it.copy(statsRecord = StatsRecord()) }
     }
 
-    private fun setOnboardingStateForTesting(onboardingViewModelState: OnboardingViewModelState) {
-        _state.update { onboardingViewModelState }
+    private fun setOnboardingStateForTesting(onboardingState: OnboardingState) {
+        _state.update { onboardingState }
     }
 }

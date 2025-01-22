@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -37,20 +38,23 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.getAllStressorResource
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
-import com.joohnq.stress_level.ui.presentation.stress_stressors.state.StressStressorsState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressStressorsUI(
-    state: StressStressorsState,
+    snackBarState: SnackbarHostState,
+    state: AddingStressLevelState,
+    onAddAction: (AddStressLevelIntent) -> Unit,
+    onEvent: (StressStressorsEvent) -> Unit,
 ) {
     val stressors = remember { getAllStressorResource() }
-    val canContinue by derivedStateOf { state.addStressLevelViewModelState.stressors.isNotEmpty() }
-    val containOtherInStressors by derivedStateOf { state.addStressLevelViewModelState.stressors.any { it::class == Stressor.Other::class } }
+    val canContinue by derivedStateOf { state.stressors.isNotEmpty() }
+    val containOtherInStressors by derivedStateOf { state.stressors.any { it::class == Stressor.Other::class } }
 
     ScaffoldSnackBar(
-        snackBarHostState = state.snackBarState,
+        snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
     ) { padding ->
@@ -63,7 +67,7 @@ fun StressStressorsUI(
         ) {
             TopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { state.onEvent(StressStressorsEvent.GoBack) }
+                onGoBack = { onEvent(StressStressorsEvent.GoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -83,11 +87,11 @@ fun StressStressorsUI(
                         TextBubble(
                             text = stressor.text,
                             onClick = {
-                                state.onAddAction(
+                                onAddAction(
                                     AddStressLevelIntent.UpdateAddingStressors(stressor)
                                 )
                             },
-                            selected = state.addStressLevelViewModelState.stressors.contains(
+                            selected = state.stressors.contains(
                                 stressor
                             ),
                         )
@@ -98,12 +102,12 @@ fun StressStressorsUI(
                 TextFieldWithLabelAndDoubleBorder(
                     label = Res.string.other,
                     placeholder = Res.string.enter_your_stressor,
-                    text = state.addStressLevelViewModelState.otherValue,
-                    errorText = state.addStressLevelViewModelState.otherValueError,
+                    text = state.otherValue,
+                    errorText = state.otherValueError,
                     focusedBorderColor = Colors.Green50Alpha25,
                     colors = ComponentColors.TextField.MainTextFieldColors(),
                     onValueChange = {
-                        state.onAddAction(
+                        onAddAction(
                             AddStressLevelIntent.UpdateAddingOtherValue(it)
                         )
                     },
@@ -113,7 +117,7 @@ fun StressStressorsUI(
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth()
                         .testTag("CONTINUE_BUTTON"),
-                    onClick = { state.onEvent(StressStressorsEvent.Continue) }
+                    onClick = { onEvent(StressStressorsEvent.Continue) }
                 )
         }
     }

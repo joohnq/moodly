@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.ui.presentation.security.event.SecurityEvent
-import com.joohnq.security.ui.presentation.security.state.SecurityState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
@@ -31,10 +31,13 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SecurityUI(state: SecurityState) {
+fun SecurityUI(
+    snackBarState: SnackbarHostState,
+    onEvent: (SecurityEvent) -> Unit,
+) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
-        snackBarHostState = state.snackBarState,
+        snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
@@ -77,17 +80,17 @@ fun SecurityUI(state: SecurityState) {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                    onClick = { state.onEvent(SecurityEvent.OnContinue) }
+                    onClick = { onEvent(SecurityEvent.OnContinue) }
                 )
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     text = Res.string.set_a_pin,
-                    onClick = { state.onEvent(SecurityEvent.OnSetPin) }
+                    onClick = { onEvent(SecurityEvent.OnSetPin) }
                 )
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     text = Res.string.skip,
-                    onClick = { state.onEvent(SecurityEvent.OnSkip) }
+                    onClick = { onEvent(SecurityEvent.OnSkip) }
                 )
             }
         }

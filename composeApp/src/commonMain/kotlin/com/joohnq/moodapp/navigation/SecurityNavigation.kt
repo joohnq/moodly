@@ -5,10 +5,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.security.ui.presentation.biometric_faceid.BiometricFaceIdScreen
 import com.joohnq.security.ui.presentation.pin.PINScreen
 import com.joohnq.security.ui.presentation.security.SecurityScreen
 import com.joohnq.security.ui.presentation.security_confirmed.SecurityConfirmedScreen
+import com.joohnq.security.ui.presentation.un_lock.UnLockScreen
 
 fun NavGraphBuilder.securityNavigation(
     onGoBack: () -> Unit,
@@ -28,11 +28,11 @@ fun NavGraphBuilder.securityNavigation(
                 onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
             )
         }
-        composable<Destination.Security.BiometricFaceId> {
-            BiometricFaceIdScreen(
+        composable<Destination.Security.UnLock> {
+            UnLockScreen(
                 onNavigateToDashboard = {
                     onNavigateGraph(NavigationGraph.App, true)
-                }
+                },
             )
         }
         composable<Destination.Security.PIN> {

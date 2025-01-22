@@ -1,8 +1,8 @@
 package com.joohnq.security.ui.viewmodel
 
+import com.joohnq.security.domain.Security
+
 sealed interface SecurityIntent {
     data object GetSecurity : SecurityIntent
-    data object UpdateSecurity : SecurityIntent
-    data class SetAddingBiometricFaceIdSecurity(val enabled: Boolean) : SecurityIntent
-    data class SetAddingPINSecurity(val enabled: Boolean, val code: List<Int>) : SecurityIntent
+    data class UpdateSecurity(val security: Security) : SecurityIntent
 }

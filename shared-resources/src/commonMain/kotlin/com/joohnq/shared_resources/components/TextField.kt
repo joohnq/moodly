@@ -40,6 +40,36 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
+fun ErrorInfo(errorText: String) {
+    Box(
+        modifier = Modifier.border(
+            width = 1.dp,
+            color = Colors.Orange40,
+            shape = Dimens.Shape.Circle
+        ).background(
+            color = Colors.Orange20,
+            shape = Dimens.Shape.Circle
+        ).paddingVerticalSmall().fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painter = painterResource(Drawables.Icons.Warning),
+                contentDescription = null,
+                tint = Colors.Orange40,
+                modifier = Modifier.size(20.dp)
+            )
+            HorizontalSpacer(10.dp)
+            Text(
+                text = errorText,
+                style = TextStyles.TextXsExtraBold(),
+                color = Colors.Orange40
+            )
+        }
+    }
+}
+
+@Composable
 fun ExpressionAnalysisTextField(
     modifier: Modifier = Modifier,
     text: String,
@@ -131,32 +161,7 @@ fun TextFieldWithLabelAndDoubleBorder(
         }
         if (isError) {
             VerticalSpacer(4.dp)
-            Box(
-                modifier = Modifier.border(
-                    width = 1.dp,
-                    color = Colors.Orange40,
-                    shape = Dimens.Shape.Circle
-                ).background(
-                    color = Colors.Orange20,
-                    shape = Dimens.Shape.Circle
-                ).paddingVerticalSmall().fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(Drawables.Icons.Warning),
-                        contentDescription = null,
-                        tint = Colors.Orange40,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    HorizontalSpacer(10.dp)
-                    Text(
-                        text = errorText.toString(),
-                        style = TextStyles.TextXsExtraBold(),
-                        color = Colors.Orange40
-                    )
-                }
-            }
+            ErrorInfo(errorText.toString())
         }
     }
 }

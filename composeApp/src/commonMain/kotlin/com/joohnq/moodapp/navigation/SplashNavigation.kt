@@ -32,11 +32,8 @@ fun NavGraphBuilder.splashNavigation(
                 onNavigateToCorruptedSecurity = {
                     onNavigate(Destination.Security.CorruptedSecurity, true)
                 },
-                onNavigateToBiometricFaceId = {
-                    onNavigate(Destination.Security.BiometricFaceId, true)
-                },
-                onNavigateToPIN = {
-                    onNavigate(Destination.Security.PIN, true)
+                onNavigateToUnLock = {
+                    onNavigate(Destination.Security.UnLock, true)
                 },
             )
         }

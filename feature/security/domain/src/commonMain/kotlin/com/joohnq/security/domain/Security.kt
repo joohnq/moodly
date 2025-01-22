@@ -16,3 +16,6 @@ sealed class Security {
     @Serializable
     data class Pin(val enabled: Boolean, val code: List<Int>) : Security()
 }
+
+fun Security.getPinCode(): List<Int> =
+    (this as Security.Pin).code

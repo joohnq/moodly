@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class PINViewModel : ViewModel() {
-    private val _state: MutableStateFlow<PINViewModelState> =
-        MutableStateFlow(PINViewModelState())
-    val state: StateFlow<PINViewModelState> = _state
+    private val _state: MutableStateFlow<PINState> =
+        MutableStateFlow(PINState())
+    val state: StateFlow<PINState> = _state
 
-    fun onAction(intent: PINViewModelIntent) {
+    fun onAction(intent: PINIntent) {
         when (intent) {
-            is PINViewModelIntent.OnChangeFieldFocused -> {
+            is PINIntent.OnChangeFieldFocused -> {
                 _state.update {
                     it.copy(
                         focusedIndex = intent.index
@@ -20,11 +20,11 @@ class PINViewModel : ViewModel() {
                 }
             }
 
-            is PINViewModelIntent.OnEnterNumber -> {
+            is PINIntent.OnEnterNumber -> {
                 enterNumber(index = intent.index, number = intent.number)
             }
 
-            PINViewModelIntent.OnKeyboardBack -> {
+            PINIntent.OnKeyboardBack -> {
                 val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
                 _state.update {
                     it.copy(

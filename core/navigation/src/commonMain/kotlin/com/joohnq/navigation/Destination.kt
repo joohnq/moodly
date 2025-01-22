@@ -20,14 +20,13 @@ sealed interface Destination {
     @Serializable data object Auth : Destination {
         @Serializable data object Avatar : Destination
         @Serializable data object UserName : Destination
-        @Serializable data object Security : Destination
     }
 
     @Serializable data object Security : Destination {
         @Serializable data object Security : Destination
         @Serializable data object SecurityConfirmed : Destination
         @Serializable data object PIN : Destination
-        @Serializable data object BiometricFaceId : Destination
+        @Serializable data object UnLock : Destination
         @Serializable data object CorruptedSecurity : Destination
     }
 

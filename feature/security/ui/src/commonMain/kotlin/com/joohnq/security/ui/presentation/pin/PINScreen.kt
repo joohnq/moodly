@@ -7,52 +7,68 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
+import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModel
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModelIntent
+import com.joohnq.security.ui.viewmodel.SecurityIntent
+import com.joohnq.security.ui.viewmodel.SecuritySideEffect
+import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.shared_resources.util.mappers.itemsNotNull
+import kotlinx.coroutines.launch
 
 @Composable
 fun PINScreen(
     onNavigateToDashboard: () -> Unit,
     onGoBack: () -> Unit,
 ) {
+    val securityViewModel: SecurityViewModel = sharedViewModel()
     val pinViewModel: PINViewModel = sharedViewModel()
+    val scope = rememberCoroutineScope()
     val state by pinViewModel.state.collectAsState()
     val snackBarState = remember { SnackbarHostState() }
-    val focusRequesters = remember {
-        List(4) { FocusRequester() }
-    }
+    val focusRequesters = remember { List(4) { FocusRequester() } }
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
     val canContinue by derivedStateOf {
         state.code.none { it == null }
     }
 
-    LaunchedEffect(state.focusedIndex) {
-        state.focusedIndex?.let { i ->
-            focusRequesters.getOrNull(i)?.requestFocus()
+    fun onError(error: Throwable) {
+        scope.launch {
+            snackBarState.showSnackbar(error.message.toString())
         }
     }
 
-    LaunchedEffect(state.code) {
-        val allNumbersEntered = state.code.none { it == null }
-        if (allNumbersEntered) {
-            focusRequesters.forEach {
-                it.freeFocus()
+    LaunchedEffect(securityViewModel.sideEffect) {
+        securityViewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
+                is SecuritySideEffect.OnSecurityUpdated -> {
+                    securityViewModel.onAction(SecurityIntent.GetSecurity)
+                    onNavigateToDashboard()
+                }
+
+                is SecuritySideEffect.ShowError -> onError(sideEffect.error)
             }
-            focusManager.clearFocus()
-            keyboardManager?.hide()
         }
     }
 
     fun onEvent(event: PINEvent) {
         when (event) {
             PINEvent.OnContinue -> {
-                onNavigateToDashboard()
+                securityViewModel.onAction(
+                    SecurityIntent.UpdateSecurity(
+                        Security.Pin(
+                            enabled = true,
+                            code = state.code.itemsNotNull()
+                        )
+                    )
+                )
             }
 
             PINEvent.OnGoBack -> onGoBack()
@@ -66,14 +82,16 @@ fun PINScreen(
     return PINUI(
         snackBarState = snackBarState,
         onEvent = ::onEvent,
-        pinViewModelState = state,
+        state = state,
         onAction = { action ->
-            if (action is PINViewModelIntent.OnEnterNumber && action.number != null) {
+            if (action is PINIntent.OnEnterNumber && action.number != null) {
                 focusRequesters[action.index].freeFocus()
             }
             pinViewModel.onAction(action)
         },
         focusRequesters = focusRequesters,
-        canContinue = canContinue
+        canContinue = canContinue,
+        focusManager = focusManager,
+        keyboardManager = keyboardManager,
     )
 }

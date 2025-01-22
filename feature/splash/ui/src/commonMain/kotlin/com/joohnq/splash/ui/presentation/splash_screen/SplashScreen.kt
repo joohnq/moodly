@@ -22,8 +22,7 @@ fun SplashScreen(
     onNavigateToAuth: () -> Unit,
     onNavigateToSecurity: () -> Unit,
     onNavigateToDashboard: () -> Unit,
-    onNavigateToBiometricFaceId: () -> Unit,
-    onNavigateToPIN: () -> Unit,
+    onNavigateToUnLock: () -> Unit,
     onNavigateToCorruptedSecurity: () -> Unit,
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
@@ -47,23 +46,12 @@ fun SplashScreen(
             val security = securityState.item.getValueOrNull()
             val preferences = userPreferencesState.userPreferences.getValueOrNull()
 
-            when (security) {
-                is Security.Biometric -> {
-                    onNavigateToBiometricFaceId()
-                    return@allSuccess
-                }
-
-                is Security.Pin -> {
-                    onNavigateToPIN()
-                    return@allSuccess
-                }
-
-                is Security.Corrupted -> {
-                    onNavigateToCorruptedSecurity()
-                    return@allSuccess
-                }
-
-                else -> Unit
+            if (security is Security.Biometric || security is Security.Pin) {
+                onNavigateToUnLock()
+                return@allSuccess
+            } else if (security is Security.Corrupted) {
+                onNavigateToCorruptedSecurity()
+                return@allSuccess
             }
 
             when (false) {

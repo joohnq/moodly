@@ -10,15 +10,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModelIntent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModelState
+import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
+import com.joohnq.security.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.OTPInputField
@@ -33,13 +36,66 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
+@Composable
+fun PINCode(
+    code: List<Int?>,
+    focusedIndex: Int?,
+    focusRequesters: List<FocusRequester>,
+    focusManager: FocusManager,
+    keyboardManager: SoftwareKeyboardController?,
+    onNumberChanged: (i: Int, newNumber: Int?) -> Unit,
+    onKeyboardBack: () -> Unit,
+    onFocusChanged: (i: Int) -> Unit,
+) {
+    LaunchedEffect(code) {
+        val allNumbersEntered = code.none { it == null }
+        if (allNumbersEntered) {
+            focusRequesters.forEach {
+                it.freeFocus()
+            }
+            focusManager.clearFocus()
+            keyboardManager?.hide()
+        }
+    }
+
+    LaunchedEffect(focusedIndex) {
+        focusedIndex?.let { i ->
+            focusRequesters.getOrNull(i)?.requestFocus()
+        }
+    }
+
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(
+            10.dp,
+            alignment = Alignment.CenterHorizontally
+        )
+    ) {
+        code.forEachIndexed { i, number ->
+            OTPInputField(
+                modifier = Modifier.weight(1f),
+                number = number,
+                focusRequester = focusRequesters[i],
+                onFocusChanged = { isFocused ->
+                    if (isFocused) {
+                        onFocusChanged(i)
+                    }
+                },
+                onNumberChanged = { newNumber -> onNumberChanged(i, newNumber) },
+                onKeyboardBack = onKeyboardBack
+            )
+        }
+    }
+}
+
 
 @Composable
 fun PINUI(
     snackBarState: SnackbarHostState = SnackbarHostState(),
-    pinViewModelState: PINViewModelState,
+    state: PINState,
     focusRequesters: List<FocusRequester>,
-    onAction: (PINViewModelIntent) -> Unit,
+    focusManager: FocusManager,
+    keyboardManager: SoftwareKeyboardController?,
+    onAction: (PINIntent) -> Unit,
     onEvent: (PINEvent) -> Unit,
     canContinue: Boolean,
 ) {
@@ -79,34 +135,23 @@ fun PINUI(
                     textAlign = TextAlign.Center
                 )
                 VerticalSpacer(48.dp)
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(
-                        10.dp,
-                        alignment = Alignment.CenterHorizontally
-                    )
-                ) {
-                    pinViewModelState.code.forEachIndexed { i, number ->
-                        OTPInputField(
-                            modifier = Modifier.weight(1f),
-                            number = number,
-                            focusRequester = focusRequesters[i],
-                            onFocusChanged = { isFocused ->
-                                if (isFocused) {
-                                    onAction(PINViewModelIntent.OnChangeFieldFocused(i))
-                                }
-                            },
-                            onNumberChanged = { newNumber ->
-                                onAction(
-                                    PINViewModelIntent.OnEnterNumber(
-                                        index = i,
-                                        number = newNumber
-                                    )
-                                )
-                            },
-                            onKeyboardBack = { onAction(PINViewModelIntent.OnKeyboardBack) },
+                PINCode(
+                    code = state.code,
+                    focusedIndex = state.focusedIndex,
+                    onNumberChanged = { i, newNumber ->
+                        onAction(
+                            PINIntent.OnEnterNumber(
+                                index = i,
+                                number = newNumber
+                            )
                         )
-                    }
-                }
+                    },
+                    onKeyboardBack = { onAction(PINIntent.OnKeyboardBack) },
+                    focusRequesters = focusRequesters,
+                    focusManager = focusManager,
+                    keyboardManager = keyboardManager,
+                    onFocusChanged = { i -> onAction(PINIntent.OnChangeFieldFocused(i)) },
+                )
             }
             ContinueButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

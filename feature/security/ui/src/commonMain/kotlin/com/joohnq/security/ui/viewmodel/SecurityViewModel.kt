@@ -27,9 +27,7 @@ class SecurityViewModel(
     fun onAction(intent: SecurityIntent) {
         when (intent) {
             is SecurityIntent.GetSecurity -> getSecurity()
-            is SecurityIntent.SetAddingBiometricFaceIdSecurity -> setBiometricFaceIdSecurity()
-            is SecurityIntent.SetAddingPINSecurity -> setAddingPINSecurity(intent.code)
-            SecurityIntent.UpdateSecurity -> updateSecurity()
+            is SecurityIntent.UpdateSecurity -> updateSecurity(intent.security)
         }
     }
 
@@ -38,29 +36,13 @@ class SecurityViewModel(
         _state.update { it.copy(item = res) }
     }
 
-    private fun updateSecurity() = viewModelScope.launch {
-        val res = securityPreference.update(state.value.updating).toUiState()
+    private fun updateSecurity(security: Security) = viewModelScope.launch {
+        val res = securityPreference.update(security).toUiState()
         res.onSuccess {
-            _sideEffect.send(SecuritySideEffect.OnBiometricFaceIdUpdated)
+            _sideEffect.send(SecuritySideEffect.OnSecurityUpdated)
         }.onFailure {
             _sideEffect.send(SecuritySideEffect.ShowError(it))
         }
 
-    }
-
-    private fun setBiometricFaceIdSecurity() = viewModelScope.launch {
-        _state.update {
-            it.copy(
-                updating = Security.Biometric(enabled = true)
-            )
-        }
-    }
-
-    private fun setAddingPINSecurity(code: List<Int>) = viewModelScope.launch {
-        _state.update {
-            it.copy(
-                updating = Security.Pin(enabled = true, code = code)
-            )
-        }
     }
 }

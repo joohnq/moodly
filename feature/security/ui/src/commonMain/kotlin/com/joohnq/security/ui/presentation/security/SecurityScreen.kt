@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.security.domain.Security
 import com.joohnq.security.domain.SecurityAuthentication
 import com.joohnq.security.ui.presentation.security.event.SecurityEvent
 import com.joohnq.security.ui.securityAuthentication
@@ -37,7 +38,7 @@ fun SecurityScreen(
     LaunchedEffect(securityViewModel.sideEffect) {
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SecuritySideEffect.OnBiometricFaceIdUpdated -> {
+                is SecuritySideEffect.OnSecurityUpdated -> {
                     securityViewModel.onAction(SecurityIntent.GetSecurity)
                     onNavigateToSecurityConfirmed()
                 }
@@ -54,9 +55,10 @@ fun SecurityScreen(
                     securityAuthentication.authenticateWithFace { isAuthorized ->
                         if (isAuthorized) {
                             securityViewModel.onAction(
-                                SecurityIntent.SetAddingBiometricFaceIdSecurity(true)
+                                SecurityIntent.UpdateSecurity(
+                                    Security.Biometric(true)
+                                )
                             )
-                            securityViewModel.onAction(SecurityIntent.UpdateSecurity)
                         }
                     }
                 }

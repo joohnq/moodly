@@ -14,6 +14,7 @@ import com.joohnq.domain.use_case.user_preferences.GetUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.InsertUserPreferencesUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipAuthUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipOnboardingUseCase
+import com.joohnq.domain.use_case.user_preferences.UpdateSkipSecurityUseCase
 import com.joohnq.domain.use_case.user_preferences.UpdateSkipWelcomeUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -34,4 +35,5 @@ val userDomainModule = module {
     factoryOf(::UpdateUserImageDrawableUseCase)
     factoryOf(::UpdateSkipOnboardingUseCase)
     factoryOf(::UpdateSkipWelcomeUseCase)
+    factoryOf(::UpdateSkipSecurityUseCase)
 }

@@ -41,7 +41,7 @@ kotlin {
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.mood.domain)
             implementation(projects.sharedResources)
-            implementation(projects.feature.loading.ui)
+            implementation(projects.feature.splash.ui)
             implementation(projects.core.ui)
 
             implementation(compose.runtime)

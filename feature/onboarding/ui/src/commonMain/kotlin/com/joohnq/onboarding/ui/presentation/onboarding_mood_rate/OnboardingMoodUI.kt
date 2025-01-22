@@ -10,15 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.state.OnboardingMoodRateState
-import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.IconContinueButton
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -31,14 +30,16 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingMoodRateUI(
-    state: OnboardingMoodRateState,
+    mood: Mood,
+    onEvent: (OnboardingEvent) -> Unit,
+    onAction: (OnboardingIntent) -> Unit,
 ) {
-    val resource = state.selectedMood.toResource()
+    val resource = mood.toResource()
     OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
     ) {
         Text(
             text = stringResource(
@@ -62,11 +63,11 @@ fun OnboardingMoodRateUI(
         IconContinueButton(
             modifier = Modifier.size(60.dp),
             colors = ComponentColors.IconButton.ContinueButtonColors(),
-            onClick = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
+            onClick = { onEvent(OnboardingEvent.OnNavigateToNext) }
         )
     }
 
-    BoxWithConstraints(modifier = Modifier.testTag(OnboardingMoodRateScreen.OnboardingMoodRateTestTag.ROULETTE)) {
+    BoxWithConstraints {
         val carouselOffset = maxHeight - (maxWidth / 2) + 60.dp
 
         Box(
@@ -76,7 +77,7 @@ fun OnboardingMoodRateUI(
             contentAlignment = Alignment.TopCenter
         ) {
             RouletteMoods(
-                setSelectedMood = { state.onAction(OnboardingViewModelIntent.UpdateMood(it)) }
+                setSelectedMood = { onAction(OnboardingIntent.UpdateMood(it)) }
             )
         }
     }

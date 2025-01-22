@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,17 +33,20 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.whats_your_stress_level_today
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.state.AddStressLevelState
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddStressLevelScreenUI(
-    state: AddStressLevelState,
+    snackBarState: SnackbarHostState,
+    state: AddingStressLevelState,
+    onAction: (AddStressLevelIntent) -> Unit,
+    onEvent: (AddStressLevelEvent) -> Unit,
 ) {
     ScaffoldSnackBar(
-        snackBarHostState = state.snackBarState,
+        snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
     ) { padding ->
@@ -55,7 +59,7 @@ fun AddStressLevelScreenUI(
             ) {
                 TopBar(
                     text = Res.string.add_stress_level,
-                    onGoBack = { state.onEvent(AddStressLevelEvent.GoBack) }
+                    onGoBack = { onEvent(AddStressLevelEvent.GoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -72,9 +76,9 @@ fun AddStressLevelScreenUI(
                 ) {
                     VerticalSlider(
                         modifier = Modifier.height(height),
-                        sliderValue = state.state.sliderValue,
+                        sliderValue = state.sliderValue,
                         setSliderValue = {
-                            state.onAddAction(AddStressLevelIntent.UpdateAddingSliderValue(it))
+                            onAction(AddStressLevelIntent.UpdateAddingSliderValue(it))
                         },
                         thumb = { SleepQualityThumb() },
                         track = { SleepQualityTrack(it) },
@@ -82,12 +86,12 @@ fun AddStressLevelScreenUI(
                     )
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
-                            text = state.state.stressLevel.level.toString(),
+                            text = state.stressLevel.level.toString(),
                             style = TextStyles.DisplayLgExtraBold(),
                             color = Colors.Brown80
                         )
                         Text(
-                            text = stringResource(state.state.stressLevel.text),
+                            text = stringResource(state.stressLevel.text),
                             style = TextStyles.TextXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End
@@ -97,7 +101,7 @@ fun AddStressLevelScreenUI(
                 VerticalSpacer(24.dp)
                 ContinueButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { state.onEvent(AddStressLevelEvent.Continue) }
+                    onClick = { onEvent(AddStressLevelEvent.Continue) }
                 )
             }
         }

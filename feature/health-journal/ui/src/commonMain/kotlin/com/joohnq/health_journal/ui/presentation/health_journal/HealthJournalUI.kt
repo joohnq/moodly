@@ -10,13 +10,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.components.HealthJournalComponentColorful
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
-import com.joohnq.health_journal.ui.presentation.health_journal.state.HealthJournalState
-import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -27,28 +26,30 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @Composable
 fun HealthJournalUI(
-    state: HealthJournalState,
+    healthJournal: UiState<List<HealthJournalRecord>>,
+    onEvent: (HealthJournalEvent) -> Unit = {},
 ) {
-    state.healthJournal.foldComposable(
-        onLoading = { LoadingUI() },
+    healthJournal.foldComposable(
+        onLoading = { SplashScreenUI() },
         onSuccess = { healthJournals: List<HealthJournalRecord> ->
             val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =
                 remember { getHealthJournalsInYearUseCase(healthJournals = healthJournals) }
             SharedPanelComponent(
                 isDark = false,
-                onGoBack = { state.onEvent(HealthJournalEvent.OnGoBack) },
+                onGoBack = { onEvent(HealthJournalEvent.OnGoBack) },
                 backgroundColor = Colors.Brown60,
                 backgroundImage = Drawables.Images.HealthJournalBackground,
                 panelTitle = Res.string.health_journal,
                 bodyTitle = Res.string.journal_history,
                 color = Colors.Brown50,
-                onAdd = { state.onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
+                onAdd = { onEvent(HealthJournalEvent.OnNavigateToAddHealthJournalScreen) },
                 panelContent = {
                     Column(
                         modifier = Modifier.paddingHorizontalMedium()
@@ -74,7 +75,7 @@ fun HealthJournalUI(
                         VerticalSpacer(10.dp)
                         HealthJournalComponentColorful(
                             healthJournals = healthJournals,
-                            onClick = { state.onEvent(HealthJournalEvent.OnClick(it)) }
+                            onClick = { onEvent(HealthJournalEvent.OnClick(it)) }
                         )
                     }
                 }

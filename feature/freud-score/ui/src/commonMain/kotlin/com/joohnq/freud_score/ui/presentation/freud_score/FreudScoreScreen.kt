@@ -5,7 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
-import com.joohnq.freud_score.ui.presentation.freud_score.state.FreudScoreState
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.mood.ui.viewmodel.StatsState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
@@ -29,10 +28,8 @@ fun FreudScoreScreen(
         }
 
     FreudScoreUI(
-        FreudScoreState(
-            freudScore = freudScoreState.freudScore!!,
-            statsRecords = statsState.statsRecords,
-            onEvent = ::onEvent,
-        )
+        state = freudScoreState,
+        statsRecords = statsState.statsRecords,
+        onEvent = ::onEvent,
     )
 }

@@ -2,13 +2,13 @@ package com.joohnq.health_journal.ui.viewmodel
 
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 
-sealed class HealthJournalIntent {
-    data object GetHealthJournals : HealthJournalIntent()
+sealed interface HealthJournalIntent {
+    data object GetHealthJournals : HealthJournalIntent
     data class AddHealthJournal(val healthJournalRecord: HealthJournalRecord) :
-        HealthJournalIntent()
+        HealthJournalIntent
 
     data class UpdateHealthJournal(val healthJournalRecord: HealthJournalRecord) :
-        HealthJournalIntent()
+        HealthJournalIntent
 
-    data class DeleteHealthJournal(val id: Int) : HealthJournalIntent()
+    data class DeleteHealthJournal(val id: Int) : HealthJournalIntent
 }

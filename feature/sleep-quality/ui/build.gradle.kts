@@ -33,7 +33,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.feature.sleepQuality.domain)
             implementation(projects.feature.mood.ui)
-            implementation(projects.feature.loading.ui)
+            implementation(projects.feature.splash.ui)
             implementation(projects.feature.mood.domain)
 
             implementation(compose.runtime)

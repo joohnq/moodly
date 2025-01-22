@@ -14,8 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.state.OnboardingPhysicalSymptomsState
-import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModelIntent
+import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.IconAndTextRadioButtonHorizontal
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -31,16 +30,18 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsUI(
-    state: OnboardingPhysicalSymptomsState,
+    physicalSymptoms: PhysicalSymptomsResource?,
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingIntent) -> Unit = {},
 ) {
     val options = remember { getAllPhysicalSymptomsResource() }
 
     OnboardingBaseComponent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = state.selectedOption != null,
-        onGoBack = { state.onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { state.onEvent(OnboardingEvent.OnNavigateToNext) }
+        isContinueButtonVisible = physicalSymptoms != null,
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -59,13 +60,13 @@ fun OnboardingPhysicalSymptomsUI(
                     paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
                     icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = state.selectedOption == option,
+                    selected = physicalSymptoms == option,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     shape = Dimens.Shape.Medium,
                     textStyle = TextStyles.TextLgExtraBold(),
                     onClick = {
-                        state.onAction(
-                            OnboardingViewModelIntent.UpdateUserPhysicalSymptoms(option)
+                        onAction(
+                            OnboardingIntent.UpdateUserPhysicalSymptoms(option)
                         )
                     }
                 )

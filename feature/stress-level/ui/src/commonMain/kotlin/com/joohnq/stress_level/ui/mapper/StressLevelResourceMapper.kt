@@ -10,14 +10,6 @@ import com.joohnq.stress_level.ui.resource.StressLevelResource.One
 import com.joohnq.stress_level.ui.resource.StressLevelResource.Three
 import com.joohnq.stress_level.ui.resource.StressLevelResource.Two
 
-fun toPercent(level: Int): Double = when (level) {
-    1 -> 0.0
-    2 -> 20.0
-    3 -> 40.0
-    4 -> 60.0
-    else -> 100.0
-}
-
 fun getAllStressLevelResource(): List<StressLevelResource> = listOf(
     One,
     Two,

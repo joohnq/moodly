@@ -19,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.moodapp.presentation.loading.LoadingUI
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.components.SharedPanelComponent
@@ -40,21 +40,23 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.to_word
+import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
 import com.joohnq.sleep_quality.ui.mapper.toMood
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality.state.SleepQualityState
+import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SleepQualityUI(
-    state: SleepQualityState,
+    sleepQualityRecords: UiState<List<SleepQualityRecord>>,
+    onEvent: (SleepQualityEvent) -> Unit = {},
 ) {
-    state.sleepQualityRecords.foldComposable(
-        onLoading = { LoadingUI() },
+    sleepQualityRecords.foldComposable(
+        onLoading = { SplashScreenUI() },
         onSuccess = { sleepQualityRecords ->
             val selected = sleepQualityRecords.first()
             val sleepQuality = selected.sleepQuality.toResource()
@@ -93,13 +95,13 @@ fun SleepQualityUI(
             SharedPanelComponent(
                 containerColor = Colors.Brown10,
                 isDark = false,
-                onGoBack = { state.onEvent(SleepQualityEvent.GoBack) },
+                onGoBack = { onEvent(SleepQualityEvent.GoBack) },
                 backgroundColor = mood.palette.color,
                 backgroundImage = Drawables.Images.SleepQualityBackground,
                 panelTitle = Res.string.sleep_quality,
                 bodyTitle = Res.string.sleep_stats,
                 color = mood.palette.backgroundColor,
-                onAdd = { state.onEvent(SleepQualityEvent.Add) },
+                onAdd = { onEvent(SleepQualityEvent.Add) },
                 topBarContent = {
                     TextWithBackground(
                         text = DatetimeProvider.formatDate(selected.createdAt.date),

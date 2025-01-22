@@ -14,13 +14,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,8 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
-import com.joohnq.auth.ui.presentation.avatar.state.AvatarState
-import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModelState
+import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
@@ -77,10 +76,16 @@ fun AvatarImagesHorizontalPager(images: List<DrawableResource>) {
 }
 
 @Composable
-fun AvatarUI(state: AvatarState) {
+fun AvatarUI(
+    snackBarState: SnackbarHostState,
+    pagerState: PagerState,
+    images: List<DrawableResource> = emptyList(),
+    onEvent: (AvatarEvent) -> Unit = {},
+    avatarState: AvatarState,
+) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
-        snackBarHostState = state.snackBarState,
+        snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
@@ -110,7 +115,7 @@ fun AvatarUI(state: AvatarState) {
                     )
                     VerticalSpacer(10.dp)
                     AvatarImagesHorizontalPager(
-                        images = state.images
+                        images = images
                     )
                     VerticalSpacer(10.dp)
                     Icon(
@@ -139,12 +144,12 @@ fun AvatarUI(state: AvatarState) {
                     )
                     VerticalSpacer(40.dp)
                     IconButton(
-                        onClick = { state.onEvent(AvatarEvent.OnPickAvatar) },
+                        onClick = { onEvent(AvatarEvent.OnPickAvatar) },
                         modifier = Modifier.size(96.dp)
                     ) {
-                        if (state.avatarState.imageBitmap != null) {
+                        if (avatarState.imageBitmap != null) {
                             Image(
-                                bitmap = state.avatarState.imageBitmap,
+                                bitmap = avatarState.imageBitmap,
                                 contentDescription = "Profile",
                                 modifier = Modifier.size(100.dp),
                                 contentScale = ContentScale.Crop
@@ -168,19 +173,8 @@ fun AvatarUI(state: AvatarState) {
             }
             ContinueButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                onClick = { state.onEvent(AvatarEvent.OnContinue) }
+                onClick = { onEvent(AvatarEvent.OnContinue) }
             )
         }
     }
-}
-
-@Composable
-fun AvatarPreview() {
-    AvatarUI(
-        AvatarState(
-            snackBarState = remember { SnackbarHostState() },
-            pagerState = rememberPagerState(initialPage = 0, pageCount = { 5 }),
-            avatarState = AvatarViewModelState()
-        )
-    )
 }

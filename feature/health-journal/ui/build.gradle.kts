@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.ui)
-            implementation(projects.feature.loading.ui)
+            implementation(projects.feature.splash.ui)
             implementation(projects.sharedResources)
             implementation(projects.feature.freudScore.ui)
             implementation(projects.feature.freudScore.domain)

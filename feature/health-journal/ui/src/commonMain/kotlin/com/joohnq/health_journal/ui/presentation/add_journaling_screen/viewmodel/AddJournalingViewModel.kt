@@ -8,21 +8,21 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AddJournalingViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddingJournalingViewModelState())
-    val state: StateFlow<AddingJournalingViewModelState> =
+    private val _state = MutableStateFlow(AddingJournalingState())
+    val state: StateFlow<AddingJournalingState> =
         _state.asStateFlow()
 
-    fun onAction(intent: AddingJournalingViewModelIntent) {
+    fun onAction(intent: AddingJournalingIntent) {
         when (intent) {
-            AddingJournalingViewModelIntent.ResetState ->
+            AddingJournalingIntent.ResetState ->
                 resetHeathJournal()
 
-            is AddingJournalingViewModelIntent.UpdateDescription ->
+            is AddingJournalingIntent.UpdateDescription ->
                 updateDescription(intent.description)
 
-            is AddingJournalingViewModelIntent.UpdateMood -> updateAddingMood(intent.mood)
-            is AddingJournalingViewModelIntent.UpdateTitle -> updateTitle(intent.title)
-            is AddingJournalingViewModelIntent.UpdateTitleError ->
+            is AddingJournalingIntent.UpdateMood -> updateAddingMood(intent.mood)
+            is AddingJournalingIntent.UpdateTitle -> updateTitle(intent.title)
+            is AddingJournalingIntent.UpdateTitleError ->
                 updateTitleError(intent.error)
         }
     }
@@ -44,6 +44,6 @@ class AddJournalingViewModel : ViewModel() {
     }
 
     private fun resetHeathJournal() {
-        _state.update { AddingJournalingViewModelState() }
+        _state.update { AddingJournalingState() }
     }
 }

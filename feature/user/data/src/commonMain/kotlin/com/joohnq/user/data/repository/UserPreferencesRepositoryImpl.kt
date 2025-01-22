@@ -11,12 +11,13 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
     private val query = database.userPreferencesQueries
     override suspend fun getUserPreferences(): Result<UserPreferences> =
         executeTryCatchResult {
-            query.getUserPreferences { id, skipWelcome, skipOnboarding, skipAuth ->
+            query.getUserPreferences { id, skipWelcome, skipOnboarding, skipAuth, skipSecurity ->
                 UserPreferences(
                     id = id.toInt(),
                     skipWelcome = BooleanConverter.toValue(skipWelcome),
                     skipOnboarding = BooleanConverter.toValue(skipOnboarding),
-                    skipAuth = BooleanConverter.toValue(skipAuth)
+                    skipAuth = BooleanConverter.toValue(skipAuth),
+                    skipSecurity = BooleanConverter.toValue(skipSecurity),
                 )
             }.executeAsOneOrNull() ?: throw Exception("User preferences not found")
         }
@@ -26,7 +27,8 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
             query.addUserPreferences(
                 skipWelcome = BooleanConverter.fromValue(userPreferences.skipWelcome),
                 skipOnboarding = BooleanConverter.fromValue(userPreferences.skipOnboarding),
-                skipAuth = BooleanConverter.fromValue(userPreferences.skipAuth)
+                skipAuth = BooleanConverter.fromValue(userPreferences.skipAuth),
+                skipSecurity = BooleanConverter.fromValue(userPreferences.skipSecurity),
             )
             true
         }
@@ -52,6 +54,12 @@ class UserPreferencesRepositoryImpl(private val database: UserDatabaseSql) :
     override suspend fun updateSkipAuth(value: Boolean): Result<Boolean> =
         executeTryCatchResult {
             query.updateSkipAuth(BooleanConverter.fromValue(value))
+            true
+        }
+
+    override suspend fun updateSkipSecurity(value: Boolean): Result<Boolean> =
+        executeTryCatchResult {
+            query.updateSkipSecurity(BooleanConverter.fromValue(value))
             true
         }
 }

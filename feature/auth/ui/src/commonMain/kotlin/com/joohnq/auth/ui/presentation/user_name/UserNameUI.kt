@@ -2,16 +2,12 @@ package com.joohnq.auth.ui.presentation.user_name
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -30,6 +26,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
+import com.joohnq.shared_resources.components.TopBalloon
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
@@ -54,25 +51,10 @@ fun UserNameUI(
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
-        Box(
-            modifier = Modifier
-                .width(maxWidth * 1.5f)
-                .height(0.dp)
-                .aspectRatio(1f)
-                .background(
-                    color = Colors.Green50,
-                    shape = Dimens.Shape.Circle
-                )
-                .padding(30.dp),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            Icon(
-                painter = painterResource(Drawables.Icons.Logo),
-                contentDescription = null,
-                modifier = Modifier.size(48.dp),
-                tint = Colors.White
-            )
-        }
+        TopBalloon(
+            backgroundColor = Colors.Green50,
+            iconColor = Colors.White
+        )
         ScaffoldSnackBar(
             containerColor = Colors.Brown10,
             snackBarHostState = snackBarState,

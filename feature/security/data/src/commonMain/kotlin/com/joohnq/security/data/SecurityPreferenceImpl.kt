@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.joohnq.security.domain.Security
-import com.joohnq.security.domain.UserSecurityPreference
+import com.joohnq.security.domain.SecurityPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
@@ -15,9 +15,9 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class UserSecurityPreferenceImpl(
+class SecurityPreferenceImpl(
     private val dataStore: DataStore<Preferences>,
-) : UserSecurityPreference {
+) : SecurityPreference {
     companion object {
         private val SECURITY_KEY = stringPreferencesKey("SECURITY")
     }

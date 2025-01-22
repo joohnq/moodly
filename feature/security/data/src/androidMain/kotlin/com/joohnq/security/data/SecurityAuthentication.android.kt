@@ -14,33 +14,34 @@ import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.joohnq.security.domain.SecurityAuthentication
+import com.joohnq.security.domain.SecurityResult
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 
 actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity) :
     SecurityAuthentication {
+    private val _securityResult = Channel<SecurityResult>()
+    val securityResult = _securityResult.receiveAsFlow()
+
     @RequiresApi(Build.VERSION_CODES.R)
     actual override fun isDeviceHasBiometric(): Boolean {
         val manager = BiometricManager.from(activity)
         when (manager.canAuthenticate(BIOMETRIC_STRONG or BIOMETRIC_WEAK)) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
-                Log.d("`FaceAuthenticator.kt`", "App can authenticate using biometrics.")
                 return true
             }
 
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
-                Log.e("`FaceAuthenticator.kt`", "No biometric features available on this device.")
+                _securityResult.trySend(SecurityResult.FeatureUnavailable)
                 return false
             }
 
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
-                Log.e("`FaceAuthenticator.kt`", "Biometric features are currently unavailable.")
+                _securityResult.trySend(SecurityResult.HardwareUnavailable)
                 return false
             }
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                Log.e(
-                    "`FaceAuthenticator.kt`",
-                    "Prompts the user to create credentials that your app accepts."
-                )
                 val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
                     putExtra(
                         Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
@@ -77,15 +78,12 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
 
     @RequiresApi(Build.VERSION_CODES.P)
     actual override fun authenticateWithFace(callback: (Boolean) -> Unit) {
-
-        // Create prompt Info to set prompt details
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Authentication using biometric")
             .setSubtitle("Authenticate using face/fingerprint")
             .setAllowedAuthenticators(BIOMETRIC_STRONG or BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
             .build()
 
-        // Create biometricPrompt object to get authentication callback result
         val biometricPrompt = BiometricPrompt(activity, activity.mainExecutor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(
@@ -102,13 +100,11 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
                     result: BiometricPrompt.AuthenticationResult,
                 ) {
                     super.onAuthenticationSucceeded(result)
-                    Toast.makeText(activity, "Authentication succeeded!", Toast.LENGTH_SHORT).show()
                     callback(true)
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-                    Toast.makeText(activity, "Authentication failed", Toast.LENGTH_SHORT).show()
                     callback(false)
                 }
             })

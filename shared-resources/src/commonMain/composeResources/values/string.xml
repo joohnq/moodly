@@ -216,4 +216,7 @@
     <string name="ai">AI </string>
     <string name="mental">Mental</string>
     <string name="journaling_ai_therapy_chatbot"> Journaling &amp; AI Therapy Chatbot</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="use_your_authentication_to_securely">Use your authentication to securely access the app and pick up right where you left off.</string>
+    <string name="this_password_is_the_same_validation_method">This password is the same validation method you use to unlock your phone.</string>
 </resources>

@@ -6,7 +6,7 @@ import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.security.domain.Security
-import com.joohnq.security.domain.UserSecurityPreference
+import com.joohnq.security.domain.SecurityPreference
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SecurityViewModel(
-    private val userSecurityPreference: UserSecurityPreference,
+    private val securityPreference: SecurityPreference,
 ) : ViewModel() {
     private val _state: MutableStateFlow<SecurityState> =
         MutableStateFlow(SecurityState())
@@ -34,12 +34,12 @@ class SecurityViewModel(
     }
 
     private fun getSecurity() = viewModelScope.launch {
-        val res = userSecurityPreference.get().toUiState()
+        val res = securityPreference.get().toUiState()
         _state.update { it.copy(item = res) }
     }
 
     private fun updateSecurity() = viewModelScope.launch {
-        val res = userSecurityPreference.update(state.value.updating).toUiState()
+        val res = securityPreference.update(state.value.updating).toUiState()
         res.onSuccess {
             _sideEffect.send(SecuritySideEffect.OnBiometricFaceIdUpdated)
         }.onFailure {

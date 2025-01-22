@@ -28,10 +28,11 @@ fun NavGraphBuilder.securityNavigation(
                 onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
             )
         }
-
         composable<Destination.Security.BiometricFaceId> {
             BiometricFaceIdScreen(
-                onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
+                onNavigateToDashboard = {
+                    onNavigateGraph(NavigationGraph.App, true)
+                }
             )
         }
         composable<Destination.Security.PIN> {

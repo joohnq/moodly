@@ -163,6 +163,12 @@ object TextStyles {
     )
 
     @Composable
+    fun TextSmMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Medium(),
+        fontSize = 14.sp
+    )
+
+    @Composable
     fun TextXsExtraBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 12.sp

@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.LogoWithBackground
 import com.joohnq.shared_resources.components.TextWithSpan
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.first_screen_desc
@@ -38,6 +39,8 @@ fun FirstScreen(onNext: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize().paddingHorizontalMedium()
     ) {
+        LogoWithBackground()
+        VerticalSpacer(10.dp)
         TextWithSpan(
             firstTitle = Res.string.first_screen_title,
             secondTitle = Res.string.first_screen_second_title,

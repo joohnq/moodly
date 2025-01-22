@@ -21,7 +21,7 @@ fun NavGraphBuilder.authNavigation(
         composable<Destination.Auth.UserName> {
             UserNameScreen(
                 onNavigateToSecurity = { onNavigateGraph(NavigationGraph.Security, true) }
-            ).Content()
+            )
         }
     }
 }

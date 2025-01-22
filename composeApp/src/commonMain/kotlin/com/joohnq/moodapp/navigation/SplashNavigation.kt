@@ -3,16 +3,17 @@ package com.joohnq.moodapp.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.joohnq.loading.ui.presentation.loading.LoadingScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
+import com.joohnq.splash.ui.presentation.splash_screen.SplashScreen
 
-fun NavGraphBuilder.loadingNavigation(
+fun NavGraphBuilder.splashNavigation(
+    onNavigate: (Destination, Boolean) -> Unit,
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
 ) {
     navigation<NavigationGraph.Loading>(startDestination = Destination.Loading) {
         composable<Destination.Loading> {
-            LoadingScreen(
+            SplashScreen(
                 onNavigateToWelcome = {
                     onNavigateGraph(NavigationGraph.Welcome, true)
                 },
@@ -28,7 +29,16 @@ fun NavGraphBuilder.loadingNavigation(
                 onNavigateToDashboard = {
                     onNavigateGraph(NavigationGraph.App, true)
                 },
-            ).Content()
+                onNavigateToCorruptedSecurity = {
+//                    onNavigate(Destination.Security.CorruptedSecurity, true)
+                },
+                onNavigateToBiometricFaceId = {
+                    onNavigate(Destination.Security.BiometricFaceId, true)
+                },
+                onNavigateToPIN = {
+                    onNavigate(Destination.Security.PIN, true)
+                },
+            )
         }
     }
 }

@@ -210,4 +210,10 @@
     <string name="set_a_pin">Set a PIN</string>
     <string name="pin_setup">PIN Setup</string>
     <string name="enter_a_four_digit_pin">Enter a four digit PIN</string>
+    <string name="use_device_password">User Device Password</string>
+    <string name="logo">Logo</string>
+    <string name="five">Five</string>
+    <string name="ai">AI </string>
+    <string name="mental">Mental</string>
+    <string name="journaling_ai_therapy_chatbot"> Journaling &amp; AI Therapy Chatbot</string>
 </resources>

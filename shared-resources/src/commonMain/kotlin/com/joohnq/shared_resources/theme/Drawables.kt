@@ -23,7 +23,6 @@ import com.joohnq.shared_resources.ic_document
 import com.joohnq.shared_resources.ic_document_health
 import com.joohnq.shared_resources.ic_drug_store
 import com.joohnq.shared_resources.ic_edit
-import com.joohnq.shared_resources.ic_edit_2
 import com.joohnq.shared_resources.ic_flag
 import com.joohnq.shared_resources.ic_gallery
 import com.joohnq.shared_resources.ic_happy_face
@@ -32,22 +31,18 @@ import com.joohnq.shared_resources.ic_heart
 import com.joohnq.shared_resources.ic_home
 import com.joohnq.shared_resources.ic_hospital_bed
 import com.joohnq.shared_resources.ic_medicine
-import com.joohnq.shared_resources.ic_minus
 import com.joohnq.shared_resources.ic_mood_neutral
 import com.joohnq.shared_resources.ic_moon
 import com.joohnq.shared_resources.ic_more_horizontal
 import com.joohnq.shared_resources.ic_nothing
 import com.joohnq.shared_resources.ic_photo_picker
-import com.joohnq.shared_resources.ic_profile
 import com.joohnq.shared_resources.ic_question
-import com.joohnq.shared_resources.ic_redo
 import com.joohnq.shared_resources.ic_resize
 import com.joohnq.shared_resources.ic_sad_face
 import com.joohnq.shared_resources.ic_simple_target
 import com.joohnq.shared_resources.ic_sleep
 import com.joohnq.shared_resources.ic_sun
 import com.joohnq.shared_resources.ic_trash
-import com.joohnq.shared_resources.ic_undo
 import com.joohnq.shared_resources.ic_user
 import com.joohnq.shared_resources.ic_warning
 import com.joohnq.shared_resources.ic_warning_outlined
@@ -75,6 +70,7 @@ import com.joohnq.shared_resources.welcome_community_image
 import com.joohnq.shared_resources.welcome_first_screen_image
 import com.joohnq.shared_resources.welcome_health_state_image
 import com.joohnq.shared_resources.welcome_intelligent_image
+import com.joohnq.shared_resources.welcome_mental_image
 import com.joohnq.shared_resources.welcome_resources_image
 
 object Drawables {
@@ -111,14 +107,9 @@ object Drawables {
         val MoodNeutral = Res.drawable.ic_mood_neutral
         val Chart = Res.drawable.ic_chart
         val Edit = Res.drawable.ic_edit
-        val Edit2 = Res.drawable.ic_edit_2
         val Trash = Res.drawable.ic_trash
         val MoreHorizontal = Res.drawable.ic_more_horizontal
         val Clock = Res.drawable.ic_clock
-        val Undo = Res.drawable.ic_undo
-        val Redo = Res.drawable.ic_redo
-        val Minus = Res.drawable.ic_minus
-        val Profile = Res.drawable.ic_profile
         val SimpleTarget = Res.drawable.ic_simple_target
         val PhotoPicker = Res.drawable.ic_photo_picker
         val Gallery = Res.drawable.ic_gallery
@@ -129,6 +120,7 @@ object Drawables {
         val WelcomeFirstScreenImage = Res.drawable.welcome_first_screen_image
         val WelcomeHealthStateImage = Res.drawable.welcome_health_state_image
         val WelcomeIntelligentImage = Res.drawable.welcome_intelligent_image
+        val WelcomeMentalImage = Res.drawable.welcome_mental_image
         val WelcomeResourcesImage = Res.drawable.welcome_resources_image
         val WelcomeCommunityImage = Res.drawable.welcome_community_image
 

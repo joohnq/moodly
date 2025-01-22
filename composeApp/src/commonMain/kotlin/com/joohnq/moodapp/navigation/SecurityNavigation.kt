@@ -5,6 +5,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
+import com.joohnq.security.ui.presentation.biometric_faceid.BiometricFaceIdScreen
 import com.joohnq.security.ui.presentation.pin.PINScreen
 import com.joohnq.security.ui.presentation.security.SecurityScreen
 import com.joohnq.security.ui.presentation.security_confirmed.SecurityConfirmedScreen
@@ -20,18 +21,30 @@ fun NavGraphBuilder.securityNavigation(
                 onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) },
                 onNavigateToSecurityConfirmed = { onNavigate(Destination.Security.SecurityConfirmed) },
                 onNavigatePIN = { onNavigate(Destination.Security.PIN) },
-            ).Content()
+            )
         }
         composable<Destination.Security.SecurityConfirmed> {
             SecurityConfirmedScreen(
                 onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
-            ).Content()
+            )
+        }
+
+        composable<Destination.Security.BiometricFaceId> {
+            BiometricFaceIdScreen(
+                onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
+            )
         }
         composable<Destination.Security.PIN> {
             PINScreen(
                 onGoBack = onGoBack,
                 onNavigateToDashboard = { onNavigate(Destination.Security.SecurityConfirmed) }
-            ).Content()
+            )
+        }
+        composable<Destination.Security.CorruptedSecurity> {
+//            CorruptedSecurityScreen(
+//                onGoBack = onGoBack,
+//                onNavigateToDashboard = { onNavigate(Destination.Security.SecurityConfirmed) }
+//            )
         }
     }
 }

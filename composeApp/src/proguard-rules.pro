@@ -26,7 +26,7 @@
 -dontwarn com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 -dontwarn com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 -dontwarn com.joohnq.mood.ui.presentation.mood.MoodScreen
--dontwarn com.joohnq.loading.ui.presentation.loading.LoadingScreen
+-dontwarn com.joohnq.splash.ui.presentation.splash_screen.LoadingScreen
 -dontwarn com.joohnq.navigation.Destination$App$AddJournaling
 -dontwarn com.joohnq.navigation.Destination$App$AddSleepQuality
 -dontwarn com.joohnq.navigation.Destination$App$AddStat

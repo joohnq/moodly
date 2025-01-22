@@ -16,26 +16,35 @@ fun <T> UiState<T>.fold(
 }
 
 @Composable
-fun onFold(
-    vararg values: UiState<*>,
-    onAllSuccess: @Composable () -> Unit,
+fun List<UiState<*>>.fold(
     onLoading: @Composable () -> Unit,
+    block: @Composable () -> Unit,
 ) {
-    if (values.all { it is UiState.Success }) {
-        onAllSuccess()
-    } else if (values.any { it is UiState.Loading }) {
+    if (all { it is UiState.Success }) {
+        block()
+    } else if (any { it is UiState.Loading }) {
         onLoading()
     }
 }
 
-fun onAnyError(
-    vararg values: UiState<*>,
-    onAnyHasError: (String) -> Unit,
-) {
-    values.filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        onAnyHasError(errorState.exception.message.toString())
-        return
+fun List<UiState<*>>.allSuccess(
+    block: () -> Unit,
+): List<UiState<*>> {
+    if (all { it is UiState.Success }) {
+        block()
     }
+    return this
+}
+
+fun List<UiState<*>>.anyError(
+    block: (String) -> Unit,
+): List<UiState<*>> {
+    filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
+        block(errorState.exception.message.toString())
+        return@let
+    }
+    return this
+
 }
 
 @Composable
@@ -51,17 +60,10 @@ fun <T> UiState<T>.foldComposable(
     is UiState.Idle -> onIdle()
 }
 
-@Composable
-fun <T> UiState<T>.getValueOrNull(): T? =
+fun <T> UiState<T>.getValueOrNull(): T =
     when (this) {
         is UiState.Success -> this.data
-        else -> null
-    }
-
-fun <T> UiState<List<T>>.getValueOrNull(): List<T> =
-    when (this) {
-        is UiState.Success -> this.data
-        else -> emptyList()
+        else -> throw Throwable()
     }
 
 inline fun <T> UiState<T>.onSuccess(

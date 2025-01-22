@@ -25,7 +25,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.ProfessionalHelp, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.ProfessionalHelp> {
             OnboardingProfessionalHelpScreen(
@@ -33,7 +33,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.PhysicalSymptoms, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.PhysicalSymptoms> {
             OnboardingPhysicalSymptomsScreen(
@@ -41,7 +41,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.SleepQuality, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.SleepQuality> {
             OnboardingSleepQualityScreen(
@@ -49,7 +49,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.MedicationsSupplements, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.MedicationsSupplements> {
             OnboardingMedicationsSupplementsScreen(
@@ -57,7 +57,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.StressLevel, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.StressLevel> {
             OnboardingStressLevelScreen(
@@ -65,7 +65,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigate(Destination.Onboarding.ExpressionAnalysis, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.Onboarding.ExpressionAnalysis> {
             OnboardingExpressionAnalysisScreen(
@@ -73,7 +73,7 @@ fun NavGraphBuilder.onboardingNavigation(
                     onNavigateGraph(NavigationGraph.Auth, true)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
     }
 }

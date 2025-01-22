@@ -10,18 +10,18 @@ import androidx.navigation.compose.rememberNavController
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.moodapp.navigation.authNavigation
-import com.joohnq.moodapp.navigation.loadingNavigation
 import com.joohnq.moodapp.navigation.onboardingNavigation
 import com.joohnq.moodapp.navigation.securityNavigation
+import com.joohnq.moodapp.navigation.splashNavigation
 import com.joohnq.moodapp.navigation.welcomeNavigation
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate
 import com.joohnq.navigation.onNavigateBack
 import com.joohnq.navigation.onNavigateGraph
+import com.joohnq.user.ui.viewmodel.user.UserIntent
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import org.koin.compose.KoinContext
 
@@ -32,8 +32,8 @@ fun App() {
         val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
 
         SideEffect {
-            userPreferencesViewModel.onAction(UserPreferenceViewModelIntent.AddUserPreferences)
-            userViewModel.onAction(UserViewModelIntent.InitUser)
+            userPreferencesViewModel.onAction(UserPreferenceIntent.AddUserPreferences)
+            userViewModel.onAction(UserIntent.InitUser)
         }
 
         MaterialTheme {
@@ -46,8 +46,9 @@ fun App() {
                 popExitTransition = { ExitTransition.None },
                 popEnterTransition = { EnterTransition.None },
             ) {
-                loadingNavigation(
-                    onNavigateGraph = navHostController::onNavigateGraph
+                splashNavigation(
+                    onNavigateGraph = navHostController::onNavigateGraph,
+                    onNavigate = navHostController::onNavigate,
                 )
                 welcomeNavigation(
                     onNavigateGraph = navHostController::onNavigateGraph

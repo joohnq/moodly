@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.sp
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TextWithBackground(text: String, borderColor: Color, backgroundColor: Color, textColor: Color) {
@@ -48,8 +50,8 @@ fun TextWithBackground(
 
 @Composable
 fun TextWithSpan(
-    firstTitle: String? = null,
-    secondTitle: String? = null,
+    firstTitle: StringResource? = null,
+    secondTitle: StringResource? = null,
     span: String,
     spanColor: Color,
 ) {
@@ -60,7 +62,7 @@ fun TextWithSpan(
                     style = TextStyles.HeadingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
-                    append(firstTitle)
+                    append(stringResource(firstTitle))
                 }
             withStyle(
                 style = TextStyles.HeadingSpanSmExtraBold()
@@ -73,7 +75,7 @@ fun TextWithSpan(
                     style = TextStyles.HeadingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
-                    append(secondTitle)
+                    append(stringResource(secondTitle))
                 }
         },
         lineHeight = 40.sp,

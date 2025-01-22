@@ -2,6 +2,7 @@ package com.joohnq.moodapp.di
 
 import com.joohnq.auth.ui.di.authUiModule
 import com.joohnq.core.ui.di.coreUiModule
+import com.joohnq.datastore.di.preferencesModule
 import com.joohnq.di.coreDiModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.ui.di.freudScoreUiModule
@@ -15,6 +16,7 @@ import com.joohnq.mood.domain.di.moodDomainModule
 import com.joohnq.mood.ui.di.moodUiModule
 import com.joohnq.onboarding.ui.di.onboardingUiModule
 import com.joohnq.security.data.di.securityAuthenticationModule
+import com.joohnq.security.data.di.securityDataModule
 import com.joohnq.security.ui.di.securityUiModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
@@ -57,5 +59,7 @@ val appModule = listOf(
     userDriverFactoryModule,
     coreStorageModule,
     securityAuthenticationModule,
-    securityUiModule
+    securityUiModule,
+    preferencesModule,
+    securityDataModule,
 )

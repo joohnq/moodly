@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -32,6 +33,8 @@ kotlin {
 
             implementation(libs.coroutines.core)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.dataStore)
+            implementation(libs.serialization)
         }
     }
 }

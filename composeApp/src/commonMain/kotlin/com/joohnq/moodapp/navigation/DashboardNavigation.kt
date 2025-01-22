@@ -65,7 +65,7 @@ fun NavGraphBuilder.appNavigation(
                     )
                 },
                 onNavigateToAllJournals = { onNavigate(Destination.App.AllJournals(), false) },
-            ).Content()
+            )
         }
         composable<Destination.App.FreudScore> {
             FreudScoreScreen(
@@ -99,7 +99,7 @@ fun NavGraphBuilder.appNavigation(
                     )
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.Mood> { backStackEntry ->
             val mood = backStackEntry.toRoute<Destination.App.Mood>()
@@ -114,7 +114,7 @@ fun NavGraphBuilder.appNavigation(
                         false
                     )
                 }
-            ).Content()
+            )
         }
         composable<Destination.App.AddStat> {
             AddStatScreen(
@@ -133,7 +133,7 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.Mood(), false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.StressLevel> {
             StressLevelScreen(
@@ -141,7 +141,7 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.AddStressLevel, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.AddStressLevel> {
             AddStressLevelScreen(
@@ -149,29 +149,29 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.StressStressors, false)
                 },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
                 onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressLevel) }
-            ).Content()
+            )
         }
         composable<Destination.App.SleepQuality> {
             SleepQualityScreen(
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality, false) },
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.AddSleepQuality> {
             AddSleepQualityScreen(
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.AddJournaling> {
             AddJournalingScreen(
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.EditJournaling> { backStackEntry ->
             val editJournaling =
@@ -179,7 +179,7 @@ fun NavGraphBuilder.appNavigation(
             EditJournalingScreen(
                 id = editJournaling.id,
                 onGoBack = onGoBack
-            ).Content()
+            )
         }
         composable<Destination.App.AllJournals> { backStackEntry ->
             val allJournals =
@@ -196,7 +196,7 @@ fun NavGraphBuilder.appNavigation(
                         false
                     )
                 }
-            ).Content()
+            )
         }
     }
 }

@@ -32,6 +32,7 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
             linkerOpts.add("-lsqlite3")
+            export(projects.core.cryptography.domain)
         }
     }
 
@@ -44,6 +45,9 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
+            api(projects.core.cryptography.domain)
+
+            implementation(projects.core.datastore)
             implementation(projects.core.navigation)
             implementation(projects.core.di)
             implementation(projects.core.ui)
@@ -80,7 +84,7 @@ kotlin {
             implementation(projects.feature.stressLevel.domain)
             implementation(projects.feature.stressLevel.data)
 
-            implementation(projects.feature.loading.ui)
+            implementation(projects.feature.splash.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

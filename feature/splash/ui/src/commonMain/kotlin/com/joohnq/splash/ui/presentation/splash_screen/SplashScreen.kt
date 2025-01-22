@@ -48,9 +48,21 @@ fun SplashScreen(
             val preferences = userPreferencesState.userPreferences.getValueOrNull()
 
             when (security) {
-                is Security.Biometric -> onNavigateToBiometricFaceId()
-                is Security.Pin -> onNavigateToPIN()
-                is Security.Corrupted -> onNavigateToCorruptedSecurity()
+                is Security.Biometric -> {
+                    onNavigateToBiometricFaceId()
+                    return@allSuccess
+                }
+
+                is Security.Pin -> {
+                    onNavigateToPIN()
+                    return@allSuccess
+                }
+
+                is Security.Corrupted -> {
+                    onNavigateToCorruptedSecurity()
+                    return@allSuccess
+                }
+
                 else -> Unit
             }
 

@@ -30,7 +30,7 @@ fun NavGraphBuilder.splashNavigation(
                     onNavigateGraph(NavigationGraph.App, true)
                 },
                 onNavigateToCorruptedSecurity = {
-//                    onNavigate(Destination.Security.CorruptedSecurity, true)
+                    onNavigate(Destination.Security.CorruptedSecurity, true)
                 },
                 onNavigateToBiometricFaceId = {
                     onNavigate(Destination.Security.BiometricFaceId, true)

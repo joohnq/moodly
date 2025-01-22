@@ -7,16 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
-import com.joohnq.security.ui.presentation.pin.state.PINState
 import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModelIntent
+import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModelState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.OTPInputField
@@ -33,12 +35,19 @@ import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun PINUI(state: PINState) {
+fun PINUI(
+    snackBarState: SnackbarHostState = SnackbarHostState(),
+    pinViewModelState: PINViewModelState,
+    focusRequesters: List<FocusRequester>,
+    onAction: (PINViewModelIntent) -> Unit,
+    onEvent: (PINEvent) -> Unit,
+    canContinue: Boolean,
+) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
-        snackBarHostState = state.snackBarState,
+        snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()
-            .pointerInput(Unit) { detectTapGestures(onTap = { state.onEvent(PINEvent.OnClearFocus) }) }
+            .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PINEvent.OnClearFocus) }) }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -54,7 +63,7 @@ fun PINUI(state: PINState) {
                 TopBar(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.pin_setup,
-                    onGoBack = { state.onEvent(PINEvent.OnGoBack) },
+                    onGoBack = { onEvent(PINEvent.OnGoBack) },
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -76,33 +85,33 @@ fun PINUI(state: PINState) {
                         alignment = Alignment.CenterHorizontally
                     )
                 ) {
-                    state.pinViewModelState.code.forEachIndexed { i, number ->
+                    pinViewModelState.code.forEachIndexed { i, number ->
                         OTPInputField(
                             modifier = Modifier.weight(1f),
                             number = number,
-                            focusRequester = state.focusRequesters[i],
+                            focusRequester = focusRequesters[i],
                             onFocusChanged = { isFocused ->
                                 if (isFocused) {
-                                    state.onAction(PINViewModelIntent.OnChangeFieldFocused(i))
+                                    onAction(PINViewModelIntent.OnChangeFieldFocused(i))
                                 }
                             },
                             onNumberChanged = { newNumber ->
-                                state.onAction(
+                                onAction(
                                     PINViewModelIntent.OnEnterNumber(
                                         index = i,
                                         number = newNumber
                                     )
                                 )
                             },
-                            onKeyboardBack = { state.onAction(PINViewModelIntent.OnKeyboardBack) },
+                            onKeyboardBack = { onAction(PINViewModelIntent.OnKeyboardBack) },
                         )
                     }
                 }
             }
             ContinueButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                enabled = state.canContinue,
-                onClick = { state.onEvent(PINEvent.OnContinue) }
+                enabled = canContinue,
+                onClick = { onEvent(PINEvent.OnContinue) }
             )
         }
     }

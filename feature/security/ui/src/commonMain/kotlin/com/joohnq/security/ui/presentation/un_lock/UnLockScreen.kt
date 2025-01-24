@@ -75,8 +75,8 @@ fun UnLockScreen(
         }
     }
 
-    LaunchedEffect(showBottomSheet) {
-        if (showBottomSheet) {
+    LaunchedEffect(sheetState.isVisible) {
+        if (sheetState.isVisible) {
             focusRequesters[0].requestFocus()
         }
     }

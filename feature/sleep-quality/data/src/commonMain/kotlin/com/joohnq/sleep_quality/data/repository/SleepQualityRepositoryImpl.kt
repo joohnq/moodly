@@ -1,11 +1,16 @@
 package com.joohnq.sleep_quality.data.repository
 
+import com.joohnq.core.database.SqliteOperationResult
 import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.core.database.executeTryCatchResult
+import com.joohnq.core.database.sqliteExceptionMapper
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import com.joohnq.sleep_quality.domain.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
 class SleepQualityRepositoryImpl(
     private val database: SleepQualityDatabaseSql,
@@ -20,7 +25,7 @@ class SleepQualityRepositoryImpl(
                     startSleeping = startSleeping,
                     endSleeping = endSleeping,
                     sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
-                    createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
+                    createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
                 )
             }.executeAsList()
         }
@@ -28,13 +33,21 @@ class SleepQualityRepositoryImpl(
     override suspend fun addSleepQuality(
         sleepQualityRecord: SleepQualityRecord,
     ): Result<Boolean> =
-        executeTryCatchResult {
-            query.addSleepQuality(
-                sleepQuality = SleepQualityRecordConverter.fromSleepQuality(sleepQualityRecord.sleepQuality),
-                startSleeping = sleepQualityRecord.startSleeping,
-                endSleeping = sleepQualityRecord.endSleeping,
-                sleepInfluencess = SleepQualityRecordConverter.fromInfluences(sleepQualityRecord.sleepInfluences)
-            )
-            true
+        withContext(Dispatchers.IO) {
+            try {
+                query.addSleepQuality(
+                    sleepQuality = SleepQualityRecordConverter.fromSleepQuality(sleepQualityRecord.sleepQuality),
+                    startSleeping = sleepQualityRecord.startSleeping,
+                    endSleeping = sleepQualityRecord.endSleeping,
+                    sleepInfluencess = SleepQualityRecordConverter.fromInfluences(sleepQualityRecord.sleepInfluences)
+                )
+                Result.success(true)
+            } catch (e: Exception) {
+                val res = sqliteExceptionMapper.map(e)
+                when (res.opResult) {
+                    SqliteOperationResult.CONSTRAINT -> Result.failure(Exception("A sleep quality record has already been added for today."))
+                    else -> Result.failure(Exception(res.cause?.message.toString()))
+                }
+            }
         }
 }

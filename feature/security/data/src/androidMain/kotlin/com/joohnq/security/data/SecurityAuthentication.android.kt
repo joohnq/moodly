@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
@@ -91,8 +90,6 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
                     errString: CharSequence,
                 ) {
                     super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(activity, "Authentication error: $errString", Toast.LENGTH_SHORT)
-                        .show()
                     callback(false)
                 }
 

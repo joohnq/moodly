@@ -38,6 +38,9 @@ kotlin {
 
             implementation(libs.datetime)
         }
+        nativeMain.dependencies {
+            implementation("co.touchlab:sqliter:1.3.0")
+        }
     }
 }
 

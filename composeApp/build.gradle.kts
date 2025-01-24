@@ -52,6 +52,7 @@ kotlin {
             implementation(projects.sharedResources)
             implementation(projects.feature.security.data)
             implementation(projects.feature.security.ui)
+            implementation(projects.feature.security.domain)
 
             implementation(projects.feature.auth.ui)
 

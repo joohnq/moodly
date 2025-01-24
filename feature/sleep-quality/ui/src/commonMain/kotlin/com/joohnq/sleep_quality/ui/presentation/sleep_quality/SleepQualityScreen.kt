@@ -10,6 +10,7 @@ import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 @Composable
 fun SleepQualityScreen(
     onNavigateAddSleepQuality: () -> Unit,
+    onNavigateSleepHistory: () -> Unit,
     onGoBack: () -> Unit,
 ) {
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
@@ -18,6 +19,7 @@ fun SleepQualityScreen(
     fun onEvent(event: SleepQualityEvent) =
         when (event) {
             SleepQualityEvent.Add -> onNavigateAddSleepQuality()
+            SleepQualityEvent.OnNavigateSleepHistory -> onNavigateAddSleepQuality()
             SleepQualityEvent.GoBack -> onGoBack()
         }
 

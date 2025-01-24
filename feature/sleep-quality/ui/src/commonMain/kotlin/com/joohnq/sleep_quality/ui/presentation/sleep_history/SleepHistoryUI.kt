@@ -1,4 +1,4 @@
-package com.joohnq.freud_score.ui.components
+package com.joohnq.sleep_quality.ui.presentation.sleep_history
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -8,44 +8,45 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared_resources.components.CircularProgressWithText
+import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
-import com.joohnq.shared_resources.components.TextEllipsis
-import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import kotlinx.datetime.LocalDateTime
+import com.joohnq.shared_resources.you_slept_for
+import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
 
-@Composable
-fun MentalScoreHistoryItemWithHour(
-    date: LocalDateTime,
-    resource: MoodResource,
-    description: String,
-    healthLevel: Int,
-    onClick: () -> Unit,
-) {
-    val hourAndMinutes = remember { DatetimeProvider.formatTime(date) }
-    val daySection = remember { DatetimeProvider.getDaySection(date) }
 
+@Composable
+fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
+    val resource = sleepQuality.sleepQuality.toResource()
+    val end = DatetimeProvider.getTime(sleepQuality.endSleeping)
+    val start = DatetimeProvider.getTime(sleepQuality.startSleeping)
+    val endInMinutes = DatetimeProvider.getMinutesInTime(end)
+    val startInMinutes = DatetimeProvider.getMinutesInTime(start)
+    val duration = endInMinutes - startInMinutes
+    val durationInTime = DatetimeProvider.getTime(duration)
+    val durationInString = DatetimeProvider.formatTimeHMin(durationInTime)
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
         colors = ComponentColors.Card.MainCardColors(),
         shape = Dimens.Shape.Medium,
-        onClick = onClick,
     ) {
         Row(
             modifier = Modifier.fillMaxSize()
@@ -61,12 +62,12 @@ fun MentalScoreHistoryItemWithHour(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = daySection,
+                    text = DatetimeProvider.getMonthAbbreviatedName(sleepQuality.createdAt),
                     style = TextStyles.LabelSm(),
                     color = Colors.Brown100Alpha64
                 )
                 Text(
-                    text = hourAndMinutes,
+                    text = sleepQuality.createdAt.dayOfMonth.toString(),
                     style = TextStyles.TextLgExtraBold(),
                     color = Colors.Brown80
                 )
@@ -77,28 +78,30 @@ fun MentalScoreHistoryItemWithHour(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = stringResource(resource.text),
+                    text = stringResource(Res.string.you_slept_for, durationInString),
                     style = TextStyles.TextMdBold(),
                     color = Colors.Brown80
                 )
-                VerticalSpacer(5.dp)
-                TextEllipsis(
-                    text = description,
-                    style = TextStyles.TextSmSemiBold(),
-                    color = Colors.Brown100Alpha64,
-                )
             }
             HorizontalSpacer(20.dp)
-            CircularProgressWithText(
-                modifier = Modifier.size(64.dp),
-                text = healthLevel.toString(),
-                textStyle = TextStyles.TextXsBold(),
-                textColor = Colors.Brown80,
-                color = resource.palette.color,
-                backgroundColor = resource.palette.backgroundColor,
-                progress = { healthLevel / 100f },
-            )
+            //Carinha mood com base no mood
         }
     }
 }
 
+@Composable
+fun SleepHistoryUI(
+    state: SleepQualityState,
+) {
+    state.sleepQualityRecords.foldComposable(
+        onSuccess = { sleepQualities ->
+            Scaffold {
+                LazyColumn {
+                    items(sleepQualities) { sleepQuality ->
+                        SleepQualityHistoryCard(sleepQuality = sleepQuality)
+                    }
+                }
+            }
+        }
+    )
+}

@@ -32,6 +32,7 @@ import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJourn
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.DateCard
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.MainAlertDialog
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -44,7 +45,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.timeline
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -60,7 +60,7 @@ fun AllJournalUI(
         user,
         healthJournalRecords,
     ).fold(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
     ) {
         val user: User = user.getValueOrNull()
         val healthJournalRecords = healthJournalRecords.getValueOrNull()

@@ -20,6 +20,7 @@ import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.StressLevelCard
 import com.joohnq.shared_resources.components.TextWithBackground
@@ -32,7 +33,6 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.components.StressLevelChart
 import com.joohnq.stress_level.ui.mapper.getText
@@ -46,7 +46,7 @@ fun StressLevelUI(
     onEvent: (StressLevelEvent) -> Unit = {},
 ) {
     stressLevelRecords.foldComposable(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
         onSuccess = { stressLevelRecords ->
             val record = stressLevelRecords.first()
             val resource = record.stressLevel.toResource()

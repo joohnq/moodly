@@ -40,6 +40,7 @@ import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_journals
 import com.joohnq.shared_resources.completed
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.document_your_mental_journal
@@ -54,7 +55,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.your_entries
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -66,7 +66,7 @@ fun JournalingUI(
     onEvent: (JournalingEvent) -> Unit = {},
 ) {
     journals.foldComposable(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
         onSuccess = { healthJournals ->
             val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =

@@ -17,6 +17,7 @@ import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.components.HealthJournalComponentColorful
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.health_journal
@@ -26,7 +27,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -36,7 +36,7 @@ fun HealthJournalUI(
     onEvent: (HealthJournalEvent) -> Unit = {},
 ) {
     healthJournal.foldComposable(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
         onSuccess = { healthJournals: List<HealthJournalRecord> ->
             val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
             val dayPerYear =

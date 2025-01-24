@@ -24,4 +24,5 @@ interface IDatetimeProvider {
     fun getDaysInYear(year: Int): Int
     fun formatInt(int: Int): String
     fun formatTime(hour: Int, minute: Int): String
+    fun getMonthAbbreviatedName(date: LocalDate): String
 }

@@ -23,6 +23,7 @@ import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.SleepQualityCard
 import com.joohnq.shared_resources.components.TextWithBackground
@@ -45,9 +46,9 @@ import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
 import com.joohnq.sleep_quality.ui.mapper.toMood
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -56,7 +57,7 @@ fun SleepQualityUI(
     onEvent: (SleepQualityEvent) -> Unit = {},
 ) {
     sleepQualityRecords.foldComposable(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
         onSuccess = { sleepQualityRecords ->
             val selected = sleepQualityRecords.first()
             val sleepQuality = selected.sleepQuality.toResource()
@@ -104,7 +105,7 @@ fun SleepQualityUI(
                 onAdd = { onEvent(SleepQualityEvent.Add) },
                 topBarContent = {
                     TextWithBackground(
-                        text = DatetimeProvider.formatDate(selected.createdAt.date),
+                        text = DatetimeProvider.formatDate(selected.createdAt),
                         textColor = sleepQuality.palette.color,
                         backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
                     )
@@ -211,5 +212,19 @@ fun SleepQualityUI(
                 }
             )
         }
+    )
+}
+
+@Preview
+@Composable
+fun SleepQualityUIPreview() {
+    SleepQualityUI(
+        sleepQualityRecords = UiState.Success(
+            listOf(
+                SleepQualityRecord(),
+                SleepQualityRecord(),
+                SleepQualityRecord(),
+            )
+        )
     )
 }

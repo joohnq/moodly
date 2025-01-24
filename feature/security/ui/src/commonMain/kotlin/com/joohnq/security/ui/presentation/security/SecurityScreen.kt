@@ -66,7 +66,7 @@ fun SecurityScreen(
 
             SecurityEvent.OnSkip -> {
                 userPreferencesViewModel.onAction(
-                    UserPreferenceIntent.UpdateSkipAuth()
+                    UserPreferenceIntent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()
             }

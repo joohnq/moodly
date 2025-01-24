@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS SleepQualityRecord (
     startSleeping TEXT NOT NULL,
     endSleeping TEXT NOT NULL,
     sleepInfluences TEXT NOT NULL,
-    createdAt TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
+    createdAt TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
 );
 
 getSleepQualities:

@@ -20,6 +20,7 @@ import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetStatGroupByDateUseCase
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.SmallTitle
 import com.joohnq.shared_resources.freud_score
@@ -29,7 +30,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.util.mappers.forEachMap
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -41,7 +41,7 @@ fun FreudScoreUI(
 ) {
     val freudScore = state.freudScore!!
     statsRecords.foldComposable(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
         onSuccess = { statsRecords: List<StatsRecord> ->
             val getStatGroupByDateUseCase: GetStatGroupByDateUseCase = koinInject()
             val mapStatsRecords =
@@ -83,7 +83,7 @@ fun FreudScoreUI(
                         items(items) { statsRecord ->
                             val resource = statsRecord.mood.toResource()
                             MentalScoreHistoryItemWithHour(
-                                date = statsRecord.createdAt.date,
+                                date = statsRecord.createdAt,
                                 resource = resource,
                                 description = statsRecord.description,
                                 healthLevel = resource.healthLevel,

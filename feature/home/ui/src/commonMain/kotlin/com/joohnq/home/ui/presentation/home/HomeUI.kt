@@ -26,6 +26,7 @@ import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.mental_health_metrics
 import com.joohnq.shared_resources.mindful_tracker
@@ -33,7 +34,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toResource
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreenUI
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.toResource
 
@@ -55,7 +55,7 @@ fun HomeUI(
         healthJournal,
         sleepQuality,
     ).fold(
-        onLoading = { SplashScreenUI() },
+        onLoading = { LoadingUI() },
     ) {
         val user = user.getValueOrNull()
 

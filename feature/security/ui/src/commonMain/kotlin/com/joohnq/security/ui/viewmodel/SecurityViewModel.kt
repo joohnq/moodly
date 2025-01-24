@@ -6,7 +6,8 @@ import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.security.domain.Security
-import com.joohnq.security.domain.SecurityPreference
+import com.joohnq.security.domain.use_case.GetSecurityUseCase
+import com.joohnq.security.domain.use_case.UpdateSecurityUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SecurityViewModel(
-    private val securityPreference: SecurityPreference,
+    private val getSecurityUseCase: GetSecurityUseCase,
+    private val updateSecurityUseCase: UpdateSecurityUseCase,
 ) : ViewModel() {
     private val _state: MutableStateFlow<SecurityState> =
         MutableStateFlow(SecurityState())
@@ -32,12 +34,12 @@ class SecurityViewModel(
     }
 
     private fun getSecurity() = viewModelScope.launch {
-        val res = securityPreference.get().toUiState()
+        val res = getSecurityUseCase().toUiState()
         _state.update { it.copy(item = res) }
     }
 
     private fun updateSecurity(security: Security) = viewModelScope.launch {
-        val res = securityPreference.update(security).toUiState()
+        val res = updateSecurityUseCase(security).toUiState()
         res.onSuccess {
             _sideEffect.send(SecuritySideEffect.OnSecurityUpdated)
         }.onFailure {

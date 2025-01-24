@@ -78,6 +78,7 @@ fun OTPInputField(
         BasicTextField(
             value = text,
             onValueChange = { value ->
+                println(value.text)
                 val new = value.text
                 if (new.length <= 1 && new.isDigitsOnly()) {
                     onNumberChanged(new.toIntOrNull())
@@ -95,10 +96,12 @@ fun OTPInputField(
                 onFocusChanged(it.isFocused)
             }.onPreviewKeyEvent { event ->
                 val wasPressed =
-                    event.key == Key.Backspace || event.key.keyCode == 4.toLong()
+                    event.key == Key.Backspace
+
                 if (wasPressed && number == null) {
                     onKeyboardBack()
                 }
+                
                 false
             },
             decorationBox = { innerBox ->
@@ -112,7 +115,7 @@ fun OTPInputField(
                         modifier = Modifier.fillMaxSize().wrapContentSize()
                     )
                 }
-            }
+            },
         )
     }
 }

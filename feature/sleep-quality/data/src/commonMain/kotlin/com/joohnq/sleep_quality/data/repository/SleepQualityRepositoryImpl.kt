@@ -4,6 +4,7 @@ import com.joohnq.core.database.SqliteOperationResult
 import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.core.database.executeTryCatchResult
 import com.joohnq.core.database.sqliteExceptionMapper
+import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import com.joohnq.sleep_quality.domain.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
@@ -22,8 +23,8 @@ class SleepQualityRepositoryImpl(
                 SleepQualityRecord(
                     id = id.toInt(),
                     sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
-                    startSleeping = startSleeping,
-                    endSleeping = endSleeping,
+                    startSleeping = DatetimeProvider.getTimeInString(startSleeping),
+                    endSleeping = DatetimeProvider.getTimeInString(endSleeping),
                     sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
                     createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
                 )
@@ -37,8 +38,8 @@ class SleepQualityRepositoryImpl(
             try {
                 query.addSleepQuality(
                     sleepQuality = SleepQualityRecordConverter.fromSleepQuality(sleepQualityRecord.sleepQuality),
-                    startSleeping = sleepQualityRecord.startSleeping,
-                    endSleeping = sleepQualityRecord.endSleeping,
+                    startSleeping = DatetimeProvider.getTimeString(sleepQualityRecord.startSleeping),
+                    endSleeping = DatetimeProvider.getTimeString(sleepQualityRecord.endSleeping),
                     sleepInfluencess = SleepQualityRecordConverter.fromInfluences(sleepQualityRecord.sleepInfluences)
                 )
                 Result.success(true)

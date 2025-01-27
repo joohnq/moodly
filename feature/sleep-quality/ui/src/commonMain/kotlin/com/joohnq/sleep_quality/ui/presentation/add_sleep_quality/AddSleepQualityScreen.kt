@@ -8,11 +8,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.core.ui.entity.Time
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toSleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.mapper.endSleeping
-import com.joohnq.sleep_quality.domain.mapper.startSleeping
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
@@ -45,12 +44,8 @@ fun AddSleepQualityScreen(
                         SleepQualityRecord(
                             sleepQuality = state.mood!!.toSleepQuality(),
                             sleepInfluences = state.selectedSleepInfluences.toDomain(),
-                        ).startSleeping(
-                            state.startHour,
-                            state.startMinute
-                        ).endSleeping(
-                            state.endHour,
-                            state.endMinute
+                            startSleeping = Time(state.startHour, state.startMinute),
+                            endSleeping = Time(state.endHour, state.endMinute),
                         )
                     )
                 )

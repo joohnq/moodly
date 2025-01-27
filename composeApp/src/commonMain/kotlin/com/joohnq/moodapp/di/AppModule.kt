@@ -61,5 +61,5 @@ val appModule = listOf(
     securityUiModule,
     preferencesModule,
     securityDataModule,
-    securityDomainModule
+    securityDomainModule,
 )

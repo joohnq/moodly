@@ -54,7 +54,7 @@ kotlin {
 
             implementation(libs.navigation.compose)
 
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
         }
     }

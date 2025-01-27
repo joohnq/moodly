@@ -45,7 +45,7 @@ sealed interface Destination {
         @Serializable data object AddStat : Destination
         @Serializable data object HealthJournal : Destination
         @Serializable data object MindfulJournal : Destination
-        @Serializable data object SleepQuality : Destination
+        @Serializable data class SleepQuality(val id: Int) : Destination
         @Serializable data object SleepHistory : Destination
         @Serializable data object AddSleepQuality : Destination
         @Serializable data object AddJournaling : Destination

@@ -33,7 +33,7 @@ kotlin {
             implementation(libs.junit)
         }
         commonMain.dependencies {
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {
             implementation(projects.core.database)

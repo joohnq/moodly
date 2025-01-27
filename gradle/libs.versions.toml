@@ -23,6 +23,7 @@ napier = "2.7.1"
 navigationCompose = "2.8.0-alpha11"
 okioVersion = "3.10.1"
 robolectric = "4.14.1"
+sqliter = "1.3.0"
 truthish = "1.0.1"
 turbine = "1.2.0"
 mokkery = "2.6.1"
@@ -56,9 +57,10 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 okio-nodefilesystem = { module = "com.squareup.okio:okio-nodefilesystem", version.ref = "okioVersion" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+sqliter = { module = "co.touchlab:sqliter", version.ref = "sqliter" }
 squareup-okio = { group = "com.squareup.okio", name = "okio", version.ref = "okioVersion" }
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }

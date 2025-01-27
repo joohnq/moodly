@@ -20,7 +20,7 @@ fun HomeScreen(
     onNavigateToMood: () -> Unit,
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
-    onNavigateToSleepQuality: () -> Unit,
+    onNavigateToSleepHistory: () -> Unit,
     onNavigateToStressLevel: () -> Unit,
 ) {
     val statsViewModel: StatsViewModel = sharedViewModel()
@@ -46,7 +46,7 @@ fun HomeScreen(
             HomeEvent.OnNavigateToMood -> onNavigateToMood()
             HomeEvent.OnNavigateToHealthJournal -> onNavigateToHealthJournal()
             HomeEvent.OnNavigateToMindfulJournal -> onNavigateToMindfulJournal()
-            HomeEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
+            HomeEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
             HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel()
         }
 

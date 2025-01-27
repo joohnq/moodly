@@ -52,9 +52,9 @@ fun NavGraphBuilder.appNavigation(
                         false
                     )
                 },
-                onNavigateToSleepQuality = {
+                onNavigateToSleepHistory = {
                     onNavigate(
-                        Destination.App.SleepQuality,
+                        Destination.App.SleepHistory,
                         false
                     )
                 },
@@ -158,15 +158,23 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressLevel) }
             )
         }
-        composable<Destination.App.SleepQuality> {
+        composable<Destination.App.SleepQuality> { backStackEntry ->
+            val sleepQuality = backStackEntry.toRoute<Destination.App.SleepQuality>()
             SleepQualityScreen(
+                id = sleepQuality.id,
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality, false) },
-                onNavigateSleepHistory = { onNavigate(Destination.App.SleepHistory, false) },
                 onGoBack = onGoBack
             )
         }
         composable<Destination.App.SleepHistory> {
-            SleepHistoryScreen()
+            SleepHistoryScreen(
+                onNavigateToSleepQuality = { id ->
+                    onNavigate(
+                        Destination.App.SleepQuality(id),
+                        false
+                    )
+                },
+            )
         }
         composable<Destination.App.AddSleepQuality> {
             AddSleepQualityScreen(

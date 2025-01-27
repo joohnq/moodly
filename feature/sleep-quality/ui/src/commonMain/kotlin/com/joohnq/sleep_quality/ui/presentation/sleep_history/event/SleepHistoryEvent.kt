@@ -1,4 +1,5 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_history.event
 
-interface SleepHistoryEvent {
+sealed interface SleepHistoryEvent {
+    data class OnNavigateToSleepQuality(val id: Int) : SleepHistoryEvent
 }

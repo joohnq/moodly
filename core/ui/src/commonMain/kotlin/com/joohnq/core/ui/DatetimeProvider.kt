@@ -1,6 +1,7 @@
 package com.joohnq.core.ui
 
 import com.joohnq.core.ui.entity.DaySection
+import com.joohnq.core.ui.entity.Time
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -13,11 +14,6 @@ import kotlinx.datetime.format.char
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.until
-
-data class Time(
-    val hour: Int,
-    val minute: Int,
-)
 
 object DatetimeProvider : IDatetimeProvider {
     override fun getCurrentDateTime(): LocalDateTime =
@@ -118,4 +114,17 @@ object DatetimeProvider : IDatetimeProvider {
     fun getMinutesInTime(time: Time): Int = time.hour * 60 + time.minute
 
     fun formatTimeHMin(time: Time): String = "${formatInt(time.hour)}h ${formatInt(time.minute)}min"
+
+    fun getTimeString(time: Time): String = "${formatInt(time.hour)}:${formatInt(time.minute)}"
+    fun getTimeInString(str: String): Time {
+        val parts = str.split(":")
+        return Time(parts[0].toInt(), parts[1].toInt())
+    }
+
+    fun getDuration(end: Time, start: Time): Time {
+        val endInMinutes = getMinutesInTime(end)
+        val startInMinutes = getMinutesInTime(start)
+        val duration = endInMinutes - startInMinutes
+        return getTime(duration)
+    }
 }

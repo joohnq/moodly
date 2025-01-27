@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.mapper
 
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.entity.Time
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.EXCELLENT
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.FAIR
@@ -25,20 +25,12 @@ fun Int.toSleepQuality(): SleepQuality = when (this) {
 
 fun SleepQuality?.toInt(): Int = this?.id ?: -1
 
-fun getAllSleepQuality(): List<SleepQuality> = listOf(
-    Excellent,
-    Good,
-    Fair,
-    Poor,
-    Worst
-)
-
 fun SleepQualityRecord.startSleeping(hour: Int, minute: Int): SleepQualityRecord =
     this.copy(
-        startSleeping = DatetimeProvider.formatTime(hour, minute)
+        startSleeping = Time(hour, minute)
     )
 
 fun SleepQualityRecord.endSleeping(hour: Int, minute: Int): SleepQualityRecord =
     this.copy(
-        endSleeping = DatetimeProvider.formatTime(hour, minute)
+        endSleeping = Time(hour, minute)
     )

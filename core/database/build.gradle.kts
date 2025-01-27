@@ -36,10 +36,13 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
+
+            implementation(libs.kotlin.datetime)
+            implementation(libs.bundles.koin)
         }
         nativeMain.dependencies {
-            implementation("co.touchlab:sqliter:1.3.0")
+            implementation(libs.sqliter)
         }
     }
 }
@@ -54,5 +57,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
 }

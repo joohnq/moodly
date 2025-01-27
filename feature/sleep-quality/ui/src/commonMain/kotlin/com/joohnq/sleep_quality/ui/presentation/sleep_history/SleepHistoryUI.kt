@@ -29,20 +29,17 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.you_slept_for
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
-
 
 @Composable
 fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
     val resource = sleepQuality.sleepQuality.toResource()
-    val end = DatetimeProvider.getTime(sleepQuality.endSleeping)
-    val start = DatetimeProvider.getTime(sleepQuality.startSleeping)
-    val endInMinutes = DatetimeProvider.getMinutesInTime(end)
-    val startInMinutes = DatetimeProvider.getMinutesInTime(start)
-    val duration = endInMinutes - startInMinutes
-    val durationInTime = DatetimeProvider.getTime(duration)
-    val durationInString = DatetimeProvider.formatTimeHMin(durationInTime)
+    val duration =
+        DatetimeProvider.getDuration(sleepQuality.endSleeping, sleepQuality.startSleeping)
+    val durationInString = DatetimeProvider.formatTimeHMin(duration)
+
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
         colors = ComponentColors.Card.MainCardColors(),
@@ -84,7 +81,6 @@ fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
                 )
             }
             HorizontalSpacer(20.dp)
-            //Carinha mood com base no mood
         }
     }
 }
@@ -92,6 +88,7 @@ fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
 @Composable
 fun SleepHistoryUI(
     state: SleepQualityState,
+    onEvent: (SleepHistoryEvent) -> Unit,
 ) {
     state.sleepQualityRecords.foldComposable(
         onSuccess = { sleepQualities ->

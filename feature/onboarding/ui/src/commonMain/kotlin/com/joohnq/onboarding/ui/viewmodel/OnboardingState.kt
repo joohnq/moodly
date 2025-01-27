@@ -1,5 +1,6 @@
 package com.joohnq.onboarding.ui.viewmodel
 
+import com.joohnq.core.ui.entity.Time
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
@@ -13,6 +14,8 @@ data class OnboardingState(
     val medicationsSupplements: MedicationsSupplementsResource? = null,
     val statsRecord: StatsRecord = StatsRecord(),
     val sleepQuality: SleepQualityResource = SleepQualityResource.Worst,
+    val startSleepTime: Time = Time(0, 0),
+    val endSleepTime: Time = Time(0, 0),
     val stressLevel: StressLevelResource = StressLevelResource.Three,
     val sliderValue: Float = 0f,
 )

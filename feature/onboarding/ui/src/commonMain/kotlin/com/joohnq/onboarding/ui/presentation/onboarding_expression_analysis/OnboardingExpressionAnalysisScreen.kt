@@ -60,7 +60,9 @@ fun OnboardingExpressionAnalysisScreen(
         sleepQualityViewModel.onAction(
             SleepQualityIntent.AddSleepQualityRecord(
                 SleepQualityRecord(
-                    sleepQuality = onboardingState.sleepQuality.toDomain()
+                    sleepQuality = onboardingState.sleepQuality.toDomain(),
+                    startSleeping = onboardingState.startSleepTime,
+                    endSleeping = onboardingState.endSleepTime,
                 )
             )
         )

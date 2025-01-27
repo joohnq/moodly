@@ -81,5 +81,17 @@ object Colors {
     val Brown80Alpha25 = Color(0xFFCCC4BF)
     val Orange40Alpha25 = Color(0xFFFAD7C8)
 
+    val Pink100 = Color(0xff4c0519)
+    val Pink90 = Color(0xff881337)
+    val Pink80 = Color(0xff9F1239)
+    val Pink70 = Color(0xffBE123C)
+    val Pink60 = Color(0xffE11D48)
+    val Pink50 = Color(0xffF43F5E)
+    val Pink40 = Color(0xffFB7185)
+    val Pink30 = Color(0xffFDA4AF)
+    val Pink20 = Color(0xffFECDD3)
+    val Pink10 = Color(0xffFFE4E6)
+    val Pink5 = Color(0xffFFF1F2)
+
     val CardShadow = Color(0x0d4b3425)
 }

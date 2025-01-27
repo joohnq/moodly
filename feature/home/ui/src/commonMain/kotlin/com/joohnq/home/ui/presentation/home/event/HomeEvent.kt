@@ -6,5 +6,5 @@ sealed interface HomeEvent {
     data object OnNavigateToHealthJournal : HomeEvent
     data object OnNavigateToMindfulJournal : HomeEvent
     data object OnNavigateToStressLevel : HomeEvent
-    data object OnNavigateToSleepQuality : HomeEvent
+    data object OnNavigateToSleepHistory : HomeEvent
 }

@@ -63,7 +63,7 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
 
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
 
             implementation(libs.coroutines.extensions)
         }

@@ -46,7 +46,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
         }

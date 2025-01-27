@@ -43,7 +43,7 @@ import com.joohnq.stress_level.ui.resource.StressLevelResource
                 textColor = Colors.Brown80
             )
         },
-        onClick = { onAction(HomeEvent.OnNavigateToSleepQuality) }
+        onClick = { onAction(HomeEvent.OnNavigateToSleepHistory) }
     )
 //    VerticalSpacer(16.dp)
 //    MindfulTrackerCardRow(icon = Drawables.Icons.DocumentHealth,

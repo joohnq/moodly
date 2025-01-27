@@ -28,7 +28,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.serialization)
             implementation(libs.navigation.compose)
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

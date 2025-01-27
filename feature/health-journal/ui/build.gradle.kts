@@ -52,7 +52,7 @@ kotlin {
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
 
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
         }
         commonTest.dependencies {
             implementation(libs.bundles.test)

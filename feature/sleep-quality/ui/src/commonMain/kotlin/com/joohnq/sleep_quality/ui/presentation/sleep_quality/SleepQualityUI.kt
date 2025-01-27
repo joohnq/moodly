@@ -19,11 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
-import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.SleepQualityCard
 import com.joohnq.shared_resources.components.TextWithBackground
@@ -48,183 +45,162 @@ import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SleepQualityUI(
-    sleepQualityRecords: UiState<List<SleepQualityRecord>>,
+    record: SleepQualityRecord,
     onEvent: (SleepQualityEvent) -> Unit = {},
 ) {
-    sleepQualityRecords.foldComposable(
-        onLoading = { LoadingUI() },
-        onSuccess = { sleepQualityRecords ->
-            val selected = sleepQualityRecords.first()
-            val sleepQuality = selected.sleepQuality.toResource()
-            val sleepInfluences = selected.sleepInfluences.toResource()
-            val mood = selected.sleepQuality.toResource().toMood()
-            val options = remember {
-                listOf(
-                    SleepStatsItem(
-                        icon = Drawables.Icons.MoodNeutral,
-                        title = Res.string.mood,
-                    ) {
-                        Text(
-                            text = stringResource(mood.text),
-                            style = TextStyles.TextMdSemiBold(),
-                            color = Colors.Brown80
-                        )
-                    },
-                    SleepStatsItem(
-                        icon = Drawables.Icons.Moon,
-                        title = Res.string.sleeping_influences,
-                    ) {
-                        if (sleepInfluences.isNotEmpty())
-                            FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                sleepInfluences.forEach { sleepInfluences ->
-                                    TextWithBackground(
-                                        text = stringResource(sleepInfluences.title),
-                                        backgroundColor = Colors.Green50,
-                                        textColor = Colors.White
-                                    )
-                                }
-                            }
-                    }
+    val sleepQuality = record.sleepQuality.toResource()
+    val sleepInfluences = record.sleepInfluences.toResource()
+    val mood = record.sleepQuality.toResource().toMood()
+    val options = remember {
+        listOf(
+            SleepStatsItem(
+                icon = Drawables.Icons.MoodNeutral,
+                title = Res.string.mood,
+            ) {
+                Text(
+                    text = stringResource(mood.text),
+                    style = TextStyles.TextMdSemiBold(),
+                    color = Colors.Brown80
                 )
-            }
-
-            SharedPanelComponent(
-                containerColor = Colors.Brown10,
-                isDark = false,
-                onGoBack = { onEvent(SleepQualityEvent.GoBack) },
-                backgroundColor = mood.palette.color,
-                backgroundImage = Drawables.Images.SleepQualityBackground,
-                panelTitle = Res.string.sleep_quality,
-                bodyTitle = Res.string.sleep_stats,
-                color = mood.palette.backgroundColor,
-                onAdd = { onEvent(SleepQualityEvent.Add) },
-                topBarContent = {
-                    TextWithBackground(
-                        text = DatetimeProvider.formatDate(selected.createdAt),
-                        textColor = sleepQuality.palette.color,
-                        backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
-                    )
-                },
-                panelContent = {
-                    Column(
-                        modifier = Modifier
-                            .paddingHorizontalMedium()
-                            .padding(top = it.calculateTopPadding())
-                            .fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = stringResource(
-                                Res.string.sleep_quality_level,
-                                selected.sleepQuality.level
-                            ),
-                            style = TextStyles.Heading2xlExtraBold(),
-                            color = Colors.White
-                        )
-                        VerticalSpacer(10.dp)
-                        Text(
-                            text = stringResource(sleepQuality.firstText),
-                            style = TextStyles.HeadingSmExtraBold(),
-                            color = Colors.White
-                        )
-                        VerticalSpacer(20.dp)
-                        Row(
-                            modifier = Modifier
-                                .background(color = Colors.White, shape = Dimens.Shape.Circle)
-                                .padding(vertical = 5.dp, horizontal = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier.size(30.dp)
-                                    .background(
-                                        color = Colors.Brown10,
-                                        shape = Dimens.Shape.Circle
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    painter = painterResource(Drawables.Icons.Sleep),
-                                    contentDescription = stringResource(Res.string.start_sleeping),
-                                    tint = Colors.Brown80,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                            }
-                            HorizontalSpacer(10.dp)
-                            Text(
-                                text = selected.startSleeping,
-                                style = TextStyles.TextMdSemiBold(),
-                                color = Colors.Brown80
-                            )
-                            Text(
-                                text = stringResource(Res.string.to_word),
-                                style = TextStyles.TextMdSemiBold(),
-                                color = Colors.Brown100Alpha64,
-                                modifier = Modifier.padding(horizontal = 5.dp)
-                            )
-                            Box(
-                                modifier = Modifier.size(30.dp)
-                                    .background(
-                                        color = Colors.Brown10,
-                                        shape = Dimens.Shape.Circle
-                                    ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    painter = painterResource(Drawables.Icons.Sun),
-                                    contentDescription = stringResource(Res.string.end_sleeping),
-                                    tint = Colors.Brown80,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                            }
-                            HorizontalSpacer(10.dp)
-                            Text(
-                                text = selected.endSleeping,
-                                style = TextStyles.TextMdSemiBold(),
-                                color = Colors.Brown80
+            },
+            SleepStatsItem(
+                icon = Drawables.Icons.Moon,
+                title = Res.string.sleeping_influences,
+            ) {
+                if (sleepInfluences.isNotEmpty())
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        sleepInfluences.forEach { sleepInfluences ->
+                            TextWithBackground(
+                                text = stringResource(sleepInfluences.title),
+                                backgroundColor = Colors.Green50,
+                                textColor = Colors.White
                             )
                         }
                     }
-                },
-                content = {
-                    item {
-                        FlowRow(
-                            maxItemsInEachRow = 1,
-                            maxLines = 2,
-                            modifier = Modifier.fillMaxSize().wrapContentHeight()
-                                .paddingHorizontalMedium(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            options.forEach { item ->
-                                SleepQualityCard(
-                                    modifier = Modifier.weight(1f),
-                                    item = item
-                                )
-                            }
-                        }
+            }
+        )
+    }
+
+    SharedPanelComponent(
+        containerColor = Colors.Brown10,
+        isDark = false,
+        onGoBack = { onEvent(SleepQualityEvent.GoBack) },
+        backgroundColor = mood.palette.color,
+        backgroundImage = Drawables.Images.SleepQualityBackground,
+        panelTitle = Res.string.sleep_quality,
+        bodyTitle = Res.string.sleep_stats,
+        color = mood.palette.backgroundColor,
+        onAdd = { onEvent(SleepQualityEvent.Add) },
+        topBarContent = {
+            TextWithBackground(
+                text = DatetimeProvider.formatDate(record.createdAt),
+                textColor = sleepQuality.palette.color,
+                backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
+            )
+        },
+        panelContent = {
+            Column(
+                modifier = Modifier
+                    .paddingHorizontalMedium()
+                    .padding(top = it.calculateTopPadding())
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = stringResource(
+                        Res.string.sleep_quality_level,
+                        record.sleepQuality.level
+                    ),
+                    style = TextStyles.Heading2xlExtraBold(),
+                    color = Colors.White
+                )
+                VerticalSpacer(10.dp)
+                Text(
+                    text = stringResource(sleepQuality.firstText),
+                    style = TextStyles.HeadingSmExtraBold(),
+                    color = Colors.White
+                )
+                VerticalSpacer(20.dp)
+                Row(
+                    modifier = Modifier
+                        .background(color = Colors.White, shape = Dimens.Shape.Circle)
+                        .padding(vertical = 5.dp, horizontal = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier.size(30.dp)
+                            .background(
+                                color = Colors.Brown10,
+                                shape = Dimens.Shape.Circle
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.Sleep),
+                            contentDescription = stringResource(Res.string.start_sleeping),
+                            tint = Colors.Brown80,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    HorizontalSpacer(10.dp)
+                    Text(
+                        text = DatetimeProvider.getTimeString(record.startSleeping),
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown80
+                    )
+                    Text(
+                        text = stringResource(Res.string.to_word),
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown100Alpha64,
+                        modifier = Modifier.padding(horizontal = 5.dp)
+                    )
+                    Box(
+                        modifier = Modifier.size(30.dp)
+                            .background(
+                                color = Colors.Brown10,
+                                shape = Dimens.Shape.Circle
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(Drawables.Icons.Sun),
+                            contentDescription = stringResource(Res.string.end_sleeping),
+                            tint = Colors.Brown80,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    HorizontalSpacer(10.dp)
+                    Text(
+                        text = DatetimeProvider.getTimeString(record.endSleeping),
+                        style = TextStyles.TextMdSemiBold(),
+                        color = Colors.Brown80
+                    )
+                }
+            }
+        },
+        content = {
+            item {
+                FlowRow(
+                    maxItemsInEachRow = 1,
+                    maxLines = 2,
+                    modifier = Modifier.fillMaxSize().wrapContentHeight()
+                        .paddingHorizontalMedium(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    options.forEach { item ->
+                        SleepQualityCard(
+                            modifier = Modifier.weight(1f),
+                            item = item
+                        )
                     }
                 }
-            )
+            }
         }
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreview() {
-    SleepQualityUI(
-        sleepQualityRecords = UiState.Success(
-            listOf(
-                SleepQualityRecord(),
-                SleepQualityRecord(),
-                SleepQualityRecord(),
-            )
-        )
     )
 }

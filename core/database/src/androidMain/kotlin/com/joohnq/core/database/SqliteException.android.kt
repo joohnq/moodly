@@ -20,7 +20,6 @@ import android.database.sqlite.SQLiteTableLockedException
 actual val sqliteExceptionMapper: SqliteExceptionMapper = AndroidSqliteExceptionMapper()
 
 private class AndroidSqliteExceptionMapper : SqliteExceptionMapper {
-    //    @Suppress("CyclomaticComplexMethod")
     override fun map(t: Throwable): SqliteException {
         val opResult = when (t) {
             is SQLiteAbortException -> SqliteOperationResult.ABORT

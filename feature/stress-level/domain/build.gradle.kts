@@ -40,7 +40,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.serialization)
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
         }
         commonTest.dependencies {

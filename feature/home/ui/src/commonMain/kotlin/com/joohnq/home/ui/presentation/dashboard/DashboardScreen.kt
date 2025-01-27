@@ -55,7 +55,7 @@ fun DashboardScreen(
     onNavigateToMood: () -> Unit,
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
-    onNavigateToSleepQuality: () -> Unit,
+    onNavigateToSleepHistory: () -> Unit,
     onNavigateToStressLevel: () -> Unit,
     onNavigateToEditJournaling: (Int) -> Unit,
     onNavigateToAllJournals: () -> Unit,
@@ -188,7 +188,7 @@ fun DashboardScreen(
                     onNavigateToMood = onNavigateToMood,
                     onNavigateToHealthJournal = onNavigateToHealthJournal,
                     onNavigateToMindfulJournal = onNavigateToMindfulJournal,
-                    onNavigateToSleepQuality = onNavigateToSleepQuality,
+                    onNavigateToSleepHistory = onNavigateToSleepHistory,
                     onNavigateToStressLevel = onNavigateToStressLevel
                 )
             }

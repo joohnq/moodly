@@ -46,7 +46,7 @@ kotlin {
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.serialization)
-            implementation(libs.datetime)
+            implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
         }
         commonTest.dependencies {

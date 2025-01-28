@@ -55,6 +55,12 @@ object TextStyles {
     )
 
     @Composable
+    fun ParagraphSm() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Regular(),
+        fontSize = 16.sp
+    )
+
+    @Composable
     fun LabelSm() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 12.sp
@@ -145,6 +151,12 @@ object TextStyles {
     )
 
     @Composable
+    fun TextMdMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Medium(),
+        fontSize = 16.sp
+    )
+
+    @Composable
     fun TextSmExtraBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 14.sp,
@@ -169,6 +181,12 @@ object TextStyles {
     )
 
     @Composable
+    fun TextSmRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Regular(),
+        fontSize = 14.sp
+    )
+
+    @Composable
     fun TextXsExtraBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 12.sp
@@ -177,6 +195,12 @@ object TextStyles {
     @Composable
     fun TextXsBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.Bold(),
+        fontSize = 12.sp,
+    )
+
+    @Composable
+    fun TextXsRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Regular(),
         fontSize = 12.sp,
     )
 }

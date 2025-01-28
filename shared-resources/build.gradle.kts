@@ -71,10 +71,6 @@ android {
     }
 }
 
-dependencies {
-    implementation(libs.androidx.ui.android)
-}
-
 compose.resources {
     publicResClass = true
     packageOfResClass = "com.joohnq.shared_resources"

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.Scaffold
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
@@ -52,7 +54,10 @@ import org.jetbrains.compose.resources.StringResource
                         topBarContent = topBarContent
                     )
                     VerticalSpacer(20.dp)
-                    Title(bodyTitle)
+                    Title(
+                        modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
+                        text = bodyTitle
+                    )
                 }
             }
             content()

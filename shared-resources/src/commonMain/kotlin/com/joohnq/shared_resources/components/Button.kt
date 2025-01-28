@@ -12,7 +12,6 @@ import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -165,7 +164,7 @@ fun BackButton(
     backgroundColor: Color = Colors.Transparent,
     onClick: () -> Unit,
 ) {
-    OutlinedIconButton(
+    FilledIconButton(
         modifier = Modifier.size(48.dp),
         shape = Dimens.Shape.Circle,
         colors = IconButtonColors(
@@ -173,10 +172,6 @@ fun BackButton(
             contentColor = color,
             disabledContainerColor = backgroundColor,
             disabledContentColor = color
-        ),
-        border = BorderStroke(
-            1.5.dp,
-            color = color
         ),
         onClick = onClick,
     ) {

@@ -7,11 +7,11 @@ import com.joohnq.shared_resources.avatar_cloud
 import com.joohnq.shared_resources.avatar_pie_chart
 import com.joohnq.shared_resources.avatar_time
 import com.joohnq.shared_resources.freud_score_background
-import com.joohnq.shared_resources.health_journal_background
 import com.joohnq.shared_resources.ic_add
 import com.joohnq.shared_resources.ic_arrow
 import com.joohnq.shared_resources.ic_arrow_chevron
 import com.joohnq.shared_resources.ic_arrow_open
+import com.joohnq.shared_resources.ic_book
 import com.joohnq.shared_resources.ic_calendar
 import com.joohnq.shared_resources.ic_camera
 import com.joohnq.shared_resources.ic_chart
@@ -53,18 +53,22 @@ import com.joohnq.shared_resources.icons.MoodOverjoyed
 import com.joohnq.shared_resources.icons.MoodSad
 import com.joohnq.shared_resources.icons.Target
 import com.joohnq.shared_resources.logo
+import com.joohnq.shared_resources.mindfulness_journal_background
 import com.joohnq.shared_resources.mood_background
 import com.joohnq.shared_resources.mood_depressed
 import com.joohnq.shared_resources.mood_happy
 import com.joohnq.shared_resources.mood_neutral
 import com.joohnq.shared_resources.mood_overjoyed
 import com.joohnq.shared_resources.mood_sad
+import com.joohnq.shared_resources.not_found
 import com.joohnq.shared_resources.onboarding_sought_professional_help_image
 import com.joohnq.shared_resources.security_confirmed_background
 import com.joohnq.shared_resources.security_confirmed_image
 import com.joohnq.shared_resources.security_image
+import com.joohnq.shared_resources.self_journaling_illustration
 import com.joohnq.shared_resources.shape_bottom_navigation
 import com.joohnq.shared_resources.sleep_quality_background
+import com.joohnq.shared_resources.sleep_woman_illustration
 import com.joohnq.shared_resources.stress_level_background
 import com.joohnq.shared_resources.welcome_community_image
 import com.joohnq.shared_resources.welcome_first_screen_image
@@ -114,6 +118,7 @@ object Drawables {
         val PhotoPicker = Res.drawable.ic_photo_picker
         val Gallery = Res.drawable.ic_gallery
         val Camera = Res.drawable.ic_camera
+        val Book = Res.drawable.ic_book
     }
 
     object Images {
@@ -128,7 +133,7 @@ object Drawables {
         val MoodBackground = Res.drawable.mood_background
         val StressLevelBackground = Res.drawable.stress_level_background
         val SleepQualityBackground = Res.drawable.sleep_quality_background
-        val HealthJournalBackground = Res.drawable.health_journal_background
+        val MindfulnessJournalBackground = Res.drawable.mindfulness_journal_background
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image
@@ -143,6 +148,11 @@ object Drawables {
 
         val SecurityConfirmedImage = Res.drawable.security_confirmed_image
         val SecurityConfirmedBackground = Res.drawable.security_confirmed_background
+
+        val SleepWomanIllustration = Res.drawable.sleep_woman_illustration
+        val SelfJournalingIllustration = Res.drawable.self_journaling_illustration
+
+        val NotFound = Res.drawable.not_found
     }
 
     object Mood {

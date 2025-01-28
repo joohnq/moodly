@@ -2,8 +2,12 @@ package com.joohnq.health_journal.ui.presentation.health_journal
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,6 +31,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -45,7 +50,7 @@ fun HealthJournalUI(
                 isDark = false,
                 onGoBack = { onEvent(HealthJournalEvent.OnGoBack) },
                 backgroundColor = Colors.Brown60,
-                backgroundImage = Drawables.Images.HealthJournalBackground,
+                backgroundImage = Drawables.Images.MindfulnessJournalBackground,
                 panelTitle = Res.string.health_journal,
                 bodyTitle = Res.string.journal_history,
                 color = Colors.Brown50,
@@ -57,11 +62,26 @@ fun HealthJournalUI(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(
-                            text = dayPerYear,
-                            style = TextStyles.Heading2xlExtraBold(),
-                            color = Colors.White
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(
+                                12.dp,
+                                alignment = Alignment.CenterHorizontally
+                            )
+                        ) {
+                            Icon(
+                                painter = painterResource(Drawables.Icons.Book),
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = Colors.Brown50
+                            )
+                            Text(
+                                text = dayPerYear,
+                                style = TextStyles.Heading2xlExtraBold(),
+                                color = Colors.White
+                            )
+                        }
                         VerticalSpacer(10.dp)
                         Text(
                             text = stringResource(Res.string.journals_this_year),

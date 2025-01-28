@@ -48,6 +48,8 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
+
+            implementation(libs.calendar)
         }
         commonTest.dependencies {
             implementation(libs.bundles.test)

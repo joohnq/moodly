@@ -165,7 +165,10 @@ fun AddSleepQualityUI(
                 )
             }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Title(text = Res.string.mood)
+                Title(
+                    modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
+                    text = Res.string.mood
+                )
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 20.dp)
@@ -173,7 +176,7 @@ fun AddSleepQualityUI(
                     items(moods) { resource ->
                         MoodFace(
                             modifier = Modifier.size(32.dp),
-                            mood = resource,
+                            resource = resource,
                             backgroundColor = if (state.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
                             color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = { onAddAction(AddSleepQualityIntent.UpdateMood(resource)) }
@@ -182,7 +185,10 @@ fun AddSleepQualityUI(
                 }
             }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Title(text = Res.string.sleeping_influences)
+                Title(
+                    modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
+                    text = Res.string.sleeping_influences
+                )
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 20.dp)

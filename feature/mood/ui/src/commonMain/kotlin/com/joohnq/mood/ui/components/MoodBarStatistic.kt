@@ -119,7 +119,7 @@ fun MoodBarStatistic(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
-                                mood = statsRecord.mood.toResource(),
+                                resource = statsRecord.mood.toResource(),
                                 backgroundColor = barFaceColor,
                                 color = background
                             )

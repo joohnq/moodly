@@ -1,13 +1,6 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -20,11 +13,7 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.DoubleText
-import com.joohnq.shared_resources.components.SleepQualityThumb
-import com.joohnq.shared_resources.components.SleepQualityTrack
-import com.joohnq.shared_resources.components.VerticalSlider
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -90,7 +79,7 @@ fun OnboardingSleepQualityUI(
                         Column {
                             MoodFace(
                                 modifier = Modifier.size(48.dp),
-                                mood = mood,
+                                resource = mood,
                             )
                         }
                     }

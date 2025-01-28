@@ -47,13 +47,13 @@ fun MoodUI(
     statsRecord?.run {
         val resource = mood.toResource()
         SharedPanelComponent(
-            isDark = true,
+            isDark = false,
             onGoBack = { onEvent(MoodEvent.OnGoBack) },
-            backgroundColor = resource.palette.backgroundColor,
+            backgroundColor = resource.palette.color,
             backgroundImage = Drawables.Images.MoodBackground,
             panelTitle = Res.string.mood,
             bodyTitle = Res.string.description,
-            color = resource.palette.subColor,
+            color = resource.palette.backgroundColor,
             onAdd = { onEvent(MoodEvent.OnAddStatScreen) },
             topBarContent = {
                 TextWithBackground(
@@ -72,12 +72,12 @@ fun MoodUI(
                     Text(
                         text = stringResource(Res.string.your_mood_is),
                         style = TextStyles.TextXlBold(),
-                        color = resource.palette.moodScreenMoodFaceColor
+                        color = resource.palette.backgroundColor
                     )
                     Text(
                         text = stringResource(resource.text),
                         style = TextStyles.Heading2xlExtraBold(),
-                        color = resource.palette.moodScreenMoodFaceColor
+                        color = resource.palette.backgroundColor
                     )
                     VerticalSpacer(10.dp)
                     Row(
@@ -93,7 +93,9 @@ fun MoodUI(
                         )
                         MoodFace(
                             modifier = Modifier.size(96.dp),
-                            mood = resource
+                            resource = resource,
+                            backgroundColor = resource.palette.backgroundColor,
+                            color = resource.palette.color
                         )
                         PreviousNextButton(
                             enabled = hasNext,

@@ -56,9 +56,13 @@ fun DashboardScreen(
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
     onNavigateToSleepHistory: () -> Unit,
-    onNavigateToStressLevel: () -> Unit,
+    onNavigateToStressLevel: (Int) -> Unit,
+    onNavigateToStressHistory: () -> Unit,
     onNavigateToEditJournaling: (Int) -> Unit,
-    onNavigateToAllJournals: () -> Unit,
+    onNavigateToSelfJournalHistory: () -> Unit,
+    onNavigateToAddSleep: () -> Unit,
+    onNavigateToAddStress: () -> Unit,
+    onNavigateToAddJournaling: () -> Unit,
 ) {
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
@@ -102,9 +106,9 @@ fun DashboardScreen(
         )
     }
 
-    fun onError(error: String) {
+    fun onError(error: Throwable) {
         scope.launch {
-            snackBarHostState.showSnackbar(error)
+            snackBarHostState.showSnackbar(error.message.toString())
         }
     }
 
@@ -122,7 +126,7 @@ fun DashboardScreen(
         statsState.statsRecords.onSuccess {
             freudScoreViewModel.onAction(
                 FreudScoreIntent.GetFreudScore(
-                    statsState.statsRecords.getValueOrNull() ?: return@onSuccess
+                    statsState.statsRecords.getValueOrNull()
                 )
             )
         }
@@ -189,13 +193,19 @@ fun DashboardScreen(
                     onNavigateToHealthJournal = onNavigateToHealthJournal,
                     onNavigateToMindfulJournal = onNavigateToMindfulJournal,
                     onNavigateToSleepHistory = onNavigateToSleepHistory,
-                    onNavigateToStressLevel = onNavigateToStressLevel
+                    onNavigateToStressLevel = onNavigateToStressLevel,
+                    onNavigateToStressHistory = onNavigateToStressHistory,
+                    onNavigateToAddSleep = onNavigateToAddSleep,
+                    onNavigateToAddStress = onNavigateToAddStress,
+                    onNavigateToSelfJournalHistory = onNavigateToSelfJournalHistory,
+                    onNavigateToAddJournaling = onNavigateToAddJournaling,
+                    onError = ::onError,
                 )
             }
             composable<Destination.App.DashBoard.Journaling> {
                 JournalingScreen(
                     onNavigateToEditJournaling = onNavigateToEditJournaling,
-                    onNavigateToAllJournals = onNavigateToAllJournals
+                    onNavigateToAllJournals = onNavigateToSelfJournalHistory
                 )
             }
         }

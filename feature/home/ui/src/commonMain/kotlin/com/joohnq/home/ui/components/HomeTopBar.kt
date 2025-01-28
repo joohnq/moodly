@@ -17,27 +17,26 @@ import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.domain.constant.UserFileStorageConstants
 import com.joohnq.domain.entity.ImageType
+import com.joohnq.domain.entity.User
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AvatarImage
 import com.joohnq.shared_resources.components.ImageCache
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.greeting
+import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun HomeTopBar(
     modifier: Modifier = Modifier,
-    userName: String,
-    images: List<DrawableResource>,
-    image: String?,
-    imageType: ImageType,
+    user: User,
 ) {
+    val avatars = rememberAvatars()
     Column(
         modifier = Modifier.fillMaxSize().background(
             color = Colors.Brown80, shape = Dimens.Shape.BottomLarge
@@ -66,8 +65,8 @@ fun HomeTopBar(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            image?.let {
-                when (imageType) {
+            user.image?.let {
+                when (user.imageType) {
                     ImageType.DEVICE -> {
                         ImageCache(
                             directory = UserFileStorageConstants.AVATAR_DIRECTORY,
@@ -77,13 +76,13 @@ fun HomeTopBar(
 
                     ImageType.DRAWABLE -> {
                         AvatarImage(
-                            painterResource(images[it.toInt()])
+                            painterResource(avatars[it.toInt()])
                         )
                     }
                 }
             }
             Text(
-                text = stringResource(Res.string.greeting, userName),
+                text = stringResource(Res.string.greeting, user.name),
                 style = TextStyles.HeadingSmExtraBold(),
                 color = Colors.White
             )

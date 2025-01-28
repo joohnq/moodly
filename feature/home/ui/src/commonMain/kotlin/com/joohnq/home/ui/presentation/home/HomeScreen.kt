@@ -19,7 +19,13 @@ fun HomeScreen(
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
     onNavigateToSleepHistory: () -> Unit,
-    onNavigateToStressLevel: () -> Unit,
+    onNavigateToStressLevel: (Int) -> Unit,
+    onNavigateToStressHistory: () -> Unit,
+    onNavigateToAddSleep: () -> Unit,
+    onNavigateToAddStress: () -> Unit,
+    onNavigateToSelfJournalHistory: () -> Unit,
+    onNavigateToAddJournaling: () -> Unit,
+    onError: (Throwable) -> Unit,
 ) {
     val statsViewModel: StatsViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
@@ -42,7 +48,14 @@ fun HomeScreen(
             HomeEvent.OnNavigateToHealthJournal -> onNavigateToHealthJournal()
             HomeEvent.OnNavigateToMindfulJournal -> onNavigateToMindfulJournal()
             HomeEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
-            HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel()
+            is HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel(event.id)
+            HomeEvent.OnNavigateToAddSleep -> onNavigateToAddSleep()
+            is HomeEvent.ShowError -> onError(event.error)
+            HomeEvent.OnNavigateToStressHistory -> TODO()
+            is HomeEvent.OnNavigateToStressHistory -> onNavigateToStressHistory()
+            HomeEvent.OnNavigateToAddStress -> onNavigateToAddStress()
+            HomeEvent.OnNavigateToAllJournals -> onNavigateToSelfJournalHistory()
+            HomeEvent.OnNavigateToAddJournaling -> onNavigateToAddJournaling()
         }
 
     HomeUI(

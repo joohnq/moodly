@@ -1,24 +1,13 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -29,24 +18,13 @@ import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.viewmodel.AddingJournalingState
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
-import com.joohnq.shared_resources.components.CustomOutlinedTextField
-import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
-import com.joohnq.shared_resources.components.MediumTitle
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.enter_the_title
-import com.joohnq.shared_resources.journal_title
-import com.joohnq.shared_resources.mood
-import com.joohnq.shared_resources.new_journal_entry
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared_resources.write_your_entry
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -120,7 +98,7 @@ fun AddJournalingUI(
                     items(moods) { resource ->
                         MoodFace(
                             modifier = Modifier.size(32.dp),
-                            mood = resource,
+                            resource = resource,
                             backgroundColor = if (state.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
                             color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {

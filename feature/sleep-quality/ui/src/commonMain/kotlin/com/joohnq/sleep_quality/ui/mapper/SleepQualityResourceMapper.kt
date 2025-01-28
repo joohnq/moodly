@@ -33,7 +33,7 @@ fun SleepQualityResource.toDomain(): SleepQuality = when (this) {
     Worst -> SleepQuality.Worst
 }
 
-fun SleepQualityResource.toMood(): MoodResource = when (this) {
+fun SleepQualityResource.toMoodResource(): MoodResource = when (this) {
     Excellent -> MoodResource.Overjoyed
     Good -> MoodResource.Happy
     Fair -> MoodResource.Neutral

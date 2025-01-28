@@ -5,10 +5,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.mapper.allSuccess
-import com.joohnq.core.ui.mapper.anyError
-import com.joohnq.core.ui.mapper.getValueOrNull
+import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.domain.entity.UserPreferences
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
@@ -48,28 +47,21 @@ fun SplashScreen(
         listOf(
             userPreferencesState.userPreferences,
             securityState.item
-        ).allSuccess {
-            val security = securityState.item.getValueOrNull()
-            val preferences = userPreferencesState.userPreferences.getValueOrNull()
+        ).fold(
+            onSuccess = { preferences: UserPreferences, security: Security ->
+                when {
+                    security is Security.Biometric
+                            || security is Security.Pin -> onNavigateToUnLock()
 
-            if (security is Security.Biometric || security is Security.Pin) {
-                onNavigateToUnLock()
-                return@allSuccess
-            } else if (security is Security.Corrupted) {
-                onNavigateToCorruptedSecurity()
-                return@allSuccess
+                    security is Security.Corrupted -> onNavigateToCorruptedSecurity()
+                    !preferences.skipWelcome -> onNavigateToWelcome()
+                    !preferences.skipOnboarding -> onNavigateToOnboarding()
+                    !preferences.skipAuth -> onNavigateToAuth()
+                    !preferences.skipSecurity -> onNavigateToSecurity()
+                    else -> onNavigateToDashboard()
+                }
             }
-
-            when (false) {
-                preferences.skipWelcome -> onNavigateToWelcome()
-                preferences.skipOnboarding -> onNavigateToOnboarding()
-                preferences.skipAuth -> onNavigateToAuth()
-                preferences.skipSecurity -> onNavigateToSecurity()
-                else -> onNavigateToDashboard()
-            }
-        }.anyError {
-            println("Errrrrrrro $it")
-        }
+        )
     }
 
     SplashScreenUI()

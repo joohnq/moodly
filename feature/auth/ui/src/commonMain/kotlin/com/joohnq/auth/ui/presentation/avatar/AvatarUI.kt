@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -78,7 +77,6 @@ fun AvatarImagesHorizontalPager(images: List<DrawableResource>) {
 @Composable
 fun AvatarUI(
     snackBarState: SnackbarHostState,
-    pagerState: PagerState,
     images: List<DrawableResource> = emptyList(),
     onEvent: (AvatarEvent) -> Unit = {},
     avatarState: AvatarState,

@@ -29,27 +29,24 @@ fun MoodScreen(
     var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
     var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
 
-    fun getCurrentStatsRecord(): StatsRecord? =
-        statsState.statsRecords.getValueOrNull()?.find { it.id == id }
-            ?: statsState.statsRecords.getValueOrNull()?.first()
-
-    var currentStatsRecord by remember {
-        mutableStateOf(getCurrentStatsRecord())
+    var record by remember {
+        mutableStateOf(statsState.statsRecords.getValueOrNull().find { it.id == id }
+            ?: statsState.statsRecords.getValueOrNull().first())
     }
 
     fun onEvent(event: MoodEvent) =
         when (event) {
             is MoodEvent.OnGoBack -> onNavigateBackToHome()
-            is MoodEvent.OnNext -> hasNext?.run { currentStatsRecord = this }
-            is MoodEvent.OnPrevious -> hasPrevious?.run { currentStatsRecord = this }
+            is MoodEvent.OnNext -> hasNext?.run { record = this }
+            is MoodEvent.OnPrevious -> hasPrevious?.run { record = this }
             is MoodEvent.OnAddStatScreen -> onNavigateAddStat()
             is MoodEvent.OnSetMood -> {
-                currentStatsRecord = event.statsRecord
+                record = event.statsRecord
             }
         }
 
-    LaunchedEffect(currentStatsRecord) {
-        currentStatsRecord?.let { statRecord ->
+    LaunchedEffect(record) {
+        record.let { statRecord ->
             hasNext =
                 getNextStatUseCase(
                     statRecord,
@@ -65,7 +62,7 @@ fun MoodScreen(
     }
 
     MoodUI(
-        statsRecord = currentStatsRecord,
+        statsRecord = record,
         hasNext = hasNext != null,
         hasPrevious = hasPrevious != null,
         statsRecords = statsState.statsRecords,

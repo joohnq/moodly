@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -41,7 +42,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.to_word
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
-import com.joohnq.sleep_quality.ui.mapper.toMood
+import com.joohnq.sleep_quality.ui.mapper.toMoodResource
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import org.jetbrains.compose.resources.painterResource
@@ -55,7 +56,7 @@ fun SleepQualityUI(
 ) {
     val sleepQuality = record.sleepQuality.toResource()
     val sleepInfluences = record.sleepInfluences.toResource()
-    val mood = record.sleepQuality.toResource().toMood()
+    val mood = record.sleepQuality.toResource().toMoodResource()
     val options = remember {
         listOf(
             SleepStatsItem(
@@ -112,14 +113,29 @@ fun SleepQualityUI(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = stringResource(
-                        Res.string.sleep_quality_level,
-                        record.sleepQuality.level
-                    ),
-                    style = TextStyles.Heading2xlExtraBold(),
-                    color = Colors.White
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(
+                        12.dp,
+                        alignment = Alignment.CenterHorizontally
+                    )
+                ) {
+                    Icon(
+                        painter = painterResource(Drawables.Icons.Sleep),
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = mood.palette.backgroundColor
+                    )
+                    Text(
+                        text = stringResource(
+                            Res.string.sleep_quality_level,
+                            record.sleepQuality.level
+                        ),
+                        style = TextStyles.Heading2xlExtraBold(),
+                        color = Colors.White
+                    )
+                }
                 VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(sleepQuality.firstText),

@@ -179,7 +179,6 @@ fun AvatarScreen(
 
     AvatarUI(
         snackBarState = snackBarState,
-        pagerState = pagerState,
         images = avatars,
         onEvent = ::onEvent,
         avatarState = avatarState

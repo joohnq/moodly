@@ -2,7 +2,7 @@
 accompanistPermissions = "0.37.0"
 agp = "8.7.3"
 android-compileSdk = "35"
-android-minSdk = "24"
+android-minSdk = "26"
 android-targetSdk = "35"
 android-versionCode = "1"
 android-versionName = "1.0.0"
@@ -12,6 +12,7 @@ androidx-lifecycle = "2.9.0-alpha01"
 biometric = "1.1.0"
 compose-plugin = "1.7.3"
 composeCharts = "0.0.17"
+composeMultiplatform = "2.6.2"
 cryptographyCore = "0.4.0"
 junit = "4.13.2"
 koinCore = "4.1.0-Beta3"
@@ -42,6 +43,7 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiAndroid" }
 charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
+calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "composeMultiplatform" }
 cryptography-core = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = "cryptographyCore" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }

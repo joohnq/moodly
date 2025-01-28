@@ -14,7 +14,7 @@ import com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.Onboarding
 import com.joohnq.onboarding.ui.presentation.onboarding_stress_level.OnboardingStressLevelScreen
 
 fun NavGraphBuilder.onboardingNavigation(
-    onNavigate: (Destination, Boolean) -> Unit,
+    onNavigate: (Destination) -> Unit,
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
     onGoBack: () -> Unit,
 ) {
@@ -22,7 +22,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.MoodRate> {
             OnboardingMoodRateScreen(
                 onNavigateToProfessionalHelp = {
-                    onNavigate(Destination.Onboarding.ProfessionalHelp, false)
+                    onNavigate(Destination.Onboarding.ProfessionalHelp)
                 },
                 onGoBack = onGoBack
             )
@@ -30,7 +30,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.ProfessionalHelp> {
             OnboardingProfessionalHelpScreen(
                 onNavigateToPhysicalSymptoms = {
-                    onNavigate(Destination.Onboarding.PhysicalSymptoms, false)
+                    onNavigate(Destination.Onboarding.PhysicalSymptoms)
                 },
                 onGoBack = onGoBack
             )
@@ -38,7 +38,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.PhysicalSymptoms> {
             OnboardingPhysicalSymptomsScreen(
                 onNavigateToSleepQuality = {
-                    onNavigate(Destination.Onboarding.SleepQuality, false)
+                    onNavigate(Destination.Onboarding.SleepQuality)
                 },
                 onGoBack = onGoBack
             )
@@ -46,7 +46,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.SleepQuality> {
             OnboardingSleepQualityScreen(
                 onNavigateToMedicationsSupplements = {
-                    onNavigate(Destination.Onboarding.MedicationsSupplements, false)
+                    onNavigate(Destination.Onboarding.MedicationsSupplements)
                 },
                 onGoBack = onGoBack
             )
@@ -54,7 +54,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.MedicationsSupplements> {
             OnboardingMedicationsSupplementsScreen(
                 onNavigateToStressLevel = {
-                    onNavigate(Destination.Onboarding.StressLevel, false)
+                    onNavigate(Destination.Onboarding.StressLevel)
                 },
                 onGoBack = onGoBack
             )
@@ -62,7 +62,7 @@ fun NavGraphBuilder.onboardingNavigation(
         composable<Destination.Onboarding.StressLevel> {
             OnboardingStressLevelScreen(
                 onNavigateToExpressionAnalysis = {
-                    onNavigate(Destination.Onboarding.ExpressionAnalysis, false)
+                    onNavigate(Destination.Onboarding.ExpressionAnalysis)
                 },
                 onGoBack = onGoBack
             )

@@ -37,7 +37,8 @@ sealed interface Destination {
         }
 
         @Serializable data object FreudScore : Destination
-        @Serializable data object StressLevel : Destination
+        @Serializable data class StressLevel(val id: Int) : Destination
+        @Serializable data object StressHistory : Destination
         @Serializable data object AddStressLevel : Destination
         @Serializable data object StressStressors : Destination
         @Serializable data class Mood(val id: Int? = null) : Destination

@@ -36,11 +36,13 @@ fun List<UiState<*>>.allSuccess(
     return this
 }
 
+fun List<UiState<*>>.allSuccess(): Boolean = all { it is UiState.Success }
+
 fun List<UiState<*>>.anyError(
-    block: (String) -> Unit,
+    block: (Throwable) -> Unit,
 ): List<UiState<*>> {
     filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        block(errorState.exception.message.toString())
+        block(errorState.exception)
         return@let
     }
     return this
@@ -86,4 +88,61 @@ inline fun <T> UiState<T>.onFailure(
     }
 
     else -> this
+}
+
+fun <R1, R2> List<UiState<*>>.fold(
+    onLoading: () -> Unit = {},
+    onError: (Throwable) -> Unit = {},
+    onSuccess: (R1, R2) -> Unit,
+) {
+    if (any { it is UiState.Error }) {
+        val errorState = first { it is UiState.Error } as UiState.Error
+        onError(errorState.exception)
+    } else if (all { it is UiState.Success<*> }) {
+        val r1 = this[0] as UiState.Success<R1>
+        val r2 = this[1] as UiState.Success<R2>
+        onSuccess(r1.data, r2.data)
+    } else {
+        onLoading()
+    }
+}
+
+@Composable
+fun <R1, R2> List<UiState<*>>.foldComposable(
+    onLoading: @Composable () -> Unit = {},
+    onError: @Composable (Throwable) -> Unit = {},
+    onSuccess: @Composable (R1, R2) -> Unit,
+) {
+    if (any { it is UiState.Error }) {
+        val errorState = first { it is UiState.Error } as UiState.Error
+        onError(errorState.exception)
+    } else if (all { it is UiState.Success<*> }) {
+        val r1 = this[0] as UiState.Success<R1>
+        val r2 = this[1] as UiState.Success<R2>
+        onSuccess(r1.data, r2.data)
+    } else {
+        onLoading()
+    }
+}
+
+
+@Composable
+fun <R1, R2, R3, R4, R5> List<UiState<*>>.foldComposable(
+    onLoading: @Composable () -> Unit,
+    onError: @Composable (Throwable) -> Unit,
+    onSuccess: @Composable (R1, R2, R3, R4, R5) -> Unit,
+) {
+    if (any { it is UiState.Error }) {
+        val errorState = first { it is UiState.Error } as UiState.Error
+        onError(errorState.exception)
+    } else if (all { it is UiState.Success<*> }) {
+        val r1 = this[0] as UiState.Success<R1>
+        val r2 = this[1] as UiState.Success<R2>
+        val r3 = this[2] as UiState.Success<R3>
+        val r4 = this[3] as UiState.Success<R4>
+        val r5 = this[4] as UiState.Success<R5>
+        onSuccess(r1.data, r2.data, r3.data, r4.data, r5.data)
+    } else {
+        onLoading()
+    }
 }

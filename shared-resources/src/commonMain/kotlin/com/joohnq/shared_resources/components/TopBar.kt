@@ -30,6 +30,7 @@ fun TopBar(
         Row(verticalAlignment = Alignment.CenterVertically) {
             BackButton(
                 color = if (isDark) Colors.Brown80 else Colors.White,
+                backgroundColor = if (isDark) Colors.Brown20 else Colors.White32,
                 onClick = onGoBack
             )
             text?.let {

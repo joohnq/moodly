@@ -93,5 +93,9 @@ object Colors {
     val Pink10 = Color(0xffFFE4E6)
     val Pink5 = Color(0xffFFF1F2)
 
+    val Brand5 = Color(0xffF7F3EF)
+
+    val White32 = Color(0x52ffffff)
+
     val CardShadow = Color(0x0d4b3425)
 }

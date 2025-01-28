@@ -1,13 +1,11 @@
 package com.joohnq.health_journal.ui.presentation.edit_journaling_screen
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
@@ -17,6 +15,7 @@ import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmode
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalSideEffect
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -24,7 +23,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     val scope = rememberCoroutineScope()
     val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
     val editJournalingViewModel: EditJournalingViewModel = sharedViewModel()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val healthJournalState by healthJournalViewModel.state.collectAsState()
     val state by editJournalingViewModel.state.collectAsState()
 

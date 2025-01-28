@@ -1,6 +1,6 @@
 package com.joohnq.domain.entity
 
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.getNow
 import kotlinx.datetime.LocalDate
 
 data class User(
@@ -11,5 +11,5 @@ data class User(
     val medicationsSupplements: MedicationsSupplements = MedicationsSupplements.ImNotTakingAny,
     val soughtHelp: ProfessionalHelp = ProfessionalHelp.No,
     val physicalSymptoms: PhysicalSymptoms = PhysicalSymptoms.No,
-    val dateCreated: LocalDate = DatetimeProvider.getCurrentDateTime().date,
+    val dateCreated: LocalDate = getNow().date,
 )

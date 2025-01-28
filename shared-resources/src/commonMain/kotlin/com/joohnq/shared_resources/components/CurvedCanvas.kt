@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.shared_resources.components
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState

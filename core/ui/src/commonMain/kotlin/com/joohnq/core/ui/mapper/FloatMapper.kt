@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources.util.mappers
+package com.joohnq.core.ui.mapper
 
 fun Float.toRadians(): Double = this.toDouble().toRadians()
 

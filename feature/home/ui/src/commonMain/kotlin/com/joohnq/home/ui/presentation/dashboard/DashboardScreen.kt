@@ -1,7 +1,6 @@
 package com.joohnq.home.ui.presentation.dashboard
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,6 +36,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.home
 import com.joohnq.shared_resources.journaling
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
@@ -60,7 +60,7 @@ fun DashboardScreen(
     onNavigateToEditJournaling: (Int) -> Unit,
     onNavigateToAllJournals: () -> Unit,
 ) {
-    val snackBarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     var addButtonIsExpanded by remember { mutableStateOf(false) }
     val navigator = rememberNavController()

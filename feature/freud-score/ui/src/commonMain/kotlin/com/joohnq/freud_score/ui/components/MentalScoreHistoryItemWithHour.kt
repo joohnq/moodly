@@ -12,11 +12,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.getDayPeriod
+import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.CircularProgressWithText
 import com.joohnq.shared_resources.components.HorizontalSpacer
@@ -38,9 +38,6 @@ fun MentalScoreHistoryItemWithHour(
     healthLevel: Int,
     onClick: () -> Unit,
 ) {
-    val hourAndMinutes = remember { DatetimeProvider.formatTime(date) }
-    val daySection = remember { DatetimeProvider.getDaySection(date) }
-
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
         colors = ComponentColors.Card.MainCardColors(),
@@ -61,12 +58,12 @@ fun MentalScoreHistoryItemWithHour(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = daySection,
+                    text = date.getDayPeriod(),
                     style = TextStyles.LabelSm(),
                     color = Colors.Brown100Alpha64
                 )
                 Text(
-                    text = hourAndMinutes,
+                    text = date.toFormattedTimeString(),
                     style = TextStyles.TextLgExtraBold(),
                     color = Colors.Brown80
                 )

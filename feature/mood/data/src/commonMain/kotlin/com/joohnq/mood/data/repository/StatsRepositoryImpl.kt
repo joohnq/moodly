@@ -2,7 +2,6 @@ package com.joohnq.mood.data.repository
 
 import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.core.database.executeTryCatchResult
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.converter.StatsRecordConverter
 import com.joohnq.mood.domain.entity.StatsRecord
@@ -26,9 +25,8 @@ class StatsRepositoryImpl(
 
     override suspend fun addStats(statsRecord: StatsRecord): Result<Boolean> =
         executeTryCatchResult {
-            val item = statsRecord.copy(createdAt = DatetimeProvider.getCurrentDateTime())
             query.addStats(
-                mood = StatsRecordConverter.fromMood(item.mood),
+                mood = StatsRecordConverter.fromMood(statsRecord.mood),
                 description = statsRecord.description
             )
             true

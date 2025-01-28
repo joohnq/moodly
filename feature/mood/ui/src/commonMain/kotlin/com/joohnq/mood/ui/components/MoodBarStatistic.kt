@@ -25,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toShortDateString
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.components.calculateTextHeight
@@ -126,7 +126,7 @@ fun MoodBarStatistic(
                         }
                     }
                     Text(
-                        text = DatetimeProvider.formatShortDate(statsRecord.createdAt.date),
+                        text = statsRecord.createdAt.date.toShortDateString(),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

@@ -1,7 +1,6 @@
 package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -27,8 +26,9 @@ import com.joohnq.permission.rememberGalleryManager
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.cancel
 import com.joohnq.shared_resources.permission_required
+import com.joohnq.shared_resources.remember.rememberAvatars
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.settings
-import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.user.ui.viewmodel.user.UserIntent
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
@@ -39,9 +39,9 @@ import kotlinx.coroutines.launch
 fun AvatarScreen(
     onNavigateToUserName: () -> Unit,
 ) {
-    val snackBarState = remember { SnackbarHostState() }
-    val images = remember { Drawables.Avatar.avatars }
-    val pagerState = rememberPagerState(pageCount = { images.size })
+    val snackBarState = rememberSnackBarState()
+    val avatars = rememberAvatars()
+    val pagerState = rememberPagerState(pageCount = { avatars.size })
     val avatarViewModel: AvatarViewModel = sharedViewModel()
     val avatarState by avatarViewModel.state.collectAsState()
     val userViewModel: UserViewModel = sharedViewModel()
@@ -180,7 +180,7 @@ fun AvatarScreen(
     AvatarUI(
         snackBarState = snackBarState,
         pagerState = pagerState,
-        images = images,
+        images = avatars,
         onEvent = ::onEvent,
         avatarState = avatarState
     )

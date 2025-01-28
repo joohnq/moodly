@@ -1,16 +1,14 @@
 package com.joohnq.security.ui.presentation.pin
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import com.joohnq.core.ui.mapper.itemsNotNull
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
@@ -19,7 +17,8 @@ import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModel
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecuritySideEffect
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
-import com.joohnq.shared_resources.util.mappers.itemsNotNull
+import com.joohnq.shared_resources.remember.rememberFocusRequester
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -31,8 +30,8 @@ fun PINScreen(
     val pinViewModel: PINViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val state by pinViewModel.state.collectAsState()
-    val snackBarState = remember { SnackbarHostState() }
-    val focusRequesters = remember { List(4) { FocusRequester() } }
+    val snackBarState = rememberSnackBarState()
+    val focusRequesters = rememberFocusRequester(4)
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
     val canContinue by derivedStateOf {

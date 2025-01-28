@@ -23,7 +23,6 @@ fun OnboardingSleepQualityScreen(
 
     OnboardingSleepQualityUI(
         sliderValue = onboardingState.sliderValue,
-        sleepQuality = onboardingState.sleepQuality,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

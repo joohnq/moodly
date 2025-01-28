@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.isDigitsOnly
+import com.joohnq.core.ui.mapper.isDigitsOnly
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
@@ -101,7 +101,7 @@ fun OTPInputField(
                 if (wasPressed && number == null) {
                     onKeyboardBack()
                 }
-                
+
                 false
             },
             decorationBox = { innerBox ->

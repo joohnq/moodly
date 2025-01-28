@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.fold
+import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.domain.entity.User
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
@@ -39,7 +39,6 @@ import com.joohnq.stress_level.ui.mapper.toResource
 
 @Composable
 fun HomeUI(
-    today: String = "",
     user: UiState<User>,
     statsRecord: UiState<List<StatsRecord>>,
     sleepQuality: UiState<List<SleepQualityRecord>>,
@@ -54,7 +53,7 @@ fun HomeUI(
         stressLevel,
         healthJournal,
         sleepQuality,
-    ).fold(
+    ).foldComposable(
         onLoading = { LoadingUI() },
     ) {
         val user = user.getValueOrNull()
@@ -81,7 +80,6 @@ fun HomeUI(
                     images = Drawables.Avatar.avatars,
                     image = user.image,
                     imageType = user.imageType,
-                    date = today
                 )
                 Title(Res.string.mental_health_metrics)
                 MentalHealthMetrics(
@@ -93,7 +91,7 @@ fun HomeUI(
                 Title(Res.string.mindful_tracker)
                 MindfulTracker(
                     sleepQuality = sleepQuality.getValueOrNull()
-                        .first().sleepQuality.toResource(),
+                        .firstOrNull()?.sleepQuality?.toResource(),
                     stressLevel = stressLevel.getValueOrNull()
                         .first().stressLevel.toResource(),
                     moodTracker = statsRecord.getValueOrNull().take(3)

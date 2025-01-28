@@ -3,7 +3,6 @@ package com.joohnq.home.ui.presentation.home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joohnq.core.ui.IDatetimeProvider
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
@@ -12,7 +11,6 @@ import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import org.koin.compose.koinInject
 
 @Composable
 fun HomeScreen(
@@ -29,9 +27,6 @@ fun HomeScreen(
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
-
-    val dateTimeProvider: IDatetimeProvider = koinInject()
-    val today = dateTimeProvider.formatDate()
 
     val userState by userViewModel.state.collectAsStateWithLifecycle()
     val freudScoreState by freudScoreViewModel.state.collectAsStateWithLifecycle()
@@ -51,7 +46,6 @@ fun HomeScreen(
         }
 
     HomeUI(
-        today = today,
         user = userState.user,
         statsRecord = statsState.statsRecords,
         freudScore = freudScoreState.freudScore,

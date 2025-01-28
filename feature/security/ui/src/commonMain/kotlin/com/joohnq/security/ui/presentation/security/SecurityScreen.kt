@@ -1,9 +1,7 @@
 package com.joohnq.security.ui.presentation.security
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.security.domain.Security
@@ -13,6 +11,7 @@ import com.joohnq.security.ui.securityAuthentication
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecuritySideEffect
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
@@ -24,7 +23,7 @@ fun SecurityScreen(
     onNavigatePIN: () -> Unit,
 ) {
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val securityAuthentication: SecurityAuthentication = securityAuthentication()
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()

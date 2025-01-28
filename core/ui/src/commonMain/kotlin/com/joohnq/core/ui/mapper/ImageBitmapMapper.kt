@@ -1,4 +1,4 @@
-package com.joohnq.core.ui
+package com.joohnq.core.ui.mapper
 
 import androidx.compose.ui.graphics.ImageBitmap
 

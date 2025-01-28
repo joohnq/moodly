@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.fold
+import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.domain.entity.User
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
@@ -59,7 +59,7 @@ fun AllJournalUI(
     listOf(
         user,
         healthJournalRecords,
-    ).fold(
+    ).foldComposable(
         onLoading = { LoadingUI() },
     ) {
         val user: User = user.getValueOrNull()
@@ -67,7 +67,7 @@ fun AllJournalUI(
         val organizeFromCreationHealthJournalFreudScoreUseCase: OrganizeFromCreationHealthJournalFreudScoreUseCase =
             koinInject()
         val healthJournalMap = organizeFromCreationHealthJournalFreudScoreUseCase(
-            creationDate = user.dateCreated,
+            creationAt = user.dateCreated,
             healthJournals = healthJournalRecords
         )
         val keys = healthJournalMap.keys.toList()

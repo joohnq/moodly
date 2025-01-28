@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.entity.Time
+import com.joohnq.core.ui.getNow
 import kotlinx.datetime.LocalDate
 
 data class SleepQualityRecord(
@@ -10,5 +10,5 @@ data class SleepQualityRecord(
     val startSleeping: Time,
     val endSleeping: Time,
     val sleepInfluences: List<SleepInfluences> = emptyList(),
-    val createdAt: LocalDate = DatetimeProvider.getCurrentDateTime().date,
+    val createdAt: LocalDate = getNow().date,
 )

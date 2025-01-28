@@ -19,26 +19,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.forEachMapComposable
+import com.joohnq.core.ui.mapper.getCurrentWeekDayIndex
+import com.joohnq.core.ui.mapper.items
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.ui.mapper.toResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalFreudScoreUseCase
 import com.joohnq.health_journal.domain.use_case.OrganizeByDateHealthJournalUseCase
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.friday_char
-import com.joohnq.shared_resources.monday_char
-import com.joohnq.shared_resources.saturday_char
-import com.joohnq.shared_resources.sunday_char
+import com.joohnq.shared_resources.remember.rememberGetNow
+import com.joohnq.shared_resources.remember.rememberWeekChars
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.thursday_char
-import com.joohnq.shared_resources.tuesday_char
-import com.joohnq.shared_resources.util.mappers.forEachMapComposable
-import com.joohnq.shared_resources.util.mappers.items
-import com.joohnq.shared_resources.wednesday_char
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -48,11 +42,11 @@ fun HealthJournalComponent(
     modifier: Modifier = Modifier,
     healthJournals: List<HealthJournalRecord>,
 ) {
-    val dayOfWeek =
-        remember { DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime()) }
+    val now = rememberGetNow()
+    val dayOfWeek = now.getCurrentWeekDayIndex()
     val organizeByDateHealthJournalUseCase: OrganizeByDateHealthJournalUseCase = koinInject()
     val healthJournalsMap: Map<LocalDate, List<HealthJournalRecord>?> =
-        remember { organizeByDateHealthJournalUseCase(healthJournals = healthJournals) }
+        remember { organizeByDateHealthJournalUseCase(date = now, healthJournals = healthJournals) }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -96,21 +90,12 @@ fun HealthJournalComponentColorful(
     healthJournals: List<HealthJournalRecord>,
     onClick: (LocalDate) -> Unit,
 ) {
-    val dayOfWeek = DatetimeProvider.getCurrentWeekDay(DatetimeProvider.getCurrentDateTime())
-    val weekChars = remember {
-        listOf(
-            Res.string.sunday_char,
-            Res.string.monday_char,
-            Res.string.tuesday_char,
-            Res.string.wednesday_char,
-            Res.string.thursday_char,
-            Res.string.friday_char,
-            Res.string.saturday_char,
-        )
-    }
+    val now = rememberGetNow()
+    val dayOfWeek = now.getCurrentWeekDayIndex()
+    val weekChars = rememberWeekChars()
     val organizeByDateHealthJournalUseCase: OrganizeByDateHealthJournalUseCase = koinInject()
     val healthJournalsMap: Map<LocalDate, List<HealthJournalRecord>?> =
-        remember { organizeByDateHealthJournalUseCase(healthJournals = healthJournals) }
+        remember { organizeByDateHealthJournalUseCase(date = now, healthJournals = healthJournals) }
 
     FlowRow(
         modifier = modifier.paddingHorizontalMedium(),

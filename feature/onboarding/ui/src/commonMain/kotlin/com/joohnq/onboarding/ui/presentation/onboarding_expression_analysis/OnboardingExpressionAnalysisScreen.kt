@@ -1,11 +1,9 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
@@ -16,6 +14,7 @@ import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
@@ -46,7 +45,7 @@ fun OnboardingExpressionAnalysisScreen(
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val onboardingState by onboardingViewModel.state.collectAsState()
     val userPreferencesState by userPreferencesViewModel.state.collectAsState()
 

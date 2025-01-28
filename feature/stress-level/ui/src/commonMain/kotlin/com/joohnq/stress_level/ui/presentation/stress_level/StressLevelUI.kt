@@ -16,9 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SharedPanelComponent
@@ -63,7 +63,7 @@ fun StressLevelUI(
                 onAdd = { onEvent(StressLevelEvent.Add) },
                 topBarContent = {
                     TextWithBackground(
-                        text = DatetimeProvider.formatDate(record.createdAt.date),
+                        text = record.createdAt.date.toFormattedDateString(),
                         textColor = resource.palette.color,
                         backgroundColor = resource.palette.backgroundColor,
                     )

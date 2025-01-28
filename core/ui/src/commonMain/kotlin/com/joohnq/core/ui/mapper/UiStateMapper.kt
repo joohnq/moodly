@@ -16,7 +16,7 @@ fun <T> UiState<T>.fold(
 }
 
 @Composable
-fun List<UiState<*>>.fold(
+fun List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit,
     block: @Composable () -> Unit,
 ) {
@@ -87,9 +87,3 @@ inline fun <T> UiState<T>.onFailure(
 
     else -> this
 }
-
-fun <T> Result<T>.toUiState(): UiState<T> =
-    fold(
-        onSuccess = { item -> UiState.Success(item) },
-        onFailure = { error -> UiState.Error(error) }
-    )

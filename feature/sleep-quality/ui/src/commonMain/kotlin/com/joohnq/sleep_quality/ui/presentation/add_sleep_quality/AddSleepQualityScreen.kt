@@ -1,16 +1,15 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.entity.Time
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toSleepQuality
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
@@ -28,7 +27,7 @@ fun AddSleepQualityScreen(
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
     val addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val state by addSleepQualityViewModel.state.collectAsState()
 
     fun onError(error: Throwable) {

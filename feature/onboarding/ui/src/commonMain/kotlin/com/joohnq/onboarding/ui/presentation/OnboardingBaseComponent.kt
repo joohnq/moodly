@@ -12,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +24,7 @@ import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.page_of
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingBaseComponent(
     page: Int,
-    snackBarState: SnackbarHostState = remember { SnackbarHostState() },
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     title: StringResource,
     image: DrawableResource? = null,
     isContinueButtonVisible: Boolean = true,

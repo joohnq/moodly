@@ -8,7 +8,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.rememberPainter
+import com.joohnq.shared_resources.remember.rememberPainter
 import com.joohnq.shared_resources.theme.Dimens
 import okio.FileSystem
 

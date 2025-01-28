@@ -111,7 +111,8 @@ fun AlertMessageDialog(
     onNegativeClick: () -> Unit = {},
 ) {
     Dialog(
-        onDismissRequest = {}, properties = DialogProperties(
+        onDismissRequest = {},
+        properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = false,
         )

@@ -15,24 +15,24 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoodFace(modifier: Modifier = Modifier, mood: MoodResource) {
+fun MoodFace(modifier: Modifier = Modifier, resource: MoodResource) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = mood.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
+            .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(mood.image),
+            painter = painterResource(resource.image),
             contentDescription = null,
             modifier = modifier,
-            tint = mood.palette.faceColor
+            tint = resource.palette.faceColor
         )
     }
 }
 
 @Composable
 fun MoodFace(
-    mood: MoodResource,
+    resource: MoodResource,
     modifier: Modifier = Modifier,
     backgroundColor: Color,
     color: Color,
@@ -43,8 +43,8 @@ fun MoodFace(
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(mood.image),
-            contentDescription = stringResource(mood.text),
+            painter = painterResource(resource.image),
+            contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color
         )
@@ -56,7 +56,7 @@ fun MoodFace(
     modifier: Modifier = Modifier,
     backgroundColor: Color,
     color: Color,
-    mood: MoodResource,
+    resource: MoodResource,
     onClick: () -> Unit,
 ) {
     IconButton(
@@ -65,8 +65,8 @@ fun MoodFace(
         onClick = onClick
     ) {
         Icon(
-            painter = painterResource(mood.image),
-            contentDescription = stringResource(mood.text),
+            painter = painterResource(resource.image),
+            contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color
         )

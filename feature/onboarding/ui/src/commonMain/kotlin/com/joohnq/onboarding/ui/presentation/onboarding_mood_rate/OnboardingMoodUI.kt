@@ -1,11 +1,6 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_mood_rate
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -52,7 +47,7 @@ fun OnboardingMoodRateUI(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            mood = resource,
+            resource = resource,
         )
         VerticalSpacer(24.dp)
     }

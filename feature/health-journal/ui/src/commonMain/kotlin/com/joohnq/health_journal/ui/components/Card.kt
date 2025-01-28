@@ -63,7 +63,7 @@ fun HealthJournalCard(
                     contentAlignment = Alignment.Center
                 ) {
                     MoodFace(
-                        mood = resource,
+                        resource = resource,
                         modifier = Modifier.size(24.dp),
                         backgroundColor = Colors.White,
                         color = resource.palette.color

@@ -24,7 +24,7 @@ import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEv
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.CardWithSwipeTorReveal
+import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -49,10 +49,10 @@ fun AllJournalsCard(
     val resource = mood.toResource()
     val palette = resource.palette
 
-    CardWithSwipeTorReveal(
-        content = { shape, modifier ->
+    SwipeTorRevealCard(
+        content = { modifier ->
             Card(
-                shape = shape,
+                shape = Dimens.Shape.Large,
                 modifier = modifier,
                 colors = ComponentColors.Card.MainCardColors(),
                 onClick = {
@@ -79,7 +79,7 @@ fun AllJournalsCard(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(20.dp),
-                                mood = resource,
+                                resource = resource,
                                 backgroundColor = Colors.White,
                                 color = palette.barFaceColor
                             )
@@ -145,7 +145,7 @@ fun AllJournalsCard(
                 )
             }
         },
-        cardPadding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
-        onDelete = onDelete
+        padding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
+        onAction = onDelete
     )
 }

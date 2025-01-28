@@ -72,7 +72,7 @@ fun AddStatScreenUI(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    mood = state.mood,
+                    resource = state.mood,
                     backgroundColor = state.mood.palette.moodScreenMoodFaceBackgroundColor,
                     color = state.mood.palette.moodScreenMoodFaceColor
                 )

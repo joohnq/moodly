@@ -100,7 +100,10 @@ fun JournalingUI(
                             color = Colors.Brown100Alpha64
                         )
                     }
-                    Title(text = Res.string.all_journals)
+                    Title(
+                        modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
+                        text = Res.string.all_journals
+                    )
                     if (healthJournals.isEmpty()) {
                         Box(
                             modifier = Modifier.height(250.dp).fillMaxSize(),

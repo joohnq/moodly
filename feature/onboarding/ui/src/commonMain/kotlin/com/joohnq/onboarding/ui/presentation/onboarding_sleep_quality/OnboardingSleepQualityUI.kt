@@ -37,7 +37,6 @@ import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 @Composable
 fun OnboardingSleepQualityUI(
     sliderValue: Float,
-    sleepQuality: SleepQualityResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {

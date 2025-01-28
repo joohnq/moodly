@@ -18,7 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.components.SharedPanelComponent
@@ -97,7 +98,7 @@ fun SleepQualityUI(
         onAdd = { onEvent(SleepQualityEvent.Add) },
         topBarContent = {
             TextWithBackground(
-                text = DatetimeProvider.formatDate(record.createdAt),
+                text = record.createdAt.toFormattedDateString(),
                 textColor = sleepQuality.palette.color,
                 backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
             )
@@ -149,7 +150,7 @@ fun SleepQualityUI(
                     }
                     HorizontalSpacer(10.dp)
                     Text(
-                        text = DatetimeProvider.getTimeString(record.startSleeping),
+                        text = record.startSleeping.toFormattedTimeString(),
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Brown80
                     )
@@ -176,7 +177,7 @@ fun SleepQualityUI(
                     }
                     HorizontalSpacer(10.dp)
                     Text(
-                        text = DatetimeProvider.getTimeString(record.endSleeping),
+                        text = record.endSleeping.toFormattedTimeString(),
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Brown80
                     )

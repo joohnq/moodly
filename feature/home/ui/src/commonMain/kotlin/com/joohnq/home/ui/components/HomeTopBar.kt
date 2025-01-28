@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.getNow
+import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.domain.constant.UserFileStorageConstants
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.shared_resources.Res
@@ -35,7 +37,6 @@ fun HomeTopBar(
     images: List<DrawableResource>,
     image: String?,
     imageType: ImageType,
-    date: String,
 ) {
     Column(
         modifier = Modifier.fillMaxSize().background(
@@ -53,7 +54,11 @@ fun HomeTopBar(
                     tint = Colors.Brown40,
                     contentDescription = null
                 )
-                Text(text = date, style = TextStyles.TextSmBold(), color = Colors.White)
+                Text(
+                    text = getNow().date.toFormattedDateString(),
+                    style = TextStyles.TextSmBold(),
+                    color = Colors.White
+                )
             }
         }
         VerticalSpacer(15.dp)

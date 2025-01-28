@@ -1,12 +1,10 @@
 package com.joohnq.mood.ui.presentation.expression_analysis
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.domain.entity.StatsRecord
@@ -17,6 +15,7 @@ import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnaly
 import com.joohnq.mood.ui.viewmodel.StatSideEffect
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -27,7 +26,7 @@ fun ExpressionAnalysisScreen(
     val statsViewModel: StatsViewModel = sharedViewModel()
     val addStatsViewModel: AddStatViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val addStatsState by addStatsViewModel.state.collectAsState()
 
     fun onError(error: Throwable) =

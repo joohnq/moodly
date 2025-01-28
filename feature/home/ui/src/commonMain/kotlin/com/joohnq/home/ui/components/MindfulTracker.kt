@@ -1,6 +1,7 @@
 package com.joohnq.home.ui.components
 
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,29 +23,32 @@ import com.joohnq.stress_level.ui.mapper.getBrushGradient
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 
 @Composable fun MindfulTracker(
-    sleepQuality: SleepQualityResource,
+    sleepQuality: SleepQualityResource?,
     stressLevel: StressLevelResource,
     moodTracker: List<MoodResource>,
     onAction: (HomeEvent) -> Unit,
 ) {
-    MindfulTrackerCardRow(icon = Drawables.Icons.HospitalBed,
-        color = sleepQuality.palette.color,
-        backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
-        title = sleepQuality.firstText,
-        subtitle = sleepQuality.secondText,
-        content = {
-            CircularProgressWithText(
-                modifier = Modifier.size(56.dp),
-                color = sleepQuality.palette.color,
-                backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
-                progress = { sleepQuality.level * 0.2f },
-                text = sleepQuality.level.toString(),
-                textStyle = TextStyles.TextXsExtraBold(),
-                textColor = Colors.Brown80
-            )
-        },
-        onClick = { onAction(HomeEvent.OnNavigateToSleepHistory) }
-    )
+    if (sleepQuality == null)
+        Text("oi")
+    else
+        MindfulTrackerCardRow(icon = Drawables.Icons.HospitalBed,
+            color = sleepQuality.palette.color,
+            backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
+            title = sleepQuality.firstText,
+            subtitle = sleepQuality.secondText,
+            content = {
+                CircularProgressWithText(
+                    modifier = Modifier.size(56.dp),
+                    color = sleepQuality.palette.color,
+                    backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
+                    progress = { sleepQuality.level * 0.2f },
+                    text = sleepQuality.level.toString(),
+                    textStyle = TextStyles.TextXsExtraBold(),
+                    textColor = Colors.Brown80
+                )
+            },
+            onClick = { onAction(HomeEvent.OnNavigateToSleepHistory) }
+        )
 //    VerticalSpacer(16.dp)
 //    MindfulTrackerCardRow(icon = Drawables.Icons.DocumentHealth,
 //        color = Colors.Orange40,

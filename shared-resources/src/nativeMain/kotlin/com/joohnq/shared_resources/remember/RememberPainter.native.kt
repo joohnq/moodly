@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.shared_resources.remember
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter

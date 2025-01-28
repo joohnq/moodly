@@ -10,9 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.core.ui.mapper.forEachMap
+import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.freud_score.ui.components.MentalScoreHistoryItemWithHour
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
@@ -29,7 +30,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.util.mappers.forEachMap
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -76,9 +76,9 @@ fun FreudScoreUI(
                     }
                 },
                 content = {
-                    mapStatsRecords.forEachMap { key, items ->
+                    mapStatsRecords.forEachMap { date, items ->
                         item {
-                            SmallTitle(text = DatetimeProvider.formatDate(key))
+                            SmallTitle(text = date.toFormattedDateString())
                         }
                         items(items) { statsRecord ->
                             val resource = statsRecord.mood.toResource()

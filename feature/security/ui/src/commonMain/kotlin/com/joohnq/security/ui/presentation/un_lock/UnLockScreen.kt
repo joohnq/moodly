@@ -11,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.core.ui.mapper.getValueOrNull
@@ -24,6 +23,7 @@ import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModel
 import com.joohnq.security.ui.presentation.un_lock.event.UnLockEvent
 import com.joohnq.security.ui.securityAuthentication
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.shared_resources.remember.rememberFocusRequester
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +39,7 @@ fun UnLockScreen(
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
     val pinState by pinViewModel.state.collectAsState()
-    val focusRequesters = remember { List(4) { FocusRequester() } }
+    val focusRequesters = rememberFocusRequester(4)
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
     val securityType = securityState.item.getValueOrNull()

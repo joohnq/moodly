@@ -20,7 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toPaddedString
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.shared_resources.Res
@@ -143,8 +143,8 @@ fun AddSleepQualityUI(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.start_sleeping_time,
-                    hour = DatetimeProvider.formatInt(startTimePickerState.hour),
-                    minutes = DatetimeProvider.formatInt(startTimePickerState.minute),
+                    hour = startTimePickerState.hour.toPaddedString(),
+                    minutes = startTimePickerState.minute.toPaddedString(),
                     isAfternoon = startTimePickerState.isAfternoon,
                     onClick = {
                         onAddAction(
@@ -156,8 +156,8 @@ fun AddSleepQualityUI(
                 TimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.end_sleeping_time,
-                    hour = DatetimeProvider.formatInt(endTimePickerState.hour),
-                    minutes = DatetimeProvider.formatInt(endTimePickerState.minute),
+                    hour = endTimePickerState.hour.toPaddedString(),
+                    minutes = endTimePickerState.minute.toPaddedString(),
                     isAfternoon = endTimePickerState.isAfternoon,
                     onClick = {
                         onAddAction(AddSleepQualityIntent.UpdateShowEndTimePickerDialog(true))

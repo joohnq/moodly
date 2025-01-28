@@ -8,8 +8,8 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
+import com.joohnq.core.ui.mapper.toRadians
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.util.mappers.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 

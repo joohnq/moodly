@@ -1,19 +1,19 @@
 package com.joohnq.health_journal.domain.use_case
 
-import com.joohnq.core.ui.IDatetimeProvider
+import com.joohnq.core.ui.getNow
+import com.joohnq.core.ui.mapper.getDaysInMonth
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
-class OrganizeByDateHealthJournalUseCase(private val dateTimeProvider: IDatetimeProvider) {
+class OrganizeByDateHealthJournalUseCase {
     operator fun invoke(
-        date: LocalDateTime = dateTimeProvider.getCurrentDateTime(),
-        monthDaysCount: Int = dateTimeProvider.getMonthDaysCount(date),
+        date: LocalDateTime = getNow(),
         healthJournals: List<HealthJournalRecord>,
     ): Map<LocalDate, List<HealthJournalRecord>?> {
         val recordsByDay = healthJournals.groupBy { it.createdAt.date }
 
-        return (1..monthDaysCount).associate { day ->
+        return (1..date.getDaysInMonth()).associate { day ->
             val localDate = LocalDate(date.year, date.month, day)
             localDate to recordsByDay[localDate]
         }

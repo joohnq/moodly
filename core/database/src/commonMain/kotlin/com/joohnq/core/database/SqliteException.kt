@@ -21,7 +21,7 @@ enum class SqliteOperationResult {
     DISK,
     DONE,
     FULL,
-    NOMEM,
+    OUT_MEMORY,
     READONLY,
     LOCKED,
 }

@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.calculateDuration
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.core.ui.mapper.getAbbreviatedMonthName
+import com.joohnq.core.ui.mapper.toHoursAndMinutesString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -28,17 +30,13 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.you_slept_for
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
-    val resource = sleepQuality.sleepQuality.toResource()
-    val duration =
-        DatetimeProvider.getDuration(sleepQuality.endSleeping, sleepQuality.startSleeping)
-    val durationInString = DatetimeProvider.formatTimeHMin(duration)
+    val duration = Pair(sleepQuality.startSleeping, sleepQuality.endSleeping).calculateDuration()
 
     Card(
         modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
@@ -59,7 +57,7 @@ fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = DatetimeProvider.getMonthAbbreviatedName(sleepQuality.createdAt),
+                    text = sleepQuality.createdAt.getAbbreviatedMonthName(),
                     style = TextStyles.LabelSm(),
                     color = Colors.Brown100Alpha64
                 )
@@ -75,7 +73,10 @@ fun SleepQualityHistoryCard(sleepQuality: SleepQualityRecord) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = stringResource(Res.string.you_slept_for, durationInString),
+                    text = stringResource(
+                        Res.string.you_slept_for,
+                        duration.toHoursAndMinutesString()
+                    ),
                     style = TextStyles.TextMdBold(),
                     color = Colors.Brown80
                 )

@@ -12,6 +12,8 @@ import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.user.ui.viewmodel.user.UserIntent
+import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 
@@ -26,11 +28,15 @@ fun SplashScreen(
     onNavigateToCorruptedSecurity: () -> Unit,
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
+    val userViewModel: UserViewModel = sharedViewModel()
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
     val userPreferencesState by userPreferencesViewModel.state.collectAsState()
     val securityState by securityViewModel.state.collectAsState()
 
     SideEffect {
+        userPreferencesViewModel.onAction(UserPreferenceIntent.AddUserPreferences)
+        userViewModel.onAction(UserIntent.InitUser)
+
         securityViewModel.onAction(SecurityIntent.GetSecurity)
         userPreferencesViewModel.onAction(UserPreferenceIntent.GetUserPreferences)
     }

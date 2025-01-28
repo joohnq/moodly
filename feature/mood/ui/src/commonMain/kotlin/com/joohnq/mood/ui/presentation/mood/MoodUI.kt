@@ -13,9 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.components.MoodBarStatistic
 import com.joohnq.mood.ui.components.MoodFace
@@ -57,7 +57,7 @@ fun MoodUI(
             onAdd = { onEvent(MoodEvent.OnAddStatScreen) },
             topBarContent = {
                 TextWithBackground(
-                    text = DatetimeProvider.formatDate(statsRecord.createdAt.date),
+                    text = statsRecord.createdAt.date.toFormattedDateString(),
                     textColor = resource.palette.moodScreenMoodFaceColor,
                     backgroundColor = resource.palette.subColor,
                 )

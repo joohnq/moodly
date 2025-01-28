@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.ConvexContentLayout
 import com.joohnq.shared_resources.theme.Colors
 
 @Composable

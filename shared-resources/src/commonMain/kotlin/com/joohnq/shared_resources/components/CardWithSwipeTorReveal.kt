@@ -51,9 +51,7 @@ fun CardWithSwipeTorReveal(
 ) {
     val scope = rememberCoroutineScope()
     var contextButtonsWidth by remember { mutableFloatStateOf(0f) }
-    val offset = remember {
-        Animatable(initialValue = 0f)
-    }
+    val offset = remember { Animatable(initialValue = 0f) }
     var isExpanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(isExpanded) {

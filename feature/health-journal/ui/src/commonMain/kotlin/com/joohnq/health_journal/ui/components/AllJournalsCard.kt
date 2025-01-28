@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.mood.ui.components.MoodFace
@@ -134,7 +134,7 @@ fun AllJournalsCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Text(
-                        text = DatetimeProvider.formatTime(healthJournal.createdAt),
+                        text = healthJournal.createdAt.toFormattedTimeString(),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.White
                     )

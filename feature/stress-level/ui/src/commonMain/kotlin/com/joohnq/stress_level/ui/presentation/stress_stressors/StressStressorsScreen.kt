@@ -1,14 +1,13 @@
 package com.joohnq.stress_level.ui.presentation.stress_stressors
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.mapper.containOther
 import com.joohnq.stress_level.ui.mapper.toDomain
@@ -27,7 +26,7 @@ fun StressStressorsScreen(
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()
 

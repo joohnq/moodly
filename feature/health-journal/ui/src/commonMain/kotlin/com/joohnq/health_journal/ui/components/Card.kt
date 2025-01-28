@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toCompleteDateString
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
@@ -70,7 +70,7 @@ fun HealthJournalCard(
                     )
                 }
                 Text(
-                    text = DatetimeProvider.formatCompleteDate(journal.createdAt.date),
+                    text = journal.createdAt.date.toCompleteDateString(),
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown80
                 )

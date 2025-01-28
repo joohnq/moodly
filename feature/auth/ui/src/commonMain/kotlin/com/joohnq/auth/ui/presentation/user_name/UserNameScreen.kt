@@ -1,11 +1,9 @@
 package com.joohnq.auth.ui.presentation.user_name
 
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
@@ -14,6 +12,7 @@ import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameViewModel
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.validator.UserNameValidator
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.user.ui.viewmodel.user.UserIntent
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
@@ -30,7 +29,7 @@ fun UserNameScreen(
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val focusManager: FocusManager = LocalFocusManager.current
-    val snackBarState = remember { SnackbarHostState() }
+    val snackBarState = rememberSnackBarState()
     val userNameState by userNameViewModel.state.collectAsState()
 
     fun onError(error: Throwable) {

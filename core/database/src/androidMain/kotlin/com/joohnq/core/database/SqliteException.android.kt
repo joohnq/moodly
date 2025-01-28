@@ -35,7 +35,7 @@ private class AndroidSqliteExceptionMapper : SqliteExceptionMapper {
             is SQLiteDoneException -> SqliteOperationResult.DONE
             is SQLiteFullException -> SqliteOperationResult.FULL
             is SQLiteMisuseException -> SqliteOperationResult.MISUSE
-            is SQLiteOutOfMemoryException -> SqliteOperationResult.NOMEM
+            is SQLiteOutOfMemoryException -> SqliteOperationResult.OUT_MEMORY
             is SQLiteReadOnlyDatabaseException -> SqliteOperationResult.READONLY
             is SQLiteTableLockedException -> SqliteOperationResult.LOCKED
             else -> SqliteOperationResult.UNKNOWN

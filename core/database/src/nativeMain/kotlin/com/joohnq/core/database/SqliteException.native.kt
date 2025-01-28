@@ -17,7 +17,7 @@ private class NativeSqliteExceptionMapper : SqliteExceptionMapper {
                 SqliteErrorType.SQLITE_ABORT -> SqliteOperationResult.ABORT
                 SqliteErrorType.SQLITE_BUSY -> SqliteOperationResult.BUSY
                 SqliteErrorType.SQLITE_LOCKED -> SqliteOperationResult.LOCKED
-                SqliteErrorType.SQLITE_NOMEM -> SqliteOperationResult.NOMEM
+                SqliteErrorType.SQLITE_NOMEM -> SqliteOperationResult.OUT_MEMORY
                 SqliteErrorType.SQLITE_READONLY -> SqliteOperationResult.READONLY
                 SqliteErrorType.SQLITE_INTERRUPT -> SqliteOperationResult.UNKNOWN
                 SqliteErrorType.SQLITE_IOERR -> SqliteOperationResult.DISK

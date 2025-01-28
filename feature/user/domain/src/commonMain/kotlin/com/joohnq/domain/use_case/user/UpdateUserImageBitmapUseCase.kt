@@ -1,7 +1,7 @@
 package com.joohnq.domain.use_case.user
 
 import androidx.compose.ui.graphics.ImageBitmap
-import com.joohnq.core.ui.toByteArray
+import com.joohnq.core.ui.mapper.toByteArray
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.storage.domain.FileStorage

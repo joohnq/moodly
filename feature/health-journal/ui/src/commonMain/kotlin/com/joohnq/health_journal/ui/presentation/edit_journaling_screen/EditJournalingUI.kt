@@ -15,13 +15,11 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.DatetimeProvider
+import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.health_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
@@ -37,6 +35,7 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.edit_journal
+import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Drawables
@@ -54,10 +53,8 @@ import org.jetbrains.compose.resources.stringResource
     onAction: (EditJournalingIntent) -> Unit = {},
     onHealthJournalAction: (HealthJournalIntent) -> Unit = {},
 ) {
-    val titleFocusRequest = remember { FocusRequester() }
-    val descriptionFocusRequest = remember {
-        FocusRequester()
-    }
+    val titleFocusRequest = rememberFocusRequester()
+    val descriptionFocusRequest = rememberFocusRequester()
     val mood = state.editingHealthJournalRecord.mood
     val resource = mood.toResource()
 
@@ -112,7 +109,7 @@ import org.jetbrains.compose.resources.stringResource
                     text = Res.string.edit_journal,
                 ) {
                     TextWithBackground(
-                        text = DatetimeProvider.formatDate(state.editingHealthJournalRecord.createdAt.date),
+                        text = state.editingHealthJournalRecord.createdAt.date.toFormattedDateString(),
                         textColor = resource.palette.moodScreenMoodFaceColor,
                         backgroundColor = resource.palette.subColor,
                     )

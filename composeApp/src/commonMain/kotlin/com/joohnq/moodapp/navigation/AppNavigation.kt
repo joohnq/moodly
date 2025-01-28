@@ -24,7 +24,7 @@ import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsS
 import kotlinx.datetime.LocalDate
 
 fun NavGraphBuilder.appNavigation(
-    onNavigate: (Destination, Boolean) -> Unit,
+    onNavigate: (Destination) -> Unit,
     onNavigateBack: (Destination) -> Unit,
     onGoBack: () -> Unit,
 ) {
@@ -32,72 +32,53 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.DashBoard> {
             DashboardScreen(
                 onNavigateAddJournaling = {
-                    onNavigate(
-                        Destination.App.AddJournaling,
-                        false
-                    )
+                    onNavigate(Destination.App.AddJournaling)
                 },
-                onNavigateAddStatScreen = { onNavigate(Destination.App.AddStat, false) },
-                onNavigateFreudScore = { onNavigate(Destination.App.FreudScore, false) },
-                onNavigateToMood = { onNavigate(Destination.App.Mood(), false) },
+                onNavigateAddStatScreen = { onNavigate(Destination.App.AddStat) },
+                onNavigateFreudScore = { onNavigate(Destination.App.FreudScore) },
+                onNavigateToMood = { onNavigate(Destination.App.Mood()) },
                 onNavigateToHealthJournal = {
-                    onNavigate(
-                        Destination.App.HealthJournal,
-                        false
-                    )
+                    onNavigate(Destination.App.HealthJournal)
                 },
                 onNavigateToMindfulJournal = {
-                    onNavigate(
-                        Destination.App.MindfulJournal,
-                        false
-                    )
+                    onNavigate(Destination.App.MindfulJournal)
                 },
                 onNavigateToSleepHistory = {
-                    onNavigate(
-                        Destination.App.SleepHistory,
-                        false
-                    )
+                    onNavigate(Destination.App.SleepHistory)
                 },
-                onNavigateToStressLevel = { onNavigate(Destination.App.StressLevel, false) },
+                onNavigateToStressLevel = { id ->
+                    onNavigate(Destination.App.StressLevel(id))
+                },
                 onNavigateToEditJournaling = { id ->
-                    onNavigate(
-                        Destination.App.EditJournaling(id),
-                        false
-                    )
+                    onNavigate(Destination.App.EditJournaling(id))
                 },
-                onNavigateToAllJournals = { onNavigate(Destination.App.AllJournals(), false) },
+                onNavigateToSelfJournalHistory = {
+                    onNavigate(Destination.App.AllJournals())
+                },
+                onNavigateToAddSleep = { onNavigate(Destination.App.AddSleepQuality) },
+                onNavigateToStressHistory = { onNavigate(Destination.App.StressHistory) },
+                onNavigateToAddStress = { onNavigate(Destination.App.AddStressLevel) },
+                onNavigateToAddJournaling = { onNavigate(Destination.App.AddJournaling) },
             )
         }
         composable<Destination.App.FreudScore> {
             FreudScoreScreen(
                 onGoBack = onGoBack,
                 onNavigateMood = { id ->
-                    onNavigate(
-                        Destination.App.Mood(id),
-                        false
-                    )
+                    onNavigate(Destination.App.Mood(id))
                 },
                 onNavigateAddStat = {
-                    onNavigate(
-                        Destination.App.AddStat,
-                        false
-                    )
+                    onNavigate(Destination.App.AddStat)
                 }
             )
         }
         composable<Destination.App.HealthJournal> {
             HealthJournalScreen(
                 onNavigateAddHealthJournal = {
-                    onNavigate(
-                        Destination.App.AddJournaling,
-                        false
-                    )
+                    onNavigate(Destination.App.AddJournaling)
                 },
                 onNavigateAllJournals = {
-                    onNavigate(
-                        Destination.App.AllJournals(it.toString()),
-                        false
-                    )
+                    onNavigate(Destination.App.AllJournals(it.toString()))
                 },
                 onGoBack = onGoBack
             )
@@ -110,20 +91,14 @@ fun NavGraphBuilder.appNavigation(
                     onNavigateBack(Destination.App.DashBoard)
                 },
                 onNavigateAddStat = {
-                    onNavigate(
-                        Destination.App.AddStat,
-                        false
-                    )
+                    onNavigate(Destination.App.AddStat)
                 }
             )
         }
         composable<Destination.App.AddStat> {
             AddStatScreen(
                 onNavigateToExpressionAnalysis = {
-                    onNavigate(
-                        Destination.App.ExpressionAnalysis,
-                        false
-                    )
+                    onNavigate(Destination.App.ExpressionAnalysis)
                 },
                 onGoBack = onGoBack
             )
@@ -131,15 +106,17 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.ExpressionAnalysis> {
             ExpressionAnalysisScreen(
                 onNavigateToMood = {
-                    onNavigate(Destination.App.Mood(), false)
+                    onNavigate(Destination.App.Mood())
                 },
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.StressLevel> {
+        composable<Destination.App.StressLevel> { backStackEntry ->
+            val stressLevel = backStackEntry.toRoute<Destination.App.StressLevel>()
             StressLevelScreen(
+                id = stressLevel.id,
                 onNavigateAddStressLevel = {
-                    onNavigate(Destination.App.AddStressLevel, false)
+                    onNavigate(Destination.App.AddStressLevel)
                 },
                 onGoBack = onGoBack
             )
@@ -147,7 +124,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.AddStressLevel> {
             AddStressLevelScreen(
                 onNavigateToStressStressors = {
-                    onNavigate(Destination.App.StressStressors, false)
+                    onNavigate(Destination.App.StressStressors)
                 },
                 onGoBack = onGoBack
             )
@@ -155,24 +132,25 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
-                onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressLevel) }
+                onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressHistory) }
             )
         }
         composable<Destination.App.SleepQuality> { backStackEntry ->
             val sleepQuality = backStackEntry.toRoute<Destination.App.SleepQuality>()
             SleepQualityScreen(
                 id = sleepQuality.id,
-                onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality, false) },
+                onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
                 onGoBack = onGoBack
             )
         }
         composable<Destination.App.SleepHistory> {
             SleepHistoryScreen(
                 onNavigateToSleepQuality = { id ->
-                    onNavigate(
-                        Destination.App.SleepQuality(id),
-                        false
-                    )
+                    onNavigate(Destination.App.SleepQuality(id))
+                },
+                onGoBack = onGoBack,
+                onNavigateToAddSleepQuality = {
+                    onNavigate(Destination.App.AddSleepQuality)
                 },
             )
         }
@@ -204,10 +182,7 @@ fun NavGraphBuilder.appNavigation(
                 localDate = date,
                 onGoBack = onGoBack,
                 onNavigateEditJournaling = { id ->
-                    onNavigate(
-                        Destination.App.EditJournaling(id),
-                        false
-                    )
+                    onNavigate(Destination.App.EditJournaling(id))
                 }
             )
         }

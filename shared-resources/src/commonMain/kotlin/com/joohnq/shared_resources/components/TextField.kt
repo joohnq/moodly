@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -75,11 +76,11 @@ fun ExpressionAnalysisTextField(
     text: String,
     onValueChange: (String) -> Unit,
 ) {
-    OutlinedTextField(
+    TextField(
         value = text,
         onValueChange = onValueChange,
         label = null,
-        shape = Dimens.Shape.Medium,
+        shape = Dimens.Shape.Large,
         placeholder = {
             Text(
                 text = stringResource(Res.string.write_what_are_you_feeling),
@@ -89,11 +90,7 @@ fun ExpressionAnalysisTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 250.dp).border(
-                color = Colors.Brown80Alpha25,
-                width = 4.dp,
-                shape = Dimens.Shape.Medium
-            ),
+            .heightIn(min = 250.dp),
         colors = ComponentColors.TextField.ExpressionAnalysisColors(),
         textStyle = TextStyles.Text2xlBold(),
     )

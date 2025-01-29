@@ -22,14 +22,14 @@ fun FreudScoreScreen(
 
     fun onEvent(event: FreudScoreEvent) =
         when (event) {
-            is FreudScoreEvent.GoBack -> onGoBack()
+            is FreudScoreEvent.OnGoBack -> onGoBack()
             is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.statsRecord.id)
-            is FreudScoreEvent.Add -> onNavigateAddStat()
+            is FreudScoreEvent.OnAdd -> onNavigateAddStat()
         }
 
     FreudScoreUI(
         state = freudScoreState,
-        statsRecords = statsState.statsRecords,
+        statsState = statsState,
         onEvent = ::onEvent,
     )
 }

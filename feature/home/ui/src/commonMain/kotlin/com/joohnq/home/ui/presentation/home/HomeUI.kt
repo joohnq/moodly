@@ -32,24 +32,21 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.mental_health_metrics
 import com.joohnq.shared_resources.self_journaling
 import com.joohnq.shared_resources.sleep
+import com.joohnq.shared_resources.stress
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepQualityMetric
-import com.joohnq.sleep_quality.ui.mapper.toResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.ui.components.StressLevelMetric
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 
-fun List<SleepQualityRecord>.getTodaySleepQualityResource(): SleepQualityResource? =
-    find { it.createdAt == getNow() }?.sleepQuality?.toResource()
-
 fun List<StressLevelRecord>.getTodayStressLevelResource(): StressLevelResource? =
-    find { it.createdAt == getNow() }?.stressLevel?.toResource()
+    find { it.createdAt.date == getNow().date }?.stressLevel?.toResource()
 
 fun List<HealthJournalRecord>.getTodayHealthJournalRecord(): HealthJournalRecord? =
-    find { it.createdAt == getNow() }
+    find { it.createdAt.date == getNow().date }
 
 @Composable
 fun HomeUI(
@@ -71,7 +68,6 @@ fun HomeUI(
         onLoading = { LoadingUI() },
         onError = { onEvent(HomeEvent.ShowError(it)) },
         onSuccess = { statsRecords: List<StatsRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
-            val sleepQualityResource = sleepQualities.getTodaySleepQualityResource()
             val stressLevelResource = stressLevels.getTodayStressLevelResource()
             val healthJournalResource = healthJournals.getTodayHealthJournalRecord()
 
@@ -110,9 +106,19 @@ fun HomeUI(
                         onSeeAll = { onEvent(HomeEvent.OnNavigateToSleepHistory) }
                     )
                     SleepQualityMetric(
-                        resource = sleepQualityResource,
+                        records = sleepQualities,
                         onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
                         onClick = { onEvent(HomeEvent.OnNavigateToSleepHistory) }
+                    )
+                    SectionHeader(
+                        modifier = Modifier.paddingHorizontalMedium(),
+                        title = Res.string.stress,
+                        onSeeAll = { onEvent(HomeEvent.OnNavigateToStressHistory) }
+                    )
+                    StressLevelMetric(
+                        resource = stressLevelResource,
+                        onCreate = { onEvent(HomeEvent.OnNavigateToAddStress) },
+                        onClick = { onEvent(HomeEvent.OnNavigateToStressHistory) }
                     )
                     SectionHeader(
                         modifier = Modifier.paddingHorizontalMedium(),
@@ -120,7 +126,7 @@ fun HomeUI(
                         onSeeAll = { onEvent(HomeEvent.OnNavigateToAllJournals) }
                     )
                     SelfJournalingMetric(
-                        resource = healthJournalResource,
+                        records = healthJournals,
                         onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
                         onClick = { onEvent(HomeEvent.OnNavigateToStressHistory) }
                     )

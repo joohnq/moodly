@@ -1,68 +1,138 @@
 package com.joohnq.shared_resources.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.joohnq.shared_resources.PanelEvent
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.painterResource
 
-@Composable fun SharedPanelComponent(
+@Composable
+fun Modifier.dpOffset(x: Dp = 0.dp, y: Dp = 0.dp): Modifier =
+    offset {
+        IntOffset(x = x.toPx().toInt(), y = y.toPx().toInt())
+    }
+
+
+@Composable
+fun SharedPanelComponent(
     containerColor: Color = Colors.Brown10,
+    paddingValues: PaddingValues,
     isDark: Boolean,
-    onGoBack: () -> Unit,
     backgroundColor: Color,
-    backgroundImage: DrawableResource,
-    panelTitle: StringResource,
-    bodyTitle: StringResource,
+    image: DrawableResource,
+    title: StringResource,
     color: Color,
-    onAdd: () -> Unit,
-    topBarContent: (@Composable () -> Unit)? = null,
-    panelContent: @Composable (PaddingValues) -> Unit,
-    content: LazyListScope.() -> Unit,
+    onEvent: (PanelEvent) -> Unit,
+    topBar: @Composable () -> Unit = { },
+    panel: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     Scaffold(
         containerColor = containerColor,
     ) { padding ->
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
-            item {
-                Column {
-                    PanelContent(
-                        modifier = Modifier.fillMaxWidth()
-                            .fillParentMaxHeight(0.5f),
-                        isDark = isDark,
-                        padding = padding,
-                        text = panelTitle,
-                        backgroundColor = backgroundColor,
-                        background = backgroundImage,
-                        color = color,
-                        onAdd = onAdd,
-                        onGoBack = onGoBack,
-                        content = { panelContent(padding) },
-                        topBarContent = topBarContent
-                    )
-                    VerticalSpacer(20.dp)
-                    Title(
-                        modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
-                        text = bodyTitle
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .background(color = backgroundColor)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .paint(
+                            painter = painterResource(image),
+                            contentScale = ContentScale.FillBounds,
+                            colorFilter = ColorFilter.tint(color = color)
+                        )
+                )
+                VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
+                TopBar(
+                    modifier = Modifier
+                        .padding(top = padding.calculateBottomPadding())
+                        .paddingHorizontalMedium(),
+                    isDark = isDark,
+                    text = title,
+                    onGoBack = { onEvent(PanelEvent.OnGoBack) },
+                    content = topBar
+                )
+                VerticalSpacer(20.dp)
+                panel()
+                VerticalSpacer(60.dp)
+                ConvexContentLayout(
+                    backgroundColor = containerColor,
+                ) {
+                    SmallAddButton(
+                        modifier = Modifier.dpOffset(y = (-88).dp),
+                        onClick = { onEvent(PanelEvent.OnAdd) }
                     )
                 }
             }
             content()
-            item {
-                VerticalSpacer(20.dp)
+        }
+    }
+}
+
+@Composable
+fun SharedPanelComponent(
+    containerColor: Color = Colors.Brown10,
+    paddingValues: PaddingValues,
+    isDark: Boolean,
+    backgroundColor: Color,
+    onEvent: (PanelEvent) -> Unit,
+    topBar: @Composable () -> Unit = { },
+    panel: @Composable () -> Unit,
+    content: @Composable (Modifier) -> Unit,
+) {
+    Scaffold(
+        containerColor = containerColor,
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .background(color = backgroundColor)
+        ) {
+            VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
+            TopBar(
+                modifier = Modifier.paddingHorizontalMedium(),
+                isDark = isDark,
+                onGoBack = { onEvent(PanelEvent.OnGoBack) },
+                content = topBar
+            )
+            VerticalSpacer(20.dp)
+            panel()
+            VerticalSpacer(60.dp)
+            ConvexContentLayout(
+                backgroundColor = containerColor,
+            ) {
+                SmallAddButton(
+                    modifier = Modifier.dpOffset(y = (-88).dp),
+                    onClick = { onEvent(PanelEvent.OnAdd) }
+                )
+                content(Modifier.paddingHorizontalMedium())
             }
         }
     }

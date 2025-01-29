@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,9 +24,7 @@ fun DecoratedConvexPanel(
     panelContent: @Composable () -> Unit,
     content: @Composable (ColumnScope) -> Unit,
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize().background(color = backgroundColor)
-    ) {
+    Scaffold(containerColor = backgroundColor) {
         Column(
             modifier = Modifier
                 .padding(bottom = 20.dp)
@@ -54,6 +53,43 @@ fun DecoratedConvexPanel(
                 ) {
                     content(this)
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun DecoratedConvexPanelScrollable(
+    modifier: Modifier = Modifier,
+    panelBackgroundColor: Color,
+    backgroundColor: Color = Colors.Brown10,
+    panelContent: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.(Modifier) -> Unit,
+) {
+    Scaffold(containerColor = backgroundColor) { padding ->
+        Column() {
+            Column(
+                modifier = Modifier
+                    .padding(top = padding.calculateTopPadding())
+                    .background(color = panelBackgroundColor)
+                    .fillMaxSize(),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .then(modifier),
+                ) {
+                    panelContent()
+                }
+                ConvexContentLayout(
+                    backgroundColor = backgroundColor,
+                )
+            }
+            Column(
+                modifier = Modifier.fillMaxWidth().background(color = backgroundColor)
+                    .padding(bottom = 60.dp).then(modifier),
+            ) {
+                content(modifier)
             }
         }
     }

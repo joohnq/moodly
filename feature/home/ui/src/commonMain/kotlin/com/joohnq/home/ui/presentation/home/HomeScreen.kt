@@ -51,7 +51,6 @@ fun HomeScreen(
             is HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel(event.id)
             HomeEvent.OnNavigateToAddSleep -> onNavigateToAddSleep()
             is HomeEvent.ShowError -> onError(event.error)
-            HomeEvent.OnNavigateToStressHistory -> TODO()
             is HomeEvent.OnNavigateToStressHistory -> onNavigateToStressHistory()
             HomeEvent.OnNavigateToAddStress -> onNavigateToAddStress()
             HomeEvent.OnNavigateToAllJournals -> onNavigateToSelfJournalHistory()

@@ -27,8 +27,8 @@ fun SleepQualityScreen(
 
     fun onEvent(event: SleepQualityEvent) =
         when (event) {
-            SleepQualityEvent.Add -> onNavigateAddSleepQuality()
-            SleepQualityEvent.GoBack -> onGoBack()
+            SleepQualityEvent.OnAdd -> onNavigateAddSleepQuality()
+            SleepQualityEvent.OnGoBack -> onGoBack()
         }
 
     return SleepQualityUI(

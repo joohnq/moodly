@@ -239,4 +239,9 @@
     <string name="today">Today</string>
     <string name="self_journaling">Self Journaling</string>
     <string name="add_new_journal">Add New Journal</string>
+    <string name="stress">Stress</string>
+    <string name="journals_written_in">Journals written in %1$s</string>
+    <string name="wake_up">Wake Up</string>
+    <string name="bedtime">Bedtime</string>
+    <string name="lets_set_up_daily_stress_level">Let's set up daily stress level</string>
 </resources>

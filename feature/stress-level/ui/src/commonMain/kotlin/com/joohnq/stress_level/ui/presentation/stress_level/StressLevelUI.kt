@@ -1,16 +1,7 @@
 package com.joohnq.stress_level.ui.presentation.stress_level
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +12,6 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.StressLevelCard
 import com.joohnq.shared_resources.components.TextWithBackground
-import com.joohnq.shared_resources.stress_analysis
 import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.stressor
 import com.joohnq.shared_resources.theme.Colors
@@ -33,6 +23,7 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.getText
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
+import com.joohnq.stress_level.ui.presentation.stress_level.event.toStressLevelEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -45,24 +36,22 @@ fun StressLevelUI(
     SharedPanelComponent(
         containerColor = Colors.White,
         isDark = false,
-        onGoBack = { onEvent(StressLevelEvent.GoBack) },
+        paddingValues = Dimens.Padding.HorizontalMedium,
         backgroundColor = resource.palette.color,
-        backgroundImage = Drawables.Images.StressLevelBackground,
-        panelTitle = Res.string.stress_level,
-        bodyTitle = Res.string.stress_analysis,
-        color = resource.palette.backgroundColor,
-        onAdd = { onEvent(StressLevelEvent.Add) },
-        topBarContent = {
+        image = Drawables.Images.StressLevelBackground,
+        title = Res.string.stress_level,
+        color = resource.palette.imageColor,
+        onEvent = { event -> onEvent(event.toStressLevelEvent()) },
+        topBar = {
             TextWithBackground(
                 text = record.createdAt.date.toFormattedDateString(),
                 textColor = resource.palette.color,
                 backgroundColor = resource.palette.backgroundColor,
             )
         },
-        panelContent = {
+        panel = {
             Column(
-                modifier = Modifier.paddingHorizontalMedium()
-                    .padding(top = it.calculateTopPadding()).fillMaxSize(),
+                modifier = Modifier.paddingHorizontalMedium().fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -79,71 +68,70 @@ fun StressLevelUI(
             }
         },
         content = {
-            item {
-                Row(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+            Row(
+                modifier = Modifier.paddingHorizontalMedium(),
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                StressLevelCard(
+                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                    icon = Drawables.Icons.WarningOutlined,
+                    title = Res.string.stressor,
+                    value = record.stressors.toResource().getText(),
                 ) {
-                    StressLevelCard(
-                        modifier = Modifier.weight(1f).fillMaxHeight(),
-                        icon = Drawables.Icons.WarningOutlined,
-                        title = Res.string.stressor,
-                        value = record.stressors.toResource().getText(),
+                    Column(
+                        modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Column(
-                            modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Box(
-                                    modifier = Modifier.width(24.dp).height(20.dp)
-                                        .background(
-                                            color = Colors.Green50,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                                Box(
-                                    modifier = Modifier.weight(1f).height(20.dp)
-                                        .background(
-                                            color = Colors.Green30,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                            }
-                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Box(
-                                    modifier = Modifier.weight(0.4f).height(20.dp)
-                                        .background(
-                                            color = Colors.Green30,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                                Box(
-                                    modifier = Modifier.weight(0.6f).height(20.dp)
-                                        .background(
-                                            color = Colors.Green50,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                            }
-                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Box(
-                                    modifier = Modifier.weight(0.6f).height(20.dp)
-                                        .background(
-                                            color = Colors.Green50,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                                Box(
-                                    modifier = Modifier.weight(0.4f).height(20.dp)
-                                        .background(
-                                            color = Colors.Green30,
-                                            shape = Dimens.Shape.Circle
-                                        )
-                                )
-                            }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Box(
+                                modifier = Modifier.width(24.dp).height(20.dp)
+                                    .background(
+                                        color = Colors.Green50,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
+                            Box(
+                                modifier = Modifier.weight(1f).height(20.dp)
+                                    .background(
+                                        color = Colors.Green30,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Box(
+                                modifier = Modifier.weight(0.4f).height(20.dp)
+                                    .background(
+                                        color = Colors.Green30,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
+                            Box(
+                                modifier = Modifier.weight(0.6f).height(20.dp)
+                                    .background(
+                                        color = Colors.Green50,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Box(
+                                modifier = Modifier.weight(0.6f).height(20.dp)
+                                    .background(
+                                        color = Colors.Green50,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
+                            Box(
+                                modifier = Modifier.weight(0.4f).height(20.dp)
+                                    .background(
+                                        color = Colors.Green30,
+                                        shape = Dimens.Shape.Circle
+                                    )
+                            )
                         }
                     }
+                }
 //                    StressLevelCard(
 //                        modifier = Modifier.weight(1f).fillMaxHeight(),
 //                        icon = Drawables.Icons.Flag,
@@ -152,7 +140,6 @@ fun StressLevelUI(
 //                    ) {
 //                        StressLevelChart(stressLevelRecords = stressLevelRecords)
 //                    }
-                }
             }
         }
     )

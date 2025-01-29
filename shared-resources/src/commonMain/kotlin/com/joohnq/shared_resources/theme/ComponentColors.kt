@@ -12,7 +12,6 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.joohnq.core.ui.entity.TextRadioButtonColors
-import com.joohnq.shared_resources.theme.Colors
 
 object ComponentColors {
     object RadioButton {
@@ -179,11 +178,11 @@ object ComponentColors {
 
     object TextField {
         @Composable fun ExpressionAnalysisColors(): TextFieldColors = TextFieldColors(
-            indicatorColor = Colors.Orange40,
+            indicatorColor = Colors.Transparent,
             containerColor = Colors.White,
-            textColor = Colors.Brown80,
-            placeholderColor = Colors.Brown100Alpha64,
-            cursorColor = Colors.Orange40,
+            textColor = Colors.Gray60,
+            placeholderColor = Colors.Gray40,
+            cursorColor = Colors.Green40,
         )
 
         @Composable fun MainTextFieldColors(): TextFieldColors = TextFieldColors(

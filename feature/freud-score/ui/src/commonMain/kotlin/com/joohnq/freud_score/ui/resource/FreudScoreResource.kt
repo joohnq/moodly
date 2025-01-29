@@ -24,7 +24,8 @@ sealed class FreudScoreResource(
         palette = FreudScorePalette(
             color = Colors.Green10,
             subColor = Colors.Green40,
-            backgroundColor = Colors.Green50
+            backgroundColor = Colors.Green50,
+            imageColor = Colors.Green70
         )
     )
 
@@ -36,7 +37,8 @@ sealed class FreudScoreResource(
         palette = FreudScorePalette(
             color = Colors.Yellow10,
             subColor = Colors.Yellow40,
-            backgroundColor = Colors.Yellow50
+            backgroundColor = Colors.Yellow50,
+            imageColor = Colors.Yellow60
         )
     )
 
@@ -48,7 +50,8 @@ sealed class FreudScoreResource(
         palette = FreudScorePalette(
             color = Colors.Brown20,
             subColor = Colors.Brown40,
-            backgroundColor = Colors.Brown70
+            backgroundColor = Colors.Brown60,
+            imageColor = Colors.Brown70
         )
     )
 
@@ -60,7 +63,8 @@ sealed class FreudScoreResource(
         palette = FreudScorePalette(
             color = Colors.Orange10,
             subColor = Colors.Orange30,
-            backgroundColor = Colors.Orange40
+            backgroundColor = Colors.Orange40,
+            imageColor = Colors.Orange50,
         )
     )
 
@@ -72,7 +76,8 @@ sealed class FreudScoreResource(
         palette = FreudScorePalette(
             color = Colors.Purple10,
             subColor = Colors.Purple30,
-            backgroundColor = Colors.Purple40
+            backgroundColor = Colors.Purple40,
+            imageColor = Colors.Purple60
         )
     )
 }

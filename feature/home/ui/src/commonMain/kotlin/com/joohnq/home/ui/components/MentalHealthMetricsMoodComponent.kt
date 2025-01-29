@@ -43,7 +43,7 @@ fun MentalHealthMetricsMoodComponent(modifier: Modifier = Modifier, mood: MoodRe
             ) {
                 MoodFace(
                     modifier = Modifier.size(120.dp),
-                    mood = mood,
+                    resource = mood,
                     tint = Colors.White
                 )
             }

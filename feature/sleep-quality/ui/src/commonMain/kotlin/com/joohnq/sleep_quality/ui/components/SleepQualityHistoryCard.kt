@@ -23,7 +23,6 @@ import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import org.jetbrains.compose.resources.painterResource
@@ -38,11 +37,11 @@ fun SleepQualityHistoryCard(
     val duration = Pair(record.startSleeping, record.endSleeping).calculateDuration()
 
     Card(
-        modifier = modifier.fillMaxWidth().paddingHorizontalMedium(),
+        modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = Colors.Gray10,
+            containerColor = Colors.Gray5,
             contentColor = Colors.Gray80,
-            disabledContainerColor = Colors.Gray10,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Colors.Gray80
         ),
         shape = Dimens.Shape.Medium,

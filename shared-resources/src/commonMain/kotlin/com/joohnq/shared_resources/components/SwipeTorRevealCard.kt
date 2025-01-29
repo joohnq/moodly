@@ -75,3 +75,48 @@ fun SwipeTorRevealCard(
         }
     }
 }
+
+@Composable
+fun SwipeTorRevealCard(
+    modifier: Modifier = Modifier,
+    onAction: () -> Unit,
+    content: @Composable (Modifier) -> Unit,
+) {
+    val scope = rememberCoroutineScope()
+    var buttonsWidth by remember { mutableFloatStateOf(0f) }
+    val offset = remember { Animatable(initialValue = 0f) }
+    var isExpanded by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isExpanded) {
+        scope.launch {
+            offset.animateTo(if (isExpanded) -buttonsWidth else 0f)
+        }
+    }
+
+    Row(modifier = modifier.height(intrinsicSize = IntrinsicSize.Max)) {
+        Box(modifier = Modifier) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(IntrinsicSize.Max)
+                    .align(Alignment.CenterEnd)
+                    .onSizeChanged { buttonsWidth = it.width.toFloat() },
+                verticalArrangement = Arrangement.Center
+            ) {
+                DeleteButton {
+                    onAction()
+                    isExpanded = false
+                }
+            }
+            content(
+                Modifier
+                    .offset { IntOffset(offset.value.roundToInt(), 0) }
+                    .swipeToReveal(
+                        width = buttonsWidth,
+                        offset = offset,
+                        setIsExpanded = { isExpanded = it }
+                    )
+            )
+        }
+    }
+}

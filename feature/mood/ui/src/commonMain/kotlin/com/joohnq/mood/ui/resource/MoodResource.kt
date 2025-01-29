@@ -35,7 +35,7 @@ sealed class MoodResource(
             text = Res.string.depressed,
             healthLevel = DEPRESSED.healthLevel,
             palette = MoodPalette(
-                faceBackgroundColor = Colors.Purple30,
+                faceBackgroundColor = Colors.Purple40,
                 faceColor = Colors.Purple90,
                 backgroundColor = Colors.Purple10,
                 subColor = Colors.Purple30,
@@ -47,6 +47,7 @@ sealed class MoodResource(
                 moodScreenMoodFaceColor = Colors.Purple80,
                 barColor = Colors.Purple30,
                 barFaceColor = Colors.Purple50,
+                imageColor = Colors.Purple60
             )
         )
 
@@ -69,6 +70,7 @@ sealed class MoodResource(
             moodScreenMoodFaceColor = Colors.Orange80,
             barColor = Colors.Orange40,
             barFaceColor = Colors.Orange60,
+            imageColor = Colors.Orange50
         )
     )
 
@@ -84,7 +86,7 @@ sealed class MoodResource(
                 faceColor = Colors.Brown90,
                 backgroundColor = Colors.Brown20,
                 subColor = Colors.Brown40,
-                color = Colors.Brown70,
+                color = Colors.Brown60,
                 moodScreenBackgroundColor = Colors.Brown60,
                 moodScreenInactiveColor = Colors.Brown80,
                 moodScreenTraceColor = Colors.Brown80,
@@ -92,6 +94,7 @@ sealed class MoodResource(
                 moodScreenMoodFaceColor = Colors.Brown80,
                 barColor = Colors.Brown50,
                 barFaceColor = Colors.Brown70,
+                imageColor = Colors.Brown70
             )
         )
 
@@ -114,6 +117,7 @@ sealed class MoodResource(
             moodScreenMoodFaceColor = Colors.Yellow80,
             barColor = Colors.Yellow40,
             barFaceColor = Colors.Yellow60,
+            imageColor = Colors.Yellow70
         )
     )
 
@@ -137,6 +141,7 @@ sealed class MoodResource(
                 moodScreenMoodFaceColor = Colors.Green80,
                 barColor = Colors.Green50,
                 barFaceColor = Colors.Green70,
+                imageColor = Colors.Green60
             )
         )
 }

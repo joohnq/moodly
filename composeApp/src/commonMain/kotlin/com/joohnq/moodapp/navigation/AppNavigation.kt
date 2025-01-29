@@ -19,6 +19,7 @@ import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualit
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.SleepHistoryScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
+import com.joohnq.stress_level.ui.presentation.stress_history.StressHistoryScreen
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
 import kotlinx.datetime.LocalDate
@@ -117,6 +118,14 @@ fun NavGraphBuilder.appNavigation(
                 id = stressLevel.id,
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
+                },
+                onGoBack = onGoBack
+            )
+        }
+        composable<Destination.App.StressHistory> {
+            StressHistoryScreen(
+                onNavigateStressLevel = { id ->
+                    onNavigate(Destination.App.StressLevel(id))
                 },
                 onGoBack = onGoBack
             )

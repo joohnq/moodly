@@ -5,12 +5,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.shared_resources.animateScrollToNextMonth
+import com.joohnq.shared_resources.animateScrollToPreviousMonth
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.kizitonwose.calendar.compose.rememberCalendarState
-import com.kizitonwose.calendar.core.minusMonths
-import com.kizitonwose.calendar.core.plusMonths
-import kotlinx.coroutines.launch
 
 @Composable
 fun SleepHistoryScreen(
@@ -23,33 +22,13 @@ fun SleepHistoryScreen(
     val calendarState = rememberCalendarState()
     val scope = rememberCoroutineScope()
 
-    fun animateScrollToNextMonth() {
-        scope.launch {
-            calendarState.animateScrollToMonth(
-                calendarState.firstVisibleMonth.yearMonth.plusMonths(
-                    1
-                )
-            )
-        }
-    }
-
-    fun animateScrollToPreviousMonth() {
-        scope.launch {
-            calendarState.animateScrollToMonth(
-                calendarState.firstVisibleMonth.yearMonth.minusMonths(
-                    1
-                )
-            )
-        }
-    }
-
     fun onEvent(event: SleepHistoryEvent) {
         when (event) {
             is SleepHistoryEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality(event.id)
             SleepHistoryEvent.OnGoBack -> onGoBack()
-            SleepHistoryEvent.OnNextMonth -> animateScrollToNextMonth()
-            SleepHistoryEvent.OnPreviousMonth -> animateScrollToPreviousMonth()
-            SleepHistoryEvent.OnCreateSleepQuality -> onNavigateToAddSleepQuality()
+            SleepHistoryEvent.OnNextMonth -> scope.animateScrollToNextMonth(calendarState)
+            SleepHistoryEvent.OnPreviousMonth -> scope.animateScrollToPreviousMonth(calendarState)
+            SleepHistoryEvent.OnAddSleepQuality -> onNavigateToAddSleepQuality()
         }
     }
 

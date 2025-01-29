@@ -1,9 +1,12 @@
 package com.joohnq.sleep_quality.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,22 +18,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.getNow
+import com.joohnq.core.ui.mapper.calculateDuration
+import com.joohnq.core.ui.mapper.toFormattedTimeString
+import com.joohnq.core.ui.mapper.toHoursAndMinutesString
+import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.CircularProgressWithText
-import com.joohnq.shared_resources.components.MindfulTrackerCardRow
+import com.joohnq.shared_resources.bedtime
+import com.joohnq.shared_resources.components.GiganticSecondaryCard
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.set_up_sleep
+import com.joohnq.shared_resources.start_sleeping
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.wake_up
 import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.ui.mapper.toResource
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+
+fun List<SleepQualityRecord>.getTodaySleepQualityRecord(): SleepQualityRecord? =
+    find { it.createdAt == getNow().date }
 
 @Composable
 fun SleepQualityNotFound(modifier: Modifier = Modifier, onClick: () -> Unit) {
@@ -91,27 +109,88 @@ fun SleepQualityNotFound(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-fun SleepQualityMetric(resource: SleepQualityResource?, onCreate: () -> Unit, onClick: () -> Unit) {
+fun RowScope.SleepInfo(
+    title: String,
+    subtitle: StringResource,
+    icon: DrawableResource,
+) {
+    Row(
+        modifier = Modifier.weight(1f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Box(
+            modifier = Modifier.size(40.dp).clip(Dimens.Shape.Circle)
+                .background(color = Colors.Gray10),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(icon),
+                contentDescription = stringResource(Res.string.start_sleeping),
+                tint = Colors.Gray60,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        Column {
+            Text(
+                text = title,
+                style = TextStyles.TextSmSemiBold(),
+                color = Colors.Gray80,
+            )
+            Text(
+                text = stringResource(subtitle),
+                style = TextStyles.TextSmRegular(),
+                color = Colors.Gray60,
+            )
+        }
+    }
+}
+
+@Composable
+fun SleepQualityMetric(
+    records: List<SleepQualityRecord>,
+    onCreate: () -> Unit,
+    onClick: () -> Unit,
+) {
+    val today = records.getTodaySleepQualityRecord()
+    val resource = today?.sleepQuality?.toResource()
+
     if (resource == null)
         SleepQualityNotFound(modifier = Modifier.paddingHorizontalMedium(), onClick = onCreate)
-    else
-        MindfulTrackerCardRow(
-            icon = Drawables.Icons.HospitalBed,
-            color = resource.palette.color,
-            backgroundColor = resource.palette.secondaryBackgroundColor,
-            title = resource.firstText,
-            subtitle = resource.secondText,
-            content = {
-                CircularProgressWithText(
-                    modifier = Modifier.size(56.dp),
-                    color = resource.palette.color,
-                    backgroundColor = resource.palette.secondaryBackgroundColor,
-                    progress = { resource.level * 0.2f },
-                    text = resource.level.toString(),
-                    textStyle = TextStyles.TextXsExtraBold(),
-                    textColor = Colors.Brown80
+    else {
+        val duration = Pair(today.endSleeping, today.startSleeping).calculateDuration()
+        val durationString = duration.toHoursAndMinutesString()
+
+        GiganticSecondaryCard(
+            modifier = Modifier.paddingHorizontalMedium(),
+            title = durationString,
+            subtitle = stringResource(resource.firstText),
+            onClick = onClick,
+            secondary = {
+                MoodFace(
+                    modifier = Modifier.size(40.dp),
+                    resource = resource.toMoodResource()
                 )
             },
-            onClick = onClick
+            content = {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        SleepInfo(
+                            title = today.startSleeping.toFormattedTimeString(),
+                            subtitle = Res.string.bedtime,
+                            icon = Drawables.Icons.Moon
+                        )
+                        SleepInfo(
+                            title = today.endSleeping.toFormattedTimeString(),
+                            subtitle = Res.string.wake_up,
+                            icon = Drawables.Icons.Sun
+                        )
+                    }
+                }
+            }
         )
+    }
 }

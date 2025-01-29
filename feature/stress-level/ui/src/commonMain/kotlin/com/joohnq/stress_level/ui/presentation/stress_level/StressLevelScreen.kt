@@ -26,8 +26,8 @@ fun StressLevelScreen(
 
     fun onEvent(event: StressLevelEvent) =
         when (event) {
-            is StressLevelEvent.Add -> onNavigateAddStressLevel()
-            is StressLevelEvent.GoBack -> onGoBack()
+            is StressLevelEvent.OnAdd -> onNavigateAddStressLevel()
+            is StressLevelEvent.OnGoBack -> onGoBack()
         }
 
     return StressLevelUI(

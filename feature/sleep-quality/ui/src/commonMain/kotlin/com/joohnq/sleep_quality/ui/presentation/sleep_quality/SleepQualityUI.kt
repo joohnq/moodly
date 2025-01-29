@@ -1,17 +1,7 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,16 +12,11 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.HorizontalSpacer
-import com.joohnq.shared_resources.components.SharedPanelComponent
-import com.joohnq.shared_resources.components.SleepQualityCard
-import com.joohnq.shared_resources.components.TextWithBackground
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.end_sleeping
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.sleep_quality
 import com.joohnq.shared_resources.sleep_quality_level
-import com.joohnq.shared_resources.sleep_stats
 import com.joohnq.shared_resources.sleeping_influences
 import com.joohnq.shared_resources.start_sleeping
 import com.joohnq.shared_resources.theme.Colors
@@ -45,6 +30,7 @@ import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
+import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.toSleepQualityEvent
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -90,25 +76,25 @@ fun SleepQualityUI(
     SharedPanelComponent(
         containerColor = Colors.Brown10,
         isDark = false,
-        onGoBack = { onEvent(SleepQualityEvent.GoBack) },
+        paddingValues = Dimens.Padding.HorizontalMedium,
         backgroundColor = mood.palette.color,
-        backgroundImage = Drawables.Images.SleepQualityBackground,
-        panelTitle = Res.string.sleep_quality,
-        bodyTitle = Res.string.sleep_stats,
-        color = mood.palette.backgroundColor,
-        onAdd = { onEvent(SleepQualityEvent.Add) },
-        topBarContent = {
+        image = Drawables.Images.SleepQualityBackground,
+        title = Res.string.sleep_quality,
+        color = mood.palette.imageColor,
+        onEvent = { event ->
+            onEvent(event.toSleepQualityEvent())
+        },
+        topBar = {
             TextWithBackground(
                 text = record.createdAt.toFormattedDateString(),
                 textColor = sleepQuality.palette.color,
                 backgroundColor = sleepQuality.palette.secondaryBackgroundColor,
             )
         },
-        panelContent = {
+        panel = {
             Column(
                 modifier = Modifier
                     .paddingHorizontalMedium()
-                    .padding(top = it.calculateTopPadding())
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -201,21 +187,19 @@ fun SleepQualityUI(
             }
         },
         content = {
-            item {
-                FlowRow(
-                    maxItemsInEachRow = 1,
-                    maxLines = 2,
-                    modifier = Modifier.fillMaxSize().wrapContentHeight()
-                        .paddingHorizontalMedium(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    options.forEach { item ->
-                        SleepQualityCard(
-                            modifier = Modifier.weight(1f),
-                            item = item
-                        )
-                    }
+            FlowRow(
+                maxItemsInEachRow = 1,
+                maxLines = 2,
+                modifier = Modifier.fillMaxSize().wrapContentHeight()
+                    .paddingHorizontalMedium(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                options.forEach { item ->
+                    SleepQualityCard(
+                        modifier = Modifier.weight(1f),
+                        item = item
+                    )
                 }
             }
         }

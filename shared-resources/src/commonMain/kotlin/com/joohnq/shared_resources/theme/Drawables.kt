@@ -70,6 +70,7 @@ import com.joohnq.shared_resources.shape_bottom_navigation
 import com.joohnq.shared_resources.sleep_quality_background
 import com.joohnq.shared_resources.sleep_woman_illustration
 import com.joohnq.shared_resources.stress_level_background
+import com.joohnq.shared_resources.stress_level_man_illustration
 import com.joohnq.shared_resources.welcome_community_image
 import com.joohnq.shared_resources.welcome_first_screen_image
 import com.joohnq.shared_resources.welcome_health_state_image
@@ -151,6 +152,7 @@ object Drawables {
 
         val SleepWomanIllustration = Res.drawable.sleep_woman_illustration
         val SelfJournalingIllustration = Res.drawable.self_journaling_illustration
+        val StressLevelManIllustration = Res.drawable.stress_level_man_illustration
 
         val NotFound = Res.drawable.not_found
     }

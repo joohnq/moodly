@@ -76,7 +76,7 @@ fun MoodFace(
 @Composable
 fun MoodFace(
     modifier: Modifier = Modifier,
-    mood: MoodResource,
+    resource: MoodResource,
     tint: Color,
     backgroundColor: Color = Colors.Transparent,
 ) {
@@ -86,7 +86,7 @@ fun MoodFace(
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(mood.image),
+            painter = painterResource(resource.image),
             contentDescription = null,
             modifier = modifier,
             tint = tint

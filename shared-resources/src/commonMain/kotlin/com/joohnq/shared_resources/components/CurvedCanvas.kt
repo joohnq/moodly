@@ -4,11 +4,7 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -133,23 +129,24 @@ fun ConvexContentLayout(
     backgroundColor: Color,
     position: CurvedCanvasPosition = CurvedCanvasPosition.TOP,
     offset: Dp = 60.dp,
-    content: @Composable () -> Unit = {},
+    content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .background(
                 shape = ConvexCanvas(offset = offset, position = position),
                 color = backgroundColor
             ),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(offset)
-        )
-        content()
+        VerticalSpacer(offset)
+        Column(
+            modifier = Modifier.dpOffset(y = -offset / 2),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            content()
+        }
     }
 }
 

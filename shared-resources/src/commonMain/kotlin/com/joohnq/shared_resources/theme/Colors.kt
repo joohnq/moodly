@@ -26,6 +26,7 @@ object Colors {
     val Gray30 = Color(0xFFC9C7C5)
     val Gray20 = Color(0xFFE1E1E0)
     val Gray10 = Color(0xFFF5F5F5)
+    val Gray5 = Color(0xFFFAFAF9)
 
     val Orange100 = Color(0xFF2E1200)
     val Orange90 = Color(0xFF432500)

@@ -1,20 +1,14 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_history
 
+import SleepQualityHistoryCard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,20 +18,21 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.SharedPanelComponent
+import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.components.Title
-import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.remember.rememberWeekThreeChars
 import com.joohnq.shared_resources.sleep_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.ui.components.SleepHistoryLazyItems
+import com.joohnq.sleep_quality.ui.components.SleepQualityNotFound
 import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
+import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.toSleepHistoryEvent
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import com.kizitonwose.calendar.compose.CalendarState
@@ -66,7 +61,7 @@ fun Day(
 
     val background = when {
         day.position == DayPosition.MonthDate && !isSelected -> Colors.White
-        day.position == DayPosition.MonthDate && isSelected -> resource!!.palette.backgroundColor
+        day.position == DayPosition.MonthDate && isSelected -> resource!!.palette.color
         else -> Colors.Brown10
     }
 
@@ -145,7 +140,7 @@ fun SleepQualityCalendar(
             IconButton(
                 onClick = onNextMonth,
                 modifier = Modifier.size(40.dp),
-                enabled = calendarState.canScrollBackward,
+                enabled = calendarState.canScrollForward,
                 colors = IconButtonColors(
                     containerColor = Colors.Transparent,
                     contentColor = Colors.Brown80,
@@ -189,13 +184,12 @@ fun SleepHistoryUI(
 ) {
     state.sleepQualityRecords.foldComposable(
         onSuccess = { records ->
-            Scaffold(
-                containerColor = Colors.Brown10
-            ) { padding ->
-                Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
-                    TopBar(
-                        onGoBack = { onEvent(SleepHistoryEvent.OnGoBack) },
-                    )
+            SharedPanelComponent(
+                paddingValues = Dimens.Padding.HorizontalMedium,
+                isDark = true,
+                backgroundColor = Colors.White,
+                onEvent = { event -> onEvent(event.toSleepHistoryEvent()) },
+                panel = {
                     SleepQualityCalendar(
                         calendarState = calendarState,
                         records = records,
@@ -207,16 +201,42 @@ fun SleepHistoryUI(
                             )
                         }
                     )
+                },
+                content = { modifier ->
                     Title(
-                        modifier = Modifier.padding(vertical = 32.dp),
+                        modifier = modifier.padding(vertical = 32.dp),
                         text = Res.string.sleep_history
                     )
-                    SleepHistoryLazyItems(
-                        records = records,
-                        onEvent = onEvent
-                    )
+                    LazyColumn {
+                        if (records.isEmpty())
+                            item {
+                                SleepQualityNotFound(
+                                    modifier = modifier,
+                                    onClick = { onEvent(SleepHistoryEvent.OnAddSleepQuality) }
+                                )
+                            }
+                        else
+                            items(records) { sleepQuality ->
+                                SwipeTorRevealCard(
+                                    modifier = modifier,
+                                    onAction = {}
+                                ) { modifier ->
+                                    SleepQualityHistoryCard(
+                                        modifier = modifier,
+                                        record = sleepQuality,
+                                        onClick = {
+                                            onEvent(
+                                                SleepHistoryEvent.OnNavigateToSleepQuality(
+                                                    sleepQuality.id
+                                                )
+                                            )
+                                        },
+                                    )
+                                }
+                            }
+                    }
                 }
-            }
+            )
         }
     )
 }

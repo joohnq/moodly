@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -13,15 +12,20 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.CompositionLocalProviderPreview
 import com.joohnq.core.ui.entity.CalendarInfo
 import com.joohnq.core.ui.getNow
+import com.joohnq.core.ui.mapper.toMonthNameString
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalsAverageUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.home.ui.presentation.home.getTodayHealthJournalRecord
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared_resources.*
+import com.joohnq.mood.ui.resource.MoodAverageResource
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.GiganticCreateCard
 import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.journals_written_in
+import com.joohnq.shared_resources.lets_set_up_daily_journaling_and_self_reflection
 import com.joohnq.shared_resources.remember.rememberCalendarInfo
 import com.joohnq.shared_resources.remember.rememberWeekChars
 import com.joohnq.shared_resources.theme.Colors
@@ -53,19 +57,11 @@ fun SelfJournalingNotFound(modifier: Modifier = Modifier, onClick: () -> Unit) {
 
 @Composable
 fun SelfJournalingDay(
-    resource: MoodResource?,
+    average: MoodAverageResource,
     day: CalendarDay,
 ) {
-    val isSelected = resource != null
-    val background = when {
-        resource != null -> null
-        else -> Colors.White
-    }
-    val border = when {
-        day.position == DayPosition.MonthDate && !isSelected -> Colors.Gray30
-        day.position != DayPosition.MonthDate -> Colors.Brown10
-        else -> null
-    }
+    val isSelected = average !is MoodAverageResource.Skipped
+    val isInCurrentMonth = day.position == DayPosition.MonthDate
 
     Box(
         modifier = Modifier
@@ -74,31 +70,22 @@ fun SelfJournalingDay(
             .aspectRatio(1f)
             .fillMaxSize()
             .clip(Dimens.Shape.Circle)
-            .then(
-                background?.let {
-                    Modifier.background(
-                        color = it,
-                        shape = Dimens.Shape.Circle
-                    )
-                } ?: Modifier
+            .background(
+                color = if (!isSelected || isInCurrentMonth) Colors.White else average.backgroundColor,
+                shape = Dimens.Shape.Circle
             )
-            .then(
-                border?.let {
-                    Modifier.border(
-                        width = 1.dp,
-                        color = it,
-                        shape = Dimens.Shape.Circle
-                    )
-                } ?: Modifier
+            .border(
+                width = 1.dp,
+                color = if (isInCurrentMonth) Colors.Gray30 else Colors.Gray10,
+                shape = Dimens.Shape.Circle
             ),
         contentAlignment = Alignment.Center
     ) {
-        resource?.let {
+        if (isSelected)
             MoodFace(
                 modifier = Modifier.fillMaxSize(),
-                resource = it
+                average = average,
             )
-        }
     }
 }
 
@@ -119,12 +106,13 @@ fun SelfJournalingMonthHeader() {
 }
 
 @Composable
-fun CalendarInfoCard(info: CalendarInfo){
-    Row {
+fun CalendarInfoCard(info: CalendarInfo) {
+    Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
         Box(
             modifier = Modifier
                 .size(6.dp)
-                .background(color = info.backgroundColor)
+                .clip(Dimens.Shape.Circle)
+                .background(color = info.backgroundColor, shape = Dimens.Shape.Circle)
                 .border(
                     width = 1.dp,
                     color = info.borderColor,
@@ -144,7 +132,10 @@ fun CalendarInfoCard(info: CalendarInfo){
 @Composable
 fun SelfJournalingCalendarFooter() {
     val calendarInfos = rememberCalendarInfo()
-    FlowRow {
+    FlowRow(
+        modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp, alignment = Alignment.CenterHorizontally)
+    ) {
         calendarInfos.forEach { info -> CalendarInfoCard(info = info) }
     }
 }
@@ -159,11 +150,12 @@ fun SelfJournalingCalendar(
         modifier = Modifier.fillMaxWidth(),
         state = calendarState,
         dayContent = { day ->
-            val resource =
-                records.find { it.createdAt.date == day.date }?.mood?.toResource()
+            val recordsInDay = records.filter { it.createdAt.date == day.date }
+            val useCase: CalculateHealthJournalsAverageUseCase = koinInject()
+            val average = useCase.invoke(recordsInDay).toResource()
 
             SelfJournalingDay(
-                resource = resource,
+                average = average,
                 day = day,
             )
         },
@@ -194,7 +186,7 @@ fun SelfJournalingMetric(
             title = recordsInYear,
             subtitle = stringResource(
                 Res.string.journals_written_in,
-                resource.createdAt.month.name
+                resource.createdAt.toMonthNameString()
             ),
             onCreate = onCreate,
             onClick = onClick,
@@ -213,6 +205,7 @@ fun SelfJournalingMetricPreview() {
     CompositionLocalProviderPreview(
         module {
             single<GetHealthJournalsInYearUseCase> { GetHealthJournalsInYearUseCase() }
+            single<CalculateHealthJournalsAverageUseCase> { CalculateHealthJournalsAverageUseCase() }
         }
     ) {
         SelfJournalingMetric(

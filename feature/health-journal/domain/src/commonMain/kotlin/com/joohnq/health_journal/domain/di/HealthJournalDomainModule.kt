@@ -2,6 +2,7 @@ package com.joohnq.health_journal.domain.di
 
 import com.joohnq.health_journal.domain.use_case.AddHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalFreudScoreUseCase
+import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalsAverageUseCase
 import com.joohnq.health_journal.domain.use_case.DeleteHealthJournalsUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsUseCase
@@ -20,4 +21,5 @@ val healthJournalDomainModule = module {
     factoryOf(::OrganizeByDateHealthJournalUseCase)
     factoryOf(::OrganizeFromCreationHealthJournalFreudScoreUseCase)
     factoryOf(::UpdateHealthJournalsUseCase)
+    factoryOf(::CalculateHealthJournalsAverageUseCase)
 }

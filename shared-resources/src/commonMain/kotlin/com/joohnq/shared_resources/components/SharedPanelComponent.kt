@@ -55,18 +55,16 @@ fun SharedPanelComponent(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight()
                     .background(color = backgroundColor)
             ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .paint(
-                            painter = painterResource(image),
-                            contentScale = ContentScale.FillBounds,
-                            colorFilter = ColorFilter.tint(color = color)
-                        )
+                        .fillMaxSize()
+//                        .paint(
+//                            painter = painterResource(image),
+//                            contentScale = ContentScale.FillBounds,
+//                            colorFilter = ColorFilter.tint(color = color)
+//                        )
                 )
                 VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
                 TopBar(

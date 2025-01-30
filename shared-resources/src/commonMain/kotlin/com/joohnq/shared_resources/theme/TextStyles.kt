@@ -212,6 +212,12 @@ object TextStyles {
     )
 
     @Composable
+    fun TextXsMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Medium(),
+        fontSize = 12.sp,
+    )
+
+    @Composable
     fun TextXsRegular() = TextStyle(
         fontFamily = FontFamily.Urbanist.Regular(),
         fontSize = 12.sp,

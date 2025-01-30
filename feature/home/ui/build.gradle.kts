@@ -56,6 +56,7 @@ kotlin {
 
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
+            implementation(libs.calendar)
         }
     }
 }

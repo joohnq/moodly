@@ -26,6 +26,11 @@ fun LocalDateTime.toFormattedDateTimeString(): String =
         minute()
     })
 
+fun LocalDateTime.toMonthNameString(): String =
+    format(LocalDateTime.Format {
+        monthName(MonthNames.ENGLISH_FULL)
+    })
+
 fun LocalDateTime.getDaysInMonth(): Int {
     val start = LocalDate(date.year, date.month, 1)
     val end = start.plus(1, DateTimeUnit.MONTH)

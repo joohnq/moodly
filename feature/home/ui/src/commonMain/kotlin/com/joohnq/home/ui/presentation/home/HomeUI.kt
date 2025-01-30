@@ -1,11 +1,6 @@
 package com.joohnq.home.ui.presentation.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -24,15 +19,11 @@ import com.joohnq.home.ui.components.MentalHealthMetrics
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.mental_health_metrics
-import com.joohnq.shared_resources.self_journaling
-import com.joohnq.shared_resources.sleep
-import com.joohnq.shared_resources.stress
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
@@ -41,6 +32,10 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.components.StressLevelMetric
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
 
 fun List<StressLevelRecord>.getTodayStressLevelResource(): StressLevelResource? =
     find { it.createdAt.date == getNow().date }?.stressLevel?.toResource()

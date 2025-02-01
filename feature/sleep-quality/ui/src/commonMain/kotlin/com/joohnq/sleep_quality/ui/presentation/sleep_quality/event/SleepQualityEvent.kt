@@ -4,6 +4,9 @@ import com.joohnq.shared_resources.PanelEvent
 
 sealed interface SleepQualityEvent {
     data object OnGoBack : SleepQualityEvent
+    data object OnAddSleepQuality : SleepQualityEvent
+    data object OnNextMonth : SleepQualityEvent
+    data object OnPreviousMonth : SleepQualityEvent
     data object OnAdd : SleepQualityEvent
 }
 

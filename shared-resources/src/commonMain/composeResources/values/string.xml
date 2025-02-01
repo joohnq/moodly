@@ -245,8 +245,8 @@
     <string name="saturday_abrev">Sat</string>
     <string name="sleep">Sleep</string>
     <string name="see_all">See All</string>
-    <string name="you_havent_set_up_any_mental_sleep_yet">You haven't set up today any sleep metrics yet. \n Let's set
-        it up now.
+    <string name="you_havent_set_up_any_mental_sleep_yet">You haven't set up today any sleep metrics yet.\n Let's set it
+        up now.
     </string>
     <string name="lets_set_up_daily_journaling_and_self_reflection">Let's set up daily journaling and self reflection
     </string>
@@ -264,4 +264,19 @@
     <string name="skipped">Skipped</string>
     <string name="positive">Positive</string>
     <string name="negative">Negative</string>
+    <string name="level_end">Level %1$d</string>
+    <string name="calendar_view">Calendar View</string>
+    <string name="no_sleep_influences">No Sleep Influences</string>
+    <string name="sleep_trigger">Sleep Trigger</string>
+    <string name="you_dont_have_enough_sleep_records_yet">You don't have enough sleep records yet</string>
+    <string name="log_stress_level">Log Stress Level</string>
+    <string name="not_available">Not Available</string>
+    <string name="current_stress_level">Current Stress Level</string>
+    <string name="current_sleep_quality">Current Sleep Quality</string>
+    <string name="stress_trigger_title">%1$s &amp; %2$s</string>
+    <string name="set_up_mood">Set Up Mood</string>
+    <string name="you_havent_set_up_any_mood_yet">You haven't set up today any mood yet.\n Let's set it up now.</string>
+    <string name="you_are_stressed_because_you_are_to_preoccupied_with">You are stressed because you're too preoccupied
+        with:
+    </string>
 </resources>

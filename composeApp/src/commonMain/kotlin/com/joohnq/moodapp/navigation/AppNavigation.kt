@@ -44,11 +44,11 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateToMindfulJournal = {
                     onNavigate(Destination.App.MindfulJournal)
                 },
-                onNavigateToSleepHistory = {
-                    onNavigate(Destination.App.SleepHistory)
+                onNavigateToSleepQuality = {
+                    onNavigate(Destination.App.SleepQuality)
                 },
-                onNavigateToStressLevel = { id ->
-                    onNavigate(Destination.App.StressLevel(id))
+                onNavigateToStressLevel = {
+                    onNavigate(Destination.App.StressLevel)
                 },
                 onNavigateToEditJournaling = { id ->
                     onNavigate(Destination.App.EditJournaling(id))
@@ -57,7 +57,6 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.AllJournals())
                 },
                 onNavigateToAddSleep = { onNavigate(Destination.App.AddSleepQuality) },
-                onNavigateToStressHistory = { onNavigate(Destination.App.StressHistory) },
                 onNavigateToAddStress = { onNavigate(Destination.App.AddStressLevel) },
                 onNavigateToAddJournaling = { onNavigate(Destination.App.AddJournaling) },
             )
@@ -112,10 +111,8 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.StressLevel> { backStackEntry ->
-            val stressLevel = backStackEntry.toRoute<Destination.App.StressLevel>()
+        composable<Destination.App.StressLevel> {
             StressLevelScreen(
-                id = stressLevel.id,
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
                 },
@@ -124,8 +121,11 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.StressHistory> {
             StressHistoryScreen(
-                onNavigateStressLevel = { id ->
-                    onNavigate(Destination.App.StressLevel(id))
+                onNavigateStressLevel = {
+                    onNavigate(Destination.App.StressLevel)
+                },
+                onAddStressLevel = {
+                    onNavigate(Destination.App.AddStressLevel)
                 },
                 onGoBack = onGoBack
             )
@@ -144,18 +144,16 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressHistory) }
             )
         }
-        composable<Destination.App.SleepQuality> { backStackEntry ->
-            val sleepQuality = backStackEntry.toRoute<Destination.App.SleepQuality>()
+        composable<Destination.App.SleepQuality> {
             SleepQualityScreen(
-                id = sleepQuality.id,
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
                 onGoBack = onGoBack
             )
         }
         composable<Destination.App.SleepHistory> {
             SleepHistoryScreen(
-                onNavigateToSleepQuality = { id ->
-                    onNavigate(Destination.App.SleepQuality(id))
+                onNavigateToSleepQuality = {
+                    onNavigate(Destination.App.SleepQuality)
                 },
                 onGoBack = onGoBack,
                 onNavigateToAddSleepQuality = {

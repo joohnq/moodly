@@ -1,11 +1,6 @@
 package com.joohnq.health_journal.ui.presentation.edit_journaling_screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,32 +15,27 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingIntent
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.viewmodel.EditJournalingState
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.MainAlertDialog
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TextWithBackground
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.delete_journal
-import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
-import com.joohnq.shared_resources.edit_journal
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.remember.rememberFocusRequester
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.type_here_your_description
-import com.joohnq.shared_resources.type_here_your_title
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@Composable fun EditJournalingUI(
+@Composable
+fun EditJournalingUI(
     snackBarState: SnackbarHostState,
     state: EditJournalingState,
     canSave: Boolean,
@@ -59,7 +49,7 @@ import org.jetbrains.compose.resources.stringResource
     val resource = mood.toResource()
 
     if (state.openDeleteDialog)
-        MainAlertDialog(
+        ImageAlertDialog(
             onDismissRequest = {
                 onAction(
                     EditJournalingIntent.UpdateOpenDeleteDialog(
@@ -73,7 +63,7 @@ import org.jetbrains.compose.resources.stringResource
             },
             dialogTitle = Res.string.delete_journal,
             dialogText = Res.string.do_you_wish_to_remove_this_journal,
-            icon = Drawables.Icons.Trash,
+            image = Drawables.Images.DeleteSelfJournalIllustration,
             backgroundColor = Colors.White
         )
 
@@ -162,3 +152,21 @@ import org.jetbrains.compose.resources.stringResource
         }
     }
 }
+
+@Preview
+@Composable
+fun EditJournalingUIPreview() {
+    ImageAlertDialog(
+        onDismissRequest = {
+
+        },
+        onConfirmation = {
+
+        },
+        dialogTitle = Res.string.delete_journal,
+        dialogText = Res.string.do_you_wish_to_remove_this_journal,
+        image = Drawables.Images.DeleteSelfJournalIllustration,
+        backgroundColor = Colors.White
+    )
+}
+

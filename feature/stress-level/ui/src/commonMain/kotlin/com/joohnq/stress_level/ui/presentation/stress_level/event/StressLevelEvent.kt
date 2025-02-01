@@ -4,11 +4,11 @@ import com.joohnq.shared_resources.PanelEvent
 
 sealed interface StressLevelEvent {
     data object OnGoBack : StressLevelEvent
-    data object OnAdd : StressLevelEvent
+    data object onAddStressLevel : StressLevelEvent
 }
 
 fun PanelEvent.toStressLevelEvent(): StressLevelEvent =
     when (this) {
         PanelEvent.OnGoBack -> StressLevelEvent.OnGoBack
-        PanelEvent.OnAdd -> StressLevelEvent.OnAdd
+        PanelEvent.OnAdd -> StressLevelEvent.onAddStressLevel
     }

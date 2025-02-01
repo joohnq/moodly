@@ -36,6 +36,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
+            implementation(libs.calendar)
         }
     }
 }

@@ -1,19 +1,8 @@
 package com.joohnq.health_journal.ui.presentation.all_journals
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,21 +18,13 @@ import com.joohnq.health_journal.ui.components.AllJournalsCard
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalIntent
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalState
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.DateCard
-import com.joohnq.shared_resources.components.LoadingUI
-import com.joohnq.shared_resources.components.MainAlertDialog
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.delete_journal
-import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
-import com.joohnq.shared_resources.my_journals
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.timeline
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
@@ -74,7 +55,7 @@ fun AllJournalUI(
             val list = healthJournalMap[key]
 
             if (state.openDeleteDialog)
-                MainAlertDialog(
+                ImageAlertDialog(
                     onDismissRequest = {
                         onAction(
                             AllJournalIntent.UpdateOpenDeleteDialog(false)
@@ -88,7 +69,7 @@ fun AllJournalUI(
                     },
                     dialogTitle = Res.string.delete_journal,
                     dialogText = Res.string.do_you_wish_to_remove_this_journal,
-                    icon = Drawables.Icons.Trash,
+                    image = Drawables.Images.DeleteSelfJournalIllustration,
                     backgroundColor = Colors.White
                 )
 

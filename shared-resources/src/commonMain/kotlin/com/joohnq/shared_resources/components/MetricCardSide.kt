@@ -1,12 +1,6 @@
 package com.joohnq.shared_resources.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
@@ -32,10 +26,10 @@ import org.jetbrains.compose.resources.stringResource
 fun MetricCardSide(
     modifier: Modifier = Modifier,
     icon: DrawableResource,
-    title: StringResource,
-    text: StringResource,
-    suffix: StringResource,
-    description: StringResource,
+    title: String,
+    text: String,
+    suffix: String,
+    description: String,
     content: @Composable (Modifier) -> Unit,
     color: Color,
     onClick: () -> Unit,
@@ -61,12 +55,12 @@ fun MetricCardSide(
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(
                         painter = painterResource(icon),
-                        contentDescription = stringResource(title),
+                        contentDescription = title,
                         modifier = Modifier.size(20.dp),
                         tint = color
                     )
                     Text(
-                        text = stringResource(title),
+                        text = title,
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Gray80
                     )
@@ -79,7 +73,7 @@ fun MetricCardSide(
                     )
                     Icon(
                         painter = painterResource(Drawables.Icons.ArrowChevron),
-                        contentDescription = stringResource(title),
+                        contentDescription = title,
                         modifier = Modifier.size(20.dp).rotate(180f),
                         tint = Colors.Gray40
                     )
@@ -96,19 +90,19 @@ fun MetricCardSide(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = stringResource(text),
+                            text = text,
                             style = TextStyles.Text2xlBold(),
                             color = Colors.Gray80
                         )
                         Text(
-                            text = stringResource(suffix),
+                            text = suffix,
                             style = TextStyles.TextMdMedium(),
                             color = Colors.Gray80
                         )
                     }
                     VerticalSpacer(10.dp)
                     Text(
-                        text = stringResource(description),
+                        text = description,
                         style = TextStyles.TextSmRegular(),
                         color = Colors.Gray60
                     )

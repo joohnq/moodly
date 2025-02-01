@@ -17,6 +17,15 @@ fun LocalDate.toFormattedDateString(): String =
         year()
     })
 
+fun LocalDate.toMonthCompleteDayAndYear(): String =
+    format(LocalDate.Format {
+        monthName(MonthNames.ENGLISH_FULL)
+        chars(" ")
+        dayOfMonth()
+        chars(", ")
+        year()
+    })
+
 fun LocalDate.toShortDateString(): String =
     format(LocalDate.Format {
         dayOfMonth()
@@ -41,7 +50,7 @@ fun LocalDate.toCompleteDateString(): String = format(LocalDate.Format {
 
 fun LocalDate.getMonthFirstLetter(): String = this.month.name.first().toString()
 
-fun LocalDate.getAbbreviatedMonthName(): String =
+fun LocalDate.toAbbreviatedMonthName(): String =
     format(LocalDate.Format {
         monthName(MonthNames.ENGLISH_ABBREVIATED)
     })

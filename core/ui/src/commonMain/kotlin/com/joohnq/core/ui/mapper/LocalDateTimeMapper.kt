@@ -1,15 +1,10 @@
 package com.joohnq.core.ui.mapper
 
 import com.joohnq.core.ui.entity.DaySection
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.format
+import kotlinx.datetime.*
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.char
-import kotlinx.datetime.plus
-import kotlinx.datetime.until
 
 fun LocalDateTime.toFormattedDateTimeString(): String =
     format(LocalDateTime.Format {
@@ -29,6 +24,13 @@ fun LocalDateTime.toFormattedDateTimeString(): String =
 fun LocalDateTime.toMonthNameString(): String =
     format(LocalDateTime.Format {
         monthName(MonthNames.ENGLISH_FULL)
+    })
+
+fun LocalDateTime.toMonthAbbreviatedAndDayString(): String =
+    format(LocalDateTime.Format {
+        monthName(MonthNames.ENGLISH_ABBREVIATED)
+        chars(" ")
+        dayOfMonth()
     })
 
 fun LocalDateTime.getDaysInMonth(): Int {

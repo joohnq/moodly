@@ -6,22 +6,21 @@ import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.kizitonwose.calendar.compose.rememberCalendarState
-
 
 @Composable
 fun StressHistoryScreen(
     onGoBack: () -> Unit,
-    onNavigateStressLevel: (Int) -> Unit,
+    onAddStressLevel: () -> Unit,
+    onNavigateStressLevel: () -> Unit,
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val state by stressLevelViewModel.state.collectAsState()
-    val calendarState = rememberCalendarState()
 
     fun onEvent(event: StressHistoryEvent) {
         when (event) {
             StressHistoryEvent.OnGoBack -> onGoBack()
-            is StressHistoryEvent.OnNavigateToStressLevel -> onNavigateStressLevel(event.id)
+            is StressHistoryEvent.OnNavigateToStressLevel -> onNavigateStressLevel()
+            StressHistoryEvent.OnAddStressLevel -> onAddStressLevel()
         }
     }
 

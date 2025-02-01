@@ -30,11 +30,3 @@ fun Int.toPercent(): Double = when (this) {
 }
 
 fun StressLevel?.toInt(): Int = this?.id ?: -1
-
-fun getAllStressLevel(): List<StressLevel> = listOf(
-    One,
-    Two,
-    Three,
-    Four,
-    Five
-)

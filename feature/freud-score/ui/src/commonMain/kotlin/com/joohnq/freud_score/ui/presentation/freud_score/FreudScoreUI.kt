@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.core.ui.mapper.forEachMapComposable
 import com.joohnq.core.ui.mapper.toFormattedDateString
@@ -34,6 +35,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 
 @Composable
@@ -134,5 +136,21 @@ fun FreudScoreUI(
                 }
             )
         }
+    )
+}
+
+@Preview
+@Composable
+fun FreudScoreUIPreview() {
+    FreudScoreUI(
+        state = FreudScoreState(),
+        statsState = StatsState(
+            statsRecords = UiState.Success(
+                listOf(
+                    StatsRecord(),
+                    StatsRecord()
+                )
+            )
+        ),
     )
 }

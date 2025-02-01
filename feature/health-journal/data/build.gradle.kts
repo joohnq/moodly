@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -12,18 +11,6 @@ plugins {
 }
 
 kotlin {
-    //Prevent the error: The same 'unique_name=runtime_commonMain'
-    metadata {
-        compilations.all {
-            val compilationName = name
-            compileTaskProvider.configure {
-                if (this is KotlinCompileCommon) {
-                    moduleName = "${project.group}:${project.name}_$compilationName"
-                }
-            }
-        }
-    }
-
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
@@ -69,9 +56,6 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)
             implementation(libs.android.driver)
-        }
-        iosMain.dependencies {
-            implementation(libs.sqldelight.native.driver)
         }
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)

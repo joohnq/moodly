@@ -14,9 +14,9 @@ import com.joohnq.core.ui.entity.CalendarInfo
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthNameString
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.health_journal.domain.mapper.getTodayHealthJournalRecord
 import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalsAverageUseCase
 import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
-import com.joohnq.home.ui.presentation.home.getTodayHealthJournalRecord
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodAverageResource
@@ -38,6 +38,7 @@ import com.kizitonwose.calendar.compose.HorizontalCalendar
 import com.kizitonwose.calendar.compose.rememberCalendarState
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
+import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
@@ -179,7 +180,13 @@ fun SelfJournalingMetric(
     val recordsInYear = useCase.invoke(healthJournals = records)
 
     if (resource == null)
-        SelfJournalingNotFound(modifier = Modifier.paddingHorizontalMedium(), onClick = onCreate)
+        NotFoundHorizontal(
+            modifier = Modifier.paddingHorizontalMedium(),
+            title = Res.string.lets_set_up_daily_journaling_and_self_reflection,
+            subtitle = Res.string.add_new_journal,
+            image = Drawables.Images.SelfJournalingIllustration,
+            onClick = onCreate
+        )
     else {
         GiganticCreateCard(
             modifier = Modifier.paddingHorizontalMedium(),
@@ -201,7 +208,7 @@ fun SelfJournalingMetric(
 
 @Preview
 @Composable
-fun SelfJournalingMetricPreview() {
+fun SelfJournalingMetricPreviewToday() {
     CompositionLocalProviderPreview(
         module {
             single<GetHealthJournalsInYearUseCase> { GetHealthJournalsInYearUseCase() }
@@ -210,12 +217,26 @@ fun SelfJournalingMetricPreview() {
     ) {
         SelfJournalingMetric(
             records = listOf(
-                HealthJournalRecord(
-                    createdAt = getNow()
-                ),
+                HealthJournalRecord(),
             ),
             onCreate = {},
             onClick = {}
         )
     }
+}
+
+@Preview
+@Composable
+fun SelfJournalingMetricPreviewYesterday() {
+    val now = getNow()
+
+    SelfJournalingMetric(
+        records = listOf(
+            HealthJournalRecord(
+                createdAt = LocalDateTime(now.year, now.month, now.date.dayOfMonth.minus(1), 0, 0)
+            ),
+        ),
+        onCreate = {},
+        onClick = {}
+    )
 }

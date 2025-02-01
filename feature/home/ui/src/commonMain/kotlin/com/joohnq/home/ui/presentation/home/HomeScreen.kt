@@ -18,9 +18,8 @@ fun HomeScreen(
     onNavigateToMood: () -> Unit,
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
-    onNavigateToSleepHistory: () -> Unit,
-    onNavigateToStressLevel: (Int) -> Unit,
-    onNavigateToStressHistory: () -> Unit,
+    onNavigateToSleepQuality: () -> Unit,
+    onNavigateToStressLevel: () -> Unit,
     onNavigateToAddSleep: () -> Unit,
     onNavigateToAddStress: () -> Unit,
     onNavigateToSelfJournalHistory: () -> Unit,
@@ -47,11 +46,10 @@ fun HomeScreen(
             HomeEvent.OnNavigateToMood -> onNavigateToMood()
             HomeEvent.OnNavigateToHealthJournal -> onNavigateToHealthJournal()
             HomeEvent.OnNavigateToMindfulJournal -> onNavigateToMindfulJournal()
-            HomeEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
-            is HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel(event.id)
+            HomeEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
+            is HomeEvent.OnNavigateToStressLevel -> onNavigateToStressLevel()
             HomeEvent.OnNavigateToAddSleep -> onNavigateToAddSleep()
             is HomeEvent.ShowError -> onError(event.error)
-            is HomeEvent.OnNavigateToStressHistory -> onNavigateToStressHistory()
             HomeEvent.OnNavigateToAddStress -> onNavigateToAddStress()
             HomeEvent.OnNavigateToAllJournals -> onNavigateToSelfJournalHistory()
             HomeEvent.OnNavigateToAddJournaling -> onNavigateToAddJournaling()

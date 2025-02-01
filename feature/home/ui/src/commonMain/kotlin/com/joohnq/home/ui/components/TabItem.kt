@@ -37,17 +37,4 @@ fun TabItem(
             modifier = icon.modifier
         )
     }
-//    NavigationBarItem(
-//        modifier = Modifier.size(24.dp).height(50.dp).background(color = Colors.Brown30),
-//        selected = selected,
-//        colors = NavigationBarItemDefaults.colors(
-//            selectedIconColor = Colors.Brown80,
-//            unselectedIconColor = Colors.Brown30,
-//            indicatorColor = Colors.Transparent,
-//        ),
-//        onClick = onNavigate,
-//        icon = {
-//
-//        },
-//    )
 }

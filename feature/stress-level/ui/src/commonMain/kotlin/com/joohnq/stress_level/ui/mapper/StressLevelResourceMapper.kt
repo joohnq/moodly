@@ -1,14 +1,12 @@
 package com.joohnq.stress_level.ui.mapper
 
 import androidx.compose.ui.graphics.Color
+import com.joohnq.core.ui.getNow
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.domain.entity.StressLevel
+import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.stress_level.ui.resource.StressLevelResource.Five
-import com.joohnq.stress_level.ui.resource.StressLevelResource.Four
-import com.joohnq.stress_level.ui.resource.StressLevelResource.One
-import com.joohnq.stress_level.ui.resource.StressLevelResource.Three
-import com.joohnq.stress_level.ui.resource.StressLevelResource.Two
+import com.joohnq.stress_level.ui.resource.StressLevelResource.*
 
 fun getAllStressLevelResource(): List<StressLevelResource> = listOf(
     One,
@@ -49,3 +47,6 @@ fun Float.fromSliderValueToStressLevelResource(): StressLevelResource = when (th
     75f -> Four
     else -> Five
 }
+
+fun List<StressLevelRecord>.getTodayStressLevelResource(): StressLevelResource? =
+    find { it.createdAt.date == getNow().date }?.stressLevel?.toResource()

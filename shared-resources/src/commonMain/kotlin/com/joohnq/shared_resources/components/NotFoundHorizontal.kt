@@ -1,21 +1,13 @@
 package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -50,13 +42,16 @@ fun NotFoundHorizontal(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier.padding(16.dp).weight(1f)) {
+            Column(
+                modifier = Modifier.padding(16.dp).weight(1f),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
                     text = stringResource(title),
                     style = TextStyles.ParagraphSm(),
                     color = Colors.Gray60,
                 )
-                VerticalSpacer(16.dp)
+                VerticalSpacer(10.dp)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -79,8 +74,72 @@ fun NotFoundHorizontal(
                 painter = painterResource(image),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.fillMaxHeight()
             )
         }
     }
 }
+
+@Composable
+fun NotFoundVertical(
+    modifier: Modifier = Modifier,
+    title: StringResource,
+    subtitle: StringResource,
+    image: DrawableResource,
+    onClick: () -> Unit,
+) {
+    Card(
+        colors = CardColors(
+            containerColor = Colors.White,
+            contentColor = Colors.Brown80,
+            disabledContainerColor = Colors.White,
+            disabledContentColor = Colors.Brown80
+        ),
+        shape = Dimens.Shape.Large,
+        modifier = modifier.fillMaxWidth(),
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(image),
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth()
+            )
+            VerticalSpacer(16.dp)
+            Text(
+                text = stringResource(title),
+                style = TextStyles.ParagraphSm(),
+                color = Colors.Gray60,
+                textAlign = TextAlign.Center
+            )
+            VerticalSpacer(16.dp)
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                color = Colors.Gray20
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(
+                    10.dp,
+                    alignment = Alignment.CenterHorizontally
+                ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(subtitle),
+                    style = TextStyles.TextMdSemiBold(),
+                    color = Colors.Brown60
+                )
+                Icon(
+                    painter = painterResource(Drawables.Icons.Arrow),
+                    contentDescription = null,
+                    tint = Colors.Brown60,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+        }
+    }
+}
+

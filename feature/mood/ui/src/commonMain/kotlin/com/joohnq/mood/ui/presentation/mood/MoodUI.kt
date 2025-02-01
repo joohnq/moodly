@@ -13,17 +13,14 @@ import com.joohnq.mood.ui.components.MoodBarStatistic
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
-import com.joohnq.mood.ui.presentation.mood.event.toMoodEvent
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.CircularLoading
+import com.joohnq.shared_resources.components.DecoratedConvexPanelItem
 import com.joohnq.shared_resources.components.PreviousNextButton
-import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.your_mood_is
@@ -32,13 +29,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodPanel(
+    modifier: Modifier = Modifier,
     resource: MoodResource,
     hasPrevious: Boolean,
     hasNext: Boolean,
     onEvent: (MoodEvent) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .paddingHorizontalMedium()
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,8 +81,13 @@ fun MoodPanel(
 }
 
 @Composable
-fun MoodContent(statsRecord: StatsRecord, statsRecords: UiState<List<StatsRecord>>, onEvent: (MoodEvent) -> Unit) {
-    Column {
+fun MoodContent(
+    modifier: Modifier = Modifier,
+    statsRecord: StatsRecord,
+    statsRecords: UiState<List<StatsRecord>>,
+    onEvent: (MoodEvent) -> Unit
+) {
+    Column(modifier = modifier) {
         Text(
             text = statsRecord.description,
             style = TextStyles.TextMdSemiBold(),
@@ -102,7 +105,6 @@ fun MoodContent(statsRecord: StatsRecord, statsRecords: UiState<List<StatsRecord
                 )
             }
         )
-        VerticalSpacer(20.dp)
     }
 }
 
@@ -116,18 +118,16 @@ fun MoodUI(
 ) {
     statsRecord?.run {
         val resource = mood.toResource()
-        SharedPanelComponent(
-            isDark = false,
-            paddingValues = Dimens.Padding.HorizontalMedium,
-            backgroundColor = resource.palette.color,
-            image = Drawables.Images.MoodBackground,
+        DecoratedConvexPanelItem(
+            containerColor = Colors.White,
+            panelBackgroundColor = resource.palette.color,
             title = Res.string.mood,
-            color = resource.palette.imageColor,
-            onEvent = { event ->
-                onEvent(event.toMoodEvent())
-            },
-            panel = {
+            isDark = false,
+            onAddButton = { onEvent(MoodEvent.OnAddStatScreen) },
+            onGoBack = { onEvent(MoodEvent.OnGoBack) },
+            panel = { modifier ->
                 MoodPanel(
+                    modifier = modifier,
                     resource = resource,
                     hasPrevious = hasPrevious,
                     hasNext = hasNext,

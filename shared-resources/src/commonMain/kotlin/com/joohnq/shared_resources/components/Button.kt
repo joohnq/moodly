@@ -1,18 +1,8 @@
 package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,18 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.DIcon
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.add
-import com.joohnq.shared_resources.continue_word
-import com.joohnq.shared_resources.go_back
-import com.joohnq.shared_resources.go_next
-import com.joohnq.shared_resources.next
-import com.joohnq.shared_resources.previous
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.theme.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -237,26 +217,26 @@ fun PreviousNextButton(
 fun BottomNavigationActionButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    drawable: DrawableResource,
-    description: StringResource,
+    image: DrawableResource,
+    description: StringResource? = null,
 ) {
     Button(
         contentPadding = PaddingValues(0.dp),
         onClick = onClick,
         shape = Dimens.Shape.Circle,
-        modifier = modifier.size(64.dp),
+        modifier = modifier,
         colors = ComponentColors.Button.BottomNavigationActionButtonColors()
     ) {
         Icon(
-            painter = painterResource(drawable),
-            contentDescription = stringResource(description),
+            painter = painterResource(image),
+            contentDescription = description?.let { stringResource(description) },
             modifier = Modifier.size(Dimens.Icon),
         )
     }
 }
 
 @Composable
-fun BottomNavigationAddButton(
+fun BottomNavigationCentralButton(
     modifier: Modifier = Modifier,
     isExpanded: Boolean,
     onClick: () -> Unit,

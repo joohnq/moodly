@@ -42,7 +42,7 @@ kotlin {
             implementation(libs.bundles.koin)
         }
         nativeMain.dependencies {
-            implementation(libs.sqliter)
+            implementation(libs.sqldelight.native.driver)
         }
     }
 }

@@ -9,20 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
+import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
-import com.joohnq.home.ui.components.MentalHealthMetrics
+import com.joohnq.home.ui.components.MoodMetric
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -30,18 +29,7 @@ import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepQualityMetric
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.components.StressLevelMetric
-import com.joohnq.stress_level.ui.mapper.toResource
-import com.joohnq.stress_level.ui.resource.StressLevelResource
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinContext
-
-fun List<StressLevelRecord>.getTodayStressLevelResource(): StressLevelResource? =
-    find { it.createdAt.date == getNow().date }?.stressLevel?.toResource()
-
-fun List<HealthJournalRecord>.getTodayHealthJournalRecord(): HealthJournalRecord? =
-    find { it.createdAt.date == getNow().date }
+import com.joohnq.stress_level.ui.mapper.getTodayStressLevelResource
 
 @Composable
 fun HomeUI(
@@ -64,7 +52,6 @@ fun HomeUI(
         onError = { onEvent(HomeEvent.ShowError(it)) },
         onSuccess = { statsRecords: List<StatsRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
             val stressLevelResource = stressLevels.getTodayStressLevelResource()
-            val healthJournalResource = healthJournals.getTodayHealthJournalRecord()
 
             Scaffold(
                 containerColor = Colors.Brown10,
@@ -85,35 +72,44 @@ fun HomeUI(
                             .padding(top = padding.calculateTopPadding()),
                         user = u,
                     )
-                    Title(
-                        modifier = Modifier.paddingHorizontalMedium().padding(vertical = 32.dp),
-                        text = Res.string.mental_health_metrics
+                    SectionHeader(
+                        modifier = Modifier.paddingHorizontalMedium(),
+                        title = Res.string.freud_score,
+                        onSeeAll = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                     )
-                    MentalHealthMetrics(
+                    FreudScoreMetric(
                         freudScore = freudScore,
-                        statsRecord = statsRecords.first(),
-                        healthJournal = healthJournals,
-                        onEvent = onEvent
+                        onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
+                    )
+                    SectionHeader(
+                        modifier = Modifier.paddingHorizontalMedium(),
+                        title = Res.string.mood,
+                        onSeeAll = { onEvent(HomeEvent.OnNavigateToMood) }
+                    )
+                    MoodMetric(
+                        records = statsRecords,
+                        onCreate = { },
+                        onClick = { }
                     )
                     SectionHeader(
                         modifier = Modifier.paddingHorizontalMedium(),
                         title = Res.string.sleep,
-                        onSeeAll = { onEvent(HomeEvent.OnNavigateToSleepHistory) }
+                        onSeeAll = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                     )
                     SleepQualityMetric(
                         records = sleepQualities,
                         onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
-                        onClick = { onEvent(HomeEvent.OnNavigateToSleepHistory) }
+                        onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                     )
                     SectionHeader(
                         modifier = Modifier.paddingHorizontalMedium(),
                         title = Res.string.stress,
-                        onSeeAll = { onEvent(HomeEvent.OnNavigateToStressHistory) }
+                        onSeeAll = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                     )
                     StressLevelMetric(
                         resource = stressLevelResource,
                         onCreate = { onEvent(HomeEvent.OnNavigateToAddStress) },
-                        onClick = { onEvent(HomeEvent.OnNavigateToStressHistory) }
+                        onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                     )
                     SectionHeader(
                         modifier = Modifier.paddingHorizontalMedium(),
@@ -123,7 +119,7 @@ fun HomeUI(
                     SelfJournalingMetric(
                         records = healthJournals,
                         onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
-                        onClick = { onEvent(HomeEvent.OnNavigateToStressHistory) }
+                        onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
                     )
                     VerticalSpacer(16.dp)
                     VerticalSpacer(30.dp)

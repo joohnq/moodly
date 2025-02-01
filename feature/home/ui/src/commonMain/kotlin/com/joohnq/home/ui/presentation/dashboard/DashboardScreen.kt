@@ -1,21 +1,13 @@
 package com.joohnq.home.ui.presentation.dashboard
 
-import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.core.ui.entity.DIcon
 import com.joohnq.core.ui.mapper.anyError
 import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.core.ui.mapper.onSuccess
@@ -32,13 +24,8 @@ import com.joohnq.home.ui.presentation.home.HomeScreen
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
 import com.joohnq.navigation.Destination
-import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.home
-import com.joohnq.shared_resources.journaling
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
@@ -48,6 +35,22 @@ import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable
+fun BottomItem<out Destination>.createTabItem(
+    isCurrentRoute: (Destination) -> Boolean,
+    onNavigate: (Destination) -> Unit
+) =
+    TabItem(
+        icon = icon,
+        selected = isCurrentRoute(route),
+        onNavigate = { onNavigate(route) }
+    )
+
+
+fun Sequence<NavDestination>?.isCurrentRoute(route: Destination): Boolean =
+    this?.any { it.route == route::class.qualifiedName } == true
+
+
+@Composable
 fun DashboardScreen(
     onNavigateAddJournaling: () -> Unit,
     onNavigateAddStatScreen: () -> Unit,
@@ -55,9 +58,8 @@ fun DashboardScreen(
     onNavigateToMood: () -> Unit,
     onNavigateToHealthJournal: () -> Unit,
     onNavigateToMindfulJournal: () -> Unit,
-    onNavigateToSleepHistory: () -> Unit,
-    onNavigateToStressLevel: (Int) -> Unit,
-    onNavigateToStressHistory: () -> Unit,
+    onNavigateToSleepQuality: () -> Unit,
+    onNavigateToStressLevel: () -> Unit,
     onNavigateToEditJournaling: (Int) -> Unit,
     onNavigateToSelfJournalHistory: () -> Unit,
     onNavigateToAddSleep: () -> Unit,
@@ -70,6 +72,7 @@ fun DashboardScreen(
     val navigator = rememberNavController()
     val navBackStackEntry by navigator.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val hierarchy = currentDestination?.hierarchy
     val statsViewModel: StatsViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
     val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
@@ -83,40 +86,14 @@ fun DashboardScreen(
     val stressLevelState by stressLevelViewModel.state.collectAsStateWithLifecycle()
     val healthJournalState by healthJournalViewModel.state.collectAsStateWithLifecycle()
 
-    val bottomItems = remember {
-        listOf(
-            BottomItem(
-                icon = DIcon(
-                    icon = Drawables.Icons.Home,
-                    modifier = Modifier.size(Dimens.Icon),
-                    contentDescription = Res.string.home
-                ),
-                title = Res.string.home,
-                route = Destination.App.DashBoard.Home
-            ),
-            BottomItem(
-                icon = DIcon(
-                    icon = Drawables.Icons.Document,
-                    modifier = Modifier.size(Dimens.Icon),
-                    contentDescription = Res.string.journaling
-                ),
-                title = Res.string.journaling,
-                route = Destination.App.DashBoard.Journaling,
-            ),
-        )
-    }
-
     fun onError(error: Throwable) {
         scope.launch {
             snackBarHostState.showSnackbar(error.message.toString())
         }
     }
 
-    fun isCurrentRoute(route: String?): Boolean =
-        currentDestination?.hierarchy?.any { it.route == route } == true
-
-    fun onNavigate(destination: Destination) {
-        if (!isCurrentRoute(destination::class.qualifiedName))
+    fun onNavigateBottomNavigate(destination: Destination) {
+        if (!hierarchy.isCurrentRoute(destination))
             navigator.navigate(destination)
 
         addButtonIsExpanded = false
@@ -130,16 +107,6 @@ fun DashboardScreen(
                 )
             )
         }
-    }
-
-    @Composable
-    fun BottomItem<out Destination>.createTabItem() {
-        val isSelected = isCurrentRoute(route::class.qualifiedName)
-        return TabItem(
-            icon = icon,
-            selected = isSelected,
-            onNavigate = { onNavigate(route) }
-        )
     }
 
     LaunchedEffect(Unit) {
@@ -171,16 +138,10 @@ fun DashboardScreen(
     ScaffoldSnackBar(
         bottomBar = {
             DashboardBottomNavigation(
+                isCurrentRoute = hierarchy::isCurrentRoute,
+                onNavigate = ::onNavigateBottomNavigate,
                 isExpanded = addButtonIsExpanded,
-                switchIsExpanded = { addButtonIsExpanded = !addButtonIsExpanded },
-                left = {
-                    bottomItems[0].createTabItem()
-                },
-                right = {
-                    bottomItems[1].createTabItem()
-                },
-                onNavigateAddJournaling = onNavigateAddJournaling,
-                onNavigateAddStatScreen = onNavigateAddStatScreen,
+                toggleIsExpanded = { addButtonIsExpanded = !addButtonIsExpanded },
             )
         },
         snackBarHostState = snackBarHostState,
@@ -192,13 +153,12 @@ fun DashboardScreen(
                     onNavigateToMood = onNavigateToMood,
                     onNavigateToHealthJournal = onNavigateToHealthJournal,
                     onNavigateToMindfulJournal = onNavigateToMindfulJournal,
-                    onNavigateToSleepHistory = onNavigateToSleepHistory,
                     onNavigateToStressLevel = onNavigateToStressLevel,
-                    onNavigateToStressHistory = onNavigateToStressHistory,
                     onNavigateToAddSleep = onNavigateToAddSleep,
                     onNavigateToAddStress = onNavigateToAddStress,
                     onNavigateToSelfJournalHistory = onNavigateToSelfJournalHistory,
                     onNavigateToAddJournaling = onNavigateToAddJournaling,
+                    onNavigateToSleepQuality = onNavigateToSleepQuality,
                     onError = ::onError,
                 )
             }

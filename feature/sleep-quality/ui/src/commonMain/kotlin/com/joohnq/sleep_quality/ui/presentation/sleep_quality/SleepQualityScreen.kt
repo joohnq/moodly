@@ -3,36 +3,33 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import com.joohnq.core.ui.mapper.getValueOrNull
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.kizitonwose.calendar.compose.rememberCalendarState
+import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 
 @Composable
 fun SleepQualityScreen(
-    id: Int,
     onNavigateAddSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
 ) {
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
-    val sleepQualityState by sleepQualityViewModel.state.collectAsState()
-    val record by remember {
-        mutableStateOf(
-            sleepQualityState.sleepQualityRecords.getValueOrNull().find { it.id == id }
-                ?: sleepQualityState.sleepQualityRecords.getValueOrNull().first()
-        )
-    }
+    val state by sleepQualityViewModel.state.collectAsState()
+    val weekCalendarState = rememberWeekCalendarState()
 
     fun onEvent(event: SleepQualityEvent) =
         when (event) {
             SleepQualityEvent.OnAdd -> onNavigateAddSleepQuality()
             SleepQualityEvent.OnGoBack -> onGoBack()
+            SleepQualityEvent.OnAddSleepQuality -> TODO()
+            SleepQualityEvent.OnNextMonth -> TODO()
+            SleepQualityEvent.OnPreviousMonth -> TODO()
         }
 
     return SleepQualityUI(
-        record = record,
+        state = state,
+        weekCalendarState = weekCalendarState,
         onEvent = ::onEvent
     )
 }

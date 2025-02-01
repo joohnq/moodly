@@ -3,32 +3,20 @@ package com.joohnq.shared_resources.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.joohnq.shared_resources.PanelEvent
+import com.joohnq.shared_resources.dpOffset
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.painterResource
-
-@Composable
-fun Modifier.dpOffset(x: Dp = 0.dp, y: Dp = 0.dp): Modifier =
-    offset {
-        IntOffset(x = x.toPx().toInt(), y = y.toPx().toInt())
-    }
-
 
 @Composable
 fun SharedPanelComponent(
@@ -60,11 +48,6 @@ fun SharedPanelComponent(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-//                        .paint(
-//                            painter = painterResource(image),
-//                            contentScale = ContentScale.FillBounds,
-//                            colorFilter = ColorFilter.tint(color = color)
-//                        )
                 )
                 VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
                 TopBar(
@@ -79,14 +62,14 @@ fun SharedPanelComponent(
                 VerticalSpacer(20.dp)
                 panel()
                 VerticalSpacer(60.dp)
-                ConvexContentLayout(
-                    backgroundColor = containerColor,
-                ) {
-                    SmallAddButton(
-                        modifier = Modifier.dpOffset(y = (-88).dp),
-                        onClick = { onEvent(PanelEvent.OnAdd) }
-                    )
-                }
+//                ConvexContentLayout(
+//                    backgroundColor = containerColor,
+//                ) {
+//                    SmallAddButton(
+//                        modifier = Modifier.dpOffset(y = (-88).dp),
+//                        onClick = { onEvent(PanelEvent.OnAdd) }
+//                    )
+//                }
             }
             content()
         }
@@ -108,30 +91,40 @@ fun SharedPanelComponent(
         containerColor = containerColor,
     ) { padding ->
         Column(
-            modifier = Modifier
+            Modifier
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
-                .background(color = backgroundColor)
         ) {
-            VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
-            TopBar(
-                modifier = Modifier.paddingHorizontalMedium(),
-                isDark = isDark,
-                onGoBack = { onEvent(PanelEvent.OnGoBack) },
-                content = topBar
-            )
-            VerticalSpacer(20.dp)
-            panel()
-            VerticalSpacer(60.dp)
-            ConvexContentLayout(
-                backgroundColor = containerColor,
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = backgroundColor)
             ) {
-                SmallAddButton(
-                    modifier = Modifier.dpOffset(y = (-88).dp),
-                    onClick = { onEvent(PanelEvent.OnAdd) }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
                 )
-                content(Modifier.paddingHorizontalMedium())
+                VerticalSpacer(paddingValues.calculateTopPadding() + 10.dp)
+                TopBar(
+                    modifier = Modifier
+                        .padding(top = padding.calculateBottomPadding())
+                        .paddingHorizontalMedium(),
+                    isDark = isDark,
+                    onGoBack = { onEvent(PanelEvent.OnGoBack) },
+                    content = topBar
+                )
+                VerticalSpacer(20.dp)
+                panel()
+                VerticalSpacer(60.dp)
+                ConvexContentLayout(
+                    backgroundColor = containerColor,
+                ) {
+                    SmallAddButton(
+                        modifier = Modifier.dpOffset(y = (-88).dp),
+                        onClick = { onEvent(PanelEvent.OnAdd) }
+                    )
+                }
             }
+            content(Modifier.paddingHorizontalMedium())
         }
     }
 }

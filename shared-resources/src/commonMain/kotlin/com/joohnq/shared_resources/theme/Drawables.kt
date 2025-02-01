@@ -1,85 +1,16 @@
 package com.joohnq.shared_resources.theme
 
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.avatar_arrow_down
-import com.joohnq.shared_resources.avatar_arrow_up
-import com.joohnq.shared_resources.avatar_cloud
-import com.joohnq.shared_resources.avatar_pie_chart
-import com.joohnq.shared_resources.avatar_time
-import com.joohnq.shared_resources.freud_score_background
-import com.joohnq.shared_resources.ic_add
-import com.joohnq.shared_resources.ic_arrow
-import com.joohnq.shared_resources.ic_arrow_chevron
-import com.joohnq.shared_resources.ic_arrow_open
-import com.joohnq.shared_resources.ic_book
-import com.joohnq.shared_resources.ic_calendar
-import com.joohnq.shared_resources.ic_camera
-import com.joohnq.shared_resources.ic_chart
-import com.joohnq.shared_resources.ic_chat
-import com.joohnq.shared_resources.ic_check
-import com.joohnq.shared_resources.ic_clock
-import com.joohnq.shared_resources.ic_close
-import com.joohnq.shared_resources.ic_document
-import com.joohnq.shared_resources.ic_document_health
-import com.joohnq.shared_resources.ic_drug_store
-import com.joohnq.shared_resources.ic_edit
-import com.joohnq.shared_resources.ic_flag
-import com.joohnq.shared_resources.ic_gallery
-import com.joohnq.shared_resources.ic_happy_face
-import com.joohnq.shared_resources.ic_head
-import com.joohnq.shared_resources.ic_heart
-import com.joohnq.shared_resources.ic_home
-import com.joohnq.shared_resources.ic_hospital_bed
-import com.joohnq.shared_resources.ic_medicine
-import com.joohnq.shared_resources.ic_mood_neutral
-import com.joohnq.shared_resources.ic_moon
-import com.joohnq.shared_resources.ic_more_horizontal
-import com.joohnq.shared_resources.ic_nothing
-import com.joohnq.shared_resources.ic_photo_picker
-import com.joohnq.shared_resources.ic_question
-import com.joohnq.shared_resources.ic_resize
-import com.joohnq.shared_resources.ic_sad_face
-import com.joohnq.shared_resources.ic_simple_target
-import com.joohnq.shared_resources.ic_sleep
-import com.joohnq.shared_resources.ic_sun
-import com.joohnq.shared_resources.ic_trash
-import com.joohnq.shared_resources.ic_user
-import com.joohnq.shared_resources.ic_warning
-import com.joohnq.shared_resources.ic_warning_outlined
-import com.joohnq.shared_resources.icons.MoodDepressed
-import com.joohnq.shared_resources.icons.MoodHappy
-import com.joohnq.shared_resources.icons.MoodNeutral
-import com.joohnq.shared_resources.icons.MoodOverjoyed
-import com.joohnq.shared_resources.icons.MoodSad
-import com.joohnq.shared_resources.icons.Target
-import com.joohnq.shared_resources.logo
-import com.joohnq.shared_resources.mindfulness_journal_background
-import com.joohnq.shared_resources.mood_background
-import com.joohnq.shared_resources.mood_depressed
-import com.joohnq.shared_resources.mood_happy
-import com.joohnq.shared_resources.mood_neutral
-import com.joohnq.shared_resources.mood_overjoyed
-import com.joohnq.shared_resources.mood_sad
-import com.joohnq.shared_resources.not_found
-import com.joohnq.shared_resources.onboarding_sought_professional_help_image
-import com.joohnq.shared_resources.security_confirmed_background
-import com.joohnq.shared_resources.security_confirmed_image
-import com.joohnq.shared_resources.security_image
-import com.joohnq.shared_resources.self_journaling_illustration
-import com.joohnq.shared_resources.shape_bottom_navigation
-import com.joohnq.shared_resources.sleep_quality_background
-import com.joohnq.shared_resources.sleep_woman_illustration
-import com.joohnq.shared_resources.stress_level_background
-import com.joohnq.shared_resources.stress_level_man_illustration
-import com.joohnq.shared_resources.welcome_community_image
-import com.joohnq.shared_resources.welcome_first_screen_image
-import com.joohnq.shared_resources.welcome_health_state_image
-import com.joohnq.shared_resources.welcome_intelligent_image
-import com.joohnq.shared_resources.welcome_mental_image
-import com.joohnq.shared_resources.welcome_resources_image
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.icons.*
 
 object Drawables {
     object Icons {
+        object Outlined {
+            val Time = Res.drawable.ic_time_outlined
+            val Upload = Res.drawable.ic_upload_outlined
+            val Work = Res.drawable.ic_work_outlined
+        }
+
         val ArrowOpen = Res.drawable.ic_arrow_open
         val Arrow = Res.drawable.ic_arrow
         val Check = Res.drawable.ic_check
@@ -154,7 +85,14 @@ object Drawables {
         val SelfJournalingIllustration = Res.drawable.self_journaling_illustration
         val StressLevelManIllustration = Res.drawable.stress_level_man_illustration
 
+        val SleepWomanTiredIllustration = Res.drawable.sleep_woman_tired_illustration
+
         val NotFound = Res.drawable.not_found
+
+        val DeleteSelfJournalIllustration = Res.drawable.delete_self_journal_illustration
+        val StressTriggerIllustration = Res.drawable.stress_trigger_illustration
+        val FreudScoreIllustration = Res.drawable.freud_score_illustration
+        val MoodIllustration = Res.drawable.mood_illustration
     }
 
     object Mood {

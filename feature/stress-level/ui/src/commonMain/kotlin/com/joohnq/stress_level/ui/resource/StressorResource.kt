@@ -1,14 +1,8 @@
 package com.joohnq.stress_level.ui.resource
 
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.finances
-import com.joohnq.shared_resources.in_peace
-import com.joohnq.shared_resources.kids
-import com.joohnq.shared_resources.life
-import com.joohnq.shared_resources.loneliness
-import com.joohnq.shared_resources.other
-import com.joohnq.shared_resources.relationship
-import com.joohnq.shared_resources.work
+import androidx.compose.ui.graphics.Color
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.FINANCES
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.IN_PEACE
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.KIDS
@@ -22,15 +16,17 @@ import org.jetbrains.compose.resources.StringResource
 sealed class StressorResource(
     val text: StringResource,
     override val id: String,
+    val color: Color
 ) : StressorProperties {
-    data object Work : StressorResource(text = Res.string.work, id = WORK.id)
+    data object Work : StressorResource(text = Res.string.work, id = WORK.id, color = Colors.Brown60)
     data object Relationship :
-        StressorResource(text = Res.string.relationship, id = RELATIONSHIP.id)
+        StressorResource(text = Res.string.relationship, id = RELATIONSHIP.id, color = Colors.Orange40)
 
-    data object Kids : StressorResource(text = Res.string.kids, id = KIDS.id)
-    data object Life : StressorResource(text = Res.string.life, id = LIFE.id)
-    data object Finances : StressorResource(text = Res.string.finances, id = FINANCES.id)
-    data object Loneliness : StressorResource(text = Res.string.loneliness, id = LONELINESS.id)
-    data object InPeace : StressorResource(text = Res.string.in_peace, id = IN_PEACE.id)
-    data class Other(val other: String = "") : StressorResource(text = Res.string.other, id = other)
+    data object Kids : StressorResource(text = Res.string.kids, id = KIDS.id, color = Colors.Pink40)
+    data object Life : StressorResource(text = Res.string.life, id = LIFE.id, color = Colors.Yellow40)
+    data object Finances : StressorResource(text = Res.string.finances, id = FINANCES.id, color = Colors.Green70)
+    data object Loneliness : StressorResource(text = Res.string.loneliness, id = LONELINESS.id, color = Colors.Gray40)
+    data object InPeace : StressorResource(text = Res.string.in_peace, id = IN_PEACE.id, color = Colors.Green40)
+    data class Other(val other: String = "") :
+        StressorResource(text = Res.string.other, id = other, color = Colors.Purple40)
 }

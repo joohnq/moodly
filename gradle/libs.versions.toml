@@ -35,7 +35,7 @@ coil = "3.0.4"
 coilNetwork = "3.0.0-alpha08"
 ktor = "3.0.3"
 coreKtx = "1.6.1"
-uiAndroid = "1.7.6"
+uiAndroid = "1.7.7"
 androidx-data-store = "1.1.2"
 
 [libraries]
@@ -77,7 +77,6 @@ ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref =
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktor" }
 androidx-core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtx" }
-androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-datastore-core = { module = "androidx.datastore:datastore", version.ref = "androidx-data-store" }
 androidx-data-store-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-data-store" }
 

@@ -25,6 +25,7 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import kotlinx.datetime.LocalDateTime
@@ -46,7 +47,7 @@ fun MentalScoreHistoryItemWithHour(
     ) {
         Row(
             modifier = Modifier.fillMaxSize()
-                .padding(16.dp),
+                .paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

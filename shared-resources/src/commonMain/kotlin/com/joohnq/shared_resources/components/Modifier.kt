@@ -121,3 +121,11 @@ fun Modifier.dashedLine(
         strokeWidth = strokeWidth.toPx()
     )
 }
+
+@Composable
+fun Modifier.takeIf(condition: Boolean, thenModifier: Modifier.() -> Modifier): Modifier {
+    val modifier = this
+    return then(
+        if (condition) thenModifier() else modifier
+    )
+}

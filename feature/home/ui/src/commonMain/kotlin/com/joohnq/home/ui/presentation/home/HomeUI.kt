@@ -110,7 +110,7 @@ fun HomeUI(
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
                     onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
                 )
-                VerticalSpacer(10.dp)
+                VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
             }
         }
     )

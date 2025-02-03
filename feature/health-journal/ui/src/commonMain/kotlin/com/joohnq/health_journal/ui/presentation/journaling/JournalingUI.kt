@@ -21,6 +21,7 @@ import com.joohnq.health_journal.ui.components.HealthJournalStatsCard
 import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.IsEmpty
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.Title
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -42,8 +43,8 @@ fun JournalingUI(
 ) {
     records.foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { healthJournals ->
-            val dayPerYear = getHealthJournalsInYearUseCase(healthJournals = healthJournals)
+        onSuccess = { records ->
+            val dayPerYear = getHealthJournalsInYearUseCase(healthJournals = records)
 
             Column(
                 modifier = Modifier
@@ -68,24 +69,15 @@ fun JournalingUI(
                     modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
                     text = Res.string.all_journals
                 )
-                if (healthJournals.isEmpty()) {
-                    Box(
-                        modifier = Modifier.height(250.dp).fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = stringResource(Res.string.empty),
-                            style = TextStyles.Text2xlExtraBold(),
-                            color = Colors.Brown100Alpha64,
-                        )
-                    }
+                if (records.isEmpty()) {
+                    IsEmpty()
                 } else {
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                         contentPadding = PaddingValues(horizontal = 20.dp),
                         modifier = Modifier.heightIn(min = 250.dp)
                     ) {
-                        items(healthJournals) { journal ->
+                        items(records) { journal ->
                             HealthJournalCard(journal) {
                                 onEvent(
                                     JournalingEvent.OnNavigateToEditJournalingScreen(journal.id)
@@ -136,7 +128,7 @@ fun JournalingUI(
                     HealthJournalStatsCard(
                         modifier = Modifier.weight(1f),
                         icon = Drawables.Icons.Chart,
-                        title = stringResource(if (healthJournals.isEmpty()) Res.string.no_data else healthJournals.first().mood.toResource().text),
+                        title = stringResource(if (records.isEmpty()) Res.string.no_data else records.first().mood.toResource().text),
                         color = Colors.Brown60,
                         backgroundColor = Colors.Brown10,
                         description = stringResource(Res.string.emotion)

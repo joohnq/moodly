@@ -99,4 +99,6 @@ object Colors {
     val White32 = Color(0x52ffffff)
 
     val CardShadow = Color(0x0d4b3425)
+
+    val Black48 = Color(0x7a000000)
 }

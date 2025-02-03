@@ -33,9 +33,10 @@ fun NavGraphBuilder.appNavigation(
     navigation<NavigationGraph.App>(startDestination = Destination.App.DashBoard) {
         composable<Destination.App.DashBoard> {
             DashboardScreen(
+                onNavigate = onNavigate,
                 onEvent = { event ->
                     when (event) {
-                        DashboardEvent.OnNavigateToAddJournaling -> onNavigate(Destination.App.AddJournaling)
+                        DashboardEvent.OnNavigateToAddJournaling -> onNavigate(Destination.App.AddSelfJournaling)
                         DashboardEvent.OnNavigateToAddSleep -> onNavigate(Destination.App.AddSleepQuality)
                         DashboardEvent.OnNavigateToAddStat -> onNavigate(Destination.App.AddStat)
                         DashboardEvent.OnNavigateToAddStress -> onNavigate(Destination.App.AddStressLevel)
@@ -66,7 +67,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.HealthJournal> {
             HealthJournalScreen(
                 onNavigateAddHealthJournal = {
-                    onNavigate(Destination.App.AddJournaling)
+                    onNavigate(Destination.App.AddSelfJournaling)
                 },
                 onNavigateAllJournals = {
                     onNavigate(Destination.App.AllJournals(it.toString()))
@@ -157,7 +158,7 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.AddJournaling> {
+        composable<Destination.App.AddSelfJournaling> {
             AddJournalingScreen(
                 onGoBack = onGoBack
             )

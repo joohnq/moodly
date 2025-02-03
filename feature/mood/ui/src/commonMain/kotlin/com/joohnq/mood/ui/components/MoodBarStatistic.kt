@@ -1,17 +1,7 @@
 package com.joohnq.mood.ui.components
 
 import androidx.compose.foundation.gestures.snapping.SnapPosition
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -28,7 +18,7 @@ import androidx.compose.ui.unit.times
 import com.joohnq.core.ui.mapper.toShortDateString
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.shared_resources.components.calculateTextHeight
+import com.joohnq.shared_resources.components.CalculateTextHeight
 import com.joohnq.shared_resources.components.dashedLine
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
@@ -52,7 +42,7 @@ fun MoodBarStatistic(
             pagerState.animateScrollToPage(selectedIndex)
         }
     }
-    val textHeight = calculateTextHeight(font = TextStyles.TextSmSemiBold())
+    val textHeight = CalculateTextHeight(font = TextStyles.TextSmSemiBold())
     val resource = currentStatsRecord.mood.toResource()
     BoxWithConstraints(
         modifier = Modifier.fillMaxWidth().height(height + textHeight)

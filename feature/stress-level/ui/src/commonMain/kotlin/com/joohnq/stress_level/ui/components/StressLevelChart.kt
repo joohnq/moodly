@@ -3,7 +3,7 @@ package com.joohnq.stress_level.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.joohnq.mood.domain.use_case.OrganizeStatRangeUseCase
-import com.joohnq.shared_resources.components.CustomChart
+import com.joohnq.shared_resources.components.LineChart
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.mapper.toPercent
 import com.joohnq.stress_level.ui.mapper.toResource
@@ -20,7 +20,7 @@ fun StressLevelChart(stressLevelRecords: List<StressLevelRecord>) {
                 it.stressLevel.level.toPercent()
             })
         }
-    CustomChart(
+    LineChart(
         color = resource.palette.color,
         values = values
     )

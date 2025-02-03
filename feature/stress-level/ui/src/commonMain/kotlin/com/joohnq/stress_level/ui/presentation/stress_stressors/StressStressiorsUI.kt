@@ -1,11 +1,6 @@
 package com.joohnq.stress_level.ui.presentation.stress_stressors
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -20,17 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.add_stress_level
-import com.joohnq.shared_resources.components.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TextBubble
-import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.enter_your_stressor
-import com.joohnq.shared_resources.other
-import com.joohnq.shared_resources.select_stressors
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -84,7 +70,7 @@ fun StressStressorsUI(
                 modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                 content = {
                     items(stressors) { stressor ->
-                        TextBubble(
+                        BubbleText(
                             text = stressor.text,
                             onClick = {
                                 onAddAction(

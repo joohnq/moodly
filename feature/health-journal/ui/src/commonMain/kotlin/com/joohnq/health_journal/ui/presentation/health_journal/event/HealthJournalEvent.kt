@@ -1,6 +1,6 @@
 package com.joohnq.health_journal.ui.presentation.health_journal.event
 
-import com.joohnq.shared_resources.PanelEvent
+import com.joohnq.core.ui.event.PanelEvent
 import kotlinx.datetime.LocalDate
 
 sealed interface HealthJournalEvent {

@@ -275,6 +275,7 @@
     <string name="current_sleep_quality">Current Sleep Quality</string>
     <string name="stress_trigger_title">%1$s &amp; %2$s</string>
     <string name="set_up_mood">Set Up Mood</string>
+    <string name="ok">Ok</string>
     <string name="you_havent_set_up_any_mood_yet">You haven't set up today any mood yet.\n Let's set it up now.</string>
     <string name="you_are_stressed_because_you_are_to_preoccupied_with">You are stressed because you're too preoccupied
         with:

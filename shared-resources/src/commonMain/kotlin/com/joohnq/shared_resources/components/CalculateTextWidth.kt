@@ -25,7 +25,7 @@ fun CalculateTextWidth(text: StringResource, fontSize: TextUnit): Dp {
 }
 
 @Composable
-fun calculateTextHeight(text: String = "11/12", font: TextStyle): Dp {
+fun CalculateTextHeight(text: String = "11/12", font: TextStyle): Dp {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()
 

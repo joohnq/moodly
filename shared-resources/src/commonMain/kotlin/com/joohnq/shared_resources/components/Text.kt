@@ -41,7 +41,7 @@ fun TextWithBackground(
 ) {
     Text(
         text = text,
-        modifier = Modifier
+        modifier = modifier
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
             .padding(vertical = 9.dp, horizontal = 16.dp),
         style = TextStyles.LabelSm().copy(color = textColor)

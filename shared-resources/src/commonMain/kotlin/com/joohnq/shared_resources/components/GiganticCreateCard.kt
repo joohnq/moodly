@@ -11,6 +11,7 @@ import com.joohnq.shared_resources.add
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -36,7 +37,7 @@ fun GiganticCreateCard(
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -100,7 +101,7 @@ fun GiganticSecondaryCard(
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

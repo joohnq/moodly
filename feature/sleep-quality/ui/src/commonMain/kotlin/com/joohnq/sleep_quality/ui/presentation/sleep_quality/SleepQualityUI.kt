@@ -2,6 +2,7 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +16,8 @@ import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.mapper.getTodaySleepQualityRecord
@@ -26,6 +29,7 @@ import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQuality
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import com.kizitonwose.calendar.compose.weekcalendar.WeekCalendarState
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -74,7 +78,7 @@ fun SleepQualityUI(
                     Column(
                         modifier = modifier
                             .background(color = Colors.White, shape = Dimens.Shape.Large)
-                            .padding(16.dp)
+                            .paddingAllSmall()
                     ) {
                         SleepTopNavDate()
                         VerticalSpacer(10.dp)

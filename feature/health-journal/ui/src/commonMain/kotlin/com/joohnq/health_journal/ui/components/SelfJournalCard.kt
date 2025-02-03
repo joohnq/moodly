@@ -1,16 +1,7 @@
 package com.joohnq.health_journal.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -20,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.Res
@@ -29,25 +19,20 @@ import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.hour
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.theme.*
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AllJournalsCard(
-    i: Int,
-    lastIndex: Int,
-    healthJournal: HealthJournalRecord,
-    onEvent: (AllJournalEvent) -> Unit,
+fun SelfJournalCard(
+    isNotFirst: Boolean,
+    isNotLast: Boolean,
+    record: HealthJournalRecord,
+    onClick: (Int) -> Unit,
     onDelete: () -> Unit,
 ) {
-    val mood = healthJournal.mood
-    val resource = mood.toResource()
-    val palette = resource.palette
+    val resource = record.mood.toResource()
 
     SwipeTorRevealCard(
         content = { modifier ->
@@ -56,14 +41,10 @@ fun AllJournalsCard(
                 modifier = modifier,
                 colors = ComponentColors.Card.MainCardColors(),
                 onClick = {
-                    onEvent(
-                        AllJournalEvent.OnSelectJournal(
-                            healthJournal.id
-                        )
-                    )
+                    onClick(record.id)
                 }
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.paddingAllSmall()) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -71,7 +52,7 @@ fun AllJournalsCard(
                         Box(
                             modifier = Modifier
                                 .background(
-                                    color = palette.color,
+                                    color = resource.palette.color,
                                     shape = Dimens.Shape.Circle
                                 )
                                 .size(44.dp),
@@ -81,25 +62,25 @@ fun AllJournalsCard(
                                 modifier = Modifier.size(20.dp),
                                 resource = resource,
                                 backgroundColor = Colors.White,
-                                color = palette.barFaceColor
+                                color = resource.palette.barFaceColor
                             )
                         }
                         TextWithBackground(
                             text = stringResource(resource.text),
-                            backgroundColor = palette.backgroundColor,
-                            textColor = palette.color
+                            backgroundColor = resource.palette.backgroundColor,
+                            textColor = resource.palette.color
                         )
                     }
                     VerticalSpacer(10.dp)
                     TextEllipsis(
-                        text = healthJournal.title,
+                        text = record.title,
                         style = TextStyles.TextMdExtraBold(),
                         color = Colors.Brown80,
                         maxLines = 1
                     )
                     VerticalSpacer(10.dp)
                     TextEllipsis(
-                        text = healthJournal.description,
+                        text = record.description,
                         style = TextStyles.TextMdSemiBold(),
                         color = Colors.Brown100Alpha64,
                         maxLines = 2
@@ -107,7 +88,7 @@ fun AllJournalsCard(
                 }
             }
         },
-        secondaryContent = {
+        secondary = {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -116,7 +97,7 @@ fun AllJournalsCard(
             ) {
                 Box(
                     modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                        .background(color = if (i != 0) Colors.Brown80 else Colors.Transparent)
+                        .background(color = if (isNotFirst) Colors.Brown80 else Colors.Transparent)
                 )
                 Column(
                     modifier = Modifier.size(50.dp)
@@ -134,14 +115,14 @@ fun AllJournalsCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Text(
-                        text = healthJournal.createdAt.toFormattedTimeString(),
+                        text = record.createdAt.toFormattedTimeString(),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.White
                     )
                 }
                 Box(
                     modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                        .background(color = if (i != lastIndex) Colors.Brown80 else Colors.Transparent)
+                        .background(color = if (isNotLast) Colors.Brown80 else Colors.Transparent)
                 )
             }
         },

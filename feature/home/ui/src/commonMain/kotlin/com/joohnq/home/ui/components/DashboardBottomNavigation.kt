@@ -23,17 +23,6 @@ fun DashboardBottomNavigation(
 ) {
     val bottomItems = rememberBottomNavigationItems()
 
-    if (isCentralExpanded)
-        Box(modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()) {
-            Row {
-                CreateTabItem(
-                    item = bottomItems[0],
-                    isCurrentRoute = isCurrentRoute,
-                    onNavigate = onNavigate
-                )
-            }
-        }
-
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,

@@ -1,12 +1,7 @@
 package com.joohnq.home.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +25,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeTopBar(
@@ -88,4 +84,17 @@ fun HomeTopBar(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun HomeTopBarPreview() {
+    HomeTopBar(
+        user = User(
+            id = 1,
+            name = "John Doe",
+            image = "0",
+            imageType = ImageType.DRAWABLE
+        )
+    )
 }

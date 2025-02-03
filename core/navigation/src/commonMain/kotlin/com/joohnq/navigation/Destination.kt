@@ -49,7 +49,7 @@ sealed interface Destination {
         @Serializable data object SleepQuality : Destination
         @Serializable data object SleepHistory : Destination
         @Serializable data object AddSleepQuality : Destination
-        @Serializable data object AddJournaling : Destination
+        @Serializable data object AddSelfJournaling : Destination
         @Serializable data class AllJournals(val localDate: String? = null) : Destination
         @Serializable data class EditJournaling(val id: Int) : Destination
     }

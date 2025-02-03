@@ -4,9 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
 import com.joohnq.health_journal.ui.presentation.health_journal.event.HealthJournalEvent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import kotlinx.datetime.LocalDate
+import org.koin.compose.koinInject
 
 @Composable
 fun HealthJournalScreen(
@@ -16,6 +18,7 @@ fun HealthJournalScreen(
 ) {
     val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
     val healthJournalState by healthJournalViewModel.state.collectAsState()
+    val getHealthJournalsInYearUseCase: GetHealthJournalsInYearUseCase = koinInject()
 
     fun onEvent(event: HealthJournalEvent) =
         when (event) {
@@ -26,6 +29,7 @@ fun HealthJournalScreen(
 
     return HealthJournalUI(
         healthJournal = healthJournalState.healthJournalRecords,
+        getHealthJournalsInYearUseCase = getHealthJournalsInYearUseCase,
         onEvent = ::onEvent
     )
 }

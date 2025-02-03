@@ -1,12 +1,7 @@
 package com.joohnq.shared_resources.theme
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Icon
-import androidx.compose.runtime.Composable
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.icons.*
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object Drawables {
     object Icons {
@@ -15,6 +10,9 @@ object Drawables {
             val Upload = Res.drawable.ic_upload_outlined
             val Work = Res.drawable.ic_work_outlined
             val Logo = Res.drawable.ic_logo_outlined
+            val Warning = Res.drawable.ic_warning_outlined
+            val BookOpen = Res.drawable.ic_book_open
+            val Mood = Res.drawable.ic_mood_neutral
         }
 
         val ArrowOpen = Res.drawable.ic_arrow_open
@@ -42,11 +40,9 @@ object Drawables {
         val Chat = Res.drawable.ic_chat
         val ArrowChevron = Res.drawable.ic_arrow_chevron
         val Flag = Res.drawable.ic_flag
-        val WarningOutlined = Res.drawable.ic_warning_outlined
         val Sleep = Res.drawable.ic_sleep
         val Sun = Res.drawable.ic_sun
         val Moon = Res.drawable.ic_moon
-        val MoodNeutral = Res.drawable.ic_mood_neutral
         val Chart = Res.drawable.ic_chart
         val Edit = Res.drawable.ic_edit
         val Trash = Res.drawable.ic_trash
@@ -75,12 +71,6 @@ object Drawables {
 
         val OnboardingSoughtProfessionalHelp =
             Res.drawable.onboarding_sought_professional_help_image
-
-        val AvatarArrowDown = Res.drawable.avatar_arrow_down
-        val AvatarArrowUp = Res.drawable.avatar_arrow_up
-        val AvatarCloud = Res.drawable.avatar_cloud
-        val AvatarPieChart = Res.drawable.avatar_pie_chart
-        val AvatarTime = Res.drawable.avatar_time
 
         val SecurityImage = Res.drawable.security_image
 
@@ -119,45 +109,18 @@ object Drawables {
 
     object Avatar {
         val avatars = listOf(
-            Images.AvatarCloud,
-            Images.AvatarTime,
-            Images.AvatarArrowUp,
-            Images.AvatarArrowDown,
-            Images.AvatarPieChart,
+            Res.drawable.man1,
+            Res.drawable.woman1,
+            Res.drawable.man2,
+            Res.drawable.woman2,
+            Res.drawable.man3,
+            Res.drawable.woman3,
+            Res.drawable.man4,
+            Res.drawable.woman4,
+            Res.drawable.man5,
+            Res.drawable.woman5,
+            Res.drawable.man6,
+            Res.drawable.woman6
         )
-    }
-}
-
-@Preview
-@Composable
-fun IconsPreview(){
-    val items = listOf(
-        Drawables.Icons.Arrow,
-        Drawables.Icons.ArrowOpen,
-        Drawables.Icons.Check,
-        Drawables.Icons.Close,
-        Drawables.Icons.Question,
-        Drawables.Icons.Resize,
-        Drawables.Icons.Medicine,
-        Drawables.Icons.DrugStore,
-        Drawables.Icons.Nothing,
-        Drawables.Icons.Logo,
-        Drawables.Icons.User,
-        Drawables.Icons.Warning,
-        Drawables.Icons.Calendar,
-        Drawables.Icons.Heart,
-        Drawables.Icons.Document,
-        Drawables.Icons.SadFace,
-        Drawables.Icons.DocumentHealth,
-        Drawables.Icons.HospitalBed,
-    )
-    Row {
-        items.forEach {icon ->
-            Icon(
-                painter = painterResource( icon),
-                tint = Colors.Brown80,
-                contentDescription = null
-            )
-        }
     }
 }

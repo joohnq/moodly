@@ -37,7 +37,7 @@ fun StressPanel(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.WarningOutlined),
+            painter = painterResource(Drawables.Icons.Outlined.Warning),
             contentDescription = stringResource(Res.string.stress_level),
             modifier = Modifier.size(48.dp),
             tint = iconTint

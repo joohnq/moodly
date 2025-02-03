@@ -16,19 +16,16 @@ import com.joohnq.core.ui.mapper.forEachMapComposable
 import com.joohnq.core.ui.mapper.toFormattedDateString
 import com.joohnq.freud_score.ui.components.MentalScoreHistoryItemWithHour
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
-import com.joohnq.freud_score.ui.presentation.freud_score.event.toFreudScoreEvent
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.domain.use_case.GetStatGroupByDateUseCase
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.viewmodel.StatsState
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.DecoratedConvexPanel
 import com.joohnq.shared_resources.components.LoadingUI
-import com.joohnq.shared_resources.components.SharedPanelComponent
 import com.joohnq.shared_resources.components.SmallTitle
-import com.joohnq.shared_resources.freud_score
-import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
@@ -114,20 +111,19 @@ fun FreudScoreUI(
 ) {
     statsState.statsRecords.foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { statsRecords: List<StatsRecord> ->
+        onSuccess = { records: List<StatsRecord> ->
+            if (state.freudScore == null) return@foldComposable
             val getStatGroupByDateUseCase: GetStatGroupByDateUseCase = koinInject()
             val recordsMap =
-                remember { getStatGroupByDateUseCase(statsRecords) }
+                remember { getStatGroupByDateUseCase(records) }
 
-            SharedPanelComponent(
-                isDark = false,
-                paddingValues = Dimens.Padding.HorizontalMedium,
-                backgroundColor = state.freudScore!!.palette.backgroundColor,
-                image = Drawables.Images.FreudScoreBackground,
-                title = Res.string.freud_score,
-                color = state.freudScore.palette.imageColor,
-                onEvent = { event -> event.toFreudScoreEvent() },
-                panel = { FreudPanel(state.freudScore) },
+
+            DecoratedConvexPanel(
+                panelBackgroundColor = Colors.Green50,
+                backgroundColor = Colors.White,
+                panelContent = {
+                    FreudPanel(state.freudScore)
+                },
                 content = {
                     FreudContent(
                         records = recordsMap,

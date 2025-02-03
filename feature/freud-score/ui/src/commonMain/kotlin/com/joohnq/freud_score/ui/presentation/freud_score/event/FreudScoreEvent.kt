@@ -1,7 +1,7 @@
 package com.joohnq.freud_score.ui.presentation.freud_score.event
 
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared_resources.PanelEvent
+import com.joohnq.core.ui.event.PanelEvent
 
 sealed interface FreudScoreEvent {
     data object OnGoBack : FreudScoreEvent

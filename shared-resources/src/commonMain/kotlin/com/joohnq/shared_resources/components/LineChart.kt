@@ -29,7 +29,7 @@ import ir.ehsannarmani.compose_charts.models.Line
 import ir.ehsannarmani.compose_charts.models.PopupProperties
 
 @Composable
-fun CustomChart(
+fun LineChart(
     color: Color,
     values: List<Double>,
 ) {

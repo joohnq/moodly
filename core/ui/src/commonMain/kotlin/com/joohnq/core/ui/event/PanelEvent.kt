@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.core.ui.event
 
 sealed interface PanelEvent {
     data object OnGoBack : PanelEvent

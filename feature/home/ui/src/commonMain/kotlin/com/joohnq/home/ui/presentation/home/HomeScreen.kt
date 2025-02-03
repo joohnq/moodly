@@ -1,5 +1,6 @@
 package com.joohnq.home.ui.presentation.home
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -14,6 +15,7 @@ import com.joohnq.user.ui.viewmodel.user.UserViewModel
 
 @Composable
 fun HomeScreen(
+    padding: PaddingValues,
     onNavigateFreudScore: () -> Unit,
     onNavigateToMood: () -> Unit,
     onNavigateToHealthJournal: () -> Unit,
@@ -24,6 +26,7 @@ fun HomeScreen(
     onNavigateToAddStress: () -> Unit,
     onNavigateToSelfJournalHistory: () -> Unit,
     onNavigateToAddJournaling: () -> Unit,
+    onNavigateAddStat: () -> Unit,
     onError: (Throwable) -> Unit,
 ) {
     val statsViewModel: StatsViewModel = sharedViewModel()
@@ -53,9 +56,11 @@ fun HomeScreen(
             HomeEvent.OnNavigateToAddStress -> onNavigateToAddStress()
             HomeEvent.OnNavigateToAllJournals -> onNavigateToSelfJournalHistory()
             HomeEvent.OnNavigateToAddJournaling -> onNavigateToAddJournaling()
+            HomeEvent.OnNavigateToAddStat -> onNavigateAddStat()
         }
 
     HomeUI(
+        padding = padding,
         user = userState.user,
         statsRecord = statsState.statsRecords,
         freudScore = freudScoreState.freudScore,

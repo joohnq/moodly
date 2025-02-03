@@ -1,7 +1,7 @@
 package com.joohnq.mood.ui.presentation.mood.event
 
 import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.shared_resources.PanelEvent
+import com.joohnq.core.ui.event.PanelEvent
 
 sealed interface MoodEvent {
     data object OnPrevious : MoodEvent

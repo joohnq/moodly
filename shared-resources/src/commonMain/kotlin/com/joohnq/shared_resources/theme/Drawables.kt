@@ -1,7 +1,12 @@
 package com.joohnq.shared_resources.theme
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Icon
+import androidx.compose.runtime.Composable
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.icons.*
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object Drawables {
     object Icons {
@@ -9,6 +14,7 @@ object Drawables {
             val Time = Res.drawable.ic_time_outlined
             val Upload = Res.drawable.ic_upload_outlined
             val Work = Res.drawable.ic_work_outlined
+            val Logo = Res.drawable.ic_logo_outlined
         }
 
         val ArrowOpen = Res.drawable.ic_arrow_open
@@ -111,10 +117,6 @@ object Drawables {
         val TargetVectorPainter = Target
     }
 
-    object Shape {
-        val BottomNavigation = Res.drawable.shape_bottom_navigation
-    }
-
     object Avatar {
         val avatars = listOf(
             Images.AvatarCloud,
@@ -123,5 +125,39 @@ object Drawables {
             Images.AvatarArrowDown,
             Images.AvatarPieChart,
         )
+    }
+}
+
+@Preview
+@Composable
+fun IconsPreview(){
+    val items = listOf(
+        Drawables.Icons.Arrow,
+        Drawables.Icons.ArrowOpen,
+        Drawables.Icons.Check,
+        Drawables.Icons.Close,
+        Drawables.Icons.Question,
+        Drawables.Icons.Resize,
+        Drawables.Icons.Medicine,
+        Drawables.Icons.DrugStore,
+        Drawables.Icons.Nothing,
+        Drawables.Icons.Logo,
+        Drawables.Icons.User,
+        Drawables.Icons.Warning,
+        Drawables.Icons.Calendar,
+        Drawables.Icons.Heart,
+        Drawables.Icons.Document,
+        Drawables.Icons.SadFace,
+        Drawables.Icons.DocumentHealth,
+        Drawables.Icons.HospitalBed,
+    )
+    Row {
+        items.forEach {icon ->
+            Icon(
+                painter = painterResource( icon),
+                tint = Colors.Brown80,
+                contentDescription = null
+            )
+        }
     }
 }

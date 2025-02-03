@@ -1,13 +1,7 @@
 package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -18,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.cancel
+import com.joohnq.shared_resources.ok
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.StringResource
@@ -39,13 +36,13 @@ fun TimePickerDialog(
             tonalElevation = 6.dp,
             color = Colors.White,
             modifier =
-            Modifier
-                .width(IntrinsicSize.Min)
-                .height(IntrinsicSize.Min)
-                .background(
-                    shape = MaterialTheme.shapes.extraLarge,
-                    color = Colors.White
-                ),
+                Modifier
+                    .width(IntrinsicSize.Min)
+                    .height(IntrinsicSize.Min)
+                    .background(
+                        shape = MaterialTheme.shapes.extraLarge,
+                        color = Colors.White
+                    ),
         ) {
             Column(
                 modifier = Modifier.padding(24.dp),
@@ -66,13 +63,13 @@ fun TimePickerDialog(
                 ) {
                     TextButton(onClick = onDismiss) {
                         Text(
-                            text = "Cancel",
+                            text = stringResource(Res.string.cancel),
                             style = TextStyles.TextMdSemiBold().copy(color = Colors.Brown80)
                         )
                     }
                     TextButton(onClick = onConfirm) {
                         Text(
-                            text = "OK",
+                            text = stringResource(Res.string.ok),
                             style = TextStyles.TextMdSemiBold().copy(color = Colors.Brown80)
                         )
                     }

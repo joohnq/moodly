@@ -234,28 +234,3 @@ fun BottomNavigationActionButton(
         )
     }
 }
-
-@Composable
-fun BottomNavigationCentralButton(
-    modifier: Modifier = Modifier,
-    isExpanded: Boolean,
-    onClick: () -> Unit,
-) {
-    Button(
-        contentPadding = PaddingValues(0.dp),
-        onClick = onClick,
-        shape = Dimens.Shape.Circle,
-        modifier = modifier.size(64.dp),
-        colors = ComponentColors.Button.BottomNavigationAddButtonColors()
-    ) {
-        Icon(
-            painter = if (!isExpanded)
-                painterResource(Drawables.Icons.Add)
-            else
-                painterResource(Drawables.Icons.Close),
-            contentDescription = stringResource(Res.string.add),
-            modifier = Modifier.size(Dimens.Icon),
-        )
-    }
-}
-

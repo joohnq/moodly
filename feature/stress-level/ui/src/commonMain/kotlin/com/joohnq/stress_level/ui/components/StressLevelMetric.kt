@@ -9,13 +9,18 @@ import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.stress_level.domain.entity.StressLevel
+import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.getBrushGradient
+import com.joohnq.stress_level.ui.mapper.getTodayStressLevelResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StressLevelMetric(resource: StressLevelResource?, onCreate: () -> Unit = {}, onClick: () -> Unit = {}) {
+fun StressLevelMetric(records: List<StressLevelRecord>, onCreate: () -> Unit = {}, onClick: () -> Unit = {}) {
+    val resource = records.getTodayStressLevelResource()
+
     if (resource == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
@@ -44,7 +49,11 @@ fun StressLevelMetric(resource: StressLevelResource?, onCreate: () -> Unit = {},
 @Composable
 fun StressLevelMetricPreviewOne() {
     StressLevelMetric(
-        resource = StressLevelResource.One
+        records = listOf(
+            StressLevelRecord(
+                stressLevel = StressLevel.Five
+            ),
+        )
     )
 }
 
@@ -52,7 +61,11 @@ fun StressLevelMetricPreviewOne() {
 @Composable
 fun StressLevelMetricPreviewTwo() {
     StressLevelMetric(
-        resource = StressLevelResource.Two
+        records = listOf(
+            StressLevelRecord(
+                stressLevel = StressLevel.Four
+            ),
+        )
     )
 }
 
@@ -60,7 +73,11 @@ fun StressLevelMetricPreviewTwo() {
 @Composable
 fun StressLevelMetricPreviewThree() {
     StressLevelMetric(
-        resource = StressLevelResource.Three
+        records = listOf(
+            StressLevelRecord(
+                stressLevel = StressLevel.Three
+            ),
+        )
     )
 }
 
@@ -68,7 +85,11 @@ fun StressLevelMetricPreviewThree() {
 @Composable
 fun StressLevelMetricPreviewFour() {
     StressLevelMetric(
-        resource = StressLevelResource.Four
+        records = listOf(
+            StressLevelRecord(
+                stressLevel = StressLevel.Two
+            ),
+        )
     )
 }
 
@@ -76,7 +97,11 @@ fun StressLevelMetricPreviewFour() {
 @Composable
 fun StressLevelMetricPreviewFive() {
     StressLevelMetric(
-        resource = StressLevelResource.Five
+        records = listOf(
+            StressLevelRecord(
+                stressLevel = StressLevel.One
+            ),
+        )
     )
 }
 
@@ -84,6 +109,6 @@ fun StressLevelMetricPreviewFive() {
 @Composable
 fun StressLevelMetricPreviewNull() {
     StressLevelMetric(
-        resource = null
+        records = listOf()
     )
 }

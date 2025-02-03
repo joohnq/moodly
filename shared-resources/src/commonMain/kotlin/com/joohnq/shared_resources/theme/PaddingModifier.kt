@@ -2,6 +2,7 @@ package com.joohnq.shared_resources.theme
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import com.joohnq.shared_resources.theme.Dimens.Padding.AllSmall
 import com.joohnq.shared_resources.theme.Dimens.Padding.HorizontalExtraExtraSmall
 import com.joohnq.shared_resources.theme.Dimens.Padding.HorizontalLarge
 import com.joohnq.shared_resources.theme.Dimens.Padding.HorizontalMedium
@@ -15,6 +16,9 @@ class PaddingModifier {
     companion object {
         fun Modifier.paddingHorizontalLarge(): Modifier =
             padding(HorizontalLarge)
+
+        fun Modifier.paddingAllSmall(): Modifier =
+            padding(AllSmall)
 
         fun Modifier.paddingHorizontalMedium(): Modifier =
             padding(HorizontalMedium)

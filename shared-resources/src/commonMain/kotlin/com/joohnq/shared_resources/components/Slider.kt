@@ -85,18 +85,6 @@ fun SleepQualityThumb() {
     }
 }
 
-@Composable
-fun AddJournalingStressLevelThumb() {
-    Box(
-        modifier = Modifier
-            .size(36.dp)
-            .background(
-                color = Colors.Green50,
-                shape = Dimens.Shape.Circle
-            ),
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SleepQualityTrack(sliderState: SliderState) {

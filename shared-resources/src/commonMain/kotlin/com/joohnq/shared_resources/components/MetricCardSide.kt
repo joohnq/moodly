@@ -15,6 +15,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.today
 import org.jetbrains.compose.resources.DrawableResource
@@ -25,6 +26,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MetricCardSide(
     modifier: Modifier = Modifier,
+    containerColor: Color = Colors.White,
+    dark: Boolean = false,
     icon: DrawableResource,
     title: String,
     text: String,
@@ -38,15 +41,15 @@ fun MetricCardSide(
         modifier = modifier.fillMaxWidth(),
         shape = Dimens.Shape.Large,
         colors = CardColors(
-            containerColor = Colors.White,
+            containerColor = containerColor,
             contentColor = Colors.Gray80,
-            disabledContainerColor = Colors.White,
+            disabledContainerColor = containerColor,
             disabledContentColor = Colors.Gray80
         ),
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            modifier = Modifier.fillMaxWidth().paddingAllSmall()
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -62,20 +65,20 @@ fun MetricCardSide(
                     Text(
                         text = title,
                         style = TextStyles.TextMdSemiBold(),
-                        color = Colors.Gray80
+                        color = if (dark) Colors.White else Colors.Gray80
                     )
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(Res.string.today),
                         style = TextStyles.TextSmRegular(),
-                        color = Colors.Gray60
+                        color = if (dark) Colors.White else Colors.Gray60
                     )
                     Icon(
                         painter = painterResource(Drawables.Icons.ArrowChevron),
                         contentDescription = title,
                         modifier = Modifier.size(20.dp).rotate(180f),
-                        tint = Colors.Gray40
+                        tint = if (dark) Colors.White else Colors.Gray40
                     )
                 }
             }
@@ -92,19 +95,19 @@ fun MetricCardSide(
                         Text(
                             text = text,
                             style = TextStyles.Text2xlBold(),
-                            color = Colors.Gray80
+                            color = if (dark) Colors.White else Colors.Gray80
                         )
                         Text(
                             text = suffix,
                             style = TextStyles.TextMdMedium(),
-                            color = Colors.Gray80
+                            color = if (dark) Colors.White else Colors.Gray80
                         )
                     }
                     VerticalSpacer(10.dp)
                     Text(
                         text = description,
                         style = TextStyles.TextSmRegular(),
-                        color = Colors.Gray60
+                        color = if (dark) Colors.White else Colors.Gray60
                     )
                 }
                 Box(modifier = Modifier.weight(1f)) {
@@ -137,7 +140,7 @@ fun MetricCardRow(
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            modifier = Modifier.fillMaxWidth().paddingAllSmall()
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

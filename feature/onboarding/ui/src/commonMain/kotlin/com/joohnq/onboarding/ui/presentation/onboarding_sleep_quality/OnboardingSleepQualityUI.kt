@@ -2,6 +2,7 @@ package com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -13,14 +14,19 @@ import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.SleepQualityThumb
+import com.joohnq.shared_resources.components.SleepQualityTrack
+import com.joohnq.shared_resources.components.VerticalSlider
+import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalLarge
+import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.ui.mapper.fromSliderValueToSleepQualityResource
 import com.joohnq.sleep_quality.ui.mapper.getAllSleepQualityResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,11 +54,19 @@ fun OnboardingSleepQualityUI(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQualityResource ->
-                        DoubleText(
-                            firstText = sleepQuality.firstText,
-                            secondText = sleepQuality.secondText,
-                            color = if (sleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
-                        )
+                        val color = if (sleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
+                        Column {
+                            Text(
+                                stringResource(sleepQuality.firstText),
+                                style = TextStyles.TextLgExtraBold()
+                                    .copy(color = color)
+                            )
+                            Text(
+                                stringResource(sleepQuality.secondText),
+                                style = TextStyles.LabelSm()
+                                    .copy(color = color)
+                            )
+                        }
                     }
                 }
                 VerticalSlider(

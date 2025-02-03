@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
@@ -27,14 +28,14 @@ fun SnackBarUI(
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .paddingAllSmall()
                 .shadow(
-                    elevation = 5.dp,
+                    elevation = 1.dp,
                     shape = Dimens.Shape.ExtraSmall
                 )
                 .fillMaxWidth()
                 .background(color = Colors.White, shape = Dimens.Shape.ExtraSmall)
-                .padding(16.dp),
+                .paddingAllSmall(),
         ) {
             Text(
                 text = data?.visuals?.message ?: "",

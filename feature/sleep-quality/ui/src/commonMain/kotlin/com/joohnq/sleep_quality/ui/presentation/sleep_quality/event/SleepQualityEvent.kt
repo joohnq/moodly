@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality.event
 
-import com.joohnq.shared_resources.PanelEvent
+import com.joohnq.core.ui.event.PanelEvent
 
 sealed interface SleepQualityEvent {
     data object OnGoBack : SleepQualityEvent

@@ -30,6 +30,7 @@ import com.joohnq.shared_resources.mood_show
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -47,7 +48,7 @@ fun HealthJournalCard(
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(16.dp),
+            modifier = Modifier.fillMaxSize().paddingAllSmall(),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Row(
@@ -117,7 +118,7 @@ fun HealthJournalStatsCard(
         shape = Dimens.Shape.Large
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Box(

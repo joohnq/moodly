@@ -15,7 +15,7 @@ import com.joohnq.shared_resources.theme.Dimens
 import org.jetbrains.compose.resources.StringResource
 
 @Composable
-fun TextBubble(
+fun BubbleText(
     text: StringResource,
     fontSize: TextUnit = 18.sp,
     padding: Dp = 24.dp,

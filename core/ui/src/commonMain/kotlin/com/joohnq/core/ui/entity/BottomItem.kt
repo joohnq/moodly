@@ -1,6 +1,5 @@
-package com.joohnq.home.ui
+package com.joohnq.core.ui.entity
 
-import com.joohnq.core.ui.entity.DIcon
 import org.jetbrains.compose.resources.StringResource
 
 data class BottomItem<T>(

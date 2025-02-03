@@ -17,6 +17,7 @@ import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.no_sleep_influences
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
@@ -47,7 +48,7 @@ fun SleepQualityHistoryCard(
     ) {
         Row(
             modifier = Modifier.fillMaxSize()
-                .padding(16.dp),
+                .paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

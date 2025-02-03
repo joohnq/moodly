@@ -1,5 +1,6 @@
 package com.joohnq.navigation
 
+import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 
 fun NavHostController.onNavigate(destination: Destination, finish: Boolean = false) {
@@ -27,3 +28,6 @@ fun NavHostController.onNavigateGraph(graph: NavigationGraph, finish: Boolean = 
 fun NavHostController.onGoBack() {
     popBackStack()
 }
+
+fun Sequence<NavDestination>?.isCurrentRoute(route: Destination): Boolean =
+    this?.any { it.route == route::class.qualifiedName } == true

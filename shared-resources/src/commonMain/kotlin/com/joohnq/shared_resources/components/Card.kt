@@ -25,6 +25,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalExtraLarge
@@ -52,7 +53,7 @@ fun MindfulTrackerCardRow(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -112,7 +113,7 @@ fun MindfulTrackerCardColumn(
         colors = ComponentColors.Card.MainCardColors(),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -261,7 +262,7 @@ fun SleepQualityCard(modifier: Modifier = Modifier, item: SleepStatsItem) {
         colors = ComponentColors.Card.MainCardColors(),
         modifier = modifier
     ) {
-        Column(Modifier.padding(16.dp)) {
+        Column(Modifier.paddingAllSmall()) {
             Box(
                 modifier = Modifier.size(40.dp)
                     .background(

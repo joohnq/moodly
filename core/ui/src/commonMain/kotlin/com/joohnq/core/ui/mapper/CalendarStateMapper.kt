@@ -1,4 +1,4 @@
-package com.joohnq.shared_resources
+package com.joohnq.core.ui.mapper
 
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.core.minusMonths

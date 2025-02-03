@@ -16,6 +16,7 @@ import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.toResource
@@ -40,7 +41,7 @@ fun StressLevelCard(
     ) {
         Row(
             modifier = Modifier.fillMaxSize()
-                .padding(16.dp),
+                .paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

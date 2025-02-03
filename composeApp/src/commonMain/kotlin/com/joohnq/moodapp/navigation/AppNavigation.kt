@@ -10,6 +10,7 @@ import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
 import com.joohnq.health_journal.ui.presentation.health_journal.HealthJournalScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
+import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
@@ -32,33 +33,23 @@ fun NavGraphBuilder.appNavigation(
     navigation<NavigationGraph.App>(startDestination = Destination.App.DashBoard) {
         composable<Destination.App.DashBoard> {
             DashboardScreen(
-                onNavigateAddJournaling = {
-                    onNavigate(Destination.App.AddJournaling)
+                onEvent = { event ->
+                    when (event) {
+                        DashboardEvent.OnNavigateToAddJournaling -> onNavigate(Destination.App.AddJournaling)
+                        DashboardEvent.OnNavigateToAddSleep -> onNavigate(Destination.App.AddSleepQuality)
+                        DashboardEvent.OnNavigateToAddStat -> onNavigate(Destination.App.AddStat)
+                        DashboardEvent.OnNavigateToAddStress -> onNavigate(Destination.App.AddStressLevel)
+                        DashboardEvent.OnNavigateToAllJournals -> onNavigate(Destination.App.AllJournals())
+                        is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(Destination.App.EditJournaling(event.id))
+                        DashboardEvent.OnNavigateToFreudScore -> onNavigate(Destination.App.FreudScore)
+                        DashboardEvent.OnNavigateToHealthJournal -> onNavigate(Destination.App.HealthJournal)
+                        DashboardEvent.OnNavigateToMindfulJournal -> onNavigate(Destination.App.MindfulJournal)
+                        DashboardEvent.OnNavigateToMood -> onNavigate(Destination.App.Mood())
+                        DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(Destination.App.AllJournals())
+                        DashboardEvent.OnNavigateToSleepQuality -> onNavigate(Destination.App.SleepQuality)
+                        DashboardEvent.OnNavigateToStressLevel -> onNavigate(Destination.App.StressLevel)
+                    }
                 },
-                onNavigateAddStatScreen = { onNavigate(Destination.App.AddStat) },
-                onNavigateFreudScore = { onNavigate(Destination.App.FreudScore) },
-                onNavigateToMood = { onNavigate(Destination.App.Mood()) },
-                onNavigateToHealthJournal = {
-                    onNavigate(Destination.App.HealthJournal)
-                },
-                onNavigateToMindfulJournal = {
-                    onNavigate(Destination.App.MindfulJournal)
-                },
-                onNavigateToSleepQuality = {
-                    onNavigate(Destination.App.SleepQuality)
-                },
-                onNavigateToStressLevel = {
-                    onNavigate(Destination.App.StressLevel)
-                },
-                onNavigateToEditJournaling = { id ->
-                    onNavigate(Destination.App.EditJournaling(id))
-                },
-                onNavigateToSelfJournalHistory = {
-                    onNavigate(Destination.App.AllJournals())
-                },
-                onNavigateToAddSleep = { onNavigate(Destination.App.AddSleepQuality) },
-                onNavigateToAddStress = { onNavigate(Destination.App.AddStressLevel) },
-                onNavigateToAddJournaling = { onNavigate(Destination.App.AddJournaling) },
             )
         }
         composable<Destination.App.FreudScore> {

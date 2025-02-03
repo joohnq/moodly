@@ -18,6 +18,8 @@ object Dimens {
         val VerticalLarge = PaddingValues(vertical = 15.dp)
         val VerticalMedium = PaddingValues(vertical = 12.dp)
         val VerticalSmall = PaddingValues(vertical = 5.dp)
+
+        val AllSmall = PaddingValues(16.dp)
     }
 
     object Shape {

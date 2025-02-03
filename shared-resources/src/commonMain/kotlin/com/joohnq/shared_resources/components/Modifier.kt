@@ -1,22 +1,58 @@
 package com.joohnq.shared_resources.components
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Dimens
+import kotlinx.coroutines.launch
+
+@Composable
+fun Modifier.swipeToReveal(
+    width: Float,
+    offset: Animatable<Float, AnimationVector1D>,
+    setIsExpanded: (Boolean) -> Unit,
+): Modifier {
+    val scope = rememberCoroutineScope()
+
+    return pointerInput(width) {
+        detectHorizontalDragGestures(
+            onHorizontalDrag = { _, dragAmount ->
+                scope.launch {
+                    val newOffset = (offset.value + dragAmount).coerceIn(
+                        -width,
+                        0f
+                    )
+                    offset.snapTo(newOffset)
+                }
+            },
+            onDragEnd = {
+                setIsExpanded(offset.value <= -width / 2f)
+            }
+        )
+    }
+}
+
+@Composable
+fun Modifier.dpOffset(x: Dp = 0.dp, y: Dp = 0.dp): Modifier =
+    offset {
+        IntOffset(x = x.toPx().toInt(), y = y.toPx().toInt())
+    }
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun Modifier.progress(

@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.health_journal.domain.use_case.OrganizeFromCreationHealthJournalFreudScoreUseCase
 import com.joohnq.health_journal.ui.presentation.all_journals.event.AllJournalEvent
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalIntent
 import com.joohnq.health_journal.ui.presentation.all_journals.viewmodel.AllJournalViewModel
@@ -12,6 +13,7 @@ import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
 import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import kotlinx.datetime.LocalDate
+import org.koin.compose.koinInject
 
 @Composable
 fun AllJournalScreen(
@@ -25,6 +27,8 @@ fun AllJournalScreen(
     val userState by userViewModel.state.collectAsState()
     val allJournalViewModel: AllJournalViewModel = sharedViewModel()
     val allJournalState by allJournalViewModel.state.collectAsState()
+    val organizeFromCreationHealthJournalFreudScoreUseCase: OrganizeFromCreationHealthJournalFreudScoreUseCase =
+        koinInject()
 
     fun onEvent(event: AllJournalEvent) =
         when (event) {
@@ -46,8 +50,9 @@ fun AllJournalScreen(
     AllJournalUI(
         state = allJournalState,
         user = userState.user,
+        organizeFromCreationHealthJournalFreudScoreUseCase = organizeFromCreationHealthJournalFreudScoreUseCase,
         onAction = allJournalViewModel::onAction,
-        healthJournalRecords = healthJournalState.healthJournalRecords,
+        records = healthJournalState.healthJournalRecords,
         onEvent = ::onEvent,
     )
 }

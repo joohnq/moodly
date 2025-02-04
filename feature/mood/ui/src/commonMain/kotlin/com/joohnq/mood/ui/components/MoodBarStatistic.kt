@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.core.ui.mapper.toShortDateString
@@ -27,9 +28,9 @@ import com.joohnq.shared_resources.theme.TextStyles
 fun MoodBarStatistic(
     statsRecords: List<StatsRecord>,
     currentStatsRecord: StatsRecord,
+    height: Dp = 250.dp,
     onClick: (StatsRecord) -> Unit = {},
 ) {
-    val height = 250.dp
     val proportion = height / 100
     val pagerState = rememberPagerState(pageCount = {
         statsRecords.size

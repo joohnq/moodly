@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.mood.ui.resource.MoodAverageResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -24,7 +24,7 @@ fun MoodFace(modifier: Modifier = Modifier, resource: MoodResource) {
             .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(resource.image),
+            painter = painterResource(resource.assets.icon),
             contentDescription = null,
             modifier = modifier,
             tint = resource.palette.faceColor
@@ -45,7 +45,7 @@ fun MoodFace(
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(resource.image),
+            painter = painterResource(resource.assets.icon),
             contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color
@@ -67,7 +67,7 @@ fun MoodFace(
         onClick = onClick
     ) {
         Icon(
-            painter = painterResource(resource.image),
+            painter = painterResource(resource.assets.icon),
             contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color
@@ -111,7 +111,7 @@ fun MoodFace(
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(resource.image),
+            painter = painterResource(resource.assets.icon),
             contentDescription = null,
             modifier = modifier,
             tint = tint

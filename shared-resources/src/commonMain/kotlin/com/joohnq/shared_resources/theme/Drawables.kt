@@ -13,6 +13,20 @@ object Drawables {
             val Warning = Res.drawable.ic_warning_outlined
             val BookOpen = Res.drawable.ic_book_open
             val Mood = Res.drawable.ic_mood_neutral
+
+            val MoodOverjoyed = Res.drawable.ic_mood_overjoyed_outlined
+            val MoodHappy = Res.drawable.ic_mood_happy_outlined
+            val MoodNeutral = Res.drawable.ic_mood_neutral_outlined
+            val MoodSad = Res.drawable.ic_mood_sad_outlined
+            val MoodDepressed = Res.drawable.ic_mood_depressed_outlined
+        }
+
+        object Filled {
+            val MoodOverjoyed = Res.drawable.ic_mood_overjoyed
+            val MoodHappy = Res.drawable.ic_mood_happy
+            val MoodNeutral = Res.drawable.ic_mood_neutral
+            val MoodSad = Res.drawable.ic_mood_sad
+            val MoodDepressed = Res.drawable.ic_mood_depressed
         }
 
         val ArrowOpen = Res.drawable.ic_arrow_open

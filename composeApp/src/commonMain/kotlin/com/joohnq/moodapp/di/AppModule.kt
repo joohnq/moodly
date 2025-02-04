@@ -9,6 +9,7 @@ import com.joohnq.health_journal.data.di.healthJournalDataModule
 import com.joohnq.health_journal.data.di.healthJournalDriverFactory
 import com.joohnq.health_journal.domain.di.healthJournalDomainModule
 import com.joohnq.health_journal.ui.di.healthJournalUiModule
+import com.joohnq.home.ui.di.homeUiModule
 import com.joohnq.mood.data.di.moodDataModule
 import com.joohnq.mood.data.di.moodDriverFactoryModule
 import com.joohnq.mood.domain.di.moodDomainModule
@@ -62,4 +63,5 @@ val appModule = listOf(
     preferencesModule,
     securityDataModule,
     securityDomainModule,
+    homeUiModule
 )

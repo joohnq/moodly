@@ -1,12 +1,6 @@
 package com.joohnq.health_journal.ui.presentation.edit_journaling_screen
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.event.EditJournalingEvent
@@ -57,21 +51,19 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     }
 
     LaunchedEffect(healthJournalViewModel) {
-        scope.launch {
-            healthJournalViewModel.sideEffect.collect { effect ->
-                when (effect) {
-                    HealthJournalSideEffect.HealthJournalEdited -> {
-                        onEvent(EditJournalingEvent.OnGoBack)
+        healthJournalViewModel.sideEffect.collect { effect ->
+            when (effect) {
+                HealthJournalSideEffect.HealthJournalEdited -> {
+                    onEvent(EditJournalingEvent.OnGoBack)
 //                            healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
-                    }
-
-                    HealthJournalSideEffect.HealthJournalDeleted -> {
-                        onEvent(EditJournalingEvent.OnGoBack)
-                    }
-
-                    is HealthJournalSideEffect.ShowError -> onError(effect.error)
-                    else -> Unit
                 }
+
+                HealthJournalSideEffect.HealthJournalDeleted -> {
+                    onEvent(EditJournalingEvent.OnGoBack)
+                }
+
+                is HealthJournalSideEffect.ShowError -> onError(effect.error)
+                else -> Unit
             }
         }
     }

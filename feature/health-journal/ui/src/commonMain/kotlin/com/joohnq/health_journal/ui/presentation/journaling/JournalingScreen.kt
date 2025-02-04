@@ -13,26 +13,16 @@ import org.koin.compose.koinInject
 @Composable
 fun JournalingScreen(
     padding: PaddingValues,
-    onNavigateToEditJournaling: (Int) -> Unit,
-    onNavigateToAllJournals: () -> Unit,
+    onEvent: (JournalingEvent) -> Unit,
 ) {
     val healthJournalViewModel: HealthJournalViewModel = sharedViewModel()
     val journal by healthJournalViewModel.state.collectAsState()
     val getHealthJournalsInYearUseCase = koinInject<GetHealthJournalsInYearUseCase>()
 
-    fun onEvent(event: JournalingEvent) {
-        when (event) {
-            is JournalingEvent.OnNavigateToEditJournalingScreen ->
-                onNavigateToEditJournaling(event.id)
-
-            JournalingEvent.OnNavigateToAllJournals -> onNavigateToAllJournals()
-        }
-    }
-
     JournalingUI(
         padding = padding,
         getHealthJournalsInYearUseCase = getHealthJournalsInYearUseCase,
         records = journal.healthJournalRecords,
-        onEvent = ::onEvent
+        onEvent = onEvent
     )
 }

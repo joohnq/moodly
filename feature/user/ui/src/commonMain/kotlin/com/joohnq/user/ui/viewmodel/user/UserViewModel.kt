@@ -8,17 +8,9 @@ import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.domain.entity.User
-import com.joohnq.domain.use_case.user.AddUserUseCase
-import com.joohnq.domain.use_case.user.GetUserUseCase
-import com.joohnq.domain.use_case.user.UpdateUserImageBitmapUseCase
-import com.joohnq.domain.use_case.user.UpdateUserImageDrawableUseCase
-import com.joohnq.domain.use_case.user.UpdateUserNameUseCase
-import com.joohnq.domain.use_case.user.UpdateUserUseCase
+import com.joohnq.domain.use_case.user.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class UserViewModel(
@@ -31,7 +23,7 @@ class UserViewModel(
 ) : ViewModel() {
     private val _state: MutableStateFlow<UserState> =
         MutableStateFlow(UserState())
-    val state: StateFlow<UserState> = _state
+    val state: StateFlow<UserState> = _state.asStateFlow()
 
     private val _sideEffect = Channel<UserSideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()

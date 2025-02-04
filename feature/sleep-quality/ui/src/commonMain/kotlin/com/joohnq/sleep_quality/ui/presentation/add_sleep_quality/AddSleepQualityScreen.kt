@@ -1,11 +1,6 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.entity.Time
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toSleepQuality
@@ -51,16 +46,14 @@ fun AddSleepQualityScreen(
         }
 
     LaunchedEffect(sleepQualityViewModel) {
-        scope.launch {
-            sleepQualityViewModel.sideEffect.collect { event ->
-                when (event) {
-                    is SleepQualitySideEffect.SleepQualityAdded -> {
-                        onEvent(AddSleepQualityEvent.OnGoBack)
-                        sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
-                    }
-
-                    is SleepQualitySideEffect.ShowError -> onError(event.error)
+        sleepQualityViewModel.sideEffect.collect { event ->
+            when (event) {
+                is SleepQualitySideEffect.SleepQualityAdded -> {
+                    onEvent(AddSleepQualityEvent.OnGoBack)
+                    sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
                 }
+
+                is SleepQualitySideEffect.ShowError -> onError(event.error)
             }
         }
     }

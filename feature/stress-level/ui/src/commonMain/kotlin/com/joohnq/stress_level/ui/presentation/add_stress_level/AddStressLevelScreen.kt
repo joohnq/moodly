@@ -1,10 +1,6 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.domain.entity.StressLevel
@@ -56,16 +52,14 @@ fun AddStressLevelScreen(
     }
 
     LaunchedEffect(stressLevelViewModel) {
-        scope.launch {
-            stressLevelViewModel.sideEffect.collect { event ->
-                when (event) {
-                    is StressLevelSideEffect.StressLevelAdded -> {
-                        onEvent(AddStressLevelEvent.PopUpToStressLevelLevel)
-                        stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
-                    }
-
-                    is StressLevelSideEffect.ShowError -> onError(event.error)
+        stressLevelViewModel.sideEffect.collect { event ->
+            when (event) {
+                is StressLevelSideEffect.StressLevelAdded -> {
+                    onEvent(AddStressLevelEvent.PopUpToStressLevelLevel)
+                    stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 }
+
+                is StressLevelSideEffect.ShowError -> onError(event.error)
             }
         }
     }

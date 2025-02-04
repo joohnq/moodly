@@ -1,35 +1,17 @@
 package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.*
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.permission.PermissionCallback
-import com.joohnq.permission.PermissionStatus
-import com.joohnq.permission.PermissionType
-import com.joohnq.permission.createPermissionsManager
-import com.joohnq.permission.rememberCameraManager
-import com.joohnq.permission.rememberGalleryManager
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.cancel
-import com.joohnq.shared_resources.permission_required
+import com.joohnq.permission.*
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.shared_resources.settings
-import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.user.ui.viewmodel.user.UserIntent
 import com.joohnq.user.ui.viewmodel.user.UserSideEffect
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
@@ -113,7 +95,8 @@ fun AvatarScreen(
         launchSetting = false
     }
     if (permissionRationalDialog) {
-        AlertMessageDialog(title = Res.string.permission_required,
+        AlertMessageDialog(
+            title = Res.string.permission_required,
             message = Res.string.to_set_your_profile_picture,
             positiveButtonText = Res.string.settings,
             negativeButtonText = Res.string.cancel,
@@ -151,16 +134,14 @@ fun AvatarScreen(
     }
 
     LaunchedEffect(userViewModel) {
-        scope.launch {
-            userViewModel.sideEffect.collect { event ->
-                when (event) {
-                    is UserSideEffect.AvatarSavedSuccess -> {
-                        onNavigateToUserName()
-                    }
-
-                    is UserSideEffect.ShowError -> onError(event.error)
-                    else -> {}
+        userViewModel.sideEffect.collect { event ->
+            when (event) {
+                is UserSideEffect.AvatarSavedSuccess -> {
+                    onNavigateToUserName()
                 }
+
+                is UserSideEffect.ShowError -> onError(event.error)
+                else -> {}
             }
         }
     }

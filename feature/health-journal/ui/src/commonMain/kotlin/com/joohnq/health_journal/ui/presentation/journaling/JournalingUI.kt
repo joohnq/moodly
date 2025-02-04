@@ -80,7 +80,7 @@ fun JournalingUI(
                         items(records) { journal ->
                             HealthJournalCard(journal) {
                                 onEvent(
-                                    JournalingEvent.OnNavigateToEditJournalingScreen(journal.id)
+                                    JournalingEvent.OnNavigateToEditJournaling(journal.id)
                                 )
                             }
                         }

@@ -9,16 +9,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
-import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MoodMetric
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
+import com.joohnq.home.ui.presentation.viewmodel.DashboardState
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
@@ -33,23 +32,17 @@ import com.joohnq.stress_level.ui.components.StressLevelMetric
 @Composable
 fun HomeUI(
     padding: PaddingValues,
-    user: UiState<User>,
-    statsRecord: UiState<List<StatsRecord>>,
-    sleepQuality: UiState<List<SleepQualityRecord>>,
-    stressLevel: UiState<List<StressLevelRecord>>,
-    freudScore: FreudScoreResource? = null,
-    healthJournal: UiState<List<HealthJournalRecord>>,
+    state: DashboardState,
     onEvent: (HomeEvent) -> Unit = {},
 ) {
     listOf(
-        statsRecord,
-        user,
-        stressLevel,
-        healthJournal,
-        sleepQuality
+        state.statsRecords,
+        state.user,
+        state.stressLevelRecords,
+        state.healthJournalRecords,
+        state.sleepQualityRecords
     ).foldComposable(
         onLoading = { LoadingUI() },
-        onError = { onEvent(HomeEvent.ShowError(it)) },
         onSuccess = { statsRecords: List<StatsRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
             Column(
                 modifier = Modifier
@@ -67,7 +60,7 @@ fun HomeUI(
                     onSeeAll = { onEvent(HomeEvent.OnNavigateToFreudScore) }
                 )
                 FreudScoreMetric(
-                    freudScore = freudScore,
+                    freudScore = state.freudScore,
                     onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
                 )
                 SectionHeader(

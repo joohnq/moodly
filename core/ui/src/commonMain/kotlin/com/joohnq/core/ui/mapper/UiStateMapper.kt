@@ -128,8 +128,8 @@ fun <R1, R2> List<UiState<*>>.foldComposable(
 
 @Composable
 fun <R1, R2, R3, R4, R5> List<UiState<*>>.foldComposable(
-    onLoading: @Composable () -> Unit,
-    onError: @Composable (Throwable) -> Unit,
+    onLoading: @Composable () -> Unit = {},
+    onError: @Composable (Throwable) -> Unit = {},
     onSuccess: @Composable (R1, R2, R3, R4, R5) -> Unit,
 ) {
     if (any { it is UiState.Error }) {

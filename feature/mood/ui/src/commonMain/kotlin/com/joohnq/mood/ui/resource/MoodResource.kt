@@ -19,10 +19,15 @@ import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
+data class Assets(
+    val imageVector: ImageVector,
+    val icon: DrawableResource,
+    val iconOutlined: DrawableResource
+)
+
 sealed class MoodResource(
     override val id: Int,
-    val image: DrawableResource,
-    val imageVector: ImageVector,
+    val assets: Assets,
     val text: StringResource,
     override val healthLevel: Int,
     val palette: MoodPalette,
@@ -30,8 +35,11 @@ sealed class MoodResource(
     data object Depressed :
         MoodResource(
             id = DEPRESSED.id,
-            image = Drawables.Mood.Depressed,
-            imageVector = Drawables.Mood.DepressedVectorPainter,
+            assets = Assets(
+                imageVector = Drawables.Mood.DepressedVectorPainter,
+                icon = Drawables.Icons.Filled.MoodDepressed,
+                iconOutlined = Drawables.Icons.Outlined.MoodDepressed
+            ),
             text = Res.string.depressed,
             healthLevel = DEPRESSED.healthLevel,
             palette = MoodPalette(
@@ -53,8 +61,11 @@ sealed class MoodResource(
 
     data object Sad : MoodResource(
         id = SAD.id,
-        image = Drawables.Mood.Sad,
-        imageVector = Drawables.Mood.SadVectorPainter,
+        assets = Assets(
+            imageVector = Drawables.Mood.SadVectorPainter,
+            icon = Drawables.Icons.Filled.MoodSad,
+            iconOutlined = Drawables.Icons.Outlined.MoodSad
+        ),
         text = Res.string.sad,
         healthLevel = SAD.healthLevel,
         palette = MoodPalette(
@@ -77,8 +88,11 @@ sealed class MoodResource(
     data object Neutral :
         MoodResource(
             id = NEUTRAL.id,
-            image = Drawables.Mood.Neutral,
-            imageVector = Drawables.Mood.NeutralVectorPainter,
+            assets = Assets(
+                imageVector = Drawables.Mood.NeutralVectorPainter,
+                icon = Drawables.Icons.Filled.MoodNeutral,
+                iconOutlined = Drawables.Icons.Outlined.MoodNeutral
+            ),
             text = Res.string.neutral,
             healthLevel = NEUTRAL.healthLevel,
             palette = MoodPalette(
@@ -100,8 +114,11 @@ sealed class MoodResource(
 
     data object Happy : MoodResource(
         id = HAPPY.id,
-        image = Drawables.Mood.Happy,
-        imageVector = Drawables.Mood.HappyVectorPainter,
+        assets = Assets(
+            imageVector = Drawables.Mood.HappyVectorPainter,
+            icon = Drawables.Icons.Filled.MoodHappy,
+            iconOutlined = Drawables.Icons.Outlined.MoodHappy
+        ),
         text = Res.string.happy,
         healthLevel = HAPPY.healthLevel,
         palette = MoodPalette(
@@ -124,8 +141,11 @@ sealed class MoodResource(
     data object Overjoyed :
         MoodResource(
             id = OVERJOYED.id,
-            image = Drawables.Mood.Overjoyed,
-            imageVector = Drawables.Mood.OverjoyedVectorPainter,
+            assets = Assets(
+                imageVector = Drawables.Mood.OverjoyedVectorPainter,
+                icon = Drawables.Icons.Filled.MoodOverjoyed,
+                iconOutlined = Drawables.Icons.Outlined.MoodOverjoyed
+            ),
             text = Res.string.overjoyed,
             healthLevel = OVERJOYED.healthLevel,
             palette = MoodPalette(

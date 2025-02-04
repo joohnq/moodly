@@ -240,4 +240,10 @@ object TextStyles {
         fontFamily = FontFamily.Urbanist.Regular(),
         fontSize = 12.sp,
     )
+
+    @Composable
+    fun Text2XsRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.Regular(),
+        fontSize = 10.sp,
+    )
 }

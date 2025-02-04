@@ -25,11 +25,11 @@ fun ScaffoldSnackBar(
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         bottomBar = bottomBar
-    ) {
-        content(it)
+    ) { padding ->
+        content(padding)
         SnackBarUI(
-            paddingTop = it.calculateTopPadding(),
-            data = snackBarHostState.currentSnackbarData,
+            padding = padding,
+            snackBarHostState = snackBarHostState
         )
     }
 }

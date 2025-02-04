@@ -1,11 +1,6 @@
 package com.joohnq.health_journal.ui.presentation.add_journaling_screen
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.health_journal.ui.presentation.add_journaling_screen.event.AddJournalingEvent
@@ -45,17 +40,15 @@ fun AddJournalingScreen(onGoBack: () -> Unit) {
         }
 
     LaunchedEffect(healthJournalViewModel) {
-        scope.launch {
-            healthJournalViewModel.sideEffect.collect { effect ->
-                when (effect) {
-                    HealthJournalSideEffect.HealthJournalAdded -> {
-                        onEvent(AddJournalingEvent.OnGoBack)
-                        healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
-                    }
-
-                    is HealthJournalSideEffect.ShowError -> onError(effect.error)
-                    else -> Unit
+        healthJournalViewModel.sideEffect.collect { effect ->
+            when (effect) {
+                HealthJournalSideEffect.HealthJournalAdded -> {
+                    onEvent(AddJournalingEvent.OnGoBack)
+                    healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
                 }
+
+                is HealthJournalSideEffect.ShowError -> onError(effect.error)
+                else -> Unit
             }
         }
     }

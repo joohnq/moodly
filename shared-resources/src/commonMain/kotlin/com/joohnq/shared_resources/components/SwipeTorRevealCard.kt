@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 @Composable
@@ -19,15 +18,12 @@ fun SwipeTorRevealCard(
     secondary: @Composable () -> Unit = {},
     content: @Composable (Modifier) -> Unit,
 ) {
-    val scope = rememberCoroutineScope()
     var buttonsWidth by remember { mutableFloatStateOf(0f) }
     val offset = remember { Animatable(initialValue = 0f) }
     var isExpanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(isExpanded) {
-        scope.launch {
-            offset.animateTo(if (isExpanded) -buttonsWidth else 0f)
-        }
+        offset.animateTo(if (isExpanded) -buttonsWidth else 0f)
     }
 
     Row(modifier = modifier.height(intrinsicSize = IntrinsicSize.Max)) {

@@ -1,11 +1,6 @@
 package com.joohnq.mood.ui.presentation.expression_analysis
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.domain.entity.StatsRecord
 import com.joohnq.mood.ui.mapper.toDomain
@@ -48,17 +43,15 @@ fun ExpressionAnalysisScreen(
         }
 
     LaunchedEffect(statsViewModel) {
-        scope.launch {
-            statsViewModel.sideEffect.collect { event ->
-                when (event) {
-                    is StatSideEffect.StatsAdded -> {
-                        statsViewModel.onAction(StatsIntent.GetStatsRecords)
-                        onNavigateToMood()
-                    }
-
-                    is StatSideEffect.ShowError -> onError(event.error)
-                    else -> {}
+        statsViewModel.sideEffect.collect { event ->
+            when (event) {
+                is StatSideEffect.StatsAdded -> {
+                    statsViewModel.onAction(StatsIntent.GetStatsRecords)
+                    onNavigateToMood()
                 }
+
+                is StatSideEffect.ShowError -> onError(event.error)
+                else -> {}
             }
         }
     }

@@ -1,10 +1,6 @@
 package com.joohnq.auth.ui.presentation.user_name
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.auth.ui.presentation.user_name.event.UserNameEvent
@@ -52,21 +48,19 @@ fun UserNameScreen(
         }
 
     LaunchedEffect(userViewModel) {
-        scope.launch {
-            userViewModel.sideEffect.collect { event ->
-                when (event) {
-                    is UserSideEffect.UserNameUpdatedSuccess -> {
-                        userPreferencesViewModel.onAction(
-                            UserPreferenceIntent.UpdateSkipAuth(
-                                true
-                            )
+        userViewModel.sideEffect.collect { event ->
+            when (event) {
+                is UserSideEffect.UserNameUpdatedSuccess -> {
+                    userPreferencesViewModel.onAction(
+                        UserPreferenceIntent.UpdateSkipAuth(
+                            true
                         )
-                        onNavigateToSecurity()
-                    }
-
-                    is UserSideEffect.ShowError -> onError(event.error)
-                    else -> {}
+                    )
+                    onNavigateToSecurity()
                 }
+
+                is UserSideEffect.ShowError -> onError(event.error)
+                else -> {}
             }
         }
     }

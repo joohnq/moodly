@@ -71,7 +71,7 @@ fun SleepQualityHistoryCard(
             }
             HorizontalSpacer(20.dp)
             Column(
-                modifier = Modifier.fillMaxHeight().weight(1f),
+                modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.Center
             ) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {

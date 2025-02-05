@@ -21,7 +21,6 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 fun CentralButton(
     modifier: Modifier = Modifier,

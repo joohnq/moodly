@@ -51,7 +51,7 @@ sealed class StressLevelResource(
             palette = StressLevelPalette(
                 color = Colors.Green60,
                 backgroundColor = Colors.Green10,
-                imageColor = Colors.Green60
+                imageColor = Colors.Green70
             ),
         )
 
@@ -66,7 +66,7 @@ sealed class StressLevelResource(
             palette = StressLevelPalette(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
-                imageColor = Colors.Yellow70
+                imageColor = Colors.Yellow60
             ),
         )
 
@@ -81,7 +81,7 @@ sealed class StressLevelResource(
             palette = StressLevelPalette(
                 color = Colors.Yellow50,
                 backgroundColor = Colors.Yellow10,
-                imageColor = Colors.Yellow70
+                imageColor = Colors.Yellow60
             ),
         )
 

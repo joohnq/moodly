@@ -103,6 +103,7 @@ object Drawables {
         val StressTriggerIllustration = Res.drawable.stress_trigger_illustration
         val FreudScoreIllustration = Res.drawable.freud_score_illustration
         val MoodIllustration = Res.drawable.mood_illustration
+        val FreudScoreCircleIllustration = Res.drawable.freud_score_circle_illustration
     }
 
     object Mood {

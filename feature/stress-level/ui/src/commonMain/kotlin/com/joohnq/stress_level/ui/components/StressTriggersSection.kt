@@ -2,7 +2,10 @@ package com.joohnq.stress_level.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -10,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toPercentage
 import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.BallItem
 import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -38,16 +42,12 @@ fun StressTriggersSection(
         .toList()
         .sortedByDescending { it.second }
 
-    val totalOccurrences = stressors.size
-
-    if (totalOccurrences < 1) return
-
     SectionHeader(
         modifier = modifier,
         title = Res.string.sleep_trigger,
         onSeeAll = {}
     )
-    if (records.size < 3)
+    if (stressors.size < 3)
         NotFoundHorizontal(
             modifier = modifier,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
@@ -126,17 +126,13 @@ fun StressTriggersSection(
                 VerticalSpacer(16.dp)
                 Column {
                     stressors.forEachIndexed { i, (stressor, count) ->
-                        val percentage = (count.toDouble() / totalOccurrences) * 100
-                        StressTrigger(
-                            percentage = percentage.toPercentage(),
-                            stressor = stressor
+                        val percentage = (count.toDouble() / stressors.size) * 100
+                        BallItem(
+                            color = stressor.color,
+                            title = stringResource(stressor.text),
+                            description = percentage.toPercentage(),
+                            isNotLast = i < stressors.lastIndex
                         )
-                        if (i < stressors.lastIndex) {
-                            HorizontalDivider(
-                                modifier = Modifier.fillMaxWidth(),
-                                color = Colors.Gray20
-                            )
-                        }
                     }
                 }
             }
@@ -159,6 +155,15 @@ fun StressTriggersSectionPreview() {
                 stressors = listOf(Stressor.Finances, Stressor.Loneliness)
             )
         ),
+        onAddStressLevel = {}
+    )
+}
+
+@Preview
+@Composable
+fun StressTriggersSectionPreviewEmpty() {
+    StressTriggersSection(
+        records = emptyList(),
         onAddStressLevel = {}
     )
 }

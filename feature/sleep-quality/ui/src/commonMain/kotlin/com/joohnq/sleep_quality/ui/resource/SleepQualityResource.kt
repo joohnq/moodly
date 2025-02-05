@@ -1,17 +1,7 @@
 package com.joohnq.sleep_quality.ui.resource
 
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.excellent
-import com.joohnq.shared_resources.fair
-import com.joohnq.shared_resources.five_hours
-import com.joohnq.shared_resources.good
-import com.joohnq.shared_resources.minus_three_hours
-import com.joohnq.shared_resources.poor
-import com.joohnq.shared_resources.seven_nine_hours
-import com.joohnq.shared_resources.six_seven_hours
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.three_four_hours
-import com.joohnq.shared_resources.worst
 import com.joohnq.sleep_quality.domain.SleepQualityProperties
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityPalette
@@ -33,7 +23,8 @@ sealed class SleepQualityResource(
         palette = SleepQualityPalette(
             secondaryBackgroundColor = Colors.Green10,
             backgroundColor = Colors.Green30,
-            color = Colors.Green60
+            color = Colors.Green60,
+            imageColor = Colors.Green70
         )
     )
 
@@ -45,7 +36,8 @@ sealed class SleepQualityResource(
         palette = SleepQualityPalette(
             secondaryBackgroundColor = Colors.Yellow10,
             backgroundColor = Colors.Yellow30,
-            color = Colors.Yellow60
+            color = Colors.Yellow60,
+            imageColor = Colors.Yellow70
         )
     )
 
@@ -57,7 +49,8 @@ sealed class SleepQualityResource(
         palette = SleepQualityPalette(
             secondaryBackgroundColor = Colors.Brown20,
             backgroundColor = Colors.Brown40,
-            color = Colors.Brown70
+            color = Colors.Brown70,
+            imageColor = Colors.Brown80
         )
     )
 
@@ -69,7 +62,8 @@ sealed class SleepQualityResource(
         palette = SleepQualityPalette(
             secondaryBackgroundColor = Colors.Orange10,
             backgroundColor = Colors.Orange30,
-            color = Colors.Orange50
+            color = Colors.Orange50,
+            imageColor = Colors.Orange60
         )
     )
 
@@ -81,7 +75,8 @@ sealed class SleepQualityResource(
         palette = SleepQualityPalette(
             secondaryBackgroundColor = Colors.Purple10,
             backgroundColor = Colors.Purple30,
-            color = Colors.Purple50
+            color = Colors.Purple50,
+            imageColor = Colors.Purple60
         )
     )
 }

@@ -45,7 +45,7 @@ fun MoodFace(
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(resource.assets.icon),
+            imageVector = resource.assets.imageVector,
             contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color

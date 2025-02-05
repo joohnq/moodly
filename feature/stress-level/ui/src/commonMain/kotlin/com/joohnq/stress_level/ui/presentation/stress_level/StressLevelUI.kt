@@ -7,6 +7,8 @@ import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.domain.mapper.getTodayStressLevelRecord
@@ -32,6 +34,8 @@ fun StressLevelUI(
             DecoratedConvexPanelList(
                 containerColor = Colors.White,
                 isDark = !hasToday,
+                image = Drawables.Images.StressLevelBackground,
+                color = if (hasToday) resource.palette.imageColor else Colors.Brown10,
                 panelBackgroundColor = if (hasToday) resource.palette.color else Colors.Brown10,
                 panel = { modifier ->
                     VerticalSpacer(10.dp)
@@ -42,12 +46,12 @@ fun StressLevelUI(
                 onAddButton = { onEvent(StressLevelEvent.onAddStressLevel) },
                 onGoBack = { onEvent(StressLevelEvent.OnGoBack) },
                 content = { modifier ->
-                    StressItems(
+                    StressTriggersSection(
                         modifier = modifier,
                         records = records,
                         onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
                     )
-                    StressTriggersSection(
+                    StressItems(
                         modifier = modifier,
                         records = records,
                         onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
@@ -60,12 +64,26 @@ fun StressLevelUI(
 
 @Preview
 @Composable
-fun StressLevelUIPreview() {
+fun StressLevelUIPreviewEmpty() {
+    StressLevelUI(
+        state = StressLevelState(
+            stressLevelRecords = UiState.Success(
+                listOf(
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelUIPreviewOne() {
     StressLevelUI(
         state = StressLevelState(
             stressLevelRecords = UiState.Success(
                 listOf(
                     StressLevelRecord(
+                        stressLevel = StressLevel.One,
                         stressors = listOf(Stressor.Work)
                     ),
                     StressLevelRecord(
@@ -82,11 +100,90 @@ fun StressLevelUIPreview() {
 
 @Preview
 @Composable
-fun StressLevelUIPreviewEmpty() {
+fun StressLevelUIPreviewTwo() {
     StressLevelUI(
         state = StressLevelState(
             stressLevelRecords = UiState.Success(
                 listOf(
+                    StressLevelRecord(
+                        stressLevel = StressLevel.Two,
+                        stressors = listOf(Stressor.Work)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Work, Stressor.Kids)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Finances, Stressor.Loneliness)
+                    )
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelUIPreviewThree() {
+    StressLevelUI(
+        state = StressLevelState(
+            stressLevelRecords = UiState.Success(
+                listOf(
+                    StressLevelRecord(
+                        stressLevel = StressLevel.Three,
+                        stressors = listOf(Stressor.Work)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Work, Stressor.Kids)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Finances, Stressor.Loneliness)
+                    )
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelUIPreviewFour() {
+    StressLevelUI(
+        state = StressLevelState(
+            stressLevelRecords = UiState.Success(
+                listOf(
+                    StressLevelRecord(
+                        stressLevel = StressLevel.Four,
+                        stressors = listOf(Stressor.Work)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Work, Stressor.Kids)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Finances, Stressor.Loneliness)
+                    )
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelUIPreviewFive() {
+    StressLevelUI(
+        state = StressLevelState(
+            stressLevelRecords = UiState.Success(
+                listOf(
+                    StressLevelRecord(
+                        stressLevel = StressLevel.Five,
+                        stressors = listOf(Stressor.Work)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Work, Stressor.Kids)
+                    ),
+                    StressLevelRecord(
+                        stressors = listOf(Stressor.Finances, Stressor.Loneliness)
+                    )
                 )
             )
         )

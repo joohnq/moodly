@@ -2,18 +2,14 @@ package com.joohnq.freud_score.ui.resource
 
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
 import com.joohnq.freud_score.domain.property.FreudScoreProperties
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.at_risk
-import com.joohnq.shared_resources.healthy
-import com.joohnq.shared_resources.mostly_healthy
-import com.joohnq.shared_resources.stable
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.unhealthy
 import org.jetbrains.compose.resources.StringResource
 
 sealed class FreudScoreResource(
     override val score: Int,
     val title: StringResource,
+    val subtitle: StringResource,
     val palette: FreudScorePalette,
 ) : FreudScoreProperties {
     data class Healthy(
@@ -21,6 +17,7 @@ sealed class FreudScoreResource(
     ) : FreudScoreResource(
         score = score,
         title = Res.string.healthy,
+        subtitle = Res.string.you_are_a_very_healthy_individual,
         palette = FreudScorePalette(
             color = Colors.Green10,
             subColor = Colors.Green40,
@@ -34,6 +31,7 @@ sealed class FreudScoreResource(
     ) : FreudScoreResource(
         score = score,
         title = Res.string.mostly_healthy,
+        subtitle = Res.string.you_maintain_good_health_habits,
         palette = FreudScorePalette(
             color = Colors.Yellow10,
             subColor = Colors.Yellow40,
@@ -47,6 +45,7 @@ sealed class FreudScoreResource(
     ) : FreudScoreResource(
         score = score,
         title = Res.string.stable,
+        subtitle = Res.string.your_health_is_in_a_balanced_state,
         palette = FreudScorePalette(
             color = Colors.Brown20,
             subColor = Colors.Brown40,
@@ -60,6 +59,7 @@ sealed class FreudScoreResource(
     ) : FreudScoreResource(
         score = score,
         title = Res.string.at_risk,
+        subtitle = Res.string.certain_habits_or_conditions_are_putting_your_health_at_risk,
         palette = FreudScorePalette(
             color = Colors.Orange10,
             subColor = Colors.Orange30,
@@ -73,6 +73,7 @@ sealed class FreudScoreResource(
     ) : FreudScoreResource(
         score = score,
         title = Res.string.unhealthy,
+        subtitle = Res.string.your_current_health_status_requires_immediate,
         palette = FreudScorePalette(
             color = Colors.Purple10,
             subColor = Colors.Purple30,
@@ -81,3 +82,11 @@ sealed class FreudScoreResource(
         )
     )
 }
+
+fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
+    FreudScoreResource.Healthy(score),
+    FreudScoreResource.MostlyHealthy(score),
+    FreudScoreResource.Stable(score),
+    FreudScoreResource.AtRisk(score),
+    FreudScoreResource.Unhealthy(score),
+)

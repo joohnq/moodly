@@ -1,8 +1,6 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,13 +10,14 @@ import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.capitalize
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.core.ui.mapper.toMonthCompleteDayAndYear
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
+import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.week_view
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepPanel
@@ -29,7 +28,7 @@ import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQuality
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import com.kizitonwose.calendar.compose.weekcalendar.WeekCalendarState
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
-import org.jetbrains.compose.resources.painterResource
+import com.kizitonwose.calendar.core.Week
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -57,6 +56,25 @@ fun SleepTopNavDate(
     }
 }
 
+
+@Composable
+fun SleepWeekView(
+    modifier: Modifier = Modifier,
+    week: Week,
+    records: List<SleepQualityRecord>,
+) {
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.week_view,
+        onSeeAll = {},
+    )
+    SleepQualityWeekCalendar(
+        modifier = modifier,
+        week = week,
+        records = records
+    )
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SleepQualityUI(
@@ -73,29 +91,25 @@ fun SleepQualityUI(
             DecoratedConvexPanelList(
                 containerColor = Colors.White,
                 isDark = !hasToday,
+                image = Drawables.Images.SleepQualityBackground,
+                color = if (hasToday) resource.palette.backgroundColor else Colors.Brown10,
                 panelBackgroundColor = if (hasToday) resource.palette.color else Colors.Brown10,
                 panel = { modifier ->
-                    Column(
-                        modifier = modifier
-                            .background(color = Colors.White, shape = Dimens.Shape.Large)
-                            .paddingAllSmall()
-                    ) {
-                        SleepTopNavDate()
-                        VerticalSpacer(10.dp)
-                        SleepQualityWeekCalendar(
-                            week = weekCalendarState.firstVisibleWeek,
-                            records = records
-                        )
-                    }
-                    VerticalSpacer(20.dp)
                     SleepPanel(
                         modifier = modifier,
+                        record = record,
                         resource = resource,
                     )
                 },
                 onAddButton = { onEvent(SleepQualityEvent.OnAddSleepQuality) },
                 onGoBack = { onEvent(SleepQualityEvent.OnGoBack) },
                 content = { modifier ->
+                    SleepWeekView(
+                        modifier = modifier,
+                        week = weekCalendarState.firstVisibleWeek,
+                        records = records
+                    )
+                    VerticalSpacer(10.dp)
                     SleepSection(
                         modifier = modifier,
                         records = records,
@@ -109,12 +123,11 @@ fun SleepQualityUI(
 
 @Preview
 @Composable
-fun SleepQualityUIPreview() {
+fun SleepQualityUIPreviewEmpty() {
     SleepQualityUI(
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord()
                 )
             )
         ),
@@ -123,11 +136,12 @@ fun SleepQualityUIPreview() {
 
 @Preview
 @Composable
-fun SleepQualityUIPreviewEmpty() {
+fun SleepQualityUIPreview() {
     SleepQualityUI(
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
+                    SleepQualityRecord()
                 )
             )
         ),

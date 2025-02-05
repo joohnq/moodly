@@ -17,17 +17,7 @@ fun StressHistoryUI(
 ) {
     state.stressLevelRecords.foldComposable(
         onSuccess = { records ->
-            DecoratedConvexPanelList(
-                containerColor = Colors.White,
-                panelBackgroundColor = Colors.Brown10,
-                panel = { modifier ->
 
-                },
-                onAddButton = { onEvent(StressHistoryEvent.OnAddStressLevel) },
-                onGoBack = { onEvent(StressHistoryEvent.OnGoBack) },
-                content = { modifier ->
-                }
-            )
         }
     )
 }

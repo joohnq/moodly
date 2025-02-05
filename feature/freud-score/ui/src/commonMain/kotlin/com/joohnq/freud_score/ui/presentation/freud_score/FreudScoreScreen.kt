@@ -15,8 +15,6 @@ fun FreudScoreScreen(
     onNavigateMood: (Int) -> Unit,
     onNavigateAddStat: () -> Unit,
 ) {
-    val statsViewModel: StatsViewModel = sharedViewModel()
-    val statsState: StatsState by statsViewModel.state.collectAsState()
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
     val freudScoreState by freudScoreViewModel.state.collectAsState()
 
@@ -29,7 +27,6 @@ fun FreudScoreScreen(
 
     FreudScoreUI(
         state = freudScoreState,
-        statsState = statsState,
         onEvent = ::onEvent,
     )
 }

@@ -5,6 +5,7 @@ import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
@@ -17,16 +18,6 @@ fun SleepHistoryUI(
 ) {
     state.sleepQualityRecords.foldComposable(
         onSuccess = { records ->
-            DecoratedConvexPanelList(
-                containerColor = Colors.White,
-                panelBackgroundColor = Colors.Brown10,
-                panel = { modifier ->
-                },
-                onAddButton = { onEvent(SleepHistoryEvent.OnAddSleepQuality) },
-                onGoBack = { onEvent(SleepHistoryEvent.OnGoBack) },
-                content = { modifier ->
-                }
-            )
         }
     )
 }

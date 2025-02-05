@@ -42,7 +42,7 @@ fun DashboardCentral(
             ),
             CentralAction<Destination>(
                 title = Res.string.mood,
-                icon = Drawables.Icons.Outlined.Mood,
+                icon = Drawables.Icons.Outlined.MoodNeutral,
                 destination = Destination.App.AddStat
             )
         )

@@ -44,7 +44,7 @@ fun NotFoundHorizontal(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
-                modifier = Modifier.paddingAllSmall().weight(1f).fillMaxHeight(),
+                modifier = Modifier.paddingAllSmall().weight(1f),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(

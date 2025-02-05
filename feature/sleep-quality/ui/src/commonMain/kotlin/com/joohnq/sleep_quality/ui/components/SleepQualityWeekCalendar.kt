@@ -12,10 +12,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityWeekCalendar(
+    modifier: Modifier = Modifier,
     week: Week,
     records: List<SleepQualityRecord>,
 ) {
-    Row(horizontalArrangement = Arrangement.Center) {
+    Row(modifier = modifier, horizontalArrangement = Arrangement.Center) {
         week.days.forEach { day ->
             val resource =
                 records.find { it.createdAt == day.date }?.sleepQuality?.toResource()

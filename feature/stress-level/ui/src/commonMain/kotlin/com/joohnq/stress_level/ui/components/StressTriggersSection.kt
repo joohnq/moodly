@@ -50,7 +50,6 @@ fun StressTriggersSection(
     SectionHeader(
         modifier = modifier,
         title = Res.string.sleep_trigger,
-        onSeeAll = {}
     )
     if (stressors.size < 3)
         NotFoundHorizontal(
@@ -83,6 +82,7 @@ fun StressTriggersSection(
                     Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                         MultiColorCircularProgress(
                             segments = segments,
+                            strokeWidth = 10.dp,
                             modifier = Modifier.size(150.dp)
                         )
                         TriggerIcon(

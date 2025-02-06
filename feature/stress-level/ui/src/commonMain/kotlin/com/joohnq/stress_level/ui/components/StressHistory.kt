@@ -14,11 +14,13 @@ import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.sleep_history
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StressItems(
+fun StressHistory(
     modifier: Modifier = Modifier,
     containerColor: Color,
     records: List<StressLevelRecord>,
@@ -47,9 +49,33 @@ fun StressItems(
                 ) { modifier ->
                     StressLevelCard(
                         modifier = modifier.background(color = containerColor),
+                        containerColor = containerColor,
                         record = record,
                     )
                 }
             }
         }
+}
+
+@Preview
+@Composable
+fun StressHistoryPreviewEmpty() {
+    StressHistory(
+        containerColor = Colors.White,
+        records = listOf(),
+        onAddStressLevel = {}
+    )
+}
+
+@Preview
+@Composable
+fun StressHistoryPreview() {
+    StressHistory(
+        containerColor = Colors.White,
+        records = listOf(
+            StressLevelRecord(),
+            StressLevelRecord()
+        ),
+        onAddStressLevel = {}
+    )
 }

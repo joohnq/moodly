@@ -8,6 +8,8 @@ import com.joohnq.freud_score.ui.resource.FreudScoreResource.MostlyHealthy
 import com.joohnq.freud_score.ui.resource.FreudScoreResource.Stable
 import com.joohnq.freud_score.ui.resource.FreudScoreResource.Unhealthy
 
+typealias Index = Int
+
 fun FreudScore.toResource(): FreudScoreResource =
     when (this) {
         is FreudScore.Healthy -> Healthy(score)
@@ -15,4 +17,32 @@ fun FreudScore.toResource(): FreudScoreResource =
         is FreudScore.Stable -> Stable(score)
         is FreudScore.AtRisk -> AtRisk(score)
         is FreudScore.Unhealthy -> Unhealthy(score)
+    }
+
+fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
+    FreudScoreResource.Healthy(score),
+    FreudScoreResource.MostlyHealthy(score),
+    FreudScoreResource.Stable(score),
+    FreudScoreResource.AtRisk(score),
+    FreudScoreResource.Unhealthy(score),
+)
+
+fun Index.toInitialFreudScore(): Int =
+    when (this) {
+        0 -> 80
+        1 -> 60
+        2 -> 40
+        3 -> 20
+        4 -> 0
+        else -> throw IllegalArgumentException("Unknown freud score: $this")
+    }
+
+fun Index.toEndFreudScore(): Int =
+    when (this) {
+        0 -> 100
+        1 -> 80
+        2 -> 60
+        3 -> 40
+        4 -> 20
+        else -> throw IllegalArgumentException("Unknown freud score: $this")
     }

@@ -111,6 +111,8 @@ object Drawables {
         val HealthJournalBackground = Res.drawable.health_journal_background
         val HealthJournalWomanWriting = Res.drawable.health_journal_woman_writing
         val HealthJournalHistory = Res.drawable.health_journal_history
+        val SleepInsight = Res.drawable.sleep_insight
+        val StressLevelInsight = Res.drawable.stress_level_insight
 
         val FaceDepressed = Res.drawable.face_depressed
         val FaceSad = Res.drawable.face_sad

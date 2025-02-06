@@ -1,6 +1,7 @@
 package com.joohnq.freud_score.ui.presentation.freud_score
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,9 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.freud_score.ui.mapper.getAllFreudScoreResources
+import com.joohnq.freud_score.ui.mapper.toEndFreudScore
+import com.joohnq.freud_score.ui.mapper.toInitialFreudScore
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
-import com.joohnq.freud_score.ui.resource.getAllFreudScoreResources
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.BallItem
@@ -42,7 +45,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
                 text = Res.string.freud_score,
                 onGoBack = { onEvent(FreudScoreEvent.OnGoBack) },
             )
-            Column(modifier = Modifier.paddingHorizontalMedium(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier.paddingHorizontalMedium(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 val color = state.freudScore.palette.backgroundColor
 
                 DottedCircles(
@@ -68,11 +74,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
                 )
                 VerticalSpacer(12.dp)
                 resources.forEachIndexed { i, resource ->
-                    val portion = 100 / resources.size
-                    val initial = (i + 1) * portion
                     BallItem(
                         color = resource.palette.backgroundColor,
-                        title = stringResource(Res.string.hyphen, initial - portion, initial),
+                        title = stringResource(
+                            Res.string.hyphen,
+                            i.toEndFreudScore(),
+                            i.toInitialFreudScore()
+                        ),
                         description = stringResource(resource.title),
                         isNotLast = i < resources.lastIndex
                     )

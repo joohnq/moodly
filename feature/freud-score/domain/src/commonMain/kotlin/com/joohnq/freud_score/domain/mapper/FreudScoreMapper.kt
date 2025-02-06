@@ -19,3 +19,4 @@ fun Int.toFreudScore(): FreudScore {
 }
 
 fun init(): FreudScore = Stable(50)
+

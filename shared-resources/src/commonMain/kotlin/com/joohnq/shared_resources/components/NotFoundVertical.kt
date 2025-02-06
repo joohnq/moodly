@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
@@ -21,6 +22,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun NotFoundVertical(
     modifier: Modifier = Modifier,
+    containerColor: Color,
     title: StringResource,
     subtitle: StringResource,
     image: DrawableResource,
@@ -28,9 +30,9 @@ fun NotFoundVertical(
 ) {
     Card(
         colors = CardColors(
-            containerColor = Colors.White,
+            containerColor = containerColor,
             contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
+            disabledContainerColor = containerColor,
             disabledContentColor = Colors.Brown80
         ),
         shape = Dimens.Shape.Large,

@@ -23,6 +23,7 @@ import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepQualityMetric
@@ -70,6 +71,7 @@ fun HomeUI(
                 )
                 MoodMetric(
                     records = statsRecords,
+                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddStat) },
                     onClick = { }
                 )
@@ -80,6 +82,7 @@ fun HomeUI(
                 )
                 SleepQualityMetric(
                     records = sleepQualities,
+                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
                     onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                 )
@@ -90,16 +93,18 @@ fun HomeUI(
                 )
                 StressLevelMetric(
                     records = stressLevels,
+                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddStress) },
                     onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                 )
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.self_journaling,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToAllJournals) }
+                    onSeeAll = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
                 )
                 SelfJournalingMetric(
                     records = healthJournals,
+                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
                     onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
                 )

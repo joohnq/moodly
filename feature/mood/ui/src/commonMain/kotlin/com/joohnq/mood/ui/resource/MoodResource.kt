@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.resource
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.joohnq.core.ui.entity.Assets
 import com.joohnq.mood.domain.entity.Mood.Companion.DEPRESSED
 import com.joohnq.mood.domain.entity.Mood.Companion.HAPPY
 import com.joohnq.mood.domain.entity.Mood.Companion.NEUTRAL
@@ -8,22 +8,10 @@ import com.joohnq.mood.domain.entity.Mood.Companion.OVERJOYED
 import com.joohnq.mood.domain.entity.Mood.Companion.SAD
 import com.joohnq.mood.domain.entity.MoodPalette
 import com.joohnq.mood.domain.property.MoodProperties
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.depressed
-import com.joohnq.shared_resources.happy
-import com.joohnq.shared_resources.neutral
-import com.joohnq.shared_resources.overjoyed
-import com.joohnq.shared_resources.sad
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-
-data class Assets(
-    val imageVector: ImageVector,
-    val icon: DrawableResource,
-    val iconOutlined: DrawableResource
-)
 
 sealed class MoodResource(
     override val id: Int,
@@ -38,6 +26,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.DepressedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodDepressed,
+                secondaryIcon = Drawables.Images.FaceDepressed,
                 iconOutlined = Drawables.Icons.Outlined.MoodDepressed
             ),
             text = Res.string.depressed,
@@ -64,6 +53,7 @@ sealed class MoodResource(
         assets = Assets(
             imageVector = Drawables.Mood.SadVectorPainter,
             icon = Drawables.Icons.Filled.MoodSad,
+            secondaryIcon = Drawables.Images.FaceSad,
             iconOutlined = Drawables.Icons.Outlined.MoodSad
         ),
         text = Res.string.sad,
@@ -91,6 +81,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.NeutralVectorPainter,
                 icon = Drawables.Icons.Filled.MoodNeutral,
+                secondaryIcon = Drawables.Images.FaceNeutral,
                 iconOutlined = Drawables.Icons.Outlined.MoodNeutral
             ),
             text = Res.string.neutral,
@@ -117,6 +108,7 @@ sealed class MoodResource(
         assets = Assets(
             imageVector = Drawables.Mood.HappyVectorPainter,
             icon = Drawables.Icons.Filled.MoodHappy,
+            secondaryIcon = Drawables.Images.FaceHappy,
             iconOutlined = Drawables.Icons.Outlined.MoodHappy
         ),
         text = Res.string.happy,
@@ -144,6 +136,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.OverjoyedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodOverjoyed,
+                secondaryIcon = Drawables.Images.FaceOverjoyed,
                 iconOutlined = Drawables.Icons.Outlined.MoodOverjoyed
             ),
             text = Res.string.overjoyed,

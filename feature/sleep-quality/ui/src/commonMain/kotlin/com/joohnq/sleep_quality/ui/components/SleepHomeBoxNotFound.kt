@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.calculateDuration
@@ -15,6 +16,7 @@ import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.GiganticSecondaryCard
 import com.joohnq.shared_resources.components.NotFoundVertical
+import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
@@ -28,6 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityMetric(
     records: List<SleepQualityRecord>,
+    containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
@@ -37,6 +40,7 @@ fun SleepQualityMetric(
     if (resource == null)
         NotFoundVertical(
             modifier = Modifier.paddingHorizontalMedium(),
+            containerColor = containerColor,
             image = Drawables.Images.SleepWomanIllustration,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
             subtitle = Res.string.set_up_sleep,
@@ -48,6 +52,7 @@ fun SleepQualityMetric(
 
         GiganticSecondaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
+            containerColor = containerColor,
             title = durationString,
             subtitle = stringResource(resource.firstText),
             onClick = onClick,

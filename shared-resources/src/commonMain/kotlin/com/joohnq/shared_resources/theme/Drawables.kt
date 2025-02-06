@@ -19,6 +19,11 @@ object Drawables {
             val MoodNeutral = Res.drawable.ic_mood_neutral_outlined
             val MoodSad = Res.drawable.ic_mood_sad_outlined
             val MoodDepressed = Res.drawable.ic_mood_depressed_outlined
+
+            val Eye = Res.drawable.ic_eye_outlined
+            val Positive = Res.drawable.ic_positive_outlined
+            val Negative = Res.drawable.ic_negative_outlined
+            val Document = Res.drawable.ic_document
         }
 
         object Filled {
@@ -43,7 +48,6 @@ object Drawables {
         val Warning = Res.drawable.ic_warning
         val Calendar = Res.drawable.ic_calendar
         val Heart = Res.drawable.ic_heart
-        val Document = Res.drawable.ic_document
         val SadFace = Res.drawable.ic_sad_face
         val DocumentHealth = Res.drawable.ic_document_health
         val HospitalBed = Res.drawable.ic_hospital_bed
@@ -104,6 +108,15 @@ object Drawables {
         val FreudScoreIllustration = Res.drawable.freud_score_illustration
         val MoodIllustration = Res.drawable.mood_illustration
         val FreudScoreCircleIllustration = Res.drawable.freud_score_circle_illustration
+        val HealthJournalBackground = Res.drawable.health_journal_background
+        val HealthJournalWomanWriting = Res.drawable.health_journal_woman_writing
+        val HealthJournalHistory = Res.drawable.health_journal_history
+
+        val FaceDepressed = Res.drawable.face_depressed
+        val FaceSad = Res.drawable.face_sad
+        val FaceNeutral = Res.drawable.face_neutral
+        val FaceHappy = Res.drawable.face_happy
+        val FaceOverjoyed = Res.drawable.face_overjoyed
     }
 
     object Mood {

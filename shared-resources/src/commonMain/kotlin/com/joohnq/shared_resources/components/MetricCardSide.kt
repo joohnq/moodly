@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MetricCardSide(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
+    containerColor: Color,
     dark: Boolean = false,
     icon: DrawableResource,
     title: String,
@@ -122,7 +122,7 @@ fun MetricCardSide(
 @Composable
 fun MetricCardSide(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
+    containerColor: Color,
     dark: Boolean = false,
     icon: ImageVector,
     title: String,
@@ -210,73 +210,6 @@ fun MetricCardSide(
                     content(Modifier.fillMaxWidth())
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun MetricCardRow(
-    modifier: Modifier = Modifier,
-    icon: DrawableResource,
-    title: StringResource,
-    description: StringResource,
-    content: @Composable () -> Unit,
-    color: Color,
-    onClick: () -> Unit,
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = Dimens.Shape.Large,
-        colors = CardColors(
-            containerColor = Colors.White,
-            contentColor = Colors.Gray80,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.Gray80
-        ),
-        onClick = onClick
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth().paddingAllSmall()
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    androidx.compose.material3.Icon(
-                        painter = painterResource(icon),
-                        contentDescription = stringResource(title),
-                        modifier = Modifier.size(20.dp),
-                        tint = color
-                    )
-                    Text(
-                        text = stringResource(title),
-                        style = TextStyles.TextMdSemiBold(),
-                        color = Colors.Gray80
-                    )
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = stringResource(Res.string.today),
-                        style = TextStyles.TextSmRegular(),
-                        color = Colors.Gray60
-                    )
-                    Icon(
-                        painter = painterResource(Drawables.Icons.ArrowChevron),
-                        contentDescription = stringResource(title),
-                        modifier = Modifier.size(20.dp).rotate(180f),
-                        tint = Colors.Gray40
-                    )
-                }
-            }
-            VerticalSpacer(10.dp)
-            content()
-            VerticalSpacer(10.dp)
-            Text(
-                text = stringResource(description),
-                style = TextStyles.TextSmRegular(),
-                color = Colors.Gray60
-            )
         }
     }
 }

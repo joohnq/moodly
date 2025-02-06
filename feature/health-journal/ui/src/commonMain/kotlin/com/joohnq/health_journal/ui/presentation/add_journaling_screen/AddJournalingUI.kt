@@ -65,7 +65,7 @@ fun AddJournalingUI(
                     colors = ComponentColors.TextField.MainTextFieldColors(),
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(Drawables.Icons.Document),
+                            painter = painterResource(Drawables.Icons.Outlined.Document),
                             contentDescription = null,
                             tint = Colors.Brown80,
                             modifier = Modifier.size(Dimens.Icon)

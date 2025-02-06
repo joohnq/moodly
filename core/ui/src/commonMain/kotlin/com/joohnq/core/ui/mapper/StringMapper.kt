@@ -12,3 +12,5 @@ fun String.toTime(): Time {
 }
 
 fun String.capitalize(): String = replaceFirstChar { c -> c.uppercase() }
+
+fun String.toWordCount(): Int = split(" ").size

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add
@@ -19,6 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun GiganticCreateCard(
     modifier: Modifier = Modifier,
+    containerColor: Color,
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
@@ -27,9 +29,9 @@ fun GiganticCreateCard(
 ) {
     Card(
         colors = CardColors(
-            containerColor = Colors.White,
+            containerColor = containerColor,
             contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
+            disabledContainerColor = containerColor,
             disabledContentColor = Colors.Brown80
         ),
         shape = Dimens.Shape.Large,
@@ -83,6 +85,7 @@ fun GiganticCreateCard(
 @Composable
 fun GiganticSecondaryCard(
     modifier: Modifier = Modifier,
+    containerColor: Color,
     title: String,
     subtitle: String,
     onClick: () -> Unit,
@@ -91,9 +94,9 @@ fun GiganticSecondaryCard(
 ) {
     Card(
         colors = CardColors(
-            containerColor = Colors.White,
+            containerColor = containerColor,
             contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
+            disabledContainerColor = containerColor,
             disabledContentColor = Colors.Brown80
         ),
         shape = Dimens.Shape.Large,

@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.copy
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
@@ -74,14 +73,15 @@ fun DecoratedConvexPanelList(
     Scaffold(
         containerColor = containerColor,
     ) { padding ->
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        LazyColumn(
+            modifier = Modifier.padding(bottom = padding.calculateBottomPadding()),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
             item {
                 Column(
                     Modifier
-                        .padding(padding.copy(top = 0.dp))
                         .background(color = containerColor)
                 ) {
-                    VerticalSpacer(padding.calculateTopPadding())
                     Box(
                         modifier = Modifier.wrapContentSize().background(color = panelBackgroundColor),
                     ) {
@@ -97,6 +97,7 @@ fun DecoratedConvexPanelList(
                             modifier = Modifier
                                 .fillMaxWidth()
                         ) {
+                            VerticalSpacer(padding.calculateTopPadding())
                             TopBar(
                                 modifier = Modifier
                                     .paddingHorizontalMedium(),
@@ -119,7 +120,6 @@ fun DecoratedConvexPanelList(
                             }
                         }
                     }
-//                    content(Modifier.paddingHorizontalMedium())
                 }
             }
             item {

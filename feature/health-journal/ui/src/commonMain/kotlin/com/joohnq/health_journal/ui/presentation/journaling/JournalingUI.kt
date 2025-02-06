@@ -119,7 +119,7 @@ fun JournalingUI(
                 ) {
                     HealthJournalStatsCard(
                         modifier = Modifier.weight(1f),
-                        icon = Drawables.Icons.Document,
+                        icon = Drawables.Icons.Outlined.Document,
                         title = dayPerYear,
                         color = Colors.Green50,
                         backgroundColor = Colors.Green10,

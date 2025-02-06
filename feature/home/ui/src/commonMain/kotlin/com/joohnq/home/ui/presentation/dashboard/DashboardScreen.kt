@@ -12,7 +12,6 @@ import androidx.navigation.compose.rememberNavController
 import com.joohnq.core.ui.ObserverSideEffects
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
-import com.joohnq.home.ui.components.DashboardBottomNavigation
 import com.joohnq.home.ui.components.DashboardCentral
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.home.ui.presentation.dashboard.event.toDashboardEvent
@@ -73,14 +72,14 @@ fun DashboardScreen(
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarHostState,
-        bottomBar = {
-            DashboardBottomNavigation(
-                isCurrentRoute = hierarchy::isCurrentRoute,
-                onNavigate = ::onNavigateBottomNavigate,
-                isCentralExpanded = centralIsExpanded,
-                toggleIsCentralExpanded = { centralIsExpanded = !centralIsExpanded },
-            )
-        }
+//        bottomBar = {
+//            DashboardBottomNavigation(
+//                isCurrentRoute = hierarchy::isCurrentRoute,
+//                onNavigate = ::onNavigateBottomNavigate,
+//                isCentralExpanded = centralIsExpanded,
+//                toggleIsCentralExpanded = { centralIsExpanded = !centralIsExpanded },
+//            )
+//        }
     ) { padding ->
         NavHost(
             modifier = Modifier

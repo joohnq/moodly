@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toPercentage
@@ -29,6 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressTriggersSection(
     modifier: Modifier = Modifier,
+    containerColor: Color = Colors.White,
     records: List<StressLevelRecord>,
     onAddStressLevel: () -> Unit
 ) {
@@ -53,6 +55,7 @@ fun StressTriggersSection(
     if (stressors.size < 3)
         NotFoundHorizontal(
             modifier = modifier,
+            containerColor = containerColor,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
             subtitle = Res.string.log_stress_level,
             image = Drawables.Images.StressTriggerIllustration,
@@ -62,9 +65,9 @@ fun StressTriggersSection(
         Card(
             modifier = modifier.fillMaxWidth(),
             colors = CardColors(
-                containerColor = Colors.White,
+                containerColor = containerColor,
                 contentColor = Colors.Gray80,
-                disabledContainerColor = Colors.White,
+                disabledContainerColor = containerColor,
                 disabledContentColor = Colors.Gray80
             )
         ) {

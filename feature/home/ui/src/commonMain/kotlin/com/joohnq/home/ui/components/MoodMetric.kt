@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.entity.StatsRecord
@@ -77,6 +78,7 @@ fun WeekMoodIndicator(
 @Composable
 fun MoodMetric(
     records: List<StatsRecord>,
+    containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
@@ -86,6 +88,7 @@ fun MoodMetric(
     if (resource == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
+            containerColor = containerColor,
             image = Drawables.Images.MoodIllustration,
             title = Res.string.you_havent_set_up_any_mood_yet,
             subtitle = Res.string.set_up_mood,
@@ -94,6 +97,7 @@ fun MoodMetric(
     else
         MetricCardSide(
             modifier = Modifier.paddingHorizontalMedium(),
+            containerColor = containerColor,
             icon = resource.assets.icon,
             title = stringResource(Res.string.mood),
             text = resource.healthLevel.toString(),

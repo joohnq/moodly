@@ -307,4 +307,18 @@
     <string name="your_current_health_status_requires_immediate">
         Your current health status requires immediate attention and lifestyle adjustments.
     </string>
+    <string name="journal_insight">Journal Insight</string>
+    <string name="total_journals">Total Journals</string>
+    <string name="most_frequent_emotion">Most Frequent Emotion</string>
+    <string name="log_your_first_journal">Log your first journal</string>
+    <string name="lets_log_your_first_journal_to_see_your_insight">Let’s log your first journal to see your insight.
+    </string>
+    <string name="write_journal">Write Journal</string>
+    <string name="journals_written_this_month">Journals written this month</string>
+    <string name="journal_calendar">Journals Calendar</string>
+    <string name="total_words">Total Words</string>
+    <string name="write_your_first_journal_to_see_journal_history_lets_do_it_now_for_better_mental_health">
+        Write your first journal to see journal history. Let’s do it now for better mental health!
+    </string>
+    <string name="words">%1$d words</string>
 </resources>

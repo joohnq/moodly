@@ -78,7 +78,7 @@ fun MentalHealthMetrics(
         item {
             MentalHealthMetricItem(
                 title = Res.string.health_journal,
-                icon = Drawables.Icons.Document,
+                icon = Drawables.Icons.Outlined.Document,
                 backgroundColor = Colors.Purple30,
                 onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
             ) { modifier ->

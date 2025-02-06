@@ -27,7 +27,7 @@ fun rememberBottomNavigationItems(): List<BottomItem<Destination>> = remember {
         ),
         BottomItem(
             icon = DIcon(
-                icon = Drawables.Icons.Document,
+                icon = Drawables.Icons.Outlined.Document,
                 modifier = Modifier.size(Dimens.Icon),
                 contentDescription = Res.string.journaling
             ),

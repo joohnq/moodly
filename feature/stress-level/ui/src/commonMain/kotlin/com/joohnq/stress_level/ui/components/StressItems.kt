@@ -1,9 +1,11 @@
 package com.joohnq.stress_level.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
@@ -18,6 +20,7 @@ import com.joohnq.stress_level.domain.entity.StressLevelRecord
 @Composable
 fun StressItems(
     modifier: Modifier = Modifier,
+    containerColor: Color,
     records: List<StressLevelRecord>,
     onAddStressLevel: () -> Unit,
 ) {
@@ -29,6 +32,7 @@ fun StressItems(
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,
+            containerColor = containerColor,
             title = Res.string.lets_set_up_daily_stress_level,
             subtitle = Res.string.add_new_journal,
             image = Drawables.Images.StressLevelManIllustration,
@@ -42,7 +46,7 @@ fun StressItems(
                     onAction = {}
                 ) { modifier ->
                     StressLevelCard(
-                        modifier = modifier,
+                        modifier = modifier.background(color = containerColor),
                         record = record,
                     )
                 }

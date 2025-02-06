@@ -12,9 +12,8 @@ import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.domain.mapper.getTodayStressLevelRecord
-import com.joohnq.stress_level.ui.components.StressItems
+import com.joohnq.stress_level.ui.components.StressContent
 import com.joohnq.stress_level.ui.components.StressPanel
-import com.joohnq.stress_level.ui.components.StressTriggersSection
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
@@ -46,15 +45,10 @@ fun StressLevelUI(
                 onAddButton = { onEvent(StressLevelEvent.onAddStressLevel) },
                 onGoBack = { onEvent(StressLevelEvent.OnGoBack) },
                 content = { modifier ->
-                    StressTriggersSection(
+                    StressContent(
                         modifier = modifier,
                         records = records,
-                        onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
-                    )
-                    StressItems(
-                        modifier = modifier,
-                        records = records.take(7),
-                        onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
+                        onEvent = onEvent
                     )
                 }
             )

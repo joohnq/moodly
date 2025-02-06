@@ -20,18 +20,12 @@ import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 
 @Composable
-fun SleepSection(
+fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecord>,
     onClick: () -> Unit
 ) {
-    SectionHeader(
-        modifier = modifier,
-        title = Res.string.sleep_history,
-        onSeeAll = {},
-    )
-
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,

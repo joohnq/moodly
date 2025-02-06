@@ -8,6 +8,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,16 +29,15 @@ import com.joohnq.shared_resources.theme.TextStyles
 @Composable
 fun MoodBarStatistic(
     statsRecords: List<StatsRecord>,
-    currentStatsRecord: StatsRecord,
     height: Dp = 250.dp,
-    onClick: (StatsRecord) -> Unit = {},
 ) {
+    val current = statsRecords.last()
     val proportion = height / 100
     val pagerState = rememberPagerState(pageCount = {
         statsRecords.size
     })
 
-    val selectedIndex = statsRecords.indexOf(currentStatsRecord)
+    val selectedIndex = statsRecords.indexOf(current)
 
     LaunchedEffect(selectedIndex) {
         if (selectedIndex >= 0) {
@@ -44,7 +45,7 @@ fun MoodBarStatistic(
         }
     }
     val textHeight = CalculateTextHeight(font = TextStyles.TextSmSemiBold())
-    val resource = currentStatsRecord.mood.toResource()
+    val resource = current.mood.toResource()
     BoxWithConstraints(
         modifier = Modifier.fillMaxWidth().height(height + textHeight)
     ) {
@@ -53,6 +54,7 @@ fun MoodBarStatistic(
 
         Box(
             modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomStart
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 Column {
@@ -78,11 +80,11 @@ fun MoodBarStatistic(
                 val statsRecord = statsRecords[page]
                 val boxHeight = statsRecord.mood.healthLevel.times(proportion)
                 val background = when {
-                    currentStatsRecord == statsRecord -> resource.palette.barColor
+                    current == statsRecord -> resource.palette.barColor
                     else -> Colors.Brown20
                 }
                 val barFaceColor = when {
-                    currentStatsRecord == statsRecord -> resource.palette.barFaceColor
+                    current == statsRecord -> resource.palette.barFaceColor
                     else -> Colors.Brown40
                 }
                 Column(
@@ -90,29 +92,28 @@ fun MoodBarStatistic(
                     verticalArrangement = Arrangement.Bottom,
                     modifier = Modifier.width(boxWidth).fillMaxHeight()
                 ) {
-                    Button(
+                    Card(
                         modifier = Modifier
                             .width(boxWidth)
                             .height(boxHeight),
-                        contentPadding = PaddingValues(5.dp),
-                        colors = ButtonColors(
-                            containerColor = background,
-                            disabledContainerColor = background,
-                            contentColor = background,
-                            disabledContentColor = background,
+                        colors = CardColors(
+                            containerColor = barFaceColor,
+                            disabledContainerColor = barFaceColor,
+                            contentColor = barFaceColor,
+                            disabledContentColor = barFaceColor,
                         ),
                         shape = RoundedCornerShape(topEnd = 100.dp, topStart = 100.dp),
-                        onClick = { onClick(statsRecord) }
                     ) {
                         Column(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.fillMaxSize().padding(5.dp),
                             verticalArrangement = Arrangement.Top,
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
                                 resource = statsRecord.mood.toResource(),
-                                backgroundColor = barFaceColor,
-                                color = background
+                                backgroundColor = Colors.White,
+                                color = barFaceColor
                             )
                         }
                     }

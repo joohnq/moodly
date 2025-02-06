@@ -112,7 +112,7 @@ fun SleepQualityUI(
                     VerticalSpacer(10.dp)
                     SleepSection(
                         modifier = modifier,
-                        records = records,
+                        records = records.take(7),
                         onClick = {},
                     )
                 }

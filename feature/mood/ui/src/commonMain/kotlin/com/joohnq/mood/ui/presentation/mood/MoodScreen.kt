@@ -18,53 +18,19 @@ import org.koin.compose.koinInject
 
 @Composable
 fun MoodScreen(
-    id: Int? = null,
     onNavigateBackToHome: () -> Unit,
     onNavigateAddStat: () -> Unit,
 ) {
     val statsViewModel: StatsViewModel = sharedViewModel()
     val statsState by statsViewModel.state.collectAsState()
-    val getNextStatUseCase: GetNextStatUseCase = koinInject()
-    val getPreviousStatUseCase: GetPreviousStatUseCase = koinInject()
-    var hasNext by remember { mutableStateOf<StatsRecord?>(null) }
-    var hasPrevious by remember { mutableStateOf<StatsRecord?>(null) }
-
-    var record by remember {
-        mutableStateOf(statsState.statsRecords.getValueOrNull().find { it.id == id }
-            ?: statsState.statsRecords.getValueOrNull().first())
-    }
 
     fun onEvent(event: MoodEvent) =
         when (event) {
             is MoodEvent.OnGoBack -> onNavigateBackToHome()
-            is MoodEvent.OnNext -> hasNext?.run { record = this }
-            is MoodEvent.OnPrevious -> hasPrevious?.run { record = this }
             is MoodEvent.OnAddStatScreen -> onNavigateAddStat()
-            is MoodEvent.OnSetMood -> {
-                record = event.statsRecord
-            }
         }
-
-    LaunchedEffect(record) {
-        record.let { statRecord ->
-            hasNext =
-                getNextStatUseCase(
-                    statRecord,
-                    statsState.statsRecords.getValueOrNull()
-                )
-
-            hasPrevious =
-                getPreviousStatUseCase(
-                    statRecord,
-                    statsState.statsRecords.getValueOrNull()
-                )
-        }
-    }
 
     MoodUI(
-        statsRecord = record,
-        hasNext = hasNext != null,
-        hasPrevious = hasPrevious != null,
         statsRecords = statsState.statsRecords,
         onEvent = ::onEvent
     )

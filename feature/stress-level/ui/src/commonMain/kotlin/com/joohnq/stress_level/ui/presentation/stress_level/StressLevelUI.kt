@@ -53,7 +53,7 @@ fun StressLevelUI(
                     )
                     StressItems(
                         modifier = modifier,
-                        records = records,
+                        records = records.take(7),
                         onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
                     )
                 }
@@ -87,7 +87,7 @@ fun StressLevelUIPreviewOne() {
                         stressors = listOf(Stressor.Work)
                     ),
                     StressLevelRecord(
-                        stressors = listOf(Stressor.Work, Stressor.Kids)
+                        stressors = listOf(Stressor.Work, Stressor.Kids, Stressor.Relationship)
                     ),
                     StressLevelRecord(
                         stressors = listOf(Stressor.Finances, Stressor.Loneliness)

@@ -14,7 +14,7 @@ import com.joohnq.stress_level.ui.resource.StressorResource.Work
 import org.jetbrains.compose.resources.stringResource
 
 fun getAllStressorResource(): List<StressorResource> =
-    listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other())
+    listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)
 
 fun Stressor.toResource(): StressorResource = when (this) {
     Stressor.Work -> Work
@@ -24,7 +24,7 @@ fun Stressor.toResource(): StressorResource = when (this) {
     Stressor.Finances -> Finances
     Stressor.Loneliness -> Loneliness
     Stressor.InPeace -> InPeace
-    is Stressor.Other -> Other(this.other)
+    Stressor.Other -> Other
 }
 
 fun List<Stressor>.toResource(): List<StressorResource> = map { it.toResource() }
@@ -37,16 +37,7 @@ fun StressorResource.toDomain(): Stressor = when (this) {
     Finances -> Stressor.Finances
     Loneliness -> Stressor.Loneliness
     InPeace -> Stressor.InPeace
-    is Other -> Stressor.Other(other)
+    Other -> Stressor.Other
 }
 
 fun List<StressorResource>.toDomain(): List<Stressor> = map { it.toDomain() }
-
-@Composable fun List<StressorResource>.getText(): String =
-    map { stressor ->
-        if (stressor is Other) {
-            stressor.other.replaceFirstChar { it.uppercase() }
-        } else {
-            stringResource(stressor.text)
-        }
-    }.joinToString(separator = ", ")

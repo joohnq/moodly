@@ -15,9 +15,6 @@ import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
 import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
 import com.joohnq.navigation.Destination
-import com.joohnq.navigation.Destination.App.AllJournals
-import com.joohnq.navigation.Destination.App.EditJournaling
-import com.joohnq.navigation.Destination.App.Mood
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.SleepHistoryScreen
@@ -42,13 +39,13 @@ fun NavGraphBuilder.appNavigation(
                         DashboardEvent.OnNavigateToAddSleep -> onNavigate(Destination.App.AddSleepQuality)
                         DashboardEvent.OnNavigateToAddStat -> onNavigate(Destination.App.AddStat)
                         DashboardEvent.OnNavigateToAddStress -> onNavigate(Destination.App.AddStressLevel)
-                        DashboardEvent.OnNavigateToAllJournals -> onNavigate(AllJournals())
-                        is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(EditJournaling(event.id))
+                        DashboardEvent.OnNavigateToAllJournals -> onNavigate(Destination.App.AllJournals())
+                        is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(Destination.App.EditJournaling(event.id))
                         DashboardEvent.OnNavigateToFreudScore -> onNavigate(Destination.App.FreudScore)
                         DashboardEvent.OnNavigateToHealthJournal -> onNavigate(Destination.App.HealthJournal)
                         DashboardEvent.OnNavigateToMindfulJournal -> onNavigate(Destination.App.MindfulJournal)
-                        DashboardEvent.OnNavigateToMood -> onNavigate(Mood())
-                        DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(AllJournals())
+                        DashboardEvent.OnNavigateToMood -> onNavigate(Destination.App.Mood)
+                        DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(Destination.App.AllJournals())
                         DashboardEvent.OnNavigateToSleepQuality -> onNavigate(Destination.App.SleepQuality)
                         DashboardEvent.OnNavigateToStressLevel -> onNavigate(Destination.App.StressLevel)
                         is DashboardEvent.OnNavigateTo -> {
@@ -62,7 +59,7 @@ fun NavGraphBuilder.appNavigation(
             FreudScoreScreen(
                 onGoBack = onGoBack,
                 onNavigateMood = { id ->
-                    onNavigate(Destination.App.Mood(id))
+                    onNavigate(Destination.App.Mood)
                 },
                 onNavigateAddStat = {
                     onNavigate(Destination.App.AddStat)
@@ -80,10 +77,8 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.Mood> { backStackEntry ->
-            val mood = backStackEntry.toRoute<Destination.App.Mood>()
+        composable<Destination.App.Mood> {
             MoodScreen(
-                id = mood.id,
                 onNavigateBackToHome = {
                     onNavigateBack(Destination.App.DashBoard)
                 },
@@ -103,7 +98,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.ExpressionAnalysis> {
             ExpressionAnalysisScreen(
                 onNavigateToMood = {
-                    onNavigate(Destination.App.Mood())
+                    onNavigate(Destination.App.Mood)
                 },
                 onGoBack = onGoBack
             )

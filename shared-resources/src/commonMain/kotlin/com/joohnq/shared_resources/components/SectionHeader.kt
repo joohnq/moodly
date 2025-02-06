@@ -60,6 +60,25 @@ fun SectionHeader(
     }
 }
 
+@Composable
+fun SectionHeader(
+    modifier: Modifier = Modifier,
+    title: StringResource,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(title),
+            style = TextStyles.TextLgExtraBold(),
+            color = Colors.Brown80,
+            modifier = Modifier.padding(vertical = 20.dp)
+        )
+    }
+}
+
 @Preview
 @Composable
 fun SectionHeaderPreview() {

@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +16,6 @@ import com.joohnq.core.ui.mapper.copy
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -76,78 +74,14 @@ fun DecoratedConvexPanelList(
     Scaffold(
         containerColor = containerColor,
     ) { padding ->
-        Column(
-            Modifier
-                .padding(padding.copy(top = 0.dp))
-                .background(color = containerColor)
-        ) {
-            VerticalSpacer(padding.calculateTopPadding())
-            Box(
-                modifier = Modifier.wrapContentSize().background(color = panelBackgroundColor),
-            ) {
-                Image(
-                    painter = painterResource(image),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.matchParentSize(),
-                    colorFilter = ColorFilter.tint(color = color),
-                    alignment = Alignment.TopCenter
-                )
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    TopBar(
-                        modifier = Modifier
-                            .paddingHorizontalMedium(),
-                        isDark = isDark,
-                        onGoBack = onGoBack,
-                    )
-                    VerticalSpacer(20.dp)
-                    panel(
-                        Modifier.paddingHorizontalMedium()
-                    )
-                    VerticalSpacer(60.dp)
-                    ConvexContentLayout(
-                        backgroundColor = Colors.White,
-                        offset = 60.dp
-                    ) {
-                        SmallAddButton(
-                            modifier = Modifier.dpOffset(y = (-58).dp),
-                            onClick = onAddButton
-                        )
-                    }
-                }
-            }
-            content(Modifier.paddingHorizontalMedium())
-        }
-    }
-}
-
-@Composable
-fun DecoratedConvexPanelItem(
-    containerColor: Color = Color.White,
-    panelBackgroundColor: Color = Colors.Brown10,
-    isDark: Boolean = true,
-    image: DrawableResource,
-    color: Color,
-    title: StringResource,
-    onAddButton: () -> Unit,
-    onGoBack: () -> Unit,
-    panel: @Composable (Modifier) -> Unit,
-    content: @Composable LazyItemScope.() -> Unit,
-) {
-    Scaffold(
-        containerColor = containerColor,
-    ) { padding ->
         LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             item {
                 Column(
                     Modifier
-                        .padding(padding)
+                        .padding(padding.copy(top = 0.dp))
                         .background(color = containerColor)
-                        .fillMaxSize()
                 ) {
+                    VerticalSpacer(padding.calculateTopPadding())
                     Box(
                         modifier = Modifier.wrapContentSize().background(color = panelBackgroundColor),
                     ) {
@@ -171,8 +105,7 @@ fun DecoratedConvexPanelItem(
                             )
                             VerticalSpacer(20.dp)
                             panel(
-                                Modifier
-                                    .paddingHorizontalMedium()
+                                Modifier.paddingHorizontalMedium()
                             )
                             VerticalSpacer(60.dp)
                             ConvexContentLayout(
@@ -186,15 +119,13 @@ fun DecoratedConvexPanelItem(
                             }
                         }
                     }
-                    VerticalSpacer(20.dp)
-                    Title(
-                        modifier = Modifier.paddingHorizontalMedium(),
-                        text = title
-                    )
+//                    content(Modifier.paddingHorizontalMedium())
                 }
             }
             item {
-                content()
+                Column {
+                    content(Modifier.paddingHorizontalMedium())
+                }
             }
         }
     }

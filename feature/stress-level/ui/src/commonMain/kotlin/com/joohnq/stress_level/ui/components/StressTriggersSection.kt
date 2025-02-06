@@ -1,15 +1,14 @@
 package com.joohnq.stress_level.ui.components
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toPercentage
 import com.joohnq.shared_resources.*
@@ -18,14 +17,12 @@ import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.toResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -35,12 +32,18 @@ fun StressTriggersSection(
     records: List<StressLevelRecord>,
     onAddStressLevel: () -> Unit
 ) {
-    val stressors = records
-        .flatMap { it.stressors.toResource() }
+    val stressors = records.flatMap { it.stressors.toResource() }
+
+    val stressorsMap = stressors
         .groupingBy { it }
         .eachCount()
         .toList()
         .sortedByDescending { it.second }
+
+    val segments = stressorsMap.map { (stressor, count) ->
+        val percent = (count.toDouble() / stressors.size) * 100
+        stressor.color to percent.toFloat()
+    }
 
     SectionHeader(
         modifier = modifier,
@@ -66,53 +69,37 @@ fun StressTriggersSection(
             )
         ) {
             Column(modifier = Modifier.paddingAllSmall(), horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .border(
-                                width = 1.dp,
-                                color = Colors.Gray30,
-                                shape = Dimens.Shape.Circle
-                            )
-                            .clip(Dimens.Shape.Circle),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(
-                            painter = painterResource(Drawables.Icons.Outlined.Time),
-                            contentDescription = null,
-                            tint = Colors.Gray80,
-                            modifier = Modifier.size(24.dp)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TriggerIcon(
+                        icon = Drawables.Icons.Outlined.Time
+                    )
+                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                        MultiColorCircularProgress(
+                            segments = segments,
+                            modifier = Modifier.size(150.dp)
+                        )
+                        TriggerIcon(
+                            modifier = Modifier.scale(1.4f),
+                            icon = stressorsMap.first().first.icon
                         )
                     }
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .border(
-                                width = 1.dp,
-                                color = Colors.Gray30,
-                                shape = Dimens.Shape.Circle
-                            )
-                            .clip(Dimens.Shape.Circle),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(
-                            painter = painterResource(Drawables.Icons.Outlined.Upload),
-                            contentDescription = null,
-                            tint = Colors.Gray80,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
+                    TriggerIcon(
+                        icon = Drawables.Icons.Outlined.Upload
+                    )
                 }
                 VerticalSpacer(16.dp)
                 Text(
                     text = if (stressors.size == 1)
-                        stringResource(stressors[0].first.text)
+                        stringResource(stressorsMap[0].first.text)
                     else
                         stringResource(
                             Res.string.stress_trigger_title,
-                            stringResource(stressors[0].first.text),
-                            stringResource(stressors[1].first.text)
+                            stringResource(stressorsMap[0].first.text),
+                            stringResource(stressorsMap[1].first.text)
                         ),
                     style = TextStyles.TextXlBold(),
                     color = Colors.Gray80
@@ -121,17 +108,18 @@ fun StressTriggersSection(
                 Text(
                     text = stringResource(Res.string.you_are_stressed_because_you_are_to_preoccupied_with),
                     style = TextStyles.ParagraphSm(),
-                    color = Colors.Gray80
+                    color = Colors.Gray80,
+                    textAlign = TextAlign.Center
                 )
                 VerticalSpacer(16.dp)
                 Column {
-                    stressors.forEachIndexed { i, (stressor, count) ->
+                    stressorsMap.forEachIndexed { i, (stressor, count) ->
                         val percentage = (count.toDouble() / stressors.size) * 100
                         BallItem(
                             color = stressor.color,
                             title = stringResource(stressor.text),
                             description = percentage.toPercentage(),
-                            isNotLast = i < stressors.lastIndex
+                            isNotLast = i != stressorsMap.lastIndex
                         )
                     }
                 }
@@ -149,7 +137,7 @@ fun StressTriggersSectionPreview() {
                 stressors = listOf(Stressor.Work)
             ),
             StressLevelRecord(
-                stressors = listOf(Stressor.Work, Stressor.Kids)
+                stressors = listOf(Stressor.Work, Stressor.Kids, Stressor.Relationship)
             ),
             StressLevelRecord(
                 stressors = listOf(Stressor.Finances, Stressor.Loneliness)

@@ -43,6 +43,12 @@ object TextStyles {
     )
 
     @Composable
+    fun HeadingXlExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.ExtraBold(),
+        fontSize = 60.sp,
+    )
+
+    @Composable
     fun HeadingXlBold() = TextStyle(
         fontFamily = FontFamily.Urbanist.Bold(),
         fontSize = 60.sp,

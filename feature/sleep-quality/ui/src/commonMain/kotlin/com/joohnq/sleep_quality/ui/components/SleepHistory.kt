@@ -24,8 +24,14 @@ fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecord>,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onSeeAll: () -> Unit
 ) {
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.sleep_history,
+        onSeeAll = onSeeAll
+    )
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,

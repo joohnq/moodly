@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toMonthAbbreviatedAndDayString
@@ -19,29 +20,31 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.toResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressLevelCard(
     modifier: Modifier = Modifier,
+    containerColor: Color = Colors.White,
     record: StressLevelRecord,
 ) {
     val resource = record.stressLevel.toResource()
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Colors.Gray80,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Colors.Gray80
+            containerColor = containerColor,
+            contentColor = Color.Unspecified,
+            disabledContainerColor = containerColor,
+            disabledContentColor = Color.Unspecified
         ),
-        shape = Dimens.Shape.Medium,
+        shape = Dimens.Shape.Large,
     ) {
         Row(
-            modifier = Modifier.fillMaxSize()
-                .paddingAllSmall(),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -53,8 +56,8 @@ fun StressLevelCard(
             )
             HorizontalSpacer(20.dp)
             Column(
-                modifier = Modifier.fillMaxHeight().weight(1f),
-                verticalArrangement = Arrangement.Center
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.CenterVertically)
             ) {
                 Text(
                     text = stringResource(resource.subtitle),
@@ -88,4 +91,27 @@ fun StressLevelCard(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun StressLevelCardPreview() {
+    StressLevelCard(
+        containerColor = Colors.White,
+        record = StressLevelRecord()
+    )
+}
+
+@Preview
+@Composable
+fun StressLevelCardPreviewWithStressors() {
+    StressLevelCard(
+        containerColor = Colors.White,
+        record = StressLevelRecord(
+            stressors = listOf(
+                Stressor.Finances,
+                Stressor.Work
+            )
+        )
+    )
 }

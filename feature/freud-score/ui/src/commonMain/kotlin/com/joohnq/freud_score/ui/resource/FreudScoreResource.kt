@@ -2,8 +2,18 @@ package com.joohnq.freud_score.ui.resource
 
 import com.joohnq.freud_score.domain.entity.FreudScorePalette
 import com.joohnq.freud_score.domain.property.FreudScoreProperties
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.at_risk
+import com.joohnq.shared_resources.certain_habits_or_conditions_are_putting_your_health_at_risk
+import com.joohnq.shared_resources.healthy
+import com.joohnq.shared_resources.mostly_healthy
+import com.joohnq.shared_resources.stable
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.unhealthy
+import com.joohnq.shared_resources.you_are_a_very_healthy_individual
+import com.joohnq.shared_resources.you_maintain_good_health_habits
+import com.joohnq.shared_resources.your_current_health_status_requires_immediate
+import com.joohnq.shared_resources.your_health_is_in_a_balanced_state
 import org.jetbrains.compose.resources.StringResource
 
 sealed class FreudScoreResource(
@@ -83,10 +93,3 @@ sealed class FreudScoreResource(
     )
 }
 
-fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
-    FreudScoreResource.Healthy(score),
-    FreudScoreResource.MostlyHealthy(score),
-    FreudScoreResource.Stable(score),
-    FreudScoreResource.AtRisk(score),
-    FreudScoreResource.Unhealthy(score),
-)

@@ -2,10 +2,6 @@ package com.joohnq.sleep_quality.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.sleep_history
-import com.joohnq.shared_resources.sleep_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.kizitonwose.calendar.core.Week
@@ -24,25 +20,17 @@ fun SleepContent(
 //        records = records
 //    )
 //    VerticalSpacer(10.dp)
-    SectionHeader(
-        modifier = modifier,
-        title = Res.string.sleep_insight
-    )
     SleepInsight(
         modifier = modifier,
         containerColor = containerColor,
         records = records,
         onClick = {}
     )
-    SectionHeader(
-        modifier = modifier,
-        title = Res.string.sleep_history,
-        onSeeAll = onSeeAll
-    )
     SleepHistory(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),
         onClick = {},
+        onSeeAll = onSeeAll
     )
 }

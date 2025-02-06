@@ -19,7 +19,13 @@ fun StressContent(
         records = records,
         onAddStressLevel = { onEvent(StressLevelEvent.onAddStressLevel) },
     )
-    StressItems(
+    StressInsight(
+        modifier = modifier,
+        containerColor = containerColor,
+        records = records,
+        onCreate = { onEvent(StressLevelEvent.onAddStressLevel) },
+    )
+    StressHistory(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),

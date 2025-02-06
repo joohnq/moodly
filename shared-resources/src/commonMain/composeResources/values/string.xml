@@ -321,4 +321,22 @@
         Write your first journal to see journal history. Let’s do it now for better mental health!
     </string>
     <string name="words">%1$d words</string>
+    <string name="log_your_first_sleep">Log your first sleep</string>
+    <string name="lets_log_your_first_sleep_to_see_your_insight">Let’s log your first sleep to see your insight</string>
+    <string name="log_sleep">Log Sleep</string>
+    <string name="logged_this_month">Logged this month</string>
+    <string name="night">%1$d night</string>
+    <string name="nights">%1$d nights</string>
+    <string name="sleep_insight">Sleep Insight</string>
+    <string name="active_stressors">Active Stressors</string>
+    <string name="your_logged_as_your_most_active_stressors_for_this_month">
+        Your logged %1$s as your most active stressors for this month.
+    </string>
+    <string name="be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result">
+        Be sure to log your sleep metrics everyday to get accurate heath result.
+    </string>
+    <string name="lets_log_your_first_stress_level_to_get_more_insights_on_data">
+        Let’s log your first stress level to get more insights on data.
+    </string>
+    <string name="log_stress">Log Stress</string>
 </resources>

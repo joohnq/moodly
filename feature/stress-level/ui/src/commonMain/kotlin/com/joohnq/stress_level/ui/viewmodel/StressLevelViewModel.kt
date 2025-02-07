@@ -5,12 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.mapper.toResultResource
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.domain.use_case.GetStressLevelsUseCase
+import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.ui.resource.toResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -36,7 +37,8 @@ class StressLevelViewModel(
         viewModelScope.launch {
             changeRecordsStatus(UiState.Loading)
             val res = getStressLevelsUseCase()
-                .toResource().toUiState()
+                .toResultResource { it.toResource() }
+                .toUiState()
             changeRecordsStatus(res)
         }
 

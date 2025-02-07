@@ -10,7 +10,7 @@ import com.joohnq.shared_resources.exposure_to_natural_light
 import com.joohnq.shared_resources.high_stress
 import com.joohnq.shared_resources.meditation
 import com.joohnq.shared_resources.physical_activity
-import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
+import com.joohnq.sleep_quality.domain.property.SleepInfluencesProperties
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ANXIETY
 import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.CAFFEINE

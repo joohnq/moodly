@@ -2,6 +2,9 @@ package com.joohnq.mood.ui.mapper
 
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthDays
+import com.joohnq.freud_score.domain.entity.FreudScore
+import com.joohnq.freud_score.domain.mapper.toFreudScore
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -60,3 +63,26 @@ fun List<MoodRecordResource>.getStatGroupByDateUseCase(): Map<LocalDate, List<Mo
             key.date to value
         }.toMap()
 }
+
+fun List<MoodRecordResource?>.calculateStatsFreudScore(): FreudScore {
+    val score = sumOf { it?.mood?.healthLevel ?: 0 } / size
+    return score.toFreudScore()
+}
+
+fun MoodRecordResource.toDomain(): MoodRecord = MoodRecord(
+    id = id,
+    mood = mood.toDomain(),
+    description = description,
+    createdAt = createdAt,
+)
+
+fun List<MoodRecordResource>.toDomain(): List<MoodRecord> = map { it.toDomain() }
+
+fun MoodRecord.toResource(): MoodRecordResource =
+    MoodRecordResource(
+        id = id,
+        mood = mood.toResource(),
+        description = description,
+        createdAt = createdAt,
+    )
+

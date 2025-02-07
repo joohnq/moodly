@@ -42,7 +42,7 @@ class DashboardViewModel(
 
     fun onAction(event: DashboardIntent) {
         when (event) {
-            DashboardIntent.GetData -> {
+            DashboardIntent.Get -> {
                 moodViewModel.onAction(MoodIntent.GetMoodRecords)
                 userViewModel.onAction(UserIntent.GetUser)
                 stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)

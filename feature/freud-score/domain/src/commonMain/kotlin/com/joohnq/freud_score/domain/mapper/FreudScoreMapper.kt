@@ -17,6 +17,3 @@ fun Int.toFreudScore(): FreudScore {
         else -> throw IllegalArgumentException("Unknown freud score: $this")
     }
 }
-
-fun init(): FreudScore = Stable(50)
-

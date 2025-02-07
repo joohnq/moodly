@@ -4,7 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -13,7 +13,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
-fun DescriptionSection(modifier: Modifier = Modifier, record: StatsRecord?) {
+fun DescriptionSection(modifier: Modifier = Modifier, record: MoodRecord?) {
     if (record != null) {
         SectionHeader(
             modifier = modifier,

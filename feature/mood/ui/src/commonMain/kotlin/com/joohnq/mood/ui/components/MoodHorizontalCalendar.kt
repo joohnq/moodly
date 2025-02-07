@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.HorizontalCalendar
@@ -14,7 +14,7 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 fun MoodHorizontalCalendar(
     calendarState: CalendarState = rememberCalendarState(),
     containerColor: Color,
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
 ) {
     HorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),

@@ -6,8 +6,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
@@ -19,7 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.core.ui.mapper.toShortDateString
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.components.CalculateTextHeight
 import com.joohnq.shared_resources.components.dashedLine
@@ -28,16 +26,16 @@ import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
 fun MoodBarStatistic(
-    statsRecords: List<StatsRecord>,
+    records: List<MoodRecord>,
     height: Dp = 250.dp,
 ) {
-    val current = statsRecords.last()
+    val current = records.last()
     val proportion = height / 100
     val pagerState = rememberPagerState(pageCount = {
-        statsRecords.size
+        records.size
     })
 
-    val selectedIndex = statsRecords.indexOf(current)
+    val selectedIndex = records.indexOf(current)
 
     LaunchedEffect(selectedIndex) {
         if (selectedIndex >= 0) {
@@ -77,14 +75,14 @@ fun MoodBarStatistic(
                 userScrollEnabled = true,
                 snapPosition = SnapPosition.Center,
             ) { page ->
-                val statsRecord = statsRecords[page]
-                val boxHeight = statsRecord.mood.healthLevel.times(proportion)
+                val record = records[page]
+                val boxHeight = record.mood.healthLevel.times(proportion)
                 val background = when {
-                    current == statsRecord -> resource.palette.barColor
+                    current == record -> resource.palette.barColor
                     else -> Colors.Brown20
                 }
                 val barFaceColor = when {
-                    current == statsRecord -> resource.palette.barFaceColor
+                    current == record -> resource.palette.barFaceColor
                     else -> Colors.Brown40
                 }
                 Column(
@@ -111,14 +109,14 @@ fun MoodBarStatistic(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
-                                resource = statsRecord.mood.toResource(),
+                                resource = record.mood.toResource(),
                                 backgroundColor = Colors.White,
                                 color = barFaceColor
                             )
                         }
                     }
                     Text(
-                        text = statsRecord.createdAt.date.toShortDateString(),
+                        text = record.createdAt.date.toShortDateString(),
                         style = TextStyles.TextSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

@@ -2,7 +2,7 @@ package com.joohnq.freud_score.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.freud_score.ui.mapper.toResource
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.use_case.CalculateStatsFreudScoreUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,11 +16,11 @@ class FreudScoreViewModel(private val calculateStatsFreudScoreUseCase: Calculate
 
     fun onAction(intent: FreudScoreIntent) {
         when (intent) {
-            is FreudScoreIntent.GetFreudScore -> getFreudScore(intent.statsRecords)
+            is FreudScoreIntent.GetFreudScore -> getFreudScore(intent.records)
         }
     }
 
-    private fun getFreudScore(statsRecords: List<StatsRecord>) {
-        _state.update { it.copy(freudScore = calculateStatsFreudScoreUseCase(statsRecords).toResource()) }
+    private fun getFreudScore(records: List<MoodRecord>) {
+        _state.update { it.copy(freudScore = calculateStatsFreudScoreUseCase(records).toResource()) }
     }
 }

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.mapper.getTodayStatRecord
 import com.joohnq.mood.ui.components.MoodContent
 import com.joohnq.mood.ui.components.MoodPanel
@@ -18,10 +18,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodUI(
-    statsRecords: UiState<List<StatsRecord>>,
+    records: UiState<List<MoodRecord>>,
     onEvent: (MoodEvent) -> Unit = {},
 ) {
-    statsRecords.foldComposable(
+    records.foldComposable(
         onSuccess = { records ->
             val record = records.getTodayStatRecord()
             val resource = record?.mood?.toResource()
@@ -58,9 +58,9 @@ fun MoodUI(
 @Composable
 fun MoodUIPreviewEmpty() {
     MoodUI(
-        statsRecords = UiState.Success(
+        records = UiState.Success(
             listOf(
-                StatsRecord(
+                MoodRecord(
                     createdAt = LocalDateTime(2025, 1, 1, 0, 0, 0)
                 )
             )
@@ -73,9 +73,9 @@ fun MoodUIPreviewEmpty() {
 @Composable
 fun MoodUIPreviewDepressed() {
     MoodUI(
-        statsRecords = UiState.Success(
+        records = UiState.Success(
             listOf(
-                StatsRecord(
+                MoodRecord(
                     mood = Mood.Depressed,
                     description = "Description"
                 ),
@@ -89,9 +89,9 @@ fun MoodUIPreviewDepressed() {
 @Composable
 fun MoodUIPreviewNeutral() {
     MoodUI(
-        statsRecords = UiState.Success(
+        records = UiState.Success(
             listOf(
-                StatsRecord(
+                MoodRecord(
                     mood = Mood.Neutral,
                     description = "Description"
                 ),
@@ -105,9 +105,9 @@ fun MoodUIPreviewNeutral() {
 @Composable
 fun MoodUIPreviewHappy() {
     MoodUI(
-        statsRecords = UiState.Success(
+        records = UiState.Success(
             listOf(
-                StatsRecord(
+                MoodRecord(
                     mood = Mood.Happy,
                     description = "Description"
                 ),
@@ -121,9 +121,9 @@ fun MoodUIPreviewHappy() {
 @Composable
 fun MoodUIPreviewOverjoyed() {
     MoodUI(
-        statsRecords = UiState.Success(
+        records = UiState.Success(
             listOf(
-                StatsRecord(
+                MoodRecord(
                     mood = Mood.Overjoyed,
                     description = "Description"
                 ),

@@ -1,7 +1,7 @@
 package com.joohnq.onboarding.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
@@ -55,7 +55,7 @@ class OnboardingViewModel : ViewModel() {
     }
 
     private fun updateMood(mood: MoodResource) {
-        _state.update { it.copy(statsRecord = it.statsRecord.copy(mood = mood.toDomain())) }
+        _state.update { it.copy(moodRecord = it.moodRecord.copy(mood = mood.toDomain())) }
     }
 
     private fun updateUserMedicationsSupplements(
@@ -73,11 +73,11 @@ class OnboardingViewModel : ViewModel() {
     }
 
     private fun updateStatsRecordDescription(description: String) {
-        _state.update { it.copy(statsRecord = it.statsRecord.copy(description = description)) }
+        _state.update { it.copy(moodRecord = it.moodRecord.copy(description = description)) }
     }
 
     private fun resetStatsRecord() {
-        _state.update { it.copy(statsRecord = StatsRecord()) }
+        _state.update { it.copy(moodRecord = MoodRecord()) }
     }
 
     private fun setOnboardingStateForTesting(onboardingState: OnboardingState) {

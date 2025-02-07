@@ -1,6 +1,6 @@
 package com.joohnq.mood.domain.use_case
 
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.fake.StatsRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 class AddStatsUseCaseTest {
     companion object {
-        val item = StatsRecord()
+        val item = MoodRecord()
     }
 
     private var repository: StatsRepositoryFake = StatsRepositoryFake()

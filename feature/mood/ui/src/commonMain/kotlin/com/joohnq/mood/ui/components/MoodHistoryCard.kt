@@ -12,10 +12,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toFormattedTimeString
-import com.joohnq.core.ui.mapper.toMonthAbbreviatedAndDayString
 import com.joohnq.core.ui.mapper.toMonthAbbreviatedDayAndHourFormatted
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -30,7 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodHistoryCard(
     containerColor: Color,
     resource: MoodResource,
-    record: StatsRecord
+    record: MoodRecord
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -91,7 +89,7 @@ fun MoodHistoryCardPreview() {
     MoodHistoryCard(
         containerColor = Colors.White,
         resource = MoodResource.Neutral,
-        record = StatsRecord(
+        record = MoodRecord(
             description = "Description",
         )
     )

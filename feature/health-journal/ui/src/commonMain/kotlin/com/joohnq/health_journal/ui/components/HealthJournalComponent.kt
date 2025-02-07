@@ -2,14 +2,7 @@ package com.joohnq.health_journal.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
@@ -67,10 +60,10 @@ fun HealthJournalComponent(
                         .size(18.dp),
                 )
             }
-            items(healthJournalsMap) { statsRecords ->
+            items(healthJournalsMap) { records ->
                 val background = when {
-                    statsRecords?.size == 1 -> Colors.Purple10
-                    statsRecords?.size != null && statsRecords.size >= 2 -> Colors.White
+                    records?.size == 1 -> Colors.Purple10
+                    records?.size != null && records.size >= 2 -> Colors.White
                     else -> Colors.Purple20
                 }
                 Box(
@@ -130,7 +123,8 @@ fun HealthJournalComponentColorful(
             Box(
                 modifier = Modifier.weight(1f).aspectRatio(1f / 1f)
                     .background(color = background, shape = Dimens.Shape.Circle)
-                    .then(if (healthJournal?.firstOrNull()?.createdAt != null)
+                    .then(
+                        if (healthJournal?.firstOrNull()?.createdAt != null)
                         Modifier.clickable {
                             onClick(healthJournal.firstOrNull()?.createdAt?.date!!)
                         }

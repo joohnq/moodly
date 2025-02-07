@@ -2,15 +2,15 @@ package com.joohnq.mood.domain.mapper
 
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthDays
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
-fun List<StatsRecord>.getTodayStatRecord(): StatsRecord? =
+fun List<MoodRecord>.getTodayStatRecord(): MoodRecord? =
     find { it.createdAt.date == getNow().date }
 
-fun List<StatsRecord>.getWeekRecords(): List<StatsRecord> {
+fun List<MoodRecord>.getWeekRecords(): List<MoodRecord> {
     val now = getNow()
     val startOfWeek = now.date.minus(now.dayOfWeek.ordinal, DateTimeUnit.DAY)
     val endOfWeek = startOfWeek.plus(6, DateTimeUnit.DAY)
@@ -18,7 +18,7 @@ fun List<StatsRecord>.getWeekRecords(): List<StatsRecord> {
     return this.filter { it.createdAt.date in range }
 }
 
-fun List<StatsRecord>.getStreakDays(): Int {
+fun List<MoodRecord>.getStreakDays(): Int {
     val now = getNow()
     val sortedRecords = this.map { it.createdAt.date }.distinct().sortedDescending()
 
@@ -35,7 +35,7 @@ fun List<StatsRecord>.getStreakDays(): Int {
     return streak
 }
 
-fun List<StatsRecord>.getMonthDaysRecordsString(): String {
+fun List<MoodRecord>.getMonthDaysRecordsString(): String {
     val now = getNow()
     val days =
         filter { it.createdAt.month == now.month }

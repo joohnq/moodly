@@ -1,10 +1,6 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.entity.User
@@ -78,7 +74,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun addStatsRecord() {
-        statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.statsRecord))
+        statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.moodRecord))
     }
 
     fun updateUser() {
@@ -139,7 +135,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     OnboardingExpressionAnalysisUI(
-        description = onboardingState.statsRecord.description,
+        description = onboardingState.moodRecord.description,
         snackBarState = snackBarState,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent

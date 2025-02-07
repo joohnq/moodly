@@ -2,7 +2,7 @@ package com.joohnq.mood.ui.presentation.expression_analysis
 
 import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
 import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
@@ -32,7 +32,7 @@ fun ExpressionAnalysisScreen(
             ExpressionAnalysisEvent.OnAdd ->
                 statsViewModel.onAction(
                     StatsIntent.AddStatsRecord(
-                        StatsRecord(
+                        MoodRecord(
                             mood = addStatsState.mood.toDomain(),
                             description = addStatsState.description
                         )

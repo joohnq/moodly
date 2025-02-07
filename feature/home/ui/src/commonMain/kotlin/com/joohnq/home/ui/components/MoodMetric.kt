@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.mapper.getTodayStatRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodResource
@@ -29,7 +29,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun WeekMoodIndicator(
     modifier: Modifier = Modifier,
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
     resource: MoodResource,
     height: Dp = 60.dp
 ) {
@@ -77,7 +77,7 @@ fun WeekMoodIndicator(
 
 @Composable
 fun MoodMetric(
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
@@ -117,8 +117,8 @@ fun MoodMetric(
 fun MoodMetricPreview() {
     MoodMetric(
         records = listOf(
-            StatsRecord(),
-            StatsRecord()
+            MoodRecord(),
+            MoodRecord()
         )
     )
 }

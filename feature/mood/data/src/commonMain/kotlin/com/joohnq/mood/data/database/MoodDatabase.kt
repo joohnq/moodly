@@ -4,11 +4,11 @@ import app.cash.sqldelight.db.SqlDriver
 import com.joohnq.core.database.Database
 import com.joohnq.mood.database.StatsDatabaseSql
 
-class StatsDatabase(private val driver: SqlDriver) : Database<StatsDatabaseSql>() {
+class MoodDatabase(private val driver: SqlDriver) : Database<StatsDatabaseSql>() {
     override operator fun invoke(): StatsDatabaseSql =
         StatsDatabaseSql(driver)
 
     companion object {
-        const val DATABASE_NAME = "stats.db"
+        const val DATABASE_NAME = "mood.db"
     }
 }

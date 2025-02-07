@@ -6,8 +6,6 @@ import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
-import com.joohnq.mood.ui.viewmodel.StatsState
-import com.joohnq.mood.ui.viewmodel.StatsViewModel
 
 @Composable
 fun FreudScoreScreen(
@@ -16,17 +14,17 @@ fun FreudScoreScreen(
     onNavigateAddStat: () -> Unit,
 ) {
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
-    val freudScoreState by freudScoreViewModel.state.collectAsState()
+    val state by freudScoreViewModel.state.collectAsState()
 
     fun onEvent(event: FreudScoreEvent) =
         when (event) {
             is FreudScoreEvent.OnGoBack -> onGoBack()
-            is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.statsRecord.id)
+            is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.record.id)
             is FreudScoreEvent.OnAdd -> onNavigateAddStat()
         }
 
     FreudScoreUI(
-        state = freudScoreState,
+        state = state,
         onEvent = ::onEvent,
     )
 }

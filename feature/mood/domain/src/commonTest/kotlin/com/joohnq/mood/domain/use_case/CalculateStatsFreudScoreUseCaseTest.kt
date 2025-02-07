@@ -2,7 +2,7 @@ package com.joohnq.mood.domain.use_case
 
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
@@ -16,10 +16,10 @@ class CalculateStatsFreudScoreUseCaseTest {
             //WHEN
             val res = useCase.invoke(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Overjoyed,
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Happy,
                     ),
                 )
@@ -35,10 +35,10 @@ class CalculateStatsFreudScoreUseCaseTest {
             //WHEN
             val res = useCase.invoke(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Happy,
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Neutral,
                     ),
                 )
@@ -54,10 +54,10 @@ class CalculateStatsFreudScoreUseCaseTest {
             //WHEN
             val res = useCase.invoke(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Neutral,
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Sad,
                     ),
                 )
@@ -73,10 +73,10 @@ class CalculateStatsFreudScoreUseCaseTest {
             //WHEN
             val res = useCase.invoke(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Sad,
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Depressed,
                     ),
                 )
@@ -92,10 +92,10 @@ class CalculateStatsFreudScoreUseCaseTest {
             //WHEN
             val res = useCase.invoke(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Depressed,
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         mood = Mood.Depressed,
                     ),
                 )

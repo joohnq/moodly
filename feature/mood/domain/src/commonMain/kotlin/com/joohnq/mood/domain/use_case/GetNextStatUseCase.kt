@@ -1,9 +1,9 @@
 package com.joohnq.mood.domain.use_case
 
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 
 class GetNextStatUseCase {
-    operator fun invoke(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
-        statsRecords.filter { it.createdAt > statsRecord.createdAt }
+    operator fun invoke(record: MoodRecord, moodRecords: List<MoodRecord>): MoodRecord? =
+        moodRecords.filter { it.createdAt > record.createdAt }
             .minByOrNull { it.createdAt }
 }

@@ -3,10 +3,12 @@ package com.joohnq.mood.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.mapper.getMonthDaysRecordsString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.GiganticCreateCard
+import com.joohnq.shared_resources.components.SectionHeader
+import com.joohnq.shared_resources.mood_calendar
 import com.joohnq.shared_resources.moods_logged_this_month
 import com.joohnq.shared_resources.theme.Colors
 import org.jetbrains.compose.resources.stringResource
@@ -16,10 +18,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodCalendar(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
     onCreate: () -> Unit = {},
 ) {
     val recordsInMonth = records.getMonthDaysRecordsString()
+
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.mood_calendar
+    )
     GiganticCreateCard(
         modifier = modifier,
         containerColor = containerColor,
@@ -41,8 +48,8 @@ fun MoodCalendar(
 fun MoodCalendarPreview() {
     MoodCalendar(
         records = listOf(
-            StatsRecord(),
-            StatsRecord()
+            MoodRecord(),
+            MoodRecord()
         )
     )
 }

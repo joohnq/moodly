@@ -16,20 +16,15 @@ fun SleepQualityScreen(
 ) {
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
     val state by sleepQualityViewModel.state.collectAsState()
-    val weekCalendarState = rememberWeekCalendarState()
 
     fun onEvent(event: SleepQualityEvent) =
         when (event) {
-            SleepQualityEvent.OnAdd -> onNavigateAddSleepQuality()
             SleepQualityEvent.OnGoBack -> onGoBack()
-            SleepQualityEvent.OnAddSleepQuality -> TODO()
-            SleepQualityEvent.OnNextMonth -> TODO()
-            SleepQualityEvent.OnPreviousMonth -> TODO()
+            SleepQualityEvent.OnAddSleepQuality -> onNavigateAddSleepQuality()
         }
 
     return SleepQualityUI(
         state = state,
-        weekCalendarState = weekCalendarState,
         onEvent = ::onEvent
     )
 }

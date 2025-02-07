@@ -9,17 +9,10 @@ import com.kizitonwose.calendar.core.Week
 @Composable
 fun SleepContent(
     modifier: Modifier = Modifier,
-    week: Week,
     records: List<SleepQualityRecord>,
     onSeeAll: () -> Unit
 ) {
     val containerColor = Colors.Gray5
-//    SleepWeekView(
-//        modifier = modifier,
-//        week = week,
-//        records = records
-//    )
-//    VerticalSpacer(10.dp)
     SleepInsight(
         modifier = modifier,
         containerColor = containerColor,

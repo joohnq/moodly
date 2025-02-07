@@ -1,11 +1,7 @@
 package com.joohnq.security.data
 
 import com.joohnq.security.domain.SecurityAuthentication
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.ObjCObjectVar
-import kotlinx.cinterop.alloc
-import kotlinx.cinterop.memScoped
-import kotlinx.cinterop.ptr
+import kotlinx.cinterop.*
 import platform.Foundation.NSError
 import platform.LocalAuthentication.LAContext
 import platform.LocalAuthentication.LAPolicyDeviceOwnerAuthenticationWithBiometrics
@@ -25,12 +21,9 @@ actual class SecurityAuthenticationImpl : SecurityAuthentication {
     }
 
     actual override fun authenticateWithFace(callback: (Boolean) -> Unit) {
-        // Authenticate using biometric
         val context = LAContext()
         val reason = "Authenticate using face"
 
-//        if (isDeviceHasBiometric()) {
-        // Perform face authentication
         context.evaluatePolicy(
             LAPolicyDeviceOwnerAuthenticationWithBiometrics,
             localizedReason = reason
@@ -40,8 +33,6 @@ actual class SecurityAuthenticationImpl : SecurityAuthentication {
                 print(nsError?.localizedDescription ?: "Failed to authenticate")
             }
         }
-//        }
-
         callback(false)
     }
 

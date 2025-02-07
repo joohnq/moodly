@@ -7,9 +7,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
-import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+import androidx.biometric.BiometricManager.Authenticators.*
 import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.joohnq.security.domain.SecurityAuthentication
@@ -66,6 +64,7 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
             }
 
             BiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
+                _securityResult.trySend(SecurityResult.AuthenticationFailed)
                 Log.e(
                     "`FaceAuthenticator.kt`",
                     "Unable to determine whether the user can authenticate"
@@ -83,7 +82,8 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
             .setAllowedAuthenticators(BIOMETRIC_STRONG or BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
             .build()
 
-        val biometricPrompt = BiometricPrompt(activity, activity.mainExecutor,
+        val biometricPrompt = BiometricPrompt(
+            activity, activity.mainExecutor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(
                     errorCode: Int,
@@ -106,7 +106,6 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
                 }
             })
 
-        //Authenticate using biometric prompt
         biometricPrompt.authenticate(promptInfo)
     }
 }

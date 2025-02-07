@@ -33,6 +33,17 @@ fun LocalDateTime.toMonthAbbreviatedAndDayString(): String =
         dayOfMonth()
     })
 
+fun LocalDateTime.toMonthAbbreviatedDayAndHourFormatted(): String =
+    format(LocalDateTime.Format {
+        monthName(MonthNames.ENGLISH_ABBREVIATED)
+        chars(" ")
+        dayOfMonth()
+        chars("\nat ")
+        hour()
+        char(':')
+        minute()
+    })
+
 fun LocalDateTime.toMonthDays(): Int {
     val start = LocalDate(date.year, date.month, 1)
     val end = start.plus(1, DateTimeUnit.MONTH)

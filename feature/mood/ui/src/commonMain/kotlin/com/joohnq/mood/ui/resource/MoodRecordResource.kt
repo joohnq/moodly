@@ -13,23 +13,3 @@ data class MoodRecordResource(
     val description: String = "",
     val createdAt: LocalDateTime = getNow(),
 )
-
-fun MoodRecord.toResource(): MoodRecordResource =
-    MoodRecordResource(
-        id = id,
-        mood = mood.toResource(),
-        description = description,
-        createdAt = createdAt,
-    )
-
-fun Result<List<MoodRecord>>.toResource(): Result<List<MoodRecordResource>> =
-    toResultResource { it.toResource() }
-
-fun MoodRecordResource.toDomain(): MoodRecord = MoodRecord(
-    id = id,
-    mood = mood.toDomain(),
-    description = description,
-    createdAt = createdAt,
-)
-
-fun List<MoodRecordResource>.toDomain(): List<MoodRecord> = map { it.toDomain() }

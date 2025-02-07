@@ -17,8 +17,8 @@ import com.joohnq.self_journal.ui.presentation.edit_self_journal.EditJournalingS
 import com.joohnq.self_journal.ui.presentation.self_journal.SelfJournalScreen
 import com.joohnq.self_journal.ui.presentation.self_journal_history.AllJournalScreen
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
-import com.joohnq.sleep_quality.ui.presentation.sleep_history.SleepHistoryScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
+import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
 import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_history.StressHistoryScreen
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
@@ -57,12 +57,6 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.FreudScore> {
             FreudScoreScreen(
                 onGoBack = onGoBack,
-                onNavigateMood = { id ->
-                    onNavigate(Destination.App.Mood)
-                },
-                onNavigateAddMood = {
-                    onNavigate(Destination.App.AddMood)
-                }
             )
         }
         composable<Destination.App.SelfJournal> {
@@ -142,7 +136,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.SleepQualityHistory> {
-            SleepHistoryScreen(
+            SleepQualityHistoryScreen(
                 onNavigateToSleepQuality = {
                     onNavigate(Destination.App.SleepQuality)
                 },

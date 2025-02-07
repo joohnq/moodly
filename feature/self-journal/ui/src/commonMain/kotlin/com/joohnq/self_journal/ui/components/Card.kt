@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toCompleteDateString
 import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground

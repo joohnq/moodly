@@ -8,7 +8,7 @@ import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodAverageResource
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -74,3 +74,11 @@ private fun generateDateSequence(
         if (nextDate <= currentDate) nextDate else null
     }
 }
+
+fun SelfJournalRecord.toResource(): SelfJournalRecordResource = SelfJournalRecordResource(
+    id = id,
+    mood = mood.toResource(),
+    title = title,
+    description = description,
+    createdAt = createdAt,
+)

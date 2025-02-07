@@ -3,13 +3,9 @@ package com.joohnq.home.ui.presentation.viewmodel
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
-import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 data class DashboardState(

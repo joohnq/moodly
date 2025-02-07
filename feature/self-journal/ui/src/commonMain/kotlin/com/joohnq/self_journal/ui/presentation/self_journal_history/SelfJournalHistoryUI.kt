@@ -13,13 +13,13 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.SelfJournalsItems
 import com.joohnq.self_journal.ui.mapper.getItemsByDate
 import com.joohnq.self_journal.ui.mapper.organizeFromCreationSelfJournalFreudScore
 import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryIntent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryState
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.theme.Colors

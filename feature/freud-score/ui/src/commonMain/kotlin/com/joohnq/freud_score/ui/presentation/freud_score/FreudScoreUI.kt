@@ -30,7 +30,8 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@Composable fun FreudScoreUI(
+@Composable
+fun FreudScoreUI(
     state: FreudScoreState,
     onEvent: (FreudScoreEvent) -> Unit = {},
 ) {
@@ -90,7 +91,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
     }
 }
 
-@Preview @Composable fun FreudScoreUIPreviewUnhealthy() {
+@Preview
+@Composable
+fun FreudScoreUIPreviewUnhealthy() {
     FreudScoreUI(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Unhealthy(10)
@@ -98,7 +101,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
     )
 }
 
-@Preview @Composable fun FreudScoreUIPreviewAtRisk() {
+@Preview
+@Composable
+fun FreudScoreUIPreviewAtRisk() {
     FreudScoreUI(
         state = FreudScoreState(
             freudScore = FreudScoreResource.AtRisk(30)
@@ -106,7 +111,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
     )
 }
 
-@Preview @Composable fun FreudScoreUIPreviewStable() {
+@Preview
+@Composable
+fun FreudScoreUIPreviewStable() {
     FreudScoreUI(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Stable(50)
@@ -114,7 +121,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
     )
 }
 
-@Preview @Composable fun FreudScoreUIPreviewMostlyHealthy() {
+@Preview
+@Composable
+fun FreudScoreUIPreviewMostlyHealthy() {
     FreudScoreUI(
         state = FreudScoreState(
             freudScore = FreudScoreResource.MostlyHealthy(70)
@@ -122,7 +131,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
     )
 }
 
-@Preview @Composable fun FreudScoreUIPreviewHealthy() {
+@Preview
+@Composable
+fun FreudScoreUIPreviewHealthy() {
     FreudScoreUI(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Healthy(90)

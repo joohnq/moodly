@@ -2,7 +2,7 @@ package com.joohnq.sleep_quality.ui.resource
 
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.sleep_quality.domain.SleepQualityProperties
+import com.joohnq.sleep_quality.domain.property.SleepQualityProperties
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityPalette
 import org.jetbrains.compose.resources.StringResource

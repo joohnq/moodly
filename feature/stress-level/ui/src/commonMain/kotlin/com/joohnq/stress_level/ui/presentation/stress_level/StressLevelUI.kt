@@ -8,8 +8,8 @@ import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.stress_level.ui.components.StressContent
-import com.joohnq.stress_level.ui.components.StressPanel
+import com.joohnq.stress_level.ui.component.StressContent
+import com.joohnq.stress_level.ui.component.StressPanel
 import com.joohnq.stress_level.ui.mapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource

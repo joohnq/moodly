@@ -5,7 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.components.IsEmpty
 
 @Composable

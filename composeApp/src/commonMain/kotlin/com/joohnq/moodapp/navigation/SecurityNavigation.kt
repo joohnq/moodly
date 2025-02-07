@@ -8,7 +8,7 @@ import com.joohnq.navigation.NavigationGraph
 import com.joohnq.security.ui.presentation.pin.PINScreen
 import com.joohnq.security.ui.presentation.security.SecurityScreen
 import com.joohnq.security.ui.presentation.security_confirmed.SecurityConfirmedScreen
-import com.joohnq.security.ui.presentation.un_lock.UnLockScreen
+import com.joohnq.security.ui.presentation.unlock.UnLockScreen
 
 fun NavGraphBuilder.securityNavigation(
     onGoBack: () -> Unit,

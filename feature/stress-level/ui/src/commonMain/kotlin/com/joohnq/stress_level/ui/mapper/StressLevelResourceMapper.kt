@@ -47,6 +47,3 @@ fun Float.fromSliderValueToStressLevelResource(): StressLevelResource = when (th
     75f -> Four
     else -> Five
 }
-
-fun List<StressLevelRecord>.getTodayStressLevelResource(): StressLevelResource? =
-    find { it.createdAt.date == getNow().date }?.stressLevel?.toResource()

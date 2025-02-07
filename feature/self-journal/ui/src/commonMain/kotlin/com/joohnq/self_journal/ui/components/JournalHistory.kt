@@ -4,8 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.NotFoundVertical
 import com.joohnq.shared_resources.theme.Drawables

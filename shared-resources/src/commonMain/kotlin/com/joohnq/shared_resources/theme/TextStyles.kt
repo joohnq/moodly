@@ -13,6 +13,12 @@ object TextStyles {
     )
 
     @Composable
+    fun TextXlMedium(): TextStyle = TextStyle(
+        fontFamily = FontFamily.Urbanist.Medium(),
+        fontSize = 20.sp
+    )
+
+    @Composable
     fun HeadingSpanSmExtraBold(): SpanStyle = SpanStyle(
         fontFamily = FontFamily.Urbanist.ExtraBold(),
         fontSize = 30.sp

@@ -339,4 +339,21 @@
         Let’s log your first stress level to get more insights on data.
     </string>
     <string name="log_stress">Log Stress</string>
+    <string name="logged_today_at">Logged today at %1$s</string>
+    <string name="you_dont_have_enough_data_to_show_your_history_lets_log_your_first_mood_to_see_this">
+        You don’t have enough data to show your history. Let’s log your first mood to see this.
+    </string>
+    <string name="log_first_mood">Log First Mood</string>
+    <string name="mood_history">Mood History</string>
+    <string name="lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now">
+        Let’s log your first mood to see your mood insights. Improve your mental health now!
+    </string>
+    <string name="you_ve_checked_in_your_mood_for_days_straight">
+        You’ve checked in your mood for %1$d days straight!
+    </string>
+    <string name="days_streak">%1$d days</string>
+    <string name="day_streak">%1$d day</string>
+    <string name="mood_streak">Mood Streak</string>
+    <string name="mood_insight">Mood Insight</string>
+    <string name="moods_logged_this_month">Moods logged this month</string>
 </resources>

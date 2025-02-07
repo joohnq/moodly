@@ -23,7 +23,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityUI(
     state: SleepQualityState,
-    weekCalendarState: WeekCalendarState = rememberWeekCalendarState(),
     onEvent: (SleepQualityEvent) -> Unit = {},
 ) {
     state.sleepQualityRecords.foldComposable(
@@ -50,7 +49,6 @@ fun SleepQualityUI(
                 content = { modifier ->
                     SleepContent(
                         modifier = modifier,
-                        week = weekCalendarState.firstVisibleWeek,
                         records = records,
                         onSeeAll = {}
                     )

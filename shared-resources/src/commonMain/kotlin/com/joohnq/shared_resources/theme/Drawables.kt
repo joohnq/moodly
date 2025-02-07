@@ -113,6 +113,9 @@ object Drawables {
         val HealthJournalHistory = Res.drawable.health_journal_history
         val SleepInsight = Res.drawable.sleep_insight
         val StressLevelInsight = Res.drawable.stress_level_insight
+        val MoodHistory = Res.drawable.mood_history
+        val MoodInsight = Res.drawable.mood_insight
+        val MoodInsightStrike = Res.drawable.mood_insight_strike
 
         val FaceDepressed = Res.drawable.face_depressed
         val FaceSad = Res.drawable.face_sad

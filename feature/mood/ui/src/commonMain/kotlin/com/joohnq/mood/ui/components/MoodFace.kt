@@ -24,7 +24,7 @@ fun MoodFace(modifier: Modifier = Modifier, resource: MoodResource) {
             .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
-            painter = painterResource(resource.assets.icon),
+            imageVector = resource.assets.imageVector,
             contentDescription = null,
             modifier = modifier,
             tint = resource.palette.faceColor
@@ -67,7 +67,7 @@ fun MoodFace(
         onClick = onClick
     ) {
         Icon(
-            painter = painterResource(resource.assets.icon),
+            imageVector = resource.assets.imageVector,
             contentDescription = stringResource(resource.text),
             modifier = modifier,
             tint = color
@@ -94,27 +94,6 @@ fun MoodFace(
             contentDescription = null,
             modifier = modifier,
             tint = average.color
-        )
-    }
-}
-
-@Composable
-fun MoodFace(
-    modifier: Modifier = Modifier,
-    resource: MoodResource,
-    tint: Color,
-    backgroundColor: Color = Colors.Transparent,
-) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
-    ) {
-        Icon(
-            painter = painterResource(resource.assets.icon),
-            contentDescription = null,
-            modifier = modifier,
-            tint = tint
         )
     }
 }

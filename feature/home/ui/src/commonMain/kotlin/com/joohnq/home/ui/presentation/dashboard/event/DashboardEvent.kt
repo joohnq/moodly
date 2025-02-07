@@ -1,8 +1,8 @@
 package com.joohnq.home.ui.presentation.dashboard.event
 
-import com.joohnq.health_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.navigation.Destination
+import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
 
 sealed interface DashboardEvent {
     data object OnNavigateToAddJournaling : DashboardEvent
@@ -11,7 +11,7 @@ sealed interface DashboardEvent {
     data object OnNavigateToAllJournals : DashboardEvent
     data object OnNavigateToFreudScore : DashboardEvent
     data object OnNavigateToMood : DashboardEvent
-    data object OnNavigateToHealthJournal : DashboardEvent
+    data object OnNavigateToSelfJournal : DashboardEvent
     data object OnNavigateToMindfulJournal : DashboardEvent
     data object OnNavigateToSleepQuality : DashboardEvent
     data object OnNavigateToStressLevel : DashboardEvent
@@ -35,7 +35,7 @@ fun HomeEvent.toDashboardEvent(): DashboardEvent =
         HomeEvent.OnNavigateToAddStress -> DashboardEvent.OnNavigateToAddStress
         HomeEvent.OnNavigateToAllJournals -> DashboardEvent.OnNavigateToAllJournals
         HomeEvent.OnNavigateToFreudScore -> DashboardEvent.OnNavigateToFreudScore
-        HomeEvent.OnNavigateToHealthJournal -> DashboardEvent.OnNavigateToHealthJournal
+        HomeEvent.OnNavigateToSelfJournal -> DashboardEvent.OnNavigateToSelfJournal
         HomeEvent.OnNavigateToMindfulJournal -> DashboardEvent.OnNavigateToMindfulJournal
         HomeEvent.OnNavigateToMood -> DashboardEvent.OnNavigateToMood
         HomeEvent.OnNavigateToSleepQuality -> DashboardEvent.OnNavigateToSleepQuality

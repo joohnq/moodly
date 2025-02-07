@@ -6,11 +6,11 @@ import androidx.compose.ui.graphics.Color
 import com.joohnq.core.ui.CompositionLocalProviderPreview
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthNameString
-import com.joohnq.health_journal.domain.entity.HealthJournalRecord
-import com.joohnq.health_journal.domain.mapper.getTodayHealthJournalRecord
-import com.joohnq.health_journal.domain.use_case.CalculateHealthJournalsAverageUseCase
-import com.joohnq.health_journal.domain.use_case.GetHealthJournalsInYearUseCase
-import com.joohnq.health_journal.ui.components.JournalCalendar
+import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.domain.mapper.getTodaySelfJournalRecord
+import com.joohnq.self_journal.domain.use_case.CalculateSelfJournalsAverageUseCase
+import com.joohnq.self_journal.domain.use_case.GetSelfJournalsInYearUseCase
+import com.joohnq.self_journal.ui.components.JournalCalendar
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.NotFoundHorizontal
@@ -26,12 +26,12 @@ import org.koin.dsl.module
 
 @Composable
 fun SelfJournalingMetric(
-    records: List<HealthJournalRecord>,
+    records: List<SelfJournalRecord>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val resource = records.getTodayHealthJournalRecord()
+    val resource = records.getTodaySelfJournalRecord()
 
     if (resource == null)
         NotFoundHorizontal(
@@ -62,13 +62,13 @@ fun SelfJournalingMetric(
 fun SelfJournalingMetricPreviewToday() {
     CompositionLocalProviderPreview(
         module {
-            single<GetHealthJournalsInYearUseCase> { GetHealthJournalsInYearUseCase() }
-            single<CalculateHealthJournalsAverageUseCase> { CalculateHealthJournalsAverageUseCase() }
+            single<GetSelfJournalsInYearUseCase> { GetSelfJournalsInYearUseCase() }
+            single<CalculateSelfJournalsAverageUseCase> { CalculateSelfJournalsAverageUseCase() }
         }
     ) {
         SelfJournalingMetric(
             records = listOf(
-                HealthJournalRecord(),
+                SelfJournalRecord(),
             ),
         )
     }
@@ -81,7 +81,7 @@ fun SelfJournalingMetricPreviewYesterday() {
 
     SelfJournalingMetric(
         records = listOf(
-            HealthJournalRecord(
+            SelfJournalRecord(
                 createdAt = LocalDateTime(now.year, now.month, now.date.dayOfMonth.minus(1), 0, 0)
             ),
         ),

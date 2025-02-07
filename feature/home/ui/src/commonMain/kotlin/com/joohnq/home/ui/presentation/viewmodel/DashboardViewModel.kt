@@ -7,12 +7,12 @@ import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreIntent
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
-import com.joohnq.health_journal.ui.viewmodel.HealthJournalIntent
-import com.joohnq.health_journal.ui.viewmodel.HealthJournalState
-import com.joohnq.health_journal.ui.viewmodel.HealthJournalViewModel
 import com.joohnq.mood.ui.viewmodel.StatsIntent
 import com.joohnq.mood.ui.viewmodel.StatsState
 import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
+import com.joohnq.self_journal.ui.viewmodel.SelfJournalState
+import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
@@ -30,7 +30,7 @@ class DashboardViewModel(
     private val userViewModel: UserViewModel,
     private val statsViewModel: StatsViewModel,
     private val freudScoreViewModel: FreudScoreViewModel,
-    private val healthJournalViewModel: HealthJournalViewModel,
+    private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
     private val stressLevelViewModel: StressLevelViewModel
 ) : ViewModel() {
@@ -47,7 +47,7 @@ class DashboardViewModel(
                 userViewModel.onAction(UserIntent.GetUser)
                 stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
-                healthJournalViewModel.onAction(HealthJournalIntent.GetHealthJournals)
+                selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
             }
         }
     }
@@ -57,14 +57,14 @@ class DashboardViewModel(
             userViewModel.state,
             statsViewModel.state,
             freudScoreViewModel.state,
-            healthJournalViewModel.state,
+            selfJournalViewModel.state,
             sleepQualityViewModel.state,
             stressLevelViewModel.state
         ) { states ->
             val userState = states[0] as UserState
             val statsState = states[1] as StatsState
             val freudState = states[2] as FreudScoreState
-            val healthState = states[3] as HealthJournalState
+            val healthState = states[3] as SelfJournalState
             val sleepState = states[4] as SleepQualityState
             val stressState = states[5] as StressLevelState
 
@@ -79,7 +79,7 @@ class DashboardViewModel(
                 userState.user,
                 stressState.stressLevelRecords,
                 sleepState.sleepQualityRecords,
-                healthState.healthJournalRecords,
+                healthState.records,
             ).anyError(
                 block = { error ->
                     viewModelScope.launch {
@@ -92,7 +92,7 @@ class DashboardViewModel(
                 user = userState.user,
                 moodRecords = statsState.records,
                 freudScore = freudState.freudScore,
-                healthJournalRecords = healthState.healthJournalRecords,
+                selfJournalRecords = healthState.records,
                 sleepQualityRecords = sleepState.sleepQualityRecords,
                 stressLevelRecords = stressState.stressLevelRecords
             )

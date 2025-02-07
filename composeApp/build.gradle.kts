@@ -70,9 +70,9 @@ kotlin {
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.mood.data)
 
-            implementation(projects.feature.healthJournal.ui)
-            implementation(projects.feature.healthJournal.domain)
-            implementation(projects.feature.healthJournal.data)
+            implementation(projects.feature.selfJournal.ui)
+            implementation(projects.feature.selfJournal.domain)
+            implementation(projects.feature.selfJournal.data)
 
             implementation(projects.feature.sleepQuality.ui)
             implementation(projects.feature.sleepQuality.domain)

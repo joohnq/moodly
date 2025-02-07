@@ -11,7 +11,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.core.ui.ObserverSideEffects
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.health_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.home.ui.components.DashboardCentral
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.home.ui.presentation.dashboard.event.toDashboardEvent
@@ -21,6 +20,7 @@ import com.joohnq.home.ui.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.ui.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
+import com.joohnq.self_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState

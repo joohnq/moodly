@@ -108,9 +108,9 @@ object Drawables {
         val FreudScoreIllustration = Res.drawable.freud_score_illustration
         val MoodIllustration = Res.drawable.mood_illustration
         val FreudScoreCircleIllustration = Res.drawable.freud_score_circle_illustration
-        val HealthJournalBackground = Res.drawable.health_journal_background
-        val HealthJournalWomanWriting = Res.drawable.health_journal_woman_writing
-        val HealthJournalHistory = Res.drawable.health_journal_history
+        val SelfJournalBackground = Res.drawable.health_journal_background
+        val SelfJournalWomanWriting = Res.drawable.health_journal_woman_writing
+        val SelfJournalHistory = Res.drawable.health_journal_history
         val SleepInsight = Res.drawable.sleep_insight
         val StressLevelInsight = Res.drawable.stress_level_insight
         val MoodHistory = Res.drawable.mood_history

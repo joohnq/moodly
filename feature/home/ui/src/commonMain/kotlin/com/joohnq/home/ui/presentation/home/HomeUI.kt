@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
-import com.joohnq.health_journal.domain.entity.HealthJournalRecord
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MoodMetric
@@ -19,6 +18,7 @@ import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
 import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
@@ -40,11 +40,11 @@ fun HomeUI(
         state.moodRecords,
         state.user,
         state.stressLevelRecords,
-        state.healthJournalRecords,
+        state.selfJournalRecords,
         state.sleepQualityRecords
     ).foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { moodRecords: List<MoodRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
+        onSuccess = { moodRecords: List<MoodRecord>, u: User, stressLevels: List<StressLevelRecord>, selfJournals: List<SelfJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -100,13 +100,13 @@ fun HomeUI(
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.self_journaling,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
+                    onSeeAll = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
                 )
                 SelfJournalingMetric(
-                    records = healthJournals,
+                    records = selfJournals,
                     containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
-                    onClick = { onEvent(HomeEvent.OnNavigateToHealthJournal) }
+                    onClick = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
                 )
                 VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
             }

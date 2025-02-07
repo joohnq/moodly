@@ -5,10 +5,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.joohnq.freud_score.ui.presentation.freud_score.FreudScoreScreen
-import com.joohnq.health_journal.ui.presentation.add_journaling_screen.AddJournalingScreen
-import com.joohnq.health_journal.ui.presentation.all_journals.AllJournalScreen
-import com.joohnq.health_journal.ui.presentation.edit_journaling_screen.EditJournalingScreen
-import com.joohnq.health_journal.ui.presentation.health_journal.HealthJournalScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
@@ -16,6 +12,10 @@ import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScr
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
+import com.joohnq.self_journal.ui.presentation.add_self_journal.AddJournalingScreen
+import com.joohnq.self_journal.ui.presentation.edit_self_journal.EditJournalingScreen
+import com.joohnq.self_journal.ui.presentation.self_journal.SelfJournalScreen
+import com.joohnq.self_journal.ui.presentation.self_journal_history.AllJournalScreen
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.SleepHistoryScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
@@ -42,7 +42,7 @@ fun NavGraphBuilder.appNavigation(
                         DashboardEvent.OnNavigateToAllJournals -> onNavigate(Destination.App.AllJournals())
                         is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(Destination.App.EditJournaling(event.id))
                         DashboardEvent.OnNavigateToFreudScore -> onNavigate(Destination.App.FreudScore)
-                        DashboardEvent.OnNavigateToHealthJournal -> onNavigate(Destination.App.HealthJournal)
+                        DashboardEvent.OnNavigateToSelfJournal -> onNavigate(Destination.App.SelfJournal)
                         DashboardEvent.OnNavigateToMindfulJournal -> onNavigate(Destination.App.MindfulJournal)
                         DashboardEvent.OnNavigateToMood -> onNavigate(Destination.App.Mood)
                         DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(Destination.App.AllJournals())
@@ -66,9 +66,9 @@ fun NavGraphBuilder.appNavigation(
                 }
             )
         }
-        composable<Destination.App.HealthJournal> {
-            HealthJournalScreen(
-                onNavigateAddHealthJournal = {
+        composable<Destination.App.SelfJournal> {
+            SelfJournalScreen(
+                onNavigateAddSelfJournal = {
                     onNavigate(Destination.App.AddSelfJournaling)
                 },
                 onNavigateAllJournals = {

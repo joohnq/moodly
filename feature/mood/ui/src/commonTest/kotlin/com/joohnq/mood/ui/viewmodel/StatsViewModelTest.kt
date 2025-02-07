@@ -3,8 +3,8 @@ package com.joohnq.mood.ui.viewmodel
 import app.cash.turbine.test
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.domain.repository.StatsRepository
+import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.domain.repository.MoodRepository
 import com.joohnq.mood.domain.use_case.AddStatsUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetStatsUseCase
@@ -20,7 +20,7 @@ import kotlin.test.Test
 
 class StatsViewModelTest {
     private lateinit var viewModel: StatsViewModel
-    private lateinit var repository: StatsRepository
+    private lateinit var repository: MoodRepository
     private lateinit var getStatsUseCase: GetStatsUseCase
     private lateinit var deleteStatsUseCase: DeleteStatsUseCase
     private lateinit var addStatsUseCase: AddStatsUseCase
@@ -41,13 +41,13 @@ class StatsViewModelTest {
     @Test
     fun `testing getStats with a success operation - returning a Result success with items`() =
         runBlocking {
-            everySuspend { repository.getStats() } returns Result.success(items)
+            everySuspend { repository.getMoodRecords() } returns Result.success(items)
 
             viewModel.state.test {
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Idle)
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
                 viewModel.onAction(StatsIntent.GetStatsRecords)
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Success(items))
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
             }
         }
 
@@ -55,24 +55,24 @@ class StatsViewModelTest {
     fun `testing getStats with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
-            everySuspend { repository.getStats() } returns Result.failure(
+            everySuspend { repository.getMoodRecords() } returns Result.failure(
                 Exception(
                     exception
                 )
             )
 
             viewModel.state.test {
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Idle)
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
                 viewModel.onAction(StatsIntent.GetStatsRecords)
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().statsRecords).isEqualTo(UiState.Error(exception))
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
             }
         }
 
     @Test
     fun `testing addStats with a success operation - returning a Result success with items`() =
         runBlocking {
-            everySuspend { repository.addStats(any()) } returns
+            everySuspend { repository.addMoodRecord(any()) } returns
                     Result.success(true)
 
             viewModel.state.test {
@@ -87,7 +87,7 @@ class StatsViewModelTest {
     fun `testing addStats with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
-            everySuspend { repository.addStats(any()) } returns
+            everySuspend { repository.addMoodRecord(any()) } returns
                     Result.failure(Exception(exception))
 
             viewModel.state.test {
@@ -102,11 +102,11 @@ class StatsViewModelTest {
 
     companion object {
         val items = listOf(
-            StatsRecord(
+            MoodRecord(
                 id = 1,
                 mood = Mood.Overjoyed
             ),
-            StatsRecord(
+            MoodRecord(
                 id = 2,
                 mood = Mood.Happy
             )

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.shared_resources.theme.Colors
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -15,7 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodHistoryContent(
     modifier: Modifier = Modifier,
     containerColor: Color,
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         records.forEach { record ->
@@ -36,9 +36,9 @@ fun MoodHistoryContentPreview() {
         modifier = Modifier,
         containerColor = Colors.White,
         records = listOf(
-            StatsRecord(),
-            StatsRecord(),
-            StatsRecord(),
+            MoodRecord(),
+            MoodRecord(),
+            MoodRecord(),
         ),
     )
 }

@@ -4,17 +4,17 @@ import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.core.database.executeTryCatchResult
 import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.converter.StatsRecordConverter
-import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.domain.repository.StatsRepository
+import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.domain.repository.MoodRepository
 
-class StatsRepositoryImpl(
+class MoodRepositoryImpl(
     private val database: StatsDatabaseSql,
-) : StatsRepository {
-    private val query = database.statRecordQueries
-    override suspend fun getStats(): Result<List<StatsRecord>> =
+) : MoodRepository {
+    private val query = database.moodRecordQueries
+    override suspend fun getMoodRecords(): Result<List<MoodRecord>> =
         executeTryCatchResult {
-            query.getStats { id, mood, description, createdAt ->
-                StatsRecord(
+            query.getMoodRecords { id, mood, description, createdAt ->
+                MoodRecord(
                     id = id.toInt(),
                     mood = StatsRecordConverter.toMood(mood),
                     description = description,
@@ -23,18 +23,18 @@ class StatsRepositoryImpl(
             }.executeAsList()
         }
 
-    override suspend fun addStats(statsRecord: StatsRecord): Result<Boolean> =
+    override suspend fun addMoodRecord(record: MoodRecord): Result<Boolean> =
         executeTryCatchResult {
-            query.addStats(
-                mood = StatsRecordConverter.fromMood(statsRecord.mood),
-                description = statsRecord.description
+            query.addMoodRecord(
+                mood = StatsRecordConverter.fromMood(record.mood),
+                description = record.description
             )
             true
         }
 
-    override suspend fun deleteStat(id: Int): Result<Boolean> =
+    override suspend fun deleteMoodRecord(id: Int): Result<Boolean> =
         executeTryCatchResult {
-            query.deleteStat(id.toLong())
+            query.deleteMoodRecord(id.toLong())
             true
         }
 }

@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.mapper.getStreakDays
 import com.joohnq.mood.domain.mapper.getWeekRecords
 import com.joohnq.shared_resources.*
@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodInsightContent(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<StatsRecord>,
+    records: List<MoodRecord>,
     onClick: () -> Unit
 ) {
     val streakDays = records.getWeekRecords().getStreakDays()

@@ -11,26 +11,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
-import com.joohnq.mood.domain.entity.StatsRecord
-import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.logged_today_at
-import com.joohnq.shared_resources.mood
-import com.joohnq.shared_resources.not_available
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.your_mood_is
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoodPanel(
     modifier: Modifier = Modifier,
-    record: StatsRecord?,
+    record: MoodRecord?,
     resource: MoodResource?,
 ) {
     val hasToday = resource != null

@@ -1,7 +1,7 @@
 package com.joohnq.mood.domain.use_case
 
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.fake.StatsRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
@@ -22,12 +22,12 @@ class GetStatsUseCaseTest {
             //THEN
             assertThat(res).isEqualTo(
                 listOf(
-                    StatsRecord(
+                    MoodRecord(
                         id = 1,
                         mood = Mood.Sad,
                         createdAt = CoreTestConstants.FAKE_DATE
                     ),
-                    StatsRecord(
+                    MoodRecord(
                         id = 2,
                         mood = Mood.Happy,
                         createdAt = CoreTestConstants.FAKE_DATE.plus(1, DateTimeUnit.DAY)

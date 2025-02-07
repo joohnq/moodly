@@ -6,16 +6,12 @@ import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.mapper.toUiState
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.use_case.AddStatsUseCase
 import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
 import com.joohnq.mood.domain.use_case.GetStatsUseCase
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class StatsViewModel(
@@ -32,7 +28,7 @@ class StatsViewModel(
     fun onAction(intent: StatsIntent) {
         when (intent) {
             is StatsIntent.GetStatsRecords -> getStatsRecords()
-            is StatsIntent.AddStatsRecord -> addStatsRecord(intent.statsRecord)
+            is StatsIntent.AddStatsRecord -> addStatsRecord(intent.record)
             is StatsIntent.DeleteStatsRecord -> deleteStatsRecord(intent.id)
         }
     }
@@ -44,8 +40,8 @@ class StatsViewModel(
             changeStatsRecordsStatus(res)
         }
 
-    private fun addStatsRecord(statsRecord: StatsRecord) = viewModelScope.launch {
-        val res = addStatsUseCase(statsRecord).toUiState()
+    private fun addStatsRecord(record: MoodRecord) = viewModelScope.launch {
+        val res = addStatsUseCase(record).toUiState()
         res.onSuccess {
             _sideEffect.send(StatSideEffect.StatsAdded)
         }.onFailure {
@@ -62,7 +58,7 @@ class StatsViewModel(
         }
     }
 
-    private fun changeStatsRecordsStatus(status: UiState<List<StatsRecord>>) {
-        _state.update { it.copy(statsRecords = status) }
+    private fun changeStatsRecordsStatus(status: UiState<List<MoodRecord>>) {
+        _state.update { it.copy(records = status) }
     }
 }

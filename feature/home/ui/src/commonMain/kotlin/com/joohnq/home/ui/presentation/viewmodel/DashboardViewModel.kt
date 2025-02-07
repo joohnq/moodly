@@ -68,14 +68,14 @@ class DashboardViewModel(
             val sleepState = states[4] as SleepQualityState
             val stressState = states[5] as StressLevelState
 
-            statsState.statsRecords.onSuccess { records ->
+            statsState.records.onSuccess { records ->
                 freudScoreViewModel.onAction(
                     FreudScoreIntent.GetFreudScore(records)
                 )
             }
 
             listOf(
-                statsState.statsRecords,
+                statsState.records,
                 userState.user,
                 stressState.stressLevelRecords,
                 sleepState.sleepQualityRecords,
@@ -90,7 +90,7 @@ class DashboardViewModel(
 
             DashboardState(
                 user = userState.user,
-                statsRecords = statsState.statsRecords,
+                moodRecords = statsState.records,
                 freudScore = freudState.freudScore,
                 healthJournalRecords = healthState.healthJournalRecords,
                 sleepQualityRecords = sleepState.sleepQualityRecords,

@@ -18,7 +18,7 @@ import com.joohnq.home.ui.components.MoodMetric
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
@@ -37,14 +37,14 @@ fun HomeUI(
     onEvent: (HomeEvent) -> Unit = {},
 ) {
     listOf(
-        state.statsRecords,
+        state.moodRecords,
         state.user,
         state.stressLevelRecords,
         state.healthJournalRecords,
         state.sleepQualityRecords
     ).foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { statsRecords: List<StatsRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
+        onSuccess = { moodRecords: List<MoodRecord>, u: User, stressLevels: List<StressLevelRecord>, healthJournals: List<HealthJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -70,7 +70,7 @@ fun HomeUI(
                     onSeeAll = { onEvent(HomeEvent.OnNavigateToMood) }
                 )
                 MoodMetric(
-                    records = statsRecords,
+                    records = moodRecords,
                     containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddStat) },
                     onClick = { }

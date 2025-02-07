@@ -1,9 +1,9 @@
 package com.joohnq.mood.domain.use_case
 
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 
 class GetPreviousStatUseCase {
-    operator fun invoke(statsRecord: StatsRecord, statsRecords: List<StatsRecord>): StatsRecord? =
-        statsRecords.filter { it.createdAt < statsRecord.createdAt }
+    operator fun invoke(record: MoodRecord, records: List<MoodRecord>): MoodRecord? =
+        records.filter { it.createdAt < record.createdAt }
             .maxByOrNull { it.createdAt }
 }

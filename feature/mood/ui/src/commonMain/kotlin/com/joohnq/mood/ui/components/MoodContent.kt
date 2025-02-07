@@ -2,14 +2,14 @@ package com.joohnq.mood.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.mood.domain.entity.StatsRecord
+import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.shared_resources.theme.Colors
 
 @Composable
 fun MoodContent(
     modifier: Modifier = Modifier,
-    record: StatsRecord?,
-    records: List<StatsRecord>,
+    record: MoodRecord?,
+    records: List<MoodRecord>,
 ) {
     val containerColor = Colors.Gray5
     DescriptionSection(

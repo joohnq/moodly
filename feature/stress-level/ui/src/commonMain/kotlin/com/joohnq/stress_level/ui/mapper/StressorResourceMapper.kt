@@ -1,17 +1,8 @@
 package com.joohnq.stress_level.ui.mapper
 
-import androidx.compose.runtime.Composable
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.resource.StressorResource
-import com.joohnq.stress_level.ui.resource.StressorResource.Finances
-import com.joohnq.stress_level.ui.resource.StressorResource.InPeace
-import com.joohnq.stress_level.ui.resource.StressorResource.Kids
-import com.joohnq.stress_level.ui.resource.StressorResource.Life
-import com.joohnq.stress_level.ui.resource.StressorResource.Loneliness
-import com.joohnq.stress_level.ui.resource.StressorResource.Other
-import com.joohnq.stress_level.ui.resource.StressorResource.Relationship
-import com.joohnq.stress_level.ui.resource.StressorResource.Work
-import org.jetbrains.compose.resources.stringResource
+import com.joohnq.stress_level.ui.resource.StressorResource.*
 
 fun getAllStressorResource(): List<StressorResource> =
     listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)

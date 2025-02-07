@@ -7,8 +7,8 @@ import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.sleep_quality.ui.components.SleepContent
-import com.joohnq.sleep_quality.ui.components.SleepPanel
+import com.joohnq.sleep_quality.ui.component.SleepContent
+import com.joohnq.sleep_quality.ui.component.SleepPanel
 import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource

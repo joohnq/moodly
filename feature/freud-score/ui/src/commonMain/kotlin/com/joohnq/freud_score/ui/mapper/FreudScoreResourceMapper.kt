@@ -2,11 +2,7 @@ package com.joohnq.freud_score.ui.mapper
 
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.AtRisk
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.Healthy
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.MostlyHealthy
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.Stable
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.Unhealthy
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.*
 
 typealias Index = Int
 
@@ -20,11 +16,11 @@ fun FreudScore.toResource(): FreudScoreResource =
     }
 
 fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
-    FreudScoreResource.Healthy(score),
-    FreudScoreResource.MostlyHealthy(score),
-    FreudScoreResource.Stable(score),
-    FreudScoreResource.AtRisk(score),
-    FreudScoreResource.Unhealthy(score),
+    Healthy(score),
+    MostlyHealthy(score),
+    Stable(score),
+    AtRisk(score),
+    Unhealthy(score),
 )
 
 fun Index.toInitialFreudScore(): Int =

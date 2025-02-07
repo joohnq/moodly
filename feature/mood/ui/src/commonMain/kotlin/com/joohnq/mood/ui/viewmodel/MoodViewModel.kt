@@ -5,13 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.mapper.toResultResource
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.use_case.AddMoodUseCase
 import com.joohnq.mood.domain.use_case.DeleteMoodUseCase
 import com.joohnq.mood.domain.use_case.GetMoodsUseCase
+import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.mood.ui.resource.toResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -38,7 +39,9 @@ class MoodViewModel(
     private fun get() =
         viewModelScope.launch {
             changeRecordsStatus(UiState.Loading)
-            val res = getMoodsUseCase().toResource().toUiState()
+            val res = getMoodsUseCase()
+                .toResultResource { it.toResource() }
+                .toUiState()
             changeRecordsStatus(res)
         }
 

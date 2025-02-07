@@ -5,12 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.onFailure
 import com.joohnq.core.ui.mapper.onSuccess
+import com.joohnq.core.ui.mapper.toResultResource
 import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.ui.resource.toResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -36,7 +37,9 @@ class SleepQualityViewModel(
     private fun getSleepQualityRecords() =
         viewModelScope.launch {
             changeRecordsStatus(UiState.Loading)
-            val res = getSleepQualitiesUseCase().toResource().toUiState()
+            val res = getSleepQualitiesUseCase()
+                .toResultResource { it.toResource() }
+                .toUiState()
             changeRecordsStatus(res)
         }
 

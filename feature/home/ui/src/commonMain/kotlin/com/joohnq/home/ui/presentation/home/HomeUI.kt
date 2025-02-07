@@ -17,21 +17,17 @@ import com.joohnq.home.ui.components.MoodMetric
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
-import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.ui.components.SleepQualityMetric
+import com.joohnq.sleep_quality.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.ui.components.StressLevelMetric
+import com.joohnq.stress_level.ui.component.StressLevelMetric
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 @Composable
@@ -98,7 +94,7 @@ fun HomeUI(
                 StressLevelMetric(
                     records = stressLevels,
                     containerColor = Colors.White,
-                    onCreate = { onEvent(HomeEvent.OnNavigateToAddStress) },
+                    onCreate = { onEvent(HomeEvent.OnNavigateToAddStressLevel) },
                     onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                 )
                 SectionHeader(

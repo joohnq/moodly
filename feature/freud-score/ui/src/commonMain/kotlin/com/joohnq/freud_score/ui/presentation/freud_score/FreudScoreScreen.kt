@@ -10,8 +10,6 @@ import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 @Composable
 fun FreudScoreScreen(
     onGoBack: () -> Unit,
-    onNavigateMood: (Int) -> Unit,
-    onNavigateAddMood: () -> Unit,
 ) {
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
     val state by freudScoreViewModel.state.collectAsState()
@@ -19,8 +17,6 @@ fun FreudScoreScreen(
     fun onEvent(event: FreudScoreEvent) =
         when (event) {
             is FreudScoreEvent.OnGoBack -> onGoBack()
-            is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.record.id)
-            is FreudScoreEvent.OnAdd -> onNavigateAddMood()
         }
 
     FreudScoreUI(

@@ -14,11 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.SelfJournalCard
 import com.joohnq.self_journal.ui.components.SelfJournalStatsCard
 import com.joohnq.self_journal.ui.mapper.getSelfJournalsInYear
 import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.IsEmpty
 import com.joohnq.shared_resources.components.LoadingUI

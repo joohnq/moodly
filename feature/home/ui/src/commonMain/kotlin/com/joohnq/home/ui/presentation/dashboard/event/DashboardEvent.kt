@@ -14,6 +14,7 @@ sealed interface DashboardEvent {
     data object OnNavigateToSelfJournal : DashboardEvent
     data object OnNavigateToSleepQuality : DashboardEvent
     data object OnNavigateToStressLevel : DashboardEvent
+    data object OnNavigateToAddStressLevel : DashboardEvent
     data class OnNavigateToEditJournaling(val id: Int) : DashboardEvent
     data object OnNavigateToSelfJournalHistory : DashboardEvent
     data object OnNavigateToAddSleep : DashboardEvent
@@ -31,8 +32,8 @@ fun HomeEvent.toDashboardEvent(): DashboardEvent =
         HomeEvent.OnNavigateToAddJournaling -> DashboardEvent.OnNavigateToAddJournaling
         HomeEvent.OnNavigateToAddSleep -> DashboardEvent.OnNavigateToAddSleep
         HomeEvent.OnNavigateToAddMood -> DashboardEvent.OnNavigateToAddMood
-        HomeEvent.OnNavigateToAddStress -> DashboardEvent.OnNavigateToAddStress
-        HomeEvent.OnNavigateToAllJournals -> DashboardEvent.OnNavigateToAllJournals
+        HomeEvent.OnNavigateToAddStressLevel -> DashboardEvent.OnNavigateToAddStressLevel
+        HomeEvent.OnNavigateToSelfJournalHistory -> DashboardEvent.OnNavigateToSelfJournalHistory
         HomeEvent.OnNavigateToFreudScore -> DashboardEvent.OnNavigateToFreudScore
         HomeEvent.OnNavigateToSelfJournal -> DashboardEvent.OnNavigateToSelfJournal
         HomeEvent.OnNavigateToMood -> DashboardEvent.OnNavigateToMood

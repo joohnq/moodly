@@ -2,10 +2,10 @@ package com.joohnq.mood.ui.presentation.expression_analysis
 
 import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
-import com.joohnq.mood.ui.resource.toDomain
 import com.joohnq.mood.ui.viewmodel.MoodIntent
 import com.joohnq.mood.ui.viewmodel.MoodSideEffect
 import com.joohnq.mood.ui.viewmodel.MoodViewModel

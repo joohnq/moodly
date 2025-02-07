@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.ui)
-            implementation(projects.feature.healthJournal.domain)
+            implementation(projects.feature.selfJournal.domain)
             implementation(projects.feature.mood.domain)
 
             implementation(compose.runtime)

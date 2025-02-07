@@ -5,10 +5,6 @@ import com.joohnq.datastore.di.preferencesModule
 import com.joohnq.di.coreDiModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.ui.di.freudScoreUiModule
-import com.joohnq.health_journal.data.di.healthJournalDataModule
-import com.joohnq.health_journal.data.di.healthJournalDriverFactory
-import com.joohnq.health_journal.domain.di.healthJournalDomainModule
-import com.joohnq.health_journal.ui.di.healthJournalUiModule
 import com.joohnq.home.ui.di.homeUiModule
 import com.joohnq.mood.data.di.moodDataModule
 import com.joohnq.mood.data.di.moodDriverFactoryModule
@@ -19,6 +15,10 @@ import com.joohnq.security.data.di.securityAuthenticationModule
 import com.joohnq.security.data.di.securityDataModule
 import com.joohnq.security.domain.di.securityDomainModule
 import com.joohnq.security.ui.di.securityUiModule
+import com.joohnq.self_journal.data.di.selfJournalDataModule
+import com.joohnq.self_journal.data.di.selfJournalDriverFactory
+import com.joohnq.self_journal.domain.di.selfJournalDomainModule
+import com.joohnq.self_journal.ui.di.selfJournalUiModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.domain.di.sleepQualityDomainModule
@@ -34,9 +34,9 @@ import com.joohnq.user.ui.di.userUiModule
 
 val appModule = listOf(
     freudScoreUiModule,
-    healthJournalDataModule,
-    healthJournalDomainModule,
-    healthJournalUiModule,
+    selfJournalDataModule,
+    selfJournalDomainModule,
+    selfJournalUiModule,
     moodDataModule,
     moodDomainModule,
     moodUiModule,
@@ -52,7 +52,7 @@ val appModule = listOf(
     coreDiModule,
     onboardingUiModule,
     authUiModule,
-    healthJournalDriverFactory,
+    selfJournalDriverFactory,
     moodDriverFactoryModule,
     sleepQualityDriverFactoryModule,
     stressLevelDriverFactoryModule,

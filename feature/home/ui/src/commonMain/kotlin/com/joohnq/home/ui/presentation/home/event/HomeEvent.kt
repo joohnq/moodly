@@ -4,7 +4,7 @@ sealed interface HomeEvent {
     data object OnNavigateToFreudScore : HomeEvent
     data object OnNavigateToMood : HomeEvent
     data object OnNavigateToSleepQuality : HomeEvent
-    data object OnNavigateToHealthJournal : HomeEvent
+    data object OnNavigateToSelfJournal : HomeEvent
     data object OnNavigateToMindfulJournal : HomeEvent
     data object OnNavigateToStressLevel : HomeEvent
     data object OnNavigateToAddSleep : HomeEvent

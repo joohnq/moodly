@@ -3,6 +3,7 @@ package com.joohnq.self_journal.ui.presentation.edit_self_journal
 import androidx.compose.runtime.*
 import com.joohnq.core.ui.mapper.onSuccess
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.self_journal.ui.mapper.toDomain
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalViewModel
@@ -45,7 +46,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
         selfJournalState.records.onSuccess { selfJournals ->
             val item = selfJournals.find { it.id == id } ?: return@onSuccess
             editSelfJournalViewModel.onAction(
-                EditSelfJournalIntent.SetEditSelfJournal(item)
+                EditSelfJournalIntent.SetEditSelfJournal(item.toDomain())
             )
         }
     }
@@ -55,7 +56,6 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
             when (effect) {
                 SelfJournalSideEffect.SelfJournalEdited -> {
                     onEvent(EditSelfJournalEvent.OnGoBack)
-//                            selfJournalViewModel.onAction(SelfJournalIntent.GetSelfJournals)
                 }
 
                 SelfJournalSideEffect.SelfJournalDeleted -> {

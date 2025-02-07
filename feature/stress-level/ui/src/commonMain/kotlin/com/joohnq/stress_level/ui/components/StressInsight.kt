@@ -15,17 +15,18 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.resource.StressorResource
 
 @Composable
 fun StressInsight(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.Gray5,
-    records: List<StressLevelRecord>,
+    records: List<StressLevelRecordResource>,
     onCreate: () -> Unit = {}
 ) {
     val stressors = records
-        .flatMap { it.stressors.toResource() }
+        .flatMap { it.stressors }
         .groupBy { it }
         .map { it.key to it.value.size }
         .sortedBy { it.second }

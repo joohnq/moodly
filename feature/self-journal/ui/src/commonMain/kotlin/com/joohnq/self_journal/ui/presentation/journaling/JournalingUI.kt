@@ -14,11 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.use_case.GetSelfJournalsInYearUseCase
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.SelfJournalCard
 import com.joohnq.self_journal.ui.components.SelfJournalStatsCard
+import com.joohnq.self_journal.ui.mapper.getSelfJournalsInYear
 import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.IsEmpty
@@ -37,14 +36,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalingUI(
     padding: PaddingValues,
-    getSelfJournalsInYearUseCase: GetSelfJournalsInYearUseCase,
-    records: UiState<List<SelfJournalRecord>>,
+    records: UiState<List<SelfJournalRecordResource>>,
     onEvent: (JournalingEvent) -> Unit = {},
 ) {
     records.foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { records ->
-            val dayPerYear = getSelfJournalsInYearUseCase(selfJournals = records)
+            val dayPerYear = records.getSelfJournalsInYear()
 
             Column(
                 modifier = Modifier
@@ -128,7 +126,7 @@ fun JournalingUI(
                     SelfJournalStatsCard(
                         modifier = Modifier.weight(1f),
                         icon = Drawables.Icons.Chart,
-                        title = stringResource(if (records.isEmpty()) Res.string.no_data else records.first().mood.toResource().text),
+                        title = stringResource(if (records.isEmpty()) Res.string.no_data else records.first().mood.text),
                         color = Colors.Brown60,
                         backgroundColor = Colors.Brown10,
                         description = stringResource(Res.string.emotion)

@@ -10,7 +10,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.week_view
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.core.Week
 
 @Composable
@@ -18,7 +18,7 @@ fun SleepWeekView(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     week: Week,
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
 ) {
     SectionHeader(
         modifier = modifier,

@@ -7,7 +7,7 @@ import kotlin.test.Test
 
 class DeleteStatsUseCaseTest {
     private var repository: StatsRepositoryFake = StatsRepositoryFake()
-    private var useCase: DeleteStatsUseCase = DeleteStatsUseCase(repository)
+    private var useCase: DeleteMoodUseCase = DeleteMoodUseCase(repository)
 
     @Test
     fun `GIVEN a valid request WHEN calling deleteStatsUseCase THEN should return true`() =

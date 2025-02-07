@@ -38,12 +38,12 @@ fun DashboardCentral(
             CentralAction<Destination>(
                 title = Res.string.self_journaling,
                 icon = Drawables.Icons.Outlined.BookOpen,
-                destination = Destination.App.AddSelfJournaling
+                destination = Destination.App.AddSelfJournal
             ),
             CentralAction<Destination>(
                 title = Res.string.mood,
                 icon = Drawables.Icons.Outlined.MoodNeutral,
-                destination = Destination.App.AddStat
+                destination = Destination.App.AddMood
             )
         )
 

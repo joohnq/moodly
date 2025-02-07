@@ -1,22 +1,19 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepContent
 import com.joohnq.sleep_quality.ui.components.SleepPanel
-import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
-import com.kizitonwose.calendar.compose.weekcalendar.WeekCalendarState
-import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -28,20 +25,18 @@ fun SleepQualityUI(
     state.sleepQualityRecords.foldComposable(
         onSuccess = { records ->
             val record = records.getTodaySleepQualityRecord()
-            val resource = record?.sleepQuality?.toResource()
-            val hasToday = resource != null
+            val hasToday = record != null
 
             DecoratedConvexPanelList(
                 containerColor = Colors.White,
                 isDark = !hasToday,
                 image = Drawables.Images.SleepQualityBackground,
-                color = if (hasToday) resource.palette.imageColor else Colors.Brown10,
-                panelBackgroundColor = if (hasToday) resource.palette.color else Colors.Brown10,
+                color = if (hasToday) record.sleepQuality.palette.imageColor else Colors.Brown10,
+                panelBackgroundColor = if (hasToday) record.sleepQuality.palette.color else Colors.Brown10,
                 panel = { modifier ->
                     SleepPanel(
                         modifier = modifier,
                         record = record,
-                        resource = resource,
                     )
                 },
                 onAddButton = { onEvent(SleepQualityEvent.OnAddSleepQuality) },
@@ -78,8 +73,8 @@ fun SleepQualityUIPreviewWorst() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(
-                        sleepQuality = SleepQuality.Worst
+                    SleepQualityRecordResource(
+                        sleepQuality = SleepQualityResource.Worst
                     )
                 )
             )
@@ -94,8 +89,8 @@ fun SleepQualityUIPreviewPoor() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(
-                        sleepQuality = SleepQuality.Poor
+                    SleepQualityRecordResource(
+                        sleepQuality = SleepQualityResource.Poor
                     )
                 )
             )
@@ -110,8 +105,8 @@ fun SleepQualityUIPreviewFair() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(
-                        sleepQuality = SleepQuality.Fair
+                    SleepQualityRecordResource(
+                        sleepQuality = SleepQualityResource.Fair
                     )
                 )
             )
@@ -126,8 +121,8 @@ fun SleepQualityUIPreviewGood() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(
-                        sleepQuality = SleepQuality.Good
+                    SleepQualityRecordResource(
+                        sleepQuality = SleepQualityResource.Good
                     )
                 )
             )
@@ -142,8 +137,8 @@ fun SleepQualityUIPreviewExcellent() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(
-                        sleepQuality = SleepQuality.Excellent
+                    SleepQualityRecordResource(
+                        sleepQuality = SleepQualityResource.Excellent
                     )
                 )
             )

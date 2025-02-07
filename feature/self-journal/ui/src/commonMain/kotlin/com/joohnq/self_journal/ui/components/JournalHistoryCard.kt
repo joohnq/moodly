@@ -16,6 +16,7 @@ import com.joohnq.core.ui.mapper.toMonthAbbreviatedAndDayString
 import com.joohnq.core.ui.mapper.toWordCount
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -33,9 +34,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun JournalHistoryCard(
     containerColor: Color,
-    record: SelfJournalRecord
+    record: SelfJournalRecordResource
 ) {
-    val resource = record.mood.toResource()
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardColors(
@@ -83,13 +83,13 @@ fun JournalHistoryCard(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(resource.assets.secondaryIcon),
+                            painter = painterResource(record.mood.assets.secondaryIcon),
                             contentDescription = stringResource(Res.string.mood),
                             tint = Colors.Gray40,
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = stringResource(resource.text),
+                            text = stringResource(record.mood.text),
                             style = TextStyles.TextSmMedium(),
                             color = Colors.Gray60
                         )
@@ -135,6 +135,6 @@ fun JournalHistoryCard(
 fun JournalHistoryCardPreview() {
     JournalHistoryCard(
         containerColor = Colors.Gray20,
-        record = SelfJournalRecord()
+        record = SelfJournalRecordResource()
     )
 }

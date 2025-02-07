@@ -5,11 +5,12 @@ import androidx.compose.ui.Modifier
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 @Composable
 fun StressContent(
     modifier: Modifier = Modifier,
-    records: List<StressLevelRecord> = listOf(),
+    records: List<StressLevelRecordResource> = listOf(),
     onEvent: (StressLevelEvent) -> Unit = {}
 ) {
     val containerColor = Colors.Gray5

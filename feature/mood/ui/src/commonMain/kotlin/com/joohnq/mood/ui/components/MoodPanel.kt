@@ -11,8 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -25,10 +24,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodPanel(
     modifier: Modifier = Modifier,
-    record: MoodRecord?,
-    resource: MoodResource?,
+    record: MoodRecordResource?,
 ) {
-    val hasToday = resource != null
+    val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
 
@@ -57,20 +55,20 @@ fun MoodPanel(
             VerticalSpacer(10.dp)
         if (hasToday) {
             Text(
-                text = stringResource(resource.text),
+                text = stringResource(record.mood.text),
                 style = TextStyles.HeadingXlExtraBold(),
                 color = Colors.White
             )
             VerticalSpacer(10.dp)
             MoodFace(
                 modifier = Modifier.size(96.dp),
-                resource = resource,
+                resource = record.mood,
                 backgroundColor = Colors.White,
-                color = resource.palette.color
+                color = record.mood.palette.color
             )
             VerticalSpacer(10.dp)
             Text(
-                text = stringResource(Res.string.logged_today_at, record!!.createdAt.toFormattedTimeString()),
+                text = stringResource(Res.string.logged_today_at, record.createdAt.toFormattedTimeString()),
                 style = TextStyles.TextXlMedium(),
                 color = Colors.White
             )

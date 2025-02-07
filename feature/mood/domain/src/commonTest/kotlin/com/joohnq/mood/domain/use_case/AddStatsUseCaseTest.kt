@@ -12,7 +12,7 @@ class AddStatsUseCaseTest {
     }
 
     private var repository: StatsRepositoryFake = StatsRepositoryFake()
-    private var useCase: AddStatsUseCase = AddStatsUseCase(repository)
+    private var useCase: AddMoodUseCase = AddMoodUseCase(repository)
 
     @Test
     fun `GIVEN a valid request WHEN calling addStatsUseCase THEN should return true`() =

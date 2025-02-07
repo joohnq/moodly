@@ -9,12 +9,10 @@ import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.domain.use_case.GetStressLevelsUseCase
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.ui.resource.toResource
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class StressLevelViewModel(
@@ -36,9 +34,10 @@ class StressLevelViewModel(
 
     private fun getStressLevelRecords() =
         viewModelScope.launch {
-            changeStressLevelRecordsStatus(UiState.Loading)
-            val res = getStressLevelsUseCase().toUiState()
-            changeStressLevelRecordsStatus(res)
+            changeRecordsStatus(UiState.Loading)
+            val res = getStressLevelsUseCase()
+                .toResource().toUiState()
+            changeRecordsStatus(res)
         }
 
     private fun addStressLevelRecord(stressLevelRecord: StressLevelRecord) =
@@ -51,7 +50,7 @@ class StressLevelViewModel(
             }
         }
 
-    private fun changeStressLevelRecordsStatus(status: UiState<List<StressLevelRecord>>) {
-        _state.update { it.copy(stressLevelRecords = status) }
+    private fun changeRecordsStatus(status: UiState<List<StressLevelRecordResource>>) {
+        _state.update { it.copy(records = status) }
     }
 }

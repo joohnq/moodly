@@ -32,7 +32,7 @@ fun AddStressLevelScreen(
         when (event) {
             AddStressLevelEvent.GoBack -> onGoBack()
             AddStressLevelEvent.Continue -> {
-                if (state.stressLevel != StressLevelResource.One) {
+                if (state.record != StressLevelResource.One) {
                     onNavigateToStressStressors()
                     return
                 }

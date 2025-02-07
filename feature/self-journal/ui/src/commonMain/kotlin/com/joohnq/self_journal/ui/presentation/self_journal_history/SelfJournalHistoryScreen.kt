@@ -5,7 +5,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.self_journal.domain.use_case.OrganizeFromCreationSelfJournalFreudScoreUseCase
 import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryIntent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryViewModel
@@ -13,7 +12,6 @@ import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
 import com.joohnq.user.ui.viewmodel.user.UserViewModel
 import kotlinx.datetime.LocalDate
-import org.koin.compose.koinInject
 
 @Composable
 fun AllJournalScreen(
@@ -27,8 +25,6 @@ fun AllJournalScreen(
     val userState by userViewModel.state.collectAsState()
     val selfJournalHistoryViewModel: SelfJournalHistoryViewModel = sharedViewModel()
     val allJournalState by selfJournalHistoryViewModel.state.collectAsState()
-    val organizeFromCreationSelfJournalFreudScoreUseCase: OrganizeFromCreationSelfJournalFreudScoreUseCase =
-        koinInject()
 
     fun onEvent(event: SelfJournalHistoryEvent) =
         when (event) {
@@ -50,7 +46,6 @@ fun AllJournalScreen(
     AllJournalUI(
         state = allJournalState,
         user = userState.user,
-        organizeFromCreationSelfJournalFreudScoreUseCase = organizeFromCreationSelfJournalFreudScoreUseCase,
         onAction = selfJournalHistoryViewModel::onAction,
         records = selfJournalState.records,
         onEvent = ::onEvent,

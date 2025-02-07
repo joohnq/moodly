@@ -12,18 +12,18 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
 
 
 @Composable
 fun SleepHistoryDay(
-    resource: SleepQualityResource?,
+    record: SleepQualityRecordResource?,
     day: CalendarDay,
     onClick: () -> Unit,
 ) {
-    val isSelected = resource != null
+    val isSelected = record != null
     val color = when {
         day.position == DayPosition.MonthDate && !isSelected -> Colors.Brown80
         day.position == DayPosition.MonthDate && isSelected -> Colors.White
@@ -32,7 +32,7 @@ fun SleepHistoryDay(
 
     val background = when {
         day.position == DayPosition.MonthDate && !isSelected -> Colors.White
-        day.position == DayPosition.MonthDate && isSelected -> resource.palette.color
+        day.position == DayPosition.MonthDate && isSelected -> record.sleepQuality.palette.color
         else -> Colors.Brown10
     }
 

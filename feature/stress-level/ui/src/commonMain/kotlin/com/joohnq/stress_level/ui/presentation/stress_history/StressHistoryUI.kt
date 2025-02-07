@@ -3,10 +3,9 @@ package com.joohnq.stress_level.ui.presentation.stress_history
 import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.shared_resources.components.DecoratedConvexPanelList
-import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -15,7 +14,7 @@ fun StressHistoryUI(
     state: StressLevelState,
     onEvent: (StressHistoryEvent) -> Unit,
 ) {
-    state.stressLevelRecords.foldComposable(
+    state.records.foldComposable(
         onSuccess = { records ->
 
         }
@@ -27,9 +26,9 @@ fun StressHistoryUI(
 fun StressHistoryUIPreview() {
     StressHistoryUI(
         state = StressLevelState(
-            stressLevelRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
-                    StressLevelRecord()
+                    StressLevelRecordResource()
                 )
             )
         ),
@@ -42,9 +41,8 @@ fun StressHistoryUIPreview() {
 fun StressHistoryUIPreviewEmpty() {
     StressHistoryUI(
         state = StressLevelState(
-            stressLevelRecords = UiState.Success(
-                listOf(
-                )
+            records = UiState.Success(
+                listOf()
             )
         ),
         onEvent = {}

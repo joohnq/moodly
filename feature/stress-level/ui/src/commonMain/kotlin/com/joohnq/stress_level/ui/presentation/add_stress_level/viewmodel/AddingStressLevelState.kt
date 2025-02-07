@@ -1,12 +1,8 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel
 
-import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.stress_level.ui.resource.StressorResource
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 data class AddingStressLevelState(
-    val stressLevel: StressLevelResource = StressLevelResource.One,
-    val stressors: List<StressorResource> = emptyList(),
-    val otherValue: String = "",
-    val otherValueError: String? = null,
+    val record: StressLevelRecordResource = StressLevelRecordResource(),
     val sliderValue: Float = 0f,
 )

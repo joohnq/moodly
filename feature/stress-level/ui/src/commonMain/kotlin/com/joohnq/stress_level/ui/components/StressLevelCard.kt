@@ -22,6 +22,8 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.toResource
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.ui.resource.StressorResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -30,9 +32,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun StressLevelCard(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    record: StressLevelRecord,
+    record: StressLevelRecordResource,
 ) {
-    val resource = record.stressLevel.toResource()
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
@@ -60,7 +61,7 @@ fun StressLevelCard(
                 verticalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.CenterVertically)
             ) {
                 Text(
-                    text = stringResource(resource.subtitle),
+                    text = stringResource(record.stressLevel.subtitle),
                     style = TextStyles.TextMdBold(),
                     color = Colors.Brown80
                 )
@@ -98,7 +99,7 @@ fun StressLevelCard(
 fun StressLevelCardPreview() {
     StressLevelCard(
         containerColor = Colors.White,
-        record = StressLevelRecord()
+        record = StressLevelRecordResource()
     )
 }
 
@@ -107,10 +108,10 @@ fun StressLevelCardPreview() {
 fun StressLevelCardPreviewWithStressors() {
     StressLevelCard(
         containerColor = Colors.White,
-        record = StressLevelRecord(
+        record = StressLevelRecordResource(
             stressors = listOf(
-                Stressor.Finances,
-                Stressor.Work
+                StressorResource.Finances,
+                StressorResource.Work
             )
         )
     )

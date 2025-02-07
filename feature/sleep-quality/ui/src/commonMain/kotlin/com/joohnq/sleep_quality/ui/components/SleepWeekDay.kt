@@ -15,14 +15,14 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.core.WeekDay
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SleepWeekDay(
     modifier: Modifier = Modifier,
-    resource: SleepQualityResource?,
+    resource: SleepQualityRecordResource?,
     day: WeekDay,
 ) {
     Box(
@@ -47,7 +47,7 @@ fun SleepWeekDay(
                 color = Colors.Gray60
             )
             if (resource != null)
-                MoodFace(modifier = Modifier.size(24.dp), resource = resource.toMoodResource())
+                MoodFace(modifier = Modifier.size(24.dp), resource = resource.sleepQuality.toMoodResource())
             else
                 Icon(
                     painter = painterResource(Drawables.Icons.Close),

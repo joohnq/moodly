@@ -12,8 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toCompleteDateString
 import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground
@@ -29,9 +28,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SelfJournalCard(
-    journal: SelfJournalRecord, onClick: () -> Unit,
+    record: SelfJournalRecordResource,
+    onClick: () -> Unit,
 ) {
-    val resource = journal.mood.toResource()
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
         colors = ComponentColors.Card.MainCardColors(),
@@ -49,20 +48,20 @@ fun SelfJournalCard(
             ) {
                 Box(
                     modifier = Modifier.size(48.dp).background(
-                        color = resource.palette.color,
+                        color = record.mood.palette.color,
                         shape = Dimens.Shape.Small
                     ),
                     contentAlignment = Alignment.Center
                 ) {
                     MoodFace(
-                        resource = resource,
+                        resource = record.mood,
                         modifier = Modifier.size(24.dp),
                         backgroundColor = Colors.White,
-                        color = resource.palette.color
+                        color = record.mood.palette.color
                     )
                 }
                 Text(
-                    text = journal.createdAt.date.toCompleteDateString(),
+                    text = record.createdAt.date.toCompleteDateString(),
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown80
                 )
@@ -74,18 +73,18 @@ fun SelfJournalCard(
                 TextWithBackground(
                     text = stringResource(
                         Res.string.mood_show,
-                        stringResource(resource.text)
+                        stringResource(record.mood.text)
                     ).uppercase(),
-                    backgroundColor = resource.palette.backgroundColor,
-                    textColor = resource.palette.color
+                    backgroundColor = record.mood.palette.backgroundColor,
+                    textColor = record.mood.palette.color
                 )
                 TextEllipsis(
-                    text = journal.title,
+                    text = record.title,
                     style = TextStyles.TextLgBold(),
                     color = Colors.Brown80
                 )
                 TextEllipsis(
-                    text = journal.description,
+                    text = record.description,
                     style = TextStyles.TextSmSemiBold(),
                     color = Colors.Brown100Alpha64
                 )

@@ -13,10 +13,10 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.mapper.getItemsByDate
-import com.joohnq.self_journal.domain.use_case.OrganizeFromCreationSelfJournalFreudScoreUseCase
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.SelfJournalsItems
+import com.joohnq.self_journal.ui.mapper.getItemsByDate
+import com.joohnq.self_journal.ui.mapper.organizeFromCreationSelfJournalFreudScore
 import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryIntent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryState
@@ -33,8 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AllJournalUI(
     state: SelfJournalHistoryState,
     user: UiState<User>,
-    organizeFromCreationSelfJournalFreudScoreUseCase: OrganizeFromCreationSelfJournalFreudScoreUseCase,
-    records: UiState<List<SelfJournalRecord>>,
+    records: UiState<List<SelfJournalRecordResource>>,
     onAction: (SelfJournalHistoryIntent) -> Unit,
     onEvent: (SelfJournalHistoryEvent) -> Unit,
 ) {
@@ -62,11 +61,8 @@ fun AllJournalUI(
         records,
     ).foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { u: User, records: List<SelfJournalRecord> ->
-            val recordsMap = organizeFromCreationSelfJournalFreudScoreUseCase(
-                creationAt = u.dateCreated,
-                selfJournals = records
-            )
+        onSuccess = { u: User, records: List<SelfJournalRecordResource> ->
+            val recordsMap = records.organizeFromCreationSelfJournalFreudScore(u.dateCreated)
             val dates = recordsMap.keys.toList()
             val items = recordsMap.getItemsByDate(state.selectedDateTime)
 

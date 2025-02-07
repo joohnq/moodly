@@ -18,12 +18,13 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 
 @Composable
 fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
     onClick: () -> Unit,
     onSeeAll: () -> Unit
 ) {

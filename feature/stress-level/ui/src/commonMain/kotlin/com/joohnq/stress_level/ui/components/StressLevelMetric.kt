@@ -13,20 +13,22 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.mapper.getBrushGradient
-import com.joohnq.stress_level.ui.mapper.getTodayStressLevelResource
+import com.joohnq.stress_level.ui.mapper.getTodayStressLevelRecord
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressLevelMetric(
-    records: List<StressLevelRecord>,
+    records: List<StressLevelRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {}
 ) {
-    val resource = records.getTodayStressLevelResource()
+    val record = records.getTodayStressLevelRecord()
 
-    if (resource == null)
+    if (record == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -41,11 +43,11 @@ fun StressLevelMetric(
             containerColor = containerColor,
             icon = Drawables.Icons.Warning,
             title = stringResource(Res.string.stress_level),
-            text = stringResource(resource.value),
+            text = stringResource(record.stressLevel.value),
             suffix = stringResource(Res.string.level),
-            description = stringResource(resource.subtitle),
+            description = stringResource(record.stressLevel.subtitle),
             content = {
-                FivePackIndicator(resource.level, ::getBrushGradient)
+                FivePackIndicator(record.stressLevel.level, ::getBrushGradient)
             },
             color = Colors.Orange40,
             onClick = onClick
@@ -57,8 +59,8 @@ fun StressLevelMetric(
 fun StressLevelMetricPreviewOne() {
     StressLevelMetric(
         records = listOf(
-            StressLevelRecord(
-                stressLevel = StressLevel.Five
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.Five
             ),
         )
     )
@@ -69,8 +71,8 @@ fun StressLevelMetricPreviewOne() {
 fun StressLevelMetricPreviewTwo() {
     StressLevelMetric(
         records = listOf(
-            StressLevelRecord(
-                stressLevel = StressLevel.Four
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.Four
             ),
         )
     )
@@ -81,8 +83,8 @@ fun StressLevelMetricPreviewTwo() {
 fun StressLevelMetricPreviewThree() {
     StressLevelMetric(
         records = listOf(
-            StressLevelRecord(
-                stressLevel = StressLevel.Three
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.Three
             ),
         )
     )
@@ -93,8 +95,8 @@ fun StressLevelMetricPreviewThree() {
 fun StressLevelMetricPreviewFour() {
     StressLevelMetric(
         records = listOf(
-            StressLevelRecord(
-                stressLevel = StressLevel.Two
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.Two
             ),
         )
     )
@@ -105,8 +107,8 @@ fun StressLevelMetricPreviewFour() {
 fun StressLevelMetricPreviewFive() {
     StressLevelMetric(
         records = listOf(
-            StressLevelRecord(
-                stressLevel = StressLevel.One
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.One
             ),
         )
     )

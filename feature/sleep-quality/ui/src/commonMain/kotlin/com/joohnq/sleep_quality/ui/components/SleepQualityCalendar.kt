@@ -16,6 +16,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.HorizontalCalendar
 import org.jetbrains.compose.resources.painterResource
@@ -25,7 +26,7 @@ fun SleepQualityCalendar(
     modifier: Modifier = Modifier,
     padding: PaddingValues,
     calendarState: CalendarState,
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
     onPreviousMonth: () -> Unit,
     onNextMonth: () -> Unit,
     onDayClick: () -> Unit,
@@ -86,9 +87,9 @@ fun SleepQualityCalendar(
         contentPadding = padding,
         dayContent = { day ->
             val resource =
-                records.find { it.createdAt == day.date }?.sleepQuality?.toResource()
+                records.find { it.createdAt == day.date }
             SleepHistoryDay(
-                resource = resource,
+                record = resource,
                 day = day,
                 onClick = { onDayClick() }
             )

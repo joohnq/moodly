@@ -4,9 +4,9 @@ import androidx.compose.runtime.*
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.entity.User
-import com.joohnq.mood.ui.viewmodel.StatSideEffect
-import com.joohnq.mood.ui.viewmodel.StatsIntent
-import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.mood.ui.viewmodel.MoodIntent
+import com.joohnq.mood.ui.viewmodel.MoodSideEffect
+import com.joohnq.mood.ui.viewmodel.MoodViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
@@ -36,7 +36,7 @@ fun OnboardingExpressionAnalysisScreen(
 ) {
     val onboardingViewModel: OnboardingViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
-    val statsViewModel: StatsViewModel = sharedViewModel()
+    val moodViewModel: MoodViewModel = sharedViewModel()
     val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
@@ -74,7 +74,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun addStatsRecord() {
-        statsViewModel.onAction(StatsIntent.AddStatsRecord(onboardingState.moodRecord))
+        moodViewModel.onAction(MoodIntent.AddMoodRecord(onboardingState.moodRecord))
     }
 
     fun updateUser() {
@@ -109,16 +109,16 @@ fun OnboardingExpressionAnalysisScreen(
     LaunchedEffect(
         stressLevelViewModel,
         sleepQualityViewModel,
-        statsViewModel
+        moodViewModel
     ) {
         combine(
             stressLevelViewModel.sideEffect,
             sleepQualityViewModel.sideEffect,
-            statsViewModel.sideEffect
+            moodViewModel.sideEffect
         ) { stressSideEffect, sleepSideEffect, statsSideEffect ->
             Triple(stressSideEffect, sleepSideEffect, statsSideEffect)
         }.collect { (stressSideEffect, sleepSideEffect, statsSideEffect) ->
-            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is StatSideEffect.StatsAdded) {
+            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodSideEffect.StatsAdded) {
                 userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboarding())
             }
         }

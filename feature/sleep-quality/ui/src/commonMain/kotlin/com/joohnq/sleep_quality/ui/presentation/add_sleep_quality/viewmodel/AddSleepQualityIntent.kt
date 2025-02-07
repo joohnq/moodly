@@ -4,7 +4,7 @@ import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
 
 sealed interface AddSleepQualityIntent {
-    data class UpdateMood(val mood: MoodResource?) : AddSleepQualityIntent
+    data class UpdateMood(val mood: MoodResource) : AddSleepQualityIntent
     data class UpdateSelectedSleepInfluence(val sleepInfluence: SleepInfluencesResource) :
         AddSleepQualityIntent
 

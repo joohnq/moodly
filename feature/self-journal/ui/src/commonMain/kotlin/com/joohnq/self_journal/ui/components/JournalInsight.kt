@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -32,10 +34,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun JournalInsight(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<SelfJournalRecord>,
+    records: List<SelfJournalRecordResource>,
 ) {
     val groupedMoods = records
-        .groupBy { it.mood.toResource() }
+        .groupBy { it.mood }
         .map { it.key to it.value.size }
         .sortedBy { it.first.id }
 
@@ -109,11 +111,11 @@ fun JournalInsight(
 fun JournalInsightPreview() {
     JournalInsight(
         records = listOf(
-            SelfJournalRecord(
-                mood = Mood.Sad
+            SelfJournalRecordResource(
+                mood = MoodResource.Sad
             ),
-            SelfJournalRecord(
-                mood = Mood.Sad
+            SelfJournalRecordResource(
+                mood = MoodResource.Sad
             )
         )
     )

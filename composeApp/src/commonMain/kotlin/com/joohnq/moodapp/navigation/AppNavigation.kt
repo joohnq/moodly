@@ -7,7 +7,7 @@ import androidx.navigation.toRoute
 import com.joohnq.freud_score.ui.presentation.freud_score.FreudScoreScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
-import com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
+import com.joohnq.mood.ui.presentation.add_mood.AddMoodScreen
 import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
 import com.joohnq.navigation.Destination
@@ -35,17 +35,16 @@ fun NavGraphBuilder.appNavigation(
             DashboardScreen(
                 onEvent = { event ->
                     when (event) {
-                        DashboardEvent.OnNavigateToAddJournaling -> onNavigate(Destination.App.AddSelfJournaling)
+                        DashboardEvent.OnNavigateToAddJournaling -> onNavigate(Destination.App.AddSelfJournal)
                         DashboardEvent.OnNavigateToAddSleep -> onNavigate(Destination.App.AddSleepQuality)
-                        DashboardEvent.OnNavigateToAddStat -> onNavigate(Destination.App.AddStat)
+                        DashboardEvent.OnNavigateToAddMood -> onNavigate(Destination.App.AddMood)
                         DashboardEvent.OnNavigateToAddStress -> onNavigate(Destination.App.AddStressLevel)
-                        DashboardEvent.OnNavigateToAllJournals -> onNavigate(Destination.App.AllJournals())
-                        is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(Destination.App.EditJournaling(event.id))
+                        DashboardEvent.OnNavigateToAllJournals -> onNavigate(Destination.App.SelfJournalHistory())
+                        is DashboardEvent.OnNavigateToEditJournaling -> onNavigate(Destination.App.EditSelfJournal(event.id))
                         DashboardEvent.OnNavigateToFreudScore -> onNavigate(Destination.App.FreudScore)
                         DashboardEvent.OnNavigateToSelfJournal -> onNavigate(Destination.App.SelfJournal)
-                        DashboardEvent.OnNavigateToMindfulJournal -> onNavigate(Destination.App.MindfulJournal)
                         DashboardEvent.OnNavigateToMood -> onNavigate(Destination.App.Mood)
-                        DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(Destination.App.AllJournals())
+                        DashboardEvent.OnNavigateToSelfJournalHistory -> onNavigate(Destination.App.SelfJournalHistory())
                         DashboardEvent.OnNavigateToSleepQuality -> onNavigate(Destination.App.SleepQuality)
                         DashboardEvent.OnNavigateToStressLevel -> onNavigate(Destination.App.StressLevel)
                         is DashboardEvent.OnNavigateTo -> {
@@ -61,18 +60,18 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateMood = { id ->
                     onNavigate(Destination.App.Mood)
                 },
-                onNavigateAddStat = {
-                    onNavigate(Destination.App.AddStat)
+                onNavigateAddMood = {
+                    onNavigate(Destination.App.AddMood)
                 }
             )
         }
         composable<Destination.App.SelfJournal> {
             SelfJournalScreen(
                 onNavigateAddSelfJournal = {
-                    onNavigate(Destination.App.AddSelfJournaling)
+                    onNavigate(Destination.App.AddSelfJournal)
                 },
                 onNavigateAllJournals = {
-                    onNavigate(Destination.App.AllJournals(it.toString()))
+                    onNavigate(Destination.App.SelfJournalHistory(it.toString()))
                 },
                 onGoBack = onGoBack
             )
@@ -82,13 +81,13 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateBackToHome = {
                     onNavigateBack(Destination.App.DashBoard)
                 },
-                onNavigateAddStat = {
-                    onNavigate(Destination.App.AddStat)
+                onNavigateAddMood = {
+                    onNavigate(Destination.App.AddMood)
                 }
             )
         }
-        composable<Destination.App.AddStat> {
-            AddStatScreen(
+        composable<Destination.App.AddMood> {
+            AddMoodScreen(
                 onNavigateToExpressionAnalysis = {
                     onNavigate(Destination.App.ExpressionAnalysis)
                 },
@@ -142,7 +141,7 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.SleepHistory> {
+        composable<Destination.App.SleepQualityHistory> {
             SleepHistoryScreen(
                 onNavigateToSleepQuality = {
                     onNavigate(Destination.App.SleepQuality)
@@ -158,30 +157,30 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.AddSelfJournaling> {
+        composable<Destination.App.AddSelfJournal> {
             AddJournalingScreen(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.EditJournaling> { backStackEntry ->
-            val editJournaling =
-                backStackEntry.toRoute<Destination.App.EditJournaling>()
+        composable<Destination.App.EditSelfJournal> { backStackEntry ->
+            val editSelfJournal =
+                backStackEntry.toRoute<Destination.App.EditSelfJournal>()
             EditJournalingScreen(
-                id = editJournaling.id,
+                id = editSelfJournal.id,
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.AllJournals> { backStackEntry ->
-            val allJournals =
-                backStackEntry.toRoute<Destination.App.AllJournals>()
+        composable<Destination.App.SelfJournalHistory> { backStackEntry ->
+            val selfJournalHistory =
+                backStackEntry.toRoute<Destination.App.SelfJournalHistory>()
 
-            val date = allJournals.localDate?.let { LocalDate.parse(it) }
+            val date = selfJournalHistory.localDate?.let { LocalDate.parse(it) }
 
             AllJournalScreen(
                 localDate = date,
                 onGoBack = onGoBack,
                 onNavigateEditJournaling = { id ->
-                    onNavigate(Destination.App.EditJournaling(id))
+                    onNavigate(Destination.App.EditSelfJournal(id))
                 }
             )
         }

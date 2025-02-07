@@ -12,6 +12,8 @@ import com.joohnq.self_journal.domain.use_case.AddSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.UpdateSelfJournalsUseCase
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.toResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -61,16 +63,17 @@ class SelfJournalViewModel(
 
     private fun getSelfJournals() =
         viewModelScope.launch {
-            changeSelfJournalRecordsStatus(UiState.Loading)
-            val res = getSelfJournalsUseCase().toUiState()
-            changeSelfJournalRecordsStatus(res)
+            changeRecordsStatus(UiState.Loading)
+            val res = getSelfJournalsUseCase()
+                .toResource().toUiState()
+            changeRecordsStatus(res)
         }
 
     private fun deleteSelfJournal(id: Int) =
         viewModelScope.launch {
             val res = deleteSelfJournalsUseCase(id).toUiState()
             res.onSuccess {
-                changeSelfJournalRecordsStatus(
+                changeRecordsStatus(
                     UiState.Success(
                         state.value.records.getValueOrNull()
                             .filter { item -> item.id != id }
@@ -82,7 +85,7 @@ class SelfJournalViewModel(
             }
         }
 
-    private fun changeSelfJournalRecordsStatus(status: UiState<List<SelfJournalRecord>>) {
+    private fun changeRecordsStatus(status: UiState<List<SelfJournalRecordResource>>) {
         _state.update { it.copy(records = status) }
     }
 }

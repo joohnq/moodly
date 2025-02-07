@@ -86,12 +86,12 @@ fun AddStressLevelScreenUI(
                     )
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
-                            text = state.stressLevel.level.toString(),
+                            text = state.record.stressLevel.level.toString(),
                             style = TextStyles.DisplayLgExtraBold(),
                             color = Colors.Brown80
                         )
                         Text(
-                            text = stringResource(state.stressLevel.text),
+                            text = stringResource(state.record.stressLevel.text),
                             style = TextStyles.TextXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End

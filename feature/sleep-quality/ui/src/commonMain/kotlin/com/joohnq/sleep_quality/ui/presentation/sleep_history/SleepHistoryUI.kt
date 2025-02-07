@@ -3,11 +3,8 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_history
 import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.shared_resources.components.DecoratedConvexPanelList
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.presentation.sleep_history.event.SleepHistoryEvent
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -29,19 +26,19 @@ fun SleepHistoryUIPreview() {
         state = SleepQualityState(
             sleepQualityRecords = UiState.Success(
                 listOf(
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
-                    SleepQualityRecord(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
+                    SleepQualityRecordResource(),
                 )
             )
         ),

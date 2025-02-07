@@ -22,6 +22,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSma
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -31,14 +32,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SleepPanel(
     modifier: Modifier = Modifier,
-    record: SleepQualityRecord?,
-    resource: SleepQualityResource?,
+    record: SleepQualityRecordResource?,
 ) {
-    val hasToday = resource != null
+    val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
     val duration = Pair(record?.startSleeping ?: Time(0, 0), record?.endSleeping ?: Time(0, 0)).calculateDuration()
-    val moodResource = resource?.toMoodResource()
+    val moodResource = record?.sleepQuality?.toMoodResource()
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -54,7 +54,7 @@ fun SleepPanel(
         if (!hasToday)
             VerticalSpacer(24.dp)
         Text(
-            text = if (hasToday) resource.level.toString() else stringResource(Res.string.not_available),
+            text = if (hasToday) record.sleepQuality.level.toString() else stringResource(Res.string.not_available),
             style = if (hasToday) TextStyles.DisplaySmExtraBold() else TextStyles.Text2xlBold(),
             color = textColor
         )

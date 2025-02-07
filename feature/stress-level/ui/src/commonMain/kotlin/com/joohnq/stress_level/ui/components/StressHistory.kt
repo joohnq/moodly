@@ -17,13 +17,14 @@ import com.joohnq.shared_resources.sleep_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressHistory(
     modifier: Modifier = Modifier,
     containerColor: Color,
-    records: List<StressLevelRecord>,
+    records: List<StressLevelRecordResource>,
     onAddStressLevel: () -> Unit,
 ) {
     SectionHeader(
@@ -73,8 +74,8 @@ fun StressHistoryPreview() {
     StressHistory(
         containerColor = Colors.White,
         records = listOf(
-            StressLevelRecord(),
-            StressLevelRecord()
+            StressLevelRecordResource(),
+            StressLevelRecordResource()
         ),
         onAddStressLevel = {}
     )

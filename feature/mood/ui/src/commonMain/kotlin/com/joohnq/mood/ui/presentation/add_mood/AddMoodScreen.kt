@@ -1,28 +1,28 @@
-package com.joohnq.mood.ui.presentation.add_stats
+package com.joohnq.mood.ui.presentation.add_mood
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
+import com.joohnq.mood.ui.presentation.add_mood.event.AddMoodEvent
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 
 @Composable
-fun AddStatScreen(
+fun AddMoodScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
     onGoBack: () -> Unit,
 ) {
-    val addStatsViewModel: AddStatViewModel = sharedViewModel()
+    val addStatsViewModel: AddMoodViewModel = sharedViewModel()
     val state by addStatsViewModel.state.collectAsState()
 
-    fun onEvent(event: AddStatEvent) =
+    fun onEvent(event: AddMoodEvent) =
         when (event) {
-            AddStatEvent.OnGoBack -> onGoBack()
-            AddStatEvent.OnNavigateToExpressionAnalysis ->
+            AddMoodEvent.OnGoBack -> onGoBack()
+            AddMoodEvent.OnNavigateToExpressionAnalysis ->
                 onNavigateToExpressionAnalysis()
         }
 
-    AddStatScreenUI(
+    AddMoodUI(
         state = state,
         onEvent = ::onEvent,
         onAction = addStatsViewModel::onAction

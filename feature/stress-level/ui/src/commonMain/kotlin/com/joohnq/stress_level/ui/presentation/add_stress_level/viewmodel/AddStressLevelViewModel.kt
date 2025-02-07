@@ -16,10 +16,6 @@ class AddStressLevelViewModel : ViewModel() {
 
     fun onAction(intent: AddStressLevelIntent) {
         when (intent) {
-            is AddStressLevelIntent.UpdateAddingOtherValue -> updateAddingOtherValue(intent.value)
-            is AddStressLevelIntent.UpdateAddingOtherValueError ->
-                updateAddingOtherValueError(intent.error)
-
             is AddStressLevelIntent.UpdateAddingStressors -> updateAddingStressStressors(intent.stressor)
             is AddStressLevelIntent.UpdateAddingSliderValue -> updateAddingSliderValue(intent.sliderValue)
             is AddStressLevelIntent.ResetState -> resetState()
@@ -31,26 +27,17 @@ class AddStressLevelViewModel : ViewModel() {
         _state.update {
             it.copy(
                 sliderValue = value,
-                stressLevel = value.fromSliderValueToStressLevelResource()
+                record = it.record.copy(
+                    stressLevel = value.fromSliderValueToStressLevelResource()
+                )
             )
         }
     }
 
     private fun updateAddingStressStressors(stressor: StressorResource) {
         _state.update {
-            it.copy(stressors = state.value.stressors.toggle(stressor))
-        }
-    }
-
-    private fun updateAddingOtherValue(otherValue: String) {
-        _state.update {
-            it.copy(otherValue = otherValue, otherValueError = null)
-        }
-    }
-
-    private fun updateAddingOtherValueError(otherValueError: String?) {
-        _state.update {
-            it.copy(otherValueError = otherValueError)
+            val stressors = state.value.record.stressors.toggle(stressor)
+            it.copy(record = it.record.copy(stressors = stressors))
         }
     }
 

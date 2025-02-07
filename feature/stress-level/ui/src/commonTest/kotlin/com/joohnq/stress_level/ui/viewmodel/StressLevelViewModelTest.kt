@@ -40,12 +40,12 @@ class StressLevelViewModelTest {
             everySuspend { repository.getStressLevels() } returns Result.success(items)
 
             viewModel.state.test {
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Idle)
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
 
                 viewModel.onAction(StressLevelIntent.GetStressLevelRecords)
 
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Success(items))
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
             }
         }
 
@@ -60,12 +60,12 @@ class StressLevelViewModelTest {
             )
 
             viewModel.state.test {
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Idle)
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
 
                 viewModel.onAction(StressLevelIntent.GetStressLevelRecords)
 
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().stressLevelRecords).isEqualTo(UiState.Error(exception))
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
             }
         }
 

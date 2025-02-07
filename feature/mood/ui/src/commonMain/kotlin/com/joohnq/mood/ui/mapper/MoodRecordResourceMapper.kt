@@ -1,16 +1,17 @@
-package com.joohnq.mood.domain.mapper
+package com.joohnq.mood.ui.mapper
 
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthDays
-import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
-fun List<MoodRecord>.getTodayStatRecord(): MoodRecord? =
+fun List<MoodRecordResource>.getTodayStatRecord(): MoodRecordResource? =
     find { it.createdAt.date == getNow().date }
 
-fun List<MoodRecord>.getWeekRecords(): List<MoodRecord> {
+fun List<MoodRecordResource>.getWeekRecords(): List<MoodRecordResource> {
     val now = getNow()
     val startOfWeek = now.date.minus(now.dayOfWeek.ordinal, DateTimeUnit.DAY)
     val endOfWeek = startOfWeek.plus(6, DateTimeUnit.DAY)
@@ -18,7 +19,7 @@ fun List<MoodRecord>.getWeekRecords(): List<MoodRecord> {
     return this.filter { it.createdAt.date in range }
 }
 
-fun List<MoodRecord>.getStreakDays(): Int {
+fun List<MoodRecordResource>.getStreakDays(): Int {
     val now = getNow()
     val sortedRecords = this.map { it.createdAt.date }.distinct().sortedDescending()
 
@@ -35,10 +36,27 @@ fun List<MoodRecord>.getStreakDays(): Int {
     return streak
 }
 
-fun List<MoodRecord>.getMonthDaysRecordsString(): String {
+fun List<MoodRecordResource>.getMonthDaysRecordsString(): String {
     val now = getNow()
     val days =
         filter { it.createdAt.month == now.month }
             .associateBy { it.createdAt.date }.keys.size
     return "$days/${now.toMonthDays()}"
+}
+
+fun List<MoodRecordResource>.getNextMood(record: MoodRecordResource): MoodRecordResource? {
+    return filter { it.createdAt > record.createdAt }
+        .minByOrNull { it.createdAt }
+}
+
+fun List<MoodRecordResource>.getPreviousMood(record: MoodRecordResource): MoodRecordResource? {
+    return filter { it.createdAt < record.createdAt }
+        .maxByOrNull { it.createdAt }
+}
+
+fun List<MoodRecordResource>.getStatGroupByDateUseCase(): Map<LocalDate, List<MoodRecordResource>> {
+    return groupBy { it.createdAt }
+        .map { (key, value) ->
+            key.date to value
+        }.toMap()
 }

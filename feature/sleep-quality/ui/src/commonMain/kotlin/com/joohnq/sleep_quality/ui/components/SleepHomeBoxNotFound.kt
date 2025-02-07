@@ -19,25 +19,23 @@ import com.joohnq.shared_resources.components.NotFoundVertical
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.mapper.getTodaySleepQualityRecord
+import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
-import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityMetric(
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val today = records.getTodaySleepQualityRecord()
-    val resource = today?.sleepQuality?.toResource()
+    val record = records.getTodaySleepQualityRecord()
 
-    if (resource == null)
+    if (record == null)
         NotFoundVertical(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -47,19 +45,19 @@ fun SleepQualityMetric(
             onClick = onCreate
         )
     else {
-        val duration = Pair(today.endSleeping, today.startSleeping).calculateDuration()
+        val duration = Pair(record.endSleeping, record.startSleeping).calculateDuration()
         val durationString = duration.toHoursAndMinutesString()
 
         GiganticSecondaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
             title = durationString,
-            subtitle = stringResource(resource.firstText),
+            subtitle = stringResource(record.sleepQuality.firstText),
             onClick = onClick,
             secondary = {
                 MoodFace(
                     modifier = Modifier.size(40.dp),
-                    resource = resource.toMoodResource()
+                    resource = record.sleepQuality.toMoodResource()
                 )
             },
             content = {
@@ -69,12 +67,12 @@ fun SleepQualityMetric(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SleepInfo(
-                            title = today.startSleeping.toFormattedTimeString(),
+                            title = record.startSleeping.toFormattedTimeString(),
                             subtitle = Res.string.bedtime,
                             icon = Drawables.Icons.Moon
                         )
                         SleepInfo(
-                            title = today.endSleeping.toFormattedTimeString(),
+                            title = record.endSleeping.toFormattedTimeString(),
                             subtitle = Res.string.wake_up,
                             icon = Drawables.Icons.Sun
                         )
@@ -90,7 +88,7 @@ fun SleepQualityMetric(
 fun SleepQualityMetricPreviewToday() {
     SleepQualityMetric(
         records = listOf(
-            SleepQualityRecord()
+            SleepQualityRecordResource()
         ),
     )
 }
@@ -102,7 +100,7 @@ fun SleepQualityMetricPreviewYesterday() {
     val now = getNow()
     SleepQualityMetric(
         records = listOf(
-            SleepQualityRecord(
+            SleepQualityRecordResource(
                 createdAt = LocalDate(now.year, now.month, now.dayOfMonth.minus(1)),
             )
         ),

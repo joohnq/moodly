@@ -10,14 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.joohnq.mood.ui.resource.MoodAverageResource
 import com.joohnq.mood.ui.resource.MoodResource
-import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoodFace(modifier: Modifier = Modifier, resource: MoodResource) {
+fun MoodFace(
+    modifier: Modifier = Modifier,
+    resource: MoodResource
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier

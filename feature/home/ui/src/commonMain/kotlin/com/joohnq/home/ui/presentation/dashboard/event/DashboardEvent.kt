@@ -7,12 +7,11 @@ import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
 sealed interface DashboardEvent {
     data object OnNavigateToAddJournaling : DashboardEvent
     data object OnNavigateToAddStress : DashboardEvent
-    data object OnNavigateToAddStat : DashboardEvent
+    data object OnNavigateToAddMood : DashboardEvent
     data object OnNavigateToAllJournals : DashboardEvent
     data object OnNavigateToFreudScore : DashboardEvent
     data object OnNavigateToMood : DashboardEvent
     data object OnNavigateToSelfJournal : DashboardEvent
-    data object OnNavigateToMindfulJournal : DashboardEvent
     data object OnNavigateToSleepQuality : DashboardEvent
     data object OnNavigateToStressLevel : DashboardEvent
     data class OnNavigateToEditJournaling(val id: Int) : DashboardEvent
@@ -31,12 +30,11 @@ fun HomeEvent.toDashboardEvent(): DashboardEvent =
     when (this) {
         HomeEvent.OnNavigateToAddJournaling -> DashboardEvent.OnNavigateToAddJournaling
         HomeEvent.OnNavigateToAddSleep -> DashboardEvent.OnNavigateToAddSleep
-        HomeEvent.OnNavigateToAddStat -> DashboardEvent.OnNavigateToAddStat
+        HomeEvent.OnNavigateToAddMood -> DashboardEvent.OnNavigateToAddMood
         HomeEvent.OnNavigateToAddStress -> DashboardEvent.OnNavigateToAddStress
         HomeEvent.OnNavigateToAllJournals -> DashboardEvent.OnNavigateToAllJournals
         HomeEvent.OnNavigateToFreudScore -> DashboardEvent.OnNavigateToFreudScore
         HomeEvent.OnNavigateToSelfJournal -> DashboardEvent.OnNavigateToSelfJournal
-        HomeEvent.OnNavigateToMindfulJournal -> DashboardEvent.OnNavigateToMindfulJournal
         HomeEvent.OnNavigateToMood -> DashboardEvent.OnNavigateToMood
         HomeEvent.OnNavigateToSleepQuality -> DashboardEvent.OnNavigateToSleepQuality
         HomeEvent.OnNavigateToStressLevel -> DashboardEvent.OnNavigateToStressLevel

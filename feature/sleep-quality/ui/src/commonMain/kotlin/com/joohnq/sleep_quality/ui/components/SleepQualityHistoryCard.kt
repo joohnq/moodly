@@ -19,21 +19,19 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.mapper.toMoodResource
-import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
-    record: SleepQualityRecord,
+    record: SleepQualityRecordResource,
     onClick: () -> Unit,
 ) {
     val duration = Pair(record.startSleeping, record.endSleeping).calculateDuration()
-    val resource = record.sleepQuality.toResource().toMoodResource()
-    val sleepInfluences = record.sleepInfluences
+    val resource = record.sleepQuality.toMoodResource()
 
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -101,8 +99,8 @@ fun SleepQualityHistoryCard(
                 }
                 Text(
                     text =
-                        if (sleepInfluences.isNotEmpty())
-                            sleepInfluences.joinToString(", ")
+                        if (record.sleepInfluences.isNotEmpty())
+                            record.sleepInfluences.joinToString(", ")
                         else
                             stringResource(Res.string.no_sleep_influences),
                     style = TextStyles.TextSmMedium(),
@@ -118,7 +116,7 @@ fun SleepQualityHistoryCard(
 @Composable
 fun SleepQualityHistoryCardPreview() {
     SleepQualityHistoryCard(
-        record = SleepQualityRecord(),
+        record = SleepQualityRecordResource(),
         onClick = {}
     )
 }

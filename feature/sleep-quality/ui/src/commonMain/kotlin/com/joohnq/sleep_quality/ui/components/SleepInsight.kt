@@ -14,6 +14,7 @@ import com.joohnq.shared_resources.sleep_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -21,7 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SleepInsight(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
     onClick: () -> Unit = {},
 ) {
     SectionHeader(
@@ -60,9 +61,9 @@ fun SleepInsightPreviewEmpty() {
 fun SleepInsightPreview() {
     SleepInsight(
         records = listOf(
-            SleepQualityRecord(),
-            SleepQualityRecord(),
-            SleepQualityRecord(),
+            SleepQualityRecordResource(),
+            SleepQualityRecordResource(),
+            SleepQualityRecordResource(),
         )
     )
 }

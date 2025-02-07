@@ -2,14 +2,13 @@ package com.joohnq.mood.ui.presentation.expression_analysis
 
 import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.ui.mapper.toDomain
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatViewModel
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
-import com.joohnq.mood.ui.viewmodel.StatSideEffect
-import com.joohnq.mood.ui.viewmodel.StatsIntent
-import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.mood.ui.resource.toDomain
+import com.joohnq.mood.ui.viewmodel.MoodIntent
+import com.joohnq.mood.ui.viewmodel.MoodSideEffect
+import com.joohnq.mood.ui.viewmodel.MoodViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import kotlinx.coroutines.launch
 
@@ -18,8 +17,8 @@ fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
     onGoBack: () -> Unit,
 ) {
-    val statsViewModel: StatsViewModel = sharedViewModel()
-    val addStatsViewModel: AddStatViewModel = sharedViewModel()
+    val moodViewModel: MoodViewModel = sharedViewModel()
+    val addStatsViewModel: AddMoodViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val addStatsState by addStatsViewModel.state.collectAsState()
@@ -30,27 +29,24 @@ fun ExpressionAnalysisScreen(
     fun onEvent(event: ExpressionAnalysisEvent) =
         when (event) {
             ExpressionAnalysisEvent.OnAdd ->
-                statsViewModel.onAction(
-                    StatsIntent.AddStatsRecord(
-                        MoodRecord(
-                            mood = addStatsState.mood.toDomain(),
-                            description = addStatsState.description
-                        )
+                moodViewModel.onAction(
+                    MoodIntent.AddMoodRecord(
+                        addStatsState.record.toDomain()
                     )
                 )
 
             ExpressionAnalysisEvent.OnGoBack -> onGoBack()
         }
 
-    LaunchedEffect(statsViewModel) {
-        statsViewModel.sideEffect.collect { event ->
+    LaunchedEffect(moodViewModel) {
+        moodViewModel.sideEffect.collect { event ->
             when (event) {
-                is StatSideEffect.StatsAdded -> {
-                    statsViewModel.onAction(StatsIntent.GetStatsRecords)
+                is MoodSideEffect.StatsAdded -> {
+                    moodViewModel.onAction(MoodIntent.GetMoodRecords)
                     onNavigateToMood()
                 }
 
-                is StatSideEffect.ShowError -> onError(event.error)
+                is MoodSideEffect.ShowError -> onError(event.error)
                 else -> {}
             }
         }
@@ -58,13 +54,13 @@ fun ExpressionAnalysisScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addStatsViewModel.onAction(AddStatIntent.ResetState)
+            addStatsViewModel.onAction(AddMoodIntent.ResetState)
         }
     }
 
     ExpressionAnalysisUI(
         snackBarState = snackBarState,
-        description = addStatsState.description,
+        description = addStatsState.record.description,
         onEvent = ::onEvent,
         onAddAction = addStatsViewModel::onAction
     )

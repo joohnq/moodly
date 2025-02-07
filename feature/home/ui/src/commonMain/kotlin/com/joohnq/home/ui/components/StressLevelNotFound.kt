@@ -3,14 +3,12 @@ package com.joohnq.home.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.core.ui.CompositionLocalProviderPreview
 import com.joohnq.core.ui.getNow
 import com.joohnq.core.ui.mapper.toMonthNameString
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.mapper.getTodaySelfJournalRecord
-import com.joohnq.self_journal.domain.use_case.CalculateSelfJournalsAverageUseCase
-import com.joohnq.self_journal.domain.use_case.GetSelfJournalsInYearUseCase
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.JournalCalendar
+import com.joohnq.self_journal.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.NotFoundHorizontal
@@ -22,11 +20,10 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.dsl.module
 
 @Composable
 fun SelfJournalingMetric(
-    records: List<SelfJournalRecord>,
+    records: List<SelfJournalRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
@@ -60,18 +57,11 @@ fun SelfJournalingMetric(
 @Preview
 @Composable
 fun SelfJournalingMetricPreviewToday() {
-    CompositionLocalProviderPreview(
-        module {
-            single<GetSelfJournalsInYearUseCase> { GetSelfJournalsInYearUseCase() }
-            single<CalculateSelfJournalsAverageUseCase> { CalculateSelfJournalsAverageUseCase() }
-        }
-    ) {
-        SelfJournalingMetric(
-            records = listOf(
-                SelfJournalRecord(),
-            ),
-        )
-    }
+    SelfJournalingMetric(
+        records = listOf(
+            SelfJournalRecordResource(),
+        ),
+    )
 }
 
 @Preview
@@ -81,7 +71,7 @@ fun SelfJournalingMetricPreviewYesterday() {
 
     SelfJournalingMetric(
         records = listOf(
-            SelfJournalRecord(
+            SelfJournalRecordResource(
                 createdAt = LocalDateTime(now.year, now.month, now.date.dayOfMonth.minus(1), 0, 0)
             ),
         ),

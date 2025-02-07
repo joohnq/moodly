@@ -2,7 +2,9 @@ package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.core.ui.mapper.toggle
+import com.joohnq.mood.ui.mapper.toSleepQuality
 import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,20 +38,21 @@ class AddSleepQualityViewModel : ViewModel() {
         }
     }
 
-    private fun updateMood(mood: MoodResource?) {
+    private fun updateMood(mood: MoodResource) {
         _state.update {
             it.copy(
-                mood = mood
+                record = it.record.copy(
+                    sleepQuality = mood.toSleepQuality().toResource()
+                ),
             )
         }
     }
 
     private fun updateSelectedSleepInfluences(sleepInfluences: SleepInfluencesResource) {
         _state.update {
+            val influences = state.value.record.sleepInfluences.toggle(sleepInfluences)
             it.copy(
-                selectedSleepInfluences = state.value.selectedSleepInfluences.toggle(
-                    sleepInfluences
-                )
+                record = it.record.copy(sleepInfluences = influences)
             )
         }
     }
@@ -69,8 +72,7 @@ class AddSleepQualityViewModel : ViewModel() {
     private fun updateStartTime(hour: Int, minute: Int) {
         _state.update {
             it.copy(
-                startHour = hour,
-                startMinute = minute
+                record = it.record.copy(startSleeping = it.record.startSleeping.copy(hour, minute)),
             )
         }
     }
@@ -78,8 +80,7 @@ class AddSleepQualityViewModel : ViewModel() {
     private fun updateEndTime(hour: Int, minute: Int) {
         _state.update {
             it.copy(
-                endHour = hour,
-                endMinute = minute
+                record = it.record.copy(endSleeping = it.record.endSleeping.copy(hour, minute)),
             )
         }
     }

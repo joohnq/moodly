@@ -1,6 +1,7 @@
 package com.joohnq.stress_level.domain.mapper
 
 import com.joohnq.stress_level.domain.entity.Stressor
+import com.joohnq.stress_level.domain.entity.Stressor.*
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.FINANCES
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.IN_PEACE
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.KIDS
@@ -9,14 +10,6 @@ import com.joohnq.stress_level.domain.entity.Stressor.Companion.LONELINESS
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.OTHER
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.RELATIONSHIP
 import com.joohnq.stress_level.domain.entity.Stressor.Companion.WORK
-import com.joohnq.stress_level.domain.entity.Stressor.Finances
-import com.joohnq.stress_level.domain.entity.Stressor.InPeace
-import com.joohnq.stress_level.domain.entity.Stressor.Kids
-import com.joohnq.stress_level.domain.entity.Stressor.Life
-import com.joohnq.stress_level.domain.entity.Stressor.Loneliness
-import com.joohnq.stress_level.domain.entity.Stressor.Other
-import com.joohnq.stress_level.domain.entity.Stressor.Relationship
-import com.joohnq.stress_level.domain.entity.Stressor.Work
 
 fun Int.toStressor(): Stressor = when (this) {
     WORK.id -> Work
@@ -31,6 +24,3 @@ fun Int.toStressor(): Stressor = when (this) {
 }
 
 fun Stressor?.toString(): String = this?.id.toString()
-
-fun List<Stressor>.containOther(): Boolean =
-    any { it::class == Other::class }

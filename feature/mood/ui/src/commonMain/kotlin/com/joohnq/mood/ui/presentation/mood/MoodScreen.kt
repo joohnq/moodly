@@ -5,20 +5,20 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
-import com.joohnq.mood.ui.viewmodel.StatsViewModel
+import com.joohnq.mood.ui.viewmodel.MoodViewModel
 
 @Composable
 fun MoodScreen(
     onNavigateBackToHome: () -> Unit,
-    onNavigateAddStat: () -> Unit,
+    onNavigateAddMood: () -> Unit,
 ) {
-    val statsViewModel: StatsViewModel = sharedViewModel()
-    val statsState by statsViewModel.state.collectAsState()
+    val moodViewModel: MoodViewModel = sharedViewModel()
+    val statsState by moodViewModel.state.collectAsState()
 
     fun onEvent(event: MoodEvent) =
         when (event) {
             is MoodEvent.OnGoBack -> onNavigateBackToHome()
-            is MoodEvent.OnAddStatScreen -> onNavigateAddStat()
+            is MoodEvent.OnAddMood -> onNavigateAddMood()
         }
 
     MoodUI(

@@ -3,12 +3,10 @@ package com.joohnq.stress_level.ui.presentation.stress_stressors
 import androidx.compose.runtime.*
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.domain.mapper.containOther
-import com.joohnq.stress_level.ui.mapper.toDomain
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
+import com.joohnq.stress_level.ui.resource.toDomain
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
@@ -25,9 +23,6 @@ fun StressStressorsScreen(
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()
 
-    fun containsOther(): Boolean =
-        state.stressors.toDomain().containOther()
-
     fun onError(error: Throwable) {
         scope.launch { snackBarState.showSnackbar(error.message.toString()) }
     }
@@ -36,32 +31,13 @@ fun StressStressorsScreen(
         when (event) {
             is StressStressorsEvent.GoBack -> onGoBack()
             is StressStressorsEvent.Continue -> {
-                try {
-                    if (containsOther() && state.otherValue.isEmpty()) throw Exception(
-                        "Please type your other stressor"
+                stressLevelViewModel.onAction(
+                    StressLevelIntent.AddStressLevelRecord(
+                        state.record.toDomain()
                     )
-
-                    stressLevelViewModel.onAction(
-                        StressLevelIntent.AddStressLevelRecord(
-                            StressLevelRecord(
-                                stressLevel = state.stressLevel.toDomain(),
-                                stressors = state.stressors.toDomain()
-                            )
-                        )
-                    )
-                } catch (e: Exception) {
-                    addStressLevelViewModel.onAction(
-                        AddStressLevelIntent.UpdateAddingOtherValueError(e.message.toString())
-                    )
-                }
+                )
             }
         }
-
-    LaunchedEffect(state.stressors) {
-        if (containsOther()) {
-            addStressLevelViewModel.onAction(AddStressLevelIntent.UpdateAddingOtherValue(""))
-        }
-    }
 
     LaunchedEffect(stressLevelViewModel) {
         stressLevelViewModel.sideEffect.collect { event ->

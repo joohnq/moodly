@@ -21,9 +21,8 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.mapper.toMonthRecordsCount
-import com.joohnq.sleep_quality.ui.mapper.toResource
+import com.joohnq.sleep_quality.ui.mapper.toMonthRecordsCount
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -32,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepInsightCard(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<SleepQualityRecord>,
+    records: List<SleepQualityRecordResource>,
 ) {
     val now = remember { getNow() }
     val month = now.month
@@ -56,11 +55,11 @@ fun SleepInsightCard(
             ) {
                 for (i in 0..38) {
                     val resource =
-                        records.find { it.createdAt.dayOfMonth == i && it.createdAt.month == month }?.sleepQuality?.toResource()
+                        records.find { it.createdAt.dayOfMonth == i && it.createdAt.month == month }
                     val backgroundColor = when {
                         i + 1 > monthDays -> containerColor
                         resource == null -> Colors.Gray20
-                        else -> resource.palette.color
+                        else -> resource.sleepQuality.palette.color
                     }
 
                     Box(

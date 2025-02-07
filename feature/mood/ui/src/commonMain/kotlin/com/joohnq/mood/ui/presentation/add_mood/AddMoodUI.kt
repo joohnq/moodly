@@ -1,11 +1,7 @@
-package com.joohnq.mood.ui.presentation.add_stats
+package com.joohnq.mood.ui.presentation.add_mood
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.ui.components.AddMoodRadioGroup
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
-import com.joohnq.mood.ui.presentation.add_stats.event.AddStatEvent
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatState
+import com.joohnq.mood.ui.presentation.add_mood.event.AddMoodEvent
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_mood
 import com.joohnq.shared_resources.components.ButtonTextAndCheck
@@ -35,13 +31,13 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AddStatScreenUI(
-    state: AddStatState,
-    onAction: (AddStatIntent) -> Unit,
-    onEvent: (AddStatEvent) -> Unit,
+fun AddMoodUI(
+    state: AddMoodState,
+    onAction: (AddMoodIntent) -> Unit,
+    onEvent: (AddMoodEvent) -> Unit,
 ) {
     val moodsResources by remember { mutableStateOf(getAllMoodResource()) }
-    val moodIndex = state.mood.id
+    val moodIndex = state.record.id
 
     Scaffold(
         containerColor = Colors.Brown10,
@@ -49,14 +45,14 @@ fun AddStatScreenUI(
     ) { padding ->
         Column(
             Modifier.fillMaxSize()
-                .background(color = state.mood.palette.moodScreenBackgroundColor)
+                .background(color = state.record.mood.palette.moodScreenBackgroundColor)
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
             TopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { onEvent(AddStatEvent.OnGoBack) }
+                onGoBack = { onEvent(AddMoodEvent.OnGoBack) }
             )
             VerticalSpacer(50.dp)
             Column(
@@ -72,13 +68,13 @@ fun AddStatScreenUI(
                 VerticalSpacer(48.dp)
                 MoodFace(
                     modifier = Modifier.size(160.dp),
-                    resource = state.mood,
-                    backgroundColor = state.mood.palette.moodScreenMoodFaceBackgroundColor,
-                    color = state.mood.palette.moodScreenMoodFaceColor
+                    resource = state.record.mood,
+                    backgroundColor = state.record.mood.palette.moodScreenMoodFaceBackgroundColor,
+                    color = state.record.mood.palette.moodScreenMoodFaceColor
                 )
                 VerticalSpacer(48.dp)
                 Text(
-                    text = stringResource(state.mood.text),
+                    text = stringResource(state.record.mood.text),
                     style = TextStyles.Text2xlSemiBold(),
                     color = Colors.White,
                     textAlign = TextAlign.Center
@@ -88,10 +84,10 @@ fun AddStatScreenUI(
                 AddMoodRadioGroup(
                     moodsSize = moodsResources.size,
                     moodIndex = moodIndex,
-                    selectedMood = state.mood,
+                    selectedMood = state.record,
                     setSelectedMood = {
                         onAction(
-                            AddStatIntent.UpdateAddingStatsRecordMood(moodsResources[it])
+                            AddMoodIntent.UpdateAddingStatsRecordMood(moodsResources[it])
                         )
                     }
                 )
@@ -99,7 +95,7 @@ fun AddStatScreenUI(
                 ButtonTextAndCheck(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.set_mood,
-                    onClick = { onEvent(AddStatEvent.OnNavigateToExpressionAnalysis) }
+                    onClick = { onEvent(AddMoodEvent.OnNavigateToExpressionAnalysis) }
                 )
             }
         }

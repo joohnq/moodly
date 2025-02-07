@@ -18,7 +18,9 @@ import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
 import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
@@ -27,8 +29,10 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.components.SleepQualityMetric
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.components.StressLevelMetric
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 @Composable
 fun HomeUI(
@@ -44,7 +48,7 @@ fun HomeUI(
         state.sleepQualityRecords
     ).foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { moodRecords: List<MoodRecord>, u: User, stressLevels: List<StressLevelRecord>, selfJournals: List<SelfJournalRecord>, sleepQualities: List<SleepQualityRecord> ->
+        onSuccess = { moodRecords: List<MoodRecordResource>, u: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -72,7 +76,7 @@ fun HomeUI(
                 MoodMetric(
                     records = moodRecords,
                     containerColor = Colors.White,
-                    onCreate = { onEvent(HomeEvent.OnNavigateToAddStat) },
+                    onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
                     onClick = { }
                 )
                 SectionHeader(

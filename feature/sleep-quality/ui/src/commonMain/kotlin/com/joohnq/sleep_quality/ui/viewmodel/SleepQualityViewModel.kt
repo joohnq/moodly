@@ -9,12 +9,10 @@ import com.joohnq.core.ui.mapper.toUiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.ui.resource.toResource
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SleepQualityViewModel(
@@ -37,9 +35,9 @@ class SleepQualityViewModel(
 
     private fun getSleepQualityRecords() =
         viewModelScope.launch {
-            changeSleepQualityRecordsStatus(UiState.Loading)
-            val res = getSleepQualitiesUseCase().toUiState()
-            changeSleepQualityRecordsStatus(res)
+            changeRecordsStatus(UiState.Loading)
+            val res = getSleepQualitiesUseCase().toResource().toUiState()
+            changeRecordsStatus(res)
         }
 
     private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
@@ -52,7 +50,7 @@ class SleepQualityViewModel(
             }
         }
 
-    private fun changeSleepQualityRecordsStatus(status: UiState<List<SleepQualityRecord>>) {
+    private fun changeRecordsStatus(status: UiState<List<SleepQualityRecordResource>>) {
         _state.update { it.copy(sleepQualityRecords = status) }
     }
 }

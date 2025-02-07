@@ -14,14 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.presentation.add_stats.viewmodel.AddStatIntent
+import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
-import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
 import com.joohnq.shared_resources.theme.Colors
@@ -33,7 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisUI(
     snackBarState: SnackbarHostState,
     description: String,
-    onAddAction: (AddStatIntent) -> Unit = {},
+    onAddAction: (AddMoodIntent) -> Unit = {},
     onEvent: (ExpressionAnalysisEvent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
@@ -65,7 +61,7 @@ fun ExpressionAnalysisUI(
                 text = description,
                 onValueChange = {
                     onAddAction(
-                        AddStatIntent.UpdateAddingStatsRecordDescription(it)
+                        AddMoodIntent.UpdateAddingStatsRecordDescription(it)
                     )
                 }
             )

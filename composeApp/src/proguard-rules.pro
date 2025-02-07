@@ -23,7 +23,7 @@
 -dontwarn com.joohnq.mood.data.di.StatsDriverFactoryModule_androidKt
 -dontwarn com.joohnq.mood.domain.di.MoodDomainModuleKt
 -dontwarn com.joohnq.mood.ui.di.MoodUiModule_androidKt
--dontwarn com.joohnq.mood.ui.presentation.add_stats.AddStatScreen
+-dontwarn com.joohnq.mood.ui.presentation.add_mood.AddStatScreen
 -dontwarn com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 -dontwarn com.joohnq.mood.ui.presentation.mood.MoodScreen
 -dontwarn com.joohnq.splash.ui.presentation.splash_screen.LoadingScreen

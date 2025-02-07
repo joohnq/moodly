@@ -3,13 +3,12 @@ package com.joohnq.mood.ui.presentation.mood
 import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.domain.mapper.getTodayStatRecord
 import com.joohnq.mood.ui.components.MoodContent
 import com.joohnq.mood.ui.components.MoodPanel
-import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.mood.ui.mapper.getTodayStatRecord
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
+import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -18,28 +17,26 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodUI(
-    records: UiState<List<MoodRecord>>,
+    records: UiState<List<MoodRecordResource>>,
     onEvent: (MoodEvent) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->
             val record = records.getTodayStatRecord()
-            val resource = record?.mood?.toResource()
-            val hasToday = resource != null
+            val hasToday = record != null
 
             DecoratedConvexPanelList(
                 containerColor = Colors.White,
-                panelBackgroundColor = if (hasToday) resource.palette.color else Colors.Brown10,
+                panelBackgroundColor = if (hasToday) record.mood.palette.color else Colors.Brown10,
                 isDark = !hasToday,
                 image = Drawables.Images.MoodBackground,
-                color = if (hasToday) resource.palette.imageColor else Colors.Brown10,
-                onAddButton = { onEvent(MoodEvent.OnAddStatScreen) },
+                color = if (hasToday) record.mood.palette.imageColor else Colors.Brown10,
+                onAddButton = { onEvent(MoodEvent.OnAddMood) },
                 onGoBack = { onEvent(MoodEvent.OnGoBack) },
                 panel = { modifier ->
                     MoodPanel(
                         modifier = modifier,
                         record = record,
-                        resource = resource,
                     )
                 },
                 content = { modifier ->
@@ -60,7 +57,7 @@ fun MoodUIPreviewEmpty() {
     MoodUI(
         records = UiState.Success(
             listOf(
-                MoodRecord(
+                MoodRecordResource(
                     createdAt = LocalDateTime(2025, 1, 1, 0, 0, 0)
                 )
             )
@@ -75,8 +72,8 @@ fun MoodUIPreviewDepressed() {
     MoodUI(
         records = UiState.Success(
             listOf(
-                MoodRecord(
-                    mood = Mood.Depressed,
+                MoodRecordResource(
+                    mood = MoodResource.Depressed,
                     description = "Description"
                 ),
             )
@@ -91,8 +88,8 @@ fun MoodUIPreviewNeutral() {
     MoodUI(
         records = UiState.Success(
             listOf(
-                MoodRecord(
-                    mood = Mood.Neutral,
+                MoodRecordResource(
+                    mood = MoodResource.Neutral,
                     description = "Description"
                 ),
             )
@@ -107,8 +104,8 @@ fun MoodUIPreviewHappy() {
     MoodUI(
         records = UiState.Success(
             listOf(
-                MoodRecord(
-                    mood = Mood.Happy,
+                MoodRecordResource(
+                    mood = MoodResource.Happy,
                     description = "Description"
                 ),
             )
@@ -123,8 +120,8 @@ fun MoodUIPreviewOverjoyed() {
     MoodUI(
         records = UiState.Success(
             listOf(
-                MoodRecord(
-                    mood = Mood.Overjoyed,
+                MoodRecordResource(
+                    mood = MoodResource.Overjoyed,
                     description = "Description"
                 ),
             )

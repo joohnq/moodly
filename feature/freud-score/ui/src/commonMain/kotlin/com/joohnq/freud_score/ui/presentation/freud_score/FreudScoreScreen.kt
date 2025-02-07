@@ -11,7 +11,7 @@ import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 fun FreudScoreScreen(
     onGoBack: () -> Unit,
     onNavigateMood: (Int) -> Unit,
-    onNavigateAddStat: () -> Unit,
+    onNavigateAddMood: () -> Unit,
 ) {
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
     val state by freudScoreViewModel.state.collectAsState()
@@ -20,7 +20,7 @@ fun FreudScoreScreen(
         when (event) {
             is FreudScoreEvent.OnGoBack -> onGoBack()
             is FreudScoreEvent.NavigateToMoodScreen -> onNavigateMood(event.record.id)
-            is FreudScoreEvent.OnAdd -> onNavigateAddStat()
+            is FreudScoreEvent.OnAdd -> onNavigateAddMood()
         }
 
     FreudScoreUI(

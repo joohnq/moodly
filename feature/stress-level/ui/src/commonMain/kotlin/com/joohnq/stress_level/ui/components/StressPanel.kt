@@ -19,15 +19,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.ui.resource.StressLevelResource
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressPanel(
-    resource: StressLevelResource?
+    record: StressLevelRecordResource?
 ) {
-    val hasToday = resource != null
+    val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Orange40
     val textColor = if (hasToday) Colors.White else Colors.Brown80
 
@@ -45,7 +45,7 @@ fun StressPanel(
         if (!hasToday)
             VerticalSpacer(24.dp)
         Text(
-            text = if (hasToday) resource.level.toString() else stringResource(Res.string.not_available),
+            text = if (hasToday) record.stressLevel.level.toString() else stringResource(Res.string.not_available),
             style = if (hasToday) TextStyles.DisplaySmExtraBold() else TextStyles.Text2xlBold(),
             color = textColor
         )
@@ -58,9 +58,9 @@ fun StressPanel(
         )
         if (hasToday)
             Text(
-                text = stringResource(resource.text),
+                text = stringResource(record.stressLevel.text),
                 style = TextStyles.TextMdRegular(),
-                color = resource.palette.backgroundColor
+                color = record.stressLevel.palette.backgroundColor
             )
     }
 }

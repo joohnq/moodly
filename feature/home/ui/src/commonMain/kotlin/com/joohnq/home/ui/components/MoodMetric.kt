@@ -10,9 +10,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.domain.mapper.getTodayStatRecord
-import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.mood.ui.mapper.getTodayStatRecord
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.MetricCardSide
@@ -29,7 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun WeekMoodIndicator(
     modifier: Modifier = Modifier,
-    records: List<MoodRecord>,
+    records: List<MoodRecordResource>,
     resource: MoodResource,
     height: Dp = 60.dp
 ) {
@@ -77,15 +76,14 @@ fun WeekMoodIndicator(
 
 @Composable
 fun MoodMetric(
-    records: List<MoodRecord>,
+    records: List<MoodRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val today = records.getTodayStatRecord()
-    val resource = today?.mood?.toResource()
+    val record = records.getTodayStatRecord()
 
-    if (resource == null)
+    if (record == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -98,15 +96,19 @@ fun MoodMetric(
         MetricCardSide(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
-            icon = resource.assets.icon,
+            icon = record.mood.assets.icon,
             title = stringResource(Res.string.mood),
-            text = resource.healthLevel.toString(),
+            text = record.mood.healthLevel.toString(),
             suffix = stringResource(Res.string.level),
-            description = stringResource(resource.text),
+            description = stringResource(record.mood.text),
             content = { modifier ->
-                WeekMoodIndicator(modifier = modifier, records = records, resource = resource)
+                WeekMoodIndicator(
+                    modifier = modifier,
+                    records = records,
+                    resource = record.mood
+                )
             },
-            color = resource.palette.color,
+            color = record.mood.palette.color,
             onClick = onClick
         )
 
@@ -117,8 +119,8 @@ fun MoodMetric(
 fun MoodMetricPreview() {
     MoodMetric(
         records = listOf(
-            MoodRecord(),
-            MoodRecord()
+            MoodRecordResource(),
+            MoodRecordResource()
         )
     )
 }

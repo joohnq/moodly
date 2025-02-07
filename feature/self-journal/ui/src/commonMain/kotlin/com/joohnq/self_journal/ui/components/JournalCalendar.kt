@@ -3,22 +3,20 @@ package com.joohnq.self_journal.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.use_case.GetSelfJournalsInYearUseCase
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.mapper.getSelfJournalsInYear
 import com.joohnq.shared_resources.components.GiganticCreateCard
-import org.koin.compose.koinInject
 
 @Composable
 fun JournalCalendar(
     modifier: Modifier = Modifier,
     containerColor: Color,
-    records: List<SelfJournalRecord>,
+    records: List<SelfJournalRecordResource>,
     subtitle: String,
     onCreate: () -> Unit,
     onClick: () -> Unit
 ) {
-    val useCase: GetSelfJournalsInYearUseCase = koinInject()
-    val recordsInYear = useCase.invoke(selfJournals = records)
+    val recordsInYear = records.getSelfJournalsInYear()
 
     GiganticCreateCard(
         modifier = modifier,

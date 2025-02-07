@@ -24,6 +24,8 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.mapper.toResource
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.ui.resource.StressorResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -31,10 +33,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun StressTriggersSection(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
-    records: List<StressLevelRecord>,
+    records: List<StressLevelRecordResource>,
     onAddStressLevel: () -> Unit
 ) {
-    val stressors = records.flatMap { it.stressors.toResource() }
+    val stressors = records.flatMap { it.stressors}
 
     val stressorsMap = stressors
         .groupingBy { it }
@@ -136,14 +138,14 @@ fun StressTriggersSection(
 fun StressTriggersSectionPreview() {
     StressTriggersSection(
         records = listOf(
-            StressLevelRecord(
-                stressors = listOf(Stressor.Work)
+            StressLevelRecordResource(
+                stressors = listOf(StressorResource.Work)
             ),
-            StressLevelRecord(
-                stressors = listOf(Stressor.Work, Stressor.Kids, Stressor.Relationship)
+            StressLevelRecordResource(
+                stressors = listOf(StressorResource.Work, StressorResource.Kids, StressorResource.Relationship)
             ),
-            StressLevelRecord(
-                stressors = listOf(Stressor.Finances, Stressor.Loneliness)
+            StressLevelRecordResource(
+                stressors = listOf(StressorResource.Finances, StressorResource.Loneliness)
             )
         ),
         onAddStressLevel = {}

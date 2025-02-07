@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
@@ -19,11 +19,11 @@ import com.kizitonwose.calendar.core.DayPosition
 
 @Composable
 fun MoodDay(
-    resource: MoodResource?,
+    record: MoodRecordResource?,
     containerColor: Color,
     day: CalendarDay,
 ) {
-    val isSelected = resource != null
+    val isSelected = record != null
     val isInCurrentMonth = day.position == DayPosition.MonthDate
 
     val border =
@@ -40,7 +40,7 @@ fun MoodDay(
     val background =
         when {
             isInCurrentMonth && isSelected -> Modifier.background(
-                color = resource.palette.color,
+                color = record.mood.palette.color,
                 shape = Dimens.Shape.Circle
             )
 
@@ -77,7 +77,7 @@ fun MoodDay(
             if (isInCurrentMonth && isSelected)
                 MoodFace(
                     modifier = Modifier.fillMaxSize(),
-                    resource = resource,
+                    resource = record.mood,
                 )
         }
     }

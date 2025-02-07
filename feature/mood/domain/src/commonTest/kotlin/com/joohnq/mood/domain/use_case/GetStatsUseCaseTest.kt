@@ -11,7 +11,7 @@ import kotlin.test.Test
 
 class GetStatsUseCaseTest {
     private var repository: StatsRepositoryFake = StatsRepositoryFake()
-    private var useCase: GetStatsUseCase = GetStatsUseCase(repository)
+    private var useCase: GetMoodsUseCase = GetMoodsUseCase(repository)
 
     @Test
     fun `GIVEN a valid request WHEN calling getStatsUseCase THEN should return true`() =

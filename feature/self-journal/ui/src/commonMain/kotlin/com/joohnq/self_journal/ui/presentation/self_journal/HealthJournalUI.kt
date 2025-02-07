@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.SelfJournalContent
 import com.joohnq.self_journal.ui.components.SelfJournalPanel
 import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent
@@ -21,7 +22,7 @@ fun SelfJournalUI(
 ) {
     state.records.foldComposable(
         onLoading = { LoadingUI() },
-        onSuccess = { records: List<SelfJournalRecord> ->
+        onSuccess = { records: List<SelfJournalRecordResource> ->
             DecoratedConvexPanelList(
                 panelBackgroundColor = Colors.Brown60,
                 containerColor = Colors.White,
@@ -62,7 +63,7 @@ fun SelfJournalUIPreview() {
         state = SelfJournalState(
             records = UiState.Success(
                 listOf(
-                    SelfJournalRecord()
+                    SelfJournalRecordResource()
                 )
             )
         ),

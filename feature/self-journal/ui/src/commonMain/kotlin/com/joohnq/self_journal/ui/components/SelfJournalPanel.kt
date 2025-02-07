@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toWordCount
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalPanel(
     modifier: Modifier = Modifier,
     count: Int,
-    records: List<SelfJournalRecord>
+    records: List<SelfJournalRecordResource>
 ) {
     val totalWords = records.sumOf { it.description.toWordCount() }
     val positive = records.filter { it.mood == Mood.Happy || it.mood == Mood.Overjoyed }.size

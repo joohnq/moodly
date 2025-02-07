@@ -5,9 +5,9 @@ import com.joohnq.core.ui.entity.UiState
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.repository.MoodRepository
-import com.joohnq.mood.domain.use_case.AddStatsUseCase
-import com.joohnq.mood.domain.use_case.DeleteStatsUseCase
-import com.joohnq.mood.domain.use_case.GetStatsUseCase
+import com.joohnq.mood.domain.use_case.AddMoodUseCase
+import com.joohnq.mood.domain.use_case.DeleteMoodUseCase
+import com.joohnq.mood.domain.use_case.GetMoodsUseCase
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
@@ -19,22 +19,22 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class StatsViewModelTest {
-    private lateinit var viewModel: StatsViewModel
+    private lateinit var viewModel: MoodViewModel
     private lateinit var repository: MoodRepository
-    private lateinit var getStatsUseCase: GetStatsUseCase
-    private lateinit var deleteStatsUseCase: DeleteStatsUseCase
-    private lateinit var addStatsUseCase: AddStatsUseCase
+    private lateinit var getMoodsUseCase: GetMoodsUseCase
+    private lateinit var deleteMoodUseCase: DeleteMoodUseCase
+    private lateinit var addMoodUseCase: AddMoodUseCase
 
     @BeforeTest
     fun setUp() {
         repository = mock(MockMode.autofill)
-        getStatsUseCase = GetStatsUseCase(repository)
-        deleteStatsUseCase = DeleteStatsUseCase(repository)
-        addStatsUseCase = AddStatsUseCase(repository)
-        viewModel = StatsViewModel(
-            getStatsUseCase = getStatsUseCase,
-            deleteStatsUseCase = deleteStatsUseCase,
-            addStatsUseCase = addStatsUseCase,
+        getMoodsUseCase = GetMoodsUseCase(repository)
+        deleteMoodUseCase = DeleteMoodUseCase(repository)
+        addMoodUseCase = AddMoodUseCase(repository)
+        viewModel = MoodViewModel(
+            getMoodsUseCase = getMoodsUseCase,
+            deleteMoodUseCase = deleteMoodUseCase,
+            addMoodUseCase = addMoodUseCase,
         )
     }
 
@@ -45,7 +45,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
-                viewModel.onAction(StatsIntent.GetStatsRecords)
+                viewModel.onAction(MoodIntent.GetMoodRecords)
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
             }
@@ -63,7 +63,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
-                viewModel.onAction(StatsIntent.GetStatsRecords)
+                viewModel.onAction(MoodIntent.GetMoodRecords)
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
             }
@@ -77,7 +77,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(StatsIntent.AddStatsRecord(items[0]))
+                viewModel.onAction(MoodIntent.AddMoodRecord(items[0]))
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
             }
@@ -93,7 +93,7 @@ class StatsViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(StatsIntent.AddStatsRecord(items[0]))
+                viewModel.onAction(MoodIntent.AddMoodRecord(items[0]))
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))

@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.ui.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.components.TextEllipsis
@@ -28,12 +27,10 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalCard(
     isNotFirst: Boolean,
     isNotLast: Boolean,
-    record: SelfJournalRecord,
+    record: SelfJournalRecordResource,
     onClick: (Int) -> Unit,
     onDelete: () -> Unit,
 ) {
-    val resource = record.mood.toResource()
-
     SwipeTorRevealCard(
         content = { modifier ->
             Card(
@@ -52,7 +49,7 @@ fun SelfJournalCard(
                         Box(
                             modifier = Modifier
                                 .background(
-                                    color = resource.palette.color,
+                                    color = record.mood.palette.color,
                                     shape = Dimens.Shape.Circle
                                 )
                                 .size(44.dp),
@@ -60,15 +57,15 @@ fun SelfJournalCard(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(20.dp),
-                                resource = resource,
+                                resource = record.mood,
                                 backgroundColor = Colors.White,
-                                color = resource.palette.barFaceColor
+                                color = record.mood.palette.barFaceColor
                             )
                         }
                         TextWithBackground(
-                            text = stringResource(resource.text),
-                            backgroundColor = resource.palette.backgroundColor,
-                            textColor = resource.palette.color
+                            text = stringResource(record.mood.text),
+                            backgroundColor = record.mood.palette.backgroundColor,
+                            textColor = record.mood.palette.color
                         )
                     }
                     VerticalSpacer(10.dp)

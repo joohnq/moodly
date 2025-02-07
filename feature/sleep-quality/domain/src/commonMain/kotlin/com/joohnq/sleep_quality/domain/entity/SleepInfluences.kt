@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.sleep_quality.domain.SleepInfluencesProperties
+import com.joohnq.sleep_quality.domain.property.SleepInfluencesProperties
 
 sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
     data object NaturalLight :

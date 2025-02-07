@@ -9,17 +9,6 @@ import com.joohnq.mood.domain.entity.Mood.Companion.SAD
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 
-fun Int.toMoodResource(): MoodResource = when (this) {
-    DEPRESSED.id -> MoodResource.Depressed
-    SAD.id -> MoodResource.Sad
-    NEUTRAL.id -> MoodResource.Neutral
-    HAPPY.id -> MoodResource.Happy
-    OVERJOYED.id -> MoodResource.Overjoyed
-    else -> throw IllegalArgumentException("Unknown mood: $this")
-}
-
-fun MoodResource.toInt(): Int = this.id
-
 fun getAllMoodResource(): List<MoodResource> = listOf(
     MoodResource.Depressed,
     MoodResource.Sad,

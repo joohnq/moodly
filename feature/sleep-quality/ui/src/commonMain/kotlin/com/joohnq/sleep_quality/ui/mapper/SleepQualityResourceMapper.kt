@@ -1,13 +1,12 @@
 package com.joohnq.sleep_quality.ui.mapper
 
+import com.joohnq.core.ui.getNow
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
+import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Excellent
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Fair
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Good
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Poor
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Worst
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.*
 
 fun getAllSleepQualityResource(): List<SleepQualityResource> = listOf(
     Excellent,
@@ -48,3 +47,27 @@ fun Float.fromSliderValueToSleepQualityResource(): SleepQualityResource = when (
     75f -> Good
     else -> Excellent
 }
+
+fun List<SleepQualityRecordResource>.getTodaySleepQualityRecord(): SleepQualityRecordResource? =
+    find { it.createdAt == getNow().date }
+
+fun List<SleepQualityRecordResource>.toMonthRecordsCount(): Int =
+    filter { it.createdAt.month == getNow().date.month }.size
+
+fun SleepQualityRecordResource.toDomain(): SleepQualityRecord = SleepQualityRecord(
+    id = id,
+    sleepQuality = sleepQuality.toDomain(),
+    startSleeping = startSleeping,
+    endSleeping = endSleeping,
+    sleepInfluences = sleepInfluences.toDomain(),
+    createdAt = createdAt,
+)
+
+fun SleepQualityRecord.toResource(): SleepQualityRecordResource = SleepQualityRecordResource(
+    id = id,
+    sleepQuality = sleepQuality.toResource(),
+    startSleeping = startSleeping,
+    endSleeping = endSleeping,
+    sleepInfluences = sleepInfluences.toResource(),
+    createdAt = createdAt,
+)

@@ -18,7 +18,7 @@ class AddMoodViewModel : ViewModel() {
                 intent.description
             )
 
-            AddMoodIntent.ResetState -> resetState()
+            AddMoodIntent.ResetState -> _state.update { AddMoodState() }
         }
     }
 
@@ -28,9 +28,5 @@ class AddMoodViewModel : ViewModel() {
 
     private fun updateAddingStatsRecordDescription(description: String) {
         _state.update { it.copy(record = it.record.copy(description = description)) }
-    }
-
-    private fun resetState() {
-        _state.update { AddMoodState() }
     }
 }

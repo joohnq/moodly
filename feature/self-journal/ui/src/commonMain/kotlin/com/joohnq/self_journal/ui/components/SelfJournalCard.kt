@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.components.TextEllipsis

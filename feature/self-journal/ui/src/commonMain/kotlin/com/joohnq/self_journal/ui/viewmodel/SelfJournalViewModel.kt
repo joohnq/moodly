@@ -3,17 +3,14 @@ package com.joohnq.self_journal.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.getValueOrNull
-import com.joohnq.core.ui.mapper.onFailure
-import com.joohnq.core.ui.mapper.onSuccess
-import com.joohnq.core.ui.mapper.toUiState
+import com.joohnq.core.ui.mapper.*
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.domain.use_case.AddSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.UpdateSelfJournalsUseCase
-import com.joohnq.self_journal.ui.SelfJournalRecordResource
-import com.joohnq.self_journal.ui.toResource
+import com.joohnq.self_journal.ui.mapper.toResource
+import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -65,7 +62,8 @@ class SelfJournalViewModel(
         viewModelScope.launch {
             changeRecordsStatus(UiState.Loading)
             val res = getSelfJournalsUseCase()
-                .toResource().toUiState()
+                .toResultResource { it.toResource() }
+                .toUiState()
             changeRecordsStatus(res)
         }
 

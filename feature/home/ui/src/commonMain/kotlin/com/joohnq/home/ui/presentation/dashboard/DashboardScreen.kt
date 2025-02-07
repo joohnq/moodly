@@ -61,7 +61,7 @@ fun DashboardScreen(
     }
 
     LaunchedEffect(Unit) {
-        dashboardViewModel.onAction(DashboardIntent.GetData)
+        dashboardViewModel.onAction(DashboardIntent.Get)
     }
 
     ObserverSideEffects(

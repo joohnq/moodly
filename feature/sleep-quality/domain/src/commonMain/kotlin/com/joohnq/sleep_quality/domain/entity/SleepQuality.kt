@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.sleep_quality.domain.SleepQualityProperties
+import com.joohnq.sleep_quality.domain.property.SleepQualityProperties
 
 sealed class SleepQuality(
     override val id: Int,

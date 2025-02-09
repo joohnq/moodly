@@ -47,7 +47,7 @@ fun StressHistory(
                     modifier = modifier,
                     onAction = {}
                 ) { modifier ->
-                    StressLevelCard(
+                    StressLevelHistoryCard(
                         modifier = modifier.background(color = containerColor),
                         containerColor = containerColor,
                         record = record,

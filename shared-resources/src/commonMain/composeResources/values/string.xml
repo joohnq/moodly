@@ -234,7 +234,6 @@
     <string name="you_havent_set_up_any_mental_sleep_yet">You haven't set up today any sleep metrics yet.\n Let's set it up now.</string>
     <string name="lets_set_up_daily_journaling_and_self_reflection">Let's set up daily journaling and self reflection</string>
     <string name="set_up_sleep">Set Up Sleep</string>
-    <string name="sleep_history">Sleep History</string>
     <string name="level">level</string>
     <string name="today">Today</string>
     <string name="self_journaling">Self Journaling</string>
@@ -307,4 +306,6 @@
     <string name="mood_insight">Mood Insight</string>
     <string name="moods_logged_this_month">Moods logged this month</string>
     <string name="mood_calendar">Mood Calendar</string>
+    <string name="sleep_history">Sleep History</string>
+    <string name="all_history">All History</string>
 </resources>

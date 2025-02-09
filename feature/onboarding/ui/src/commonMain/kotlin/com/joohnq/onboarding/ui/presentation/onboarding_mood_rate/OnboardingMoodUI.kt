@@ -6,10 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.components.RouletteMoods
-import com.joohnq.mood.ui.mapper.toResource
+import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
@@ -25,11 +24,10 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingMoodRateUI(
-    mood: Mood,
+    record: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit,
     onAction: (OnboardingIntent) -> Unit,
 ) {
-    val resource = mood.toResource()
     OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
@@ -39,7 +37,7 @@ fun OnboardingMoodRateUI(
         Text(
             text = stringResource(
                 Res.string.mood_rate_desc,
-                stringResource(resource.text)
+                stringResource(record.mood.text)
             ),
             style = TextStyles.TextXlSemiBold(),
             color = Colors.Brown100Alpha64,
@@ -47,7 +45,7 @@ fun OnboardingMoodRateUI(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            resource = resource,
+            resource = record.mood,
         )
         VerticalSpacer(24.dp)
     }

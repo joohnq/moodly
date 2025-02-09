@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.self_journal.ui.components.SelfJournalCard
+import com.joohnq.self_journal.ui.components.SelfJournalHistoryCard
 import com.joohnq.self_journal.ui.components.SelfJournalStatsCard
 import com.joohnq.self_journal.ui.mapper.getSelfJournalsInYear
 import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
@@ -76,7 +76,7 @@ fun JournalingUI(
                         modifier = Modifier.heightIn(min = 250.dp)
                     ) {
                         items(records) { journal ->
-                            SelfJournalCard(journal) {
+                            SelfJournalHistoryCard(journal) {
                                 onEvent(
                                     JournalingEvent.OnNavigateToEditJournaling(journal.id)
                                 )
@@ -98,7 +98,7 @@ fun JournalingUI(
                     FilledIconButton(
                         modifier = Modifier.size(48.dp),
                         colors = ComponentColors.IconButton.TransparentButton(Colors.Brown100Alpha64),
-                        onClick = { onEvent(JournalingEvent.OnNavigateToAllJournals) }
+                        onClick = { onEvent(JournalingEvent.OnNavigateToSelfJournalHistory) }
                     ) {
                         Icon(
                             painter = painterResource(Drawables.Icons.MoreHorizontal),

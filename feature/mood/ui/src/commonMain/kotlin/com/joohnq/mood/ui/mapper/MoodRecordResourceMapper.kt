@@ -11,7 +11,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
-fun List<MoodRecordResource>.getTodayStatRecord(): MoodRecordResource? =
+fun List<MoodRecordResource>.getTodayMoodRecord(): MoodRecordResource? =
     find { it.createdAt.date == getNow().date }
 
 fun List<MoodRecordResource>.getWeekRecords(): List<MoodRecordResource> {
@@ -57,7 +57,7 @@ fun List<MoodRecordResource>.getPreviousMood(record: MoodRecordResource): MoodRe
         .maxByOrNull { it.createdAt }
 }
 
-fun List<MoodRecordResource>.getStatGroupByDateUseCase(): Map<LocalDate, List<MoodRecordResource>> {
+fun List<MoodRecordResource>.getStatGroupByDate(): Map<LocalDate, List<MoodRecordResource>> {
     return groupBy { it.createdAt }
         .map { (key, value) ->
             key.date to value

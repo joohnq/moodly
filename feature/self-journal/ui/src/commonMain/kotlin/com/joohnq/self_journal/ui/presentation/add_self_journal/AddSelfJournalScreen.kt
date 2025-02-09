@@ -14,7 +14,7 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddJournalingScreen(onGoBack: () -> Unit) {
+fun AddSelfJournalScreen(onGoBack: () -> Unit) {
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
     val addJournalingViewModel: AddJournalingViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()

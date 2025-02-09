@@ -90,6 +90,9 @@ sealed interface Destination {
         data object Mood : Destination
 
         @Serializable
+        data object MoodHistory : Destination
+
+        @Serializable
         data object ExpressionAnalysis : Destination
 
         @Serializable
@@ -111,7 +114,7 @@ sealed interface Destination {
         data object AddSelfJournal : Destination
 
         @Serializable
-        data class SelfJournalHistory(val localDate: String? = null) : Destination
+        data object SelfJournalHistory : Destination
 
         @Serializable
         data class EditSelfJournal(val id: Int) : Destination

@@ -8,7 +8,6 @@ sealed interface DashboardEvent {
     data object OnNavigateToAddJournaling : DashboardEvent
     data object OnNavigateToAddStress : DashboardEvent
     data object OnNavigateToAddMood : DashboardEvent
-    data object OnNavigateToAllJournals : DashboardEvent
     data object OnNavigateToFreudScore : DashboardEvent
     data object OnNavigateToMood : DashboardEvent
     data object OnNavigateToSelfJournal : DashboardEvent
@@ -23,7 +22,7 @@ sealed interface DashboardEvent {
 
 fun JournalingEvent.toDashboardEvent(): DashboardEvent =
     when (this) {
-        JournalingEvent.OnNavigateToAllJournals -> DashboardEvent.OnNavigateToAllJournals
+        JournalingEvent.OnNavigateToSelfJournalHistory -> DashboardEvent.OnNavigateToSelfJournalHistory
         is JournalingEvent.OnNavigateToEditJournaling -> DashboardEvent.OnNavigateToEditJournaling(this.id)
     }
 

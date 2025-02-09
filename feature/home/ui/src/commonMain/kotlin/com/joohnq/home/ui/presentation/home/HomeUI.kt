@@ -9,8 +9,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.domain.entity.User
+import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MoodMetric
@@ -29,6 +31,7 @@ import com.joohnq.sleep_quality.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.ui.component.StressLevelMetric
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeUI(
@@ -111,5 +114,39 @@ fun HomeUI(
                 VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
             }
         }
+    )
+}
+
+@Preview
+@Composable
+fun HomeUIPreview() {
+    HomeUI(
+        padding = PaddingValues(0.dp),
+        state = DashboardState(
+            freudScore = FreudScoreResource.Healthy(80),
+            moodRecords = UiState.Success(
+                listOf(
+                    MoodRecordResource()
+                )
+            ),
+            stressLevelRecords = UiState.Success(
+                listOf(
+                    StressLevelRecordResource()
+                )
+            ),
+            selfJournalRecords = UiState.Success(
+                listOf(
+                    SelfJournalRecordResource()
+                )
+            ),
+            sleepQualityRecords = UiState.Success(
+                listOf(
+                    SleepQualityRecordResource()
+                )
+            ),
+            user = UiState.Success(
+                User()
+            )
+        ),
     )
 }

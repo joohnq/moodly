@@ -146,12 +146,6 @@ fun AvatarScreen(
         }
     }
 
-    DisposableEffect(Unit) {
-        onDispose {
-            userViewModel.onAction(UserIntent.ResetUpdatingStatus)
-        }
-    }
-
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
             avatarViewModel.onAction(AvatarIntent.UpdateImageDrawableIndex(page))
@@ -160,8 +154,8 @@ fun AvatarScreen(
 
     AvatarUI(
         snackBarState = snackBarState,
-        images = avatars,
+        state = avatarState,
+        avatars = avatars,
         onEvent = ::onEvent,
-        avatarState = avatarState
     )
 }

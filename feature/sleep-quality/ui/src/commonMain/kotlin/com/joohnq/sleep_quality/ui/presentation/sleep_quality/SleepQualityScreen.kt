@@ -6,13 +6,12 @@ import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
-import com.kizitonwose.calendar.compose.rememberCalendarState
-import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 
 @Composable
 fun SleepQualityScreen(
     onNavigateAddSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
+    onNavigateToSleepHistory: () -> Unit,
 ) {
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
     val state by sleepQualityViewModel.state.collectAsState()
@@ -20,7 +19,8 @@ fun SleepQualityScreen(
     fun onEvent(event: SleepQualityEvent) =
         when (event) {
             SleepQualityEvent.OnGoBack -> onGoBack()
-            SleepQualityEvent.OnAddSleepQuality -> onNavigateAddSleepQuality()
+            SleepQualityEvent.OnNavigateToAddSleepQuality -> onNavigateAddSleepQuality()
+            SleepQualityEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
         }
 
     return SleepQualityUI(

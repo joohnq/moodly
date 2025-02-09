@@ -22,12 +22,13 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.ui.mapper.getAllStressLevelResource
+import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingStressLevelUI(
-    stressLevel: StressLevelResource,
+    record: StressLevelRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -40,7 +41,7 @@ fun OnboardingStressLevelUI(
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
-            text = stringResource(stressLevel.value),
+            text = stringResource(record.stressLevel.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -53,7 +54,7 @@ fun OnboardingStressLevelUI(
                 TextRadioButton(
                     modifier = Modifier.weight(1f).aspectRatio(1f).testTag(option.id.toString()),
                     text = option.value,
-                    selected = stressLevel == option,
+                    selected = record.stressLevel == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
                     onClick = { onAction(OnboardingIntent.UpdateStressLevel(option)) }
@@ -62,7 +63,7 @@ fun OnboardingStressLevelUI(
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(stressLevel.text),
+            text = stringResource(record.stressLevel.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )

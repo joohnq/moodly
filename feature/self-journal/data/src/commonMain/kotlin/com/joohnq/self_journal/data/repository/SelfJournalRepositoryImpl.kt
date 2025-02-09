@@ -2,7 +2,7 @@ package com.joohnq.self_journal.data.repository
 
 import com.joohnq.core.database.converters.LocalDateTimeConverter
 import com.joohnq.core.database.executeTryCatchResult
-import com.joohnq.mood.domain.converter.StatsRecordConverter
+import com.joohnq.mood.domain.converter.MoodRecordConverter
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.domain.repository.SelfJournalRepository
@@ -16,7 +16,7 @@ class SelfJournalRepositoryImpl(
             query.getSelfJournalRecords { id, mood, title, description, createdAt ->
                 SelfJournalRecord(
                     id = id.toInt(),
-                    mood = StatsRecordConverter.toMood(mood),
+                    mood = MoodRecordConverter.toMood(mood),
                     title = title,
                     description = description,
                     createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
@@ -29,7 +29,7 @@ class SelfJournalRepositoryImpl(
     ): Result<Boolean> =
         executeTryCatchResult {
             query.addSelfJournalRecord(
-                mood = StatsRecordConverter.fromMood(record.mood),
+                mood = MoodRecordConverter.fromMood(record.mood),
                 title = record.title,
                 description = record.description,
             )
@@ -47,7 +47,7 @@ class SelfJournalRepositoryImpl(
     override suspend fun updateSelfJournal(record: SelfJournalRecord): Result<Boolean> =
         executeTryCatchResult {
             query.updateSelfJournalRecord(
-                mood = StatsRecordConverter.fromMood(record.mood),
+                mood = MoodRecordConverter.fromMood(record.mood),
                 title = record.title,
                 description = record.description,
                 id = record.id.toLong()

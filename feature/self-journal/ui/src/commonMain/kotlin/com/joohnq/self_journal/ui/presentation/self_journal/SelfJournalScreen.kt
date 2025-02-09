@@ -6,12 +6,11 @@ import androidx.compose.runtime.getValue
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
-import kotlinx.datetime.LocalDate
 
 @Composable
 fun SelfJournalScreen(
     onNavigateAddSelfJournal: () -> Unit,
-    onNavigateAllJournals: (LocalDate) -> Unit,
+    onNavigateToSelfJournalHistory: () -> Unit,
     onGoBack: () -> Unit,
 ) {
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
@@ -21,7 +20,8 @@ fun SelfJournalScreen(
         when (event) {
             SelfJournalEvent.OnGoBack -> onGoBack()
             SelfJournalEvent.OnNavigateToAddSelfJournal -> onNavigateAddSelfJournal()
-            is SelfJournalEvent.OnClick -> onNavigateAllJournals(event.localDate)
+            is SelfJournalEvent.OnClick -> onNavigateToSelfJournalHistory()
+            SelfJournalEvent.OnNavigateToSelfHistory -> onNavigateToSelfJournalHistory()
         }
 
     return SelfJournalUI(

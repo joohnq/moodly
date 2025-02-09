@@ -2,15 +2,11 @@ package com.joohnq.welcome.ui
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.core.ui.mapper.fold
+import com.joohnq.core.ui.ObserverSideEffects
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
+import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesSideEffect
 import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
@@ -19,7 +15,6 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
     val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
-    val userPreferencesState by userPreferencesViewModel.state.collectAsState()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
 
     fun onError(message: String) {
@@ -28,23 +23,20 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         }
     }
 
-    LaunchedEffect(userPreferencesState.updating) {
-        userPreferencesState.updating.fold(
-            onSuccess = { onNavigateToOnboarding() },
-            onError = ::onError
-        )
-    }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            userPreferencesViewModel.onAction(UserPreferenceIntent.ResetUpdating)
+    ObserverSideEffects(
+        flow = userPreferencesViewModel.sideEffect,
+        onEvent = { effect ->
+            when (effect) {
+                is UserPreferencesSideEffect.ShowError -> onError(effect.message)
+                UserPreferencesSideEffect.UpdatedUserPreferences -> onNavigateToOnboarding()
+                else -> Unit
+            }
         }
-    }
+    )
 
     fun onNext() {
         scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
     }
-
 
     WelcomeUI(
         snackBarState = snackBarState,

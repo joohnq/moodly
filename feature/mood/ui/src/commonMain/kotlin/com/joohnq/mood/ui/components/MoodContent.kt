@@ -2,7 +2,7 @@ package com.joohnq.mood.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.theme.Colors
 
@@ -11,6 +11,7 @@ fun MoodContent(
     modifier: Modifier = Modifier,
     record: MoodRecordResource?,
     records: List<MoodRecordResource>,
+    onEvent: (MoodEvent) -> Unit
 ) {
     val containerColor = Colors.Gray5
     DescriptionSection(
@@ -32,7 +33,9 @@ fun MoodContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),
-        onSeeAll = {},
+        onSeeAll = {
+            onEvent(MoodEvent.OnNavigateToMoodHistory)
+        },
         onClick = {}
     )
 }

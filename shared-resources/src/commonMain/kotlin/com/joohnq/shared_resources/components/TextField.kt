@@ -2,43 +2,25 @@ package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.*
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalSmall
-import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.write_what_are_you_feeling
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ErrorInfo(errorText: String) {
@@ -90,7 +72,13 @@ fun ExpressionAnalysisTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 250.dp),
+            .heightIn(min = 250.dp)
+            .shadow(
+                elevation = 7.dp,
+                ambientColor = Colors.Black48.copy(alpha = 0.2f),
+                spotColor = Colors.Black48.copy(alpha = 0.2f),
+                shape = Dimens.Shape.Large
+            ),
         colors = ComponentColors.TextField.ExpressionAnalysisColors(),
         textStyle = TextStyles.Text2xlBold(),
     )
@@ -191,5 +179,14 @@ fun CustomOutlinedTextField(
         colors = colors,
         textStyle = TextStyles.TextMdBold(),
         leadingIcon = leadingIcon
+    )
+}
+
+@Preview
+@Composable
+fun ExpressionAnalysisTextFieldPreview() {
+    ExpressionAnalysisTextField(
+        text = "",
+        onValueChange = {}
     )
 }

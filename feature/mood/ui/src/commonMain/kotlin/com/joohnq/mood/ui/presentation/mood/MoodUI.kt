@@ -5,7 +5,7 @@ import com.joohnq.core.ui.entity.UiState
 import com.joohnq.core.ui.mapper.foldComposable
 import com.joohnq.mood.ui.components.MoodContent
 import com.joohnq.mood.ui.components.MoodPanel
-import com.joohnq.mood.ui.mapper.getTodayStatRecord
+import com.joohnq.mood.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.mood.ui.resource.MoodResource
@@ -22,7 +22,7 @@ fun MoodUI(
 ) {
     records.foldComposable(
         onSuccess = { records ->
-            val record = records.getTodayStatRecord()
+            val record = records.getTodayMoodRecord()
             val hasToday = record != null
 
             DecoratedConvexPanelList(
@@ -44,6 +44,7 @@ fun MoodUI(
                         modifier = modifier,
                         record = record,
                         records = records,
+                        onEvent = onEvent
                     )
                 }
             )

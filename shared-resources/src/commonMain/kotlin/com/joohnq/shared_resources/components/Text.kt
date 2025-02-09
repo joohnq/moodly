@@ -57,26 +57,30 @@ fun TextWithSpan(
 ) {
     Text(
         text = buildAnnotatedString {
-            if (firstTitle != null)
+            if (firstTitle != null) {
                 withStyle(
                     style = TextStyles.HeadingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
                     append(stringResource(firstTitle))
                 }
+                append(" ")
+            }
             withStyle(
                 style = TextStyles.HeadingSpanSmExtraBold()
                     .copy(color = spanColor)
             ) {
                 append(span)
             }
-            if (secondTitle != null)
+            if (secondTitle != null) {
+                append(" ")
                 withStyle(
                     style = TextStyles.HeadingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
                     append(stringResource(secondTitle))
                 }
+            }
         },
         lineHeight = 40.sp,
         textAlign = TextAlign.Center

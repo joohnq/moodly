@@ -22,7 +22,7 @@ fun SleepInsight(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
-    onClick: () -> Unit = {},
+    onCreate: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
@@ -37,7 +37,7 @@ fun SleepInsight(
             text = Res.string.log_sleep,
             icon = Drawables.Icons.Add,
             image = Drawables.Images.SleepInsight,
-            onClick = onClick
+            onCreate= onCreate
         )
     else
         SleepInsightCard(

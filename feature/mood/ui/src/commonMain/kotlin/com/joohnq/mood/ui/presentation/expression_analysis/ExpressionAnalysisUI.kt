@@ -61,7 +61,7 @@ fun ExpressionAnalysisUI(
                 text = description,
                 onValueChange = {
                     onAddAction(
-                        AddMoodIntent.UpdateAddingStatsRecordDescription(it)
+                        AddMoodIntent.UpdateAddingMoodRecordDescription(it)
                     )
                 }
             )

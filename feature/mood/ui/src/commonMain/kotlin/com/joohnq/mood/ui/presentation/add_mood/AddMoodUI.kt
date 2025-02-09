@@ -87,7 +87,7 @@ fun AddMoodUI(
                     selectedMood = state.record,
                     setSelectedMood = {
                         onAction(
-                            AddMoodIntent.UpdateAddingStatsRecordMood(moodsResources[it])
+                            AddMoodIntent.UpdateAddingMoodRecordMood(moodsResources[it])
                         )
                     }
                 )

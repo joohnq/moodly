@@ -16,6 +16,7 @@ import com.joohnq.shared_resources.expression_analysis_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun OnboardingExpressionAnalysisUI(
@@ -43,11 +44,20 @@ fun OnboardingExpressionAnalysisUI(
             text = description,
             onValueChange = {
                 onAction(
-                    OnboardingIntent.UpdateStatsRecordDescription(
-                        it
-                    )
+                    OnboardingIntent.UpdateMoodRecordDescription(it)
                 )
             }
         )
     }
+}
+
+@Preview
+@Composable
+fun OnboardingExpressionAnalysisUIPreview() {
+    OnboardingExpressionAnalysisUI(
+        snackBarState = SnackbarHostState(),
+        description = "",
+        onEvent = {},
+        onAction = {},
+    )
 }

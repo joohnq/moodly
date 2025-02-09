@@ -10,5 +10,4 @@ sealed interface UserIntent {
     data class UpdateUserName(val name: String) : UserIntent
     data class UpdateUserImageBitmap(val image: ImageBitmap) : UserIntent
     data class UpdateUserImageDrawable(val i: Int) : UserIntent
-    data object ResetUpdatingStatus : UserIntent
 }

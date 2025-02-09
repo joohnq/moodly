@@ -93,7 +93,7 @@ fun NotFoundHorizontal(
     text: StringResource,
     icon: DrawableResource,
     image: DrawableResource,
-    onClick: () -> Unit,
+    onCreate: () -> Unit,
 ) {
     Card(
         colors = CardColors(
@@ -104,7 +104,7 @@ fun NotFoundHorizontal(
         ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
-        onClick = onClick
+        onClick = onCreate
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

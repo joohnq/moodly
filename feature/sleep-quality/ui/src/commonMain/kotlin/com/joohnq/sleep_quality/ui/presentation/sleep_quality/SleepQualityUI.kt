@@ -39,13 +39,13 @@ fun SleepQualityUI(
                         record = record,
                     )
                 },
-                onAddButton = { onEvent(SleepQualityEvent.OnAddSleepQuality) },
+                onAddButton = { onEvent(SleepQualityEvent.OnNavigateToAddSleepQuality) },
                 onGoBack = { onEvent(SleepQualityEvent.OnGoBack) },
                 content = { modifier ->
                     SleepContent(
                         modifier = modifier,
                         records = records,
-                        onSeeAll = {}
+                        onEvent = onEvent
                     )
                 }
             )

@@ -41,13 +41,7 @@ fun SelfJournalUI(
                     SelfJournalContent(
                         modifier = modifier,
                         records = records,
-                        onClick = {
-                        },
-                        onCreate = {
-                            onEvent(SelfJournalEvent.OnNavigateToAddSelfJournal)
-                        },
-                        onSeeAll = {
-                        }
+                        onEvent = onEvent
                     )
                 },
             )

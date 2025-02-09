@@ -5,5 +5,6 @@ import kotlinx.datetime.LocalDate
 sealed interface SelfJournalEvent {
     data object OnGoBack : SelfJournalEvent
     data object OnNavigateToAddSelfJournal : SelfJournalEvent
+    data object OnNavigateToSelfHistory : SelfJournalEvent
     data class OnClick(val localDate: LocalDate) : SelfJournalEvent
 }

@@ -12,10 +12,10 @@ import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScr
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.self_journal.ui.presentation.add_self_journal.AddJournalingScreen
+import com.joohnq.self_journal.ui.presentation.add_self_journal.AddSelfJournalScreen
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.EditJournalingScreen
 import com.joohnq.self_journal.ui.presentation.self_journal.SelfJournalScreen
-import com.joohnq.self_journal.ui.presentation.self_journal_history.AllJournalScreen
+import com.joohnq.self_journal.ui.presentation.self_journal_history.SelfJournalHistoryScreen
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
@@ -23,7 +23,6 @@ import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelSc
 import com.joohnq.stress_level.ui.presentation.stress_history.StressHistoryScreen
 import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
-import kotlinx.datetime.LocalDate
 
 fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination) -> Unit,
@@ -51,8 +50,8 @@ fun NavGraphBuilder.appNavigation(
                             onNavigate(Destination.App.AddStressLevel)
                         }
 
-                        DashboardEvent.OnNavigateToAllJournals -> {
-                            onNavigate(Destination.App.SelfJournalHistory())
+                        DashboardEvent.OnNavigateToSelfJournalHistory -> {
+                            onNavigate(Destination.App.SelfJournalHistory)
                         }
 
                         is DashboardEvent.OnNavigateToEditJournaling -> {
@@ -69,10 +68,6 @@ fun NavGraphBuilder.appNavigation(
 
                         DashboardEvent.OnNavigateToMood -> {
                             onNavigate(Destination.App.Mood)
-                        }
-
-                        DashboardEvent.OnNavigateToSelfJournalHistory -> {
-                            onNavigate(Destination.App.SelfJournalHistory())
                         }
 
                         DashboardEvent.OnNavigateToSleepQuality -> {
@@ -104,10 +99,10 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateAddSelfJournal = {
                     onNavigate(Destination.App.AddSelfJournal)
                 },
-                onNavigateAllJournals = {
-                    onNavigate(Destination.App.SelfJournalHistory(it.toString()))
+                onNavigateToSelfJournalHistory = {
+                    onNavigate(Destination.App.SelfJournalHistory)
                 },
-                onGoBack = onGoBack
+                onGoBack = onGoBack,
             )
         }
         composable<Destination.App.Mood> {
@@ -115,8 +110,11 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateBackToHome = {
                     onNavigateBack(Destination.App.DashBoard)
                 },
-                onNavigateAddMood = {
+                onNavigateToAddMood = {
                     onNavigate(Destination.App.AddMood)
+                },
+                onNavigateToMoodHistory = {
+                    onNavigate(Destination.App.MoodHistory)
                 }
             )
         }
@@ -172,7 +170,10 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.SleepQuality> {
             SleepQualityScreen(
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
-                onGoBack = onGoBack
+                onGoBack = onGoBack,
+                onNavigateToSleepHistory = {
+                    onNavigate(Destination.App.SleepQualityHistory)
+                }
             )
         }
         composable<Destination.App.SleepQualityHistory> {
@@ -192,7 +193,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.AddSelfJournal> {
-            AddJournalingScreen(
+            AddSelfJournalScreen(
                 onGoBack = onGoBack
             )
         }
@@ -204,14 +205,8 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.SelfJournalHistory> { backStackEntry ->
-            val selfJournalHistory =
-                backStackEntry.toRoute<Destination.App.SelfJournalHistory>()
-
-            val date = selfJournalHistory.localDate?.let { LocalDate.parse(it) }
-
-            AllJournalScreen(
-                localDate = date,
+        composable<Destination.App.SelfJournalHistory> {
+            SelfJournalHistoryScreen(
                 onGoBack = onGoBack,
                 onNavigateEditJournaling = { id ->
                     onNavigate(Destination.App.EditSelfJournal(id))

@@ -44,6 +44,8 @@ fun DecoratedConvexPanel(
                     panelContent()
                     ConvexContentLayout(
                         backgroundColor = backgroundColor,
+                        offset = 60.dp,
+                        spacer = 60.dp
                     )
                 }
                 Column(

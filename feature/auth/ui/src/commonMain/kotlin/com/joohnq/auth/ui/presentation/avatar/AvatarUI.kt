@@ -1,20 +1,8 @@
 package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PageSize
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHostState
@@ -22,64 +10,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.auth.ui.components.AvatarImagesHorizontalPager
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarState
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.or_upload_your_profile
-import com.joohnq.shared_resources.profile_setup
-import com.joohnq.shared_resources.select_your_avatar
+import com.joohnq.shared_resources.components.drawDottedBorder
+import com.joohnq.shared_resources.remember.rememberAvatars
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.shared_resources.we_have_a_set_of_customizable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-
-@Composable
-fun AvatarImagesHorizontalPager(images: List<DrawableResource>) {
-    val avatarSize = 180.dp
-    val pagerState = rememberPagerState(pageCount = { images.size })
-    BoxWithConstraints {
-        HorizontalPager(
-            state = pagerState,
-            pageSize = PageSize.Fixed(avatarSize),
-            contentPadding = PaddingValues(horizontal = (maxWidth / 2) - (avatarSize / 2)),
-            pageSpacing = 20.dp
-        ) { page ->
-            Image(
-                painter = painterResource(images[page]),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clip(Dimens.Shape.Circle)
-                    .border(
-                        width = 8.dp,
-                        color = Colors.White,
-                        shape = Dimens.Shape.Circle
-                    ),
-            )
-        }
-    }
-}
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AvatarUI(
-    snackBarState: SnackbarHostState,
-    images: List<DrawableResource> = emptyList(),
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
+    state: AvatarState,
+    avatars: List<DrawableResource> = rememberAvatars(),
     onEvent: (AvatarEvent) -> Unit = {},
-    avatarState: AvatarState,
 ) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
@@ -94,13 +54,6 @@ fun AvatarUI(
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Column {
-                VerticalSpacer(10.dp)
-                Text(
-                    text = stringResource(Res.string.profile_setup),
-                    style = TextStyles.TextXlExtraBold(),
-                    color = Colors.Brown80,
-                    modifier = Modifier.paddingHorizontalMedium()
-                )
                 VerticalSpacer(32.dp)
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -113,7 +66,7 @@ fun AvatarUI(
                     )
                     VerticalSpacer(10.dp)
                     AvatarImagesHorizontalPager(
-                        images = images
+                        avatars = avatars
                     )
                     VerticalSpacer(10.dp)
                     Icon(
@@ -145,20 +98,29 @@ fun AvatarUI(
                         onClick = { onEvent(AvatarEvent.OnPickAvatar) },
                         modifier = Modifier.size(96.dp)
                     ) {
-                        if (avatarState.imageBitmap != null) {
+                        if (state.imageBitmap != null) {
                             Image(
-                                bitmap = avatarState.imageBitmap,
-                                contentDescription = "Profile",
+                                bitmap = state.imageBitmap,
+                                contentDescription = stringResource(Res.string.profile),
                                 modifier = Modifier.size(100.dp),
                                 contentScale = ContentScale.Crop
                             )
                         } else {
-                            Icon(
-                                painter = painterResource(Drawables.Icons.PhotoPicker),
-                                contentDescription = null,
-                                modifier = Modifier.size(96.dp),
-                                tint = Colors.Brown80
-                            )
+                            Box(
+                                modifier = Modifier.size(64.dp)
+                                    .drawDottedBorder(
+                                        color = Colors.Gray40,
+                                        shape = Dimens.Shape.Circle
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(Drawables.Icons.Add),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(32.dp),
+                                    tint = Colors.Gray40
+                                )
+                            }
                         }
                     }
                     VerticalSpacer(16.dp)
@@ -175,4 +137,12 @@ fun AvatarUI(
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun AvatarScreenPreview() {
+    AvatarUI(
+        state = AvatarState(),
+    )
 }

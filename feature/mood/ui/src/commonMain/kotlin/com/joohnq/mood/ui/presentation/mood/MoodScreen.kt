@@ -10,7 +10,8 @@ import com.joohnq.mood.ui.viewmodel.MoodViewModel
 @Composable
 fun MoodScreen(
     onNavigateBackToHome: () -> Unit,
-    onNavigateAddMood: () -> Unit,
+    onNavigateToAddMood: () -> Unit,
+    onNavigateToMoodHistory: () -> Unit,
 ) {
     val moodViewModel: MoodViewModel = sharedViewModel()
     val statsState by moodViewModel.state.collectAsState()
@@ -18,7 +19,8 @@ fun MoodScreen(
     fun onEvent(event: MoodEvent) =
         when (event) {
             is MoodEvent.OnGoBack -> onNavigateBackToHome()
-            is MoodEvent.OnAddMood -> onNavigateAddMood()
+            is MoodEvent.OnAddMood -> onNavigateToAddMood()
+            MoodEvent.OnNavigateToMoodHistory -> onNavigateToMoodHistory()
         }
 
     MoodUI(

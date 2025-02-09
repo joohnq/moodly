@@ -34,22 +34,27 @@ class UserViewModel(
             is UserIntent.UpdateUser -> updateUser(intent.user)
             is UserIntent.UpdateUserImageBitmap -> updateUserImageBitmap(intent.image)
             is UserIntent.UpdateUserName -> updateUserName(intent.name)
-            UserIntent.ResetUpdatingStatus -> changeUpdatingStatus(UiState.Idle)
             is UserIntent.UpdateUserImageDrawable -> updateUserImageDrawable(intent.i)
             UserIntent.InitUser -> addUser()
         }
     }
 
     private fun addUser() = viewModelScope.launch {
-        changeAddingStatus(UiState.Loading)
         val res = addUserUseCase(User()).toUiState()
-        changeAddingStatus(res)
+        res.onSuccess {
+            _sideEffect.send(UserSideEffect.AddedUser)
+        }.onFailure {
+            _sideEffect.send(UserSideEffect.ShowError(it))
+        }
     }
 
     private fun updateUser(user: User) = viewModelScope.launch {
-        changeUpdatingStatus(UiState.Loading)
         val res = updateUserUseCase(user).toUiState()
-        changeUpdatingStatus(res)
+        res.onSuccess {
+            _sideEffect.send(UserSideEffect.UpdatedUser)
+        }.onFailure {
+            _sideEffect.send(UserSideEffect.ShowError(it))
+        }
     }
 
     private fun getUser() = viewModelScope.launch {
@@ -84,14 +89,6 @@ class UserViewModel(
         }.onFailure {
             _sideEffect.send(UserSideEffect.ShowError(it))
         }
-    }
-
-    private fun changeAddingStatus(status: UiState<Boolean>) {
-        _state.update { it.copy(adding = status) }
-    }
-
-    private fun changeUpdatingStatus(status: UiState<Boolean>) {
-        _state.update { it.copy(updating = status) }
     }
 
     private fun changeUserStatus(status: UiState<User>) {

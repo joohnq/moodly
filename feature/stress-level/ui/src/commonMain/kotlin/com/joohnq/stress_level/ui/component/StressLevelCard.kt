@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StressLevelCard(
+fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     record: StressLevelRecordResource,
@@ -94,7 +94,7 @@ fun StressLevelCard(
 @Preview
 @Composable
 fun StressLevelCardPreview() {
-    StressLevelCard(
+    StressLevelHistoryCard(
         containerColor = Colors.White,
         record = StressLevelRecordResource()
     )
@@ -103,7 +103,7 @@ fun StressLevelCardPreview() {
 @Preview
 @Composable
 fun StressLevelCardPreviewWithStressors() {
-    StressLevelCard(
+    StressLevelHistoryCard(
         containerColor = Colors.White,
         record = StressLevelRecordResource(
             stressors = listOf(

@@ -13,8 +13,8 @@ class AddMoodViewModel : ViewModel() {
 
     fun onAction(intent: AddMoodIntent) {
         when (intent) {
-            is AddMoodIntent.UpdateAddingStatsRecordMood -> updateAddingStatsRecordMood(intent.mood)
-            is AddMoodIntent.UpdateAddingStatsRecordDescription -> updateAddingStatsRecordDescription(
+            is AddMoodIntent.UpdateAddingMoodRecordMood -> updateAddingMoodRecordMood(intent.mood)
+            is AddMoodIntent.UpdateAddingMoodRecordDescription -> updateAddingMoodRecordDescription(
                 intent.description
             )
 
@@ -22,11 +22,11 @@ class AddMoodViewModel : ViewModel() {
         }
     }
 
-    private fun updateAddingStatsRecordMood(mood: MoodResource) {
+    private fun updateAddingMoodRecordMood(mood: MoodResource) {
         _state.update { it.copy(record = it.record.copy(mood = mood)) }
     }
 
-    private fun updateAddingStatsRecordDescription(description: String) {
+    private fun updateAddingMoodRecordDescription(description: String) {
         _state.update { it.copy(record = it.record.copy(description = description)) }
     }
 }

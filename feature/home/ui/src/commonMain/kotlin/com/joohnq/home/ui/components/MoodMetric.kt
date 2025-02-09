@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.mapper.getTodayStatRecord
+import com.joohnq.mood.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.*
@@ -81,7 +81,7 @@ fun MoodMetric(
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val record = records.getTodayStatRecord()
+    val record = records.getTodayMoodRecord()
 
     if (record == null)
         NotFoundHorizontal(

@@ -3,6 +3,7 @@ package com.joohnq.self_journal.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.SectionHeader
@@ -14,9 +15,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalContent(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
-    onCreate: () -> Unit = {},
-    onClick: () -> Unit = {},
-    onSeeAll: () -> Unit = {}
+    onEvent: (SelfJournalEvent) -> Unit = {},
 ) {
     val containerColor = Colors.Gray5
 
@@ -38,13 +37,19 @@ fun SelfJournalContent(
         containerColor = containerColor,
         records = records,
         subtitle = stringResource(Res.string.journals_written_this_month),
-        onCreate = onCreate,
-        onClick = onClick,
+        onCreate = {
+            onEvent(SelfJournalEvent.OnNavigateToAddSelfJournal)
+        },
+        onClick = {
+
+        },
     )
     SectionHeader(
         modifier = modifier,
         title = Res.string.journal_history,
-        onSeeAll = onSeeAll
+        onSeeAll = {
+            onEvent(SelfJournalEvent.OnNavigateToSelfHistory)
+        }
     )
     JournalHistory(
         modifier = modifier,

@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.toFormattedTimeString
 import com.joohnq.mood.ui.components.MoodFace
@@ -24,7 +25,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SelfJournalCard(
+fun SelfJournalHistoryCard(
+    modifier: Modifier = Modifier,
+    containerColor: Color,
     isNotFirst: Boolean,
     isNotLast: Boolean,
     record: SelfJournalRecordResource,
@@ -32,6 +35,7 @@ fun SelfJournalCard(
     onDelete: () -> Unit,
 ) {
     SwipeTorRevealCard(
+        modifier = modifier.background(color = containerColor, shape = Dimens.Shape.Large),
         content = { modifier ->
             Card(
                 shape = Dimens.Shape.Large,

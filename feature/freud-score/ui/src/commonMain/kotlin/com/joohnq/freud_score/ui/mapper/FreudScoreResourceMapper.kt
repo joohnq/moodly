@@ -25,10 +25,10 @@ fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
 
 fun Index.toInitialFreudScore(): Int =
     when (this) {
-        0 -> 80
-        1 -> 60
-        2 -> 40
-        3 -> 20
+        0 -> 81
+        1 -> 61
+        2 -> 41
+        3 -> 21
         4 -> 0
         else -> throw IllegalArgumentException("Unknown freud score: $this")
     }

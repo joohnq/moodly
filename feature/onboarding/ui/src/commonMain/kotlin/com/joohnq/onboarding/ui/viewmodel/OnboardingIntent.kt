@@ -22,9 +22,8 @@ sealed interface OnboardingIntent {
     data class UpdateUserSoughtHelp(val soughtHelp: ProfessionalHelpResource?) :
         OnboardingIntent
 
-    data class UpdateStatsRecordDescription(val description: String) : OnboardingIntent
+    data class UpdateMoodRecordDescription(val description: String) : OnboardingIntent
     data class UpdateSliderValue(val sliderValue: Float) : OnboardingIntent
-    data object ResetStatsRecord : OnboardingIntent
     data class SetOnboardingStateForTesting(val onboardingState: OnboardingState) :
         OnboardingIntent
 }

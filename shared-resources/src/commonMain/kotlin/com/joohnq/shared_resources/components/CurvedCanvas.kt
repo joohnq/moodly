@@ -52,6 +52,7 @@ fun ConvexContentLayout(
     backgroundColor: Color,
     position: CurvedCanvasPosition = CurvedCanvasPosition.TOP,
     offset: Dp = 60.dp,
+    spacer: Dp = 30.dp,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Column(
@@ -63,7 +64,7 @@ fun ConvexContentLayout(
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        VerticalSpacer(offset / 2)
+        VerticalSpacer(spacer)
         Column(
             modifier = Modifier.dpOffset(y = -offset / 2),
             horizontalAlignment = Alignment.CenterHorizontally

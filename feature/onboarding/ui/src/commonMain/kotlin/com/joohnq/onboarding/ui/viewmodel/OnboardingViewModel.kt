@@ -1,8 +1,6 @@
 package com.joohnq.onboarding.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
@@ -20,11 +18,10 @@ class OnboardingViewModel : ViewModel() {
 
     fun onAction(intent: OnboardingIntent) {
         when (intent) {
-            is OnboardingIntent.ResetStatsRecord -> resetStatsRecord()
             is OnboardingIntent.UpdateMood -> updateMood(intent.mood)
             is OnboardingIntent.UpdateSleepQuality -> updateSleepQuality(intent.sleepQuality)
-            is OnboardingIntent.UpdateStatsRecordDescription ->
-                updateStatsRecordDescription(intent.description)
+            is OnboardingIntent.UpdateMoodRecordDescription ->
+                updateMoodRecordDescription(intent.description)
 
             is OnboardingIntent.UpdateStressLevel -> updateStressLevel(intent.stressLevel)
             is OnboardingIntent.UpdateUserMedicationsSupplements -> updateUserMedicationsSupplements(
@@ -47,15 +44,15 @@ class OnboardingViewModel : ViewModel() {
     }
 
     private fun updateSleepQuality(sleepQuality: SleepQualityResource) {
-        _state.update { it.copy(sleepQuality = sleepQuality) }
+        _state.update { it.copy(sleepQuality = it.sleepQuality.copy(sleepQuality = sleepQuality)) }
     }
 
     private fun updateStressLevel(stressLevel: StressLevelResource) {
-        _state.update { it.copy(stressLevel = stressLevel) }
+        _state.update { it.copy(stressLevel = it.stressLevel.copy(stressLevel = stressLevel)) }
     }
 
     private fun updateMood(mood: MoodResource) {
-        _state.update { it.copy(moodRecord = it.moodRecord.copy(mood = mood.toDomain())) }
+        _state.update { it.copy(moodRecord = it.moodRecord.copy(mood = mood)) }
     }
 
     private fun updateUserMedicationsSupplements(
@@ -72,12 +69,8 @@ class OnboardingViewModel : ViewModel() {
         _state.update { it.copy(soughtHelp = soughtHelp) }
     }
 
-    private fun updateStatsRecordDescription(description: String) {
+    private fun updateMoodRecordDescription(description: String) {
         _state.update { it.copy(moodRecord = it.moodRecord.copy(description = description)) }
-    }
-
-    private fun resetStatsRecord() {
-        _state.update { it.copy(moodRecord = MoodRecord()) }
     }
 
     private fun setOnboardingStateForTesting(onboardingState: OnboardingState) {

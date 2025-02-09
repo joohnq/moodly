@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.mapper.calculateDuration
@@ -27,6 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
+    containerColor: Color = Color.White,
     record: SleepQualityRecordResource,
     onClick: () -> Unit,
 ) {
@@ -36,10 +38,10 @@ fun SleepQualityHistoryCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = Colors.White,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.Brown80
+            containerColor = containerColor,
+            contentColor = Color.Unspecified,
+            disabledContainerColor = containerColor,
+            disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Medium,
         onClick = onClick,

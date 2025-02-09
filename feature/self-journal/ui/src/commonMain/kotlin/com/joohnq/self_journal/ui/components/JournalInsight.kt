@@ -49,7 +49,7 @@ fun JournalInsight(
             description = Res.string.lets_log_your_first_journal_to_see_your_insight,
             text = Res.string.write_journal,
             icon = Drawables.Icons.Edit,
-            onClick = {},
+            onCreate = {},
         )
     else
         Card(

@@ -18,14 +18,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
-    onClick: () -> Unit,
-    onSeeAll: () -> Unit
+    onClick: () -> Unit = {},
+    onSeeAll: () -> Unit = {}
 ) {
     SectionHeader(
         modifier = modifier,
@@ -50,10 +51,22 @@ fun SleepHistory(
                 ) { modifier ->
                     SleepQualityHistoryCard(
                         modifier = modifier,
+                        containerColor = containerColor,
                         record = record,
                         onClick = { },
                     )
                 }
             }
         }
+}
+
+@Preview
+@Composable
+fun SleepHistoryPreview() {
+    SleepHistory(
+        records = listOf(
+            SleepQualityRecordResource(),
+            SleepQualityRecordResource(),
+        ),
+    )
 }

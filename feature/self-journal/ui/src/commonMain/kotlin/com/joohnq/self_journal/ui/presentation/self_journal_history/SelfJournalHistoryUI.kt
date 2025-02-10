@@ -1,6 +1,9 @@
 package com.joohnq.self_journal.ui.presentation.self_journal_history
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -17,8 +20,11 @@ import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJo
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryIntent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryState
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.delete_journal
+import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -59,7 +65,7 @@ fun SelfJournalHistoryUI(
             Scaffold(
                 containerColor = Colors.Brown10
             ) { padding ->
-                Column(modifier = Modifier.paddingHorizontalMedium()) {
+                Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
                     TopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,

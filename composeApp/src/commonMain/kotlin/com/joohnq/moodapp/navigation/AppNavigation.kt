@@ -10,6 +10,7 @@ import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.mood.ui.presentation.add_mood.AddMoodScreen
 import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.ui.presentation.mood.MoodScreen
+import com.joohnq.mood.ui.presentation.mood_history.MoodHistoryScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.self_journal.ui.presentation.add_self_journal.AddSelfJournalScreen
@@ -116,6 +117,11 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateToMoodHistory = {
                     onNavigate(Destination.App.MoodHistory)
                 }
+            )
+        }
+        composable<Destination.App.MoodHistory> {
+            MoodHistoryScreen(
+                onGoBack = onGoBack,
             )
         }
         composable<Destination.App.AddMood> {

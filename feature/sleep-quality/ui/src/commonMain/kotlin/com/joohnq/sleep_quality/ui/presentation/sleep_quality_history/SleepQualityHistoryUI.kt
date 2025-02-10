@@ -1,10 +1,10 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality_history
 
 import SleepQualityHistoryCard
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
@@ -19,7 +19,6 @@ import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.sleep_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
@@ -39,7 +38,7 @@ fun SleepQualityHistoryUI(
             Scaffold(
                 containerColor = Colors.Brown10
             ) { padding ->
-                Column(modifier = Modifier.paddingHorizontalMedium()) {
+                Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
                     TopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,

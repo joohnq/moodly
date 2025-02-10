@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "ui"
+            baseName = "sleep_quality.ui"
             isStatic = true
         }
     }

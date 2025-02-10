@@ -1,7 +1,7 @@
 package com.joohnq.user.data.database
 
 import app.cash.sqldelight.db.SqlDriver
-import com.joohnq.core.database.Database
+import com.joohnq.database.Database
 import com.joohnq.user.database.UserDatabaseSql
 
 class UserDatabase(private val driver: SqlDriver) : Database<UserDatabaseSql>() {

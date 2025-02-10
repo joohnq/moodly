@@ -18,7 +18,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "domain"
+            baseName = "criptography.domain"
             isStatic = true
         }
     }

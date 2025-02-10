@@ -1,8 +1,7 @@
 package com.joohnq.sleep_quality.data.database
 
 import app.cash.sqldelight.db.SqlDriver
-import com.joohnq.core.database.Database
-import com.joohnq.sleep_quality.data.driver.SleepQualityDriverFactory
+import com.joohnq.database.Database
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 
 class SleepQualityDatabase(private val driver: SqlDriver) :

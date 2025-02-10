@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "mood.data"
             isStatic = true
             linkerOpts.add("-lsqlite3")
         }
@@ -65,7 +65,7 @@ kotlin {
 
 sqldelight {
     databases {
-        create("StatsDatabaseSql") {
+        create("MoodDatabaseSql") {
             packageName.set("com.joohnq.mood.database")
         }
     }

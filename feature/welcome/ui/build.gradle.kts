@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "ui"
+            baseName = "welcome.ui"
             isStatic = true
         }
     }

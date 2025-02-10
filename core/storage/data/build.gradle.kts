@@ -18,7 +18,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "storage.data"
             isStatic = true
         }
     }
@@ -36,7 +36,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.data"
+    namespace = "com.joohnq.storage.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

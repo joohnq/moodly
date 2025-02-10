@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "di"
             isStatic = true
         }
     }
@@ -46,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.core.di"
+    namespace = "com.joohnq.di"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

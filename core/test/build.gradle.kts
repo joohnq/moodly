@@ -47,7 +47,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.core.test"
+    namespace = "com.joohnq.test"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

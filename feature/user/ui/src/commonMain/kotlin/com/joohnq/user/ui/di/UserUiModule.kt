@@ -1,12 +1,10 @@
 package com.joohnq.user.ui.di
 
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val userUiModule: Module = module {
     singleOf(::UserViewModel)
-    singleOf(::UserPreferencesViewModel)
 }

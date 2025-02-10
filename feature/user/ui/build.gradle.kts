@@ -43,7 +43,6 @@ kotlin {
             implementation(libs.kotlin.datetime)
 
             implementation(libs.bundles.koin)
-            implementation(libs.bundles.koin)
         }
         commonTest.dependencies {
             implementation(projects.core.storage.domain)

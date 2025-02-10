@@ -27,11 +27,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.feature.user.ui)
             implementation(projects.core.ui)
             implementation(projects.core.permission)
             implementation(projects.sharedResources)
             implementation(projects.feature.user.domain)
+            implementation(projects.feature.user.ui)
+            implementation(projects.feature.preferences.ui)
             implementation(projects.feature.security.domain)
 
             implementation(compose.runtime)

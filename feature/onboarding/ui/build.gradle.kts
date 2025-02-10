@@ -37,6 +37,7 @@ kotlin {
             implementation(projects.feature.sleepQuality.ui)
             implementation(projects.feature.user.domain)
             implementation(projects.feature.user.ui)
+            implementation(projects.feature.preferences.ui)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

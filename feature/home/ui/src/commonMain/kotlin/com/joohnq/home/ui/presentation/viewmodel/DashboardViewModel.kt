@@ -19,9 +19,9 @@ import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
-import com.joohnq.user.ui.viewmodel.user.UserIntent
-import com.joohnq.user.ui.viewmodel.user.UserState
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import com.joohnq.user.ui.viewmodel.UserIntent
+import com.joohnq.user.ui.viewmodel.UserState
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

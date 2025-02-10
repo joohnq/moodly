@@ -4,6 +4,8 @@ import com.joohnq.core.test.assertThatContains
 import com.joohnq.domain.entity.MedicationsSupplements
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.fake.UserRepositoryFake
+import com.joohnq.domain.use_case.AddUserUseCase
+import com.joohnq.domain.use_case.GetUserUseCase
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test

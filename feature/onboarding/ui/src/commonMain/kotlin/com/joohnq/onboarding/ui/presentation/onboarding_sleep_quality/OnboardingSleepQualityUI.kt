@@ -13,6 +13,7 @@ import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.ui.viewmodel.OnboardingState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
@@ -23,15 +24,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalLarge
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.mapper.fromSliderValueToSleepQualityResource
 import com.joohnq.sleep_quality.ui.mapper.getAllSleepQualityResource
+import com.joohnq.sleep_quality.ui.mapper.toSleepQualityResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingSleepQualityUI(
-    sliderValue: Float,
+    state: OnboardingState,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -54,7 +55,8 @@ fun OnboardingSleepQualityUI(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     sleepQualityOptions.forEach { sleepQuality: SleepQualityResource ->
-                        val color = if (sleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
+                        val color =
+                            if (state.sleepQuality.sleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
                         Column {
                             Text(
                                 stringResource(sleepQuality.firstText),
@@ -71,12 +73,12 @@ fun OnboardingSleepQualityUI(
                 }
                 VerticalSlider(
                     modifier = Modifier.weight(1f),
-                    sliderValue = sliderValue,
+                    sliderValue = state.sliderValue,
                     setSliderValue = {
                         onAction(OnboardingIntent.UpdateSliderValue(it))
                         onAction(
                             OnboardingIntent.UpdateSleepQuality(
-                                it.fromSliderValueToSleepQualityResource()
+                                it.toSleepQualityResource()
                             )
                         )
                     },

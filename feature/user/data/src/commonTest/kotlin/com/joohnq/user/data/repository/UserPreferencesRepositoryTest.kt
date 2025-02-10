@@ -4,7 +4,6 @@ import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.createTestDriver
 import com.joohnq.domain.entity.UserPreferences
-import com.joohnq.domain.repository.UserPreferencesRepository
 import com.joohnq.user.data.database.UserDatabase
 import com.joohnq.user.database.UserDatabaseSql
 import com.varabyte.truthish.assertThat
@@ -14,13 +13,13 @@ import kotlin.test.Test
 
 class UserPreferencesRepositoryTest : RobolectricTests() {
     private lateinit var database: UserDatabaseSql
-    private lateinit var repository: UserPreferencesRepository
+    private lateinit var repository: PreferencesRepository
 
     @BeforeTest
     fun setUp() {
         val driver = createTestDriver(UserDatabaseSql.Schema)
         database = UserDatabase(driver).invoke()
-        repository = UserPreferencesRepositoryImpl(database)
+        repository = PreferencesRepositoryImpl(database)
     }
 
     private suspend fun initUserPreferences() {

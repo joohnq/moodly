@@ -8,12 +8,12 @@ import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameViewModel
 import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.domain.validator.UserNameValidator
+import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.user.ui.viewmodel.user.UserIntent
-import com.joohnq.user.ui.viewmodel.user.UserSideEffect
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
+import com.joohnq.user.ui.viewmodel.UserIntent
+import com.joohnq.user.ui.viewmodel.UserSideEffect
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -22,7 +22,7 @@ fun UserNameScreen(
 ) {
     val userNameViewModel: UserNameViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
-    val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
+    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
@@ -34,27 +34,24 @@ fun UserNameScreen(
         }
     }
 
-    fun onEvent(event: UserNameEvent) =
-        when (event) {
-            UserNameEvent.Continue -> {
-                focusManager.clearFocus()
-                try {
-                    UserNameValidator(userNameState.name)
-                    userViewModel.onAction(UserIntent.UpdateUserName(userNameState.name))
-                } catch (e: Exception) {
-                    userNameViewModel.onAction(UserNameIntent.UpdateUserNameError(e.message.toString()))
-                }
+    fun onEvent(event: UserNameEvent) = when (event) {
+        UserNameEvent.Continue -> {
+            focusManager.clearFocus()
+            try {
+                UserNameValidator(userNameState.name)
+                userViewModel.onAction(UserIntent.UpdateUserName(userNameState.name))
+            } catch (e: Exception) {
+                userNameViewModel.onAction(UserNameIntent.UpdateUserNameError(e.message.toString()))
             }
         }
+    }
 
     LaunchedEffect(userViewModel) {
         userViewModel.sideEffect.collect { event ->
             when (event) {
                 is UserSideEffect.UserNameUpdatedSuccess -> {
-                    userPreferencesViewModel.onAction(
-                        UserPreferenceIntent.UpdateSkipAuth(
-                            true
-                        )
+                    preferencesViewModel.onAction(
+                        PreferenceIntent.UpdateSkipAuth()
                     )
                     onNavigateToSecurity()
                 }

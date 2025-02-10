@@ -145,7 +145,9 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
                 },
-                onGoBack = onGoBack
+                onGoBack = {
+                    onNavigateBack(Destination.App.DashBoard)
+                }
             )
         }
         composable<Destination.App.StressHistory> {
@@ -170,7 +172,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
-                onNavigateBackToStressLevel = { onNavigateBack(Destination.App.StressHistory) }
+                onNavigateToStressLevel = { onNavigate(Destination.App.StressLevel) }
             )
         }
         composable<Destination.App.SleepQuality> {

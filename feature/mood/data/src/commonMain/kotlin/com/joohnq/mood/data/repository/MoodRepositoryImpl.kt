@@ -1,7 +1,7 @@
 package com.joohnq.mood.data.repository
 
-import com.joohnq.core.database.converters.LocalDateTimeConverter
-import com.joohnq.core.database.executeTryCatchResult
+import com.joohnq.database.converters.LocalDateTimeConverter
+import com.joohnq.database.executeTryCatchResult
 import com.joohnq.mood.database.StatsDatabaseSql
 import com.joohnq.mood.domain.converter.MoodRecordConverter
 import com.joohnq.mood.domain.entity.MoodRecord

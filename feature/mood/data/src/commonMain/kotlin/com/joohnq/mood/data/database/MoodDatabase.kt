@@ -1,7 +1,7 @@
 package com.joohnq.mood.data.database
 
 import app.cash.sqldelight.db.SqlDriver
-import com.joohnq.core.database.Database
+import com.joohnq.database.Database
 import com.joohnq.mood.database.StatsDatabaseSql
 
 class MoodDatabase(private val driver: SqlDriver) : Database<StatsDatabaseSql>() {

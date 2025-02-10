@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "ui"
+            baseName = "security.ui"
             isStatic = true
         }
     }
@@ -49,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.ui"
+    namespace = "com.joohnq.security.ui"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

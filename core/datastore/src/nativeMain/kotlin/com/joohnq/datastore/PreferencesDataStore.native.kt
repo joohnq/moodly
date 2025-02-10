@@ -19,7 +19,7 @@ actual class PreferencesDataStore {
                 create = false,
                 error = null,
             )
-            requireNotNull(documentDirectory).path + "/$dataStoreFileName"
+            requireNotNull(documentDirectory).path + "/${dataStoreFileName}"
         }
     )
 }

@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.data.database
 
 import app.cash.sqldelight.db.SqlDriver
-import com.joohnq.core.database.Database
+import com.joohnq.database.Database
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 
 class SelfJournalDatabase(private val driverFactory: SqlDriver) :

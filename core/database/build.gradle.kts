@@ -48,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.joohnq.core.database"
+    namespace = "com.joohnq.database"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

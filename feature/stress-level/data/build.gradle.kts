@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "stress_level.data"
             isStatic = true
             linkerOpts.add("-lsqlite3")
         }

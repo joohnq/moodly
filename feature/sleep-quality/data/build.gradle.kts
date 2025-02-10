@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "sleep_quality.data"
             isStatic = true
             linkerOpts.add("-lsqlite3")
         }

@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.data.repository
 
-import com.joohnq.core.database.converters.LocalDateTimeConverter
-import com.joohnq.core.database.executeTryCatchResult
+import com.joohnq.database.converters.LocalDateTimeConverter
+import com.joohnq.database.executeTryCatchResult
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import com.joohnq.stress_level.domain.converter.StressLevelRecordConverter
 import com.joohnq.stress_level.domain.converter.StressorsConverter

@@ -21,10 +21,15 @@ import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.freud_score
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.self_journaling
+import com.joohnq.shared_resources.sleep
+import com.joohnq.shared_resources.stress
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.ui.component.SleepQualityMetric
@@ -48,6 +53,7 @@ fun HomeUI(
     ).foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { moodRecords: List<MoodRecordResource>, u: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
+            throw NotImplementedError()
             Column(
                 modifier = Modifier
                     .fillMaxSize()

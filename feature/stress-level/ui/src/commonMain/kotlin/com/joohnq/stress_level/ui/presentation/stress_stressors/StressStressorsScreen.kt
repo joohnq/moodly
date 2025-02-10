@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun StressStressorsScreen(
     onGoBack: () -> Unit,
-    onNavigateBackToStressLevel: () -> Unit,
+    onNavigateToStressLevel: () -> Unit,
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
@@ -43,7 +43,7 @@ fun StressStressorsScreen(
         stressLevelViewModel.sideEffect.collect { event ->
             when (event) {
                 is StressLevelSideEffect.StressLevelAdded -> {
-                    onNavigateBackToStressLevel()
+                    onNavigateToStressLevel()
                     stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
                 }
 

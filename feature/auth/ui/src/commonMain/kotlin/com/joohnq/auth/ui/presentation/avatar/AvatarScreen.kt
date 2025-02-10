@@ -12,9 +12,9 @@ import com.joohnq.permission.*
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.user.ui.viewmodel.user.UserIntent
-import com.joohnq.user.ui.viewmodel.user.UserSideEffect
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
+import com.joohnq.user.ui.viewmodel.UserIntent
+import com.joohnq.user.ui.viewmodel.UserSideEffect
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable

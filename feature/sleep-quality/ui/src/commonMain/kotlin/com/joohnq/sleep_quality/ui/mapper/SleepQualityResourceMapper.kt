@@ -40,7 +40,7 @@ fun SleepQualityResource.toMoodResource(): MoodResource = when (this) {
     Worst -> MoodResource.Depressed
 }
 
-fun Float.fromSliderValueToSleepQualityResource(): SleepQualityResource = when (this) {
+fun Float.toSleepQualityResource(): SleepQualityResource = when (this) {
     0f -> Worst
     25f -> Poor
     50f -> Fair

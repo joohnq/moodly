@@ -1,10 +1,8 @@
 package com.joohnq.user.data.di
 
-import com.joohnq.domain.repository.UserPreferencesRepository
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.user.data.database.UserDatabase
 import com.joohnq.user.data.driver.UserDriverFactory
-import com.joohnq.user.data.repository.UserPreferencesRepositoryImpl
 import com.joohnq.user.data.repository.UserRepositoryImpl
 import com.joohnq.user.database.UserDatabaseSql
 import org.koin.core.module.dsl.singleOf
@@ -17,5 +15,4 @@ val userDataModule = module {
         UserDatabase(driver.createDriver()).invoke()
     }
     singleOf(::UserRepositoryImpl) bind UserRepository::class
-    singleOf(::UserPreferencesRepositoryImpl) bind UserPreferencesRepository::class
 }

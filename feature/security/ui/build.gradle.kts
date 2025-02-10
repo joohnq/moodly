@@ -33,7 +33,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.feature.security.domain)
             implementation(projects.sharedResources)
-            implementation(projects.feature.user.ui)
+            implementation(projects.feature.preferences.ui)
 
             implementation(libs.bundles.koin)
 

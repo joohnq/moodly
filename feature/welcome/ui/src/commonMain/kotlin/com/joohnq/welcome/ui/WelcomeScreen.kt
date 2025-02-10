@@ -5,14 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.core.ui.ObserverSideEffects
 import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.preferences.ui.viewmodel.PreferencesSideEffect
+import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesSideEffect
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
-    val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
+    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
@@ -24,12 +24,11 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
     }
 
     ObserverSideEffects(
-        flow = userPreferencesViewModel.sideEffect,
+        flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is UserPreferencesSideEffect.ShowError -> onError(effect.message)
-                UserPreferencesSideEffect.UpdatedUserPreferences -> onNavigateToOnboarding()
-                else -> Unit
+                is PreferencesSideEffect.ShowError -> onError(effect.message)
+                PreferencesSideEffect.UpdatedPreferences -> onNavigateToOnboarding()
             }
         }
     )
@@ -42,6 +41,6 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         snackBarState = snackBarState,
         pagerState = pagerState,
         onNext = ::onNext,
-        onAction = userPreferencesViewModel::onAction
+        onAction = preferencesViewModel::onAction
     )
 }

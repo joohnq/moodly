@@ -86,7 +86,7 @@
 -dontwarn com.joohnq.user.data.di.UserDataModuleKt
 -dontwarn com.joohnq.user.data.di.UserDriverFactoryModule_androidKt
 -dontwarn com.joohnq.user.ui.di.UserUiModule_androidKt
--dontwarn com.joohnq.user.ui.viewmodel.user.UserViewModel
+-dontwarn com.joohnq.user.ui.viewmodel.UserViewModel
 -dontwarn com.joohnq.user.ui.viewmodel.user.UserViewModelIntent$InitUser
 -dontwarn com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
 -dontwarn com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent$AddUserPreferences

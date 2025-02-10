@@ -10,6 +10,9 @@ import com.joohnq.mood.ui.viewmodel.MoodSideEffect
 import com.joohnq.mood.ui.viewmodel.MoodViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
+import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.ui.viewmodel.PreferencesSideEffect
+import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
@@ -20,12 +23,9 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.user.ui.mapper.toDomain
-import com.joohnq.user.ui.viewmodel.user.UserIntent
-import com.joohnq.user.ui.viewmodel.user.UserSideEffect
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesSideEffect
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
+import com.joohnq.user.ui.viewmodel.UserIntent
+import com.joohnq.user.ui.viewmodel.UserSideEffect
+import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -41,7 +41,7 @@ fun OnboardingExpressionAnalysisScreen(
     val moodViewModel: MoodViewModel = sharedViewModel()
     val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-    val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
+    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val onboardingState by onboardingViewModel.state.collectAsState()
@@ -128,18 +128,17 @@ fun OnboardingExpressionAnalysisScreen(
             }
 
             if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodSideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
-                userPreferencesViewModel.onAction(UserPreferenceIntent.UpdateSkipOnboarding())
+                preferencesViewModel.onAction(PreferenceIntent.UpdateSkipOnboarding())
             }
         }
     }
 
     ObserverSideEffects(
-        flow = userPreferencesViewModel.sideEffect,
+        flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is UserPreferencesSideEffect.ShowError -> onError(effect.message)
-                UserPreferencesSideEffect.UpdatedUserPreferences -> onNavigateToUserName()
-                else -> Unit
+                is PreferencesSideEffect.ShowError -> onError(effect.message)
+                PreferencesSideEffect.UpdatedPreferences -> onNavigateToUserName()
             }
         }
     )

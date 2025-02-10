@@ -1,20 +1,16 @@
 package com.joohnq.splash.ui.presentation.splash_screen
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import com.joohnq.core.ui.mapper.fold
 import com.joohnq.core.ui.sharedViewModel
-import com.joohnq.domain.entity.UserPreferences
+import com.joohnq.preferences.domain.entity.AppPreferences
+import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
-import com.joohnq.user.ui.viewmodel.user.UserIntent
-import com.joohnq.user.ui.viewmodel.user.UserViewModel
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
+import com.joohnq.user.ui.viewmodel.UserIntent
+import com.joohnq.user.ui.viewmodel.UserViewModel
 
 @Composable
 fun SplashScreen(
@@ -28,27 +24,26 @@ fun SplashScreen(
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
-    val userPreferencesViewModel: UserPreferencesViewModel = sharedViewModel()
-    val userPreferencesState by userPreferencesViewModel.state.collectAsState()
+    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
+    val preferencesState by preferencesViewModel.state.collectAsState()
     val securityState by securityViewModel.state.collectAsState()
 
     SideEffect {
-        userPreferencesViewModel.onAction(UserPreferenceIntent.AddUserPreferences)
         userViewModel.onAction(UserIntent.InitUser)
 
         securityViewModel.onAction(SecurityIntent.GetSecurity)
-        userPreferencesViewModel.onAction(UserPreferenceIntent.GetUserPreferences)
+        preferencesViewModel.onAction(PreferenceIntent.GetPreferences)
     }
 
     LaunchedEffect(
-        userPreferencesState.userPreferences,
+        preferencesState.userPreferences,
         securityState
     ) {
         listOf(
-            userPreferencesState.userPreferences,
+            preferencesState.userPreferences,
             securityState.item
         ).fold(
-            onSuccess = { preferences: UserPreferences, security: Security ->
+            onSuccess = { preferences: AppPreferences, security: Security ->
                 when {
                     security is Security.Biometric
                             || security is Security.Pin -> onNavigateToUnLock()

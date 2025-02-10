@@ -5,11 +5,11 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceIntent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -17,7 +17,7 @@ fun WelcomeUI(
     snackBarState: SnackbarHostState,
     pagerState: PagerState,
     onNext: () -> Unit,
-    onAction: (UserPreferenceIntent) -> Unit,
+    onAction: (PreferenceIntent) -> Unit,
 ) {
     ScaffoldSnackBar(
         snackBarHostState = snackBarState,
@@ -100,7 +100,7 @@ fun WelcomeUI(
                         spanColor = Colors.Purple40,
                     ),
                     paddingTop = padding.calculateTopPadding(),
-                    onNext = { onAction(UserPreferenceIntent.UpdateSkipWelcome()) }
+                    onNext = { onAction(PreferenceIntent.UpdateSkipWelcome()) }
                 )
             }
         }

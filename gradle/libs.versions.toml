@@ -24,7 +24,6 @@ napier = "2.7.1"
 navigationCompose = "2.8.0-alpha11"
 okioVersion = "3.10.1"
 robolectric = "4.14.1"
-sqliter = "1.3.0"
 truthish = "1.0.1"
 turbine = "1.2.0"
 mokkery = "2.6.1"
@@ -37,6 +36,10 @@ ktor = "3.0.3"
 coreKtx = "1.6.1"
 uiAndroid = "1.7.7"
 androidx-data-store = "1.1.2"
+firebase-android-bom = "33.9.0"
+crashlytics = "3.0.3"
+google-services = "4.4.2"
+firebase-gitlive-sdk = "2.1.0"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -45,6 +48,8 @@ androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref =
 charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
 calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "composeMultiplatform" }
 cryptography-core = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = "cryptographyCore" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel" }
@@ -62,7 +67,6 @@ serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", v
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-sqliter = { module = "co.touchlab:sqliter", version.ref = "sqliter" }
 squareup-okio = { group = "com.squareup.okio", name = "okio", version.ref = "okioVersion" }
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
@@ -79,7 +83,8 @@ ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref 
 androidx-core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-core = { module = "androidx.datastore:datastore", version.ref = "androidx-data-store" }
 androidx-data-store-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-data-store" }
-
+firebase-android-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
+gitlive-firebase-kotlin-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-gitlive-sdk" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -91,6 +96,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 [bundles]
 viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]

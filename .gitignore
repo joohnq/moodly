@@ -18,4 +18,5 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 .fleet
 *.log
-goole-services.json
+google-services.json
+GoogleService-Info.plist

@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.crashlytics)
 }
 
 kotlin {
@@ -42,8 +44,13 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            implementation(libs.firebase.android.bom)
+
+            implementation(libs.firebase.crashlytics)
+            implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
+            api(libs.gitlive.firebase.kotlin.crashlytics)
             implementation(projects.core.datastore)
             implementation(projects.core.navigation)
             implementation(projects.core.di)

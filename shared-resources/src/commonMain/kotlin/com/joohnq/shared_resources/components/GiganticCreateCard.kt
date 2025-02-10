@@ -67,7 +67,7 @@ fun GiganticCreateCard(
                     )
                 ) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.Add),
+                        painter = painterResource(Drawables.Icons.Outlined.Add),
                         contentDescription = stringResource(Res.string.add),
                         tint = Colors.Gray80,
                         modifier = Modifier.size(18.dp)

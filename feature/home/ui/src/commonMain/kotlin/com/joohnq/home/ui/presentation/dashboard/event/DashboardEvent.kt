@@ -2,7 +2,6 @@ package com.joohnq.home.ui.presentation.dashboard.event
 
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.navigation.Destination
-import com.joohnq.self_journal.ui.presentation.journaling.event.JournalingEvent
 
 sealed interface DashboardEvent {
     data object OnNavigateToAddJournaling : DashboardEvent
@@ -19,12 +18,6 @@ sealed interface DashboardEvent {
     data object OnNavigateToAddSleep : DashboardEvent
     data class OnNavigateTo(val destination: Destination) : DashboardEvent
 }
-
-fun JournalingEvent.toDashboardEvent(): DashboardEvent =
-    when (this) {
-        JournalingEvent.OnNavigateToSelfJournalHistory -> DashboardEvent.OnNavigateToSelfJournalHistory
-        is JournalingEvent.OnNavigateToEditJournaling -> DashboardEvent.OnNavigateToEditJournaling(this.id)
-    }
 
 fun HomeEvent.toDashboardEvent(): DashboardEvent =
     when (this) {

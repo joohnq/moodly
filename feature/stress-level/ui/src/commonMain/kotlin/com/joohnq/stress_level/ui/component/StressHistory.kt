@@ -37,7 +37,7 @@ fun StressHistory(
             containerColor = containerColor,
             title = Res.string.lets_set_up_daily_stress_level,
             subtitle = Res.string.add_new_journal,
-            image = Drawables.Images.StressLevelManIllustration,
+            image = Drawables.Images.StressLevelHistory,
             onClick = onAddStressLevel
         )
     else

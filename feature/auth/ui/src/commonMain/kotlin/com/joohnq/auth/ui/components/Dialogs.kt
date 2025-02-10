@@ -74,7 +74,7 @@ fun ImageSourceOptionDialog(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.camera,
                     icon = DIcon(
-                        icon = Drawables.Icons.Camera,
+                        icon = Drawables.Icons.Outlined.Camera,
                         tint = Colors.White,
                         modifier = Modifier.size(32.dp),
                         contentDescription = Res.string.camera
@@ -87,7 +87,7 @@ fun ImageSourceOptionDialog(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.gallery,
                     icon = DIcon(
-                        icon = Drawables.Icons.Gallery,
+                        icon = Drawables.Icons.Outlined.Gallery,
                         tint = Colors.White,
                         modifier = Modifier.size(32.dp),
                         contentDescription = Res.string.gallery

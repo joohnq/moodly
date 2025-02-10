@@ -110,7 +110,7 @@ fun SelfJournalHistoryCard(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.Clock),
+                        painter = painterResource(Drawables.Icons.Filled.Clock),
                         contentDescription = stringResource(Res.string.hour),
                         tint = Colors.White,
                         modifier = Modifier.size(18.dp)

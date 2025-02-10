@@ -22,7 +22,7 @@ fun SplashScreenUI() {
     Scaffold {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Image(
-                painter = painterResource(Drawables.Icons.Logo),
+                painter = painterResource(Drawables.Icons.Filled.Logo),
                 contentDescription = stringResource(Res.string.logo),
                 modifier = Modifier.size(110.dp),
                 colorFilter = ColorFilter.tint(Colors.Brown60)

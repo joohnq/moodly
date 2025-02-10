@@ -1,11 +1,7 @@
 package com.joohnq.security.ui.presentation.security
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,15 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.ui.presentation.security.event.SecurityEvent
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.SecondaryButton
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.scan_with_your_device_security
-import com.joohnq.shared_resources.security_setup
-import com.joohnq.shared_resources.set_a_pin
-import com.joohnq.shared_resources.skip
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -59,7 +51,7 @@ fun SecurityUI(
                 )
                 VerticalSpacer(60.dp)
                 Image(
-                    painter = painterResource(Drawables.Images.SecurityImage),
+                    painter = painterResource(Drawables.Images.Security),
                     contentDescription = stringResource(Res.string.security_setup),
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
                 )

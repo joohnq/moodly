@@ -61,7 +61,7 @@ fun EditJournalingUI(
             },
             dialogTitle = Res.string.delete_journal,
             dialogText = Res.string.do_you_wish_to_remove_this_journal,
-            image = Drawables.Images.DeleteSelfJournalIllustration,
+            image = Drawables.Images.SelfJournalDeleting,
             backgroundColor = Colors.White
         )
 
@@ -163,7 +163,7 @@ fun EditJournalingUIPreview() {
         },
         dialogTitle = Res.string.delete_journal,
         dialogText = Res.string.do_you_wish_to_remove_this_journal,
-        image = Drawables.Images.DeleteSelfJournalIllustration,
+        image = Drawables.Images.SelfJournalDeleting,
         backgroundColor = Colors.White
     )
 }

@@ -39,7 +39,7 @@ fun SleepQualityMetric(
         NotFoundVertical(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
-            image = Drawables.Images.SleepWomanIllustration,
+            image = Drawables.Images.SleepQualityCreate,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
             subtitle = Res.string.set_up_sleep,
             onClick = onCreate
@@ -69,12 +69,12 @@ fun SleepQualityMetric(
                         SleepInfo(
                             title = record.startSleeping.toFormattedTimeString(),
                             subtitle = Res.string.bedtime,
-                            icon = Drawables.Icons.Moon
+                            icon = Drawables.Icons.Outlined.Moon
                         )
                         SleepInfo(
                             title = record.endSleeping.toFormattedTimeString(),
                             subtitle = Res.string.wake_up,
-                            icon = Drawables.Icons.Sun
+                            icon = Drawables.Icons.Outlined.Sun
                         )
                     }
                 }

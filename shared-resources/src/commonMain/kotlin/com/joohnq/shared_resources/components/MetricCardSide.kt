@@ -76,7 +76,7 @@ fun MetricCardSide(
                         color = if (dark) Colors.White else Colors.Gray60
                     )
                     Icon(
-                        painter = painterResource(Drawables.Icons.ArrowChevron),
+                        painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                         contentDescription = title,
                         modifier = Modifier.size(20.dp).rotate(180f),
                         tint = if (dark) Colors.White else Colors.Gray40
@@ -171,7 +171,7 @@ fun MetricCardSide(
                         color = if (dark) Colors.White else Colors.Gray60
                     )
                     Icon(
-                        painter = painterResource(Drawables.Icons.ArrowChevron),
+                        painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                         contentDescription = title,
                         modifier = Modifier.size(20.dp).rotate(180f),
                         tint = if (dark) Colors.White else Colors.Gray40

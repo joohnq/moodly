@@ -51,7 +51,7 @@ fun SleepQualityCalendar(
                 ),
             ) {
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowChevron),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     tint = Colors.Brown80,
                     modifier = Modifier.size(24.dp)
@@ -70,7 +70,7 @@ fun SleepQualityCalendar(
                 ),
             ) {
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowChevron),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     tint = Colors.Brown80,
                     modifier = Modifier.size(24.dp).rotate(180f),

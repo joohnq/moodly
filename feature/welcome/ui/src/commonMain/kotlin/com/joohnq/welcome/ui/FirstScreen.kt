@@ -2,28 +2,18 @@ package com.joohnq.welcome.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.LogoWithBackground
 import com.joohnq.shared_resources.components.TextWithSpan
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.first_screen_desc
-import com.joohnq.shared_resources.first_screen_image
-import com.joohnq.shared_resources.first_screen_second_title
-import com.joohnq.shared_resources.first_screen_title
-import com.joohnq.shared_resources.first_screen_title_word
-import com.joohnq.shared_resources.get_started
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -62,7 +52,7 @@ fun FirstScreen(onNext: () -> Unit) {
                     .background(color = Colors.White, shape = Dimens.Shape.Circle)
             )
             Image(
-                painter = painterResource(Drawables.Images.WelcomeFirstScreenImage),
+                painter = painterResource(Drawables.Images.WelcomeFirstScreen),
                 contentDescription = stringResource(Res.string.first_screen_image),
             )
         }

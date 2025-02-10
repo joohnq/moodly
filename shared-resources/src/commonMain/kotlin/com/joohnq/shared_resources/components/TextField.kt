@@ -37,7 +37,7 @@ fun ErrorInfo(errorText: String) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                painter = painterResource(Drawables.Icons.Warning),
+                painter = painterResource(Drawables.Icons.Filled.Warning),
                 contentDescription = null,
                 tint = Colors.Orange40,
                 modifier = Modifier.size(20.dp)

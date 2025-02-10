@@ -1,9 +1,9 @@
 package com.joohnq.user.ui.resource
 
+import com.joohnq.core.ui.entity.DIcon
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.NO
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL
-import com.joohnq.core.ui.entity.DIcon
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.no_physical_pain
 import com.joohnq.shared_resources.theme.Drawables
@@ -20,7 +20,7 @@ sealed class PhysicalSymptomsResource(
         id = YES_VERY_PAINFUL.id,
         text = Res.string.yes_very_painful,
         icon = DIcon(
-            icon = Drawables.Icons.Check,
+            icon = Drawables.Icons.Outlined.Check,
             contentDescription = Res.string.yes_very_painful
         )
     )
@@ -29,7 +29,7 @@ sealed class PhysicalSymptomsResource(
         id = NO.id,
         text = Res.string.no_physical_pain,
         icon = DIcon(
-            icon = Drawables.Icons.Close,
+            icon = Drawables.Icons.Outlined.Close,
             contentDescription = Res.string.no_physical_pain
         )
     )
@@ -38,7 +38,7 @@ sealed class PhysicalSymptomsResource(
         id = YES_JUST_A_BIT.id,
         text = Res.string.yes_but_just_a_bit,
         icon = DIcon(
-            icon = Drawables.Icons.Question,
+            icon = Drawables.Icons.Outlined.Question,
             contentDescription = Res.string.yes_but_just_a_bit
         )
     )

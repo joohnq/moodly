@@ -32,14 +32,14 @@ fun StressLevelMetric(
             containerColor = containerColor,
             title = Res.string.lets_set_up_daily_stress_level,
             subtitle = Res.string.add_new_journal,
-            image = Drawables.Images.StressLevelManIllustration,
+            image = Drawables.Images.StressLevelHistory,
             onClick = onCreate
         )
     else
         MetricCardSide(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
-            icon = Drawables.Icons.Warning,
+            icon = Drawables.Icons.Filled.Warning,
             title = stringResource(Res.string.stress_level),
             text = stringResource(record.stressLevel.value),
             suffix = stringResource(Res.string.level),

@@ -41,7 +41,7 @@ fun DashboardBottomNavigation(
         BottomNavigationActionButton(
             modifier = Modifier.size(48.dp),
             onClick = toggleIsCentralExpanded,
-            image = if (isCentralExpanded) Drawables.Icons.Close else Drawables.Icons.Logo,
+            image = if (isCentralExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo,
         )
         CreateTabItem(
             item = bottomItems[1],

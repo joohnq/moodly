@@ -1,13 +1,7 @@
 package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraintsScope
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,7 +32,7 @@ fun BoxWithConstraintsScope.TopBalloon(
         contentAlignment = Alignment.BottomCenter
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.Logo),
+            painter = painterResource(Drawables.Icons.Filled.Logo),
             contentDescription = null,
             modifier = Modifier.size(48.dp),
             tint = iconColor

@@ -2,12 +2,7 @@ package com.joohnq.auth.ui.presentation.user_name
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -23,20 +18,12 @@ import com.joohnq.auth.ui.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TextFieldWithLabelAndDoubleBorder
-import com.joohnq.shared_resources.components.TopBalloon
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
 import com.joohnq.shared_resources.name
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.*
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -86,7 +73,7 @@ fun UserNameUI(
                     focusedBorderColor = Colors.Green50Alpha25,
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(Drawables.Icons.User),
+                            painter = painterResource(Drawables.Icons.Outlined.User),
                             contentDescription = null,
                             tint = Colors.Brown80,
                             modifier = Modifier.size(Dimens.Icon)

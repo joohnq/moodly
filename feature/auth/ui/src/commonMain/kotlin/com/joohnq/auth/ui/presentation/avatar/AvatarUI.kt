@@ -59,7 +59,7 @@ fun AvatarUI(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.SimpleTarget),
+                        painter = painterResource(Drawables.Icons.Filled.Target),
                         contentDescription = null,
                         modifier = Modifier.width(22.dp),
                         tint = Colors.Brown80
@@ -70,7 +70,7 @@ fun AvatarUI(
                     )
                     VerticalSpacer(10.dp)
                     Icon(
-                        painter = painterResource(Drawables.Icons.SimpleTarget),
+                        painter = painterResource(Drawables.Icons.Filled.Target),
                         contentDescription = null,
                         modifier = Modifier.width(22.dp).rotate(-180f),
                         tint = Colors.Brown80
@@ -115,7 +115,7 @@ fun AvatarUI(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
-                                    painter = painterResource(Drawables.Icons.Add),
+                                    painter = painterResource(Drawables.Icons.Outlined.Add),
                                     contentDescription = null,
                                     modifier = Modifier.size(32.dp),
                                     tint = Colors.Gray40

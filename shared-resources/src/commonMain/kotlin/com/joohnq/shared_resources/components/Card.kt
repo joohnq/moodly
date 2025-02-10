@@ -226,7 +226,7 @@ fun TimePickerCard(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.Calendar),
+                        painter = painterResource(Drawables.Icons.Outlined.Calendar),
                         contentDescription = stringResource(Res.string.start_sleeping),
                         tint = Colors.Brown80,
                         modifier = Modifier.size(24.dp)
@@ -245,7 +245,7 @@ fun TimePickerCard(
                 }
                 HorizontalSpacer(10.dp)
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowOpen),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = stringResource(Res.string.start_sleeping),
                     tint = Colors.Brown80,
                     modifier = Modifier.size(18.dp).rotate(90f)

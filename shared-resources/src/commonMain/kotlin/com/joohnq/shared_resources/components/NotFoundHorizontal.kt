@@ -68,7 +68,7 @@ fun NotFoundHorizontal(
                         color = Colors.Brown60
                     )
                     Icon(
-                        painter = painterResource(Drawables.Icons.Add),
+                        painter = painterResource(Drawables.Icons.Outlined.Add),
                         contentDescription = null,
                         tint = Colors.Brown60,
                         modifier = Modifier.size(16.dp)

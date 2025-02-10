@@ -23,7 +23,7 @@ fun SmallAddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         modifier = modifier.size(56.dp).dpOffset(y = 30.dp)
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.Add),
+            painter = painterResource(Drawables.Icons.Outlined.Add),
             contentDescription = stringResource(Res.string.add),
             modifier = Modifier.size(Dimens.Icon)
         )

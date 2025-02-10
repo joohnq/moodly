@@ -49,7 +49,7 @@ fun JournalHistoryCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(Drawables.Icons.Book),
+                painter = painterResource(Drawables.Icons.Outlined.BookOpen),
                 contentDescription = null,
                 tint = Colors.Brown60,
                 modifier = Modifier.size(24.dp)
@@ -118,7 +118,7 @@ fun JournalHistoryCard(
                     color = Colors.Gray60,
                 )
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowChevron),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     tint = Colors.Gray60,
                     modifier = Modifier.size(24.dp).rotate(180f)

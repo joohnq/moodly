@@ -42,7 +42,7 @@ fun SecurityConfirmedUI(
                 modifier = Modifier.fillMaxSize()
             )
             Image(
-                painter = painterResource(Drawables.Images.SecurityConfirmedImage),
+                painter = painterResource(Drawables.Images.SecurityConfirmed),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxWidth()

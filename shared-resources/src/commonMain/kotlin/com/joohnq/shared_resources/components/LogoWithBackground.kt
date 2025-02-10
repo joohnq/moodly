@@ -25,7 +25,7 @@ fun LogoWithBackground() {
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(Drawables.Icons.Logo),
+            painter = painterResource(Drawables.Icons.Filled.Logo),
             contentDescription = stringResource(Res.string.logo),
             modifier = Modifier.size(32.dp),
             colorFilter = ColorFilter.tint(Colors.White)

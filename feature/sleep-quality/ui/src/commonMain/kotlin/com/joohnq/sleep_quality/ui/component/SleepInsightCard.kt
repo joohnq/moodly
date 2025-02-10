@@ -94,7 +94,7 @@ fun SleepInsightCard(
                     )
                 }
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowChevron),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     tint = Colors.Gray60,
                     modifier = Modifier.size(24.dp).rotate(180f),
                     contentDescription = null

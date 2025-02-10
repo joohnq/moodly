@@ -73,7 +73,7 @@ fun AddJournalingUI(
                     },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(Drawables.Icons.Edit),
+                            painter = painterResource(Drawables.Icons.Outlined.Edit),
                             contentDescription = null,
                             tint = Colors.Brown80,
                             modifier = Modifier.size(Dimens.Icon)

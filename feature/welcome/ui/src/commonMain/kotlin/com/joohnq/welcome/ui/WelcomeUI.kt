@@ -31,7 +31,7 @@ fun WelcomeUI(
                 0 -> FirstScreen(onNext = onNext)
                 1 -> WelcomeBase(
                     welcome = Welcome(
-                        image = Drawables.Images.WelcomeHealthStateImage,
+                        image = Drawables.Images.WelcomeHealthState,
                         step = Res.string.one,
                         index = 1,
                         backgroundColor = Colors.Green30,
@@ -47,7 +47,7 @@ fun WelcomeUI(
 
                 2 -> WelcomeBase(
                     welcome = Welcome(
-                        image = Drawables.Images.WelcomeIntelligentImage,
+                        image = Drawables.Images.WelcomeIntelligent,
                         step = Res.string.two,
                         index = 2,
                         backgroundColor = Colors.Orange20,
@@ -61,7 +61,7 @@ fun WelcomeUI(
 
                 3 -> WelcomeBase(
                     welcome = Welcome(
-                        image = Drawables.Images.WelcomeMentalImage,
+                        image = Drawables.Images.WelcomeMental,
                         step = Res.string.three,
                         index = 3,
                         backgroundColor = Colors.Gray10,
@@ -76,7 +76,7 @@ fun WelcomeUI(
 
                 4 -> WelcomeBase(
                     welcome = Welcome(
-                        image = Drawables.Images.WelcomeResourcesImage,
+                        image = Drawables.Images.WelcomeResources,
                         step = Res.string.four,
                         index = 4,
                         backgroundColor = Colors.Yellow20,
@@ -91,7 +91,7 @@ fun WelcomeUI(
 
                 5 -> WelcomeBase(
                     welcome = Welcome(
-                        image = Drawables.Images.WelcomeCommunityImage,
+                        image = Drawables.Images.WelcomeCommunity,
                         step = Res.string.five,
                         index = 5,
                         backgroundColor = Colors.Purple30,

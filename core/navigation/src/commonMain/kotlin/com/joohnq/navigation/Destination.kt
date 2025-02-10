@@ -66,9 +66,6 @@ sealed interface Destination {
         data object DashBoard : Destination {
             @Serializable
             data object Home : Destination
-
-            @Serializable
-            data object Journaling : Destination
         }
 
         @Serializable

@@ -74,7 +74,7 @@ fun NotFoundVertical(
                     color = Colors.Brown60
                 )
                 Icon(
-                    painter = painterResource(Drawables.Icons.Arrow),
+                    painter = painterResource(Drawables.Icons.Outlined.Arrow),
                     contentDescription = null,
                     tint = Colors.Brown60,
                     modifier = Modifier.size(16.dp)

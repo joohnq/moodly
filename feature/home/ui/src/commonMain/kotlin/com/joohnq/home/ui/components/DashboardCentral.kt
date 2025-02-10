@@ -24,10 +24,10 @@ fun DashboardCentral(
     onEvent: (DashboardEvent) -> Unit
 ) {
     val items =
-        listOf<CentralAction<Destination>>(
+        listOf(
             CentralAction<Destination>(
                 title = Res.string.sleep,
-                icon = Drawables.Icons.Sleep,
+                icon = Drawables.Icons.Outlined.Sleep,
                 destination = Destination.App.AddSleepQuality
             ),
             CentralAction<Destination>(

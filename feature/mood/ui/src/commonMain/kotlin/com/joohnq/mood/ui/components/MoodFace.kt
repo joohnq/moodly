@@ -87,9 +87,9 @@ fun MoodFace(
             .background(color = average.backgroundColor, shape = Dimens.Shape.Circle),
     ) {
         val image = when (average) {
-            MoodAverageResource.Negative -> Drawables.Mood.Depressed
-            MoodAverageResource.Neutral -> Drawables.Mood.Neutral
-            else -> Drawables.Mood.Overjoyed
+            MoodAverageResource.Negative -> Drawables.Icons.Filled.MoodDepressed
+            MoodAverageResource.Neutral -> Drawables.Icons.Filled.MoodNeutral
+            else -> Drawables.Icons.Filled.MoodOverjoyed
         }
         Icon(
             painter = painterResource(image),

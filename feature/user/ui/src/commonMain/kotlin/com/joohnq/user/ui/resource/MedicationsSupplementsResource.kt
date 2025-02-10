@@ -6,11 +6,7 @@ import com.joohnq.domain.entity.MedicationsSupplements.Companion.OVER_THE_COUNTE
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PRESCRIBED_MEDICATIONS
 import com.joohnq.domain.property.MedicationsSupplementsProperties
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.im_not_taking_any
-import com.joohnq.shared_resources.over_the_counter_supplements
-import com.joohnq.shared_resources.prefer_not_to_say
-import com.joohnq.shared_resources.prescribed_medications
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.StringResource
 
@@ -23,7 +19,7 @@ sealed class MedicationsSupplementsResource(
         id = PRESCRIBED_MEDICATIONS.id,
         text = Res.string.prescribed_medications,
         icon = DIcon(
-            icon = Drawables.Icons.Medicine,
+            icon = Drawables.Icons.Outlined.Medicine,
             contentDescription = Res.string.prescribed_medications
         )
     )
@@ -32,7 +28,7 @@ sealed class MedicationsSupplementsResource(
         id = OVER_THE_COUNTER_SUPPLEMENTS.id,
         text = Res.string.over_the_counter_supplements,
         icon = DIcon(
-            icon = Drawables.Icons.DrugStore,
+            icon = Drawables.Icons.Outlined.DrugStore,
             contentDescription = Res.string.over_the_counter_supplements
         )
     )
@@ -41,7 +37,7 @@ sealed class MedicationsSupplementsResource(
         id = IM_NOT_TAKING_ANY.id,
         text = Res.string.im_not_taking_any,
         icon = DIcon(
-            icon = Drawables.Icons.Nothing,
+            icon = Drawables.Icons.Outlined.Nothing,
             contentDescription = Res.string.im_not_taking_any
         )
     )
@@ -51,7 +47,7 @@ sealed class MedicationsSupplementsResource(
             id = PREFER_NOT_TO_SAY.id,
             text = Res.string.prefer_not_to_say,
             icon = DIcon(
-                icon = Drawables.Icons.Close,
+                icon = Drawables.Icons.Outlined.Close,
                 contentDescription = Res.string.prefer_not_to_say
             )
         )

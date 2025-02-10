@@ -17,7 +17,7 @@ fun FreudScoreMetric(freudScore: FreudScoreResource?, onClick: () -> Unit = {}) 
     if (freudScore == null) return
     MetricCardSide(
         modifier = Modifier.paddingHorizontalMedium(),
-        icon = Drawables.Icons.Logo,
+        icon = Drawables.Icons.Filled.Logo,
         dark = true,
         containerColor = Colors.Green50,
         title = stringResource(Res.string.freud_score),

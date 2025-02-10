@@ -44,11 +44,11 @@ fun JournalInsight(
         NotFoundHorizontal(
             modifier = modifier,
             containerColor = containerColor,
-            image = Drawables.Images.SelfJournalWomanWriting,
+            image = Drawables.Images.SelfJournalInsight,
             title = Res.string.log_your_first_journal,
             description = Res.string.lets_log_your_first_journal_to_see_your_insight,
             text = Res.string.write_journal,
-            icon = Drawables.Icons.Edit,
+            icon = Drawables.Icons.Outlined.Edit,
             onCreate = {},
         )
     else

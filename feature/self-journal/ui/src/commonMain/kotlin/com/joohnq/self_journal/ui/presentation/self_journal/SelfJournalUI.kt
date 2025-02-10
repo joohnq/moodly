@@ -51,6 +51,19 @@ fun SelfJournalUI(
 
 @Preview
 @Composable
+fun SelfJournalUIPreviewEmpty() {
+    SelfJournalUI(
+        state = SelfJournalState(
+            records = UiState.Success(
+                listOf(
+                )
+            )
+        ),
+    )
+}
+
+@Preview
+@Composable
 fun SelfJournalUIPreview() {
     SelfJournalUI(
         state = SelfJournalState(

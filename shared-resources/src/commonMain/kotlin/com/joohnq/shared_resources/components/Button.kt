@@ -6,12 +6,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.joohnq.core.ui.entity.DIcon
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.continue_word
+import com.joohnq.shared_resources.go_back
+import com.joohnq.shared_resources.go_next
 import com.joohnq.shared_resources.theme.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -92,7 +94,7 @@ fun ContinueButton(
         colors = ComponentColors.Button.MainButtonColors(),
         shape = Dimens.Shape.Circle,
         icon = DIcon(
-            icon = Drawables.Icons.Arrow,
+            icon = Drawables.Icons.Outlined.Arrow,
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = Res.string.continue_word
         ),
@@ -129,7 +131,7 @@ fun ButtonTextAndCheck(
         colors = ComponentColors.Button.MainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
         icon = DIcon(
-            icon = Drawables.Icons.Check,
+            icon = Drawables.Icons.Outlined.Check,
             tint = Colors.Brown80,
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = text
@@ -157,7 +159,7 @@ fun BackButton(
     ) {
         Icon(
             DIcon(
-                icon = Drawables.Icons.ArrowOpen,
+                icon = Drawables.Icons.Outlined.ArrowOpen,
                 tint = color,
                 modifier = Modifier.size(Dimens.Icon),
                 contentDescription = Res.string.go_back
@@ -179,36 +181,10 @@ fun IconContinueButton(
         onClick = onClick,
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.Arrow),
+            painter = painterResource(Drawables.Icons.Outlined.Arrow),
             tint = colors.contentColor,
             modifier = Modifier.size(Dimens.Icon),
             contentDescription = stringResource(Res.string.go_next)
-        )
-    }
-}
-
-@Composable
-fun PreviousNextButton(
-    enabled: Boolean = true,
-    onClick: () -> Unit,
-    isPrevious: Boolean = true,
-    color: Color,
-) {
-    val modifier = Modifier.size(Dimens.Icon)
-    val iconModifier = if (isPrevious)
-        modifier else modifier.rotate(180f)
-
-    FilledIconButton(
-        enabled = enabled,
-        onClick = onClick,
-        colors = ComponentColors.IconButton.PreviousNextButton(color),
-        shape = Dimens.Shape.Circle,
-        modifier = Modifier.size(48.dp),
-    ) {
-        Icon(
-            painter = painterResource(Drawables.Icons.ArrowChevron),
-            modifier = iconModifier,
-            contentDescription = stringResource(if (isPrevious) Res.string.previous else Res.string.next)
         )
     }
 }

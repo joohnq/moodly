@@ -77,7 +77,7 @@ fun SleepQualityThumb() {
         contentAlignment = Alignment.Center
     ) {
         androidx.compose.material3.Icon(
-            painter = painterResource(Drawables.Icons.Resize),
+            painter = painterResource(Drawables.Icons.Outlined.Resize),
             contentDescription = null,
             modifier = Modifier.size(Dimens.Icon),
             tint = Colors.White

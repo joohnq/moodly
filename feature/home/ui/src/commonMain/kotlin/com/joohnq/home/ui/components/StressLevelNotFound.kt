@@ -35,7 +35,7 @@ fun SelfJournalingMetric(
             containerColor = containerColor,
             title = Res.string.lets_set_up_daily_journaling_and_self_reflection,
             subtitle = Res.string.add_new_journal,
-            image = Drawables.Images.SelfJournalingIllustration,
+            image = Drawables.Images.SelfJournalCreate,
             onClick = onCreate
         )
     else {

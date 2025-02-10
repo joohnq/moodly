@@ -50,7 +50,7 @@ fun SleepWeekDay(
                 MoodFace(modifier = Modifier.size(24.dp), resource = resource.sleepQuality.toMoodResource())
             else
                 Icon(
-                    painter = painterResource(Drawables.Icons.Close),
+                    painter = painterResource(Drawables.Icons.Outlined.Close),
                     contentDescription = null,
                     tint = Colors.Pink40,
                     modifier = Modifier.size(24.dp)

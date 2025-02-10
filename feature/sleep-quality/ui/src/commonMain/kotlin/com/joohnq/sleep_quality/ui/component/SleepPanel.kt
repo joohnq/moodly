@@ -41,7 +41,7 @@ fun SleepPanel(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.Sleep),
+            painter = painterResource(Drawables.Icons.Outlined.Sleep),
             contentDescription = stringResource(Res.string.sleep_quality),
             modifier = Modifier.size(48.dp),
             tint = iconTint
@@ -71,7 +71,7 @@ fun SleepPanel(
         ) {
             SleepPanelInfo(
                 modifier = Modifier.weight(1f),
-                icon = Drawables.Icons.Sleep,
+                icon = Drawables.Icons.Outlined.Sleep,
                 title = Res.string.time_asleep,
                 value = duration.toHoursAndMinutesString()
             )

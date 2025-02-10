@@ -55,7 +55,7 @@ fun EditFloatingActionButtons(
                     )
                 ) {
                     Icon(
-                        painter = painterResource(Drawables.Icons.Trash),
+                        painter = painterResource(Drawables.Icons.Filled.Trash),
                         contentDescription = stringResource(Res.string.remove_journal),
                         tint = Colors.White,
                         modifier = Modifier.size(28.dp)
@@ -83,7 +83,7 @@ fun EditFloatingActionButtons(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(Drawables.Icons.Edit),
+                            painter = painterResource(Drawables.Icons.Outlined.Edit),
                             contentDescription = stringResource(Res.string.edit_journal),
                             tint = if (isEditing) Colors.White else Colors.Brown80,
                             modifier = Modifier.size(28.dp)
@@ -122,7 +122,7 @@ fun EditFloatingActionButtons(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(Drawables.Icons.Check),
+                            painter = painterResource(Drawables.Icons.Outlined.Check),
                             contentDescription = stringResource(Res.string.remove_journal),
                             tint = Colors.White,
                             modifier = Modifier.size(28.dp)

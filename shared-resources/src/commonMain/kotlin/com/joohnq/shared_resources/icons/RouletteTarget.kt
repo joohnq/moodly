@@ -10,12 +10,12 @@ import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val Target: ImageVector
+val RouletteTarget: ImageVector
     get() {
-        if (_target != null) {
-            return _target!!
+        if (_rouletteTarget != null) {
+            return _rouletteTarget!!
         }
-        _target = Builder(
+        _rouletteTarget = Builder(
             name = "Target",
             defaultWidth = 37.0.dp,
             defaultHeight = 60.0.dp,
@@ -53,7 +53,7 @@ val Target: ImageVector
             }
         }
             .build()
-        return _target!!
+        return _rouletteTarget!!
     }
 
-private var _target: ImageVector? = null
+private var _rouletteTarget: ImageVector? = null

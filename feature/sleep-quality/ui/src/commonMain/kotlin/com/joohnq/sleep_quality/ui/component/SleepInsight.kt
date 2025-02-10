@@ -4,13 +4,9 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.lets_log_your_first_sleep_to_see_your_insight
-import com.joohnq.shared_resources.log_sleep
-import com.joohnq.shared_resources.log_your_first_sleep
-import com.joohnq.shared_resources.sleep_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
@@ -35,9 +31,9 @@ fun SleepInsight(
             title = Res.string.log_your_first_sleep,
             description = Res.string.lets_log_your_first_sleep_to_see_your_insight,
             text = Res.string.log_sleep,
-            icon = Drawables.Icons.Add,
-            image = Drawables.Images.SleepInsight,
-            onCreate= onCreate
+            icon = Drawables.Icons.Outlined.Add,
+            image = Drawables.Images.SleepQualityInsight,
+            onCreate = onCreate
         )
     else
         SleepInsightCard(

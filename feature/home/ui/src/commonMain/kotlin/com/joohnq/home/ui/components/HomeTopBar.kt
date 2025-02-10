@@ -44,7 +44,7 @@ fun HomeTopBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(Drawables.Icons.Calendar),
+                    painter = painterResource(Drawables.Icons.Outlined.Calendar),
                     modifier = Modifier.size(20.dp),
                     tint = Colors.Brown40,
                     contentDescription = null

@@ -39,7 +39,7 @@ fun SleepHistory(
             containerColor = containerColor,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
             subtitle = Res.string.set_up_sleep,
-            image = Drawables.Images.SleepWomanTiredIllustration,
+            image = Drawables.Images.SleepQualityHistory,
             onClick = onClick
         )
     else

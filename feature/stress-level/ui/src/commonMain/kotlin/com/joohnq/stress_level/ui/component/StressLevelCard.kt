@@ -47,7 +47,7 @@ fun StressLevelHistoryCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Icon(
-                painter = painterResource(Drawables.Icons.Warning),
+                painter = painterResource(Drawables.Icons.Filled.Warning),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = Colors.Orange40
@@ -81,7 +81,7 @@ fun StressLevelHistoryCard(
                     color = Colors.Gray60
                 )
                 Icon(
-                    painter = painterResource(Drawables.Icons.ArrowOpen),
+                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     modifier = Modifier.size(24.dp).rotate(180f),
                     tint = Colors.Gray60

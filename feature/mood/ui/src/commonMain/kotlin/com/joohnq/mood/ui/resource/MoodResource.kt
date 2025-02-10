@@ -26,7 +26,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.DepressedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodDepressed,
-                secondaryIcon = Drawables.Images.FaceDepressed,
+                secondaryIcon = Drawables.Mood.FaceDepressedNew,
                 iconOutlined = Drawables.Icons.Outlined.MoodDepressed
             ),
             text = Res.string.depressed,
@@ -53,7 +53,7 @@ sealed class MoodResource(
         assets = Assets(
             imageVector = Drawables.Mood.SadVectorPainter,
             icon = Drawables.Icons.Filled.MoodSad,
-            secondaryIcon = Drawables.Images.FaceSad,
+            secondaryIcon = Drawables.Mood.FaceSadNew,
             iconOutlined = Drawables.Icons.Outlined.MoodSad
         ),
         text = Res.string.sad,
@@ -81,7 +81,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.NeutralVectorPainter,
                 icon = Drawables.Icons.Filled.MoodNeutral,
-                secondaryIcon = Drawables.Images.FaceNeutral,
+                secondaryIcon = Drawables.Mood.FaceNeutralNew,
                 iconOutlined = Drawables.Icons.Outlined.MoodNeutral
             ),
             text = Res.string.neutral,
@@ -108,7 +108,7 @@ sealed class MoodResource(
         assets = Assets(
             imageVector = Drawables.Mood.HappyVectorPainter,
             icon = Drawables.Icons.Filled.MoodHappy,
-            secondaryIcon = Drawables.Images.FaceHappy,
+            secondaryIcon = Drawables.Mood.FaceHappyNew,
             iconOutlined = Drawables.Icons.Outlined.MoodHappy
         ),
         text = Res.string.happy,
@@ -136,7 +136,7 @@ sealed class MoodResource(
             assets = Assets(
                 imageVector = Drawables.Mood.OverjoyedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodOverjoyed,
-                secondaryIcon = Drawables.Images.FaceOverjoyed,
+                secondaryIcon = Drawables.Mood.FaceOverjoyedNew,
                 iconOutlined = Drawables.Icons.Outlined.MoodOverjoyed
             ),
             text = Res.string.overjoyed,

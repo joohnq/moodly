@@ -20,7 +20,6 @@ import com.joohnq.home.ui.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.ui.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
-import com.joohnq.self_journal.ui.presentation.journaling.JournalingScreen
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -93,14 +92,6 @@ fun DashboardScreen(
         ) {
             composable<Destination.App.DashBoard.Home> {
                 HomeScreen(
-                    padding = padding,
-                    onEvent = { event ->
-                        onEvent(event.toDashboardEvent())
-                    }
-                )
-            }
-            composable<Destination.App.DashBoard.Journaling> {
-                JournalingScreen(
                     padding = padding,
                     onEvent = { event ->
                         onEvent(event.toDashboardEvent())

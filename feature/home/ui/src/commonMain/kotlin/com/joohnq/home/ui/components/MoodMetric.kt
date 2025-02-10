@@ -87,7 +87,7 @@ fun MoodMetric(
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
-            image = Drawables.Images.MoodIllustration,
+            image = Drawables.Images.MoodInsight,
             title = Res.string.you_havent_set_up_any_mood_yet,
             subtitle = Res.string.set_up_mood,
             onClick = onCreate

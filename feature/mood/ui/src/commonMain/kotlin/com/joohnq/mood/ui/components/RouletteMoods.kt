@@ -28,7 +28,7 @@ fun RouletteMoods(setSelectedMood: (MoodResource) -> Unit) {
         getAllMoodResource() + getAllMoodResource()
     }
     val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.assets.imageVector) }
-    val targetVectorPainter = rememberVectorPainter(Drawables.Mood.TargetVectorPainter)
+    val targetVectorPainter = rememberVectorPainter(Drawables.Icons.Filled.RouletteTarget)
     val totalSlices = moods.size
     val limitedAngle = 360f * (PI / 180) // 6,283185307179586
     val limitedAngleForSlice =

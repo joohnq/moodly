@@ -27,7 +27,7 @@ fun DeleteButton(onClick: () -> Unit) {
         )
     ) {
         Icon(
-            painter = painterResource(Drawables.Icons.Trash),
+            painter = painterResource(Drawables.Icons.Filled.Trash),
             contentDescription = stringResource(Res.string.remove),
             tint = Colors.White,
             modifier = Modifier.size(28.dp)

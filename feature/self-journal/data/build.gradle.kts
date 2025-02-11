@@ -31,7 +31,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.core.database)
             implementation(projects.feature.selfJournal.domain)
             implementation(projects.feature.mood.domain)

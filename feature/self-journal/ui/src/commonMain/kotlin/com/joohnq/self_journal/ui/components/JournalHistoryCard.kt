@@ -12,8 +12,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toMonthAbbreviatedAndDayString
-import com.joohnq.core.ui.mapper.toWordCount
+import com.joohnq.domain.mapper.toMonthAbbreviatedAndDayString
+import com.joohnq.domain.mapper.toWordCount
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
@@ -103,7 +103,10 @@ fun JournalHistoryCard(
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = stringResource(Res.string.words, record.description.toWordCount()),
+                            text = stringResource(
+                                Res.string.words,
+                                record.description.toWordCount()
+                            ),
                             style = TextStyles.TextSmMedium(),
                             color = Colors.Gray60
                         )

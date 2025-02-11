@@ -3,7 +3,7 @@ package com.joohnq.freud_score.ui.presentation.freud_score
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.freud_score.ui.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
 

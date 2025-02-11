@@ -1,7 +1,7 @@
 package com.joohnq.mood.ui.mapper
 
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.toMonthDays
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.toMonthDays
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.domain.mapper.toFreudScore
 import com.joohnq.mood.domain.entity.MoodRecord

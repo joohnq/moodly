@@ -5,10 +5,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.core.ui.mapper.itemsIndexed
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.components.IsEmpty
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.ui.mapper.itemsIndexed
 import kotlinx.datetime.LocalDate
 
 @Composable

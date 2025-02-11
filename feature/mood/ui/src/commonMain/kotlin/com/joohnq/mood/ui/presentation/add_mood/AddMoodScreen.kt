@@ -3,7 +3,7 @@ package com.joohnq.mood.ui.presentation.add_mood
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.mood.ui.presentation.add_mood.event.AddMoodEvent
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 

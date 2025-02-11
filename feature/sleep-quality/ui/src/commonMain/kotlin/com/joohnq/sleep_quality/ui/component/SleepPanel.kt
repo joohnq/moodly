@@ -9,9 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.Time
-import com.joohnq.core.ui.mapper.calculateDuration
-import com.joohnq.core.ui.mapper.toHoursAndMinutesString
+import com.joohnq.domain.mapper.calculateDuration
+import com.joohnq.domain.mapper.toHoursAndMinutesString
+import com.joohnq.domain.entity.Time
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -32,7 +32,10 @@ fun SleepPanel(
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
-    val duration = Pair(record?.startSleeping ?: Time(0, 0), record?.endSleeping ?: Time(0, 0)).calculateDuration()
+    val duration = Pair(
+        record?.startSleeping ?: Time(0, 0),
+        record?.endSleeping ?: Time(0, 0)
+    ).calculateDuration()
     val moodResource = record?.sleepQuality?.toMoodResource()
 
     Column(

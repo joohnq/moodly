@@ -2,8 +2,8 @@ package com.joohnq.stress_level.ui.presentation.stress_level
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -79,7 +79,11 @@ fun StressLevelUIPreviewOne() {
                         stressors = listOf(StressorResource.Work)
                     ),
                     StressLevelRecordResource(
-                        stressors = listOf(StressorResource.Work, StressorResource.Kids, StressorResource.Relationship)
+                        stressors = listOf(
+                            StressorResource.Work,
+                            StressorResource.Kids,
+                            StressorResource.Relationship
+                        )
                     ),
                     StressLevelRecordResource(
                         stressors = listOf(StressorResource.Finances, StressorResource.Loneliness)

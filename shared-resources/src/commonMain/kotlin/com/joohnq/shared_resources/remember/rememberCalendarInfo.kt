@@ -2,7 +2,7 @@ package com.joohnq.shared_resources.remember
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.joohnq.core.ui.entity.CalendarInfo
+import com.joohnq.domain.entity.CalendarInfo
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 

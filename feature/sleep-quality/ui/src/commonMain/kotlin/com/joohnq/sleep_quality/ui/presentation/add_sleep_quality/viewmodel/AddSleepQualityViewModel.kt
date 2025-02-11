@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.core.ui.mapper.toggle
+import com.joohnq.domain.mapper.toggle
 import com.joohnq.mood.ui.mapper.toSleepQuality
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.mapper.toResource

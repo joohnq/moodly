@@ -8,10 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.calculateDuration
-import com.joohnq.core.ui.mapper.toFormattedTimeString
-import com.joohnq.core.ui.mapper.toHoursAndMinutesString
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.calculateDuration
+import com.joohnq.domain.mapper.toFormattedTimeString
+import com.joohnq.domain.mapper.toHoursAndMinutesString
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.GiganticSecondaryCard

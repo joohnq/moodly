@@ -31,6 +31,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.feature.sleepQuality.domain)
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.splash.ui)

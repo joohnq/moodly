@@ -3,7 +3,7 @@ package com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 

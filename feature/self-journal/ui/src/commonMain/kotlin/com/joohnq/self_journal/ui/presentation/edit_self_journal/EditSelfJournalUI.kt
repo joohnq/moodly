@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.self_journal.ui.components.EditFloatingActionButtons
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent

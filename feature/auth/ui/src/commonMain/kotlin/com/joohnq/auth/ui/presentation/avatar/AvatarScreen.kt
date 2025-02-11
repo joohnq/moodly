@@ -7,7 +7,7 @@ import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.permission.*
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.remember.rememberAvatars

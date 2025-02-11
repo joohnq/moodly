@@ -36,6 +36,7 @@ kotlin {
             implementation(projects.feature.freudScore.domain)
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

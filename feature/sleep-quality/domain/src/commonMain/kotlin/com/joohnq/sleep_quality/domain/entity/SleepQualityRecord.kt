@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.domain.entity
 
-import com.joohnq.core.ui.entity.Time
-import com.joohnq.core.ui.getNow
+import com.joohnq.domain.entity.Time
+import com.joohnq.domain.getNow
 import kotlinx.datetime.LocalDate
 
 data class SleepQualityRecord(

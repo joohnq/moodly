@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord

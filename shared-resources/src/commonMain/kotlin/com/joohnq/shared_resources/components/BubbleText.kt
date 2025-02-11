@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joohnq.core.ui.entity.TextRadioButtonColors
+import com.joohnq.domain.entity.TextRadioButtonColors
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import org.jetbrains.compose.resources.StringResource

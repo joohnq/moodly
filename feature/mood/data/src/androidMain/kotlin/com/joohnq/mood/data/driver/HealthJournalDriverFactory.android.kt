@@ -5,15 +5,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.joohnq.mood.data.database.MoodDatabase
-import com.joohnq.mood.database.StatsDatabaseSql
+import com.joohnq.mood.database.MoodDatabaseSql
 
 actual class MoodDriverFactory(private val context: Context) {
     actual fun createDriver(): SqlDriver =
         AndroidSqliteDriver(
-            StatsDatabaseSql.Schema,
+            MoodDatabaseSql.Schema,
             context,
             MoodDatabase.DATABASE_NAME,
-            callback = object : AndroidSqliteDriver.Callback(StatsDatabaseSql.Schema) {
+            callback = object : AndroidSqliteDriver.Callback(MoodDatabaseSql.Schema) {
                 override fun onOpen(db: SupportSQLiteDatabase) {
                     db.setForeignKeyConstraintsEnabled(true)
                 }

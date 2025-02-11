@@ -1,8 +1,8 @@
 package com.joohnq.self_journal.ui.presentation.self_journal
 
 import androidx.compose.runtime.Composable
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.self_journal.ui.components.SelfJournalContent
 import com.joohnq.self_journal.ui.components.SelfJournalPanel
 import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent

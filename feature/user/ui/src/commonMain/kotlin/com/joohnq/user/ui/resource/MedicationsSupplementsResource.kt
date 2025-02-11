@@ -1,6 +1,6 @@
 package com.joohnq.user.ui.resource
 
-import com.joohnq.core.ui.entity.DIcon
+import com.joohnq.domain.entity.DIcon
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.IM_NOT_TAKING_ANY
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.OVER_THE_COUNTER_SUPPLEMENTS
 import com.joohnq.domain.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY

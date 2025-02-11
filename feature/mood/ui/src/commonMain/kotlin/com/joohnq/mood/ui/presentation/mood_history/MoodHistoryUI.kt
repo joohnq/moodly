@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.mood.ui.components.MoodHistoryCard
 import com.joohnq.mood.ui.presentation.mood_history.event.MoodHistoryEvent
 import com.joohnq.mood.ui.resource.MoodRecordResource

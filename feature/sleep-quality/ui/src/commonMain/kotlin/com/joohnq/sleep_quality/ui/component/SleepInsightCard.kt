@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.toMonthDays
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.toMonthDays
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result
 import com.joohnq.shared_resources.logged_this_month
@@ -47,7 +47,10 @@ fun SleepInsightCard(
         ),
         shape = Dimens.Shape.Large
     ) {
-        Column(modifier = Modifier.paddingAllSmall(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(
+            modifier = Modifier.paddingAllSmall(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 maxItemsInEachRow = 13,

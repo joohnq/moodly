@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.DIcon
-import com.joohnq.core.ui.entity.TextRadioButtonColors
+import com.joohnq.domain.entity.DIcon
+import com.joohnq.domain.entity.TextRadioButtonColors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.StringResource

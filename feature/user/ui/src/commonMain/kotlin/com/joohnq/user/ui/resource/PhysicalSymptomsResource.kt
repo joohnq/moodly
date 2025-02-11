@@ -1,6 +1,6 @@
 package com.joohnq.user.ui.resource
 
-import com.joohnq.core.ui.entity.DIcon
+import com.joohnq.domain.entity.DIcon
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.NO
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
 import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL

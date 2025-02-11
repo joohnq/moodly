@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.ui.presentation.add_self_journal
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.ui.presentation.add_self_journal.event.AddSelfJournalEvent

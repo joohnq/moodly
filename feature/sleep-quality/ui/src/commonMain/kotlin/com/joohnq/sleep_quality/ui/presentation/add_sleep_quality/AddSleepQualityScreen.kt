@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent

@@ -3,7 +3,7 @@ package com.joohnq.self_journal.ui.presentation.self_journal_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
 import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryViewModel
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent

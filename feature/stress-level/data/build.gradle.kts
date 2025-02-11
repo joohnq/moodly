@@ -36,7 +36,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.database)
             implementation(projects.feature.stressLevel.domain)
-            implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

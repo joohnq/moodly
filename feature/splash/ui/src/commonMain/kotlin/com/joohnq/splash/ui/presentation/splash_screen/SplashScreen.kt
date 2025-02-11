@@ -1,8 +1,8 @@
 package com.joohnq.splash.ui.presentation.splash_screen
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.mapper.fold
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.domain.mapper.fold
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.preferences.domain.entity.AppPreferences
 import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel

@@ -29,6 +29,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.feature.mood.domain)
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.stressLevel.domain)

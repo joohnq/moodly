@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.capitalize
-import com.joohnq.core.ui.mapper.toMonthCompleteDayAndYear
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.capitalize
+import com.joohnq.domain.mapper.toMonthCompleteDayAndYear
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 

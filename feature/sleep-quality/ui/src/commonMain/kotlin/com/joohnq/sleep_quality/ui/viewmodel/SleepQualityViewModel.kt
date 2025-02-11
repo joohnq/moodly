@@ -2,11 +2,11 @@ package com.joohnq.sleep_quality.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.onFailure
-import com.joohnq.core.ui.mapper.onSuccess
-import com.joohnq.core.ui.mapper.toResultResource
-import com.joohnq.core.ui.mapper.toUiState
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.onFailure
+import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.domain.mapper.toResultResource
+import com.joohnq.domain.mapper.toUiState
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase

@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.domain.mapper
 
-import com.joohnq.core.ui.entity.Time
+import com.joohnq.domain.entity.Time
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.EXCELLENT
 import com.joohnq.sleep_quality.domain.entity.SleepQuality.Companion.FAIR

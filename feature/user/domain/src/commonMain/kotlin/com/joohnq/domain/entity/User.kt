@@ -1,6 +1,6 @@
 package com.joohnq.domain.entity
 
-import com.joohnq.core.ui.getNow
+import com.joohnq.domain.getNow
 import kotlinx.datetime.LocalDate
 
 data class User(

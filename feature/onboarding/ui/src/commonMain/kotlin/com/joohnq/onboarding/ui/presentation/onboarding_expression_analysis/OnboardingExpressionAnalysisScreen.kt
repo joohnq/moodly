@@ -1,8 +1,10 @@
 package com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis
 
-import androidx.compose.runtime.*
-import com.joohnq.core.ui.ObserverSideEffects
-import com.joohnq.core.ui.sharedViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.entity.User
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.viewmodel.MoodIntent
@@ -22,6 +24,8 @@ import com.joohnq.stress_level.ui.mapper.toDomain
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.ui.ObserverSideEffects
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.ui.mapper.toDomain
 import com.joohnq.user.ui.viewmodel.UserIntent
 import com.joohnq.user.ui.viewmodel.UserSideEffect
@@ -29,7 +33,12 @@ import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
-data class Quad<out A, out B, out C, out D>(val first: A, val second: B, val third: C, val fourth: D)
+data class Quad<out A, out B, out C, out D>(
+    val first: A,
+    val second: B,
+    val third: C,
+    val fourth: D
+)
 
 @Composable
 fun OnboardingExpressionAnalysisScreen(

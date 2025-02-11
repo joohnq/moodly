@@ -31,7 +31,6 @@ fun MoodInsightContent(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
-    onClick: () -> Unit
 ) {
     val streakDays = records.getWeekRecords().getStreakDays()
     SectionHeader(
@@ -47,7 +46,6 @@ fun MoodInsightContent(
         ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
-        onClick = onClick
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -29,7 +29,7 @@ fun StressHistory(
     SectionHeader(
         modifier = modifier,
         title = Res.string.sleep_history,
-        onSeeAll = {}
+        onSeeMore = {}
     )
     if (records.isEmpty())
         NotFoundHorizontal(

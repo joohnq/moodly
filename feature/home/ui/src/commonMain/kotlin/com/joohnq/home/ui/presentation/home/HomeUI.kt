@@ -66,7 +66,7 @@ fun HomeUI(
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.freud_score,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToFreudScore) }
+                    onSeeMore = { onEvent(HomeEvent.OnNavigateToFreudScore) }
                 )
                 FreudScoreMetric(
                     freudScore = state.freudScore,
@@ -75,18 +75,18 @@ fun HomeUI(
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.mood,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToMood) }
+                    onSeeMore = { onEvent(HomeEvent.OnNavigateToMood) }
                 )
                 MoodMetric(
                     records = moodRecords,
                     containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
-                    onClick = { }
+                    onClick = { onEvent(HomeEvent.OnNavigateToMood) }
                 )
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.sleep,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
+                    onSeeMore = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                 )
                 SleepQualityMetric(
                     records = sleepQualities,
@@ -97,7 +97,7 @@ fun HomeUI(
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.stress,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToStressLevel) }
+                    onSeeMore = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                 )
                 StressLevelMetric(
                     records = stressLevels,
@@ -108,7 +108,7 @@ fun HomeUI(
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
                     title = Res.string.self_journaling,
-                    onSeeAll = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
+                    onSeeMore = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
                 )
                 SelfJournalingMetric(
                     records = selfJournals,

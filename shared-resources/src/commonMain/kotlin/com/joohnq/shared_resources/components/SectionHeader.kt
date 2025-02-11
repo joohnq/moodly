@@ -1,20 +1,15 @@
 package com.joohnq.shared_resources.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.see_all
+import com.joohnq.shared_resources.see_more
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
@@ -27,7 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SectionHeader(
     modifier: Modifier = Modifier,
     title: StringResource,
-    onSeeAll: () -> Unit,
+    onSeeMore: () -> Unit,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -41,7 +36,7 @@ fun SectionHeader(
             modifier = Modifier.padding(vertical = 20.dp)
         )
         TextButton(
-            onClick = onSeeAll,
+            onClick = onSeeMore,
             contentPadding = PaddingValues(horizontal = 5.dp, vertical = 2.dp),
             shape = Dimens.Shape.Circle,
             colors = ButtonColors(
@@ -53,7 +48,7 @@ fun SectionHeader(
         ) {
             Text(
                 modifier = Modifier,
-                text = stringResource(Res.string.see_all),
+                text = stringResource(Res.string.see_more),
                 style = TextStyles.TextSmMedium(),
             )
         }
@@ -84,6 +79,6 @@ fun SectionHeader(
 fun SectionHeaderPreview() {
     SectionHeader(
         title = Res.string.your_mood_is,
-        onSeeAll = {}
+        onSeeMore = {}
     )
 }

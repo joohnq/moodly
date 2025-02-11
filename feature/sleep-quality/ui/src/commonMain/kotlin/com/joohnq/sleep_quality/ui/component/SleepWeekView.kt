@@ -23,7 +23,7 @@ fun SleepWeekView(
     SectionHeader(
         modifier = modifier,
         title = Res.string.week_view,
-        onSeeAll = {},
+        onSeeMore = {},
     )
     SleepQualityWeekCalendar(
         modifier = modifier.background(color = containerColor, shape = Dimens.Shape.Large).paddingAllSmall(),

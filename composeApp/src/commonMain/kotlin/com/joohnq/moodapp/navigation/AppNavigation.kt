@@ -104,6 +104,9 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.SelfJournalHistory)
                 },
                 onGoBack = onGoBack,
+                onEditSelfJournal = {id ->
+                    onNavigate(Destination.App.EditSelfJournal(id))
+                }
             )
         }
         composable<Destination.App.Mood> {

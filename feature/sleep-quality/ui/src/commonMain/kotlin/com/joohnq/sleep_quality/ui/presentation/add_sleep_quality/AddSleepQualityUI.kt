@@ -1,6 +1,14 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,8 +23,22 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.toPaddedString
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
-import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.AddSleepQualityTimePicker
+import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.TextRadioButton
+import com.joohnq.shared_resources.components.TimePickerCard
+import com.joohnq.shared_resources.components.TimePickerDialog
+import com.joohnq.shared_resources.components.Title
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.end_sleeping_time
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.new_sleep_quality
+import com.joohnq.shared_resources.sleeping_influences
+import com.joohnq.shared_resources.start_sleeping_time
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
@@ -143,62 +165,60 @@ fun AddSleepQualityUI(
                     }
                 )
             }
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Title(
-                    modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
-                    text = Res.string.mood
-                )
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(horizontal = 20.dp)
-                ) {
-                    items(moods) { resource ->
-                        val moodResource = state.record.sleepQuality.toMoodResource()
-                        MoodFace(
-                            modifier = Modifier.size(32.dp),
-                            resource = resource,
-                            backgroundColor = if (moodResource == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
-                            color = if (moodResource == resource) resource.palette.faceColor else Colors.Gray60,
-                            onClick = { onAddAction(AddSleepQualityIntent.UpdateMood(resource)) }
-                        )
-                    }
+            VerticalSpacer(20.dp)
+            Title(
+                modifier = Modifier.paddingHorizontalMedium(),
+                text = Res.string.mood
+            )
+            VerticalSpacer(10.dp)
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(horizontal = 20.dp)
+            ) {
+                items(moods) { resource ->
+                    val moodResource = state.record.sleepQuality.toMoodResource()
+                    MoodFace(
+                        modifier = Modifier.size(32.dp),
+                        resource = resource,
+                        backgroundColor = if (moodResource == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                        color = if (moodResource == resource) resource.palette.faceColor else Colors.Gray60,
+                        onClick = { onAddAction(AddSleepQualityIntent.UpdateMood(resource)) }
+                    )
                 }
             }
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Title(
-                    modifier = Modifier.padding(vertical = 32.dp).paddingHorizontalMedium(),
-                    text = Res.string.sleeping_influences
-                )
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(horizontal = 20.dp)
-                ) {
-                    items(sleepInfluences) { sleepInfluences ->
-                        TextRadioButton(
-                            text = sleepInfluences.title,
-                            selected = state.record.sleepInfluences.contains(
-                                sleepInfluences
-                            ),
-                            colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                            shape = Dimens.Shape.Circle,
-                            onClick = {
-                                onAddAction(
-                                    AddSleepQualityIntent.UpdateSelectedSleepInfluence(
-                                        sleepInfluences
-                                    )
+            VerticalSpacer(20.dp)
+            Title(
+                modifier = Modifier.paddingHorizontalMedium(),
+                text = Res.string.sleeping_influences
+            )
+            VerticalSpacer(10.dp)
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(horizontal = 20.dp)
+            ) {
+                items(sleepInfluences) { sleepInfluences ->
+                    TextRadioButton(
+                        text = sleepInfluences.title,
+                        selected = state.record.sleepInfluences.contains(
+                            sleepInfluences
+                        ),
+                        colors = ComponentColors.RadioButton.TextRadioButtonColors(),
+                        shape = Dimens.Shape.Circle,
+                        onClick = {
+                            onAddAction(
+                                AddSleepQualityIntent.UpdateSelectedSleepInfluence(
+                                    sleepInfluences
                                 )
-                            }
-                        )
-                    }
+                            )
+                        }
+                    )
                 }
             }
             VerticalSpacer(48.dp)
-            Box(modifier = Modifier.paddingHorizontalMedium()) {
-                ContinueButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { onEvent(AddSleepQualityEvent.OnAdd) }
-                )
-            }
+            ContinueButton(
+                modifier = Modifier.paddingHorizontalMedium().fillMaxWidth(),
+                onClick = { onEvent(AddSleepQualityEvent.OnAdd) }
+            )
         }
     }
 }

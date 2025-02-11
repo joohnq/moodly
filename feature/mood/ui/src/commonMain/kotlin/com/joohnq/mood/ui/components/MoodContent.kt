@@ -22,7 +22,7 @@ fun MoodContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records,
-        onClick = {}
+        onCreate = { onEvent(MoodEvent.OnAddMood) }
     )
     MoodCalendar(
         modifier = modifier,
@@ -33,9 +33,11 @@ fun MoodContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),
-        onSeeAll = {
+        onSeeMore = {
             onEvent(MoodEvent.OnNavigateToMoodHistory)
         },
-        onClick = {}
+        onCreate = {
+            onEvent(MoodEvent.OnAddMood)
+        }
     )
 }

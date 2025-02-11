@@ -14,7 +14,6 @@ fun JournalCalendar(
     records: List<SelfJournalRecordResource>,
     subtitle: String,
     onCreate: () -> Unit,
-    onClick: () -> Unit
 ) {
     val recordsInYear = records.getSelfJournalsInYear()
 
@@ -24,7 +23,6 @@ fun JournalCalendar(
         title = recordsInYear,
         subtitle = subtitle,
         onCreate = onCreate,
-        onClick = onClick,
         content = {
             SelfJournalingCalendar(
                 records = records,

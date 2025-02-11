@@ -7,4 +7,5 @@ sealed interface SelfJournalEvent {
     data object OnNavigateToAddSelfJournal : SelfJournalEvent
     data object OnNavigateToSelfHistory : SelfJournalEvent
     data class OnClick(val localDate: LocalDate) : SelfJournalEvent
+    data class OnEditSelfJournal(val id: Int) : SelfJournalEvent
 }

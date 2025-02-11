@@ -24,7 +24,6 @@ fun GiganticCreateCard(
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
-    onClick: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
@@ -36,7 +35,6 @@ fun GiganticCreateCard(
         ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
-        onClick = onClick
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().paddingAllSmall(),

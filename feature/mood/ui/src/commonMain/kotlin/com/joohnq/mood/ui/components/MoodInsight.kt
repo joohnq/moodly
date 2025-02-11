@@ -16,7 +16,7 @@ fun MoodInsight(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
-    onClick: () -> Unit
+    onCreate: () -> Unit = {},
 ) {
     if (records.isEmpty())
         NotFoundHorizontal(
@@ -25,13 +25,12 @@ fun MoodInsight(
             title = Res.string.lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now,
             subtitle = Res.string.log_first_mood,
             image = Drawables.Images.MoodInsight,
-            onClick = onClick
+            onClick = onCreate
         )
     else
         MoodInsightContent(
             modifier = modifier,
             containerColor = containerColor,
             records = records,
-            onClick = onClick
         )
 }

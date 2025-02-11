@@ -1,7 +1,10 @@
 package com.joohnq.stress_level.ui.presentation.add_stress_level
 
-import androidx.compose.runtime.*
-import com.joohnq.ui.sharedViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
@@ -12,6 +15,7 @@ import com.joohnq.stress_level.ui.resource.StressLevelResource
 import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -32,7 +36,7 @@ fun AddStressLevelScreen(
         when (event) {
             AddStressLevelEvent.GoBack -> onGoBack()
             AddStressLevelEvent.Continue -> {
-                if (state.record != StressLevelResource.One) {
+                if (state.record.stressLevel != StressLevelResource.One) {
                     onNavigateToStressStressors()
                     return
                 }

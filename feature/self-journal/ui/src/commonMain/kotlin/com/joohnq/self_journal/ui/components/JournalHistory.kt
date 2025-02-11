@@ -16,6 +16,8 @@ fun JournalHistory(
     modifier: Modifier = Modifier,
     containerColor: Color,
     records: List<SelfJournalRecordResource>,
+    onCreate: () -> Unit,
+    onClick: (Int) -> Unit
 ) {
     if (records.isEmpty())
         NotFoundVertical(
@@ -24,12 +26,16 @@ fun JournalHistory(
             title = Res.string.write_your_first_journal_to_see_journal_history_lets_do_it_now_for_better_mental_health,
             subtitle = Res.string.write_journal,
             image = Drawables.Images.SelfJournalHistory,
-            onClick = {}
+            onClick = onCreate
         )
     else
         Column(modifier = modifier) {
             records.forEach { record ->
-                JournalHistoryCard(containerColor = containerColor, record = record)
+                JournalHistoryCard(
+                    containerColor = containerColor,
+                    record = record,
+                    onClick = onClick
+                )
             }
         }
 }

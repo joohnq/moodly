@@ -40,14 +40,11 @@ fun SelfJournalContent(
         onCreate = {
             onEvent(SelfJournalEvent.OnNavigateToAddSelfJournal)
         },
-        onClick = {
-
-        },
     )
     SectionHeader(
         modifier = modifier,
         title = Res.string.journal_history,
-        onSeeAll = {
+        onSeeMore = {
             onEvent(SelfJournalEvent.OnNavigateToSelfHistory)
         }
     )
@@ -55,6 +52,8 @@ fun SelfJournalContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),
+        onClick = {onEvent(SelfJournalEvent.OnEditSelfJournal(it))},
+        onCreate = {onEvent(SelfJournalEvent.OnNavigateToAddSelfJournal)}
     )
     VerticalSpacer(10.dp)
 }

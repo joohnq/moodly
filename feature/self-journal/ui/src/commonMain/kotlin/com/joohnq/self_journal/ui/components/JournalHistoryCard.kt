@@ -32,7 +32,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun JournalHistoryCard(
     containerColor: Color,
-    record: SelfJournalRecordResource
+    record: SelfJournalRecordResource,
+    onClick: (Int) -> Unit = {}
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -41,7 +42,10 @@ fun JournalHistoryCard(
             contentColor = Color.Unspecified,
             disabledContainerColor = containerColor,
             disabledContentColor = Color.Unspecified
-        )
+        ),
+        onClick = {
+            onClick(record.id)
+        }
     ) {
         Row(
             modifier = Modifier.paddingAllSmall(),

@@ -3,7 +3,6 @@ package com.joohnq.mood.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.NotFoundVertical
@@ -20,13 +19,13 @@ fun MoodHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
-    onClick: () -> Unit = {},
-    onSeeAll: () -> Unit = {}
+    onSeeMore: () -> Unit = {},
+    onCreate: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
         title = Res.string.mood_history,
-        onSeeAll = onSeeAll
+        onSeeMore = onSeeMore
     )
     if (records.isEmpty())
         NotFoundVertical(
@@ -35,7 +34,7 @@ fun MoodHistory(
             title = Res.string.you_dont_have_enough_data_to_show_your_history_lets_log_your_first_mood_to_see_this,
             subtitle = Res.string.log_first_mood,
             image = Drawables.Images.MoodHistory,
-            onClick = onClick,
+            onClick = onCreate,
         )
     else
         MoodHistoryContent(

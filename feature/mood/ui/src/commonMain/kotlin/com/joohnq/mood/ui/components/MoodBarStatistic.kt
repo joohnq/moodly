@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import com.joohnq.core.ui.mapper.toShortDateString
+import com.joohnq.domain.mapper.toShortDateString
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodRecordResource

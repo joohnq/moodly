@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.ui.presentation.stress_level.event
 
-import com.joohnq.core.ui.event.PanelEvent
+import com.joohnq.ui.event.PanelEvent
 
 sealed interface StressLevelEvent {
     data object OnGoBack : StressLevelEvent

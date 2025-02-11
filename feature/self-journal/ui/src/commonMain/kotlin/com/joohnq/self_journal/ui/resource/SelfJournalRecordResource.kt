@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.ui.resource
 
-import com.joohnq.core.ui.getNow
+import com.joohnq.domain.getNow
 import com.joohnq.mood.ui.resource.MoodResource
 import kotlinx.datetime.LocalDateTime
 

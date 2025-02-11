@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.viewmodel
 
 import app.cash.turbine.test
-import com.joohnq.core.ui.entity.UiState
+import com.joohnq.domain.entity.UiState
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository

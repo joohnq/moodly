@@ -1,6 +1,6 @@
 package com.joohnq.security.ui.viewmodel
 
-import com.joohnq.core.ui.entity.UiState
+import com.joohnq.domain.entity.UiState
 import com.joohnq.security.domain.Security
 
 data class SecurityState(

@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.test)
-            implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.feature.freudScore.domain)
 
             implementation(compose.runtime)

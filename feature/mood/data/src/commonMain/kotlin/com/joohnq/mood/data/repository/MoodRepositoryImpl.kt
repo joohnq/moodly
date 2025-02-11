@@ -2,13 +2,13 @@ package com.joohnq.mood.data.repository
 
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
-import com.joohnq.mood.database.StatsDatabaseSql
+import com.joohnq.mood.database.MoodDatabaseSql
 import com.joohnq.mood.domain.converter.MoodRecordConverter
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.repository.MoodRepository
 
 class MoodRepositoryImpl(
-    private val database: StatsDatabaseSql,
+    private val database: MoodDatabaseSql,
 ) : MoodRepository {
     private val query = database.moodRecordQueries
     override suspend fun getMoodRecords(): Result<List<MoodRecord>> =

@@ -11,11 +11,12 @@ import androidx.compose.material3.SliderColors
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.joohnq.core.ui.entity.TextRadioButtonColors
+import com.joohnq.domain.entity.TextRadioButtonColors
 
 object ComponentColors {
     object RadioButton {
-        @Composable fun TextRadioButtonColors(): TextRadioButtonColors = TextRadioButtonColors(
+        @Composable
+        fun TextRadioButtonColors(): TextRadioButtonColors = TextRadioButtonColors(
             selectedBackgroundColor = Colors.Green50,
             selectedContentColor = Colors.White,
             unSelectedContentColor = Colors.Brown80,
@@ -32,7 +33,8 @@ object ComponentColors {
                 disabledUnselectedColor = colors.unSelectedContentColor,
             )
 
-        @Composable fun StressLevelRadioButtonColors(): TextRadioButtonColors =
+        @Composable
+        fun StressLevelRadioButtonColors(): TextRadioButtonColors =
             TextRadioButtonColors(
                 selectedBackgroundColor = Colors.Orange40,
                 selectedContentColor = Colors.White,
@@ -43,7 +45,8 @@ object ComponentColors {
     }
 
     object NavigationBarItem {
-        @Composable fun NavigationBarItemColors(): NavigationBarItemColors =
+        @Composable
+        fun NavigationBarItemColors(): NavigationBarItemColors =
             NavigationBarItemColors(
                 selectedIconColor = Colors.Brown80,
                 selectedTextColor = Colors.Brown80,
@@ -56,7 +59,8 @@ object ComponentColors {
     }
 
     object Slider {
-        @Composable fun SleepQualitySliderColors(): SliderColors = SliderColors(
+        @Composable
+        fun SleepQualitySliderColors(): SliderColors = SliderColors(
             thumbColor = Colors.Orange40,
             activeTickColor = Colors.Orange40,
             inactiveTickColor = Colors.Brown20,
@@ -69,7 +73,8 @@ object ComponentColors {
             disabledInactiveTickColor = Colors.Brown20
         )
 
-        @Composable fun AddJournalingStressLevel(): SliderColors = SliderColors(
+        @Composable
+        fun AddJournalingStressLevel(): SliderColors = SliderColors(
             thumbColor = Colors.Green50,
             activeTickColor = Colors.Green50,
             inactiveTickColor = Colors.Brown20,
@@ -84,21 +89,24 @@ object ComponentColors {
     }
 
     object Card {
-        @Composable fun MentalHealthMetricColors(backgroundColor: Color): CardColors = CardColors(
+        @Composable
+        fun MentalHealthMetricColors(backgroundColor: Color): CardColors = CardColors(
             containerColor = backgroundColor,
             contentColor = Colors.White,
             disabledContainerColor = backgroundColor,
             disabledContentColor = Colors.White
         )
 
-        @Composable fun MainCardColors(): CardColors = CardColors(
+        @Composable
+        fun MainCardColors(): CardColors = CardColors(
             containerColor = Colors.White,
             contentColor = Colors.Brown80,
             disabledContainerColor = Colors.White,
             disabledContentColor = Colors.Brown80
         )
 
-        @Composable fun StressLevelCardColors(): CardColors = CardColors(
+        @Composable
+        fun StressLevelCardColors(): CardColors = CardColors(
             containerColor = Colors.Brown10,
             contentColor = Colors.Brown80,
             disabledContainerColor = Colors.Brown10,
@@ -107,21 +115,24 @@ object ComponentColors {
     }
 
     object IconButton {
-        @Composable fun ContinueButtonColors(): IconButtonColors = IconButtonColors(
+        @Composable
+        fun ContinueButtonColors(): IconButtonColors = IconButtonColors(
             containerColor = Colors.Brown80,
             contentColor = Colors.White,
             disabledContainerColor = Colors.Brown80,
             disabledContentColor = Colors.White
         )
 
-        @Composable fun PreviousNextButton(color: Color): IconButtonColors = IconButtonColors(
+        @Composable
+        fun PreviousNextButton(color: Color): IconButtonColors = IconButtonColors(
             containerColor = Colors.Transparent,
             disabledContainerColor = Colors.Transparent,
             contentColor = color,
             disabledContentColor = Color.Transparent,
         )
 
-        @Composable fun TransparentButton(color: Color): IconButtonColors = IconButtonColors(
+        @Composable
+        fun TransparentButton(color: Color): IconButtonColors = IconButtonColors(
             containerColor = Colors.Transparent,
             disabledContainerColor = Colors.Transparent,
             contentColor = color,
@@ -130,42 +141,48 @@ object ComponentColors {
     }
 
     object Button {
-        @Composable fun BottomNavigationAddButtonColors(): ButtonColors = ButtonColors(
+        @Composable
+        fun BottomNavigationAddButtonColors(): ButtonColors = ButtonColors(
             containerColor = Colors.Green50,
             contentColor = Colors.White,
             disabledContainerColor = Colors.Green50,
             disabledContentColor = Colors.White
         )
 
-        @Composable fun BottomNavigationActionButtonColors(): ButtonColors = ButtonColors(
+        @Composable
+        fun BottomNavigationActionButtonColors(): ButtonColors = ButtonColors(
             containerColor = Colors.Green60,
             contentColor = Colors.White,
             disabledContainerColor = Colors.Green60,
             disabledContentColor = Colors.White
         )
 
-        @Composable fun MainButtonColors(): ButtonColors = ButtonColors(
+        @Composable
+        fun MainButtonColors(): ButtonColors = ButtonColors(
             containerColor = Colors.Brown80,
             contentColor = Colors.White,
             disabledContainerColor = Colors.Gray60,
             disabledContentColor = Colors.Gray20
         )
 
-        @Composable fun MainButtonColorsInverted(): ButtonColors = ButtonColors(
+        @Composable
+        fun MainButtonColorsInverted(): ButtonColors = ButtonColors(
             containerColor = Colors.White,
             contentColor = Colors.Brown80,
             disabledContainerColor = Colors.White,
             disabledContentColor = Colors.Brown80
         )
 
-        @Composable fun DeleteButtonColors(): ButtonColors = ButtonColors(
+        @Composable
+        fun DeleteButtonColors(): ButtonColors = ButtonColors(
             containerColor = Colors.Orange50,
             contentColor = Colors.White,
             disabledContainerColor = Colors.Orange50,
             disabledContentColor = Colors.White
         )
 
-        @Composable fun TextRadioButtonColors(
+        @Composable
+        fun TextRadioButtonColors(
             selected: Boolean,
             colors: TextRadioButtonColors,
         ): ButtonColors = ButtonColors(
@@ -177,7 +194,8 @@ object ComponentColors {
     }
 
     object TextField {
-        @Composable fun ExpressionAnalysisColors(): TextFieldColors = TextFieldColors(
+        @Composable
+        fun ExpressionAnalysisColors(): TextFieldColors = TextFieldColors(
             indicatorColor = Colors.Transparent,
             containerColor = Colors.White,
             textColor = Colors.Gray60,
@@ -185,7 +203,8 @@ object ComponentColors {
             cursorColor = Colors.Green40,
         )
 
-        @Composable fun MainTextFieldColors(): TextFieldColors = TextFieldColors(
+        @Composable
+        fun MainTextFieldColors(): TextFieldColors = TextFieldColors(
             containerColor = Colors.White,
             placeholderColor = Colors.Brown100Alpha64,
             leadingIconColor = Colors.Brown80,

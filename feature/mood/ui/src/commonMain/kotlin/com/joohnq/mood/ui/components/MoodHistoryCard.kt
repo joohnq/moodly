@@ -12,7 +12,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toMonthAbbreviatedDayAndHourFormatted
+import com.joohnq.domain.mapper.toMonthAbbreviatedDayAndHourFormatted
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -72,7 +72,7 @@ fun MoodHistoryCard(
                 )
                 Icon(
                     painter =
-                        painterResource(Drawables.Icons.Outlined.ArrowOpen),
+                    painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     modifier = Modifier.size(24.dp).rotate(180f),
                     tint = Colors.Gray60

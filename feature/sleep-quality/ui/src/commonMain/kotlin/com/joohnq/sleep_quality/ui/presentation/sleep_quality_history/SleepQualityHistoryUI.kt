@@ -12,8 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.SwipeTorRevealCard

@@ -1,6 +1,6 @@
 package com.joohnq.home.ui.presentation.viewmodel
 
-import com.joohnq.core.ui.entity.UiState
+import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.mood.ui.resource.MoodRecordResource

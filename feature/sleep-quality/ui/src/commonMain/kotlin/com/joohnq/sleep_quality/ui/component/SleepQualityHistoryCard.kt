@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.calculateDuration
-import com.joohnq.core.ui.mapper.toAbbreviatedMonthName
-import com.joohnq.core.ui.mapper.toHoursAndMinutesString
+import com.joohnq.domain.mapper.calculateDuration
+import com.joohnq.domain.mapper.toAbbreviatedMonthName
+import com.joohnq.domain.mapper.toHoursAndMinutesString
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
@@ -74,7 +74,10 @@ fun SleepQualityHistoryCard(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.Center
             ) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Text(
                         text = duration.toHoursAndMinutesString(),
                         style = TextStyles.TextMdBold(),
@@ -101,10 +104,10 @@ fun SleepQualityHistoryCard(
                 }
                 Text(
                     text =
-                        if (record.sleepInfluences.isNotEmpty())
-                            record.sleepInfluences.joinToString(", ")
-                        else
-                            stringResource(Res.string.no_sleep_influences),
+                    if (record.sleepInfluences.isNotEmpty())
+                        record.sleepInfluences.joinToString(", ")
+                    else
+                        stringResource(Res.string.no_sleep_influences),
                     style = TextStyles.TextSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis

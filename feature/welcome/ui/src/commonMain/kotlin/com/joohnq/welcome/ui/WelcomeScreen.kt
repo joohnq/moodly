@@ -3,11 +3,11 @@ package com.joohnq.welcome.ui
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.core.ui.ObserverSideEffects
-import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.preferences.ui.viewmodel.PreferencesSideEffect
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.ObserverSideEffects
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable

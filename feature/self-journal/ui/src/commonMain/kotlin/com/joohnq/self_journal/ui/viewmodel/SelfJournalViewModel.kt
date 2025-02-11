@@ -2,8 +2,8 @@ package com.joohnq.self_journal.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.*
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.*
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.domain.use_case.AddSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.DeleteSelfJournalsUseCase

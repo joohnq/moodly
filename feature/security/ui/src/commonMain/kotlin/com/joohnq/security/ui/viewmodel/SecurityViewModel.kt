@@ -2,9 +2,9 @@ package com.joohnq.security.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.core.ui.mapper.onFailure
-import com.joohnq.core.ui.mapper.onSuccess
-import com.joohnq.core.ui.mapper.toUiState
+import com.joohnq.domain.mapper.onFailure
+import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.domain.mapper.toUiState
 import com.joohnq.security.domain.Security
 import com.joohnq.security.domain.use_case.GetSecurityUseCase
 import com.joohnq.security.domain.use_case.UpdateSecurityUseCase

@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.domain.entity
 
-import com.joohnq.core.ui.getNow
+import com.joohnq.domain.getNow
 import com.joohnq.mood.domain.entity.Mood
 import kotlinx.datetime.LocalDateTime
 

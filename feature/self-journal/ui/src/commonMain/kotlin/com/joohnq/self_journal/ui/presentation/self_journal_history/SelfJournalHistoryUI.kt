@@ -10,10 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.core.ui.mapper.items
-import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
+import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.self_journal.ui.components.SelfJournalsHistoryCards
 import com.joohnq.self_journal.ui.mapper.toGroupedByDate
 import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
@@ -22,13 +21,18 @@ import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.Se
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.ImageAlertDialog
+import com.joohnq.shared_resources.components.IsEmpty
+import com.joohnq.shared_resources.components.SwipeTorRevealCard
+import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

@@ -1,6 +1,12 @@
 package com.joohnq.home.ui.presentation.dashboard
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
@@ -9,8 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.core.ui.ObserverSideEffects
-import com.joohnq.core.ui.sharedViewModel
 import com.joohnq.home.ui.components.DashboardCentral
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.home.ui.presentation.dashboard.event.toDashboardEvent
@@ -24,6 +28,8 @@ import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.ui.ObserverSideEffects
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable

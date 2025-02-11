@@ -9,9 +9,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.entity.User
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
@@ -53,7 +53,6 @@ fun HomeUI(
     ).foldComposable(
         onLoading = { LoadingUI() },
         onSuccess = { moodRecords: List<MoodRecordResource>, u: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
-            throw NotImplementedError()
             Column(
                 modifier = Modifier
                     .fillMaxSize()

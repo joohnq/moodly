@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.CurvedCanvasPosition
+import com.joohnq.domain.entity.CurvedCanvasPosition
 
 class ConvexCanvas(private val offset: Dp, private val position: CurvedCanvasPosition) : Shape {
     override fun createOutline(

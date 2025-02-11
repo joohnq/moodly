@@ -12,7 +12,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toMonthAbbreviatedAndDayString
+import com.joohnq.domain.mapper.toMonthAbbreviatedAndDayString
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -55,7 +55,10 @@ fun StressLevelHistoryCard(
             HorizontalSpacer(20.dp)
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.CenterVertically)
+                verticalArrangement = Arrangement.spacedBy(
+                    8.dp,
+                    alignment = Alignment.CenterVertically
+                )
             ) {
                 Text(
                     text = stringResource(record.stressLevel.subtitle),

@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.domain.constant.UserFileStorageConstants
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.entity.User

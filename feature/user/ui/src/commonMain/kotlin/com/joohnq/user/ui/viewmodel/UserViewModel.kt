@@ -3,14 +3,24 @@ package com.joohnq.user.ui.viewmodel
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.onFailure
-import com.joohnq.core.ui.mapper.onSuccess
-import com.joohnq.core.ui.mapper.toUiState
+import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.entity.User
-import com.joohnq.domain.use_case.*
+import com.joohnq.domain.mapper.onFailure
+import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.domain.mapper.toUiState
+import com.joohnq.domain.use_case.AddUserUseCase
+import com.joohnq.domain.use_case.GetUserUseCase
+import com.joohnq.domain.use_case.UpdateUserImageBitmapUseCase
+import com.joohnq.domain.use_case.UpdateUserImageDrawableUseCase
+import com.joohnq.domain.use_case.UpdateUserNameUseCase
+import com.joohnq.domain.use_case.UpdateUserUseCase
+import com.joohnq.ui.mapper.toByteArray
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UserViewModel(
@@ -64,7 +74,7 @@ class UserViewModel(
     }
 
     private fun updateUserImageBitmap(image: ImageBitmap) = viewModelScope.launch {
-        val res = updateUserImageBitmapUseCase(image).toUiState()
+        val res = updateUserImageBitmapUseCase(image.toByteArray()).toUiState()
         res.onSuccess {
             _sideEffect.send(UserSideEffect.AvatarSavedSuccess)
         }.onFailure {

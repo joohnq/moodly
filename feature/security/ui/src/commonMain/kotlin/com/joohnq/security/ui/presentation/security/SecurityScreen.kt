@@ -3,7 +3,7 @@ package com.joohnq.security.ui.presentation.security
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.domain.Security

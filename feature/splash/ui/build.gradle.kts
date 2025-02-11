@@ -35,6 +35,7 @@ kotlin {
             implementation(projects.feature.security.ui)
             implementation(projects.feature.security.domain)
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

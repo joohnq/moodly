@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import com.joohnq.core.ui.mapper.itemsNotNull
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.domain.mapper.itemsNotNull
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
 import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent

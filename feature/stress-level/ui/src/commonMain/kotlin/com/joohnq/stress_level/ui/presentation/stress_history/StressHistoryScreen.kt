@@ -3,7 +3,7 @@ package com.joohnq.stress_level.ui.presentation.stress_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 

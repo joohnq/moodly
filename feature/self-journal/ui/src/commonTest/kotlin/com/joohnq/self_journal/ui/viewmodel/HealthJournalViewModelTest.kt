@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.ui.viewmodel
 
 import app.cash.turbine.test
-import com.joohnq.core.ui.entity.UiState
+import com.joohnq.domain.entity.UiState
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.domain.repository.SelfJournalRepository

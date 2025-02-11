@@ -3,7 +3,7 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
 

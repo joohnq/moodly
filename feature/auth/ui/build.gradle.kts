@@ -28,6 +28,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.core.permission)
             implementation(projects.sharedResources)
             implementation(projects.feature.user.domain)

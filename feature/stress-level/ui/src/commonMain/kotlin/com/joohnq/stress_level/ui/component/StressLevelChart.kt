@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.component
 
 import androidx.compose.runtime.Composable
-import com.joohnq.core.ui.mapper.organizeMoodRange
+import com.joohnq.domain.mapper.organizeMoodRange
 import com.joohnq.shared_resources.components.LineChart
 import com.joohnq.stress_level.domain.mapper.toPercent
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource

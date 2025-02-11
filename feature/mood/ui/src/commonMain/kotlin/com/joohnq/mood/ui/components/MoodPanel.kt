@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toFormattedTimeString
+import com.joohnq.domain.mapper.toFormattedTimeString
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -68,7 +68,10 @@ fun MoodPanel(
             )
             VerticalSpacer(10.dp)
             Text(
-                text = stringResource(Res.string.logged_today_at, record.createdAt.toFormattedTimeString()),
+                text = stringResource(
+                    Res.string.logged_today_at,
+                    record.createdAt.toFormattedTimeString()
+                ),
                 style = TextStyles.TextXlMedium(),
                 color = Colors.White
             )

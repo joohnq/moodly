@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toPercentage
+import com.joohnq.domain.mapper.toPercentage
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.BallItem
 import com.joohnq.shared_resources.components.NotFoundHorizontal
@@ -33,7 +33,7 @@ fun StressTriggersSection(
     records: List<StressLevelRecordResource>,
     onAddStressLevel: () -> Unit
 ) {
-    val stressors = records.flatMap { it.stressors}
+    val stressors = records.flatMap { it.stressors }
 
     val stressorsMap = stressors
         .groupingBy { it }
@@ -69,7 +69,10 @@ fun StressTriggersSection(
                 disabledContentColor = Colors.Gray80
             )
         ) {
-            Column(modifier = Modifier.paddingAllSmall(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = Modifier.paddingAllSmall(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -139,7 +142,11 @@ fun StressTriggersSectionPreview() {
                 stressors = listOf(StressorResource.Work)
             ),
             StressLevelRecordResource(
-                stressors = listOf(StressorResource.Work, StressorResource.Kids, StressorResource.Relationship)
+                stressors = listOf(
+                    StressorResource.Work,
+                    StressorResource.Kids,
+                    StressorResource.Relationship
+                )
             ),
             StressLevelRecordResource(
                 stressors = listOf(StressorResource.Finances, StressorResource.Loneliness)

@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toPaddedString
+import com.joohnq.domain.mapper.toPaddedString
 import com.joohnq.mood.ui.components.MoodFace
 import com.joohnq.mood.ui.mapper.getAllMoodResource
 import com.joohnq.shared_resources.*

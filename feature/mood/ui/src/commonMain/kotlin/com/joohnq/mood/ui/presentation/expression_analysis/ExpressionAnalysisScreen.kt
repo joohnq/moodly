@@ -1,7 +1,7 @@
 package com.joohnq.mood.ui.presentation.expression_analysis
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel

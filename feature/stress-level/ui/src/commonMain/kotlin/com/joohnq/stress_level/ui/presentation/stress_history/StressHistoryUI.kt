@@ -10,10 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
-import com.joohnq.core.ui.mapper.items
-import com.joohnq.core.ui.mapper.toFormattedDateString
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
+import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.IsEmpty
@@ -28,6 +27,7 @@ import com.joohnq.stress_level.ui.mapper.toGroupedByDate
 import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
+import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -42,8 +42,9 @@ fun StressHistoryUI(
             Scaffold(
                 containerColor = Colors.Brown10
             ) { padding ->
-                Column(modifier = Modifier
-                    .padding(padding).paddingHorizontalMedium()
+                Column(
+                    modifier = Modifier
+                        .padding(padding).paddingHorizontalMedium()
                 ) {
                     TopBar(
                         modifier = Modifier.fillMaxWidth(),

@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.core.ui.mapper.toWordCount
+import com.joohnq.domain.mapper.toWordCount
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
@@ -61,7 +61,10 @@ fun SelfJournalPanel(
                 .paddingAllSmall()
                 .clip(Dimens.Shape.Large)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(space = 20.dp, alignment = Alignment.CenterHorizontally)
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 20.dp,
+                alignment = Alignment.CenterHorizontally
+            )
         ) {
             SelfJournalPanelInfo(
                 modifier = Modifier.weight(1f),

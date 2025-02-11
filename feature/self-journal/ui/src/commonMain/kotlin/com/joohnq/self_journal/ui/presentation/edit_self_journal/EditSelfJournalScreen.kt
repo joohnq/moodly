@@ -1,8 +1,8 @@
 package com.joohnq.self_journal.ui.presentation.edit_self_journal
 
 import androidx.compose.runtime.*
-import com.joohnq.core.ui.mapper.onSuccess
-import com.joohnq.core.ui.sharedViewModel
+import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.self_journal.ui.mapper.toDomain
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent

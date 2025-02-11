@@ -2,8 +2,8 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
-import com.joohnq.core.ui.entity.UiState
-import com.joohnq.core.ui.mapper.foldComposable
+import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables

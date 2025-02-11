@@ -3,8 +3,8 @@ package com.joohnq.home.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.core.ui.getNow
-import com.joohnq.core.ui.mapper.toMonthNameString
+import com.joohnq.domain.getNow
+import com.joohnq.domain.mapper.toMonthNameString
 import com.joohnq.self_journal.ui.components.JournalCalendar
 import com.joohnq.self_journal.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource

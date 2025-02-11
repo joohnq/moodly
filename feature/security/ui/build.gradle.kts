@@ -31,6 +31,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
             implementation(projects.feature.security.domain)
             implementation(projects.sharedResources)
             implementation(projects.feature.preferences.ui)

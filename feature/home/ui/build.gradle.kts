@@ -43,6 +43,7 @@ kotlin {
             implementation(projects.sharedResources)
             implementation(projects.feature.splash.ui)
             implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

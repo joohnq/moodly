@@ -1,6 +1,5 @@
 package com.joohnq.self_journal.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -25,15 +24,11 @@ fun SelfJournalingDay(
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(horizontal = 11.dp, vertical = 3.dp)
-            .aspectRatio(1f)
+            .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
             .fillMaxSize()
+            .aspectRatio(1f)
             .clip(Dimens.Shape.Circle)
-            .background(
-                color = if (!isSelected || isInCurrentMonth) Colors.White else average.backgroundColor,
-                shape = Dimens.Shape.Circle
-            )
             .border(
                 width = 1.dp,
                 color = if (isInCurrentMonth) Colors.Gray30 else Colors.Gray10,

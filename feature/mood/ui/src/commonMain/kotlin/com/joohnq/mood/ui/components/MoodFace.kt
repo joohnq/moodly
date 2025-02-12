@@ -84,7 +84,7 @@ fun MoodFace(
 ) {
     Box(
         modifier = Modifier
-            .background(color = average.backgroundColor, shape = Dimens.Shape.Circle),
+            .background(color = average.color, shape = Dimens.Shape.Circle),
     ) {
         val image = when (average) {
             MoodAverageResource.Negative -> Drawables.Icons.Filled.MoodDepressed
@@ -95,7 +95,7 @@ fun MoodFace(
             painter = painterResource(image),
             contentDescription = null,
             modifier = modifier,
-            tint = average.color
+            tint = average.backgroundColor
         )
     }
 }

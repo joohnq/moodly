@@ -2,6 +2,7 @@ package com.joohnq.freud_score.ui.presentation.freud_score
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,6 +54,7 @@ fun FreudScoreUI(
                 val color = state.freudScore.palette.backgroundColor
 
                 DottedCircles(
+                    modifier = Modifier.sizeIn(maxWidth = 500.dp, maxHeight = 500.dp),
                     color = color
                 ) {
                     Text(

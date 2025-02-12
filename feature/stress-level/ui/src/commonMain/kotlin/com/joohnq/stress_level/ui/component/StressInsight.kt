@@ -6,11 +6,11 @@ import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.NotFoundVertical
 import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.lets_log_your_first_stress_level_to_get_more_insights_on_data
 import com.joohnq.shared_resources.log_stress
 import com.joohnq.shared_resources.stress_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.you_dont_have_enough_data_to_show_insights
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 
 @Composable
@@ -34,7 +34,7 @@ fun StressInsight(
         NotFoundVertical(
             modifier = modifier,
             containerColor = containerColor,
-            title = Res.string.lets_log_your_first_stress_level_to_get_more_insights_on_data,
+            title = Res.string.you_dont_have_enough_data_to_show_insights,
             subtitle = Res.string.log_stress,
             image = Drawables.Images.StressLevelInsight,
             onClick = onCreate

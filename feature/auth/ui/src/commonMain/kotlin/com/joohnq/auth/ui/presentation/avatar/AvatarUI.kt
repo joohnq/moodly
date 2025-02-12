@@ -1,8 +1,14 @@
 package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHostState
@@ -17,18 +23,22 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.auth.ui.components.AvatarImagesHorizontalPager
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarState
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.components.drawDottedBorder
+import com.joohnq.shared_resources.or_upload_your_profile
+import com.joohnq.shared_resources.profile
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.shared_resources.select_your_avatar
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.we_have_a_set_of_customizable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -52,6 +62,7 @@ fun AvatarUI(
                 .padding(bottom = 20.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Column {
                 VerticalSpacer(32.dp)
@@ -79,7 +90,7 @@ fun AvatarUI(
                 VerticalSpacer(40.dp)
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.paddingHorizontalMedium()
+                    modifier = Modifier.fillMaxWidth().paddingHorizontalMedium()
                 ) {
                     Text(
                         text = stringResource(Res.string.select_your_avatar),

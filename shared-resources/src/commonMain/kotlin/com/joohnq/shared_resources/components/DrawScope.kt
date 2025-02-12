@@ -40,7 +40,7 @@ fun DrawScope.drawSlice(
         size = size,
     )
     drawIntoCanvas {
-        translate(left = iconX, top = iconY - 20f) {
+        translate(left = iconX, top = iconY) {
             with(vectorPainter) {
                 draw(size = iconSize, colorFilter = ColorFilter.tint(color))
             }
@@ -53,7 +53,7 @@ fun DrawScope.drawCenterCircle(
     iconSize: Size = Size(55.5f, 84f),
 ) {
     val center = Offset(size.width / 2, size.height / 2)
-    val radius = 250f
+    val radius = (size.width / 2 * 0.7f) * 0.5f
 
     drawCircle(
         color = Colors.Brown10,
@@ -73,8 +73,9 @@ fun DrawScope.drawCenterCircle(
     }
 }
 
-fun DrawScope.drawCenterCircle(radius: Float, backgroundColor: Color) {
+fun DrawScope.drawCenterCircle(backgroundColor: Color) {
     val center = Offset(size.width / 2, size.height / 2)
+    val radius = (size.width / 2 * 0.7f) * 0.5f + 10f
 
     drawCircle(
         color = backgroundColor,

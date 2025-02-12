@@ -51,6 +51,7 @@ kotlin {
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
+            implementation("tech.annexflow.compose:constraintlayout-compose-multiplatform:0.5.1")
         }
     }
 }

@@ -1,16 +1,9 @@
 package com.joohnq.mood.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.runtime.Composable
@@ -26,28 +19,31 @@ import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AddMoodRadioGroup(
+    modifier: Modifier = Modifier,
     selectedMood: MoodRecordResource,
     setSelectedMood: (MoodResource) -> Unit,
 ) {
     val resources by remember { mutableStateOf(getAllMoodResource()) }
 
-    BoxWithConstraints {
+    BoxWithConstraints(modifier = modifier) {
         val dividerWidth = (maxWidth - 180.dp - 40.dp) / 4
         LazyRow(
             modifier = Modifier.wrapContentSize(Alignment.Center).fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            items(resources.size, key = { it }) { i ->
+            itemsIndexed(resources) { i, resource ->
+                val selected = i <= selectedMood.mood.id
                 Button(
                     modifier = Modifier.size(36.dp),
                     colors = ButtonColors(
-                        containerColor = if (i <= selectedMood.id) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                        containerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
                         contentColor = selectedMood.mood.palette.moodScreenBackgroundColor,
-                        disabledContainerColor = if (i <= selectedMood.id) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                        disabledContainerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
                         disabledContentColor = selectedMood.mood.palette.moodScreenBackgroundColor
                     ),
                     shape = Dimens.Shape.Circle,
@@ -68,10 +64,65 @@ fun AddMoodRadioGroup(
                     Box(
                         modifier = Modifier.width(dividerWidth).height(10.dp)
                             .paddingHorizontalExtraExtraSmall()
-                            .background(color = if (selectedMood.id - 1 >= i) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor)
+                            .background(color = if (selectedMood.mood.id - 1 >= i) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor)
                     )
                 }
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun AddMoodRadioGroupPreviewDepressed() {
+    AddMoodRadioGroup(
+        selectedMood = MoodRecordResource(
+            mood = MoodResource.Depressed
+        ),
+        setSelectedMood = {}
+    )
+}
+
+@Preview
+@Composable
+fun AddMoodRadioGroupPreviewSad() {
+    AddMoodRadioGroup(
+        selectedMood = MoodRecordResource(
+            mood = MoodResource.Sad
+        ),
+        setSelectedMood = {}
+    )
+}
+
+@Preview
+@Composable
+fun AddMoodRadioGroupPreviewNeutral() {
+    AddMoodRadioGroup(
+        selectedMood = MoodRecordResource(
+            mood = MoodResource.Neutral
+        ),
+        setSelectedMood = {}
+    )
+}
+
+@Preview
+@Composable
+fun AddMoodRadioGroupPreviewHappy() {
+    AddMoodRadioGroup(
+        selectedMood = MoodRecordResource(
+            mood = MoodResource.Happy
+        ),
+        setSelectedMood = {}
+    )
+}
+
+@Preview
+@Composable
+fun AddMoodRadioGroupPreviewOverjoyed() {
+    AddMoodRadioGroup(
+        selectedMood = MoodRecordResource(
+            mood = MoodResource.Overjoyed
+        ),
+        setSelectedMood = {}
+    )
 }

@@ -67,8 +67,9 @@ fun MoodDay(
 
         Box(
             modifier = Modifier
-                .aspectRatio(1f)
+                .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
                 .fillMaxSize()
+                .aspectRatio(1f)
                 .clip(Dimens.Shape.Circle)
                 .then(background)
                 .then(border),

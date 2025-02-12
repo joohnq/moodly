@@ -4,10 +4,10 @@
     <string name="community_first_title">Loving &amp; Supporting</string>
     <string name="community_span">Community</string>
     <string name="four">Four</string>
-    <string name="first_screen_title">Welcome to the ultimate</string>
-    <string name="first_screen_title_word">freud</string>
-    <string name="first_screen_second_title">UI Kit!</string>
-    <string name="first_screen_desc">Your mindful mental health AI companion for everyone, anywhere</string>
+    <string name="first_screen_title">Welcome to the</string>
+    <string name="first_screen_title_word">Mood</string>
+    <string name="first_screen_second_title">App</string>
+    <string name="first_screen_desc">Your mindful mental health companion for everyone, anywhere</string>
     <string name="get_started">Get Started</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign In</string>
@@ -330,8 +330,7 @@
     <string name="be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result">Be sure to log your sleep
         metrics everyday to get accurate heath result.
     </string>
-    <string name="lets_log_your_first_stress_level_to_get_more_insights_on_data">Let’s log your first stress level to
-        get more insights on data.
+    <string name="you_dont_have_enough_data_to_show_insights">You don’t have enough data to show insights
     </string>
     <string name="log_stress">Log Stress</string>
     <string name="logged_today_at">Logged today at %1$s</string>

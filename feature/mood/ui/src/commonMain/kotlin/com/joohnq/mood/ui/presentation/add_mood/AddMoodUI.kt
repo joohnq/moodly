@@ -75,6 +75,7 @@ fun AddMoodUI(
                 VerticalSpacer(40.dp)
                 VerticalSpacer(40.dp)
                 AddMoodRadioGroup(
+                    modifier = Modifier.widthIn(max = 500.dp),
                     selectedMood = state.record,
                     setSelectedMood = { resource ->
                         onAction(

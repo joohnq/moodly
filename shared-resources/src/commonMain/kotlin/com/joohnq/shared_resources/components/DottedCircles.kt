@@ -13,12 +13,13 @@ import com.joohnq.shared_resources.theme.Dimens
 
 @Composable
 fun DottedCircles(
+    modifier: Modifier = Modifier,
     color: Color,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val shape = Dimens.Shape.Circle
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .padding(16.dp)

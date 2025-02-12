@@ -1,6 +1,5 @@
 package com.joohnq.auth.ui.presentation.user_name
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.auth.ui.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.ui.presentation.user_name.viewmodel.UserNameState
+import com.joohnq.domain.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.enter_your_name
@@ -37,21 +37,34 @@ fun UserNameUI(
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
-    BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
-        TopBalloon(
-            backgroundColor = Colors.Green50,
-            iconColor = Colors.White
-        )
-        ScaffoldSnackBar(
-            containerColor = Colors.Brown10,
-            snackBarHostState = snackBarState,
-            modifier = Modifier.fillMaxSize().padding(top = maxWidth / 2 + 56.dp, bottom = 20.dp)
-                .pointerInput(Unit) {
-                    detectTapGestures(onTap = {
-                        onClearFocus()
-                    })
-                }
-        ) { _ ->
+    ScaffoldSnackBar(
+        containerColor = Colors.Brown10,
+        snackBarHostState = snackBarState,
+        modifier = Modifier.fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    onClearFocus()
+                })
+            }
+    ) { _ ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            ConvexContentLayout(
+                backgroundColor = Colors.Green50,
+                offset = 150.dp,
+                spacer = 150.dp,
+                position = CurvedCanvasPosition.BOTTOM
+            ) {
+                Icon(
+                    painter = painterResource(Drawables.Icons.Filled.Logo),
+                    contentDescription = null,
+                    modifier = Modifier.size(48.dp),
+                    tint = Colors.White
+                )
+            }
+            VerticalSpacer(50.dp)
             Column(
                 modifier = Modifier
                     .paddingHorizontalMedium()

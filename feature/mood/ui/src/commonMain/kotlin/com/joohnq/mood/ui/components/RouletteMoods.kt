@@ -23,11 +23,12 @@ import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun RouletteMoods(setSelectedMood: (MoodResource) -> Unit) {
+fun RouletteMoods(modifier: Modifier = Modifier, setSelectedMood: (MoodResource) -> Unit) {
     val moods = rememberSaveable {
         getAllMoodResource() + getAllMoodResource()
     }
-    val painterResources: List<VectorPainter> = moods.map { rememberVectorPainter(it.assets.imageVector) }
+    val painterResources: List<VectorPainter> =
+        moods.map { rememberVectorPainter(it.assets.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Icons.Filled.RouletteTarget)
     val totalSlices = moods.size
     val limitedAngle = 360f * (PI / 180) // 6,283185307179586
@@ -38,9 +39,7 @@ fun RouletteMoods(setSelectedMood: (MoodResource) -> Unit) {
 
 
     Canvas(
-        modifier = Modifier
-            .fillMaxSize()
-            .scale(1.5f)
+        modifier = modifier
             .pointerInput(Unit) {
                 detectDragGestures(onDragEnd = {
                     val i = rotation % limitedAngle
@@ -63,8 +62,9 @@ fun RouletteMoods(setSelectedMood: (MoodResource) -> Unit) {
             painterResources + painterResources,
             moods
         )
-        drawCenterCircle(radius = 270f, backgroundColor = Colors.Alpha15)
-//        drawCenterCircle(targetVectorPainter, -(paddingBottom))
-        drawCenterCircle(targetVectorPainter)
+        drawCenterCircle(backgroundColor = Colors.Alpha15)
+        drawCenterCircle(
+            vectorPainter = targetVectorPainter,
+        )
     }
 }

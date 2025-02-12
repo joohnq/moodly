@@ -20,3 +20,5 @@ captures
 *.log
 google-services.json
 GoogleService-Info.plist
+release/*.aab
+release/*.apk

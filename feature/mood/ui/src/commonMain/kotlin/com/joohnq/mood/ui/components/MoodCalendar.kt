@@ -33,7 +33,6 @@ fun MoodCalendar(
         title = recordsInMonth,
         subtitle = stringResource(Res.string.moods_logged_this_month),
         onCreate = onCreate,
-        onClick = {},
         content = {
             MoodHorizontalCalendar(
                 containerColor = containerColor,

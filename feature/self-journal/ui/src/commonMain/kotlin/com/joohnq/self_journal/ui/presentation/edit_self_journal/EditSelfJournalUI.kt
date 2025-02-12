@@ -98,8 +98,8 @@ fun EditJournalingUI(
                 ) {
                     TextWithBackground(
                         text = state.editingSelfJournalRecord.createdAt.date.toFormattedDateString(),
-                        textColor = resource.palette.moodScreenMoodFaceColor,
-                        backgroundColor = resource.palette.subColor,
+                        textColor = resource.palette.backgroundColor,
+                        backgroundColor = resource.palette.color,
                     )
                 }
             }

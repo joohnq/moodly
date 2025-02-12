@@ -355,4 +355,8 @@
     <string name="all_history">All History</string>
     <string name="error">Error</string>
     <string name="close">Close</string>
+    <string name="stress_history">Stress History</string>
+    <string name="stress_insight">Stress Insight</string>
+    <string name="stress_trigger">Stress Trigger</string>
+    <string name="current_mood">Current Mood</string>
 </resources>

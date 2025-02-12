@@ -8,9 +8,9 @@ fun Time.toFormattedTimeString(): String =
 fun Time.toMinutes(): Int = hour * 60 + minute
 
 fun Time.toHoursAndMinutesString(): String =
-    "${hour.toPaddedString()}h ${minute.toPaddedString()}min"
+    "${hour}h ${minute}min"
 
-fun Pair<Time, Time>.calculateDuration(): Time {
-    val duration = first.toMinutes() - second.toMinutes()
+fun calculateDuration(start: Time, end: Time): Time {
+    val duration = end.toMinutes() - start.toMinutes()
     return duration.toTimeFromMinutes()
 }

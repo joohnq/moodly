@@ -8,7 +8,7 @@ import com.joohnq.shared_resources.components.NotFoundVertical
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.lets_log_your_first_stress_level_to_get_more_insights_on_data
 import com.joohnq.shared_resources.log_stress
-import com.joohnq.shared_resources.sleep_insight
+import com.joohnq.shared_resources.stress_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
@@ -28,7 +28,7 @@ fun StressInsight(
 
     SectionHeader(
         modifier = modifier,
-        title = Res.string.sleep_insight,
+        title = Res.string.stress_insight,
     )
     if (stressors.isEmpty())
         NotFoundVertical(

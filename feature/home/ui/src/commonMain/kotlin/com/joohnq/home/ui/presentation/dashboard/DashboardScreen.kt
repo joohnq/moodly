@@ -1,12 +1,8 @@
 package com.joohnq.home.ui.presentation.dashboard
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.FabPosition
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
@@ -24,11 +20,14 @@ import com.joohnq.home.ui.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.ui.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
+import com.joohnq.shared_resources.components.BottomNavigationActionButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.ObserverSideEffects
+import com.joohnq.ui.mapper.plus
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -77,14 +76,16 @@ fun DashboardScreen(
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarHostState,
-//        bottomBar = {
-//            DashboardBottomNavigation(
-//                isCurrentRoute = hierarchy::isCurrentRoute,
-//                onNavigate = ::onNavigateBottomNavigate,
-//                isCentralExpanded = centralIsExpanded,
-//                toggleIsCentralExpanded = { centralIsExpanded = !centralIsExpanded },
-//            )
-//        }
+        floatingActionButton = {
+            BottomNavigationActionButton(
+                modifier = Modifier.size(48.dp),
+                onClick = {
+                    centralIsExpanded = !centralIsExpanded
+                },
+                image = if (centralIsExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo,
+            )
+        },
+        floatingActionButtonPosition = FabPosition.Center,
     ) { padding ->
         NavHost(
             modifier = Modifier
@@ -108,7 +109,7 @@ fun DashboardScreen(
 
         if (centralIsExpanded)
             DashboardCentral(
-                padding = padding,
+                padding = padding.plus(bottom = 60.dp),
                 onEvent = onEvent
             )
     }

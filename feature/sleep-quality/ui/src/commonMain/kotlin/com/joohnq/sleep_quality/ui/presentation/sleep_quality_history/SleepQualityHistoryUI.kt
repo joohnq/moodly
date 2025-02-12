@@ -64,7 +64,6 @@ fun SleepQualityHistoryUI(
                                     modifier = modifier,
                                     containerColor = Colors.White,
                                     record = record,
-                                    onClick = {}
                                 )
                             }
                         }

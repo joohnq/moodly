@@ -25,7 +25,6 @@ fun SleepContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records.take(7),
-        onClick = {},
         onSeeMore = {
             onEvent(SleepQualityEvent.OnNavigateToSleepHistory)
         }

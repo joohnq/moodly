@@ -13,7 +13,7 @@ import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.SwipeTorRevealCard
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
-import com.joohnq.shared_resources.sleep_history
+import com.joohnq.shared_resources.stress_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
@@ -28,7 +28,7 @@ fun StressHistory(
 ) {
     SectionHeader(
         modifier = modifier,
-        title = Res.string.sleep_history,
+        title = Res.string.stress_history,
         onSeeMore = {}
     )
     if (records.isEmpty())

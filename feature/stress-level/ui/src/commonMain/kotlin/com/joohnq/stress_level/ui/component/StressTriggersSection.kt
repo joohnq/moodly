@@ -48,7 +48,7 @@ fun StressTriggersSection(
 
     SectionHeader(
         modifier = modifier,
-        title = Res.string.sleep_trigger,
+        title = Res.string.stress_trigger,
     )
     if (stressors.size < 3)
         NotFoundHorizontal(

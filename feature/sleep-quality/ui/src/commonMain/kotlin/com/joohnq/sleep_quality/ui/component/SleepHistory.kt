@@ -25,7 +25,7 @@ fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
-    onClick: () -> Unit = {},
+    onCreate: () -> Unit = {},
     onSeeMore: () -> Unit = {}
 ) {
     SectionHeader(
@@ -40,7 +40,7 @@ fun SleepHistory(
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
             subtitle = Res.string.set_up_sleep,
             image = Drawables.Images.SleepQualityHistory,
-            onClick = onClick
+            onClick = onCreate
         )
     else
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -53,7 +53,6 @@ fun SleepHistory(
                         modifier = modifier,
                         containerColor = containerColor,
                         record = record,
-                        onClick = { },
                     )
                 }
             }

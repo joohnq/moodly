@@ -25,7 +25,6 @@ fun SelfJournalingMetric(
     records: List<SelfJournalRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
-    onClick: () -> Unit = {},
 ) {
     val resource = records.getTodaySelfJournalRecord()
 
@@ -48,7 +47,6 @@ fun SelfJournalingMetric(
                 resource.createdAt.toMonthNameString()
             ),
             onCreate = onCreate,
-            onClick = onClick,
         )
     }
 }

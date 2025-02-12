@@ -7,7 +7,6 @@ import com.joohnq.freud_score.domain.mapper.toFreudScore
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
@@ -23,14 +22,14 @@ fun List<MoodRecordResource>.getWeekRecords(): List<MoodRecordResource> {
 }
 
 fun List<MoodRecordResource>.getStreakDays(): Int {
-    val now = getNow()
+    val now = getNow().date
     val sortedRecords = this.map { it.createdAt.date }.distinct().sortedDescending()
 
     if (sortedRecords.isEmpty() || sortedRecords.first() != now) return 0
 
     var streak = 1
     for (i in 1 until sortedRecords.size) {
-        if (sortedRecords[i] != now.date.minus(streak.toLong(), DateTimeUnit.DAY)) {
+        if (sortedRecords[i] != now.minus(streak.toLong(), DateTimeUnit.DAY)) {
             break
         }
         streak++
@@ -45,23 +44,6 @@ fun List<MoodRecordResource>.getMonthDaysRecordsString(): String {
         filter { it.createdAt.month == now.month }
             .associateBy { it.createdAt.date }.keys.size
     return "$days/${now.toMonthDays()}"
-}
-
-fun List<MoodRecordResource>.getNextMood(record: MoodRecordResource): MoodRecordResource? {
-    return filter { it.createdAt > record.createdAt }
-        .minByOrNull { it.createdAt }
-}
-
-fun List<MoodRecordResource>.getPreviousMood(record: MoodRecordResource): MoodRecordResource? {
-    return filter { it.createdAt < record.createdAt }
-        .maxByOrNull { it.createdAt }
-}
-
-fun List<MoodRecordResource>.getStatGroupByDate(): Map<LocalDate, List<MoodRecordResource>> {
-    return groupBy { it.createdAt }
-        .map { (key, value) ->
-            key.date to value
-        }.toMap()
 }
 
 fun List<MoodRecordResource?>.calculateStatsFreudScore(): FreudScore {

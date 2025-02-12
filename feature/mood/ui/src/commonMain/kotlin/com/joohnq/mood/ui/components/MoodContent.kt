@@ -28,6 +28,7 @@ fun MoodContent(
         modifier = modifier,
         containerColor = containerColor,
         records = records,
+        onCreate = { onEvent(MoodEvent.OnAddMood) }
     )
     MoodHistory(
         modifier = modifier,

@@ -13,11 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.joohnq.mood.ui.mapper.getStreakDays
 import com.joohnq.mood.ui.mapper.getWeekRecords
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.SectionHeader
+import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -25,6 +27,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSma
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodInsightContent(
@@ -32,7 +35,9 @@ fun MoodInsightContent(
     containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
 ) {
-    val streakDays = records.getWeekRecords().getStreakDays()
+    val weekRecords = records.getWeekRecords()
+    val streakDays = weekRecords.getStreakDays()
+
     SectionHeader(
         modifier = modifier,
         title = Res.string.mood_insight
@@ -61,11 +66,13 @@ fun MoodInsightContent(
                     style = TextStyles.HeadingXsBold(),
                     color = Colors.Gray80,
                 )
+                VerticalSpacer(3.dp)
                 Text(
                     text = stringResource(Res.string.mood_streak),
                     style = TextStyles.TextMdMedium(),
                     color = Colors.Gray60,
                 )
+                VerticalSpacer(3.dp)
                 Text(
                     text = stringResource(Res.string.you_ve_checked_in_your_mood_for_days_straight, streakDays),
                     style = TextStyles.ParagraphSm(),
@@ -79,4 +86,18 @@ fun MoodInsightContent(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun MoodInsightContentPreview() {
+    MoodInsightContent(
+        modifier = Modifier,
+        containerColor = Colors.White,
+        records = listOf(
+            MoodRecordResource(),
+            MoodRecordResource(),
+            MoodRecordResource()
+        )
+    )
 }

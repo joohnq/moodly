@@ -76,5 +76,13 @@ fun MoodPanel(
                 color = Colors.White
             )
         }
+        if (!hasToday) {
+            VerticalSpacer(10.dp)
+            Text(
+                text = stringResource(Res.string.current_mood),
+                style = TextStyles.TextLgMedium(),
+                color = textColor
+            )
+        }
     }
 }

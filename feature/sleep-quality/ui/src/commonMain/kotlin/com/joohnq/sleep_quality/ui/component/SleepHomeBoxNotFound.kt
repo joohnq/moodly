@@ -45,7 +45,10 @@ fun SleepQualityMetric(
             onClick = onCreate
         )
     else {
-        val duration = Pair(record.endSleeping, record.startSleeping).calculateDuration()
+        val duration = calculateDuration(
+            start = record.startSleeping,
+            end = record.endSleeping
+        )
         val durationString = duration.toHoursAndMinutesString()
 
         GiganticSecondaryCard(

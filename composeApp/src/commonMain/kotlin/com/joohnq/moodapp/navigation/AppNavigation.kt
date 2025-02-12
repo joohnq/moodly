@@ -104,7 +104,7 @@ fun NavGraphBuilder.appNavigation(
                     onNavigate(Destination.App.SelfJournalHistory)
                 },
                 onGoBack = onGoBack,
-                onEditSelfJournal = {id ->
+                onEditSelfJournal = { id ->
                     onNavigate(Destination.App.EditSelfJournal(id))
                 }
             )
@@ -200,7 +200,10 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.AddSleepQuality> {
             AddSleepQualityScreen(
-                onGoBack = onGoBack
+                onGoBack = onGoBack,
+                onNavigateToSleepQuality = {
+                    onNavigate(Destination.App.SleepQuality)
+                }
             )
         }
         composable<Destination.App.AddSelfJournal> {

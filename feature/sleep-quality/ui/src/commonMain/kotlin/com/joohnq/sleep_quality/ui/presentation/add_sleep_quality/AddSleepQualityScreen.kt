@@ -1,7 +1,6 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
 import androidx.compose.runtime.*
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
@@ -10,11 +9,13 @@ import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddS
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualitySideEffect
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun AddSleepQualityScreen(
     onGoBack: () -> Unit,
+    onNavigateToSleepQuality: () -> Unit,
 ) {
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
     val addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel()
@@ -35,13 +36,15 @@ fun AddSleepQualityScreen(
                         state.record.toDomain()
                     )
                 )
+
+            AddSleepQualityEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
         }
 
     LaunchedEffect(sleepQualityViewModel) {
         sleepQualityViewModel.sideEffect.collect { event ->
             when (event) {
                 is SleepQualitySideEffect.SleepQualityAdded -> {
-                    onEvent(AddSleepQualityEvent.OnGoBack)
+                    onEvent(AddSleepQualityEvent.OnNavigateToSleepQuality)
                     sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
                 }
 

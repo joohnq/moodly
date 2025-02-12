@@ -2,7 +2,6 @@ package com.joohnq.self_journal.ui.presentation.edit_self_journal
 
 import androidx.compose.runtime.*
 import com.joohnq.domain.mapper.onSuccess
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.self_journal.ui.mapper.toDomain
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
@@ -11,6 +10,7 @@ import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalSideEffect
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -54,10 +54,6 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     LaunchedEffect(selfJournalViewModel) {
         selfJournalViewModel.sideEffect.collect { effect ->
             when (effect) {
-                SelfJournalSideEffect.SelfJournalEdited -> {
-                    onEvent(EditSelfJournalEvent.OnGoBack)
-                }
-
                 SelfJournalSideEffect.SelfJournalDeleted -> {
                     onEvent(EditSelfJournalEvent.OnGoBack)
                 }

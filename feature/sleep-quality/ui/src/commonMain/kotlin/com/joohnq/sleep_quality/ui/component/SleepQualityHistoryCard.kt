@@ -30,9 +30,11 @@ fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
     containerColor: Color = Color.White,
     record: SleepQualityRecordResource,
-    onClick: () -> Unit,
 ) {
-    val duration = Pair(record.startSleeping, record.endSleeping).calculateDuration()
+    val duration = calculateDuration(
+        start = record.startSleeping,
+        end = record.endSleeping
+    )
     val resource = record.sleepQuality.toMoodResource()
 
     Card(
@@ -44,7 +46,6 @@ fun SleepQualityHistoryCard(
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Medium,
-        onClick = onClick,
     ) {
         Row(
             modifier = Modifier.fillMaxSize()
@@ -104,10 +105,10 @@ fun SleepQualityHistoryCard(
                 }
                 Text(
                     text =
-                    if (record.sleepInfluences.isNotEmpty())
-                        record.sleepInfluences.joinToString(", ")
-                    else
-                        stringResource(Res.string.no_sleep_influences),
+                        if (record.sleepInfluences.isNotEmpty())
+                            record.sleepInfluences.joinToString(", ")
+                        else
+                            stringResource(Res.string.no_sleep_influences),
                     style = TextStyles.TextSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis
@@ -122,6 +123,5 @@ fun SleepQualityHistoryCard(
 fun SleepQualityHistoryCardPreview() {
     SleepQualityHistoryCard(
         record = SleepQualityRecordResource(),
-        onClick = {}
     )
 }

@@ -99,7 +99,7 @@ fun DashboardScreen(
         ) {
             composable<Destination.App.DashBoard.Home> {
                 HomeScreen(
-                    padding = padding,
+                    padding = padding.plus(bottom = 60.dp),
                     onEvent = { event ->
                         onEvent(event.toDashboardEvent())
                     }
@@ -109,7 +109,7 @@ fun DashboardScreen(
 
         if (centralIsExpanded)
             DashboardCentral(
-                padding = padding.plus(bottom = 60.dp),
+                padding = padding.plus(bottom = 50.dp),
                 onEvent = onEvent
             )
     }

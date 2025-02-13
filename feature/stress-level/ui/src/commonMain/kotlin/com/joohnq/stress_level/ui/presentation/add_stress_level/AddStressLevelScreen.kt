@@ -45,7 +45,6 @@ fun AddStressLevelScreen(
                     StressLevelIntent.AddStressLevelRecord(
                         StressLevelRecord(
                             stressLevel = StressLevel.One,
-                            stressors = listOf(Stressor.InPeace)
                         )
                     )
                 )

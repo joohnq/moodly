@@ -314,4 +314,6 @@
     <string name="stress_insight">Visão do Estresse</string>
     <string name="stress_trigger">Gatilho de Estresse</string>
     <string name="current_mood">Humor Atual</string>
+    <string name="a_sleep_quality_record_has_already_been_added_for_today">Um registro de sono já foi adicionado hoje. Volte amanhã!</string>
+    <string name="invalid_pin">Senha inválida</string>
 </resources>

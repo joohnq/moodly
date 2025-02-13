@@ -1,14 +1,15 @@
 package com.joohnq.sleep_quality.data.repository
 
-import com.joohnq.domain.mapper.toFormattedTimeString
-import com.joohnq.domain.mapper.toTime
 import com.joohnq.database.SqliteOperationResult
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.database.sqliteExceptionMapper
+import com.joohnq.domain.mapper.toFormattedTimeString
+import com.joohnq.domain.mapper.toTime
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import com.joohnq.sleep_quality.domain.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.domain.exception.SleepQualityException
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -47,7 +48,7 @@ class SleepQualityRepositoryImpl(
             } catch (e: Exception) {
                 val res = sqliteExceptionMapper.map(e)
                 when (res.opResult) {
-                    SqliteOperationResult.CONSTRAINT -> Result.failure(Exception("A sleep quality record has already been added for today."))
+                    SqliteOperationResult.CONSTRAINT -> Result.failure(SleepQualityException.AlreadyBeenAddedToday)
                     else -> Result.failure(Exception(res.cause?.message.toString()))
                 }
             }

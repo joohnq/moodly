@@ -26,7 +26,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SnackBarUI(
     padding: PaddingValues,
     snackBarHostState: SnackbarHostState,
-    onDismiss: () -> Unit = {}
 ) {
     val scope = rememberCoroutineScope()
     SnackbarHost(

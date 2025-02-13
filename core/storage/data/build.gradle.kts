@@ -25,6 +25,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.domain)
             implementation(projects.core.storage.domain)
             implementation(libs.squareup.okio)
             implementation(libs.bundles.koin)

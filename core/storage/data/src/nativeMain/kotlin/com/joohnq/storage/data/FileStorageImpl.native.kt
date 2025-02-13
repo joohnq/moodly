@@ -1,5 +1,7 @@
 package com.joohnq.storage.data
 
+import androidx.compose.ui.graphics.ImageBitmap
+import com.joohnq.domain.mapper.toByteArray
 import com.joohnq.storage.domain.FileStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -13,7 +15,7 @@ actual class FileStorageImpl : FileStorage {
     actual override suspend fun saveImage(
         directory: String,
         fileName: String,
-        data: ByteArray,
+        data: ImageBitmap,
     ): String = withContext(Dispatchers.IO) {
         val basePath = "${systemTemporaryPath / directory}".toPath()
         val path = "${basePath / fileName}".toPath()
@@ -23,7 +25,7 @@ actual class FileStorageImpl : FileStorage {
         }
 
         FileSystem.SYSTEM.write(path) {
-            write(data)
+            write(data.toByteArray())
         }
 
         path.toString()

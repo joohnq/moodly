@@ -6,7 +6,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.domain.mapper.getValueOrNull
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.domain.SecurityAuthentication
 import com.joohnq.security.domain.getPinCode
@@ -15,8 +14,12 @@ import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModel
 import com.joohnq.security.ui.presentation.unlock.event.UnLockEvent
 import com.joohnq.security.ui.securityAuthentication
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.invalid_pin
 import com.joohnq.shared_resources.remember.rememberFocusRequester
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,6 +42,7 @@ fun UnLockScreen(
         pinState.code.none { it == null }
     }
     var isError by remember { mutableStateOf<Exception?>(null) }
+    val invalidPin = stringResource(Res.string.invalid_pin)
 
     fun executeBiometricSecurity() {
         if (securityAuthentication.isDeviceHasBiometric()) {
@@ -81,7 +85,7 @@ fun UnLockScreen(
         if (canContinue) {
             val pin = securityType.getPinCode()
             if (pin != pinState.code) {
-                isError = Exception("Invalid PIN")
+                isError = Exception(invalidPin)
             } else {
                 onNavigateToDashboard()
             }

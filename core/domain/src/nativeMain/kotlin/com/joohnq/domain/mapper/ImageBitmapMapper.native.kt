@@ -1,4 +1,4 @@
-package com.joohnq.ui.mapper
+package com.joohnq.domain.mapper
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap

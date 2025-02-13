@@ -65,13 +65,14 @@ fun StressLevelHistoryCard(
                     style = TextStyles.TextMdBold(),
                     color = Colors.Brown80
                 )
-                if (record.stressors.isNotEmpty())
-                    Text(
-                        text = record.stressors.joinToString(", "),
-                        style = TextStyles.TextSmMedium(),
-                        color = Colors.Brown80,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                Text(
+                    text = if (record.stressors.isNotEmpty()) record.stressors.joinToString(", ") else stringResource(
+                        StressorResource.InPeace.text
+                    ),
+                    style = TextStyles.TextSmMedium(),
+                    color = Colors.Brown80,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
             HorizontalSpacer(20.dp)
             Row(

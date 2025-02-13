@@ -314,4 +314,6 @@
     <string name="stress_insight">Stress Insight</string>
     <string name="stress_trigger">Stress Trigger</string>
     <string name="current_mood">Current Mood</string>
+    <string name="a_sleep_quality_record_has_already_been_added_for_today">A sleep quality record has already been added for today. Come back tomorrow!</string>
+    <string name="invalid_pin">Invalid PIN</string>
 </resources>

@@ -1,95 +1,28 @@
-# Please add these rules to your existing keep rules in order to suppress warnings.
-# This is generated automatically by the Android Gradle plugin.
--dontwarn com.google.auto.service.AutoService
+-keepattributes Signature
+# Ignore annotation used for build tooling.
 -dontwarn io.ktor.utils.io.jvm.nio.WritingKt
--dontwarn com.joohnq.auth.ui.di.AuthUiModule_androidKt
--dontwarn com.joohnq.auth.ui.presentation.avatar.AvatarScreen
--dontwarn com.joohnq.auth.ui.presentation.user_name.UserNameScreen
--dontwarn com.joohnq.core.ui.di.CoreUiModule_androidKt
--dontwarn com.joohnq.di.CoreDiModuleKt
--dontwarn com.joohnq.domain.di.UserDomainModuleKt
--dontwarn com.joohnq.freud_score.ui.di.FreudScoreUiModule_androidKt
--dontwarn com.joohnq.freud_score.ui.presentation.freud_score.FreudScoreScreen
--dontwarn com.joohnq.self_journal.data.di.SelfJournalDataModuleKt
--dontwarn com.joohnq.self_journal.data.di.SelfJournalDriverFactoryModule_androidKt
--dontwarn com.joohnq.self_journal.domain.di.SelfJournalDomainModuleKt
--dontwarn com.joohnq.self_journal.ui.di.SelfJournalUiModule_androidKt
--dontwarn com.joohnq.self_journal.ui.presentation.add_self_journal.AddJournalingScreen
--dontwarn com.joohnq.self_journal.ui.presentation.self_journal_history.AllJournalScreen
--dontwarn com.joohnq.self_journal.ui.presentation.edit_self_journal.EditJournalingScreen
--dontwarn com.joohnq.self_journal.ui.presentation.self_journal.SelfJournalScreen
--dontwarn com.joohnq.home.ui.presentation.dashboard.DashboardScreen
--dontwarn com.joohnq.mood.data.di.MoodDataModuleKt
--dontwarn com.joohnq.mood.data.di.StatsDriverFactoryModule_androidKt
--dontwarn com.joohnq.mood.domain.di.MoodDomainModuleKt
--dontwarn com.joohnq.mood.ui.di.MoodUiModule_androidKt
--dontwarn com.joohnq.mood.ui.presentation.add_mood.AddStatScreen
--dontwarn com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
--dontwarn com.joohnq.mood.ui.presentation.mood.MoodScreen
--dontwarn com.joohnq.splash.ui.presentation.splash_screen.LoadingScreen
--dontwarn com.joohnq.navigation.Destination$App$AddJournaling
--dontwarn com.joohnq.navigation.Destination$App$AddSleepQuality
--dontwarn com.joohnq.navigation.Destination$App$AddStat
--dontwarn com.joohnq.navigation.Destination$App$AddStressLevel
--dontwarn com.joohnq.navigation.Destination$App$AllJournal
--dontwarn com.joohnq.navigation.Destination$App$AllJournaling
--dontwarn com.joohnq.navigation.Destination$App$AllJournals
--dontwarn com.joohnq.navigation.Destination$App$DashBoard
--dontwarn com.joohnq.navigation.Destination$App$EditJournaling
--dontwarn com.joohnq.navigation.Destination$App$ExpressionAnalysis
--dontwarn com.joohnq.navigation.Destination$App$FreudScore
--dontwarn com.joohnq.navigation.Destination$App$SelfJournal
--dontwarn com.joohnq.navigation.Destination$App$MindfulJournal
--dontwarn com.joohnq.navigation.Destination$App$Mood
--dontwarn com.joohnq.navigation.Destination$App$SleepQuality
--dontwarn com.joohnq.navigation.Destination$App$StressLevel
--dontwarn com.joohnq.navigation.Destination$App$StressStressors
--dontwarn com.joohnq.navigation.Destination$Auth$Avatar
--dontwarn com.joohnq.navigation.Destination$Auth$UserName
--dontwarn com.joohnq.navigation.Destination$Loading
--dontwarn com.joohnq.navigation.Destination$Onboarding$ExpressionAnalysis
--dontwarn com.joohnq.navigation.Destination$Onboarding$MedicationsSupplements
--dontwarn com.joohnq.navigation.Destination$Onboarding$MoodRate
--dontwarn com.joohnq.navigation.Destination$Onboarding$PhysicalSymptoms
--dontwarn com.joohnq.navigation.Destination$Onboarding$ProfessionalHelp
--dontwarn com.joohnq.navigation.Destination$Onboarding$SleepQuality
--dontwarn com.joohnq.navigation.Destination$Onboarding$StressLevel
--dontwarn com.joohnq.navigation.Destination$Welcome
--dontwarn com.joohnq.navigation.Destination
--dontwarn com.joohnq.navigation.NavigationGraph$App
--dontwarn com.joohnq.navigation.NavigationGraph$Auth
--dontwarn com.joohnq.navigation.NavigationGraph$Loading
--dontwarn com.joohnq.navigation.NavigationGraph$Onboarding
--dontwarn com.joohnq.navigation.NavigationGraph$Welcome
--dontwarn com.joohnq.navigation.NavigationGraph
--dontwarn com.joohnq.onboarding.ui.di.OnboardingUiModule_androidKt
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_expression_analysis.OnboardingExpressionAnalysisScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_medications_supplements.OnboardingMedicationsSupplementsScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_mood_rate.OnboardingMoodRateScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_physical_symptoms.OnboardingPhysicalSymptomsScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_professional_help.OnboardingProfessionalHelpScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_sleep_quality.OnboardingSleepQualityScreen
--dontwarn com.joohnq.onboarding.ui.presentation.onboarding_stress_level.OnboardingStressLevelScreen
--dontwarn com.joohnq.sleep_quality.data.di.SleepQualityDataModuleKt
--dontwarn com.joohnq.sleep_quality.data.di.SleepQualityDriverFactoryModule_androidKt
--dontwarn com.joohnq.sleep_quality.domain.di.SleepQualityDomainModuleKt
--dontwarn com.joohnq.sleep_quality.ui.di.SleepQualityUiModule_androidKt
--dontwarn com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
--dontwarn com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
--dontwarn com.joohnq.stress_level.data.di.StressLevelDataModuleKt
--dontwarn com.joohnq.stress_level.data.di.StressLevelDriverFactoryModule_androidKt
--dontwarn com.joohnq.stress_level.domain.di.StressLevelDomainModuleKt
--dontwarn com.joohnq.stress_level.ui.di.StressLevelUiModule_androidKt
--dontwarn com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
--dontwarn com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
--dontwarn com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
--dontwarn com.joohnq.user.data.di.UserDataModuleKt
--dontwarn com.joohnq.user.data.di.UserDriverFactoryModule_androidKt
--dontwarn com.joohnq.user.ui.di.UserUiModule_androidKt
--dontwarn com.joohnq.user.ui.viewmodel.UserViewModel
--dontwarn com.joohnq.user.ui.viewmodel.user.UserViewModelIntent$InitUser
--dontwarn com.joohnq.user.ui.viewmodel.user.UserViewModelIntent
--dontwarn com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent$AddUserPreferences
--dontwarn com.joohnq.user.ui.viewmodel.user_preferences.UserPreferenceViewModelIntent
--dontwarn com.joohnq.user.ui.viewmodel.user_preferences.UserPreferencesViewModel
--dontwarn com.joohnq.welcome.ui.WelcomeScreen
+-dontwarn okio.**
+## Kotlinx serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class com.joohnq.moodapp.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.joohnq.moodapp.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.joohnq.moodapp.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keep,includedescriptorclasses class com.joohnq.security.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.joohnq.security.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.joohnq.security.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keep,includedescriptorclasses class com.joohnq.navigation.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.joohnq.navigation.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.joohnq.navigation.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}

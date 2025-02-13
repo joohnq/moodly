@@ -103,7 +103,9 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateToSelfJournalHistory = {
                     onNavigate(Destination.App.SelfJournalHistory)
                 },
-                onGoBack = onGoBack,
+                onGoBack = {
+                    onNavigateBack(Destination.App.DashBoard)
+                },
                 onEditSelfJournal = { id ->
                     onNavigate(Destination.App.EditSelfJournal(id))
                 }
@@ -111,7 +113,7 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.Mood> {
             MoodScreen(
-                onNavigateBackToHome = {
+                onGoBack = {
                     onNavigateBack(Destination.App.DashBoard)
                 },
                 onNavigateToAddMood = {
@@ -181,7 +183,9 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.SleepQuality> {
             SleepQualityScreen(
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
-                onGoBack = onGoBack,
+                onGoBack = {
+                    onNavigateBack(Destination.App.DashBoard)
+                },
                 onNavigateToSleepHistory = {
                     onNavigate(Destination.App.SleepQualityHistory)
                 }

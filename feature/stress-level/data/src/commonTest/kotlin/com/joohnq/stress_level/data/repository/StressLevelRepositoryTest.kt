@@ -27,7 +27,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
     }
 
     private suspend fun fillDumpItems() {
-        items.forEach { repository.addStressLevel(it) }
+        items.forEach { repository.addRecord(it) }
     }
 
     @Test
@@ -37,7 +37,7 @@ class StressLevelRepositoryTest : RobolectricTests() {
             fillDumpItems()
 
             //WHEN
-            val items = assertDoesNotThrow { repository.getStressLevels() }.getOrThrow()
+            val items = assertDoesNotThrow { repository.getRecords() }.getOrThrow()
 
             //THEN
             assertThat(items.isNotEmpty())
@@ -55,8 +55,8 @@ class StressLevelRepositoryTest : RobolectricTests() {
     fun `testing add stress level`() =
         runBlocking {
             //WHEN
-            assertDoesNotThrow { repository.addStressLevel(items[0]) }.getOrThrow()
-            val items = assertDoesNotThrow { repository.getStressLevels() }.getOrThrow()
+            assertDoesNotThrow { repository.addRecord(items[0]) }.getOrThrow()
+            val items = assertDoesNotThrow { repository.getRecords() }.getOrThrow()
 
             //THEN
             assertThat(items.isNotEmpty())

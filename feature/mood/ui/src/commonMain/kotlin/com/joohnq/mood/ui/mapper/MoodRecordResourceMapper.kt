@@ -47,6 +47,7 @@ fun List<MoodRecordResource>.getMonthDaysRecordsString(): String {
 }
 
 fun List<MoodRecordResource?>.calculateStatsFreudScore(): FreudScore {
+    if (isEmpty()) return FreudScore.NotAvailable
     val score = sumOf { it?.mood?.healthLevel ?: 0 } / size
     return score.toFreudScore()
 }

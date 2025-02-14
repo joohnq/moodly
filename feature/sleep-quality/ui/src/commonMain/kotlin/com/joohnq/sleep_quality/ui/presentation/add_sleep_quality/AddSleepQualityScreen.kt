@@ -1,6 +1,11 @@
 package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.a_sleep_quality_record_has_already_been_added_for_today
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -26,7 +31,8 @@ fun AddSleepQualityScreen(
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val state by addSleepQualityViewModel.state.collectAsState()
-    val alreadyBeenAddedToday = stringResource(Res.string.a_sleep_quality_record_has_already_been_added_for_today)
+    val alreadyBeenAddedToday =
+        stringResource(Res.string.a_sleep_quality_record_has_already_been_added_for_today)
 
     fun onError(error: Throwable) {
         scope.launch {
@@ -43,7 +49,7 @@ fun AddSleepQualityScreen(
             AddSleepQualityEvent.OnGoBack -> onGoBack()
             AddSleepQualityEvent.OnAdd ->
                 sleepQualityViewModel.onAction(
-                    SleepQualityIntent.AddSleepQualityRecord(
+                    SleepQualityIntent.Add(
                         state.record.toDomain()
                     )
                 )
@@ -56,7 +62,7 @@ fun AddSleepQualityScreen(
             when (event) {
                 is SleepQualitySideEffect.SleepQualityAdded -> {
                     onEvent(AddSleepQualityEvent.OnNavigateToSleepQuality)
-                    sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
+                    sleepQualityViewModel.onAction(SleepQualityIntent.GetAll)
                 }
 
                 is SleepQualitySideEffect.ShowError -> onError(event.error)

@@ -15,12 +15,14 @@ import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEve
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
 import com.joohnq.stress_level.ui.resource.StressorResource
+import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressLevelUI(
     state: StressLevelState,
+    onAction: (StressLevelIntent) -> Unit = {},
     onEvent: (StressLevelEvent) -> Unit = {},
 ) {
     state.records.foldComposable(
@@ -46,6 +48,7 @@ fun StressLevelUI(
                     StressContent(
                         modifier = modifier,
                         records = records,
+                        onAction = onAction,
                         onEvent = onEvent
                     )
                 }

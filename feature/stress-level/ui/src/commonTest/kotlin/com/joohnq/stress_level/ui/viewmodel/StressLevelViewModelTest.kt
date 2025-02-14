@@ -37,12 +37,12 @@ class StressLevelViewModelTest {
     @Test
     fun `testing getStressLevels with a success operation - returning a Result success with items`() =
         runBlocking {
-            everySuspend { repository.getStressLevels() } returns Result.success(items)
+            everySuspend { repository.getRecords() } returns Result.success(items)
 
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(StressLevelIntent.GetStressLevelRecords)
+                viewModel.onAction(StressLevelIntent.GetAll)
 
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
@@ -53,7 +53,7 @@ class StressLevelViewModelTest {
     fun `testing getStressLevels with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
-            everySuspend { repository.getStressLevels() } returns Result.failure(
+            everySuspend { repository.getRecords() } returns Result.failure(
                 Exception(
                     exception
                 )
@@ -62,7 +62,7 @@ class StressLevelViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(StressLevelIntent.GetStressLevelRecords)
+                viewModel.onAction(StressLevelIntent.GetAll)
 
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
@@ -72,11 +72,11 @@ class StressLevelViewModelTest {
     @Test
     fun `testing addStressLevel with a success operation - returning a Result success with items`() =
         runBlocking {
-            everySuspend { repository.addStressLevel(any()) } returns Result.success(true)
+            everySuspend { repository.addRecord(any()) } returns Result.success(true)
 
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(StressLevelIntent.AddStressLevelRecord(items[0]))
+                viewModel.onAction(StressLevelIntent.Add(items[0]))
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
             }
@@ -86,7 +86,7 @@ class StressLevelViewModelTest {
     fun `testing addStressLevel with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
-            everySuspend { repository.addStressLevel(any()) } returns Result.failure(
+            everySuspend { repository.addRecord(any()) } returns Result.failure(
                 Exception(
                     exception
                 )
@@ -95,7 +95,7 @@ class StressLevelViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(StressLevelIntent.AddStressLevelRecord(items[0]))
+                viewModel.onAction(StressLevelIntent.Add(items[0]))
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))

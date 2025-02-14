@@ -4,9 +4,8 @@ import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 
 sealed interface EditSelfJournalIntent {
     data object ResetState : EditSelfJournalIntent
-    data class SetEditSelfJournal(val record: SelfJournalRecord) :
-        EditSelfJournalIntent
-
+    data object ClearEditingState : EditSelfJournalIntent
+    data class SetEditSelfJournal(val record: SelfJournalRecord) : EditSelfJournalIntent
     data class UpdateTitle(val title: String) : EditSelfJournalIntent
     data class UpdateDescription(val description: String) : EditSelfJournalIntent
     data class UpdateIsEditing(val value: Boolean) : EditSelfJournalIntent

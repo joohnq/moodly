@@ -63,7 +63,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun addSleepQualityRecord() {
         sleepQualityViewModel.onAction(
-            SleepQualityIntent.AddSleepQualityRecord(
+            SleepQualityIntent.Add(
                 onboardingState.sleepQuality.toDomain(),
             )
         )
@@ -71,7 +71,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun addStressLevelRecord() {
         stressLevelViewModel.onAction(
-            StressLevelIntent.AddStressLevelRecord(
+            StressLevelIntent.Add(
                 onboardingState.stressLevel.toDomain()
             )
         )
@@ -79,7 +79,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun addMoodRecord() {
         moodViewModel.onAction(
-            MoodIntent.AddMoodRecord(
+            MoodIntent.Add(
                 onboardingState.moodRecord.toDomain()
             )
         )

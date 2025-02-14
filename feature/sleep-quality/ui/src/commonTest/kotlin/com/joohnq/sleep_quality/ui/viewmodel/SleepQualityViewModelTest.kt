@@ -40,10 +40,10 @@ class SleepQualityViewModelTest {
             everySuspend { repository.getSleepQualities() } returns Result.success(items)
 
             viewModel.state.test {
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Idle)
-                viewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Success(items))
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
+                viewModel.onAction(SleepQualityIntent.GetAll)
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
             }
         }
 
@@ -58,12 +58,12 @@ class SleepQualityViewModelTest {
             )
 
             viewModel.state.test {
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Idle)
+                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
+                viewModel.onAction(SleepQualityIntent.GetAll)
 
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().sleepQualityRecords).isEqualTo(UiState.Error(exception))
+                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
+                assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
             }
         }
 
@@ -74,7 +74,7 @@ class SleepQualityViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(SleepQualityIntent.AddSleepQualityRecord(items[0]))
+                viewModel.onAction(SleepQualityIntent.Add(items[0]))
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
             }
@@ -93,7 +93,7 @@ class SleepQualityViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(SleepQualityIntent.AddSleepQualityRecord(items[0]))
+                viewModel.onAction(SleepQualityIntent.Add(items[0]))
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))

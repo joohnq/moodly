@@ -3,6 +3,7 @@ package com.joohnq.mood.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.mapper.getValueOrNull
 import com.joohnq.domain.mapper.onFailure
 import com.joohnq.domain.mapper.onSuccess
 import com.joohnq.domain.mapper.toResultResource
@@ -14,7 +15,11 @@ import com.joohnq.mood.domain.use_case.GetMoodsUseCase
 import com.joohnq.mood.ui.mapper.toResource
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MoodViewModel(
@@ -30,9 +35,9 @@ class MoodViewModel(
 
     fun onAction(intent: MoodIntent) {
         when (intent) {
-            is MoodIntent.GetMoodRecords -> get()
-            is MoodIntent.AddMoodRecord -> add(intent.record)
-            is MoodIntent.DeleteMoodRecord -> delete(intent.id)
+            is MoodIntent.GetAll -> get()
+            is MoodIntent.Add -> add(intent.record)
+            is MoodIntent.Delete -> delete(intent.id)
         }
     }
 
@@ -58,6 +63,12 @@ class MoodViewModel(
         val res = deleteMoodUseCase(id).toUiState()
         res.onSuccess {
             _sideEffect.send(MoodSideEffect.StatsDeleted)
+            changeRecordsStatus(
+                UiState.Success(
+                    state.value.records.getValueOrNull()
+                        .filter { item -> item.id != id }
+                )
+            )
         }.onFailure {
             _sideEffect.send(MoodSideEffect.ShowError(it))
         }

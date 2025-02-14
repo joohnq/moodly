@@ -24,7 +24,8 @@ fun StressHistory(
     modifier: Modifier = Modifier,
     containerColor: Color,
     records: List<StressLevelRecordResource>,
-    onAddStressLevel: () -> Unit,
+    onDelete: (Int) -> Unit = {},
+    onAddStressLevel: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
@@ -45,7 +46,7 @@ fun StressHistory(
             records.forEach { record ->
                 SwipeTorRevealCard(
                     modifier = modifier,
-                    onAction = {}
+                    onAction = { onDelete(record.id) }
                 ) { modifier ->
                     StressLevelHistoryCard(
                         modifier = modifier.background(color = containerColor),
@@ -76,6 +77,5 @@ fun StressHistoryPreview() {
             StressLevelRecordResource(),
             StressLevelRecordResource()
         ),
-        onAddStressLevel = {}
     )
 }

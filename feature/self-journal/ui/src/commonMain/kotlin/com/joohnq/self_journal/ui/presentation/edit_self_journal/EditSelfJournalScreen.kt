@@ -1,6 +1,12 @@
 package com.joohnq.self_journal.ui.presentation.edit_self_journal
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.mapper.onSuccess
 import com.joohnq.self_journal.ui.mapper.toDomain
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
@@ -21,7 +27,6 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     val snackBarState = rememberSnackBarState()
     val selfJournalState by selfJournalViewModel.state.collectAsState()
     val state by editSelfJournalViewModel.state.collectAsState()
-
     val isDifferent by derivedStateOf {
         state.editingSelfJournalRecord.title != state.currentSelfJournalRecord.title ||
                 state.editingSelfJournalRecord.description != state.currentSelfJournalRecord.description
@@ -56,6 +61,12 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
             when (effect) {
                 SelfJournalSideEffect.SelfJournalDeleted -> {
                     onEvent(EditSelfJournalEvent.OnGoBack)
+                }
+
+                SelfJournalSideEffect.SelfJournalEdited -> {
+                    editSelfJournalViewModel.onAction(EditSelfJournalIntent.ClearEditingState)
+                    editSelfJournalViewModel.onAction(EditSelfJournalIntent.UpdateIsEditing(false))
+                    selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
                 }
 
                 is SelfJournalSideEffect.ShowError -> onError(effect.error)

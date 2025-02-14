@@ -23,7 +23,13 @@ import com.joohnq.user.ui.viewmodel.UserIntent
 import com.joohnq.user.ui.viewmodel.UserState
 import com.joohnq.user.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
@@ -43,10 +49,10 @@ class DashboardViewModel(
     fun onAction(event: DashboardIntent) {
         when (event) {
             DashboardIntent.Get -> {
-                moodViewModel.onAction(MoodIntent.GetMoodRecords)
+                moodViewModel.onAction(MoodIntent.GetAll)
                 userViewModel.onAction(UserIntent.GetUser)
-                stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
-                sleepQualityViewModel.onAction(SleepQualityIntent.GetSleepQualityRecords)
+                stressLevelViewModel.onAction(StressLevelIntent.GetAll)
+                sleepQualityViewModel.onAction(SleepQualityIntent.GetAll)
                 selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
             }
         }
@@ -78,7 +84,7 @@ class DashboardViewModel(
                 statsState.records,
                 userState.user,
                 stressState.records,
-                sleepState.sleepQualityRecords,
+                sleepState.records,
                 healthState.records,
             ).anyError(
                 block = { error ->
@@ -93,7 +99,7 @@ class DashboardViewModel(
                 moodRecords = statsState.records,
                 freudScore = freudState.freudScore,
                 selfJournalRecords = healthState.records,
-                sleepQualityRecords = sleepState.sleepQualityRecords,
+                sleepQualityRecords = sleepState.records,
                 stressLevelRecords = stressState.records
             )
         }.onEach { newState ->

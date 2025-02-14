@@ -1,7 +1,11 @@
 package com.joohnq.mood.ui.presentation.expression_analysis
 
-import androidx.compose.runtime.*
-import com.joohnq.ui.sharedViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
@@ -10,6 +14,7 @@ import com.joohnq.mood.ui.viewmodel.MoodIntent
 import com.joohnq.mood.ui.viewmodel.MoodSideEffect
 import com.joohnq.mood.ui.viewmodel.MoodViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -30,7 +35,7 @@ fun ExpressionAnalysisScreen(
         when (event) {
             ExpressionAnalysisEvent.OnAdd ->
                 moodViewModel.onAction(
-                    MoodIntent.AddMoodRecord(
+                    MoodIntent.Add(
                         addStatsState.record.toDomain()
                     )
                 )
@@ -42,7 +47,7 @@ fun ExpressionAnalysisScreen(
         moodViewModel.sideEffect.collect { event ->
             when (event) {
                 is MoodSideEffect.StatsAdded -> {
-                    moodViewModel.onAction(MoodIntent.GetMoodRecords)
+                    moodViewModel.onAction(MoodIntent.GetAll)
                     onNavigateToMood()
                 }
 

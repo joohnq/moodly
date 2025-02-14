@@ -10,6 +10,7 @@ sealed class FreudScore(
     data class Stable(override val score: Int) : FreudScore(score)
     data class AtRisk(override val score: Int) : FreudScore(score)
     data class Unhealthy(override val score: Int) : FreudScore(score)
+    data object NotAvailable : FreudScore(0)
 }
 
 

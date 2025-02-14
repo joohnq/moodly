@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.ui.viewmodel.MoodIntent
 import com.joohnq.shared_resources.theme.Colors
 
 @Composable
@@ -11,6 +12,7 @@ fun MoodContent(
     modifier: Modifier = Modifier,
     record: MoodRecordResource?,
     records: List<MoodRecordResource>,
+    onAction: (MoodIntent) -> Unit,
     onEvent: (MoodEvent) -> Unit
 ) {
     val containerColor = Colors.Gray5
@@ -39,6 +41,9 @@ fun MoodContent(
         },
         onCreate = {
             onEvent(MoodEvent.OnAddMood)
+        },
+        onDelete = { id ->
+            onAction(MoodIntent.Delete(id))
         }
     )
 }

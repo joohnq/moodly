@@ -34,15 +34,15 @@ class SleepQualityRepositoryImpl(
         }
 
     override suspend fun addSleepQuality(
-        sleepQualityRecord: SleepQualityRecord,
+        record: SleepQualityRecord,
     ): Result<Boolean> =
         withContext(Dispatchers.IO) {
             try {
                 query.addSleepQuality(
-                    sleepQuality = SleepQualityRecordConverter.fromSleepQuality(sleepQualityRecord.sleepQuality),
-                    startSleeping = sleepQualityRecord.startSleeping.toFormattedTimeString(),
-                    endSleeping = sleepQualityRecord.endSleeping.toFormattedTimeString(),
-                    sleepInfluencess = SleepQualityRecordConverter.fromInfluences(sleepQualityRecord.sleepInfluences)
+                    sleepQuality = SleepQualityRecordConverter.fromSleepQuality(record.sleepQuality),
+                    startSleeping = record.startSleeping.toFormattedTimeString(),
+                    endSleeping = record.endSleeping.toFormattedTimeString(),
+                    sleepInfluencess = SleepQualityRecordConverter.fromInfluences(record.sleepInfluences)
                 )
                 Result.success(true)
             } catch (e: Exception) {
@@ -52,5 +52,11 @@ class SleepQualityRepositoryImpl(
                     else -> Result.failure(Exception(res.cause?.message.toString()))
                 }
             }
+        }
+
+    override suspend fun deleteSleepQuality(id: Int): Result<Boolean> =
+        executeTryCatchResult {
+            query.deleteSleepQuality(id = id.toLong())
+            true
         }
 }

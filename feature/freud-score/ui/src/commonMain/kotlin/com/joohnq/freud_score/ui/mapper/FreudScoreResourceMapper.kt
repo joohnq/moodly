@@ -2,7 +2,12 @@ package com.joohnq.freud_score.ui.mapper
 
 import com.joohnq.freud_score.domain.entity.FreudScore
 import com.joohnq.freud_score.ui.resource.FreudScoreResource
-import com.joohnq.freud_score.ui.resource.FreudScoreResource.*
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.AtRisk
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.Healthy
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.MostlyHealthy
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.NotAvailable
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.Stable
+import com.joohnq.freud_score.ui.resource.FreudScoreResource.Unhealthy
 
 typealias Index = Int
 
@@ -13,6 +18,7 @@ fun FreudScore.toResource(): FreudScoreResource =
         is FreudScore.Stable -> Stable(score)
         is FreudScore.AtRisk -> AtRisk(score)
         is FreudScore.Unhealthy -> Unhealthy(score)
+        FreudScore.NotAvailable -> NotAvailable
     }
 
 fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
@@ -29,7 +35,7 @@ fun Index.toInitialFreudScore(): Int =
         1 -> 61
         2 -> 41
         3 -> 21
-        4 -> 0
+        4 -> 1
         else -> throw IllegalArgumentException("Unknown freud score: $this")
     }
 

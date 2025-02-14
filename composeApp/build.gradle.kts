@@ -143,6 +143,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            ndk.debugSymbolLevel = "FULL"
         }
         debug {
             isMinifyEnabled = false
@@ -154,6 +155,11 @@ android {
             )
         }
     }
+
+    base {
+        archivesName = "Mood-v${defaultConfig.versionCode}"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -161,4 +167,5 @@ android {
     buildFeatures {
         compose = true
     }
+    ndkVersion = "27.0.12077973"
 }

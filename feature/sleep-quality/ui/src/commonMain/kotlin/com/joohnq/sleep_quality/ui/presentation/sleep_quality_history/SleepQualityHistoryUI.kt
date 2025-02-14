@@ -24,6 +24,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,8 +33,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SleepQualityHistoryUI(
     state: SleepQualityState,
     onEvent: (SleepQualityHistoryEvent) -> Unit = {},
+    onAction: (SleepQualityIntent) -> Unit = {},
 ) {
-    state.sleepQualityRecords.foldComposable(
+    state.records.foldComposable(
         onSuccess = { records ->
             Scaffold(
                 containerColor = Colors.Brown10
@@ -58,7 +60,7 @@ fun SleepQualityHistoryUI(
                         items(records) { record ->
                             SwipeTorRevealCard(
                                 modifier = Modifier.fillMaxWidth(),
-                                onAction = {},
+                                onAction = { onAction(SleepQualityIntent.Delete(record.id)) },
                             ) { modifier ->
                                 SleepQualityHistoryCard(
                                     modifier = modifier,
@@ -79,7 +81,7 @@ fun SleepQualityHistoryUI(
 fun SleepHistoryUIPreview() {
     SleepQualityHistoryUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(),
                     SleepQualityRecordResource(),
@@ -105,7 +107,7 @@ fun SleepHistoryUIPreview() {
 fun SleepHistoryUIPreviewEmpty() {
     SleepQualityHistoryUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf()
             )
         ),

@@ -45,7 +45,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
-                viewModel.onAction(MoodIntent.GetMoodRecords)
+                viewModel.onAction(MoodIntent.GetAll)
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
             }
@@ -63,7 +63,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
-                viewModel.onAction(MoodIntent.GetMoodRecords)
+                viewModel.onAction(MoodIntent.GetAll)
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
             }
@@ -77,7 +77,7 @@ class StatsViewModelTest {
 
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(MoodIntent.AddMoodRecord(items[0]))
+                viewModel.onAction(MoodIntent.Add(items[0]))
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
             }
@@ -93,7 +93,7 @@ class StatsViewModelTest {
             viewModel.state.test {
                 assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
 
-                viewModel.onAction(MoodIntent.AddMoodRecord(items[0]))
+                viewModel.onAction(MoodIntent.Add(items[0]))
 
                 assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
                 assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))

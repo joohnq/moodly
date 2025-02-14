@@ -14,9 +14,7 @@ class EditSelfJournalViewModel : ViewModel() {
 
     fun onAction(intent: EditSelfJournalIntent) {
         when (intent) {
-            EditSelfJournalIntent.ResetState ->
-                resetState()
-
+            EditSelfJournalIntent.ResetState -> resetState()
             is EditSelfJournalIntent.UpdateDescription ->
                 updateDescription(intent.description)
 
@@ -31,6 +29,17 @@ class EditSelfJournalViewModel : ViewModel() {
 
             is EditSelfJournalIntent.SetEditSelfJournal ->
                 setEditingSelfJournal(intent.record)
+
+            EditSelfJournalIntent.ClearEditingState -> clearEditingState()
+        }
+    }
+
+    private fun clearEditingState() {
+        _state.update {
+            it.copy(
+                currentSelfJournalRecord = state.value.editingSelfJournalRecord,
+                editingSelfJournalRecord = state.value.editingSelfJournalRecord
+            )
         }
     }
 

@@ -25,6 +25,7 @@ fun SleepHistory(
     modifier: Modifier = Modifier,
     containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
+    onDelete: (Int) -> Unit = {},
     onCreate: () -> Unit = {},
     onSeeMore: () -> Unit = {}
 ) {
@@ -47,7 +48,7 @@ fun SleepHistory(
             records.forEach { record ->
                 SwipeTorRevealCard(
                     modifier = modifier,
-                    onAction = {}
+                    onAction = { onDelete(record.id) }
                 ) { modifier ->
                     SleepQualityHistoryCard(
                         modifier = modifier,

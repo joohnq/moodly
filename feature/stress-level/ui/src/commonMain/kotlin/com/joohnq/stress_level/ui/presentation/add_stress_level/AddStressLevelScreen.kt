@@ -8,7 +8,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.domain.entity.Stressor
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.resource.StressLevelResource
@@ -42,7 +41,7 @@ fun AddStressLevelScreen(
                 }
 
                 stressLevelViewModel.onAction(
-                    StressLevelIntent.AddStressLevelRecord(
+                    StressLevelIntent.Add(
                         StressLevelRecord(
                             stressLevel = StressLevel.One,
                         )
@@ -59,10 +58,11 @@ fun AddStressLevelScreen(
             when (event) {
                 is StressLevelSideEffect.StressLevelAdded -> {
                     onEvent(AddStressLevelEvent.PopUpToStressLevelLevel)
-                    stressLevelViewModel.onAction(StressLevelIntent.GetStressLevelRecords)
+                    stressLevelViewModel.onAction(StressLevelIntent.GetAll)
                 }
 
                 is StressLevelSideEffect.ShowError -> onError(event.error)
+                else -> Unit
             }
         }
     }

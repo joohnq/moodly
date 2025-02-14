@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.mapper.foldComposable
@@ -13,16 +12,17 @@ import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SleepQualityUI(
     state: SleepQualityState,
     onEvent: (SleepQualityEvent) -> Unit = {},
+    onAction: (SleepQualityIntent) -> Unit = {},
 ) {
-    state.sleepQualityRecords.foldComposable(
+    state.records.foldComposable(
         onSuccess = { records ->
             val record = records.getTodaySleepQualityRecord()
             val hasToday = record != null
@@ -31,8 +31,8 @@ fun SleepQualityUI(
                 containerColor = Colors.White,
                 isDark = !hasToday,
                 image = Drawables.Images.SleepQualityBackground,
-                color = if (hasToday) record.sleepQuality.palette.imageColor else Colors.Brown10,
-                panelBackgroundColor = if (hasToday) record.sleepQuality.palette.color else Colors.Brown10,
+                color = if (hasToday) record!!.sleepQuality.palette.imageColor else Colors.Brown10,
+                panelBackgroundColor = if (hasToday) record!!.sleepQuality.palette.color else Colors.Brown10,
                 panel = { modifier ->
                     SleepPanel(
                         modifier = modifier,
@@ -45,7 +45,8 @@ fun SleepQualityUI(
                     SleepContent(
                         modifier = modifier,
                         records = records,
-                        onEvent = onEvent
+                        onEvent = onEvent,
+                        onAction = onAction
                     )
                 }
             )
@@ -58,7 +59,7 @@ fun SleepQualityUI(
 fun SleepQualityUIPreviewEmpty() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                 )
             )
@@ -71,7 +72,7 @@ fun SleepQualityUIPreviewEmpty() {
 fun SleepQualityUIPreviewWorst() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(
                         sleepQuality = SleepQualityResource.Worst
@@ -87,7 +88,7 @@ fun SleepQualityUIPreviewWorst() {
 fun SleepQualityUIPreviewPoor() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(
                         sleepQuality = SleepQualityResource.Poor
@@ -103,7 +104,7 @@ fun SleepQualityUIPreviewPoor() {
 fun SleepQualityUIPreviewFair() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(
                         sleepQuality = SleepQualityResource.Fair
@@ -119,7 +120,7 @@ fun SleepQualityUIPreviewFair() {
 fun SleepQualityUIPreviewGood() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(
                         sleepQuality = SleepQualityResource.Good
@@ -135,7 +136,7 @@ fun SleepQualityUIPreviewGood() {
 fun SleepQualityUIPreviewExcellent() {
     SleepQualityUI(
         state = SleepQualityState(
-            sleepQualityRecords = UiState.Success(
+            records = UiState.Success(
                 listOf(
                     SleepQualityRecordResource(
                         sleepQuality = SleepQualityResource.Excellent

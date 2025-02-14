@@ -3,9 +3,9 @@ package com.joohnq.sleep_quality.ui.presentation.sleep_quality
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun SleepQualityScreen(
@@ -25,6 +25,7 @@ fun SleepQualityScreen(
 
     return SleepQualityUI(
         state = state,
-        onEvent = ::onEvent
+        onEvent = ::onEvent,
+        onAction = sleepQualityViewModel::onAction
     )
 }

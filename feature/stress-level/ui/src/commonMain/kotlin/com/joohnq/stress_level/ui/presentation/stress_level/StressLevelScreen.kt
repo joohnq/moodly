@@ -3,9 +3,9 @@ package com.joohnq.stress_level.ui.presentation.stress_level
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun StressLevelScreen(
@@ -23,6 +23,7 @@ fun StressLevelScreen(
 
     return StressLevelUI(
         state = state,
-        onEvent = ::onEvent
+        onEvent = ::onEvent,
+        onAction = stressLevelViewModel::onAction
     )
 }

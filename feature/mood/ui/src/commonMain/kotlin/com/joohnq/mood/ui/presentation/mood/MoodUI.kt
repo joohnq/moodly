@@ -9,6 +9,7 @@ import com.joohnq.mood.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.ui.viewmodel.MoodIntent
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -18,6 +19,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodUI(
     records: UiState<List<MoodRecordResource>>,
+    onAction: (MoodIntent) -> Unit = {},
     onEvent: (MoodEvent) -> Unit = {},
 ) {
     records.foldComposable(
@@ -44,7 +46,8 @@ fun MoodUI(
                         modifier = modifier,
                         record = record,
                         records = records,
-                        onEvent = onEvent
+                        onEvent = onEvent,
+                        onAction = onAction
                     )
                 }
             )

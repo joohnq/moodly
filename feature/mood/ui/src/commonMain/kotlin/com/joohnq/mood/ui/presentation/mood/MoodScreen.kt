@@ -13,8 +13,8 @@ fun MoodScreen(
     onNavigateToAddMood: () -> Unit,
     onNavigateToMoodHistory: () -> Unit,
 ) {
-    val moodViewModel: MoodViewModel = sharedViewModel()
-    val statsState by moodViewModel.state.collectAsState()
+    val viewModel: MoodViewModel = sharedViewModel()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: MoodEvent) =
         when (event) {
@@ -24,7 +24,8 @@ fun MoodScreen(
         }
 
     MoodUI(
-        records = statsState.records,
-        onEvent = ::onEvent
+        records = state.records,
+        onEvent = ::onEvent,
+        onAction = viewModel::onAction
     )
 }

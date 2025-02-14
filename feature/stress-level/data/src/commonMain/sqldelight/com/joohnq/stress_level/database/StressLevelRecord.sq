@@ -10,3 +10,6 @@ SELECT * FROM StressLevelRecord ORDER BY createdAt DESC;
 
 addStressLevel:
 INSERT INTO StressLevelRecord (stressLevel, stressors) VALUES (:stressLevel, :stressors);
+
+deleteRecord:
+DELETE FROM StressLevelRecord WHERE id = :id;

@@ -7,6 +7,7 @@ import com.joohnq.shared_resources.at_risk
 import com.joohnq.shared_resources.certain_habits_or_conditions_are_putting_your_health_at_risk
 import com.joohnq.shared_resources.healthy
 import com.joohnq.shared_resources.mostly_healthy
+import com.joohnq.shared_resources.not_available
 import com.joohnq.shared_resources.stable
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.unhealthy
@@ -89,6 +90,18 @@ sealed class FreudScoreResource(
             subColor = Colors.Purple30,
             backgroundColor = Colors.Purple40,
             imageColor = Colors.Purple60
+        )
+    )
+
+    data object NotAvailable : FreudScoreResource(
+        score = 0,
+        title = Res.string.not_available,
+        subtitle = Res.string.not_available,
+        palette = FreudScorePalette(
+            color = Colors.Gray20,
+            subColor = Colors.Gray40,
+            backgroundColor = Colors.Gray60,
+            imageColor = Colors.Gray70
         )
     )
 }

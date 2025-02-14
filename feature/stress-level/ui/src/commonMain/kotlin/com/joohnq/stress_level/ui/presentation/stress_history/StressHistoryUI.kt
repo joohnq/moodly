@@ -26,6 +26,7 @@ import com.joohnq.stress_level.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.ui.mapper.toGroupedByDate
 import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.ui.viewmodel.StressLevelState
 import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
@@ -34,7 +35,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressHistoryUI(
     state: StressLevelState,
-    onEvent: (StressHistoryEvent) -> Unit,
+    onAction: (StressLevelIntent) -> Unit = {},
+    onEvent: (StressHistoryEvent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -77,7 +79,9 @@ fun StressHistoryUI(
                         ) { record ->
                             SwipeTorRevealCard(
                                 modifier = Modifier.fillMaxWidth(),
-                                onAction = {}
+                                onAction = {
+                                    onAction(StressLevelIntent.Delete(record.id))
+                                }
                             ) { modifier ->
                                 StressLevelHistoryCard(
                                     modifier = modifier,

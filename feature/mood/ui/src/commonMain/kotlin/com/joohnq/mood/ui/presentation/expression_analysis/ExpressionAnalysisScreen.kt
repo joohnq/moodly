@@ -28,8 +28,8 @@ fun ExpressionAnalysisScreen(
     val snackBarState = rememberSnackBarState()
     val addStatsState by addStatsViewModel.state.collectAsState()
 
-    fun onError(error: Throwable) =
-        scope.launch { snackBarState.showSnackbar(error.message.toString()) }
+    fun onError(error: String) =
+        scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: ExpressionAnalysisEvent) =
         when (event) {

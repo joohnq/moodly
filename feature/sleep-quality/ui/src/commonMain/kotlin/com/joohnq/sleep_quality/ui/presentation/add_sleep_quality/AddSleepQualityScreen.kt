@@ -34,7 +34,7 @@ fun AddSleepQualityScreen(
     val alreadyBeenAddedToday =
         stringResource(Res.string.a_sleep_quality_record_has_already_been_added_for_today)
 
-    fun onError(error: Throwable) {
+    fun onError(error: String) {
         scope.launch {
             val error = when (error) {
                 is SleepQualityException.AlreadyBeenAddedToday -> alreadyBeenAddedToday

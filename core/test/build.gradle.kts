@@ -34,6 +34,9 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlin.datetime)
+            implementation(projects.core.database)
+            implementation(libs.bundles.test)
+            implementation(libs.coroutines.extensions)
         }
         commonTest.dependencies {
             implementation(projects.core.database)
@@ -56,7 +59,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
-dependencies {
-    implementation(libs.androidx.core.ktx)
 }

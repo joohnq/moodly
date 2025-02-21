@@ -54,7 +54,6 @@ kotlin {
             implementation(libs.coroutines.extensions)
         }
         commonTest.dependencies {
-            implementation(projects.core.test)
             implementation(libs.bundles.test)
         }
         nativeMain.dependencies {

@@ -27,6 +27,9 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.android.driver)
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)

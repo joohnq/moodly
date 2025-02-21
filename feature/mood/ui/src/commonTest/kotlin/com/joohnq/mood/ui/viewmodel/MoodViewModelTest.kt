@@ -8,10 +8,10 @@ import com.joohnq.mood.domain.repository.MoodRepository
 import com.joohnq.mood.domain.use_case.AddMoodUseCase
 import com.joohnq.mood.domain.use_case.DeleteMoodUseCase
 import com.joohnq.mood.domain.use_case.GetMoodsUseCase
+import com.joohnq.mood.ui.mapper.toResource
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
-import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
@@ -29,15 +29,9 @@ class MoodViewModelTest {
     @BeforeTest
     fun setUp() {
         repository = mock(MockMode.autofill)
-        getMoodsUseCase = mock {
-            every { repository } returns repository
-        }
-        deleteMoodUseCase = mock {
-            every { repository } returns repository
-        }
-        addMoodUseCase = mock {
-            every { repository } returns repository
-        }
+        getMoodsUseCase = GetMoodsUseCase(repository)
+        deleteMoodUseCase = DeleteMoodUseCase(repository)
+        addMoodUseCase = AddMoodUseCase(repository)
         viewModel = MoodViewModel(
             getMoodsUseCase = getMoodsUseCase,
             deleteMoodUseCase = deleteMoodUseCase,
@@ -46,7 +40,7 @@ class MoodViewModelTest {
     }
 
     @Test
-    fun `testing getStats with a success operation - returning a Result success with items`() =
+    fun `testing get with a success operation - returning a Result success with items`() =
         runBlocking {
             everySuspend { repository.getMoodRecords() } returns Result.success(items)
 
@@ -54,12 +48,12 @@ class MoodViewModelTest {
                 assertThat(awaitItem().records).isEqualTo(UiState.Idle)
                 viewModel.onAction(MoodIntent.GetAll)
                 assertThat(awaitItem().records).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
+                assertThat(awaitItem().records).isEqualTo(UiState.Success(items.toResource()))
             }
         }
 
     @Test
-    fun `testing getStats with a failed operation - returning a Result failure with exception`() =
+    fun `testing get with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
             everySuspend { repository.getMoodRecords() } returns Result.failure(
@@ -77,33 +71,52 @@ class MoodViewModelTest {
         }
 
     @Test
-    fun `testing addStats with a success operation - returning a Result success with items`() =
+    fun `testing add with a success operation - returning a Result success with items`() =
         runBlocking {
             everySuspend { repository.addMoodRecord(any()) } returns
                     Result.success(true)
 
-            viewModel.state.test {
-                assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(MoodIntent.Add(items[0]))
-                assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
+            viewModel.onAction(MoodIntent.Add(items[0]))
+            viewModel.sideEffect.test {
+                assertThat(awaitItem()).isEqualTo(MoodSideEffect.StatsAdded)
             }
         }
 
     @Test
-    fun `testing addStats with a failed operation - returning a Result failure with exception`() =
+    fun `testing add with a failed operation - returning a Result failure with exception`() =
         runBlocking {
             val exception = "Something went wrong"
             everySuspend { repository.addMoodRecord(any()) } returns
                     Result.failure(Exception(exception))
 
-            viewModel.state.test {
-                assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
+            viewModel.onAction(MoodIntent.Add(items[0]))
+            viewModel.sideEffect.test {
+                assertThat(awaitItem()).isEqualTo(MoodSideEffect.ShowError(exception))
+            }
+        }
 
-                viewModel.onAction(MoodIntent.Add(items[0]))
+    @Test
+    fun `testing delete with a success operation - returning a Result success with items`() =
+        runBlocking {
+            everySuspend { repository.deleteMoodRecord(any()) } returns
+                    Result.success(true)
 
-                assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))
+            viewModel.onAction(MoodIntent.Delete(1))
+            viewModel.sideEffect.test {
+                assertThat(awaitItem()).isEqualTo(MoodSideEffect.StatsDeleted)
+            }
+        }
+
+    @Test
+    fun `testing delete with a failed operation - returning a Result failure with exception`() =
+        runBlocking {
+            val exception = "Something went wrong"
+            everySuspend { repository.deleteMoodRecord(any()) } returns
+                    Result.failure(Exception(exception))
+
+            viewModel.onAction(MoodIntent.Delete(1))
+            viewModel.sideEffect.test {
+                assertThat(awaitItem()).isEqualTo(MoodSideEffect.ShowError(exception))
             }
         }
 

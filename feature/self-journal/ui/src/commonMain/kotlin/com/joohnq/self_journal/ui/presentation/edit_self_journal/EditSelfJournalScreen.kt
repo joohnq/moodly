@@ -33,8 +33,8 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     }
     val canSave by derivedStateOf { isDifferent && state.editingSelfJournalRecord.title.isNotBlank() && state.editingSelfJournalRecord.description.isNotBlank() }
 
-    fun onError(error: Throwable) =
-        scope.launch { snackBarState.showSnackbar(error.message.toString()) }
+    fun onError(error: String) =
+        scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: EditSelfJournalEvent) =
         when (event) {

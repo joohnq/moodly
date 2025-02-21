@@ -63,7 +63,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
                     onEvent(EditSelfJournalEvent.OnGoBack)
                 }
 
-                SelfJournalSideEffect.SelfJournalEdited -> {
+                SelfJournalSideEffect.Updated -> {
                     editSelfJournalViewModel.onAction(EditSelfJournalIntent.ClearEditingState)
                     editSelfJournalViewModel.onAction(EditSelfJournalIntent.UpdateIsEditing(false))
                     selfJournalViewModel.onAction(SelfJournalIntent.GetAll)

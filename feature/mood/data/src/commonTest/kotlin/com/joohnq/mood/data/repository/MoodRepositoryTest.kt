@@ -1,28 +1,30 @@
 package com.joohnq.mood.data.repository
 
-import com.joohnq.core.test.assertDoesNotThrow
-import com.joohnq.core.test.assertThatOneOfContains
-import com.joohnq.core.test.createTestDriver
 import com.joohnq.mood.data.database.MoodDatabase
 import com.joohnq.mood.database.MoodDatabaseSql
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.repository.MoodRepository
-import com.joohnq.test.RobolectricTests
+import com.joohnq.test.assertDoesNotThrow
+import com.joohnq.test.assertThatOneOfContains
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class StatsRepositoryTest : RobolectricTests() {
+class MoodRepositoryTest {
     private lateinit var database: MoodDatabaseSql
     private lateinit var repository: MoodRepository
 
     @BeforeTest
     fun setUp() {
-        val driver = createTestDriver(MoodDatabaseSql.Schema)
         database = MoodDatabase(driver).invoke()
         repository = MoodRepositoryImpl(database)
+        val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+
+        val database = MoodDatabase(driver)
+
+        MoodDatabase.Schema.create(driver)
     }
 
     private suspend fun fillDumpItems() {

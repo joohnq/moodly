@@ -38,7 +38,7 @@ fun AddSleepQualityScreen(
         scope.launch {
             val error = when (error) {
                 is SleepQualityException.AlreadyBeenAddedToday -> alreadyBeenAddedToday
-                else -> error.message.toString()
+                else -> error
             }
             snackBarState.showSnackbar(error)
         }
@@ -60,12 +60,14 @@ fun AddSleepQualityScreen(
     LaunchedEffect(sleepQualityViewModel) {
         sleepQualityViewModel.sideEffect.collect { event ->
             when (event) {
-                is SleepQualitySideEffect.SleepQualityAdded -> {
+                is SleepQualitySideEffect.ShowError -> onError(event.error)
+
+                SleepQualitySideEffect.Deleted -> {
                     onEvent(AddSleepQualityEvent.OnNavigateToSleepQuality)
                     sleepQualityViewModel.onAction(SleepQualityIntent.GetAll)
                 }
 
-                is SleepQualitySideEffect.ShowError -> onError(event.error)
+                else -> Unit
             }
         }
     }

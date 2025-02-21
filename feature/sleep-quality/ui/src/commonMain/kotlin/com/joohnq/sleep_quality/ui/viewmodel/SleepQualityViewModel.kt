@@ -47,7 +47,7 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             val res = deleteSleepQualityUseCase(id).toUiState()
             res.onSuccess {
-                _sideEffect.send(SleepQualitySideEffect.SleepQualityAdded)
+                _sideEffect.send(SleepQualitySideEffect.Deleted)
                 changeRecordsStatus(
                     UiState.Success(
                         state.value.records.getValueOrEmpty()

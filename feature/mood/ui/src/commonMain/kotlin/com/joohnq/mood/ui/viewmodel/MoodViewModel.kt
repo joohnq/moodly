@@ -3,7 +3,7 @@ package com.joohnq.mood.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.getValueOrNull
+import com.joohnq.domain.mapper.getValueOrEmpty
 import com.joohnq.domain.mapper.onFailure
 import com.joohnq.domain.mapper.onSuccess
 import com.joohnq.domain.mapper.toResultResource
@@ -65,7 +65,7 @@ class MoodViewModel(
             _sideEffect.send(MoodSideEffect.StatsDeleted)
             changeRecordsStatus(
                 UiState.Success(
-                    state.value.records.getValueOrNull()
+                    state.value.records.getValueOrEmpty()
                         .filter { item -> item.id != id }
                 )
             )

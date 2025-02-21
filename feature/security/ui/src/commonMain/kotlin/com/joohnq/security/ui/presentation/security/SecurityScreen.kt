@@ -30,7 +30,7 @@ fun SecurityScreen(
 
     fun onError(error: String) {
         scope.launch {
-            snackBarState.showSnackbar(error.message.toString())
+            snackBarState.showSnackbar(error)
         }
     }
 

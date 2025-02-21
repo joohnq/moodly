@@ -68,6 +68,12 @@ fun <T> UiState<T>.getValueOrNull(): T =
         else -> throw Throwable()
     }
 
+fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =
+    when (this) {
+        is UiState.Success -> this.data
+        else -> emptyList<T>()
+    }
+
 inline fun <T> UiState<T>.onSuccess(
     block: (T) -> Unit = {},
 ): UiState<T> = when (this) {

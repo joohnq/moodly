@@ -7,7 +7,11 @@ import com.joohnq.domain.mapper.onFailure
 import com.joohnq.domain.mapper.onSuccess
 import com.joohnq.domain.mapper.toUiState
 import com.joohnq.preferences.domain.entity.AppPreferences
-import com.joohnq.preferences.domain.use_case.*
+import com.joohnq.preferences.domain.use_case.GetUserPreferencesUseCase
+import com.joohnq.preferences.domain.use_case.UpdateSkipAuthUseCase
+import com.joohnq.preferences.domain.use_case.UpdateSkipOnboardingUseCase
+import com.joohnq.preferences.domain.use_case.UpdateSkipSecurityUseCase
+import com.joohnq.preferences.domain.use_case.UpdateSkipWelcomeUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -58,7 +62,7 @@ class PreferencesViewModel(
             res.onSuccess {
                 _sideEffect.send(PreferencesSideEffect.UpdatedPreferences)
             }.onFailure {
-                _sideEffect.send(PreferencesSideEffect.ShowError(it.message.toString()))
+                _sideEffect.send(PreferencesSideEffect.ShowError(it))
             }
         }
 
@@ -68,7 +72,7 @@ class PreferencesViewModel(
             res.onSuccess {
                 _sideEffect.send(PreferencesSideEffect.UpdatedPreferences)
             }.onFailure {
-                _sideEffect.send(PreferencesSideEffect.ShowError(it.message.toString()))
+                _sideEffect.send(PreferencesSideEffect.ShowError(it))
             }
         }
 
@@ -78,7 +82,7 @@ class PreferencesViewModel(
             res.onSuccess {
                 _sideEffect.send(PreferencesSideEffect.UpdatedPreferences)
             }.onFailure {
-                _sideEffect.send(PreferencesSideEffect.ShowError(it.message.toString()))
+                _sideEffect.send(PreferencesSideEffect.ShowError(it))
             }
         }
 
@@ -88,7 +92,7 @@ class PreferencesViewModel(
             res.onSuccess {
                 _sideEffect.send(PreferencesSideEffect.UpdatedPreferences)
             }.onFailure {
-                _sideEffect.send(PreferencesSideEffect.ShowError(it.message.toString()))
+                _sideEffect.send(PreferencesSideEffect.ShowError(it))
             }
         }
 

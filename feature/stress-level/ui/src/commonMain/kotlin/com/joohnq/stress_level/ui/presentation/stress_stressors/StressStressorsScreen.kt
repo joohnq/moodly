@@ -28,8 +28,8 @@ fun StressStressorsScreen(
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()
 
-    fun onError(error: Throwable) {
-        scope.launch { snackBarState.showSnackbar(error.message.toString()) }
+    fun onError(error: String) {
+        scope.launch { snackBarState.showSnackbar(error) }
     }
 
     fun onEvent(event: StressStressorsEvent) =

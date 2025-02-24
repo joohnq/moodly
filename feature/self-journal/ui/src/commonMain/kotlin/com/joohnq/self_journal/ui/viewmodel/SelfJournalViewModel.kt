@@ -3,7 +3,11 @@ package com.joohnq.self_journal.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.*
+import com.joohnq.domain.mapper.getValueOrEmpty
+import com.joohnq.domain.mapper.onFailure
+import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.domain.mapper.toResultResource
+import com.joohnq.domain.mapper.toUiState
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.domain.use_case.AddSelfJournalsUseCase
 import com.joohnq.self_journal.domain.use_case.DeleteSelfJournalsUseCase
@@ -12,7 +16,11 @@ import com.joohnq.self_journal.domain.use_case.UpdateSelfJournalsUseCase
 import com.joohnq.self_journal.ui.mapper.toResource
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SelfJournalViewModel(
@@ -43,7 +51,7 @@ class SelfJournalViewModel(
         res.onSuccess {
             _sideEffect.send(SelfJournalSideEffect.SelfJournalAdded)
         }.onFailure {
-            _sideEffect.send(SelfJournalSideEffect.SelfJournalAdded)
+            _sideEffect.send(SelfJournalSideEffect.ShowError(it))
         }
     }
 
@@ -52,7 +60,7 @@ class SelfJournalViewModel(
     ) = viewModelScope.launch {
         val res = updateSelfJournalsUseCase(record).toUiState()
         res.onSuccess {
-            _sideEffect.send(SelfJournalSideEffect.SelfJournalEdited)
+            _sideEffect.send(SelfJournalSideEffect.Updated)
         }.onFailure {
             _sideEffect.send(SelfJournalSideEffect.ShowError(it))
         }
@@ -73,7 +81,7 @@ class SelfJournalViewModel(
             res.onSuccess {
                 changeRecordsStatus(
                     UiState.Success(
-                        state.value.records.getValueOrNull()
+                        state.value.records.getValueOrEmpty()
                             .filter { item -> item.id != id }
                     )
                 )

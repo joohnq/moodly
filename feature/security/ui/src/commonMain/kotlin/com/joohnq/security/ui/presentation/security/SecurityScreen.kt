@@ -3,7 +3,6 @@ package com.joohnq.security.ui.presentation.security
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.domain.Security
@@ -14,6 +13,7 @@ import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecuritySideEffect
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,9 +28,9 @@ fun SecurityScreen(
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
 
-    fun onError(error: Throwable) {
+    fun onError(error: String) {
         scope.launch {
-            snackBarState.showSnackbar(error.message.toString())
+            snackBarState.showSnackbar(error)
         }
     }
 

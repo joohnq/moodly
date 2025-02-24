@@ -69,3 +69,6 @@ fun MoodRecord.toResource(): MoodRecordResource =
         createdAt = createdAt,
     )
 
+fun List<MoodRecord>.toResource(): List<MoodRecordResource> = map { it.toResource() }
+
+

@@ -9,7 +9,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.domain.mapper.itemsNotNull
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.security.domain.Security
 import com.joohnq.security.ui.presentation.pin.event.PINEvent
 import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
@@ -19,6 +18,7 @@ import com.joohnq.security.ui.viewmodel.SecuritySideEffect
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
 import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -38,9 +38,9 @@ fun PINScreen(
         state.code.none { it == null }
     }
 
-    fun onError(error: Throwable) {
+    fun onError(error: String) {
         scope.launch {
-            snackBarState.showSnackbar(error.message.toString())
+            snackBarState.showSnackbar(error)
         }
     }
 

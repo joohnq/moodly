@@ -6,7 +6,11 @@ import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.*
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Excellent
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Fair
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Good
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Poor
+import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Worst
 
 fun getAllSleepQualityResource(): List<SleepQualityResource> = listOf(
     Excellent,
@@ -71,3 +75,6 @@ fun SleepQualityRecord.toResource(): SleepQualityRecordResource = SleepQualityRe
     sleepInfluences = sleepInfluences.toResource(),
     createdAt = createdAt,
 )
+
+fun List<SleepQualityRecord>.toResource(): List<SleepQualityRecordResource> =
+    map { it.toResource() }

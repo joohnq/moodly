@@ -12,6 +12,7 @@ import com.joohnq.mood.ui.mapper.toResource
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
+import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
@@ -29,9 +30,15 @@ class MoodViewModelTest {
     @BeforeTest
     fun setUp() {
         repository = mock(MockMode.autofill)
-        getMoodsUseCase = GetMoodsUseCase(repository)
-        deleteMoodUseCase = DeleteMoodUseCase(repository)
-        addMoodUseCase = AddMoodUseCase(repository)
+        getMoodsUseCase = mock {
+            every { repository } returns repository
+        }
+        deleteMoodUseCase = mock {
+            every { repository } returns repository
+        }
+        addMoodUseCase = mock {
+            every { repository } returns repository
+        }
         viewModel = MoodViewModel(
             getMoodsUseCase = getMoodsUseCase,
             deleteMoodUseCase = deleteMoodUseCase,

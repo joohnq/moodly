@@ -28,7 +28,7 @@ jobs:
 
   iOS:
     if: ${{ inputs.shouldRunKmp == 'true' || inputs.shouldRunIos == 'true' }}
-    runs-on: macos-12
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v3

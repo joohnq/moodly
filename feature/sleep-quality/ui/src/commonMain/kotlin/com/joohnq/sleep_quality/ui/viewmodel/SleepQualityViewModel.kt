@@ -3,7 +3,7 @@ package com.joohnq.sleep_quality.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.getValueOrNull
+import com.joohnq.domain.mapper.getValueOrEmpty
 import com.joohnq.domain.mapper.onFailure
 import com.joohnq.domain.mapper.onSuccess
 import com.joohnq.domain.mapper.toResultResource
@@ -47,10 +47,10 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             val res = deleteSleepQualityUseCase(id).toUiState()
             res.onSuccess {
-                _sideEffect.send(SleepQualitySideEffect.SleepQualityAdded)
+                _sideEffect.send(SleepQualitySideEffect.Deleted)
                 changeRecordsStatus(
                     UiState.Success(
-                        state.value.records.getValueOrNull()
+                        state.value.records.getValueOrEmpty()
                             .filter { item -> item.id != id }
                     )
                 )

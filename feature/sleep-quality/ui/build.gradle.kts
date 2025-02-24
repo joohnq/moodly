@@ -36,6 +36,7 @@ kotlin {
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.splash.ui)
             implementation(projects.feature.mood.domain)
+            implementation(projects.core.test)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

@@ -11,7 +11,7 @@ fun <T> UiState<T>.fold(
 ) = when (this) {
     is UiState.Loading -> onLoading()
     is UiState.Success -> onSuccess(this.data)
-    is UiState.Error -> onError(this.exception.message.toString())
+    is UiState.Error -> onError(this.error)
     is UiState.Idle -> onIdle()
 }
 
@@ -39,10 +39,10 @@ fun List<UiState<*>>.allSuccess(
 fun List<UiState<*>>.allSuccess(): Boolean = all { it is UiState.Success }
 
 fun List<UiState<*>>.anyError(
-    block: (Throwable) -> Unit,
+    block: (String) -> Unit,
 ): List<UiState<*>> {
     filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-        block(errorState.exception)
+        block(errorState.error)
         return@let
     }
     return this
@@ -58,7 +58,7 @@ fun <T> UiState<T>.foldComposable(
 ) = when (this) {
     is UiState.Loading -> onLoading()
     is UiState.Success -> onSuccess(this.data)
-    is UiState.Error -> onError(this.exception.message.toString())
+    is UiState.Error -> onError(this.error)
     is UiState.Idle -> onIdle()
 }
 
@@ -66,6 +66,12 @@ fun <T> UiState<T>.getValueOrNull(): T =
     when (this) {
         is UiState.Success -> this.data
         else -> throw Throwable()
+    }
+
+fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =
+    when (this) {
+        is UiState.Success -> this.data
+        else -> emptyList<T>()
     }
 
 inline fun <T> UiState<T>.onSuccess(
@@ -80,10 +86,10 @@ inline fun <T> UiState<T>.onSuccess(
 }
 
 inline fun <T> UiState<T>.onFailure(
-    block: (Throwable) -> Unit = {},
+    block: (String) -> Unit = {},
 ): UiState<T> = when (this) {
     is UiState.Error -> {
-        block(this.exception)
+        block(this.error)
         this
     }
 
@@ -92,12 +98,12 @@ inline fun <T> UiState<T>.onFailure(
 
 fun <R1, R2> List<UiState<*>>.fold(
     onLoading: () -> Unit = {},
-    onError: (Throwable) -> Unit = {},
+    onError: (String) -> Unit = {},
     onSuccess: (R1, R2) -> Unit,
 ) {
     if (any { it is UiState.Error }) {
         val errorState = first { it is UiState.Error } as UiState.Error
-        onError(errorState.exception)
+        onError(errorState.error)
     } else if (all { it is UiState.Success<*> }) {
         val r1 = this[0] as UiState.Success<R1>
         val r2 = this[1] as UiState.Success<R2>
@@ -110,12 +116,12 @@ fun <R1, R2> List<UiState<*>>.fold(
 @Composable
 fun <R1, R2> List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit = {},
-    onError: @Composable (Throwable) -> Unit = {},
+    onError: @Composable (String) -> Unit = {},
     onSuccess: @Composable (R1, R2) -> Unit,
 ) {
     if (any { it is UiState.Error }) {
         val errorState = first { it is UiState.Error } as UiState.Error
-        onError(errorState.exception)
+        onError(errorState.error)
     } else if (all { it is UiState.Success<*> }) {
         val r1 = this[0] as UiState.Success<R1>
         val r2 = this[1] as UiState.Success<R2>
@@ -129,12 +135,12 @@ fun <R1, R2> List<UiState<*>>.foldComposable(
 @Composable
 fun <R1, R2, R3, R4, R5> List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit = {},
-    onError: @Composable (Throwable) -> Unit = {},
+    onError: @Composable (String) -> Unit = {},
     onSuccess: @Composable (R1, R2, R3, R4, R5) -> Unit,
 ) {
     if (any { it is UiState.Error }) {
         val errorState = first { it is UiState.Error } as UiState.Error
-        onError(errorState.exception)
+        onError(errorState.error)
     } else if (all { it is UiState.Success<*> }) {
         val r1 = this[0] as UiState.Success<R1>
         val r2 = this[1] as UiState.Success<R2>

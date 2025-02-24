@@ -1,7 +1,11 @@
 package com.joohnq.self_journal.ui.presentation.add_self_journal
 
-import androidx.compose.runtime.*
-import com.joohnq.ui.sharedViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.ui.mapper.toDomain
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.joohnq.self_journal.ui.presentation.add_self_journal.event.AddSelfJournalEvent
@@ -11,6 +15,7 @@ import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalSideEffect
 import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -21,8 +26,8 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
     val snackBarState = rememberSnackBarState()
     val state by addJournalingViewModel.state.collectAsState()
 
-    fun onError(error: Throwable) =
-        scope.launch { snackBarState.showSnackbar(error.message.toString()) }
+    fun onError(error: String) =
+        scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: AddSelfJournalEvent) =
         when (event) {

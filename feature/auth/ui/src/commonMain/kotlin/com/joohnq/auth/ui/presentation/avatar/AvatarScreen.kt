@@ -7,11 +7,11 @@ import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.permission.*
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.ui.viewmodel.UserIntent
 import com.joohnq.user.ui.viewmodel.UserSideEffect
 import com.joohnq.user.ui.viewmodel.UserViewModel
@@ -110,7 +110,7 @@ fun AvatarScreen(
         )
     }
 
-    fun onError(error: Throwable) {
+    fun onError(error: String) {
         scope.launch {
             snackBarState.showSnackbar(error.message.toString())
         }

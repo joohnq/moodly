@@ -83,6 +83,8 @@ fun SelfJournalRecord.toResource(): SelfJournalRecordResource = SelfJournalRecor
     createdAt = createdAt,
 )
 
+fun List<SelfJournalRecord>.toResource(): List<SelfJournalRecordResource> = map { it.toResource() }
+
 fun List<SelfJournalRecordResource>.toGroupedByDate(): Map<LocalDate, List<SelfJournalRecordResource>> =
     groupBy { it.createdAt }
         .map { (key, value) ->

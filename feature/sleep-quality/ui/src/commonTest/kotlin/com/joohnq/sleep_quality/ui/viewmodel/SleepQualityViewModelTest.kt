@@ -6,50 +6,53 @@ import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.domain.repository.SleepQualityRepository
 import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
+import com.joohnq.sleep_quality.domain.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.ui.mapper.toResource
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class SleepQualityViewModelTest {
     private lateinit var viewModel: SleepQualityViewModel
     private lateinit var repository: SleepQualityRepository
-    private lateinit var addSleepQualityUseCase: AddSleepQualityUseCase
-    private lateinit var getSleepQualitiesUseCase: GetSleepQualitiesUseCase
 
     @BeforeTest
     fun setUp() {
         repository = mock(MockMode.autofill)
-        addSleepQualityUseCase = AddSleepQualityUseCase(repository)
-        getSleepQualitiesUseCase = GetSleepQualitiesUseCase(repository)
+        val addSleepQualityUseCase = AddSleepQualityUseCase(repository)
+        val getSleepQualitiesUseCase = GetSleepQualitiesUseCase(repository)
+        val deleteSleepQualityUseCase = DeleteSleepQualityUseCase(repository)
         viewModel = SleepQualityViewModel(
             addSleepQualityUseCase = addSleepQualityUseCase,
             getSleepQualitiesUseCase = getSleepQualitiesUseCase,
+            deleteSleepQualityUseCase = deleteSleepQualityUseCase
         )
     }
 
     @Test
-    fun `testing getSleepQualities with a success operation - returning a Result success with items`() =
-        runBlocking {
+    fun `testing get with a success operation - returning a Result success with items`() =
+        runTest {
             everySuspend { repository.getSleepQualities() } returns Result.success(items)
 
             viewModel.state.test {
-                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
+                assertState(field = { it.records }, UiState.Idle)
                 viewModel.onAction(SleepQualityIntent.GetAll)
-                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().records).isEqualTo(UiState.Success(items))
+                assertState(field = { it.records }, UiState.Loading)
+                assertState(field = { it.records }, UiState.Success(items.toResource()))
+                cancelAndConsumeRemainingEvents()
             }
         }
 
     @Test
-    fun `testing getSleepQualities with a failed operation - returning a Result failure with exception`() =
-        runBlocking {
+    fun `testing get with a failed operation - returning a Result failure with exception`() =
+        runTest {
             val exception = "Something went wrong"
             everySuspend { repository.getSleepQualities() } returns Result.failure(
                 Exception(
@@ -58,31 +61,30 @@ class SleepQualityViewModelTest {
             )
 
             viewModel.state.test {
-                assertThat(awaitItem().records).isEqualTo(UiState.Idle)
-
+                assertState(field = { it.records }, UiState.Idle)
                 viewModel.onAction(SleepQualityIntent.GetAll)
-
-                assertThat(awaitItem().records).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().records).isEqualTo(UiState.Error(exception))
+                assertState(field = { it.records }, UiState.Loading)
+                assertState(field = { it.records }, UiState.Error(exception))
+                cancelAndConsumeRemainingEvents()
             }
         }
 
     @Test
-    fun `testing addSleepQuality with a success operation - returning a Result success with items`() =
-        runBlocking {
+    fun `testing add with a success operation - returning a Result success with items`() =
+        runTest {
             everySuspend { repository.addSleepQuality(any()) } returns Result.success(true)
 
-            viewModel.state.test {
-                assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
-                viewModel.onAction(SleepQualityIntent.Add(items[0]))
-                assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().adding).isEqualTo(UiState.Success(true))
+            viewModel.onAction(SleepQualityIntent.Add(items[0]))
+
+            viewModel.sideEffect.test {
+                assertSideEffect(SleepQualitySideEffect.SleepQualityAdded)
+                cancelAndConsumeRemainingEvents()
             }
         }
 
     @Test
-    fun `testing addSleepQuality with a failed operation - returning a Result failure with exception`() =
-        runBlocking {
+    fun `testing add with a failed operation - returning a Result failure with exception`() =
+        runTest {
             val exception = "Something went wrong"
             everySuspend { repository.addSleepQuality(any()) } returns Result.failure(
                 Exception(
@@ -90,13 +92,42 @@ class SleepQualityViewModelTest {
                 )
             )
 
-            viewModel.state.test {
-                assertThat(awaitItem().adding).isEqualTo(UiState.Idle)
+            viewModel.onAction(SleepQualityIntent.Add(items[0]))
 
-                viewModel.onAction(SleepQualityIntent.Add(items[0]))
+            viewModel.sideEffect.test {
+                assertSideEffect(SleepQualitySideEffect.ShowError(exception))
+                cancelAndConsumeRemainingEvents()
+            }
+        }
 
-                assertThat(awaitItem().adding).isEqualTo(UiState.Loading)
-                assertThat(awaitItem().adding).isEqualTo(UiState.Error(exception))
+    @Test
+    fun `testing delete with a success operation - returning a Result success`() =
+        runTest {
+            everySuspend { repository.deleteSleepQuality(any()) } returns Result.success(true)
+
+            viewModel.onAction(SleepQualityIntent.Delete(1))
+
+            viewModel.sideEffect.test {
+                assertSideEffect(SleepQualitySideEffect.Deleted)
+                cancelAndConsumeRemainingEvents()
+            }
+        }
+
+    @Test
+    fun `testing delete with a failed operation - returning a Result failure with exception`() =
+        runTest {
+            val exception = "Something went wrong"
+            everySuspend { repository.deleteSleepQuality(any()) } returns Result.failure(
+                Exception(
+                    exception
+                )
+            )
+
+            viewModel.onAction(SleepQualityIntent.Delete(1))
+
+            viewModel.sideEffect.test {
+                assertThat(awaitItem()).isEqualTo(SleepQualitySideEffect.ShowError(exception))
+                cancelAndConsumeRemainingEvents()
             }
         }
 

@@ -25,18 +25,14 @@ kotlin {
 
     sourceSets {
         androidUnitTest.dependencies {
-            implementation(libs.androidx.startup.runtime)
             implementation(libs.android.driver)
-
-            implementation(libs.androidx.core.ktx)
-            implementation(libs.robolectric)
-            implementation(libs.junit)
         }
         commonMain.dependencies {
             implementation(libs.kotlin.datetime)
             implementation(projects.core.database)
             implementation(libs.bundles.test)
             implementation(libs.coroutines.extensions)
+            implementation(libs.turbine)
         }
         commonTest.dependencies {
             implementation(projects.core.database)

@@ -37,6 +37,8 @@ Este projeto está licenciado sob a **Creative Commons Attribution-NoDerivatives
 CC BY-ND 4.0)**. Isso significa que você pode compartilhar o código e o aplicativo, mas sem
 modificações.
 
+[![Licença CC BY-ND 4.0](https://licensebuttons.net/l/by-nd/4.0/88x31.png)](https://creativecommons.org/licenses/by-nd/4.0/deed.pt)
+
 ## Contato
 
 Desenvolvido por **João Henrique**

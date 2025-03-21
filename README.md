@@ -28,16 +28,21 @@ Store. [Clique aqui para baixar](https://play.google.com/store/apps/details?id=c
 
 ## Contribuição
 
-O Moodly é um projeto open source, mas no momento não aceitamos Pull Requests. No entanto, você pode
-ajudar divulgando o aplicativo e compartilhando feedback!
+O código-fonte é de propriedade exclusiva de João Henrique e não pode ser modificado ou
+redistribuído.
+No entanto, você pode ajudar divulgando o aplicativo e compartilhando feedback!
 
 ## Licença
 
-Este projeto está licenciado sob a **Creative Commons Attribution-NoDerivatives 4.0 International (
-CC BY-ND 4.0)**. Isso significa que você pode compartilhar o código e o aplicativo, mas sem
-modificações.
+Este projeto está licenciado sob a **Licença Proprietária**. O código-fonte e o aplicativo são de
+propriedade exclusiva de João Henrique.
 
-[![Licença CC BY-ND 4.0](https://licensebuttons.net/l/by-nd/4.0/88x31.png)](https://creativecommons.org/licenses/by-nd/4.0/deed.pt)
+Você NÃO tem permissão para modificar, distribuir ou criar trabalhos derivados do código-fonte ou do
+aplicativo sem permissão expressa.
+
+Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
+
+Todos os direitos reservados.
 
 ## Contato
 
@@ -45,7 +50,4 @@ Desenvolvido por **João Henrique**
 
 - LinkedIn: [Seu Perfil](https://www.linkedin.com/in/joohnq/)
 - E-mail: [Seu E-mail](mailto:joaohenriquess3287@gmail.com)
-
----
-Sinta-se à vontade para modificar conforme necessário! 😊
 

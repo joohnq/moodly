@@ -89,10 +89,10 @@ fun MoodBarStatistic(
             ) { page ->
                 val record = records[page]
                 val boxHeight = record.mood.healthLevel.times(proportion)
-                val background = when {
-                    current == record -> resource.palette.barColor
-                    else -> Colors.Brown20
-                }
+//                val background = when {
+//                    current == record -> resource.palette.barColor
+//                    else -> Colors.Brown20
+//                }
                 val barFaceColor = when {
                     current == record -> resource.palette.barFaceColor
                     else -> Colors.Brown40

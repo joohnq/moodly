@@ -5,7 +5,7 @@
     <string name="community_span">Comunidade</string>
     <string name="four">Quatro</string>
     <string name="first_screen_title">Bem-vindo ao</string>
-    <string name="first_screen_title_word">Mood</string>
+    <string name="first_screen_title_word">Moodly</string>
     <string name="first_screen_second_title">App</string>
     <string name="first_screen_desc">Seu companheiro consciente de saúde mental para todos, em qualquer lugar</string>
     <string name="get_started">Começar</string>
@@ -148,8 +148,8 @@
     <string name="anxiety">Ansiedade</string>
     <string name="alcohol_consumption">Consumo de Álcool</string>
     <string name="new_sleep_quality">Nova Qualidade de Sono</string>
-    <string name="start_sleeping_time">Hora de Começar a Dormir</string>
-    <string name="end_sleeping_time">Hora de Terminar o Sono</string>
+    <string name="start_sleeping_time">Hora início</string>
+    <string name="end_sleeping_time">Hora fim</string>
     <string name="to_word">para</string>
     <string name="your_entries">Suas Entradas</string>
     <string name="document_your_mental_journal">Documente seu Diário Mental</string>

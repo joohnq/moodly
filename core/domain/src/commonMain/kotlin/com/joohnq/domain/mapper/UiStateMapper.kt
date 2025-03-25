@@ -7,7 +7,7 @@ fun <T> UiState<T>.fold(
     onLoading: () -> Unit = {},
     onIdle: () -> Unit = {},
     onSuccess: (T) -> Unit = {},
-    onError: (String) -> Unit = {},
+    onError: (Throwable) -> Unit = {},
 ) = when (this) {
     is UiState.Loading -> onLoading()
     is UiState.Success -> onSuccess(this.data)
@@ -39,7 +39,7 @@ fun List<UiState<*>>.allSuccess(
 fun List<UiState<*>>.allSuccess(): Boolean = all { it is UiState.Success }
 
 fun List<UiState<*>>.anyError(
-    block: (String) -> Unit,
+    block: (Throwable) -> Unit,
 ): List<UiState<*>> {
     filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
         block(errorState.error)
@@ -54,7 +54,7 @@ fun <T> UiState<T>.foldComposable(
     onLoading: @Composable () -> Unit = {},
     onIdle: @Composable () -> Unit = {},
     onSuccess: @Composable (T) -> Unit = {},
-    onError: @Composable (String) -> Unit = {},
+    onError: @Composable (Throwable) -> Unit = {},
 ) = when (this) {
     is UiState.Loading -> onLoading()
     is UiState.Success -> onSuccess(this.data)
@@ -86,7 +86,7 @@ inline fun <T> UiState<T>.onSuccess(
 }
 
 inline fun <T> UiState<T>.onFailure(
-    block: (String) -> Unit = {},
+    block: (Throwable) -> Unit = {},
 ): UiState<T> = when (this) {
     is UiState.Error -> {
         block(this.error)
@@ -98,7 +98,7 @@ inline fun <T> UiState<T>.onFailure(
 
 fun <R1, R2> List<UiState<*>>.fold(
     onLoading: () -> Unit = {},
-    onError: (String) -> Unit = {},
+    onError: (Throwable) -> Unit = {},
     onSuccess: (R1, R2) -> Unit,
 ) {
     if (any { it is UiState.Error }) {
@@ -116,7 +116,7 @@ fun <R1, R2> List<UiState<*>>.fold(
 @Composable
 fun <R1, R2> List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit = {},
-    onError: @Composable (String) -> Unit = {},
+    onError: @Composable (Throwable) -> Unit = {},
     onSuccess: @Composable (R1, R2) -> Unit,
 ) {
     if (any { it is UiState.Error }) {
@@ -135,7 +135,7 @@ fun <R1, R2> List<UiState<*>>.foldComposable(
 @Composable
 fun <R1, R2, R3, R4, R5> List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit = {},
-    onError: @Composable (String) -> Unit = {},
+    onError: @Composable (Throwable) -> Unit = {},
     onSuccess: @Composable (R1, R2, R3, R4, R5) -> Unit,
 ) {
     if (any { it is UiState.Error }) {

@@ -15,7 +15,7 @@ fun <T> T?.toResultNull(message: String): Result<T> =
 fun <T> Result<T>.toUiState(): UiState<T> =
     fold(
         onSuccess = { item -> UiState.Success(item) },
-        onFailure = { error -> UiState.Error(error.message.toString()) }
+        onFailure = { error -> UiState.Error(error) }
     )
 
 fun <T> Result<List<T>>.getOrEmpty(): List<T> = getOrNull() ?: emptyList()

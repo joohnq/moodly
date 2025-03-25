@@ -60,7 +60,7 @@ fun UserNameScreen(
                     onNavigateToSecurity()
                 }
 
-                is UserSideEffect.ShowError -> onError(event.error)
+                is UserSideEffect.ShowError -> onError(event.error.message.toString())
                 else -> {}
             }
         }

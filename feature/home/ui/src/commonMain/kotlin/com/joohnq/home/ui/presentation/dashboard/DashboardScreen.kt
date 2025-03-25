@@ -2,9 +2,17 @@ package com.joohnq.home.ui.presentation.dashboard
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.FabPosition
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -60,7 +68,7 @@ fun DashboardScreen(
 
     fun onSideEffect(effect: DashboardSideEffect) {
         when (effect) {
-            is DashboardSideEffect.ShowError -> onError(effect.message)
+            is DashboardSideEffect.ShowError -> onError(effect.error.message.toString())
         }
     }
 
@@ -109,7 +117,14 @@ fun DashboardScreen(
 
         if (centralIsExpanded)
             DashboardCentral(
-                padding = padding.plus(bottom = 50.dp),
+                modifier = Modifier.pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            awaitPointerEvent(PointerEventPass.Initial)
+                        }
+                    }
+                },
+                padding = padding.plus(bottom = 68.dp),
                 onEvent = onEvent
             )
     }

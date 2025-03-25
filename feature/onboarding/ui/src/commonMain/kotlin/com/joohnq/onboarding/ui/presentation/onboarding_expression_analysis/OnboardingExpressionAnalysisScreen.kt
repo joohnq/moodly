@@ -124,16 +124,16 @@ fun OnboardingExpressionAnalysisScreen(
             Quad(stressSideEffect, sleepSideEffect, statsSideEffect, userSideEffect)
         }.collect { (stressSideEffect, sleepSideEffect, statsSideEffect, userSideEffect) ->
             if (stressSideEffect is StressLevelSideEffect.ShowError) {
-                onError(stressSideEffect.error)
+                onError(stressSideEffect.error.message.toString())
             }
             if (sleepSideEffect is SleepQualitySideEffect.ShowError) {
-                onError(sleepSideEffect.error)
+                onError(sleepSideEffect.error.message.toString())
             }
             if (statsSideEffect is MoodSideEffect.ShowError) {
-                onError(statsSideEffect.error)
+                onError(statsSideEffect.error.message.toString())
             }
             if (userSideEffect is UserSideEffect.ShowError) {
-                onError(userSideEffect.error)
+                onError(userSideEffect.error.message.toString())
             }
 
             if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodSideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
@@ -146,7 +146,7 @@ fun OnboardingExpressionAnalysisScreen(
         flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is PreferencesSideEffect.ShowError -> onError(effect.message)
+                is PreferencesSideEffect.ShowError -> onError(effect.error.message.toString())
                 PreferencesSideEffect.UpdatedPreferences -> onNavigateToUserName()
             }
         }

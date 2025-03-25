@@ -52,7 +52,7 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
                     selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
                 }
 
-                is SelfJournalSideEffect.ShowError -> onError(effect.error)
+                is SelfJournalSideEffect.ShowError -> onError(effect.error.message.toString())
                 else -> Unit
             }
         }

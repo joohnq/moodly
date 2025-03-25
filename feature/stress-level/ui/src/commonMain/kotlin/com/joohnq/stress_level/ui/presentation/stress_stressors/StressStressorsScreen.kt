@@ -52,7 +52,7 @@ fun StressStressorsScreen(
                     stressLevelViewModel.onAction(StressLevelIntent.GetAll)
                 }
 
-                is StressLevelSideEffect.ShowError -> onError(event.error)
+                is StressLevelSideEffect.ShowError -> onError(event.error.message.toString())
                 else -> Unit
             }
         }

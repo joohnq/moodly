@@ -27,7 +27,7 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is PreferencesSideEffect.ShowError -> onError(effect.message)
+                is PreferencesSideEffect.ShowError -> onError(effect.error.message.toString())
                 PreferencesSideEffect.UpdatedPreferences -> onNavigateToOnboarding()
             }
         }

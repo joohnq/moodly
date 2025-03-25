@@ -51,7 +51,7 @@ fun ExpressionAnalysisScreen(
                     onNavigateToMood()
                 }
 
-                is MoodSideEffect.ShowError -> onError(event.error)
+                is MoodSideEffect.ShowError -> onError(event.error.message.toString())
                 else -> {}
             }
         }

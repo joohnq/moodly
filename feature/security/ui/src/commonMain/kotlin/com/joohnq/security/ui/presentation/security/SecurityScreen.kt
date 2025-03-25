@@ -42,7 +42,7 @@ fun SecurityScreen(
                     onNavigateToSecurityConfirmed()
                 }
 
-                is SecuritySideEffect.ShowError -> onError(sideEffect.error)
+                is SecuritySideEffect.ShowError -> onError(sideEffect.error.message.toString())
             }
         }
     }

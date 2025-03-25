@@ -1,16 +1,33 @@
 package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import com.joohnq.auth.ui.components.AlertMessageDialog
 import com.joohnq.auth.ui.components.ImageSourceOptionDialog
 import com.joohnq.auth.ui.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
-import com.joohnq.permission.*
-import com.joohnq.shared_resources.*
+import com.joohnq.permission.PermissionCallback
+import com.joohnq.permission.PermissionStatus
+import com.joohnq.permission.PermissionType
+import com.joohnq.permission.createPermissionsManager
+import com.joohnq.permission.rememberCameraManager
+import com.joohnq.permission.rememberGalleryManager
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.cancel
+import com.joohnq.shared_resources.permission_required
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.shared_resources.settings
+import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.ui.viewmodel.UserIntent
 import com.joohnq.user.ui.viewmodel.UserSideEffect
@@ -140,7 +157,7 @@ fun AvatarScreen(
                     onNavigateToUserName()
                 }
 
-                is UserSideEffect.ShowError -> onError(event.error)
+                is UserSideEffect.ShowError -> onError(event.error.message.toString())
                 else -> {}
             }
         }

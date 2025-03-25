@@ -14,10 +14,8 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.home.ui.components.DashboardCentral
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
@@ -27,7 +25,6 @@ import com.joohnq.home.ui.presentation.viewmodel.DashboardIntent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.ui.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
-import com.joohnq.navigation.isCurrentRoute
 import com.joohnq.shared_resources.components.BottomNavigationActionButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
@@ -46,9 +43,9 @@ fun DashboardScreen(
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val navigator = rememberNavController()
-    val navBackStackEntry by navigator.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    val hierarchy = currentDestination?.hierarchy
+//    val navBackStackEntry by navigator.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+//    val hierarchy = currentDestination?.hierarchy
 
     var centralIsExpanded by remember { mutableStateOf(false) }
     val dashboardViewModel: DashboardViewModel = sharedViewModel()
@@ -59,12 +56,12 @@ fun DashboardScreen(
         }
     }
 
-    fun onNavigateBottomNavigate(destination: Destination) {
-        if (!hierarchy.isCurrentRoute(destination))
-            navigator.navigate(destination)
-
-        centralIsExpanded = false
-    }
+//    fun onNavigateBottomNavigate(destination: Destination) {
+//        if (!hierarchy.isCurrentRoute(destination))
+//            navigator.navigate(destination)
+//
+//        centralIsExpanded = false
+//    }
 
     fun onSideEffect(effect: DashboardSideEffect) {
         when (effect) {

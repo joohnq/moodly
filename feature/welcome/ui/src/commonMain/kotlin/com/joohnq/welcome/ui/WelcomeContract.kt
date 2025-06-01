@@ -1,0 +1,18 @@
+package com.joohnq.welcome.ui
+
+import androidx.compose.ui.graphics.Color
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
+
+sealed interface WelcomeContract {
+    data class State(
+        val image: DrawableResource,
+        val step: StringResource,
+        val index: Int,
+        val backgroundColor: Color,
+        val firstTitle: StringResource? = null,
+        val span: StringResource,
+        val secondTitle: StringResource? = null,
+        val spanColor: Color,
+    )
+}

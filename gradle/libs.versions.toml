@@ -1,0 +1,107 @@
+[versions]
+accompanistPermissions = "0.37.3"
+activityComposeVersion = "1.10.1"
+android-compileSdk = "36"
+android-minSdk = "26"
+android-targetSdk = "36"
+android-versionCode = "5"
+android-versionName = "1.0.2"
+androidGradlePluginVersion = "8.10.0"
+android-packageName = "com.joohnq.moodapp"
+androidxLifecycleVersion = "2.9.0"
+biometric = "1.1.0"
+coilNetworkKtorVersion = "3.0.0-alpha08"
+coilVersion = "3.2.0"
+composeChartsVersion = "0.1.7"
+composeCompilerPluginVersion = "1.8.1"
+composeMultiplatformVersion = "2.7.0"
+composeUiVersion = "1.8.2"
+coroutinesVersion = "1.10.2"
+dataStoreVersion = "1.1.7"
+datetimeVersion = "0.6.2"
+firebaseBomVersion = "33.14.0"
+firebaseCrashlyticsVersion = "3.0.3"
+gitliveFirebaseVersion = "2.1.0"
+googleServicesVersion = "4.4.2"
+koinVersion = "4.0.4"
+kotlin = "2.1.21"
+ktorVersion = "3.1.3"
+lifecycleViewModelVersion = "2.9.0"
+mokkeryVersion = "2.7.2"
+napierVersion = "2.7.1"
+navigationComposeVersion = "2.8.0-alpha13"
+okioVersion = "3.11.0"
+serializationJsonVersion = "1.8.1"
+sqlDelightVersion = "2.1.0"
+startupRuntimeVersion = "1.2.0"
+truthishVersion = "1.0.2"
+turbineVersion = "1.2.0"
+kmpAuthGoogleVersion = "2.3.1"
+logginVersion = "2.0.3"
+
+[libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelightVersion" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
+androidx-data-store-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
+androidx-datastore-core = { module = "androidx.datastore:datastore", version.ref = "dataStoreVersion" }
+androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidxLifecycleVersion" }
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntimeVersion" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUiVersion" }
+calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "composeMultiplatformVersion" }
+charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeChartsVersion" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion" }
+coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", version.ref = "coilNetworkKtorVersion" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelightVersion" }
+firebase-android-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
+gitlive-firebase-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "gitliveFirebaseVersion" }
+gitlive-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "gitliveFirebaseVersion" }
+gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "gitliveFirebaseVersion" }
+gitlive-firebase-analytics = { module = "dev.gitlive:firebase-analytics", version.ref = "gitliveFirebaseVersion" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVersion" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinVersion" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinVersion" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinVersion" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetimeVersion" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktorVersion" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorVersion" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModelVersion" }
+napier = { module = "io.github.aakira:napier", version.ref = "napierVersion" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJsonVersion" }
+squareup-okio = { group = "com.squareup.okio", name = "okio", version.ref = "okioVersion" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelightVersion" }
+truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthishVersion" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbineVersion" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kmpauth-google = { group = "io.github.mirzemehdi", name = "kmpauth-google", version.ref = "kmpAuthGoogleVersion" }
+kmpauth-firebase = { group = "io.github.mirzemehdi", name = "kmpauth-firebase", version.ref = "kmpAuthGoogleVersion" }
+kmpauth-uihelper = { group = "io.github.mirzemehdi", name = "kmpauth-uihelper", version.ref = "kmpAuthGoogleVersion" }
+logging = {group = "com.diamondedge", name = "logging", version.ref = "logginVersion"}
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "androidGradlePluginVersion" }
+androidLibrary = { id = "com.android.library", version.ref = "androidGradlePluginVersion" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsVersion" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesVersion" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "composeCompilerPluginVersion" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+mokkery = { id = "dev.mokkery", version.ref = "mokkeryVersion" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelightVersion" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "androidGradlePluginVersion" }
+
+[bundles]
+dataStore = ["androidx-datastore-core", "androidx-data-store-preferences"]
+koin = ["koin-core", "koin-compose", "koin-compose-viewmodel"]
+test = ["kotlin-test", "truthish"]
+viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]
+kmpauth = ["kmpauth-google", "kmpauth-firebase", "kmpauth-uihelper"]
+base = ["logging"]

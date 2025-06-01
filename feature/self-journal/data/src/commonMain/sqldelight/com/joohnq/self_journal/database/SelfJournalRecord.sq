@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS SelfJournalRecord (
+    id INTEGER PRIMARY KEY NOT NULL,
+    mood INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    createdAt TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
+);
+
+getSelfJournalRecords:
+SELECT * FROM SelfJournalRecord ORDER BY createdAt DESC;
+
+addSelfJournalRecord:
+INSERT INTO SelfJournalRecord (mood, title, description) VALUES (:mood, :title, :description);
+
+deleteSelfJournalRecord:
+DELETE FROM SelfJournalRecord WHERE id = :id;
+
+updateSelfJournalRecord:
+UPDATE SelfJournalRecord SET mood = :mood, title = :title, description = :description WHERE id = :id;

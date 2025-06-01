@@ -1,0 +1,48 @@
+package com.joohnq.mood.ui.components
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.joohnq.mood.ui.presentation.mood.viewmodel.MoodContract
+import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.shared_resources.theme.Colors
+
+@Composable
+fun MoodContent(
+    modifier: Modifier = Modifier,
+    record: MoodRecordResource?,
+    records: List<MoodRecordResource>,
+    onIntent: (MoodContract.Intent) -> Unit,
+    onEvent: (MoodContract.Event) -> Unit
+) {
+    val containerColor = Colors.Gray5
+    DescriptionSection(
+        modifier = modifier,
+        record = record
+    )
+    MoodInsight(
+        modifier = modifier,
+        containerColor = containerColor,
+        records = records,
+        onCreate = { onEvent(MoodContract.Event.AddMood) }
+    )
+    MoodCalendar(
+        modifier = modifier,
+        containerColor = containerColor,
+        records = records,
+        onCreate = { onEvent(MoodContract.Event.AddMood) }
+    )
+    MoodHistory(
+        modifier = modifier,
+        containerColor = containerColor,
+        records = records.take(7),
+        onSeeMore = {
+            onEvent(MoodContract.Event.NavigateToMoodHistory)
+        },
+        onCreate = {
+            onEvent(MoodContract.Event.AddMood)
+        },
+        onDelete = { id ->
+            onIntent(MoodContract.Intent.Delete(id))
+        }
+    )
+}

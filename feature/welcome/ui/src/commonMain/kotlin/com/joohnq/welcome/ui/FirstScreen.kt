@@ -1,0 +1,69 @@
+package com.joohnq.welcome.ui
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.LogoWithBackground
+import com.joohnq.shared_resources.components.TextWithSpan
+import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+fun FirstScreen(onNext: () -> Unit) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize().paddingHorizontalMedium()
+    ) {
+        LogoWithBackground()
+        VerticalSpacer(10.dp)
+        TextWithSpan(
+            firstTitle = Res.string.first_screen_title,
+            span = stringResource(Res.string.first_screen_title_word),
+            spanColor = Colors.Brown60,
+        )
+        VerticalSpacer(16.dp)
+        Text(
+            text = stringResource(Res.string.first_screen_desc),
+            style = TextStyles.textLgMedium(),
+            color = Colors.Brown100Alpha64,
+            textAlign = TextAlign.Center
+        )
+        VerticalSpacer(32.dp)
+        Box(contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier
+                    .size(300.dp)
+                    .background(color = Colors.White, shape = Dimens.Shape.Circle)
+            )
+            Image(
+                painter = painterResource(Drawables.Images.WelcomeFirstScreen),
+                contentDescription = stringResource(Res.string.first_screen_image),
+            )
+        }
+        VerticalSpacer(32.dp)
+        ContinueButton(text = Res.string.get_started, onClick = onNext)
+        VerticalSpacer(30.dp)
+    }
+}
+
+@Preview
+@Composable
+fun FirstScreenPreview() {
+    FirstScreen(onNext = {})
+}

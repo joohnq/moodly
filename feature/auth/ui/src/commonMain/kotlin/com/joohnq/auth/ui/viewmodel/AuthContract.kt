@@ -1,8 +1,6 @@
 package com.joohnq.auth.ui.viewmodel
 
-import com.joohnq.auth.domain.entity.OAuthUser
 import com.joohnq.domain.entity.UiState
-import dev.gitlive.firebase.auth.FirebaseUser
 
 sealed interface AuthContract {
     data class State(
@@ -26,16 +24,13 @@ sealed interface AuthContract {
         data object NavigateToForgotPassword : Event
         data object NavigateToSignIn : Event
         data object NavigateToSignUp : Event
+        data object SignInWithGoogle : Event
     }
-
 
     sealed interface Intent {
         data object GetAuthUser : Intent
-
-        data class SignInWithGoogle(val user: OAuthUser) : Intent
-        data class SignInWithApple(val user: Result<FirebaseUser?>) : Intent
-
         data object SignIn : Intent
+        data object SignInWithGoogle : Intent
         data object SignUp : Intent
         data object SignOut : Intent
 

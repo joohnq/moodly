@@ -2,9 +2,9 @@ package com.joohnq.auth.ui.presentation.sign_in
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.joohnq.auth.ui.viewmodel.AuthContract
 import com.joohnq.auth.ui.viewmodel.AuthViewModel
 import com.joohnq.domain.mapper.onFailure
@@ -20,7 +20,7 @@ fun SignInScreen(
     navigateToNext: () -> Unit
 ) {
     val viewModel = koinViewModel<AuthViewModel>()
-    val state by viewModel.signInState.collectAsStateWithLifecycle()
+    val state by viewModel.signInState.collectAsState()
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
 

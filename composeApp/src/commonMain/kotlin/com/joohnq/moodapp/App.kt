@@ -5,8 +5,6 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.auth.ui.viewmodel.AuthContract
@@ -23,8 +21,6 @@ import com.joohnq.navigation.onNavigate
 import com.joohnq.navigation.onNavigateBack
 import com.joohnq.navigation.onNavigateGraph
 import com.joohnq.navigation.onReplace
-import com.mmk.kmpauth.google.GoogleAuthCredentials
-import com.mmk.kmpauth.google.GoogleAuthProvider
 import org.koin.compose.KoinContext
 import org.koin.compose.koinInject
 
@@ -32,14 +28,6 @@ import org.koin.compose.koinInject
 fun App() {
     KoinContext {
         val authViewModel = koinInject<AuthViewModel>()
-
-        LaunchedEffect(Unit) {
-            GoogleAuthProvider.create(
-                credentials = GoogleAuthCredentials(
-                    serverId = googleAuthCredentialKey
-                )
-            )
-        }
 
         LaunchedEffect(Unit) {
             authViewModel.onIntent(AuthContract.Intent.GetAuthUser)

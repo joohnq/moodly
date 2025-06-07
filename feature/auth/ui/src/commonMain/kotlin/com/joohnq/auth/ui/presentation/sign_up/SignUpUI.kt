@@ -12,7 +12,7 @@ import com.joohnq.auth.ui.components.AuthenticationPasswordTextFieldSection
 import com.joohnq.auth.ui.components.AuthenticationRedirectSection
 import com.joohnq.auth.ui.components.AuthenticationScaffold
 import com.joohnq.auth.ui.components.AuthenticationTextFieldSection
-import com.joohnq.auth.ui.components.SignInWithPlatformAuthButton
+import com.joohnq.auth.ui.components.SignInWithGoogleButton
 import com.joohnq.auth.ui.presentation.sign_in.SignInUI
 import com.joohnq.auth.ui.viewmodel.AuthContract
 import com.joohnq.domain.entity.UiState
@@ -27,7 +27,6 @@ import com.joohnq.shared_resources.name
 import com.joohnq.shared_resources.password
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import dev.gitlive.firebase.auth.GoogleAuthProvider
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -38,6 +37,8 @@ fun SignUpUI(
     onIntent: (AuthContract.Intent) -> Unit = {},
     onEvent: (AuthContract.Event) -> Unit = {}
 ) {
+  val isLoading = state.status == UiState.Loading
+
     AuthenticationScaffold(
         backgroundColor = Colors.Brown10,
         containerColor = Colors.White,
@@ -82,19 +83,18 @@ fun SignUpUI(
             VerticalSpacer(24.dp)
             SignUpButton(
                 modifier = Modifier.fillMaxWidth(),
-                isLoading = state.status == UiState.Loading,
+                isLoading = isLoading,
                 onClick = { onIntent(AuthContract.Intent.SignUp) }
             )
             VerticalSpacer(16.dp)
             AuthenticationOrDivider()
             VerticalSpacer(16.dp)
-            SignInWithPlatformAuthButton(
-                onGoogleSignInResult = { user ->
-                    onIntent(AuthContract.Intent.SignInWithGoogle(user))
-                },
-                onAppleSignInResult = {user ->
-                    onIntent(AuthContract.Intent.SignInWithApple(user))
-                },
+            SignInWithGoogleButton(
+                modifier = Modifier.fillMaxWidth(),
+                isLoading = isLoading,
+                onClick = {
+                    onIntent(AuthContract.Intent.SignInWithGoogle)
+                }
             )
             VerticalSpacer(48.dp)
             AuthenticationRedirectSection(

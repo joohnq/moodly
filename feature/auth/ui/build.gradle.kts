@@ -34,6 +34,12 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.credentials)
+            implementation(libs.androidx.credentials.play.services.auth)
+            implementation(libs.google.id)
+            implementation(libs.play.services.auth)
+        }
         commonMain.dependencies {
             implementation(libs.gitlive.firebase.firestore)
 

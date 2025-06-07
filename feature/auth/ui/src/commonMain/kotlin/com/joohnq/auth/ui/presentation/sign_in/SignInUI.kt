@@ -13,7 +13,7 @@ import com.joohnq.auth.ui.components.AuthenticationPasswordTextFieldSection
 import com.joohnq.auth.ui.components.AuthenticationRedirectSection
 import com.joohnq.auth.ui.components.AuthenticationScaffold
 import com.joohnq.auth.ui.components.AuthenticationTextFieldSection
-import com.joohnq.auth.ui.components.SignInWithPlatformAuthButton
+import com.joohnq.auth.ui.components.SignInWithGoogleButton
 import com.joohnq.auth.ui.viewmodel.AuthContract
 import com.joohnq.domain.entity.UiState
 import com.joohnq.shared_resources.Res
@@ -35,6 +35,8 @@ fun SignInUI(
     onIntent: (AuthContract.Intent) -> Unit = {},
     onEvent: (AuthContract.Event) -> Unit = {}
 ) {
+    val isLoading = state.status is UiState.Loading
+
     AuthenticationScaffold(
         backgroundColor = Colors.Brown10,
         containerColor = Colors.White,
@@ -72,19 +74,18 @@ fun SignInUI(
             )
             SignInButton(
                 modifier = Modifier,
-                isLoading = state.status == UiState.Loading,
+                isLoading = isLoading,
                 onClick = { onIntent(AuthContract.Intent.SignIn) }
             )
             VerticalSpacer(16.dp)
             AuthenticationOrDivider()
             VerticalSpacer(16.dp)
-            SignInWithPlatformAuthButton(
-                onGoogleSignInResult = { user ->
-                    onIntent(AuthContract.Intent.SignInWithGoogle(user))
-                },
-                onAppleSignInResult = {user ->
-                    onIntent(AuthContract.Intent.SignInWithApple(user))
-                },
+            SignInWithGoogleButton(
+                modifier = Modifier.fillMaxWidth(),
+                isLoading = isLoading,
+                onClick = {
+                    onIntent(AuthContract.Intent.SignInWithGoogle)
+                }
             )
             VerticalSpacer(48.dp)
             AuthenticationRedirectSection(

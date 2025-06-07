@@ -52,17 +52,6 @@ class AuthRepositoryImpl(
             signIn.isNewUser()
         }
 
-    override suspend fun signInWithApple(token: String, accessToken: String?): Boolean =
-        withContext(dispatcher) {
-            val credential = OAuthProvider.credential(
-                providerId = AuthProviderId.APPLE,
-                idToken = token,
-                accessToken = accessToken
-            )
-            val signIn = auth.signInWithCredential(credential)
-            signIn.isNewUser()
-        }
-
     override suspend fun signUpWithEmailAndPassword(
         email: String,
         password: String

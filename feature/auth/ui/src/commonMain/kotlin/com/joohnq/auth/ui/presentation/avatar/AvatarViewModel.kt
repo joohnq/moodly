@@ -1,7 +1,8 @@
-package com.joohnq.auth.ui.presentation.avatar.viewmodel
+package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
+import com.joohnq.auth.ui.presentation.avatar.AvatarContract
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

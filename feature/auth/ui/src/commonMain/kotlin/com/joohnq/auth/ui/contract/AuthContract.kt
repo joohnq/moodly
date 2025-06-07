@@ -1,5 +1,7 @@
-package com.joohnq.auth.ui.viewmodel
+package com.joohnq.auth.ui.contract
 
+import com.joohnq.auth.domain.entity.OAuthUser
+import com.joohnq.auth.ui.entity.AuthUserState
 import com.joohnq.domain.entity.UiState
 
 sealed interface AuthContract {
@@ -30,7 +32,7 @@ sealed interface AuthContract {
     sealed interface Intent {
         data object GetAuthUser : Intent
         data object SignIn : Intent
-        data object SignInWithGoogle : Intent
+        data class SignInWithGoogle(val oauthUser: Result<OAuthUser>) : Intent
         data object SignUp : Intent
         data object SignOut : Intent
 

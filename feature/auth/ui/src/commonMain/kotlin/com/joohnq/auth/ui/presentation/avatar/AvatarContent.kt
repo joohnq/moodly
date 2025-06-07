@@ -20,8 +20,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.auth.ui.components.AvatarImagesHorizontalPager
-import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarContract
+import com.joohnq.auth.ui.presentation.common.components.AvatarImagesHorizontalPager
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
@@ -44,7 +43,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AvatarUI(
+fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AvatarContract.State,
     avatars: List<DrawableResource> = rememberAvatars(),
@@ -152,7 +151,7 @@ fun AvatarUI(
 @Composable
 @Preview
 fun AvatarScreenPreview() {
-    AvatarUI(
+    AvatarContent(
         state = AvatarContract.State(),
     )
 }

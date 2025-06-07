@@ -1,4 +1,4 @@
-package com.joohnq.auth.ui.viewmodel
+package com.joohnq.auth.ui.entity
 
 import com.joohnq.auth.domain.entity.AuthUser
 

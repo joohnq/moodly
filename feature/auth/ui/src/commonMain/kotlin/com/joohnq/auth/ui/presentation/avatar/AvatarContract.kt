@@ -1,4 +1,4 @@
-package com.joohnq.auth.ui.presentation.avatar.viewmodel
+package com.joohnq.auth.ui.presentation.avatar
 
 import androidx.compose.ui.graphics.ImageBitmap
 

@@ -1,4 +1,4 @@
-package com.joohnq.auth.ui.components
+package com.joohnq.auth.ui.presentation.common.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

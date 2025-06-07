@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.joohnq.auth.ui.viewmodel.AuthContract
+import com.joohnq.auth.ui.contract.AuthContract
 import com.joohnq.auth.ui.viewmodel.AuthViewModel
 import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.moodapp.navigation.authNavigation

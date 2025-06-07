@@ -2,7 +2,7 @@ package com.joohnq.splash.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.auth.ui.viewmodel.AuthUserState
+import com.joohnq.auth.ui.entity.AuthUserState
 import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.mapper.TripleState

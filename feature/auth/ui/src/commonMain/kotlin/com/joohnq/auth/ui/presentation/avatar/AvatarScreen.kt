@@ -10,10 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
-import com.joohnq.auth.ui.components.AlertMessageDialog
-import com.joohnq.auth.ui.components.ImageSourceOptionDialog
-import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarContract
-import com.joohnq.auth.ui.presentation.avatar.viewmodel.AvatarViewModel
+import com.joohnq.auth.ui.presentation.common.components.AlertMessageDialog
+import com.joohnq.auth.ui.presentation.common.components.ImageSourceOptionDialog
 import com.joohnq.permission.PermissionCallback
 import com.joohnq.permission.PermissionStatus
 import com.joohnq.permission.PermissionType
@@ -164,7 +162,7 @@ fun AvatarScreen(
         }
     }
 
-    AvatarUI(
+    AvatarContent(
         snackBarState = snackBarState,
         state = avatarState,
         avatars = avatars,

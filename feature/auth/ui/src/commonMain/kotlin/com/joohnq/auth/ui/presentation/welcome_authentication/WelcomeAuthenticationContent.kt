@@ -7,22 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.auth.ui.components.AuthenticationOrientation
-import com.joohnq.auth.ui.components.AuthenticationRedirectSection
-import com.joohnq.auth.ui.components.AuthenticationScaffold
-import com.joohnq.auth.ui.components.AuthenticationWelcomeHeader
-import com.joohnq.auth.ui.components.SignInWithEmailButton
-import com.joohnq.auth.ui.components.SignInWithGoogleButton
-import com.joohnq.auth.ui.viewmodel.AuthContract
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationOrientation
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationRedirectSection
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationScaffold
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationWelcomeHeader
+import com.joohnq.auth.ui.presentation.common.components.SignInWithEmailButton
+import com.joohnq.auth.ui.presentation.common.components.SignInWithGoogleButton
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun WelcomeAuthenticationUI(
+fun WelcomeAuthenticationContent(
     snackBarHostState: SnackbarHostState = SnackbarHostState(),
-    onIntent: (AuthContract.Intent) -> Unit = {},
     onEvent: (WelcomeAuthenticationContract.Event) -> Unit = {}
 ) {
     AuthenticationScaffold(
@@ -64,5 +62,5 @@ fun WelcomeAuthenticationUI(
 @Preview
 @Composable
 fun WelcomeAuthenticationUIPreview() {
-    WelcomeAuthenticationUI()
+    WelcomeAuthenticationContent()
 }

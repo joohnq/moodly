@@ -5,16 +5,16 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.auth.ui.components.AuthenticationForgotPassword
-import com.joohnq.auth.ui.components.AuthenticationHeader
-import com.joohnq.auth.ui.components.AuthenticationOrDivider
-import com.joohnq.auth.ui.components.AuthenticationOrientation
-import com.joohnq.auth.ui.components.AuthenticationPasswordTextFieldSection
-import com.joohnq.auth.ui.components.AuthenticationRedirectSection
-import com.joohnq.auth.ui.components.AuthenticationScaffold
-import com.joohnq.auth.ui.components.AuthenticationTextFieldSection
-import com.joohnq.auth.ui.components.SignInWithGoogleButton
-import com.joohnq.auth.ui.viewmodel.AuthContract
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationForgotPassword
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationHeader
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationOrDivider
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationOrientation
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationPasswordTextFieldSection
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationRedirectSection
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationScaffold
+import com.joohnq.auth.ui.presentation.common.components.AuthenticationTextFieldSection
+import com.joohnq.auth.ui.presentation.common.components.SignInWithGoogleButton
+import com.joohnq.auth.ui.contract.AuthContract
 import com.joohnq.domain.entity.UiState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SignInButton
@@ -29,7 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SignInUI(
+fun SignInContent(
     snackBarHostState: SnackbarHostState = SnackbarHostState(),
     state: AuthContract.SignInState = AuthContract.SignInState(),
     onIntent: (AuthContract.Intent) -> Unit = {},
@@ -82,9 +82,8 @@ fun SignInUI(
             VerticalSpacer(16.dp)
             SignInWithGoogleButton(
                 modifier = Modifier.fillMaxWidth(),
-                isLoading = isLoading,
                 onClick = {
-                    onIntent(AuthContract.Intent.SignInWithGoogle)
+                    onEvent(AuthContract.Event.SignInWithGoogle)
                 }
             )
             VerticalSpacer(48.dp)
@@ -100,5 +99,5 @@ fun SignInUI(
 @Preview
 @Composable
 fun SignInUIPreview() {
-    SignInUI()
+    SignInContent()
 }

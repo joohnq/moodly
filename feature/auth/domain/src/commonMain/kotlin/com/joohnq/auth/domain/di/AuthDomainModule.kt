@@ -1,7 +1,6 @@
 package com.joohnq.auth.domain.di
 
 import com.joohnq.auth.domain.use_case.GetAuthUserUseCase
-import com.joohnq.auth.domain.use_case.SignInWithAppleUseCase
 import com.joohnq.auth.domain.use_case.SignInWithEmailAndPasswordUseCase
 import com.joohnq.auth.domain.use_case.SignInWithGoogleUseCase
 import com.joohnq.auth.domain.use_case.SignOutUseCase
@@ -15,6 +14,5 @@ val authDomainModule: Module = module {
     singleOf(::SignInWithEmailAndPasswordUseCase)
     singleOf(::SignOutUseCase)
     singleOf(::SignUpWithEmailAndPasswordUseCase)
-    singleOf(::SignInWithAppleUseCase)
     singleOf(::SignInWithGoogleUseCase)
 }

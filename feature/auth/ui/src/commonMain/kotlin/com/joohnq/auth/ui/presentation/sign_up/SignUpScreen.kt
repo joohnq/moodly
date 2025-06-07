@@ -5,7 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.auth.ui.viewmodel.AuthContract
+import com.joohnq.auth.ui.contract.AuthContract
+import com.joohnq.auth.ui.googleAuthenticatorComposable
 import com.joohnq.auth.ui.viewmodel.AuthViewModel
 import com.joohnq.domain.mapper.onFailure
 import com.joohnq.domain.mapper.onSuccess
@@ -22,6 +23,7 @@ fun SignUpScreen(
     val state by viewModel.signUpState.collectAsState()
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
+    val googleAuthenticator = googleAuthenticatorComposable()
 
     fun onError(error: Throwable) {
         scope.launch {
@@ -32,6 +34,12 @@ fun SignUpScreen(
     fun onEvent(event: AuthContract.Event) =
         when (event) {
             AuthContract.Event.NavigateToSignIn -> navigateToSignIn()
+            AuthContract.Event.SignInWithGoogle -> {
+                scope.launch {
+                    val oAuthUser = googleAuthenticator.signIn()
+                    viewModel.onIntent(AuthContract.Intent.SignInWithGoogle(oAuthUser))
+                }
+            }
             else -> Unit
         }
 
@@ -43,7 +51,7 @@ fun SignUpScreen(
             .onFailure(::onError)
     }
 
-    SignUpUI(
+    SignUpContent(
         snackBarHostState = snackBarHostState,
         state = state,
         onIntent = viewModel::onIntent,

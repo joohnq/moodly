@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.auth.ui.contract.AuthContract
 import com.joohnq.auth.ui.googleAuthenticatorComposable
 import com.joohnq.auth.ui.viewmodel.AuthViewModel
 import com.joohnq.domain.mapper.onFailure
@@ -37,8 +38,8 @@ fun WelcomeAuthenticationScreen(
             WelcomeAuthenticationContract.Event.SignUp -> navigateToSignUp()
             WelcomeAuthenticationContract.Event.SignInWithGoogle -> {
                 scope.launch {
-                    val result = googleAuthenticator.signIn()
-                    println("Result Google Auth: $result")
+                    val oAuthUser = googleAuthenticator.signIn()
+                    viewModel.onIntent(AuthContract.Intent.SignInWithGoogle(oAuthUser))
                 }
             }
         }
@@ -50,9 +51,8 @@ fun WelcomeAuthenticationScreen(
             .onFailure(::onError)
     }
 
-    WelcomeAuthenticationUI(
+    WelcomeAuthenticationContent(
         snackBarHostState = snackBarHostState,
-        onIntent = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

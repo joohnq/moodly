@@ -19,6 +19,7 @@ class SignInWithGoogleUseCase(
                 val hasUser = userRepository.hasUser(user.id)
                 if (!hasUser) throw AuthException.UserNotFound
             }
+
             Result.success(Unit)
         }
 }

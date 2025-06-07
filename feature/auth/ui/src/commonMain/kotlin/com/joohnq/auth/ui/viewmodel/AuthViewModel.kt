@@ -2,14 +2,15 @@ package com.joohnq.auth.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joohnq.auth.domain.entity.OAuthUser
 import com.joohnq.auth.domain.mapper.toUser
 import com.joohnq.auth.domain.use_case.GetAuthUserUseCase
-import com.joohnq.auth.domain.use_case.SignInWithAppleUseCase
 import com.joohnq.auth.domain.use_case.SignInWithEmailAndPasswordUseCase
 import com.joohnq.auth.domain.use_case.SignInWithGoogleUseCase
 import com.joohnq.auth.domain.use_case.SignOutUseCase
 import com.joohnq.auth.domain.use_case.SignUpWithEmailAndPasswordUseCase
-import com.joohnq.auth.domain.GoogleAuthenticator
+import com.joohnq.auth.ui.contract.AuthContract
+import com.joohnq.auth.ui.entity.AuthUserState
 import com.joohnq.domain.entity.UiState
 import com.joohnq.domain.mapper.onStart
 import kotlinx.coroutines.channels.Channel
@@ -25,7 +26,6 @@ import kotlinx.coroutines.launch
 class AuthViewModel(
     private val getAuthUserUseCase: GetAuthUserUseCase,
     private val signInWithGoogleUseCase: SignInWithGoogleUseCase,
-    private val signInWithAppleUseCase: SignInWithAppleUseCase,
     private val signInWithEmailAndPasswordUseCase: SignInWithEmailAndPasswordUseCase,
     private val signUpWithEmailAndPasswordUseCase: SignUpWithEmailAndPasswordUseCase,
     private val signOutUseCase: SignOutUseCase,
@@ -53,7 +53,7 @@ class AuthViewModel(
             is AuthContract.Intent.SignUpEmailChanged -> _signUpState.update { it.copy(email = intent.email) }
             is AuthContract.Intent.SignUpNameChanged -> _signUpState.update { it.copy(name = intent.name) }
             is AuthContract.Intent.SignUpPasswordChanged -> _signUpState.update { it.copy(password = intent.password) }
-            AuthContract.Intent.SignInWithGoogle -> signInWithGoogle()
+            is AuthContract.Intent.SignInWithGoogle -> signInWithGoogle(intent.oauthUser)
         }
     }
 
@@ -114,25 +114,25 @@ class AuthViewModel(
             }
     }
 
-    private fun signInWithGoogle() = viewModelScope.launch {
+    private fun signInWithGoogle(oAuthUser: Result<OAuthUser>) = viewModelScope.launch {
         try {
-//            val oAuthUser = googleAuthenticator.signIn().getOrThrow()
-//            val user = oAuthUser.toUser()
-//
-//            signInWithGoogleUseCase(
-//                user = user,
-//                token = oAuthUser.token,
-//                accessToken = oAuthUser.accessToken
-//            )
-//                .onStart {
-//                    _signInState.update { it.copy(status = UiState.Loading) }
-//                }
-//                .onFailure { error ->
-//                    _signInState.update { it.copy(status = UiState.Error(error)) }
-//                }
-//                .onSuccess {
-//                    _signInState.update { it.copy(status = UiState.Success(Unit)) }
-//                }
+            val oAuthUser = oAuthUser.getOrThrow()
+            val user = oAuthUser.toUser()
+
+            signInWithGoogleUseCase(
+                user = user,
+                token = oAuthUser.token,
+                accessToken = oAuthUser.accessToken
+            )
+                .onStart {
+                    _signInState.update { it.copy(status = UiState.Loading) }
+                }
+                .onFailure { error ->
+                    _signInState.update { it.copy(status = UiState.Error(error)) }
+                }
+                .onSuccess {
+                    _signInState.update { it.copy(status = UiState.Success(Unit)) }
+                }
 
         } catch (e: Exception) {
             _sideEffect.send(AuthContract.SideEffect.ShowError(e.message.toString()))

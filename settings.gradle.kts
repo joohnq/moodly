@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-
 rootProject.name = "Moodly"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         KMAuthInitializer.initWithContext(
-            webClientId = "40912754044-lfmvdhjhss9ijnofm575glhbk9hokq9c.apps.googleusercontent.com",
+            webClientId = BuildKonfig.GOOGLE_CLIENT_ID,
             kmAuthPlatformContext = KMAuthPlatformContext(this)
         )
 

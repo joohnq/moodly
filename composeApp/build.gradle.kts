@@ -1,4 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +10,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    id("com.codingfeline.buildkonfig")
 }
 
 kotlin {
@@ -209,8 +212,16 @@ android {
     ndkVersion = "27.0.12077973"
 }
 
-gradle.taskGraph.whenReady {
-    tasks.matching { it.name == "embedAndSignAppleFrameworkForXcode" }.all {
-        enabled = false
+buildkonfig {
+    packageName = "com.joohnq.moodapp"
+
+    defaultConfigs {
+        val googleClientId: String = gradleLocalProperties(rootDir, providers).getProperty("GOOGLE_CLIENT_ID")
+
+        require(googleClientId.isNotEmpty()) {
+            "Register your api key from developer and place it in local.properties as `API_KEY`"
+        }
+
+        buildConfigField(STRING, "GOOGLE_CLIENT_ID", googleClientId)
     }
 }

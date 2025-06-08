@@ -26,13 +26,12 @@ sealed interface AuthContract {
         data object NavigateToForgotPassword : Event
         data object NavigateToSignIn : Event
         data object NavigateToSignUp : Event
-        data object SignInWithGoogle : Event
     }
 
     sealed interface Intent {
         data object GetAuthUser : Intent
         data object SignIn : Intent
-        data class SignInWithGoogle(val oauthUser: Result<OAuthUser>) : Intent
+        data object SignInWithGoogle : Intent
         data object SignUp : Intent
         data object SignOut : Intent
 
@@ -47,6 +46,6 @@ sealed interface AuthContract {
     sealed interface SideEffect {
         data object SignOutFailure : SideEffect
         data object SignOutSuccess : SideEffect
-        data class ShowError(val error: String) : SideEffect
+        data class ShowError(val error: Throwable) : SideEffect
     }
 }

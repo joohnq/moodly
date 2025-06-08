@@ -1,16 +1,14 @@
 package com.joohnq.auth.data.repository
 
 import com.joohnq.auth.domain.AuthException
-import com.joohnq.auth.domain.AuthProviderId
 import com.joohnq.auth.domain.entity.AuthUser
+import com.joohnq.auth.domain.entity.SignInWithGoogleResponse
 import com.joohnq.auth.domain.repository.AuthRepository
 import dev.gitlive.firebase.auth.AuthResult
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.GoogleAuthProvider
-import dev.gitlive.firebase.auth.OAuthProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
@@ -43,13 +41,18 @@ class AuthRepositoryImpl(
         }
     }
 
-    override suspend fun signInWithGoogle(token: String, accessToken: String?): Boolean =
+    override suspend fun signInWithGoogle(token: String, accessToken: String?): SignInWithGoogleResponse =
         withContext(dispatcher) {
             val credential =
                 GoogleAuthProvider.credential(idToken = token, accessToken = accessToken)
 
             val signIn = auth.signInWithCredential(credential)
-            signIn.isNewUser()
+            val userId = signIn.user?.uid ?: throw AuthException.UserNotFound
+
+            SignInWithGoogleResponse(
+                id = userId,
+                isNew = signIn.isNew(),
+            )
         }
 
     override suspend fun signUpWithEmailAndPassword(
@@ -62,7 +65,7 @@ class AuthRepositoryImpl(
                 ?: throw AuthException.FailedToCreateUser
         }
 
-    fun AuthResult.isNewUser(): Boolean {
+    fun AuthResult.isNew(): Boolean {
         return additionalUserInfo?.isNewUser ?: true
     }
 

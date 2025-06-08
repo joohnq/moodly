@@ -58,6 +58,7 @@ kotlin {
 
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
             implementation(libs.coroutines.extensions)
         }

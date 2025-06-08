@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.auth.ui.contract.AuthContract
 import com.joohnq.auth.ui.presentation.common.components.AuthenticationOrientation
 import com.joohnq.auth.ui.presentation.common.components.AuthenticationRedirectSection
 import com.joohnq.auth.ui.presentation.common.components.AuthenticationScaffold
@@ -21,6 +22,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun WelcomeAuthenticationContent(
     snackBarHostState: SnackbarHostState = SnackbarHostState(),
+    onIntent: (AuthContract.Intent) -> Unit = {},
     onEvent: (WelcomeAuthenticationContract.Event) -> Unit = {}
 ) {
     AuthenticationScaffold(
@@ -43,7 +45,7 @@ fun WelcomeAuthenticationContent(
             SignInWithGoogleButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    onEvent(WelcomeAuthenticationContract.Event.SignInWithGoogle)
+                    onIntent(AuthContract.Intent.SignInWithGoogle)
                 }
             )
             VerticalSpacer(16.dp)

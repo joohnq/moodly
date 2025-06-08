@@ -2,8 +2,6 @@ package com.joohnq.auth.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.auth.domain.entity.OAuthUser
-import com.joohnq.auth.domain.mapper.toUser
 import com.joohnq.auth.domain.use_case.GetAuthUserUseCase
 import com.joohnq.auth.domain.use_case.SignInWithEmailAndPasswordUseCase
 import com.joohnq.auth.domain.use_case.SignInWithGoogleUseCase
@@ -11,8 +9,12 @@ import com.joohnq.auth.domain.use_case.SignOutUseCase
 import com.joohnq.auth.domain.use_case.SignUpWithEmailAndPasswordUseCase
 import com.joohnq.auth.ui.contract.AuthContract
 import com.joohnq.auth.ui.entity.AuthUserState
+import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.entity.UiState
+import com.joohnq.domain.entity.User
+import com.joohnq.domain.entity.UserImage
 import com.joohnq.domain.mapper.onStart
+import com.sunildhiman90.kmauth.google.GoogleAuthManager
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +31,7 @@ class AuthViewModel(
     private val signInWithEmailAndPasswordUseCase: SignInWithEmailAndPasswordUseCase,
     private val signUpWithEmailAndPasswordUseCase: SignUpWithEmailAndPasswordUseCase,
     private val signOutUseCase: SignOutUseCase,
+    private val googleAuthManager: GoogleAuthManager
 ) : ViewModel() {
     private val _state = MutableStateFlow(AuthContract.State())
     val state: StateFlow<AuthContract.State> = _state.asStateFlow()
@@ -53,7 +56,7 @@ class AuthViewModel(
             is AuthContract.Intent.SignUpEmailChanged -> _signUpState.update { it.copy(email = intent.email) }
             is AuthContract.Intent.SignUpNameChanged -> _signUpState.update { it.copy(name = intent.name) }
             is AuthContract.Intent.SignUpPasswordChanged -> _signUpState.update { it.copy(password = intent.password) }
-            is AuthContract.Intent.SignInWithGoogle -> signInWithGoogle(intent.oauthUser)
+            is AuthContract.Intent.SignInWithGoogle -> signInWithGoogle()
         }
     }
 
@@ -70,8 +73,6 @@ class AuthViewModel(
                     if (user?.id.isNullOrBlank() && user?.email.isNullOrBlank())
                         AuthUserState.NotAuthenticated
                     else AuthUserState.Authenticated(user)
-
-                println(authUser)
 
                 _state.update {
                     it.copy(
@@ -114,14 +115,25 @@ class AuthViewModel(
             }
     }
 
-    private fun signInWithGoogle(oAuthUser: Result<OAuthUser>) = viewModelScope.launch {
+    private fun signInWithGoogle() = viewModelScope.launch {
         try {
-            val oAuthUser = oAuthUser.getOrThrow()
-            val user = oAuthUser.toUser()
+            val oAuthUser = googleAuthManager.signIn().getOrThrow() ?: throw Exception("Google user is null")
+
+            val token = oAuthUser.idToken ?: throw Exception("Google token is null")
+
+            val user = User(
+                id = oAuthUser.id,
+                name = oAuthUser.name,
+                email = oAuthUser.email,
+                image = UserImage(
+                    image = oAuthUser.profilePicUrl,
+                    type = ImageType.URL
+                )
+            )
 
             signInWithGoogleUseCase(
                 user = user,
-                token = oAuthUser.token,
+                token = token,
                 accessToken = oAuthUser.accessToken
             )
                 .onStart {
@@ -135,7 +147,7 @@ class AuthViewModel(
                 }
 
         } catch (e: Exception) {
-            _sideEffect.send(AuthContract.SideEffect.ShowError(e.message.toString()))
+            _sideEffect.send(AuthContract.SideEffect.ShowError(e))
             return@launch
         }
     }

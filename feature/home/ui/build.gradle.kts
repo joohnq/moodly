@@ -35,7 +35,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(libs.gitlive.firebase.firestore)
@@ -70,11 +70,11 @@ kotlin {
 
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
             implementation(libs.calendar)
 
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
-            implementation(libs.ktor.client.core)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)

@@ -35,13 +35,14 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.biometric)
-            implementation("androidx.appcompat:appcompat:1.7.0")
+            implementation(libs.app.compat)
         }
         commonMain.dependencies {
             implementation(projects.feature.security.domain)
 
             implementation(libs.coroutines.core)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
             implementation(libs.bundles.dataStore)
             implementation(libs.serialization)
         }

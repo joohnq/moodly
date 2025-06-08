@@ -56,6 +56,7 @@ kotlin {
             implementation(libs.serialization)
 
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
             implementation(libs.charts)
             implementation(libs.kotlin.datetime)
             implementation(libs.calendar)

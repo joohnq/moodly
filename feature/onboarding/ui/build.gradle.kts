@@ -60,9 +60,9 @@ kotlin {
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
             implementation(libs.gitlive.firebase.firestore)
-            api(libs.logging)
         }
     }
 }

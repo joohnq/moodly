@@ -36,6 +36,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.dataStore)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
         }
     }
 }

@@ -50,6 +50,7 @@ kotlin {
             implementation(libs.kotlin.datetime)
             implementation(libs.serialization)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
         }
         commonTest.dependencies {
             implementation(libs.bundles.test)

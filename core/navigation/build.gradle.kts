@@ -37,6 +37,8 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.navigation.compose)
             implementation(libs.kotlin.datetime)
+
+            implementation(libs.bundles.base)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

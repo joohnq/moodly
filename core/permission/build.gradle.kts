@@ -48,6 +48,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

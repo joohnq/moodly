@@ -37,6 +37,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

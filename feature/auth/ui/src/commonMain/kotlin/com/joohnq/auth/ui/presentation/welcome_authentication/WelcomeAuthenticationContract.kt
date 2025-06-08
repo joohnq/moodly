@@ -4,6 +4,5 @@ sealed interface WelcomeAuthenticationContract {
     sealed interface Event: WelcomeAuthenticationContract {
         object SignInWithEmail : Event
         object SignUp : Event
-        object SignInWithGoogle : Event
     }
 }

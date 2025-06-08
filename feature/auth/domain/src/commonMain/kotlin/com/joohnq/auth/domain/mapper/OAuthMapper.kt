@@ -8,9 +8,8 @@ import com.joohnq.domain.entity.UserImage
 
 fun OAuthUser.toUser(): User {
     return User(
-        id = id ?: "",
-        email = email ?: "",
-        name = name ?: "",
+        email = email,
+        name = name,
         image = UserImage(image = image, type = ImageType.URL)
     )
 }

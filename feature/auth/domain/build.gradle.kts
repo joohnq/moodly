@@ -38,6 +38,7 @@ kotlin {
 
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.koin)
+                implementation(libs.bundles.base)
             }
         }
     }

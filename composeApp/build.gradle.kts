@@ -143,9 +143,10 @@ kotlin {
             implementation(libs.kotlin.datetime)
             implementation(libs.navigation.compose)
 
-            implementation(libs.bundles.koin)
+             implementation(libs.bundles.base)
 
-            implementation(libs.bundles.kmpauth)
+            implementation(libs.kmpauth.google)
+            implementation(libs.kmpauth.google.compose)
         }
     }
 }
@@ -206,4 +207,10 @@ android {
         compose = true
     }
     ndkVersion = "27.0.12077973"
+}
+
+gradle.taskGraph.whenReady {
+    tasks.matching { it.name == "embedAndSignAppleFrameworkForXcode" }.all {
+        enabled = false
+    }
 }

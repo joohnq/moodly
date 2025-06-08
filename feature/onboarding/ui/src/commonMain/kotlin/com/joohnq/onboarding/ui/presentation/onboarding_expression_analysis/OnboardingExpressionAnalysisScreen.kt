@@ -5,7 +5,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.diamondedge.logging.logging
 import com.joohnq.domain.entity.UiState
 import com.joohnq.mood.ui.resource.mapper.toDomain
 import com.joohnq.onboarding.ui.viewmodel.OnboardingContract
@@ -53,7 +52,7 @@ fun OnboardingExpressionAnalysisScreen(
         when (val status = state.status) {
             is UiState.Success -> onNavigateToNext()
             is UiState.Error -> onError(status.error.message.toString())
-            else -> logging("KMLogging Tag").i { "OnboardingExpressionAnalysisScreen: $status" }
+            else -> Unit
         }
     }
 

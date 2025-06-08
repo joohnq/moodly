@@ -10,7 +10,7 @@ import com.joohnq.preferences.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.ui.presentation.security.viewmodel.SecurityContract
 import com.joohnq.security.ui.presentation.security.viewmodel.SecurityViewModel
-import com.joohnq.splash.ui.viewmodel.SplashContract
+import com.joohnq.splash.ui.contract.SplashContract
 import com.joohnq.splash.ui.viewmodel.SplashViewModel
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.ui.viewmodel.UserViewModel
@@ -37,6 +37,7 @@ fun SplashScreen(
     val viewModel: SplashViewModel = koinViewModel()
 
     fun onError(message: String) {
+        print("SplashScreen: onError: $message")
     }
 
     LaunchedEffect(Unit){

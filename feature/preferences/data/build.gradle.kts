@@ -36,6 +36,7 @@ kotlin {
             implementation(projects.feature.preferences.domain)
             implementation(projects.core.datastore)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
             implementation(libs.bundles.dataStore)
         }
     }

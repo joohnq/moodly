@@ -3,7 +3,6 @@ package com.joohnq.moodapp.di
 import com.joohnq.auth.data.di.authDataModule
 import com.joohnq.auth.domain.di.authDomainModule
 import com.joohnq.auth.ui.di.authUiModule
-import com.joohnq.auth.ui.di.googleAuthenticatorModule
 import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.domain.di.coreDomainModule
 import com.joohnq.domain.di.userDomainModule
@@ -57,7 +56,6 @@ val appModule = listOf(
     userDomainModule,
     userUiModule,
     onboardingUiModule,
-    googleAuthenticatorModule,
     authDataModule,
     authDomainModule,
     authUiModule,

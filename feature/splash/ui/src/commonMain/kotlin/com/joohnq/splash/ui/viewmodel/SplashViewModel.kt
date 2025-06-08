@@ -9,6 +9,7 @@ import com.joohnq.domain.mapper.TripleState
 import com.joohnq.domain.mapper.whenAllResolved
 import com.joohnq.preferences.domain.entity.AppPreferences
 import com.joohnq.security.domain.Security
+import com.joohnq.splash.ui.contract.SplashContract
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -34,9 +35,7 @@ class SplashViewModel : ViewModel() {
         security: UiState<Security>,
         preferences: UiState<AppPreferences>
     ) = viewModelScope.launch {
-        if (auth is UiState.Loading || user is UiState.Loading) {
-            return@launch
-        }
+        if (auth is UiState.Loading || user is UiState.Loading || security is UiState.Loading || preferences is UiState.Loading) return@launch
 
         if (user is UiState.Error) {
             _sideEffect.send(SplashContract.SideEffect.NavigateToAuth)
@@ -74,7 +73,7 @@ class SplashViewModel : ViewModel() {
                             SplashContract.SideEffect.NavigateToDashboard
                     }
                 },
-                onError = {error ->
+                onError = { error ->
                     SplashContract.SideEffect.ShowError(error.message.toString())
                 },
                 onLoading = { null }

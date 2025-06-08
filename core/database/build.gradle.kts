@@ -50,7 +50,7 @@ kotlin {
             implementation(libs.kotlin.datetime)
 
             implementation(libs.kotlin.datetime)
-            implementation(libs.bundles.koin)
+             implementation(libs.bundles.base)
         }
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)

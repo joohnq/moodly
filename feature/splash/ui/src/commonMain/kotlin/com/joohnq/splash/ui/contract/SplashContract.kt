@@ -1,4 +1,4 @@
-package com.joohnq.splash.ui.viewmodel
+package com.joohnq.splash.ui.contract
 
 import com.joohnq.auth.ui.entity.AuthUserState
 import com.joohnq.domain.entity.UiState

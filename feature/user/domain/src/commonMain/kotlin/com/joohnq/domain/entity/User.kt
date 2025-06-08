@@ -12,7 +12,7 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @Serializable
-data class User @OptIn(ExperimentalUuidApi::class) constructor(
+data class User(
     val id: String = "",
     val name: String? = null,
     val email: String? = null,

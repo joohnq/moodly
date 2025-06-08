@@ -52,6 +52,7 @@ kotlin {
             implementation(libs.bundles.viewmodel)
 
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
             implementation(libs.kotlin.datetime)
         }

@@ -93,7 +93,7 @@ fun SignUpContent(
             SignInWithGoogleButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    onEvent(AuthContract.Event.SignInWithGoogle)
+                    onIntent(AuthContract.Intent.SignInWithGoogle)
                 }
             )
             VerticalSpacer(48.dp)

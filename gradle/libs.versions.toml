@@ -36,12 +36,12 @@ sqlDelightVersion = "2.1.0"
 startupRuntimeVersion = "1.2.0"
 truthishVersion = "1.0.2"
 turbineVersion = "1.2.0"
-kmpAuthGoogleVersion = "2.3.1"
-logginVersion = "2.0.3"
 androidxCredentialsVersion = "1.5.0"
 credentialsPlayServicesAuth = "1.5.0"
 googleid = "1.1.1"
 playServicesAuth = "21.3.0"
+appCompatVersion = "1.7.1"
+kmauthGoogleVersion = "0.2.0"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -71,8 +71,9 @@ koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", ver
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetimeVersion" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorVersion" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktorVersion" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorVersion" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModelVersion" }
 napier = { module = "io.github.aakira:napier", version.ref = "napierVersion" }
@@ -83,14 +84,13 @@ sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", versi
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthishVersion" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbineVersion" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-kmpauth-google = { group = "io.github.mirzemehdi", name = "kmpauth-google", version.ref = "kmpAuthGoogleVersion" }
-kmpauth-firebase = { group = "io.github.mirzemehdi", name = "kmpauth-firebase", version.ref = "kmpAuthGoogleVersion" }
-kmpauth-uihelper = { group = "io.github.mirzemehdi", name = "kmpauth-uihelper", version.ref = "kmpAuthGoogleVersion" }
-logging = {group = "com.diamondedge", name = "logging", version.ref = "logginVersion"}
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "androidxCredentialsVersion" }
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
 google-id = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+app-compat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompatVersion" }
+kmpauth-google = { module = "io.github.sunildhiman90:kmauth-google", version.ref = "kmauthGoogleVersion" }
+kmpauth-google-compose = { module = "io.github.sunildhiman90:kmauth-google-compose", version.ref = "kmauthGoogleVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePluginVersion" }
@@ -111,5 +111,4 @@ dataStore = ["androidx-datastore-core", "androidx-data-store-preferences"]
 koin = ["koin-core", "koin-compose", "koin-compose-viewmodel"]
 test = ["kotlin-test", "truthish"]
 viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]
-kmpauth = ["kmpauth-google", "kmpauth-firebase", "kmpauth-uihelper"]
-base = ["logging"]
+base = ["napier"]

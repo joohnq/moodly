@@ -46,7 +46,7 @@ kotlin {
 
                 implementation(libs.bundles.koin)
 
-                implementation(libs.bundles.kmpauth)
+                implementation(libs.bundles.base)
             }
         }
     }

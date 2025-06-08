@@ -37,6 +37,7 @@ kotlin {
             implementation(projects.core.storage.domain)
             implementation(libs.squareup.okio)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -22,6 +22,7 @@ import com.joohnq.domain.entity.User
 import com.joohnq.domain.entity.UserImage
 import com.joohnq.domain.getNow
 import com.joohnq.domain.mapper.capitalize
+import com.joohnq.domain.mapper.getPrimaryName
 import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AvatarImage
@@ -52,23 +53,21 @@ fun HomeTopBar(
             .padding(20.dp)
             .then(modifier)
     ) {
-        Row {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(Drawables.Icons.Outlined.Calendar),
-                    modifier = Modifier.size(20.dp),
-                    tint = Colors.Brown40,
-                    contentDescription = null
-                )
-                Text(
-                    text = getNow().date.toFormattedDateString().capitalize(),
-                    style = TextStyles.textSmBold(),
-                    color = Colors.White
-                )
-            }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(Drawables.Icons.Outlined.Calendar),
+                modifier = Modifier.size(20.dp),
+                tint = Colors.Brown40,
+                contentDescription = null
+            )
+            Text(
+                text = getNow().date.toFormattedDateString().capitalize(),
+                style = TextStyles.textSmBold(),
+                color = Colors.White
+            )
         }
         VerticalSpacer(15.dp)
         Row(
@@ -107,7 +106,7 @@ fun HomeTopBar(
                 }
             }
             Text(
-                text = stringResource(Res.string.greeting, user.name ?: "User"),
+                text = stringResource(Res.string.greeting, user.name.getPrimaryName()),
                 style = TextStyles.headingSmExtraBold(),
                 color = Colors.White
             )

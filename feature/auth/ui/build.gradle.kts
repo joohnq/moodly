@@ -63,8 +63,10 @@ kotlin {
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
-            implementation(libs.bundles.kmpauth)
+            implementation(libs.kmpauth.google)
+            implementation(libs.kmpauth.google.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

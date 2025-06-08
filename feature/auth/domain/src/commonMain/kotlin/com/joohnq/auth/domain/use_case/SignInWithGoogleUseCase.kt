@@ -11,12 +11,15 @@ class SignInWithGoogleUseCase(
 ) {
     suspend operator fun invoke(user: User, token: String, accessToken: String?): Result<Unit> =
         runCatching {
-            val isNew = authRepository.signInWithGoogle(token, accessToken)
+            println("useCase")
+            val res = authRepository.signInWithGoogle(token, accessToken)
 
-            if (isNew) {
-                userRepository.addUser(user).getOrThrow()
+            val newUser = user.copy(id = res.id)
+
+            if (res.isNew) {
+                userRepository.addUser(newUser).getOrThrow()
             } else {
-                val hasUser = userRepository.hasUser(user.id)
+                val hasUser = userRepository.hasUser(newUser.id)
                 if (!hasUser) throw AuthException.UserNotFound
             }
 

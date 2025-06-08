@@ -36,7 +36,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.ui.tooling)
-            implementation("androidx.appcompat:appcompat:1.7.0")
+            implementation(libs.app.compat)
         }
         commonMain.dependencies {
             implementation(projects.core.ui)
@@ -46,6 +46,7 @@ kotlin {
             implementation(projects.feature.preferences.ui)
 
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

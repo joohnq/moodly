@@ -57,6 +57,7 @@ kotlin {
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.base)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

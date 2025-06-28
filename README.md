@@ -1,52 +1,42 @@
 # Moodly
 
-Moodly é um aplicativo para monitoramento de humor, sono e estresse, funcionando como um diário
-pessoal. Os dados são armazenados localmente, garantindo privacidade ao usuário.
+**Moodly** é um aplicativo para monitorar seu **humor**, **sono** e **estresse**, funcionando como um diário pessoal. Todos os dados são armazenados **localmente**, garantindo total **privacidade** ao usuário. 🔒
 
 ![Tela inicial do Moodly](assets/principal.png)
 
-## Recursos
+## 🚀 Recursos
 
-- Registro de humor, sono e estresse
-- Armazenamento local dos dados
-- Interface intuitiva e amigável
-- Gráficos e insights sobre seus estados ao longo do tempo
+- 🎭 Registro de humor, sono e estresse  
+- 💾 Armazenamento local dos dados  
+- 🤝 Interface intuitiva e amigável  
+- 📊 Gráficos e insights sobre seus estados ao longo do tempo  
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
-- **Kotlin Multiplatform (KMP)**: Desenvolvimento para Android e iOS com Compose Multi-Platform
-- **Jetpack Compose**: Interface moderna e declarativa
-- **Room Database**: Armazenamento local seguro
-- **Kotlin Coroutines**: Para operações assíncronas eficientes
-- **MVI**: Arquitetura organizada e escalável
-- **Testes Unitários**: Garantia de qualidade e confiabilidade
+- **Compose Multiplatform (CMP)**: desenvolvimento para Android e iOS  
+- **Jetpack Compose**: interface moderna e declarativa  
+- **SQLDelight**: armazenamento local seguro  
+- **Kotlin Coroutines**: operações assíncronas eficientes  
+- **MVI**: arquitetura organizada e escalável  
 
-## Como Instalar
+## 📥 Como Instalar
 
-O Moodly está disponível na Google Play
-Store. [Clique aqui para baixar](https://play.google.com/store/apps/details?id=com.joohnq.moodapp)
+Moodly está disponível na Google Play Store.
 
-## Contribuição
+<a href="https://play.google.com/store/apps/details?id=com.joohnq.moodapp" target="_blank">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/pt-br_badge_web_generic.png" alt="Disponível no Google Play" width="150"/>
+</a>
 
-O código-fonte é de propriedade exclusiva de João Henrique e não pode ser modificado ou
-redistribuído.
-No entanto, você pode ajudar divulgando o aplicativo e compartilhando feedback!
+## 🤝 Contribuição
 
-## Licença
+O código-fonte é de **propriedade exclusiva de João Henrique** e não pode ser modificado ou redistribuído.  
+Mas você pode ajudar **divulgando o app e enviando feedbacks!**  
 
-Este projeto está licenciado sob a **Licença Proprietária**. O código-fonte e o aplicativo são de
-propriedade exclusiva de João Henrique.
+## 📄 Licença
 
-Você NÃO tem permissão para modificar, distribuir ou criar trabalhos derivados do código-fonte ou do
-aplicativo sem permissão expressa.
+Este projeto está licenciado sob **Licença Proprietária**.  
+Você **NÃO** tem permissão para modificar, distribuir ou criar trabalhos derivados do código-fonte ou do app sem autorização expressa.
 
 Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
 
-Todos os direitos reservados.
-
-## Contato
-
-Desenvolvido por **João Henrique**
-
-- LinkedIn: [Seu Perfil](https://www.linkedin.com/in/joohnq/)
-- E-mail: [Seu E-mail](mailto:joaohenriquess3287@gmail.com)
+**Todos os direitos reservados.**

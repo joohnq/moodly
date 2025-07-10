@@ -109,7 +109,7 @@ name: Deploy To Google Play
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release ]
 
 jobs:
   test:

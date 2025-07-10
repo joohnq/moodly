@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Moodly Logo" />
+  <img src="composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Moodly Logo" />
 </p>
 
 <h1 align="center">Moodly</h1>

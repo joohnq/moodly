@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Moodly Logo" />
+  <img src="./androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Moodly Logo" />
 </p>
 
 <h1 align="center">Moodly</h1>
@@ -16,7 +16,7 @@
 
 ## Screenshot
 
-![screenshot](assets/principal.png)
+![screenshot](./assets/principal.png)
 
 ## Platforms
 
@@ -42,18 +42,6 @@
 | [**DataStore**](https://developer.android.com/jetpack/androidx/releases/datastore) | Coroutine-based key-value storage. |
 | [**Material3**](https://m3.material.io/) | Google's cross-platform design system. |
 | [**Kotlinx DateTime**](https://github.com/Kotlin/kotlinx-datetime) | Date and time utilities for Kotlin. |
-
-## Getting Started
-
-- **JDK**: 17
-- **Android Studio**: Ladybug or newer
-- **Xcode**: Optional, only needed to run the iOS app locally. We recommend using the latest stable version
-
-*If you encounter issues running the app locally, feel free to open an issue or check the [Kotlin Multiplatform setup guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html).*
-
-After setting up your environment, run the following commands to set up local config files:
-
-*(adicione aqui os comandos necessários para configurar o ambiente local)*
 
 ## License
 

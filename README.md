@@ -1,38 +1,58 @@
-# Moodly
+<p align="center">
+  <img src="composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Moodly Logo" />
+</p>
 
-## 📱 Sobre
+<h1 align="center">Moodly</h1>
 
-**Moodly** é um aplicativo multiplataforma (Android e IOS) projetado para ajudar você a monitorar e entender seu **humor**, **nível de estresse** e **qualidade do sono**. Através de uma interface interativa e intuitiva, o app permite que o usuário registre seu **estado emocional diário**, registre observações pessoais e visualize seu progresso ao longo do tempo.
+<p align="center">
+  Moodly is an app to monitor your <strong>mood</strong>, <strong>sleep</strong>, and <strong>stress</strong>, working like a personal diary. All data is stored <strong>locally</strong>, ensuring complete <strong>privacy</strong>.
+</p>
 
-<img width="1600" alt="Thumbnail Horizontal" src="https://github.com/user-attachments/assets/a2e457e1-f20b-436d-9e20-76c541e67230">
+<p align="center">
+  <a href="https://github.com/joohnq/moodly/stargazers">
+    <img src="https://img.shields.io/github/stars/joohnq/moodly" alt="Stars" />
+  </a>
+  <a href="https://github.com/joohnq/moodly/actions/workflows/release.yml">
+    <img src="https://github.com/joohnq/moodly/actions/workflows/release.yml/badge.svg" alt="Release" />
+  </a>
+</p>
 
-https://github.com/user-attachments/assets/983c3660-6c47-4f05-9c3a-c1f1975c8c9d
+## Screenshot
 
-https://github.com/user-attachments/assets/d9e2bf60-3bda-4a90-a213-1e10e4718087
+![screenshot](./assets/principal.png)
 
-https://github.com/user-attachments/assets/d4f6cd1d-80c6-4133-8492-115f3ed7bc3d
+## Platforms
 
-https://github.com/user-attachments/assets/7165a8a9-0e5e-4a09-a3db-479465f1f6af
+- **Android** – Download on [Play Store](https://play.google.com/store/apps/details?id=com.joohnq.moodapp)
+- **iOS** – *App Store release coming soon*
 
-https://github.com/user-attachments/assets/221334b9-6d55-492c-b710-966a94e2baf3
+## Features
 
-## 💡 Funcionalidades
+- **Mood Tracking**: Log your mood daily with a simple and visual interface.
+- **Sleep Logging**: Track your sleep quality and identify patterns over time.
+- **Stress Monitoring**: Record your stress levels and monitor trends.
+- **Local Storage**: All data is stored on the device, ensuring user privacy.
+- **Visual Insights**: View charts and summaries to better understand your emotional patterns.
+- **Intuitive UI**: Clean and user-friendly interface built with Compose.
 
-- **Salvar humor diário** 😃: Registre facilmente seu estado emocional, escolhendo entre diferentes níveis de humor (depressivo, triste, neutro, feliz e super contente) com uma interface visual rica e interativa.
-- **Monitoramento de estresse e sono** 😴: Acompanhe seu nível de estresse e qualidade do sono para uma visão completa do seu bem-estar.
-- **Histórico e progresso** 📊: Visualize gráficos e resumos semanais ou mensais para acompanhar a evolução do seu humor e saúde mental.
-- **Interface vibrante e gamificada** 🎨: Uma UI colorida e envolvente que torna o processo de monitoramento de humor agradável e motivador.
+## Built With
 
-## 🛠 Tecnologias e Ferramentas Utilizadas
+| Technology | Description |
+|------------|-------------|
+| [**Compose Multiplatform**](https://github.com/JetBrains/compose-jb) | UI toolkit for building native UIs across platforms. |
+| [**Koin**](https://insert-koin.io/) | Dependency injection for Kotlin. |
+| [**SQLDelight**](https://cashapp.github.io/sqldelight/) | Multiplatform database with type-safe Kotlin APIs. |
+| [**DataStore**](https://developer.android.com/jetpack/androidx/releases/datastore) | Coroutine-based key-value storage. |
+| [**Material3**](https://m3.material.io/) | Google's cross-platform design system. |
+| [**Kotlinx DateTime**](https://github.com/Kotlin/kotlinx-datetime) | Date and time utilities for Kotlin. |
 
-- **Kotlin** 🟢
-- **Kotlin Multiplatform** 🌍
-- **Compose Multiplatform** 💻
-- **Jetpack Compose** 🎨
-- **Koin** (Injeção de Dependências) 🔌
-- **Clean Architecture** 🏗️
-- **POO** (Programação Orientada a Objetos) 🧩
-- **MVVM** (Model-View-ViewModel) 🖥️
-- **Coroutines** ⏳
-- **Room** 💾
-- **Testes Unitários** 🧪
+## License
+
+This project is licensed under a **Proprietary License**.  
+You are **NOT** allowed to modify, distribute, or create derivative works from the source code or the app without explicit permission.
+
+For more details, see the [LICENSE](./LICENSE) file.
+
+<p align="center">
+  <sub><strong>&copy; 2025 João Henrique. All rights reserved.</strong></sub>
+</p>

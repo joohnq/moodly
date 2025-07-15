@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 rootProject.name = "Moodly"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -28,47 +30,50 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
-include(":core:database")
-include(":core:ui")
-include(":feature:welcome:ui")
-include(":feature:mood:ui")
-include(":feature:mood:domain")
-include(":feature:mood:data")
-include(":feature:onboarding:ui")
-include(":feature:sleep-quality:data")
-include(":feature:sleep-quality:ui")
-include(":feature:sleep-quality:domain")
-include(":feature:stress-level:data")
-include(":feature:stress-level:domain")
-include(":feature:stress-level:ui")
-include(":feature:user:data")
-include(":feature:user:domain")
-include(":feature:user:ui")
-include(":feature:home:ui")
-include(":feature:self-journal:data")
-include(":feature:self-journal:domain")
-include(":feature:self-journal:ui")
-include(":feature:freud-score:domain")
-include(":feature:freud-score:ui")
-include(":core:di")
-include(":core:navigation")
-include(":shared-resources")
-include(":feature:splash:ui")
-include(":feature:auth")
-include(":feature:auth:ui")
-include(":core:permission")
-include(":core:storage:data")
-include(":core:storage:domain")
-include(":core:test")
-include(":feature:security")
-include(":feature:security:data")
-include(":feature:security:domain")
-include(":feature:security:ui")
-include(":core:datastore")
-include(":core:domain")
-include(":core:cryptography:data")
-include(":core:cryptography:domain")
-include(":feature:preferences:data")
-include(":feature:preferences:domain")
-include(":feature:preferences:ui")
+include(
+    ":composeApp",
+    ":core:database",
+    ":core:ui",
+    ":feature:welcome:ui",
+    ":feature:mood:ui",
+    ":feature:mood:domain",
+    ":feature:mood:data",
+    ":feature:onboarding:ui",
+    ":feature:sleep-quality:data",
+    ":feature:sleep-quality:ui",
+    ":feature:sleep-quality:domain",
+    ":feature:stress-level:data",
+    ":feature:stress-level:domain",
+    ":feature:stress-level:ui",
+    ":feature:user:data",
+    ":feature:user:domain",
+    ":feature:user:ui",
+    ":feature:home:ui",
+    ":feature:self-journal:data",
+    ":feature:self-journal:domain",
+    ":feature:self-journal:ui",
+    ":feature:freud-score:domain",
+    ":feature:freud-score:ui",
+    ":core:di",
+    ":core:navigation",
+    ":shared-resources",
+    ":feature:splash:ui",
+    ":feature:auth",
+    ":feature:auth:ui",
+    ":core:permission",
+    ":core:storage:data",
+    ":core:storage:domain",
+    ":core:test",
+    ":feature:security",
+    ":feature:security:data",
+    ":feature:security:domain",
+    ":feature:security:ui",
+    ":core:datastore",
+    ":core:domain",
+    ":core:cryptography:data",
+    ":core:cryptography:domain",
+    ":feature:preferences:data",
+    ":feature:preferences:domain",
+    ":feature:preferences:ui",
+    "backend"
+)

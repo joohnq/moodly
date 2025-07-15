@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.navigation.appNavigation
-import com.joohnq.moodapp.navigation.authNavigation
-import com.joohnq.moodapp.navigation.onboardingNavigation
-import com.joohnq.moodapp.navigation.securityNavigation
-import com.joohnq.moodapp.navigation.splashNavigation
-import com.joohnq.moodapp.navigation.welcomeNavigation
+import com.joohnq.auth.ui.navigation.authNavigation
+import com.joohnq.onboarding.ui.navigation.onboardingNavigation
+import com.joohnq.security.ui.navigation.securityNavigation
+import com.joohnq.splash.ui.navigation.splashNavigation
+import com.joohnq.welcome.ui.navigation.welcomeNavigation
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate

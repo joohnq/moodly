@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.navigation
+package com.joohnq.security.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable

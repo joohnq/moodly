@@ -39,6 +39,7 @@ kotlin {
             implementation(projects.feature.user.domain)
             implementation(projects.feature.user.ui)
             implementation(projects.feature.preferences.ui)
+            implementation(projects.core.navigation)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -47,6 +48,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.navigation.compose)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.viewmodel)

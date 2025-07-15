@@ -35,6 +35,7 @@ kotlin {
             implementation(projects.feature.security.domain)
             implementation(projects.sharedResources)
             implementation(projects.feature.preferences.ui)
+            implementation(projects.core.navigation)
 
             implementation(libs.bundles.koin)
 
@@ -45,6 +46,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.navigation.compose)
         }
     }
 }

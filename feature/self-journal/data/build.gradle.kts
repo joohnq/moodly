@@ -1,32 +1,11 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    id("moodly.multiplatform.library")
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.mokkery)
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "self_journal.data"
-            isStatic = true
-            linkerOpts.add("-lsqlite3")
-        }
-    }
-
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.domain)
@@ -62,16 +41,3 @@ sqldelight {
         }
     }
 }
-
-android {
-    namespace = "com.joohnq.self_journal.data"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-

@@ -3,10 +3,6 @@ plugins {
     alias(libs.plugins.serialization)
 }
 
-android {
-    namespace = "com.joohnq.navigation"
-}
-
 kotlin {
     sourceSets {
         commonMain.dependencies {

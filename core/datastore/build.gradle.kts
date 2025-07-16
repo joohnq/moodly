@@ -1,10 +1,6 @@
 plugins {
-    alias(libs.plugins.serialization)
     id("moodly.multiplatform.library")
-}
-
-android {
-    namespace = "com.joohnq.core.datastore"
+    alias(libs.plugins.serialization)
 }
 
 kotlin {

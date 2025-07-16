@@ -2,10 +2,6 @@ plugins {
     id("moodly.multiplatform.library")
 }
 
-android {
-    namespace = "com.joohnq.core.database"
-}
-
 kotlin {
     sourceSets {
         androidMain.dependencies {

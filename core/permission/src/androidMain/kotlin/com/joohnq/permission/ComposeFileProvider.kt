@@ -3,6 +3,7 @@ package com.joohnq.permission
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
+import com.joohnq.core.permission.R
 import java.io.File
 import java.util.Objects
 

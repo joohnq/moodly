@@ -31,11 +31,10 @@ class KmpLibraryPlugin : Plugin<Project> {
 
     private fun androidSettings(target: Project) {
         target.extensions.configure<LibraryExtension> {
-            compileSdk = AppConfig.compileSdk
+            compileSdk = AppConfig.COMPILE_SDK
 
             defaultConfig {
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                minSdk = AppConfig.minSdk
+                minSdk = AppConfig.MIN_SDK
             }
 
             compileOptions {
@@ -47,10 +46,6 @@ class KmpLibraryPlugin : Plugin<Project> {
                 release {
                     isMinifyEnabled = false
                 }
-
-                debug {
-
-                }
             }
         }
     }
@@ -61,7 +56,7 @@ class KmpLibraryPlugin : Plugin<Project> {
                 compilations.all {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            jvmTarget.set(AppConfig.jvmTargetMp)
+                            jvmTarget.set(AppConfig.jvmTargetVersion)
                         }
                     }
                 }

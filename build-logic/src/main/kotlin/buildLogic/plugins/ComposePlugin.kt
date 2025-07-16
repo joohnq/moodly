@@ -25,7 +25,7 @@ class ComposePlugin : Plugin<Project> {
 
     private fun Project.androidSettings() {
         extensions.configure<LibraryExtension> {
-            compileSdk = AppConfig.compileSdk
+            compileSdk = AppConfig.COMPILE_SDK
 
             buildFeatures {
                 compose = true

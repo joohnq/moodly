@@ -16,10 +16,10 @@ class ComposePlugin : Plugin<Project> {
 
     private fun Project.installPlugins() {
         pluginManager.apply(
-            getPlugin(alias = "composeMultiplatform").pluginId
+            getPlugin(alias = "jetbrains-compose").pluginId
         )
         pluginManager.apply(
-            getPlugin(alias = "composeCompiler").pluginId
+            getPlugin(alias = "compose-compiler").pluginId
         )
     }
 

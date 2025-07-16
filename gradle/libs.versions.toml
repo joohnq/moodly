@@ -89,11 +89,11 @@ android-library-gradle-plugin = { module = "com.android.library:com.android.libr
 android-application-gradle-plugin = { module = "com.android.application:com.android.application.gradle.plugin", version.ref = "agp" }
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

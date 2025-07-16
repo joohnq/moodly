@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
     alias(libs.plugins.mokkery)

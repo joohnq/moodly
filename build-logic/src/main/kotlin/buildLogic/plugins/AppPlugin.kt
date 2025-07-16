@@ -29,16 +29,16 @@ class AppPlugin : Plugin<Project> {
 
     private fun androidSettings(target: Project) {
         target.extensions.configure<BaseAppModuleExtension> {
-            namespace = AppConfig.appId
+            namespace = AppConfig.APPLICATION_ID
 
-            compileSdk = AppConfig.compileSdk
+            compileSdk = AppConfig.COMPILE_SDK
 
             defaultConfig {
-                applicationId = AppConfig.appId
-                minSdk = AppConfig.minSdk
-                targetSdk = AppConfig.targetSdk
-                versionCode = AppConfig.versionCode
-                versionName = AppConfig.versionName
+                applicationId = AppConfig.APPLICATION_ID
+                minSdk = AppConfig.MIN_SDK
+                targetSdk = AppConfig.TARGET_SDK
+                versionCode = AppConfig.VERSION_CODE
+                versionName = AppConfig.VERSION_NAME
             }
 
             buildTypes {
@@ -62,7 +62,7 @@ class AppPlugin : Plugin<Project> {
     private fun configureKotlin(target: Project) {
         target.tasks.withType<KotlinCompile>().configureEach {
             kotlinOptions {
-                jvmTarget = AppConfig.jvmTarget
+                jvmTarget = AppConfig.JVM_TARGET
             }
         }
     }

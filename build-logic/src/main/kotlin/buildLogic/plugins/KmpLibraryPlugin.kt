@@ -1,9 +1,8 @@
 package buildLogic.plugins
 
 import buildLogic.configs.AppConfig
-import buildLogic.extensions.deriveNamespace
 import buildLogic.extensions.getPlugin
-import com.android.build.gradle.LibraryExtension
+import buildLogic.plugins.android.LibraryAndroidSettings
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -28,7 +27,7 @@ class KmpLibraryPlugin : Plugin<Project> {
     }
 
     private fun androidSettings(target: Project) {
-        AndroidSettings.setupLibraryExtension(target)
+        LibraryAndroidSettings().setup(target)
     }
 
     private fun configureKotlinMultiplatform(target: Project) = with(target) {

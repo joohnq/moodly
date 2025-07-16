@@ -1,6 +1,6 @@
 [versions]
 accompanistPermissions = "0.37.0"
-agp = "8.7.3"
+agp = "8.11.1"
 android-compileSdk = "35"
 android-minSdk = "26"
 android-targetSdk = "35"
@@ -37,6 +37,10 @@ firebase-android-bom = "33.9.0"
 crashlytics = "3.0.3"
 google-services = "4.4.2"
 firebase-gitlive-sdk = "2.1.0"
+kotlinStdlib = "2.1.10"
+runner = "1.6.2"
+core = "1.6.1"
+junit = "1.2.1"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -78,6 +82,10 @@ androidx-datastore-core = { module = "androidx.datastore:datastore", version.ref
 androidx-data-store-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-data-store" }
 firebase-android-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
 gitlive-firebase-kotlin-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-gitlive-sdk" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -91,6 +99,8 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+android-lint = { id = "com.android.lint", version.ref = "agp" }
 
 [bundles]
 viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]

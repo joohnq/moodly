@@ -5,6 +5,7 @@ import buildLogic.extensions.debugImplementation
 import buildLogic.extensions.getLibrary
 import buildLogic.extensions.getPlugin
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -31,10 +32,14 @@ class ComposePlugin : Plugin<Project> {
     }
 
     private fun Project.androidSettings() {
-        extensions.configure<LibraryExtension> {
-            compileSdk = AppConfig.COMPILE_SDK
-
-            buildFeatures {
+        extensions.findByType(LibraryExtension::class.java)?.let { android ->
+            android.compileSdk = AppConfig.COMPILE_SDK
+            android.buildFeatures {
+                compose = true
+            }
+        } ?: extensions.findByType(BaseAppModuleExtension::class.java)?.let { android ->
+            android.compileSdk = AppConfig.COMPILE_SDK
+            android.buildFeatures {
                 compose = true
             }
         }

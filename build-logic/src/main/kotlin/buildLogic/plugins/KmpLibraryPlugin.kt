@@ -11,18 +11,18 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 class KmpLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            installPlugins(this)
-            configureKotlinMultiplatform(this)
+            installPlugins()
+            configureKotlinMultiplatform()
         }
     }
 
-    private fun installPlugins(target: Project) {
-        target.pluginManager.apply(
-            target.getPlugin(alias = "kotlin-multiplatform").pluginId
+    private fun Project.installPlugins() {
+        pluginManager.apply(
+            getPlugin("kotlin-multiplatform").pluginId
         )
     }
 
-    private fun configureKotlinMultiplatform(target: Project) = with(target) {
+    private fun Project.configureKotlinMultiplatform() {
         configure<KotlinMultiplatformExtension> {
             androidTarget {
                 compilations.all {

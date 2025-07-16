@@ -32,5 +32,10 @@ gradlePlugin {
             id = "moodly.application"
             implementationClass = "buildLogic.plugins.AppPlugin"
         }
+
+        create("moodly-android-library") {
+            id = "moodly.android.library"
+            implementationClass = "buildLogic.plugins.AndroidLibraryPlugin"
+        }
     }
 }

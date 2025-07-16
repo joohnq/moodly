@@ -1,4 +1,5 @@
 plugins {
+    id("moodly.android.library")
     id("moodly.multiplatform.library")
     id("moodly.compose")
 }
@@ -6,8 +7,6 @@ plugins {
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.material3)
-            implementation(compose.ui)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
         }
@@ -16,13 +15,6 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.feature.sleepQuality.domain)
             implementation(projects.core.storage.domain)
-
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.charts)

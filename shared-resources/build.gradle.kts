@@ -28,7 +28,6 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(compose.material3)
-            implementation(compose.material)
             implementation(compose.ui)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
@@ -42,7 +41,6 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)

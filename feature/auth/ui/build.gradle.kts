@@ -35,11 +35,11 @@ kotlin {
             implementation(projects.feature.user.ui)
             implementation(projects.feature.preferences.ui)
             implementation(projects.feature.security.domain)
+            implementation(projects.core.navigation)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)

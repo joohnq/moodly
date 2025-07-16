@@ -16,12 +16,6 @@ kotlin {
             implementation(projects.feature.security.domain)
             implementation(projects.core.navigation)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
             implementation(libs.navigation.compose)
 
             implementation(libs.bundles.viewmodel)

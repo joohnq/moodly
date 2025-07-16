@@ -28,10 +28,8 @@ class AppPlugin : Plugin<Project> {
     }
 
     private fun androidSettings(target: Project) {
-        target.extensions.configure<BaseAppModuleExtension> {
+        AndroidSettings.setupBaseAppModuleExtension(target){
             namespace = AppConfig.APPLICATION_ID
-
-            compileSdk = AppConfig.COMPILE_SDK
 
             defaultConfig {
                 applicationId = AppConfig.APPLICATION_ID
@@ -39,22 +37,6 @@ class AppPlugin : Plugin<Project> {
                 targetSdk = AppConfig.TARGET_SDK
                 versionCode = AppConfig.VERSION_CODE
                 versionName = AppConfig.VERSION_NAME
-            }
-
-            buildTypes {
-                release {
-                    isMinifyEnabled = true
-                    isShrinkResources = true
-                }
-
-                debug {
-
-                }
-            }
-
-            compileOptions {
-                sourceCompatibility = AppConfig.javaVersion
-                targetCompatibility = AppConfig.javaVersion
             }
         }
     }

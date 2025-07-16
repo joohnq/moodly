@@ -24,30 +24,10 @@ class KmpLibraryPlugin : Plugin<Project> {
         target.pluginManager.apply(
             target.getPlugin(alias = "kotlin-multiplatform").pluginId
         )
-        target.pluginManager.apply(
-            target.getPlugin(alias = "detekt").pluginId
-        )
     }
 
     private fun androidSettings(target: Project) {
-        target.extensions.configure<LibraryExtension> {
-            compileSdk = AppConfig.COMPILE_SDK
-
-            defaultConfig {
-                minSdk = AppConfig.MIN_SDK
-            }
-
-            compileOptions {
-                sourceCompatibility = AppConfig.javaVersion
-                targetCompatibility = AppConfig.javaVersion
-            }
-
-            buildTypes {
-                release {
-                    isMinifyEnabled = false
-                }
-            }
-        }
+        AndroidSettings.setupLibraryExtension(target)
     }
 
     private fun configureKotlinMultiplatform(target: Project) = with(target) {
@@ -67,7 +47,6 @@ class KmpLibraryPlugin : Plugin<Project> {
             iosSimulatorArm64()
 
             compilerOptions {
-                // Common compiler options applied to all Kotlin source sets
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }

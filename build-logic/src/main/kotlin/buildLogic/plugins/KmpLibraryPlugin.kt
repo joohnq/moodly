@@ -1,6 +1,7 @@
 package buildLogic.plugins
 
 import buildLogic.configs.AppConfig
+import buildLogic.extensions.deriveNamespace
 import buildLogic.extensions.getPlugin
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin

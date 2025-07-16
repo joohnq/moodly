@@ -2,10 +2,10 @@ package com.joohnq.preferences.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.onFailure
-import com.joohnq.domain.mapper.onSuccess
-import com.joohnq.domain.mapper.toUiState
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.toUiState
 import com.joohnq.preferences.domain.entity.AppPreferences
 import com.joohnq.preferences.domain.use_case.GetUserPreferencesUseCase
 import com.joohnq.preferences.domain.use_case.UpdateSkipAuthUseCase

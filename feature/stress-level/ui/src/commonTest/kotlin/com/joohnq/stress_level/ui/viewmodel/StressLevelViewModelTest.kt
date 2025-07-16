@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.viewmodel
 
 import app.cash.turbine.test
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 import com.joohnq.stress_level.domain.entity.StressLevel
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.repository.StressLevelRepository

@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.storage.domain.FileStorage
+import com.joohnq.ui.mapper.toByteArray
 
 class UpdateUserImageBitmapUseCase(
     private val fileStorage: FileStorage,
@@ -14,7 +15,7 @@ class UpdateUserImageBitmapUseCase(
             fileStorage.saveImage(
                 directory = "avatar",
                 fileName = "avatar.png",
-                data = image
+                data = image.toByteArray()
             )
         } catch (e: Exception) {
             return Result.failure(e)

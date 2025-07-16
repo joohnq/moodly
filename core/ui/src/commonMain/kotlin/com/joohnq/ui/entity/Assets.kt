@@ -1,4 +1,4 @@
-package com.joohnq.domain.entity
+package com.joohnq.ui.entity
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource

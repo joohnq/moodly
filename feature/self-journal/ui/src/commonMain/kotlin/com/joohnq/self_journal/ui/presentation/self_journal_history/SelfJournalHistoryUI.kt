@@ -10,8 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.foldComposable
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.self_journal.ui.components.SelfJournalsHistoryCards
 import com.joohnq.self_journal.ui.mapper.toGroupedByDate

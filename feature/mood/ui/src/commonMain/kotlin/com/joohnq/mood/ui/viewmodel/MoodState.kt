@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.viewmodel
 
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 import com.joohnq.mood.ui.resource.MoodRecordResource
 
 data class MoodState(

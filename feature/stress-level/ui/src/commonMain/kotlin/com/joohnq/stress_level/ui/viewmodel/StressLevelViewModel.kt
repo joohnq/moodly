@@ -2,12 +2,12 @@ package com.joohnq.stress_level.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.getValueOrEmpty
-import com.joohnq.domain.mapper.onFailure
-import com.joohnq.domain.mapper.onSuccess
-import com.joohnq.domain.mapper.toResultResource
-import com.joohnq.domain.mapper.toUiState
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.getValueOrEmpty
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.toResultResource
+import com.joohnq.ui.mapper.toUiState
 import com.joohnq.stress_level.domain.entity.StressLevelRecord
 import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.domain.use_case.DeleteStressLevelUseCase

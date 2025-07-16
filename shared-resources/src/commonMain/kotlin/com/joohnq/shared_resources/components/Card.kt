@@ -30,7 +30,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalExtraLarge
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.domain.entity.SleepStatsItem
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -254,41 +253,3 @@ fun TimePickerCard(
         }
     }
 }
-
-@Composable
-fun SleepQualityCard(modifier: Modifier = Modifier, item: SleepStatsItem) {
-    Card(
-        shape = Dimens.Shape.Large,
-        colors = ComponentColors.Card.MainCardColors(),
-        modifier = modifier
-    ) {
-        Column(Modifier.paddingAllSmall()) {
-            Box(
-                modifier = Modifier.size(40.dp)
-                    .background(
-                        color = Colors.Brown10,
-                        shape = Dimens.Shape.ExtraSmall
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(item.icon),
-                    contentDescription = stringResource(item.title),
-                    tint = Colors.Brown80,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-            VerticalSpacer(16.dp)
-            Text(
-                text = stringResource(item.title),
-                style = TextStyles.TextMdBold(),
-                color = Colors.Brown80
-            )
-            VerticalSpacer(5.dp)
-            Box(modifier = Modifier.fillMaxWidth()) {
-                item.content()
-            }
-        }
-    }
-}
-

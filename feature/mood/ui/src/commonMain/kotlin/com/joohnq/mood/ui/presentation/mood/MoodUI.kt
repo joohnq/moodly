@@ -1,8 +1,8 @@
 package com.joohnq.mood.ui.presentation.mood
 
 import androidx.compose.runtime.Composable
-import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.foldComposable
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.mood.ui.components.MoodContent
 import com.joohnq.mood.ui.components.MoodPanel
 import com.joohnq.mood.ui.mapper.getTodayMoodRecord

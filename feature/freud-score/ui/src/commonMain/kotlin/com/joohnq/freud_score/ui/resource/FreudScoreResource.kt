@@ -1,6 +1,6 @@
 package com.joohnq.freud_score.ui.resource
 
-import com.joohnq.freud_score.domain.entity.FreudScorePalette
+import com.joohnq.freud_score.ui.entity.FreudScorePalette
 import com.joohnq.freud_score.domain.property.FreudScoreProperties
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.at_risk

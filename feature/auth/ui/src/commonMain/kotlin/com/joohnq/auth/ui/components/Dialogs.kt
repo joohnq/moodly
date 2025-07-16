@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.joohnq.domain.entity.DIcon
+import com.joohnq.ui.entity.DIcon
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.camera
 import com.joohnq.shared_resources.components.ButtonTextAndIcon

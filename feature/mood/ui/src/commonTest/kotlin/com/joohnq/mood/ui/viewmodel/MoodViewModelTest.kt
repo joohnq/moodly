@@ -1,7 +1,7 @@
 package com.joohnq.mood.ui.viewmodel
 
 import app.cash.turbine.test
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.repository.MoodRepository

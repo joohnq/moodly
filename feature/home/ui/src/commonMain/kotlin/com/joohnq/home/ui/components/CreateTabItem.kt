@@ -1,7 +1,7 @@
 package com.joohnq.home.ui.components
 
 import androidx.compose.runtime.Composable
-import com.joohnq.domain.entity.BottomItem
+import com.joohnq.ui.entity.BottomItem
 import com.joohnq.navigation.Destination
 
 @Composable

@@ -1,4 +1,4 @@
-package com.joohnq.domain.entity
+package com.joohnq.ui.entity
 
 import org.jetbrains.compose.resources.StringResource
 

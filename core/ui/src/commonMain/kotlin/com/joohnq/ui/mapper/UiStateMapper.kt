@@ -1,7 +1,7 @@
-package com.joohnq.domain.mapper
+package com.joohnq.ui.mapper
 
 import androidx.compose.runtime.Composable
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 
 fun <T> UiState<T>.fold(
     onLoading: () -> Unit = {},

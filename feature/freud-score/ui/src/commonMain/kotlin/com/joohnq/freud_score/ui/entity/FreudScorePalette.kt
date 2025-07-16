@@ -1,4 +1,4 @@
-package com.joohnq.freud_score.domain.entity
+package com.joohnq.freud_score.ui.entity
 
 import androidx.compose.ui.graphics.Color
 

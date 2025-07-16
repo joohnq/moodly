@@ -2,8 +2,8 @@ package com.joohnq.stress_level.ui.presentation.stress_level
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.UiState
-import com.joohnq.domain.mapper.foldComposable
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors

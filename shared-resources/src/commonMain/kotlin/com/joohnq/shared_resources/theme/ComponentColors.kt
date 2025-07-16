@@ -11,7 +11,7 @@ import androidx.compose.material3.SliderColors
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.joohnq.domain.entity.TextRadioButtonColors
+import com.joohnq.ui.entity.TextRadioButtonColors
 
 object ComponentColors {
     object RadioButton {

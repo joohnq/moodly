@@ -1,26 +1,17 @@
 package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.DIcon
-import com.joohnq.domain.entity.TextRadioButtonColors
+import com.joohnq.ui.entity.TextRadioButtonColors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.StringResource

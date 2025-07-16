@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.DIcon
+import com.joohnq.ui.entity.DIcon
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.go_back

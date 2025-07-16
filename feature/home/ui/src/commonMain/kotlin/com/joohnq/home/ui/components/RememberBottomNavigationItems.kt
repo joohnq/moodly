@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.joohnq.domain.entity.BottomItem
-import com.joohnq.domain.entity.DIcon
+import com.joohnq.ui.entity.BottomItem
+import com.joohnq.ui.entity.DIcon
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.home

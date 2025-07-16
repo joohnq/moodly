@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.entity.CentralAction
+import com.joohnq.ui.entity.CentralAction
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.*

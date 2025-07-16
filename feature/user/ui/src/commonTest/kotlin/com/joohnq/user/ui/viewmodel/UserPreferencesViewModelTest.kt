@@ -1,7 +1,7 @@
 package com.joohnq.user.ui.viewmodel
 
 import app.cash.turbine.test
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend

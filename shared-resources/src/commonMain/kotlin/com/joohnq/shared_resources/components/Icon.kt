@@ -2,7 +2,7 @@ package com.joohnq.shared_resources.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import com.joohnq.domain.entity.DIcon
+import com.joohnq.ui.entity.DIcon
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

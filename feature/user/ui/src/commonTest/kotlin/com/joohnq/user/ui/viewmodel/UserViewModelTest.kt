@@ -2,7 +2,7 @@ package com.joohnq.user.ui.viewmodel
 
 import androidx.compose.ui.graphics.ImageBitmap
 import app.cash.turbine.test
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.domain.use_case.*

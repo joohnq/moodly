@@ -1,6 +1,6 @@
-package com.joohnq.domain.mapper
+package com.joohnq.ui.mapper
 
-import com.joohnq.domain.entity.UiState
+import com.joohnq.ui.entity.UiState
 
 fun <T> T.toResult(): Result<T> =
     if (this is Throwable) Result.failure(this) else Result.success(this)

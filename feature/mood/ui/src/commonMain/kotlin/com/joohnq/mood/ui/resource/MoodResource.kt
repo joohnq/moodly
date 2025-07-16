@@ -1,6 +1,6 @@
 package com.joohnq.mood.ui.resource
 
-import com.joohnq.domain.entity.Assets
+import com.joohnq.ui.entity.Assets
 import com.joohnq.mood.domain.entity.Mood.Companion.DEPRESSED
 import com.joohnq.mood.domain.entity.Mood.Companion.HAPPY
 import com.joohnq.mood.domain.entity.Mood.Companion.NEUTRAL

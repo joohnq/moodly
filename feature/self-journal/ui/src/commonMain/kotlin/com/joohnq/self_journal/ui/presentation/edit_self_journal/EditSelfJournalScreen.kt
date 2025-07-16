@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.self_journal.ui.mapper.toDomain
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
 import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent

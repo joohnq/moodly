@@ -2,8 +2,8 @@ package com.joohnq.home.ui.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.domain.mapper.anyError
-import com.joohnq.domain.mapper.onSuccess
+import com.joohnq.ui.mapper.anyError
+import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreIntent
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
 import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel

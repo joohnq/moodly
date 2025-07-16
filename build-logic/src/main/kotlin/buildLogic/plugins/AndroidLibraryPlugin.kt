@@ -8,18 +8,18 @@ import org.gradle.api.Project
 class AndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            installPlugins(this)
-            androidSettings(this)
+            installPlugins()
+            androidSettings()
         }
     }
 
-    private fun installPlugins(target: Project) {
-        target.pluginManager.apply(
-            target.getPlugin(alias = "android-library").pluginId
+    private fun Project.installPlugins() {
+        pluginManager.apply(
+            getPlugin("android-library").pluginId
         )
     }
 
-    private fun androidSettings(target: Project) {
-        LibraryAndroidSettings().setup(target)
+    private fun Project.androidSettings() {
+        LibraryAndroidSettings().setup(this)
     }
 }

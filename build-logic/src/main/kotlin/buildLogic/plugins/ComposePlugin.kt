@@ -24,10 +24,10 @@ class ComposePlugin : Plugin<Project> {
 
     private fun Project.installPlugins() {
         pluginManager.apply(
-            getPlugin(alias = "jetbrains-compose").pluginId
+            getPlugin("jetbrains-compose").pluginId
         )
         pluginManager.apply(
-            getPlugin(alias = "compose-compiler").pluginId
+            getPlugin("compose-compiler").pluginId
         )
     }
 
@@ -49,12 +49,12 @@ class ComposePlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
             sourceSets {
                 commonMain.dependencies {
-                    implementation(getLibrary(alias = "compose-runtime"))
-                    implementation(getLibrary(alias = "compose-foundation"))
-                    implementation(getLibrary(alias = "compose-material3"))
-                    implementation(getLibrary(alias = "compose-ui"))
-                    implementation(getLibrary(alias = "compose-components-resources"))
-                    implementation(getLibrary(alias = "compose-components-ui-tooling-preview"))
+                    implementation(getLibrary("compose-runtime"))
+                    implementation(getLibrary("compose-foundation"))
+                    implementation(getLibrary("compose-material3"))
+                    implementation(getLibrary("compose-ui"))
+                    implementation(getLibrary("compose-components-resources"))
+                    implementation(getLibrary("compose-components-ui-tooling-preview"))
                 }
             }
         }

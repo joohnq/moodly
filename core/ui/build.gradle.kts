@@ -1,7 +1,6 @@
 plugins {
     id("moodly.multiplatform.library")
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.compose.compiler)
+    id("moodly.compose")
 }
 
 kotlin {

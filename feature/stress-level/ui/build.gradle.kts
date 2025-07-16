@@ -2,8 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("moodly.multiplatform.library")
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.compose.compiler)
+    id("moodly.compose")
     alias(libs.plugins.serialization)
     alias(libs.plugins.mokkery)
 }

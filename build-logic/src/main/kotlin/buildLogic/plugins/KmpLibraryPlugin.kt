@@ -1,8 +1,8 @@
 package buildLogic.plugins
 
 import buildLogic.configs.AppConfig
+import buildLogic.extensions.geDeriveNamespace
 import buildLogic.extensions.getPlugin
-import buildLogic.plugins.android.LibraryAndroidSettings
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -12,22 +12,14 @@ class KmpLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             installPlugins(this)
-            androidSettings(this)
             configureKotlinMultiplatform(this)
         }
     }
 
     private fun installPlugins(target: Project) {
         target.pluginManager.apply(
-            target.getPlugin(alias = "android-library").pluginId
-        )
-        target.pluginManager.apply(
             target.getPlugin(alias = "kotlin-multiplatform").pluginId
         )
-    }
-
-    private fun androidSettings(target: Project) {
-        LibraryAndroidSettings().setup(target)
     }
 
     private fun configureKotlinMultiplatform(target: Project) = with(target) {
@@ -42,9 +34,17 @@ class KmpLibraryPlugin : Plugin<Project> {
                 }
             }
 
-            iosX64()
-            iosArm64()
-            iosSimulatorArm64()
+            listOf(
+                iosX64(),
+                iosArm64(),
+                iosSimulatorArm64()
+            ).forEach { iosTarget ->
+                iosTarget.binaries.framework {
+                    baseName = geDeriveNamespace()
+                    isStatic = true
+                    linkerOpts.add("-lsqlite3")
+                }
+            }
 
             compilerOptions {
                 freeCompilerArgs.add("-Xexpect-actual-classes")

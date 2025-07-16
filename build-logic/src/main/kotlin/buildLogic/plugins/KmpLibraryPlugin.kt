@@ -40,7 +40,13 @@ class KmpLibraryPlugin : Plugin<Project> {
                 iosSimulatorArm64()
             ).forEach { iosTarget ->
                 iosTarget.binaries.framework {
-                    baseName = geDeriveNamespace()
+                    var deriveBaseName = geDeriveNamespace()
+
+                    if (deriveBaseName == "${AppConfig.APPLICATION_NAME}composeApp.AndroidApp") {
+                        deriveBaseName = "${AppConfig.APPLICATION_NAME}composeApp"
+                    }
+
+                    baseName = deriveBaseName
                     isStatic = true
                     linkerOpts.add("-lsqlite3")
                 }

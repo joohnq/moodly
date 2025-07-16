@@ -13,12 +13,6 @@ kotlin {
             implementation(projects.feature.mood.ui)
             implementation(projects.feature.splash.ui)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
             implementation(libs.bundles.viewmodel)
 
             implementation(libs.bundles.koin)

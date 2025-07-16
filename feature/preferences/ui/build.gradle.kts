@@ -11,13 +11,6 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.feature.preferences.domain)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-
             implementation(libs.bundles.koin)
         }
     }

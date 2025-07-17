@@ -1,19 +1,15 @@
 package buildLogic.plugins
 
-import buildLogic.configs.AppConfig
 import buildLogic.extensions.getPlugin
 import buildLogic.plugins.android.AppAndroidSettings
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class AppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             installPlugins()
             androidSettings()
-            configureKotlin()
         }
     }
 
@@ -32,14 +28,6 @@ class AppPlugin : Plugin<Project> {
             }
 
             ndkVersion = "27.0.12077973"
-        }
-    }
-
-    private fun Project.configureKotlin() {
-        tasks.withType<KotlinCompile>().configureEach {
-            kotlinOptions {
-                jvmTarget = AppConfig.JVM_TARGET
-            }
         }
     }
 }

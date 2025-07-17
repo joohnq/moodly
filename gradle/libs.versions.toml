@@ -9,68 +9,68 @@ android-versionCode = "5"
 android-versionName = "1.0.1"
 
 # Accompanist
-accompanistPermissions = "0.37.0"
+accompanistPermissions = "0.37.3"
 
 # AndroidX
-androidx-activityCompose = "1.10.0"
-androidx-data-store = "1.1.2"
-androidx-lifecycle = "2.9.0-alpha02"
+androidx-activityCompose = "1.10.1"
+androidx-data-store = "1.1.7"
+androidx-lifecycle = "2.9.1"
 
 # Biometric
 biometric = "1.1.0"
 
 # Coil
-coil = "3.0.4"
+coil = "3.2.0"
 coilNetwork = "3.0.0-alpha08"
 
 # Compose
-composeCharts = "0.0.17"
-composeMultiplatform = "2.6.2"
-compose-plugin = "1.7.3"
-uiAndroid = "1.7.7"
+composeCharts = "0.1.7"
+composeMultiplatform = "2.7.0"
+compose-plugin = "1.8.2"
+uiAndroid = "1.8.3"
 
 # Crashlytics & Firebase
-crashlytics = "3.0.3"
-firebase-android-bom = "33.9.0"
+crashlytics = "3.0.4"
+firebase-android-bom = "33.16.0"
 firebase-gitlive-sdk = "2.1.0"
-google-services = "4.4.2"
+google-services = "4.4.3"
 
 # Koin
-koinCore = "4.1.0-Beta3"
+koinCore = "4.1.0"
 
 # Kotlin & KotlinX
-kotlin = "2.1.10"
-kotlinxCoroutines = "1.10.1"
-kotlinxDatetime = "0.6.1"
-kotlinxSerializationJson = "1.7.3"
+kotlin = "2.2.0"
+kotlinxCoroutines = "1.10.2"
+kotlinxDatetime = "0.7.1"
+kotlinxSerializationJson = "1.9.0"
 
 # Ktor
-ktor = "3.0.3"
+ktor = "3.2.2"
 
 # Lifecycle
-lifecycleViewModel = "2.8.7"
+lifecycleViewModel = "2.9.1"
 
 # Mokkery
-mokkery = "2.6.1"
+mokkery = "2.9.0"
 
 # Napier
 napier = "2.7.1"
 
 # Navigation
-navigation-compose = "2.8.0-alpha11"
+navigation-compose = "2.8.0-alpha13"
 
 # Okio
-okioVersion = "3.10.1"
+okioVersion = "3.15.0"
 
 # Startup
 startupRuntime = "1.2.0"
 
 # SQLDelight
-sqldelight = "2.0.2"
+sqldelight = "2.1.0"
 
 # Testing
-truthish = "1.0.1"
-turbine = "1.2.0"
+truthish = "1.0.3"
+turbine = "1.2.1"
 
 [libraries]
 

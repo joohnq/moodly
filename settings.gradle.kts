@@ -71,8 +71,6 @@ include(
     ":feature:security:ui",
     ":core:datastore",
     ":core:domain",
-    ":core:cryptography:data",
-    ":core:cryptography:domain",
     ":feature:preferences:data",
     ":feature:preferences:domain",
     ":feature:preferences:ui",

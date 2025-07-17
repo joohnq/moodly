@@ -52,7 +52,7 @@ fun LocalDateTime.toMonthAbbreviatedDayAndHourFormatted(): String =
 fun LocalDateTime.toMonthDays(): Int {
     val start = LocalDate(date.year, date.month, 1)
     val end = start.plus(1, DateTimeUnit.MONTH)
-    return start.until(end, DateTimeUnit.DAY)
+    return start.until(end, DateTimeUnit.DAY).toInt()
 }
 
 fun LocalDateTime.getCurrentWeekDayIndex(): Int =

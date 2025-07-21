@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.ui.mapper.anyError
 import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.freud_score.ui.viewmodel.FreudScoreIntent
-import com.joohnq.freud_score.ui.viewmodel.FreudScoreState
-import com.joohnq.freud_score.ui.viewmodel.FreudScoreViewModel
+import com.joohnq.freud_score.impl.viewmodel.FreudScoreIntent
+import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
+import com.joohnq.freud_score.impl.viewmodel.FreudScoreViewModel
 import com.joohnq.mood.ui.viewmodel.MoodIntent
 import com.joohnq.mood.ui.viewmodel.MoodState
 import com.joohnq.mood.ui.viewmodel.MoodViewModel

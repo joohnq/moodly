@@ -3,7 +3,7 @@ package com.joohnq.moodapp.di
 import com.joohnq.auth.ui.di.authUiModule
 import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.domain.di.userDomainModule
-import com.joohnq.freud_score.ui.di.freudScoreUiModule
+import com.joohnq.freud_score.impl.di.freudScoreUiModule
 import com.joohnq.home.ui.di.homeUiModule
 import com.joohnq.mood.data.di.moodDataModule
 import com.joohnq.mood.data.di.moodDriverFactoryModule

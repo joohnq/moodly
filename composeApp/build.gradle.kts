@@ -39,7 +39,7 @@ kotlin {
             implementation(projects.feature.preferences.ui)
 
             implementation(projects.feature.welcome.ui)
-            implementation(projects.feature.freudScore.ui)
+            implementation(projects.feature.freudScore.impl)
             implementation(projects.feature.onboarding.ui)
 
             implementation(projects.feature.home.ui)

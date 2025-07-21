@@ -2,7 +2,7 @@ package com.joohnq.home.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.freud_score.ui.resource.FreudScoreResource
+import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.MetricCardSide
 import com.joohnq.shared_resources.freud_score

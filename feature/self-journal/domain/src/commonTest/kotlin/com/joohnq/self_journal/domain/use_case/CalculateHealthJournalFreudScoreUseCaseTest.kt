@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.domain.use_case
 
-import com.joohnq.freud_score.domain.entity.FreudScore
+import com.joohnq.freud_score.api.entity.FreudScore
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.self_journal.domain.entity.SelfJournalRecord
 import com.varabyte.truthish.assertThat

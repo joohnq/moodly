@@ -8,7 +8,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.domain)
             implementation(projects.feature.mood.domain)
-            implementation(projects.feature.freudScore.domain)
+            implementation(projects.feature.freudScore.api)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)

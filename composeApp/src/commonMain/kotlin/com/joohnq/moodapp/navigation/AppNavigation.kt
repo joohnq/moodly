@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import com.joohnq.freud_score.ui.presentation.freud_score.FreudScoreScreen
+import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
 import com.joohnq.mood.ui.presentation.add_mood.AddMoodScreen

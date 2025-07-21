@@ -38,7 +38,7 @@ include(
     ":feature:welcome:ui",
     ":feature:mood:api",
     ":feature:mood:impl",
-    ":feature:onboarding:ui",
+    ":feature:onboarding:impl",
     ":feature:sleep-quality:data",
     ":feature:sleep-quality:ui",
     ":feature:sleep-quality:domain",

@@ -26,7 +26,6 @@ import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.event.Slee
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
-import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

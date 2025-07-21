@@ -5,7 +5,6 @@ import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.mapper.toInt
 import com.joohnq.sleep_quality.domain.mapper.toSleepInfluences
 import com.joohnq.sleep_quality.domain.mapper.toSleepQuality
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 object SleepQualityRecordConverter {

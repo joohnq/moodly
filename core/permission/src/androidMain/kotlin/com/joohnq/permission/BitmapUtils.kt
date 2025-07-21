@@ -8,7 +8,7 @@ import java.io.InputStream
 
 object BitmapUtils {
     fun getBitmapFromUri(uri: Uri, contentResolver: ContentResolver): Bitmap? {
-        var inputStream: InputStream? = null
+        var inputStream: InputStream?
         try {
             inputStream = contentResolver.openInputStream(uri)
             val s = BitmapFactory.decodeStream(inputStream)

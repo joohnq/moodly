@@ -1,11 +1,6 @@
 package com.joohnq.mood.ui.mapper
 
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.Mood.Companion.DEPRESSED
-import com.joohnq.mood.domain.entity.Mood.Companion.HAPPY
-import com.joohnq.mood.domain.entity.Mood.Companion.NEUTRAL
-import com.joohnq.mood.domain.entity.Mood.Companion.OVERJOYED
-import com.joohnq.mood.domain.entity.Mood.Companion.SAD
 import com.joohnq.mood.ui.resource.MoodResource
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 

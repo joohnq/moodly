@@ -8,7 +8,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.domain)
-            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.mood.api)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.serialization)

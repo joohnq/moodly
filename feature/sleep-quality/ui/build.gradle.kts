@@ -13,9 +13,9 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
             implementation(projects.feature.sleepQuality.domain)
-            implementation(projects.feature.mood.ui)
+            implementation(projects.feature.mood.impl)
             implementation(projects.feature.splash.ui)
-            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.mood.api)
             implementation(projects.core.test)
 
             implementation(libs.bundles.viewmodel)

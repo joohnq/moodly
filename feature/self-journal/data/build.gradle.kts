@@ -12,7 +12,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
             implementation(projects.feature.selfJournal.domain)
-            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.mood.api)
 
             implementation(libs.kotlin.datetime)
 

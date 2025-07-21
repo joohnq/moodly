@@ -13,7 +13,7 @@ kotlin {
             implementation(projects.feature.user.ui)
             implementation(projects.feature.user.domain)
             implementation(projects.feature.sleepQuality.domain)
-            implementation(projects.feature.freudScore.domain)
+            implementation(projects.feature.freudScore.api)
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
             implementation(projects.core.domain)

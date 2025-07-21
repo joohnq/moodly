@@ -2,7 +2,7 @@ package com.joohnq.home.ui.presentation.viewmodel
 
 import com.joohnq.ui.entity.UiState
 import com.joohnq.domain.entity.User
-import com.joohnq.freud_score.ui.resource.FreudScoreResource
+import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.mood.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource

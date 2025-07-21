@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.ui.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.freud_score.ui.resource.FreudScoreResource
+import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
 import com.joohnq.home.ui.components.MoodMetric

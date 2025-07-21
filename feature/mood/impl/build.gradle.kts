@@ -17,7 +17,7 @@ kotlin {
             implementation(projects.feature.mood.api)
             implementation(projects.feature.user.ui)
             implementation(projects.feature.user.domain)
-            implementation(projects.feature.sleepQuality.domain)
+            implementation(projects.feature.sleepQuality.api)
             implementation(projects.feature.freudScore.api)
             implementation(projects.sharedResources)
             implementation(projects.core.ui)

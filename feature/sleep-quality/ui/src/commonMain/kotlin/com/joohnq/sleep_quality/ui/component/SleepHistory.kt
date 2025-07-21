@@ -1,7 +1,6 @@
 package com.joohnq.sleep_quality.ui.component
 
 
-import SleepQualityHistoryCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

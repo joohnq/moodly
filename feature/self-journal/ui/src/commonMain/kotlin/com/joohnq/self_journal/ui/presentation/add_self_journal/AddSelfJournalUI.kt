@@ -38,7 +38,6 @@ fun AddJournalingUI(
         state.title.isNotEmpty() && state.mood != null && state.description.isNotEmpty()
     }
     val focusRequester = FocusRequester()
-    var isFocused by remember { mutableStateOf(false) }
     val moods = remember { getAllMoodResource() }
 
     ScaffoldSnackBar(
@@ -80,9 +79,7 @@ fun AddJournalingUI(
                         )
                     },
                     modifier = Modifier.fillMaxWidth().height(56.dp)
-                        .onFocusChanged { focusState ->
-                            isFocused = focusState.isFocused
-                        }.focusRequester(focusRequester),
+                        .focusRequester(focusRequester),
                     onValueChange = {
                         onAction(
                             AddSelfJournalIntent.UpdateTitle(

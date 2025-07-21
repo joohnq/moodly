@@ -1,4 +1,5 @@
-import com.joohnq.mood.domain.converter.MoodRecordConverter
+package com.joohnq.mood.domain.converter
+
 import com.joohnq.mood.domain.entity.Mood
 import com.varabyte.truthish.assertThat
 import kotlin.test.Test

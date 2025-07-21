@@ -5,8 +5,8 @@ import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.impl.di.freudScoreUiModule
 import com.joohnq.home.ui.di.homeUiModule
-import com.joohnq.mood.data.di.moodDataModule
-import com.joohnq.mood.data.di.moodDriverFactoryModule
+import com.joohnq.mood.impl.data.di.moodDataModule
+import com.joohnq.mood.impl.data.di.moodDriverFactoryModule
 import com.joohnq.mood.domain.di.moodDomainModule
 import com.joohnq.mood.ui.di.moodUiModule
 import com.joohnq.onboarding.ui.di.onboardingUiModule

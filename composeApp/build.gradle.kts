@@ -42,15 +42,14 @@ kotlin {
             implementation(projects.feature.freudScore.impl)
             implementation(projects.feature.onboarding.ui)
 
-            implementation(projects.feature.home.ui)
+            implementation(projects.feature.home.impl)
 
             implementation(projects.feature.user.data)
             implementation(projects.feature.user.domain)
             implementation(projects.feature.user.ui)
 
-            implementation(projects.feature.mood.ui)
-            implementation(projects.feature.mood.domain)
-            implementation(projects.feature.mood.data)
+            implementation(projects.feature.mood.api)
+            implementation(projects.feature.mood.impl)
 
             implementation(projects.feature.selfJournal.ui)
             implementation(projects.feature.selfJournal.domain)

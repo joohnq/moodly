@@ -9,9 +9,9 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.sharedResources)
-            implementation(projects.feature.mood.domain)
+            implementation(projects.feature.mood.api)
             implementation(projects.feature.freudScore.api)
-            implementation(projects.feature.mood.ui)
+            implementation(projects.feature.mood.impl)
             implementation(projects.feature.splash.ui)
 
             implementation(libs.bundles.viewmodel)

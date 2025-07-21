@@ -14,7 +14,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
             implementation(projects.feature.mood.api)
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.serialization)

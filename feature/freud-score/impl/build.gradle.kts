@@ -12,7 +12,7 @@ kotlin {
             implementation(projects.feature.mood.api)
             implementation(projects.feature.freudScore.api)
             implementation(projects.feature.mood.impl)
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
 
             implementation(libs.bundles.viewmodel)
 

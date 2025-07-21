@@ -29,7 +29,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.feature.sleepQuality.api)
             implementation(projects.feature.mood.impl)
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
             implementation(projects.feature.mood.api)
             implementation(projects.core.test)
 

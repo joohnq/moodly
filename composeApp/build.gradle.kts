@@ -59,7 +59,7 @@ kotlin {
             implementation(projects.feature.stressLevel.domain)
             implementation(projects.feature.stressLevel.data)
 
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.navigation.compose)

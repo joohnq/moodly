@@ -22,7 +22,7 @@ kotlin {
 
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
             implementation(projects.sharedResources)
             implementation(projects.feature.freudScore.impl)
             implementation(projects.feature.freudScore.api)

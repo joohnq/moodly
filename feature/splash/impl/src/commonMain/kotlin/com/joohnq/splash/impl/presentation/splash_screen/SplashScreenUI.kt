@@ -1,4 +1,4 @@
-package com.joohnq.splash.ui.presentation.splash_screen
+package com.joohnq.splash.impl.presentation.splash_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

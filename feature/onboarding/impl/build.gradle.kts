@@ -18,7 +18,7 @@ kotlin {
             implementation(projects.feature.sleepQuality.ui)
             implementation(projects.feature.user.domain)
             implementation(projects.feature.user.ui)
-            implementation(projects.feature.preferences.ui)
+            implementation(projects.feature.preferences.impl)
             implementation(projects.core.navigation)
 
             implementation(libs.navigation.compose)

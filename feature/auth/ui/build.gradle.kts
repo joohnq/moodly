@@ -13,7 +13,7 @@ kotlin {
             implementation(projects.sharedResources)
             implementation(projects.feature.user.domain)
             implementation(projects.feature.user.ui)
-            implementation(projects.feature.preferences.ui)
+            implementation(projects.feature.preferences.impl)
             implementation(projects.feature.security.domain)
             implementation(projects.core.navigation)
 

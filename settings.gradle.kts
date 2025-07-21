@@ -70,8 +70,7 @@ include(
     ":feature:security:ui",
     ":core:datastore",
     ":core:domain",
-    ":feature:preferences:data",
-    ":feature:preferences:domain",
-    ":feature:preferences:ui",
+    ":feature:preferences:impl",
+    ":feature:preferences:api",
     "backend"
 )

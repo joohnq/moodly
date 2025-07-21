@@ -14,7 +14,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.feature.security.domain)
             implementation(projects.sharedResources)
-            implementation(projects.feature.preferences.ui)
+            implementation(projects.feature.preferences.impl)
             implementation(projects.core.navigation)
 
             implementation(libs.bundles.koin)

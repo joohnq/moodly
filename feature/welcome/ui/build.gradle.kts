@@ -10,7 +10,7 @@ kotlin {
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.feature.preferences.ui)
+            implementation(projects.feature.preferences.impl)
             implementation(projects.core.navigation)
 
             implementation(libs.navigation.compose)

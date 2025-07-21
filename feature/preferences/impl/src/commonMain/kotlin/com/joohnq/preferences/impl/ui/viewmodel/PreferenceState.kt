@@ -1,4 +1,4 @@
-package com.joohnq.preferences.ui.viewmodel
+package com.joohnq.preferences.impl.ui.viewmodel
 
 import com.joohnq.ui.entity.UiState
 import com.joohnq.preferences.domain.entity.AppPreferences

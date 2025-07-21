@@ -40,7 +40,7 @@ kotlin {
 
             implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.impl)
-            implementation(projects.feature.onboarding.ui)
+            implementation(projects.feature.onboarding.impl)
 
             implementation(projects.feature.home.impl)
 

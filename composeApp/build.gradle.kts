@@ -52,9 +52,8 @@ kotlin {
             implementation(projects.feature.selfJournal.impl)
             implementation(projects.feature.selfJournal.api)
 
-            implementation(projects.feature.sleepQuality.ui)
-            implementation(projects.feature.sleepQuality.domain)
-            implementation(projects.feature.sleepQuality.data)
+            implementation(projects.feature.sleepQuality.impl)
+            implementation(projects.feature.sleepQuality.api)
 
             implementation(projects.feature.stressLevel.ui)
             implementation(projects.feature.stressLevel.domain)

@@ -13,7 +13,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.feature.sleepQuality.domain)
+            implementation(projects.feature.sleepQuality.api)
             implementation(projects.core.storage.api)
 
             implementation(libs.kotlin.datetime)

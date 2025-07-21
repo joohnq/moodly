@@ -14,7 +14,7 @@ kotlin {
             implementation(projects.core.ui)
             implementation(projects.core.domain)
             implementation(projects.feature.sleepQuality.domain)
-            implementation(projects.core.storage.domain)
+            implementation(projects.core.storage.api)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.charts)

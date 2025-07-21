@@ -26,7 +26,7 @@ kotlin {
             implementation(projects.core.navigation)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
-            implementation(projects.core.storage.data)
+            implementation(projects.core.storage.impl)
             implementation(projects.sharedResources)
             implementation(projects.feature.security.data)
             implementation(projects.feature.security.ui)

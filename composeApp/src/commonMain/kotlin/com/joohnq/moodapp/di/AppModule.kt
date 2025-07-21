@@ -25,7 +25,7 @@ import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.domain.di.sleepQualityDomainModule
 import com.joohnq.sleep_quality.ui.di.sleepQualityUiModule
-import com.joohnq.storage.data.di.coreStorageModule
+import com.joohnq.storage.impl.di.coreStorageModule
 import com.joohnq.stress_level.data.di.stressLevelDataModule
 import com.joohnq.stress_level.data.di.stressLevelDriverFactoryModule
 import com.joohnq.stress_level.domain.di.stressLevelDomainModule

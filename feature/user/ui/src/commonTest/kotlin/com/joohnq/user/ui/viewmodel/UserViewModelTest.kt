@@ -6,7 +6,7 @@ import com.joohnq.ui.entity.UiState
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.repository.UserRepository
 import com.joohnq.domain.use_case.*
-import com.joohnq.storage.domain.FileStorage
+import com.joohnq.storage.api.FileStorage
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns

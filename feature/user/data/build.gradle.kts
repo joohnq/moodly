@@ -15,7 +15,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.feature.user.domain)
             implementation(projects.core.database)
-            implementation(projects.core.storage.domain)
+            implementation(projects.core.storage.api)
 
             implementation(libs.serialization)
             implementation(libs.bundles.koin)

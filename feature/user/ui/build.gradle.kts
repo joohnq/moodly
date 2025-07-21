@@ -18,7 +18,7 @@ kotlin {
             implementation(libs.bundles.koin)
         }
         commonTest.dependencies {
-            implementation(projects.core.storage.domain)
+            implementation(projects.core.storage.api)
             implementation(projects.core.test)
             implementation(libs.bundles.test)
             implementation(libs.turbine)

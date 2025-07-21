@@ -1,3 +1,5 @@
+package com.joohnq.domain.use_case.user
+
 import com.joohnq.domain.entity.ProfessionalHelp
 import com.joohnq.domain.entity.User
 import com.joohnq.domain.fake.UserRepositoryFake

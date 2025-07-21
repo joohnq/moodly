@@ -1,3 +1,5 @@
+package com.joohnq.sleep_quality.ui.component
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card

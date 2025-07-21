@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.ui.presentation.sleep_quality_history
 
-import SleepQualityHistoryCard
+import com.joohnq.sleep_quality.ui.component.SleepQualityHistoryCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

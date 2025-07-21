@@ -1,4 +1,4 @@
-package com.joohnq.preferences.ui.viewmodel
+package com.joohnq.preferences.impl.ui.viewmodel
 
 sealed interface PreferenceIntent {
     data object GetPreferences : PreferenceIntent

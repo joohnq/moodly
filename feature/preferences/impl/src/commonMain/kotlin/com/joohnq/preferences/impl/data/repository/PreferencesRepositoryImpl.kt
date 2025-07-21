@@ -1,4 +1,4 @@
-package com.joohnq.preferences.data.repository
+package com.joohnq.preferences.impl.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.MutablePreferences

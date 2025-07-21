@@ -34,9 +34,8 @@ kotlin {
 
             implementation(projects.feature.auth.ui)
 
-            implementation(projects.feature.preferences.domain)
-            implementation(projects.feature.preferences.data)
-            implementation(projects.feature.preferences.ui)
+            implementation(projects.feature.preferences.api)
+            implementation(projects.feature.preferences.impl)
 
             implementation(projects.feature.welcome.ui)
             implementation(projects.feature.freudScore.impl)

@@ -1,8 +1,6 @@
 package com.joohnq.freud_score.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.freud_score.domain.entity.FreudScore
-import com.joohnq.freud_score.domain.mapper.toFreudScore
 import com.joohnq.freud_score.ui.mapper.toResource
 import com.joohnq.mood.ui.mapper.calculateStatsFreudScore
 import com.joohnq.mood.ui.resource.MoodRecordResource

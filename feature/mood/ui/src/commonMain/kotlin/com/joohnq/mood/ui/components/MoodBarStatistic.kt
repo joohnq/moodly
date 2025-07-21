@@ -1,30 +1,5 @@
 package com.joohnq.mood.ui.components
 
-import androidx.compose.foundation.gestures.snapping.SnapPosition
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PageSize
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.times
-import com.joohnq.domain.mapper.toShortDateString
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.shared_resources.components.CalculateTextHeight
-import com.joohnq.shared_resources.components.dashedLine
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.TextStyles
-
 //@Composable
 //fun MoodBarStatistic(
 //    records: List<MoodRecordResource>,

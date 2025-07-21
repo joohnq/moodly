@@ -10,7 +10,6 @@ import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.components.BottomNavigationActionButton
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

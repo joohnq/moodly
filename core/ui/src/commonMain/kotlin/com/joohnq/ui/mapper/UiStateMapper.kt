@@ -71,7 +71,7 @@ fun <T> UiState<T>.getValueOrNull(): T =
 fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =
     when (this) {
         is UiState.Success -> this.data
-        else -> emptyList<T>()
+        else -> emptyList()
     }
 
 inline fun <T> UiState<T>.onSuccess(

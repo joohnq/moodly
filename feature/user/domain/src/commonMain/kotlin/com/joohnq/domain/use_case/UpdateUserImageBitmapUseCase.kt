@@ -3,7 +3,7 @@ package com.joohnq.domain.use_case
 import androidx.compose.ui.graphics.ImageBitmap
 import com.joohnq.domain.entity.ImageType
 import com.joohnq.domain.repository.UserRepository
-import com.joohnq.storage.domain.FileStorage
+import com.joohnq.storage.api.FileStorage
 import com.joohnq.ui.mapper.toByteArray
 
 class UpdateUserImageBitmapUseCase(

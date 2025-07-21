@@ -1,21 +1,19 @@
 plugins {
     id("moodly.android.library")
     id("moodly.multiplatform.library")
-    alias(libs.plugins.mokkery)
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.domain)
             implementation(projects.core.storage.api)
-            implementation(projects.core.ui)
+            implementation(projects.core.domain)
 
-            implementation(libs.kotlin.datetime)
+            implementation(libs.squareup.okio)
             implementation(libs.bundles.koin)
         }
         commonTest.dependencies {
-            implementation(libs.bundles.test)
+            implementation(libs.kotlin.test)
         }
     }
 }

@@ -7,7 +7,7 @@ import com.joohnq.domain.fake.UserRepositoryFake
 import com.joohnq.domain.use_case.AddUserUseCase
 import com.joohnq.domain.use_case.GetUserUseCase
 import com.joohnq.domain.use_case.UpdateUserImageBitmapUseCase
-import com.joohnq.storage.domain.FileStorage
+import com.joohnq.storage.api.FileStorage
 import com.varabyte.truthish.assertThat
 import dev.mokkery.MockMode
 import dev.mokkery.answering.returns

@@ -6,7 +6,7 @@ import com.joohnq.ui.sharedViewModel
 import com.joohnq.preferences.domain.entity.AppPreferences
 import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
-import com.joohnq.security.domain.Security
+import com.joohnq.security.api.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
 import com.joohnq.user.ui.viewmodel.UserIntent

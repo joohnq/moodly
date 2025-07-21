@@ -28,9 +28,8 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.storage.impl)
             implementation(projects.sharedResources)
-            implementation(projects.feature.security.data)
-            implementation(projects.feature.security.ui)
-            implementation(projects.feature.security.domain)
+            implementation(projects.feature.security.impl)
+            implementation(projects.feature.security.api)
 
             implementation(projects.feature.auth.ui)
 

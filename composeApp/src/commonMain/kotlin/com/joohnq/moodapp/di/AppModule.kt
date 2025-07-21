@@ -15,7 +15,7 @@ import com.joohnq.preferences.domain.di.preferencesDomainModule
 import com.joohnq.preferences.impl.ui.di.preferencesUiModule
 import com.joohnq.security.data.di.securityAuthenticationModule
 import com.joohnq.security.data.di.securityDataModule
-import com.joohnq.security.domain.di.securityDomainModule
+import com.joohnq.security.api.di.securityDomainModule
 import com.joohnq.security.ui.di.securityUiModule
 import com.joohnq.self_journal.data.di.selfJournalDataModule
 import com.joohnq.self_journal.data.di.selfJournalDriverFactory

@@ -49,9 +49,8 @@ kotlin {
             implementation(projects.feature.mood.api)
             implementation(projects.feature.mood.impl)
 
-            implementation(projects.feature.selfJournal.ui)
-            implementation(projects.feature.selfJournal.domain)
-            implementation(projects.feature.selfJournal.data)
+            implementation(projects.feature.selfJournal.impl)
+            implementation(projects.feature.selfJournal.api)
 
             implementation(projects.feature.sleepQuality.ui)
             implementation(projects.feature.sleepQuality.domain)

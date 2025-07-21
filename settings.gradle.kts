@@ -55,7 +55,7 @@ include(
     ":core:di",
     ":core:navigation",
     ":shared-resources",
-    ":feature:splash:ui",
+    ":feature:splash:impl",
     ":feature:auth",
     ":feature:auth:ui",
     ":core:permission",

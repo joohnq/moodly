@@ -21,7 +21,7 @@ kotlin {
             implementation(projects.feature.mood.impl)
             implementation(projects.feature.mood.api)
             implementation(projects.sharedResources)
-            implementation(projects.feature.splash.ui)
+            implementation(projects.feature.splash.impl)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
 

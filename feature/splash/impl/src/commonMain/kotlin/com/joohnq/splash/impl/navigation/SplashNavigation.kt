@@ -1,11 +1,11 @@
-package com.joohnq.splash.ui.navigation
+package com.joohnq.splash.impl.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.splash.ui.presentation.splash_screen.SplashScreen
+import com.joohnq.splash.impl.presentation.splash_screen.SplashScreen
 
 fun NavGraphBuilder.splashNavigation(
     onNavigate: (Destination, Boolean) -> Unit,

@@ -1,4 +1,4 @@
-package com.joohnq.splash.ui.presentation.splash_screen
+package com.joohnq.splash.impl.presentation.splash_screen
 
 import androidx.compose.runtime.*
 import com.joohnq.ui.mapper.fold

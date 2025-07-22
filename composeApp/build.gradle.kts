@@ -31,7 +31,7 @@ kotlin {
             implementation(projects.feature.security.impl)
             implementation(projects.feature.security.api)
 
-            implementation(projects.feature.auth.ui)
+            implementation(projects.feature.auth.impl)
 
             implementation(projects.feature.preferences.api)
             implementation(projects.feature.preferences.impl)

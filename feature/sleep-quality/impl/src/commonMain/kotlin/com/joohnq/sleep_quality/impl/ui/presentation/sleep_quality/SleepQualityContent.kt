@@ -17,7 +17,7 @@ import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SleepQualityUI(
+fun SleepQualityContent(
     state: SleepQualityState,
     onEvent: (SleepQualityEvent) -> Unit = {},
     onAction: (SleepQualityIntent) -> Unit = {},
@@ -57,7 +57,7 @@ fun SleepQualityUI(
 @Preview
 @Composable
 fun SleepQualityUIPreviewEmpty() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -70,7 +70,7 @@ fun SleepQualityUIPreviewEmpty() {
 @Preview
 @Composable
 fun SleepQualityUIPreviewWorst() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -86,7 +86,7 @@ fun SleepQualityUIPreviewWorst() {
 @Preview
 @Composable
 fun SleepQualityUIPreviewPoor() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -102,7 +102,7 @@ fun SleepQualityUIPreviewPoor() {
 @Preview
 @Composable
 fun SleepQualityUIPreviewFair() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -118,7 +118,7 @@ fun SleepQualityUIPreviewFair() {
 @Preview
 @Composable
 fun SleepQualityUIPreviewGood() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -134,7 +134,7 @@ fun SleepQualityUIPreviewGood() {
 @Preview
 @Composable
 fun SleepQualityUIPreviewExcellent() {
-    SleepQualityUI(
+    SleepQualityContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(

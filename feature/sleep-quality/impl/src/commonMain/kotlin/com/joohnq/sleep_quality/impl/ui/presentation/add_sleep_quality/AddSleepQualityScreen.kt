@@ -78,7 +78,7 @@ fun AddSleepQualityScreen(
         }
     }
 
-    AddSleepQualityUI(
+    AddSleepQualityContent(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,

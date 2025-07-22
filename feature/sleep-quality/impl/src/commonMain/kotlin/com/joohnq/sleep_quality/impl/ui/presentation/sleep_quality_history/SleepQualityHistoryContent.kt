@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SleepQualityHistoryUI(
+fun SleepQualityHistoryContent(
     state: SleepQualityState,
     onEvent: (SleepQualityHistoryEvent) -> Unit = {},
     onAction: (SleepQualityIntent) -> Unit = {},
@@ -79,7 +79,7 @@ fun SleepQualityHistoryUI(
 @Preview
 @Composable
 fun SleepHistoryUIPreview() {
-    SleepQualityHistoryUI(
+    SleepQualityHistoryContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf(
@@ -105,7 +105,7 @@ fun SleepHistoryUIPreview() {
 @Preview
 @Composable
 fun SleepHistoryUIPreviewEmpty() {
-    SleepQualityHistoryUI(
+    SleepQualityHistoryContent(
         state = SleepQualityState(
             records = UiState.Success(
                 listOf()

@@ -24,7 +24,7 @@ fun SleepQualityHistoryScreen(
         }
     }
 
-    SleepQualityHistoryUI(
+    SleepQualityHistoryContent(
         state = state,
         onEvent = ::onEvent
     )

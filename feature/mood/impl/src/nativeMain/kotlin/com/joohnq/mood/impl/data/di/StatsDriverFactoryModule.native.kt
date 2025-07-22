@@ -1,4 +1,4 @@
-package com.joohnq.mood.data.di
+package com.joohnq.mood.impl.data.di
 
 import com.joohnq.mood.impl.data.driver.MoodDriverFactory
 import org.koin.core.module.Module

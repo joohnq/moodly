@@ -1,4 +1,4 @@
-package com.joohnq.mood.data.driver
+package com.joohnq.mood.impl.data.driver
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver

@@ -1,4 +1,4 @@
-package com.joohnq.mood.data.driver
+package com.joohnq.mood.impl.data.driver
 
 import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase

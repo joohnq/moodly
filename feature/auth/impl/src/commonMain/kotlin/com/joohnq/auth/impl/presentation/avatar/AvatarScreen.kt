@@ -33,6 +33,7 @@ import com.joohnq.user.impl.ui.viewmodel.UserIntent
 import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AvatarScreen(
@@ -113,10 +114,10 @@ fun AvatarScreen(
     }
     if (permissionRationalDialog) {
         AlertMessageDialog(
-            title = Res.string.permission_required,
-            message = Res.string.to_set_your_profile_picture,
-            positiveButtonText = Res.string.settings,
-            negativeButtonText = Res.string.cancel,
+            title = stringResource(Res.string.permission_required),
+            message = stringResource(Res.string.to_set_your_profile_picture),
+            positiveButtonText = stringResource(Res.string.settings),
+            negativeButtonText = stringResource(Res.string.cancel),
             onPositiveClick = {
                 permissionRationalDialog = false
                 launchSetting = true

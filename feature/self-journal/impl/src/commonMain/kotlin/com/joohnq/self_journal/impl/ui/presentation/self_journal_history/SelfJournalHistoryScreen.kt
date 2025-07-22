@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.self_journal.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
-import com.joohnq.self_journal.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryViewModel
-import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
-import com.joohnq.self_journal.ui.viewmodel.SelfJournalViewModel
+import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
+import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryViewModel
+import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
+import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
 
 @Composable
 fun SelfJournalHistoryScreen(

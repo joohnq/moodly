@@ -3,8 +3,8 @@ package com.joohnq.self_journal.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.event.SelfJournalEvent
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer

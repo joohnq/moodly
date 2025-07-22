@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

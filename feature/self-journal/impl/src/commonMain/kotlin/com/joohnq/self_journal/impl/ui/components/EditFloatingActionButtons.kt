@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens

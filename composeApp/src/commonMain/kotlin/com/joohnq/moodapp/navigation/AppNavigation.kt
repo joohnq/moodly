@@ -13,10 +13,10 @@ import com.joohnq.mood.impl.ui.presentation.mood.MoodScreen
 import com.joohnq.mood.impl.ui.presentation.mood_history.MoodHistoryScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.self_journal.ui.presentation.add_self_journal.AddSelfJournalScreen
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.EditJournalingScreen
-import com.joohnq.self_journal.ui.presentation.self_journal.SelfJournalScreen
-import com.joohnq.self_journal.ui.presentation.self_journal_history.SelfJournalHistoryScreen
+import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJournalScreen
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditJournalingScreen
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalScreen
+import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJournalHistoryScreen
 import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen

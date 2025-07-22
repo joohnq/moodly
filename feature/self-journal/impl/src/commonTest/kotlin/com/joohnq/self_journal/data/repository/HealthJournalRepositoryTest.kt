@@ -7,8 +7,8 @@ import com.joohnq.core.test.createTestDriver
 import com.joohnq.mood.domain.entity.Mood
 import com.joohnq.self_journal.impl.data.database.SelfJournalDatabase
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.repository.SelfJournalRepository
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.repository.SelfJournalRepository
 import com.joohnq.self_journal.impl.data.repository.SelfJournalRepositoryImpl
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking

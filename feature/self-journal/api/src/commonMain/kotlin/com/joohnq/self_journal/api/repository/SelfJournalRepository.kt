@@ -1,6 +1,6 @@
-package com.joohnq.self_journal.domain.repository
+package com.joohnq.self_journal.api.repository
 
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
 
 interface SelfJournalRepository {
     suspend fun getSelfJournals(): Result<List<SelfJournalRecord>>

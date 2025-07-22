@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.impl.ui.viewmodel
 
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
 
 sealed interface SelfJournalIntent {
     data object GetAll : SelfJournalIntent

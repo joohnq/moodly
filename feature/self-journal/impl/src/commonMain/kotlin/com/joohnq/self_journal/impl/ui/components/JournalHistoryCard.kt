@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.toMonthAbbreviatedAndDayString
 import com.joohnq.domain.mapper.toWordCount
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.components.VerticalSpacer

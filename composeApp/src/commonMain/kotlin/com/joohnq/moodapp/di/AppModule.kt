@@ -19,8 +19,8 @@ import com.joohnq.security.api.di.securityDomainModule
 import com.joohnq.security.ui.di.securityUiModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDataModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDriverFactory
-import com.joohnq.self_journal.domain.di.selfJournalDomainModule
-import com.joohnq.self_journal.ui.di.selfJournalUiModule
+import com.joohnq.self_journal.api.di.selfJournalDomainModule
+import com.joohnq.self_journal.impl.ui.di.selfJournalUiModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.domain.di.sleepQualityDomainModule

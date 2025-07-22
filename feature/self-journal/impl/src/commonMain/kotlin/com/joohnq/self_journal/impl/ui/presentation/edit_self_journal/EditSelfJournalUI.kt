@@ -16,11 +16,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.toFormattedDateString
 import com.joohnq.mood.impl.ui.mapper.toResource
-import com.joohnq.self_journal.ui.components.EditFloatingActionButtons
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
-import com.joohnq.self_journal.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
-import com.joohnq.self_journal.ui.viewmodel.SelfJournalIntent
+import com.joohnq.self_journal.impl.ui.components.EditFloatingActionButtons
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
+import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.remember.rememberFocusRequester

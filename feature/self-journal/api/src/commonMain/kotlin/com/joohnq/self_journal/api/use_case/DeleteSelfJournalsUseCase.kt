@@ -1,6 +1,6 @@
-package com.joohnq.self_journal.domain.use_case
+package com.joohnq.self_journal.api.use_case
 
-import com.joohnq.self_journal.domain.repository.SelfJournalRepository
+import com.joohnq.self_journal.api.repository.SelfJournalRepository
 
 class DeleteSelfJournalsUseCase(private val selfJournalRepository: SelfJournalRepository) {
     suspend operator fun invoke(item: Int): Result<Boolean> =

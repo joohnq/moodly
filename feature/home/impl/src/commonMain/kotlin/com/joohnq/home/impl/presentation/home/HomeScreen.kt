@@ -16,7 +16,7 @@ fun HomeScreen(
     val dashboardViewModel: DashboardViewModel = sharedViewModel()
     val state by dashboardViewModel.state.collectAsStateWithLifecycle()
 
-    HomeUI(
+    HomeContent(
         padding = padding,
         state = state,
         onEvent = onEvent

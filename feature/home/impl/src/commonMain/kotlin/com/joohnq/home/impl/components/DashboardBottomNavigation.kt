@@ -49,12 +49,3 @@ fun DashboardBottomNavigation(
         )
     }
 }
-
-@Preview
-@Composable
-fun DashboardBottomNavigationPreview() {
-    DashboardBottomNavigation(
-        isCurrentRoute = { true },
-        isCentralExpanded = false,
-    )
-}

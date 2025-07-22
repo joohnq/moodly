@@ -16,32 +16,33 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DashboardCentral(
-    padding: PaddingValues,
-    onEvent: (DashboardEvent) -> Unit
+    padding: PaddingValues = PaddingValues(0.dp),
+    onEvent: (DashboardEvent) -> Unit = {}
 ) {
     val items =
         listOf(
             CentralAction<Destination>(
-                title = Res.string.sleep,
+                title = stringResource(Res.string.sleep),
                 icon = Drawables.Icons.Outlined.Sleep,
                 destination = Destination.App.AddSleepQuality
             ),
             CentralAction<Destination>(
-                title = Res.string.stress_level,
+                title = stringResource(Res.string.stress_level),
                 icon = Drawables.Icons.Outlined.Warning,
                 destination = Destination.App.AddStressLevel
             ),
             CentralAction<Destination>(
-                title = Res.string.self_journaling,
+                title = stringResource(Res.string.self_journaling),
                 icon = Drawables.Icons.Outlined.BookOpen,
                 destination = Destination.App.AddSelfJournal
             ),
             CentralAction<Destination>(
-                title = Res.string.mood,
+                title = stringResource(Res.string.mood),
                 icon = Drawables.Icons.Outlined.MoodNeutral,
                 destination = Destination.App.AddMood
             )

@@ -4,15 +4,15 @@ import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.FINANCES
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.IN_PEACE
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.KIDS
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.LIFE
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.LONELINESS
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.OTHER
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.RELATIONSHIP
-import com.joohnq.stress_level.domain.entity.Stressor.Companion.WORK
-import com.joohnq.stress_level.domain.property.StressorProperties
+import com.joohnq.stress_level.api.entity.Stressor.Companion.FINANCES
+import com.joohnq.stress_level.api.entity.Stressor.Companion.IN_PEACE
+import com.joohnq.stress_level.api.entity.Stressor.Companion.KIDS
+import com.joohnq.stress_level.api.entity.Stressor.Companion.LIFE
+import com.joohnq.stress_level.api.entity.Stressor.Companion.LONELINESS
+import com.joohnq.stress_level.api.entity.Stressor.Companion.OTHER
+import com.joohnq.stress_level.api.entity.Stressor.Companion.RELATIONSHIP
+import com.joohnq.stress_level.api.entity.Stressor.Companion.WORK
+import com.joohnq.stress_level.api.property.StressorProperties
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 

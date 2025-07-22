@@ -6,8 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.stress_level.domain.entity.StressLevel
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.api.entity.StressLevel
+import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
 import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
 import com.joohnq.stress_level.ui.resource.StressLevelResource

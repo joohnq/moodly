@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.ui.mapper
 
 import com.joohnq.domain.getNow
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import kotlinx.datetime.LocalDate
 

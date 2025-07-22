@@ -22,13 +22,13 @@ import com.joohnq.shared_resources.you_are_extremely_stressed_out
 import com.joohnq.shared_resources.you_are_neutral
 import com.joohnq.shared_resources.you_are_not_stressed_out
 import com.joohnq.shared_resources.you_are_very_stressed_out
-import com.joohnq.stress_level.domain.entity.StressLevel.Companion.FIVE
-import com.joohnq.stress_level.domain.entity.StressLevel.Companion.FOUR
-import com.joohnq.stress_level.domain.entity.StressLevel.Companion.ONE
-import com.joohnq.stress_level.domain.entity.StressLevel.Companion.THREE
-import com.joohnq.stress_level.domain.entity.StressLevel.Companion.TWO
-import com.joohnq.stress_level.domain.entity.StressLevelPalette
-import com.joohnq.stress_level.domain.property.StressLevelProperties
+import com.joohnq.stress_level.api.entity.StressLevel.Companion.FIVE
+import com.joohnq.stress_level.api.entity.StressLevel.Companion.FOUR
+import com.joohnq.stress_level.api.entity.StressLevel.Companion.ONE
+import com.joohnq.stress_level.api.entity.StressLevel.Companion.THREE
+import com.joohnq.stress_level.api.entity.StressLevel.Companion.TWO
+import com.joohnq.stress_level.api.entity.StressLevelPalette
+import com.joohnq.stress_level.api.property.StressLevelProperties
 import org.jetbrains.compose.resources.StringResource
 
 sealed class StressLevelResource(

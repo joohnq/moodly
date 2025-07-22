@@ -3,9 +3,9 @@ package com.joohnq.splash.impl.presentation.splash_screen
 import androidx.compose.runtime.*
 import com.joohnq.ui.mapper.fold
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.preferences.domain.entity.AppPreferences
-import com.joohnq.preferences.impl.viewmodel.PreferenceIntent
-import com.joohnq.preferences.impl.viewmodel.PreferencesViewModel
+import com.joohnq.preferences.api.entity.AppPreferences
+import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel

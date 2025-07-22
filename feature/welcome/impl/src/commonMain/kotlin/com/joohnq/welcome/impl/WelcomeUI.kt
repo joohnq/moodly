@@ -5,7 +5,7 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import com.joohnq.preferences.impl.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.theme.Colors

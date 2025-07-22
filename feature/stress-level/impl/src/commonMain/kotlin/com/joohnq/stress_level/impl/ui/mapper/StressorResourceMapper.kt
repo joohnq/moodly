@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.ui.mapper
 
-import com.joohnq.stress_level.domain.entity.Stressor
+import com.joohnq.stress_level.api.entity.Stressor
 import com.joohnq.stress_level.ui.resource.StressorResource
 import com.joohnq.stress_level.ui.resource.StressorResource.*
 

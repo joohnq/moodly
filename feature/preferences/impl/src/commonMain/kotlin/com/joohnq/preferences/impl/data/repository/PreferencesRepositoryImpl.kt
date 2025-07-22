@@ -5,8 +5,8 @@ import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.joohnq.preferences.domain.entity.AppPreferences
-import com.joohnq.preferences.domain.repository.PreferencesRepository
+import com.joohnq.preferences.api.entity.AppPreferences
+import com.joohnq.preferences.api.repository.PreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first

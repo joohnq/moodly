@@ -7,10 +7,10 @@ import androidx.navigation.toRoute
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreScreen
 import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
-import com.joohnq.mood.ui.presentation.add_mood.AddMoodScreen
-import com.joohnq.mood.ui.presentation.expression_analysis.ExpressionAnalysisScreen
-import com.joohnq.mood.ui.presentation.mood.MoodScreen
-import com.joohnq.mood.ui.presentation.mood_history.MoodHistoryScreen
+import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodScreen
+import com.joohnq.mood.impl.ui.presentation.expression_analysis.ExpressionAnalysisScreen
+import com.joohnq.mood.impl.ui.presentation.mood.MoodScreen
+import com.joohnq.mood.impl.ui.presentation.mood_history.MoodHistoryScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.self_journal.ui.presentation.add_self_journal.AddSelfJournalScreen

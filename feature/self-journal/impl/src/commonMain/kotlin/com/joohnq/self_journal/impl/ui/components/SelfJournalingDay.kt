@@ -7,8 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.resource.MoodAverageResource
+import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.resource.MoodAverageResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.kizitonwose.calendar.core.CalendarDay

@@ -1,6 +1,6 @@
 package com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel
 
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 
 sealed interface AddMoodIntent {
     data class UpdateAddingMoodRecordMood(val mood: MoodResource) : AddMoodIntent

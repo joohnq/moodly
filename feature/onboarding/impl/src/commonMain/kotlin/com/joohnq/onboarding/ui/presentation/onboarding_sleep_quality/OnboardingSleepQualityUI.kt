@@ -8,8 +8,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.mood.ui.mapper.getTodayMoodRecord
+import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.MetricCardSide
 import com.joohnq.shared_resources.components.NotFoundHorizontal

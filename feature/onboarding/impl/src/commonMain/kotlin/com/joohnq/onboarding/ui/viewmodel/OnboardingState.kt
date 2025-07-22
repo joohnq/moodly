@@ -1,6 +1,6 @@
 package com.joohnq.onboarding.ui.viewmodel
 
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource

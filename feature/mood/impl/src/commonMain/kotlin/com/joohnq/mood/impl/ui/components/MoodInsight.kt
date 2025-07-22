@@ -3,7 +3,7 @@ package com.joohnq.mood.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now

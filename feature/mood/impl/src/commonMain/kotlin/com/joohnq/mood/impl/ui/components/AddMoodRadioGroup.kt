@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.mapper.getAllMoodResource
-import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall

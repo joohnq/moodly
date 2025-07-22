@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

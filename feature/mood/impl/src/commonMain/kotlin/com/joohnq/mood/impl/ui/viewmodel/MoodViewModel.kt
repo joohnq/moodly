@@ -12,8 +12,8 @@ import com.joohnq.mood.domain.entity.MoodRecord
 import com.joohnq.mood.domain.use_case.AddMoodUseCase
 import com.joohnq.mood.domain.use_case.DeleteMoodUseCase
 import com.joohnq.mood.domain.use_case.GetMoodsUseCase
-import com.joohnq.mood.ui.mapper.toResource
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.mapper.toResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

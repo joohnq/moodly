@@ -6,9 +6,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.entity.User
-import com.joohnq.mood.ui.viewmodel.MoodIntent
-import com.joohnq.mood.ui.viewmodel.MoodSideEffect
-import com.joohnq.mood.ui.viewmodel.MoodViewModel
+import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
+import com.joohnq.mood.impl.ui.viewmodel.MoodSideEffect
+import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
 import com.joohnq.preferences.impl.viewmodel.PreferenceIntent

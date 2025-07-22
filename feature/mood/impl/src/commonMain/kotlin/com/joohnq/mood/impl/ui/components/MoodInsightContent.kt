@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.mapper.getStreakDays
-import com.joohnq.mood.ui.mapper.getWeekRecords
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.mapper.getStreakDays
+import com.joohnq.mood.impl.ui.mapper.getWeekRecords
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer

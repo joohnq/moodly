@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.mood.ui.presentation.mood_history.event.MoodHistoryEvent
-import com.joohnq.mood.ui.viewmodel.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.mood_history.event.MoodHistoryEvent
+import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
 
 @Composable
 fun MoodHistoryScreen(

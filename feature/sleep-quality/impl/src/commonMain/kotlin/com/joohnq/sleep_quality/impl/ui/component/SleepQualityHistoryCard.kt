@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.calculateDuration
 import com.joohnq.domain.mapper.toAbbreviatedMonthName
 import com.joohnq.domain.mapper.toHoursAndMinutesString
-import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.no_sleep_influences

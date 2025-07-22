@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.toCompleteDateString
-import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.TextEllipsis

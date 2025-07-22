@@ -17,8 +17,8 @@ import com.joohnq.shared_resources.medications_supplements_title
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.user.ui.mapper.getAllMedicationsSupplementsResource
-import com.joohnq.user.ui.resource.MedicationsSupplementsResource
+import com.joohnq.user.impl.ui.mapper.getAllMedicationsSupplementsResource
+import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

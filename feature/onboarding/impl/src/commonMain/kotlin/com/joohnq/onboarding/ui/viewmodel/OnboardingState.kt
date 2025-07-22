@@ -5,9 +5,9 @@ import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.user.ui.resource.MedicationsSupplementsResource
-import com.joohnq.user.ui.resource.PhysicalSymptomsResource
-import com.joohnq.user.ui.resource.ProfessionalHelpResource
+import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
+import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
+import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 data class OnboardingState(
     val physicalSymptoms: PhysicalSymptomsResource? = null,

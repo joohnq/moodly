@@ -25,9 +25,9 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.ui.viewmodel.UserIntent
-import com.joohnq.user.ui.viewmodel.UserSideEffect
-import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.impl.ui.viewmodel.UserIntent
+import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
+import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 

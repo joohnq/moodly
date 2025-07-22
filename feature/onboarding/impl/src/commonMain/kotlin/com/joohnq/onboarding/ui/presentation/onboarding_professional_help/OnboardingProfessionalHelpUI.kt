@@ -16,8 +16,8 @@ import com.joohnq.shared_resources.sought_professional_help_title
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.user.ui.mapper.getAllProfessionalHelpResource
-import com.joohnq.user.ui.resource.ProfessionalHelpResource
+import com.joohnq.user.impl.ui.mapper.getAllProfessionalHelpResource
+import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 @Composable
 fun OnboardingProfessionalHelpUI(

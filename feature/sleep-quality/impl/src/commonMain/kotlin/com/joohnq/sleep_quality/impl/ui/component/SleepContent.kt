@@ -1,11 +1,11 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
 
 @Composable
 fun SleepContent(

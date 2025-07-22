@@ -1,11 +1,11 @@
-package com.joohnq.stress_level.ui.presentation.stress_history
+package com.joohnq.stress_level.impl.ui.presentation.stress_history
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_history.event.StressHistoryEvent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
 
 @Composable
 fun StressHistoryScreen(

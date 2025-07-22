@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.presentation.sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import androidx.compose.runtime.Composable
 import com.joohnq.ui.entity.UiState
@@ -6,14 +6,14 @@ import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.sleep_quality.ui.component.SleepContent
-import com.joohnq.sleep_quality.ui.component.SleepPanel
-import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
+import com.joohnq.sleep_quality.impl.ui.component.SleepContent
+import com.joohnq.sleep_quality.impl.ui.component.SleepPanel
+import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

@@ -1,10 +1,10 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 import com.kizitonwose.calendar.core.Week
 import org.jetbrains.compose.ui.tooling.preview.Preview

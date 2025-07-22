@@ -9,8 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.mapper.toWordCount
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.api.mapper.toWordCount
+import com.joohnq.mood.api.entity.Mood
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.VerticalSpacer

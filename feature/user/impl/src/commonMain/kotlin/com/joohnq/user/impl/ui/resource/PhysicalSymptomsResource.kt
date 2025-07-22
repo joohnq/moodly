@@ -1,9 +1,9 @@
 package com.joohnq.user.impl.ui.resource
 
 import com.joohnq.ui.entity.DIcon
-import com.joohnq.domain.entity.PhysicalSymptoms.Companion.NO
-import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
-import com.joohnq.domain.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL
+import com.joohnq.api.entity.PhysicalSymptoms.Companion.NO
+import com.joohnq.api.entity.PhysicalSymptoms.Companion.YES_JUST_A_BIT
+import com.joohnq.api.entity.PhysicalSymptoms.Companion.YES_VERY_PAINFUL
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.no_physical_pain
 import com.joohnq.shared_resources.theme.Drawables

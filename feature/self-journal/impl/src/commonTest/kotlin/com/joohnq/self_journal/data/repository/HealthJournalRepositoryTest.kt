@@ -4,7 +4,7 @@ import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
 import com.joohnq.core.test.createTestDriver
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.api.entity.Mood
 import com.joohnq.self_journal.impl.data.database.SelfJournalDatabase
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import com.joohnq.self_journal.api.entity.SelfJournalRecord

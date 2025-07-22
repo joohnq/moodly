@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.api.use_case
 
 import com.joohnq.core.ui.DatetimeProvider
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.api.entity.Mood
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking

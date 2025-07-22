@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.resource
+package com.joohnq.stress_level.impl.ui.resource
 
 import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.*

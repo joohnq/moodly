@@ -1,9 +1,9 @@
 package com.joohnq.self_journal.impl.ui.mapper
 
-import com.joohnq.domain.getNow
-import com.joohnq.domain.mapper.getTotalDays
-import com.joohnq.domain.mapper.toMonthDays
-import com.joohnq.mood.domain.mapper.toAverage
+import com.joohnq.api.getNow
+import com.joohnq.api.mapper.getTotalDays
+import com.joohnq.api.mapper.toMonthDays
+import com.joohnq.mood.api.mapper.toAverage
 import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.mood.impl.ui.mapper.toResource
 import com.joohnq.mood.impl.ui.resource.MoodAverageResource

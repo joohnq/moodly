@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.auth.impl.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
-import com.joohnq.domain.entity.CurvedCanvasPosition
+import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.enter_your_name

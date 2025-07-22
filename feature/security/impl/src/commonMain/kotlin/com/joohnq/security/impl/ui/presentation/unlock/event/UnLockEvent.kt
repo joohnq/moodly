@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.unlock.event
+package com.joohnq.security.impl.ui.presentation.unlock.event
 
 sealed interface UnLockEvent {
     data object OnContinue : UnLockEvent

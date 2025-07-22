@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.api.entity
 
-import com.joohnq.domain.getNow
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.api.getNow
+import com.joohnq.mood.api.entity.Mood
 import kotlinx.datetime.LocalDateTime
 
 data class SelfJournalRecord(

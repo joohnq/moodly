@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.viewmodel
+package com.joohnq.security.impl.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

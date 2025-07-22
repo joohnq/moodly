@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.entity
+package com.joohnq.sleep_quality.impl.ui.entity
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.DrawableResource

@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,10 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.getNow
-import com.joohnq.domain.mapper.calculateDuration
-import com.joohnq.domain.mapper.toFormattedTimeString
-import com.joohnq.domain.mapper.toHoursAndMinutesString
+import com.joohnq.api.getNow
+import com.joohnq.api.mapper.calculateDuration
+import com.joohnq.api.mapper.toFormattedTimeString
+import com.joohnq.api.mapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.GiganticSecondaryCard
@@ -19,9 +19,9 @@ import com.joohnq.shared_resources.components.NotFoundVertical
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.sleep_quality.ui.mapper.getTodaySleepQualityRecord
-import com.joohnq.sleep_quality.ui.mapper.toMoodResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
+import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

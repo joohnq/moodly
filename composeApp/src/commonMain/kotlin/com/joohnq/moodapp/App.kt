@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.auth.impl.navigation.authNavigation
-import com.joohnq.onboarding.ui.navigation.onboardingNavigation
-import com.joohnq.security.ui.navigation.securityNavigation
+import com.joohnq.onboarding.impl.navigation.onboardingNavigation
+import com.joohnq.security.impl.ui.navigation.securityNavigation
 import com.joohnq.splash.impl.navigation.splashNavigation
 import com.joohnq.welcome.impl.navigation.welcomeNavigation
 import com.joohnq.navigation.NavigationGraph

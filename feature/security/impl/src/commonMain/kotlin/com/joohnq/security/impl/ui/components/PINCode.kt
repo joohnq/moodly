@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.components
+package com.joohnq.security.impl.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,16 +1,16 @@
-package com.joohnq.sleep_quality.ui.mapper
+package com.joohnq.sleep_quality.impl.ui.mapper
 
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.AlcoholConsumption
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.Anxiety
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.Caffeine
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.ChillSleepEnvironment
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.ExcessiveScreenTime
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.HighStress
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.Meditation
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.NaturalLight
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource.PhysicalActivity
+import com.joohnq.sleep_quality.api.entity.SleepInfluences
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.AlcoholConsumption
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.Anxiety
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.Caffeine
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.ChillSleepEnvironment
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.ExcessiveScreenTime
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.HighStress
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.Meditation
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.NaturalLight
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.PhysicalActivity
 
 fun getAllSleepInfluencesResource(): List<SleepInfluencesResource> = listOf(
     NaturalLight,

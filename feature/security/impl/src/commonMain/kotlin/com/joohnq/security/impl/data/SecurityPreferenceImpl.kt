@@ -1,4 +1,4 @@
-package com.joohnq.security.data
+package com.joohnq.security.impl.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.MutablePreferences

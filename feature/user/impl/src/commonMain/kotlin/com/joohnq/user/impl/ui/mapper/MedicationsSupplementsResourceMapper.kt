@@ -1,6 +1,6 @@
 package com.joohnq.user.impl.ui.mapper
 
-import com.joohnq.domain.entity.MedicationsSupplements
+import com.joohnq.api.entity.MedicationsSupplements
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource.ImNotTakingAny
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource.OverTheCounterSupplements

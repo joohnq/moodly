@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)

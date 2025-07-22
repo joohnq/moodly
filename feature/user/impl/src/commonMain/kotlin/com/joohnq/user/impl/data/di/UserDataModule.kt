@@ -1,6 +1,6 @@
 package com.joohnq.user.impl.data.di
 
-import com.joohnq.domain.repository.UserRepository
+import com.joohnq.api.repository.UserRepository
 import com.joohnq.user.impl.data.database.UserDatabase
 import com.joohnq.user.impl.data.driver.UserDriverFactory
 import com.joohnq.user.impl.data.repository.UserRepositoryImpl

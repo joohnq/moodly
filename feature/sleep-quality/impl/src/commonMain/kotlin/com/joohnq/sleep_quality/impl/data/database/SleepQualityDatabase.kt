@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.data.database
+package com.joohnq.sleep_quality.impl.data.database
 
 import app.cash.sqldelight.db.SqlDriver
 import com.joohnq.database.Database

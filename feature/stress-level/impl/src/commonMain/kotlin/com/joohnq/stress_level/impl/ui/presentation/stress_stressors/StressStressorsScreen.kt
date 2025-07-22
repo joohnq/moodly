@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_stressors
+package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -7,13 +7,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.stress_level.ui.mapper.toDomain
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
-import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
-import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.mapper.toDomain
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelSideEffect
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 

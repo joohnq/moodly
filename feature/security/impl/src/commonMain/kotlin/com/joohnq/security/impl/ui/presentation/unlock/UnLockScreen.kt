@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.unlock
+package com.joohnq.security.impl.ui.presentation.unlock
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -9,11 +9,11 @@ import com.joohnq.ui.mapper.getValueOrNull
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityAuthentication
 import com.joohnq.security.api.getPinCode
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINViewModel
-import com.joohnq.security.ui.presentation.unlock.event.UnLockEvent
-import com.joohnq.security.ui.securityAuthentication
-import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINViewModel
+import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
+import com.joohnq.security.impl.ui.securityAuthentication
+import com.joohnq.security.impl.ui.viewmodel.SecurityViewModel
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.invalid_pin
 import com.joohnq.shared_resources.remember.rememberFocusRequester

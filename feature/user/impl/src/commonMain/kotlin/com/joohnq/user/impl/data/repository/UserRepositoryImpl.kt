@@ -2,11 +2,11 @@ package com.joohnq.user.impl.data.repository
 
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
-import com.joohnq.domain.converter.UserConverter
-import com.joohnq.domain.entity.*
-import com.joohnq.domain.mapper.toImageType
-import com.joohnq.domain.mapper.toValue
-import com.joohnq.domain.repository.UserRepository
+import com.joohnq.api.converter.UserConverter
+import com.joohnq.api.entity.*
+import com.joohnq.api.mapper.toImageType
+import com.joohnq.api.mapper.toValue
+import com.joohnq.api.repository.UserRepository
 import com.joohnq.user.database.UserDatabaseSql
 
 class UserRepositoryImpl(

@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.auth.impl.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameViewModel
-import com.joohnq.domain.validator.UserNameValidator
+import com.joohnq.api.validator.UserNameValidator
 import com.joohnq.preferences.impl.ui.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.impl.ui.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState

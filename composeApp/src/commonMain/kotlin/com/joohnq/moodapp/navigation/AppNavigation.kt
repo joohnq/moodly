@@ -5,8 +5,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreScreen
-import com.joohnq.home.ui.presentation.dashboard.DashboardScreen
-import com.joohnq.home.ui.presentation.dashboard.event.DashboardEvent
+import com.joohnq.home.impl.presentation.dashboard.DashboardScreen
+import com.joohnq.home.impl.presentation.dashboard.event.DashboardEvent
 import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodScreen
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.impl.ui.presentation.mood.MoodScreen
@@ -17,13 +17,13 @@ import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJour
 import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditJournalingScreen
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalScreen
 import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJournalHistoryScreen
-import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.AddSleepQualityScreen
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality.SleepQualityScreen
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
-import com.joohnq.stress_level.ui.presentation.add_stress_level.AddStressLevelScreen
-import com.joohnq.stress_level.ui.presentation.stress_history.StressHistoryScreen
-import com.joohnq.stress_level.ui.presentation.stress_level.StressLevelScreen
-import com.joohnq.stress_level.ui.presentation.stress_stressors.StressStressorsScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQualityScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelScreen
+import com.joohnq.stress_level.impl.ui.presentation.stress_history.StressHistoryScreen
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelScreen
+import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.StressStressorsScreen
 
 fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination) -> Unit,

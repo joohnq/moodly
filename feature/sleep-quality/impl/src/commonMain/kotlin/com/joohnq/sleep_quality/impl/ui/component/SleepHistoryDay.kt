@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
 

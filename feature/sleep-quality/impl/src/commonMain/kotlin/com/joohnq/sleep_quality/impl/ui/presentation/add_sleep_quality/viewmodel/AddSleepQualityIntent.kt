@@ -1,7 +1,7 @@
-package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
+package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel
 
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
 
 sealed interface AddSleepQualityIntent {
     data class UpdateMood(val mood: MoodResource) : AddSleepQualityIntent

@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.add_stress_level.event
+package com.joohnq.stress_level.impl.ui.presentation.add_stress_level.event
 
 sealed interface AddStressLevelEvent {
     data object GoBack : AddStressLevelEvent

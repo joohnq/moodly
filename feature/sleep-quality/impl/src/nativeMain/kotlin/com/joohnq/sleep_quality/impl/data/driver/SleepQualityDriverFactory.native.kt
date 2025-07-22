@@ -1,9 +1,9 @@
-package com.joohnq.sleep_quality.data.driver
+package com.joohnq.sleep_quality.impl.data.driver
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import co.touchlab.sqliter.DatabaseConfiguration
-import com.joohnq.sleep_quality.data.database.SleepQualityDatabase
+import com.joohnq.sleep_quality.impl.data.database.SleepQualityDatabase
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 
 actual class SleepQualityDriverFactory {

@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.unlock
+package com.joohnq.security.impl.ui.presentation.unlock
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,10 +20,10 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.ui.components.PINCode
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINState
-import com.joohnq.security.ui.presentation.unlock.event.UnLockEvent
+import com.joohnq.security.impl.ui.components.PINCode
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
+import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ErrorInfo

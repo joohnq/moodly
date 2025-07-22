@@ -3,9 +3,9 @@ package com.joohnq.mood.impl.data.repository
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.mood.database.MoodDatabaseSql
-import com.joohnq.mood.domain.converter.MoodRecordConverter
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.domain.repository.MoodRepository
+import com.joohnq.mood.api.converter.MoodRecordConverter
+import com.joohnq.mood.api.entity.MoodRecord
+import com.joohnq.mood.api.repository.MoodRepository
 
 class MoodRepositoryImpl(
     private val database: MoodDatabaseSql,

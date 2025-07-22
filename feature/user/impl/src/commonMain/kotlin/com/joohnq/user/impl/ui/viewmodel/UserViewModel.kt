@@ -4,11 +4,11 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.ui.entity.UiState
-import com.joohnq.domain.entity.User
+import com.joohnq.api.entity.User
 import com.joohnq.ui.mapper.onFailure
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.mapper.toUiState
-import com.joohnq.domain.use_case.*
+import com.joohnq.api.use_case.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.channels.Channel

@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.viewmodel
+package com.joohnq.stress_level.impl.ui.viewmodel
 
 import com.joohnq.stress_level.api.entity.StressLevelRecord
 

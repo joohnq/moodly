@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.security
+package com.joohnq.security.impl.ui.presentation.security
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.ui.presentation.security.event.SecurityEvent
+import com.joohnq.security.impl.ui.presentation.security.event.SecurityEvent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar

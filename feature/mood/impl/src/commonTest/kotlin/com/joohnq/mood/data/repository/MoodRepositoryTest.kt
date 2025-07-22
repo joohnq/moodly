@@ -2,9 +2,9 @@ package com.joohnq.mood.data.repository
 
 import com.joohnq.mood.impl.data.database.MoodDatabase
 import com.joohnq.mood.database.MoodDatabaseSql
-import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.domain.repository.MoodRepository
+import com.joohnq.mood.api.entity.Mood
+import com.joohnq.mood.api.entity.MoodRecord
+import com.joohnq.mood.api.repository.MoodRepository
 import com.joohnq.mood.impl.data.repository.MoodRepositoryImpl
 import com.joohnq.test.assertDoesNotThrow
 import com.joohnq.test.assertThatOneOfContains

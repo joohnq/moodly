@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.data.di
+package com.joohnq.sleep_quality.impl.data.di
 
 import org.koin.core.module.Module
 

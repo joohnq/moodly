@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.pin.event
+package com.joohnq.security.impl.ui.presentation.pin.event
 
 sealed interface PINEvent {
     data object OnContinue : PINEvent

@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.getNow
-import com.joohnq.domain.mapper.toMonthDays
+import com.joohnq.api.getNow
+import com.joohnq.api.mapper.toMonthDays
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result
 import com.joohnq.shared_resources.logged_this_month
@@ -21,8 +21,8 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.mapper.toMonthRecordsCount
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.mapper.toMonthRecordsCount
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.pin
+package com.joohnq.security.impl.ui.presentation.pin
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -13,10 +13,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.ui.components.PINCode
-import com.joohnq.security.ui.presentation.pin.event.PINEvent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.ui.presentation.pin.viewmodel.PINState
+import com.joohnq.security.impl.ui.components.PINCode
+import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
+import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar

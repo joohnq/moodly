@@ -3,7 +3,7 @@ package com.joohnq.user.data.repository
 import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.createTestDriver
-import com.joohnq.domain.entity.UserPreferences
+import com.joohnq.api.entity.UserPreferences
 import com.joohnq.user.impl.data.database.UserDatabase
 import com.joohnq.user.database.UserDatabaseSql
 import com.varabyte.truthish.assertThat

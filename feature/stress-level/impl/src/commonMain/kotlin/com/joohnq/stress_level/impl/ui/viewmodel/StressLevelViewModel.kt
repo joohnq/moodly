@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.viewmodel
+package com.joohnq.stress_level.impl.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,8 +12,8 @@ import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
-import com.joohnq.stress_level.ui.mapper.toResource
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.mapper.toResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

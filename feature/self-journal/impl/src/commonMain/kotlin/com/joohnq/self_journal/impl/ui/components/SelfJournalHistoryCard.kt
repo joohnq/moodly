@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.mapper.toFormattedTimeString
+import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res

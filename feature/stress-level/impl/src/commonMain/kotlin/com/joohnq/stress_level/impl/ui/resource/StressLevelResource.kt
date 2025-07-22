@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.resource
+package com.joohnq.stress_level.impl.ui.resource
 
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.five_number

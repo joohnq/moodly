@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.api.entity
 
-import com.joohnq.domain.getNow
+import com.joohnq.api.getNow
 import kotlinx.datetime.LocalDateTime
 
 data class StressLevelRecord(

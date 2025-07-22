@@ -1,6 +1,6 @@
-package com.joohnq.sleep_quality.ui.viewmodel
+package com.joohnq.sleep_quality.impl.ui.viewmodel
 
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 
 sealed interface SleepQualityIntent {
     data object GetAll : SleepQualityIntent

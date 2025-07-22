@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.your_logged_as_your_most_active_stressors_for_this_month
-import com.joohnq.stress_level.ui.resource.StressorResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

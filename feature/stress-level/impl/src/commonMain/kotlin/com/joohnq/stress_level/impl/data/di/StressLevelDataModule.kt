@@ -1,8 +1,8 @@
-package com.joohnq.stress_level.data.di
+package com.joohnq.stress_level.impl.data.di
 
-import com.joohnq.stress_level.data.database.StressLevelDatabase
-import com.joohnq.stress_level.data.driver.StressLevelDriverFactory
-import com.joohnq.stress_level.data.repository.StressLevelRepositoryImpl
+import com.joohnq.stress_level.impl.data.database.StressLevelDatabase
+import com.joohnq.stress_level.impl.data.driver.StressLevelDriverFactory
+import com.joohnq.stress_level.impl.data.repository.StressLevelRepositoryImpl
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import com.joohnq.stress_level.api.repository.StressLevelRepository
 import org.koin.core.module.dsl.singleOf

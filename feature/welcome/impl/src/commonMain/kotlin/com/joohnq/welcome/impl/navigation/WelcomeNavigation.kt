@@ -5,7 +5,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.welcome.impl.WelcomeScreen
+import com.joohnq.welcome.impl.presentation.welcome.WelcomeScreen
 
 fun NavGraphBuilder.welcomeNavigation(
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,

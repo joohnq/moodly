@@ -1,4 +1,4 @@
-package com.joohnq.welcome.impl
+package com.joohnq.welcome.impl.presentation.first
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun FirstScreen(onNext: () -> Unit) {
+fun FirstContent(onNext: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,

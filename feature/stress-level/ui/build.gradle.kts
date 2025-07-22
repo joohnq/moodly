@@ -9,7 +9,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.feature.stressLevel.domain)
+            implementation(projects.feature.stressLevel.api)
             implementation(projects.sharedResources)
             implementation(projects.core.ui)
             implementation(projects.core.domain)

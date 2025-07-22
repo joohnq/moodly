@@ -15,6 +15,7 @@ class AppAndroidSettings : AndroidSettings<BaseAppModuleExtension>() {
             setupDefaultConfig()
             setupCompileOptions()
             setupBuildTypes()
+            setupSourceSets()
 
             config?.invoke(this)
         }
@@ -51,6 +52,14 @@ class AppAndroidSettings : AndroidSettings<BaseAppModuleExtension>() {
                     "proguard-rules.pro"
                 )
             }
+        }
+    }
+
+    private fun BaseAppModuleExtension.setupSourceSets() {
+        sourceSets.getByName("main").apply {
+            manifest.srcFile("src/androidMain/AndroidManifest.xml")
+            res.srcDirs("src/androidMain/res")
+            resources.srcDirs("src/commonMain/resources")
         }
     }
 }

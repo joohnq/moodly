@@ -59,5 +59,5 @@ fun SplashScreen(
         )
     }
 
-    SplashScreenUI()
+    SplashScreenContent()
 }

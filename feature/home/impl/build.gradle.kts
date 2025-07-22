@@ -8,8 +8,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.navigation)
-            implementation(projects.feature.stressLevel.ui)
-            implementation(projects.feature.stressLevel.domain)
+            implementation(projects.feature.stressLevel.impl)
+            implementation(projects.feature.stressLevel.api)
             implementation(projects.feature.sleepQuality.impl)
             implementation(projects.feature.sleepQuality.api)
             implementation(projects.feature.freudScore.impl)

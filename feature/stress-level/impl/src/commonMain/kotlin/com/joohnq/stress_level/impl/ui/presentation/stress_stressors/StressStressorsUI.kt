@@ -3,6 +3,7 @@ package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +43,7 @@ fun StressStressorsUI(
         modifier = Modifier.fillMaxSize(),
     ) { padding ->
         Column(
-            modifier = padding(padding)
+            modifier = Modifier.padding(padding)
                 .paddingHorizontalMedium()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally

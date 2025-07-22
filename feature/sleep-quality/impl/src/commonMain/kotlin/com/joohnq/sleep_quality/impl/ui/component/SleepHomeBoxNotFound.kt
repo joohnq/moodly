@@ -12,7 +12,7 @@ import com.joohnq.domain.getNow
 import com.joohnq.domain.mapper.calculateDuration
 import com.joohnq.domain.mapper.toFormattedTimeString
 import com.joohnq.domain.mapper.toHoursAndMinutesString
-import com.joohnq.mood.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.GiganticSecondaryCard
 import com.joohnq.shared_resources.components.NotFoundVertical

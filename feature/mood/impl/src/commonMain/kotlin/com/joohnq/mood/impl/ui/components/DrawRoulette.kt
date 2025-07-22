@@ -4,7 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.VectorPainter
 import com.joohnq.domain.mapper.toDegrees
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.drawSlice
 import androidx.compose.ui.geometry.Size
 

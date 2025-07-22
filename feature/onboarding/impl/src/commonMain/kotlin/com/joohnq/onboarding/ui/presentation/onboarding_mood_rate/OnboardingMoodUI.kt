@@ -7,9 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.components.RouletteMoods
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.components.RouletteMoods
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingIntent

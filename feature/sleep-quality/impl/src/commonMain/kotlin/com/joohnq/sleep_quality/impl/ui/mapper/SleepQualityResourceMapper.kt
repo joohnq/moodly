@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.ui.mapper
 
 import com.joohnq.domain.getNow
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource

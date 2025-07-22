@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.domain.mapper.toMonthAbbreviatedDayAndHourFormatted
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables

@@ -1,7 +1,7 @@
 package com.joohnq.mood.impl.ui.mapper
 
 import com.joohnq.mood.domain.entity.MoodAverage
-import com.joohnq.mood.ui.resource.MoodAverageResource
+import com.joohnq.mood.impl.ui.resource.MoodAverageResource
 
 fun MoodAverage.toResource(): MoodAverageResource =
     when (this) {

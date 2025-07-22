@@ -13,8 +13,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.components.MoodFace
-import com.joohnq.mood.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.self_journal.ui.presentation.add_self_journal.event.AddSelfJournalEvent
 import com.joohnq.self_journal.ui.presentation.add_self_journal.viewmodel.AddSelfJournalIntent
 import com.joohnq.self_journal.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState

@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.mood.ui.presentation.add_mood.event.AddMoodEvent
-import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodViewModel
+import com.joohnq.mood.impl.ui.presentation.add_mood.event.AddMoodEvent
+import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 
 @Composable
 fun AddMoodScreen(

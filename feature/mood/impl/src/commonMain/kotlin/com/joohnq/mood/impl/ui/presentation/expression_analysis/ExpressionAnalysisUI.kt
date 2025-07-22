@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.ui.presentation.add_mood.viewmodel.AddMoodIntent
-import com.joohnq.mood.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
+import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
+import com.joohnq.mood.impl.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.expression_analysis_desc

@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.ui.resource.MoodAverageResource
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodAverageResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.painterResource

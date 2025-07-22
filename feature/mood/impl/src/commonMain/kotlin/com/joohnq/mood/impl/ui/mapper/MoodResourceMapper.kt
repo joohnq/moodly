@@ -1,7 +1,7 @@
 package com.joohnq.mood.impl.ui.mapper
 
 import com.joohnq.mood.domain.entity.Mood
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.domain.entity.SleepQuality
 
 fun getAllMoodResource(): List<MoodResource> = listOf(

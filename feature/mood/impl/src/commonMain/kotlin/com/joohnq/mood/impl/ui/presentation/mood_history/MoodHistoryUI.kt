@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.mood.ui.components.MoodHistoryCard
-import com.joohnq.mood.ui.presentation.mood_history.event.MoodHistoryEvent
-import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.mood.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.components.MoodHistoryCard
+import com.joohnq.mood.impl.ui.presentation.mood_history.event.MoodHistoryEvent
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.SwipeTorRevealCard

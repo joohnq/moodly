@@ -3,8 +3,8 @@ package com.joohnq.mood.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.joohnq.mood.ui.mapper.getMonthDaysRecordsString
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.mapper.getMonthDaysRecordsString
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.GiganticCreateCard
 import com.joohnq.shared_resources.components.SectionHeader

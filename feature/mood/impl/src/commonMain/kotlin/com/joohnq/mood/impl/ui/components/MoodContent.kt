@@ -2,9 +2,9 @@ package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.mood.ui.presentation.mood.event.MoodEvent
-import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.mood.ui.viewmodel.MoodIntent
+import com.joohnq.mood.impl.ui.presentation.mood.event.MoodEvent
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
 import com.joohnq.shared_resources.theme.Colors
 
 @Composable

@@ -11,7 +11,7 @@ import com.joohnq.auth.ui.navigation.authNavigation
 import com.joohnq.onboarding.ui.navigation.onboardingNavigation
 import com.joohnq.security.ui.navigation.securityNavigation
 import com.joohnq.splash.impl.navigation.splashNavigation
-import com.joohnq.welcome.ui.navigation.welcomeNavigation
+import com.joohnq.welcome.impl.navigation.welcomeNavigation
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate

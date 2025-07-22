@@ -1,4 +1,4 @@
-package com.joohnq.welcome.ui
+package com.joohnq.welcome.impl
 
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState

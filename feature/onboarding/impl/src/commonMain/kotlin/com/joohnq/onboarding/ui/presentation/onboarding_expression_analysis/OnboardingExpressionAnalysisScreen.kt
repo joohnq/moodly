@@ -6,6 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.domain.entity.User
+import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
 import com.joohnq.mood.impl.ui.viewmodel.MoodSideEffect
 import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
@@ -25,6 +26,7 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.sharedViewModel
+import com.joohnq.user.impl.ui.mapper.toDomain
 import com.joohnq.user.impl.ui.viewmodel.UserIntent
 import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel

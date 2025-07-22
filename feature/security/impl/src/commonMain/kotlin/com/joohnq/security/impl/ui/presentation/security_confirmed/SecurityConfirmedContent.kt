@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SecurityConfirmedUI(
+fun SecurityConfirmedContent(
     onEvent: (SecurityConfirmedEvent) -> Unit,
 ) {
     DecoratedConvexPanel(

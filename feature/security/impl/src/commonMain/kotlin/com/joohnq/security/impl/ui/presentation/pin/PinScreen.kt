@@ -78,7 +78,7 @@ fun PINScreen(
         }
     }
 
-    return PINUI(
+    return PinContent(
         snackBarState = snackBarState,
         onEvent = ::onEvent,
         state = state,

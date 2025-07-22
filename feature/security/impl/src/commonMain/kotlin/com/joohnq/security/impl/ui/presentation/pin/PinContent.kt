@@ -31,7 +31,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun PINUI(
+fun PinContent(
     snackBarState: SnackbarHostState = SnackbarHostState(),
     state: PINState,
     focusRequesters: List<FocusRequester>,

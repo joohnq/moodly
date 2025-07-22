@@ -39,7 +39,7 @@ import com.joohnq.ui.mapper.foldComposable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HomeUI(
+fun HomeContent(
     padding: PaddingValues,
     state: DashboardState,
     onEvent: (HomeEvent) -> Unit = {},
@@ -123,7 +123,7 @@ fun HomeUI(
 @Preview
 @Composable
 fun HomeUIPreview() {
-    HomeUI(
+    HomeContent(
         padding = PaddingValues(0.dp),
         state = DashboardState(
             freudScore = FreudScoreResource.Healthy(80),

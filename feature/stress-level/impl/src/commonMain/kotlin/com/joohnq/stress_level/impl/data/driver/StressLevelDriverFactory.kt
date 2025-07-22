@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.data.driver
+package com.joohnq.stress_level.impl.data.driver
 
 import app.cash.sqldelight.db.SqlDriver
 

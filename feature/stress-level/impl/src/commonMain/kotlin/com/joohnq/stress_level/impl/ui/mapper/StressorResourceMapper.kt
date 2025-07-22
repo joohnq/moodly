@@ -1,8 +1,8 @@
-package com.joohnq.stress_level.ui.mapper
+package com.joohnq.stress_level.impl.ui.mapper
 
 import com.joohnq.stress_level.api.entity.Stressor
-import com.joohnq.stress_level.ui.resource.StressorResource
-import com.joohnq.stress_level.ui.resource.StressorResource.*
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.*
 
 fun getAllStressorResource(): List<StressorResource> =
     listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)

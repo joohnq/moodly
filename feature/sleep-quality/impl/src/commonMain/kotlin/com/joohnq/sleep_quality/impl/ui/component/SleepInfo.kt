@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

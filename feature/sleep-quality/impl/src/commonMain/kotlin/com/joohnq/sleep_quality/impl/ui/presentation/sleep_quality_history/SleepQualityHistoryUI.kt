@@ -1,6 +1,6 @@
-package com.joohnq.sleep_quality.ui.presentation.sleep_quality_history
+package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history
 
-import com.joohnq.sleep_quality.ui.component.SleepQualityHistoryCard
+import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,10 +22,10 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityState
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

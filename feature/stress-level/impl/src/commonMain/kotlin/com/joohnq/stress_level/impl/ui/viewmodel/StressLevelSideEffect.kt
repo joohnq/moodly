@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.viewmodel
+package com.joohnq.stress_level.impl.ui.viewmodel
 
 sealed interface StressLevelSideEffect {
     data object StressLevelAdded : StressLevelSideEffect

@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_history.event
+package com.joohnq.stress_level.impl.ui.presentation.stress_history.event
 
 sealed interface StressHistoryEvent {
     data object OnGoBack : StressHistoryEvent

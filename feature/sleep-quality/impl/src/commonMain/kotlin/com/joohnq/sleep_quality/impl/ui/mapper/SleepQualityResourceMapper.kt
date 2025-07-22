@@ -1,16 +1,16 @@
-package com.joohnq.sleep_quality.ui.mapper
+package com.joohnq.sleep_quality.impl.ui.mapper
 
-import com.joohnq.domain.getNow
+import com.joohnq.api.getNow
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Excellent
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Fair
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Good
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Poor
-import com.joohnq.sleep_quality.ui.resource.SleepQualityResource.Worst
+import com.joohnq.sleep_quality.api.entity.SleepQuality
+import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource.Excellent
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource.Fair
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource.Good
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource.Poor
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource.Worst
 
 fun getAllSleepQualityResource(): List<SleepQualityResource> = listOf(
     Excellent,

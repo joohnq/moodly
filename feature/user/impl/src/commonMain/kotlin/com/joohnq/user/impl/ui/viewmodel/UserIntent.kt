@@ -1,7 +1,7 @@
 package com.joohnq.user.impl.ui.viewmodel
 
 import androidx.compose.ui.graphics.ImageBitmap
-import com.joohnq.domain.entity.User
+import com.joohnq.api.entity.User
 
 sealed interface UserIntent {
     data object GetUser : UserIntent

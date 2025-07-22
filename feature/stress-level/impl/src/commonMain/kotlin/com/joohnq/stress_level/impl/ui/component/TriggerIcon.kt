@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box

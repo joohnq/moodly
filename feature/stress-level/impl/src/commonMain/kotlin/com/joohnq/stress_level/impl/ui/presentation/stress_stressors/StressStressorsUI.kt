@@ -1,9 +1,8 @@
-package com.joohnq.stress_level.ui.presentation.stress_stressors
+package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,10 +20,10 @@ import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.ui.mapper.getAllStressorResource
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
-import com.joohnq.stress_level.ui.presentation.stress_stressors.event.StressStressorsEvent
+import com.joohnq.stress_level.impl.ui.mapper.getAllStressorResource
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
+import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -43,8 +42,7 @@ fun StressStressorsUI(
         modifier = Modifier.fillMaxSize(),
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
+            modifier = padding(padding)
                 .paddingHorizontalMedium()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally

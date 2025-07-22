@@ -1,11 +1,11 @@
-package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel
+package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.joohnq.domain.mapper.toggle
+import com.joohnq.api.mapper.toggle
 import com.joohnq.mood.impl.ui.mapper.toSleepQuality
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.sleep_quality.ui.mapper.toResource
-import com.joohnq.sleep_quality.ui.resource.SleepInfluencesResource
+import com.joohnq.sleep_quality.impl.ui.mapper.toResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

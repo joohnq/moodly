@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_level.event
+package com.joohnq.stress_level.impl.ui.presentation.stress_level.event
 
 import com.joohnq.ui.event.PanelEvent
 

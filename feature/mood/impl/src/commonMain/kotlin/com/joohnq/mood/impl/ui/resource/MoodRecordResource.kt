@@ -1,6 +1,6 @@
 package com.joohnq.mood.impl.ui.resource
 
-import com.joohnq.domain.getNow
+import com.joohnq.api.getNow
 import kotlinx.datetime.LocalDateTime
 
 data class MoodRecordResource(

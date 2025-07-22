@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.data.database
+package com.joohnq.stress_level.impl.data.database
 
 import app.cash.sqldelight.db.SqlDriver
 import com.joohnq.database.Database

@@ -1,4 +1,4 @@
-package com.joohnq.security.data.di
+package com.joohnq.security.impl.data.di
 
 import org.koin.core.module.Module
 

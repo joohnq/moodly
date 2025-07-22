@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_level
+package com.joohnq.stress_level.impl.ui.presentation.stress_level
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
@@ -8,15 +8,15 @@ import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.stress_level.ui.component.StressContent
-import com.joohnq.stress_level.ui.component.StressPanel
-import com.joohnq.stress_level.ui.mapper.getTodayStressLevelRecord
-import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.stress_level.ui.resource.StressorResource
-import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelState
+import com.joohnq.stress_level.impl.ui.component.StressContent
+import com.joohnq.stress_level.impl.ui.component.StressPanel
+import com.joohnq.stress_level.impl.ui.mapper.getTodayStressLevelRecord
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.event.StressLevelEvent
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

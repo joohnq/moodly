@@ -1,8 +1,8 @@
-package com.joohnq.stress_level.ui.mapper
+package com.joohnq.stress_level.impl.ui.mapper
 
-import com.joohnq.domain.getNow
+import com.joohnq.api.getNow
 import com.joohnq.stress_level.api.entity.StressLevelRecord
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import kotlinx.datetime.LocalDate
 
 fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? =

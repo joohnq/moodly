@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.security.event
+package com.joohnq.security.impl.ui.presentation.security.event
 
 sealed interface SecurityEvent {
     data object OnContinue : SecurityEvent

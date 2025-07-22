@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.viewmodel
+package com.joohnq.security.impl.ui.viewmodel
 
 sealed interface SecuritySideEffect {
     data object OnSecurityUpdated : SecuritySideEffect

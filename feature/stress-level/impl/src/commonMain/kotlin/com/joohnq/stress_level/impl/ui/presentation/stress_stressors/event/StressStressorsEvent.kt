@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_stressors.event
+package com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event
 
 sealed interface StressStressorsEvent {
     data object GoBack : StressStressorsEvent

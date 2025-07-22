@@ -1,8 +1,8 @@
 package com.joohnq.mood.impl.ui.mapper
 
-import com.joohnq.mood.domain.entity.Mood
+import com.joohnq.mood.api.entity.Mood
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.sleep_quality.domain.entity.SleepQuality
+import com.joohnq.sleep_quality.api.entity.SleepQuality
 
 fun getAllMoodResource(): List<MoodResource> = listOf(
     MoodResource.Depressed,

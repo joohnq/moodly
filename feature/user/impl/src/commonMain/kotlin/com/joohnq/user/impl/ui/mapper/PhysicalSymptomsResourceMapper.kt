@@ -1,6 +1,6 @@
 package com.joohnq.user.impl.ui.mapper
 
-import com.joohnq.domain.entity.PhysicalSymptoms
+import com.joohnq.api.entity.PhysicalSymptoms
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource.No
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource.YesJustABit

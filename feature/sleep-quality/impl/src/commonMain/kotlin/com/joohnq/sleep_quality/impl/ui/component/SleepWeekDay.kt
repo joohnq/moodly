@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -14,8 +14,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.ui.mapper.toMoodResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.kizitonwose.calendar.core.WeekDay
 import org.jetbrains.compose.resources.painterResource
 

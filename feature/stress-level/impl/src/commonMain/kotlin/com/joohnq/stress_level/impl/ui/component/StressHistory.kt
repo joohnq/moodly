@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,7 @@ import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.stress_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

@@ -1,10 +1,10 @@
-package com.joohnq.sleep_quality.ui.presentation.sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.sleep_quality.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable

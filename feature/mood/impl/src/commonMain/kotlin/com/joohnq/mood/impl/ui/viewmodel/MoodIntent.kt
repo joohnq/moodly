@@ -1,6 +1,6 @@
 package com.joohnq.mood.impl.ui.viewmodel
 
-import com.joohnq.mood.domain.entity.MoodRecord
+import com.joohnq.mood.api.entity.MoodRecord
 
 sealed interface MoodIntent {
     data object GetAll : MoodIntent

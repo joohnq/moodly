@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.data.repository
+package com.joohnq.stress_level.impl.data.repository
 
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult

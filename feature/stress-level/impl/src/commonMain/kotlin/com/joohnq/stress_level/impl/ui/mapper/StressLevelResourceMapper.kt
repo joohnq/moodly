@@ -1,10 +1,10 @@
-package com.joohnq.stress_level.ui.mapper
+package com.joohnq.stress_level.impl.ui.mapper
 
 import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.api.entity.StressLevel
-import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.stress_level.ui.resource.StressLevelResource.*
+import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelResource.*
 
 fun getAllStressLevelResource(): List<StressLevelResource> = listOf(
     One,

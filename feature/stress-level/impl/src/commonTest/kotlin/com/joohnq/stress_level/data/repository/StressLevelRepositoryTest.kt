@@ -4,12 +4,13 @@ import com.joohnq.core.test.RobolectricTests
 import com.joohnq.core.test.assertDoesNotThrow
 import com.joohnq.core.test.assertThatOneOfContains
 import com.joohnq.core.test.createTestDriver
-import com.joohnq.stress_level.data.database.StressLevelDatabase
+import com.joohnq.stress_level.impl.data.database.StressLevelDatabase
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import com.joohnq.stress_level.api.entity.StressLevel
 import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.api.entity.Stressor
 import com.joohnq.stress_level.api.repository.StressLevelRepository
+import com.joohnq.stress_level.impl.data.repository.StressLevelRepositoryImpl
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest

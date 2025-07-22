@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,10 +10,10 @@ import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
-import com.joohnq.stress_level.ui.mapper.getBrushGradient
-import com.joohnq.stress_level.ui.mapper.getTodayStressLevelRecord
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.ui.resource.StressLevelResource
+import com.joohnq.stress_level.impl.ui.mapper.getBrushGradient
+import com.joohnq.stress_level.impl.ui.mapper.getTodayStressLevelRecord
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

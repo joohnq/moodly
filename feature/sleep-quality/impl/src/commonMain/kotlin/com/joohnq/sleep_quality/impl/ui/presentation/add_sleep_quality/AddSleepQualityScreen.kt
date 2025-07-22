@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -9,14 +9,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.a_sleep_quality_record_has_already_been_added_for_today
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.sleep_quality.domain.exception.SleepQualityException
-import com.joohnq.sleep_quality.ui.mapper.toDomain
-import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
-import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
-import com.joohnq.sleep_quality.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityViewModel
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualitySideEffect
-import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.sleep_quality.api.exception.SleepQualityException
+import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
+import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
+import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
+import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityViewModel
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualitySideEffect
+import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource

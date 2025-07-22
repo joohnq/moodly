@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.pin.viewmodel
+package com.joohnq.security.impl.ui.presentation.pin.viewmodel
 
 sealed interface PINIntent {
     data class OnEnterNumber(val number: Int?, val index: Int) : PINIntent

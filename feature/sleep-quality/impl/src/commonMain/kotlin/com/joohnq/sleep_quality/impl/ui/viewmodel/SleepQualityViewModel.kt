@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.viewmodel
+package com.joohnq.sleep_quality.impl.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,12 +8,12 @@ import com.joohnq.ui.mapper.onFailure
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.mapper.toResultResource
 import com.joohnq.ui.mapper.toUiState
-import com.joohnq.sleep_quality.domain.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.domain.use_case.AddSleepQualityUseCase
-import com.joohnq.sleep_quality.domain.use_case.DeleteSleepQualityUseCase
-import com.joohnq.sleep_quality.domain.use_case.GetSleepQualitiesUseCase
-import com.joohnq.sleep_quality.ui.mapper.toResource
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
+import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
+import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.impl.ui.mapper.toResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

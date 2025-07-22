@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.add_stress_level
+package com.joohnq.stress_level.impl.ui.presentation.add_stress_level
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -32,9 +32,9 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.whats_your_stress_level_today
-import com.joohnq.stress_level.ui.presentation.add_stress_level.event.AddStressLevelEvent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.event.AddStressLevelEvent
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,7 +53,7 @@ fun AddStressLevelScreenUI(
         BoxWithConstraints {
             val height = maxHeight * 0.5f
             Column(
-                modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
+                modifier = padding(padding).paddingHorizontalMedium().fillMaxSize()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -75,7 +75,7 @@ fun AddStressLevelScreenUI(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     VerticalSlider(
-                        modifier = Modifier.height(height),
+                        modifier = height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {
                             onAction(AddStressLevelIntent.UpdateAddingSliderValue(it))

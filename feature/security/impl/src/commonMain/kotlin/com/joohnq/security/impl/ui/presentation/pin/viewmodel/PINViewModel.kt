@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.pin.viewmodel
+package com.joohnq.security.impl.ui.presentation.pin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.presentation.security_confirmed
+package com.joohnq.security.impl.ui.presentation.security_confirmed
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
+import com.joohnq.security.impl.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.DecoratedConvexPanel

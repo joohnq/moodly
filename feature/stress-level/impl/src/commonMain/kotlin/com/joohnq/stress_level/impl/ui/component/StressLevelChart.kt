@@ -1,10 +1,10 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.runtime.Composable
-import com.joohnq.domain.mapper.organizeMoodRange
+import com.joohnq.api.mapper.organizeMoodRange
 import com.joohnq.shared_resources.components.LineChart
 import com.joohnq.stress_level.api.mapper.toPercent
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 
 @Composable
 fun StressLevelChart(records: List<StressLevelRecordResource>) {

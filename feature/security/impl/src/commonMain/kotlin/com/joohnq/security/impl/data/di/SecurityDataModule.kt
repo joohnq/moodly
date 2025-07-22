@@ -1,6 +1,6 @@
-package com.joohnq.security.data.di
+package com.joohnq.security.impl.data.di
 
-import com.joohnq.security.data.SecurityPreferenceImpl
+import com.joohnq.security.impl.data.SecurityPreferenceImpl
 import com.joohnq.security.api.SecurityPreference
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf

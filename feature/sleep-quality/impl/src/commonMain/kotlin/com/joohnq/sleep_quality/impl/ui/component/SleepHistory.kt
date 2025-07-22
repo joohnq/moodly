@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.component
+package com.joohnq.sleep_quality.impl.ui.component
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,7 @@ import com.joohnq.shared_resources.sleep_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
-import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

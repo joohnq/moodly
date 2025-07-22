@@ -1,4 +1,4 @@
-package com.joohnq.security.ui
+package com.joohnq.security.impl.ui
 
 import androidx.compose.runtime.Composable
 import com.joohnq.security.api.SecurityAuthentication

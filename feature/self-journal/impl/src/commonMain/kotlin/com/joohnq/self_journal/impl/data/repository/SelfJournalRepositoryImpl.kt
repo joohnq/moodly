@@ -2,7 +2,7 @@ package com.joohnq.self_journal.impl.data.repository
 
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
-import com.joohnq.mood.domain.converter.MoodRecordConverter
+import com.joohnq.mood.api.converter.MoodRecordConverter
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.repository.SelfJournalRepository

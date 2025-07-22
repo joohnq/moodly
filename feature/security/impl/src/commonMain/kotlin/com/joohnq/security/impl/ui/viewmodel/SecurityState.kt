@@ -1,4 +1,4 @@
-package com.joohnq.security.ui.viewmodel
+package com.joohnq.security.impl.ui.viewmodel
 
 import com.joohnq.ui.entity.UiState
 import com.joohnq.security.api.Security

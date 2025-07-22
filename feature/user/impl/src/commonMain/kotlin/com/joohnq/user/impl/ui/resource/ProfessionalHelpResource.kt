@@ -1,7 +1,7 @@
 package com.joohnq.user.impl.ui.resource
 
-import com.joohnq.domain.entity.ProfessionalHelp.Companion.NO
-import com.joohnq.domain.entity.ProfessionalHelp.Companion.YES
+import com.joohnq.api.entity.ProfessionalHelp.Companion.NO
+import com.joohnq.api.entity.ProfessionalHelp.Companion.YES
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.no
 import com.joohnq.shared_resources.yes

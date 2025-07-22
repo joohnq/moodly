@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.component
+package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.domain.mapper.toPercentage
+import com.joohnq.api.mapper.toPercentage
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.BallItem
 import com.joohnq.shared_resources.components.NotFoundHorizontal
@@ -21,8 +21,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.ui.resource.StressorResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

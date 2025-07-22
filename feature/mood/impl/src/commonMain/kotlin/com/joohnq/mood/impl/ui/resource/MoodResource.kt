@@ -1,13 +1,13 @@
 package com.joohnq.mood.impl.ui.resource
 
 import com.joohnq.ui.entity.Assets
-import com.joohnq.mood.domain.entity.Mood.Companion.DEPRESSED
-import com.joohnq.mood.domain.entity.Mood.Companion.HAPPY
-import com.joohnq.mood.domain.entity.Mood.Companion.NEUTRAL
-import com.joohnq.mood.domain.entity.Mood.Companion.OVERJOYED
-import com.joohnq.mood.domain.entity.Mood.Companion.SAD
-import com.joohnq.mood.domain.entity.MoodPalette
-import com.joohnq.mood.domain.property.MoodProperties
+import com.joohnq.mood.api.entity.Mood.Companion.DEPRESSED
+import com.joohnq.mood.api.entity.Mood.Companion.HAPPY
+import com.joohnq.mood.api.entity.Mood.Companion.NEUTRAL
+import com.joohnq.mood.api.entity.Mood.Companion.OVERJOYED
+import com.joohnq.mood.api.entity.Mood.Companion.SAD
+import com.joohnq.mood.api.entity.MoodPalette
+import com.joohnq.mood.api.property.MoodProperties
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables

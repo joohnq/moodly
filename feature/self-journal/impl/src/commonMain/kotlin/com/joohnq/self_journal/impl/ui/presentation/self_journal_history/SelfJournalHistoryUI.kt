@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.domain.mapper.toFormattedDateString
+import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.self_journal.impl.ui.components.SelfJournalsHistoryCards
 import com.joohnq.self_journal.impl.ui.mapper.toGroupedByDate
 import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent

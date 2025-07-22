@@ -1,10 +1,10 @@
-package com.joohnq.stress_level.ui.presentation.stress_level
+package com.joohnq.stress_level.impl.ui.presentation.stress_level
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.stress_level.ui.presentation.stress_level.event.StressLevelEvent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.event.StressLevelEvent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable

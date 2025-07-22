@@ -1,14 +1,14 @@
-package com.joohnq.security.ui.navigation
+package com.joohnq.security.impl.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.security.ui.presentation.pin.PINScreen
-import com.joohnq.security.ui.presentation.security.SecurityScreen
-import com.joohnq.security.ui.presentation.security_confirmed.SecurityConfirmedScreen
-import com.joohnq.security.ui.presentation.unlock.UnLockScreen
+import com.joohnq.security.impl.ui.presentation.pin.PINScreen
+import com.joohnq.security.impl.ui.presentation.security.SecurityScreen
+import com.joohnq.security.impl.ui.presentation.security_confirmed.SecurityConfirmedScreen
+import com.joohnq.security.impl.ui.presentation.unlock.UnLockScreen
 
 fun NavGraphBuilder.securityNavigation(
     onGoBack: () -> Unit,

@@ -1,6 +1,6 @@
 package com.joohnq.user.impl.ui.mapper
 
-import com.joohnq.domain.entity.ProfessionalHelp
+import com.joohnq.api.entity.ProfessionalHelp
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource.No
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource.Yes

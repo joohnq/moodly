@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmodel
 
-import com.joohnq.domain.getNow
+import com.joohnq.api.getNow
 import kotlinx.datetime.LocalDate
 
 data class SelfJournalHistoryState(

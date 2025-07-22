@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.ui.presentation.stress_history
+package com.joohnq.stress_level.impl.ui.presentation.stress_history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.domain.mapper.toFormattedDateString
+import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.IsEmpty
@@ -22,12 +22,12 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.ui.component.StressLevelHistoryCard
-import com.joohnq.stress_level.ui.mapper.toGroupedByDate
-import com.joohnq.stress_level.ui.presentation.stress_history.event.StressHistoryEvent
-import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.ui.viewmodel.StressLevelState
+import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
+import com.joohnq.stress_level.impl.ui.mapper.toGroupedByDate
+import com.joohnq.stress_level.impl.ui.presentation.stress_history.event.StressHistoryEvent
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
+import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
 import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -45,8 +45,7 @@ fun StressHistoryUI(
                 containerColor = Colors.Brown10
             ) { padding ->
                 Column(
-                    modifier = Modifier
-                        .padding(padding).paddingHorizontalMedium()
+                    modifier = padding(padding).paddingHorizontalMedium()
                 ) {
                     TopBar(
                         modifier = Modifier.fillMaxWidth(),

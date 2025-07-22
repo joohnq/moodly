@@ -7,8 +7,8 @@ import com.joohnq.preferences.api.entity.AppPreferences
 import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
-import com.joohnq.security.ui.viewmodel.SecurityIntent
-import com.joohnq.security.ui.viewmodel.SecurityViewModel
+import com.joohnq.security.impl.ui.viewmodel.SecurityIntent
+import com.joohnq.security.impl.ui.viewmodel.SecurityViewModel
 import com.joohnq.user.impl.ui.viewmodel.UserIntent
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 

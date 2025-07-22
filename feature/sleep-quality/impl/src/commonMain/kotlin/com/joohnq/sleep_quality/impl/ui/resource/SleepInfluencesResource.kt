@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.ui.resource
+package com.joohnq.sleep_quality.impl.ui.resource
 
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.alcohol_consumption
@@ -10,16 +10,16 @@ import com.joohnq.shared_resources.exposure_to_natural_light
 import com.joohnq.shared_resources.high_stress
 import com.joohnq.shared_resources.meditation
 import com.joohnq.shared_resources.physical_activity
-import com.joohnq.sleep_quality.domain.property.SleepInfluencesProperties
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.ANXIETY
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.CAFFEINE
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.CHILL_SLEEP_ENVIRONMENT
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.EXCESSIVE_SCREEN_TIME
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.HIGH_STRESS
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.MEDITATION
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.NATURAL_LIGHT
-import com.joohnq.sleep_quality.domain.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
+import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.ANXIETY
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.CAFFEINE
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.CHILL_SLEEP_ENVIRONMENT
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.EXCESSIVE_SCREEN_TIME
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.HIGH_STRESS
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.MEDITATION
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.NATURAL_LIGHT
+import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
 import org.jetbrains.compose.resources.StringResource
 
 sealed class SleepInfluencesResource(

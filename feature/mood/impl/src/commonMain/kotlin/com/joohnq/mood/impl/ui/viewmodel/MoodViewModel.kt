@@ -8,10 +8,10 @@ import com.joohnq.ui.mapper.onFailure
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.mapper.toResultResource
 import com.joohnq.ui.mapper.toUiState
-import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.domain.use_case.AddMoodUseCase
-import com.joohnq.mood.domain.use_case.DeleteMoodUseCase
-import com.joohnq.mood.domain.use_case.GetMoodsUseCase
+import com.joohnq.mood.api.entity.MoodRecord
+import com.joohnq.mood.api.use_case.AddMoodUseCase
+import com.joohnq.mood.api.use_case.DeleteMoodUseCase
+import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.mood.impl.ui.mapper.toResource
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import kotlinx.coroutines.channels.Channel

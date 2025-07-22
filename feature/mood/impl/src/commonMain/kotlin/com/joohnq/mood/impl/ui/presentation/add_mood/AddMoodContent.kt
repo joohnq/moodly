@@ -27,7 +27,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AddMoodUI(
+fun AddMoodContent(
     state: AddMoodState,
     onAction: (AddMoodIntent) -> Unit,
     onEvent: (AddMoodEvent) -> Unit,

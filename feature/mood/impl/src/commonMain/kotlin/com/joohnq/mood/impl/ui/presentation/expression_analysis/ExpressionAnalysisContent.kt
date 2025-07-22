@@ -26,7 +26,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ExpressionAnalysisUI(
+fun ExpressionAnalysisContent(
     snackBarState: SnackbarHostState,
     description: String,
     onAddAction: (AddMoodIntent) -> Unit = {},

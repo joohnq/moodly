@@ -53,7 +53,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddSleepQualityUI(
+fun AddSleepQualityContent(
     snackBarState: SnackbarHostState,
     state: AddSleepQualityState,
     onEvent: (AddSleepQualityEvent) -> Unit = {},

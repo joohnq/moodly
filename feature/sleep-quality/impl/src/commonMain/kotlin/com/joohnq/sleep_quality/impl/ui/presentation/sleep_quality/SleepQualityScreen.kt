@@ -23,7 +23,7 @@ fun SleepQualityScreen(
             SleepQualityEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
         }
 
-    return SleepQualityUI(
+    return SleepQualityContent(
         state = state,
         onEvent = ::onEvent,
         onAction = sleepQualityViewModel::onAction

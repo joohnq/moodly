@@ -21,7 +21,7 @@ fun OnboardingPhysicalSymptomsScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    OnboardingPhysicalSymptomsUI(
+    OnboardingPhysicalSymptomsContent(
         physicalSymptoms = onboardingState.physicalSymptoms,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent

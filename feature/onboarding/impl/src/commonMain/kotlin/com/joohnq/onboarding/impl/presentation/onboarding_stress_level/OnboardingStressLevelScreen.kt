@@ -21,7 +21,7 @@ fun OnboardingStressLevelScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    OnboardingStressLevelUI(
+    OnboardingStressLevelContent(
         record = onboardingState.stressLevel,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent

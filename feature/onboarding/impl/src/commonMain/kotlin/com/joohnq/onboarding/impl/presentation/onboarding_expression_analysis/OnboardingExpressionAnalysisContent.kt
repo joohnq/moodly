@@ -19,7 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun OnboardingExpressionAnalysisUI(
+fun OnboardingExpressionAnalysisContent(
     snackBarState: SnackbarHostState,
     description: String,
     onEvent: (OnboardingEvent) -> Unit = {},
@@ -54,7 +54,7 @@ fun OnboardingExpressionAnalysisUI(
 @Preview
 @Composable
 fun OnboardingExpressionAnalysisUIPreview() {
-    OnboardingExpressionAnalysisUI(
+    OnboardingExpressionAnalysisContent(
         snackBarState = SnackbarHostState(),
         description = "",
         onEvent = {},

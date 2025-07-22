@@ -20,7 +20,7 @@ import com.joohnq.user.impl.ui.mapper.getAllProfessionalHelpResource
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 @Composable
-fun OnboardingProfessionalHelpUI(
+fun OnboardingProfessionalHelpContent(
     soughtHelp: ProfessionalHelpResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},

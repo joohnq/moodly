@@ -24,7 +24,7 @@ fun OnboardingMedicationsSupplementsScreen(
                 onGoBack()
         }
 
-    OnboardingMedicationsSupplementsUI(
+    OnboardingMedicationsSupplementsContent(
         state = state,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent

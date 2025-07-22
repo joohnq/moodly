@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun OnboardingMoodRateUI(
+fun OnboardingMoodRateContent(
     record: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
@@ -88,7 +88,7 @@ fun OnboardingMoodRateUI(
 @Preview
 @Composable
 fun OnboardingMoodRateUIPreview() {
-    OnboardingMoodRateUI(
+    OnboardingMoodRateContent(
         record = MoodRecordResource(),
     )
 }

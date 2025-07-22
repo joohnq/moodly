@@ -23,7 +23,7 @@ import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingMedicationsSupplementsUI(
+fun OnboardingMedicationsSupplementsContent(
     state: OnboardingState?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},

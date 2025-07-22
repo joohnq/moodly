@@ -8,8 +8,8 @@ import com.joohnq.domain.mapper.toMonthNameString
 import com.joohnq.self_journal.impl.ui.components.JournalCalendar
 import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.self_journal.ui.components.JournalCalendar
-import com.joohnq.self_journal.ui.mapper.getTodaySelfJournalRecord
+import com.joohnq.self_journal.impl.ui.components.JournalCalendar
+import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.NotFoundHorizontal

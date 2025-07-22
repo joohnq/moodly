@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.domain.entity
+package com.joohnq.self_journal.api.entity
 
 import com.joohnq.domain.getNow
 import com.joohnq.mood.domain.entity.Mood

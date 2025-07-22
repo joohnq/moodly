@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.NotFoundHorizontal
 import com.joohnq.shared_resources.components.VerticalSpacer

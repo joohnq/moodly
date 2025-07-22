@@ -1,6 +1,6 @@
-package com.joohnq.self_journal.domain.use_case
+package com.joohnq.self_journal.api.use_case
 
-import com.joohnq.self_journal.domain.fake.SelfJournalRepositoryFake
+import com.joohnq.self_journal.api.fake.SelfJournalRepositoryFake
 import com.varabyte.truthish.assertThat
 import kotlinx.coroutines.runBlocking
 import kotlin.test.BeforeTest

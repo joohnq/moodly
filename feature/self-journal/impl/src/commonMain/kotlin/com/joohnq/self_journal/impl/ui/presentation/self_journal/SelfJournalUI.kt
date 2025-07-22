@@ -3,11 +3,11 @@ package com.joohnq.self_journal.impl.ui.presentation.self_journal
 import androidx.compose.runtime.Composable
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.self_journal.ui.components.SelfJournalContent
-import com.joohnq.self_journal.ui.components.SelfJournalPanel
-import com.joohnq.self_journal.ui.presentation.self_journal.event.SelfJournalEvent
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
-import com.joohnq.self_journal.ui.viewmodel.SelfJournalState
+import com.joohnq.self_journal.impl.ui.components.SelfJournalContent
+import com.joohnq.self_journal.impl.ui.components.SelfJournalPanel
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.event.SelfJournalEvent
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
+import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalState
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.theme.Colors

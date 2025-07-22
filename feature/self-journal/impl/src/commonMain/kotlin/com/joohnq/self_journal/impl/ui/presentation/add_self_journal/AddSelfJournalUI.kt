@@ -15,9 +15,9 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
-import com.joohnq.self_journal.ui.presentation.add_self_journal.event.AddSelfJournalEvent
-import com.joohnq.self_journal.ui.presentation.add_self_journal.viewmodel.AddSelfJournalIntent
-import com.joohnq.self_journal.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
+import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.event.AddSelfJournalEvent
+import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalIntent
+import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.theme.Colors

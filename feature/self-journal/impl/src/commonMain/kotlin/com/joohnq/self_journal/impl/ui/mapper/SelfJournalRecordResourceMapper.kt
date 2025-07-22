@@ -7,8 +7,8 @@ import com.joohnq.mood.domain.mapper.toAverage
 import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.mood.impl.ui.mapper.toResource
 import com.joohnq.mood.impl.ui.resource.MoodAverageResource
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime

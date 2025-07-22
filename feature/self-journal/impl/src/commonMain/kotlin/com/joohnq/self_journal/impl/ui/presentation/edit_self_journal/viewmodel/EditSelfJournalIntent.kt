@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel
 
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
 
 sealed interface EditSelfJournalIntent {
     data object ResetState : EditSelfJournalIntent

@@ -4,8 +4,8 @@ import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.mood.domain.converter.MoodRecordConverter
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
-import com.joohnq.self_journal.domain.entity.SelfJournalRecord
-import com.joohnq.self_journal.domain.repository.SelfJournalRepository
+import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import com.joohnq.self_journal.api.repository.SelfJournalRepository
 
 class SelfJournalRepositoryImpl(
     private val database: SelfJournalDatabaseSql,

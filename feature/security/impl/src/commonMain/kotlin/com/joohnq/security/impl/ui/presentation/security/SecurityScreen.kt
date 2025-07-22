@@ -74,7 +74,7 @@ fun SecurityScreen(
         }
     }
 
-    return SecurityUI(
+    return SecurityContent(
         snackBarState = snackBarState,
         onEvent = ::onEvent,
     )

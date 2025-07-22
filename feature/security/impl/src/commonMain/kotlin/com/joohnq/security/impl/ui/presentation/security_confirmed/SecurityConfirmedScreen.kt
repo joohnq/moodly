@@ -23,7 +23,7 @@ fun SecurityConfirmedScreen(
         }
     }
 
-    SecurityConfirmedUI(
+    SecurityConfirmedContent(
         onEvent = ::onEvent
     )
 }

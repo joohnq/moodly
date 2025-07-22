@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UnLockUI(
+fun UnLockContent(
     sheetState: SheetState,
     isError: Exception?,
     showBottomSheet: Boolean,

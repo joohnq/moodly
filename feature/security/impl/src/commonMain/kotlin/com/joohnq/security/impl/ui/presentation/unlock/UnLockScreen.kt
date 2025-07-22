@@ -92,7 +92,7 @@ fun UnLockScreen(
         }
     }
 
-    return UnLockUI(
+    return UnLockContent(
         sheetState = sheetState,
         isError = isError,
         showBottomSheet = showBottomSheet,

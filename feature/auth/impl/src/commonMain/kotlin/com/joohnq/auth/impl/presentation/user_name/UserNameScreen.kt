@@ -11,13 +11,13 @@ import com.joohnq.auth.impl.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameViewModel
 import com.joohnq.domain.validator.UserNameValidator
-import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
-import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
+import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.ui.viewmodel.UserIntent
-import com.joohnq.user.ui.viewmodel.UserSideEffect
-import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.impl.ui.viewmodel.UserIntent
+import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
+import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable

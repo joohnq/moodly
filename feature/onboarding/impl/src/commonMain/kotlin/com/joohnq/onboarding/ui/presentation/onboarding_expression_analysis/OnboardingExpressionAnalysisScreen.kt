@@ -11,9 +11,9 @@ import com.joohnq.mood.ui.viewmodel.MoodSideEffect
 import com.joohnq.mood.ui.viewmodel.MoodViewModel
 import com.joohnq.onboarding.ui.event.OnboardingEvent
 import com.joohnq.onboarding.ui.viewmodel.OnboardingViewModel
-import com.joohnq.preferences.ui.viewmodel.PreferenceIntent
-import com.joohnq.preferences.ui.viewmodel.PreferencesSideEffect
-import com.joohnq.preferences.ui.viewmodel.PreferencesViewModel
+import com.joohnq.preferences.impl.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.viewmodel.PreferencesSideEffect
+import com.joohnq.preferences.impl.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.ui.mapper.toDomain
 import com.joohnq.sleep_quality.ui.viewmodel.SleepQualityIntent

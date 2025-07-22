@@ -11,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
@@ -28,7 +27,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun AddJournalingUI(
+fun AddJournalingContent(
     snackBarState: SnackbarHostState,
     state: AddSelfJournalState,
     onAction: (AddSelfJournalIntent) -> Unit = {},

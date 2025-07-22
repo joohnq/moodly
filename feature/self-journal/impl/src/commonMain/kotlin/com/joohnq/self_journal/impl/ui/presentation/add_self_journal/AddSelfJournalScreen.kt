@@ -64,7 +64,7 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
         }
     }
 
-    return AddJournalingUI(
+    return AddJournalingContent(
         snackBarState = snackBarState,
         state = state,
         onAction = addJournalingViewModel::onAction,

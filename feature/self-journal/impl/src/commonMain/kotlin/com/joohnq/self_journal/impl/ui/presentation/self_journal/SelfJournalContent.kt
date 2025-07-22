@@ -15,7 +15,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SelfJournalUI(
+fun SelfJournalContent(
     state: SelfJournalState,
     onEvent: (SelfJournalEvent) -> Unit = {},
 ) {
@@ -52,7 +52,7 @@ fun SelfJournalUI(
 @Preview
 @Composable
 fun SelfJournalUIPreviewEmpty() {
-    SelfJournalUI(
+    SelfJournalContent(
         state = SelfJournalState(
             records = UiState.Success(
                 listOf(
@@ -65,7 +65,7 @@ fun SelfJournalUIPreviewEmpty() {
 @Preview
 @Composable
 fun SelfJournalUIPreview() {
-    SelfJournalUI(
+    SelfJournalContent(
         state = SelfJournalState(
             records = UiState.Success(
                 listOf(

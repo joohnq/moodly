@@ -81,7 +81,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
         }
     }
 
-    return EditJournalingUI(
+    return EditJournalingContent(
         snackBarState = snackBarState,
         state = state,
         canSave = canSave,

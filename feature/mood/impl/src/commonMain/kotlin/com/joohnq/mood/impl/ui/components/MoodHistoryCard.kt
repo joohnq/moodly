@@ -26,7 +26,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
-    containerColor: Color,
+    containerColor: Color = Colors.White,
     record: MoodRecordResource,
 ) {
     Card(
@@ -80,13 +80,4 @@ fun MoodHistoryCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun MoodHistoryCardPreview() {
-    MoodHistoryCard(
-        containerColor = Colors.White,
-        record = MoodRecordResource(),
-    )
 }

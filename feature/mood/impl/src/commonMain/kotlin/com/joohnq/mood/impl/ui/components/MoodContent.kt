@@ -12,8 +12,8 @@ fun MoodContent(
     modifier: Modifier = Modifier,
     record: MoodRecordResource?,
     records: List<MoodRecordResource>,
-    onAction: (MoodIntent) -> Unit,
-    onEvent: (MoodEvent) -> Unit
+    onAction: (MoodIntent) -> Unit = {},
+    onEvent: (MoodEvent) -> Unit = {}
 ) {
     val containerColor = Colors.Gray5
     DescriptionSection(

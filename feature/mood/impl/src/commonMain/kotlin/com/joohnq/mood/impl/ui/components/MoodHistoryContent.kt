@@ -15,7 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodHistoryContent(
     modifier: Modifier = Modifier,
-    containerColor: Color,
+    containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
     onDelete: (Int) -> Unit = {},
 ) {
@@ -34,18 +34,4 @@ fun MoodHistoryContent(
 
         }
     }
-}
-
-@Preview
-@Composable
-fun MoodHistoryContentPreview() {
-    MoodHistoryContent(
-        modifier = Modifier,
-        containerColor = Colors.White,
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-    )
 }

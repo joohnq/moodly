@@ -25,7 +25,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AddMoodRadioGroup(
     modifier: Modifier = Modifier,
     selectedMood: MoodRecordResource,
-    setSelectedMood: (MoodResource) -> Unit,
+    setSelectedMood: (MoodResource) -> Unit = {},
 ) {
     val resources by remember { mutableStateOf(getAllMoodResource()) }
 
@@ -70,59 +70,4 @@ fun AddMoodRadioGroup(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun AddMoodRadioGroupPreviewDepressed() {
-    AddMoodRadioGroup(
-        selectedMood = MoodRecordResource(
-            mood = MoodResource.Depressed
-        ),
-        setSelectedMood = {}
-    )
-}
-
-@Preview
-@Composable
-fun AddMoodRadioGroupPreviewSad() {
-    AddMoodRadioGroup(
-        selectedMood = MoodRecordResource(
-            mood = MoodResource.Sad
-        ),
-        setSelectedMood = {}
-    )
-}
-
-@Preview
-@Composable
-fun AddMoodRadioGroupPreviewNeutral() {
-    AddMoodRadioGroup(
-        selectedMood = MoodRecordResource(
-            mood = MoodResource.Neutral
-        ),
-        setSelectedMood = {}
-    )
-}
-
-@Preview
-@Composable
-fun AddMoodRadioGroupPreviewHappy() {
-    AddMoodRadioGroup(
-        selectedMood = MoodRecordResource(
-            mood = MoodResource.Happy
-        ),
-        setSelectedMood = {}
-    )
-}
-
-@Preview
-@Composable
-fun AddMoodRadioGroupPreviewOverjoyed() {
-    AddMoodRadioGroup(
-        selectedMood = MoodRecordResource(
-            mood = MoodResource.Overjoyed
-        ),
-        setSelectedMood = {}
-    )
 }

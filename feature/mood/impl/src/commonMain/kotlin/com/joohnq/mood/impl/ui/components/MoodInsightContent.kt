@@ -87,17 +87,3 @@ fun MoodInsightContent(
         }
     }
 }
-
-@Preview
-@Composable
-fun MoodInsightContentPreview() {
-    MoodInsightContent(
-        modifier = Modifier,
-        containerColor = Colors.White,
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-            MoodRecordResource()
-        )
-    )
-}

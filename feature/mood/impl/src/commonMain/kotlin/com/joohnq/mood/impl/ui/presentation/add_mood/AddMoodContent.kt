@@ -29,8 +29,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddMoodContent(
     state: AddMoodState,
-    onAction: (AddMoodIntent) -> Unit,
-    onEvent: (AddMoodEvent) -> Unit,
+    onAction: (AddMoodIntent) -> Unit = {},
+    onEvent: (AddMoodEvent) -> Unit = {},
 ) {
     Scaffold(
         containerColor = Colors.Brown10,

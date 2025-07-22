@@ -64,7 +64,7 @@ fun StressStressorsScreen(
         }
     }
 
-    StressStressorsUI(
+    StressStressorsContent(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,

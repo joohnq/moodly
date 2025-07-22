@@ -12,13 +12,16 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.core.ui)
+
             implementation(projects.core.domain)
-            implementation(projects.feature.sleepQuality.api)
+
             implementation(projects.core.storage.api)
+
+            implementation(projects.feature.sleepQuality.api)
+
 
             implementation(libs.kotlin.datetime)
             implementation(libs.charts)
-
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
@@ -28,10 +31,6 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
     }
-}
-
-dependencies {
-    debugImplementation(libs.androidx.ui.tooling)
 }
 
 compose.resources {

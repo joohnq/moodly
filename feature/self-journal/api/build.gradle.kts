@@ -7,14 +7,14 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.core.domain)
+
             implementation(projects.feature.mood.api)
+
             implementation(projects.feature.freudScore.api)
 
             implementation(libs.kotlin.datetime)
+
             implementation(libs.bundles.koin)
-        }
-        commonTest.dependencies {
-            implementation(libs.bundles.test)
         }
     }
 }

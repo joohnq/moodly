@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageSourceOptionDialog(
-    onDismissRequest: () -> Unit,
+    onDismissRequest: () -> Unit = {},
     onGalleryRequest: () -> Unit = {},
     onCameraRequest: () -> Unit = {},
 ) {

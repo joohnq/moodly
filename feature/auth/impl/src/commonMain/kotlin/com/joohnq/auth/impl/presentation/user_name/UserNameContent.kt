@@ -22,6 +22,7 @@ import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
 import com.joohnq.shared_resources.name
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.*
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.painterResource
@@ -29,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun UserNameContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: UserNameState,
     onEvent: (UserNameEvent) -> Unit,
     onClearFocus: () -> Unit,

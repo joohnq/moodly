@@ -149,11 +149,3 @@ fun AvatarContent(
         }
     }
 }
-
-@Composable
-@Preview
-fun AvatarScreenPreview() {
-    AvatarContent(
-        state = AvatarState(),
-    )
-}

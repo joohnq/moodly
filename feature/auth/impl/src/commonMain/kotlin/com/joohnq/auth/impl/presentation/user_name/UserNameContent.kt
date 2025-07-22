@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun UserNameUI(
+fun UserNameContent(
     snackBarState: SnackbarHostState,
     state: UserNameState,
     onEvent: (UserNameEvent) -> Unit,

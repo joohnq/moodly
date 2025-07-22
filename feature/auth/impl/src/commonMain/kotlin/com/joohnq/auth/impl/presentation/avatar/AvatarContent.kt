@@ -45,7 +45,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AvatarUI(
+fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AvatarState,
     avatars: List<DrawableResource> = rememberAvatars(),
@@ -153,7 +153,7 @@ fun AvatarUI(
 @Composable
 @Preview
 fun AvatarScreenPreview() {
-    AvatarUI(
+    AvatarContent(
         state = AvatarState(),
     )
 }

@@ -66,7 +66,7 @@ fun UserNameScreen(
         }
     }
 
-    UserNameUI(
+    UserNameContent(
         state = userNameState,
         snackBarState = snackBarState,
         onClearFocus = focusManager::clearFocus,

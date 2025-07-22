@@ -26,7 +26,7 @@ fun SelfJournalScreen(
             is SelfJournalEvent.OnEditSelfJournal -> onEditSelfJournal(event.id)
         }
 
-    return SelfJournalUI(
+    return SelfJournalContent(
         state = state,
         onEvent = ::onEvent
     )

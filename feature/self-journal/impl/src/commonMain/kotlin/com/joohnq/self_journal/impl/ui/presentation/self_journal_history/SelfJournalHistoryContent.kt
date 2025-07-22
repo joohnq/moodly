@@ -37,7 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SelfJournalHistoryUI(
+fun SelfJournalHistoryContent(
     state: SelfJournalHistoryState,
     records: UiState<List<SelfJournalRecordResource>>,
     onAction: (SelfJournalHistoryIntent) -> Unit,
@@ -122,7 +122,7 @@ fun SelfJournalHistoryUI(
 @Preview
 @Composable
 fun SelfJournalHistoryUIPreview() {
-    SelfJournalHistoryUI(
+    SelfJournalHistoryContent(
         state = SelfJournalHistoryState(),
         records = UiState.Success(
             listOf(

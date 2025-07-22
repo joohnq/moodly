@@ -30,7 +30,7 @@ fun SelfJournalHistoryScreen(
             )
         }
 
-    SelfJournalHistoryUI(
+    SelfJournalHistoryContent(
         state = historyState,
         onAction = historyViewModel::onAction,
         records = selfJournalState.records,

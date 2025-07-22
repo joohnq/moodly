@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun EditJournalingUI(
+fun EditJournalingContent(
     snackBarState: SnackbarHostState,
     state: EditSelfJournalState,
     canSave: Boolean,

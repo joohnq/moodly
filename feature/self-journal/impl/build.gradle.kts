@@ -31,8 +31,8 @@ kotlin {
             implementation(projects.feature.selfJournal.api)
             implementation(projects.feature.stressLevel.impl)
             implementation(projects.feature.stressLevel.api)
-            implementation(projects.feature.user.domain)
-            implementation(projects.feature.user.ui)
+            implementation(projects.feature.user.api)
+            implementation(projects.feature.user.impl)
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)

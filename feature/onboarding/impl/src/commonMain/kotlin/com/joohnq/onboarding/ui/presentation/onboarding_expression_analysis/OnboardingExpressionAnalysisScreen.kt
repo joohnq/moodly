@@ -25,7 +25,6 @@ import com.joohnq.stress_level.ui.viewmodel.StressLevelSideEffect
 import com.joohnq.stress_level.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.ui.mapper.toDomain
 import com.joohnq.user.ui.viewmodel.UserIntent
 import com.joohnq.user.ui.viewmodel.UserSideEffect
 import com.joohnq.user.ui.viewmodel.UserViewModel

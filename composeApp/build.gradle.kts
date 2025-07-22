@@ -42,9 +42,8 @@ kotlin {
 
             implementation(projects.feature.home.impl)
 
-            implementation(projects.feature.user.data)
-            implementation(projects.feature.user.domain)
-            implementation(projects.feature.user.ui)
+            implementation(projects.feature.user.api)
+            implementation(projects.feature.user.impl)
 
             implementation(projects.feature.mood.api)
             implementation(projects.feature.mood.impl)

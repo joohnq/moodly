@@ -9,8 +9,8 @@ import com.joohnq.preferences.impl.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.ui.viewmodel.SecurityIntent
 import com.joohnq.security.ui.viewmodel.SecurityViewModel
-import com.joohnq.user.ui.viewmodel.UserIntent
-import com.joohnq.user.ui.viewmodel.UserViewModel
+import com.joohnq.user.impl.ui.viewmodel.UserIntent
+import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 
 @Composable
 fun SplashScreen(

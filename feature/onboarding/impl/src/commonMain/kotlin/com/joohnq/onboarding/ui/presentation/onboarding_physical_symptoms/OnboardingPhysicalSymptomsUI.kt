@@ -20,8 +20,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.user.ui.mapper.getAllPhysicalSymptomsResource
-import com.joohnq.user.ui.resource.PhysicalSymptomsResource
+import com.joohnq.user.impl.ui.mapper.getAllPhysicalSymptomsResource
+import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

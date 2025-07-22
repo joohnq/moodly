@@ -3,9 +3,9 @@ package com.joohnq.onboarding.ui.viewmodel
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.user.ui.resource.MedicationsSupplementsResource
-import com.joohnq.user.ui.resource.PhysicalSymptomsResource
-import com.joohnq.user.ui.resource.ProfessionalHelpResource
+import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
+import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
+import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 sealed interface OnboardingIntent {
     data class UpdateSleepQuality(val sleepQuality: SleepQualityResource) :

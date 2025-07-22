@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.ui.resource.StressLevelResource
-import com.joohnq.user.ui.resource.MedicationsSupplementsResource
-import com.joohnq.user.ui.resource.PhysicalSymptomsResource
-import com.joohnq.user.ui.resource.ProfessionalHelpResource
+import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
+import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
+import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

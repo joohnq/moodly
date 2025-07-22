@@ -1,4 +1,4 @@
-package com.joohnq.welcome.impl
+package com.joohnq.welcome.impl.presentation.welcome
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
@@ -37,7 +37,7 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
     }
 
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = snackBarState,
         pagerState = pagerState,
         onNext = ::onNext,

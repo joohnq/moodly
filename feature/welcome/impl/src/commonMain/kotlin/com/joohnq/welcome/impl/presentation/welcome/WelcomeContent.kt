@@ -1,4 +1,4 @@
-package com.joohnq.welcome.impl
+package com.joohnq.welcome.impl.presentation.welcome
 
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -10,10 +10,13 @@ import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.welcome.impl.presentation.first.FirstScreen
+import com.joohnq.welcome.impl.Welcome
+import com.joohnq.welcome.impl.WelcomeBase
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun WelcomeUI(
+fun WelcomeContent(
     snackBarState: SnackbarHostState,
     pagerState: PagerState,
     onNext: () -> Unit,
@@ -110,7 +113,7 @@ fun WelcomeUI(
 @Preview
 @Composable
 fun WelcomeUIPreview0() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(0) { 6 },
         onNext = {},
@@ -121,7 +124,7 @@ fun WelcomeUIPreview0() {
 @Preview
 @Composable
 fun WelcomeUIPreview1() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(1) { 6 },
         onNext = {},
@@ -132,7 +135,7 @@ fun WelcomeUIPreview1() {
 @Preview
 @Composable
 fun WelcomeUIPreview2() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(2) { 6 },
         onNext = {},
@@ -143,7 +146,7 @@ fun WelcomeUIPreview2() {
 @Preview
 @Composable
 fun WelcomeUIPreview3() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(3) { 6 },
         onNext = {},
@@ -154,7 +157,7 @@ fun WelcomeUIPreview3() {
 @Preview
 @Composable
 fun WelcomeUIPreview4() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(4) { 6 },
         onNext = {},
@@ -165,7 +168,7 @@ fun WelcomeUIPreview4() {
 @Preview
 @Composable
 fun WelcomeUIPreview5() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(5) { 6 },
         onNext = {},
@@ -176,7 +179,7 @@ fun WelcomeUIPreview5() {
 @Preview
 @Composable
 fun WelcomeUIPreview6() {
-    WelcomeUI(
+    WelcomeContent(
         snackBarState = SnackbarHostState(),
         pagerState = rememberPagerState(6) { 6 },
         onNext = {},

@@ -53,7 +53,7 @@ fun AddStressLevelScreenUI(
         BoxWithConstraints {
             val height = maxHeight * 0.5f
             Column(
-                modifier = padding(padding).paddingHorizontalMedium().fillMaxSize()
+                modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -75,7 +75,7 @@ fun AddStressLevelScreenUI(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     VerticalSlider(
-                        modifier = height(height),
+                        modifier = Modifier.height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {
                             onAction(AddStressLevelIntent.UpdateAddingSliderValue(it))

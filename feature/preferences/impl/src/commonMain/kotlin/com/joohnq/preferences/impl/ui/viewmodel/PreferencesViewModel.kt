@@ -10,6 +10,8 @@ import com.joohnq.preferences.api.use_case.UpdateSkipAuthUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipOnboardingUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipSecurityUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipWelcomeUseCase
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow

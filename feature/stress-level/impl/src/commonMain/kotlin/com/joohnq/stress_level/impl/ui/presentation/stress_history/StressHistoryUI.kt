@@ -45,7 +45,7 @@ fun StressHistoryUI(
                 containerColor = Colors.Brown10
             ) { padding ->
                 Column(
-                    modifier = padding(padding).paddingHorizontalMedium()
+                    modifier = Modifier.padding(padding).paddingHorizontalMedium()
                 ) {
                     TopBar(
                         modifier = Modifier.fillMaxWidth(),

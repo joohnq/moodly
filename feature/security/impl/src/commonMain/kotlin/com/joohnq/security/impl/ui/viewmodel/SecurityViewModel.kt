@@ -6,6 +6,8 @@ import com.joohnq.ui.mapper.toUiState
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.use_case.GetSecurityUseCase
 import com.joohnq.security.api.use_case.UpdateSecurityUseCase
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

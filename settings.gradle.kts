@@ -55,7 +55,7 @@ include(
     ":shared-resources",
     ":feature:splash:impl",
     ":feature:auth",
-    ":feature:auth:ui",
+    ":feature:auth:impl",
     ":core:permission",
     ":core:storage:impl",
     ":core:storage:api",

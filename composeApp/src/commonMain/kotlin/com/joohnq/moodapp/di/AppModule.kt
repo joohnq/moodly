@@ -1,6 +1,6 @@
 package com.joohnq.moodapp.di
 
-import com.joohnq.auth.ui.di.authUiModule
+import com.joohnq.auth.impl.di.authUiModule
 import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.domain.di.userDomainModule
 import com.joohnq.freud_score.impl.di.freudScoreUiModule

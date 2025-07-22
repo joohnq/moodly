@@ -45,27 +45,3 @@ fun MoodHistory(
             onDelete = onDelete
         )
 }
-
-@Preview
-@Composable
-fun MoodHistoryPreviewEmpty() {
-    MoodHistory(
-        modifier = Modifier,
-        containerColor = Colors.White,
-        records = listOf(),
-    )
-}
-
-@Preview
-@Composable
-fun MoodHistoryPreview() {
-    MoodHistory(
-        modifier = Modifier,
-        containerColor = Colors.White,
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-    )
-}

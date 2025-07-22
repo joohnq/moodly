@@ -20,6 +20,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
@@ -27,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ExpressionAnalysisContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onAddAction: (AddMoodIntent) -> Unit = {},
     onEvent: (ExpressionAnalysisEvent) -> Unit = {},

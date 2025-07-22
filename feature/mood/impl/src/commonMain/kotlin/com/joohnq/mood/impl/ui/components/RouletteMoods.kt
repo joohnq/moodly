@@ -21,7 +21,10 @@ import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun RouletteMoods(modifier: Modifier = Modifier, setSelectedMood: (MoodResource) -> Unit) {
+fun RouletteMoods(
+    modifier: Modifier = Modifier,
+    setSelectedMood: (MoodResource) -> Unit = {}
+) {
     val moods = rememberSaveable {
         getAllMoodResource() + getAllMoodResource()
     }

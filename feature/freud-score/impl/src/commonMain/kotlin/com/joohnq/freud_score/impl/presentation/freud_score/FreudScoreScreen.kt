@@ -19,7 +19,7 @@ fun FreudScoreScreen(
             is FreudScoreEvent.OnGoBack -> onGoBack()
         }
 
-    FreudScoreUI(
+    FreudScoreContent(
         state = state,
         onEvent = ::onEvent,
     )

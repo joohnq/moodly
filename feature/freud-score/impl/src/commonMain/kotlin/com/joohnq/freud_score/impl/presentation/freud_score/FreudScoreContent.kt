@@ -32,7 +32,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun FreudScoreUI(
+fun FreudScoreContent(
     state: FreudScoreState,
     onEvent: (FreudScoreEvent) -> Unit = {},
 ) {
@@ -96,7 +96,7 @@ fun FreudScoreUI(
 @Preview
 @Composable
 fun FreudScoreUIPreviewUnhealthy() {
-    FreudScoreUI(
+    FreudScoreContent(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Unhealthy(10)
         ),
@@ -106,7 +106,7 @@ fun FreudScoreUIPreviewUnhealthy() {
 @Preview
 @Composable
 fun FreudScoreUIPreviewAtRisk() {
-    FreudScoreUI(
+    FreudScoreContent(
         state = FreudScoreState(
             freudScore = FreudScoreResource.AtRisk(30)
         ),
@@ -116,7 +116,7 @@ fun FreudScoreUIPreviewAtRisk() {
 @Preview
 @Composable
 fun FreudScoreUIPreviewStable() {
-    FreudScoreUI(
+    FreudScoreContent(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Stable(50)
         ),
@@ -126,7 +126,7 @@ fun FreudScoreUIPreviewStable() {
 @Preview
 @Composable
 fun FreudScoreUIPreviewMostlyHealthy() {
-    FreudScoreUI(
+    FreudScoreContent(
         state = FreudScoreState(
             freudScore = FreudScoreResource.MostlyHealthy(70)
         ),
@@ -136,7 +136,7 @@ fun FreudScoreUIPreviewMostlyHealthy() {
 @Preview
 @Composable
 fun FreudScoreUIPreviewHealthy() {
-    FreudScoreUI(
+    FreudScoreContent(
         state = FreudScoreState(
             freudScore = FreudScoreResource.Healthy(90)
         ),

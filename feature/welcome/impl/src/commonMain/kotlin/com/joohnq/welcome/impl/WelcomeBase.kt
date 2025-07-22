@@ -1,4 +1,4 @@
-package com.joohnq.welcome.ui
+package com.joohnq.welcome.impl
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

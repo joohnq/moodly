@@ -1,11 +1,11 @@
-package com.joohnq.welcome.ui.navigation
+package com.joohnq.welcome.impl.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.welcome.ui.WelcomeScreen
+import com.joohnq.welcome.impl.WelcomeScreen
 
 fun NavGraphBuilder.welcomeNavigation(
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,

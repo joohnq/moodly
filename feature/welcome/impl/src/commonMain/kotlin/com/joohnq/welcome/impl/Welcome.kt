@@ -1,4 +1,4 @@
-package com.joohnq.welcome.ui
+package com.joohnq.welcome.impl
 
 import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.DrawableResource

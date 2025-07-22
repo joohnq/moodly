@@ -36,7 +36,8 @@ kotlin {
             implementation(projects.feature.preferences.api)
             implementation(projects.feature.preferences.impl)
 
-            implementation(projects.feature.welcome.ui)
+            implementation(projects.feature.welcome.impl)
+
             implementation(projects.feature.freudScore.impl)
             implementation(projects.feature.onboarding.impl)
 

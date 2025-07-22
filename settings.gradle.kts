@@ -35,7 +35,7 @@ include(
     ":composeApp",
     ":core:database",
     ":core:ui",
-    ":feature:welcome:ui",
+    ":feature:welcome:impl",
     ":feature:mood:api",
     ":feature:mood:impl",
     ":feature:onboarding:impl",

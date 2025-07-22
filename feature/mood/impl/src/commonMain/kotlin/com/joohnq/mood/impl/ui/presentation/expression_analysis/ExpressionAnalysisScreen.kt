@@ -63,7 +63,7 @@ fun ExpressionAnalysisScreen(
         }
     }
 
-    ExpressionAnalysisUI(
+    ExpressionAnalysisContent(
         snackBarState = snackBarState,
         description = addStatsState.record.description,
         onEvent = ::onEvent,

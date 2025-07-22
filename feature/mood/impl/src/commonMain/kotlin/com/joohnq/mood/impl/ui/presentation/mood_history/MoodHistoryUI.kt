@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MoodHistoryUI(
+fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
     onEvent: (MoodHistoryEvent) -> Unit = {},
 ) {
@@ -81,7 +81,7 @@ fun MoodHistoryUI(
 @Preview
 @Composable
 fun MoodHistoryUIPreviewEmpty() {
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -96,7 +96,7 @@ fun MoodHistoryUIPreviewEmpty() {
 @Preview
 @Composable
 fun MoodHistoryUIPreviewDepressed() {
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -112,7 +112,7 @@ fun MoodHistoryUIPreviewDepressed() {
 @Preview
 @Composable
 fun MoodHistoryUIPreviewNeutral() {
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -128,7 +128,7 @@ fun MoodHistoryUIPreviewNeutral() {
 @Preview
 @Composable
 fun MoodHistoryUIPreviewHappy() {
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -144,7 +144,7 @@ fun MoodHistoryUIPreviewHappy() {
 @Preview
 @Composable
 fun MoodHistoryUIPreviewOverjoyed() {
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(

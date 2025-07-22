@@ -15,7 +15,6 @@ import com.joohnq.freud_score.impl.mapper.getAllFreudScoreResources
 import com.joohnq.freud_score.impl.mapper.toEndFreudScore
 import com.joohnq.freud_score.impl.mapper.toInitialFreudScore
 import com.joohnq.freud_score.impl.presentation.freud_score.event.FreudScoreEvent
-import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.BallItem
@@ -29,7 +28,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FreudScoreContent(
@@ -39,7 +37,9 @@ fun FreudScoreContent(
     if (state.freudScore == null) return
     val resources = remember { getAllFreudScoreResources(state.freudScore.score) }
 
-    Scaffold { padding ->
+    Scaffold(
+        containerColor = Colors.Brown10,
+    ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
             TopBar(
                 modifier = Modifier.paddingHorizontalMedium(),

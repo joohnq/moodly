@@ -23,7 +23,7 @@ fun MoodScreen(
             MoodEvent.OnNavigateToMoodHistory -> onNavigateToMoodHistory()
         }
 
-    MoodUI(
+    MoodContent(
         records = state.records,
         onEvent = ::onEvent,
         onAction = viewModel::onAction

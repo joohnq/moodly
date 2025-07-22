@@ -17,7 +17,7 @@ import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MoodUI(
+fun MoodContent(
     records: UiState<List<MoodRecordResource>>,
     onAction: (MoodIntent) -> Unit = {},
     onEvent: (MoodEvent) -> Unit = {},
@@ -58,7 +58,7 @@ fun MoodUI(
 @Preview
 @Composable
 fun MoodUIPreviewEmpty() {
-    MoodUI(
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -73,7 +73,7 @@ fun MoodUIPreviewEmpty() {
 @Preview
 @Composable
 fun MoodUIPreviewDepressed() {
-    MoodUI(
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -89,7 +89,7 @@ fun MoodUIPreviewDepressed() {
 @Preview
 @Composable
 fun MoodUIPreviewNeutral() {
-    MoodUI(
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -105,7 +105,7 @@ fun MoodUIPreviewNeutral() {
 @Preview
 @Composable
 fun MoodUIPreviewHappy() {
-    MoodUI(
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -121,7 +121,7 @@ fun MoodUIPreviewHappy() {
 @Preview
 @Composable
 fun MoodUIPreviewOverjoyed() {
-    MoodUI(
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(

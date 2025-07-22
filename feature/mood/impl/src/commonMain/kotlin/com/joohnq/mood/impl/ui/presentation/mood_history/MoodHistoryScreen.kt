@@ -19,7 +19,7 @@ fun MoodHistoryScreen(
             is MoodHistoryEvent.OnGoBack -> onGoBack()
         }
 
-    MoodHistoryUI(
+    MoodHistoryContent(
         records = statsState.records,
         onEvent = ::onEvent
     )

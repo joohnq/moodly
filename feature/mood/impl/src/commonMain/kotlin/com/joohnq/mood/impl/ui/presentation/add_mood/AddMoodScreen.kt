@@ -22,7 +22,7 @@ fun AddMoodScreen(
                 onNavigateToExpressionAnalysis()
         }
 
-    AddMoodUI(
+    AddMoodContent(
         state = state,
         onEvent = ::onEvent,
         onAction = addStatsViewModel::onAction

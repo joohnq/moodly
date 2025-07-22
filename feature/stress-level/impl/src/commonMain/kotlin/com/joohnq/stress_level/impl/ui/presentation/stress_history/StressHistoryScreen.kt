@@ -24,7 +24,7 @@ fun StressHistoryScreen(
         }
     }
 
-    StressHistoryUI(
+    StressHistoryContent(
         state = state,
         onEvent = ::onEvent
     )

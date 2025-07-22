@@ -28,7 +28,7 @@ import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.Stres
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun StressStressorsUI(
+fun StressStressorsContent(
     snackBarState: SnackbarHostState,
     state: AddingStressLevelState,
     onAddAction: (AddStressLevelIntent) -> Unit,

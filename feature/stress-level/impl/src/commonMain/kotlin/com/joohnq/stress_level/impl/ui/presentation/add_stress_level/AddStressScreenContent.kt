@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddStressLevelScreenUI(
+fun AddStressLevelScreenContent(
     snackBarState: SnackbarHostState,
     state: AddingStressLevelState,
     onAction: (AddStressLevelIntent) -> Unit,

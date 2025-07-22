@@ -67,7 +67,7 @@ fun AddStressLevelScreen(
         }
     }
 
-    AddStressLevelScreenUI(
+    AddStressLevelScreenContent(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,

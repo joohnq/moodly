@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StressHistoryUI(
+fun StressHistoryContent(
     state: StressLevelState,
     onAction: (StressLevelIntent) -> Unit = {},
     onEvent: (StressHistoryEvent) -> Unit = {},
@@ -99,7 +99,7 @@ fun StressHistoryUI(
 @Preview
 @Composable
 fun StressHistoryUIPreview() {
-    StressHistoryUI(
+    StressHistoryContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -118,7 +118,7 @@ fun StressHistoryUIPreview() {
 @Preview
 @Composable
 fun StressHistoryUIPreviewEmpty() {
-    StressHistoryUI(
+    StressHistoryContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf()

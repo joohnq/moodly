@@ -21,7 +21,7 @@ fun StressLevelScreen(
             is StressLevelEvent.OnGoBack -> onGoBack()
         }
 
-    return StressLevelUI(
+    return StressLevelContent(
         state = state,
         onEvent = ::onEvent,
         onAction = stressLevelViewModel::onAction

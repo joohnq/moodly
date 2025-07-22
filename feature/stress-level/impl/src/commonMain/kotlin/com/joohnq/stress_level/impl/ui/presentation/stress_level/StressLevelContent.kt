@@ -20,7 +20,7 @@ import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StressLevelUI(
+fun StressLevelContent(
     state: StressLevelState,
     onAction: (StressLevelIntent) -> Unit = {},
     onEvent: (StressLevelEvent) -> Unit = {},
@@ -60,7 +60,7 @@ fun StressLevelUI(
 @Preview
 @Composable
 fun StressLevelUIPreviewEmpty() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -73,7 +73,7 @@ fun StressLevelUIPreviewEmpty() {
 @Preview
 @Composable
 fun StressLevelUIPreviewOne() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -100,7 +100,7 @@ fun StressLevelUIPreviewOne() {
 @Preview
 @Composable
 fun StressLevelUIPreviewTwo() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -123,7 +123,7 @@ fun StressLevelUIPreviewTwo() {
 @Preview
 @Composable
 fun StressLevelUIPreviewThree() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -146,7 +146,7 @@ fun StressLevelUIPreviewThree() {
 @Preview
 @Composable
 fun StressLevelUIPreviewFour() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(
@@ -169,7 +169,7 @@ fun StressLevelUIPreviewFour() {
 @Preview
 @Composable
 fun StressLevelUIPreviewFive() {
-    StressLevelUI(
+    StressLevelContent(
         state = StressLevelState(
             records = UiState.Success(
                 listOf(

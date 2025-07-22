@@ -7,11 +7,15 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.sharedResources)
-            implementation(projects.core.ui)
-            implementation(projects.core.domain)
-            implementation(projects.feature.preferences.impl)
             implementation(projects.core.navigation)
+
+            implementation(projects.core.ui)
+
+            implementation(projects.core.domain)
+
+            implementation(projects.sharedResources)
+
+            implementation(projects.feature.preferences.impl)
 
             implementation(libs.navigation.compose)
 

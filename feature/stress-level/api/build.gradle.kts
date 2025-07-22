@@ -1,6 +1,7 @@
 plugins {
     id("moodly.android.library")
     id("moodly.multiplatform.library")
+
     alias(libs.plugins.serialization)
 }
 
@@ -11,6 +12,7 @@ kotlin {
 
             implementation(libs.serialization)
             implementation(libs.kotlin.datetime)
+
             implementation(libs.bundles.koin)
         }
         commonTest.dependencies {

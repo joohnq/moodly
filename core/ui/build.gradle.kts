@@ -10,10 +10,8 @@ kotlin {
             implementation(libs.kotlin.datetime)
             implementation(libs.bundles.koin)
             implementation(libs.calendar)
-
             implementation(libs.coroutines.core)
             implementation(libs.coroutines.extensions)
-
             implementation(libs.navigation.compose)
         }
     }

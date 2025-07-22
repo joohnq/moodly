@@ -2,6 +2,7 @@ plugins {
     id("moodly.application")
     id("moodly.multiplatform.library")
     id("moodly.compose")
+
     alias(libs.plugins.serialization)
     alias(libs.plugins.google.services)
     alias(libs.plugins.crashlytics)
@@ -21,13 +22,18 @@ kotlin {
             implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
-            api(libs.gitlive.firebase.kotlin.crashlytics)
             implementation(projects.core.datastore)
+
             implementation(projects.core.navigation)
+
             implementation(projects.core.ui)
+
             implementation(projects.core.domain)
+
             implementation(projects.core.storage.impl)
+
             implementation(projects.sharedResources)
+
             implementation(projects.feature.security.impl)
             implementation(projects.feature.security.api)
 
@@ -59,6 +65,8 @@ kotlin {
             implementation(projects.feature.stressLevel.api)
 
             implementation(projects.feature.splash.impl)
+
+            api(libs.gitlive.firebase.kotlin.crashlytics)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.navigation.compose)

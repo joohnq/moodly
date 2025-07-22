@@ -10,11 +10,14 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun FreudScoreMetric(freudScore: FreudScoreResource?, onClick: () -> Unit = {}) {
+fun FreudScoreMetric(
+    freudScore: FreudScoreResource?,
+    onClick: () -> Unit = {}
+) {
     if (freudScore == null) return
+
     MetricCardSide(
         modifier = Modifier.paddingHorizontalMedium(),
         icon = Drawables.Icons.Filled.Logo,
@@ -29,14 +32,5 @@ fun FreudScoreMetric(freudScore: FreudScoreResource?, onClick: () -> Unit = {}) 
         },
         color = Colors.White,
         onClick = onClick
-    )
-}
-
-@Preview
-@Composable
-fun FreudScoreMetricPreview() {
-    FreudScoreMetric(
-        freudScore = FreudScoreResource.Healthy(50),
-        onClick = {}
     )
 }

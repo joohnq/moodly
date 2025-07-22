@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 fun CentralButton(
     modifier: Modifier = Modifier,
     item: CentralAction<Destination>,
-    onClick: (Destination) -> Unit
+    onClick: (Destination) -> Unit = {}
 ) {
     Column(
         modifier = modifier.clickable(onClick = { onClick(item.destination) }),
@@ -41,13 +41,13 @@ fun CentralButton(
         ) {
             Icon(
                 painter = painterResource(item.icon),
-                contentDescription = stringResource(item.title),
+                contentDescription = item.title,
                 tint = Colors.Brown60,
                 modifier = Modifier.size(24.dp)
             )
         }
         Text(
-            text = stringResource(item.title),
+            text = item.title,
             style = TextStyles.TextSmRegular(),
             color = Colors.Gray60
         )

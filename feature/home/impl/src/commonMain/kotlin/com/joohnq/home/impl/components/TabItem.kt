@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun TabItem(
     icon: DIcon,
     selected: Boolean,
-    onNavigate: () -> Unit,
+    onNavigate: () -> Unit = {},
 ) {
     FilledIconButton(
         shape = Dimens.Shape.Circle,

@@ -21,7 +21,7 @@ fun OnboardingProfessionalHelpScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    OnboardingProfessionalHelpUI(
+    OnboardingProfessionalHelpContent(
         soughtHelp = onboardingState.soughtHelp,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent

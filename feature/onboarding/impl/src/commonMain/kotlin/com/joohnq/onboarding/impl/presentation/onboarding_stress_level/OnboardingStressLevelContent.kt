@@ -27,7 +27,7 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingStressLevelUI(
+fun OnboardingStressLevelContent(
     record: StressLevelRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},

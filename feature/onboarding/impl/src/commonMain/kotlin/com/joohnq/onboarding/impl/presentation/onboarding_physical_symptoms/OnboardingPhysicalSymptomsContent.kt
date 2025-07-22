@@ -25,7 +25,7 @@ import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingPhysicalSymptomsUI(
+fun OnboardingPhysicalSymptomsContent(
     physicalSymptoms: PhysicalSymptomsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},

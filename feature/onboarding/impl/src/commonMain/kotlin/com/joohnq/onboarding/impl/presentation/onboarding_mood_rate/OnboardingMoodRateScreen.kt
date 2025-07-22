@@ -21,7 +21,7 @@ fun OnboardingMoodRateScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    OnboardingMoodRateUI(
+    OnboardingMoodRateContent(
         record = state.moodRecord,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent,

@@ -10,9 +10,9 @@ import com.joohnq.mood.impl.data.di.moodDriverFactoryModule
 import com.joohnq.mood.domain.di.moodDomainModule
 import com.joohnq.mood.impl.ui.di.moodUiModule
 import com.joohnq.onboarding.ui.di.onboardingUiModule
-import com.joohnq.preferences.impl.data.di.preferencesDataModule
-import com.joohnq.preferences.domain.di.preferencesDomainModule
-import com.joohnq.preferences.impl.ui.di.preferencesUiModule
+import com.joohnq.preferences.impl.ui.data.di.preferencesDataModule
+import com.joohnq.preferences.api.di.preferencesDomainModule
+import com.joohnq.preferences.impl.ui.ui.di.preferencesUiModule
 import com.joohnq.security.data.di.securityAuthenticationModule
 import com.joohnq.security.data.di.securityDataModule
 import com.joohnq.security.api.di.securityDomainModule
@@ -28,7 +28,7 @@ import com.joohnq.sleep_quality.ui.di.sleepQualityUiModule
 import com.joohnq.storage.impl.di.coreStorageModule
 import com.joohnq.stress_level.data.di.stressLevelDataModule
 import com.joohnq.stress_level.data.di.stressLevelDriverFactoryModule
-import com.joohnq.stress_level.domain.di.stressLevelDomainModule
+import com.joohnq.stress_level.api.di.stressLevelDomainModule
 import com.joohnq.stress_level.ui.di.stressLevelUiModule
 import com.joohnq.user.impl.data.di.userDataModule
 import com.joohnq.user.impl.data.di.userDriverFactoryModule

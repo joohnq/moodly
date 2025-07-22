@@ -2,8 +2,8 @@ package com.joohnq.security.ui.presentation.security_confirmed
 
 import androidx.compose.runtime.Composable
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.preferences.impl.viewmodel.PreferenceIntent
-import com.joohnq.preferences.impl.viewmodel.PreferencesViewModel
+import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
 
 @Composable

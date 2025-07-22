@@ -8,10 +8,10 @@ import com.joohnq.ui.mapper.onFailure
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.mapper.toResultResource
 import com.joohnq.ui.mapper.toUiState
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.domain.use_case.AddStressLevelUseCase
-import com.joohnq.stress_level.domain.use_case.DeleteStressLevelUseCase
-import com.joohnq.stress_level.domain.use_case.GetStressLevelsUseCase
+import com.joohnq.stress_level.api.entity.StressLevelRecord
+import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
+import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
+import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
 import com.joohnq.stress_level.ui.mapper.toResource
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
 import kotlinx.coroutines.channels.Channel

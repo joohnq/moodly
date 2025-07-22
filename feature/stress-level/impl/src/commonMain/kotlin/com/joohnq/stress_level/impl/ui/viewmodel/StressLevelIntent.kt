@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.ui.viewmodel
 
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
+import com.joohnq.stress_level.api.entity.StressLevelRecord
 
 sealed interface StressLevelIntent {
     data object GetAll : StressLevelIntent

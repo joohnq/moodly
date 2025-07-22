@@ -4,7 +4,7 @@ import com.joohnq.stress_level.data.database.StressLevelDatabase
 import com.joohnq.stress_level.data.driver.StressLevelDriverFactory
 import com.joohnq.stress_level.data.repository.StressLevelRepositoryImpl
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
-import com.joohnq.stress_level.domain.repository.StressLevelRepository
+import com.joohnq.stress_level.api.repository.StressLevelRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

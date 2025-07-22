@@ -3,10 +3,10 @@ package com.joohnq.stress_level.data.repository
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
-import com.joohnq.stress_level.domain.converter.StressLevelRecordConverter
-import com.joohnq.stress_level.domain.converter.StressorsConverter
-import com.joohnq.stress_level.domain.entity.StressLevelRecord
-import com.joohnq.stress_level.domain.repository.StressLevelRepository
+import com.joohnq.stress_level.api.converter.StressLevelRecordConverter
+import com.joohnq.stress_level.api.converter.StressorsConverter
+import com.joohnq.stress_level.api.entity.StressLevelRecord
+import com.joohnq.stress_level.api.repository.StressLevelRepository
 
 class StressLevelRepositoryImpl(
     private val database: StressLevelDatabaseSql,

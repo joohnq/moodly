@@ -170,7 +170,7 @@ fun AvatarScreen(
         }
     }
 
-    AvatarUI(
+    AvatarContent(
         snackBarState = snackBarState,
         state = avatarState,
         avatars = avatars,

@@ -30,9 +30,9 @@ import com.joohnq.stress_level.data.di.stressLevelDataModule
 import com.joohnq.stress_level.data.di.stressLevelDriverFactoryModule
 import com.joohnq.stress_level.domain.di.stressLevelDomainModule
 import com.joohnq.stress_level.ui.di.stressLevelUiModule
-import com.joohnq.user.data.di.userDataModule
-import com.joohnq.user.data.di.userDriverFactoryModule
-import com.joohnq.user.ui.di.userUiModule
+import com.joohnq.user.impl.data.di.userDataModule
+import com.joohnq.user.impl.data.di.userDriverFactoryModule
+import com.joohnq.user.impl.ui.di.userUiModule
 
 val appModule = listOf(
     freudScoreUiModule,

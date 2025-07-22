@@ -16,8 +16,8 @@ kotlin {
             implementation(projects.feature.stressLevel.impl)
             implementation(projects.feature.sleepQuality.api)
             implementation(projects.feature.sleepQuality.impl)
-            implementation(projects.feature.user.domain)
-            implementation(projects.feature.user.ui)
+            implementation(projects.feature.user.api)
+            implementation(projects.feature.user.impl)
             implementation(projects.feature.preferences.impl)
             implementation(projects.core.navigation)
 

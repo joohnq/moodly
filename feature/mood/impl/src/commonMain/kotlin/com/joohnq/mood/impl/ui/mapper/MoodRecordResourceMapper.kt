@@ -5,7 +5,7 @@ import com.joohnq.domain.mapper.toMonthDays
 import com.joohnq.freud_score.api.entity.FreudScore
 import com.joohnq.freud_score.api.mapper.toFreudScore
 import com.joohnq.mood.domain.entity.MoodRecord
-import com.joohnq.mood.ui.resource.MoodRecordResource
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus

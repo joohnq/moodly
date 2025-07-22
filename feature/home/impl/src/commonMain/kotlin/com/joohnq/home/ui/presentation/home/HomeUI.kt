@@ -9,9 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.UiState
 import com.joohnq.domain.entity.User
-import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.home.ui.components.FreudScoreMetric
 import com.joohnq.home.ui.components.HomeTopBar
@@ -19,18 +17,25 @@ import com.joohnq.home.ui.components.MoodMetric
 import com.joohnq.home.ui.components.SelfJournalingMetric
 import com.joohnq.home.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.ui.presentation.viewmodel.DashboardState
-import com.joohnq.mood.ui.resource.MoodRecordResource
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.LoadingUI
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.freud_score
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.self_journaling
+import com.joohnq.shared_resources.sleep
+import com.joohnq.shared_resources.stress
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.ui.component.StressLevelMetric
 import com.joohnq.stress_level.ui.resource.StressLevelRecordResource
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

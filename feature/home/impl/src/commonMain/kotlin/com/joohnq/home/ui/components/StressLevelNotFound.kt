@@ -5,9 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.joohnq.domain.getNow
 import com.joohnq.domain.mapper.toMonthNameString
+import com.joohnq.self_journal.impl.ui.components.JournalCalendar
+import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
+import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.self_journal.ui.components.JournalCalendar
 import com.joohnq.self_journal.ui.mapper.getTodaySelfJournalRecord
-import com.joohnq.self_journal.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.NotFoundHorizontal

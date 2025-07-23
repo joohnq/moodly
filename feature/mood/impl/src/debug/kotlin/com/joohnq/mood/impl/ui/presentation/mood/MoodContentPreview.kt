@@ -1,21 +1,20 @@
-package com.joohnq.mood.impl.ui.presentation.mood_history
+package com.joohnq.mood.impl.ui.presentation.mood
 
 import androidx.compose.runtime.Composable
+import com.joohnq.ui.entity.UiState
 import com.joohnq.mood.impl.ui.fake.depressedMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.fake.happyMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.fake.neutralMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.fake.overjoyedMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.fake.sadMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.ui.entity.UiState
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun MoodHistoryContentEmptyPreview() {
-    MoodHistoryContent(
+fun MoodContentEmptyPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 MoodRecordResource(
@@ -28,24 +27,24 @@ fun MoodHistoryContentEmptyPreview() {
 
 @Preview
 @Composable
-fun MoodHistoryContentLoadingPreview() {
-    MoodHistoryContent(
+fun MoodContentLoadingPreview() {
+    MoodContent(
         records = UiState.Loading
     )
 }
 
 @Preview
 @Composable
-fun MoodHistoryContentErrorPreview() {
-    MoodHistoryContent(
+fun MoodContentErrorPreview() {
+    MoodContent(
         records = UiState.Error("Something went wrong")
     )
 }
 
 @Preview
 @Composable
-fun MoodHistoryContentDepressedPreview() {
-    MoodHistoryContent(
+fun MoodContentDepressedPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 depressedMoodRecordResourcePreview
@@ -56,8 +55,8 @@ fun MoodHistoryContentDepressedPreview() {
 
 @Preview
 @Composable
-fun MoodHistoryContentSadPreview() {
-    MoodHistoryContent(
+fun MoodContentSadPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 sadMoodRecordResourcePreview
@@ -68,8 +67,8 @@ fun MoodHistoryContentSadPreview() {
 
 @Preview
 @Composable
-fun MoodHistoryContentNeutralPreview() {
-    MoodHistoryContent(
+fun MoodContentNeutralPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 neutralMoodRecordResourcePreview
@@ -80,8 +79,8 @@ fun MoodHistoryContentNeutralPreview() {
 
 @Preview
 @Composable
-fun MoodHistoryContentHappyPreview() {
-    MoodHistoryContent(
+fun MoodContentHappyPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 happyMoodRecordResourcePreview
@@ -92,8 +91,8 @@ fun MoodHistoryContentHappyPreview() {
 
 @Preview
 @Composable
-fun MoodHistoryContentOverjoyedPreview() {
-    MoodHistoryContent(
+fun MoodContentOverjoyedPreview() {
+    MoodContent(
         records = UiState.Success(
             listOf(
                 overjoyedMoodRecordResourcePreview

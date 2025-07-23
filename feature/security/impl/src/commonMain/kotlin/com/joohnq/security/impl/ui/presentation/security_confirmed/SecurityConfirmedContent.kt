@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SecurityConfirmedContent(
-    onEvent: (SecurityConfirmedEvent) -> Unit,
+    onEvent: (SecurityConfirmedEvent) -> Unit = {},
 ) {
     DecoratedConvexPanel(
         panelBackgroundColor = Colors.Green20,

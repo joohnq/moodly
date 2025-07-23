@@ -10,10 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.impl.ui.components.PINCode
+import com.joohnq.security.impl.ui.components.PinCode
 import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
@@ -34,12 +35,12 @@ import org.jetbrains.compose.resources.stringResource
 fun PinContent(
     snackBarState: SnackbarHostState = SnackbarHostState(),
     state: PINState,
-    focusRequesters: List<FocusRequester>,
-    focusManager: FocusManager,
-    keyboardManager: SoftwareKeyboardController?,
-    onAction: (PINIntent) -> Unit,
-    onEvent: (PINEvent) -> Unit,
+    focusRequesters: List<FocusRequester> = emptyList(),
+    focusManager: FocusManager = LocalFocusManager.current,
+    keyboardManager: SoftwareKeyboardController? = null,
     canContinue: Boolean,
+    onAction: (PINIntent) -> Unit = {},
+    onEvent: (PINEvent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,
@@ -77,7 +78,7 @@ fun PinContent(
                     textAlign = TextAlign.Center
                 )
                 VerticalSpacer(48.dp)
-                PINCode(
+                PinCode(
                     code = state.code,
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->

@@ -40,8 +40,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SelfJournalHistoryContent(
     state: SelfJournalHistoryState,
     records: UiState<List<SelfJournalRecordResource>>,
-    onAction: (SelfJournalHistoryIntent) -> Unit,
-    onEvent: (SelfJournalHistoryEvent) -> Unit,
+    onAction: (SelfJournalHistoryIntent) -> Unit = {},
+    onEvent: (SelfJournalHistoryEvent) -> Unit = {},
 ) {
     if (state.openDeleteDialog)
         ImageAlertDialog(
@@ -105,7 +105,6 @@ fun SelfJournalHistoryContent(
                             ) { modifier ->
                                 SelfJournalsHistoryCards(
                                     modifier = modifier,
-                                    containerColor = Colors.White,
                                     records = recordsMap,
                                     onClick = {},
                                     onDelete = {}

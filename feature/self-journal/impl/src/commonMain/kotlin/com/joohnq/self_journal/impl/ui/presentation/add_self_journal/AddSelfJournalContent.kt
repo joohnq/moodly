@@ -19,6 +19,7 @@ import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.A
 import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
@@ -28,7 +29,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun AddJournalingContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSelfJournalState,
     onAction: (AddSelfJournalIntent) -> Unit = {},
     onEvent: (AddSelfJournalEvent) -> Unit = {},

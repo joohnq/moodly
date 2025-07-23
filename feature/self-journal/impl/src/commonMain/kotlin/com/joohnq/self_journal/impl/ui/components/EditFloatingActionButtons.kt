@@ -22,9 +22,9 @@ import org.jetbrains.compose.resources.stringResource
 fun EditFloatingActionButtons(
     isEditing: Boolean,
     canSave: Boolean,
-    onEditingAction: (EditSelfJournalIntent) -> Unit,
-    onEvent: (EditSelfJournalEvent) -> Unit,
-    requestTitleFocus: () -> Unit,
+    onEditingAction: (EditSelfJournalIntent) -> Unit = {},
+    onEvent: (EditSelfJournalEvent) -> Unit = {},
+    onRequestTitleFocus: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier.imePadding().fillMaxWidth(),
@@ -66,7 +66,7 @@ fun EditFloatingActionButtons(
                 Button(
                     onClick = {
                         onEditingAction(EditSelfJournalIntent.UpdateIsEditing(!isEditing))
-                        requestTitleFocus()
+                        onRequestTitleFocus()
                     },
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
                     shape = Dimens.Shape.Circle,

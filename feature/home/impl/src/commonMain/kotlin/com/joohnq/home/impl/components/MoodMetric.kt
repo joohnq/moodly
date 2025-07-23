@@ -21,7 +21,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodMetric(
     records: List<MoodRecordResource>,
-    containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
@@ -30,7 +29,7 @@ fun MoodMetric(
     if (record == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
+            containerColor = Colors.White,
             image = Drawables.Images.MoodInsight,
             title = Res.string.you_havent_set_up_any_mood_yet,
             subtitle = Res.string.set_up_mood,
@@ -39,7 +38,7 @@ fun MoodMetric(
     else
         MetricCardSide(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
+            containerColor = Colors.White,
             icon = record.mood.assets.icon,
             title = stringResource(Res.string.mood),
             text = record.mood.healthLevel.toString(),

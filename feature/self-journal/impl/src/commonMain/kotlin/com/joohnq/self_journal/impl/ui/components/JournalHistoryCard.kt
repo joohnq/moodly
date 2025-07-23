@@ -31,16 +31,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun JournalHistoryCard(
-    containerColor: Color,
     record: SelfJournalRecordResource,
     onClick: (Int) -> Unit = {}
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         onClick = {
@@ -133,13 +132,4 @@ fun JournalHistoryCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun JournalHistoryCardPreview() {
-    JournalHistoryCard(
-        containerColor = Colors.Gray20,
-        record = SelfJournalRecordResource()
-    )
 }

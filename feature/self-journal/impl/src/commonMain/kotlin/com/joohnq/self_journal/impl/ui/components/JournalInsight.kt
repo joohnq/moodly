@@ -30,7 +30,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun JournalInsight(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<SelfJournalRecordResource>,
 ) {
     val groupedMoods = records
@@ -43,7 +42,7 @@ fun JournalInsight(
     if (groupedMoods.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             image = Drawables.Images.SelfJournalInsight,
             title = Res.string.log_your_first_journal,
             description = Res.string.lets_log_your_first_journal_to_see_your_insight,
@@ -56,9 +55,9 @@ fun JournalInsight(
             modifier = modifier,
             shape = Dimens.Shape.Large,
             colors = CardColors(
-                containerColor = containerColor,
+                containerColor = Colors.Gray5,
                 contentColor = Color.Unspecified,
-                disabledContainerColor = containerColor,
+                disabledContainerColor = Colors.Gray5,
                 disabledContentColor = Color.Unspecified
             )
         ) {
@@ -101,19 +100,4 @@ fun JournalInsight(
                 }
             }
         }
-}
-
-@Preview
-@Composable
-fun JournalInsightPreview() {
-    JournalInsight(
-        records = listOf(
-            SelfJournalRecordResource(
-                mood = MoodResource.Sad
-            ),
-            SelfJournalRecordResource(
-                mood = MoodResource.Sad
-            )
-        )
-    )
 }

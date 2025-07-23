@@ -78,7 +78,6 @@ fun HomeContent(
                 )
                 MoodMetric(
                     records = moodRecords,
-                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
                     onClick = { onEvent(HomeEvent.OnNavigateToMood) }
                 )
@@ -89,7 +88,6 @@ fun HomeContent(
                 )
                 SleepQualityMetric(
                     records = sleepQualities,
-                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
                     onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                 )
@@ -100,7 +98,6 @@ fun HomeContent(
                 )
                 StressLevelMetric(
                     records = stressLevels,
-                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddStressLevel) },
                     onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                 )
@@ -111,7 +108,6 @@ fun HomeContent(
                 )
                 SelfJournalingMetric(
                     records = selfJournals,
-                    containerColor = Colors.White,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
                 )
                 VerticalSpacer(padding.calculateBottomPadding() + 10.dp)

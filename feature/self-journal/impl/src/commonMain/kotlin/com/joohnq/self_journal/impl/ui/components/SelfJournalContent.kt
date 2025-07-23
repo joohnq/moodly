@@ -17,15 +17,12 @@ fun SelfJournalContent(
     records: List<SelfJournalRecordResource>,
     onEvent: (SelfJournalEvent) -> Unit = {},
 ) {
-    val containerColor = Colors.Gray5
-
     SectionHeader(
         modifier = modifier,
         title = Res.string.journal_insight
     )
     JournalInsight(
         modifier = modifier,
-        containerColor = containerColor,
         records = records
     )
     SectionHeader(
@@ -34,7 +31,6 @@ fun SelfJournalContent(
     )
     JournalCalendar(
         modifier = modifier,
-        containerColor = containerColor,
         records = records,
         subtitle = stringResource(Res.string.journals_written_this_month),
         onCreate = {
@@ -50,7 +46,6 @@ fun SelfJournalContent(
     )
     JournalHistory(
         modifier = modifier,
-        containerColor = containerColor,
         records = records.take(7),
         onClick = {onEvent(SelfJournalEvent.OnEditSelfJournal(it))},
         onCreate = {onEvent(SelfJournalEvent.OnNavigateToAddSelfJournal)}

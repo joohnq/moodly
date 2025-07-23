@@ -24,6 +24,7 @@ import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.remember.rememberFocusRequester
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Drawables
@@ -34,7 +35,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun EditJournalingContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: EditSelfJournalState,
     canSave: Boolean,
     onEvent: (EditSelfJournalEvent) -> Unit = {},
@@ -75,7 +76,7 @@ fun EditJournalingContent(
                 canSave = canSave,
                 onEditingAction = onAction,
                 onEvent = onEvent,
-                requestTitleFocus = titleFocusRequest::requestFocus,
+                onRequestTitleFocus = titleFocusRequest::requestFocus,
             )
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -150,21 +151,3 @@ fun EditJournalingContent(
         }
     }
 }
-
-@Preview
-@Composable
-fun EditJournalingUIPreview() {
-    ImageAlertDialog(
-        onDismissRequest = {
-
-        },
-        onConfirmation = {
-
-        },
-        dialogTitle = Res.string.delete_journal,
-        dialogText = Res.string.do_you_wish_to_remove_this_journal,
-        image = Drawables.Images.SelfJournalDeleting,
-        backgroundColor = Colors.White
-    )
-}
-

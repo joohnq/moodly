@@ -20,7 +20,6 @@ import com.kizitonwose.calendar.core.DayPosition
 @Composable
 fun MoodDay(
     record: MoodRecordResource?,
-    containerColor: Color,
     day: CalendarDay,
 ) {
     val isSelected = record != null
@@ -45,7 +44,7 @@ fun MoodDay(
             )
 
             else -> Modifier.background(
-                color = containerColor,
+                color = Colors.Gray5,
                 shape = Dimens.Shape.Circle
             )
         }

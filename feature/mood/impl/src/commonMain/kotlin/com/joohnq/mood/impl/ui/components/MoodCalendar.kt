@@ -17,7 +17,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodCalendar(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
 ) {
@@ -29,13 +28,11 @@ fun MoodCalendar(
     )
     GiganticCreateCard(
         modifier = modifier,
-        containerColor = containerColor,
         title = recordsInMonth,
         subtitle = stringResource(Res.string.moods_logged_this_month),
         onCreate = onCreate,
         content = {
             MoodHorizontalCalendar(
-                containerColor = containerColor,
                 records = records,
             )
         }

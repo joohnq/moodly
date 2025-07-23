@@ -20,7 +20,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalingMetric(
     records: List<SelfJournalRecordResource>,
-    containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
 ) {
     val resource = records.getTodaySelfJournalRecord()
@@ -28,7 +27,7 @@ fun SelfJournalingMetric(
     if (resource == null)
         NotFoundHorizontal(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
+            containerColor = Colors.White,
             title = Res.string.lets_set_up_daily_journaling_and_self_reflection,
             subtitle = Res.string.add_new_journal,
             image = Drawables.Images.SelfJournalCreate,
@@ -37,7 +36,6 @@ fun SelfJournalingMetric(
     else {
         JournalCalendar(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
             records = records,
             subtitle = stringResource(
                 Res.string.journals_written_in,

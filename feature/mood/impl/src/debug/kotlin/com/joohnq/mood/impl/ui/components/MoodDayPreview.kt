@@ -13,7 +13,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodDayPreview() {
     MoodDay(
         record = depressedMoodRecordResourcePreview,
-        containerColor = Colors.White,
         day = CalendarDay(
             date = LocalDate(2023, 1, 1),
             position = DayPosition.MonthDate

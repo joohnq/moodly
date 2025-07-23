@@ -13,7 +13,6 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 @Composable
 fun MoodHorizontalCalendar(
     calendarState: CalendarState = rememberCalendarState(),
-    containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
 ) {
     HorizontalCalendar(
@@ -25,7 +24,6 @@ fun MoodHorizontalCalendar(
 
             MoodDay(
                 record = record,
-                containerColor = containerColor,
                 day = day,
             )
         },

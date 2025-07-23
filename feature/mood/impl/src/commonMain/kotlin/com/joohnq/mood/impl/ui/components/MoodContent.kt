@@ -28,7 +28,6 @@ fun MoodContent(
     )
     MoodCalendar(
         modifier = modifier,
-        containerColor = containerColor,
         records = records,
         onCreate = { onEvent(MoodEvent.OnAddMood) }
     )

@@ -20,7 +20,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun GiganticCreateCard(
     modifier: Modifier = Modifier,
-    containerColor: Color,
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
@@ -28,9 +27,9 @@ fun GiganticCreateCard(
 ) {
     Card(
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Colors.Brown80,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Colors.Brown80
         ),
         shape = Dimens.Shape.Large,

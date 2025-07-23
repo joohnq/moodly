@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joohnq.api.mapper.toCompleteDateString
 import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
@@ -19,6 +20,7 @@ import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.hour
+import com.joohnq.shared_resources.mood_show
 import com.joohnq.shared_resources.theme.*
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import org.jetbrains.compose.resources.painterResource
@@ -26,8 +28,74 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SelfJournalHistoryCard(
+    record: SelfJournalRecordResource,
+    onClick: () -> Unit = {},
+) {
+    Card(
+        modifier = Modifier.width(220.dp).height(250.dp),
+        colors = ComponentColors.Card.MainCardColors(),
+        shape = Dimens.Shape.Large,
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize().paddingAllSmall(),
+            verticalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier.size(48.dp).background(
+                        color = record.mood.palette.color,
+                        shape = Dimens.Shape.Small
+                    ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    MoodFace(
+                        resource = record.mood,
+                        modifier = Modifier.size(24.dp),
+                        backgroundColor = Colors.White,
+                        color = record.mood.palette.color
+                    )
+                }
+                Text(
+                    text = record.createdAt.date.toCompleteDateString(),
+                    style = TextStyles.TextSmSemiBold(),
+                    color = Colors.Brown80
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                TextWithBackground(
+                    text = stringResource(
+                        Res.string.mood_show,
+                        stringResource(record.mood.text)
+                    ).uppercase(),
+                    backgroundColor = record.mood.palette.backgroundColor,
+                    textColor = record.mood.palette.color
+                )
+                TextEllipsis(
+                    text = record.title,
+                    style = TextStyles.TextLgBold(),
+                    color = Colors.Brown80
+                )
+                TextEllipsis(
+                    text = record.description,
+                    style = TextStyles.TextSmSemiBold(),
+                    color = Colors.Brown100Alpha64
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SelfJournalHistoryCard(
     modifier: Modifier = Modifier,
-    containerColor: Color,
     isNotFirst: Boolean,
     isNotLast: Boolean,
     record: SelfJournalRecordResource,
@@ -35,7 +103,7 @@ fun SelfJournalHistoryCard(
     onDelete: () -> Unit,
 ) {
     SwipeTorRevealCard(
-        modifier = modifier.background(color = containerColor, shape = Dimens.Shape.Large),
+        modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),
         content = { modifier ->
             Card(
                 shape = Dimens.Shape.Large,

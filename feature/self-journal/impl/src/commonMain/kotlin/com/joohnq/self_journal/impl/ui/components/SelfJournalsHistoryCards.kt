@@ -14,10 +14,9 @@ import kotlinx.datetime.LocalDate
 @Composable
 fun SelfJournalsHistoryCards(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: Map<LocalDate, List<SelfJournalRecordResource>>,
-    onClick: (Int) -> Unit,
-    onDelete: (Int) -> Unit,
+    onClick: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {},
 ) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
         itemsIndexed(
@@ -31,7 +30,6 @@ fun SelfJournalsHistoryCards(
         ) { i, lastIndex, record ->
             SelfJournalHistoryCard(
                 modifier = modifier,
-                containerColor = containerColor,
                 isNotFirst = i != 0,
                 isNotLast = i != lastIndex,
                 record = record,

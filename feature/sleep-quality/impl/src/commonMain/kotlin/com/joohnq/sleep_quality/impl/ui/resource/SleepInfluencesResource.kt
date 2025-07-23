@@ -10,7 +10,6 @@ import com.joohnq.shared_resources.exposure_to_natural_light
 import com.joohnq.shared_resources.high_stress
 import com.joohnq.shared_resources.meditation
 import com.joohnq.shared_resources.physical_activity
-import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.ALCOHOL_CONSUMPTION
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.ANXIETY
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.CAFFEINE
@@ -20,6 +19,7 @@ import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.HIGH_STRESS
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.MEDITATION
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.NATURAL_LIGHT
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
+import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
 import org.jetbrains.compose.resources.StringResource
 
 sealed class SleepInfluencesResource(
@@ -54,4 +54,18 @@ sealed class SleepInfluencesResource(
     data object Anxiety : SleepInfluencesResource(id = ANXIETY.id, title = Res.string.anxiety)
     data object AlcoholConsumption :
         SleepInfluencesResource(id = ALCOHOL_CONSUMPTION.id, title = Res.string.alcohol_consumption)
+
+    companion object {
+        val allSleepInfluences = listOf(
+            NaturalLight,
+            PhysicalActivity,
+            ChillSleepEnvironment,
+            Meditation,
+            Caffeine,
+            ExcessiveScreenTime,
+            HighStress,
+            Anxiety,
+            AlcoholConsumption
+        )
+    }
 }

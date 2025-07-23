@@ -1,6 +1,13 @@
 package com.joohnq.onboarding.impl.presentation.onboarding_mood_rate
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,7 +29,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun OnboardingMoodRateContent(
@@ -66,9 +72,9 @@ fun OnboardingMoodRateContent(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        val carouselOffset = when{
+        val carouselOffset = when {
             maxWidth >= 400.dp -> maxHeight - 200.dp
-            else ->  maxHeight - (maxWidth / 2) + 50.dp
+            else -> maxHeight - (maxWidth / 2) + 50.dp
         }
 
         Box(
@@ -83,12 +89,4 @@ fun OnboardingMoodRateContent(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun OnboardingMoodRateUIPreview() {
-    OnboardingMoodRateContent(
-        state = MoodRecordResource(),
-    )
 }

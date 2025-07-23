@@ -17,7 +17,6 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun OnboardingExpressionAnalysisContent(
@@ -50,15 +49,4 @@ fun OnboardingExpressionAnalysisContent(
             }
         )
     }
-}
-
-@Preview
-@Composable
-fun OnboardingExpressionAnalysisUIPreview() {
-    OnboardingExpressionAnalysisContent(
-        snackBarState = SnackbarHostState(),
-        description = "",
-        onEvent = {},
-        onAction = {},
-    )
 }

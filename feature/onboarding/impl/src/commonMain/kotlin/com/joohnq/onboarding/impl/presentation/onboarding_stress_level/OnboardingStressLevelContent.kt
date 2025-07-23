@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingStressLevelContent(
-    record: StressLevelRecordResource,
+    state: StressLevelRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -41,7 +41,7 @@ fun OnboardingStressLevelContent(
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
-            text = stringResource(record.stressLevel.value),
+            text = stringResource(state.stressLevel.value),
             style = TextStyles.DisplayLgExtraBold(),
             color = Colors.Brown80
         )
@@ -54,7 +54,7 @@ fun OnboardingStressLevelContent(
                 TextRadioButton(
                     modifier = Modifier.weight(1f).aspectRatio(1f).testTag(option.id.toString()),
                     text = option.value,
-                    selected = record.stressLevel == option,
+                    selected = state.stressLevel == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
                     onClick = { onAction(OnboardingIntent.UpdateStressLevel(option)) }
@@ -63,7 +63,7 @@ fun OnboardingStressLevelContent(
         }
         VerticalSpacer(16.dp)
         Text(
-            text = stringResource(record.stressLevel.text),
+            text = stringResource(state.stressLevel.text),
             style = TextStyles.TextLgBold(),
             color = Colors.Brown80
         )

@@ -13,6 +13,7 @@ import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
@@ -20,7 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun OnboardingExpressionAnalysisContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},

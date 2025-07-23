@@ -17,8 +17,6 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.experiencing_physical_symptoms_title
 import com.joohnq.shared_resources.select_one_answer
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.user.impl.ui.mapper.getAllPhysicalSymptomsResource
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
@@ -26,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingPhysicalSymptomsContent(
-    physicalSymptoms: PhysicalSymptomsResource?,
+    state: PhysicalSymptomsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -35,7 +33,7 @@ fun OnboardingPhysicalSymptomsContent(
     OnboardingBaseComponent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
-        isContinueButtonVisible = physicalSymptoms != null,
+        isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
@@ -53,13 +51,9 @@ fun OnboardingPhysicalSymptomsContent(
             options.forEach { option: PhysicalSymptomsResource ->
                 PhysicalSymptomsRadioButton(
                     modifier = Modifier.fillMaxWidth().testTag(option.id.toString()),
-                    paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
-                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = physicalSymptoms == option,
-                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    shape = Dimens.Shape.Medium,
-                    textStyle = TextStyles.TextLgExtraBold(),
+                    icon = option.icon,
+                    selected = state == option,
                     onClick = {
                         onAction(
                             OnboardingIntent.UpdateUserPhysicalSymptoms(option)

@@ -22,7 +22,7 @@ fun OnboardingPhysicalSymptomsScreen(
         }
 
     OnboardingPhysicalSymptomsContent(
-        physicalSymptoms = onboardingState.physicalSymptoms,
+        state = onboardingState.physicalSymptoms,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

@@ -25,7 +25,7 @@ fun OnboardingMedicationsSupplementsScreen(
         }
 
     OnboardingMedicationsSupplementsContent(
-        state = state,
+        state = state.medicationsSupplements,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

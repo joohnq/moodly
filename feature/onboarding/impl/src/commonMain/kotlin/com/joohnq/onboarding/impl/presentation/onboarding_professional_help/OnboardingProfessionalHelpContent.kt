@@ -21,7 +21,7 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 @Composable
 fun OnboardingProfessionalHelpContent(
-    soughtHelp: ProfessionalHelpResource?,
+    state: ProfessionalHelpResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -31,7 +31,7 @@ fun OnboardingProfessionalHelpContent(
         page = 2,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,
-        isContinueButtonVisible = soughtHelp != null,
+        isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
@@ -43,7 +43,7 @@ fun OnboardingProfessionalHelpContent(
                 TextRadioButton(
                     modifier = Modifier.weight(1f),
                     text = option.text,
-                    selected = soughtHelp == option,
+                    selected = state == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.TextRadioButtonColors(),
                     onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }

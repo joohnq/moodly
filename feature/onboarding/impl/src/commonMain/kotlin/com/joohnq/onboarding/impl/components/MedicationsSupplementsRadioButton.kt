@@ -2,34 +2,31 @@ package com.joohnq.onboarding.impl.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.DIcon
-import com.joohnq.ui.entity.TextRadioButtonColors
 import com.joohnq.shared_resources.components.Icon
 import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.ui.entity.DIcon
 
 @Composable
 fun MedicationsSupplementsRadioButton(
     modifier: Modifier = Modifier,
-    paddingValues: PaddingValues,
     text: String,
     icon: DIcon,
     selected: Boolean,
-    colors: TextRadioButtonColors,
-    shape: Shape,
-    textStyle: TextStyle,
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
 ) {
+    val colors = ComponentColors.RadioButton.TextRadioButtonColors()
     Button(
         modifier = modifier,
-        shape = shape,
+        shape = Dimens.Shape.Medium,
         colors = ComponentColors.Button.TextRadioButtonColors(selected = selected, colors = colors),
         border = if (selected) BorderStroke(
             color = colors.selectedBorderColor,
@@ -40,15 +37,19 @@ fun MedicationsSupplementsRadioButton(
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier.fillMaxSize().padding(PaddingValues(all = 16.dp)),
             horizontalAlignment = Alignment.Start
         ) {
             Icon(
-                icon.copy(tint = if (selected) colors.selectedContentColor else colors.unSelectedContentColor)
+                icon.copy(
+                    tint = if (selected) colors.selectedContentColor else colors.unSelectedContentColor,
+                    modifier = Modifier.size(Dimens.Icon)
+                )
             )
             Text(
                 text = text,
-                style = textStyle.copy(color = if (selected) colors.selectedContentColor else colors.unSelectedContentColor)
+                style = TextStyles.TextMdBold(),
+                color = if (selected) colors.selectedContentColor else colors.unSelectedContentColor
             )
         }
     }

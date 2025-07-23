@@ -22,7 +22,7 @@ fun OnboardingStressLevelScreen(
         }
 
     OnboardingStressLevelContent(
-        record = onboardingState.stressLevel,
+        state = onboardingState.stressLevel,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

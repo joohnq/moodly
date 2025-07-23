@@ -26,7 +26,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun OnboardingMoodRateContent(
-    record: MoodRecordResource,
+    state: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -39,7 +39,7 @@ fun OnboardingMoodRateContent(
         Text(
             text = stringResource(
                 Res.string.mood_rate_desc,
-                stringResource(record.mood.text)
+                stringResource(state.mood.text)
             ),
             style = TextStyles.TextXlSemiBold(),
             color = Colors.Brown100Alpha64,
@@ -47,7 +47,7 @@ fun OnboardingMoodRateContent(
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            resource = record.mood,
+            resource = state.mood,
         )
         VerticalSpacer(24.dp)
     }
@@ -89,6 +89,6 @@ fun OnboardingMoodRateContent(
 @Composable
 fun OnboardingMoodRateUIPreview() {
     OnboardingMoodRateContent(
-        record = MoodRecordResource(),
+        state = MoodRecordResource(),
     )
 }

@@ -1,6 +1,8 @@
 package com.joohnq.onboarding.impl.presentation.onboarding_medications_supplements
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -12,19 +14,15 @@ import com.joohnq.onboarding.impl.components.MedicationsSupplementsRadioButton
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.medications_supplements_title
-import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.user.impl.ui.mapper.getAllMedicationsSupplementsResource
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun OnboardingMedicationsSupplementsContent(
-    state: OnboardingState?,
+    state: MedicationsSupplementsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -34,7 +32,7 @@ fun OnboardingMedicationsSupplementsContent(
     OnboardingBaseComponent(
         page = 5,
         title = Res.string.medications_supplements_title,
-        isContinueButtonVisible = state?.medicationsSupplements != null,
+        isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
     ) {
@@ -48,13 +46,9 @@ fun OnboardingMedicationsSupplementsContent(
             items(options) { option: MedicationsSupplementsResource ->
                 MedicationsSupplementsRadioButton(
                     modifier = Modifier.fillMaxSize().aspectRatio(1f),
-                    paddingValues = PaddingValues(all = 16.dp),
                     text = stringResource(option.text),
-                    icon = option.icon.copy(modifier = Modifier.size(Dimens.Icon)),
-                    selected = state?.medicationsSupplements == option,
-                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
-                    shape = Dimens.Shape.Medium,
-                    textStyle = TextStyles.TextMdBold(),
+                    icon = option.icon,
+                    selected = state == option,
                     onClick = {
                         onAction(
                             OnboardingIntent.UpdateUserMedicationsSupplements(option)

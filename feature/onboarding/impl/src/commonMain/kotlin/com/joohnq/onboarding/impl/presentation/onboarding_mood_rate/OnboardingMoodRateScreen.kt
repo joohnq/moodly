@@ -22,7 +22,7 @@ fun OnboardingMoodRateScreen(
         }
 
     OnboardingMoodRateContent(
-        record = state.moodRecord,
+        state = state.moodRecord,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent,
     )

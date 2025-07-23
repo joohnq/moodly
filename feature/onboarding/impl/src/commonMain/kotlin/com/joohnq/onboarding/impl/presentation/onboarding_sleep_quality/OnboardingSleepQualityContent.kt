@@ -13,7 +13,6 @@ import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
@@ -26,13 +25,15 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVertic
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.mapper.getAllSleepQualityResource
 import com.joohnq.sleep_quality.impl.ui.mapper.toSleepQualityResource
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OnboardingSleepQualityUI(
-    state: OnboardingState,
+fun OnboardingSleepQualityContent(
+    state: SleepQualityRecordResource,
+    sliderValue: Float,
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingIntent) -> Unit = {},
 ) {
@@ -54,17 +55,17 @@ fun OnboardingSleepQualityUI(
                     modifier = Modifier.fillMaxHeight().weight(1f).paddingVerticalLarge(),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    sleepQualityOptions.forEach { sleepQuality: SleepQualityResource ->
+                    sleepQualityOptions.forEach { sleepQualityOption: SleepQualityResource ->
                         val color =
-                            if (state.sleepQuality.sleepQuality == sleepQuality) Colors.Brown80 else Colors.Brown100Alpha64
+                            if (state == sleepQualityOption) Colors.Brown80 else Colors.Brown100Alpha64
                         Column {
                             Text(
-                                stringResource(sleepQuality.firstText),
+                                stringResource(sleepQualityOption.firstText),
                                 style = TextStyles.TextLgExtraBold()
                                     .copy(color = color)
                             )
                             Text(
-                                stringResource(sleepQuality.secondText),
+                                stringResource(sleepQualityOption.secondText),
                                 style = TextStyles.LabelSm()
                                     .copy(color = color)
                             )
@@ -73,7 +74,7 @@ fun OnboardingSleepQualityUI(
                 }
                 VerticalSlider(
                     modifier = Modifier.weight(1f),
-                    sliderValue = state.sliderValue,
+                    sliderValue = sliderValue,
                     setSliderValue = {
                         onAction(OnboardingIntent.UpdateSliderValue(it))
                         onAction(

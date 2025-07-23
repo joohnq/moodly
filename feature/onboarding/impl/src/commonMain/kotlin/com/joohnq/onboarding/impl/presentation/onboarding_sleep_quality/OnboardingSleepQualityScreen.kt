@@ -21,8 +21,9 @@ fun OnboardingSleepQualityScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    OnboardingSleepQualityUI(
-        state = onboardingState,
+    OnboardingSleepQualityContent(
+        state = onboardingState.sleepQuality,
+        sliderValue = onboardingState.sliderValue,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

@@ -22,7 +22,7 @@ fun OnboardingProfessionalHelpScreen(
         }
 
     OnboardingProfessionalHelpContent(
-        soughtHelp = onboardingState.soughtHelp,
+        state = onboardingState.soughtHelp,
         onAction = onboardingViewModel::onAction,
         onEvent = ::onEvent
     )

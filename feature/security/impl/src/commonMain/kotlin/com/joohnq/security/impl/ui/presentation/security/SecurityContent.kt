@@ -15,6 +15,7 @@ import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.SecondaryButton
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -24,8 +25,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SecurityContent(
-    snackBarState: SnackbarHostState,
-    onEvent: (SecurityEvent) -> Unit,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
+    onEvent: (SecurityEvent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
         containerColor = Colors.Brown10,

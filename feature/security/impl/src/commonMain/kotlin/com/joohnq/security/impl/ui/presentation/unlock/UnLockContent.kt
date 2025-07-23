@@ -12,15 +12,17 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.impl.ui.components.PINCode
+import com.joohnq.security.impl.ui.components.PinCode
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
@@ -42,15 +44,15 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UnLockContent(
-    sheetState: SheetState,
-    isError: Exception?,
+    sheetState: SheetState = rememberModalBottomSheetState(),
+    isError: Exception? = null,
     showBottomSheet: Boolean,
     pinState: PINState,
-    focusRequesters: List<FocusRequester>,
-    focusManager: FocusManager,
-    keyboardManager: SoftwareKeyboardController?,
-    onAction: (PINIntent) -> Unit,
-    onEvent: (UnLockEvent) -> Unit,
+    focusRequesters: List<FocusRequester> = emptyList(),
+    focusManager: FocusManager = LocalFocusManager.current,
+    keyboardManager: SoftwareKeyboardController? = null,
+    onAction: (PINIntent) -> Unit = {},
+    onEvent: (UnLockEvent) -> Unit = {},
 ) {
     if (showBottomSheet) {
         ModalBottomSheet(
@@ -72,7 +74,7 @@ fun UnLockContent(
                     textAlign = TextAlign.Center
                 )
                 VerticalSpacer(10.dp)
-                PINCode(
+                PinCode(
                     code = pinState.code,
                     focusedIndex = pinState.focusedIndex,
                     onNumberChanged = { i, newNumber ->

@@ -23,7 +23,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun FirstContent(onNext: () -> Unit) {
+fun FirstContent(
+    onNext: () -> Unit = {}
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,

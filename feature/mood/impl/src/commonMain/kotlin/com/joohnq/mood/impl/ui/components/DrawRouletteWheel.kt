@@ -8,7 +8,7 @@ import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.draw_scope.drawSlice
 import androidx.compose.ui.geometry.Size
 
-fun DrawScope.drawRoulette(
+fun DrawScope.drawRouletteWheel(
     sliceAngle: Float,
     rotation: Float,
     painterResources: List<VectorPainter>,

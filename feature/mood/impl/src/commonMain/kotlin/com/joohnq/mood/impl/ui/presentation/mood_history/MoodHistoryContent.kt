@@ -63,7 +63,6 @@ fun MoodHistoryContent(
                             ) { modifier ->
                                 MoodHistoryCard(
                                     modifier = modifier,
-                                    containerColor = Colors.White,
                                     record = record,
                                 )
                             }

@@ -35,7 +35,7 @@ fun SelfJournalContent(
                         records = records
                     )
                 },
-                content = { modifier ->
+                body = { modifier ->
                     SelfJournalContent(
                         modifier = modifier,
                         records = records,

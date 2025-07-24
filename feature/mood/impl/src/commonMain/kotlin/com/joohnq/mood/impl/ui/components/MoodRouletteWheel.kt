@@ -21,7 +21,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun RouletteMoods(
+fun MoodRouletteWheel(
     modifier: Modifier = Modifier,
     setSelectedMood: (MoodResource) -> Unit = {}
 ) {
@@ -32,9 +32,8 @@ fun RouletteMoods(
         moods.map { rememberVectorPainter(it.assets.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Icons.Filled.RouletteTarget)
     val totalSlices = moods.size
-    val limitedAngle = 360f * (PI / 180) // 6,283185307179586
-    val limitedAngleForSlice =
-        limitedAngle / totalSlices // 0,6283185307179586 / 0,3141592653589793(HALF)
+    val limitedAngle = 360f * (PI / 180)
+    val limitedAngleForSlice = limitedAngle / totalSlices
     val aQuarter = (limitedAngle / 4 - limitedAngleForSlice / 2).toFloat()
     var rotation by rememberSaveable { mutableStateOf(0f) }
 
@@ -57,7 +56,7 @@ fun RouletteMoods(
                 }
             }
     ) {
-        drawRoulette(
+        drawRouletteWheel(
             limitedAngleForSlice.toFloat(),
             rotation,
             painterResources + painterResources,

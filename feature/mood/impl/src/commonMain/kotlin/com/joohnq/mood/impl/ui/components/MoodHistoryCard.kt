@@ -26,15 +26,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     record: MoodRecordResource,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Large

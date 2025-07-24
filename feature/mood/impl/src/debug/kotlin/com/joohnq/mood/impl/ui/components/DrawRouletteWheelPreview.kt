@@ -8,9 +8,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun DrawRoulettePreview() {
+fun DrawRouletteWheelPreview() {
    Canvas(modifier = Modifier.fillMaxSize()) {
-       drawRoulette(
+       drawRouletteWheel(
            sliceAngle = 360f / 6,
            rotation = 0f,
            painterResources = listOf(),

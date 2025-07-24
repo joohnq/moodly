@@ -34,7 +34,7 @@ fun ConvexGroupLazyLayout(
     onAddButton: () -> Unit,
     onGoBack: () -> Unit,
     panel: @Composable ColumnScope.(Modifier) -> Unit,
-    content: @Composable ColumnScope.(Modifier) -> Unit,
+    body: @Composable ColumnScope.(Modifier) -> Unit,
 ) {
     Scaffold(
         containerColor = containerColor,
@@ -91,7 +91,7 @@ fun ConvexGroupLazyLayout(
             }
             item {
                 Column {
-                    content(Modifier.paddingHorizontalMedium())
+                    body(Modifier.paddingHorizontalMedium())
                 }
             }
         }

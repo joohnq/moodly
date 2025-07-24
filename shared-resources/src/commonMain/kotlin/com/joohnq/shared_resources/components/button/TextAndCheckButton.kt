@@ -11,10 +11,10 @@ import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.StringResource
 
 @Composable
-fun ButtonTextAndCheck(
+fun TextAndCheckButton(
     modifier: Modifier = Modifier,
     text: StringResource,
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
 ) {
     TextAndIconButton(
         modifier = modifier,

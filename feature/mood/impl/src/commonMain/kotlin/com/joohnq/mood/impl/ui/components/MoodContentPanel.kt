@@ -22,7 +22,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MoodPanel(
+fun MoodContentPanel(
     modifier: Modifier = Modifier,
     record: MoodRecordResource?,
 ) {

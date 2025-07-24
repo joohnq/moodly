@@ -19,10 +19,9 @@ import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AddMoodRadioGroup(
+fun MoodRadioGroup(
     modifier: Modifier = Modifier,
     selectedMood: MoodRecordResource,
     setSelectedMood: (MoodResource) -> Unit = {},

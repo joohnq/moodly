@@ -17,7 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
@@ -68,11 +71,11 @@ fun ExpressionAnalysisContent(
                 }
             )
             VerticalSpacer(24.dp)
-            if (description.isNotEmpty())
-                ContinueButton(
-                    modifier = Modifier.fillMaxWidth().testTag("CONTINUE_BUTTON"),
-                    onClick = { onEvent(ExpressionAnalysisEvent.OnAdd) }
-                )
+            ContinueButton(
+                modifier = Modifier.fillMaxWidth().testTag("CONTINUE_BUTTON"),
+                enabled = description.isNotEmpty(),
+                onClick = { onEvent(ExpressionAnalysisEvent.OnAdd) }
+            )
         }
     }
 }

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.app_name
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
@@ -12,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PhysicalSymptomsRadioButtonNotSelectedPreview() {
     PhysicalSymptomsRadioButton(
         text = "Option",
-        icon = DIcon(
+        icon = IconResource(
             icon = Drawables.Icons.Outlined.Logo,
             contentDescription = Res.string.app_name,
         ),
@@ -25,7 +25,7 @@ fun PhysicalSymptomsRadioButtonNotSelectedPreview() {
 fun PhysicalSymptomsRadioButtonSelectedPreview() {
     PhysicalSymptomsRadioButton(
         text = "Option",
-        icon = DIcon(
+        icon = IconResource(
             icon = Drawables.Icons.Outlined.Logo,
             contentDescription = Res.string.app_name,
         ),

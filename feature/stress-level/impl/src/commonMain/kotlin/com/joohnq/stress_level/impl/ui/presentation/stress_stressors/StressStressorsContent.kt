@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
@@ -49,7 +50,7 @@ fun StressStressorsContent(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(
+            AppTopBar(
                 text = Res.string.add_stress_level,
                 onGoBack = { onEvent(StressStressorsEvent.GoBack) }
             )

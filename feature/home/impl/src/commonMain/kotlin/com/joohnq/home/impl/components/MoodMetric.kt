@@ -2,12 +2,11 @@ package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.MetricCardSide
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.level
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.set_up_mood
@@ -16,7 +15,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.you_havent_set_up_any_mood_yet
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodMetric(
@@ -27,7 +25,7 @@ fun MoodMetric(
     val record = records.getTodayMoodRecord()
 
     if (record == null)
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
             image = Drawables.Images.MoodInsight,

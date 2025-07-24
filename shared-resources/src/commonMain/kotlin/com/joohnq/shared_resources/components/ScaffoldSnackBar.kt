@@ -27,7 +27,7 @@ fun ScaffoldSnackBar(
         bottomBar = bottomBar
     ) { padding ->
         content(padding)
-        SnackBarUI(
+        SnackBarContent(
             padding = padding,
             snackBarHostState = snackBarHostState,
         )

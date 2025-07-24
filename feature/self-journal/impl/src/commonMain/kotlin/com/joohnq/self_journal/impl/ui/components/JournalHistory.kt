@@ -3,10 +3,9 @@ package com.joohnq.self_journal.impl.ui.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.NotFoundVertical
+import com.joohnq.shared_resources.components.NotFoundVerticalLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.write_journal
@@ -20,7 +19,7 @@ fun JournalHistory(
     onClick: (Int) -> Unit = {}
 ) {
     if (records.isEmpty())
-        NotFoundVertical(
+        NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.write_your_first_journal_to_see_journal_history_lets_do_it_now_for_better_mental_health,

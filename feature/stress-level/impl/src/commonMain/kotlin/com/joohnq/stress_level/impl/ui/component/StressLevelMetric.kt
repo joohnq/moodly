@@ -4,18 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.FivePackIndicator
+import com.joohnq.shared_resources.components.RatingBar
 import com.joohnq.shared_resources.components.MetricCardSide
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.stress_level.impl.ui.mapper.getBrushGradient
 import com.joohnq.stress_level.impl.ui.mapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressLevelMetric(
@@ -27,7 +25,7 @@ fun StressLevelMetric(
     val record = records.getTodayStressLevelRecord()
 
     if (record == null)
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
             title = Res.string.lets_set_up_daily_stress_level,
@@ -45,7 +43,7 @@ fun StressLevelMetric(
             suffix = stringResource(Res.string.level),
             description = stringResource(record.stressLevel.subtitle),
             content = {
-                FivePackIndicator(record.stressLevel.level, ::getBrushGradient)
+                RatingBar(record.stressLevel.level, ::getBrushGradient)
             },
             color = Colors.Orange40,
             onClick = onClick

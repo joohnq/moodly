@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.ContinueButton
 import com.joohnq.shared_resources.components.LogoWithBackground
-import com.joohnq.shared_resources.components.TextWithSpan
+import com.joohnq.shared_resources.components.HeadingWithSpan
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -33,7 +33,7 @@ fun FirstContent(
     ) {
         LogoWithBackground()
         VerticalSpacer(10.dp)
-        TextWithSpan(
+        HeadingWithSpan(
             firstTitle = Res.string.first_screen_title,
             secondTitle = Res.string.first_screen_second_title,
             span = stringResource(Res.string.first_screen_title_word),
@@ -59,7 +59,10 @@ fun FirstContent(
             )
         }
         VerticalSpacer(32.dp)
-        ContinueButton(text = Res.string.get_started, onClick = onNext)
+        PrimaryButton(
+            text = Res.string.get_started,
+            onClick = onNext
+        )
         VerticalSpacer(30.dp)
     }
 }

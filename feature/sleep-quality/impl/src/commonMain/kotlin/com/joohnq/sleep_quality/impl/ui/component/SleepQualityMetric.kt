@@ -13,7 +13,7 @@ import com.joohnq.api.mapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.GiganticSecondaryCard
-import com.joohnq.shared_resources.components.NotFoundVertical
+import com.joohnq.shared_resources.components.NotFoundVerticalLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -31,7 +31,7 @@ fun SleepQualityMetric(
     val record = records.getTodaySleepQualityRecord()
 
     if (record == null)
-        NotFoundVertical(
+        NotFoundVerticalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
             image = Drawables.Images.SleepQualityCreate,

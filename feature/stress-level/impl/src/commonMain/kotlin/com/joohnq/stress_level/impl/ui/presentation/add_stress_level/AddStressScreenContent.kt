@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
-import com.joohnq.shared_resources.components.TopBar
-import com.joohnq.shared_resources.components.VerticalSlider
+import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.SleepQualityVerticalSlider
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
@@ -58,7 +58,7 @@ fun AddStressLevelScreenContent(
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TopBar(
+                AppTopBar(
                     text = Res.string.add_stress_level,
                     onGoBack = { onEvent(AddStressLevelEvent.GoBack) }
                 )
@@ -75,7 +75,7 @@ fun AddStressLevelScreenContent(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Bottom
                 ) {
-                    VerticalSlider(
+                    SleepQualityVerticalSlider(
                         modifier = Modifier.height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {

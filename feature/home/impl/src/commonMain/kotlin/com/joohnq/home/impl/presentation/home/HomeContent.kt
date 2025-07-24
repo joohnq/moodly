@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.User
-import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.home.impl.components.FreudScoreMetric
 import com.joohnq.home.impl.components.HomeTopBar
 import com.joohnq.home.impl.components.MoodMetric
@@ -20,7 +19,7 @@ import com.joohnq.home.impl.presentation.viewmodel.DashboardState
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.LoadingUI
+import com.joohnq.shared_resources.components.view.LoadingView
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.freud_score
@@ -28,15 +27,12 @@ import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.self_journaling
 import com.joohnq.shared_resources.sleep
 import com.joohnq.shared_resources.stress
-import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.component.StressLevelMetric
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeContent(
@@ -51,7 +47,7 @@ fun HomeContent(
         state.selfJournalRecords,
         state.sleepQualityRecords
     ).foldComposable(
-        onLoading = { LoadingUI() },
+        onLoading = { LoadingView() },
         onSuccess = { moodRecords: List<MoodRecordResource>, u: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
             Column(
                 modifier = Modifier

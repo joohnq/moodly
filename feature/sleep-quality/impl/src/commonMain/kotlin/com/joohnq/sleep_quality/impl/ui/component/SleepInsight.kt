@@ -3,14 +3,12 @@ package com.joohnq.sleep_quality.impl.ui.component
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -24,7 +22,7 @@ fun SleepInsight(
         title = Res.string.sleep_insight
     )
     if (records.isEmpty())
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.log_your_first_sleep,

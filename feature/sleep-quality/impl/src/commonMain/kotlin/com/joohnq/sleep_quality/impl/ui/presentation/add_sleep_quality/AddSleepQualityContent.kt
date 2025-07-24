@@ -24,15 +24,15 @@ import com.joohnq.api.mapper.toPaddedString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.AddSleepQualityTimePicker
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.AppTimePicker
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.HorizontalSpacer
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextRadioButton
-import com.joohnq.shared_resources.components.TimePickerCard
-import com.joohnq.shared_resources.components.TimePickerDialog
+import com.joohnq.shared_resources.components.AppTimePickerCard
+import com.joohnq.shared_resources.components.AppTimePickerDialog
 import com.joohnq.shared_resources.components.Title
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.end_sleeping_time
 import com.joohnq.shared_resources.mood
@@ -74,7 +74,7 @@ fun AddSleepQualityContent(
     )
 
     if (state.showStartTimePickerDialog) {
-        TimePickerDialog(
+        AppTimePickerDialog(
             title = Res.string.start_sleeping_time,
             onDismiss = {
                 onAddAction(
@@ -93,12 +93,12 @@ fun AddSleepQualityContent(
                 )
             },
         ) {
-            AddSleepQualityTimePicker(startTimePickerState)
+            AppTimePicker(startTimePickerState)
         }
     }
 
     if (state.showEndTimePickerDialog) {
-        TimePickerDialog(
+        AppTimePickerDialog(
             title = Res.string.end_sleeping_time,
             onDismiss = {
                 onAddAction(AddSleepQualityIntent.UpdateShowStartTimePickerDialog(false))
@@ -113,7 +113,7 @@ fun AddSleepQualityContent(
                 )
             },
         ) {
-            AddSleepQualityTimePicker(endTimePickerState)
+            AppTimePicker(endTimePickerState)
         }
     }
 
@@ -127,7 +127,7 @@ fun AddSleepQualityContent(
                 .padding(padding),
         ) {
             Box(modifier = Modifier.paddingHorizontalMedium()) {
-                TopBar(onGoBack = { onEvent(AddSleepQualityEvent.OnGoBack) })
+                AppTopBar(onGoBack = { onEvent(AddSleepQualityEvent.OnGoBack) })
             }
             VerticalSpacer(40.dp)
             Text(
@@ -142,7 +142,7 @@ fun AddSleepQualityContent(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                TimePickerCard(
+                AppTimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.start_sleeping_time,
                     hour = startTimePickerState.hour.toPaddedString(),
@@ -155,7 +155,7 @@ fun AddSleepQualityContent(
                     }
                 )
                 HorizontalSpacer(20.dp)
-                TimePickerCard(
+                AppTimePickerCard(
                     modifier = Modifier.weight(1f),
                     title = Res.string.end_sleeping_time,
                     hour = endTimePickerState.hour.toPaddedString(),

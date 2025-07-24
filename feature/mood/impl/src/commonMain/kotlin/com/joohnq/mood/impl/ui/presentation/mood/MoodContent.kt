@@ -8,13 +8,10 @@ import com.joohnq.mood.impl.ui.components.MoodPanel
 import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
-import com.joohnq.shared_resources.components.DecoratedConvexPanelList
+import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import kotlinx.datetime.LocalDateTime
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodContent(
@@ -27,7 +24,7 @@ fun MoodContent(
             val record = records.getTodayMoodRecord()
             val hasToday = record != null
 
-            DecoratedConvexPanelList(
+            ConvexGroupLazyLayout(
                 containerColor = Colors.White,
                 panelBackgroundColor = if (hasToday) record.mood.palette.color else Colors.Brown10,
                 isDark = !hasToday,

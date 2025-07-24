@@ -16,18 +16,15 @@ import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.mood.impl.ui.components.MoodHistoryCard
 import com.joohnq.mood.impl.ui.presentation.mood_history.event.MoodHistoryEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodHistoryContent(
@@ -43,7 +40,7 @@ fun MoodHistoryContent(
                     modifier = Modifier
                         .padding(padding).paddingHorizontalMedium()
                 ) {
-                    TopBar(
+                    AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
                         onGoBack = { onEvent(MoodHistoryEvent.OnGoBack) }
@@ -60,7 +57,7 @@ fun MoodHistoryContent(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(records) { record ->
-                            SwipeTorRevealCard(
+                            SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
                                 onAction = {},
                             ) { modifier ->

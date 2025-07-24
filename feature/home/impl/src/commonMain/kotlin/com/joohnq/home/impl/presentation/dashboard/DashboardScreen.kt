@@ -20,7 +20,7 @@ import com.joohnq.home.impl.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.impl.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
-import com.joohnq.shared_resources.components.BottomNavigationActionButton
+import com.joohnq.shared_resources.components.BottomNavigationButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -77,7 +77,7 @@ fun DashboardScreen(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarHostState,
         floatingActionButton = {
-            BottomNavigationActionButton(
+            BottomNavigationButton(
                 modifier = Modifier.size(48.dp),
                 onClick = {
                     centralIsExpanded = !centralIsExpanded

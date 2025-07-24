@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.joohnq.ui.entity.BottomItem
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.home
@@ -16,7 +16,7 @@ import com.joohnq.shared_resources.theme.Drawables
 fun rememberBottomNavigationItems(): List<BottomItem<Destination>> = remember {
     listOf(
         BottomItem(
-            icon = DIcon(
+            icon = IconResource(
                 icon = Drawables.Icons.Outlined.Home,
                 modifier = Modifier.size(Dimens.Icon),
                 contentDescription = Res.string.home

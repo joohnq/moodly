@@ -14,17 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.Icon
+import com.joohnq.shared_resources.components.IconResource
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 
 @Composable
 fun PhysicalSymptomsRadioButton(
     modifier: Modifier = Modifier,
     text: String,
-    icon: DIcon,
+    icon: IconResource,
     selected: Boolean,
     onClick: () -> Unit = {},
 ) {
@@ -49,7 +49,7 @@ fun PhysicalSymptomsRadioButton(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
+                IconResource(
                     icon.copy(
                         modifier = Modifier.size(Dimens.Icon),
                         tint = if (selected) colors.selectedContentColor else colors.unSelectedContentColor

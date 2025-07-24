@@ -7,10 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.navigation.Destination
-import com.joohnq.shared_resources.components.BottomNavigationActionButton
+import com.joohnq.shared_resources.components.BottomNavigationButton
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DashboardBottomNavigation(
@@ -37,7 +36,7 @@ fun DashboardBottomNavigation(
             isCurrentRoute = isCurrentRoute,
             onNavigate = onNavigate
         )
-        BottomNavigationActionButton(
+        BottomNavigationButton(
             modifier = Modifier.size(48.dp),
             onClick = toggleIsCentralExpanded,
             image = if (isCentralExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo,

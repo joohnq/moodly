@@ -18,10 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.assessments
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.TextWithBackground
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.page_of
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -54,7 +54,7 @@ fun OnboardingBaseComponent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(
+            AppTopBar(
                 text = Res.string.assessments,
                 onGoBack = onGoBack
             ) {

@@ -21,10 +21,10 @@ import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmod
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.ImageAlertDialog
-import com.joohnq.shared_resources.components.IsEmpty
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.DialogWithImage
+import com.joohnq.shared_resources.components.view.EmptyView
+import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
@@ -34,7 +34,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SelfJournalHistoryContent(
@@ -44,7 +43,7 @@ fun SelfJournalHistoryContent(
     onEvent: (SelfJournalHistoryEvent) -> Unit = {},
 ) {
     if (state.openDeleteDialog)
-        ImageAlertDialog(
+        DialogWithImage(
             onDismissRequest = {
                 onAction(
                     SelfJournalHistoryIntent.UpdateOpenDeleteDialog(false)
@@ -70,7 +69,7 @@ fun SelfJournalHistoryContent(
                 containerColor = Colors.Brown10
             ) { padding ->
                 Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
-                    TopBar(
+                    AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
                         onGoBack = { onEvent(SelfJournalHistoryEvent.OnGoBack) }
@@ -89,7 +88,7 @@ fun SelfJournalHistoryContent(
                         items(
                             items = recordsMap,
                             empty = {
-                                IsEmpty()
+                                EmptyView()
                             },
                             title = { date ->
                                 Text(
@@ -99,7 +98,7 @@ fun SelfJournalHistoryContent(
                                 )
                             },
                         ) { record ->
-                            SwipeTorRevealCard(
+                            SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
                                 onAction = {}
                             ) { modifier ->

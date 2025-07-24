@@ -1,23 +1,9 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.api.getNow
-import com.joohnq.api.mapper.toMonthNameString
-import com.joohnq.self_journal.impl.ui.components.JournalCalendar
-import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.add_new_journal
-import com.joohnq.shared_resources.components.NotFoundHorizontal
-import com.joohnq.shared_resources.journals_written_in
-import com.joohnq.shared_resources.lets_set_up_daily_journaling_and_self_reflection
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import kotlinx.datetime.LocalDateTime
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview

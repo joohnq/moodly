@@ -19,9 +19,9 @@ import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.enter_a_four_digit_pin
 import com.joohnq.shared_resources.pin_setup
@@ -59,7 +59,7 @@ fun PinContent(
                 modifier = Modifier.paddingHorizontalMedium(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TopBar(
+                AppTopBar(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.pin_setup,
                     onGoBack = { onEvent(PINEvent.OnGoBack) },

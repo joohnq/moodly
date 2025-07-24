@@ -7,15 +7,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
+import com.joohnq.shared_resources.components.SwipeableCardLayout
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.stress_history
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressHistory(
@@ -30,7 +29,7 @@ fun StressHistory(
         onSeeMore = {}
     )
     if (records.isEmpty())
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.lets_set_up_daily_stress_level,
@@ -41,7 +40,7 @@ fun StressHistory(
     else
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             records.forEach { record ->
-                SwipeTorRevealCard(
+                SwipeableCardLayout(
                     modifier = modifier,
                     onAction = { onDelete(record.id) }
                 ) { modifier ->

@@ -31,7 +31,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun EditJournalingContent(
@@ -48,7 +47,7 @@ fun EditJournalingContent(
     val resource = mood.toResource()
 
     if (state.openDeleteDialog)
-        ImageAlertDialog(
+        DialogWithImage(
             onDismissRequest = {
                 onAction(
                     EditSelfJournalIntent.UpdateOpenDeleteDialog(
@@ -93,7 +92,7 @@ fun EditJournalingContent(
                 modifier = Modifier.fillMaxWidth()
                     .paddingHorizontalMedium()
             ) {
-                TopBar(
+                AppTopBar(
                     onGoBack = { onEvent(EditSelfJournalEvent.OnGoBack) },
                     text = Res.string.edit_journal,
                 ) {

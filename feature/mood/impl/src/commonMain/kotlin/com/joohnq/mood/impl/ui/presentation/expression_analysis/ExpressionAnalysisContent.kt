@@ -18,6 +18,7 @@ import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -43,7 +44,7 @@ fun ExpressionAnalysisContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TopBar(onGoBack = { onEvent(ExpressionAnalysisEvent.OnGoBack) })
+            AppTopBar(onGoBack = { onEvent(ExpressionAnalysisEvent.OnGoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),

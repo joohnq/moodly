@@ -14,10 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -25,7 +24,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun JournalInsight(
@@ -40,7 +38,7 @@ fun JournalInsight(
     val moodResources = remember { getAllMoodResource() }
 
     if (groupedMoods.isEmpty())
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             image = Drawables.Images.SelfJournalInsight,

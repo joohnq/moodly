@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MultiColorCircularProgress(
+    modifier: Modifier = Modifier,
     segments: List<Pair<Color, Float>>,
     gapAngle: Float = 4f,
-    modifier: Modifier = Modifier,
     strokeWidth: Dp = 8.dp
 ) {
     val totalProgress = segments.sumOf { it.second.toDouble() }.toFloat()

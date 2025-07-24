@@ -41,5 +41,14 @@ data class StressLevelRecordResource(
             stressLevel = StressLevelResource.Five,
             stressors = allStressors,
         )
+
+        val allStressLevelRecordResourcePreview = listOf(
+            stressLevelRecordResourceOnePreview,
+            stressLevelRecordResourceTwoPreview,
+            stressLevelRecordResourceThreePreview,
+            stressLevelRecordResourceFourPreview,
+            stressLevelRecordResourceFivePreview,
+            stressLevelRecordResourceWithStressorsPreview,
+        )
     }
 }

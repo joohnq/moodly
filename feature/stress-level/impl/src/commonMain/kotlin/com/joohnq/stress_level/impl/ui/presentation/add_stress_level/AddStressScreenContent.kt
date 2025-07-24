@@ -27,6 +27,7 @@ import com.joohnq.shared_resources.components.SleepQualityTrack
 import com.joohnq.shared_resources.components.TopBar
 import com.joohnq.shared_resources.components.VerticalSlider
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -40,10 +41,10 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddStressLevelScreenContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddingStressLevelState,
-    onAction: (AddStressLevelIntent) -> Unit,
-    onEvent: (AddStressLevelEvent) -> Unit,
+    onAction: (AddStressLevelIntent) -> Unit = {},
+    onEvent: (AddStressLevelEvent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
         snackBarHostState = snackBarState,

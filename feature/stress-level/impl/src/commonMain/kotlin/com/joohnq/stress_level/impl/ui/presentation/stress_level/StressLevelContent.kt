@@ -39,7 +39,7 @@ fun StressLevelContent(
                 },
                 onAddButton = { onEvent(StressLevelEvent.onAddStressLevel) },
                 onGoBack = { onEvent(StressLevelEvent.OnGoBack) },
-                content = { modifier ->
+                body = { modifier ->
                     StressContent(
                         modifier = modifier,
                         records = records,

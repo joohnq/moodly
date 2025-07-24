@@ -37,7 +37,7 @@ fun SleepQualityContent(
                 },
                 onAddButton = { onEvent(SleepQualityEvent.OnNavigateToAddSleepQuality) },
                 onGoBack = { onEvent(SleepQualityEvent.OnGoBack) },
-                content = { modifier ->
+                body = { modifier ->
                     SleepContent(
                         modifier = modifier,
                         records = records,

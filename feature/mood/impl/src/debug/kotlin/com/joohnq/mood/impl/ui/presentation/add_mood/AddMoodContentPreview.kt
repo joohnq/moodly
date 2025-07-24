@@ -1,12 +1,8 @@
 package com.joohnq.mood.impl.ui.presentation.add_mood
 
 import androidx.compose.runtime.Composable
-import com.joohnq.mood.impl.ui.fake.depressedMoodRecordResourcePreview
-import com.joohnq.mood.impl.ui.fake.happyMoodRecordResourcePreview
-import com.joohnq.mood.impl.ui.fake.neutralMoodRecordResourcePreview
-import com.joohnq.mood.impl.ui.fake.overjoyedMoodRecordResourcePreview
-import com.joohnq.mood.impl.ui.fake.sadMoodRecordResourcePreview
 import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodState
+import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
@@ -14,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AddMoodContentDepressedPreview() {
     AddMoodContent(
         state = AddMoodState(
-            record = depressedMoodRecordResourcePreview
+            record = MoodRecordResource.moodRecordResourceDepressedPreview
         ),
     )
 }
@@ -24,7 +20,7 @@ fun AddMoodContentDepressedPreview() {
 fun AddMoodContentSadPreview() {
     AddMoodContent(
         state = AddMoodState(
-            record = sadMoodRecordResourcePreview
+            record = MoodRecordResource.moodRecordResourceSadPreview
         ),
     )
 }
@@ -34,7 +30,7 @@ fun AddMoodContentSadPreview() {
 fun AddMoodContentNeutralPreview() {
     AddMoodContent(
         state = AddMoodState(
-            record = neutralMoodRecordResourcePreview
+            record = MoodRecordResource.moodRecordResourceNeutralPreview
         ),
     )
 }
@@ -44,7 +40,7 @@ fun AddMoodContentNeutralPreview() {
 fun AddMoodContentHappyPreview() {
     AddMoodContent(
         state = AddMoodState(
-            record = happyMoodRecordResourcePreview
+            record = MoodRecordResource.moodRecordResourceHappyPreview
         ),
     )
 }
@@ -54,7 +50,7 @@ fun AddMoodContentHappyPreview() {
 fun AddMoodContentOverjoyedPreview() {
     AddMoodContent(
         state = AddMoodState(
-            record = overjoyedMoodRecordResourcePreview
+            record = MoodRecordResource.moodRecordResourceOverjoyedPreview
         ),
     )
 }

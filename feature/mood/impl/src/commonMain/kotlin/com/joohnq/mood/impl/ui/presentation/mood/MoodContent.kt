@@ -1,10 +1,8 @@
 package com.joohnq.mood.impl.ui.presentation.mood
 
 import androidx.compose.runtime.Composable
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.mood.impl.ui.components.MoodContent
-import com.joohnq.mood.impl.ui.components.MoodPanel
+import com.joohnq.mood.impl.ui.components.MoodContentBody
+import com.joohnq.mood.impl.ui.components.MoodContentPanel
 import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
@@ -12,6 +10,8 @@ import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
 import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 
 @Composable
 fun MoodContent(
@@ -33,13 +33,13 @@ fun MoodContent(
                 onAddButton = { onEvent(MoodEvent.OnAddMood) },
                 onGoBack = { onEvent(MoodEvent.OnGoBack) },
                 panel = { modifier ->
-                    MoodPanel(
+                    MoodContentPanel(
                         modifier = modifier,
                         record = record,
                     )
                 },
-                content = { modifier ->
-                    MoodContent(
+                body = { modifier ->
+                    MoodContentBody(
                         modifier = modifier,
                         record = record,
                         records = records,

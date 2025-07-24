@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.components.RouletteMoods
+import com.joohnq.mood.impl.ui.components.MoodRouletteWheel
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
@@ -83,7 +83,7 @@ fun OnboardingMoodRateContent(
                 .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
-            RouletteMoods(
+            MoodRouletteWheel(
                 modifier = Modifier.fillMaxSize().scale(1.4f),
                 setSelectedMood = { onAction(OnboardingIntent.UpdateMood(it)) }
             )

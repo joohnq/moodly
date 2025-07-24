@@ -32,7 +32,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoodInsightContent(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<MoodRecordResource>,
 ) {
     val weekRecords = records.getWeekRecords()
@@ -44,9 +43,9 @@ fun MoodInsightContent(
     )
     Card(
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Colors.Brown80,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Colors.Brown80
         ),
         shape = Dimens.Shape.Large,

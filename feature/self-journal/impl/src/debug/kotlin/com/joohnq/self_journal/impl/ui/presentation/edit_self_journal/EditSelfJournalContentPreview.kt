@@ -2,16 +2,22 @@ package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import com.joohnq.self_journal.impl.ui.parameter.BooleanParameterProvider
+import com.joohnq.self_journal.impl.ui.parameter.SelfJournalRecordParameterProvider
 import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun EditJournalingContentPreview() {
+fun EditJournalingContentPreview(
+    @PreviewParameter(SelfJournalRecordParameterProvider::class)
+    item: SelfJournalRecord,
+) {
     EditJournalingContent(
         state = EditSelfJournalState(
-            currentSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            editingSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
+            currentSelfJournalRecord = item,
+            editingSelfJournalRecord = item,
             isEditing = false,
             openDeleteDialog = false
         ),
@@ -21,42 +27,15 @@ fun EditJournalingContentPreview() {
 
 @Preview
 @Composable
-fun EditJournalingContentIsEditingPreview() {
+fun EditJournalingContentPreview(
+    @PreviewParameter(BooleanParameterProvider::class)
+    boolean: Boolean
+) {
     EditJournalingContent(
         state = EditSelfJournalState(
-            currentSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            editingSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            isEditing = true,
-            openDeleteDialog = false
+            isEditing = boolean,
+            openDeleteDialog = !boolean
         ),
-        canSave = false,
-    )
-}
-
-@Preview
-@Composable
-fun EditJournalingContentCanSavePreview() {
-    EditJournalingContent(
-        state = EditSelfJournalState(
-            currentSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            editingSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            isEditing = false,
-            openDeleteDialog = false
-        ),
-        canSave = true,
-    )
-}
-
-@Preview
-@Composable
-fun EditJournalingContentIsOpenDeleteDialogPreview() {
-    EditJournalingContent(
-        state = EditSelfJournalState(
-            currentSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            editingSelfJournalRecord = SelfJournalRecord.selfJournalDepressedPreview,
-            isEditing = false,
-            openDeleteDialog = true
-        ),
-        canSave = false,
+        canSave = boolean,
     )
 }

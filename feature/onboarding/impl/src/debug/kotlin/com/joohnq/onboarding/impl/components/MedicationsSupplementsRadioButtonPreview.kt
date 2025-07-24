@@ -1,85 +1,28 @@
 package com.joohnq.onboarding.impl.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.joohnq.user.impl.ui.parameter.MedicationsSupplementsResourceParameterProvider
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun MedicationsSupplementsRadioButtonPrescribedMedicationsNotSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.PrescribedMedications.icon,
-        selected = false,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonPrescribedMedicationsSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.PrescribedMedications.icon,
-        selected = true,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonOverTheCounterSupplementsNotSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.OverTheCounterSupplements.icon,
-        selected = false,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonOverTheCounterSupplementsSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.OverTheCounterSupplements.icon,
-        selected = true,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonImNotTakingAnyNotSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.ImNotTakingAny.icon,
-        selected = false,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonImNotTakingAnySelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.ImNotTakingAny.icon,
-        selected = true,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonPreferNotToSayNotSelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.PreferNotToSay.icon,
-        selected = false,
-    )
-}
-
-@Preview
-@Composable
-fun MedicationsSupplementsRadioButtonPreferNotToSaySelectedPreview() {
-    MedicationsSupplementsRadioButton(
-        text = "Option",
-        icon = MedicationsSupplementsResource.PreferNotToSay.icon,
-        selected = true,
-    )
+fun MedicationsSupplementsRadioButtonPreview(
+    @PreviewParameter(MedicationsSupplementsResourceParameterProvider::class)
+    item: MedicationsSupplementsResource
+) {
+    Column {
+        MedicationsSupplementsRadioButton(
+            text = "Option",
+            icon = item.icon,
+            selected = false,
+        )
+        MedicationsSupplementsRadioButton(
+            text = "Option",
+            icon = item.icon,
+            selected = true,
+        )
+    }
 }

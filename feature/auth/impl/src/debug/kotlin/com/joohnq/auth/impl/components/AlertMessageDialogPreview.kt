@@ -16,7 +16,7 @@ fun AlertMessageDialogPreview() {
 
 @Preview
 @Composable
-fun AlertMessageDialogPreviewOnlyTitle() {
+fun AlertMessageDialogOnlyTitlePreview() {
     AlertMessageDialog(
         title = "Title",
     )
@@ -24,7 +24,7 @@ fun AlertMessageDialogPreviewOnlyTitle() {
 
 @Preview
 @Composable
-fun AlertMessageDialogPreviewWithoutButtons() {
+fun AlertMessageDialogWithoutButtonsPreview() {
     AlertMessageDialog(
         title = "Title",
         message = "Message Here",

@@ -1,58 +1,23 @@
 package com.joohnq.onboarding.impl.presentation.onboarding_sleep_quality
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.joohnq.sleep_quality.impl.ui.parameter.SleepQualityRecordResourceParameterProvider
+import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource.Companion.sleepQualityRecordExcellentPreview
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource.Companion.sleepQualityRecordFairPreview
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource.Companion.sleepQualityRecordGoodPreview
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource.Companion.sleepQualityRecordPoorPreview
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource.Companion.sleepQualityRecordWorstPreview
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingSleepQualityContentWorstPreview() {
+fun OnboardingSleepQualityContentPreview(
+    @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
+    item: SleepQualityRecordResource
+) {
     OnboardingSleepQualityContent(
-        state = sleepQualityRecordWorstPreview,
+        state = item,
         sliderValue = 1f,
     )
 }
-
-@Preview
-@Composable
-fun OnboardingSleepQualityContentPoorPreview() {
-    OnboardingSleepQualityContent(
-        state = sleepQualityRecordPoorPreview,
-        sliderValue = 1f,
-    )
-}
-
-@Preview
-@Composable
-fun OnboardingSleepQualityContentFairPreview() {
-    OnboardingSleepQualityContent(
-        state = sleepQualityRecordFairPreview,
-        sliderValue = 1f,
-    )
-}
-
-@Preview
-@Composable
-fun OnboardingSleepQualityContentGoodPreview() {
-    OnboardingSleepQualityContent(
-        state = sleepQualityRecordGoodPreview,
-        sliderValue = 1f,
-    )
-}
-
-@Preview
-@Composable
-fun OnboardingSleepQualityContentExcellentPreview() {
-    OnboardingSleepQualityContent(
-        state = sleepQualityRecordExcellentPreview,
-        sliderValue = 1f,
-    )
-}
-
 
 @Preview
 @Composable

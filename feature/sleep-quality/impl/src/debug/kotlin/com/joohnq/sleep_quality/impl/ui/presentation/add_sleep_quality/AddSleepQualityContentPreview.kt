@@ -1,16 +1,21 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
 
 import androidx.compose.runtime.Composable
+import com.joohnq.sleep_quality.impl.ui.parameter.SleepQualityRecordResourceParameterProvider
 import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityState
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun AddSleepQualityContentWorstPreview() {
+fun AddSleepQualityContentWorstPreview(
+    @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
+    item: SleepQualityRecordResource
+) {
     AddSleepQualityContent(
         state = AddSleepQualityState(
-            record = SleepQualityRecordResource.sleepQualityRecordWorstPreview,
+            record = item,
             showStartTimePickerDialog = false,
             showEndTimePickerDialog = false
         ),
@@ -19,55 +24,7 @@ fun AddSleepQualityContentWorstPreview() {
 
 @Preview
 @Composable
-fun AddSleepQualityContentPoorPreview() {
-    AddSleepQualityContent(
-        state = AddSleepQualityState(
-            record = SleepQualityRecordResource.sleepQualityRecordPoorPreview,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = false
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun AddSleepQualityContentFairPreview() {
-    AddSleepQualityContent(
-        state = AddSleepQualityState(
-            record = SleepQualityRecordResource.sleepQualityRecordFairPreview,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = false
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun AddSleepQualityContentGoodPreview() {
-    AddSleepQualityContent(
-        state = AddSleepQualityState(
-            record = SleepQualityRecordResource.sleepQualityRecordGoodPreview,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = false
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun AddSleepQualityContentExcellentPreview() {
-    AddSleepQualityContent(
-        state = AddSleepQualityState(
-            record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = false
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun AddSleepQualityContentShowStartTimePickerPreview() {
+fun AddSleepQualityContentShowStartTimePickerDialogPreview() {
     AddSleepQualityContent(
         state = AddSleepQualityState(
             record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,

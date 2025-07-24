@@ -17,7 +17,7 @@ fun UserNameContentPreview() {
 
 @Preview
 @Composable
-fun UserNameContentPreviewWithName() {
+fun UserNameContentWithNamePreview() {
     UserNameContent(
         state = UserNameState(
             name = "John Doe"
@@ -30,7 +30,7 @@ fun UserNameContentPreviewWithName() {
 
 @Preview
 @Composable
-fun UserNameContentPreviewWithError() {
+fun UserNameContentWithErrorPreview() {
     UserNameContent(
         state = UserNameState(
             name = "John Doe",

@@ -27,10 +27,10 @@ import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
-import com.joohnq.shared_resources.components.ErrorInfo
+import com.joohnq.shared_resources.components.view.ErrorView
 import com.joohnq.shared_resources.components.TopBalloon
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
@@ -93,7 +93,7 @@ fun UnLockContent(
                 )
                 isError?.let {
                     VerticalSpacer(15.dp)
-                    ErrorInfo(it.message.toString())
+                    ErrorView(it.message.toString())
                 }
             }
         }
@@ -128,7 +128,7 @@ fun UnLockContent(
                     )
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    ContinueButton(
+                    PrimaryButton(
                         text = Res.string.use_device_password,
                         modifier = Modifier.fillMaxWidth(),
                         onClick = { onEvent(UnLockEvent.OnContinue) }

@@ -8,14 +8,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toCompleteDateString
 import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
+import com.joohnq.shared_resources.components.SwipeableCardLayout
 import com.joohnq.shared_resources.components.TextEllipsis
 import com.joohnq.shared_resources.components.TextWithBackground
 import com.joohnq.shared_resources.components.VerticalSpacer
@@ -102,7 +101,7 @@ fun SelfJournalHistoryCard(
     onClick: (Int) -> Unit,
     onDelete: () -> Unit,
 ) {
-    SwipeTorRevealCard(
+    SwipeableCardLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),
         content = { modifier ->
             Card(

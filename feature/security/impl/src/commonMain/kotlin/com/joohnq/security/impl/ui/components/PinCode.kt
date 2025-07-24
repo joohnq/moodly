@@ -11,7 +11,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.OTPInputField
+import com.joohnq.shared_resources.components.PinInputField
 
 @Composable
 fun PinCode(
@@ -48,7 +48,7 @@ fun PinCode(
         )
     ) {
         code.forEachIndexed { i, number ->
-            OTPInputField(
+            PinInputField(
                 modifier = Modifier.weight(1f),
                 number = number,
                 focusRequester = focusRequesters[i],

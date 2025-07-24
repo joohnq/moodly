@@ -1,6 +1,6 @@
 package com.joohnq.user.impl.ui.resource
 
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 import com.joohnq.api.entity.MedicationsSupplements.Companion.IM_NOT_TAKING_ANY
 import com.joohnq.api.entity.MedicationsSupplements.Companion.OVER_THE_COUNTER_SUPPLEMENTS
 import com.joohnq.api.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY
@@ -13,12 +13,12 @@ import org.jetbrains.compose.resources.StringResource
 sealed class MedicationsSupplementsResource(
     override val id: Int,
     val text: StringResource,
-    val icon: DIcon,
+    val icon: IconResource,
 ) : MedicationsSupplementsProperties {
     data object PrescribedMedications : MedicationsSupplementsResource(
         id = PRESCRIBED_MEDICATIONS.id,
         text = Res.string.prescribed_medications,
-        icon = DIcon(
+        icon = IconResource(
             icon = Drawables.Icons.Outlined.Medicine,
             contentDescription = Res.string.prescribed_medications
         )
@@ -27,7 +27,7 @@ sealed class MedicationsSupplementsResource(
     data object OverTheCounterSupplements : MedicationsSupplementsResource(
         id = OVER_THE_COUNTER_SUPPLEMENTS.id,
         text = Res.string.over_the_counter_supplements,
-        icon = DIcon(
+        icon = IconResource(
             icon = Drawables.Icons.Outlined.DrugStore,
             contentDescription = Res.string.over_the_counter_supplements
         )
@@ -36,7 +36,7 @@ sealed class MedicationsSupplementsResource(
     data object ImNotTakingAny : MedicationsSupplementsResource(
         id = IM_NOT_TAKING_ANY.id,
         text = Res.string.im_not_taking_any,
-        icon = DIcon(
+        icon = IconResource(
             icon = Drawables.Icons.Outlined.Nothing,
             contentDescription = Res.string.im_not_taking_any
         )
@@ -46,7 +46,7 @@ sealed class MedicationsSupplementsResource(
         MedicationsSupplementsResource(
             id = PREFER_NOT_TO_SAY.id,
             text = Res.string.prefer_not_to_say,
-            icon = DIcon(
+            icon = IconResource(
                 icon = Drawables.Icons.Outlined.Close,
                 contentDescription = Res.string.prefer_not_to_say
             )

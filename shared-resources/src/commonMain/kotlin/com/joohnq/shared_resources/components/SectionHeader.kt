@@ -73,12 +73,3 @@ fun SectionHeader(
         )
     }
 }
-
-@Preview
-@Composable
-fun SectionHeaderPreview() {
-    SectionHeader(
-        title = Res.string.your_mood_is,
-        onSeeMore = {}
-    )
-}

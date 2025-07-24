@@ -17,10 +17,10 @@ import org.jetbrains.compose.resources.StringResource
 @Composable
 fun BubbleText(
     text: StringResource,
+    selected: Boolean,
     fontSize: TextUnit = 18.sp,
     padding: Dp = 24.dp,
     onClick: () -> Unit = {},
-    selected: Boolean,
 ) {
     val size = CalculateTextWidth(text, fontSize)
     Box(modifier = Modifier.size(size + padding)) {

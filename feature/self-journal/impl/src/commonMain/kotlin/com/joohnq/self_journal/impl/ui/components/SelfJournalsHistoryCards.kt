@@ -4,10 +4,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.components.IsEmpty
-import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.components.view.EmptyView
 import com.joohnq.ui.mapper.itemsIndexed
 import kotlinx.datetime.LocalDate
 
@@ -25,7 +23,7 @@ fun SelfJournalsHistoryCards(
 
             },
             empty = {
-                IsEmpty()
+                EmptyView()
             }
         ) { i, lastIndex, record ->
             SelfJournalHistoryCard(

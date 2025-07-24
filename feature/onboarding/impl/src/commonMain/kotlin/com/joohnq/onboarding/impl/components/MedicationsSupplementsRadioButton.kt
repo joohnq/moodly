@@ -9,17 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.Icon
+import com.joohnq.shared_resources.components.IconResource
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 
 @Composable
 fun MedicationsSupplementsRadioButton(
     modifier: Modifier = Modifier,
     text: String,
-    icon: DIcon,
+    icon: IconResource,
     selected: Boolean,
     onClick: () -> Unit = {},
 ) {
@@ -40,7 +40,7 @@ fun MedicationsSupplementsRadioButton(
             modifier = Modifier.fillMaxSize().padding(PaddingValues(all = 16.dp)),
             horizontalAlignment = Alignment.Start
         ) {
-            Icon(
+            IconResource(
                 icon.copy(
                     tint = if (selected) colors.selectedContentColor else colors.unSelectedContentColor,
                     modifier = Modifier.size(Dimens.Icon)

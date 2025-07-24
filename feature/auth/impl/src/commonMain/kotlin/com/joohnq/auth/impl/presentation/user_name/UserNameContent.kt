@@ -19,6 +19,7 @@ import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
 import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
 import com.joohnq.shared_resources.name
@@ -52,7 +53,7 @@ fun UserNameContent(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ConvexContentLayout(
+            ConvexColumnLayout(
                 backgroundColor = Colors.Green50,
                 offset = 150.dp,
                 spacer = 150.dp,
@@ -79,7 +80,7 @@ fun UserNameContent(
                     color = Colors.Brown80
                 )
                 VerticalSpacer(48.dp)
-                TextFieldWithLabelAndDoubleBorder(
+                AppTextFieldWithPlaceholder(
                     label = Res.string.name,
                     placeholder = Res.string.enter_your_name,
                     text = state.name,

@@ -14,8 +14,8 @@ import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.AvatarImage
-import com.joohnq.shared_resources.components.ImageCache
+import com.joohnq.shared_resources.components.ProfileImage
+import com.joohnq.shared_resources.components.CacheImage
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.greeting
 import com.joohnq.shared_resources.remember.rememberAvatars
@@ -25,7 +25,6 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeTopBar(
@@ -64,14 +63,14 @@ fun HomeTopBar(
             user.image?.let {
                 when (user.imageType) {
                     ImageType.DEVICE -> {
-                        ImageCache(
+                        CacheImage(
                             directory = UserFileStorageConstants.AVATAR_DIRECTORY,
                             fileName = UserFileStorageConstants.AVATAR_FILE_NAME
                         )
                     }
 
                     ImageType.DRAWABLE -> {
-                        AvatarImage(
+                        ProfileImage(
                             painterResource(avatars[it.toInt()])
                         )
                     }

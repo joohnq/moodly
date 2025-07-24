@@ -8,13 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toPercentage
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.BallItem
-import com.joohnq.shared_resources.components.NotFoundHorizontal
+import com.joohnq.shared_resources.components.ColoredIndicatorItem
+import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.SectionHeader
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
@@ -24,9 +23,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.mapper.toMap
 import com.joohnq.stress_level.impl.ui.mapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressTriggersSection(
@@ -43,7 +40,7 @@ fun StressTriggersSection(
         title = Res.string.stress_trigger,
     )
     if (stressors.size < 3)
-        NotFoundHorizontal(
+        NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
@@ -112,7 +109,7 @@ fun StressTriggersSection(
                 Column {
                     stressorsMap.forEachIndexed { i, (stressor, count) ->
                         val percentage = (count.toDouble() / stressors.size) * 100
-                        BallItem(
+                        ColoredIndicatorItem(
                             color = stressor.color,
                             title = stringResource(stressor.text),
                             description = percentage.toPercentage(),

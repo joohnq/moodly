@@ -11,9 +11,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.presentation.security.event.SecurityEvent
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.SecondaryButton
+import com.joohnq.shared_resources.components.button.SecondaryButton
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors

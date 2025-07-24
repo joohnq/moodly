@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.camera
-import com.joohnq.shared_resources.components.ButtonTextAndIcon
+import com.joohnq.shared_resources.components.button.TextAndIconButton
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.gallery
 import com.joohnq.shared_resources.select_an_image_source
@@ -27,7 +27,7 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.ui.entity.DIcon
+import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,10 +59,10 @@ fun ImageSourceOptionDialog(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                ButtonTextAndIcon(
+                TextAndIconButton(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.camera,
-                    icon = DIcon(
+                    icon = IconResource(
                         icon = Drawables.Icons.Outlined.Camera,
                         tint = Colors.White,
                         modifier = Modifier.size(32.dp),
@@ -72,10 +72,10 @@ fun ImageSourceOptionDialog(
                     shape = Dimens.Shape.Circle,
                     onClick = { onCameraRequest() }
                 )
-                ButtonTextAndIcon(
+                TextAndIconButton(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.gallery,
-                    icon = DIcon(
+                    icon = IconResource(
                         icon = Drawables.Icons.Outlined.Gallery,
                         tint = Colors.White,
                         modifier = Modifier.size(32.dp),

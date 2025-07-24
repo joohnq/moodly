@@ -17,9 +17,9 @@ import com.joohnq.freud_score.impl.mapper.toInitialFreudScore
 import com.joohnq.freud_score.impl.presentation.freud_score.event.FreudScoreEvent
 import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.BallItem
-import com.joohnq.shared_resources.components.DottedCircles
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.ColoredIndicatorItem
+import com.joohnq.shared_resources.components.ProgressiveDottedCircles
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.hyphen
@@ -41,7 +41,7 @@ fun FreudScoreContent(
         containerColor = Colors.Brown10,
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            TopBar(
+            AppTopBar(
                 modifier = Modifier.paddingHorizontalMedium(),
                 isDark = true,
                 text = Res.string.freud_score,
@@ -53,7 +53,7 @@ fun FreudScoreContent(
             ) {
                 val color = state.freudScore.palette.backgroundColor
 
-                DottedCircles(
+                ProgressiveDottedCircles(
                     modifier = Modifier.sizeIn(maxWidth = 500.dp, maxHeight = 500.dp),
                     color = color
                 ) {
@@ -77,7 +77,7 @@ fun FreudScoreContent(
                 )
                 VerticalSpacer(12.dp)
                 resources.forEachIndexed { i, resource ->
-                    BallItem(
+                    ColoredIndicatorItem(
                         color = resource.palette.backgroundColor,
                         title = stringResource(
                             Res.string.hyphen,

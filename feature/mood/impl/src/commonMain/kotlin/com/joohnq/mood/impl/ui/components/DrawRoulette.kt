@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.VectorPainter
 import com.joohnq.api.mapper.toDegrees
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.shared_resources.components.drawSlice
+import com.joohnq.shared_resources.components.draw_scope.drawSlice
 import androidx.compose.ui.geometry.Size
 
 fun DrawScope.drawRoulette(

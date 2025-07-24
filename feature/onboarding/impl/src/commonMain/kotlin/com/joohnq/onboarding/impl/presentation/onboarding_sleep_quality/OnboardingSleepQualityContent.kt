@@ -16,7 +16,7 @@ import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
-import com.joohnq.shared_resources.components.VerticalSlider
+import com.joohnq.shared_resources.components.SleepQualityVerticalSlider
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
@@ -72,7 +72,7 @@ fun OnboardingSleepQualityContent(
                         }
                     }
                 }
-                VerticalSlider(
+                SleepQualityVerticalSlider(
                     modifier = Modifier.weight(1f),
                     sliderValue = sliderValue,
                     setSliderValue = {

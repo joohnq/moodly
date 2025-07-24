@@ -12,22 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityHistoryContent(
@@ -41,7 +38,7 @@ fun SleepQualityHistoryContent(
                 containerColor = Colors.Brown10
             ) { padding ->
                 Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
-                    TopBar(
+                    AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
                         onGoBack = { onEvent(SleepQualityHistoryEvent.OnGoBack) }
@@ -58,7 +55,7 @@ fun SleepQualityHistoryContent(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(records) { record ->
-                            SwipeTorRevealCard(
+                            SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
                                 onAction = { onAction(SleepQualityIntent.Delete(record.id)) },
                             ) { modifier ->

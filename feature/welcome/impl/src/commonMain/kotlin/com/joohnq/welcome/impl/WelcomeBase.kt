@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.button.IconContinueButton
 import com.joohnq.shared_resources.step
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -63,7 +64,7 @@ fun WelcomeBase(
                     strokeCap = StrokeCap.Round,
                 )
                 VerticalSpacer(24.dp)
-                TextWithSpan(
+                HeadingWithSpan(
                     firstTitle = welcome.firstTitle,
                     secondTitle = welcome.secondTitle,
                     span = stringResource(welcome.span),

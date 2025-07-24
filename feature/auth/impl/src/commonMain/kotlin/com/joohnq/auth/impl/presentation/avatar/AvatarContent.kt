@@ -24,10 +24,10 @@ import com.joohnq.auth.impl.components.AvatarImagesHorizontalPager
 import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ContinueButton
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
 import com.joohnq.shared_resources.components.VerticalSpacer
-import com.joohnq.shared_resources.components.drawDottedBorder
+import com.joohnq.shared_resources.components.modifier.drawDottedBorder
 import com.joohnq.shared_resources.or_upload_your_profile
 import com.joohnq.shared_resources.profile
 import com.joohnq.shared_resources.remember.rememberAvatars
@@ -42,7 +42,6 @@ import com.joohnq.shared_resources.we_have_a_set_of_customizable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AvatarContent(

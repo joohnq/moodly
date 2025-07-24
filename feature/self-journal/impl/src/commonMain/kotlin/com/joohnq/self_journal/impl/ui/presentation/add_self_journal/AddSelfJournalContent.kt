@@ -19,6 +19,7 @@ import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.A
 import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -52,12 +53,12 @@ fun AddJournalingContent(
                 Modifier.fillMaxSize()
                     .paddingHorizontalMedium(),
             ) {
-                TopBar(
+                AppTopBar(
                     onGoBack = { onEvent(AddSelfJournalEvent.OnGoBack) },
                     text = Res.string.new_journal_entry
                 )
                 MediumTitle(Res.string.journal_title)
-                CustomOutlinedTextField(
+                AppOutlinedTextField(
                     text = state.title,
                     placeholder = Res.string.enter_the_title,
                     errorText = state.titleError,

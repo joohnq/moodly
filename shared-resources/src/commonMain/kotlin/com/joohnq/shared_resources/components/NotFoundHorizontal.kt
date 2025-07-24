@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun NotFoundHorizontal(
+fun NotFoundHorizontalLayout(
     modifier: Modifier = Modifier,
     containerColor: Color,
     title: StringResource,
@@ -85,7 +85,7 @@ fun NotFoundHorizontal(
 }
 
 @Composable
-fun NotFoundHorizontal(
+fun NotFoundHorizontalLayout(
     modifier: Modifier = Modifier,
     containerColor: Color,
     title: StringResource,

@@ -16,8 +16,8 @@ import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_mood
-import com.joohnq.shared_resources.components.ButtonTextAndCheck
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.button.ButtonTextAndCheck
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.how_are_you_feeling_this_day
 import com.joohnq.shared_resources.set_mood
@@ -42,7 +42,7 @@ fun AddMoodContent(
                 .padding(padding)
                 .paddingHorizontalMedium(),
         ) {
-            TopBar(
+            AppTopBar(
                 isDark = false,
                 text = Res.string.add_mood,
                 onGoBack = { onEvent(AddMoodEvent.OnGoBack) }

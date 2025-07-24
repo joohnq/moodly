@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.IsEmpty
-import com.joohnq.shared_resources.components.SwipeTorRevealCard
-import com.joohnq.shared_resources.components.TopBar
+import com.joohnq.shared_resources.components.view.EmptyView
+import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -44,7 +44,7 @@ fun StressHistoryContent(
                 Column(
                     modifier = Modifier.padding(padding).paddingHorizontalMedium()
                 ) {
-                    TopBar(
+                    AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
                         onGoBack = { onEvent(StressHistoryEvent.OnGoBack) }
@@ -63,7 +63,7 @@ fun StressHistoryContent(
                         items(
                             items = recordsMap,
                             empty = {
-                                IsEmpty()
+                                EmptyView()
                             },
                             title = { date ->
                                 Text(
@@ -73,7 +73,7 @@ fun StressHistoryContent(
                                 )
                             },
                         ) { record ->
-                            SwipeTorRevealCard(
+                            SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
                                 onAction = {
                                     onAction(StressLevelIntent.Delete(record.id))

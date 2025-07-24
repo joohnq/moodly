@@ -21,7 +21,7 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.IconContinueButton
+import com.joohnq.shared_resources.components.button.IconContinueButton
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.mood_rate_desc
 import com.joohnq.shared_resources.mood_rate_title

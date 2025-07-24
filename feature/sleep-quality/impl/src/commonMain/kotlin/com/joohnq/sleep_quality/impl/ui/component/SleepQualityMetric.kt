@@ -6,9 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.getNow
 import com.joohnq.api.mapper.calculateDuration
 import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.api.mapper.toHoursAndMinutesString
@@ -22,9 +20,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
-import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityMetric(

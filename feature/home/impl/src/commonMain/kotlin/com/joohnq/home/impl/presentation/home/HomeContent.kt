@@ -115,37 +115,3 @@ fun HomeContent(
         }
     )
 }
-
-@Preview
-@Composable
-fun HomeUIPreview() {
-    HomeContent(
-        padding = PaddingValues(0.dp),
-        state = DashboardState(
-            freudScore = FreudScoreResource.Healthy(80),
-            moodRecords = UiState.Success(
-                listOf(
-                    MoodRecordResource()
-                )
-            ),
-            stressLevelRecords = UiState.Success(
-                listOf(
-                    StressLevelRecordResource()
-                )
-            ),
-            selfJournalRecords = UiState.Success(
-                listOf(
-                    SelfJournalRecordResource()
-                )
-            ),
-            sleepQualityRecords = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource()
-                )
-            ),
-            user = UiState.Success(
-                User()
-            )
-        ),
-    )
-}

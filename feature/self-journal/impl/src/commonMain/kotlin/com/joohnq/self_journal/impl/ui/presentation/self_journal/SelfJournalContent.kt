@@ -48,30 +48,3 @@ fun SelfJournalContent(
         }
     )
 }
-
-@Preview
-@Composable
-fun SelfJournalUIPreviewEmpty() {
-    SelfJournalContent(
-        state = SelfJournalState(
-            records = UiState.Success(
-                listOf(
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SelfJournalUIPreview() {
-    SelfJournalContent(
-        state = SelfJournalState(
-            records = UiState.Success(
-                listOf(
-                    SelfJournalRecordResource()
-                )
-            )
-        ),
-    )
-}

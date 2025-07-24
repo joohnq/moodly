@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.welcome.impl.presentation.first.FirstScreen
@@ -17,10 +18,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun WelcomeContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     pagerState: PagerState,
-    onNext: () -> Unit,
-    onAction: (PreferenceIntent) -> Unit,
+    onNext: () -> Unit = {},
+    onAction: (PreferenceIntent) -> Unit = {},
 ) {
     ScaffoldSnackBar(
         snackBarHostState = snackBarState,

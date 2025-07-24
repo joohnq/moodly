@@ -1,6 +1,5 @@
 package com.joohnq.auth.impl.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.camera
-import com.joohnq.shared_resources.components.button.TextAndIconButton
 import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.button.TextAndIconButton
 import com.joohnq.shared_resources.gallery
 import com.joohnq.shared_resources.select_an_image_source
 import com.joohnq.shared_resources.theme.Colors
@@ -32,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageSourceOptionDialog(
+fun ImageSourcePicker(
     onDismissRequest: () -> Unit = {},
     onGalleryRequest: () -> Unit = {},
     onCameraRequest: () -> Unit = {},
@@ -41,11 +40,11 @@ fun ImageSourceOptionDialog(
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
+        containerColor = Colors.Brown10,
         sheetState = sheetState
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
-                .background(Colors.Brown10, shape = Dimens.Shape.Large)
                 .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

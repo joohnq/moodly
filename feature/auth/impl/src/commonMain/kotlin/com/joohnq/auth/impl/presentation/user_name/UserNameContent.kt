@@ -55,7 +55,6 @@ fun UserNameContent(
         ) {
             ConvexColumnLayout(
                 backgroundColor = Colors.Green50,
-                offset = 150.dp,
                 spacer = 150.dp,
                 position = CurvedCanvasPosition.BOTTOM
             ) {

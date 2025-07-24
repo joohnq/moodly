@@ -21,6 +21,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.stress_level.impl.ui.mapper.toMap
+import com.joohnq.stress_level.impl.ui.mapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.resources.stringResource
@@ -29,22 +31,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressTriggersSection(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<StressLevelRecordResource>,
-    onAddStressLevel: () -> Unit
+    onAddStressLevel: () -> Unit = {}
 ) {
     val stressors = records.flatMap { it.stressors }
-
-    val stressorsMap = stressors
-        .groupingBy { it }
-        .eachCount()
-        .toList()
-        .sortedByDescending { it.second }
-
-    val segments = stressorsMap.map { (stressor, count) ->
-        val percent = (count.toDouble() / stressors.size) * 100
-        stressor.color to percent.toFloat()
-    }
+    val stressorsMap = stressors.toMap()
+    val segments = stressorsMap.toSegments(stressors.size)
 
     SectionHeader(
         modifier = modifier,
@@ -53,7 +45,7 @@ fun StressTriggersSection(
     if (stressors.size < 3)
         NotFoundHorizontal(
             modifier = modifier,
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
             subtitle = Res.string.log_stress_level,
             image = Drawables.Images.StressLevelTrigger,
@@ -63,9 +55,9 @@ fun StressTriggersSection(
         Card(
             modifier = modifier.fillMaxWidth(),
             colors = CardColors(
-                containerColor = containerColor,
+                containerColor = Colors.Gray5,
                 contentColor = Colors.Gray80,
-                disabledContainerColor = containerColor,
+                disabledContainerColor = Colors.Gray5,
                 disabledContentColor = Colors.Gray80
             )
         ) {
@@ -131,36 +123,4 @@ fun StressTriggersSection(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun StressTriggersSectionPreview() {
-    StressTriggersSection(
-        records = listOf(
-            StressLevelRecordResource(
-                stressors = listOf(StressorResource.Work)
-            ),
-            StressLevelRecordResource(
-                stressors = listOf(
-                    StressorResource.Work,
-                    StressorResource.Kids,
-                    StressorResource.Relationship
-                )
-            ),
-            StressLevelRecordResource(
-                stressors = listOf(StressorResource.Finances, StressorResource.Loneliness)
-            )
-        ),
-        onAddStressLevel = {}
-    )
-}
-
-@Preview
-@Composable
-fun StressTriggersSectionPreviewEmpty() {
-    StressTriggersSection(
-        records = emptyList(),
-        onAddStressLevel = {}
-    )
 }

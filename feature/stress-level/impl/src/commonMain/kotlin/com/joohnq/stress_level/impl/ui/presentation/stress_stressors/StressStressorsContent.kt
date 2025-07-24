@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -29,10 +30,10 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressStressorsContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddingStressLevelState,
-    onAddAction: (AddStressLevelIntent) -> Unit,
-    onEvent: (StressStressorsEvent) -> Unit,
+    onAddAction: (AddStressLevelIntent) -> Unit = {},
+    onEvent: (StressStressorsEvent) -> Unit = {},
 ) {
     val stressors = remember { getAllStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }

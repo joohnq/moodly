@@ -1,11 +1,9 @@
 package com.joohnq.stress_level.impl.ui.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
@@ -22,7 +20,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressHistory(
     modifier: Modifier = Modifier,
-    containerColor: Color,
     records: List<StressLevelRecordResource>,
     onDelete: (Int) -> Unit = {},
     onAddStressLevel: () -> Unit = {},
@@ -35,7 +32,7 @@ fun StressHistory(
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             title = Res.string.lets_set_up_daily_stress_level,
             subtitle = Res.string.add_new_journal,
             image = Drawables.Images.StressLevelHistory,
@@ -49,33 +46,10 @@ fun StressHistory(
                     onAction = { onDelete(record.id) }
                 ) { modifier ->
                     StressLevelHistoryCard(
-                        modifier = modifier.background(color = containerColor),
-                        containerColor = containerColor,
+                        modifier = modifier,
                         record = record,
                     )
                 }
             }
         }
-}
-
-@Preview
-@Composable
-fun StressHistoryPreviewEmpty() {
-    StressHistory(
-        containerColor = Colors.White,
-        records = listOf(),
-        onAddStressLevel = {}
-    )
-}
-
-@Preview
-@Composable
-fun StressHistoryPreview() {
-    StressHistory(
-        containerColor = Colors.White,
-        records = listOf(
-            StressLevelRecordResource(),
-            StressLevelRecordResource()
-        ),
-    )
 }

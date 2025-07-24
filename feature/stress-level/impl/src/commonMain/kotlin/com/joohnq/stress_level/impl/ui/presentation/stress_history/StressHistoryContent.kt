@@ -10,8 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
@@ -25,12 +23,11 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.impl.ui.mapper.toGroupedByDate
 import com.joohnq.stress_level.impl.ui.presentation.stress_history.event.StressHistoryEvent
-import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
+import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressHistoryContent(
@@ -84,7 +81,6 @@ fun StressHistoryContent(
                             ) { modifier ->
                                 StressLevelHistoryCard(
                                     modifier = modifier,
-                                    containerColor = Colors.White,
                                     record = record,
                                 )
                             }
@@ -93,37 +89,5 @@ fun StressHistoryContent(
                 }
             }
         }
-    )
-}
-
-@Preview
-@Composable
-fun StressHistoryUIPreview() {
-    StressHistoryContent(
-        state = StressLevelState(
-            records = UiState.Success(
-                listOf(
-                    StressLevelRecordResource(),
-                    StressLevelRecordResource(),
-                    StressLevelRecordResource(),
-                    StressLevelRecordResource(),
-                    StressLevelRecordResource(),
-                )
-            )
-        ),
-        onEvent = {}
-    )
-}
-
-@Preview
-@Composable
-fun StressHistoryUIPreviewEmpty() {
-    StressHistoryContent(
-        state = StressLevelState(
-            records = UiState.Success(
-                listOf()
-            )
-        ),
-        onEvent = {}
     )
 }

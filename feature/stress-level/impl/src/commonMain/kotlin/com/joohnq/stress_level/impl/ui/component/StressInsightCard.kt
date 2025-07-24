@@ -25,16 +25,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressInsightCard(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     stressors: List<Pair<StressorResource, Int>>,
     mostActive: StressorResource
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Large
@@ -92,18 +91,4 @@ fun StressInsightCard(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun StressInsightCardPreview() {
-    StressInsightCard(
-        containerColor = Colors.White,
-        stressors = listOf(
-            Pair(StressorResource.Work, 3),
-            Pair(StressorResource.Relationship, 3),
-            Pair(StressorResource.Kids, 3),
-        ),
-        mostActive = StressorResource.Work
-    )
 }

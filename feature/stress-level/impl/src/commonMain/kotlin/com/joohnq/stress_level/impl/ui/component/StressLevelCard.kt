@@ -28,15 +28,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     record: StressLevelRecordResource,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Large,
@@ -93,27 +92,4 @@ fun StressLevelHistoryCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun StressLevelCardPreview() {
-    StressLevelHistoryCard(
-        containerColor = Colors.White,
-        record = StressLevelRecordResource()
-    )
-}
-
-@Preview
-@Composable
-fun StressLevelCardPreviewWithStressors() {
-    StressLevelHistoryCard(
-        containerColor = Colors.White,
-        record = StressLevelRecordResource(
-            stressors = listOf(
-                StressorResource.Finances,
-                StressorResource.Work
-            )
-        )
-    )
 }

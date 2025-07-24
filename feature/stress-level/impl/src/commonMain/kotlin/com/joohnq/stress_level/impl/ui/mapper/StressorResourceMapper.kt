@@ -1,8 +1,16 @@
 package com.joohnq.stress_level.impl.ui.mapper
 
+import androidx.compose.ui.graphics.Color
 import com.joohnq.stress_level.api.entity.Stressor
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
-import com.joohnq.stress_level.impl.ui.resource.StressorResource.*
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Finances
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.InPeace
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Kids
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Life
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Loneliness
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Other
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Relationship
+import com.joohnq.stress_level.impl.ui.resource.StressorResource.Work
 
 fun getAllStressorResource(): List<StressorResource> =
     listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)
@@ -30,5 +38,17 @@ fun StressorResource.toDomain(): Stressor = when (this) {
     InPeace -> Stressor.InPeace
     Other -> Stressor.Other
 }
+
+fun List<StressorResource>.toMap(): List<Pair<StressorResource, Int>> =
+    groupingBy { it }
+        .eachCount()
+        .toList()
+        .sortedByDescending { it.second }
+
+fun List<Pair<StressorResource, Int>>.toSegments(size: Int): List<Pair<Color, Float>> =
+    map { (stressor, count) ->
+        val percent = (count.toDouble() / size) * 100
+        stressor.color to percent.toFloat()
+    }
 
 fun List<StressorResource>.toDomain(): List<Stressor> = map { it.toDomain() }

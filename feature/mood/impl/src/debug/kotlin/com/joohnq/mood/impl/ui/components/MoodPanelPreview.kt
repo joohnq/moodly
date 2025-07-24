@@ -1,45 +1,18 @@
 package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.impl.ui.parameter.MoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun MoodPanelDepressedPreview() {
+fun MoodPanelPreview(
+    @PreviewParameter(MoodRecordResourceParameterProvider::class)
+    item: MoodRecordResource
+) {
     MoodContentPanel(
-        record = MoodRecordResource.moodRecordResourceDepressedPreview
-    )
-}
-
-@Preview
-@Composable
-fun MoodPanelSadPreview() {
-    MoodContentPanel(
-        record = MoodRecordResource.moodRecordResourceSadPreview
-    )
-}
-
-@Preview
-@Composable
-fun MoodPanelNeutralPreview() {
-    MoodContentPanel(
-        record = MoodRecordResource.moodRecordResourceNeutralPreview
-    )
-}
-
-@Preview
-@Composable
-fun MoodPanelHappyPreview() {
-    MoodContentPanel(
-        record = MoodRecordResource.moodRecordResourceHappyPreview
-    )
-}
-
-@Preview
-@Composable
-fun MoodPanelOverjoyedPreview() {
-    MoodContentPanel(
-        record = MoodRecordResource.moodRecordResourceOverjoyedPreview
+        record = item
     )
 }

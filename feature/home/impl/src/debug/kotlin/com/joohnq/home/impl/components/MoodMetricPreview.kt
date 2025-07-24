@@ -1,17 +1,18 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun MoodMetricPreview() {
+fun MoodMetricPreview(
+    @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
+    list: List<MoodRecordResource>,
+) {
     MoodMetric(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
+        records = list,
     )
 }

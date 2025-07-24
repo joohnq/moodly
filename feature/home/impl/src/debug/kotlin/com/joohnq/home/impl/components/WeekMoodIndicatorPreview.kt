@@ -1,66 +1,33 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
+import com.joohnq.mood.impl.ui.parameter.MoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun WeekMoodIndicatorDepressedPreview() {
+fun WeekMoodIndicatorPreview(
+    @PreviewParameter(MoodRecordResourceParameterProvider::class)
+    item: MoodRecordResource
+) {
     WeekMoodIndicator(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-        resource = MoodResource.Depressed,
+        records = listOf(item),
+        resource = item.mood,
     )
 }
 
 @Preview
 @Composable
-fun WeekMoodIndicatorSadPreview() {
+fun WeekMoodIndicatorListPreview(
+    @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
+    list: List<MoodRecordResource>
+) {
     WeekMoodIndicator(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-        resource = MoodResource.Sad,
-    )
-}
-
-@Preview
-@Composable
-fun WeekMoodIndicatorNeutralPreview() {
-    WeekMoodIndicator(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
+        records = list,
         resource = MoodResource.Neutral,
-    )
-}
-
-@Preview
-@Composable
-fun WeekMoodIndicatorHappyPreview() {
-    WeekMoodIndicator(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-        resource = MoodResource.Happy,
-    )
-}
-
-@Preview
-@Composable
-fun WeekMoodIndicatorOverjoyedPreview() {
-    WeekMoodIndicator(
-        records = listOf(
-            MoodRecordResource(),
-            MoodRecordResource(),
-        ),
-        resource = MoodResource.Overjoyed,
     )
 }

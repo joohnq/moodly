@@ -1,27 +1,22 @@
 package com.joohnq.mood.impl.ui.presentation.mood_history
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun MoodHistoryContentPreview() {
+fun MoodHistoryContentPreview(
+    @PreviewParameter(ListMoodRecordResourceParameterProvider ::class)
+    list: List<MoodRecordResource>
+) {
     MoodHistoryContent(
         records = UiState.Success(
-            MoodRecordResource.allMoodRecordResourcePreview
+            list
         ),
-    )
-}
-
-@Preview
-@Composable
-fun MoodHistoryContentEmptyPreview() {
-    MoodHistoryContent(
-        records = UiState.Success(
-            listOf()
-        )
     )
 }
 

@@ -5,30 +5,41 @@ import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.home.impl.presentation.viewmodel.DashboardState
+import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
+import com.joohnq.sleep_quality.impl.ui.parameter.ListSleepQualityRecordResourceParameterProvider
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.stress_level.impl.ui.parameter.ListStressLevelRecordResourceParameterProvider
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun HomeContentPreview() {
+fun HomeContentPreview(
+    @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
+    moodRecordResources: List<MoodRecordResource>,
+    @PreviewParameter(ListStressLevelRecordResourceParameterProvider::class)
+    stressLevelRecordResources: List<StressLevelRecordResource>,
+    @PreviewParameter(ListSleepQualityRecordResourceParameterProvider::class)
+    sleepQualityRecordResources: List<SleepQualityRecordResource>,
+) {
     HomeContent(
         state = DashboardState(
             freudScore = FreudScoreResource.Healthy(80),
             moodRecords = UiState.Success(
-                MoodRecordResource.allMoodRecordResourcePreview
+                moodRecordResources
             ),
             stressLevelRecords = UiState.Success(
-                StressLevelRecordResource.allStressLevelRecordResourcePreview
+                stressLevelRecordResources
             ),
             selfJournalRecords = UiState.Success(
                 SelfJournalRecordResource.allSelfJournalRecordResourcePreview
             ),
             sleepQualityRecords = UiState.Success(
-                SleepQualityRecordResource.allSleepQualityRecordResource
+                sleepQualityRecordResources
             ),
             user = UiState.Success(
                 User(

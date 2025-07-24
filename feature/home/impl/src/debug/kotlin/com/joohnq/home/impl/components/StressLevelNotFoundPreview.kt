@@ -1,31 +1,18 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
-import com.joohnq.api.getNow
+import com.joohnq.self_journal.impl.ui.parameter.ListSelfJournalRecordResourceParameterProvider
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun SelfJournalingMetricPreviewToday() {
+fun SelfJournalingMetricPreview(
+    @PreviewParameter(ListSelfJournalRecordResourceParameterProvider::class)
+    list: List<SelfJournalRecordResource>,
+) {
     SelfJournalingMetric(
-        records = listOf(
-            SelfJournalRecordResource(),
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SelfJournalingMetricPreviewYesterday() {
-    val now = getNow()
-
-    SelfJournalingMetric(
-        records = listOf(
-            SelfJournalRecordResource(
-                createdAt = LocalDateTime(now.year, now.month, now.date.dayOfMonth.minus(1), 0, 0)
-            ),
-        ),
+        records = list,
     )
 }

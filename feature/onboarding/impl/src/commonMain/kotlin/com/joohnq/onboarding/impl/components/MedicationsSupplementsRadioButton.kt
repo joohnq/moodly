@@ -3,6 +3,7 @@ package com.joohnq.onboarding.impl.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,8 +25,9 @@ fun MedicationsSupplementsRadioButton(
     onClick: () -> Unit = {},
 ) {
     val colors = ComponentColors.RadioButton.TextRadioButtonColors()
+
     Button(
-        modifier = modifier,
+        modifier = modifier.aspectRatio(1f),
         shape = Dimens.Shape.Medium,
         colors = ComponentColors.Button.TextRadioButtonColors(selected = selected, colors = colors),
         border = if (selected) BorderStroke(

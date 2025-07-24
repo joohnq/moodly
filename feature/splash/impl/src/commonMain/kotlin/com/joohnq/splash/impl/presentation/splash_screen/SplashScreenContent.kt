@@ -19,7 +19,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SplashScreenContent() {
-    Scaffold {
+    Scaffold(
+        contentColor = Colors.Brown10
+    ) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Image(
                 painter = painterResource(Drawables.Icons.Filled.Logo),

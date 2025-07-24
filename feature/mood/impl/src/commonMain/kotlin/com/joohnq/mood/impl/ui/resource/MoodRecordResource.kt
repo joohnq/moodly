@@ -39,5 +39,13 @@ data class MoodRecordResource(
             mood = MoodResource.Overjoyed,
             description = "Description",
         )
+
+        val allMoodRecordResourcePreview = listOf(
+            moodRecordResourceDepressedPreview,
+            moodRecordResourceSadPreview,
+            moodRecordResourceNeutralPreview,
+            moodRecordResourceHappyPreview,
+            moodRecordResourceOverjoyedPreview,
+        )
     }
 }

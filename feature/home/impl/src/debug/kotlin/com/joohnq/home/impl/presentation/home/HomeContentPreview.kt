@@ -1,8 +1,7 @@
 package com.joohnq.home.impl.presentation.home
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
+import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.home.impl.presentation.viewmodel.DashboardState
@@ -17,31 +16,26 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeContentPreview() {
     HomeContent(
-        padding = PaddingValues(0.dp),
         state = DashboardState(
             freudScore = FreudScoreResource.Healthy(80),
             moodRecords = UiState.Success(
-                listOf(
-                    MoodRecordResource()
-                )
+                MoodRecordResource.allMoodRecordResourcePreview
             ),
             stressLevelRecords = UiState.Success(
-                listOf(
-                    StressLevelRecordResource()
-                )
+                StressLevelRecordResource.allStressLevelRecordResourcePreview
             ),
             selfJournalRecords = UiState.Success(
-                listOf(
-                    SelfJournalRecordResource()
-                )
+                SelfJournalRecordResource.allSelfJournalRecordResourcePreview
             ),
             sleepQualityRecords = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource()
-                )
+                SleepQualityRecordResource.allSleepQualityRecordResource
             ),
             user = UiState.Success(
-                User()
+                User(
+                    name = "John Doe",
+                    image = "0",
+                    imageType = ImageType.DRAWABLE
+                )
             )
         ),
     )

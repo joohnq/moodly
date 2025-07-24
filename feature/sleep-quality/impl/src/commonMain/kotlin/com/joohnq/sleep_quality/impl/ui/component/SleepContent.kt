@@ -11,13 +11,11 @@ import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
 fun SleepContent(
     modifier: Modifier = Modifier,
     records: List<SleepQualityRecordResource>,
-    onEvent: (SleepQualityEvent) -> Unit,
-    onAction: (SleepQualityIntent) -> Unit
+    onEvent: (SleepQualityEvent) -> Unit = {},
+    onAction: (SleepQualityIntent) -> Unit = {}
 ) {
-    val containerColor = Colors.Gray5
     SleepInsight(
         modifier = modifier,
-        containerColor = containerColor,
         records = records,
         onCreate = {
             onEvent(SleepQualityEvent.OnNavigateToAddSleepQuality)
@@ -25,7 +23,6 @@ fun SleepContent(
     )
     SleepHistory(
         modifier = modifier,
-        containerColor = containerColor,
         records = records.take(7),
         onDelete = { id -> onAction(SleepQualityIntent.Delete(id)) },
         onSeeMore = {

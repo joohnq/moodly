@@ -84,27 +84,3 @@ fun SleepQualityMetric(
         )
     }
 }
-
-@Preview
-@Composable
-fun SleepQualityMetricPreviewToday() {
-    SleepQualityMetric(
-        records = listOf(
-            SleepQualityRecordResource()
-        ),
-    )
-}
-
-
-@Preview
-@Composable
-fun SleepQualityMetricPreviewYesterday() {
-    val now = getNow()
-    SleepQualityMetric(
-        records = listOf(
-            SleepQualityRecordResource(
-                createdAt = LocalDate(now.year, now.month, now.dayOfMonth.minus(1)),
-            )
-        ),
-    )
-}

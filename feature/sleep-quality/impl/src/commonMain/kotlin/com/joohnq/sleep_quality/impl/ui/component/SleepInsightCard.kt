@@ -30,7 +30,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SleepInsightCard(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
 ) {
     val now = remember { getNow() }
@@ -40,9 +39,9 @@ fun SleepInsightCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Large
@@ -60,7 +59,7 @@ fun SleepInsightCard(
                     val resource =
                         records.find { it.createdAt.dayOfMonth == i && it.createdAt.month == month }
                     val backgroundColor = when {
-                        i + 1 > monthDays -> containerColor
+                        i + 1 > monthDays -> Colors.Gray5
                         resource == null -> Colors.Gray20
                         else -> resource.sleepQuality.palette.color
                     }

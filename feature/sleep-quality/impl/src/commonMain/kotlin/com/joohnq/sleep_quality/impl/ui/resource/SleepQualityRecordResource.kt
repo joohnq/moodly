@@ -39,10 +39,19 @@ data class SleepQualityRecordResource(
             sleepQuality = SleepQualityResource.Excellent,
         )
 
-        val sleepQualityRecordExcellentWithSleepInfluencesPreview = SleepQualityRecordResource(
+        val sleepQualityRecordWithSleepInfluencesPreview = SleepQualityRecordResource(
             id = SleepQualityResource.Worst.id,
             sleepQuality = SleepQualityResource.Excellent,
             sleepInfluences = allSleepInfluences
+        )
+
+        val allSleepQualityRecordResource = listOf(
+            sleepQualityRecordWorstPreview,
+            sleepQualityRecordPoorPreview,
+            sleepQualityRecordFairPreview,
+            sleepQualityRecordGoodPreview,
+            sleepQualityRecordExcellentPreview,
+            sleepQualityRecordWithSleepInfluencesPreview,
         )
     }
 }

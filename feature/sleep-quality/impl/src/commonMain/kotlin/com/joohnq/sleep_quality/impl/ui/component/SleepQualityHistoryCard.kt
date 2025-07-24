@@ -30,7 +30,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
-    containerColor: Color = Color.White,
     record: SleepQualityRecordResource,
 ) {
     val duration = calculateDuration(
@@ -42,9 +41,9 @@ fun SleepQualityHistoryCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardColors(
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
+            disabledContainerColor = Colors.Gray5,
             disabledContentColor = Color.Unspecified
         ),
         shape = Dimens.Shape.Medium,
@@ -118,12 +117,4 @@ fun SleepQualityHistoryCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun SleepQualityHistoryCardPreview() {
-    SleepQualityHistoryCard(
-        record = SleepQualityRecordResource(),
-    )
 }

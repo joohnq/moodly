@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetState
@@ -22,16 +24,19 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.security.impl.ui.components.PinCode
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.ConvexColumnLayout
 import com.joohnq.shared_resources.components.view.ErrorView
 import com.joohnq.shared_resources.components.TopBalloon
 import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.this_password_is_the_same_validation_method
@@ -39,6 +44,7 @@ import com.joohnq.shared_resources.type_your_four_digit_pin_to_unlock_the_app
 import com.joohnq.shared_resources.use_device_password
 import com.joohnq.shared_resources.use_your_authentication_to_securely
 import com.joohnq.shared_resources.welcome_back
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -100,10 +106,18 @@ fun UnLockContent(
     }
 
     BoxWithConstraints(modifier = Modifier.background(color = Colors.Brown10)) {
-        TopBalloon(
+        ConvexColumnLayout(
             backgroundColor = Colors.Brown80,
-            iconColor = Colors.White
-        )
+            spacer = 150.dp,
+            position = CurvedCanvasPosition.BOTTOM
+        ) {
+            Icon(
+                painter = painterResource(Drawables.Icons.Filled.Logo),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp),
+                tint = Colors.White
+            )
+        }
         Scaffold(
             containerColor = Colors.Brown10,
             modifier = Modifier.padding(top = maxWidth / 2 + 56.dp)

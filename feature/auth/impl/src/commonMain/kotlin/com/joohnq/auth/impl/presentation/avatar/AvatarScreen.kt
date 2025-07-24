@@ -11,7 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import com.joohnq.auth.impl.components.AlertMessageDialog
-import com.joohnq.auth.impl.components.ImageSourceOptionDialog
+import com.joohnq.auth.impl.components.ImageSourcePicker
 import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarIntent
 import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarViewModel
@@ -82,7 +82,7 @@ fun AvatarScreen(
         }
     }
     if (imageSourceOptionDialog) {
-        ImageSourceOptionDialog(onDismissRequest = {
+        ImageSourcePicker(onDismissRequest = {
             imageSourceOptionDialog = false
         }, onGalleryRequest = {
             imageSourceOptionDialog = false

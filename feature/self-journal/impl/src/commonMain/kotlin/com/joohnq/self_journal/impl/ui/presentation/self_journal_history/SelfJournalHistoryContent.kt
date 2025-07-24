@@ -117,19 +117,3 @@ fun SelfJournalHistoryContent(
         }
     )
 }
-
-@Preview
-@Composable
-fun SelfJournalHistoryUIPreview() {
-    SelfJournalHistoryContent(
-        state = SelfJournalHistoryState(),
-        records = UiState.Success(
-            listOf(
-                SelfJournalRecordResource(),
-                SelfJournalRecordResource()
-            )
-        ),
-        onAction = {},
-        onEvent = {}
-    )
-}

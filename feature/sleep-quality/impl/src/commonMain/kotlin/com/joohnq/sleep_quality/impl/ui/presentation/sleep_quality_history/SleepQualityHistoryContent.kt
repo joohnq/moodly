@@ -64,7 +64,6 @@ fun SleepQualityHistoryContent(
                             ) { modifier ->
                                 SleepQualityHistoryCard(
                                     modifier = modifier,
-                                    containerColor = Colors.White,
                                     record = record,
                                 )
                             }
@@ -73,43 +72,5 @@ fun SleepQualityHistoryContent(
                 }
             }
         }
-    )
-}
-
-@Preview
-@Composable
-fun SleepHistoryUIPreview() {
-    SleepQualityHistoryContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                    SleepQualityRecordResource(),
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepHistoryUIPreviewEmpty() {
-    SleepQualityHistoryContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf()
-            )
-        ),
     )
 }

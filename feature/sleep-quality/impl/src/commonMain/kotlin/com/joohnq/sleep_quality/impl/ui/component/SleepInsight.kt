@@ -16,7 +16,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepInsight(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
     onCreate: () -> Unit = {},
 ) {
@@ -27,7 +26,7 @@ fun SleepInsight(
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             title = Res.string.log_your_first_sleep,
             description = Res.string.lets_log_your_first_sleep_to_see_your_insight,
             text = Res.string.log_sleep,
@@ -38,27 +37,6 @@ fun SleepInsight(
     else
         SleepInsightCard(
             modifier = modifier,
-            containerColor = containerColor,
             records = records
         )
-}
-
-@Preview
-@Composable
-fun SleepInsightPreviewEmpty() {
-    SleepInsight(
-        records = emptyList(),
-    )
-}
-
-@Preview
-@Composable
-fun SleepInsightPreview() {
-    SleepInsight(
-        records = listOf(
-            SleepQualityRecordResource(),
-            SleepQualityRecordResource(),
-            SleepQualityRecordResource(),
-        )
-    )
 }

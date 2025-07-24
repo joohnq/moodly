@@ -37,6 +37,7 @@ import com.joohnq.shared_resources.components.VerticalSpacer
 import com.joohnq.shared_resources.end_sleeping_time
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.new_sleep_quality
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.sleeping_influences
 import com.joohnq.shared_resources.start_sleeping_time
 import com.joohnq.shared_resources.theme.Colors
@@ -54,7 +55,7 @@ import org.jetbrains.compose.resources.stringResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddSleepQualityContent(
-    snackBarState: SnackbarHostState,
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSleepQualityState,
     onEvent: (AddSleepQualityEvent) -> Unit = {},
     onAddAction: (AddSleepQualityIntent) -> Unit = {},

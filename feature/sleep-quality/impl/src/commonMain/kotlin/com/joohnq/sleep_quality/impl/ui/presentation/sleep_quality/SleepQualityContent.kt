@@ -1,8 +1,6 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import androidx.compose.runtime.Composable
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.components.DecoratedConvexPanelList
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -10,11 +8,9 @@ import com.joohnq.sleep_quality.impl.ui.component.SleepContent
 import com.joohnq.sleep_quality.impl.ui.component.SleepPanel
 import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
-import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
 import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
 import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import com.joohnq.ui.mapper.foldComposable
 
 @Composable
 fun SleepQualityContent(
@@ -31,8 +27,8 @@ fun SleepQualityContent(
                 containerColor = Colors.White,
                 isDark = !hasToday,
                 image = Drawables.Images.SleepQualityBackground,
-                color = if (hasToday) record!!.sleepQuality.palette.imageColor else Colors.Brown10,
-                panelBackgroundColor = if (hasToday) record!!.sleepQuality.palette.color else Colors.Brown10,
+                color = record?.sleepQuality?.palette?.imageColor ?: Colors.Brown10,
+                panelBackgroundColor = record?.sleepQuality?.palette?.color ?: Colors.Brown10,
                 panel = { modifier ->
                     SleepPanel(
                         modifier = modifier,
@@ -51,98 +47,5 @@ fun SleepQualityContent(
                 }
             )
         }
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewEmpty() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewWorst() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(
-                        sleepQuality = SleepQualityResource.Worst
-                    )
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewPoor() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(
-                        sleepQuality = SleepQualityResource.Poor
-                    )
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewFair() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(
-                        sleepQuality = SleepQualityResource.Fair
-                    )
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewGood() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(
-                        sleepQuality = SleepQualityResource.Good
-                    )
-                )
-            )
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityUIPreviewExcellent() {
-    SleepQualityContent(
-        state = SleepQualityState(
-            records = UiState.Success(
-                listOf(
-                    SleepQualityRecordResource(
-                        sleepQuality = SleepQualityResource.Excellent
-                    )
-                )
-            )
-        ),
     )
 }

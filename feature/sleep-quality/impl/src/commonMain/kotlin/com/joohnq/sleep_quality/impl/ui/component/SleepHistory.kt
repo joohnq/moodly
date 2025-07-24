@@ -22,7 +22,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepHistory(
     modifier: Modifier = Modifier,
-    containerColor: Color = Colors.White,
     records: List<SleepQualityRecordResource>,
     onDelete: (Int) -> Unit = {},
     onCreate: () -> Unit = {},
@@ -36,7 +35,7 @@ fun SleepHistory(
     if (records.isEmpty())
         NotFoundHorizontal(
             modifier = modifier,
-            containerColor = containerColor,
+            containerColor = Colors.Gray5,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
             subtitle = Res.string.set_up_sleep,
             image = Drawables.Images.SleepQualityHistory,
@@ -51,21 +50,9 @@ fun SleepHistory(
                 ) { modifier ->
                     SleepQualityHistoryCard(
                         modifier = modifier,
-                        containerColor = containerColor,
                         record = record,
                     )
                 }
             }
         }
-}
-
-@Preview
-@Composable
-fun SleepHistoryPreview() {
-    SleepHistory(
-        records = listOf(
-            SleepQualityRecordResource(),
-            SleepQualityRecordResource(),
-        ),
-    )
 }

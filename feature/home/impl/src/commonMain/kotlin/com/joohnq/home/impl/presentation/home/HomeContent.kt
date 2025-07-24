@@ -36,8 +36,8 @@ import com.joohnq.ui.mapper.foldComposable
 
 @Composable
 fun HomeContent(
-    padding: PaddingValues,
     state: DashboardState,
+    padding: PaddingValues = PaddingValues(0.dp),
     onEvent: (HomeEvent) -> Unit = {},
 ) {
     listOf(
@@ -48,7 +48,7 @@ fun HomeContent(
         state.sleepQualityRecords
     ).foldComposable(
         onLoading = { LoadingView() },
-        onSuccess = { moodRecords: List<MoodRecordResource>, u: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
+        onSuccess = { moodRecords: List<MoodRecordResource>, user: User, stressLevels: List<StressLevelRecordResource>, selfJournals: List<SelfJournalRecordResource>, sleepQualities: List<SleepQualityRecordResource> ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -57,7 +57,7 @@ fun HomeContent(
                 HomeTopBar(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding()),
-                    user = u,
+                    user = user,
                 )
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),

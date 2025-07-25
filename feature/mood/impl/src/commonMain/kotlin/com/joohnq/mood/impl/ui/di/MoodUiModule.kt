@@ -7,6 +7,12 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val moodUiModule: Module = module {
-    singleOf(::MoodViewModel)
     singleOf(::AddMoodViewModel)
+    single<MoodViewModel> {
+        MoodViewModel(
+            getMoodsUseCase = get(),
+            addMoodUseCase = get(),
+            deleteMoodUseCase = get(),
+        )
+    }
 }

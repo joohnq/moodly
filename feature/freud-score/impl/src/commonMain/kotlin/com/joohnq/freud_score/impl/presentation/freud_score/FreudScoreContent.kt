@@ -11,15 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.freud_score.impl.components.ProgressiveDottedCircles
 import com.joohnq.freud_score.impl.mapper.getAllFreudScoreResources
 import com.joohnq.freud_score.impl.mapper.toEndFreudScore
 import com.joohnq.freud_score.impl.mapper.toInitialFreudScore
-import com.joohnq.freud_score.impl.presentation.freud_score.event.FreudScoreEvent
-import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ColoredIndicatorItem
-import com.joohnq.freud_score.impl.components.ProgressiveDottedCircles
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.ColoredIndicatorItem
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.hyphen
@@ -31,8 +29,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun FreudScoreContent(
-    state: FreudScoreState,
-    onEvent: (FreudScoreEvent) -> Unit = {},
+    state: FreudScoreContract.State,
+    onEvent: (FreudScoreContract.Event) -> Unit = {},
 ) {
     if (state.freudScore == null) return
     val resources = remember { getAllFreudScoreResources(state.freudScore.score) }
@@ -45,7 +43,7 @@ fun FreudScoreContent(
                 modifier = Modifier.paddingHorizontalMedium(),
                 isDark = true,
                 text = Res.string.freud_score,
-                onGoBack = { onEvent(FreudScoreEvent.OnGoBack) },
+                onGoBack = { onEvent(FreudScoreContract.Event.OnGoBack) },
             )
             Column(
                 modifier = Modifier.paddingHorizontalMedium(),

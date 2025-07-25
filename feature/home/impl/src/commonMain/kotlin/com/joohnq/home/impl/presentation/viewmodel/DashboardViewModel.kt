@@ -1,6 +1,5 @@
 package com.joohnq.home.impl.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreContract
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreViewModel
@@ -12,36 +11,29 @@ import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityC
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
+import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.mapper.anyError
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
+    initialState: DashboardContract.State = DashboardContract.State(),
     private val userViewModel: UserViewModel,
     private val moodViewModel: MoodViewModel,
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
     private val stressLevelViewModel: StressLevelViewModel,
-) : ViewModel() {
-    private val _state = MutableStateFlow(DashboardContract.State())
-    val state: StateFlow<DashboardContract.State> = _state.asStateFlow()
-
-    private val _sideEffect = Channel<DashboardContract.SideEffect>(Channel.BUFFERED)
-    val sideEffect = _sideEffect.receiveAsFlow()
-
-    fun onAction(event: DashboardContract.Intent) {
-        when (event) {
+) : BaseViewModel<DashboardContract.State, DashboardContract.Intent, DashboardContract.SideEffect>(
+    initialState = initialState
+), DashboardContract.ViewModel {
+    override fun onIntent(intent: DashboardContract.Intent) {
+        when (intent) {
             DashboardContract.Intent.Get -> {
                 moodViewModel.onAction(MoodContract.Intent.GetAll)
                 userViewModel.onAction(UserContract.Intent.GetUser)
@@ -83,7 +75,7 @@ class DashboardViewModel(
             ).anyError(
                 block = { error ->
                     viewModelScope.launch {
-                        _sideEffect.send(DashboardContract.SideEffect.ShowError(error))
+                        emitEffect(DashboardContract.SideEffect.ShowError(error))
                     }
                 }
             )
@@ -97,7 +89,7 @@ class DashboardViewModel(
                 stressLevelRecords = stressState.records
             )
         }.onEach { newState ->
-            _state.value = newState
+            updateState { newState }
         }.launchIn(viewModelScope)
     }
 }

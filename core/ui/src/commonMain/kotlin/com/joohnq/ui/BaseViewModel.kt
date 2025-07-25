@@ -19,8 +19,8 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     private val _state = MutableStateFlow(initialState)
     override val state: StateFlow<STATE> = _state.asStateFlow()
 
-    private val _effect = MutableSharedFlow<EFFECT>()
-    override val effect: SharedFlow<EFFECT> = _effect.asSharedFlow()
+    private val _sideEffect = MutableSharedFlow<EFFECT>()
+    override val sideEffect: SharedFlow<EFFECT> = _sideEffect.asSharedFlow()
 
     private val handledOneTimeEvents = mutableSetOf<INTENT>()
 
@@ -40,7 +40,7 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
      */
     protected fun emitEffect(effect: EFFECT) {
         viewModelScope.launch {
-            _effect.emit(effect)
+            _sideEffect.emit(effect)
         }
     }
 

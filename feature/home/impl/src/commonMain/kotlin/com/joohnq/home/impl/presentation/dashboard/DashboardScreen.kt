@@ -12,10 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.home.impl.components.DashboardCentral
 import com.joohnq.home.impl.presentation.home.HomeScreen
@@ -23,7 +21,6 @@ import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.home.impl.presentation.viewmodel.DashboardViewModel
 import com.joohnq.home.impl.toDashboardEvent
 import com.joohnq.navigation.Destination
-import com.joohnq.navigation.isCurrentRoute
 import com.joohnq.shared_resources.components.button.BottomNavigationButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.modifier.takeIf
@@ -59,7 +56,7 @@ fun DashboardScreen(
     }
 
     LaunchedEffect(Unit) {
-        dashboardViewModel.onAction(DashboardContract.Intent.Get)
+        dashboardViewModel.onIntent(DashboardContract.Intent.Get)
     }
 
     ObserverSideEffects(

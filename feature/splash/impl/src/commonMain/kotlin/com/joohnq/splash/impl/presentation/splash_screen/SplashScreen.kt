@@ -13,7 +13,7 @@ import com.joohnq.security.impl.ui.presentation.security.SecurityContract
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
 import com.joohnq.ui.mapper.fold
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.viewmodel.UserIntent
+import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 
 @Composable
@@ -33,7 +33,7 @@ fun SplashScreen(
     val securityState by securityViewModel.state.collectAsState()
 
     SideEffect {
-        userViewModel.onAction(UserIntent.InitUser)
+        userViewModel.onAction(UserContract.Intent.InitUser)
 
         securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
         preferencesViewModel.onAction(PreferencesContract.Intent.GetPreferences)

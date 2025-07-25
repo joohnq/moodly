@@ -14,8 +14,7 @@ import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelCont
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.ui.mapper.anyError
 import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.user.impl.ui.viewmodel.UserIntent
-import com.joohnq.user.impl.ui.viewmodel.UserState
+import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,7 +44,7 @@ class DashboardViewModel(
         when (event) {
             DashboardContract.Intent.Get -> {
                 moodViewModel.onAction(MoodContract.Intent.GetAll)
-                userViewModel.onAction(UserIntent.GetUser)
+                userViewModel.onAction(UserContract.Intent.GetUser)
                 stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)
                 selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
@@ -62,7 +61,7 @@ class DashboardViewModel(
             sleepQualityViewModel.state,
             stressLevelViewModel.state
         ) { states ->
-            val userState = states[0] as UserState
+            val state = states[0] as UserContract.State
             val statsState = states[1] as MoodContract.State
             val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalContract.State
@@ -77,7 +76,7 @@ class DashboardViewModel(
 
             listOf(
                 statsState.records,
-                userState.user,
+                state.user,
                 stressState.records,
                 sleepState.records,
                 healthState.records,
@@ -90,7 +89,7 @@ class DashboardViewModel(
             )
 
             DashboardContract.State(
-                user = userState.user,
+                user = state.user,
                 moodRecords = statsState.records,
                 freudScore = freudState.freudScore,
                 selfJournalRecords = healthState.records,

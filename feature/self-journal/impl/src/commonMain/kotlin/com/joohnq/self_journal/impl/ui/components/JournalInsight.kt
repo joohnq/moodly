@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables

@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import androidx.compose.runtime.Composable
-import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.component.SleepContent

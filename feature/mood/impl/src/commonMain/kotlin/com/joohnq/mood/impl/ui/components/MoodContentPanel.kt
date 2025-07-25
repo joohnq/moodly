@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium

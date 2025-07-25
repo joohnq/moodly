@@ -18,9 +18,9 @@ import com.joohnq.freud_score.impl.presentation.freud_score.event.FreudScoreEven
 import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
-import com.joohnq.shared_resources.components.ProgressiveDottedCircles
+import com.joohnq.freud_score.impl.components.ProgressiveDottedCircles
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.hyphen
 import com.joohnq.shared_resources.out_of_100

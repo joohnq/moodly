@@ -2,10 +2,9 @@ package com.joohnq.self_journal.impl.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.self_journal.impl.ui.mapper.getSelfJournalsInYear
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.components.GiganticCreateCard
+import com.joohnq.shared_resources.components.card.GiganticCreateCard
 
 @Composable
 fun JournalCalendar(

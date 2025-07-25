@@ -14,8 +14,8 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.TextRadioButton
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.radio_button.TextRadioButton
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.stress_rate_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors

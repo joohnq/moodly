@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toMonthAbbreviatedAndDayString
-import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -23,7 +23,6 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun StressLevelHistoryCard(

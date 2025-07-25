@@ -11,7 +11,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.PinInputField
+import com.joohnq.shared_resources.components.input_field.PinInputField
 
 @Composable
 fun PinCode(

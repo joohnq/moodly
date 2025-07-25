@@ -11,15 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getStreakDays
 import com.joohnq.mood.impl.ui.mapper.getWeekRecords
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -27,7 +26,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSma
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodInsightContent(

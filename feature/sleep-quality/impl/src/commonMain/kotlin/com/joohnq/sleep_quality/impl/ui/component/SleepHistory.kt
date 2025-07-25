@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.set_up_sleep
 import com.joohnq.shared_resources.sleep_history
 import com.joohnq.shared_resources.theme.Colors

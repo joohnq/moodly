@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles

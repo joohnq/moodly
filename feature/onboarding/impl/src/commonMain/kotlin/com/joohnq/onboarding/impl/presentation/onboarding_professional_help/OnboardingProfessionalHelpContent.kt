@@ -11,7 +11,7 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.TextRadioButton
+import com.joohnq.shared_resources.components.radio_button.TextRadioButton
 import com.joohnq.shared_resources.sought_professional_help_title
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens

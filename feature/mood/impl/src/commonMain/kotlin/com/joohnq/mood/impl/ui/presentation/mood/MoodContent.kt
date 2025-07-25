@@ -7,7 +7,7 @@ import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
-import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.UiState

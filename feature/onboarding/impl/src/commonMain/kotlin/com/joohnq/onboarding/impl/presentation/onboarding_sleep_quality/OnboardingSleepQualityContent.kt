@@ -14,10 +14,10 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.SleepQualityThumb
-import com.joohnq.shared_resources.components.SleepQualityTrack
-import com.joohnq.shared_resources.components.SleepQualityVerticalSlider
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.sleep_quality.impl.ui.component.SleepQualityThumb
+import com.joohnq.sleep_quality.impl.ui.component.SleepQualityTrack
+import com.joohnq.sleep_quality.impl.ui.component.SleepQualityVerticalSlider
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors

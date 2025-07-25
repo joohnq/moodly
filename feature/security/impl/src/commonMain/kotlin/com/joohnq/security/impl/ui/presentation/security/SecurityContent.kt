@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.presentation.security.event.SecurityEvent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.button.SecondaryButton
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -28,7 +28,7 @@ fun SecurityContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     onEvent: (SecurityEvent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()

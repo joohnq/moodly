@@ -8,8 +8,8 @@ import com.joohnq.mood.impl.ui.presentation.mood.event.MoodEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.description
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles

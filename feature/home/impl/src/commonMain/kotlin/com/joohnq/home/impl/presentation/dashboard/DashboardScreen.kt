@@ -20,9 +20,9 @@ import com.joohnq.home.impl.presentation.viewmodel.DashboardSideEffect
 import com.joohnq.home.impl.presentation.viewmodel.DashboardViewModel
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
-import com.joohnq.shared_resources.components.BottomNavigationButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.takeIf
+import com.joohnq.shared_resources.components.button.BottomNavigationButton
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.modifier.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -73,7 +73,7 @@ fun DashboardScreen(
         onEvent = ::onSideEffect
     )
 
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarHostState,
         floatingActionButton = {

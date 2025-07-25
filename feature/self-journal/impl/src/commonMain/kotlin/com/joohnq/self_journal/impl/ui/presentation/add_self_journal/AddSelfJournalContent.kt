@@ -20,6 +20,11 @@ import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.A
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.MediumTitle
+import com.joohnq.shared_resources.components.input_field.AppOutlinedTextField
+import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -41,7 +46,7 @@ fun AddJournalingContent(
     val focusRequester = FocusRequester()
     val moods = remember { getAllMoodResource() }
 
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
         snackBarHostState = snackBarState
@@ -130,4 +135,3 @@ fun AddJournalingContent(
         }
     }
 }
-

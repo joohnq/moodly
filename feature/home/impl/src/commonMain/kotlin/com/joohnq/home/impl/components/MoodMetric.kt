@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.MetricCardSide
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.card.MetricSummaryCard
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.level
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.set_up_mood
@@ -34,7 +34,7 @@ fun MoodMetric(
             onClick = onCreate
         )
     else
-        MetricCardSide(
+        MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
             icon = record.mood.assets.icon,

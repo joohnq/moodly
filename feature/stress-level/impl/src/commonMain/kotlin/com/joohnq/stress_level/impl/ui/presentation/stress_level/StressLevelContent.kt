@@ -3,8 +3,8 @@ package com.joohnq.stress_level.impl.ui.presentation.stress_level
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.component.StressContent

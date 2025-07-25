@@ -18,6 +18,9 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.BubbleText
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
@@ -39,7 +42,7 @@ fun StressStressorsContent(
     val stressors = remember { getAllStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
 
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),

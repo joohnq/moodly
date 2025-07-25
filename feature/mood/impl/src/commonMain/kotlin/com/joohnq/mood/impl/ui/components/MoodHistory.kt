@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.NotFoundVerticalLayout
-import com.joohnq.shared_resources.components.SectionHeader
+import com.joohnq.shared_resources.components.layout.NotFoundVerticalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.log_first_mood
 import com.joohnq.shared_resources.mood_history
 import com.joohnq.shared_resources.theme.Colors

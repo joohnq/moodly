@@ -14,9 +14,9 @@ import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ProfileImage
-import com.joohnq.shared_resources.components.CacheImage
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.image.ProfileImage
+import com.joohnq.shared_resources.components.image.CacheImage
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.greeting
 import com.joohnq.shared_resources.remember.rememberAvatars
 import com.joohnq.shared_resources.theme.Colors

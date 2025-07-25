@@ -8,7 +8,7 @@ import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.journals_written_in
 import com.joohnq.shared_resources.lets_set_up_daily_journaling_and_self_reflection
 import com.joohnq.shared_resources.theme.Colors

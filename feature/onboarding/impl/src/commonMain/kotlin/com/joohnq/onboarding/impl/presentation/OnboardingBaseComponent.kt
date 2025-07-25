@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.assessments
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.TextWithBackground
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.page_of
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
@@ -44,7 +44,7 @@ fun OnboardingBaseComponent(
     onContinue: () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize()

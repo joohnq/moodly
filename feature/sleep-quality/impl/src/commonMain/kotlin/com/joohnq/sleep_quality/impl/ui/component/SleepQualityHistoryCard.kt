@@ -16,7 +16,7 @@ import com.joohnq.api.mapper.toAbbreviatedMonthName
 import com.joohnq.api.mapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.no_sleep_influences
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -25,7 +25,6 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SleepQualityHistoryCard(

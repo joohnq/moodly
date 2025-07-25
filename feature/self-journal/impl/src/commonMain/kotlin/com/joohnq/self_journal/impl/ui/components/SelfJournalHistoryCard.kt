@@ -14,10 +14,10 @@ import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.SwipeableCardLayout
-import com.joohnq.shared_resources.components.TextEllipsis
-import com.joohnq.shared_resources.components.TextWithBackground
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
+import com.joohnq.shared_resources.components.text.TextEllipsis
+import com.joohnq.shared_resources.components.text.TextWithBackground
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.hour
 import com.joohnq.shared_resources.mood_show
 import com.joohnq.shared_resources.theme.*

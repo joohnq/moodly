@@ -21,12 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.SleepQualityThumb
 import com.joohnq.shared_resources.components.SleepQualityTrack
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.SleepQualityVerticalSlider
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -46,7 +46,7 @@ fun AddStressLevelScreenContent(
     onAction: (AddStressLevelIntent) -> Unit = {},
     onEvent: (AddStressLevelEvent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),

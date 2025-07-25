@@ -13,7 +13,7 @@ import com.joohnq.api.entity.Time
 import com.joohnq.api.mapper.calculateDuration
 import com.joohnq.api.mapper.toHoursAndMinutesString
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables

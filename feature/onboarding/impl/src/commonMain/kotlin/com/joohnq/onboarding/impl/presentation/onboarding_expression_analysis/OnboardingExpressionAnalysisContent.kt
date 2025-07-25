@@ -9,8 +9,8 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
 import com.joohnq.shared_resources.remember.rememberSnackBarState

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 
 @Composable
 fun MoodHistoryBody(

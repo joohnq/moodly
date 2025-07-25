@@ -36,7 +36,7 @@ class DashboardViewModel(
         when (intent) {
             DashboardContract.Intent.Get -> {
                 moodViewModel.onIntent(MoodContract.Intent.GetAll)
-                userViewModel.onAction(UserContract.Intent.GetUser)
+                userViewModel.onIntent(UserContract.Intent.GetUser)
                 stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 sleepQualityViewModel.onIntent(SleepQualityContract.Intent.GetAll)
                 selfJournalViewModel.onIntent(SelfJournalContract.Intent.GetAll)

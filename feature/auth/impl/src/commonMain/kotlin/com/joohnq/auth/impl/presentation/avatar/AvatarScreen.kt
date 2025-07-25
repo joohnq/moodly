@@ -142,7 +142,7 @@ fun AvatarScreen(
                 else
                     UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
 
-                userViewModel.onAction(action)
+                userViewModel.onIntent(action)
             }
         }
     }

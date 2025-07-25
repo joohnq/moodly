@@ -81,7 +81,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun updateUser() {
-        userViewModel.onAction(
+        userViewModel.onIntent(
             UserContract.Intent.Update(
                 User(
                     physicalSymptoms = onboardingState.physicalSymptoms!!.toDomain(),

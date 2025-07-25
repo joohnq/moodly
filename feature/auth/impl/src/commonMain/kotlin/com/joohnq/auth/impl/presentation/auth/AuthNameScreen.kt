@@ -39,7 +39,7 @@ fun AuthNameScreen(
             focusManager.clearFocus()
             try {
                 UserNameValidator(userNameState.name)
-                userViewModel.onAction(UserContract.Intent.UpdateName(userNameState.name))
+                userViewModel.onIntent(UserContract.Intent.UpdateName(userNameState.name))
             } catch (e: Exception) {
                 authNameViewModel.onIntent(AuthNameContract.Intent.UpdateError(e.message.toString()))
             }

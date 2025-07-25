@@ -2,9 +2,12 @@ package com.joohnq.user.impl.ui.viewmodel
 
 import androidx.compose.ui.graphics.ImageBitmap
 import com.joohnq.api.entity.User
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface UserContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data object GetUser : Intent
         data object InitUser : Intent

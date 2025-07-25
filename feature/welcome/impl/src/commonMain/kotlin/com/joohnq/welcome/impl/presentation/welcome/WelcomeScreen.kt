@@ -3,7 +3,7 @@ package com.joohnq.welcome.impl.presentation.welcome
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.preferences.impl.ui.viewmodel.PreferencesSideEffect
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.ObserverSideEffects
@@ -27,8 +27,8 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is PreferencesSideEffect.ShowError -> onError(effect.message)
-                PreferencesSideEffect.UpdatedPreferences -> onNavigateToOnboarding()
+                is PreferencesContract.SideEffect.ShowError -> onError(effect.message)
+                PreferencesContract.SideEffect.UpdatedPreferences -> onNavigateToOnboarding()
             }
         }
     )

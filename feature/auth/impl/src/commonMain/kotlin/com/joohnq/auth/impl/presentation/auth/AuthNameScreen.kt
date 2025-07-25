@@ -8,7 +8,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.api.validator.UserNameValidator
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
@@ -52,7 +52,7 @@ fun AuthNameScreen(
             when (event) {
                 is UserSideEffect.UserNameUpdatedSuccess -> {
                     preferencesViewModel.onAction(
-                        PreferenceIntent.UpdateSkipAuth()
+                        PreferencesContract.Intent.UpdateSkipAuth()
                     )
                     onNavigateToSecurity()
                 }

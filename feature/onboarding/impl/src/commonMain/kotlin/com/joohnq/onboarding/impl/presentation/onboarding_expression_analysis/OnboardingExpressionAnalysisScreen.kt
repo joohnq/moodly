@@ -11,8 +11,7 @@ import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
 import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingViewModel
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
-import com.joohnq.preferences.impl.ui.viewmodel.PreferencesSideEffect
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
@@ -136,7 +135,7 @@ fun OnboardingExpressionAnalysisScreen(
             }
 
             if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodContract.SideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
-                preferencesViewModel.onAction(PreferenceIntent.UpdateSkipOnboarding())
+                preferencesViewModel.onAction(PreferencesContract.Intent.UpdateSkipOnboarding())
             }
         }
     }
@@ -145,8 +144,8 @@ fun OnboardingExpressionAnalysisScreen(
         flow = preferencesViewModel.sideEffect,
         onEvent = { effect ->
             when (effect) {
-                is PreferencesSideEffect.ShowError -> onError(effect.message)
-                PreferencesSideEffect.UpdatedPreferences -> onNavigateToUserName()
+                is PreferencesContract.SideEffect.ShowError -> onError(effect.message)
+                PreferencesContract.SideEffect.UpdatedPreferences -> onNavigateToUserName()
             }
         }
     )

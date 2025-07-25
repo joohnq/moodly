@@ -6,11 +6,13 @@ import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 sealed interface OnboardingContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
     sealed interface Intent {
         data class UpdateSleepQuality(val sleepQuality: SleepQualityResource) :
             Intent
@@ -28,9 +30,9 @@ sealed interface OnboardingContract {
 
         data class UpdateMoodRecordDescription(val description: String) : Intent
         data class UpdateSliderValue(val sliderValue: Float) : Intent
-        data class SetOnboardingStateForTesting(val state: State) :
-            Intent
     }
+
+    sealed interface SideEffect
 
     data class State(
         val physicalSymptoms: PhysicalSymptomsResource? = null,

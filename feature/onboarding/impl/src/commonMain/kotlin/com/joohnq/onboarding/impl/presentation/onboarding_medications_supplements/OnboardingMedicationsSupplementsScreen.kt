@@ -26,8 +26,7 @@ fun OnboardingMedicationsSupplementsScreen(
 
     OnboardingMedicationsSupplementsContent(
         state = state.medicationsSupplements,
-        onAction = onboardingViewModel::onAction,
+        onAction = onboardingViewModel::onIntent,
         onEvent = ::onEvent
     )
 }
-

@@ -155,7 +155,7 @@ fun OnboardingExpressionAnalysisScreen(
     OnboardingExpressionAnalysisContent(
         description = onboardingState.moodRecord.description,
         snackBarState = snackBarState,
-        onAction = onboardingViewModel::onAction,
+        onAction = onboardingViewModel::onIntent,
         onEvent = ::onEvent
     )
 }

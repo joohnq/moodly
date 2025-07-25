@@ -41,7 +41,7 @@ fun AuthNameScreen(
                 UserNameValidator(userNameState.name)
                 userViewModel.onAction(UserContract.Intent.UpdateName(userNameState.name))
             } catch (e: Exception) {
-                authNameViewModel.onAction(AuthNameContract.Intent.UpdateError(e.message.toString()))
+                authNameViewModel.onIntent(AuthNameContract.Intent.UpdateError(e.message.toString()))
             }
         }
     }
@@ -67,6 +67,6 @@ fun AuthNameScreen(
         snackBarState = snackBarState,
         onClearFocus = focusManager::clearFocus,
         onEvent = ::onEvent,
-        onGetAction = authNameViewModel::onAction
+        onGetAction = authNameViewModel::onIntent
     )
 }

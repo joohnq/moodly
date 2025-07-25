@@ -69,12 +69,12 @@ fun AvatarScreen(
         })
     val cameraManager = rememberCameraManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     val galleryManager = rememberGalleryManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     if (imageSourceOptionDialog) {
@@ -162,7 +162,7 @@ fun AvatarScreen(
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageDrawableIndex(page))
+            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageDrawableIndex(page))
         }
     }
 

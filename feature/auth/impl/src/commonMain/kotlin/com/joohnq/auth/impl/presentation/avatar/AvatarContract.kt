@@ -1,12 +1,18 @@
 package com.joohnq.auth.impl.presentation.avatar
 
 import androidx.compose.ui.graphics.ImageBitmap
+import com.joohnq.auth.impl.presentation.auth.AuthNameContract.SideEffect
+import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AvatarContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data class UpdateImageBitmap(val imageBitmap: ImageBitmap? = null) : Intent
         data class UpdateImageDrawableIndex(val i: Int) : Intent
     }
+
+    sealed interface SideEffect
 
     data class State(
         val imageBitmap: ImageBitmap? = null,

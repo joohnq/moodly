@@ -1,32 +1,17 @@
 package com.joohnq.auth.impl.presentation.auth
 
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import com.joohnq.ui.BaseViewModel
 
-class AuthNameViewModel : ViewModel() {
-    private val _state: MutableStateFlow<AuthNameContract.State> =
-        MutableStateFlow(AuthNameContract.State())
-    val state: StateFlow<AuthNameContract.State> = _state
-
-    fun onAction(intent: AuthNameContract.Intent) {
+class AuthNameViewModel(
+    initialState: AuthNameContract.State = AuthNameContract.State(),
+) : BaseViewModel<AuthNameContract.State, AuthNameContract.Intent, AuthNameContract.SideEffect>(
+    initialState = initialState
+), AuthNameContract.ViewModel {
+    override fun onIntent(intent: AuthNameContract.Intent) {
         when (intent) {
-            is AuthNameContract.Intent.Update -> updateUserName(intent.name)
-            AuthNameContract.Intent.ResetState -> _state.update { AuthNameContract.State() }
-            is AuthNameContract.Intent.UpdateError -> updateUserNameError(intent.error)
-        }
-    }
-
-    private fun updateUserName(name: String) {
-        _state.update {
-            it.copy(name = name, nameError = null)
-        }
-    }
-
-    private fun updateUserNameError(error: String?) {
-        _state.update {
-            it.copy(nameError = error)
+            is AuthNameContract.Intent.Update -> updateState { it.copy(name = intent.name) }
+            AuthNameContract.Intent.ResetState -> updateState { AuthNameContract.State() }
+            is AuthNameContract.Intent.UpdateError -> updateState { it.copy(nameError = intent.error) }
         }
     }
 }

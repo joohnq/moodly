@@ -29,7 +29,7 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
         when (event) {
             AddSelfJournalContract.Event.OnGoBack -> onGoBack()
             AddSelfJournalContract.Event.OnAdd ->
-                selfJournalViewModel.onAction(
+                selfJournalViewModel.onIntent(
                     SelfJournalContract.Intent.Add(
                         SelfJournalRecord(
                             mood = state.mood!!.toDomain(),
@@ -45,7 +45,7 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
             when (effect) {
                 SelfJournalContract.SideEffect.SelfJournalAdded -> {
                     onEvent(AddSelfJournalContract.Event.OnGoBack)
-                    selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
+                    selfJournalViewModel.onIntent(SelfJournalContract.Intent.GetAll)
                 }
 
                 is SelfJournalContract.SideEffect.ShowError -> onError(effect.error)
@@ -56,14 +56,14 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
 
     DisposableEffect(Unit) {
         onDispose {
-            addSelfJournalViewModel.onAction(AddSelfJournalContract.Intent.ResetState)
+            addSelfJournalViewModel.onIntent(AddSelfJournalContract.Intent.ResetState)
         }
     }
 
     return AddJournalingContent(
         snackBarState = snackBarState,
         state = state,
-        onAction = addSelfJournalViewModel::onAction,
+        onAction = addSelfJournalViewModel::onIntent,
         onEvent = ::onEvent
     )
 }

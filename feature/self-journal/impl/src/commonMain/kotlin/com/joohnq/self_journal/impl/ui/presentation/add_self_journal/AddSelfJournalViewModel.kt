@@ -1,32 +1,28 @@
 package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
 
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.joohnq.ui.BaseViewModel
 
-class AddSelfJournalViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddSelfJournalContract.State())
-    val state: StateFlow<AddSelfJournalContract.State> =
-        _state.asStateFlow()
-
-    fun onAction(intent: AddSelfJournalContract.Intent) {
+class AddSelfJournalViewModel(
+    initialState: AddSelfJournalContract.State = AddSelfJournalContract.State(),
+) : BaseViewModel<AddSelfJournalContract.State, AddSelfJournalContract.Intent, AddSelfJournalContract.SideEffect>(
+    initialState = initialState
+), AddSelfJournalContract.ViewModel {
+    override fun onIntent(intent: AddSelfJournalContract.Intent) {
         when (intent) {
             AddSelfJournalContract.Intent.ResetState ->
-                _state.update { AddSelfJournalContract.State() }
+                updateState { AddSelfJournalContract.State() }
 
             is AddSelfJournalContract.Intent.UpdateDescription ->
-                _state.update { it.copy(description = intent.description) }
+                updateState { it.copy(description = intent.description) }
 
             is AddSelfJournalContract.Intent.UpdateMood ->
-                _state.update { it.copy(mood = intent.mood) }
+                updateState { it.copy(mood = intent.mood) }
 
             is AddSelfJournalContract.Intent.UpdateTitle ->
-                _state.update { it.copy(title = intent.title) }
+                updateState { it.copy(title = intent.title) }
 
             is AddSelfJournalContract.Intent.UpdateTitleError ->
-                _state.update { it.copy(titleError = intent.error) }
+                updateState { it.copy(titleError = intent.error) }
         }
     }
 }

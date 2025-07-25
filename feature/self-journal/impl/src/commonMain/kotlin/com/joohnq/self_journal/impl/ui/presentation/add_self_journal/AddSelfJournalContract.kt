@@ -2,8 +2,10 @@ package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
 
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
+import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AddSelfJournalContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
     sealed interface Event {
         data object OnGoBack : Event
         data object OnAdd : Event
@@ -16,6 +18,8 @@ sealed interface AddSelfJournalContract {
         data class UpdateTitleError(val error: String?) : Intent
         data object ResetState : Intent
     }
+
+    sealed interface SideEffect
 
     data class State(
         val mood: MoodResource? = null,

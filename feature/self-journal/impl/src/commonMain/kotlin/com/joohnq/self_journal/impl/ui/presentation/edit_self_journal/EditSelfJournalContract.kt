@@ -1,8 +1,12 @@
 package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJournalContract
+import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface EditSelfJournalContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Event {
         data object OnGoBack : Event
         data object OnSave : Event
@@ -17,6 +21,8 @@ sealed interface EditSelfJournalContract {
         data class UpdateIsEditing(val value: Boolean) : Intent
         data class UpdateOpenDeleteDialog(val value: Boolean) : Intent
     }
+
+    sealed interface SideEffect
 
     data class State(
         val currentSelfJournalRecord: SelfJournalRecord = SelfJournalRecord(),

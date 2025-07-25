@@ -1,9 +1,13 @@
 package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
 
 import com.joohnq.api.getNow
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.ui.UnidirectionalViewModel
 import kotlinx.datetime.LocalDate
 
 interface SelfJournalHistoryContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data class UpdateSelectedDateTime(val selectedDateTime: LocalDate) : Intent
         data class UpdateOpenDeleteDialog(val openDeleteDialog: Boolean) : Intent
@@ -16,6 +20,8 @@ interface SelfJournalHistoryContract {
         val openDeleteDialog: Boolean = false,
         val currentDeleteId: Int = -1,
     )
+
+    sealed interface SideEffect
 
     sealed interface Event {
         data object OnGoBack : Event

@@ -11,6 +11,7 @@ class AddSleepQualityViewModel(
 ) : BaseViewModel<AddSleepQualityContract.State, AddSleepQualityContract.Intent, AddSleepQualityContract.SideEffect>(
     initialState = initialState
 ), AddSleepQualityContract.ViewModel {
+
     override fun onIntent(intent: AddSleepQualityContract.Intent) {
         when (intent) {
             is AddSleepQualityContract.Intent.UpdateMood ->

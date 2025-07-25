@@ -6,5 +6,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val onboardingUiModule: Module = module {
-    singleOf(::OnboardingViewModel)
+    single<OnboardingViewModel> {
+        OnboardingViewModel()
+    }
 }

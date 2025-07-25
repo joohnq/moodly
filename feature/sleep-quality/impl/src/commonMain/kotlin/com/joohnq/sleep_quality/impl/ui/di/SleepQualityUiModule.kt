@@ -7,6 +7,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val sleepQualityUiModule: Module = module {
-    singleOf(::SleepQualityViewModel)
-    singleOf(::AddSleepQualityViewModel)
+    single<SleepQualityViewModel> {
+        SleepQualityViewModel(
+            addSleepQualityUseCase = get(),
+            getSleepQualitiesUseCase = get(),
+            deleteSleepQualityUseCase = get(),
+        )
+    }
+    single<AddSleepQualityViewModel> {
+        AddSleepQualityViewModel()
+    }
 }

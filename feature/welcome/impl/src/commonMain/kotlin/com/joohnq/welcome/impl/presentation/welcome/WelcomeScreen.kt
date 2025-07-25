@@ -41,6 +41,6 @@ fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
         snackBarState = snackBarState,
         pagerState = pagerState,
         onNext = ::onNext,
-        onAction = preferencesViewModel::onAction
+        onAction = preferencesViewModel::onIntent
     )
 }

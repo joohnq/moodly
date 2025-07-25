@@ -1,9 +1,12 @@
 package com.joohnq.preferences.impl.ui.viewmodel
 
 import com.joohnq.preferences.api.entity.AppPreferences
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface PreferencesContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data object GetPreferences : Intent
         data class UpdateSkipWelcome(

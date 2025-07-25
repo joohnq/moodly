@@ -50,7 +50,7 @@ fun AuthNameScreen(
         userViewModel.sideEffect.collect { event ->
             when (event) {
                 is UserContract.SideEffect.UserNameUpdatedSuccess -> {
-                    preferencesViewModel.onAction(
+                    preferencesViewModel.onIntent(
                         PreferencesContract.Intent.UpdateSkipAuth()
                     )
                     onNavigateToSecurity()

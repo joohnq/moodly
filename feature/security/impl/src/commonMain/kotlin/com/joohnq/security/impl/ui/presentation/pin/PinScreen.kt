@@ -22,7 +22,7 @@ fun PINScreen(
     onGoBack: () -> Unit,
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
-    val pinViewModel: PINViewModel = sharedViewModel()
+    val pinViewModel: PinViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val state by pinViewModel.state.collectAsState()
     val snackBarState = rememberSnackBarState()
@@ -40,7 +40,7 @@ fun PINScreen(
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
                 is SecurityContract.SideEffect.OnSecurityUpdated -> {
-                    securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
+                    securityViewModel.onIntent(SecurityContract.Intent.GetSecurity)
                     onNavigateToDashboard()
                 }
 
@@ -52,7 +52,7 @@ fun PINScreen(
     fun onEvent(event: PinContract.Event) {
         when (event) {
             PinContract.Event.OnContinue -> {
-                securityViewModel.onAction(
+                securityViewModel.onIntent(
                     SecurityContract.Intent.Update(
                         Security.Pin(
                             enabled = true,
@@ -78,7 +78,7 @@ fun PINScreen(
             if (action is PinContract.Intent.OnEnterNumber && action.number != null) {
                 focusRequesters[action.index].freeFocus()
             }
-            pinViewModel.onAction(action)
+            pinViewModel.onIntent(action)
         },
         focusRequesters = focusRequesters,
         focusManager = focusManager,

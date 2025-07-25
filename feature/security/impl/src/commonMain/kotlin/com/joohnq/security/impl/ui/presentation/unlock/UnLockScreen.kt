@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityAuthentication
 import com.joohnq.security.api.getPinCode
-import com.joohnq.security.impl.ui.presentation.pin.PINViewModel
+import com.joohnq.security.impl.ui.presentation.pin.PinViewModel
 import com.joohnq.security.impl.ui.presentation.pin.PinContract
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
 import com.joohnq.security.impl.ui.securityAuthentication
@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 fun UnLockScreen(
     onNavigateToDashboard: () -> Unit,
 ) {
-    val pinViewModel: PINViewModel = sharedViewModel()
+    val pinViewModel: PinViewModel = sharedViewModel()
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val securityAuthentication: SecurityAuthentication = securityAuthentication()
     val securityState by securityViewModel.state.collectAsState()
@@ -112,7 +112,7 @@ fun UnLockScreen(
             if (action is PinContract.Intent.OnEnterNumber && action.number != null) {
                 focusRequesters[action.index].freeFocus()
             }
-            pinViewModel.onAction(action)
+            pinViewModel.onIntent(action)
         },
     )
 }

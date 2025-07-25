@@ -34,7 +34,7 @@ fun SecurityScreen(
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
                 is SecurityContract.SideEffect.OnSecurityUpdated -> {
-                    securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
+                    securityViewModel.onIntent(SecurityContract.Intent.GetSecurity)
                     onNavigateToSecurityConfirmed()
                 }
 
@@ -49,7 +49,7 @@ fun SecurityScreen(
                 if (securityAuthentication.isDeviceHasBiometric()) {
                     securityAuthentication.authenticateWithFace { isAuthorized ->
                         if (isAuthorized) {
-                            securityViewModel.onAction(
+                            securityViewModel.onIntent(
                                 SecurityContract.Intent.Update(
                                     Security.Biometric(true)
                                 )
@@ -60,7 +60,7 @@ fun SecurityScreen(
             }
 
             SecurityContract.Event.OnSkip -> {
-                preferencesViewModel.onAction(
+                preferencesViewModel.onIntent(
                     PreferencesContract.Intent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()

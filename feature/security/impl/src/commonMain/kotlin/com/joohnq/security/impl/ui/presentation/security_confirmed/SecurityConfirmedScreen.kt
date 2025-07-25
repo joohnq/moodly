@@ -14,7 +14,7 @@ fun SecurityConfirmedScreen(
     fun onEvent(event: SecurityConfirmedContract.Event) {
         when (event) {
             SecurityConfirmedContract.Event.OnContinue -> {
-                preferencesViewModel.onAction(
+                preferencesViewModel.onIntent(
                     PreferencesContract.Intent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()

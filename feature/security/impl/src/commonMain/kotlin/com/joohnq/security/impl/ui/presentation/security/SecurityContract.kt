@@ -1,9 +1,12 @@
 package com.joohnq.security.impl.ui.presentation.security
 
 import com.joohnq.security.api.Security
+import com.joohnq.security.impl.ui.presentation.pin.PinContract
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface SecurityContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
     sealed interface Intent {
         data object GetSecurity : Intent
         data class Update(val security: Security) : Intent

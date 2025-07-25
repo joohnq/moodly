@@ -7,16 +7,13 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.component.SleepContent
 import com.joohnq.sleep_quality.impl.ui.component.SleepPanel
 import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
 import com.joohnq.ui.mapper.foldComposable
 
 @Composable
 fun SleepQualityContent(
-    state: SleepQualityState,
-    onEvent: (SleepQualityEvent) -> Unit = {},
-    onAction: (SleepQualityIntent) -> Unit = {},
+    state: SleepQualityContract.State,
+    onEvent: (SleepQualityContract.Event) -> Unit = {},
+    onAction: (SleepQualityContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -35,8 +32,8 @@ fun SleepQualityContent(
                         record = record,
                     )
                 },
-                onAddButton = { onEvent(SleepQualityEvent.OnNavigateToAddSleepQuality) },
-                onGoBack = { onEvent(SleepQualityEvent.OnGoBack) },
+                onAddButton = { onEvent(SleepQualityContract.Event.OnNavigateToAddSleepQuality) },
+                onGoBack = { onEvent(SleepQualityContract.Event.OnGoBack) },
                 body = { modifier ->
                     SleepContent(
                         modifier = modifier,

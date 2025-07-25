@@ -15,9 +15,8 @@ import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualitySideEffect
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.stress_level.impl.ui.mapper.toDomain
 import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
 import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelSideEffect
@@ -61,7 +60,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun addSleepQualityRecord() {
         sleepQualityViewModel.onAction(
-            SleepQualityIntent.Add(
+            SleepQualityContract.Intent.Add(
                 onboardingState.sleepQuality.toDomain(),
             )
         )
@@ -124,7 +123,7 @@ fun OnboardingExpressionAnalysisScreen(
             if (stressSideEffect is StressLevelSideEffect.ShowError) {
                 onError(stressSideEffect.error)
             }
-            if (sleepSideEffect is SleepQualitySideEffect.ShowError) {
+            if (sleepSideEffect is SleepQualityContract.SideEffect.ShowError) {
                 onError(sleepSideEffect.error)
             }
             if (statsSideEffect is MoodContract.SideEffect.ShowError) {
@@ -134,7 +133,7 @@ fun OnboardingExpressionAnalysisScreen(
                 onError(userSideEffect.error)
             }
 
-            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodContract.SideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
+            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualityContract.SideEffect.SleepQualityAdded && statsSideEffect is MoodContract.SideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
                 preferencesViewModel.onAction(PreferencesContract.Intent.UpdateSkipOnboarding())
             }
         }

@@ -3,8 +3,6 @@ package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.event.SleepQualityEvent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable
@@ -16,11 +14,11 @@ fun SleepQualityScreen(
     val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
     val state by sleepQualityViewModel.state.collectAsState()
 
-    fun onEvent(event: SleepQualityEvent) =
+    fun onEvent(event: SleepQualityContract.Event) =
         when (event) {
-            SleepQualityEvent.OnGoBack -> onGoBack()
-            SleepQualityEvent.OnNavigateToAddSleepQuality -> onNavigateAddSleepQuality()
-            SleepQualityEvent.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
+            SleepQualityContract.Event.OnGoBack -> onGoBack()
+            SleepQualityContract.Event.OnNavigateToAddSleepQuality -> onNavigateAddSleepQuality()
+            SleepQualityContract.Event.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
         }
 
     return SleepQualityContent(

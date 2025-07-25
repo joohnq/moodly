@@ -2,7 +2,13 @@ package com.joohnq.home.impl.presentation.dashboard
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.FabPosition
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
@@ -12,12 +18,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.home.impl.components.DashboardCentral
-import com.joohnq.home.impl.presentation.dashboard.event.DashboardEvent
-import com.joohnq.home.impl.presentation.dashboard.event.toDashboardEvent
 import com.joohnq.home.impl.presentation.home.HomeScreen
-import com.joohnq.home.impl.presentation.viewmodel.DashboardIntent
-import com.joohnq.home.impl.presentation.viewmodel.DashboardSideEffect
+import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.home.impl.presentation.viewmodel.DashboardViewModel
+import com.joohnq.home.impl.toDashboardEvent
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.isCurrentRoute
 import com.joohnq.shared_resources.components.button.BottomNavigationButton
@@ -33,14 +37,11 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun DashboardScreen(
-    onEvent: (DashboardEvent) -> Unit
+    onEvent: (DashboardContract.Event) -> Unit,
 ) {
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val navigator = rememberNavController()
-    val navBackStackEntry by navigator.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    val hierarchy = currentDestination?.hierarchy
 
     var centralIsExpanded by remember { mutableStateOf(false) }
     val dashboardViewModel: DashboardViewModel = sharedViewModel()
@@ -51,21 +52,14 @@ fun DashboardScreen(
         }
     }
 
-    fun onNavigateBottomNavigate(destination: Destination) {
-        if (!hierarchy.isCurrentRoute(destination))
-            navigator.navigate(destination)
-
-        centralIsExpanded = false
-    }
-
-    fun onSideEffect(effect: DashboardSideEffect) {
+    fun onSideEffect(effect: DashboardContract.SideEffect) {
         when (effect) {
-            is DashboardSideEffect.ShowError -> onError(effect.message)
+            is DashboardContract.SideEffect.ShowError -> onError(effect.message)
         }
     }
 
     LaunchedEffect(Unit) {
-        dashboardViewModel.onAction(DashboardIntent.Get)
+        dashboardViewModel.onAction(DashboardContract.Intent.Get)
     }
 
     ObserverSideEffects(

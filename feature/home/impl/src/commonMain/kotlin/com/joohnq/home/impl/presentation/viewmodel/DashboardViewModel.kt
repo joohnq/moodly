@@ -39,15 +39,15 @@ class DashboardViewModel(
     private val sleepQualityViewModel: SleepQualityViewModel,
     private val stressLevelViewModel: StressLevelViewModel,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(DashboardState())
-    val state: StateFlow<DashboardState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(DashboardContract.State())
+    val state: StateFlow<DashboardContract.State> = _state.asStateFlow()
 
-    private val _sideEffect = Channel<DashboardSideEffect>(Channel.BUFFERED)
+    private val _sideEffect = Channel<DashboardContract.SideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(event: DashboardIntent) {
+    fun onAction(event: DashboardContract.Intent) {
         when (event) {
-            DashboardIntent.Get -> {
+            DashboardContract.Intent.Get -> {
                 moodViewModel.onAction(MoodIntent.GetAll)
                 userViewModel.onAction(UserIntent.GetUser)
                 stressLevelViewModel.onAction(StressLevelIntent.GetAll)
@@ -88,12 +88,12 @@ class DashboardViewModel(
             ).anyError(
                 block = { error ->
                     viewModelScope.launch {
-                        _sideEffect.send(DashboardSideEffect.ShowError(error))
+                        _sideEffect.send(DashboardContract.SideEffect.ShowError(error))
                     }
                 }
             )
 
-            DashboardState(
+            DashboardContract.State(
                 user = userState.user,
                 moodRecords = statsState.records,
                 freudScore = freudState.freudScore,

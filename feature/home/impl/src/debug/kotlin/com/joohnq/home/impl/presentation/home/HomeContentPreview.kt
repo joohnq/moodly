@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.resource.FreudScoreResource
-import com.joohnq.home.impl.presentation.viewmodel.DashboardState
+import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
@@ -27,7 +27,7 @@ fun HomeContentPreview(
     sleepQualityRecordResources: List<SleepQualityRecordResource>,
 ) {
     HomeContent(
-        state = DashboardState(
+        state = DashboardContract.State(
             freudScore = FreudScoreResource.Healthy(80),
             moodRecords = UiState.Success(
                 moodRecordResources

@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel
+package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
@@ -8,29 +8,29 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class EditSelfJournalViewModel : ViewModel() {
-    private val _state = MutableStateFlow(EditSelfJournalState())
-    val state: StateFlow<EditSelfJournalState> =
+    private val _state = MutableStateFlow(EditSelfJournalContract.State())
+    val state: StateFlow<EditSelfJournalContract.State> =
         _state.asStateFlow()
 
-    fun onAction(intent: EditSelfJournalIntent) {
+    fun onAction(intent: EditSelfJournalContract.Intent) {
         when (intent) {
-            EditSelfJournalIntent.ResetState -> resetState()
-            is EditSelfJournalIntent.UpdateDescription ->
+            EditSelfJournalContract.Intent.ResetState -> _state.update { EditSelfJournalContract.State() }
+            is EditSelfJournalContract.Intent.UpdateDescription ->
                 updateDescription(intent.description)
 
-            is EditSelfJournalIntent.UpdateOpenDeleteDialog ->
+            is EditSelfJournalContract.Intent.UpdateOpenDeleteDialog ->
                 updateOpenDeleteDialog(intent.value)
 
-            is EditSelfJournalIntent.UpdateTitle ->
+            is EditSelfJournalContract.Intent.UpdateTitle ->
                 updateTitle(intent.title)
 
-            is EditSelfJournalIntent.UpdateIsEditing ->
+            is EditSelfJournalContract.Intent.UpdateIsEditing ->
                 updateIsEditing(intent.value)
 
-            is EditSelfJournalIntent.SetEditSelfJournal ->
+            is EditSelfJournalContract.Intent.Set ->
                 setEditingSelfJournal(intent.record)
 
-            EditSelfJournalIntent.ClearEditingState -> clearEditingState()
+            EditSelfJournalContract.Intent.ClearEditingState -> clearEditingState()
         }
     }
 
@@ -80,9 +80,5 @@ class EditSelfJournalViewModel : ViewModel() {
                 openDeleteDialog = value
             )
         }
-    }
-
-    private fun resetState() {
-        _state.update { EditSelfJournalState() }
     }
 }

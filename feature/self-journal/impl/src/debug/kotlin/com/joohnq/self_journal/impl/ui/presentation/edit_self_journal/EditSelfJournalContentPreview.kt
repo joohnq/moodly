@@ -2,9 +2,8 @@ package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
-import com.joohnq.shared_resources.components.parameter.BooleanParameterProvider
 import com.joohnq.self_journal.impl.ui.parameter.SelfJournalRecordParameterProvider
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
+import com.joohnq.shared_resources.components.parameter.BooleanParameterProvider
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -15,7 +14,7 @@ fun EditJournalingContentPreview(
     item: SelfJournalRecord,
 ) {
     EditJournalingContent(
-        state = EditSelfJournalState(
+        state = EditSelfJournalContract.State(
             currentSelfJournalRecord = item,
             editingSelfJournalRecord = item,
             isEditing = false,
@@ -29,10 +28,10 @@ fun EditJournalingContentPreview(
 @Composable
 fun EditJournalingContentPreview(
     @PreviewParameter(BooleanParameterProvider::class)
-    boolean: Boolean
+    boolean: Boolean,
 ) {
     EditJournalingContent(
-        state = EditSelfJournalState(
+        state = EditSelfJournalContract.State(
             isEditing = boolean,
             openDeleteDialog = !boolean
         ),

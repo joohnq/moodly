@@ -8,12 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.event.AddSelfJournalEvent
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddJournalingViewModel
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalIntent
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalSideEffect
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
@@ -21,20 +17,20 @@ import kotlinx.coroutines.launch
 @Composable
 fun AddSelfJournalScreen(onGoBack: () -> Unit) {
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
-    val addJournalingViewModel: AddJournalingViewModel = sharedViewModel()
+    val addSelfJournalViewModel: AddSelfJournalViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
-    val state by addJournalingViewModel.state.collectAsState()
+    val state by addSelfJournalViewModel.state.collectAsState()
 
     fun onError(error: String) =
         scope.launch { snackBarState.showSnackbar(error) }
 
-    fun onEvent(event: AddSelfJournalEvent) =
+    fun onEvent(event: AddSelfJournalContract.Event) =
         when (event) {
-            AddSelfJournalEvent.OnGoBack -> onGoBack()
-            AddSelfJournalEvent.OnAdd ->
+            AddSelfJournalContract.Event.OnGoBack -> onGoBack()
+            AddSelfJournalContract.Event.OnAdd ->
                 selfJournalViewModel.onAction(
-                    SelfJournalIntent.Add(
+                    SelfJournalContract.Intent.Add(
                         SelfJournalRecord(
                             mood = state.mood!!.toDomain(),
                             title = state.title,
@@ -47,12 +43,12 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
     LaunchedEffect(selfJournalViewModel) {
         selfJournalViewModel.sideEffect.collect { effect ->
             when (effect) {
-                SelfJournalSideEffect.SelfJournalAdded -> {
-                    onEvent(AddSelfJournalEvent.OnGoBack)
-                    selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
+                SelfJournalContract.SideEffect.SelfJournalAdded -> {
+                    onEvent(AddSelfJournalContract.Event.OnGoBack)
+                    selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
                 }
 
-                is SelfJournalSideEffect.ShowError -> onError(effect.error)
+                is SelfJournalContract.SideEffect.ShowError -> onError(effect.error)
                 else -> Unit
             }
         }
@@ -60,14 +56,14 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
 
     DisposableEffect(Unit) {
         onDispose {
-            addJournalingViewModel.onAction(AddSelfJournalIntent.ResetState)
+            addSelfJournalViewModel.onAction(AddSelfJournalContract.Intent.ResetState)
         }
     }
 
     return AddJournalingContent(
         snackBarState = snackBarState,
         state = state,
-        onAction = addJournalingViewModel::onAction,
+        onAction = addSelfJournalViewModel::onAction,
         onEvent = ::onEvent
     )
 }

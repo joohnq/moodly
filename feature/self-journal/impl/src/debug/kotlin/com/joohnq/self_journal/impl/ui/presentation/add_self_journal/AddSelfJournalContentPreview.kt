@@ -2,7 +2,6 @@ package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
 
 import androidx.compose.runtime.Composable
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -10,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AddJournalingContentDepressedPreview() {
     AddJournalingContent(
-        state = AddSelfJournalState(
+        state = AddSelfJournalContract.State(
             mood = MoodResource.Depressed,
             title = "Title",
             titleError = null,
@@ -25,7 +24,7 @@ fun AddJournalingContentDepressedPreview() {
 @Composable
 fun AddJournalingContentSadPreview() {
     AddJournalingContent(
-        state = AddSelfJournalState(
+        state = AddSelfJournalContract.State(
             mood = MoodResource.Sad,
             title = "Title",
             titleError = null,
@@ -40,7 +39,7 @@ fun AddJournalingContentSadPreview() {
 @Composable
 fun AddJournalingContentNeutralPreview() {
     AddJournalingContent(
-        state = AddSelfJournalState(
+        state = AddSelfJournalContract.State(
             mood = MoodResource.Neutral,
             title = "Title",
             titleError = null,
@@ -55,7 +54,7 @@ fun AddJournalingContentNeutralPreview() {
 @Composable
 fun AddJournalingContentHappyPreview() {
     AddJournalingContent(
-        state = AddSelfJournalState(
+        state = AddSelfJournalContract.State(
             mood = MoodResource.Happy,
             title = "Title",
             titleError = null,
@@ -70,7 +69,7 @@ fun AddJournalingContentHappyPreview() {
 @Composable
 fun AddJournalingContentOverjoyedPreview() {
     AddJournalingContent(
-        state = AddSelfJournalState(
+        state = AddSelfJournalContract.State(
             mood = MoodResource.Overjoyed,
             title = "Title",
             titleError = null,

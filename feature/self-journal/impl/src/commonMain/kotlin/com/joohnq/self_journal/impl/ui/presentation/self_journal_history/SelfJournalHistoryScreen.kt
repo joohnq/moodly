@@ -3,11 +3,9 @@ package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.event.SelfJournalHistoryEvent
-import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryViewModel
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
 
 @Composable
 fun SelfJournalHistoryScreen(
@@ -19,12 +17,15 @@ fun SelfJournalHistoryScreen(
     val historyViewModel: SelfJournalHistoryViewModel = sharedViewModel()
     val historyState by historyViewModel.state.collectAsState()
 
-    fun onEvent(event: SelfJournalHistoryEvent) =
+    fun onEvent(event: SelfJournalHistoryContract.Event) =
         when (event) {
-            SelfJournalHistoryEvent.OnGoBack -> onGoBack()
-            is SelfJournalHistoryEvent.OnSelectJournalHistory -> onNavigateEditJournaling(event.id)
-            SelfJournalHistoryEvent.OnDelete -> selfJournalViewModel.onAction(
-                SelfJournalIntent.Delete(
+            SelfJournalHistoryContract.Event.OnGoBack -> onGoBack()
+            is SelfJournalHistoryContract.Event.OnSelectJournalHistory -> onNavigateEditJournaling(
+                event.id
+            )
+
+            SelfJournalHistoryContract.Event.OnDelete -> selfJournalViewModel.onAction(
+                SelfJournalContract.Intent.Delete(
                     historyState.currentDeleteId
                 )
             )
@@ -37,4 +38,3 @@ fun SelfJournalHistoryScreen(
         onEvent = ::onEvent,
     )
 }
-

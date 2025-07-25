@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.event.SelfJournalEvent
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
 
 @Composable
 fun SelfJournalScreen(
@@ -17,13 +15,13 @@ fun SelfJournalScreen(
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
     val state by selfJournalViewModel.state.collectAsState()
 
-    fun onEvent(event: SelfJournalEvent) =
+    fun onEvent(event: SelfJournalContract.Event) =
         when (event) {
-            SelfJournalEvent.OnGoBack -> onGoBack()
-            SelfJournalEvent.OnNavigateToAddSelfJournal -> onNavigateAddSelfJournal()
-            is SelfJournalEvent.OnClick -> onNavigateToSelfJournalHistory()
-            SelfJournalEvent.OnNavigateToSelfHistory -> onNavigateToSelfJournalHistory()
-            is SelfJournalEvent.OnEditSelfJournal -> onEditSelfJournal(event.id)
+            SelfJournalContract.Event.OnGoBack -> onGoBack()
+            SelfJournalContract.Event.OnNavigateToAddSelfJournal -> onNavigateAddSelfJournal()
+            is SelfJournalContract.Event.OnClick -> onNavigateToSelfJournalHistory()
+            SelfJournalContract.Event.OnNavigateToSelfHistory -> onNavigateToSelfJournalHistory()
+            is SelfJournalContract.Event.OnEdit -> onEditSelfJournal(event.id)
         }
 
     return SelfJournalContent(

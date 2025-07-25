@@ -7,7 +7,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -23,7 +23,7 @@ fun OnboardingExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 7,
@@ -44,7 +44,7 @@ fun OnboardingExpressionAnalysisContent(
             text = description,
             onValueChange = {
                 onAction(
-                    OnboardingIntent.UpdateMoodRecordDescription(it)
+                    OnboardingContract.Intent.UpdateMoodRecordDescription(it)
                 )
             }
         )

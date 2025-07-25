@@ -19,7 +19,7 @@ import com.joohnq.mood.impl.ui.components.MoodRouletteWheel
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.IconContinueButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingMoodRateContent(
     state: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     OnboardingBaseComponent(
         page = 1,
@@ -85,7 +85,7 @@ fun OnboardingMoodRateContent(
         ) {
             MoodRouletteWheel(
                 modifier = Modifier.fillMaxSize().scale(1.4f),
-                setSelectedMood = { onAction(OnboardingIntent.UpdateMood(it)) }
+                setSelectedMood = { onAction(OnboardingContract.Intent.UpdateMood(it)) }
             )
         }
     }

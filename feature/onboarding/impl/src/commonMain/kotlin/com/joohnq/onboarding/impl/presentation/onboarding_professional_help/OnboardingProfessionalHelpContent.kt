@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.radio_button.TextRadioButton
 import com.joohnq.shared_resources.sought_professional_help_title
@@ -23,7 +23,7 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 fun OnboardingProfessionalHelpContent(
     state: ProfessionalHelpResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options = rememberSaveable { getAllProfessionalHelpResource() }
 
@@ -46,7 +46,7 @@ fun OnboardingProfessionalHelpContent(
                     selected = state == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.textRadioButtonColors(),
-                    onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
+                    onClick = { onAction(OnboardingContract.Intent.UpdateUserSoughtHelp(option)) }
                 )
             }
         }

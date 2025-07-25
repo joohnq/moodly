@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.components.MedicationsSupplementsRadioButton
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.medications_supplements_title
 import com.joohnq.user.impl.ui.mapper.getAllMedicationsSupplementsResource
@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingMedicationsSupplementsContent(
     state: MedicationsSupplementsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options: List<MedicationsSupplementsResource> =
         remember { getAllMedicationsSupplementsResource() }
@@ -51,7 +51,7 @@ fun OnboardingMedicationsSupplementsContent(
                     selected = state == option,
                     onClick = {
                         onAction(
-                            OnboardingIntent.UpdateUserMedicationsSupplements(option)
+                            OnboardingContract.Intent.UpdateUserMedicationsSupplements(option)
                         )
                     }
                 )

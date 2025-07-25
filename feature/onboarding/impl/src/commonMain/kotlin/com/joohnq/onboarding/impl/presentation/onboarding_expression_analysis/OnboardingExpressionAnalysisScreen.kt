@@ -57,7 +57,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun addSleepQualityRecord() {
-        sleepQualityViewModel.onAction(
+        sleepQualityViewModel.onIntent(
             SleepQualityContract.Intent.Add(
                 onboardingState.sleepQuality.toDomain(),
             )

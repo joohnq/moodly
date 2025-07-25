@@ -1,10 +1,14 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
+import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface SleepQualityContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Event {
         data object OnGoBack : Event
         data object OnNavigateToAddSleepQuality : Event

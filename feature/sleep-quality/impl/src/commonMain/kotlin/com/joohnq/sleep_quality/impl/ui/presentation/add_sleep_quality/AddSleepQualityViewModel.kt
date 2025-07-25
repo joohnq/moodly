@@ -1,24 +1,20 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
 
-import androidx.lifecycle.ViewModel
 import com.joohnq.api.mapper.toggle
 import com.joohnq.mood.impl.ui.mapper.toSleepQuality
 import com.joohnq.sleep_quality.impl.ui.mapper.toResource
-import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.update
 
-class AddSleepQualityViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddSleepQualityContract.State())
-    val state: StateFlow<AddSleepQualityContract.State> =
-        _state.asStateFlow()
-
-    fun onAction(intent: AddSleepQualityContract.Intent) {
+class AddSleepQualityViewModel(
+    initialState: AddSleepQualityContract.State = AddSleepQualityContract.State(),
+) : BaseViewModel<AddSleepQualityContract.State, AddSleepQualityContract.Intent, AddSleepQualityContract.SideEffect>(
+    initialState = initialState
+), AddSleepQualityContract.ViewModel {
+    override fun onIntent(intent: AddSleepQualityContract.Intent) {
         when (intent) {
             is AddSleepQualityContract.Intent.UpdateMood ->
-                _state.update {
+                updateState {
                     it.copy(
                         record = it.record.copy(
                             sleepQuality = intent.mood.toSleepQuality().toResource()
@@ -27,7 +23,7 @@ class AddSleepQualityViewModel : ViewModel() {
                 }
 
             is AddSleepQualityContract.Intent.UpdateSelectedSleepInfluence ->
-                _state.update {
+                updateState {
                     val influences =
                         state.value.record.sleepInfluences.toggle(intent.sleepInfluence)
                     it.copy(
@@ -36,13 +32,13 @@ class AddSleepQualityViewModel : ViewModel() {
                 }
 
             is AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog ->
-                _state.update { it.copy(showStartTimePickerDialog = intent.value) }
+                updateState { it.copy(showStartTimePickerDialog = intent.value) }
 
             is AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog ->
-                _state.update { it.copy(showEndTimePickerDialog = intent.value) }
+                updateState { it.copy(showEndTimePickerDialog = intent.value) }
 
             is AddSleepQualityContract.Intent.UpdateStartTime ->
-                _state.update {
+                updateState {
                     it.copy(
                         record = it.record.copy(
                             startSleeping = it.record.startSleeping.copy(
@@ -54,7 +50,7 @@ class AddSleepQualityViewModel : ViewModel() {
                 }
 
             is AddSleepQualityContract.Intent.UpdateEndTime ->
-                _state.update {
+                updateState {
                     it.copy(
                         record = it.record.copy(
                             endSleeping = it.record.endSleeping.copy(
@@ -66,7 +62,7 @@ class AddSleepQualityViewModel : ViewModel() {
                 }
 
             AddSleepQualityContract.Intent.ResetState ->
-                _state.update { AddSleepQualityContract.State() }
+                updateState { AddSleepQualityContract.State() }
         }
     }
 }

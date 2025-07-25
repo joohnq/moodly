@@ -26,7 +26,7 @@ class PreferencesViewModel(
 
     override fun onIntent(intent: PreferencesContract.Intent) {
         when (intent) {
-            is PreferencesContract.Intent.GetPreferences -> getPreferences()
+            is PreferencesContract.Intent.Get -> getPreferences()
             is PreferencesContract.Intent.UpdateSkipAuth ->
                 updateSkipAuth(value = intent.value)
 

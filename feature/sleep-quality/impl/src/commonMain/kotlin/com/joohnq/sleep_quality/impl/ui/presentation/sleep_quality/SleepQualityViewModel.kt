@@ -65,7 +65,7 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
             res.onSuccess {
-                emitEffect(SleepQualityContract.SideEffect.SleepQualityAdded)
+                emitEffect(SleepQualityContract.SideEffect.Added)
             }.onFailure {
                 emitEffect(SleepQualityContract.SideEffect.ShowError(it))
             }

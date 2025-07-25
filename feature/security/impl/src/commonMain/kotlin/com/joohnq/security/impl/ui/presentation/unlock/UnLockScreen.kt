@@ -67,12 +67,12 @@ fun UnLockScreen(
         when (event) {
             UnlockContract.Event.OnContinue -> {
                 when (securityType) {
-                    is Security.Pin -> onEvent(UnlockContract.Event.UpdateShowBottomSheet(true))
+                    is Security.Pin -> onEvent(UnlockContract.Event.OnUpdateShowBottomSheet(true))
                     else -> executeBiometricSecurity()
                 }
             }
 
-            is UnlockContract.Event.UpdateShowBottomSheet -> {
+            is UnlockContract.Event.OnUpdateShowBottomSheet -> {
                 showBottomSheet = event.value
             }
         }

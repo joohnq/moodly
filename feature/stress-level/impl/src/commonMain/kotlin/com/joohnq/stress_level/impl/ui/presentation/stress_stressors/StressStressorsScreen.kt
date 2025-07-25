@@ -46,7 +46,7 @@ fun StressStressorsScreen(
     LaunchedEffect(stressLevelViewModel) {
         stressLevelViewModel.sideEffect.collect { event ->
             when (event) {
-                is StressLevelContract.SideEffect.StressLevelAdded -> {
+                is StressLevelContract.SideEffect.Added -> {
                     onNavigateToStressLevel()
                     stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 }

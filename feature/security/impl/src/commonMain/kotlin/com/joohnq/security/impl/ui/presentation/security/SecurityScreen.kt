@@ -34,7 +34,7 @@ fun SecurityScreen(
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
                 is SecurityContract.SideEffect.OnSecurityUpdated -> {
-                    securityViewModel.onIntent(SecurityContract.Intent.GetSecurity)
+                    securityViewModel.onIntent(SecurityContract.Intent.Get)
                     onNavigateToSecurityConfirmed()
                 }
 

@@ -8,7 +8,7 @@ sealed interface PreferencesContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data object GetPreferences : Intent
+        data object Get : Intent
         data class UpdateSkipWelcome(
             val value: Boolean = true,
         ) : Intent

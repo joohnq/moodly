@@ -61,7 +61,7 @@ fun UnLockContent(
         ModalBottomSheet(
             containerColor = Colors.Brown10,
             onDismissRequest = {
-                onEvent(UnlockContract.Event.UpdateShowBottomSheet(false))
+                onEvent(UnlockContract.Event.OnUpdateShowBottomSheet(false))
             },
             sheetState = sheetState
         ) {

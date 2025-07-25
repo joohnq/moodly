@@ -37,7 +37,7 @@ class StressLevelViewModel(
             val res = deleteStressLevelUseCase(id).toUiState()
 
             res.onSuccess {
-                emitEffect(StressLevelContract.SideEffect.StressLevelDeleted)
+                emitEffect(StressLevelContract.SideEffect.Deleted)
                 updateState {
                     it.copy(
                         UiState.Success(
@@ -69,7 +69,7 @@ class StressLevelViewModel(
             val res = addStressLevelUseCase(record).toUiState()
 
             res.onSuccess {
-                emitEffect(StressLevelContract.SideEffect.StressLevelAdded)
+                emitEffect(StressLevelContract.SideEffect.Added)
             }.onFailure {
                 emitEffect(StressLevelContract.SideEffect.ShowError(it))
             }

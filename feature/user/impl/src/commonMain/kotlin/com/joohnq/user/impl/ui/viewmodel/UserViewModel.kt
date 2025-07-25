@@ -32,36 +32,36 @@ class UserViewModel(
 
     override fun onIntent(intent: UserContract.Intent) {
         when (intent) {
-            is UserContract.Intent.GetUser -> getUser()
-            is UserContract.Intent.Update -> updateUser(intent.user)
+            is UserContract.Intent.Get -> get()
+            is UserContract.Intent.Update -> update(intent.user)
             is UserContract.Intent.UpdateImageBitmap -> updateUserImageBitmap(intent.image)
             is UserContract.Intent.UpdateName -> updateUserName(intent.name)
             is UserContract.Intent.UpdateImageDrawable -> updateUserImageDrawable(intent.i)
-            UserContract.Intent.InitUser -> addUser()
+            UserContract.Intent.Init -> add()
         }
     }
 
-    private fun addUser() = viewModelScope.launch {
+    private fun add() = viewModelScope.launch {
         val res = addUserUseCase(User()).toUiState()
 
         res.onSuccess {
-            emitEffect(UserContract.SideEffect.AddedUser)
+            emitEffect(UserContract.SideEffect.Added)
         }.onFailure {
             emitEffect(UserContract.SideEffect.ShowError(it))
         }
     }
 
-    private fun updateUser(user: User) = viewModelScope.launch {
+    private fun update(user: User) = viewModelScope.launch {
         val res = updateUserUseCase(user).toUiState()
 
         res.onSuccess {
-            emitEffect(UserContract.SideEffect.UpdatedUser)
+            emitEffect(UserContract.SideEffect.Updated)
         }.onFailure {
             emitEffect(UserContract.SideEffect.ShowError(it))
         }
     }
 
-    private fun getUser() = viewModelScope.launch {
+    private fun get() = viewModelScope.launch {
         updateState { it.copy(UiState.Loading) }
 
         val res = getUserUseCase().toUiState()

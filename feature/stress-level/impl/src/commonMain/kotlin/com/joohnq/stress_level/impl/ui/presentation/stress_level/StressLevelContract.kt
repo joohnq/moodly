@@ -1,7 +1,6 @@
 package com.joohnq.stress_level.impl.ui.presentation.stress_level
 
 import com.joohnq.stress_level.api.entity.StressLevelRecord
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
@@ -21,8 +20,8 @@ sealed interface StressLevelContract {
     }
 
     sealed interface SideEffect {
-        data object StressLevelAdded : SideEffect
-        data object StressLevelDeleted : SideEffect
+        data object Added : SideEffect
+        data object Deleted : SideEffect
         data class ShowError(val error: String) : SideEffect
     }
 

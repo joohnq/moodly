@@ -1,7 +1,6 @@
 package com.joohnq.self_journal.impl.ui.presentation.self_journal
 
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditSelfJournalContract
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState

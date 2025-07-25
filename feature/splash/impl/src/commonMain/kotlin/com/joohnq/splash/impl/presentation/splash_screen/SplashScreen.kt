@@ -33,10 +33,10 @@ fun SplashScreen(
     val securityState by securityViewModel.state.collectAsState()
 
     SideEffect {
-        userViewModel.onIntent(UserContract.Intent.InitUser)
+        userViewModel.onIntent(UserContract.Intent.Init)
 
-        securityViewModel.onIntent(SecurityContract.Intent.GetSecurity)
-        preferencesViewModel.onIntent(PreferencesContract.Intent.GetPreferences)
+        securityViewModel.onIntent(SecurityContract.Intent.Get)
+        preferencesViewModel.onIntent(PreferencesContract.Intent.Get)
     }
 
     LaunchedEffect(

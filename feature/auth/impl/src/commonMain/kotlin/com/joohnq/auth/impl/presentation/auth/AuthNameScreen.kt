@@ -35,7 +35,7 @@ fun AuthNameScreen(
     }
 
     fun onEvent(event: AuthNameContract.Event) = when (event) {
-        AuthNameContract.Event.Continue -> {
+        AuthNameContract.Event.OnContinue -> {
             focusManager.clearFocus()
             try {
                 UserNameValidator(userNameState.name)

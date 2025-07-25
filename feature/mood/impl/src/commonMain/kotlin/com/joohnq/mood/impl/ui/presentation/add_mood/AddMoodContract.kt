@@ -6,6 +6,7 @@ import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AddMoodContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data class UpdateAddingMoodRecordMood(val mood: MoodResource) : Intent
         data class UpdateAddingMoodRecordDescription(val description: String) : Intent

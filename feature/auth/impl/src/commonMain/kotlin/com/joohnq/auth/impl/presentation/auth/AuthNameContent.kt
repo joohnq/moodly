@@ -110,7 +110,7 @@ fun AuthNameContent(
                     PrimaryButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                         text = Res.string.continue_word,
-                        onClick = { onEvent(AuthNameContract.Event.Continue) }
+                        onClick = { onEvent(AuthNameContract.Event.OnContinue) }
                     )
             }
         }

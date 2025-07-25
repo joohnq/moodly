@@ -8,7 +8,6 @@ import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.mapper.onFailure
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.mapper.toUiState
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SecurityViewModel(
@@ -20,7 +19,7 @@ class SecurityViewModel(
 ), SecurityContract.ViewModel {
     override fun onIntent(intent: SecurityContract.Intent) {
         when (intent) {
-            is SecurityContract.Intent.GetSecurity -> getSecurity()
+            is SecurityContract.Intent.Get -> getSecurity()
             is SecurityContract.Intent.Update -> updateSecurity(intent.security)
         }
     }

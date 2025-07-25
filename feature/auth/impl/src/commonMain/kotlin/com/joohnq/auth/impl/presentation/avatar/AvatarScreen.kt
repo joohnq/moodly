@@ -26,8 +26,7 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.settings
 import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.viewmodel.UserIntent
-import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
+import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -139,9 +138,9 @@ fun AvatarScreen(
 
             AvatarContract.Event.OnContinue -> {
                 val action = if (avatarState.imageBitmap == null)
-                    UserIntent.UpdateUserImageDrawable(avatarState.selectedDrawableIndex)
+                    UserContract.Intent.UpdateImageDrawable(avatarState.selectedDrawableIndex)
                 else
-                    UserIntent.UpdateUserImageBitmap(avatarState.imageBitmap!!)
+                    UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
 
                 userViewModel.onAction(action)
             }
@@ -151,11 +150,11 @@ fun AvatarScreen(
     LaunchedEffect(userViewModel) {
         userViewModel.sideEffect.collect { event ->
             when (event) {
-                is UserSideEffect.AvatarSavedSuccess -> {
+                is UserContract.SideEffect.AvatarSavedSuccess -> {
                     onNavigateToUserName()
                 }
 
-                is UserSideEffect.ShowError -> onError(event.error)
+                is UserContract.SideEffect.ShowError -> onError(event.error)
                 else -> {}
             }
         }

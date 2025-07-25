@@ -23,8 +23,7 @@ import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelView
 import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.impl.ui.mapper.toDomain
-import com.joohnq.user.impl.ui.viewmodel.UserIntent
-import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
+import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -83,7 +82,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun updateUser() {
         userViewModel.onAction(
-            UserIntent.UpdateUser(
+            UserContract.Intent.Update(
                 User(
                     physicalSymptoms = onboardingState.physicalSymptoms!!.toDomain(),
                     medicationsSupplements = onboardingState.medicationsSupplements!!.toDomain(),
@@ -128,7 +127,7 @@ fun OnboardingExpressionAnalysisScreen(
             if (statsSideEffect is MoodContract.SideEffect.ShowError) {
                 onError(statsSideEffect.error)
             }
-            if (userSideEffect is UserSideEffect.ShowError) {
+            if (userSideEffect is UserContract.SideEffect.ShowError) {
                 onError(userSideEffect.error)
             }
 
@@ -136,7 +135,7 @@ fun OnboardingExpressionAnalysisScreen(
                 stressSideEffect is StressLevelContract.SideEffect.StressLevelAdded &&
                 sleepSideEffect is SleepQualityContract.SideEffect.SleepQualityAdded &&
                 statsSideEffect is MoodContract.SideEffect.StatsAdded &&
-                userSideEffect is UserSideEffect.UpdatedUser
+                userSideEffect is UserContract.SideEffect.UpdatedUser
             ) {
                 preferencesViewModel.onAction(PreferencesContract.Intent.UpdateSkipOnboarding())
             }

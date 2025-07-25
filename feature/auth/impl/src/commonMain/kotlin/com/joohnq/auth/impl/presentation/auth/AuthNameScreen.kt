@@ -12,8 +12,7 @@ import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.viewmodel.UserIntent
-import com.joohnq.user.impl.ui.viewmodel.UserSideEffect
+import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
@@ -40,7 +39,7 @@ fun AuthNameScreen(
             focusManager.clearFocus()
             try {
                 UserNameValidator(userNameState.name)
-                userViewModel.onAction(UserIntent.UpdateUserName(userNameState.name))
+                userViewModel.onAction(UserContract.Intent.UpdateName(userNameState.name))
             } catch (e: Exception) {
                 authNameViewModel.onAction(AuthNameContract.Intent.UpdateError(e.message.toString()))
             }
@@ -50,14 +49,14 @@ fun AuthNameScreen(
     LaunchedEffect(userViewModel) {
         userViewModel.sideEffect.collect { event ->
             when (event) {
-                is UserSideEffect.UserNameUpdatedSuccess -> {
+                is UserContract.SideEffect.UserNameUpdatedSuccess -> {
                     preferencesViewModel.onAction(
                         PreferencesContract.Intent.UpdateSkipAuth()
                     )
                     onNavigateToSecurity()
                 }
 
-                is UserSideEffect.ShowError -> onError(event.error)
+                is UserContract.SideEffect.ShowError -> onError(event.error)
                 else -> {}
             }
         }

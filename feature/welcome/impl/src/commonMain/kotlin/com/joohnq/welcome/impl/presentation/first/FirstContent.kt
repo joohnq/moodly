@@ -11,9 +11,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LogoWithBackground
-import com.joohnq.shared_resources.components.HeadingWithSpan
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.text.HeadingWithSpan
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables

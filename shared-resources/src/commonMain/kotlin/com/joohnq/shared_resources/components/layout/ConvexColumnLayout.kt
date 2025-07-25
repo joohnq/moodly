@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.ConvexCanvas
+import com.joohnq.shared_resources.components.modifier.dpOffset
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
-import com.joohnq.shared_resources.components.dpOffset
 
 @Composable
 fun ConvexColumnLayout(

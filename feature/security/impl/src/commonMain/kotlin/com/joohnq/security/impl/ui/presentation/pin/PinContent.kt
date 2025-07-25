@@ -1,7 +1,11 @@
 package com.joohnq.security.impl.ui.presentation.pin
 
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,13 +19,10 @@ import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.components.PinCode
-import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.enter_a_four_digit_pin
@@ -35,19 +36,18 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun PinContent(
     snackBarState: SnackbarHostState = SnackbarHostState(),
-    state: PINState,
+    state: PinContract.State,
     focusRequesters: List<FocusRequester> = emptyList(),
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
-    canContinue: Boolean,
-    onAction: (PINIntent) -> Unit = {},
-    onEvent: (PINEvent) -> Unit = {},
+    onAction: (PinContract.Intent) -> Unit = {},
+    onEvent: (PinContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()
-            .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PINEvent.OnClearFocus) }) }
+            .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PinContract.Event.OnClearFocus) }) }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -63,7 +63,7 @@ fun PinContent(
                 AppTopBar(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.pin_setup,
-                    onGoBack = { onEvent(PINEvent.OnGoBack) },
+                    onGoBack = { onEvent(PinContract.Event.OnGoBack) },
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -84,23 +84,23 @@ fun PinContent(
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
                         onAction(
-                            PINIntent.OnEnterNumber(
+                            PinContract.Intent.OnEnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onAction(PINIntent.OnKeyboardBack) },
+                    onKeyboardBack = { onAction(PinContract.Intent.OnKeyboardBack) },
                     focusRequesters = focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PINIntent.OnChangeFieldFocused(i)) },
+                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) },
                 )
             }
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(PINEvent.OnContinue) }
+                onClick = { onEvent(PinContract.Event.OnContinue) }
             )
         }
     }

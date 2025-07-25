@@ -3,19 +3,14 @@ package com.joohnq.security.impl.ui.presentation.pin
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.joohnq.api.mapper.itemsNotNull
 import com.joohnq.security.api.Security
-import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINViewModel
-import com.joohnq.security.impl.ui.viewmodel.SecurityIntent
-import com.joohnq.security.impl.ui.viewmodel.SecuritySideEffect
-import com.joohnq.security.impl.ui.viewmodel.SecurityViewModel
+import com.joohnq.security.impl.ui.presentation.security.SecurityContract
+import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
 import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
@@ -34,9 +29,6 @@ fun PINScreen(
     val focusRequesters = rememberFocusRequester(4)
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
-    val canContinue by derivedStateOf {
-        state.code.none { it == null }
-    }
 
     fun onError(error: String) {
         scope.launch {
@@ -47,21 +39,21 @@ fun PINScreen(
     LaunchedEffect(securityViewModel.sideEffect) {
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SecuritySideEffect.OnSecurityUpdated -> {
-                    securityViewModel.onAction(SecurityIntent.GetSecurity)
+                is SecurityContract.SideEffect.OnSecurityUpdated -> {
+                    securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
                     onNavigateToDashboard()
                 }
 
-                is SecuritySideEffect.ShowError -> onError(sideEffect.error)
+                is SecurityContract.SideEffect.ShowError -> onError(sideEffect.error)
             }
         }
     }
 
-    fun onEvent(event: PINEvent) {
+    fun onEvent(event: PinContract.Event) {
         when (event) {
-            PINEvent.OnContinue -> {
+            PinContract.Event.OnContinue -> {
                 securityViewModel.onAction(
-                    SecurityIntent.UpdateSecurity(
+                    SecurityContract.Intent.Update(
                         Security.Pin(
                             enabled = true,
                             code = state.code.itemsNotNull()
@@ -70,8 +62,8 @@ fun PINScreen(
                 )
             }
 
-            PINEvent.OnGoBack -> onGoBack()
-            PINEvent.OnClearFocus -> {
+            PinContract.Event.OnGoBack -> onGoBack()
+            PinContract.Event.OnClearFocus -> {
                 focusManager.clearFocus()
                 keyboardManager?.hide()
             }
@@ -83,13 +75,12 @@ fun PINScreen(
         onEvent = ::onEvent,
         state = state,
         onAction = { action ->
-            if (action is PINIntent.OnEnterNumber && action.number != null) {
+            if (action is PinContract.Intent.OnEnterNumber && action.number != null) {
                 focusRequesters[action.index].freeFocus()
             }
             pinViewModel.onAction(action)
         },
         focusRequesters = focusRequesters,
-        canContinue = canContinue,
         focusManager = focusManager,
         keyboardManager = keyboardManager,
     )

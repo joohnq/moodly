@@ -2,14 +2,13 @@ package com.joohnq.security.impl.ui.presentation.pin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.focus.FocusRequester
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
 fun PinContentPreview() {
     PinContent(
-        state = PINState(
+        state = PinContract.State(
             code = listOf(1, 2, 3, 4),
             focusedIndex = 0
         ),
@@ -19,7 +18,6 @@ fun PinContentPreview() {
             FocusRequester(),
             FocusRequester(),
         ),
-        canContinue = false
     )
 }
 
@@ -27,7 +25,7 @@ fun PinContentPreview() {
 @Composable
 fun PinContentEmptyPreview() {
     PinContent(
-        state = PINState(
+        state = PinContract.State(
             code = listOf(1, 2, 3, 4),
             focusedIndex = 0
         ),
@@ -37,7 +35,6 @@ fun PinContentEmptyPreview() {
             FocusRequester(),
             FocusRequester(),
         ),
-        canContinue = false
     )
 }
 
@@ -46,7 +43,7 @@ fun PinContentEmptyPreview() {
 @Composable
 fun PinContentCanContinuePreview() {
     PinContent(
-        state = PINState(
+        state = PinContract.State(
             code = listOf(1, 2, 3, 4),
             focusedIndex = 0
         ),
@@ -56,6 +53,5 @@ fun PinContentCanContinuePreview() {
             FocusRequester(),
             FocusRequester(),
         ),
-        canContinue = true
     )
 }

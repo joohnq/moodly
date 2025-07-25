@@ -1,10 +1,10 @@
 package com.joohnq.security.impl.ui.presentation.security_confirmed
 
 import androidx.compose.runtime.Composable
-import com.joohnq.ui.sharedViewModel
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.impl.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun SecurityConfirmedScreen(
@@ -16,7 +16,7 @@ fun SecurityConfirmedScreen(
         when (event) {
             SecurityConfirmedEvent.OnContinue -> {
                 preferencesViewModel.onAction(
-                    PreferenceIntent.UpdateSkipSecurity()
+                    PreferencesContract.Intent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()
             }

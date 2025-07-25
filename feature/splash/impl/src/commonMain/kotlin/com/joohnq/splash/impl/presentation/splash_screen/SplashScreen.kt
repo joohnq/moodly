@@ -4,7 +4,7 @@ import androidx.compose.runtime.*
 import com.joohnq.ui.mapper.fold
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.preferences.api.entity.AppPreferences
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.impl.ui.viewmodel.SecurityIntent
@@ -32,7 +32,7 @@ fun SplashScreen(
         userViewModel.onAction(UserIntent.InitUser)
 
         securityViewModel.onAction(SecurityIntent.GetSecurity)
-        preferencesViewModel.onAction(PreferenceIntent.GetPreferences)
+        preferencesViewModel.onAction(PreferencesContract.Intent.GetPreferences)
     }
 
     LaunchedEffect(

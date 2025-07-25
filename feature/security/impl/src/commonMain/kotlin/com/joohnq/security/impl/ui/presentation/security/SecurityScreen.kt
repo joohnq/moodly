@@ -3,7 +3,7 @@ package com.joohnq.security.impl.ui.presentation.security
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityAuthentication
@@ -65,7 +65,7 @@ fun SecurityScreen(
 
             SecurityEvent.OnSkip -> {
                 preferencesViewModel.onAction(
-                    PreferenceIntent.UpdateSkipSecurity()
+                    PreferencesContract.Intent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()
             }

@@ -4,22 +4,40 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
-import com.joohnq.shared_resources.*
+import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.ai
+import com.joohnq.shared_resources.community_first_title
+import com.joohnq.shared_resources.community_span
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.five
+import com.joohnq.shared_resources.four
+import com.joohnq.shared_resources.health_state_first_title
+import com.joohnq.shared_resources.health_state_second_title
+import com.joohnq.shared_resources.health_state_span
+import com.joohnq.shared_resources.intelligent_first_second_title
+import com.joohnq.shared_resources.intelligent_first_span
+import com.joohnq.shared_resources.journaling_ai_therapy_chatbot
+import com.joohnq.shared_resources.mental
+import com.joohnq.shared_resources.one
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.shared_resources.resource_first_title
+import com.joohnq.shared_resources.resource_second_title
+import com.joohnq.shared_resources.resource_span
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.welcome.impl.presentation.first.FirstScreen
+import com.joohnq.shared_resources.three
+import com.joohnq.shared_resources.two
 import com.joohnq.welcome.impl.Welcome
 import com.joohnq.welcome.impl.WelcomeBase
+import com.joohnq.welcome.impl.presentation.first.FirstScreen
 
 @Composable
 fun WelcomeContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     pagerState: PagerState,
     onNext: () -> Unit = {},
-    onAction: (PreferenceIntent) -> Unit = {},
+    onAction: (PreferencesContract.Intent) -> Unit = {},
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
@@ -102,7 +120,7 @@ fun WelcomeContent(
                         spanColor = Colors.Purple40,
                     ),
                     paddingTop = padding.calculateTopPadding(),
-                    onNext = { onAction(PreferenceIntent.UpdateSkipWelcome()) }
+                    onNext = { onAction(PreferencesContract.Intent.UpdateSkipWelcome()) }
                 )
             }
         }

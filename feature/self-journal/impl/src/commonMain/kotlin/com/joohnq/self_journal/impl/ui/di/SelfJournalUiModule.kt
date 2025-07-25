@@ -5,8 +5,6 @@ import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditSelfJo
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJournalHistoryViewModel
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.singleOf
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val selfJournalUiModule: Module = module {

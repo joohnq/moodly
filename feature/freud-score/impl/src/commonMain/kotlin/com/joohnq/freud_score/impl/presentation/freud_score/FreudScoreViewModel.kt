@@ -1,4 +1,4 @@
-package com.joohnq.freud_score.impl.viewmodel
+package com.joohnq.freud_score.impl.presentation.freud_score
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.freud_score.impl.mapper.toResource
@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.update
 
 class FreudScoreViewModel() :
     ViewModel() {
-    private val _state = MutableStateFlow(FreudScoreState())
-    val state: StateFlow<FreudScoreState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(FreudScoreContract.State())
+    val state: StateFlow<FreudScoreContract.State> = _state.asStateFlow()
 
-    fun onAction(intent: FreudScoreIntent) {
+    fun onAction(intent: FreudScoreContract.Intent) {
         when (intent) {
-            is FreudScoreIntent.GetFreudScore -> getFreudScore(intent.records)
+            is FreudScoreContract.Intent.Get -> getFreudScore(intent.records)
         }
     }
 

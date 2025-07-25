@@ -2,9 +2,8 @@ package com.joohnq.home.impl.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.freud_score.impl.viewmodel.FreudScoreIntent
-import com.joohnq.freud_score.impl.viewmodel.FreudScoreState
-import com.joohnq.freud_score.impl.viewmodel.FreudScoreViewModel
+import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreContract
+import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreViewModel
 import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
 import com.joohnq.mood.impl.ui.viewmodel.MoodState
 import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
@@ -38,7 +37,7 @@ class DashboardViewModel(
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
-    private val stressLevelViewModel: StressLevelViewModel
+    private val stressLevelViewModel: StressLevelViewModel,
 ) : ViewModel() {
     private val _state = MutableStateFlow(DashboardState())
     val state: StateFlow<DashboardState> = _state.asStateFlow()
@@ -69,14 +68,14 @@ class DashboardViewModel(
         ) { states ->
             val userState = states[0] as UserState
             val statsState = states[1] as MoodState
-            val freudState = states[2] as FreudScoreState
+            val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalState
             val sleepState = states[4] as SleepQualityState
             val stressState = states[5] as StressLevelState
 
             statsState.records.onSuccess { records ->
                 freudScoreViewModel.onAction(
-                    FreudScoreIntent.GetFreudScore(records)
+                    FreudScoreContract.Intent.Get(records)
                 )
             }
 

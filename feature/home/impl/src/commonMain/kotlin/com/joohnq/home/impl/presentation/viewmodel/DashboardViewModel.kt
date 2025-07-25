@@ -35,7 +35,7 @@ class DashboardViewModel(
     override fun onIntent(intent: DashboardContract.Intent) {
         when (intent) {
             DashboardContract.Intent.Get -> {
-                moodViewModel.onAction(MoodContract.Intent.GetAll)
+                moodViewModel.onIntent(MoodContract.Intent.GetAll)
                 userViewModel.onAction(UserContract.Intent.GetUser)
                 stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)

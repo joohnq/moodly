@@ -23,6 +23,6 @@ fun AddMoodScreen(
     AddMoodContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = addStatsViewModel::onAction
+        onAction = addStatsViewModel::onIntent
     )
 }

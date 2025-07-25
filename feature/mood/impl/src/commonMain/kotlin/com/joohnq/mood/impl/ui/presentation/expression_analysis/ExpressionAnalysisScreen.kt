@@ -32,7 +32,7 @@ fun ExpressionAnalysisScreen(
     fun onEvent(event: ExpressionAnalysisContract.Event) =
         when (event) {
             ExpressionAnalysisContract.Event.OnAdd ->
-                moodViewModel.onAction(
+                moodViewModel.onIntent(
                     MoodContract.Intent.Add(
                         addStatsState.record.toDomain()
                     )
@@ -45,7 +45,7 @@ fun ExpressionAnalysisScreen(
         moodViewModel.sideEffect.collect { event ->
             when (event) {
                 is MoodContract.SideEffect.StatsAdded -> {
-                    moodViewModel.onAction(MoodContract.Intent.GetAll)
+                    moodViewModel.onIntent(MoodContract.Intent.GetAll)
                     onNavigateToMood()
                 }
 
@@ -57,7 +57,7 @@ fun ExpressionAnalysisScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addStatsViewModel.onAction(AddMoodContract.Intent.ResetState)
+            addStatsViewModel.onIntent(AddMoodContract.Intent.ResetState)
         }
     }
 
@@ -65,6 +65,6 @@ fun ExpressionAnalysisScreen(
         snackBarState = snackBarState,
         description = addStatsState.record.description,
         onEvent = ::onEvent,
-        onAddAction = addStatsViewModel::onAction
+        onAddAction = addStatsViewModel::onIntent
     )
 }

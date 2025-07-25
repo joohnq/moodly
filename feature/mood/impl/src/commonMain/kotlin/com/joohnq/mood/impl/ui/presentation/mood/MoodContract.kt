@@ -2,9 +2,12 @@ package com.joohnq.mood.impl.ui.presentation.mood
 
 import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface MoodContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data object GetAll : Intent
         data class Add(val record: MoodRecord) : Intent

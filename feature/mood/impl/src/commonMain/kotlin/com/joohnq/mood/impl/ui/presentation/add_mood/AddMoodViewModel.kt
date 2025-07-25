@@ -1,35 +1,21 @@
 package com.joohnq.mood.impl.ui.presentation.add_mood
 
-import androidx.lifecycle.ViewModel
-import com.joohnq.mood.impl.ui.resource.MoodResource
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.joohnq.ui.BaseViewModel
 
-class AddMoodViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddMoodContract.State())
-    val state: StateFlow<AddMoodContract.State> = _state.asStateFlow()
-
-    fun onAction(intent: AddMoodContract.Intent) {
+class AddMoodViewModel(
+    private val initialState: AddMoodContract.State = AddMoodContract.State(),
+) : BaseViewModel<AddMoodContract.State, AddMoodContract.Intent, AddMoodContract.SideEffect>(
+    initialState = initialState
+), AddMoodContract.ViewModel {
+    override fun onIntent(intent: AddMoodContract.Intent) {
         when (intent) {
-            is AddMoodContract.Intent.UpdateAddingMoodRecordMood -> updateAddingMoodRecordMood(
-                intent.mood
-            )
+            is AddMoodContract.Intent.UpdateAddingMoodRecordMood ->
+                updateState { it.copy(record = it.record.copy(mood = intent.mood)) }
 
-            is AddMoodContract.Intent.UpdateAddingMoodRecordDescription -> updateAddingMoodRecordDescription(
-                intent.description
-            )
+            is AddMoodContract.Intent.UpdateAddingMoodRecordDescription ->
+                updateState { it.copy(record = it.record.copy(description = intent.description)) }
 
-            AddMoodContract.Intent.ResetState -> _state.update { AddMoodContract.State() }
+            AddMoodContract.Intent.ResetState -> updateState { initialState }
         }
-    }
-
-    private fun updateAddingMoodRecordMood(mood: MoodResource) {
-        _state.update { it.copy(record = it.record.copy(mood = mood)) }
-    }
-
-    private fun updateAddingMoodRecordDescription(description: String) {
-        _state.update { it.copy(record = it.record.copy(description = description)) }
     }
 }

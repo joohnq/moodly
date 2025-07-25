@@ -73,7 +73,7 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun addMoodRecord() {
-        moodViewModel.onAction(
+        moodViewModel.onIntent(
             MoodContract.Intent.Add(
                 onboardingState.moodRecord.toDomain()
             )

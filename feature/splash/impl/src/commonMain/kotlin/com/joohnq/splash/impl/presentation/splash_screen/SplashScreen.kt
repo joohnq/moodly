@@ -35,8 +35,8 @@ fun SplashScreen(
     SideEffect {
         userViewModel.onAction(UserContract.Intent.InitUser)
 
-        securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
-        preferencesViewModel.onAction(PreferencesContract.Intent.GetPreferences)
+        securityViewModel.onIntent(SecurityContract.Intent.GetSecurity)
+        preferencesViewModel.onIntent(PreferencesContract.Intent.GetPreferences)
     }
 
     LaunchedEffect(

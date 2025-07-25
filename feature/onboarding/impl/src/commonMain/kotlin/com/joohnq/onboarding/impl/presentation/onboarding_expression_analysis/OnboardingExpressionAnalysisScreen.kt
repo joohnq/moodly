@@ -137,7 +137,7 @@ fun OnboardingExpressionAnalysisScreen(
                 statsSideEffect is MoodContract.SideEffect.StatsAdded &&
                 userSideEffect is UserContract.SideEffect.UpdatedUser
             ) {
-                preferencesViewModel.onAction(PreferencesContract.Intent.UpdateSkipOnboarding())
+                preferencesViewModel.onIntent(PreferencesContract.Intent.UpdateSkipOnboarding())
             }
         }
     }

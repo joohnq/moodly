@@ -11,12 +11,8 @@ import com.joohnq.shared_resources.a_sleep_quality_record_has_already_been_added
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.api.exception.SleepQualityException
 import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.event.AddSleepQualityEvent
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityIntent
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityViewModel
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualitySideEffect
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityViewModel
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -44,27 +40,27 @@ fun AddSleepQualityScreen(
         }
     }
 
-    fun onEvent(event: AddSleepQualityEvent) =
+    fun onEvent(event: AddSleepQualityContract.Event) =
         when (event) {
-            AddSleepQualityEvent.OnGoBack -> onGoBack()
-            AddSleepQualityEvent.OnAdd ->
+            AddSleepQualityContract.Event.OnGoBack -> onGoBack()
+            AddSleepQualityContract.Event.OnAdd ->
                 sleepQualityViewModel.onAction(
-                    SleepQualityIntent.Add(
+                    SleepQualityContract.Intent.Add(
                         state.record.toDomain()
                     )
                 )
 
-            AddSleepQualityEvent.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
+            AddSleepQualityContract.Event.OnNavigateToSleepQuality -> onNavigateToSleepQuality()
         }
 
     LaunchedEffect(sleepQualityViewModel) {
         sleepQualityViewModel.sideEffect.collect { event ->
             when (event) {
-                is SleepQualitySideEffect.ShowError -> onError(event.error)
+                is SleepQualityContract.SideEffect.ShowError -> onError(event.error)
 
-                SleepQualitySideEffect.Deleted -> {
-                    onEvent(AddSleepQualityEvent.OnNavigateToSleepQuality)
-                    sleepQualityViewModel.onAction(SleepQualityIntent.GetAll)
+                SleepQualityContract.SideEffect.Deleted -> {
+                    onEvent(AddSleepQualityContract.Event.OnNavigateToSleepQuality)
+                    sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)
                 }
 
                 else -> Unit
@@ -74,7 +70,7 @@ fun AddSleepQualityScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addSleepQualityViewModel.onAction(AddSleepQualityIntent.ResetState)
+            addSleepQualityViewModel.onAction(AddSleepQualityContract.Intent.ResetState)
         }
     }
 

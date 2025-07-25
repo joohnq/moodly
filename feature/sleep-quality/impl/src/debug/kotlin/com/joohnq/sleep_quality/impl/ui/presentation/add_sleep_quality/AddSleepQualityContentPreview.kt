@@ -2,7 +2,6 @@ package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
 
 import androidx.compose.runtime.Composable
 import com.joohnq.sleep_quality.impl.ui.parameter.SleepQualityRecordResourceParameterProvider
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.viewmodel.AddSleepQualityState
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
@@ -11,10 +10,10 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun AddSleepQualityContentWorstPreview(
     @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
-    item: SleepQualityRecordResource
+    item: SleepQualityRecordResource,
 ) {
     AddSleepQualityContent(
-        state = AddSleepQualityState(
+        state = AddSleepQualityContract.State(
             record = item,
             showStartTimePickerDialog = false,
             showEndTimePickerDialog = false
@@ -26,7 +25,7 @@ fun AddSleepQualityContentWorstPreview(
 @Composable
 fun AddSleepQualityContentShowStartTimePickerDialogPreview() {
     AddSleepQualityContent(
-        state = AddSleepQualityState(
+        state = AddSleepQualityContract.State(
             record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
             showStartTimePickerDialog = true,
             showEndTimePickerDialog = false
@@ -38,7 +37,7 @@ fun AddSleepQualityContentShowStartTimePickerDialogPreview() {
 @Composable
 fun AddSleepQualityContentShowEndTimePickerPreview() {
     AddSleepQualityContent(
-        state = AddSleepQualityState(
+        state = AddSleepQualityContract.State(
             record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
             showStartTimePickerDialog = false,
             showEndTimePickerDialog = true

@@ -1,19 +1,19 @@
-package com.joohnq.sleep_quality.impl.ui.viewmodel
+package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.getValueOrEmpty
-import com.joohnq.ui.mapper.onFailure
-import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.ui.mapper.toResultResource
-import com.joohnq.ui.mapper.toUiState
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
 import com.joohnq.sleep_quality.impl.ui.mapper.toResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.getValueOrEmpty
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.toResultResource
+import com.joohnq.ui.mapper.toUiState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,19 +27,19 @@ class SleepQualityViewModel(
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(SleepQualityState())
-    val state: StateFlow<SleepQualityState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(SleepQualityContract.State())
+    val state: StateFlow<SleepQualityContract.State> = _state.asStateFlow()
 
-    private val _sideEffect = Channel<SleepQualitySideEffect>(Channel.BUFFERED)
+    private val _sideEffect = Channel<SleepQualityContract.SideEffect>(Channel.Factory.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(intent: SleepQualityIntent) {
+    fun onAction(intent: SleepQualityContract.Intent) {
         when (intent) {
-            SleepQualityIntent.GetAll -> getSleepQualityRecords()
-            is SleepQualityIntent.Add ->
+            SleepQualityContract.Intent.GetAll -> getSleepQualityRecords()
+            is SleepQualityContract.Intent.Add ->
                 addSleepQualityRecord(intent.record)
 
-            is SleepQualityIntent.Delete -> delete(intent.id)
+            is SleepQualityContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -47,7 +47,7 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             val res = deleteSleepQualityUseCase(id).toUiState()
             res.onSuccess {
-                _sideEffect.send(SleepQualitySideEffect.Deleted)
+                _sideEffect.send(SleepQualityContract.SideEffect.Deleted)
                 changeRecordsStatus(
                     UiState.Success(
                         state.value.records.getValueOrEmpty()
@@ -55,7 +55,7 @@ class SleepQualityViewModel(
                     )
                 )
             }.onFailure {
-                _sideEffect.send(SleepQualitySideEffect.ShowError(it))
+                _sideEffect.send(SleepQualityContract.SideEffect.ShowError(it))
             }
         }
 
@@ -72,9 +72,9 @@ class SleepQualityViewModel(
         viewModelScope.launch {
             val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
             res.onSuccess {
-                _sideEffect.send(SleepQualitySideEffect.SleepQualityAdded)
+                _sideEffect.send(SleepQualityContract.SideEffect.SleepQualityAdded)
             }.onFailure {
-                _sideEffect.send(SleepQualitySideEffect.ShowError(it))
+                _sideEffect.send(SleepQualityContract.SideEffect.ShowError(it))
             }
         }
 

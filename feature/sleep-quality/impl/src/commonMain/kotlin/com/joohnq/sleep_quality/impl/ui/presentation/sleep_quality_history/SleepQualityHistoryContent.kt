@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history
 
-import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,25 +11,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.event.SleepQualityHistoryEvent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityIntent
-import com.joohnq.sleep_quality.impl.ui.viewmodel.SleepQualityState
+import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
+import com.joohnq.ui.mapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SleepQualityHistoryContent(
-    state: SleepQualityState,
-    onEvent: (SleepQualityHistoryEvent) -> Unit = {},
-    onAction: (SleepQualityIntent) -> Unit = {},
+    state: SleepQualityContract.State,
+    onEvent: (SleepQualityHistoryContract.Event) -> Unit = {},
+    onAction: (SleepQualityContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -41,7 +39,7 @@ fun SleepQualityHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(SleepQualityHistoryEvent.OnGoBack) }
+                        onGoBack = { onEvent(SleepQualityHistoryContract.Event.OnGoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(
@@ -57,7 +55,7 @@ fun SleepQualityHistoryContent(
                         items(records) { record ->
                             SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
-                                onAction = { onAction(SleepQualityIntent.Delete(record.id)) },
+                                onAction = { onAction(SleepQualityContract.Intent.Delete(record.id)) },
                             ) { modifier ->
                                 SleepQualityHistoryCard(
                                     modifier = modifier,

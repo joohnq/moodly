@@ -38,7 +38,7 @@ class DashboardViewModel(
                 moodViewModel.onIntent(MoodContract.Intent.GetAll)
                 userViewModel.onAction(UserContract.Intent.GetUser)
                 stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
-                sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)
+                sleepQualityViewModel.onIntent(SleepQualityContract.Intent.GetAll)
                 selfJournalViewModel.onIntent(SelfJournalContract.Intent.GetAll)
             }
         }

@@ -44,7 +44,7 @@ fun AddSleepQualityScreen(
         when (event) {
             AddSleepQualityContract.Event.OnGoBack -> onGoBack()
             AddSleepQualityContract.Event.OnAdd ->
-                sleepQualityViewModel.onAction(
+                sleepQualityViewModel.onIntent(
                     SleepQualityContract.Intent.Add(
                         state.record.toDomain()
                     )
@@ -60,7 +60,7 @@ fun AddSleepQualityScreen(
 
                 SleepQualityContract.SideEffect.Deleted -> {
                     onEvent(AddSleepQualityContract.Event.OnNavigateToSleepQuality)
-                    sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)
+                    sleepQualityViewModel.onIntent(SleepQualityContract.Intent.GetAll)
                 }
 
                 else -> Unit
@@ -70,7 +70,7 @@ fun AddSleepQualityScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addSleepQualityViewModel.onAction(AddSleepQualityContract.Intent.ResetState)
+            addSleepQualityViewModel.onIntent(AddSleepQualityContract.Intent.ResetState)
         }
     }
 
@@ -78,6 +78,6 @@ fun AddSleepQualityScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onAddAction = addSleepQualityViewModel::onAction
+        onAddAction = addSleepQualityViewModel::onIntent
     )
 }

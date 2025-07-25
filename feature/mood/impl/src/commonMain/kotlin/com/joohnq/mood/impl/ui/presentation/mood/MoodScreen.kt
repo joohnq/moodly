@@ -24,6 +24,6 @@ fun MoodScreen(
     MoodContent(
         records = state.records,
         onEvent = ::onEvent,
-        onAction = viewModel::onAction
+        onAction = viewModel::onIntent
     )
 }

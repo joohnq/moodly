@@ -69,7 +69,7 @@ class DashboardViewModel(
             val stressState = states[5] as StressLevelContract.State
 
             statsState.records.onSuccess { records ->
-                freudScoreViewModel.onAction(
+                freudScoreViewModel.onIntent(
                     FreudScoreContract.Intent.Get(records)
                 )
             }

@@ -1,6 +1,7 @@
 package buildLogic.plugins
 
 import buildLogic.configs.AppConfig
+import buildLogic.extensions.configureDetekt
 import buildLogic.extensions.geDeriveNamespace
 import buildLogic.extensions.getPlugin
 import org.gradle.api.Plugin
@@ -13,12 +14,16 @@ class KmpLibraryPlugin : Plugin<Project> {
         with(target) {
             installPlugins()
             configureKotlinMultiplatform()
+            configureDetektPlugin()
         }
     }
 
     private fun Project.installPlugins() {
         pluginManager.apply(
             getPlugin("kotlin-multiplatform").pluginId
+        )
+        pluginManager.apply(
+            getPlugin(alias = "detekt").pluginId
         )
     }
 
@@ -56,5 +61,9 @@ class KmpLibraryPlugin : Plugin<Project> {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
+    }
+
+    private fun Project.configureDetektPlugin() {
+       configureDetekt()
     }
 }

@@ -72,6 +72,8 @@ sqldelight = "2.1.0"
 truthish = "1.0.3"
 turbine = "1.2.1"
 
+detekt = "1.23.8"
+
 [libraries]
 
 # Accompanist
@@ -133,6 +135,8 @@ kotlin-multiplatform-gradle-plugin = { module = "org.jetbrains.kotlin.multiplatf
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin", version.ref = "detekt" }
+
 # Ktor
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktor" }
@@ -178,6 +182,8 @@ crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyti
 
 # Google Services
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
 

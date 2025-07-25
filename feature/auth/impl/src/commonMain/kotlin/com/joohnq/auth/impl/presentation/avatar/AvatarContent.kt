@@ -21,13 +21,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.auth.impl.components.AvatarImagesHorizontalPager
-import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
-import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.modifier.drawDottedBorder
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.or_upload_your_profile
 import com.joohnq.shared_resources.profile
@@ -47,9 +45,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    state: AvatarState,
+    state: AvatarContract.State,
     avatars: List<DrawableResource> = rememberAvatars(),
-    onEvent: (AvatarEvent) -> Unit = {},
+    onEvent: (AvatarContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -106,7 +104,7 @@ fun AvatarContent(
                     )
                     VerticalSpacer(40.dp)
                     IconButton(
-                        onClick = { onEvent(AvatarEvent.OnPickAvatar) },
+                        onClick = { onEvent(AvatarContract.Event.OnPickAvatar) },
                         modifier = Modifier.size(96.dp)
                     ) {
                         if (state.imageBitmap != null) {
@@ -145,7 +143,7 @@ fun AvatarContent(
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(AvatarEvent.OnContinue) }
+                onClick = { onEvent(AvatarContract.Event.OnContinue) }
             )
         }
     }

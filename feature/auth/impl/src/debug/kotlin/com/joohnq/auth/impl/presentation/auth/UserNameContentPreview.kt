@@ -1,14 +1,13 @@
-package com.joohnq.auth.impl.presentation.user_name
+package com.joohnq.auth.impl.presentation.auth
 
 import androidx.compose.runtime.Composable
-import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
 fun UserNameContentPreview() {
-    UserNameContent(
-        state = UserNameState(),
+    AuthNameContent(
+        state = AuthNameContract.State(),
         onEvent = {},
         onClearFocus = {},
         onGetAction = {},
@@ -18,8 +17,8 @@ fun UserNameContentPreview() {
 @Preview
 @Composable
 fun UserNameContentWithNamePreview() {
-    UserNameContent(
-        state = UserNameState(
+    AuthNameContent(
+        state = AuthNameContract.State(
             name = "John Doe"
         ),
         onEvent = {},
@@ -31,8 +30,8 @@ fun UserNameContentWithNamePreview() {
 @Preview
 @Composable
 fun UserNameContentWithErrorPreview() {
-    UserNameContent(
-        state = UserNameState(
+    AuthNameContent(
+        state = AuthNameContract.State(
             name = "John Doe",
             nameError = "Some error"
         ),

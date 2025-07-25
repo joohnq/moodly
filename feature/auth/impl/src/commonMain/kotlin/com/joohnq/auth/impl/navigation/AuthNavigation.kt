@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.auth.impl.presentation.avatar.AvatarScreen
-import com.joohnq.auth.impl.presentation.user_name.UserNameScreen
+import com.joohnq.auth.impl.presentation.auth.AuthNameScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 
@@ -19,7 +19,7 @@ fun NavGraphBuilder.authNavigation(
             )
         }
         composable<Destination.Auth.UserName> {
-            UserNameScreen(
+            AuthNameScreen(
                 onNavigateToSecurity = { onNavigateGraph(NavigationGraph.Security, true) }
             )
         }

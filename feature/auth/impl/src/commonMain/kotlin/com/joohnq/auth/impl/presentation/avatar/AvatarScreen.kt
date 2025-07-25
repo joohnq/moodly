@@ -12,9 +12,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import com.joohnq.auth.impl.components.AlertMessageDialog
 import com.joohnq.auth.impl.components.ImageSourcePicker
-import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
-import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarIntent
-import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarViewModel
 import com.joohnq.permission.PermissionCallback
 import com.joohnq.permission.PermissionStatus
 import com.joohnq.permission.PermissionType
@@ -73,12 +70,12 @@ fun AvatarScreen(
         })
     val cameraManager = rememberCameraManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarIntent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     val galleryManager = rememberGalleryManager {
         scope.launch {
-            avatarViewModel.onAction(AvatarIntent.UpdateImageBitmap(it?.toImageBitmap()))
+            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
         }
     }
     if (imageSourceOptionDialog) {
@@ -134,13 +131,13 @@ fun AvatarScreen(
         }
     }
 
-    fun onEvent(event: AvatarEvent) {
+    fun onEvent(event: AvatarContract.Event) {
         when (event) {
-            AvatarEvent.OnPickAvatar -> {
+            AvatarContract.Event.OnPickAvatar -> {
                 imageSourceOptionDialog = true
             }
 
-            AvatarEvent.OnContinue -> {
+            AvatarContract.Event.OnContinue -> {
                 val action = if (avatarState.imageBitmap == null)
                     UserIntent.UpdateUserImageDrawable(avatarState.selectedDrawableIndex)
                 else
@@ -166,7 +163,7 @@ fun AvatarScreen(
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            avatarViewModel.onAction(AvatarIntent.UpdateImageDrawableIndex(page))
+            avatarViewModel.onAction(AvatarContract.Intent.UpdateImageDrawableIndex(page))
         }
     }
 

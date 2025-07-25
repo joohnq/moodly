@@ -1,4 +1,4 @@
-package com.joohnq.auth.impl.presentation.avatar.viewmodel
+package com.joohnq.auth.impl.presentation.avatar
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class AvatarViewModel : ViewModel() {
-    private val _state: MutableStateFlow<AvatarState> =
-        MutableStateFlow(AvatarState())
-    val state: StateFlow<AvatarState> = _state
+    private val _state: MutableStateFlow<AvatarContract.State> =
+        MutableStateFlow(AvatarContract.State())
+    val state: StateFlow<AvatarContract.State> = _state
 
-    fun onAction(intent: AvatarIntent) {
+    fun onAction(intent: AvatarContract.Intent) {
         when (intent) {
-            is AvatarIntent.UpdateImageBitmap -> updateImageBitmap(intent.imageBitmap)
-            is AvatarIntent.UpdateImageDrawableIndex -> updateImageDrawableIndex(intent.i)
+            is AvatarContract.Intent.UpdateImageBitmap -> updateImageBitmap(intent.imageBitmap)
+            is AvatarContract.Intent.UpdateImageDrawableIndex -> updateImageDrawableIndex(intent.i)
         }
     }
 

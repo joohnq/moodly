@@ -1,4 +1,4 @@
-package com.joohnq.auth.impl.presentation.user_name
+package com.joohnq.auth.impl.presentation.auth
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
@@ -18,9 +18,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.CurvedCanvasPosition
-import com.joohnq.auth.impl.presentation.user_name.event.UserNameEvent
-import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
-import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.input_field.AppTextFieldWithPlaceholder
@@ -42,12 +39,12 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun UserNameContent(
+fun AuthNameContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    state: UserNameState,
-    onEvent: (UserNameEvent) -> Unit,
+    state: AuthNameContract.State,
+    onEvent: (AuthNameContract.Event) -> Unit,
     onClearFocus: () -> Unit,
-    onGetAction: (UserNameIntent) -> Unit,
+    onGetAction: (AuthNameContract.Intent) -> Unit,
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
@@ -106,14 +103,14 @@ fun UserNameContent(
                         )
                     },
                     colors = ComponentColors.TextField.mainTextFieldColors(),
-                    onValueChange = { onGetAction(UserNameIntent.UpdateUserName(it)) },
+                    onValueChange = { onGetAction(AuthNameContract.Intent.Update(it)) },
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue)
                     PrimaryButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                         text = Res.string.continue_word,
-                        onClick = { onEvent(UserNameEvent.Continue) }
+                        onClick = { onEvent(AuthNameContract.Event.Continue) }
                     )
             }
         }

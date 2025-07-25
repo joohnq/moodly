@@ -18,9 +18,9 @@ import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.ExpressionAnalysisTextField
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
@@ -37,7 +37,7 @@ fun ExpressionAnalysisContent(
     onAddAction: (AddMoodIntent) -> Unit = {},
     onEvent: (ExpressionAnalysisEvent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
         snackBarHostState = snackBarState

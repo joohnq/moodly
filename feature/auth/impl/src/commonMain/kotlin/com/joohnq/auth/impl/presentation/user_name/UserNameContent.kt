@@ -18,8 +18,11 @@ import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
 import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.input_field.AppTextFieldWithPlaceholder
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
 import com.joohnq.shared_resources.name
@@ -39,7 +42,7 @@ fun UserNameContent(
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()

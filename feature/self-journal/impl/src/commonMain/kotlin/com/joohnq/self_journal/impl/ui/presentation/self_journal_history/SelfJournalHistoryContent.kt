@@ -21,11 +21,11 @@ import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmod
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.DialogWithImage
+import com.joohnq.shared_resources.components.layout.ImageDialogLayout
 import com.joohnq.shared_resources.components.view.EmptyView
-import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.theme.Colors
@@ -43,7 +43,7 @@ fun SelfJournalHistoryContent(
     onEvent: (SelfJournalHistoryEvent) -> Unit = {},
 ) {
     if (state.openDeleteDialog)
-        DialogWithImage(
+        ImageDialogLayout(
             onDismissRequest = {
                 onAction(
                     SelfJournalHistoryIntent.UpdateOpenDeleteDialog(false)

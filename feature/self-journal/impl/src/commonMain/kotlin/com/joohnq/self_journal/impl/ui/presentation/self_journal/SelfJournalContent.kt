@@ -7,7 +7,7 @@ import com.joohnq.self_journal.impl.ui.components.SelfJournalPanel
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.event.SelfJournalEvent
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalState
-import com.joohnq.shared_resources.components.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.components.view.LoadingView
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables

@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.DecoratedConvexPanel
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.DecoratedConvexPanel
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.now_every_time_you_open_the_app
 import com.joohnq.shared_resources.security_setup_completed
 import com.joohnq.shared_resources.theme.Colors

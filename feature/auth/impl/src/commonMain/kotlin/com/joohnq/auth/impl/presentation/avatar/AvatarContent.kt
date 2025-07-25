@@ -25,8 +25,8 @@ import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.modifier.drawDottedBorder
 import com.joohnq.shared_resources.or_upload_your_profile
 import com.joohnq.shared_resources.profile
@@ -50,7 +50,7 @@ fun AvatarContent(
     avatars: List<DrawableResource> = rememberAvatars(),
     onEvent: (AvatarEvent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()

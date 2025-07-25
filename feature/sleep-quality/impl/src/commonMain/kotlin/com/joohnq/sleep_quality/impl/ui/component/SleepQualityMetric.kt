@@ -12,8 +12,8 @@ import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.api.mapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.GiganticSecondaryCard
-import com.joohnq.shared_resources.components.NotFoundVerticalLayout
+import com.joohnq.shared_resources.components.card.GiganticSecondaryCard
+import com.joohnq.shared_resources.components.layout.NotFoundVerticalLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium

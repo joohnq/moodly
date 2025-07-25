@@ -2,10 +2,9 @@ package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now
 import com.joohnq.shared_resources.log_first_mood
 import com.joohnq.shared_resources.theme.Colors

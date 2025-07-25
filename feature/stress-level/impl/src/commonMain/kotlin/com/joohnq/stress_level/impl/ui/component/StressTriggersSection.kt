@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toPercentage
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall

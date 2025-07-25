@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.navigation.Destination
-import com.joohnq.shared_resources.components.BottomNavigationButton
+import com.joohnq.shared_resources.components.button.BottomNavigationButton
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 

@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.SectionHeader
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource

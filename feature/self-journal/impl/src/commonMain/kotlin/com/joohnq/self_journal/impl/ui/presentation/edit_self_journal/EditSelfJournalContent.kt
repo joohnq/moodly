@@ -23,6 +23,10 @@ import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.
 import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.layout.ImageDialogLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
@@ -47,7 +51,7 @@ fun EditJournalingContent(
     val resource = mood.toResource()
 
     if (state.openDeleteDialog)
-        DialogWithImage(
+        ImageDialogLayout(
             onDismissRequest = {
                 onAction(
                     EditSelfJournalIntent.UpdateOpenDeleteDialog(
@@ -65,7 +69,7 @@ fun EditJournalingContent(
             backgroundColor = Colors.White
         )
 
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize(),
         snackBarHostState = snackBarState,

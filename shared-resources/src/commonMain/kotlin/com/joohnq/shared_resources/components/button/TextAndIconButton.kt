@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.HorizontalSpacer
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.components.IconResource
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.IconResource

@@ -7,9 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.SectionHeader
-import com.joohnq.shared_resources.components.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.stress_history
 import com.joohnq.shared_resources.theme.Colors

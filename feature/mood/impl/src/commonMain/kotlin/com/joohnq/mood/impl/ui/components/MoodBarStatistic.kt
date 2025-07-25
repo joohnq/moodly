@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.joohnq.api.mapper.toShortDateString
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.shared_resources.components.CalculateTextHeight
+import com.joohnq.shared_resources.components.text.CalculateTextHeight
 import com.joohnq.shared_resources.components.dashedLine
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles

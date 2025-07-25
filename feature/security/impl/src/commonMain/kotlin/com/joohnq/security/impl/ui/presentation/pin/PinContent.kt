@@ -20,9 +20,9 @@ import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.enter_a_four_digit_pin
 import com.joohnq.shared_resources.pin_setup
 import com.joohnq.shared_resources.scan_with_your_device_security
@@ -42,7 +42,7 @@ fun PinContent(
     onAction: (PINIntent) -> Unit = {},
     onEvent: (PINEvent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
         modifier = Modifier.fillMaxSize()

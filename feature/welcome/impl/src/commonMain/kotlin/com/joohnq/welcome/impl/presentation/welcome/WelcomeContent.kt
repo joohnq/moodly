@@ -2,19 +2,17 @@ package com.joohnq.welcome.impl.presentation.welcome
 
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.ScaffoldSnackBar
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.welcome.impl.presentation.first.FirstScreen
 import com.joohnq.welcome.impl.Welcome
 import com.joohnq.welcome.impl.WelcomeBase
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun WelcomeContent(
@@ -23,7 +21,7 @@ fun WelcomeContent(
     onNext: () -> Unit = {},
     onAction: (PreferenceIntent) -> Unit = {},
 ) {
-    ScaffoldSnackBar(
+    AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.White
     ) { padding ->

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.freud_score.impl.resource.FreudScoreResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.MetricCardSide
+import com.joohnq.shared_resources.components.card.MetricSummaryCard
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -18,7 +18,7 @@ fun FreudScoreMetric(
 ) {
     if (freudScore == null) return
 
-    MetricCardSide(
+    MetricSummaryCard(
         modifier = Modifier.paddingHorizontalMedium(),
         icon = Drawables.Icons.Filled.Logo,
         dark = true,

@@ -3,8 +3,8 @@ package com.joohnq.stress_level.impl.ui.component
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.NotFoundVerticalLayout
-import com.joohnq.shared_resources.components.SectionHeader
+import com.joohnq.shared_resources.components.layout.NotFoundVerticalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.log_stress
 import com.joohnq.shared_resources.stress_insight
 import com.joohnq.shared_resources.theme.Colors

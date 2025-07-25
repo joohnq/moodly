@@ -16,8 +16,8 @@ import com.joohnq.api.mapper.toMonthAbbreviatedAndDayString
 import com.joohnq.api.mapper.toWordCount
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.HorizontalSpacer
-import com.joohnq.shared_resources.components.VerticalSpacer
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -27,7 +27,6 @@ import com.joohnq.shared_resources.total_words
 import com.joohnq.shared_resources.words
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun JournalHistoryCard(

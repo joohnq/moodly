@@ -4,9 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.RatingBar
-import com.joohnq.shared_resources.components.MetricCardSide
-import com.joohnq.shared_resources.components.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.card.MetricSummaryCard
+import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -34,7 +33,7 @@ fun StressLevelMetric(
             onClick = onCreate
         )
     else
-        MetricCardSide(
+        MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
             icon = Drawables.Icons.Filled.Warning,

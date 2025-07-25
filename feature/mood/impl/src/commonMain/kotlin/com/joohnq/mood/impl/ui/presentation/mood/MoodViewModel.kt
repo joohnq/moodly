@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.viewmodel
+package com.joohnq.mood.impl.ui.presentation.mood
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,17 +27,17 @@ class MoodViewModel(
     private val deleteMoodUseCase: DeleteMoodUseCase,
     private val addMoodUseCase: AddMoodUseCase,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(MoodState())
-    val state: StateFlow<MoodState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(MoodContract.State())
+    val state: StateFlow<MoodContract.State> = _state.asStateFlow()
 
-    private val _sideEffect = Channel<MoodSideEffect>(Channel.BUFFERED)
+    private val _sideEffect = Channel<MoodContract.SideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(intent: MoodIntent) {
+    fun onAction(intent: MoodContract.Intent) {
         when (intent) {
-            is MoodIntent.GetAll -> get()
-            is MoodIntent.Add -> add(intent.record)
-            is MoodIntent.Delete -> delete(intent.id)
+            is MoodContract.Intent.GetAll -> get()
+            is MoodContract.Intent.Add -> add(intent.record)
+            is MoodContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -53,16 +53,16 @@ class MoodViewModel(
     private fun add(record: MoodRecord) = viewModelScope.launch {
         val res = addMoodUseCase(record).toUiState()
         res.onSuccess {
-            _sideEffect.send(MoodSideEffect.StatsAdded)
+            _sideEffect.send(MoodContract.SideEffect.StatsAdded)
         }.onFailure {
-            _sideEffect.send(MoodSideEffect.ShowError(it))
+            _sideEffect.send(MoodContract.SideEffect.ShowError(it))
         }
     }
 
     private fun delete(id: Int) = viewModelScope.launch {
         val res = deleteMoodUseCase(id).toUiState()
         res.onSuccess {
-            _sideEffect.send(MoodSideEffect.StatsDeleted)
+            _sideEffect.send(MoodContract.SideEffect.StatsDeleted)
             changeRecordsStatus(
                 UiState.Success(
                     state.value.records.getValueOrEmpty()
@@ -70,7 +70,7 @@ class MoodViewModel(
                 )
             )
         }.onFailure {
-            _sideEffect.send(MoodSideEffect.ShowError(it))
+            _sideEffect.send(MoodContract.SideEffect.ShowError(it))
         }
     }
 

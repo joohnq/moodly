@@ -3,9 +3,8 @@ package com.joohnq.mood.impl.ui.presentation.mood_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.mood.impl.ui.presentation.mood_history.event.MoodHistoryEvent
-import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
 
 @Composable
 fun MoodHistoryScreen(
@@ -14,9 +13,9 @@ fun MoodHistoryScreen(
     val moodViewModel: MoodViewModel = sharedViewModel()
     val statsState by moodViewModel.state.collectAsState()
 
-    fun onEvent(event: MoodHistoryEvent) =
+    fun onEvent(event: MoodHistoryContract.Event) =
         when (event) {
-            is MoodHistoryEvent.OnGoBack -> onGoBack()
+            is MoodHistoryContract.Event.OnGoBack -> onGoBack()
         }
 
     MoodHistoryContent(

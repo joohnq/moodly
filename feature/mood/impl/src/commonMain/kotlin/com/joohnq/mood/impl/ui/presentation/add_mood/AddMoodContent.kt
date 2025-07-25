@@ -14,16 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.components.MoodRadioGroup
 import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.presentation.add_mood.event.AddMoodEvent
-import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
-import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodState
+import com.joohnq.mood.impl.ui.components.MoodRadioGroup
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_mood
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.TextAndCheckButton
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.how_are_you_feeling_this_day
 import com.joohnq.shared_resources.set_mood
 import com.joohnq.shared_resources.theme.Colors
@@ -33,9 +30,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AddMoodContent(
-    state: AddMoodState,
-    onAction: (AddMoodIntent) -> Unit = {},
-    onEvent: (AddMoodEvent) -> Unit = {},
+    state: AddMoodContract.State,
+    onAction: (AddMoodContract.Intent) -> Unit = {},
+    onEvent: (AddMoodContract.Event) -> Unit = {},
 ) {
     Scaffold(
         containerColor = Colors.Brown10,
@@ -51,7 +48,7 @@ fun AddMoodContent(
             AppTopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { onEvent(AddMoodEvent.OnGoBack) }
+                onGoBack = { onEvent(AddMoodContract.Event.OnGoBack) }
             )
             VerticalSpacer(50.dp)
             Text(
@@ -80,7 +77,7 @@ fun AddMoodContent(
                 selectedMood = state.record,
                 setSelectedMood = { resource ->
                     onAction(
-                        AddMoodIntent.UpdateAddingMoodRecordMood(resource)
+                        AddMoodContract.Intent.UpdateAddingMoodRecordMood(resource)
                     )
                 }
             )
@@ -88,7 +85,7 @@ fun AddMoodContent(
             TextAndCheckButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.set_mood,
-                onClick = { onEvent(AddMoodEvent.OnNavigateToExpressionAnalysis) }
+                onClick = { onEvent(AddMoodContract.Event.OnNavigateToExpressionAnalysis) }
             )
         }
     }

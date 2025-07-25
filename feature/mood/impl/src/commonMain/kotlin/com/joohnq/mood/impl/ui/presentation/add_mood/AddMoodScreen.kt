@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.mood.impl.ui.presentation.add_mood.event.AddMoodEvent
-import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodViewModel
 
 @Composable
 fun AddMoodScreen(
@@ -15,10 +13,10 @@ fun AddMoodScreen(
     val addStatsViewModel: AddMoodViewModel = sharedViewModel()
     val state by addStatsViewModel.state.collectAsState()
 
-    fun onEvent(event: AddMoodEvent) =
+    fun onEvent(event: AddMoodContract.Event) =
         when (event) {
-            AddMoodEvent.OnGoBack -> onGoBack()
-            AddMoodEvent.OnNavigateToExpressionAnalysis ->
+            AddMoodContract.Event.OnGoBack -> onGoBack()
+            AddMoodContract.Event.OnNavigateToExpressionAnalysis ->
                 onNavigateToExpressionAnalysis()
         }
 

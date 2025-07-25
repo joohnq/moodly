@@ -11,25 +11,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.mood.impl.ui.components.MoodHistoryCard
-import com.joohnq.mood.impl.ui.presentation.mood_history.event.MoodHistoryEvent
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
-    onEvent: (MoodHistoryEvent) -> Unit = {},
+    onEvent: (MoodHistoryContract.Event) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -43,7 +42,7 @@ fun MoodHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(MoodHistoryEvent.OnGoBack) }
+                        onGoBack = { onEvent(MoodHistoryContract.Event.OnGoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(

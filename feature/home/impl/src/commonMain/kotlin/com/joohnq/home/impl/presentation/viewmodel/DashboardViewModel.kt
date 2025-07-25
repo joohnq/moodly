@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreContract
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreViewModel
-import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
-import com.joohnq.mood.impl.ui.viewmodel.MoodState
-import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
+import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
 import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalState
 import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
@@ -48,7 +47,7 @@ class DashboardViewModel(
     fun onAction(event: DashboardContract.Intent) {
         when (event) {
             DashboardContract.Intent.Get -> {
-                moodViewModel.onAction(MoodIntent.GetAll)
+                moodViewModel.onAction(MoodContract.Intent.GetAll)
                 userViewModel.onAction(UserIntent.GetUser)
                 stressLevelViewModel.onAction(StressLevelIntent.GetAll)
                 sleepQualityViewModel.onAction(SleepQualityIntent.GetAll)
@@ -67,7 +66,7 @@ class DashboardViewModel(
             stressLevelViewModel.state
         ) { states ->
             val userState = states[0] as UserState
-            val statsState = states[1] as MoodState
+            val statsState = states[1] as MoodContract.State
             val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalState
             val sleepState = states[4] as SleepQualityState

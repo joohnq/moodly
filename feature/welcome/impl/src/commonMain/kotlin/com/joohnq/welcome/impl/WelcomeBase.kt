@@ -15,6 +15,7 @@ import com.joohnq.shared_resources.components.*
 import com.joohnq.shared_resources.components.button.IconContinueButton
 import com.joohnq.shared_resources.components.layout.DecoratedConvexPanel
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.HeadingWithSpan
 import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.step
 import com.joohnq.shared_resources.theme.Colors

@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
 
 import androidx.compose.runtime.Composable
-import com.joohnq.self_journal.impl.ui.parameter.BooleanParameterProvider
+import com.joohnq.shared_resources.components.parameter.BooleanParameterProvider
 import com.joohnq.self_journal.impl.ui.parameter.ListSelfJournalRecordResourceParameterProvider
 import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.viewmodel.SelfJournalHistoryState
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource

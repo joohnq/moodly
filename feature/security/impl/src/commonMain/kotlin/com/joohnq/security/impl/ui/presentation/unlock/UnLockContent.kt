@@ -74,7 +74,7 @@ fun UnLockContent(
                 VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(Res.string.type_your_four_digit_pin_to_unlock_the_app),
-                    style = TextStyles.ParagraphLg(),
+                    style = TextStyles.paragraphLg(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
                 )
@@ -130,13 +130,13 @@ fun UnLockContent(
                     VerticalSpacer(40.dp)
                     Text(
                         text = stringResource(Res.string.welcome_back),
-                        style = TextStyles.HeadingSmExtraBold(),
+                        style = TextStyles.headingSmExtraBold(),
                         color = Colors.Brown80
                     )
                     VerticalSpacer(10.dp)
                     Text(
                         text = stringResource(Res.string.use_your_authentication_to_securely),
-                        style = TextStyles.ParagraphLg(),
+                        style = TextStyles.paragraphLg(),
                         color = Colors.Brown100Alpha64,
                     )
                 }
@@ -149,7 +149,7 @@ fun UnLockContent(
                     VerticalSpacer(16.dp)
                     Text(
                         text = stringResource(Res.string.this_password_is_the_same_validation_method),
-                        style = TextStyles.TextSmMedium(),
+                        style = TextStyles.textSmMedium(),
                         color = Colors.Brown100Alpha64,
                         textAlign = TextAlign.Center
                     )

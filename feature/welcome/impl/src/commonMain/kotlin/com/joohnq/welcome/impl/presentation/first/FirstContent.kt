@@ -42,7 +42,7 @@ fun FirstContent(
         VerticalSpacer(16.dp)
         Text(
             text = stringResource(Res.string.first_screen_desc),
-            style = TextStyles.ParagraphLg(),
+            style = TextStyles.paragraphLg(),
             color = Colors.Brown100Alpha64,
             textAlign = TextAlign.Center
         )

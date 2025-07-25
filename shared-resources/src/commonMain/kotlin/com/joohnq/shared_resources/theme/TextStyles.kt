@@ -7,267 +7,267 @@ import androidx.compose.ui.unit.sp
 
 object TextStyles {
     @Composable
-    fun HeadingLgExtraBold(): TextStyle = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun headingLgExtraBold(): TextStyle = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 48.sp
     )
 
     @Composable
-    fun TextXlMedium(): TextStyle = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun textXlMedium(): TextStyle = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 20.sp
     )
 
     @Composable
-    fun HeadingSpanSmExtraBold(): SpanStyle = SpanStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun headingSpanSmExtraBold(): SpanStyle = SpanStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 30.sp
     )
 
     @Composable
-    fun Heading2xlExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun heading2xlExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 72.sp
     )
 
     @Composable
-    fun HeadingMdExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun headingMdExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 36.sp
     )
 
     @Composable
-    fun HeadingSmExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun headingSmExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 30.sp,
     )
 
     @Composable
-    fun HeadingXsBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun headingXsBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 24.sp,
     )
 
     @Composable
-    fun HeadingXsSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun headingXsSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 24.sp,
     )
 
     @Composable
-    fun HeadingXlExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun headingXlExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 60.sp,
     )
 
     @Composable
-    fun HeadingXlBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun headingXlBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 60.sp,
     )
 
     @Composable
-    fun ParagraphLg() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun paragraphLg() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 18.sp,
     )
 
     @Composable
-    fun ParagraphMd() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun paragraphMd() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 16.sp
     )
 
     @Composable
-    fun ParagraphXs() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun paragraphXs() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 12.sp
     )
 
     @Composable
-    fun ParagraphSm() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun paragraphSm() = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 16.sp
     )
 
     @Composable
-    fun LabelSm() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun labelSm() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 12.sp
     )
 
     @Composable
-    fun DisplayLgExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun displayLgExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 180.sp
     )
 
     @Composable
-    fun DisplayMdExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun displayMdExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 128.sp,
     )
 
     @Composable
-    fun DisplaySmExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun displaySmExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 96.sp
     )
 
     @Composable
-    fun Text2xlExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun text2xlExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 24.sp,
     )
 
     @Composable
-    fun Text2xlBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun text2xlBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 24.sp
     )
 
 
     @Composable
-    fun Paragraph2Xl() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun paragraph2Xl() = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 24.sp
     )
 
     @Composable
-    fun Text2xlSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun text2xlSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 24.sp
     )
 
     @Composable
-    fun TextXlBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun textXlBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 20.sp
     )
 
     @Composable
-    fun TextXlExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun textXlExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 20.sp
     )
 
     @Composable
-    fun TextXlSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun textXlSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 20.sp,
     )
 
     @Composable
-    fun TextLgExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun textLgExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 18.sp
     )
 
     @Composable
-    fun TextLgBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun textLgBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 18.sp
     )
 
     @Composable
-    fun TextLgMedium() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun textLgMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 18.sp
     )
 
     @Composable
-    fun TextLgSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun textLgSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 18.sp
     )
 
     @Composable
-    fun TextMdExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun textMdExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 18.sp
     )
 
     @Composable
-    fun TextMdBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun textMdBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 16.sp,
     )
 
     @Composable
-    fun TextMdSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun textMdSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 16.sp
     )
 
     @Composable
-    fun TextMdMedium() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun textMdMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 16.sp
     )
 
     @Composable
-    fun TextMdRegular(): TextStyle = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun textMdRegular(): TextStyle = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 16.sp
     )
 
     @Composable
-    fun TextSmExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun textSmExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 14.sp,
     )
 
     @Composable
-    fun TextSmBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun textSmBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 14.sp,
     )
 
     @Composable
-    fun TextSmSemiBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.SemiBold(),
+    fun textSmSemiBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.semiBold(),
         fontSize = 14.sp
     )
 
     @Composable
-    fun TextSmMedium() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun textSmMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 14.sp
     )
 
     @Composable
-    fun TextSmRegular() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun textSmRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 14.sp
     )
 
     @Composable
-    fun TextXsExtraBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.ExtraBold(),
+    fun textXsExtraBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.extraBold(),
         fontSize = 12.sp
     )
 
     @Composable
-    fun TextXsBold() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Bold(),
+    fun textXsBold() = TextStyle(
+        fontFamily = FontFamily.Urbanist.bold(),
         fontSize = 12.sp,
     )
 
     @Composable
-    fun TextXsMedium() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Medium(),
+    fun textXsMedium() = TextStyle(
+        fontFamily = FontFamily.Urbanist.medium(),
         fontSize = 12.sp,
     )
 
     @Composable
-    fun TextXsRegular() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun textXsRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 12.sp,
     )
 
     @Composable
-    fun Text2XsRegular() = TextStyle(
-        fontFamily = FontFamily.Urbanist.Regular(),
+    fun text2XsRegular() = TextStyle(
+        fontFamily = FontFamily.Urbanist.regular(),
         fontSize = 10.sp,
     )
 }

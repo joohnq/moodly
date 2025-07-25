@@ -39,11 +39,11 @@ fun AppTimePickerCard(
     Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = modifier) {
         Text(
             text = stringResource(title),
-            style = TextStyles.TextLgExtraBold(),
+            style = TextStyles.textLgExtraBold(),
             color = Colors.Brown80
         )
         Card(
-            colors = ComponentColors.Card.MainCardColors(),
+            colors = ComponentColors.Card.mainCardColors(),
             shape = Dimens.Shape.Circle,
             onClick = onClick,
             modifier = Modifier.height(56.dp)
@@ -63,12 +63,12 @@ fun AppTimePickerCard(
                     HorizontalSpacer(15.dp)
                     Text(
                         text = "$hour:$minutes",
-                        style = TextStyles.TextMdBold(),
+                        style = TextStyles.textMdBold(),
                         color = Colors.Brown100Alpha64
                     )
                     Text(
                         text = if (isAfternoon) " PM" else " AM",
-                        style = TextStyles.TextMdBold(),
+                        style = TextStyles.textMdBold(),
                         color = Colors.Brown100Alpha64
                     )
                 }

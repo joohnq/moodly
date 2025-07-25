@@ -12,14 +12,14 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppOutlinedTextField(
+    modifier: Modifier = Modifier,
     text: String,
     placeholder: StringResource,
     errorText: String?,
     colors: TextFieldColors,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String) -> Unit = {},
 ) {
     OutlinedTextField(
         value = text,
@@ -30,13 +30,13 @@ fun AppOutlinedTextField(
         placeholder = {
             Text(
                 text = stringResource(placeholder),
-                style = TextStyles.TextMdBold()
+                style = TextStyles.textMdBold()
             )
         },
         singleLine = true,
         trailingIcon = trailingIcon,
         colors = colors,
-        textStyle = TextStyles.TextMdBold(),
+        textStyle = TextStyles.textMdBold(),
         leadingIcon = leadingIcon
     )
 }

@@ -35,7 +35,7 @@ fun OnboardingExpressionAnalysisContent(
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),
-            style = TextStyles.ParagraphMd(),
+            style = TextStyles.paragraphMd(),
             color = Colors.Brown100Alpha64,
             textAlign = TextAlign.Center
         )

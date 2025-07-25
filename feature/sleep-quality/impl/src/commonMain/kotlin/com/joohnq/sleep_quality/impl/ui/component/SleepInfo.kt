@@ -45,12 +45,12 @@ fun RowScope.SleepInfo(
         Column {
             Text(
                 text = title,
-                style = TextStyles.TextSmSemiBold(),
+                style = TextStyles.textSmSemiBold(),
                 color = Colors.Gray80,
             )
             Text(
                 text = stringResource(subtitle),
-                style = TextStyles.TextSmRegular(),
+                style = TextStyles.textSmRegular(),
                 color = Colors.Gray60,
             )
         }

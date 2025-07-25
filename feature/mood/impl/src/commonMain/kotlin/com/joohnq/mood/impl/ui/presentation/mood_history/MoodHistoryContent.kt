@@ -48,7 +48,7 @@ fun MoodHistoryContent(
                     VerticalSpacer(20.dp)
                     Text(
                         text = stringResource(Res.string.all_history),
-                        style = TextStyles.TextLgBold(),
+                        style = TextStyles.textLgBold(),
                         color = Colors.Gray80
                     )
                     VerticalSpacer(20.dp)

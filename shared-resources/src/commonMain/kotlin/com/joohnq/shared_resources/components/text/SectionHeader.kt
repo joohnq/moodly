@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SectionHeader(
     modifier: Modifier = Modifier,
     title: StringResource,
-    onSeeMore: () -> Unit,
+    onSeeMore: () -> Unit = {},
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -33,7 +33,7 @@ fun SectionHeader(
     ) {
         Text(
             text = stringResource(title),
-            style = TextStyles.TextLgExtraBold(),
+            style = TextStyles.textLgExtraBold(),
             color = Colors.Brown80,
             modifier = Modifier.padding(vertical = 20.dp)
         )
@@ -51,7 +51,7 @@ fun SectionHeader(
             Text(
                 modifier = Modifier,
                 text = stringResource(Res.string.see_more),
-                style = TextStyles.TextSmMedium(),
+                style = TextStyles.textSmMedium(),
             )
         }
     }
@@ -69,7 +69,7 @@ fun SectionHeader(
     ) {
         Text(
             text = stringResource(title),
-            style = TextStyles.TextLgExtraBold(),
+            style = TextStyles.textLgExtraBold(),
             color = Colors.Brown80,
             modifier = Modifier.padding(vertical = 20.dp)
         )

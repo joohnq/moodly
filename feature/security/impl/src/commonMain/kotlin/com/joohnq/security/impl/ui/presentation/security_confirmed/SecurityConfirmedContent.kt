@@ -14,9 +14,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.DecoratedConvexPanel
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.now_every_time_you_open_the_app
 import com.joohnq.shared_resources.security_setup_completed
 import com.joohnq.shared_resources.theme.Colors
@@ -53,7 +54,7 @@ fun SecurityConfirmedContent(
                 VerticalSpacer(30.dp)
                 Text(
                     text = stringResource(Res.string.security_setup_completed),
-                    style = TextStyles.HeadingSmExtraBold(),
+                    style = TextStyles.headingSmExtraBold(),
                     color = Colors.Brown80,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.paddingHorizontalMedium()
@@ -61,14 +62,15 @@ fun SecurityConfirmedContent(
                 VerticalSpacer(12.dp)
                 Text(
                     text = stringResource(Res.string.now_every_time_you_open_the_app),
-                    style = TextStyles.ParagraphLg(),
+                    style = TextStyles.paragraphLg(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.paddingHorizontalMedium()
                 )
             }
-            ContinueButton(
+            PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                text = Res.string.continue_word,
                 onClick = { onEvent(SecurityConfirmedEvent.OnContinue) }
             )
         }

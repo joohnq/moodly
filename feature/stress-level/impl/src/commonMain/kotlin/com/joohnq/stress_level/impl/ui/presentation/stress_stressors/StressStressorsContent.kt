@@ -17,10 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
 import com.joohnq.shared_resources.components.*
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.BubbleText
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
@@ -60,7 +61,7 @@ fun StressStressorsContent(
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.select_stressors),
-                style = TextStyles.HeadingSmExtraBold(),
+                style = TextStyles.headingSmExtraBold(),
                 color = Colors.Brown80,
                 textAlign = TextAlign.Center
             )
@@ -88,8 +89,9 @@ fun StressStressorsContent(
             )
             VerticalSpacer(24.dp)
             if (canContinue)
-                ContinueButton(
+                PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
+                    text = Res.string.continue_word,
                     onClick = { onEvent(StressStressorsEvent.Continue) }
                 )
         }

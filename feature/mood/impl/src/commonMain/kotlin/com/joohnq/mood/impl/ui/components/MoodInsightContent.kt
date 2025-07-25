@@ -60,19 +60,19 @@ fun MoodInsightContent(
             ) {
                 Text(
                     text = stringResource(Res.string.day_streak, streakDays),
-                    style = TextStyles.HeadingXsBold(),
+                    style = TextStyles.headingXsBold(),
                     color = Colors.Gray80,
                 )
                 VerticalSpacer(3.dp)
                 Text(
                     text = stringResource(Res.string.mood_streak),
-                    style = TextStyles.TextMdMedium(),
+                    style = TextStyles.textMdMedium(),
                     color = Colors.Gray60,
                 )
                 VerticalSpacer(3.dp)
                 Text(
                     text = stringResource(Res.string.you_ve_checked_in_your_mood_for_days_straight, streakDays),
-                    style = TextStyles.ParagraphSm(),
+                    style = TextStyles.paragraphSm(),
                     color = Colors.Gray60,
                 )
             }

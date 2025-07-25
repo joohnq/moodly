@@ -52,7 +52,7 @@ fun NotFoundVerticalLayout(
             VerticalSpacer(16.dp)
             Text(
                 text = stringResource(title),
-                style = TextStyles.ParagraphSm(),
+                style = TextStyles.paragraphSm(),
                 color = Colors.Gray60,
                 textAlign = TextAlign.Center
             )
@@ -71,7 +71,7 @@ fun NotFoundVerticalLayout(
             ) {
                 Text(
                     text = stringResource(subtitle),
-                    style = TextStyles.TextMdSemiBold(),
+                    style = TextStyles.textMdSemiBold(),
                     color = Colors.Brown60
                 )
                 Icon(

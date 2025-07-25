@@ -45,7 +45,7 @@ fun OnboardingProfessionalHelpContent(
                     text = option.text,
                     selected = state == option,
                     shape = Dimens.Shape.Circle,
-                    colors = ComponentColors.RadioButton.TextRadioButtonColors(),
+                    colors = ComponentColors.RadioButton.textRadioButtonColors(),
                     onClick = { onAction(OnboardingIntent.UpdateUserSoughtHelp(option)) }
                 )
             }

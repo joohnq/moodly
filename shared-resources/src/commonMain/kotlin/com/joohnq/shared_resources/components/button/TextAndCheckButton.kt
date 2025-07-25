@@ -19,7 +19,7 @@ fun TextAndCheckButton(
     TextAndIconButton(
         modifier = modifier,
         text = text,
-        colors = ComponentColors.Button.MainButtonColorsInverted(),
+        colors = ComponentColors.Button.mainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
         icon = IconResource(
             icon = Drawables.Icons.Outlined.Check,

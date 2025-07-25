@@ -16,11 +16,14 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SmallAddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun SmallAddButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
+) {
     FilledIconButton(
         onClick = onClick,
         shape = Dimens.Shape.Circle,
-        colors = ComponentColors.IconButton.ContinueButtonColors(),
+        colors = ComponentColors.IconButton.mainButtonColors(),
         modifier = modifier.size(56.dp).dpOffset(y = 30.dp)
     ) {
         Icon(

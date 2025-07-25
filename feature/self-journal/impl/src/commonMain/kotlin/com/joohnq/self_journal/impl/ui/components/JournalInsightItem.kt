@@ -29,7 +29,7 @@ fun JournalInsightItem(
     ) {
         Text(
             text = count.toString(),
-            style = TextStyles.TextSmBold(),
+            style = TextStyles.textSmBold(),
             color = Colors.Gray60
         )
         HorizontalSpacer(10.dp)

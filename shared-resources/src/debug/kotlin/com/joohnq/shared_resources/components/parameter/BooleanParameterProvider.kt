@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.parameter
+package com.joohnq.shared_resources.components.parameter
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 

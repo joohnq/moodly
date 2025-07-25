@@ -56,7 +56,7 @@ fun AddMoodContent(
             VerticalSpacer(50.dp)
             Text(
                 text = stringResource(Res.string.how_are_you_feeling_this_day),
-                style = TextStyles.HeadingMdExtraBold(),
+                style = TextStyles.headingMdExtraBold(),
                 color = Colors.White,
                 textAlign = TextAlign.Center
             )
@@ -70,7 +70,7 @@ fun AddMoodContent(
             VerticalSpacer(48.dp)
             Text(
                 text = stringResource(state.record.mood.text),
-                style = TextStyles.Text2xlSemiBold(),
+                style = TextStyles.text2xlSemiBold(),
                 color = Colors.White,
                 textAlign = TextAlign.Center
             )

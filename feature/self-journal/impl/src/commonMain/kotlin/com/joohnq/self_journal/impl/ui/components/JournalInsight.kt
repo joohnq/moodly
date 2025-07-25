@@ -69,12 +69,12 @@ fun JournalInsight(
                     Column {
                         Text(
                             text = stringResource(groupedMoods.first().first.text),
-                            style = TextStyles.HeadingXsBold(),
+                            style = TextStyles.headingXsBold(),
                             color = Colors.Gray80
                         )
                         Text(
                             text = stringResource(Res.string.most_frequent_emotion),
-                            style = TextStyles.TextSmRegular(),
+                            style = TextStyles.textSmRegular(),
                             color = Colors.Gray60
                         )
                     }

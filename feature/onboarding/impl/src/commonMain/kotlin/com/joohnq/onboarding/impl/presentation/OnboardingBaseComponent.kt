@@ -18,11 +18,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.assessments
-import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.page_of
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
@@ -77,7 +78,7 @@ fun OnboardingBaseComponent(
             }
             Text(
                 text = stringResource(title),
-                style = TextStyles.HeadingSmExtraBold(),
+                style = TextStyles.headingSmExtraBold(),
                 color = Colors.Brown80,
                 textAlign = TextAlign.Center
             )
@@ -85,8 +86,9 @@ fun OnboardingBaseComponent(
             content()
             VerticalSpacer(24.dp)
             if (isContinueButtonVisible) {
-                ContinueButton(
+                PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
+                    text = Res.string.continue_word,
                     onClick = onContinue
                 )
                 VerticalSpacer(16.dp)

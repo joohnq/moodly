@@ -32,7 +32,7 @@ fun SelfJournalHistoryCard(
 ) {
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
-        colors = ComponentColors.Card.MainCardColors(),
+        colors = ComponentColors.Card.mainCardColors(),
         shape = Dimens.Shape.Large,
         onClick = onClick
     ) {
@@ -61,7 +61,7 @@ fun SelfJournalHistoryCard(
                 }
                 Text(
                     text = record.createdAt.date.toCompleteDateString(),
-                    style = TextStyles.TextSmSemiBold(),
+                    style = TextStyles.textSmSemiBold(),
                     color = Colors.Brown80
                 )
             }
@@ -79,12 +79,12 @@ fun SelfJournalHistoryCard(
                 )
                 TextEllipsis(
                     text = record.title,
-                    style = TextStyles.TextLgBold(),
+                    style = TextStyles.textLgBold(),
                     color = Colors.Brown80
                 )
                 TextEllipsis(
                     text = record.description,
-                    style = TextStyles.TextSmSemiBold(),
+                    style = TextStyles.textSmSemiBold(),
                     color = Colors.Brown100Alpha64
                 )
             }
@@ -107,7 +107,7 @@ fun SelfJournalHistoryCard(
             Card(
                 shape = Dimens.Shape.Large,
                 modifier = modifier,
-                colors = ComponentColors.Card.MainCardColors(),
+                colors = ComponentColors.Card.mainCardColors(),
                 onClick = {
                     onClick(record.id)
                 }
@@ -142,14 +142,14 @@ fun SelfJournalHistoryCard(
                     VerticalSpacer(10.dp)
                     TextEllipsis(
                         text = record.title,
-                        style = TextStyles.TextMdExtraBold(),
+                        style = TextStyles.textMdExtraBold(),
                         color = Colors.Brown80,
                         maxLines = 1
                     )
                     VerticalSpacer(10.dp)
                     TextEllipsis(
                         text = record.description,
-                        style = TextStyles.TextMdSemiBold(),
+                        style = TextStyles.textMdSemiBold(),
                         color = Colors.Brown100Alpha64,
                         maxLines = 2
                     )
@@ -184,7 +184,7 @@ fun SelfJournalHistoryCard(
                     )
                     Text(
                         text = record.createdAt.toFormattedTimeString(),
-                        style = TextStyles.TextSmSemiBold(),
+                        style = TextStyles.textSmSemiBold(),
                         color = Colors.White
                     )
                 }

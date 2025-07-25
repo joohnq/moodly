@@ -17,16 +17,16 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BottomNavigationButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
     image: DrawableResource,
     description: StringResource? = null,
+    onClick: () -> Unit = {},
 ) {
     Button(
         contentPadding = PaddingValues(0.dp),
         onClick = onClick,
         shape = Dimens.Shape.Circle,
         modifier = modifier,
-        colors = ComponentColors.Button.BottomNavigationActionButtonColors()
+        colors = ComponentColors.Button.bottomNavigationActionButtonColors()
     ) {
         Icon(
             painter = painterResource(image),

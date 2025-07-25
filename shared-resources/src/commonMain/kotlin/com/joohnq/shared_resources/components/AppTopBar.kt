@@ -8,7 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.button.BackButton
+import com.joohnq.shared_resources.components.button.AppDarkBackButton
+import com.joohnq.shared_resources.components.button.AppLightBackButton
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalMedium
@@ -21,7 +22,7 @@ fun AppTopBar(
     modifier: Modifier = Modifier,
     isDark: Boolean = true,
     text: StringResource? = null,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit = {},
     content: (@Composable () -> Unit)? = null,
 ) {
     Row(
@@ -30,17 +31,21 @@ fun AppTopBar(
         modifier = modifier.fillMaxWidth().paddingVerticalMedium()
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            BackButton(
-                color = if (isDark) Colors.Brown80 else Colors.White,
-                backgroundColor = if (isDark) Colors.Brown20 else Colors.White32,
-                onClick = onGoBack
-            )
+            if (isDark)
+                AppDarkBackButton(
+                    onClick = onGoBack
+                )
+            else
+                AppLightBackButton(
+                    onClick = onGoBack
+                )
+
             text?.let {
                 HorizontalSpacer(10.dp)
 
                 Text(
                     text = stringResource(text),
-                    style = TextStyles.TextXlExtraBold(),
+                    style = TextStyles.textXlExtraBold(),
                     color = if (isDark) Colors.Brown80 else Colors.White,
                 )
             }

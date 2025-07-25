@@ -28,11 +28,11 @@ fun PhysicalSymptomsRadioButton(
     selected: Boolean,
     onClick: () -> Unit = {},
 ) {
-    val colors = ComponentColors.RadioButton.TextRadioButtonColors()
+    val colors = ComponentColors.RadioButton.textRadioButtonColors()
     Button(
         modifier = modifier,
         shape = Dimens.Shape.Medium,
-        colors = ComponentColors.Button.TextRadioButtonColors(selected = selected, colors = colors),
+        colors = ComponentColors.Button.textRadioButtonColors(selected = selected, colors = colors),
         border = if (selected) BorderStroke(
             color = colors.selectedBorderColor,
             width = 4.dp
@@ -57,13 +57,13 @@ fun PhysicalSymptomsRadioButton(
                 )
                 Text(
                     text = text,
-                    style = TextStyles.TextLgExtraBold()
+                    style = TextStyles.textLgExtraBold()
                 )
             }
             RadioButton(
                 selected = selected,
                 onClick = onClick,
-                colors = ComponentColors.RadioButton.IconAndTextRadioButtonHorizontalColors(colors)
+                colors = ComponentColors.RadioButton.iconAndTextRadioButtonHorizontalColors(colors)
             )
         }
     }

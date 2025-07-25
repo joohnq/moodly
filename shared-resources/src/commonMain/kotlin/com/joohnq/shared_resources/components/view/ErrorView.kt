@@ -43,7 +43,7 @@ fun ErrorView(errorText: String) {
             HorizontalSpacer(10.dp)
             Text(
                 text = errorText,
-                style = TextStyles.TextXsExtraBold(),
+                style = TextStyles.textXsExtraBold(),
                 color = Colors.Orange40
             )
         }

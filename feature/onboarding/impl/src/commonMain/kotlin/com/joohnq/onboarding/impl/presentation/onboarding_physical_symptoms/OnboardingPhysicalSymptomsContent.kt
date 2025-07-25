@@ -39,7 +39,7 @@ fun OnboardingPhysicalSymptomsContent(
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
-            style = TextStyles.ParagraphMd(),
+            style = TextStyles.paragraphMd(),
             textAlign = TextAlign.Center,
             color = Colors.Brown100Alpha64
         )

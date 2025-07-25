@@ -36,7 +36,7 @@ fun BubbleText(
                 unSelectedBackgroundColor = Colors.Brown20,
                 unSelectedContentColor = Colors.Brown40
             ),
-            contentPaddingValues = PaddingValues(0.dp),
+            paddingValues = PaddingValues(0.dp),
             text = text,
             selected = selected,
             shape = Dimens.Shape.Circle

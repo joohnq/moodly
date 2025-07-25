@@ -38,13 +38,13 @@ fun ColoredIndicatorItem(
                 )
                 Text(
                     text = title,
-                    style = TextStyles.TextSmRegular(),
+                    style = TextStyles.textSmRegular(),
                     color = Colors.Gray80
                 )
             }
             Text(
                 text = description,
-                style = TextStyles.TextSmSemiBold(),
+                style = TextStyles.textSmSemiBold(),
                 color = Colors.Gray80
             )
         }

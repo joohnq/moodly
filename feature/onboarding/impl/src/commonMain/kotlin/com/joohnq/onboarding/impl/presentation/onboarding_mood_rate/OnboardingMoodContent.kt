@@ -47,7 +47,7 @@ fun OnboardingMoodRateContent(
                 Res.string.mood_rate_desc,
                 stringResource(state.mood.text)
             ),
-            style = TextStyles.TextXlSemiBold(),
+            style = TextStyles.textXlSemiBold(),
             color = Colors.Brown100Alpha64,
         )
         VerticalSpacer(24.dp)
@@ -63,7 +63,7 @@ fun OnboardingMoodRateContent(
     ) {
         IconContinueButton(
             modifier = Modifier.size(60.dp),
-            colors = ComponentColors.IconButton.ContinueButtonColors(),
+            colors = ComponentColors.IconButton.mainButtonColors(),
             onClick = { onEvent(OnboardingEvent.OnNavigateToNext) }
         )
     }

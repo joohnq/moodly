@@ -1,0 +1,12 @@
+package com.joohnq.shared_resources.components.view
+
+import androidx.compose.runtime.Composable
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Preview
+@Composable
+fun ErrorViewPreview() {
+    ErrorView(
+        errorText = "Something went wrong"
+    )
+}

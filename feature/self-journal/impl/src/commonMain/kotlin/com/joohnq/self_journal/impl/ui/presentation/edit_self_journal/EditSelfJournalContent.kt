@@ -114,14 +114,14 @@ fun EditJournalingContent(
                 placeholder = {
                     Text(
                         text = stringResource(Res.string.type_here_your_title),
-                        style = TextStyles.HeadingMdExtraBold(),
+                        style = TextStyles.headingMdExtraBold(),
                         color = Colors.Brown100Alpha64
                     )
                 },
                 onValueChange = { onAction(EditSelfJournalIntent.UpdateTitle(it)) },
                 modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
-                colors = ComponentColors.TextField.TextFieldTitleTransparentColors(),
-                textStyle = TextStyles.HeadingMdExtraBold(),
+                colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
+                textStyle = TextStyles.headingMdExtraBold(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(
                     onDone = { titleFocusRequest.freeFocus() }
@@ -134,7 +134,7 @@ fun EditJournalingContent(
                 placeholder = {
                     Text(
                         text = stringResource(Res.string.type_here_your_description),
-                        style = TextStyles.ParagraphLg(),
+                        style = TextStyles.paragraphLg(),
                         color = Colors.Brown100Alpha64
                     )
                 },
@@ -144,8 +144,8 @@ fun EditJournalingContent(
                     )
                 },
                 modifier = Modifier.fillMaxWidth().focusRequester(descriptionFocusRequest),
-                colors = ComponentColors.TextField.TextFieldDescriptionTransparentColors(),
-                textStyle = TextStyles.ParagraphLg(),
+                colors = ComponentColors.TextField.textFieldDescriptionTransparentColors(),
+                textStyle = TextStyles.paragraphLg(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(
                     onDone = { descriptionFocusRequest.freeFocus() }

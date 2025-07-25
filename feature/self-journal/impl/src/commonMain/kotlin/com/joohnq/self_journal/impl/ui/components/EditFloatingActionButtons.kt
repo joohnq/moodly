@@ -90,7 +90,7 @@ fun EditFloatingActionButtons(
                         )
                         if (isEditing) Text(
                             text = stringResource(Res.string.editing),
-                            style = TextStyles.TextMdBold(),
+                            style = TextStyles.textMdBold(),
                             color = Colors.White
                         )
                     }
@@ -130,7 +130,7 @@ fun EditFloatingActionButtons(
                         if (canSave)
                             Text(
                                 text = stringResource(Res.string.save),
-                                style = TextStyles.TextMdBold(),
+                                style = TextStyles.textMdBold(),
                                 color = Colors.White
                             )
                     }

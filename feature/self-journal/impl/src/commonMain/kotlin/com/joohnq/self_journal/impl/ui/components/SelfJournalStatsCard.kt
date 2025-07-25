@@ -29,7 +29,7 @@ fun SelfJournalStatsCard(
 ) {
     Card(
         modifier = modifier,
-        colors = ComponentColors.Card.MainCardColors(),
+        colors = ComponentColors.Card.mainCardColors(),
         shape = Dimens.Shape.Large
     ) {
         Row(
@@ -54,16 +54,15 @@ fun SelfJournalStatsCard(
             ) {
                 Text(
                     text = title,
-                    style = TextStyles.TextMdExtraBold(),
+                    style = TextStyles.textMdExtraBold(),
                     color = Colors.Brown80
                 )
                 Text(
                     text = description,
-                    style = TextStyles.TextSmSemiBold(),
+                    style = TextStyles.textSmSemiBold(),
                     color = Colors.Brown100Alpha64
                 )
             }
         }
     }
 }
-

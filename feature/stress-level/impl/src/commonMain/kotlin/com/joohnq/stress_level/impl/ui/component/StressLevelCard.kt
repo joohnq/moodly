@@ -60,14 +60,14 @@ fun StressLevelHistoryCard(
             ) {
                 Text(
                     text = stringResource(record.stressLevel.subtitle),
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.Brown80
                 )
                 Text(
                     text = if (record.stressors.isNotEmpty()) record.stressors.joinToString(", ") else stringResource(
                         StressorResource.InPeace.text
                     ),
-                    style = TextStyles.TextSmMedium(),
+                    style = TextStyles.textSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -79,7 +79,7 @@ fun StressLevelHistoryCard(
             ) {
                 Text(
                     text = record.createdAt.toMonthAbbreviatedAndDayString(),
-                    style = TextStyles.TextSmRegular(),
+                    style = TextStyles.textSmRegular(),
                     color = Colors.Gray60
                 )
                 Icon(

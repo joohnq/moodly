@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.component
+package com.joohnq.shared_resources.components.slider
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,7 +15,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun SleepQualityThumb() {
+fun AppVerticalSliderThump() {
     Box(
         modifier = Modifier
             .size(64.dp)

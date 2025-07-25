@@ -21,7 +21,7 @@ fun MoodMonthHeader() {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                 Text(
                     text = stringResource(day),
-                    style = TextStyles.TextSmBold(),
+                    style = TextStyles.textSmBold(),
                     color = Colors.Gray80
                 )
             }

@@ -42,7 +42,7 @@ fun OnboardingStressLevelContent(
     ) {
         Text(
             text = stringResource(state.stressLevel.value),
-            style = TextStyles.DisplayLgExtraBold(),
+            style = TextStyles.displayLgExtraBold(),
             color = Colors.Brown80
         )
         VerticalSpacer(16.dp)
@@ -56,7 +56,7 @@ fun OnboardingStressLevelContent(
                     text = option.value,
                     selected = state.stressLevel == option,
                     shape = Dimens.Shape.Circle,
-                    colors = ComponentColors.RadioButton.StressLevelRadioButtonColors(),
+                    colors = ComponentColors.RadioButton.stressLevelRadioButtonColors(),
                     onClick = { onAction(OnboardingIntent.UpdateStressLevel(option)) }
                 )
             }
@@ -64,7 +64,7 @@ fun OnboardingStressLevelContent(
         VerticalSpacer(16.dp)
         Text(
             text = stringResource(state.stressLevel.text),
-            style = TextStyles.TextLgBold(),
+            style = TextStyles.textLgBold(),
             color = Colors.Brown80
         )
     }

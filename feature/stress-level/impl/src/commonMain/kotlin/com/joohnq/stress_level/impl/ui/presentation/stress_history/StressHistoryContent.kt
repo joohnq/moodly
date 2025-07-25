@@ -52,7 +52,7 @@ fun StressHistoryContent(
                     VerticalSpacer(20.dp)
                     Text(
                         text = stringResource(Res.string.all_history),
-                        style = TextStyles.TextLgBold(),
+                        style = TextStyles.textLgBold(),
                         color = Colors.Gray80
                     )
                     VerticalSpacer(20.dp)
@@ -68,7 +68,7 @@ fun StressHistoryContent(
                             title = { date ->
                                 Text(
                                     text = date.toFormattedDateString(),
-                                    style = TextStyles.TextMdBold(),
+                                    style = TextStyles.textMdBold(),
                                     color = Colors.Gray80
                                 )
                             },

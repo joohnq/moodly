@@ -86,12 +86,12 @@ fun SleepInsightCard(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(Res.string.nights, records.toMonthRecordsCount()),
-                        style = TextStyles.HeadingXsBold(),
+                        style = TextStyles.headingXsBold(),
                         color = Colors.Gray80
                     )
                     Text(
                         text = stringResource(Res.string.logged_this_month),
-                        style = TextStyles.TextMdRegular(),
+                        style = TextStyles.textMdRegular(),
                         color = Colors.Gray60
                     )
                 }
@@ -108,7 +108,7 @@ fun SleepInsightCard(
             )
             Text(
                 text = stringResource(Res.string.be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result),
-                style = TextStyles.ParagraphSm(),
+                style = TextStyles.paragraphSm(),
                 color = Colors.Gray60
             )
         }

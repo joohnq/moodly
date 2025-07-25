@@ -24,7 +24,7 @@ fun SelfJournalHistoryScreen(
                 event.id
             )
 
-            SelfJournalHistoryContract.Event.OnDelete -> selfJournalViewModel.onAction(
+            SelfJournalHistoryContract.Event.OnDelete -> selfJournalViewModel.onIntent(
                 SelfJournalContract.Intent.Delete(
                     historyState.currentDeleteId
                 )
@@ -33,7 +33,7 @@ fun SelfJournalHistoryScreen(
 
     SelfJournalHistoryContent(
         state = historyState,
-        onAction = historyViewModel::onAction,
+        onAction = historyViewModel::onIntent,
         records = selfJournalState.records,
         onEvent = ::onEvent,
     )

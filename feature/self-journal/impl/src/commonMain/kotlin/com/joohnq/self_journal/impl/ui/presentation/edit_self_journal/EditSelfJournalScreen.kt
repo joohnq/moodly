@@ -36,7 +36,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
         when (event) {
             EditSelfJournalContract.Event.OnGoBack -> onGoBack()
             EditSelfJournalContract.Event.OnSave ->
-                selfJournalViewModel.onAction(
+                selfJournalViewModel.onIntent(
                     SelfJournalContract.Intent.Update(
                         state.editingSelfJournalRecord
                     )
@@ -46,7 +46,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     LaunchedEffect(selfJournalState.records) {
         selfJournalState.records.onSuccess { selfJournals ->
             val item = selfJournals.find { it.id == id } ?: return@onSuccess
-            editSelfJournalViewModel.onAction(
+            editSelfJournalViewModel.onIntent(
                 EditSelfJournalContract.Intent.Set(item.toDomain())
             )
         }
@@ -60,13 +60,13 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
                 }
 
                 SelfJournalContract.SideEffect.Updated -> {
-                    editSelfJournalViewModel.onAction(EditSelfJournalContract.Intent.ClearEditingState)
-                    editSelfJournalViewModel.onAction(
+                    editSelfJournalViewModel.onIntent(EditSelfJournalContract.Intent.ClearEditingState)
+                    editSelfJournalViewModel.onIntent(
                         EditSelfJournalContract.Intent.UpdateIsEditing(
                             false
                         )
                     )
-                    selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
+                    selfJournalViewModel.onIntent(SelfJournalContract.Intent.GetAll)
                 }
 
                 is SelfJournalContract.SideEffect.ShowError -> onError(effect.error)
@@ -77,7 +77,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
 
     DisposableEffect(Unit) {
         onDispose {
-            editSelfJournalViewModel.onAction(EditSelfJournalContract.Intent.ResetState)
+            editSelfJournalViewModel.onIntent(EditSelfJournalContract.Intent.ResetState)
         }
     }
 
@@ -85,8 +85,8 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
         snackBarState = snackBarState,
         state = state,
         canSave = canSave,
-        onAction = editSelfJournalViewModel::onAction,
+        onAction = editSelfJournalViewModel::onIntent,
         onEvent = ::onEvent,
-        onSelfJournalAction = selfJournalViewModel::onAction
+        onSelfJournalAction = selfJournalViewModel::onIntent
     )
 }

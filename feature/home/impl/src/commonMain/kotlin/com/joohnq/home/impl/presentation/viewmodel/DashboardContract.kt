@@ -7,9 +7,12 @@ import com.joohnq.navigation.Destination
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
 sealed interface DashboardContract {
+    interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
         data object Get : Intent
     }

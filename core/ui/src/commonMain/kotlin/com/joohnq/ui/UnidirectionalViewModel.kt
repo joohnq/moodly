@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface UnidirectionalViewModel<STATE, INTENT, EFFECT> {
     val state: StateFlow<STATE>
-    val effect: SharedFlow<EFFECT>
+    val sideEffect: SharedFlow<EFFECT>
     fun onIntent(intent: INTENT)
 }

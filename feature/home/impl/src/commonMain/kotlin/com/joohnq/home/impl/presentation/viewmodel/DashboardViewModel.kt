@@ -10,9 +10,8 @@ import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalCont
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.ui.mapper.anyError
 import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.user.impl.ui.viewmodel.UserIntent
@@ -47,7 +46,7 @@ class DashboardViewModel(
             DashboardContract.Intent.Get -> {
                 moodViewModel.onAction(MoodContract.Intent.GetAll)
                 userViewModel.onAction(UserIntent.GetUser)
-                stressLevelViewModel.onAction(StressLevelIntent.GetAll)
+                stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 sleepQualityViewModel.onAction(SleepQualityContract.Intent.GetAll)
                 selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
             }
@@ -68,7 +67,7 @@ class DashboardViewModel(
             val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalContract.State
             val sleepState = states[4] as SleepQualityContract.State
-            val stressState = states[5] as StressLevelState
+            val stressState = states[5] as StressLevelContract.State
 
             statsState.records.onSuccess { records ->
                 freudScoreViewModel.onAction(

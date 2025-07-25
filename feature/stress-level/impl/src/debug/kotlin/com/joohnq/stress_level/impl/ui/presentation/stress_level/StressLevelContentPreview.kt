@@ -2,7 +2,6 @@ package com.joohnq.stress_level.impl.ui.presentation.stress_level
 
 import androidx.compose.runtime.Composable
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
 import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -10,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressLevelContentPreview() {
     StressLevelContent(
-        state = StressLevelState(
+        state = StressLevelContract.State(
             records = UiState.Success(
                 StressLevelRecordResource.allStressLevelRecordResourcePreview
             )
@@ -22,7 +21,7 @@ fun StressLevelContentPreview() {
 @Composable
 fun StressLevelContentEmptyPreview() {
     StressLevelContent(
-        state = StressLevelState(
+        state = StressLevelContract.State(
             records = UiState.Success(
                 listOf()
             )

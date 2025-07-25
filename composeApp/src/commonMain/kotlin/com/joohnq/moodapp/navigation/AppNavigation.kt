@@ -21,7 +21,7 @@ import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQ
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelScreen
-import com.joohnq.stress_level.impl.ui.presentation.stress_history.StressHistoryScreen
+import com.joohnq.stress_level.impl.ui.presentation.stress_level_history.StressLevelHistoryScreen
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.StressStressorsScreen
 
@@ -156,7 +156,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.StressHistory> {
-            StressHistoryScreen(
+            StressLevelHistoryScreen(
                 onNavigateStressLevel = {
                     onNavigate(Destination.App.StressLevel)
                 },

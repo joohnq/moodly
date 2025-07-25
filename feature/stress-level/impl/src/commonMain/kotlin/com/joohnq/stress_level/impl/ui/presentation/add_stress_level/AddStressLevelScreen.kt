@@ -8,12 +8,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.api.entity.StressLevel
 import com.joohnq.stress_level.api.entity.StressLevelRecord
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.event.AddStressLevelEvent
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelSideEffect
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -31,17 +28,17 @@ fun AddStressLevelScreen(
     fun onError(error: String) =
         scope.launch { snackBarState.showSnackbar(error) }
 
-    fun onEvent(event: AddStressLevelEvent) {
+    fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {
-            AddStressLevelEvent.GoBack -> onGoBack()
-            AddStressLevelEvent.Continue -> {
+            AddStressLevelContract.Event.GoBack -> onGoBack()
+            AddStressLevelContract.Event.Continue -> {
                 if (state.record.stressLevel != StressLevelResource.One) {
                     onNavigateToStressStressors()
                     return
                 }
 
-                stressLevelViewModel.onAction(
-                    StressLevelIntent.Add(
+                stressLevelViewModel.onIntent(
+                    StressLevelContract.Intent.Add(
                         StressLevelRecord(
                             stressLevel = StressLevel.One,
                         )
@@ -49,19 +46,19 @@ fun AddStressLevelScreen(
                 )
             }
 
-            AddStressLevelEvent.PopUpToStressLevelLevel -> onGoBack()
+            AddStressLevelContract.Event.PopUpToStressLevelLevel -> onGoBack()
         }
     }
 
     LaunchedEffect(stressLevelViewModel) {
         stressLevelViewModel.sideEffect.collect { event ->
             when (event) {
-                is StressLevelSideEffect.StressLevelAdded -> {
-                    onEvent(AddStressLevelEvent.PopUpToStressLevelLevel)
-                    stressLevelViewModel.onAction(StressLevelIntent.GetAll)
+                is StressLevelContract.SideEffect.StressLevelAdded -> {
+                    onEvent(AddStressLevelContract.Event.PopUpToStressLevelLevel)
+                    stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 }
 
-                is StressLevelSideEffect.ShowError -> onError(event.error)
+                is StressLevelContract.SideEffect.ShowError -> onError(event.error)
                 else -> Unit
             }
         }

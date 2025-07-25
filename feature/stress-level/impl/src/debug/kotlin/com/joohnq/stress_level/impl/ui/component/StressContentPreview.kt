@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun StressContentPreview() {
-    StressContent(
+    StressLevelBody(
         records = StressLevelRecordResource.allStressLevelRecordResourcePreview,
     )
 }

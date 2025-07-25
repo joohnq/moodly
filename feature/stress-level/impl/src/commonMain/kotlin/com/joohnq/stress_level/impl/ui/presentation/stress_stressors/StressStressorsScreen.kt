@@ -8,12 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.stress_level.impl.ui.mapper.toDomain
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelSideEffect
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -36,8 +35,8 @@ fun StressStressorsScreen(
         when (event) {
             is StressStressorsEvent.GoBack -> onGoBack()
             is StressStressorsEvent.Continue -> {
-                stressLevelViewModel.onAction(
-                    StressLevelIntent.Add(
+                stressLevelViewModel.onIntent(
+                    StressLevelContract.Intent.Add(
                         state.record.toDomain()
                     )
                 )
@@ -47,12 +46,12 @@ fun StressStressorsScreen(
     LaunchedEffect(stressLevelViewModel) {
         stressLevelViewModel.sideEffect.collect { event ->
             when (event) {
-                is StressLevelSideEffect.StressLevelAdded -> {
+                is StressLevelContract.SideEffect.StressLevelAdded -> {
                     onNavigateToStressLevel()
-                    stressLevelViewModel.onAction(StressLevelIntent.GetAll)
+                    stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 }
 
-                is StressLevelSideEffect.ShowError -> onError(event.error)
+                is StressLevelContract.SideEffect.ShowError -> onError(event.error)
                 else -> Unit
             }
         }
@@ -60,7 +59,7 @@ fun StressStressorsScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addStressLevelViewModel.onAction(AddStressLevelIntent.ResetState)
+            addStressLevelViewModel.onAction(AddStressLevelContract.Intent.ResetState)
         }
     }
 

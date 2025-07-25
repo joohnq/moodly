@@ -24,7 +24,7 @@ fun OnboardingSleepQualityScreen(
     OnboardingSleepQualityContent(
         state = onboardingState.sleepQuality,
         sliderValue = onboardingState.sliderValue,
-        onAction = onboardingViewModel::onAction,
+        onAction = onboardingViewModel::onIntent,
         onEvent = ::onEvent
     )
 }

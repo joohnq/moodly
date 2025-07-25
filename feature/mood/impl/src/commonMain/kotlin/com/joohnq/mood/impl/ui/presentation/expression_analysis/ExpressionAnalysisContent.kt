@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
@@ -21,7 +20,8 @@ import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -51,13 +51,13 @@ fun ExpressionAnalysisContent(
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
-                style = TextStyles.HeadingSmExtraBold(),
+                style = TextStyles.headingSmExtraBold(),
                 color = Colors.Brown80
             )
             VerticalSpacer(24.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_desc),
-                style = TextStyles.ParagraphMd(),
+                style = TextStyles.paragraphMd(),
                 color = Colors.Brown100Alpha64,
                 textAlign = TextAlign.Center
             )
@@ -71,8 +71,9 @@ fun ExpressionAnalysisContent(
                 }
             )
             VerticalSpacer(24.dp)
-            ContinueButton(
-                modifier = Modifier.fillMaxWidth().testTag("CONTINUE_BUTTON"),
+            PrimaryButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = Res.string.continue_word,
                 enabled = description.isNotEmpty(),
                 onClick = { onEvent(ExpressionAnalysisEvent.OnAdd) }
             )

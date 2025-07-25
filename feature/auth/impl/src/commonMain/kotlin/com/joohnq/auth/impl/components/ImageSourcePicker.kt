@@ -49,7 +49,7 @@ fun ImageSourcePicker(
         ) {
             Text(
                 text = stringResource(Res.string.select_an_image_source),
-                style = TextStyles.TextXlExtraBold(),
+                style = TextStyles.textXlExtraBold(),
                 color = Colors.Brown80
             )
             VerticalSpacer(20.dp)
@@ -67,7 +67,7 @@ fun ImageSourcePicker(
                         modifier = Modifier.size(32.dp),
                         contentDescription = Res.string.camera
                     ),
-                    colors = ComponentColors.Button.MainButtonColors(),
+                    colors = ComponentColors.Button.mainButtonColors(),
                     shape = Dimens.Shape.Circle,
                     onClick = { onCameraRequest() }
                 )
@@ -80,7 +80,7 @@ fun ImageSourcePicker(
                         modifier = Modifier.size(32.dp),
                         contentDescription = Res.string.gallery
                     ),
-                    colors = ComponentColors.Button.MainButtonColors(),
+                    colors = ComponentColors.Button.mainButtonColors(),
                     shape = Dimens.Shape.Circle,
                     onClick = { onGalleryRequest() }
                 )

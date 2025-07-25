@@ -46,20 +46,20 @@ fun StressPanel(
             VerticalSpacer(24.dp)
         Text(
             text = if (hasToday) record.stressLevel.level.toString() else stringResource(Res.string.not_available),
-            style = if (hasToday) TextStyles.DisplaySmExtraBold() else TextStyles.Text2xlBold(),
+            style = if (hasToday) TextStyles.displaySmExtraBold() else TextStyles.text2xlBold(),
             color = textColor
         )
         if (!hasToday)
             VerticalSpacer(10.dp)
         Text(
             text = stringResource(Res.string.current_stress_level),
-            style = TextStyles.TextLgMedium(),
+            style = TextStyles.textLgMedium(),
             color = textColor
         )
         if (hasToday)
             Text(
                 text = stringResource(record.stressLevel.text),
-                style = TextStyles.TextMdRegular(),
+                style = TextStyles.textMdRegular(),
                 color = record.stressLevel.palette.backgroundColor
             )
     }

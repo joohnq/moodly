@@ -24,10 +24,11 @@ import com.joohnq.auth.impl.components.AvatarImagesHorizontalPager
 import com.joohnq.auth.impl.presentation.avatar.event.AvatarEvent
 import com.joohnq.auth.impl.presentation.avatar.viewmodel.AvatarState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.modifier.drawDottedBorder
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.or_upload_your_profile
 import com.joohnq.shared_resources.profile
 import com.joohnq.shared_resources.remember.rememberAvatars
@@ -93,13 +94,13 @@ fun AvatarContent(
                 ) {
                     Text(
                         text = stringResource(Res.string.select_your_avatar),
-                        style = TextStyles.Text2xlExtraBold(),
+                        style = TextStyles.text2xlExtraBold(),
                         color = Colors.Brown80
                     )
                     VerticalSpacer(12.dp)
                     Text(
                         text = stringResource(Res.string.we_have_a_set_of_customizable),
-                        style = TextStyles.ParagraphMd(),
+                        style = TextStyles.paragraphMd(),
                         color = Colors.Brown100Alpha64,
                         textAlign = TextAlign.Center
                     )
@@ -136,13 +137,14 @@ fun AvatarContent(
                     VerticalSpacer(16.dp)
                     Text(
                         text = stringResource(Res.string.or_upload_your_profile),
-                        style = TextStyles.TextMdBold(),
+                        style = TextStyles.textMdBold(),
                         color = Colors.Brown100Alpha64
                     )
                 }
             }
-            ContinueButton(
+            PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                text = Res.string.continue_word,
                 onClick = { onEvent(AvatarEvent.OnContinue) }
             )
         }

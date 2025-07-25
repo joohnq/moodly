@@ -2,7 +2,7 @@ package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
-import com.joohnq.self_journal.impl.ui.parameter.BooleanParameterProvider
+import com.joohnq.shared_resources.components.parameter.BooleanParameterProvider
 import com.joohnq.self_journal.impl.ui.parameter.SelfJournalRecordParameterProvider
 import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
 import org.jetbrains.compose.ui.tooling.preview.Preview

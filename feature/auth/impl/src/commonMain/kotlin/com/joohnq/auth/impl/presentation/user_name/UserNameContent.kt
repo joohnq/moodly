@@ -1,7 +1,11 @@
 package com.joohnq.auth.impl.presentation.user_name
 
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -13,22 +17,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.auth.impl.presentation.user_name.event.UserNameEvent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameIntent
 import com.joohnq.auth.impl.presentation.user_name.viewmodel.UserNameState
-import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.input_field.AppTextFieldWithPlaceholder
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.enter_your_name
 import com.joohnq.shared_resources.how_we_can_call_you
 import com.joohnq.shared_resources.name
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.shared_resources.theme.*
+import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -77,7 +86,7 @@ fun UserNameContent(
             ) {
                 Text(
                     text = stringResource(Res.string.how_we_can_call_you),
-                    style = TextStyles.HeadingSmExtraBold(),
+                    style = TextStyles.headingSmExtraBold(),
                     textAlign = TextAlign.Center,
                     color = Colors.Brown80
                 )
@@ -96,13 +105,14 @@ fun UserNameContent(
                             modifier = Modifier.size(Dimens.Icon)
                         )
                     },
-                    colors = ComponentColors.TextField.MainTextFieldColors(),
+                    colors = ComponentColors.TextField.mainTextFieldColors(),
                     onValueChange = { onGetAction(UserNameIntent.UpdateUserName(it)) },
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue)
-                    ContinueButton(
+                    PrimaryButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
+                        text = Res.string.continue_word,
                         onClick = { onEvent(UserNameEvent.Continue) }
                     )
             }

@@ -35,12 +35,12 @@ fun SleepPanelInfoInverted(
         Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(
                 text = stringResource(title),
-                style = TextStyles.TextSmMedium(),
+                style = TextStyles.textSmMedium(),
                 color = Colors.Gray60
             )
             Text(
                 text = value,
-                style = TextStyles.TextLgSemiBold(),
+                style = TextStyles.textLgSemiBold(),
                 color = Colors.Gray80
             )
         }

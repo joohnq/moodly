@@ -52,7 +52,7 @@ fun MoodBarStatistic(
             pagerState.animateScrollToPage(selectedIndex)
         }
     }
-    val textHeight = CalculateTextHeight(font = TextStyles.TextSmSemiBold())
+    val textHeight = CalculateTextHeight(font = TextStyles.textSmSemiBold())
     val resource = current.mood
 
     BoxWithConstraints(
@@ -125,7 +125,7 @@ fun MoodBarStatistic(
                     }
                     Text(
                         text = record.createdAt.date.toShortDateString(),
-                        style = TextStyles.TextSmSemiBold(),
+                        style = TextStyles.textSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier
                     )

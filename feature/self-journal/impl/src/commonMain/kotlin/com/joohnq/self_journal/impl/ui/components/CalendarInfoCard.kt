@@ -37,7 +37,7 @@ fun CalendarInfoCard(info: CalendarInfo) {
         )
         Text(
             text = stringResource(info.text),
-            style = TextStyles.TextXsMedium(),
+            style = TextStyles.textXsMedium(),
             color = Colors.Gray60
         )
     }

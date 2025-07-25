@@ -34,12 +34,12 @@ fun AppTextFieldWithPlaceholder(
     label: StringResource,
     placeholder: StringResource,
     text: String,
-    errorText: String?,
+    errorText: String? = null,
     colors: TextFieldColors,
+    focusedBorderColor: Color,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    focusedBorderColor: Color,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String) -> Unit = {},
 ) {
     val isError = errorText != null
     val focusRequester = FocusRequester()
@@ -53,7 +53,7 @@ fun AppTextFieldWithPlaceholder(
     Column {
         Text(
             text = stringResource(label),
-            style = TextStyles.TextSmExtraBold(),
+            style = TextStyles.textSmExtraBold(),
             color = Colors.Brown80
         )
         VerticalSpacer(5.dp)

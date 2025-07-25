@@ -17,7 +17,7 @@ import org.jetbrains.compose.resources.stringResource
 fun IconContinueButton(
     modifier: Modifier = Modifier,
     colors: IconButtonColors,
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
 ) {
     FilledIconButton(
         modifier = modifier,

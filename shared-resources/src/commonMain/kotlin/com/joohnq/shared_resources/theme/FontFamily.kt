@@ -19,38 +19,38 @@ import org.jetbrains.compose.resources.Font
 object FontFamily {
     object Urbanist {
         @Composable
-        fun Black() =
+        fun black() =
             FontFamily(
                 Font(Res.font.urbanist_black, FontWeight.Black, FontStyle.Normal)
             )
 
         @Composable
-        fun ExtraBold() =
+        fun extraBold() =
             FontFamily(Font(Res.font.urbanist_extra_bold, FontWeight.ExtraBold, FontStyle.Normal))
 
         @Composable
-        fun Bold() = FontFamily(Font(Res.font.urbanist_bold, FontWeight.Bold, FontStyle.Normal))
+        fun bold() = FontFamily(Font(Res.font.urbanist_bold, FontWeight.Bold, FontStyle.Normal))
 
         @Composable
-        fun SemiBold() =
+        fun semiBold() =
             FontFamily(Font(Res.font.urbanist_semi_bold, FontWeight.SemiBold, FontStyle.Normal))
 
         @Composable
-        fun Medium() =
+        fun medium() =
             FontFamily(Font(Res.font.urbanist_medium, FontWeight.Medium, FontStyle.Normal))
 
         @Composable
-        fun Regular() =
+        fun regular() =
             FontFamily(Font(Res.font.urbanist_regular, FontWeight.Normal, FontStyle.Normal))
 
         @Composable
-        fun Light() = FontFamily(Font(Res.font.urbanist_light, FontWeight.Light, FontStyle.Normal))
+        fun light() = FontFamily(Font(Res.font.urbanist_light, FontWeight.Light, FontStyle.Normal))
 
         @Composable
-        fun ExtraLight() =
+        fun extraLight() =
             FontFamily(Font(Res.font.urbanist_extra_light, FontWeight.ExtraLight, FontStyle.Normal))
 
         @Composable
-        fun Thin() = FontFamily(Font(Res.font.urbanist_thin, FontWeight.Thin, FontStyle.Normal))
+        fun thin() = FontFamily(Font(Res.font.urbanist_thin, FontWeight.Thin, FontStyle.Normal))
     }
 }

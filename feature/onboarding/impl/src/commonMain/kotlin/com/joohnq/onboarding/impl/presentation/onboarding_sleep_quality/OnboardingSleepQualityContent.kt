@@ -14,9 +14,9 @@ import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
 import com.joohnq.shared_resources.Res
-import com.joohnq.sleep_quality.impl.ui.component.SleepQualityThumb
-import com.joohnq.sleep_quality.impl.ui.component.SleepQualityTrack
-import com.joohnq.sleep_quality.impl.ui.component.SleepQualityVerticalSlider
+import com.joohnq.shared_resources.components.slider.AppVerticalSliderThump
+import com.joohnq.shared_resources.components.slider.AppVerticalSliderTrack
+import com.joohnq.shared_resources.components.slider.AppVerticalSlider
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
@@ -61,18 +61,18 @@ fun OnboardingSleepQualityContent(
                         Column {
                             Text(
                                 stringResource(sleepQualityOption.firstText),
-                                style = TextStyles.TextLgExtraBold()
+                                style = TextStyles.textLgExtraBold()
                                     .copy(color = color)
                             )
                             Text(
                                 stringResource(sleepQualityOption.secondText),
-                                style = TextStyles.LabelSm()
+                                style = TextStyles.labelSm()
                                     .copy(color = color)
                             )
                         }
                     }
                 }
-                SleepQualityVerticalSlider(
+                AppVerticalSlider(
                     modifier = Modifier.weight(1f),
                     sliderValue = sliderValue,
                     setSliderValue = {
@@ -83,9 +83,9 @@ fun OnboardingSleepQualityContent(
                             )
                         )
                     },
-                    thumb = { SleepQualityThumb() },
-                    track = { SleepQualityTrack(it) },
-                    sliderColors = ComponentColors.Slider.SleepQualitySliderColors()
+                    thumb = { AppVerticalSliderThump() },
+                    track = { AppVerticalSliderTrack(it) },
+                    sliderColors = ComponentColors.Slider.sleepQualitySliderColors()
                 )
                 Column(
                     modifier = Modifier.fillMaxHeight().weight(1f).paddingVerticalLarge(),

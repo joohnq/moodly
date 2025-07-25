@@ -24,16 +24,17 @@ import com.joohnq.api.mapper.toPaddedString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.time_picker.AppTimePicker
-import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
-import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
-import com.joohnq.shared_resources.components.radio_button.TextRadioButton
+import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.card.AppTimePickerCard
 import com.joohnq.shared_resources.components.dialog.AppTimePickerDialog
-import com.joohnq.shared_resources.components.text.Title
-import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.radio_button.TextRadioButton
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.Title
+import com.joohnq.shared_resources.components.time_picker.AppTimePicker
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.end_sleeping_time
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.new_sleep_quality
@@ -132,7 +133,7 @@ fun AddSleepQualityContent(
             VerticalSpacer(40.dp)
             Text(
                 text = stringResource(Res.string.new_sleep_quality),
-                style = TextStyles.HeadingSmExtraBold(),
+                style = TextStyles.headingSmExtraBold(),
                 color = Colors.Brown80,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.paddingHorizontalMedium()
@@ -203,7 +204,7 @@ fun AddSleepQualityContent(
                         selected = state.record.sleepInfluences.contains(
                             sleepInfluences
                         ),
-                        colors = ComponentColors.RadioButton.TextRadioButtonColors(),
+                        colors = ComponentColors.RadioButton.textRadioButtonColors(),
                         shape = Dimens.Shape.Circle,
                         onClick = {
                             onAddAction(
@@ -216,8 +217,9 @@ fun AddSleepQualityContent(
                 }
             }
             VerticalSpacer(48.dp)
-            ContinueButton(
+            PrimaryButton(
                 modifier = Modifier.paddingHorizontalMedium().fillMaxWidth(),
+                text = Res.string.continue_word,
                 onClick = { onEvent(AddSleepQualityEvent.OnAdd) }
             )
         }

@@ -2,8 +2,19 @@ package com.joohnq.shared_resources.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -13,6 +24,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.close
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.error
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -22,8 +34,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AppSnackBar(
-    padding: PaddingValues,
-    snackBarHostState: SnackbarHostState,
+    padding: PaddingValues = PaddingValues(0.dp),
+    snackBarHostState: SnackbarHostState = rememberSnackBarState(),
 ) {
     val scope = rememberCoroutineScope()
 

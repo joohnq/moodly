@@ -21,7 +21,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSma
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoodHistoryCard(
@@ -53,12 +52,12 @@ fun MoodHistoryCard(
             ) {
                 Text(
                     text = stringResource(record.mood.text),
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.Gray80
                 )
                 Text(
                     text = record.description,
-                    style = TextStyles.TextSmMedium(),
+                    style = TextStyles.textSmMedium(),
                     color = Colors.Gray60,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -66,7 +65,7 @@ fun MoodHistoryCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = record.createdAt.toMonthAbbreviatedDayAndHourFormatted(),
-                    style = TextStyles.TextSmMedium(),
+                    style = TextStyles.textSmMedium(),
                     color = Colors.Gray60
                 )
                 Icon(

@@ -20,13 +20,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
-import com.joohnq.shared_resources.components.button.ContinueButton
-import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
-import com.joohnq.shared_resources.components.SleepQualityThumb
-import com.joohnq.shared_resources.components.SleepQualityTrack
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.SleepQualityVerticalSlider
+import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
+import com.joohnq.shared_resources.components.slider.AppVerticalSlider
+import com.joohnq.shared_resources.components.slider.AppVerticalSliderThump
+import com.joohnq.shared_resources.components.slider.AppVerticalSliderTrack
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -65,7 +66,7 @@ fun AddStressLevelScreenContent(
                 VerticalSpacer(60.dp)
                 Text(
                     text = stringResource(Res.string.whats_your_stress_level_today),
-                    style = TextStyles.HeadingSmExtraBold(),
+                    style = TextStyles.headingSmExtraBold(),
                     color = Colors.Brown80,
                     textAlign = TextAlign.Center
                 )
@@ -75,33 +76,34 @@ fun AddStressLevelScreenContent(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.Bottom
                 ) {
-                    SleepQualityVerticalSlider(
+                    AppVerticalSlider(
                         modifier = Modifier.height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {
                             onAction(AddStressLevelIntent.UpdateAddingSliderValue(it))
                         },
-                        thumb = { SleepQualityThumb() },
-                        track = { SleepQualityTrack(it) },
-                        sliderColors = ComponentColors.Slider.SleepQualitySliderColors()
+                        thumb = { AppVerticalSliderThump() },
+                        track = { AppVerticalSliderTrack(it) },
+                        sliderColors = ComponentColors.Slider.sleepQualitySliderColors()
                     )
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
                             text = state.record.stressLevel.level.toString(),
-                            style = TextStyles.DisplayLgExtraBold(),
+                            style = TextStyles.displayLgExtraBold(),
                             color = Colors.Brown80
                         )
                         Text(
                             text = stringResource(state.record.stressLevel.text),
-                            style = TextStyles.TextXlBold(),
+                            style = TextStyles.textXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End
                         )
                     }
                 }
                 VerticalSpacer(24.dp)
-                ContinueButton(
+                PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
+                    text = Res.string.continue_word,
                     onClick = { onEvent(AddStressLevelEvent.Continue) }
                 )
             }

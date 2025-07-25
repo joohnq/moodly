@@ -52,13 +52,13 @@ fun SelfJournalPanelInfo(
         VerticalSpacer(8.dp)
         Text(
             text = value,
-            style = TextStyles.TextXlBold(),
+            style = TextStyles.textXlBold(),
             color = Colors.Gray80
         )
         VerticalSpacer(2.dp)
         Text(
             text = stringResource(title),
-            style = TextStyles.TextSmRegular(),
+            style = TextStyles.textSmRegular(),
             color = Colors.Gray60
         )
     }

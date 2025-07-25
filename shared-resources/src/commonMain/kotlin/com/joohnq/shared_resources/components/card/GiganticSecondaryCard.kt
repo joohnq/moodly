@@ -49,12 +49,12 @@ fun GiganticSecondaryCard(
                 Column {
                     Text(
                         text = title,
-                        style = TextStyles.HeadingXsBold(),
+                        style = TextStyles.headingXsBold(),
                         color = Colors.Gray80
                     )
                     Text(
                         text = subtitle,
-                        style = TextStyles.TextSmRegular(),
+                        style = TextStyles.textSmRegular(),
                         color = Colors.Gray60
                     )
                 }

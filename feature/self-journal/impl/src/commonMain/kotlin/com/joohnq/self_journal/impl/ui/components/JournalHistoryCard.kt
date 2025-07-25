@@ -62,13 +62,13 @@ fun JournalHistoryCard(
             ) {
                 Text(
                     text = record.title,
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.Gray80,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = record.description,
-                    style = TextStyles.TextSmMedium(),
+                    style = TextStyles.textSmMedium(),
                     color = Colors.Gray60,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2
@@ -90,7 +90,7 @@ fun JournalHistoryCard(
                         )
                         Text(
                             text = stringResource(record.mood.text),
-                            style = TextStyles.TextSmMedium(),
+                            style = TextStyles.textSmMedium(),
                             color = Colors.Gray60
                         )
                     }
@@ -109,7 +109,7 @@ fun JournalHistoryCard(
                                 Res.string.words,
                                 record.description.toWordCount()
                             ),
-                            style = TextStyles.TextSmMedium(),
+                            style = TextStyles.textSmMedium(),
                             color = Colors.Gray60
                         )
                     }
@@ -119,7 +119,7 @@ fun JournalHistoryCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = record.createdAt.toMonthAbbreviatedAndDayString(),
-                    style = TextStyles.TextSmRegular(),
+                    style = TextStyles.textSmRegular(),
                     color = Colors.Gray60,
                 )
                 Icon(

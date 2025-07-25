@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.component
+package com.joohnq.shared_resources.components.slider
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,13 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.progress
+import com.joohnq.shared_resources.components.modifier.progress
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SleepQualityTrack(
+fun AppVerticalSliderTrack(
     state: SliderState
 ) {
     Box(

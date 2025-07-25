@@ -11,15 +11,15 @@ import org.jetbrains.compose.resources.StringResource
 @Composable
 fun SecondaryButton(
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     text: StringResource,
-    onClick: () -> Unit,
+    enabled: Boolean = true,
+    onClick: () -> Unit = {},
 ) {
     TextOutlinedButton(
         modifier = modifier.height(56.dp),
         text = text,
         enabled = enabled,
-        colors = ComponentColors.Button.MainButtonColorsInverted(),
+        colors = ComponentColors.Button.mainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
         onClick = onClick
     )

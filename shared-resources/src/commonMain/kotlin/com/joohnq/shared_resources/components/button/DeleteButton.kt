@@ -15,7 +15,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun DeleteButton(onClick: () -> Unit) {
+fun DeleteButton(
+    onClick: () -> Unit = {}
+) {
     FilledIconButton(
         onClick = onClick,
         modifier = Modifier.size(40.dp),

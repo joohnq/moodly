@@ -29,7 +29,7 @@ fun MoodContentBody(
         )
         Text(
             text = record.description,
-            style = TextStyles.TextMdSemiBold(),
+            style = TextStyles.textMdSemiBold(),
             color = Colors.Brown80,
             modifier = modifier
         )

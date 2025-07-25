@@ -19,7 +19,7 @@ import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.A
 import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.viewmodel.AddSelfJournalState
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.*
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.MediumTitle
 import com.joohnq.shared_resources.components.input_field.AppOutlinedTextField
@@ -67,7 +67,7 @@ fun AddJournalingContent(
                     text = state.title,
                     placeholder = Res.string.enter_the_title,
                     errorText = state.titleError,
-                    colors = ComponentColors.TextField.MainTextFieldColors(),
+                    colors = ComponentColors.TextField.mainTextFieldColors(),
                     leadingIcon = {
                         Icon(
                             painter = painterResource(Drawables.Icons.Outlined.Document),
@@ -126,9 +126,9 @@ fun AddJournalingContent(
                 Modifier.fillMaxSize().paddingHorizontalMedium(),
             ) {
                 VerticalSpacer(24.dp)
-                ContinueButton(
+                PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = canContinue,
+                    text = Res.string.continue_word,
                     onClick = { onEvent(AddSelfJournalEvent.OnAdd) }
                 )
             }

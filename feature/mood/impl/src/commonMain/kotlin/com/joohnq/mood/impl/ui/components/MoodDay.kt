@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.theme.Colors
@@ -60,7 +59,7 @@ fun MoodDay(
         if (isInCurrentMonth)
             Text(
                 text = day.date.dayOfMonth.toString(),
-                style = TextStyles.TextXsMedium(),
+                style = TextStyles.textXsMedium(),
                 color = Colors.Gray60
             )
 

@@ -59,19 +59,19 @@ fun FreudScoreContent(
                 ) {
                     Text(
                         text = state.freudScore.score.toString(),
-                        style = TextStyles.HeadingXlBold(),
+                        style = TextStyles.headingXlBold(),
                         color = state.freudScore.palette.backgroundColor
                     )
                     Text(
                         text = stringResource(Res.string.out_of_100),
-                        style = TextStyles.TextSmRegular(),
+                        style = TextStyles.textSmRegular(),
                         color = Colors.Gray60
                     )
                 }
                 VerticalSpacer(24.dp)
                 Text(
                     text = stringResource(state.freudScore.subtitle),
-                    style = TextStyles.ParagraphLg(),
+                    style = TextStyles.paragraphLg(),
                     color = Colors.Gray80,
                     textAlign = TextAlign.Center
                 )

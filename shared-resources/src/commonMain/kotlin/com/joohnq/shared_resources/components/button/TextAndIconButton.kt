@@ -26,7 +26,7 @@ fun TextAndIconButton(
     icon: IconResource,
     colors: ButtonColors,
     shape: Shape,
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
 ) {
     Button(
         modifier = modifier.height(56.dp),
@@ -41,7 +41,7 @@ fun TextAndIconButton(
         ) {
             Text(
                 text = stringResource(text),
-                style = TextStyles.TextLgExtraBold(),
+                style = TextStyles.textLgExtraBold(),
             )
             HorizontalSpacer(12.dp)
             IconResource(icon.copy(tint = if (enabled) colors.contentColor else colors.disabledContentColor))

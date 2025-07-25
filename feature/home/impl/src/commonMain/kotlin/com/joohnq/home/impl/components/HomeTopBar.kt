@@ -50,7 +50,7 @@ fun HomeTopBar(
                 )
                 Text(
                     text = getNow().date.toFormattedDateString(),
-                    style = TextStyles.TextSmBold(),
+                    style = TextStyles.textSmBold(),
                     color = Colors.White
                 )
             }
@@ -78,7 +78,7 @@ fun HomeTopBar(
             }
             Text(
                 text = stringResource(Res.string.greeting, user.name),
-                style = TextStyles.HeadingSmExtraBold(),
+                style = TextStyles.headingSmExtraBold(),
                 color = Colors.White
             )
         }

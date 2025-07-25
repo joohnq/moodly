@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.security.impl.ui.presentation.security.event.SecurityEvent
 import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.button.ContinueButton
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.button.SecondaryButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -47,7 +47,7 @@ fun SecurityContent(
                 VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(Res.string.security_setup),
-                    style = TextStyles.TextXlExtraBold(),
+                    style = TextStyles.textXlExtraBold(),
                     color = Colors.Brown80,
                 )
                 VerticalSpacer(60.dp)
@@ -59,20 +59,21 @@ fun SecurityContent(
                 VerticalSpacer(60.dp)
                 Text(
                     text = stringResource(Res.string.security_setup),
-                    style = TextStyles.Text2xlExtraBold(),
+                    style = TextStyles.text2xlExtraBold(),
                     color = Colors.Brown80
                 )
                 VerticalSpacer(12.dp)
                 Text(
                     text = stringResource(Res.string.scan_with_your_device_security),
-                    style = TextStyles.ParagraphMd(),
+                    style = TextStyles.paragraphMd(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
                 )
             }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                ContinueButton(
+                PrimaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
+                    text = Res.string.continue_word,
                     onClick = { onEvent(SecurityEvent.OnContinue) }
                 )
                 SecondaryButton(

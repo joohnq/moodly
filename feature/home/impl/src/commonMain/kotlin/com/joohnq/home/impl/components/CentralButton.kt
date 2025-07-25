@@ -19,7 +19,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CentralButton(
@@ -48,7 +47,7 @@ fun CentralButton(
         }
         Text(
             text = item.title,
-            style = TextStyles.TextSmRegular(),
+            style = TextStyles.textSmRegular(),
             color = Colors.Gray60
         )
     }

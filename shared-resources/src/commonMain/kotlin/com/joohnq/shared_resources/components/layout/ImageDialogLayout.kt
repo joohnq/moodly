@@ -45,14 +45,14 @@ fun ImageDialogLayout(
         title = {
             Text(
                 text = stringResource(dialogTitle),
-                style = TextStyles.TextXlBold(),
+                style = TextStyles.textXlBold(),
                 color = Colors.Brown80
             )
         },
         text = {
             Text(
                 text = stringResource(dialogText),
-                style = TextStyles.TextMdSemiBold(),
+                style = TextStyles.textMdSemiBold(),
                 color = Colors.Brown80,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
@@ -63,12 +63,12 @@ fun ImageDialogLayout(
             TextButton(
                 onClick = onConfirmation,
                 shape = Dimens.Shape.ExtraSmall,
-                colors = ComponentColors.Button.DeleteButtonColors(),
+                colors = ComponentColors.Button.deleteButtonColors(),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
             ) {
                 Text(
                     text = stringResource(Res.string.confirm),
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.White,
                 )
             }
@@ -77,7 +77,7 @@ fun ImageDialogLayout(
             TextButton(onClick = onDismissRequest) {
                 Text(
                     text = stringResource(Res.string.cancel),
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.Brown80
                 )
             }

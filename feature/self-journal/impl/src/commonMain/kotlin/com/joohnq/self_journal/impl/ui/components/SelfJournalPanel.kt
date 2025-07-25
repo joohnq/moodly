@@ -45,13 +45,13 @@ fun SelfJournalPanel(
         )
         Text(
             text = count.toString(),
-            style = TextStyles.Heading2xlExtraBold(),
+            style = TextStyles.heading2xlExtraBold(),
             color = Colors.White
         )
         VerticalSpacer(10.dp)
         Text(
             text = stringResource(Res.string.total_journals),
-            style = TextStyles.TextXlSemiBold(),
+            style = TextStyles.textXlSemiBold(),
             color = Colors.White
         )
         VerticalSpacer(20.dp)

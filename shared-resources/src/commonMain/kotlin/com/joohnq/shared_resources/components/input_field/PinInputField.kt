@@ -31,9 +31,9 @@ fun PinInputField(
     modifier: Modifier = Modifier,
     number: Int? = null,
     focusRequester: FocusRequester,
-    onFocusChanged: (Boolean) -> Unit,
-    onNumberChanged: (Int?) -> Unit,
-    onKeyboardBack: () -> Unit,
+    onFocusChanged: (Boolean) -> Unit = {},
+    onNumberChanged: (Int?) -> Unit = {},
+    onKeyboardBack: () -> Unit = {},
 ) {
     val text by remember(number) {
         mutableStateOf(
@@ -77,7 +77,7 @@ fun PinInputField(
             },
             singleLine = true,
             cursorBrush = SolidColor(Colors.Transparent),
-            textStyle = TextStyles.HeadingLgExtraBold()
+            textStyle = TextStyles.headingLgExtraBold()
                 .copy(color = textColor, textAlign = TextAlign.Center),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.NumberPassword
@@ -100,7 +100,7 @@ fun PinInputField(
                 if (!isFocused && number == null) {
                     Text(
                         text = "0",
-                        style = TextStyles.HeadingLgExtraBold()
+                        style = TextStyles.headingLgExtraBold()
                             .copy(color = Colors.Brown100Alpha64),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier.fillMaxSize().wrapContentSize()

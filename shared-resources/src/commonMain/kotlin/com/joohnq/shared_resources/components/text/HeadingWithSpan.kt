@@ -23,7 +23,7 @@ fun HeadingWithSpan(
         text = buildAnnotatedString {
             if (firstTitle != null) {
                 withStyle(
-                    style = TextStyles.HeadingSpanSmExtraBold()
+                    style = TextStyles.headingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
                     append(stringResource(firstTitle))
@@ -31,7 +31,7 @@ fun HeadingWithSpan(
                 append(" ")
             }
             withStyle(
-                style = TextStyles.HeadingSpanSmExtraBold()
+                style = TextStyles.headingSpanSmExtraBold()
                     .copy(color = spanColor)
             ) {
                 append(span)
@@ -39,7 +39,7 @@ fun HeadingWithSpan(
             if (secondTitle != null) {
                 append(" ")
                 withStyle(
-                    style = TextStyles.HeadingSpanSmExtraBold()
+                    style = TextStyles.headingSpanSmExtraBold()
                         .copy(color = Colors.Brown80)
                 ) {
                     append(stringResource(secondTitle))

@@ -95,13 +95,13 @@ fun StressTriggersSection(
                             stringResource(stressorsMap[0].first.text),
                             stringResource(stressorsMap[1].first.text)
                         ),
-                    style = TextStyles.TextXlBold(),
+                    style = TextStyles.textXlBold(),
                     color = Colors.Gray80
                 )
                 VerticalSpacer(8.dp)
                 Text(
                     text = stringResource(Res.string.you_are_stressed_because_you_are_to_preoccupied_with),
-                    style = TextStyles.ParagraphSm(),
+                    style = TextStyles.paragraphSm(),
                     color = Colors.Gray80,
                     textAlign = TextAlign.Center
                 )

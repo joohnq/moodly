@@ -66,7 +66,7 @@ fun WeekMoodIndicator(
                 }
                 Text(
                     text = day.date.dayOfWeek.name.first().toString(),
-                    style = TextStyles.Text2XsRegular(),
+                    style = TextStyles.text2XsRegular(),
                     color = Colors.Brown80
                 )
             }

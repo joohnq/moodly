@@ -31,7 +31,7 @@ fun EmptyView() {
         )
         Text(
             text = stringResource(Res.string.empty),
-            style = TextStyles.Text2xlExtraBold(),
+            style = TextStyles.text2xlExtraBold(),
             color = Colors.Brown80
         )
     }

@@ -76,7 +76,7 @@ fun WelcomeBase(
                 VerticalSpacer(24.dp)
                 IconContinueButton(
                     modifier = Modifier.size(60.dp),
-                    colors = ComponentColors.IconButton.ContinueButtonColors(),
+                    colors = ComponentColors.IconButton.mainButtonColors(),
                     onClick = onNext
                 )
             }

@@ -19,10 +19,11 @@ import com.joohnq.security.impl.ui.presentation.pin.event.PINEvent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
 import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.button.ContinueButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.enter_a_four_digit_pin
 import com.joohnq.shared_resources.pin_setup
 import com.joohnq.shared_resources.scan_with_your_device_security
@@ -67,13 +68,13 @@ fun PinContent(
                 VerticalSpacer(60.dp)
                 Text(
                     text = stringResource(Res.string.enter_a_four_digit_pin),
-                    style = TextStyles.Text2xlExtraBold(),
+                    style = TextStyles.text2xlExtraBold(),
                     color = Colors.Brown80
                 )
                 VerticalSpacer(12.dp)
                 Text(
                     text = stringResource(Res.string.scan_with_your_device_security),
-                    style = TextStyles.ParagraphMd(),
+                    style = TextStyles.paragraphMd(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
                 )
@@ -96,9 +97,9 @@ fun PinContent(
                     onFocusChanged = { i -> onAction(PINIntent.OnChangeFieldFocused(i)) },
                 )
             }
-            ContinueButton(
+            PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
-                enabled = canContinue,
+                text = Res.string.continue_word,
                 onClick = { onEvent(PINEvent.OnContinue) }
             )
         }

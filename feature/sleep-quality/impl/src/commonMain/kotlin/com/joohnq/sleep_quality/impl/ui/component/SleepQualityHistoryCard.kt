@@ -61,12 +61,12 @@ fun SleepQualityHistoryCard(
             ) {
                 Text(
                     text = record.createdAt.toAbbreviatedMonthName(),
-                    style = TextStyles.LabelSm(),
+                    style = TextStyles.labelSm(),
                     color = Colors.Brown40
                 )
                 Text(
                     text = record.createdAt.dayOfMonth.toString(),
-                    style = TextStyles.TextXlExtraBold(),
+                    style = TextStyles.textXlExtraBold(),
                     color = Colors.Brown80
                 )
             }
@@ -81,7 +81,7 @@ fun SleepQualityHistoryCard(
                 ) {
                     Text(
                         text = duration.toHoursAndMinutesString(),
-                        style = TextStyles.TextMdBold(),
+                        style = TextStyles.textMdBold(),
                         color = Colors.Brown80
                     )
                     Row(
@@ -98,7 +98,7 @@ fun SleepQualityHistoryCard(
                         )
                         Text(
                             text = stringResource(resource.text),
-                            style = TextStyles.TextSmBold(),
+                            style = TextStyles.textSmBold(),
                             color = Colors.White
                         )
                     }
@@ -109,7 +109,7 @@ fun SleepQualityHistoryCard(
                             record.sleepInfluences.joinToString(", ")
                         else
                             stringResource(Res.string.no_sleep_influences),
-                    style = TextStyles.TextSmMedium(),
+                    style = TextStyles.textSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis
                 )

@@ -54,7 +54,7 @@ fun AlertMessageDialog(
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     text = title,
-                    style = TextStyles.TextXlExtraBold(),
+                    style = TextStyles.textXlExtraBold(),
                     fontWeight = FontWeight.Medium,
                     color = Colors.Brown80,
                     textAlign = TextAlign.Center
@@ -63,7 +63,7 @@ fun AlertMessageDialog(
                 message?.let {
                     Text(
                         text = it,
-                        style = TextStyles.TextMdSemiBold(),
+                        style = TextStyles.textMdSemiBold(),
                         fontWeight = FontWeight.Medium,
                         color = Colors.Brown100Alpha64,
                         textAlign = TextAlign.Center

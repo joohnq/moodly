@@ -13,6 +13,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
 fun TextWithBackground(
+    modifier: Modifier = Modifier,
     text: String,
     borderColor: Color,
     backgroundColor: Color,
@@ -20,11 +21,11 @@ fun TextWithBackground(
 ) {
     Text(
         text = text.uppercase(),
-        modifier = Modifier
+        modifier = modifier
             .border(2.dp, color = borderColor, shape = Dimens.Shape.Circle)
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
             .padding(vertical = 9.dp, horizontal = 16.dp),
-        style = TextStyles.LabelSm().copy(color = textColor),
+        style = TextStyles.labelSm().copy(color = textColor),
     )
 }
 
@@ -40,6 +41,6 @@ fun TextWithBackground(
         modifier = modifier
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
             .padding(vertical = 9.dp, horizontal = 16.dp),
-        style = TextStyles.LabelSm().copy(color = textColor)
+        style = TextStyles.labelSm().copy(color = textColor)
     )
 }

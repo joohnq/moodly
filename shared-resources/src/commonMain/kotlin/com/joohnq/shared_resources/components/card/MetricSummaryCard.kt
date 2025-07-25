@@ -69,14 +69,14 @@ fun MetricSummaryCard(
                     )
                     Text(
                         text = title,
-                        style = TextStyles.TextMdSemiBold(),
+                        style = TextStyles.textMdSemiBold(),
                         color = if (dark) Colors.White else Colors.Gray80
                     )
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(Res.string.today),
-                        style = TextStyles.TextSmRegular(),
+                        style = TextStyles.textSmRegular(),
                         color = if (dark) Colors.White else Colors.Gray60
                     )
                     Icon(
@@ -99,19 +99,19 @@ fun MetricSummaryCard(
                     ) {
                         Text(
                             text = text,
-                            style = TextStyles.Text2xlBold(),
+                            style = TextStyles.text2xlBold(),
                             color = if (dark) Colors.White else Colors.Gray80
                         )
                         Text(
                             text = suffix,
-                            style = TextStyles.TextMdMedium(),
+                            style = TextStyles.textMdMedium(),
                             color = if (dark) Colors.White else Colors.Gray80
                         )
                     }
                     VerticalSpacer(10.dp)
                     Text(
                         text = description,
-                        style = TextStyles.TextSmRegular(),
+                        style = TextStyles.textSmRegular(),
                         color = if (dark) Colors.White else Colors.Gray60
                     )
                 }

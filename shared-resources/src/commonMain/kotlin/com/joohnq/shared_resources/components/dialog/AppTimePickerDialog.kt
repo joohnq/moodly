@@ -23,9 +23,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AppTimePickerDialog(
     title: StringResource,
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit,
-    content: @Composable () -> Unit,
+    onDismiss: () -> Unit = {},
+    onConfirm: () -> Unit = {},
+    content: @Composable () -> Unit = {},
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -53,7 +53,7 @@ fun AppTimePickerDialog(
                         .fillMaxWidth()
                         .padding(bottom = 20.dp),
                     text = stringResource(title),
-                    style = TextStyles.TextSmSemiBold().copy(color = Colors.Brown80)
+                    style = TextStyles.textSmSemiBold().copy(color = Colors.Brown80)
                 )
                 content()
                 Row(
@@ -64,13 +64,13 @@ fun AppTimePickerDialog(
                     TextButton(onClick = onDismiss) {
                         Text(
                             text = stringResource(Res.string.cancel),
-                            style = TextStyles.TextMdSemiBold().copy(color = Colors.Brown80)
+                            style = TextStyles.textMdSemiBold().copy(color = Colors.Brown80)
                         )
                     }
                     TextButton(onClick = onConfirm) {
                         Text(
                             text = stringResource(Res.string.ok),
-                            style = TextStyles.TextMdSemiBold().copy(color = Colors.Brown80)
+                            style = TextStyles.textMdSemiBold().copy(color = Colors.Brown80)
                         )
                     }
                 }

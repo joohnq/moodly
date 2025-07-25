@@ -54,7 +54,7 @@ fun NotFoundHorizontalLayout(
             ) {
                 Text(
                     text = stringResource(title),
-                    style = TextStyles.ParagraphSm(),
+                    style = TextStyles.paragraphSm(),
                     color = Colors.Gray60,
                 )
                 VerticalSpacer(10.dp)
@@ -65,7 +65,7 @@ fun NotFoundHorizontalLayout(
                 ) {
                     Text(
                         text = stringResource(subtitle),
-                        style = TextStyles.TextMdSemiBold(),
+                        style = TextStyles.textMdSemiBold(),
                         color = Colors.Brown60
                     )
                     Icon(
@@ -118,19 +118,19 @@ fun NotFoundHorizontalLayout(
             ) {
                 Text(
                     text = stringResource(title),
-                    style = TextStyles.TextMdBold(),
+                    style = TextStyles.textMdBold(),
                     color = Colors.Gray80
                 )
                 VerticalSpacer(10.dp)
                 Text(
                     text = stringResource(description),
-                    style = TextStyles.ParagraphSm(),
+                    style = TextStyles.paragraphSm(),
                     color = Colors.Gray60
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(text),
-                        style = TextStyles.TextSmSemiBold(),
+                        style = TextStyles.textSmSemiBold(),
                         color = Colors.Brown60
                     )
                     Icon(

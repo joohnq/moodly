@@ -48,7 +48,7 @@ fun MoodContentPanel(
             VerticalSpacer(24.dp)
         Text(
             text = if (hasToday) stringResource(Res.string.your_mood_is) else stringResource(Res.string.not_available),
-            style = TextStyles.TextXlBold(),
+            style = TextStyles.textXlBold(),
             color = textColor
         )
         if (!hasToday)
@@ -56,7 +56,7 @@ fun MoodContentPanel(
         if (hasToday) {
             Text(
                 text = stringResource(record.mood.text),
-                style = TextStyles.HeadingXlExtraBold(),
+                style = TextStyles.headingXlExtraBold(),
                 color = Colors.White
             )
             VerticalSpacer(10.dp)
@@ -72,7 +72,7 @@ fun MoodContentPanel(
                     Res.string.logged_today_at,
                     record.createdAt.toFormattedTimeString()
                 ),
-                style = TextStyles.TextXlMedium(),
+                style = TextStyles.textXlMedium(),
                 color = Colors.White
             )
         }
@@ -80,7 +80,7 @@ fun MoodContentPanel(
             VerticalSpacer(10.dp)
             Text(
                 text = stringResource(Res.string.current_mood),
-                style = TextStyles.TextLgMedium(),
+                style = TextStyles.textLgMedium(),
                 color = textColor
             )
         }

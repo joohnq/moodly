@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.component
+package com.joohnq.shared_resources.components.slider
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.Constraints
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun SleepQualityVerticalSlider(
+fun AppVerticalSlider(
     modifier: Modifier = Modifier,
     sliderValue: Float,
     thumb: @Composable () -> Unit,

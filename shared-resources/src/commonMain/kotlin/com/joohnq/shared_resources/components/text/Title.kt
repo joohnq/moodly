@@ -9,10 +9,13 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun Title(modifier: Modifier = Modifier, text: StringResource) {
+fun Title(
+    modifier: Modifier = Modifier,
+    text: StringResource,
+) {
     Text(
         text = stringResource(text),
-        style = TextStyles.TextLgExtraBold(),
+        style = TextStyles.textLgExtraBold(),
         color = Colors.Brown80,
         modifier = modifier
     )

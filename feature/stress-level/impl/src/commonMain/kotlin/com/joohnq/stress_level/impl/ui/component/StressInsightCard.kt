@@ -41,13 +41,13 @@ fun StressInsightCard(
             Column {
                 Text(
                     text = stressors.size.toString(),
-                    style = TextStyles.HeadingXsBold(),
+                    style = TextStyles.headingXsBold(),
                     color = Colors.Gray80
                 )
                 VerticalSpacer(5.dp)
                 Text(
                     text = stringResource(Res.string.active_stressors),
-                    style = TextStyles.TextMdRegular(),
+                    style = TextStyles.textMdRegular(),
                     color = Colors.Gray60
                 )
             }
@@ -69,7 +69,7 @@ fun StressInsightCard(
                         )
                         Text(
                             text = stringResource(stressor.text),
-                            style = TextStyles.TextSmMedium(),
+                            style = TextStyles.textSmMedium(),
                             color = Colors.Gray60
                         )
                     }
@@ -85,7 +85,7 @@ fun StressInsightCard(
                     Res.string.your_logged_as_your_most_active_stressors_for_this_month,
                     stringResource(mostActive.text)
                 ),
-                style = TextStyles.ParagraphSm(),
+                style = TextStyles.paragraphSm(),
                 color = Colors.Gray60
             )
         }

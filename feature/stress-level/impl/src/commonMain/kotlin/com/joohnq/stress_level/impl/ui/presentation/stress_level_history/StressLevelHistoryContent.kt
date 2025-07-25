@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_history
+package com.joohnq.stress_level.impl.ui.presentation.stress_level_history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,27 +13,25 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
-import com.joohnq.shared_resources.components.view.EmptyView
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.view.EmptyView
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.impl.ui.mapper.toGroupedByDate
-import com.joohnq.stress_level.impl.ui.presentation.stress_history.event.StressHistoryEvent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelIntent
-import com.joohnq.stress_level.impl.ui.viewmodel.StressLevelState
+import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.ui.mapper.foldComposable
 import com.joohnq.ui.mapper.items
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun StressHistoryContent(
-    state: StressLevelState,
-    onAction: (StressLevelIntent) -> Unit = {},
-    onEvent: (StressHistoryEvent) -> Unit = {},
+fun StressLevelHistoryContent(
+    state: StressLevelContract.State,
+    onAction: (StressLevelContract.Intent) -> Unit = {},
+    onEvent: (StressLevelHistoryContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -47,7 +45,7 @@ fun StressHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(StressHistoryEvent.OnGoBack) }
+                        onGoBack = { onEvent(StressLevelHistoryContract.Event.OnGoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(
@@ -76,7 +74,7 @@ fun StressHistoryContent(
                             SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
                                 onAction = {
-                                    onAction(StressLevelIntent.Delete(record.id))
+                                    onAction(StressLevelContract.Intent.Delete(record.id))
                                 }
                             ) { modifier ->
                                 StressLevelHistoryCard(

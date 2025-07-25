@@ -34,18 +34,15 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.whats_your_stress_level_today
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.event.AddStressLevelEvent
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddStressLevelScreenContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    state: AddingStressLevelState,
-    onAction: (AddStressLevelIntent) -> Unit = {},
-    onEvent: (AddStressLevelEvent) -> Unit = {},
+    state: AddStressLevelContract.State,
+    onAction: (AddStressLevelContract.Intent) -> Unit = {},
+    onEvent: (AddStressLevelContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
@@ -61,7 +58,7 @@ fun AddStressLevelScreenContent(
             ) {
                 AppTopBar(
                     text = Res.string.add_stress_level,
-                    onGoBack = { onEvent(AddStressLevelEvent.GoBack) }
+                    onGoBack = { onEvent(AddStressLevelContract.Event.GoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -80,7 +77,7 @@ fun AddStressLevelScreenContent(
                         modifier = Modifier.height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {
-                            onAction(AddStressLevelIntent.UpdateAddingSliderValue(it))
+                            onAction(AddStressLevelContract.Intent.UpdateAddingSliderValue(it))
                         },
                         thumb = { AppVerticalSliderThump() },
                         track = { AppVerticalSliderTrack(it) },
@@ -104,7 +101,7 @@ fun AddStressLevelScreenContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(AddStressLevelEvent.Continue) }
+                    onClick = { onEvent(AddStressLevelContract.Event.Continue) }
                 )
             }
         }

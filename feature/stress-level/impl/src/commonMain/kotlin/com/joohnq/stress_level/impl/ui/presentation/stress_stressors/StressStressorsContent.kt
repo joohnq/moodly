@@ -1,6 +1,11 @@
 package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -16,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_stress_level
-import com.joohnq.shared_resources.components.*
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -28,16 +33,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.mapper.getAllStressorResource
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddStressLevelIntent
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.viewmodel.AddingStressLevelState
+import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressStressorsContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    state: AddingStressLevelState,
-    onAddAction: (AddStressLevelIntent) -> Unit = {},
+    state: AddStressLevelContract.State,
+    onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
     onEvent: (StressStressorsEvent) -> Unit = {},
 ) {
     val stressors = remember { getAllStressorResource() }
@@ -77,7 +81,7 @@ fun StressStressorsContent(
                             text = stressor.text,
                             onClick = {
                                 onAddAction(
-                                    AddStressLevelIntent.UpdateAddingStressors(stressor)
+                                    AddStressLevelContract.Intent.UpdateAddingStressors(stressor)
                                 )
                             },
                             selected = state.record.stressors.contains(

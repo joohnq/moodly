@@ -1,19 +1,19 @@
-package com.joohnq.stress_level.impl.ui.viewmodel
+package com.joohnq.stress_level.impl.ui.presentation.stress_level
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.getValueOrEmpty
-import com.joohnq.ui.mapper.onFailure
-import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.ui.mapper.toResultResource
-import com.joohnq.ui.mapper.toUiState
 import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
 import com.joohnq.stress_level.impl.ui.mapper.toResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.ui.entity.UiState
+import com.joohnq.ui.mapper.getValueOrEmpty
+import com.joohnq.ui.mapper.onFailure
+import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.toResultResource
+import com.joohnq.ui.mapper.toUiState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,17 +27,17 @@ class StressLevelViewModel(
     private val getStressLevelsUseCase: GetStressLevelsUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(StressLevelState())
-    val state: StateFlow<StressLevelState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(StressLevelContract.State())
+    val state: StateFlow<StressLevelContract.State> = _state.asStateFlow()
 
-    private val _sideEffect = Channel<StressLevelSideEffect>(Channel.BUFFERED)
+    private val _sideEffect = Channel<StressLevelContract.SideEffect>(Channel.Factory.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(intent: StressLevelIntent) {
+    fun onIntent(intent: StressLevelContract.Intent) {
         when (intent) {
-            StressLevelIntent.GetAll -> getStressLevelRecords()
-            is StressLevelIntent.Add -> addStressLevelRecord(intent.record)
-            is StressLevelIntent.Delete -> delete(intent.id)
+            StressLevelContract.Intent.GetAll -> getStressLevelRecords()
+            is StressLevelContract.Intent.Add -> addStressLevelRecord(intent.record)
+            is StressLevelContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -45,7 +45,7 @@ class StressLevelViewModel(
         viewModelScope.launch {
             val res = deleteStressLevelUseCase(id).toUiState()
             res.onSuccess {
-                _sideEffect.trySend(StressLevelSideEffect.StressLevelDeleted)
+                _sideEffect.trySend(StressLevelContract.SideEffect.StressLevelDeleted)
                 changeRecordsStatus(
                     UiState.Success(
                         state.value.records.getValueOrEmpty()
@@ -53,7 +53,7 @@ class StressLevelViewModel(
                     )
                 )
             }.onFailure {
-                _sideEffect.trySend(StressLevelSideEffect.ShowError(it))
+                _sideEffect.trySend(StressLevelContract.SideEffect.ShowError(it))
             }
         }
     }
@@ -71,9 +71,9 @@ class StressLevelViewModel(
         viewModelScope.launch {
             val res = addStressLevelUseCase(stressLevelRecord).toUiState()
             res.onSuccess {
-                _sideEffect.trySend(StressLevelSideEffect.StressLevelAdded)
+                _sideEffect.trySend(StressLevelContract.SideEffect.StressLevelAdded)
             }.onFailure {
-                _sideEffect.trySend(StressLevelSideEffect.ShowError(it))
+                _sideEffect.trySend(StressLevelContract.SideEffect.ShowError(it))
             }
         }
 

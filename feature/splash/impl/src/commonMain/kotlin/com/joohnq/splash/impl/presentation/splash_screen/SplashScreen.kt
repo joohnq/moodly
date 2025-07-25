@@ -1,14 +1,18 @@
 package com.joohnq.splash.impl.presentation.splash_screen
 
-import androidx.compose.runtime.*
-import com.joohnq.ui.mapper.fold
-import com.joohnq.ui.sharedViewModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.joohnq.preferences.api.entity.AppPreferences
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
-import com.joohnq.security.impl.ui.viewmodel.SecurityIntent
-import com.joohnq.security.impl.ui.viewmodel.SecurityViewModel
+import com.joohnq.security.impl.ui.presentation.security.SecurityContract
+import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
+import com.joohnq.ui.mapper.fold
+import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.impl.ui.viewmodel.UserIntent
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 
@@ -31,7 +35,7 @@ fun SplashScreen(
     SideEffect {
         userViewModel.onAction(UserIntent.InitUser)
 
-        securityViewModel.onAction(SecurityIntent.GetSecurity)
+        securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
         preferencesViewModel.onAction(PreferencesContract.Intent.GetPreferences)
     }
 

@@ -3,7 +3,7 @@ package com.joohnq.security.impl.ui.presentation.unlock
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.focus.FocusRequester
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
+import com.joohnq.security.impl.ui.presentation.pin.PinContract
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
@@ -12,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun UnLockContentPreview() {
     UnLockContent(
         showBottomSheet = true,
-        pinState = PINState(
+        state = PinContract.State(
             code = listOf(1, 2, 3, 4),
             focusedIndex = 0
         ),

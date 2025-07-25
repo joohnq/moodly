@@ -7,11 +7,7 @@ import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityAuthentication
-import com.joohnq.security.impl.ui.presentation.security.event.SecurityEvent
 import com.joohnq.security.impl.ui.securityAuthentication
-import com.joohnq.security.impl.ui.viewmodel.SecurityIntent
-import com.joohnq.security.impl.ui.viewmodel.SecuritySideEffect
-import com.joohnq.security.impl.ui.viewmodel.SecurityViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
@@ -37,24 +33,24 @@ fun SecurityScreen(
     LaunchedEffect(securityViewModel.sideEffect) {
         securityViewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SecuritySideEffect.OnSecurityUpdated -> {
-                    securityViewModel.onAction(SecurityIntent.GetSecurity)
+                is SecurityContract.SideEffect.OnSecurityUpdated -> {
+                    securityViewModel.onAction(SecurityContract.Intent.GetSecurity)
                     onNavigateToSecurityConfirmed()
                 }
 
-                is SecuritySideEffect.ShowError -> onError(sideEffect.error)
+                is SecurityContract.SideEffect.ShowError -> onError(sideEffect.error)
             }
         }
     }
 
-    fun onEvent(event: SecurityEvent) {
+    fun onEvent(event: SecurityContract.Event) {
         when (event) {
-            SecurityEvent.OnContinue -> {
+            SecurityContract.Event.OnContinue -> {
                 if (securityAuthentication.isDeviceHasBiometric()) {
                     securityAuthentication.authenticateWithFace { isAuthorized ->
                         if (isAuthorized) {
                             securityViewModel.onAction(
-                                SecurityIntent.UpdateSecurity(
+                                SecurityContract.Intent.Update(
                                     Security.Biometric(true)
                                 )
                             )
@@ -63,14 +59,14 @@ fun SecurityScreen(
                 }
             }
 
-            SecurityEvent.OnSkip -> {
+            SecurityContract.Event.OnSkip -> {
                 preferencesViewModel.onAction(
                     PreferencesContract.Intent.UpdateSkipSecurity()
                 )
                 onNavigateToDashboard()
             }
 
-            SecurityEvent.OnSetPin -> onNavigatePIN()
+            SecurityContract.Event.OnSetPin -> onNavigatePIN()
         }
     }
 

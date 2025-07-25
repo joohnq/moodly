@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.security.impl.ui.presentation.security_confirmed.event.SecurityConfirmedEvent
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.DecoratedConvexPanel
@@ -29,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SecurityConfirmedContent(
-    onEvent: (SecurityConfirmedEvent) -> Unit = {},
+    onEvent: (SecurityConfirmedContract.Event) -> Unit = {},
 ) {
     DecoratedConvexPanel(
         panelBackgroundColor = Colors.Green20,
@@ -71,7 +70,7 @@ fun SecurityConfirmedContent(
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(SecurityConfirmedEvent.OnContinue) }
+                onClick = { onEvent(SecurityConfirmedContract.Event.OnContinue) }
             )
         }
     )

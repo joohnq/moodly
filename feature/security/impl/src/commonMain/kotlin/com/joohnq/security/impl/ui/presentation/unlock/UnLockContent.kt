@@ -26,14 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.security.impl.ui.components.PinCode
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINIntent
-import com.joohnq.security.impl.ui.presentation.pin.viewmodel.PINState
-import com.joohnq.security.impl.ui.presentation.unlock.event.UnLockEvent
+import com.joohnq.security.impl.ui.presentation.pin.PinContract
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
-import com.joohnq.shared_resources.components.view.ErrorView
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.view.ErrorView
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
@@ -52,18 +50,18 @@ fun UnLockContent(
     sheetState: SheetState = rememberModalBottomSheetState(),
     isError: Exception? = null,
     showBottomSheet: Boolean,
-    pinState: PINState,
+    state: PinContract.State,
     focusRequesters: List<FocusRequester> = emptyList(),
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
-    onAction: (PINIntent) -> Unit = {},
-    onEvent: (UnLockEvent) -> Unit = {},
+    onAction: (PinContract.Intent) -> Unit = {},
+    onEvent: (UnlockContract.Event) -> Unit = {},
 ) {
     if (showBottomSheet) {
         ModalBottomSheet(
             containerColor = Colors.Brown10,
             onDismissRequest = {
-                onEvent(UnLockEvent.UpdateShowBottomSheet(false))
+                onEvent(UnlockContract.Event.UpdateShowBottomSheet(false))
             },
             sheetState = sheetState
         ) {
@@ -80,21 +78,21 @@ fun UnLockContent(
                 )
                 VerticalSpacer(10.dp)
                 PinCode(
-                    code = pinState.code,
-                    focusedIndex = pinState.focusedIndex,
+                    code = state.code,
+                    focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
                         onAction(
-                            PINIntent.OnEnterNumber(
+                            PinContract.Intent.OnEnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onAction(PINIntent.OnKeyboardBack) },
+                    onKeyboardBack = { onAction(PinContract.Intent.OnKeyboardBack) },
                     focusRequesters = focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PINIntent.OnChangeFieldFocused(i)) },
+                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) },
                 )
                 isError?.let {
                     VerticalSpacer(15.dp)
@@ -144,7 +142,7 @@ fun UnLockContent(
                     PrimaryButton(
                         text = Res.string.use_device_password,
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = { onEvent(UnLockEvent.OnContinue) }
+                        onClick = { onEvent(UnlockContract.Event.OnContinue) }
                     )
                     VerticalSpacer(16.dp)
                     Text(

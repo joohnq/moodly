@@ -1,4 +1,4 @@
-package com.joohnq.security.impl.ui.viewmodel
+package com.joohnq.security.impl.ui.presentation.security
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,17 +19,17 @@ class SecurityViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val updateSecurityUseCase: UpdateSecurityUseCase,
 ) : ViewModel() {
-    private val _state: MutableStateFlow<SecurityState> =
-        MutableStateFlow(SecurityState())
-    val state: StateFlow<SecurityState> = _state
+    private val _state: MutableStateFlow<SecurityContract.State> =
+        MutableStateFlow(SecurityContract.State())
+    val state: StateFlow<SecurityContract.State> = _state
 
-    private val _sideEffect = Channel<SecuritySideEffect>(Channel.BUFFERED)
+    private val _sideEffect = Channel<SecurityContract.SideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
-    fun onAction(intent: SecurityIntent) {
+    fun onAction(intent: SecurityContract.Intent) {
         when (intent) {
-            is SecurityIntent.GetSecurity -> getSecurity()
-            is SecurityIntent.UpdateSecurity -> updateSecurity(intent.security)
+            is SecurityContract.Intent.GetSecurity -> getSecurity()
+            is SecurityContract.Intent.Update -> updateSecurity(intent.security)
         }
     }
 
@@ -41,9 +41,9 @@ class SecurityViewModel(
     private fun updateSecurity(security: Security) = viewModelScope.launch {
         val res = updateSecurityUseCase(security).toUiState()
         res.onSuccess {
-            _sideEffect.send(SecuritySideEffect.OnSecurityUpdated)
+            _sideEffect.send(SecurityContract.SideEffect.OnSecurityUpdated)
         }.onFailure {
-            _sideEffect.send(SecuritySideEffect.ShowError(it))
+            _sideEffect.send(SecurityContract.SideEffect.ShowError(it))
         }
 
     }

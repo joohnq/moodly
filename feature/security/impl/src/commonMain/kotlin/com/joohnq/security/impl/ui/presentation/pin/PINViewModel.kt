@@ -1,4 +1,4 @@
-package com.joohnq.security.impl.ui.presentation.pin.viewmodel
+package com.joohnq.security.impl.ui.presentation.pin
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class PINViewModel : ViewModel() {
-    private val _state: MutableStateFlow<PINState> =
-        MutableStateFlow(PINState())
-    val state: StateFlow<PINState> = _state
+    private val _state: MutableStateFlow<PinContract.State> =
+        MutableStateFlow(PinContract.State())
+    val state: StateFlow<PinContract.State> = _state
 
-    fun onAction(intent: PINIntent) {
+    fun onAction(intent: PinContract.Intent) {
         when (intent) {
-            is PINIntent.OnChangeFieldFocused -> {
+            is PinContract.Intent.OnChangeFieldFocused -> {
                 _state.update {
                     it.copy(
                         focusedIndex = intent.index
@@ -20,11 +20,11 @@ class PINViewModel : ViewModel() {
                 }
             }
 
-            is PINIntent.OnEnterNumber -> {
+            is PinContract.Intent.OnEnterNumber -> {
                 enterNumber(index = intent.index, number = intent.number)
             }
 
-            PINIntent.OnKeyboardBack -> {
+            PinContract.Intent.OnKeyboardBack -> {
                 val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
                 _state.update {
                     it.copy(

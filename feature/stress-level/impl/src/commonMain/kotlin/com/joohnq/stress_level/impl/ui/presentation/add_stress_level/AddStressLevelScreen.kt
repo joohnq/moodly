@@ -68,6 +68,6 @@ fun AddStressLevelScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onAction = addStressLevelViewModel::onAction
+        onAction = addStressLevelViewModel::onIntent
     )
 }

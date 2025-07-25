@@ -1,22 +1,19 @@
 package com.joohnq.stress_level.impl.ui.presentation.add_stress_level
 
-import androidx.lifecycle.ViewModel
 import com.joohnq.api.mapper.toggle
 import com.joohnq.stress_level.impl.ui.mapper.fromSliderValueToStressLevelResource
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.joohnq.ui.BaseViewModel
 
-class AddStressLevelViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddStressLevelContract.State())
-    val state: StateFlow<AddStressLevelContract.State> =
-        _state.asStateFlow()
+class AddStressLevelViewModel(
+    initialState: AddStressLevelContract.State = AddStressLevelContract.State(),
+) : BaseViewModel<AddStressLevelContract.State, AddStressLevelContract.Intent, AddStressLevelContract.SideEffect>(
+    initialState = initialState
+), AddStressLevelContract.ViewModel {
 
-    fun onAction(intent: AddStressLevelContract.Intent) {
+    override fun onIntent(intent: AddStressLevelContract.Intent) {
         when (intent) {
             is AddStressLevelContract.Intent.UpdateAddingStressors ->
-                _state.update {
+                updateState {
                     it.copy(
                         record =
                             it.record.copy(
@@ -26,7 +23,7 @@ class AddStressLevelViewModel : ViewModel() {
                 }
 
             is AddStressLevelContract.Intent.UpdateAddingSliderValue ->
-                _state.update {
+                updateState {
                     it.copy(
                         sliderValue = intent.sliderValue,
                         record = it.record.copy(
@@ -36,7 +33,7 @@ class AddStressLevelViewModel : ViewModel() {
                 }
 
             is AddStressLevelContract.Intent.ResetState ->
-                _state.update { AddStressLevelContract.State() }
+                updateState { AddStressLevelContract.State() }
         }
     }
 }

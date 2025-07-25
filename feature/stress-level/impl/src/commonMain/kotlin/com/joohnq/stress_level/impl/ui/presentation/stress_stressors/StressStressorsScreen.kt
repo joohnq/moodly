@@ -59,7 +59,7 @@ fun StressStressorsScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addStressLevelViewModel.onAction(AddStressLevelContract.Intent.ResetState)
+            addStressLevelViewModel.onIntent(AddStressLevelContract.Intent.ResetState)
         }
     }
 
@@ -67,6 +67,6 @@ fun StressStressorsScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onAddAction = addStressLevelViewModel::onAction,
+        onAddAction = addStressLevelViewModel::onIntent,
     )
 }

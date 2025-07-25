@@ -7,6 +7,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val stressLevelUiModule: Module = module {
-    singleOf(::StressLevelViewModel)
-    singleOf(::AddStressLevelViewModel)
+    single<StressLevelViewModel> {
+        StressLevelViewModel(
+            getStressLevelsUseCase = get(),
+            addStressLevelUseCase = get(),
+            deleteStressLevelUseCase = get(),
+        )
+    }
+    single<AddStressLevelViewModel> {
+        AddStressLevelViewModel()
+    }
 }

@@ -1,6 +1,8 @@
 package com.joohnq.onboarding.impl.presentation.onboarding_physical_symptoms
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -11,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.components.PhysicalSymptomsRadioButton
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.experiencing_physical_symptoms_title
@@ -26,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingPhysicalSymptomsContent(
     state: PhysicalSymptomsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options = remember { getAllPhysicalSymptomsResource() }
 
@@ -56,7 +58,7 @@ fun OnboardingPhysicalSymptomsContent(
                     selected = state == option,
                     onClick = {
                         onAction(
-                            OnboardingIntent.UpdateUserPhysicalSymptoms(option)
+                            OnboardingContract.Intent.UpdateUserPhysicalSymptoms(option)
                         )
                     }
                 )

@@ -1,6 +1,13 @@
 package com.joohnq.onboarding.impl.presentation.onboarding_sleep_quality
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,11 +19,11 @@ import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingIntent
+import com.joohnq.onboarding.impl.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.slider.AppVerticalSlider
 import com.joohnq.shared_resources.components.slider.AppVerticalSliderThump
 import com.joohnq.shared_resources.components.slider.AppVerticalSliderTrack
-import com.joohnq.shared_resources.components.slider.AppVerticalSlider
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
@@ -35,7 +42,7 @@ fun OnboardingSleepQualityContent(
     state: SleepQualityRecordResource,
     sliderValue: Float,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingIntent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val moods = remember { getAllMoodResource().reversed() }
     val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
@@ -76,9 +83,9 @@ fun OnboardingSleepQualityContent(
                     modifier = Modifier.weight(1f),
                     sliderValue = sliderValue,
                     setSliderValue = {
-                        onAction(OnboardingIntent.UpdateSliderValue(it))
+                        onAction(OnboardingContract.Intent.UpdateSliderValue(it))
                         onAction(
-                            OnboardingIntent.UpdateSleepQuality(
+                            OnboardingContract.Intent.UpdateSleepQuality(
                                 it.toSleepQualityResource()
                             )
                         )

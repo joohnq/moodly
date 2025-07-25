@@ -6,7 +6,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import com.joohnq.freud_score.impl.presentation.freud_score.FreudScoreScreen
 import com.joohnq.home.impl.presentation.dashboard.DashboardScreen
-import com.joohnq.home.impl.presentation.dashboard.event.DashboardEvent
+import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodScreen
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.ExpressionAnalysisScreen
 import com.joohnq.mood.impl.ui.presentation.mood.MoodScreen
@@ -35,55 +35,55 @@ fun NavGraphBuilder.appNavigation(
             DashboardScreen(
                 onEvent = { event ->
                     when (event) {
-                        DashboardEvent.OnNavigateToAddJournaling -> {
+                        DashboardContract.Event.OnNavigateToAddJournaling -> {
                             onNavigate(Destination.App.AddSelfJournal)
                         }
 
-                        DashboardEvent.OnNavigateToAddSleep -> {
+                        DashboardContract.Event.OnNavigateToAddSleep -> {
                             onNavigate(Destination.App.AddSleepQuality)
                         }
 
-                        DashboardEvent.OnNavigateToAddMood -> {
+                        DashboardContract.Event.OnNavigateToAddMood -> {
                             onNavigate(Destination.App.AddMood)
                         }
 
-                        DashboardEvent.OnNavigateToAddStress -> {
+                        DashboardContract.Event.OnNavigateToAddStress -> {
                             onNavigate(Destination.App.AddStressLevel)
                         }
 
-                        DashboardEvent.OnNavigateToSelfJournalHistory -> {
+                        DashboardContract.Event.OnNavigateToSelfJournalHistory -> {
                             onNavigate(Destination.App.SelfJournalHistory)
                         }
 
-                        is DashboardEvent.OnNavigateToEditJournaling -> {
+                        is DashboardContract.Event.OnNavigateToEditJournaling -> {
                             onNavigate(Destination.App.EditSelfJournal(event.id))
                         }
 
-                        DashboardEvent.OnNavigateToFreudScore -> {
+                        DashboardContract.Event.OnNavigateToFreudScore -> {
                             onNavigate(Destination.App.FreudScore)
                         }
 
-                        DashboardEvent.OnNavigateToSelfJournal -> {
+                        DashboardContract.Event.OnNavigateToSelfJournal -> {
                             onNavigate(Destination.App.SelfJournal)
                         }
 
-                        DashboardEvent.OnNavigateToMood -> {
+                        DashboardContract.Event.OnNavigateToMood -> {
                             onNavigate(Destination.App.Mood)
                         }
 
-                        DashboardEvent.OnNavigateToSleepQuality -> {
+                        DashboardContract.Event.OnNavigateToSleepQuality -> {
                             onNavigate(Destination.App.SleepQuality)
                         }
 
-                        DashboardEvent.OnNavigateToStressLevel -> {
+                        DashboardContract.Event.OnNavigateToStressLevel -> {
                             onNavigate(Destination.App.StressLevel)
                         }
 
-                        is DashboardEvent.OnNavigateTo -> {
+                        is DashboardContract.Event.OnNavigateTo -> {
                             onNavigate(event.destination)
                         }
 
-                        DashboardEvent.OnNavigateToAddStressLevel -> {
+                        DashboardContract.Event.OnNavigateToAddStressLevel -> {
                             onNavigate(Destination.App.AddStressLevel)
                         }
                     }
@@ -233,4 +233,3 @@ fun NavGraphBuilder.appNavigation(
         }
     }
 }
-

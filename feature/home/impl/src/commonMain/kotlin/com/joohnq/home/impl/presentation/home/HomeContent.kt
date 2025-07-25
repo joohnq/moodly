@@ -15,13 +15,13 @@ import com.joohnq.home.impl.components.HomeTopBar
 import com.joohnq.home.impl.components.MoodMetric
 import com.joohnq.home.impl.components.SelfJournalingMetric
 import com.joohnq.home.impl.presentation.home.event.HomeEvent
-import com.joohnq.home.impl.presentation.viewmodel.DashboardState
+import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.view.LoadingView
-import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.components.view.LoadingView
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.self_journaling
@@ -36,7 +36,7 @@ import com.joohnq.ui.mapper.foldComposable
 
 @Composable
 fun HomeContent(
-    state: DashboardState,
+    state: DashboardContract.State,
     padding: PaddingValues = PaddingValues(0.dp),
     onEvent: (HomeEvent) -> Unit = {},
 ) {

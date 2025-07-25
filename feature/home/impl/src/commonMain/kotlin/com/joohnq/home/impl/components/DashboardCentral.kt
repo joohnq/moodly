@@ -1,28 +1,39 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.CentralAction
-import com.joohnq.home.impl.presentation.dashboard.event.DashboardEvent
+import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
 import com.joohnq.navigation.Destination
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.self_journaling
+import com.joohnq.shared_resources.sleep
+import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.ui.entity.CentralAction
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DashboardCentral(
     padding: PaddingValues = PaddingValues(0.dp),
-    onEvent: (DashboardEvent) -> Unit = {}
+    onEvent: (DashboardContract.Event) -> Unit = {},
 ) {
     val items =
         listOf(
@@ -73,7 +84,7 @@ fun DashboardCentral(
                 CentralButton(
                     modifier = Modifier.weight(1f),
                     item = item,
-                    onClick = { onEvent(DashboardEvent.OnNavigateTo(item.destination)) }
+                    onClick = { onEvent(DashboardContract.Event.OnNavigateTo(item.destination)) }
                 )
             }
         }

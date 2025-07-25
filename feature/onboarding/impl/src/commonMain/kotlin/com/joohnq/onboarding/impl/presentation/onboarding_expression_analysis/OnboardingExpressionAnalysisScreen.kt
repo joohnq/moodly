@@ -7,9 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.api.entity.User
 import com.joohnq.mood.impl.ui.mapper.toDomain
-import com.joohnq.mood.impl.ui.viewmodel.MoodIntent
-import com.joohnq.mood.impl.ui.viewmodel.MoodSideEffect
-import com.joohnq.mood.impl.ui.viewmodel.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
+import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingViewModel
 import com.joohnq.preferences.impl.ui.viewmodel.PreferenceIntent
@@ -37,7 +36,7 @@ data class Quad<out A, out B, out C, out D>(
     val first: A,
     val second: B,
     val third: C,
-    val fourth: D
+    val fourth: D,
 )
 
 @Composable
@@ -79,7 +78,7 @@ fun OnboardingExpressionAnalysisScreen(
 
     fun addMoodRecord() {
         moodViewModel.onAction(
-            MoodIntent.Add(
+            MoodContract.Intent.Add(
                 onboardingState.moodRecord.toDomain()
             )
         )
@@ -129,14 +128,14 @@ fun OnboardingExpressionAnalysisScreen(
             if (sleepSideEffect is SleepQualitySideEffect.ShowError) {
                 onError(sleepSideEffect.error)
             }
-            if (statsSideEffect is MoodSideEffect.ShowError) {
+            if (statsSideEffect is MoodContract.SideEffect.ShowError) {
                 onError(statsSideEffect.error)
             }
             if (userSideEffect is UserSideEffect.ShowError) {
                 onError(userSideEffect.error)
             }
 
-            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodSideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
+            if (stressSideEffect is StressLevelSideEffect.StressLevelAdded && sleepSideEffect is SleepQualitySideEffect.SleepQualityAdded && statsSideEffect is MoodContract.SideEffect.StatsAdded && userSideEffect is UserSideEffect.UpdatedUser) {
                 preferencesViewModel.onAction(PreferenceIntent.UpdateSkipOnboarding())
             }
         }

@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel
+package com.joohnq.mood.impl.ui.presentation.add_mood
 
 import androidx.lifecycle.ViewModel
 import com.joohnq.mood.impl.ui.resource.MoodResource
@@ -8,17 +8,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class AddMoodViewModel : ViewModel() {
-    private val _state = MutableStateFlow(AddMoodState())
-    val state: StateFlow<AddMoodState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(AddMoodContract.State())
+    val state: StateFlow<AddMoodContract.State> = _state.asStateFlow()
 
-    fun onAction(intent: AddMoodIntent) {
+    fun onAction(intent: AddMoodContract.Intent) {
         when (intent) {
-            is AddMoodIntent.UpdateAddingMoodRecordMood -> updateAddingMoodRecordMood(intent.mood)
-            is AddMoodIntent.UpdateAddingMoodRecordDescription -> updateAddingMoodRecordDescription(
+            is AddMoodContract.Intent.UpdateAddingMoodRecordMood -> updateAddingMoodRecordMood(
+                intent.mood
+            )
+
+            is AddMoodContract.Intent.UpdateAddingMoodRecordDescription -> updateAddingMoodRecordDescription(
                 intent.description
             )
 
-            AddMoodIntent.ResetState -> _state.update { AddMoodState() }
+            AddMoodContract.Intent.ResetState -> _state.update { AddMoodContract.State() }
         }
     }
 

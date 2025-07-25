@@ -13,14 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.presentation.add_mood.viewmodel.AddMoodIntent
-import com.joohnq.mood.impl.ui.presentation.expression_analysis.event.ExpressionAnalysisEvent
+import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
+import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
-import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.expression_analysis_desc
 import com.joohnq.shared_resources.expression_analysis_title
@@ -34,8 +33,8 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
-    onAddAction: (AddMoodIntent) -> Unit = {},
-    onEvent: (ExpressionAnalysisEvent) -> Unit = {},
+    onAddAction: (AddMoodContract.Intent) -> Unit = {},
+    onEvent: (ExpressionAnalysisContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -47,7 +46,7 @@ fun ExpressionAnalysisContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppTopBar(onGoBack = { onEvent(ExpressionAnalysisEvent.OnGoBack) })
+            AppTopBar(onGoBack = { onEvent(ExpressionAnalysisContract.Event.OnGoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -66,7 +65,7 @@ fun ExpressionAnalysisContent(
                 text = description,
                 onValueChange = {
                     onAddAction(
-                        AddMoodIntent.UpdateAddingMoodRecordDescription(it)
+                        AddMoodContract.Intent.UpdateAddingMoodRecordDescription(it)
                     )
                 }
             )
@@ -75,7 +74,7 @@ fun ExpressionAnalysisContent(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.continue_word,
                 enabled = description.isNotEmpty(),
-                onClick = { onEvent(ExpressionAnalysisEvent.OnAdd) }
+                onClick = { onEvent(ExpressionAnalysisContract.Event.OnAdd) }
             )
         }
     }

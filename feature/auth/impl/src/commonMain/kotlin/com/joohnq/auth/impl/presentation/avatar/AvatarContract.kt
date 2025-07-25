@@ -1,7 +1,6 @@
 package com.joohnq.auth.impl.presentation.avatar
 
 import androidx.compose.ui.graphics.ImageBitmap
-import com.joohnq.auth.impl.presentation.auth.AuthNameContract.SideEffect
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AvatarContract {

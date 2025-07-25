@@ -30,8 +30,8 @@ fun AddStressLevelScreen(
 
     fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {
-            AddStressLevelContract.Event.GoBack -> onGoBack()
-            AddStressLevelContract.Event.Continue -> {
+            AddStressLevelContract.Event.OnGoBack -> onGoBack()
+            AddStressLevelContract.Event.OnContinue -> {
                 if (state.record.stressLevel != StressLevelResource.One) {
                     onNavigateToStressStressors()
                     return
@@ -46,15 +46,15 @@ fun AddStressLevelScreen(
                 )
             }
 
-            AddStressLevelContract.Event.PopUpToStressLevelLevel -> onGoBack()
+            AddStressLevelContract.Event.OnPopUpToStressLevelLevel -> onGoBack()
         }
     }
 
     LaunchedEffect(stressLevelViewModel) {
         stressLevelViewModel.sideEffect.collect { event ->
             when (event) {
-                is StressLevelContract.SideEffect.StressLevelAdded -> {
-                    onEvent(AddStressLevelContract.Event.PopUpToStressLevelLevel)
+                is StressLevelContract.SideEffect.Added -> {
+                    onEvent(AddStressLevelContract.Event.OnPopUpToStressLevelLevel)
                     stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 }
 

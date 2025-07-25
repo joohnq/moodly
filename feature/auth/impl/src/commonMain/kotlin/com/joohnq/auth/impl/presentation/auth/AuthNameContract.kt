@@ -19,6 +19,6 @@ sealed interface AuthNameContract {
     )
 
     sealed interface Event {
-        data object Continue : Event
+        data object OnContinue : Event
     }
 }

@@ -1,7 +1,6 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
 
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
@@ -22,7 +21,7 @@ sealed interface SleepQualityContract {
     }
 
     sealed interface SideEffect {
-        data object SleepQualityAdded : SideEffect
+        data object Added : SideEffect
         data object Deleted : SideEffect
         data class ShowError(val error: String) : SideEffect
     }

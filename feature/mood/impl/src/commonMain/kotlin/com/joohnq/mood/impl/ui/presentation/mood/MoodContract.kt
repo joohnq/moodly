@@ -17,7 +17,6 @@ sealed interface MoodContract {
     sealed interface SideEffect {
         data object StatsDeleted : SideEffect
         data object StatsAdded : SideEffect
-        data object Updated : SideEffect
         data class ShowError(val error: String) : SideEffect
     }
 

@@ -1,7 +1,6 @@
 package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
 
 import com.joohnq.api.getNow
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.ui.UnidirectionalViewModel
 import kotlinx.datetime.LocalDate
 

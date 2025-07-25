@@ -132,10 +132,10 @@ fun OnboardingExpressionAnalysisScreen(
             }
 
             if (
-                stressSideEffect is StressLevelContract.SideEffect.StressLevelAdded &&
-                sleepSideEffect is SleepQualityContract.SideEffect.SleepQualityAdded &&
+                stressSideEffect is StressLevelContract.SideEffect.Added &&
+                sleepSideEffect is SleepQualityContract.SideEffect.Added &&
                 statsSideEffect is MoodContract.SideEffect.StatsAdded &&
-                userSideEffect is UserContract.SideEffect.UpdatedUser
+                userSideEffect is UserContract.SideEffect.Updated
             ) {
                 preferencesViewModel.onIntent(PreferencesContract.Intent.UpdateSkipOnboarding())
             }

@@ -7,9 +7,9 @@ import com.joohnq.ui.UnidirectionalViewModel
 sealed interface AddStressLevelContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
     sealed interface Event {
-        data object GoBack : Event
-        data object Continue : Event
-        data object PopUpToStressLevelLevel : Event
+        data object OnGoBack : Event
+        data object OnContinue : Event
+        data object OnPopUpToStressLevelLevel : Event
     }
 
     sealed interface Intent {

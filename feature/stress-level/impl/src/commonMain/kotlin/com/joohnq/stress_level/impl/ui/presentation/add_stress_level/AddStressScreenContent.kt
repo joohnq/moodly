@@ -58,7 +58,7 @@ fun AddStressLevelScreenContent(
             ) {
                 AppTopBar(
                     text = Res.string.add_stress_level,
-                    onGoBack = { onEvent(AddStressLevelContract.Event.GoBack) }
+                    onGoBack = { onEvent(AddStressLevelContract.Event.OnGoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -101,7 +101,7 @@ fun AddStressLevelScreenContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(AddStressLevelContract.Event.Continue) }
+                    onClick = { onEvent(AddStressLevelContract.Event.OnContinue) }
                 )
             }
         }

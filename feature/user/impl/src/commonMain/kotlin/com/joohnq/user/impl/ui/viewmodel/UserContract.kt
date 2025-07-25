@@ -9,8 +9,8 @@ sealed interface UserContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data object GetUser : Intent
-        data object InitUser : Intent
+        data object Get : Intent
+        data object Init : Intent
         data class Update(val user: User) : Intent
         data class UpdateName(val name: String) : Intent
         data class UpdateImageBitmap(val image: ImageBitmap) : Intent
@@ -20,8 +20,8 @@ sealed interface UserContract {
     sealed interface SideEffect {
         data object AvatarSavedSuccess : SideEffect
         data object UserNameUpdatedSuccess : SideEffect
-        data object UpdatedUser : SideEffect
-        data object AddedUser : SideEffect
+        data object Updated : SideEffect
+        data object Added : SideEffect
         data class ShowError(val error: String) : SideEffect
     }
 

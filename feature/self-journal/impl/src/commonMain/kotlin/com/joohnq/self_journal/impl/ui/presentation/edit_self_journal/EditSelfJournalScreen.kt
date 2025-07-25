@@ -7,15 +7,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.self_journal.impl.ui.mapper.toDomain
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalViewModel
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalSideEffect
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalViewModel
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.mapper.onSuccess
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -36,12 +32,12 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     fun onError(error: String) =
         scope.launch { snackBarState.showSnackbar(error) }
 
-    fun onEvent(event: EditSelfJournalEvent) =
+    fun onEvent(event: EditSelfJournalContract.Event) =
         when (event) {
-            EditSelfJournalEvent.OnGoBack -> onGoBack()
-            EditSelfJournalEvent.OnSave ->
+            EditSelfJournalContract.Event.OnGoBack -> onGoBack()
+            EditSelfJournalContract.Event.OnSave ->
                 selfJournalViewModel.onAction(
-                    SelfJournalIntent.Update(
+                    SelfJournalContract.Intent.Update(
                         state.editingSelfJournalRecord
                     )
                 )
@@ -51,7 +47,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
         selfJournalState.records.onSuccess { selfJournals ->
             val item = selfJournals.find { it.id == id } ?: return@onSuccess
             editSelfJournalViewModel.onAction(
-                EditSelfJournalIntent.SetEditSelfJournal(item.toDomain())
+                EditSelfJournalContract.Intent.Set(item.toDomain())
             )
         }
     }
@@ -59,17 +55,21 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     LaunchedEffect(selfJournalViewModel) {
         selfJournalViewModel.sideEffect.collect { effect ->
             when (effect) {
-                SelfJournalSideEffect.SelfJournalDeleted -> {
-                    onEvent(EditSelfJournalEvent.OnGoBack)
+                SelfJournalContract.SideEffect.SelfJournalDeleted -> {
+                    onEvent(EditSelfJournalContract.Event.OnGoBack)
                 }
 
-                SelfJournalSideEffect.Updated -> {
-                    editSelfJournalViewModel.onAction(EditSelfJournalIntent.ClearEditingState)
-                    editSelfJournalViewModel.onAction(EditSelfJournalIntent.UpdateIsEditing(false))
-                    selfJournalViewModel.onAction(SelfJournalIntent.GetAll)
+                SelfJournalContract.SideEffect.Updated -> {
+                    editSelfJournalViewModel.onAction(EditSelfJournalContract.Intent.ClearEditingState)
+                    editSelfJournalViewModel.onAction(
+                        EditSelfJournalContract.Intent.UpdateIsEditing(
+                            false
+                        )
+                    )
+                    selfJournalViewModel.onAction(SelfJournalContract.Intent.GetAll)
                 }
 
-                is SelfJournalSideEffect.ShowError -> onError(effect.error)
+                is SelfJournalContract.SideEffect.ShowError -> onError(effect.error)
                 else -> Unit
             }
         }
@@ -77,7 +77,7 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
 
     DisposableEffect(Unit) {
         onDispose {
-            editSelfJournalViewModel.onAction(EditSelfJournalIntent.ResetState)
+            editSelfJournalViewModel.onAction(EditSelfJournalContract.Intent.ResetState)
         }
     }
 

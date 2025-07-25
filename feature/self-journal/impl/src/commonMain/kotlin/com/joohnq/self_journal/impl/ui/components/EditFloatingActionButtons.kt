@@ -1,16 +1,34 @@
 package com.joohnq.self_journal.impl.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
-import com.joohnq.shared_resources.*
+import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditSelfJournalContract
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.edit_journal
+import com.joohnq.shared_resources.editing
+import com.joohnq.shared_resources.remove_journal
+import com.joohnq.shared_resources.save
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
@@ -22,8 +40,8 @@ import org.jetbrains.compose.resources.stringResource
 fun EditFloatingActionButtons(
     isEditing: Boolean,
     canSave: Boolean,
-    onEditingAction: (EditSelfJournalIntent) -> Unit = {},
-    onEvent: (EditSelfJournalEvent) -> Unit = {},
+    onEditingAction: (EditSelfJournalContract.Intent) -> Unit = {},
+    onEvent: (EditSelfJournalContract.Event) -> Unit = {},
     onRequestTitleFocus: () -> Unit = {},
 ) {
     Box(
@@ -42,7 +60,7 @@ fun EditFloatingActionButtons(
                 FilledIconButton(
                     onClick = {
                         onEditingAction(
-                            EditSelfJournalIntent.UpdateOpenDeleteDialog(true)
+                            EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(true)
                         )
                     },
                     modifier = Modifier.size(56.dp),
@@ -65,7 +83,7 @@ fun EditFloatingActionButtons(
             item {
                 Button(
                     onClick = {
-                        onEditingAction(EditSelfJournalIntent.UpdateIsEditing(!isEditing))
+                        onEditingAction(EditSelfJournalContract.Intent.UpdateIsEditing(!isEditing))
                         onRequestTitleFocus()
                     },
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
@@ -100,7 +118,7 @@ fun EditFloatingActionButtons(
                 Button(
                     enabled = canSave,
                     onClick = {
-                        onEvent(EditSelfJournalEvent.OnSave)
+                        onEvent(EditSelfJournalContract.Event.OnSave)
                     },
                     contentPadding = if (canSave) PaddingValues(
                         horizontal = 20.dp,

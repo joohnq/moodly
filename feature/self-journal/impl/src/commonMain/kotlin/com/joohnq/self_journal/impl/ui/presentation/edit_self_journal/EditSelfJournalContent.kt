@@ -1,6 +1,11 @@
 package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,16 +22,16 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.mood.impl.ui.mapper.toResource
 import com.joohnq.self_journal.impl.ui.components.EditFloatingActionButtons
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.event.EditSelfJournalEvent
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalIntent
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.viewmodel.EditSelfJournalState
-import com.joohnq.self_journal.impl.ui.viewmodel.SelfJournalIntent
-import com.joohnq.shared_resources.*
-import com.joohnq.shared_resources.components.*
+import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.layout.ImageDialogLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.TextWithBackground
+import com.joohnq.shared_resources.delete_journal
+import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
+import com.joohnq.shared_resources.edit_journal
 import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
@@ -34,16 +39,18 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.type_here_your_description
+import com.joohnq.shared_resources.type_here_your_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun EditJournalingContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    state: EditSelfJournalState,
+    state: EditSelfJournalContract.State,
     canSave: Boolean,
-    onEvent: (EditSelfJournalEvent) -> Unit = {},
-    onAction: (EditSelfJournalIntent) -> Unit = {},
-    onSelfJournalAction: (SelfJournalIntent) -> Unit = {},
+    onEvent: (EditSelfJournalContract.Event) -> Unit = {},
+    onAction: (EditSelfJournalContract.Intent) -> Unit = {},
+    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {},
 ) {
     val titleFocusRequest = rememberFocusRequester()
     val descriptionFocusRequest = rememberFocusRequester()
@@ -54,14 +61,14 @@ fun EditJournalingContent(
         ImageDialogLayout(
             onDismissRequest = {
                 onAction(
-                    EditSelfJournalIntent.UpdateOpenDeleteDialog(
+                    EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(
                         false
                     )
                 )
             },
             onConfirmation = {
-                onAction(EditSelfJournalIntent.UpdateOpenDeleteDialog(false))
-                onSelfJournalAction(SelfJournalIntent.Delete(state.editingSelfJournalRecord.id))
+                onAction(EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(false))
+                onSelfJournalAction(SelfJournalContract.Intent.Delete(state.editingSelfJournalRecord.id))
             },
             dialogTitle = Res.string.delete_journal,
             dialogText = Res.string.do_you_wish_to_remove_this_journal,
@@ -97,7 +104,7 @@ fun EditJournalingContent(
                     .paddingHorizontalMedium()
             ) {
                 AppTopBar(
-                    onGoBack = { onEvent(EditSelfJournalEvent.OnGoBack) },
+                    onGoBack = { onEvent(EditSelfJournalContract.Event.OnGoBack) },
                     text = Res.string.edit_journal,
                 ) {
                     TextWithBackground(
@@ -118,7 +125,7 @@ fun EditJournalingContent(
                         color = Colors.Brown100Alpha64
                     )
                 },
-                onValueChange = { onAction(EditSelfJournalIntent.UpdateTitle(it)) },
+                onValueChange = { onAction(EditSelfJournalContract.Intent.UpdateTitle(it)) },
                 modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
                 colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
                 textStyle = TextStyles.headingMdExtraBold(),
@@ -140,7 +147,7 @@ fun EditJournalingContent(
                 },
                 onValueChange = {
                     onAction(
-                        EditSelfJournalIntent.UpdateDescription(it)
+                        EditSelfJournalContract.Intent.UpdateDescription(it)
                     )
                 },
                 modifier = Modifier.fillMaxWidth().focusRequester(descriptionFocusRequest),

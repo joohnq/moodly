@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
-    PreferencesRepository {
+class PreferencesRepositoryImpl(
+    private val dataStore: DataStore<Preferences>
+) : PreferencesRepository {
     companion object {
         private val SKIP_WELCOME_KEY = stringPreferencesKey("SKIP_WELCOME")
         private val SKIP_ONBOARDING_KEY = stringPreferencesKey("SKIP_ONBOARDING")
@@ -25,9 +26,11 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     override suspend fun getUserPreferences(): Result<AppPreferences> =
         withContext(Dispatchers.IO) {
             try {
-                val item = dataStore.data.map { preferences ->
-                    preferences.toMutablePreferences().toAppPreferences()
-                }.first()
+                val item =
+                    dataStore.data
+                        .map { preferences ->
+                            preferences.toMutablePreferences().toAppPreferences()
+                        }.first()
                 Result.success(item)
             } catch (e: Exception) {
                 Result.failure(e)
@@ -46,7 +49,6 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
             }
         }
 
-
     override suspend fun updateSkipOnboarding(value: Boolean): Result<Boolean> =
         withContext(Dispatchers.IO) {
             try {
@@ -58,7 +60,6 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
                 Result.failure(e)
             }
         }
-
 
     override suspend fun updateSkipAuth(value: Boolean): Result<Boolean> =
         withContext(Dispatchers.IO) {

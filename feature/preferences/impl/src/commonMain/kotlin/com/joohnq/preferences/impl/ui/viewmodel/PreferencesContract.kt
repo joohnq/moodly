@@ -9,29 +9,33 @@ sealed interface PreferencesContract {
 
     sealed interface Intent {
         data object Get : Intent
+
         data class UpdateSkipWelcome(
-            val value: Boolean = true,
+            val value: Boolean = true
         ) : Intent
 
         data class UpdateSkipOnboarding(
-            val value: Boolean = true,
+            val value: Boolean = true
         ) : Intent
 
         data class UpdateSkipAuth(
-            val value: Boolean = true,
+            val value: Boolean = true
         ) : Intent
 
         data class UpdateSkipSecurity(
-            val value: Boolean = true,
+            val value: Boolean = true
         ) : Intent
     }
 
     sealed interface SideEffect {
-        data class ShowError(val message: String) : SideEffect
+        data class ShowError(
+            val message: String
+        ) : SideEffect
+
         data object UpdatedPreferences : SideEffect
     }
 
     data class State(
-        val userPreferences: UiState<AppPreferences> = UiState.Idle,
+        val userPreferences: UiState<AppPreferences> = UiState.Idle
     )
 }

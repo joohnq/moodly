@@ -17,35 +17,42 @@ fun HeadingWithSpan(
     firstTitle: StringResource? = null,
     secondTitle: StringResource? = null,
     span: String,
-    spanColor: Color,
+    spanColor: Color
 ) {
     Text(
-        text = buildAnnotatedString {
-            if (firstTitle != null) {
-                withStyle(
-                    style = TextStyles.headingSpanSmExtraBold()
-                        .copy(color = Colors.Brown80)
-                ) {
-                    append(stringResource(firstTitle))
+        text =
+            buildAnnotatedString {
+                if (firstTitle != null) {
+                    withStyle(
+                        style =
+                            TextStyles
+                                .headingSpanSmExtraBold()
+                                .copy(color = Colors.Brown80)
+                    ) {
+                        append(stringResource(firstTitle))
+                    }
+                    append(" ")
                 }
-                append(" ")
-            }
-            withStyle(
-                style = TextStyles.headingSpanSmExtraBold()
-                    .copy(color = spanColor)
-            ) {
-                append(span)
-            }
-            if (secondTitle != null) {
-                append(" ")
                 withStyle(
-                    style = TextStyles.headingSpanSmExtraBold()
-                        .copy(color = Colors.Brown80)
+                    style =
+                        TextStyles
+                            .headingSpanSmExtraBold()
+                            .copy(color = spanColor)
                 ) {
-                    append(stringResource(secondTitle))
+                    append(span)
                 }
-            }
-        },
+                if (secondTitle != null) {
+                    append(" ")
+                    withStyle(
+                        style =
+                            TextStyles
+                                .headingSpanSmExtraBold()
+                                .copy(color = Colors.Brown80)
+                    ) {
+                        append(stringResource(secondTitle))
+                    }
+                }
+            },
         lineHeight = 40.sp,
         textAlign = TextAlign.Center
     )

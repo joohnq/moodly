@@ -40,17 +40,18 @@ fun MetricSummaryCard(
     description: String,
     content: @Composable (Modifier) -> Unit,
     color: Color,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = Dimens.Shape.Large,
-        colors = CardColors(
-            containerColor = containerColor,
-            contentColor = Colors.Gray80,
-            disabledContainerColor = containerColor,
-            disabledContentColor = Colors.Gray80
-        ),
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Colors.Gray80,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Colors.Gray80
+            ),
         onClick = onClick
     ) {
         Column(

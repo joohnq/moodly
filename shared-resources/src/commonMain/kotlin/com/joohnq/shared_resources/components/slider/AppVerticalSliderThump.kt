@@ -17,12 +17,13 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AppVerticalSliderThump() {
     Box(
-        modifier = Modifier
-            .size(64.dp)
-            .background(
-                color = Colors.Orange40,
-                shape = Dimens.Shape.Circle
-            ).border(4.dp, color = Colors.Orange40Alpha25, shape = Dimens.Shape.Circle),
+        modifier =
+            Modifier
+                .size(64.dp)
+                .background(
+                    color = Colors.Orange40,
+                    shape = Dimens.Shape.Circle
+                ).border(4.dp, color = Colors.Orange40Alpha25, shape = Dimens.Shape.Circle),
         contentAlignment = Alignment.Center
     ) {
         Icon(

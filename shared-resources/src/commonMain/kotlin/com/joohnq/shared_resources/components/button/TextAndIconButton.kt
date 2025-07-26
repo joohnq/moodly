@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.components.IconResource
+import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.StringResource
@@ -26,7 +26,7 @@ fun TextAndIconButton(
     icon: IconResource,
     colors: ButtonColors,
     shape: Shape,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     Button(
         modifier = modifier.height(56.dp),
@@ -41,7 +41,7 @@ fun TextAndIconButton(
         ) {
             Text(
                 text = stringResource(text),
-                style = TextStyles.textLgExtraBold(),
+                style = TextStyles.textLgExtraBold()
             )
             HorizontalSpacer(12.dp)
             IconResource(icon.copy(tint = if (enabled) colors.contentColor else colors.disabledContentColor))

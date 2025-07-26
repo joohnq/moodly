@@ -12,9 +12,7 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun MediumTitle(
-    text: StringResource,
-) {
+fun MediumTitle(text: StringResource) {
     Text(
         text = stringResource(text),
         modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp),

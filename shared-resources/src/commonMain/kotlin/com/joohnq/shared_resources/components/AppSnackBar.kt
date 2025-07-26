@@ -35,28 +35,29 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AppSnackBar(
     padding: PaddingValues = PaddingValues(0.dp),
-    snackBarHostState: SnackbarHostState = rememberSnackBarState(),
+    snackBarHostState: SnackbarHostState = rememberSnackBarState()
 ) {
     val scope = rememberCoroutineScope()
 
     SnackbarHost(
         hostState = snackBarHostState,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 15.dp, vertical = 10.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 15.dp, vertical = 10.dp),
         snackbar = { snackBarData ->
             Column(modifier = Modifier.fillMaxWidth()) {
                 VerticalSpacer(padding.calculateTopPadding())
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 1.dp,
-                            color = Colors.Pink40,
-                            shape = Dimens.Shape.Circle
-                        )
-                        .background(color = Colors.Pink5, shape = Dimens.Shape.Circle)
-                        .padding(8.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .border(
+                                width = 1.dp,
+                                color = Colors.Pink40,
+                                shape = Dimens.Shape.Circle
+                            ).background(color = Colors.Pink5, shape = Dimens.Shape.Circle)
+                            .padding(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -77,12 +78,13 @@ fun AppSnackBar(
                                 snackBarData.dismiss()
                             }
                         },
-                        colors = IconButtonColors(
-                            containerColor = Colors.Transparent,
-                            contentColor = Colors.Gray60,
-                            disabledContentColor = Colors.Gray60,
-                            disabledContainerColor = Colors.Transparent
-                        )
+                        colors =
+                            IconButtonColors(
+                                containerColor = Colors.Transparent,
+                                contentColor = Colors.Gray60,
+                                disabledContentColor = Colors.Gray60,
+                                disabledContainerColor = Colors.Transparent
+                            )
                     ) {
                         Icon(
                             painter = painterResource(Drawables.Icons.Outlined.Close),

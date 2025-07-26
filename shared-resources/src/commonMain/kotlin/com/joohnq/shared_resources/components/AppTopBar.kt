@@ -23,7 +23,7 @@ fun AppTopBar(
     isDark: Boolean = true,
     text: StringResource? = null,
     onGoBack: () -> Unit = {},
-    content: (@Composable () -> Unit)? = null,
+    content: (@Composable () -> Unit)? = null
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -31,14 +31,15 @@ fun AppTopBar(
         modifier = modifier.fillMaxWidth().paddingVerticalMedium()
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (isDark)
+            if (isDark) {
                 AppDarkBackButton(
                     onClick = onGoBack
                 )
-            else
+            } else {
                 AppLightBackButton(
                     onClick = onGoBack
                 )
+            }
 
             text?.let {
                 HorizontalSpacer(10.dp)
@@ -46,7 +47,7 @@ fun AppTopBar(
                 Text(
                     text = stringResource(text),
                     style = TextStyles.textXlExtraBold(),
-                    color = if (isDark) Colors.Brown80 else Colors.White,
+                    color = if (isDark) Colors.Brown80 else Colors.White
                 )
             }
         }

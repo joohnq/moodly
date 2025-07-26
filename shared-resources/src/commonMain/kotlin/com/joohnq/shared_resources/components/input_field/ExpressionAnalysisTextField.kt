@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisTextField(
     modifier: Modifier = Modifier,
     text: String,
-    onValueChange: (String) -> Unit = {},
+    onValueChange: (String) -> Unit = {}
 ) {
     TextField(
         value = text,
@@ -34,16 +34,17 @@ fun ExpressionAnalysisTextField(
                 color = Colors.Brown100Alpha64
             )
         },
-        modifier = modifier
-            .fillMaxWidth()
-            .heightIn(min = 250.dp)
-            .shadow(
-                elevation = 7.dp,
-                ambientColor = Colors.Black48.copy(alpha = 0.2f),
-                spotColor = Colors.Black48.copy(alpha = 0.2f),
-                shape = Dimens.Shape.Large
-            ),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .heightIn(min = 250.dp)
+                .shadow(
+                    elevation = 7.dp,
+                    ambientColor = Colors.Black48.copy(alpha = 0.2f),
+                    spotColor = Colors.Black48.copy(alpha = 0.2f),
+                    shape = Dimens.Shape.Large
+                ),
         colors = ComponentColors.TextField.expressionAnalysisColors(),
-        textStyle = TextStyles.text2xlBold(),
+        textStyle = TextStyles.text2xlBold()
     )
 }

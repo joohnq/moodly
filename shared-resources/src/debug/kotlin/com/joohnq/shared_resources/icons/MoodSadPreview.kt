@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodSadPreview() {
     Icon(
         imageVector = MoodSad,
-        contentDescription = null,
+        contentDescription = null
     )
 }

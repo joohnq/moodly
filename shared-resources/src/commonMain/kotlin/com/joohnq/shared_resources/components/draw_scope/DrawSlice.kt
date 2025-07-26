@@ -21,7 +21,7 @@ fun DrawScope.drawSlice(
     topLeft: Offset,
     size: Size,
     vectorPainter: VectorPainter,
-    iconSize: Size = Size(180f, 180f),
+    iconSize: Size = Size(180f, 180f)
 ) {
     val centerX = topLeft.x + size.width / 2
     val centerY = topLeft.y + size.height / 2
@@ -36,7 +36,7 @@ fun DrawScope.drawSlice(
         sweepAngle = sweepAngle,
         useCenter = useCenter,
         topLeft = topLeft,
-        size = size,
+        size = size
     )
     drawIntoCanvas {
         translate(left = iconX, top = iconY) {

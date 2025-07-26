@@ -5,7 +5,10 @@ import com.joohnq.shared_resources.remember.rememberPainter
 import okio.FileSystem
 
 @Composable
-fun CacheImage(directory: String, fileName: String) {
+fun CacheImage(
+    directory: String,
+    fileName: String
+) {
     val systemTemporaryPath = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
     val painter = rememberPainter("${systemTemporaryPath / directory / fileName}")
 

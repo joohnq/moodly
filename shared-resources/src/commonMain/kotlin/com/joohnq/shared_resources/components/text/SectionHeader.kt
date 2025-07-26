@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SectionHeader(
     modifier: Modifier = Modifier,
     title: StringResource,
-    onSeeMore: () -> Unit = {},
+    onSeeMore: () -> Unit = {}
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -41,17 +41,18 @@ fun SectionHeader(
             onClick = onSeeMore,
             contentPadding = PaddingValues(horizontal = 5.dp, vertical = 2.dp),
             shape = Dimens.Shape.Circle,
-            colors = ButtonColors(
-                containerColor = Colors.Transparent,
-                contentColor = Colors.Brown80,
-                disabledContainerColor = Colors.Transparent,
-                disabledContentColor = Colors.Brown80
-            )
+            colors =
+                ButtonColors(
+                    containerColor = Colors.Transparent,
+                    contentColor = Colors.Brown80,
+                    disabledContainerColor = Colors.Transparent,
+                    disabledContentColor = Colors.Brown80
+                )
         ) {
             Text(
                 modifier = Modifier,
                 text = stringResource(Res.string.see_more),
-                style = TextStyles.textSmMedium(),
+                style = TextStyles.textSmMedium()
             )
         }
     }
@@ -60,7 +61,7 @@ fun SectionHeader(
 @Composable
 fun SectionHeader(
     modifier: Modifier = Modifier,
-    title: StringResource,
+    title: StringResource
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),

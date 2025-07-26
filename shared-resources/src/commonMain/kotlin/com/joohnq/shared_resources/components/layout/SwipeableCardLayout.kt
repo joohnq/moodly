@@ -34,7 +34,7 @@ fun SwipeableCardLayout(
     onAction: () -> Unit,
     padding: PaddingValues = PaddingValues(0.dp),
     secondary: @Composable () -> Unit = {},
-    content: @Composable (Modifier) -> Unit,
+    content: @Composable (Modifier) -> Unit
 ) {
     var buttonsWidth by remember { mutableFloatStateOf(0f) }
     val offset = remember { Animatable(initialValue = 0f) }
@@ -48,11 +48,12 @@ fun SwipeableCardLayout(
         secondary()
         Box(modifier = Modifier.padding(padding)) {
             Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(IntrinsicSize.Max)
-                    .align(Alignment.CenterEnd)
-                    .onSizeChanged { buttonsWidth = it.width.toFloat() },
+                modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .width(IntrinsicSize.Max)
+                        .align(Alignment.CenterEnd)
+                        .onSizeChanged { buttonsWidth = it.width.toFloat() },
                 verticalArrangement = Arrangement.Center
             ) {
                 DeleteButton {

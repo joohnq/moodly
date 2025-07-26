@@ -12,7 +12,7 @@ fun AppTimePickerCardNotAfternoonPreview() {
         title = Res.string.app_name,
         hour = "12",
         minutes = "00",
-        isAfternoon = false,
+        isAfternoon = false
     )
 }
 
@@ -23,6 +23,6 @@ fun AppTimePickerCardIsAfternoonPreview() {
         title = Res.string.app_name,
         hour = "12",
         minutes = "00",
-        isAfternoon = true,
+        isAfternoon = true
     )
 }

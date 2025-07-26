@@ -124,19 +124,20 @@ object Drawables {
     }
 
     object Avatar {
-        val avatars = listOf(
-            Res.drawable.avatar_man_1,
-            Res.drawable.avatar_woman_1,
-            Res.drawable.avatar_man_2,
-            Res.drawable.avatar_woman_2,
-            Res.drawable.avatar_man_3,
-            Res.drawable.avatar_woman_3,
-            Res.drawable.avatar_man_4,
-            Res.drawable.avatar_woman_4,
-            Res.drawable.avatar_man_5,
-            Res.drawable.avatar_woman_5,
-            Res.drawable.avatar_man_6,
-            Res.drawable.avatar_woman_6
-        )
+        val avatars =
+            listOf(
+                Res.drawable.avatar_man_1,
+                Res.drawable.avatar_woman_1,
+                Res.drawable.avatar_man_2,
+                Res.drawable.avatar_woman_2,
+                Res.drawable.avatar_man_3,
+                Res.drawable.avatar_woman_3,
+                Res.drawable.avatar_man_4,
+                Res.drawable.avatar_woman_4,
+                Res.drawable.avatar_man_5,
+                Res.drawable.avatar_woman_5,
+                Res.drawable.avatar_man_6,
+                Res.drawable.avatar_woman_6
+            )
     }
 }

@@ -15,18 +15,17 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun DeleteButton(
-    onClick: () -> Unit = {}
-) {
+fun DeleteButton(onClick: () -> Unit = {}) {
     FilledIconButton(
         onClick = onClick,
         modifier = Modifier.size(40.dp),
-        colors = IconButtonColors(
-            containerColor = Colors.Pink40,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Pink40,
-            disabledContentColor = Colors.White
-        )
+        colors =
+            IconButtonColors(
+                containerColor = Colors.Pink40,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Pink40,
+                disabledContentColor = Colors.White
+            )
     ) {
         Icon(
             painter = painterResource(Drawables.Icons.Filled.Trash),

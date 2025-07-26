@@ -11,7 +11,7 @@ import com.joohnq.shared_resources.theme.Colors
 
 fun DrawScope.drawCenterCircle(
     vectorPainter: VectorPainter,
-    iconSize: Size = Size(55.5f, 84f),
+    iconSize: Size = Size(55.5f, 84f)
 ) {
     val center = Offset(size.width / 2, size.height / 2)
     val radius = (size.width / 2 * 0.7f) * 0.5f

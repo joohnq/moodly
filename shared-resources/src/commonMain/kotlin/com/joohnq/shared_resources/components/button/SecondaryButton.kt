@@ -13,7 +13,7 @@ fun SecondaryButton(
     modifier: Modifier = Modifier,
     text: StringResource,
     enabled: Boolean = true,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     TextOutlinedButton(
         modifier = modifier.height(56.dp),

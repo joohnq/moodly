@@ -19,7 +19,6 @@ kotlin {
 
             implementation(projects.feature.sleepQuality.api)
 
-
             implementation(libs.kotlin.datetime)
             implementation(libs.charts)
             implementation(libs.coil.compose)

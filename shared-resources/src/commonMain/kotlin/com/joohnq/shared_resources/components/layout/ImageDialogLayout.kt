@@ -31,7 +31,7 @@ fun ImageDialogLayout(
     image: DrawableResource,
     backgroundColor: Color,
     onDismissRequest: () -> Unit = {},
-    onConfirmation: () -> Unit = {},
+    onConfirmation: () -> Unit = {}
 ) {
     AlertDialog(
         containerColor = backgroundColor,
@@ -69,7 +69,7 @@ fun ImageDialogLayout(
                 Text(
                     text = stringResource(Res.string.confirm),
                     style = TextStyles.textMdBold(),
-                    color = Colors.White,
+                    color = Colors.White
                 )
             }
         },

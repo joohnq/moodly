@@ -22,23 +22,25 @@ fun DecoratedConvexPanel(
     panelBackgroundColor: Color,
     backgroundColor: Color = Colors.Brown10,
     panelContent: @Composable () -> Unit,
-    content: @Composable (ColumnScope) -> Unit,
+    content: @Composable (ColumnScope) -> Unit
 ) {
     Scaffold(containerColor = backgroundColor) {
         Column(
-            modifier = Modifier
-                .padding(bottom = 20.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            modifier =
+                Modifier
+                    .padding(bottom = 20.dp)
+                    .fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.6f)
-                        .background(color = panelBackgroundColor),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.6f)
+                            .background(color = panelBackgroundColor),
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     panelContent()

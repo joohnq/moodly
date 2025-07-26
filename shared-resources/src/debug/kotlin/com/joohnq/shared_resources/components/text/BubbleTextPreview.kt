@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun BubbleTextNotSelectedPreview() {
     BubbleText(
         text = Res.string.app_name,
-        selected = false,
+        selected = false
     )
 }
 
@@ -19,6 +19,6 @@ fun BubbleTextNotSelectedPreview() {
 fun BubbleTextSelectedPreview() {
     BubbleText(
         text = Res.string.app_name,
-        selected = true,
+        selected = true
     )
 }

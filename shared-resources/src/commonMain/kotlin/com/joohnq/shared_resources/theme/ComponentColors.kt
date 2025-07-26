@@ -14,20 +14,21 @@ import com.joohnq.ui.entity.TextRadioButtonColors
 
 object ComponentColors {
     object RadioButton {
-        fun textRadioButtonColors(): TextRadioButtonColors = TextRadioButtonColors(
-            selectedBackgroundColor = Colors.Green50,
-            selectedContentColor = Colors.White,
-            unSelectedContentColor = Colors.Brown80,
-            unSelectedBackgroundColor = Colors.White,
-            selectedBorderColor = Colors.Green50Alpha25,
-        )
+        fun textRadioButtonColors(): TextRadioButtonColors =
+            TextRadioButtonColors(
+                selectedBackgroundColor = Colors.Green50,
+                selectedContentColor = Colors.White,
+                unSelectedContentColor = Colors.Brown80,
+                unSelectedBackgroundColor = Colors.White,
+                selectedBorderColor = Colors.Green50Alpha25
+            )
 
         fun iconAndTextRadioButtonHorizontalColors(colors: TextRadioButtonColors): RadioButtonColors =
             RadioButtonColors(
                 selectedColor = colors.selectedContentColor,
                 unselectedColor = colors.unSelectedContentColor,
                 disabledSelectedColor = colors.selectedContentColor,
-                disabledUnselectedColor = colors.unSelectedContentColor,
+                disabledUnselectedColor = colors.unSelectedContentColor
             )
 
         fun stressLevelRadioButtonColors(): TextRadioButtonColors =
@@ -36,117 +37,130 @@ object ComponentColors {
                 selectedContentColor = Colors.White,
                 unSelectedContentColor = Colors.Brown80,
                 unSelectedBackgroundColor = Colors.White,
-                selectedBorderColor = Colors.Orange40Alpha25,
+                selectedBorderColor = Colors.Orange40Alpha25
             )
     }
+
     object Slider {
-        fun sleepQualitySliderColors(): SliderColors = SliderColors(
-            thumbColor = Colors.Orange40,
-            activeTickColor = Colors.Orange40,
-            inactiveTickColor = Colors.Brown20,
-            activeTrackColor = Colors.Orange40,
-            inactiveTrackColor = Colors.Brown20,
-            disabledThumbColor = Colors.Brown20,
-            disabledActiveTrackColor = Colors.Orange40,
-            disabledActiveTickColor = Colors.Orange40,
-            disabledInactiveTrackColor = Colors.Brown20,
-            disabledInactiveTickColor = Colors.Brown20
-        )
+        fun sleepQualitySliderColors(): SliderColors =
+            SliderColors(
+                thumbColor = Colors.Orange40,
+                activeTickColor = Colors.Orange40,
+                inactiveTickColor = Colors.Brown20,
+                activeTrackColor = Colors.Orange40,
+                inactiveTrackColor = Colors.Brown20,
+                disabledThumbColor = Colors.Brown20,
+                disabledActiveTrackColor = Colors.Orange40,
+                disabledActiveTickColor = Colors.Orange40,
+                disabledInactiveTrackColor = Colors.Brown20,
+                disabledInactiveTickColor = Colors.Brown20
+            )
     }
 
     object Card {
-        fun mainCardColors(): CardColors = CardColors(
-            containerColor = Colors.White,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.Brown80
-        )
+        fun mainCardColors(): CardColors =
+            CardColors(
+                containerColor = Colors.White,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = Colors.White,
+                disabledContentColor = Colors.Brown80
+            )
     }
 
     object IconButton {
-        fun mainButtonColors(): IconButtonColors = IconButtonColors(
-            containerColor = Colors.Brown80,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Brown80,
-            disabledContentColor = Colors.White
-        )
+        fun mainButtonColors(): IconButtonColors =
+            IconButtonColors(
+                containerColor = Colors.Brown80,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Brown80,
+                disabledContentColor = Colors.White
+            )
 
-        fun previousNextButton(color: Color): IconButtonColors = IconButtonColors(
-            containerColor = Colors.Transparent,
-            disabledContainerColor = Colors.Transparent,
-            contentColor = color,
-            disabledContentColor = Color.Transparent,
-        )
+        fun previousNextButton(color: Color): IconButtonColors =
+            IconButtonColors(
+                containerColor = Colors.Transparent,
+                disabledContainerColor = Colors.Transparent,
+                contentColor = color,
+                disabledContentColor = Color.Transparent
+            )
 
-        fun transparentButton(color: Color): IconButtonColors = IconButtonColors(
-            containerColor = Colors.Transparent,
-            disabledContainerColor = Colors.Transparent,
-            contentColor = color,
-            disabledContentColor = color,
-        )
+        fun transparentButton(color: Color): IconButtonColors =
+            IconButtonColors(
+                containerColor = Colors.Transparent,
+                disabledContainerColor = Colors.Transparent,
+                contentColor = color,
+                disabledContentColor = color
+            )
     }
 
     object Button {
-        fun bottomNavigationActionButtonColors(): ButtonColors = ButtonColors(
-            containerColor = Colors.Green60,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Green60,
-            disabledContentColor = Colors.White
-        )
+        fun bottomNavigationActionButtonColors(): ButtonColors =
+            ButtonColors(
+                containerColor = Colors.Green60,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Green60,
+                disabledContentColor = Colors.White
+            )
 
-        fun mainButtonColors(): ButtonColors = ButtonColors(
-            containerColor = Colors.Brown80,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Gray60,
-            disabledContentColor = Colors.Gray20
-        )
+        fun mainButtonColors(): ButtonColors =
+            ButtonColors(
+                containerColor = Colors.Brown80,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Gray60,
+                disabledContentColor = Colors.Gray20
+            )
 
-        fun mainButtonColorsInverted(): ButtonColors = ButtonColors(
-            containerColor = Colors.White,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.White,
-            disabledContentColor = Colors.Brown80
-        )
+        fun mainButtonColorsInverted(): ButtonColors =
+            ButtonColors(
+                containerColor = Colors.White,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = Colors.White,
+                disabledContentColor = Colors.Brown80
+            )
 
-        fun deleteButtonColors(): ButtonColors = ButtonColors(
-            containerColor = Colors.Orange50,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Orange50,
-            disabledContentColor = Colors.White
-        )
+        fun deleteButtonColors(): ButtonColors =
+            ButtonColors(
+                containerColor = Colors.Orange50,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Orange50,
+                disabledContentColor = Colors.White
+            )
 
         fun textRadioButtonColors(
             selected: Boolean,
-            colors: TextRadioButtonColors,
-        ): ButtonColors = ButtonColors(
-            containerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
-            contentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor,
-            disabledContainerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
-            disabledContentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor
-        )
+            colors: TextRadioButtonColors
+        ): ButtonColors =
+            ButtonColors(
+                containerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
+                contentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor,
+                disabledContainerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
+                disabledContentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor
+            )
     }
 
     object TextField {
         @Composable
-        fun expressionAnalysisColors(): TextFieldColors = textFieldColors(
-            indicatorColor = Colors.Transparent,
-            containerColor = Colors.White,
-            textColor = Colors.Gray60,
-            placeholderColor = Colors.Gray40,
-            cursorColor = Colors.Green40,
-        )
+        fun expressionAnalysisColors(): TextFieldColors =
+            textFieldColors(
+                indicatorColor = Colors.Transparent,
+                containerColor = Colors.White,
+                textColor = Colors.Gray60,
+                placeholderColor = Colors.Gray40,
+                cursorColor = Colors.Green40
+            )
 
         @Composable
-        fun mainTextFieldColors(): TextFieldColors = textFieldColors(
-            containerColor = Colors.White,
-            placeholderColor = Colors.Brown100Alpha64,
-            leadingIconColor = Colors.Brown80,
-            textColor = Colors.Brown100Alpha64,
-            cursorColor = Colors.Brown80,
-            focusedBorderColor = Colors.Green50,
-            errorBorderColor = Colors.Orange40,
-            unfocusedBorderColor = Colors.Transparent
-        )
+        fun mainTextFieldColors(): TextFieldColors =
+            textFieldColors(
+                containerColor = Colors.White,
+                placeholderColor = Colors.Brown100Alpha64,
+                leadingIconColor = Colors.Brown80,
+                textColor = Colors.Brown100Alpha64,
+                cursorColor = Colors.Brown80,
+                focusedBorderColor = Colors.Green50,
+                errorBorderColor = Colors.Orange40,
+                unfocusedBorderColor = Colors.Transparent
+            )
 
         fun textFieldColors(
             indicatorColor: Color = Color.Unspecified,
@@ -160,7 +174,7 @@ object ComponentColors {
             placeholderColor: Color,
             supportingTextColor: Color = Color.Unspecified,
             prefixColor: Color = Color.Unspecified,
-            suffixColor: Color = Color.Unspecified,
+            suffixColor: Color = Color.Unspecified
         ): TextFieldColors =
             TextFieldColors(
                 focusedIndicatorColor = indicatorColor,
@@ -174,10 +188,11 @@ object ComponentColors {
                 errorContainerColor = errorColor,
                 cursorColor = cursorColor,
                 errorCursorColor = errorColor,
-                textSelectionColors = TextSelectionColors(
-                    handleColor = indicatorColor,
-                    backgroundColor = containerColor
-                ),
+                textSelectionColors =
+                    TextSelectionColors(
+                        handleColor = indicatorColor,
+                        backgroundColor = containerColor
+                    ),
                 unfocusedIndicatorColor = indicatorColor,
                 disabledIndicatorColor = indicatorColor,
                 errorIndicatorColor = errorColor,
@@ -208,7 +223,7 @@ object ComponentColors {
                 focusedSuffixColor = suffixColor,
                 unfocusedSuffixColor = suffixColor,
                 disabledSuffixColor = suffixColor,
-                errorSuffixColor = errorColor,
+                errorSuffixColor = errorColor
             )
 
         @Composable
@@ -225,7 +240,7 @@ object ComponentColors {
             prefixColor: Color = Color.Unspecified,
             focusedBorderColor: Color = Color.Unspecified,
             unfocusedBorderColor: Color = Color.Unspecified,
-            errorBorderColor: Color = Color.Unspecified,
+            errorBorderColor: Color = Color.Unspecified
         ): TextFieldColors =
             OutlinedTextFieldDefaults.colors(
                 unfocusedTextColor = textColor,
@@ -280,10 +295,11 @@ object ComponentColors {
                 errorContainerColor = Colors.Transparent,
                 cursorColor = Colors.Brown80,
                 errorCursorColor = Colors.Brown80,
-                textSelectionColors = TextSelectionColors(
-                    handleColor = Colors.Brown60,
-                    backgroundColor = Colors.Green40
-                ),
+                textSelectionColors =
+                    TextSelectionColors(
+                        handleColor = Colors.Brown60,
+                        backgroundColor = Colors.Green40
+                    ),
                 focusedIndicatorColor = Colors.Transparent,
                 unfocusedIndicatorColor = Colors.Transparent,
                 disabledIndicatorColor = Colors.Transparent,
@@ -330,10 +346,11 @@ object ComponentColors {
                 errorContainerColor = Colors.Transparent,
                 cursorColor = Colors.Brown80,
                 errorCursorColor = Colors.Brown80,
-                textSelectionColors = TextSelectionColors(
-                    handleColor = Colors.Brown60,
-                    backgroundColor = Colors.Green40
-                ),
+                textSelectionColors =
+                    TextSelectionColors(
+                        handleColor = Colors.Brown60,
+                        backgroundColor = Colors.Green40
+                    ),
                 focusedIndicatorColor = Colors.Transparent,
                 unfocusedIndicatorColor = Colors.Transparent,
                 disabledIndicatorColor = Colors.Transparent,

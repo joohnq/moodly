@@ -6,17 +6,18 @@ import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource.No
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource.YesJustABit
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource.YesVeryPainful
 
-fun getAllPhysicalSymptomsResource(): List<PhysicalSymptomsResource> =
-    listOf(YesVeryPainful, No, YesJustABit)
+fun getAllPhysicalSymptomsResource(): List<PhysicalSymptomsResource> = listOf(YesVeryPainful, No, YesJustABit)
 
-fun PhysicalSymptoms.toResource(): PhysicalSymptomsResource = when (this) {
-    PhysicalSymptoms.YesVeryPainful -> YesVeryPainful
-    PhysicalSymptoms.No -> No
-    PhysicalSymptoms.YesJustABit -> YesJustABit
-}
+fun PhysicalSymptoms.toResource(): PhysicalSymptomsResource =
+    when (this) {
+        PhysicalSymptoms.YesVeryPainful -> YesVeryPainful
+        PhysicalSymptoms.No -> No
+        PhysicalSymptoms.YesJustABit -> YesJustABit
+    }
 
-fun PhysicalSymptomsResource.toDomain(): PhysicalSymptoms = when (this) {
-    YesVeryPainful -> PhysicalSymptoms.YesVeryPainful
-    No -> PhysicalSymptoms.No
-    YesJustABit -> PhysicalSymptoms.YesJustABit
-}
+fun PhysicalSymptomsResource.toDomain(): PhysicalSymptoms =
+    when (this) {
+        YesVeryPainful -> PhysicalSymptoms.YesVeryPainful
+        No -> PhysicalSymptoms.No
+        YesJustABit -> PhysicalSymptoms.YesJustABit
+    }

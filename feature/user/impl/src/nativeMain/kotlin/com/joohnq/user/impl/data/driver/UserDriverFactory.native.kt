@@ -3,8 +3,8 @@ package com.joohnq.user.impl.data.driver
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import co.touchlab.sqliter.DatabaseConfiguration
-import com.joohnq.user.impl.data.database.UserDatabase
 import com.joohnq.user.database.UserDatabaseSql
+import com.joohnq.user.impl.data.database.UserDatabase
 
 actual class UserDriverFactory {
     actual fun createDriver(): SqlDriver =

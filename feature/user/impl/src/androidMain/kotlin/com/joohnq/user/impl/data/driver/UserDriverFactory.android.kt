@@ -4,18 +4,22 @@ import android.content.Context
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import com.joohnq.user.impl.data.database.UserDatabase
 import com.joohnq.user.database.UserDatabaseSql
+import com.joohnq.user.impl.data.database.UserDatabase
 
-actual class UserDriverFactory(private val context: Context) {
-    actual fun createDriver(): SqlDriver = AndroidSqliteDriver(
-        UserDatabaseSql.Schema,
-        context,
-        UserDatabase.DATABASE_NAME,
-        callback = object : AndroidSqliteDriver.Callback(UserDatabaseSql.Schema) {
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                db.setForeignKeyConstraintsEnabled(true)
-            }
-        }
-    )
+actual class UserDriverFactory(
+    private val context: Context
+) {
+    actual fun createDriver(): SqlDriver =
+        AndroidSqliteDriver(
+            UserDatabaseSql.Schema,
+            context,
+            UserDatabase.DATABASE_NAME,
+            callback =
+                object : AndroidSqliteDriver.Callback(UserDatabaseSql.Schema) {
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        db.setForeignKeyConstraintsEnabled(true)
+                    }
+                }
+        )
 }

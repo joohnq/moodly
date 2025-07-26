@@ -10,7 +10,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class ProfessionalHelpResource(
     val id: Int,
     val text: StringResource,
-    val value: Boolean,
+    val value: Boolean
 ) {
     data object Yes : ProfessionalHelpResource(
         id = NO.id,

@@ -23,7 +23,7 @@ sealed interface DashboardContract {
         val freudScore: FreudScoreResource? = null,
         val selfJournalRecords: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
         val sleepQualityRecords: UiState<List<SleepQualityRecordResource>> = UiState.Idle,
-        val stressLevelRecords: UiState<List<StressLevelRecordResource>> = UiState.Idle,
+        val stressLevelRecords: UiState<List<StressLevelRecordResource>> = UiState.Idle
     )
 
     sealed interface SideEffect {

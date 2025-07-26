@@ -28,7 +28,6 @@ fun FreudScoreMetric(
         suffix = stringResource(Res.string.freud_score),
         description = stringResource(freudScore.title),
         content = {
-
         },
         color = Colors.White,
         onClick = onClick

@@ -19,11 +19,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalingMetric(
     records: List<SelfJournalRecordResource>,
-    onCreate: () -> Unit = {},
+    onCreate: () -> Unit = {}
 ) {
     val resource = records.getTodaySelfJournalRecord()
 
-    if (resource == null)
+    if (resource == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -32,7 +32,7 @@ fun SelfJournalingMetric(
             image = Drawables.Images.SelfJournalCreate,
             onClick = onCreate
         )
-    else {
+    } else {
         JournalCalendar(
             modifier = Modifier.paddingHorizontalMedium(),
             records = records,
@@ -40,7 +40,7 @@ fun SelfJournalingMetric(
                 Res.string.journals_written_in,
                 resource.createdAt.toMonthNameString()
             ),
-            onCreate = onCreate,
+            onCreate = onCreate
         )
     }
 }

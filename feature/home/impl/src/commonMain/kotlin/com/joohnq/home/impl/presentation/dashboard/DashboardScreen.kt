@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun DashboardScreen(
-    onEvent: (DashboardContract.Event) -> Unit,
+    onEvent: (DashboardContract.Event) -> Unit
 ) {
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
@@ -73,16 +73,16 @@ fun DashboardScreen(
                 onClick = {
                     centralIsExpanded = !centralIsExpanded
                 },
-                image = if (centralIsExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo,
+                image = if (centralIsExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButtonPosition = FabPosition.Center
     ) { padding ->
         NavHost(
             modifier = Modifier
                 .takeIf(centralIsExpanded) {
                     Modifier.blur(
-                        radius = 15.dp,
+                        radius = 15.dp
                     )
                 },
             navController = navigator,
@@ -98,10 +98,11 @@ fun DashboardScreen(
             }
         }
 
-        if (centralIsExpanded)
+        if (centralIsExpanded) {
             DashboardCentral(
                 padding = padding.plus(bottom = 50.dp),
                 onEvent = onEvent
             )
+        }
     }
 }

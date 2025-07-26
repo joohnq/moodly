@@ -27,17 +27,18 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
-    record: StressLevelRecordResource,
+    record: StressLevelRecordResource
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
-        shape = Dimens.Shape.Large,
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
+        shape = Dimens.Shape.Large
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().paddingAllSmall(),
@@ -53,10 +54,11 @@ fun StressLevelHistoryCard(
             HorizontalSpacer(20.dp)
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(
-                    8.dp,
-                    alignment = Alignment.CenterVertically
-                )
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        8.dp,
+                        alignment = Alignment.CenterVertically
+                    )
             ) {
                 Text(
                     text = stringResource(record.stressLevel.subtitle),
@@ -64,9 +66,14 @@ fun StressLevelHistoryCard(
                     color = Colors.Brown80
                 )
                 Text(
-                    text = if (record.stressors.isNotEmpty()) record.stressors.joinToString(", ") else stringResource(
-                        StressorResource.InPeace.text
-                    ),
+                    text =
+                        if (record.stressors.isNotEmpty()) {
+                            record.stressors.joinToString(", ")
+                        } else {
+                            stringResource(
+                                StressorResource.InPeace.text
+                            )
+                        },
                     style = TextStyles.textSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis

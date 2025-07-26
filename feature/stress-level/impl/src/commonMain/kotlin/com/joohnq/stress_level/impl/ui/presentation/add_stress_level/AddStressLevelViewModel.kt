@@ -5,11 +5,11 @@ import com.joohnq.stress_level.impl.ui.mapper.fromSliderValueToStressLevelResour
 import com.joohnq.ui.BaseViewModel
 
 class AddStressLevelViewModel(
-    initialState: AddStressLevelContract.State = AddStressLevelContract.State(),
+    initialState: AddStressLevelContract.State = AddStressLevelContract.State()
 ) : BaseViewModel<AddStressLevelContract.State, AddStressLevelContract.Intent, AddStressLevelContract.SideEffect>(
-    initialState = initialState
-), AddStressLevelContract.ViewModel {
-
+        initialState = initialState
+    ),
+    AddStressLevelContract.ViewModel {
     override fun onIntent(intent: AddStressLevelContract.Intent) {
         when (intent) {
             is AddStressLevelContract.Intent.UpdateAddingStressors ->
@@ -17,7 +17,9 @@ class AddStressLevelViewModel(
                     it.copy(
                         record =
                             it.record.copy(
-                                stressors = state.value.record.stressors.toggle(intent.stressor)
+                                stressors =
+                                    state.value.record.stressors
+                                        .toggle(intent.stressor)
                             )
                     )
                 }
@@ -26,9 +28,10 @@ class AddStressLevelViewModel(
                 updateState {
                     it.copy(
                         sliderValue = intent.sliderValue,
-                        record = it.record.copy(
-                            stressLevel = intent.sliderValue.fromSliderValueToStressLevelResource()
-                        )
+                        record =
+                            it.record.copy(
+                                stressLevel = intent.sliderValue.fromSliderValueToStressLevelResource()
+                            )
                     )
                 }
 

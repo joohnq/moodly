@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressHistoryPreview() {
     StressHistory(
-        records = StressLevelRecordResource.allStressLevelRecordResourcePreview,
+        records = StressLevelRecordResource.allStressLevelRecordResourcePreview
     )
 }
 
@@ -16,6 +16,6 @@ fun StressHistoryPreview() {
 @Composable
 fun StressHistoryEmptyPreview() {
     StressHistory(
-        records = listOf(),
+        records = listOf()
     )
 }

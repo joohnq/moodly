@@ -42,7 +42,7 @@ fun StressStressorsContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
     onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressStressorsEvent) -> Unit = {},
+    onEvent: (StressStressorsEvent) -> Unit = {}
 ) {
     val stressors = remember { getAllStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
@@ -50,12 +50,14 @@ fun StressStressorsContent(
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding)
-                .paddingHorizontalMedium()
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .paddingHorizontalMedium()
+                    .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AppTopBar(
@@ -84,20 +86,22 @@ fun StressStressorsContent(
                                     AddStressLevelContract.Intent.UpdateAddingStressors(stressor)
                                 )
                             },
-                            selected = state.record.stressors.contains(
-                                stressor
-                            ),
+                            selected =
+                                state.record.stressors.contains(
+                                    stressor
+                                )
                         )
                     }
-                },
+                }
             )
             VerticalSpacer(24.dp)
-            if (canContinue)
+            if (canContinue) {
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
                     onClick = { onEvent(StressStressorsEvent.Continue) }
                 )
+            }
         }
     }
 }

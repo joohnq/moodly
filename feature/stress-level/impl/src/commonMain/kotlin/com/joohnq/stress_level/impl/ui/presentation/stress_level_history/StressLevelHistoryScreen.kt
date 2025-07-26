@@ -10,7 +10,7 @@ import com.joohnq.ui.sharedViewModel
 fun StressLevelHistoryScreen(
     onGoBack: () -> Unit,
     onAddStressLevel: () -> Unit,
-    onNavigateStressLevel: () -> Unit,
+    onNavigateStressLevel: () -> Unit
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val state by stressLevelViewModel.state.collectAsState()

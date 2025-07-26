@@ -14,8 +14,8 @@ import com.joohnq.api.mapper.toPercentage
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
@@ -37,26 +37,27 @@ fun StressTriggersSection(
 
     SectionHeader(
         modifier = modifier,
-        title = Res.string.stress_trigger,
+        title = Res.string.stress_trigger
     )
-    if (stressors.size < 3)
+    if (stressors.size < 3) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
             subtitle = Res.string.log_stress_level,
             image = Drawables.Images.StressLevelTrigger,
-            onClick = onAddStressLevel,
+            onClick = onAddStressLevel
         )
-    else {
+    } else {
         Card(
             modifier = modifier.fillMaxWidth(),
-            colors = CardColors(
-                containerColor = Colors.Gray5,
-                contentColor = Colors.Gray80,
-                disabledContainerColor = Colors.Gray5,
-                disabledContentColor = Colors.Gray80
-            )
+            colors =
+                CardColors(
+                    containerColor = Colors.Gray5,
+                    contentColor = Colors.Gray80,
+                    disabledContainerColor = Colors.Gray5,
+                    disabledContentColor = Colors.Gray80
+                )
         ) {
             Column(
                 modifier = Modifier.paddingAllSmall(),
@@ -87,14 +88,16 @@ fun StressTriggersSection(
                 }
                 VerticalSpacer(16.dp)
                 Text(
-                    text = if (stressors.size == 1)
-                        stringResource(stressorsMap[0].first.text)
-                    else
-                        stringResource(
-                            Res.string.stress_trigger_title,
-                            stringResource(stressorsMap[0].first.text),
-                            stringResource(stressorsMap[1].first.text)
-                        ),
+                    text =
+                        if (stressors.size == 1) {
+                            stringResource(stressorsMap[0].first.text)
+                        } else {
+                            stringResource(
+                                Res.string.stress_trigger_title,
+                                stringResource(stressorsMap[0].first.text),
+                                stringResource(stressorsMap[1].first.text)
+                            )
+                        },
                     style = TextStyles.textXlBold(),
                     color = Colors.Gray80
                 )

@@ -23,7 +23,7 @@ fun StressLevelMetric(
 ) {
     val record = records.getTodayStressLevelRecord()
 
-    if (record == null)
+    if (record == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -32,7 +32,7 @@ fun StressLevelMetric(
             image = Drawables.Images.StressLevelHistory,
             onClick = onCreate
         )
-    else
+    } else {
         MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -47,4 +47,5 @@ fun StressLevelMetric(
             color = Colors.Orange40,
             onClick = onClick
         )
+    }
 }

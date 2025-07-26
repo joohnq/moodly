@@ -26,9 +26,10 @@ fun MultiColorCircularProgress(
     val normalizedSegments = segments.map { it.first to (it.second / totalProgress) }
 
     Canvas(
-        modifier = modifier
-            .size(100.dp)
-            .padding(8.dp)
+        modifier =
+            modifier
+                .size(100.dp)
+                .padding(8.dp)
     ) {
         val radius = size.minDimension / 2
         val center = Offset(size.width / 2, size.height / 2)

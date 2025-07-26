@@ -18,7 +18,7 @@ fun JournalHistory(
     onCreate: () -> Unit = {},
     onClick: (Int) -> Unit = {}
 ) {
-    if (records.isEmpty())
+    if (records.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -27,7 +27,7 @@ fun JournalHistory(
             image = Drawables.Images.SelfJournalHistory,
             onClick = onCreate
         )
-    else
+    } else {
         Column(modifier = modifier) {
             records.forEach { record ->
                 JournalHistoryCard(
@@ -36,4 +36,5 @@ fun JournalHistory(
                 )
             }
         }
+    }
 }

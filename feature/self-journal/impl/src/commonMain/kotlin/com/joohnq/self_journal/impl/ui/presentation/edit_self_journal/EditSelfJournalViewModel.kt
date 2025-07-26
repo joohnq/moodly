@@ -3,10 +3,11 @@ package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 import com.joohnq.ui.BaseViewModel
 
 class EditSelfJournalViewModel(
-    initialState: EditSelfJournalContract.State = EditSelfJournalContract.State(),
+    initialState: EditSelfJournalContract.State = EditSelfJournalContract.State()
 ) : BaseViewModel<EditSelfJournalContract.State, EditSelfJournalContract.Intent, EditSelfJournalContract.SideEffect>(
-    initialState = initialState
-), EditSelfJournalContract.ViewModel {
+        initialState = initialState
+    ),
+    EditSelfJournalContract.ViewModel {
     override fun onIntent(intent: EditSelfJournalContract.Intent) {
         when (intent) {
             EditSelfJournalContract.Intent.ResetState ->
@@ -15,9 +16,10 @@ class EditSelfJournalViewModel(
             is EditSelfJournalContract.Intent.UpdateDescription ->
                 updateState {
                     it.copy(
-                        editingSelfJournalRecord = it.editingSelfJournalRecord.copy(
-                            description = intent.description
-                        ),
+                        editingSelfJournalRecord =
+                            it.editingSelfJournalRecord.copy(
+                                description = intent.description
+                            )
                     )
                 }
 

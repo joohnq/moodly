@@ -7,22 +7,23 @@ import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJou
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val selfJournalUiModule: Module = module {
-    single<SelfJournalViewModel> {
-        SelfJournalViewModel(
-            getSelfJournalsUseCase = get(),
-            deleteSelfJournalsUseCase = get(),
-            updateSelfJournalsUseCase = get(),
-            addSelfJournalsUseCase = get(),
-        )
+val selfJournalUiModule: Module =
+    module {
+        single<SelfJournalViewModel> {
+            SelfJournalViewModel(
+                getSelfJournalsUseCase = get(),
+                deleteSelfJournalsUseCase = get(),
+                updateSelfJournalsUseCase = get(),
+                addSelfJournalsUseCase = get()
+            )
+        }
+        single<AddSelfJournalViewModel> {
+            AddSelfJournalViewModel()
+        }
+        single<SelfJournalHistoryViewModel> {
+            SelfJournalHistoryViewModel()
+        }
+        single<EditSelfJournalViewModel> {
+            EditSelfJournalViewModel()
+        }
     }
-    single<AddSelfJournalViewModel> {
-        AddSelfJournalViewModel()
-    }
-    single<SelfJournalHistoryViewModel> {
-        SelfJournalHistoryViewModel()
-    }
-    single<EditSelfJournalViewModel> {
-        EditSelfJournalViewModel()
-    }
-}

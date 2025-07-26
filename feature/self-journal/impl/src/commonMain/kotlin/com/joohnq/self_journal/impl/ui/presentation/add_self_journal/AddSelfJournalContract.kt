@@ -6,16 +6,30 @@ import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AddSelfJournalContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Event {
         data object OnGoBack : Event
+
         data object OnAdd : Event
     }
 
     sealed interface Intent {
-        data class UpdateMood(val mood: MoodResource?) : Intent
-        data class UpdateTitle(val title: String) : Intent
-        data class UpdateDescription(val description: String) : Intent
-        data class UpdateTitleError(val error: String?) : Intent
+        data class UpdateMood(
+            val mood: MoodResource?
+        ) : Intent
+
+        data class UpdateTitle(
+            val title: String
+        ) : Intent
+
+        data class UpdateDescription(
+            val description: String
+        ) : Intent
+
+        data class UpdateTitleError(
+            val error: String?
+        ) : Intent
+
         data object ResetState : Intent
     }
 
@@ -27,6 +41,6 @@ sealed interface AddSelfJournalContract {
         val titleError: String? = null,
         val description: String = "",
         val selectedStressStressors: List<StressorResource> = mutableListOf(),
-        val sliderValue: Float = 0f,
+        val sliderValue: Float = 0f
     )
 }

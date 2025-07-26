@@ -12,10 +12,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SelfJournalingDaySkippedPreview() {
     SelfJournalingDay(
         average = MoodAverageResource.Skipped,
-        day = CalendarDay(
-            date = getNow().date,
-            position = DayPosition.InDate
-        )
+        day =
+            CalendarDay(
+                date = getNow().date,
+                position = DayPosition.InDate
+            )
     )
 }
 
@@ -24,10 +25,11 @@ fun SelfJournalingDaySkippedPreview() {
 fun SelfJournalingDayNeutralPreview() {
     SelfJournalingDay(
         average = MoodAverageResource.Neutral,
-        day = CalendarDay(
-            date = getNow().date,
-            position = DayPosition.InDate
-        )
+        day =
+            CalendarDay(
+                date = getNow().date,
+                position = DayPosition.InDate
+            )
     )
 }
 
@@ -36,10 +38,11 @@ fun SelfJournalingDayNeutralPreview() {
 fun SelfJournalingDayNegativePreview() {
     SelfJournalingDay(
         average = MoodAverageResource.Negative,
-        day = CalendarDay(
-            date = getNow().date,
-            position = DayPosition.InDate
-        )
+        day =
+            CalendarDay(
+                date = getNow().date,
+                position = DayPosition.InDate
+            )
     )
 }
 
@@ -48,9 +51,10 @@ fun SelfJournalingDayNegativePreview() {
 fun SelfJournalingDayPositivePreview() {
     SelfJournalingDay(
         average = MoodAverageResource.Positive,
-        day = CalendarDay(
-            date = getNow().date,
-            position = DayPosition.InDate
-        )
+        day =
+            CalendarDay(
+                date = getNow().date,
+                position = DayPosition.InDate
+            )
     )
 }

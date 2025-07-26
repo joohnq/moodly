@@ -24,7 +24,7 @@ fun SplashScreen(
     onNavigateToSecurity: () -> Unit,
     onNavigateToDashboard: () -> Unit,
     onNavigateToUnLock: () -> Unit,
-    onNavigateToCorruptedSecurity: () -> Unit,
+    onNavigateToCorruptedSecurity: () -> Unit
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
@@ -49,8 +49,8 @@ fun SplashScreen(
         ).fold(
             onSuccess = { preferences: AppPreferences, security: Security ->
                 when {
-                    security is Security.Biometric
-                            || security is Security.Pin -> onNavigateToUnLock()
+                    security is Security.Biometric ||
+                        security is Security.Pin -> onNavigateToUnLock()
 
                     security is Security.Corrupted -> onNavigateToCorruptedSecurity()
                     !preferences.skipWelcome -> onNavigateToWelcome()

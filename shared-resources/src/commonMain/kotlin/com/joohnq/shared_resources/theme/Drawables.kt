@@ -56,7 +56,7 @@ object Drawables {
             val Document = Res.drawable.ic_document
             val Head = Res.drawable.ic_head
             val Target = Res.drawable.ic_target
-            val RouletteTarget = com.joohnq.shared_resources.icons.RouletteTarget
+            val RouletteTarget = com.joohnq.shared_resources.icons.RouletteTargetImageVector
             val Clock = Res.drawable.ic_clock
             val MoreHorizontal = Res.drawable.ic_more_horizontal
             val Trash = Res.drawable.ic_trash

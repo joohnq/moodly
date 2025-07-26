@@ -17,8 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.components.MoodRouletteWheel
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.IconContinueButton
@@ -33,14 +32,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingMoodRateContent(
     state: MoodRecordResource,
-    onEvent: (com.joohnq.onboarding.impl.ui.event.OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {}
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onGoBack = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack) }
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
             text = stringResource(
@@ -64,7 +63,7 @@ fun OnboardingMoodRateContent(
         IconContinueButton(
             modifier = Modifier.size(60.dp),
             colors = ComponentColors.IconButton.mainButtonColors(),
-            onClick = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext) }
+            onClick = { onEvent(OnboardingEvent.OnNavigateToNext) }
         )
     }
 

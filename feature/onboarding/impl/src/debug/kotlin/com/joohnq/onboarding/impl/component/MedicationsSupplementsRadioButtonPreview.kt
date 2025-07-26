@@ -1,8 +1,9 @@
-package com.joohnq.onboarding.impl.components
+package com.joohnq.onboarding.impl.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.joohnq.onboarding.impl.ui.component.MedicationsSupplementsRadioButton
 import com.joohnq.user.impl.ui.parameter.MedicationsSupplementsResourceParameterProvider
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -11,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MedicationsSupplementsRadioButtonPreview(
     @PreviewParameter(MedicationsSupplementsResourceParameterProvider::class)
-    item: MedicationsSupplementsResource
+    item: MedicationsSupplementsResource,
 ) {
     Column {
         MedicationsSupplementsRadioButton(

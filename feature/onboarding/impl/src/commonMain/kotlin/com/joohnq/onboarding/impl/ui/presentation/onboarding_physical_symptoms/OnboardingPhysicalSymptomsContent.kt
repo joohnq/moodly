@@ -10,9 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.onboarding.impl.components.PhysicalSymptomsRadioButton
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
+import com.joohnq.onboarding.impl.ui.component.PhysicalSymptomsRadioButton
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -27,8 +26,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingPhysicalSymptomsContent(
     state: PhysicalSymptomsResource?,
-    onEvent: (com.joohnq.onboarding.impl.ui.event.OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {}
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options = remember { getAllPhysicalSymptomsResource() }
 
@@ -36,8 +35,8 @@ fun OnboardingPhysicalSymptomsContent(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = state != null,
-        onGoBack = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext) }
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -51,7 +50,7 @@ fun OnboardingPhysicalSymptomsContent(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             options.forEach { option: PhysicalSymptomsResource ->
-                _root_ide_package_.com.joohnq.onboarding.impl.ui.components.PhysicalSymptomsRadioButton(
+                PhysicalSymptomsRadioButton(
                     modifier = Modifier.fillMaxWidth().testTag(option.id.toString()),
                     text = stringResource(option.text),
                     icon = option.icon,

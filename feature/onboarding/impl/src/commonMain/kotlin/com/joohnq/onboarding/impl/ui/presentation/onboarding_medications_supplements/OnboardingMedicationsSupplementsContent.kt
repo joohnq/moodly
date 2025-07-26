@@ -10,9 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.onboarding.impl.components.MedicationsSupplementsRadioButton
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
+import com.joohnq.onboarding.impl.ui.component.MedicationsSupplementsRadioButton
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.medications_supplements_title
@@ -23,8 +22,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun OnboardingMedicationsSupplementsContent(
     state: MedicationsSupplementsResource?,
-    onEvent: (com.joohnq.onboarding.impl.ui.event.OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {}
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options: List<MedicationsSupplementsResource> =
         remember { getAllMedicationsSupplementsResource() }
@@ -33,8 +32,8 @@ fun OnboardingMedicationsSupplementsContent(
         page = 5,
         title = Res.string.medications_supplements_title,
         isContinueButtonVisible = state != null,
-        onGoBack = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext) }
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -44,7 +43,7 @@ fun OnboardingMedicationsSupplementsContent(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(options) { option: MedicationsSupplementsResource ->
-                _root_ide_package_.com.joohnq.onboarding.impl.ui.components.MedicationsSupplementsRadioButton(
+                MedicationsSupplementsRadioButton(
                     modifier = Modifier.fillMaxSize().aspectRatio(1f),
                     text = stringResource(option.text),
                     icon = option.icon,

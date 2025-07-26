@@ -7,6 +7,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AvatarContentPreview() {
     AvatarContent(
-        state = AvatarContract.State(),
+        state = AvatarContract.State()
     )
 }

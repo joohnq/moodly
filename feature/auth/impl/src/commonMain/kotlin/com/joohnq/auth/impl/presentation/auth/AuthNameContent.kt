@@ -44,7 +44,7 @@ fun AuthNameContent(
     state: AuthNameContract.State,
     onEvent: (AuthNameContract.Event) -> Unit,
     onClearFocus: () -> Unit,
-    onGetAction: (AuthNameContract.Intent) -> Unit,
+    onGetAction: (AuthNameContract.Intent) -> Unit
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
@@ -79,7 +79,7 @@ fun AuthNameContent(
                 modifier = Modifier
                     .paddingHorizontalMedium()
                     .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = stringResource(Res.string.how_we_can_call_you),
@@ -103,15 +103,16 @@ fun AuthNameContent(
                         )
                     },
                     colors = ComponentColors.TextField.mainTextFieldColors(),
-                    onValueChange = { onGetAction(AuthNameContract.Intent.Update(it)) },
+                    onValueChange = { onGetAction(AuthNameContract.Intent.Update(it)) }
                 )
                 VerticalSpacer(24.dp)
-                if (canContinue)
+                if (canContinue) {
                     PrimaryButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                         text = Res.string.continue_word,
                         onClick = { onEvent(AuthNameContract.Event.OnContinue) }
                     )
+                }
             }
         }
     }

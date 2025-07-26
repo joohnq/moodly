@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AvatarScreen(
-    onNavigateToUserName: () -> Unit,
+    onNavigateToUserName: () -> Unit
 ) {
     val snackBarState = rememberSnackBarState()
     val avatars = rememberAvatars()
@@ -51,7 +51,7 @@ fun AvatarScreen(
         createPermissionsManager(object : PermissionCallback {
             override fun onPermissionStatus(
                 permissionType: PermissionType,
-                status: PermissionStatus,
+                status: PermissionStatus
             ) {
                 when (status) {
                     PermissionStatus.GRANTED -> {
@@ -137,10 +137,11 @@ fun AvatarScreen(
             }
 
             AvatarContract.Event.OnContinue -> {
-                val action = if (avatarState.imageBitmap == null)
+                val action = if (avatarState.imageBitmap == null) {
                     UserContract.Intent.UpdateImageDrawable(avatarState.selectedDrawableIndex)
-                else
+                } else {
                     UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
+                }
 
                 userViewModel.onIntent(action)
             }
@@ -170,6 +171,6 @@ fun AvatarScreen(
         snackBarState = snackBarState,
         state = avatarState,
         avatars = avatars,
-        onEvent = ::onEvent,
+        onEvent = ::onEvent
     )
 }

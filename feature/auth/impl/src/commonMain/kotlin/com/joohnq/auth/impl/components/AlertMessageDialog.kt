@@ -32,13 +32,13 @@ fun AlertMessageDialog(
     positiveButtonText: String? = null,
     negativeButtonText: String? = null,
     onPositiveClick: () -> Unit = {},
-    onNegativeClick: () -> Unit = {},
+    onNegativeClick: () -> Unit = {}
 ) {
     Dialog(
         onDismissRequest = {},
         properties = DialogProperties(
             dismissOnBackPress = false,
-            dismissOnClickOutside = false,
+            dismissOnClickOutside = false
         )
     ) {
         Surface(
@@ -77,7 +77,8 @@ fun AlertMessageDialog(
                 ) {
                     negativeButtonText?.let {
                         Button(
-                            modifier = Modifier.weight(1f), onClick = {
+                            modifier = Modifier.weight(1f),
+                            onClick = {
                                 onNegativeClick()
                             }
                         ) {
@@ -92,7 +93,8 @@ fun AlertMessageDialog(
                     }
                     positiveButtonText?.let {
                         Button(
-                            modifier = Modifier.weight(1f), onClick = {
+                            modifier = Modifier.weight(1f),
+                            onClick = {
                                 onPositiveClick()
                             }
                         ) {

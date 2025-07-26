@@ -47,7 +47,7 @@ fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AvatarContract.State,
     avatars: List<DrawableResource> = rememberAvatars(),
-    onEvent: (AvatarContract.Event) -> Unit = {},
+    onEvent: (AvatarContract.Event) -> Unit = {}
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

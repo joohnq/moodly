@@ -3,10 +3,11 @@ package com.joohnq.auth.impl.presentation.avatar
 import com.joohnq.ui.BaseViewModel
 
 class AvatarViewModel(
-    initialState: AvatarContract.State = AvatarContract.State(),
+    initialState: AvatarContract.State = AvatarContract.State()
 ) : BaseViewModel<AvatarContract.State, AvatarContract.Intent, AvatarContract.SideEffect>(
     initialState = initialState
-), AvatarContract.ViewModel {
+),
+    AvatarContract.ViewModel {
     override fun onIntent(intent: AvatarContract.Intent) {
         when (intent) {
             is AvatarContract.Intent.UpdateImageBitmap ->

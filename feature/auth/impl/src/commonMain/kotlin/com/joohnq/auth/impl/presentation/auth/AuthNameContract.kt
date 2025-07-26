@@ -15,7 +15,7 @@ sealed interface AuthNameContract {
 
     data class State(
         val name: String = "",
-        val nameError: String? = null,
+        val nameError: String? = null
     )
 
     sealed interface Event {

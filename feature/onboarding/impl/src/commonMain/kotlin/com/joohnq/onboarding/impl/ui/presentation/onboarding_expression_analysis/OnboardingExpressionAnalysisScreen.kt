@@ -9,8 +9,8 @@ import com.joohnq.api.entity.User
 import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
 import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.viewmodel.OnboardingViewModel
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -32,15 +32,15 @@ data class Quad<out A, out B, out C, out D>(
     val first: A,
     val second: B,
     val third: C,
-    val fourth: D
+    val fourth: D,
 )
 
 @Composable
 fun OnboardingExpressionAnalysisScreen(
     onNavigateToUserName: () -> Unit,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
-    val onboardingViewModel: com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel = sharedViewModel()
+    val onboardingViewModel: OnboardingViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
     val moodViewModel: MoodViewModel = sharedViewModel()
     val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
@@ -92,16 +92,16 @@ fun OnboardingExpressionAnalysisScreen(
         )
     }
 
-    fun onEvent(event: com.joohnq.onboarding.impl.ui.event.OnboardingEvent) =
+    fun onEvent(event: OnboardingEvent) =
         when (event) {
-            _root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext -> {
+            OnboardingEvent.OnNavigateToNext -> {
                 addSleepQualityRecord()
                 addStressLevelRecord()
                 addMoodRecord()
                 updateUser()
             }
 
-            _root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack -> onGoBack()
+            OnboardingEvent.OnGoBack -> onGoBack()
         }
 
     LaunchedEffect(

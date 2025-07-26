@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.moodapp.navigation.appNavigation
 import com.joohnq.auth.impl.ui.navigation.authNavigation
-import com.joohnq.onboarding.impl.navigation.onboardingNavigation
 import com.joohnq.security.impl.ui.navigation.securityNavigation
 import com.joohnq.splash.impl.ui.navigation.splashNavigation
 import com.joohnq.welcome.impl.ui.navigation.welcomeNavigation
@@ -17,6 +16,7 @@ import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate
 import com.joohnq.navigation.onNavigateBack
 import com.joohnq.navigation.onNavigateGraph
+import com.joohnq.onboarding.impl.ui.navigation.onboardingNavigation
 import org.koin.compose.KoinContext
 
 @Composable

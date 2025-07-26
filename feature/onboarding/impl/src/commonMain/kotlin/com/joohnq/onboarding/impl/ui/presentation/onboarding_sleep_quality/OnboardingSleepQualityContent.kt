@@ -17,8 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.slider.AppVerticalSlider
@@ -41,8 +40,8 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingSleepQualityContent(
     state: SleepQualityRecordResource,
     sliderValue: Float,
-    onEvent: (com.joohnq.onboarding.impl.ui.event.OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {}
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val moods = remember { getAllMoodResource().reversed() }
     val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
@@ -50,8 +49,8 @@ fun OnboardingSleepQualityContent(
     _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
         page = 4,
         title = Res.string.sleep_quality_title,
-        onGoBack = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext) }
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             VerticalSpacer(20.dp)

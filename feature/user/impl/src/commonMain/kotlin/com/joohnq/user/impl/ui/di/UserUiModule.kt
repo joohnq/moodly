@@ -14,7 +14,6 @@ val userUiModule: Module =
                 updateUserNameUseCase = get(),
                 updateUserImageBitmapUseCase = get(),
                 updateUserImageDrawableUseCase = get(),
-                initialState = get()
             )
         }
     }

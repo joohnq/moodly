@@ -9,7 +9,7 @@ import com.joohnq.splash.impl.presentation.splash_screen.SplashScreen
 
 fun NavGraphBuilder.splashNavigation(
     onNavigate: (Destination, Boolean) -> Unit,
-    onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
+    onNavigateGraph: (NavigationGraph, Boolean) -> Unit
 ) {
     navigation<NavigationGraph.Loading>(startDestination = Destination.Loading) {
         composable<Destination.Loading> {
@@ -34,7 +34,7 @@ fun NavGraphBuilder.splashNavigation(
                 },
                 onNavigateToUnLock = {
                     onNavigate(Destination.Security.UnLock, true)
-                },
+                }
             )
         }
     }

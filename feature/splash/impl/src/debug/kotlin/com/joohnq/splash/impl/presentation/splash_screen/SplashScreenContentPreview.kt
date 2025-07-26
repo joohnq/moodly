@@ -8,4 +8,3 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun SplashScreenContentPreview() {
     SplashScreenContent()
 }
-

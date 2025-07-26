@@ -11,15 +11,15 @@ import com.joohnq.stress_level.impl.ui.mapper.toDomain
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelViewModel
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
-import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun StressStressorsScreen(
     onGoBack: () -> Unit,
-    onNavigateToStressLevel: () -> Unit,
+    onNavigateToStressLevel: () -> Unit
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
@@ -67,6 +67,6 @@ fun StressStressorsScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onAddAction = addStressLevelViewModel::onIntent,
+        onAddAction = addStressLevelViewModel::onIntent
     )
 }

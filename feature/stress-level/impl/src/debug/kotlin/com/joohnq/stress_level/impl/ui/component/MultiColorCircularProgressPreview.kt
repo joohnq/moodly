@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MultiColorCircularProgressPreview() {
     MultiColorCircularProgress(
-        segments = StressLevelRecordResource.allStressLevelRecordResourcePreview.toSegments(),
+        segments = StressLevelRecordResource.allStressLevelRecordResourcePreview.toSegments()
     )
 }

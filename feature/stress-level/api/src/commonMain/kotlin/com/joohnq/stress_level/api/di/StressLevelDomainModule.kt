@@ -6,8 +6,9 @@ import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val stressLevelDomainModule = module {
-    factoryOf(::AddStressLevelUseCase)
-    factoryOf(::GetStressLevelsUseCase)
-    factoryOf(::DeleteStressLevelUseCase)
-}
+val stressLevelDomainModule =
+    module {
+        factoryOf(::AddStressLevelUseCase)
+        factoryOf(::GetStressLevelsUseCase)
+        factoryOf(::DeleteStressLevelUseCase)
+    }

@@ -23,9 +23,9 @@ fun StressInsight(
 
     SectionHeader(
         modifier = modifier,
-        title = Res.string.stress_insight,
+        title = Res.string.stress_insight
     )
-    if (stressors.isEmpty())
+    if (stressors.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -34,10 +34,11 @@ fun StressInsight(
             image = Drawables.Images.StressLevelInsight,
             onClick = onCreate
         )
-    else
+    } else {
         StressInsightCard(
             modifier = modifier,
             stressors = stressors,
             mostActive = stressors.last().first
         )
+    }
 }

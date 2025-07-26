@@ -19,11 +19,11 @@ class StressLevelViewModel(
     private val addStressLevelUseCase: AddStressLevelUseCase,
     private val getStressLevelsUseCase: GetStressLevelsUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
-    initialState: StressLevelContract.State = StressLevelContract.State(),
+    initialState: StressLevelContract.State = StressLevelContract.State()
 ) : BaseViewModel<StressLevelContract.State, StressLevelContract.Intent, StressLevelContract.SideEffect>(
-    initialState = initialState
-), StressLevelContract.ViewModel {
-
+        initialState = initialState
+    ),
+    StressLevelContract.ViewModel {
     override fun onIntent(intent: StressLevelContract.Intent) {
         when (intent) {
             StressLevelContract.Intent.GetAll -> getAll()
@@ -36,19 +36,21 @@ class StressLevelViewModel(
         viewModelScope.launch {
             val res = deleteStressLevelUseCase(id).toUiState()
 
-            res.onSuccess {
-                emitEffect(StressLevelContract.SideEffect.Deleted)
-                updateState {
-                    it.copy(
-                        UiState.Success(
-                            state.value.records.getValueOrEmpty()
-                                .filter { item -> item.id != id }
+            res
+                .onSuccess {
+                    emitEffect(StressLevelContract.SideEffect.Deleted)
+                    updateState {
+                        it.copy(
+                            UiState.Success(
+                                state.value.records
+                                    .getValueOrEmpty()
+                                    .filter { item -> item.id != id }
+                            )
                         )
-                    )
+                    }
+                }.onFailure {
+                    emitEffect(StressLevelContract.SideEffect.ShowError(it))
                 }
-            }.onFailure {
-                emitEffect(StressLevelContract.SideEffect.ShowError(it))
-            }
         }
     }
 
@@ -56,9 +58,10 @@ class StressLevelViewModel(
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
 
-            val res = getStressLevelsUseCase()
-                .toResultResource { it.toResource() }
-                .toUiState()
+            val res =
+                getStressLevelsUseCase()
+                    .toResultResource { it.toResource() }
+                    .toUiState()
 
             updateState { it.copy(res) }
         }
@@ -68,11 +71,12 @@ class StressLevelViewModel(
         viewModelScope.launch {
             val res = addStressLevelUseCase(record).toUiState()
 
-            res.onSuccess {
-                emitEffect(StressLevelContract.SideEffect.Added)
-            }.onFailure {
-                emitEffect(StressLevelContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(StressLevelContract.SideEffect.Added)
+                }.onFailure {
+                    emitEffect(StressLevelContract.SideEffect.ShowError(it))
+                }
         }
     }
 }

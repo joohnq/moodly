@@ -80,16 +80,17 @@ sealed class StressorResource(
             icon = Drawables.Icons.Outlined.Work
         )
 
-    companion object{
-        val allStressors = listOf(
-            Work,
-            Relationship,
-            Kids,
-            Life,
-            Finances,
-            Loneliness,
-            InPeace,
-            Other
-        )
+    companion object {
+        val allStressors =
+            listOf(
+                Work,
+                Relationship,
+                Kids,
+                Life,
+                Finances,
+                Loneliness,
+                InPeace,
+                Other
+            )
     }
 }

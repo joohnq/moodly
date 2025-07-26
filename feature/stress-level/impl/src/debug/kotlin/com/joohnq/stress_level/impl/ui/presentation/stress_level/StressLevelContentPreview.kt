@@ -9,11 +9,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressLevelContentPreview() {
     StressLevelContent(
-        state = StressLevelContract.State(
-            records = UiState.Success(
-                StressLevelRecordResource.allStressLevelRecordResourcePreview
+        state =
+            StressLevelContract.State(
+                records =
+                    UiState.Success(
+                        StressLevelRecordResource.allStressLevelRecordResourcePreview
+                    )
             )
-        ),
     )
 }
 
@@ -21,10 +23,12 @@ fun StressLevelContentPreview() {
 @Composable
 fun StressLevelContentEmptyPreview() {
     StressLevelContent(
-        state = StressLevelContract.State(
-            records = UiState.Success(
-                listOf()
+        state =
+            StressLevelContract.State(
+                records =
+                    UiState.Success(
+                        listOf()
+                    )
             )
-        ),
     )
 }

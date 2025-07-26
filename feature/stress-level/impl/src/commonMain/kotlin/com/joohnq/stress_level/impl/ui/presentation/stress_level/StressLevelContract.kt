@@ -10,22 +10,33 @@ sealed interface StressLevelContract {
 
     sealed interface Event {
         data object OnGoBack : Event
+
         data object OnAddStressLevel : Event
     }
 
     sealed interface Intent {
         data object GetAll : Intent
-        data class Add(val record: StressLevelRecord) : Intent
-        data class Delete(val id: Int) : Intent
+
+        data class Add(
+            val record: StressLevelRecord
+        ) : Intent
+
+        data class Delete(
+            val id: Int
+        ) : Intent
     }
 
     sealed interface SideEffect {
         data object Added : SideEffect
+
         data object Deleted : SideEffect
-        data class ShowError(val error: String) : SideEffect
+
+        data class ShowError(
+            val error: String
+        ) : SideEffect
     }
 
     data class State(
-        val records: UiState<List<StressLevelRecordResource>> = UiState.Idle,
+        val records: UiState<List<StressLevelRecordResource>> = UiState.Idle
     )
 }

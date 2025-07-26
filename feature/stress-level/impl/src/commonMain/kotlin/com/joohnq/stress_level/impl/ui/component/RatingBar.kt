@@ -16,19 +16,27 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 
 @Composable
-fun RatingBar(level: Int, brushGradient: (Int) -> List<Color>) {
+fun RatingBar(
+    level: Int,
+    brushGradient: (Int) -> List<Color>
+) {
     BoxWithConstraints {
         val boxWidth = (maxWidth - 16.dp) / 5
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             for (i in 1..5) {
                 val isSelected = i <= level
-                val background = if (isSelected) Modifier.background(
-                    brush = Brush.linearGradient(brushGradient(i - 1)),
-                    shape = Dimens.Shape.Circle
-                )
-                else Modifier.background(
-                    color = Colors.Brown20, shape = Dimens.Shape.Circle
-                )
+                val background =
+                    if (isSelected) {
+                        Modifier.background(
+                            brush = Brush.linearGradient(brushGradient(i - 1)),
+                            shape = Dimens.Shape.Circle
+                        )
+                    } else {
+                        Modifier.background(
+                            color = Colors.Brown20,
+                            shape = Dimens.Shape.Circle
+                        )
+                    }
                 Box(
                     modifier = Modifier.width(boxWidth).height(6.dp).then(background)
                 )

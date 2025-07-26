@@ -11,15 +11,17 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun SelfJournalHistoryContentPreview(
     @PreviewParameter(ListSelfJournalRecordResourceParameterProvider::class)
-    list: List<SelfJournalRecordResource>,
+    list: List<SelfJournalRecordResource>
 ) {
     SelfJournalHistoryContent(
-        state = SelfJournalHistoryContract.State(
-            openDeleteDialog = false
-        ),
-        records = UiState.Success(
-            list
-        ),
+        state =
+            SelfJournalHistoryContract.State(
+                openDeleteDialog = false
+            ),
+        records =
+            UiState.Success(
+                list
+            )
     )
 }
 
@@ -27,11 +29,13 @@ fun SelfJournalHistoryContentPreview(
 @Composable
 fun SelfJournalHistoryContentPreview() {
     SelfJournalHistoryContent(
-        state = SelfJournalHistoryContract.State(
-            openDeleteDialog = true
-        ),
-        records = UiState.Success(
-            listOf()
-        ),
+        state =
+            SelfJournalHistoryContract.State(
+                openDeleteDialog = true
+            ),
+        records =
+            UiState.Success(
+                listOf()
+            )
     )
 }

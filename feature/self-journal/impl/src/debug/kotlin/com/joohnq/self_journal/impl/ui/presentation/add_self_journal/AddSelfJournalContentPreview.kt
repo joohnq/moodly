@@ -9,14 +9,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AddJournalingContentDepressedPreview() {
     AddJournalingContent(
-        state = AddSelfJournalContract.State(
-            mood = MoodResource.Depressed,
-            title = "Title",
-            titleError = null,
-            description = "Description",
-            selectedStressStressors = StressorResource.allStressors,
-            sliderValue = 0f
-        ),
+        state =
+            AddSelfJournalContract.State(
+                mood = MoodResource.Depressed,
+                title = "Title",
+                titleError = null,
+                description = "Description",
+                selectedStressStressors = StressorResource.allStressors,
+                sliderValue = 0f
+            )
     )
 }
 
@@ -24,14 +25,15 @@ fun AddJournalingContentDepressedPreview() {
 @Composable
 fun AddJournalingContentSadPreview() {
     AddJournalingContent(
-        state = AddSelfJournalContract.State(
-            mood = MoodResource.Sad,
-            title = "Title",
-            titleError = null,
-            description = "Description",
-            selectedStressStressors = StressorResource.allStressors,
-            sliderValue = 0f
-        ),
+        state =
+            AddSelfJournalContract.State(
+                mood = MoodResource.Sad,
+                title = "Title",
+                titleError = null,
+                description = "Description",
+                selectedStressStressors = StressorResource.allStressors,
+                sliderValue = 0f
+            )
     )
 }
 
@@ -39,14 +41,15 @@ fun AddJournalingContentSadPreview() {
 @Composable
 fun AddJournalingContentNeutralPreview() {
     AddJournalingContent(
-        state = AddSelfJournalContract.State(
-            mood = MoodResource.Neutral,
-            title = "Title",
-            titleError = null,
-            description = "Description",
-            selectedStressStressors = StressorResource.allStressors,
-            sliderValue = 0f
-        ),
+        state =
+            AddSelfJournalContract.State(
+                mood = MoodResource.Neutral,
+                title = "Title",
+                titleError = null,
+                description = "Description",
+                selectedStressStressors = StressorResource.allStressors,
+                sliderValue = 0f
+            )
     )
 }
 
@@ -54,14 +57,15 @@ fun AddJournalingContentNeutralPreview() {
 @Composable
 fun AddJournalingContentHappyPreview() {
     AddJournalingContent(
-        state = AddSelfJournalContract.State(
-            mood = MoodResource.Happy,
-            title = "Title",
-            titleError = null,
-            description = "Description",
-            selectedStressStressors = StressorResource.allStressors,
-            sliderValue = 0f
-        ),
+        state =
+            AddSelfJournalContract.State(
+                mood = MoodResource.Happy,
+                title = "Title",
+                titleError = null,
+                description = "Description",
+                selectedStressStressors = StressorResource.allStressors,
+                sliderValue = 0f
+            )
     )
 }
 
@@ -69,13 +73,14 @@ fun AddJournalingContentHappyPreview() {
 @Composable
 fun AddJournalingContentOverjoyedPreview() {
     AddJournalingContent(
-        state = AddSelfJournalContract.State(
-            mood = MoodResource.Overjoyed,
-            title = "Title",
-            titleError = null,
-            description = "Description",
-            selectedStressStressors = StressorResource.allStressors,
-            sliderValue = 0f
-        ),
+        state =
+            AddSelfJournalContract.State(
+                mood = MoodResource.Overjoyed,
+                title = "Title",
+                titleError = null,
+                description = "Description",
+                selectedStressStressors = StressorResource.allStressors,
+                sliderValue = 0f
+            )
     )
 }

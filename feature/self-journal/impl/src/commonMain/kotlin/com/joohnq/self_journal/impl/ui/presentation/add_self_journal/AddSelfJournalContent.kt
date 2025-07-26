@@ -48,7 +48,7 @@ fun AddJournalingContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSelfJournalContract.State,
     onAction: (AddSelfJournalContract.Intent) -> Unit = {},
-    onEvent: (AddSelfJournalContract.Event) -> Unit = {},
+    onEvent: (AddSelfJournalContract.Event) -> Unit = {}
 ) {
     val focusRequester = FocusRequester()
     val moods = remember { getAllMoodResource() }
@@ -62,8 +62,9 @@ fun AddJournalingContent(
             modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState())
         ) {
             Column(
-                Modifier.fillMaxSize()
-                    .paddingHorizontalMedium(),
+                Modifier
+                    .fillMaxSize()
+                    .paddingHorizontalMedium()
             ) {
                 AppTopBar(
                     onGoBack = { onEvent(AddSelfJournalContract.Event.OnGoBack) },
@@ -91,19 +92,22 @@ fun AddJournalingContent(
                             modifier = Modifier.size(Dimens.Icon)
                         )
                     },
-                    modifier = Modifier.fillMaxWidth().height(56.dp)
-                        .focusRequester(focusRequester),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(56.dp)
+                            .focusRequester(focusRequester),
                     onValueChange = {
                         onAction(
                             AddSelfJournalContract.Intent.UpdateTitle(
                                 it
                             )
                         )
-                    },
+                    }
                 )
                 MediumTitle(Res.string.mood)
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     items(moods) { resource ->
                         MoodFace(
@@ -130,7 +134,7 @@ fun AddJournalingContent(
                 )
             }
             Column(
-                Modifier.fillMaxSize().paddingHorizontalMedium(),
+                Modifier.fillMaxSize().paddingHorizontalMedium()
             ) {
                 VerticalSpacer(24.dp)
                 PrimaryButton(

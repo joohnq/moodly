@@ -22,8 +22,7 @@ fun AddSelfJournalScreen(onGoBack: () -> Unit) {
     val snackBarState = rememberSnackBarState()
     val state by addSelfJournalViewModel.state.collectAsState()
 
-    fun onError(error: String) =
-        scope.launch { snackBarState.showSnackbar(error) }
+    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: AddSelfJournalContract.Event) =
         when (event) {

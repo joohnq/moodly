@@ -25,7 +25,7 @@ fun SelfJournalStatsCard(
     title: String,
     color: Color,
     backgroundColor: Color,
-    description: String,
+    description: String
 ) {
     Card(
         modifier = modifier,
@@ -37,8 +37,10 @@ fun SelfJournalStatsCard(
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Box(
-                modifier = Modifier.size(48.dp)
-                    .background(color = backgroundColor, shape = Dimens.Shape.Small),
+                modifier =
+                    Modifier
+                        .size(48.dp)
+                        .background(color = backgroundColor, shape = Dimens.Shape.Small),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

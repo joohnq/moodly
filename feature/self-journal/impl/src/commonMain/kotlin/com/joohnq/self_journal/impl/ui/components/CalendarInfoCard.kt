@@ -12,10 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.CalendarInfo
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.ui.entity.CalendarInfo
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -25,15 +25,16 @@ fun CalendarInfoCard(info: CalendarInfo) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier
-                .size(6.dp)
-                .clip(Dimens.Shape.Circle)
-                .background(color = info.backgroundColor, shape = Dimens.Shape.Circle)
-                .border(
-                    width = 1.dp,
-                    color = info.borderColor,
-                    shape = Dimens.Shape.Circle
-                )
+            modifier =
+                Modifier
+                    .size(6.dp)
+                    .clip(Dimens.Shape.Circle)
+                    .background(color = info.backgroundColor, shape = Dimens.Shape.Circle)
+                    .border(
+                        width = 1.dp,
+                        color = info.borderColor,
+                        shape = Dimens.Shape.Circle
+                    )
         )
         Text(
             text = stringResource(info.text),

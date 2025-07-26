@@ -14,13 +14,12 @@ fun SelfJournalsHistoryCards(
     modifier: Modifier = Modifier,
     records: Map<LocalDate, List<SelfJournalRecordResource>>,
     onClick: (Int) -> Unit = {},
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {}
 ) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
         itemsIndexed(
             items = records,
             title = {
-
             },
             empty = {
                 EmptyView()

@@ -8,6 +8,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun JournalHistoryPreview() {
     JournalHistory(
-        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,
+        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview
     )
 }

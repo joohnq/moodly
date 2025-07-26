@@ -13,7 +13,7 @@ import com.joohnq.ui.mapper.foldComposable
 @Composable
 fun SelfJournalContent(
     state: SelfJournalContract.State,
-    onEvent: (SelfJournalContract.Event) -> Unit = {},
+    onEvent: (SelfJournalContract.Event) -> Unit = {}
 ) {
     state.records.foldComposable(
         onLoading = { LoadingView() },
@@ -39,7 +39,7 @@ fun SelfJournalContent(
                         records = records,
                         onEvent = onEvent
                     )
-                },
+                }
             )
         }
     )

@@ -21,10 +21,11 @@ class SelfJournalViewModel(
     private val deleteSelfJournalsUseCase: DeleteSelfJournalsUseCase,
     private val updateSelfJournalsUseCase: UpdateSelfJournalsUseCase,
     private val addSelfJournalsUseCase: AddSelfJournalsUseCase,
-    initialState: SelfJournalContract.State = SelfJournalContract.State(),
+    initialState: SelfJournalContract.State = SelfJournalContract.State()
 ) : BaseViewModel<SelfJournalContract.State, SelfJournalContract.Intent, SelfJournalContract.SideEffect>(
-    initialState = initialState
-), SelfJournalContract.ViewModel {
+        initialState = initialState
+    ),
+    SelfJournalContract.ViewModel {
     override fun onIntent(intent: SelfJournalContract.Intent) {
         when (intent) {
             is SelfJournalContract.Intent.GetAll -> getAll()
@@ -34,52 +35,55 @@ class SelfJournalViewModel(
         }
     }
 
-    private fun add(
-        record: SelfJournalRecord,
-    ) = viewModelScope.launch {
-        val res = addSelfJournalsUseCase(record).toUiState()
-        res.onSuccess {
-            emitEffect(SelfJournalContract.SideEffect.SelfJournalAdded)
-        }.onFailure {
-            emitEffect(SelfJournalContract.SideEffect.ShowError(it))
+    private fun add(record: SelfJournalRecord) =
+        viewModelScope.launch {
+            val res = addSelfJournalsUseCase(record).toUiState()
+            res
+                .onSuccess {
+                    emitEffect(SelfJournalContract.SideEffect.SelfJournalAdded)
+                }.onFailure {
+                    emitEffect(SelfJournalContract.SideEffect.ShowError(it))
+                }
         }
-    }
 
-    private fun update(
-        record: SelfJournalRecord,
-    ) = viewModelScope.launch {
-        val res = updateSelfJournalsUseCase(record).toUiState()
-        res.onSuccess {
-            emitEffect(SelfJournalContract.SideEffect.Updated)
-        }.onFailure {
-            emitEffect(SelfJournalContract.SideEffect.ShowError(it))
+    private fun update(record: SelfJournalRecord) =
+        viewModelScope.launch {
+            val res = updateSelfJournalsUseCase(record).toUiState()
+            res
+                .onSuccess {
+                    emitEffect(SelfJournalContract.SideEffect.Updated)
+                }.onFailure {
+                    emitEffect(SelfJournalContract.SideEffect.ShowError(it))
+                }
         }
-    }
 
     private fun getAll() =
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
-            val res = getSelfJournalsUseCase()
-                .toResultResource { it.toResource() }
-                .toUiState()
+            val res =
+                getSelfJournalsUseCase()
+                    .toResultResource { it.toResource() }
+                    .toUiState()
             updateState { it.copy(res) }
         }
 
     private fun delete(id: Int) =
         viewModelScope.launch {
             val res = deleteSelfJournalsUseCase(id).toUiState()
-            res.onSuccess {
-                updateState {
-                    it.copy(
-                        UiState.Success(
-                            state.value.records.getValueOrEmpty()
-                                .filter { item -> item.id != id }
+            res
+                .onSuccess {
+                    updateState {
+                        it.copy(
+                            UiState.Success(
+                                state.value.records
+                                    .getValueOrEmpty()
+                                    .filter { item -> item.id != id }
+                            )
                         )
-                    )
+                    }
+                    emitEffect(SelfJournalContract.SideEffect.SelfJournalDeleted)
+                }.onFailure {
+                    emitEffect(SelfJournalContract.SideEffect.ShowError(it))
                 }
-                emitEffect(SelfJournalContract.SideEffect.SelfJournalDeleted)
-            }.onFailure {
-                emitEffect(SelfJournalContract.SideEffect.ShowError(it))
-            }
         }
 }

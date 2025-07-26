@@ -28,16 +28,17 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalInsight(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>,
+    records: List<SelfJournalRecordResource>
 ) {
-    val groupedMoods = records
-        .groupBy { it.mood }
-        .map { it.key to it.value.size }
-        .sortedBy { it.first.id }
+    val groupedMoods =
+        records
+            .groupBy { it.mood }
+            .map { it.key to it.value.size }
+            .sortedBy { it.first.id }
 
     val moodResources = remember { getAllMoodResource() }
 
-    if (groupedMoods.isEmpty())
+    if (groupedMoods.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -46,21 +47,22 @@ fun JournalInsight(
             description = Res.string.lets_log_your_first_journal_to_see_your_insight,
             text = Res.string.write_journal,
             icon = Drawables.Icons.Outlined.Edit,
-            onCreate = {},
+            onCreate = {}
         )
-    else
+    } else {
         Card(
             modifier = modifier,
             shape = Dimens.Shape.Large,
-            colors = CardColors(
-                containerColor = Colors.Gray5,
-                contentColor = Color.Unspecified,
-                disabledContainerColor = Colors.Gray5,
-                disabledContentColor = Color.Unspecified
-            )
+            colors =
+                CardColors(
+                    containerColor = Colors.Gray5,
+                    contentColor = Color.Unspecified,
+                    disabledContainerColor = Colors.Gray5,
+                    disabledContentColor = Color.Unspecified
+                )
         ) {
             Column(
-                modifier = Modifier.fillMaxWidth().paddingAllSmall(),
+                modifier = Modifier.fillMaxWidth().paddingAllSmall()
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -98,4 +100,5 @@ fun JournalInsight(
                 }
             }
         }
+    }
 }

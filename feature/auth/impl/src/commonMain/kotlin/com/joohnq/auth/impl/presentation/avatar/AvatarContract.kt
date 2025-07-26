@@ -15,7 +15,7 @@ sealed interface AvatarContract {
 
     data class State(
         val imageBitmap: ImageBitmap? = null,
-        val selectedDrawableIndex: Int = 0,
+        val selectedDrawableIndex: Int = 0
     )
 
     sealed interface Event {

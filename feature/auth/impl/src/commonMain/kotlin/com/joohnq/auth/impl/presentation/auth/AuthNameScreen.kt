@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AuthNameScreen(
-    onNavigateToSecurity: () -> Unit,
+    onNavigateToSecurity: () -> Unit
 ) {
     val authNameViewModel: AuthNameViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()

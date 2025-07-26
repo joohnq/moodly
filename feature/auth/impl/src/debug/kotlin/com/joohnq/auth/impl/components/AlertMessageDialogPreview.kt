@@ -10,7 +10,7 @@ fun AlertMessageDialogPreview() {
         title = "Title",
         message = "Message Here",
         positiveButtonText = "Ok",
-        negativeButtonText = "Cancel",
+        negativeButtonText = "Cancel"
     )
 }
 
@@ -18,7 +18,7 @@ fun AlertMessageDialogPreview() {
 @Composable
 fun AlertMessageDialogOnlyTitlePreview() {
     AlertMessageDialog(
-        title = "Title",
+        title = "Title"
     )
 }
 
@@ -27,6 +27,6 @@ fun AlertMessageDialogOnlyTitlePreview() {
 fun AlertMessageDialogWithoutButtonsPreview() {
     AlertMessageDialog(
         title = "Title",
-        message = "Message Here",
+        message = "Message Here"
     )
 }

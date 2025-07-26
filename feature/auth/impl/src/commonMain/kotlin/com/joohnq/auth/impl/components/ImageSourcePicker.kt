@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.camera
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.TextAndIconButton
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.gallery
 import com.joohnq.shared_resources.select_an_image_source
 import com.joohnq.shared_resources.theme.Colors
@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ImageSourcePicker(
     onDismissRequest: () -> Unit = {},
     onGalleryRequest: () -> Unit = {},
-    onCameraRequest: () -> Unit = {},
+    onCameraRequest: () -> Unit = {}
 ) {
     val sheetState = rememberModalBottomSheetState()
 
@@ -45,7 +45,8 @@ fun ImageSourcePicker(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
-                .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally
+                .padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(Res.string.select_an_image_source),

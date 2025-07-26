@@ -56,15 +56,17 @@ fun SelfJournalPanel(
         )
         VerticalSpacer(20.dp)
         Row(
-            modifier = Modifier
-                .background(color = Colors.White, shape = Dimens.Shape.Large)
-                .paddingAllSmall()
-                .clip(Dimens.Shape.Large)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(
-                space = 20.dp,
-                alignment = Alignment.CenterHorizontally
-            )
+            modifier =
+                Modifier
+                    .background(color = Colors.White, shape = Dimens.Shape.Large)
+                    .paddingAllSmall()
+                    .clip(Dimens.Shape.Large)
+                    .fillMaxWidth(),
+            horizontalArrangement =
+                Arrangement.spacedBy(
+                    space = 20.dp,
+                    alignment = Alignment.CenterHorizontally
+                )
         ) {
             SelfJournalPanelInfo(
                 modifier = Modifier.weight(1f),

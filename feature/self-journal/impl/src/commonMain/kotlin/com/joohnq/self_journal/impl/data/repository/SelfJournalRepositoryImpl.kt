@@ -3,35 +3,35 @@ package com.joohnq.self_journal.impl.data.repository
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.mood.api.converter.MoodRecordConverter
-import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.repository.SelfJournalRepository
+import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 
 class SelfJournalRepositoryImpl(
-    private val database: SelfJournalDatabaseSql,
+    private val database: SelfJournalDatabaseSql
 ) : SelfJournalRepository {
     private val query = database.selfJournalRecordQueries
+
     override suspend fun getSelfJournals(): Result<List<SelfJournalRecord>> =
         executeTryCatchResult {
-            query.getSelfJournalRecords { id, mood, title, description, createdAt ->
-                SelfJournalRecord(
-                    id = id.toInt(),
-                    mood = MoodRecordConverter.toMood(mood),
-                    title = title,
-                    description = description,
-                    createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
-                )
-            }.executeAsList()
+            query
+                .getSelfJournalRecords { id, mood, title, description, createdAt ->
+                    SelfJournalRecord(
+                        id = id.toInt(),
+                        mood = MoodRecordConverter.toMood(mood),
+                        title = title,
+                        description = description,
+                        createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
+                    )
+                }.executeAsList()
         }
 
-    override suspend fun addSelfJournal(
-        record: SelfJournalRecord,
-    ): Result<Boolean> =
+    override suspend fun addSelfJournal(record: SelfJournalRecord): Result<Boolean> =
         executeTryCatchResult {
             query.addSelfJournalRecord(
                 mood = MoodRecordConverter.fromMood(record.mood),
                 title = record.title,
-                description = record.description,
+                description = record.description
             )
             true
         }

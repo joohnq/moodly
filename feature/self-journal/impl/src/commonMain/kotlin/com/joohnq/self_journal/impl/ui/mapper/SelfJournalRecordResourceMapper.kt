@@ -20,12 +20,10 @@ fun SelfJournalRecordResource.toDomain(): SelfJournalRecord =
         mood = mood.toDomain(),
         title = title,
         description = description,
-        createdAt = createdAt,
+        createdAt = createdAt
     )
 
-
-fun List<SelfJournalRecordResource>.getTodaySelfJournalRecord(): SelfJournalRecordResource? =
-    find { it.createdAt.date == getNow().date }
+fun List<SelfJournalRecordResource>.getTodaySelfJournalRecord(): SelfJournalRecordResource? = find { it.createdAt.date == getNow().date }
 
 fun Map<LocalDate, List<SelfJournalRecordResource>?>.getItemsByDate(date: LocalDate): List<SelfJournalRecordResource>? {
     val key = keys.find { it == date } ?: keys.last()
@@ -41,12 +39,13 @@ fun List<SelfJournalRecordResource>.calculateSelfJournalsAverage(): MoodAverageR
 fun List<SelfJournalRecordResource?>.getSelfJournalsInYear(date: LocalDateTime = getNow()): String {
     val days =
         filter { it?.createdAt?.year == date.year }
-            .associateBy { it?.createdAt?.date }.keys.size
+            .associateBy { it?.createdAt?.date }
+            .keys.size
     return "$days/${date.year.getTotalDays()}"
 }
 
 fun List<SelfJournalRecordResource>.organizeByDateSelfJournal(
-    date: LocalDateTime = getNow(),
+    date: LocalDateTime = getNow()
 ): Map<LocalDate, List<SelfJournalRecordResource>?> {
     val recordsByDay = groupBy { it.createdAt.date }
 
@@ -57,7 +56,7 @@ fun List<SelfJournalRecordResource>.organizeByDateSelfJournal(
 }
 
 fun List<SelfJournalRecordResource>.organizeFromCreationSelfJournalFreudScore(
-    creationAt: LocalDate = getNow().date,
+    creationAt: LocalDate = getNow().date
 ): Map<LocalDate, List<SelfJournalRecordResource>?> {
     val now = getNow().date
     val recordsByDay = groupBy { it.createdAt.date }
@@ -67,21 +66,21 @@ fun List<SelfJournalRecordResource>.organizeFromCreationSelfJournalFreudScore(
 
 private fun generateDateSequence(
     creationDate: LocalDate,
-    currentDate: LocalDate,
-): Sequence<LocalDate> {
-    return generateSequence(creationDate) { current ->
+    currentDate: LocalDate
+): Sequence<LocalDate> =
+    generateSequence(creationDate) { current ->
         val nextDate = current.plus(1, DateTimeUnit.DAY)
         if (nextDate <= currentDate) nextDate else null
     }
-}
 
-fun SelfJournalRecord.toResource(): SelfJournalRecordResource = SelfJournalRecordResource(
-    id = id,
-    mood = mood.toResource(),
-    title = title,
-    description = description,
-    createdAt = createdAt,
-)
+fun SelfJournalRecord.toResource(): SelfJournalRecordResource =
+    SelfJournalRecordResource(
+        id = id,
+        mood = mood.toResource(),
+        title = title,
+        description = description,
+        createdAt = createdAt
+    )
 
 fun List<SelfJournalRecord>.toResource(): List<SelfJournalRecordResource> = map { it.toResource() }
 

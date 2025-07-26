@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalContent(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
-    onEvent: (SelfJournalContract.Event) -> Unit = {},
+    onEvent: (SelfJournalContract.Event) -> Unit = {}
 ) {
     SectionHeader(
         modifier = modifier,
@@ -38,7 +38,7 @@ fun SelfJournalContent(
         subtitle = stringResource(Res.string.journals_written_this_month),
         onCreate = {
             onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal)
-        },
+        }
     )
     SectionHeader(
         modifier = modifier,

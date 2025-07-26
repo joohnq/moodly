@@ -7,6 +7,6 @@ import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 @Composable
 fun SelfJournalsHistoryCardsPreview() {
     SelfJournalsHistoryCards(
-        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview.toGroupedByDate(),
+        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview.toGroupedByDate()
     )
 }

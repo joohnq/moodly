@@ -13,6 +13,6 @@ fun SelfJournalHistoryCardPreview(
     item: SelfJournalRecordResource
 ) {
     SelfJournalHistoryCard(
-        record = item,
+        record = item
     )
 }

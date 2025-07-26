@@ -11,16 +11,17 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun EditJournalingContentPreview(
     @PreviewParameter(SelfJournalRecordParameterProvider::class)
-    item: SelfJournalRecord,
+    item: SelfJournalRecord
 ) {
     EditJournalingContent(
-        state = EditSelfJournalContract.State(
-            currentSelfJournalRecord = item,
-            editingSelfJournalRecord = item,
-            isEditing = false,
-            openDeleteDialog = false
-        ),
-        canSave = false,
+        state =
+            EditSelfJournalContract.State(
+                currentSelfJournalRecord = item,
+                editingSelfJournalRecord = item,
+                isEditing = false,
+                openDeleteDialog = false
+            ),
+        canSave = false
     )
 }
 
@@ -28,13 +29,14 @@ fun EditJournalingContentPreview(
 @Composable
 fun EditJournalingContentPreview(
     @PreviewParameter(BooleanParameterProvider::class)
-    boolean: Boolean,
+    boolean: Boolean
 ) {
     EditJournalingContent(
-        state = EditSelfJournalContract.State(
-            isEditing = boolean,
-            openDeleteDialog = !boolean
-        ),
-        canSave = boolean,
+        state =
+            EditSelfJournalContract.State(
+                isEditing = boolean,
+                openDeleteDialog = !boolean
+            ),
+        canSave = boolean
     )
 }

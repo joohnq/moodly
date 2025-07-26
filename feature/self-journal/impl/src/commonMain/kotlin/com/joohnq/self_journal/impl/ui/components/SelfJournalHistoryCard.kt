@@ -15,9 +15,9 @@ import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.TextEllipsis
 import com.joohnq.shared_resources.components.text.TextWithBackground
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.hour
 import com.joohnq.shared_resources.mood_show
 import com.joohnq.shared_resources.theme.*
@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalHistoryCard(
     record: SelfJournalRecordResource,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
@@ -38,7 +38,7 @@ fun SelfJournalHistoryCard(
     ) {
         Column(
             modifier = Modifier.fillMaxSize().paddingAllSmall(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -46,10 +46,11 @@ fun SelfJournalHistoryCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier.size(48.dp).background(
-                        color = record.mood.palette.color,
-                        shape = Dimens.Shape.Small
-                    ),
+                    modifier =
+                        Modifier.size(48.dp).background(
+                            color = record.mood.palette.color,
+                            shape = Dimens.Shape.Small
+                        ),
                     contentAlignment = Alignment.Center
                 ) {
                     MoodFace(
@@ -70,10 +71,11 @@ fun SelfJournalHistoryCard(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 TextWithBackground(
-                    text = stringResource(
-                        Res.string.mood_show,
-                        stringResource(record.mood.text)
-                    ).uppercase(),
+                    text =
+                        stringResource(
+                            Res.string.mood_show,
+                            stringResource(record.mood.text)
+                        ).uppercase(),
                     backgroundColor = record.mood.palette.backgroundColor,
                     textColor = record.mood.palette.color
                 )
@@ -99,7 +101,7 @@ fun SelfJournalHistoryCard(
     isNotLast: Boolean,
     record: SelfJournalRecordResource,
     onClick: (Int) -> Unit,
-    onDelete: () -> Unit,
+    onDelete: () -> Unit
 ) {
     SwipeableCardLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),
@@ -118,12 +120,12 @@ fun SelfJournalHistoryCard(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Box(
-                            modifier = Modifier
-                                .background(
-                                    color = record.mood.palette.color,
-                                    shape = Dimens.Shape.Circle
-                                )
-                                .size(44.dp),
+                            modifier =
+                                Modifier
+                                    .background(
+                                        color = record.mood.palette.color,
+                                        shape = Dimens.Shape.Circle
+                                    ).size(44.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             MoodFace(
@@ -158,21 +160,28 @@ fun SelfJournalHistoryCard(
         },
         secondary = {
             Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(horizontal = 10.dp),
+                modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .padding(horizontal = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
-                    modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                        .background(color = if (isNotFirst) Colors.Brown80 else Colors.Transparent)
+                    modifier =
+                        Modifier
+                            .width(3.dp)
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .background(color = if (isNotFirst) Colors.Brown80 else Colors.Transparent)
                 )
                 Column(
-                    modifier = Modifier.size(50.dp)
-                        .background(
-                            color = Colors.Brown80,
-                            shape = Dimens.Shape.ExtraSmall
-                        ),
+                    modifier =
+                        Modifier
+                            .size(50.dp)
+                            .background(
+                                color = Colors.Brown80,
+                                shape = Dimens.Shape.ExtraSmall
+                            ),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
@@ -189,8 +198,12 @@ fun SelfJournalHistoryCard(
                     )
                 }
                 Box(
-                    modifier = Modifier.width(3.dp).weight(1f).fillMaxHeight()
-                        .background(color = if (isNotLast) Colors.Brown80 else Colors.Transparent)
+                    modifier =
+                        Modifier
+                            .width(3.dp)
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .background(color = if (isNotLast) Colors.Brown80 else Colors.Transparent)
                 )
             }
         },

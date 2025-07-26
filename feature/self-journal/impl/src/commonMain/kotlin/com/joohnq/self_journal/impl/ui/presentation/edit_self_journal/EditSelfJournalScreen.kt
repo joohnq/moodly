@@ -16,7 +16,10 @@ import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
+fun EditJournalingScreen(
+    id: Int,
+    onGoBack: () -> Unit
+) {
     val scope = rememberCoroutineScope()
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
     val editSelfJournalViewModel: EditSelfJournalViewModel = sharedViewModel()
@@ -25,12 +28,14 @@ fun EditJournalingScreen(id: Int, onGoBack: () -> Unit) {
     val state by editSelfJournalViewModel.state.collectAsState()
     val isDifferent by derivedStateOf {
         state.editingSelfJournalRecord.title != state.currentSelfJournalRecord.title ||
-                state.editingSelfJournalRecord.description != state.currentSelfJournalRecord.description
+            state.editingSelfJournalRecord.description != state.currentSelfJournalRecord.description
     }
-    val canSave by derivedStateOf { isDifferent && state.editingSelfJournalRecord.title.isNotBlank() && state.editingSelfJournalRecord.description.isNotBlank() }
+    val canSave by derivedStateOf {
+        isDifferent && state.editingSelfJournalRecord.title.isNotBlank() &&
+            state.editingSelfJournalRecord.description.isNotBlank()
+    }
 
-    fun onError(error: String) =
-        scope.launch { snackBarState.showSnackbar(error) }
+    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: EditSelfJournalContract.Event) =
         when (event) {

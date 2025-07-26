@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun JournalCalendarPreview() {
     JournalCalendar(
         records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,
-        subtitle = "Subtitle",
+        subtitle = "Subtitle"
     )
 }

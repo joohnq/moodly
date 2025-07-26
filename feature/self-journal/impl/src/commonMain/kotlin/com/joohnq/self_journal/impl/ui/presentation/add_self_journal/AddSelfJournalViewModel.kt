@@ -3,10 +3,11 @@ package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
 import com.joohnq.ui.BaseViewModel
 
 class AddSelfJournalViewModel(
-    initialState: AddSelfJournalContract.State = AddSelfJournalContract.State(),
+    initialState: AddSelfJournalContract.State = AddSelfJournalContract.State()
 ) : BaseViewModel<AddSelfJournalContract.State, AddSelfJournalContract.Intent, AddSelfJournalContract.SideEffect>(
-    initialState = initialState
-), AddSelfJournalContract.ViewModel {
+        initialState = initialState
+    ),
+    AddSelfJournalContract.ViewModel {
     override fun onIntent(intent: AddSelfJournalContract.Intent) {
         when (intent) {
             AddSelfJournalContract.Intent.ResetState ->

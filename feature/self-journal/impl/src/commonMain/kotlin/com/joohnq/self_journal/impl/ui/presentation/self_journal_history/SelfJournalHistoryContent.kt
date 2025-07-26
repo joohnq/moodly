@@ -37,9 +37,9 @@ fun SelfJournalHistoryContent(
     state: SelfJournalHistoryContract.State,
     records: UiState<List<SelfJournalRecordResource>>,
     onAction: (SelfJournalHistoryContract.Intent) -> Unit = {},
-    onEvent: (SelfJournalHistoryContract.Event) -> Unit = {},
+    onEvent: (SelfJournalHistoryContract.Event) -> Unit = {}
 ) {
-    if (state.openDeleteDialog)
+    if (state.openDeleteDialog) {
         ImageDialogLayout(
             onDismissRequest = {
                 onAction(
@@ -57,6 +57,7 @@ fun SelfJournalHistoryContent(
             image = Drawables.Images.SelfJournalDeleting,
             backgroundColor = Colors.White
         )
+    }
 
     records.foldComposable(
         onSuccess = { records ->
@@ -93,7 +94,7 @@ fun SelfJournalHistoryContent(
                                     style = TextStyles.textMdBold(),
                                     color = Colors.Gray80
                                 )
-                            },
+                            }
                         ) { record ->
                             SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),

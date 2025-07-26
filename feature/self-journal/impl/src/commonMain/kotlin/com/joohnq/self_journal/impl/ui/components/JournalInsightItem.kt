@@ -37,7 +37,7 @@ fun JournalInsightItem(
             modifier = Modifier.height(12.dp).weight(1f),
             progress = { percentage },
             trackColor = Colors.Gray20,
-            color = color,
+            color = color
         )
         HorizontalSpacer(10.dp)
         Icon(

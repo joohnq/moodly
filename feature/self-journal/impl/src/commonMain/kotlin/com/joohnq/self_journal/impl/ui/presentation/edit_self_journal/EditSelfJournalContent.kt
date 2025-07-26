@@ -50,14 +50,14 @@ fun EditJournalingContent(
     canSave: Boolean,
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
     onAction: (EditSelfJournalContract.Intent) -> Unit = {},
-    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {},
+    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {}
 ) {
     val titleFocusRequest = rememberFocusRequester()
     val descriptionFocusRequest = rememberFocusRequester()
     val mood = state.editingSelfJournalRecord.mood
     val resource = mood.toResource()
 
-    if (state.openDeleteDialog)
+    if (state.openDeleteDialog) {
         ImageDialogLayout(
             onDismissRequest = {
                 onAction(
@@ -75,6 +75,7 @@ fun EditJournalingContent(
             image = Drawables.Images.SelfJournalDeleting,
             backgroundColor = Colors.White
         )
+    }
 
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -86,31 +87,38 @@ fun EditJournalingContent(
                 canSave = canSave,
                 onEditingAction = onAction,
                 onEvent = onEvent,
-                onRequestTitleFocus = titleFocusRequest::requestFocus,
+                onRequestTitleFocus = titleFocusRequest::requestFocus
             )
         },
         floatingActionButtonPosition = FabPosition.Center
     ) { pad ->
-        val padding = PaddingValues(
-            top = pad.calculateTopPadding(),
-            bottom = pad.calculateBottomPadding() + 80.dp,
-        )
+        val padding =
+            PaddingValues(
+                top = pad.calculateTopPadding(),
+                bottom = pad.calculateBottomPadding() + 80.dp
+            )
         Column(
-            Modifier.fillMaxSize().padding(padding)
-                .verticalScroll(rememberScrollState()),
+            Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .verticalScroll(rememberScrollState())
         ) {
             Box(
-                modifier = Modifier.fillMaxWidth()
-                    .paddingHorizontalMedium()
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .paddingHorizontalMedium()
             ) {
                 AppTopBar(
                     onGoBack = { onEvent(EditSelfJournalContract.Event.OnGoBack) },
-                    text = Res.string.edit_journal,
+                    text = Res.string.edit_journal
                 ) {
                     TextWithBackground(
-                        text = state.editingSelfJournalRecord.createdAt.date.toFormattedDateString(),
+                        text =
+                            state.editingSelfJournalRecord.createdAt.date
+                                .toFormattedDateString(),
                         textColor = resource.palette.backgroundColor,
-                        backgroundColor = resource.palette.color,
+                        backgroundColor = resource.palette.color
                     )
                 }
             }
@@ -130,9 +138,10 @@ fun EditJournalingContent(
                 colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
                 textStyle = TextStyles.headingMdExtraBold(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = { titleFocusRequest.freeFocus() }
-                )
+                keyboardActions =
+                    KeyboardActions(
+                        onDone = { titleFocusRequest.freeFocus() }
+                    )
             )
             VerticalSpacer(10.dp)
             TextField(
@@ -154,9 +163,10 @@ fun EditJournalingContent(
                 colors = ComponentColors.TextField.textFieldDescriptionTransparentColors(),
                 textStyle = TextStyles.paragraphLg(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = { descriptionFocusRequest.freeFocus() }
-                )
+                keyboardActions =
+                    KeyboardActions(
+                        onDone = { descriptionFocusRequest.freeFocus() }
+                    )
             )
         }
     }

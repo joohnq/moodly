@@ -17,29 +17,31 @@ import com.kizitonwose.calendar.core.DayPosition
 @Composable
 fun SelfJournalingDay(
     average: MoodAverageResource,
-    day: CalendarDay,
+    day: CalendarDay
 ) {
     val isSelected = average !is MoodAverageResource.Skipped
     val isInCurrentMonth = day.position == DayPosition.MonthDate
 
     Box(
-        modifier = Modifier
-            .padding(horizontal = 11.dp, vertical = 3.dp)
-            .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
-            .fillMaxSize()
-            .aspectRatio(1f)
-            .clip(Dimens.Shape.Circle)
-            .border(
-                width = 1.dp,
-                color = if (isInCurrentMonth) Colors.Gray30 else Colors.Gray10,
-                shape = Dimens.Shape.Circle
-            ),
+        modifier =
+            Modifier
+                .padding(horizontal = 11.dp, vertical = 3.dp)
+                .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .clip(Dimens.Shape.Circle)
+                .border(
+                    width = 1.dp,
+                    color = if (isInCurrentMonth) Colors.Gray30 else Colors.Gray10,
+                    shape = Dimens.Shape.Circle
+                ),
         contentAlignment = Alignment.Center
     ) {
-        if (isSelected)
+        if (isSelected) {
             MoodFace(
                 modifier = Modifier.fillMaxSize(),
-                average = average,
+                average = average
             )
+        }
     }
 }

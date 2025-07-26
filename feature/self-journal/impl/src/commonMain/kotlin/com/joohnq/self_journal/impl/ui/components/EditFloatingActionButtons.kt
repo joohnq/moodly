@@ -42,17 +42,19 @@ fun EditFloatingActionButtons(
     canSave: Boolean,
     onEditingAction: (EditSelfJournalContract.Intent) -> Unit = {},
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
-    onRequestTitleFocus: () -> Unit = {},
+    onRequestTitleFocus: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier.imePadding().fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         LazyRow(
-            modifier = Modifier.background(
-                color = Colors.White,
-                shape = Dimens.Shape.Circle
-            ).padding(10.dp),
+            modifier =
+                Modifier
+                    .background(
+                        color = Colors.White,
+                        shape = Dimens.Shape.Circle
+                    ).padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -65,12 +67,13 @@ fun EditFloatingActionButtons(
                     },
                     modifier = Modifier.size(56.dp),
                     shape = Dimens.Shape.Circle,
-                    colors = IconButtonColors(
-                        containerColor = Colors.Orange50,
-                        contentColor = Colors.White,
-                        disabledContainerColor = Colors.Orange50,
-                        disabledContentColor = Colors.White
-                    )
+                    colors =
+                        IconButtonColors(
+                            containerColor = Colors.Orange50,
+                            contentColor = Colors.White,
+                            disabledContainerColor = Colors.Orange50,
+                            disabledContentColor = Colors.White
+                        )
                 ) {
                     Icon(
                         painter = painterResource(Drawables.Icons.Filled.Trash),
@@ -88,12 +91,13 @@ fun EditFloatingActionButtons(
                     },
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
                     shape = Dimens.Shape.Circle,
-                    colors = ButtonColors(
-                        containerColor = if (isEditing) Colors.Yellow50 else Colors.White,
-                        contentColor = if (isEditing) Colors.White else Colors.Brown80,
-                        disabledContainerColor = if (isEditing) Colors.Yellow50 else Colors.White,
-                        disabledContentColor = if (isEditing) Colors.White else Colors.Brown80,
-                    ),
+                    colors =
+                        ButtonColors(
+                            containerColor = if (isEditing) Colors.Yellow50 else Colors.White,
+                            contentColor = if (isEditing) Colors.White else Colors.Brown80,
+                            disabledContainerColor = if (isEditing) Colors.Yellow50 else Colors.White,
+                            disabledContentColor = if (isEditing) Colors.White else Colors.Brown80
+                        ),
                     modifier = Modifier.height(56.dp)
                 ) {
                     Row(
@@ -106,11 +110,13 @@ fun EditFloatingActionButtons(
                             tint = if (isEditing) Colors.White else Colors.Brown80,
                             modifier = Modifier.size(28.dp)
                         )
-                        if (isEditing) Text(
-                            text = stringResource(Res.string.editing),
-                            style = TextStyles.textMdBold(),
-                            color = Colors.White
-                        )
+                        if (isEditing) {
+                            Text(
+                                text = stringResource(Res.string.editing),
+                                style = TextStyles.textMdBold(),
+                                color = Colors.White
+                            )
+                        }
                     }
                 }
             }
@@ -120,20 +126,27 @@ fun EditFloatingActionButtons(
                     onClick = {
                         onEvent(EditSelfJournalContract.Event.OnSave)
                     },
-                    contentPadding = if (canSave) PaddingValues(
-                        horizontal = 20.dp,
-                        vertical = 8.dp
-                    ) else PaddingValues(0.dp),
+                    contentPadding =
+                        if (canSave) {
+                            PaddingValues(
+                                horizontal = 20.dp,
+                                vertical = 8.dp
+                            )
+                        } else {
+                            PaddingValues(0.dp)
+                        },
                     shape = Dimens.Shape.Circle,
-                    colors = ButtonColors(
-                        containerColor = Colors.Green60,
-                        contentColor = Colors.White,
-                        disabledContainerColor = Colors.Gray60,
-                        disabledContentColor = Colors.Gray90,
-                    ),
-                    modifier = Modifier.height(56.dp).then(
-                        if (canSave) Modifier.width(IntrinsicSize.Max) else Modifier.width(56.dp)
-                    )
+                    colors =
+                        ButtonColors(
+                            containerColor = Colors.Green60,
+                            contentColor = Colors.White,
+                            disabledContainerColor = Colors.Gray60,
+                            disabledContentColor = Colors.Gray90
+                        ),
+                    modifier =
+                        Modifier.height(56.dp).then(
+                            if (canSave) Modifier.width(IntrinsicSize.Max) else Modifier.width(56.dp)
+                        )
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -145,12 +158,13 @@ fun EditFloatingActionButtons(
                             tint = Colors.White,
                             modifier = Modifier.size(28.dp)
                         )
-                        if (canSave)
+                        if (canSave) {
                             Text(
                                 text = stringResource(Res.string.save),
                                 style = TextStyles.textMdBold(),
                                 color = Colors.White
                             )
+                        }
                     }
                 }
             }

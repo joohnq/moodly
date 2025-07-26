@@ -35,12 +35,13 @@ fun JournalHistoryCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
         onClick = {
             onClick(record.id)
         }
@@ -58,7 +59,7 @@ fun JournalHistoryCard(
             )
             HorizontalSpacer(12.dp)
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f)
             ) {
                 Text(
                     text = record.title,
@@ -105,10 +106,11 @@ fun JournalHistoryCard(
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = stringResource(
-                                Res.string.words,
-                                record.description.toWordCount()
-                            ),
+                            text =
+                                stringResource(
+                                    Res.string.words,
+                                    record.description.toWordCount()
+                                ),
                             style = TextStyles.textSmMedium(),
                             color = Colors.Gray60
                         )
@@ -120,7 +122,7 @@ fun JournalHistoryCard(
                 Text(
                     text = record.createdAt.toMonthAbbreviatedAndDayString(),
                     style = TextStyles.textSmRegular(),
-                    color = Colors.Gray60,
+                    color = Colors.Gray60
                 )
                 Icon(
                     painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),

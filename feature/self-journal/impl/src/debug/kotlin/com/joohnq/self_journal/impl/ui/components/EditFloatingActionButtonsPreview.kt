@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun EditFloatingActionButtonsPreview() {
     EditFloatingActionButtons(
         isEditing = false,
-        canSave = false,
+        canSave = false
     )
 }
 
@@ -17,7 +17,7 @@ fun EditFloatingActionButtonsPreview() {
 fun EditFloatingActionButtonsIsEditingPreview() {
     EditFloatingActionButtons(
         isEditing = true,
-        canSave = false,
+        canSave = false
     )
 }
 
@@ -26,6 +26,6 @@ fun EditFloatingActionButtonsIsEditingPreview() {
 fun EditFloatingActionButtonsCanSavePreview() {
     EditFloatingActionButtons(
         isEditing = false,
-        canSave = true,
+        canSave = true
     )
 }

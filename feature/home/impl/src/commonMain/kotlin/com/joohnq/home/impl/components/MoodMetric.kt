@@ -20,11 +20,11 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodMetric(
     records: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     val record = records.getTodayMoodRecord()
 
-    if (record == null)
+    if (record == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -33,7 +33,7 @@ fun MoodMetric(
             subtitle = Res.string.set_up_mood,
             onClick = onCreate
         )
-    else
+    } else {
         MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -52,5 +52,5 @@ fun MoodMetric(
             color = record.mood.palette.color,
             onClick = onClick
         )
-
+    }
 }

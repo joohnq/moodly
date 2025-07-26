@@ -16,7 +16,7 @@ fun WeekMoodIndicatorPreview(
 ) {
     WeekMoodIndicator(
         records = listOf(item),
-        resource = item.mood,
+        resource = item.mood
     )
 }
 
@@ -28,6 +28,6 @@ fun WeekMoodIndicatorListPreview(
 ) {
     WeekMoodIndicator(
         records = list,
-        resource = MoodResource.Neutral,
+        resource = MoodResource.Neutral
     )
 }

@@ -1,8 +1,8 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
-import com.joohnq.ui.entity.BottomItem
 import com.joohnq.navigation.Destination
+import com.joohnq.ui.entity.BottomItem
 
 @Composable
 fun <T : Destination> CreateTabItem(

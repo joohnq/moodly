@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.getNow
-import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
+import com.joohnq.api.getNow
+import com.joohnq.api.mapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.image.ProfileImage
 import com.joohnq.shared_resources.components.image.CacheImage
+import com.joohnq.shared_resources.components.image.ProfileImage
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.greeting
 import com.joohnq.shared_resources.remember.rememberAvatars
@@ -29,12 +29,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun HomeTopBar(
     modifier: Modifier = Modifier,
-    user: User,
+    user: User
 ) {
     val avatars = rememberAvatars()
     Column(
         modifier = Modifier.fillMaxSize().background(
-            color = Colors.Brown80, shape = Dimens.Shape.BottomLarge
+            color = Colors.Brown80,
+            shape = Dimens.Shape.BottomLarge
         ).padding(20.dp).then(modifier)
     ) {
         Row {

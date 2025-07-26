@@ -17,6 +17,6 @@ fun TabItemPreview() {
             tint = Colors.Brown80,
             contentDescription = Res.string.home
         ),
-        selected = true,
+        selected = true
     )
 }

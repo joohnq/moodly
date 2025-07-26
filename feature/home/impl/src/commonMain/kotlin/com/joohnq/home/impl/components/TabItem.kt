@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.IconResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
+import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun TabItem(
     icon: IconResource,
     selected: Boolean,
-    onNavigate: () -> Unit = {},
+    onNavigate: () -> Unit = {}
 ) {
     FilledIconButton(
         shape = Dimens.Shape.Circle,

@@ -14,6 +14,6 @@ fun CentralButtonPreview() {
             title = "Title",
             icon = Drawables.Icons.Outlined.Sleep,
             destination = Destination.App.DashBoard.Home
-        ),
+        )
     )
 }

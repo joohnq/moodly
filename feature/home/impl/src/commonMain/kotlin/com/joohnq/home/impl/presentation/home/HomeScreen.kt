@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.home.impl.presentation.home.event.HomeEvent
 import com.joohnq.home.impl.presentation.viewmodel.DashboardViewModel
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun HomeScreen(

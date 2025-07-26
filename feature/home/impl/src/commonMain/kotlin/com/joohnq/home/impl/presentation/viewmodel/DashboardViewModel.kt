@@ -28,10 +28,11 @@ class DashboardViewModel(
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
-    private val stressLevelViewModel: StressLevelViewModel,
+    private val stressLevelViewModel: StressLevelViewModel
 ) : BaseViewModel<DashboardContract.State, DashboardContract.Intent, DashboardContract.SideEffect>(
     initialState = initialState
-), DashboardContract.ViewModel {
+),
+    DashboardContract.ViewModel {
     override fun onIntent(intent: DashboardContract.Intent) {
         when (intent) {
             DashboardContract.Intent.Get -> {
@@ -71,7 +72,7 @@ class DashboardViewModel(
                 state.user,
                 stressState.records,
                 sleepState.records,
-                healthState.records,
+                healthState.records
             ).anyError(
                 block = { error ->
                     viewModelScope.launch {

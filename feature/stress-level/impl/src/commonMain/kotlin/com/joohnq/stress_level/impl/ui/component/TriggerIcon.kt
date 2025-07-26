@@ -20,15 +20,15 @@ fun TriggerIcon(
     icon: DrawableResource
 ) {
     Box(
-        modifier = modifier
-            .size(40.dp)
-            .border(
-                width = 1.dp,
-                color = Colors.Gray30,
-                shape = Dimens.Shape.Circle
-            )
-            .clip(Dimens.Shape.Circle),
-        contentAlignment = Alignment.Center,
+        modifier =
+            modifier
+                .size(40.dp)
+                .border(
+                    width = 1.dp,
+                    color = Colors.Gray30,
+                    shape = Dimens.Shape.Circle
+                ).clip(Dimens.Shape.Circle),
+        contentAlignment = Alignment.Center
     ) {
         Icon(
             painter = painterResource(icon),

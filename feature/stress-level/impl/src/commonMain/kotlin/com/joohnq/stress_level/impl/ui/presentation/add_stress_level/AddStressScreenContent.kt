@@ -42,18 +42,22 @@ fun AddStressLevelScreenContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
     onAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (AddStressLevelContract.Event) -> Unit = {},
+    onEvent: (AddStressLevelContract.Event) -> Unit = {}
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
         containerColor = Colors.Brown10,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
     ) { padding ->
         BoxWithConstraints {
             val height = maxHeight * 0.5f
             Column(
-                modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
+                modifier =
+                    Modifier
+                        .padding(padding)
+                        .paddingHorizontalMedium()
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppTopBar(
@@ -85,7 +89,9 @@ fun AddStressLevelScreenContent(
                     )
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
-                            text = state.record.stressLevel.level.toString(),
+                            text =
+                                state.record.stressLevel.level
+                                    .toString(),
                             style = TextStyles.displayLgExtraBold(),
                             color = Colors.Brown80
                         )

@@ -7,9 +7,7 @@ import com.joohnq.stress_level.api.mapper.toPercent
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 
 @Composable
-fun StressLevelChart(
-    records: List<StressLevelRecordResource>
-) {
+fun StressLevelChart(records: List<StressLevelRecordResource>) {
     val first = records.last().stressLevel
     val levels = records.map { it.stressLevel.level.toPercent() }
     val values = levels.organizeMoodRange()

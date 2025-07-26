@@ -9,10 +9,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressStressorsContentOnePreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceOnePreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceOnePreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -20,10 +21,11 @@ fun StressStressorsContentOnePreview() {
 @Composable
 fun StressStressorsContentTwoPreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceTwoPreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceTwoPreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -31,10 +33,11 @@ fun StressStressorsContentTwoPreview() {
 @Composable
 fun StressStressorsContentThreePreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceThreePreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceThreePreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -42,10 +45,11 @@ fun StressStressorsContentThreePreview() {
 @Composable
 fun StressStressorsContentFourPreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceFourPreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceFourPreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -53,10 +57,11 @@ fun StressStressorsContentFourPreview() {
 @Composable
 fun StressStressorsContentFivePreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -64,10 +69,11 @@ fun StressStressorsContentFivePreview() {
 @Composable
 fun StressStressorsContentWithStressorsPreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceWithStressorsPreview,
-            sliderValue = 1f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceWithStressorsPreview,
+                sliderValue = 1f
+            )
     )
 }
 
@@ -75,9 +81,10 @@ fun StressStressorsContentWithStressorsPreview() {
 @Composable
 fun StressStressorsContentHalfSliderValuePreview() {
     StressStressorsContent(
-        state = AddStressLevelContract.State(
-            record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
-            sliderValue = 0.5f
-        ),
+        state =
+            AddStressLevelContract.State(
+                record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
+                sliderValue = 0.5f
+            )
     )
 }

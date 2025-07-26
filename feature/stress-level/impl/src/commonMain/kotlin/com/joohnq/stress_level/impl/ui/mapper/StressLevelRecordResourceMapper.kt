@@ -16,28 +16,30 @@ fun List<StressLevelRecordResource>.toGroupedByDate(): Map<LocalDate, List<Stres
             key.date to value
         }.toMap()
 
-fun StressLevelRecord.toResource(): StressLevelRecordResource = StressLevelRecordResource(
-    id = id,
-    stressLevel = stressLevel.toResource(),
-    stressors = stressors.toResource(),
-    createdAt = createdAt,
-)
+fun StressLevelRecord.toResource(): StressLevelRecordResource =
+    StressLevelRecordResource(
+        id = id,
+        stressLevel = stressLevel.toResource(),
+        stressors = stressors.toResource(),
+        createdAt = createdAt
+    )
 
-fun StressLevelRecordResource.toDomain(): StressLevelRecord = StressLevelRecord(
-    id = id,
-    stressLevel = stressLevel.toDomain(),
-    stressors = stressors.toDomain(),
-    createdAt = createdAt,
-)
+fun StressLevelRecordResource.toDomain(): StressLevelRecord =
+    StressLevelRecord(
+        id = id,
+        stressLevel = stressLevel.toDomain(),
+        stressors = stressors.toDomain(),
+        createdAt = createdAt
+    )
 
-fun List<StressLevelRecordResource>.toPair(): List<Pair<StressorResource, Int>> {
-    return this.flatMap { it.stressors }
+fun List<StressLevelRecordResource>.toPair(): List<Pair<StressorResource, Int>> =
+    this
+        .flatMap { it.stressors }
         .groupBy { it }
         .map { it.key to it.value.size }
         .sortedBy { it.second }
-}
 
-fun  List<StressLevelRecordResource>.toSegments(): List<Pair<Color, Float>>  =
+fun List<StressLevelRecordResource>.toSegments(): List<Pair<Color, Float>> =
     flatMap { it.stressors }
         .toMap()
         .toSegments(size)

@@ -29,12 +29,13 @@ fun StressInsightCard(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
         shape = Dimens.Shape.Large
     ) {
         Column(modifier = Modifier.paddingAllSmall(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -55,10 +56,11 @@ fun StressInsightCard(
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 stressors.forEach { (stressor, _) ->
                     Row(
-                        modifier = Modifier
-                            .border(width = 1.dp, color = Colors.Gray30, shape = Dimens.Shape.Circle)
-                            .padding(horizontal = 12.dp, vertical = 6.dp)
-                            .clip(Dimens.Shape.Circle),
+                        modifier =
+                            Modifier
+                                .border(width = 1.dp, color = Colors.Gray30, shape = Dimens.Shape.Circle)
+                                .padding(horizontal = 12.dp, vertical = 6.dp)
+                                .clip(Dimens.Shape.Circle),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Icon(
@@ -81,10 +83,11 @@ fun StressInsightCard(
                 color = Colors.Gray20
             )
             Text(
-                text = stringResource(
-                    Res.string.your_logged_as_your_most_active_stressors_for_this_month,
-                    stringResource(mostActive.text)
-                ),
+                text =
+                    stringResource(
+                        Res.string.your_logged_as_your_most_active_stressors_for_this_month,
+                        stringResource(mostActive.text)
+                    ),
                 style = TextStyles.paragraphSm(),
                 color = Colors.Gray60
             )

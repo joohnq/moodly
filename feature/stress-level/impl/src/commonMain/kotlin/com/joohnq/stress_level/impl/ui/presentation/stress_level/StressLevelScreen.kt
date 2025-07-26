@@ -8,7 +8,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun StressLevelScreen(
     onNavigateAddStressLevel: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val state by stressLevelViewModel.state.collectAsState()

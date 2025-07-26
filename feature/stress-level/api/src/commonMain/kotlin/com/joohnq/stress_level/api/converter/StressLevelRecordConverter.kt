@@ -6,5 +6,6 @@ import com.joohnq.stress_level.api.mapper.toStressLevel
 
 object StressLevelRecordConverter {
     fun fromStressLevel(value: StressLevel): Long = value.toInt().toLong()
+
     fun toStressLevel(value: Long): StressLevel = value.toInt().toStressLevel()
 }

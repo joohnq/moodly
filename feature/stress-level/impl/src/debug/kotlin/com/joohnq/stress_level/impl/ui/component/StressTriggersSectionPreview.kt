@@ -16,6 +16,6 @@ fun StressTriggersSectionPreview() {
 @Composable
 fun StressTriggersSectionEmptyPreview() {
     StressTriggersSection(
-        records = listOf(),
+        records = listOf()
     )
 }

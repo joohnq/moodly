@@ -10,11 +10,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun StressLevelHistoryContentPreview() {
     StressLevelHistoryContent(
-        state = StressLevelContract.State(
-            records = UiState.Success(
-                StressLevelRecordResource.allStressLevelRecordResourcePreview
-            )
-        ),
+        state =
+            StressLevelContract.State(
+                records =
+                    UiState.Success(
+                        StressLevelRecordResource.allStressLevelRecordResourcePreview
+                    )
+            ),
         onEvent = {}
     )
 }
@@ -23,11 +25,13 @@ fun StressLevelHistoryContentPreview() {
 @Composable
 fun StressLevelHistoryContentPreviewEmpty() {
     StressLevelHistoryContent(
-        state = StressLevelContract.State(
-            records = UiState.Success(
-                listOf()
-            )
-        ),
+        state =
+            StressLevelContract.State(
+                records =
+                    UiState.Success(
+                        listOf()
+                    )
+            ),
         onEvent = {}
     )
 }

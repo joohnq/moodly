@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AddStressLevelScreen(
     onNavigateToStressStressors: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
@@ -25,8 +25,7 @@ fun AddStressLevelScreen(
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()
 
-    fun onError(error: String) =
-        scope.launch { snackBarState.showSnackbar(error) }
+    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {
@@ -40,7 +39,7 @@ fun AddStressLevelScreen(
                 stressLevelViewModel.onIntent(
                     StressLevelContract.Intent.Add(
                         StressLevelRecord(
-                            stressLevel = StressLevel.One,
+                            stressLevel = StressLevel.One
                         )
                     )
                 )

@@ -5,15 +5,16 @@ import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelView
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val stressLevelUiModule: Module = module {
-    single<StressLevelViewModel> {
-        StressLevelViewModel(
-            getStressLevelsUseCase = get(),
-            addStressLevelUseCase = get(),
-            deleteStressLevelUseCase = get(),
-        )
+val stressLevelUiModule: Module =
+    module {
+        single<StressLevelViewModel> {
+            StressLevelViewModel(
+                getStressLevelsUseCase = get(),
+                addStressLevelUseCase = get(),
+                deleteStressLevelUseCase = get()
+            )
+        }
+        single<AddStressLevelViewModel> {
+            AddStressLevelViewModel()
+        }
     }
-    single<AddStressLevelViewModel> {
-        AddStressLevelViewModel()
-    }
-}

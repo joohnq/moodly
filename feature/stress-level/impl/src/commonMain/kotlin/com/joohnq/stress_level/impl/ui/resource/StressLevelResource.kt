@@ -38,7 +38,7 @@ sealed class StressLevelResource(
     val subtitle: StringResource,
     val lifeImpact: StringResource,
     override val level: Int,
-    val palette: StressLevelPalette,
+    val palette: StressLevelPalette
 ) : StressLevelProperties {
     data object One :
         StressLevelResource(
@@ -48,11 +48,12 @@ sealed class StressLevelResource(
             subtitle = Res.string.level_one_zen,
             level = ONE.level,
             lifeImpact = Res.string.none,
-            palette = StressLevelPalette(
-                color = Colors.Green60,
-                backgroundColor = Colors.Green10,
-                imageColor = Colors.Green70
-            ),
+            palette =
+                StressLevelPalette(
+                    color = Colors.Green60,
+                    backgroundColor = Colors.Green10,
+                    imageColor = Colors.Green70
+                )
         )
 
     data object Two :
@@ -63,11 +64,12 @@ sealed class StressLevelResource(
             subtitle = Res.string.level_two_calm,
             level = TWO.level,
             lifeImpact = Res.string.mild,
-            palette = StressLevelPalette(
-                color = Colors.Yellow50,
-                backgroundColor = Colors.Yellow10,
-                imageColor = Colors.Yellow60
-            ),
+            palette =
+                StressLevelPalette(
+                    color = Colors.Yellow50,
+                    backgroundColor = Colors.Yellow10,
+                    imageColor = Colors.Yellow60
+                )
         )
 
     data object Three :
@@ -78,11 +80,12 @@ sealed class StressLevelResource(
             subtitle = Res.string.level_three_normal,
             level = THREE.level,
             lifeImpact = Res.string.moderate,
-            palette = StressLevelPalette(
-                color = Colors.Yellow50,
-                backgroundColor = Colors.Yellow10,
-                imageColor = Colors.Yellow60
-            ),
+            palette =
+                StressLevelPalette(
+                    color = Colors.Yellow50,
+                    backgroundColor = Colors.Yellow10,
+                    imageColor = Colors.Yellow60
+                )
         )
 
     data object Four :
@@ -93,11 +96,12 @@ sealed class StressLevelResource(
             subtitle = Res.string.level_four_irritated,
             level = FOUR.level,
             lifeImpact = Res.string.high,
-            palette = StressLevelPalette(
-                color = Colors.Orange60,
-                backgroundColor = Colors.Orange10,
-                imageColor = Colors.Orange50
-            ),
+            palette =
+                StressLevelPalette(
+                    color = Colors.Orange60,
+                    backgroundColor = Colors.Orange10,
+                    imageColor = Colors.Orange50
+                )
         )
 
     data object Five :
@@ -108,10 +112,11 @@ sealed class StressLevelResource(
             subtitle = Res.string.level_five_angry,
             level = FIVE.level,
             lifeImpact = Res.string.very_high,
-            palette = StressLevelPalette(
-                color = Colors.Orange60,
-                backgroundColor = Colors.Orange10,
-                imageColor = Colors.Orange50
-            ),
+            palette =
+                StressLevelPalette(
+                    color = Colors.Orange60,
+                    backgroundColor = Colors.Orange10,
+                    imageColor = Colors.Orange50
+                )
         )
 }

@@ -2,6 +2,7 @@ package com.joohnq.welcome.impl.presentation.welcome
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import com.joohnq.welcome.impl.ui.presentation.welcome.WelcomeContent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview

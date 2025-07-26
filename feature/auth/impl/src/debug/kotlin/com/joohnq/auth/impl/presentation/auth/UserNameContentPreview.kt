@@ -1,6 +1,8 @@
 package com.joohnq.auth.impl.presentation.auth
 
 import androidx.compose.runtime.Composable
+import com.joohnq.auth.impl.ui.presentation.auth.AuthNameContent
+import com.joohnq.auth.impl.ui.presentation.auth.AuthNameContract
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview

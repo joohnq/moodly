@@ -1,6 +1,7 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.home.impl.ui.components.SelfJournalingMetric
 import com.joohnq.self_journal.impl.ui.parameter.ListSelfJournalRecordResourceParameterProvider
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

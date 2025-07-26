@@ -1,10 +1,10 @@
 package com.joohnq.moodapp.di
 
-import com.joohnq.auth.impl.di.authUiModule
+import com.joohnq.auth.impl.ui.di.authUiModule
 import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.api.di.userDomainModule
-import com.joohnq.freud_score.impl.di.freudScoreUiModule
-import com.joohnq.home.impl.di.homeUiModule
+import com.joohnq.freud_score.impl.ui.di.freudScoreUiModule
+import com.joohnq.home.impl.ui.di.homeUiModule
 import com.joohnq.mood.impl.data.di.moodDataModule
 import com.joohnq.mood.impl.data.di.moodDriverFactoryModule
 import com.joohnq.mood.api.di.moodDomainModule

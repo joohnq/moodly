@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun WelcomeContentOnePreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(0) { 6 },
+        pagerState = rememberPagerState(0) { 6 }
     )
 }
 
@@ -16,7 +16,7 @@ fun WelcomeContentOnePreview() {
 @Composable
 fun WelcomeContentTwoPreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(1) { 6 },
+        pagerState = rememberPagerState(1) { 6 }
     )
 }
 
@@ -24,7 +24,7 @@ fun WelcomeContentTwoPreview() {
 @Composable
 fun WelcomeContentThreePreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(2) { 6 },
+        pagerState = rememberPagerState(2) { 6 }
     )
 }
 
@@ -32,7 +32,7 @@ fun WelcomeContentThreePreview() {
 @Composable
 fun WelcomeContentFourPreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(3) { 6 },
+        pagerState = rememberPagerState(3) { 6 }
     )
 }
 
@@ -40,7 +40,7 @@ fun WelcomeContentFourPreview() {
 @Composable
 fun WelcomeContentFivePreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(4) { 6 },
+        pagerState = rememberPagerState(4) { 6 }
     )
 }
 
@@ -48,7 +48,7 @@ fun WelcomeContentFivePreview() {
 @Composable
 fun WelcomeContentSixPreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(5) { 6 },
+        pagerState = rememberPagerState(5) { 6 }
     )
 }
 
@@ -56,6 +56,6 @@ fun WelcomeContentSixPreview() {
 @Composable
 fun WelcomeContentSevenPreview() {
     WelcomeContent(
-        pagerState = rememberPagerState(6) { 6 },
+        pagerState = rememberPagerState(6) { 6 }
     )
 }

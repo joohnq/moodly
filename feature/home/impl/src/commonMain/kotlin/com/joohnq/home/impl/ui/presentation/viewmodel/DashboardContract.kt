@@ -23,26 +23,44 @@ sealed interface DashboardContract {
         val freudScore: FreudScoreResource? = null,
         val selfJournalRecords: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
         val sleepQualityRecords: UiState<List<SleepQualityRecordResource>> = UiState.Idle,
-        val stressLevelRecords: UiState<List<StressLevelRecordResource>> = UiState.Idle
+        val stressLevelRecords: UiState<List<StressLevelRecordResource>> = UiState.Idle,
     )
 
     sealed interface SideEffect {
-        data class ShowError(val message: String) : SideEffect
+        data class ShowError(
+            val message: String,
+        ) : SideEffect
     }
 
     sealed interface Event {
         data object OnNavigateToAddJournaling : Event
+
         data object OnNavigateToAddStress : Event
+
         data object OnNavigateToAddMood : Event
+
         data object OnNavigateToFreudScore : Event
+
         data object OnNavigateToMood : Event
+
         data object OnNavigateToSelfJournal : Event
+
         data object OnNavigateToSleepQuality : Event
+
         data object OnNavigateToStressLevel : Event
+
         data object OnNavigateToAddStressLevel : Event
-        data class OnNavigateToEditJournaling(val id: Int) : Event
+
+        data class OnNavigateToEditJournaling(
+            val id: Int,
+        ) : Event
+
         data object OnNavigateToSelfJournalHistory : Event
+
         data object OnNavigateToAddSleep : Event
-        data class OnNavigateTo(val destination: Destination) : Event
+
+        data class OnNavigateTo(
+            val destination: Destination,
+        ) : Event
     }
 }

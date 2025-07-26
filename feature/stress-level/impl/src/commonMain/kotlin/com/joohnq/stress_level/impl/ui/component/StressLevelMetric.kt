@@ -19,7 +19,7 @@ fun StressLevelMetric(
     records: List<StressLevelRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val record = records.getTodayStressLevelRecord()
 

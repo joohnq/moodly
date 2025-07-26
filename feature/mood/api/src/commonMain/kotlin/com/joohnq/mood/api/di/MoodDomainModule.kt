@@ -6,8 +6,9 @@ import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val moodDomainModule = module {
-    factoryOf(::AddMoodUseCase)
-    factoryOf(::DeleteMoodUseCase)
-    factoryOf(::GetMoodsUseCase)
-}
+val moodDomainModule =
+    module {
+        factoryOf(::AddMoodUseCase)
+        factoryOf(::DeleteMoodUseCase)
+        factoryOf(::GetMoodsUseCase)
+    }

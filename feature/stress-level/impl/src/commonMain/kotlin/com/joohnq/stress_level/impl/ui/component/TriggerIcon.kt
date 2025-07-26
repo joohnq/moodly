@@ -17,7 +17,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun TriggerIcon(
     modifier: Modifier = Modifier,
-    icon: DrawableResource
+    icon: DrawableResource,
 ) {
     Box(
         modifier =

@@ -12,7 +12,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class MoodAverageResource(
     val backgroundColor: Color,
     val color: Color,
-    val text: StringResource
+    val text: StringResource,
 ) {
     data object Positive : MoodAverageResource(
         backgroundColor = Colors.Green40,

@@ -31,8 +31,11 @@ fun RowScope.SleepInfo(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Box(
-            modifier = Modifier.size(40.dp).clip(Dimens.Shape.Circle)
-                .background(color = Colors.Gray10),
+            modifier =
+                Modifier
+                    .size(40.dp)
+                    .clip(Dimens.Shape.Circle)
+                    .background(color = Colors.Gray10),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -46,12 +49,12 @@ fun RowScope.SleepInfo(
             Text(
                 text = title,
                 style = TextStyles.textSmSemiBold(),
-                color = Colors.Gray80,
+                color = Colors.Gray80
             )
             Text(
                 text = stringResource(subtitle),
                 style = TextStyles.textSmRegular(),
-                color = Colors.Gray60,
+                color = Colors.Gray60
             )
         }
     }

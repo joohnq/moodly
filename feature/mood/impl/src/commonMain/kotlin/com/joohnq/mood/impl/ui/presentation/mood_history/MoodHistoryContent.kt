@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
-    onEvent: (MoodHistoryContract.Event) -> Unit = {}
+    onEvent: (MoodHistoryContract.Event) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -37,9 +37,9 @@ fun MoodHistoryContent(
             ) { padding ->
                 Column(
                     modifier =
-                    Modifier
-                        .padding(padding)
-                        .paddingHorizontalMedium()
+                        Modifier
+                            .padding(padding)
+                            .paddingHorizontalMedium()
                 ) {
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),

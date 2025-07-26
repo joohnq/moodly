@@ -19,7 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalingMetric(
     records: List<SelfJournalRecordResource>,
-    onCreate: () -> Unit = {}
+    onCreate: () -> Unit = {},
 ) {
     val resource = records.getTodaySelfJournalRecord()
 
@@ -36,10 +36,11 @@ fun SelfJournalingMetric(
         JournalCalendar(
             modifier = Modifier.paddingHorizontalMedium(),
             records = records,
-            subtitle = stringResource(
-                Res.string.journals_written_in,
-                resource.createdAt.toMonthNameString()
-            ),
+            subtitle =
+                stringResource(
+                    Res.string.journals_written_in,
+                    resource.createdAt.toMonthNameString()
+                ),
             onCreate = onCreate
         )
     }

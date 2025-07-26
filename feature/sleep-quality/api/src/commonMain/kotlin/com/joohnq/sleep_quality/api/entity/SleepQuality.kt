@@ -7,9 +7,13 @@ sealed class SleepQuality(
     override val level: Int,
 ) : SleepQualityProperties {
     data object Excellent : SleepQuality(EXCELLENT.id, EXCELLENT.level)
+
     data object Good : SleepQuality(GOOD.id, GOOD.level)
+
     data object Fair : SleepQuality(FAIR.id, FAIR.level)
+
     data object Poor : SleepQuality(POOR.id, POOR.level)
+
     data object Worst : SleepQuality(WORST.id, WORST.level)
 
     companion object {
@@ -20,5 +24,3 @@ sealed class SleepQuality(
         val WORST = DSleepQualityProperties(1, 1)
     }
 }
-
-

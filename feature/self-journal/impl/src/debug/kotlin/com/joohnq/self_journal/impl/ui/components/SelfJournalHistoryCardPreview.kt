@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun SelfJournalHistoryCardPreview(
     @PreviewParameter(SelfJournalRecordResourceParameterProvider::class)
-    item: SelfJournalRecordResource
+    item: SelfJournalRecordResource,
 ) {
     SelfJournalHistoryCard(
         record = item

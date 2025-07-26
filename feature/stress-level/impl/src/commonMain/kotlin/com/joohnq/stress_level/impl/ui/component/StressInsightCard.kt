@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressInsightCard(
     modifier: Modifier = Modifier,
     stressors: List<Pair<StressorResource, Int>>,
-    mostActive: StressorResource
+    mostActive: StressorResource,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

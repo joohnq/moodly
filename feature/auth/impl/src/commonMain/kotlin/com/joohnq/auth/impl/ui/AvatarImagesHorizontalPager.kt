@@ -33,15 +33,16 @@ fun AvatarImagesHorizontalPager(avatars: List<DrawableResource>) {
             Image(
                 painter = painterResource(avatars[page]),
                 contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clip(Dimens.Shape.Circle)
-                    .border(
-                        width = 8.dp,
-                        color = Colors.White,
-                        shape = Dimens.Shape.Circle
-                    )
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                        .clip(Dimens.Shape.Circle)
+                        .border(
+                            width = 8.dp,
+                            color = Colors.White,
+                            shape = Dimens.Shape.Circle
+                        )
             )
         }
     }

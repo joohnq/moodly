@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun EditJournalingContentPreview(
     @PreviewParameter(SelfJournalRecordParameterProvider::class)
-    item: SelfJournalRecord
+    item: SelfJournalRecord,
 ) {
     EditJournalingContent(
         state =
@@ -29,7 +29,7 @@ fun EditJournalingContentPreview(
 @Composable
 fun EditJournalingContentPreview(
     @PreviewParameter(BooleanParameterProvider::class)
-    boolean: Boolean
+    boolean: Boolean,
 ) {
     EditJournalingContent(
         state =

@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FreudScoreMetric(
     freudScore: FreudScoreResource?,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     if (freudScore == null) return
 

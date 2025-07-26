@@ -27,7 +27,7 @@ fun Modifier.dashedLine(
     strokeWidth: Dp = 2.dp,
     dashLength: Dp = 4.dp,
     gapLength: Dp = 4.dp,
-    cap: StrokeCap = StrokeCap.Round
+    cap: StrokeCap = StrokeCap.Round,
 ) = dashedLine(brush = SolidColor(color), strokeWidth, dashLength, gapLength, cap)
 
 /**
@@ -46,7 +46,7 @@ fun Modifier.dashedLine(
     strokeWidth: Dp = 2.dp,
     dashLength: Dp = 4.dp,
     gapLength: Dp = 4.dp,
-    cap: StrokeCap = StrokeCap.Round
+    cap: StrokeCap = StrokeCap.Round,
 ) = this.drawWithContent {
     val pathEffect =
         PathEffect.dashPathEffect(floatArrayOf(dashLength.toPx(), gapLength.toPx()), 0f)

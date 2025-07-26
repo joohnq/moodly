@@ -6,5 +6,5 @@ data class FreudScorePalette(
     val color: Color,
     val subColor: Color,
     val backgroundColor: Color,
-    val imageColor: Color
+    val imageColor: Color,
 )

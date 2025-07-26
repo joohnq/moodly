@@ -8,7 +8,7 @@ import com.joohnq.user.database.UserDatabaseSql
 import com.joohnq.user.impl.data.database.UserDatabase
 
 actual class UserDriverFactory(
-    private val context: Context
+    private val context: Context,
 ) {
     actual fun createDriver(): SqlDriver =
         AndroidSqliteDriver(

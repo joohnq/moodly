@@ -45,7 +45,7 @@ fun List<SelfJournalRecordResource?>.getSelfJournalsInYear(date: LocalDateTime =
 }
 
 fun List<SelfJournalRecordResource>.organizeByDateSelfJournal(
-    date: LocalDateTime = getNow()
+    date: LocalDateTime = getNow(),
 ): Map<LocalDate, List<SelfJournalRecordResource>?> {
     val recordsByDay = groupBy { it.createdAt.date }
 
@@ -56,7 +56,7 @@ fun List<SelfJournalRecordResource>.organizeByDateSelfJournal(
 }
 
 fun List<SelfJournalRecordResource>.organizeFromCreationSelfJournalFreudScore(
-    creationAt: LocalDate = getNow().date
+    creationAt: LocalDate = getNow().date,
 ): Map<LocalDate, List<SelfJournalRecordResource>?> {
     val now = getNow().date
     val recordsByDay = groupBy { it.createdAt.date }
@@ -66,7 +66,7 @@ fun List<SelfJournalRecordResource>.organizeFromCreationSelfJournalFreudScore(
 
 private fun generateDateSequence(
     creationDate: LocalDate,
-    currentDate: LocalDate
+    currentDate: LocalDate,
 ): Sequence<LocalDate> =
     generateSequence(creationDate) { current ->
         val nextDate = current.plus(1, DateTimeUnit.DAY)

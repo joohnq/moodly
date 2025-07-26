@@ -20,7 +20,7 @@ sealed class StressorResource(
     val text: StringResource,
     override val id: Int,
     val color: Color,
-    val icon: DrawableResource
+    val icon: DrawableResource,
 ) : StressorProperties {
     data object Work : StressorResource(
         text = Res.string.work,

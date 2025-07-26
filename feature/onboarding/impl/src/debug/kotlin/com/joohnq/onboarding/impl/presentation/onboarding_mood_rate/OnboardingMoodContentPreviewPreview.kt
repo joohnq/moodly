@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun OnboardingMoodRateContentDepressedPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
-    item: MoodRecordResource
+    item: MoodRecordResource,
 ) {
     OnboardingMoodRateContent(
         state = item

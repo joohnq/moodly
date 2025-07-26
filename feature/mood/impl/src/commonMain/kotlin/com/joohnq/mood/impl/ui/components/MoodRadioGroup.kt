@@ -32,7 +32,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 fun MoodRadioGroup(
     modifier: Modifier = Modifier,
     selectedMood: MoodRecordResource,
-    setSelectedMood: (MoodResource) -> Unit = {}
+    setSelectedMood: (MoodResource) -> Unit = {},
 ) {
     val resources by remember { mutableStateOf(getAllMoodResource()) }
 
@@ -48,12 +48,12 @@ fun MoodRadioGroup(
                 Button(
                     modifier = Modifier.size(36.dp),
                     colors =
-                    ButtonColors(
-                        containerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
-                        contentColor = selectedMood.mood.palette.moodScreenBackgroundColor,
-                        disabledContainerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
-                        disabledContentColor = selectedMood.mood.palette.moodScreenBackgroundColor
-                    ),
+                        ButtonColors(
+                            containerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                            contentColor = selectedMood.mood.palette.moodScreenBackgroundColor,
+                            disabledContainerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                            disabledContentColor = selectedMood.mood.palette.moodScreenBackgroundColor
+                        ),
                     shape = Dimens.Shape.Circle,
                     onClick = {
                         setSelectedMood(resources[i])
@@ -62,30 +62,30 @@ fun MoodRadioGroup(
                 ) {
                     Box(
                         modifier =
-                        Modifier.size(8.dp).background(
-                            color = selectedMood.mood.palette.moodScreenBackgroundColor,
-                            shape = Dimens.Shape.Circle
-                        )
+                            Modifier.size(8.dp).background(
+                                color = selectedMood.mood.palette.moodScreenBackgroundColor,
+                                shape = Dimens.Shape.Circle
+                            )
                     )
                 }
 
                 if (i < resources.size - 1) {
                     Box(
                         modifier =
-                        Modifier
-                            .width(dividerWidth)
-                            .height(10.dp)
-                            .paddingHorizontalExtraExtraSmall()
-                            .background(
-                                color =
-                                if (selectedMood.mood.id - 1 >=
-                                    i
-                                ) {
-                                    Colors.White
-                                } else {
-                                    selectedMood.mood.palette.moodScreenInactiveColor
-                                }
-                            )
+                            Modifier
+                                .width(dividerWidth)
+                                .height(10.dp)
+                                .paddingHorizontalExtraExtraSmall()
+                                .background(
+                                    color =
+                                        if (selectedMood.mood.id - 1 >=
+                                            i
+                                        ) {
+                                            Colors.White
+                                        } else {
+                                            selectedMood.mood.palette.moodScreenInactiveColor
+                                        }
+                                )
                     )
                 }
             }

@@ -22,7 +22,7 @@ fun PinCode(
     keyboardManager: SoftwareKeyboardController? = null,
     onNumberChanged: (i: Int, newNumber: Int?) -> Unit = { _, _ -> },
     onKeyboardBack: () -> Unit = {},
-    onFocusChanged: (i: Int) -> Unit = {}
+    onFocusChanged: (i: Int) -> Unit = {},
 ) {
     LaunchedEffect(code) {
         val allNumbersEntered = code.none { it == null }

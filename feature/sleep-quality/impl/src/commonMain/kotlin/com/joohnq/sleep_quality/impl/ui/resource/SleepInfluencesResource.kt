@@ -42,6 +42,7 @@ sealed class SleepInfluencesResource(
         SleepInfluencesResource(id = MEDITATION.id, title = Res.string.meditation)
 
     data object Caffeine : SleepInfluencesResource(id = CAFFEINE.id, title = Res.string.caffeine)
+
     data object ExcessiveScreenTime :
         SleepInfluencesResource(
             id = EXCESSIVE_SCREEN_TIME.id,
@@ -52,20 +53,22 @@ sealed class SleepInfluencesResource(
         SleepInfluencesResource(id = HIGH_STRESS.id, title = Res.string.high_stress)
 
     data object Anxiety : SleepInfluencesResource(id = ANXIETY.id, title = Res.string.anxiety)
+
     data object AlcoholConsumption :
         SleepInfluencesResource(id = ALCOHOL_CONSUMPTION.id, title = Res.string.alcohol_consumption)
 
     companion object {
-        val allSleepInfluences = listOf(
-            NaturalLight,
-            PhysicalActivity,
-            ChillSleepEnvironment,
-            Meditation,
-            Caffeine,
-            ExcessiveScreenTime,
-            HighStress,
-            Anxiety,
-            AlcoholConsumption
-        )
+        val allSleepInfluences =
+            listOf(
+                NaturalLight,
+                PhysicalActivity,
+                ChillSleepEnvironment,
+                Meditation,
+                Caffeine,
+                ExcessiveScreenTime,
+                HighStress,
+                Anxiety,
+                AlcoholConsumption
+            )
     }
 }

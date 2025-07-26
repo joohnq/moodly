@@ -41,7 +41,7 @@ fun PinContent(
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
     onAction: (PinContract.Intent) -> Unit = {},
-    onEvent: (PinContract.Event) -> Unit = {}
+    onEvent: (PinContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

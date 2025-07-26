@@ -18,18 +18,19 @@ import org.jetbrains.compose.resources.stringResource
 fun TabItem(
     icon: IconResource,
     selected: Boolean,
-    onNavigate: () -> Unit = {}
+    onNavigate: () -> Unit = {},
 ) {
     FilledIconButton(
         shape = Dimens.Shape.Circle,
         onClick = onNavigate,
         modifier = Modifier.size(48.dp),
-        colors = IconButtonColors(
-            containerColor = if (selected) Colors.Brown10 else Colors.White,
-            contentColor = if (selected) Colors.Brown80 else Colors.Brown30,
-            disabledContainerColor = Color.Unspecified,
-            disabledContentColor = Color.Unspecified
-        )
+        colors =
+            IconButtonColors(
+                containerColor = if (selected) Colors.Brown10 else Colors.White,
+                contentColor = if (selected) Colors.Brown80 else Colors.Brown30,
+                disabledContainerColor = Color.Unspecified,
+                disabledContentColor = Color.Unspecified
+            )
     ) {
         Icon(
             painter = painterResource(icon.icon),

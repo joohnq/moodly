@@ -15,7 +15,7 @@ import com.joohnq.ui.mapper.foldComposable
 fun StressLevelContent(
     state: StressLevelContract.State,
     onAction: (StressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressLevelContract.Event) -> Unit = {}
+    onEvent: (StressLevelContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->

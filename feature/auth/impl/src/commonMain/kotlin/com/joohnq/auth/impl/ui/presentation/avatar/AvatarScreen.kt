@@ -32,9 +32,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AvatarScreen(
-    onNavigateToUserName: () -> Unit
-) {
+fun AvatarScreen(onNavigateToUserName: () -> Unit) {
     val snackBarState = rememberSnackBarState()
     val avatars = rememberAvatars()
     val pagerState = rememberPagerState(pageCount = { avatars.size })
@@ -48,35 +46,39 @@ fun AvatarScreen(
     var launchSetting by remember { mutableStateOf(value = false) }
     var permissionRationalDialog by remember { mutableStateOf(value = false) }
     val permissionsManager =
-        createPermissionsManager(object : PermissionCallback {
-            override fun onPermissionStatus(
-                permissionType: PermissionType,
-                status: PermissionStatus
-            ) {
-                when (status) {
-                    PermissionStatus.GRANTED -> {
-                        when (permissionType) {
-                            PermissionType.CAMERA -> launchCamera = true
-                            PermissionType.GALLERY -> launchGallery = true
+        createPermissionsManager(
+            object : PermissionCallback {
+                override fun onPermissionStatus(
+                    permissionType: PermissionType,
+                    status: PermissionStatus,
+                ) {
+                    when (status) {
+                        PermissionStatus.GRANTED -> {
+                            when (permissionType) {
+                                PermissionType.CAMERA -> launchCamera = true
+                                PermissionType.GALLERY -> launchGallery = true
+                            }
                         }
-                    }
 
-                    else -> {
-                        permissionRationalDialog = true
+                        else -> {
+                            permissionRationalDialog = true
+                        }
                     }
                 }
             }
-        })
-    val cameraManager = rememberCameraManager {
-        scope.launch {
-            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+        )
+    val cameraManager =
+        rememberCameraManager {
+            scope.launch {
+                avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+            }
         }
-    }
-    val galleryManager = rememberGalleryManager {
-        scope.launch {
-            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+    val galleryManager =
+        rememberGalleryManager {
+            scope.launch {
+                avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+            }
         }
-    }
     if (imageSourceOptionDialog) {
         ImageSourcePicker(onDismissRequest = {
             imageSourceOptionDialog = false
@@ -137,11 +139,12 @@ fun AvatarScreen(
             }
 
             AvatarContract.Event.OnContinue -> {
-                val action = if (avatarState.imageBitmap == null) {
-                    UserContract.Intent.UpdateImageDrawable(avatarState.selectedDrawableIndex)
-                } else {
-                    UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
-                }
+                val action =
+                    if (avatarState.imageBitmap == null) {
+                        UserContract.Intent.UpdateImageDrawable(avatarState.selectedDrawableIndex)
+                    } else {
+                        UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
+                    }
 
                 userViewModel.onIntent(action)
             }

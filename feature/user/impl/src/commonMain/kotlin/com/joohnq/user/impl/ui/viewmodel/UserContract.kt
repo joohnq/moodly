@@ -14,19 +14,19 @@ sealed interface UserContract {
         data object Init : Intent
 
         data class Update(
-            val user: User
+            val user: User,
         ) : Intent
 
         data class UpdateName(
-            val name: String
+            val name: String,
         ) : Intent
 
         data class UpdateImageBitmap(
-            val image: ImageBitmap
+            val image: ImageBitmap,
         ) : Intent
 
         data class UpdateImageDrawable(
-            val i: Int
+            val i: Int,
         ) : Intent
     }
 
@@ -40,11 +40,11 @@ sealed interface UserContract {
         data object Added : SideEffect
 
         data class ShowError(
-            val error: String
+            val error: String,
         ) : SideEffect
     }
 
     data class State(
-        val user: UiState<User> = UiState.Idle
+        val user: UiState<User> = UiState.Idle,
     )
 }

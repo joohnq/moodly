@@ -19,7 +19,7 @@ class PreferencesViewModel(
     private val updateSkipWelcomeUseCase: UpdateSkipWelcomeUseCase,
     private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     private val updateSkipAuthUseCase: UpdateSkipAuthUseCase,
-    private val updateSkipSecurityUseCase: UpdateSkipSecurityUseCase
+    private val updateSkipSecurityUseCase: UpdateSkipSecurityUseCase,
 ) : BaseViewModel<PreferencesContract.State, PreferencesContract.Intent, PreferencesContract.SideEffect>(
         initialState = initialState
     ),

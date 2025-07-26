@@ -7,11 +7,8 @@ import java.io.ByteArrayOutputStream
 
 actual typealias ImageFormat = Bitmap.CompressFormat
 
-actual fun ImageBitmap.toByteArray(
-    format: ImageFormat,
-): ByteArray {
-    return ByteArrayOutputStream().use {
+actual fun ImageBitmap.toByteArray(format: ImageFormat): ByteArray =
+    ByteArrayOutputStream().use {
         asAndroidBitmap().compress(format, 100, it)
         it.toByteArray()
     }
-}

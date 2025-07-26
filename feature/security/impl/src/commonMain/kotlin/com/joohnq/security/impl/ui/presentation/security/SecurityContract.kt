@@ -11,7 +11,7 @@ sealed interface SecurityContract {
         data object Get : Intent
 
         data class Update(
-            val security: Security
+            val security: Security,
         ) : Intent
     }
 
@@ -19,12 +19,12 @@ sealed interface SecurityContract {
         data object OnSecurityUpdated : SideEffect
 
         data class ShowError(
-            val error: String
+            val error: String,
         ) : SideEffect
     }
 
     data class State(
-        val item: UiState<Security> = UiState.Idle
+        val item: UiState<Security> = UiState.Idle,
     )
 
     sealed interface Event {

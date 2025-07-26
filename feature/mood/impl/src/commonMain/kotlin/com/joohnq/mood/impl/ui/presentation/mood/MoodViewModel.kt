@@ -6,7 +6,6 @@ import com.joohnq.mood.api.use_case.AddMoodUseCase
 import com.joohnq.mood.api.use_case.DeleteMoodUseCase
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.mood.impl.ui.mapper.toResource
-import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodContract
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.getValueOrEmpty
@@ -20,10 +19,10 @@ class MoodViewModel(
     private val initialState: MoodContract.State = MoodContract.State(),
     private val getMoodsUseCase: GetMoodsUseCase,
     private val deleteMoodUseCase: DeleteMoodUseCase,
-    private val addMoodUseCase: AddMoodUseCase
+    private val addMoodUseCase: AddMoodUseCase,
 ) : BaseViewModel<MoodContract.State, MoodContract.Intent, MoodContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     MoodContract.ViewModel {
     override fun onIntent(intent: MoodContract.Intent) {
         when (intent) {

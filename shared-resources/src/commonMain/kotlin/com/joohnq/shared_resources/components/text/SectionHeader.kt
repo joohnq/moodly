@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SectionHeader(
     modifier: Modifier = Modifier,
     title: StringResource,
-    onSeeMore: () -> Unit = {}
+    onSeeMore: () -> Unit = {},
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -61,7 +61,7 @@ fun SectionHeader(
 @Composable
 fun SectionHeader(
     modifier: Modifier = Modifier,
-    title: StringResource
+    title: StringResource,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),

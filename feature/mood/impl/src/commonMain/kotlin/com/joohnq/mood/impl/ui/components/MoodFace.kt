@@ -18,13 +18,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodFace(
     modifier: Modifier = Modifier,
-    resource: MoodResource
+    resource: MoodResource,
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier =
-        modifier
-            .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
+            modifier
+                .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
             imageVector = resource.assets.imageVector,
@@ -40,13 +40,13 @@ fun MoodFace(
     modifier: Modifier = Modifier,
     resource: MoodResource,
     backgroundColor: Color,
-    color: Color
+    color: Color,
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier =
-        modifier
-            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
+            modifier
+                .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
             imageVector = resource.assets.imageVector,
@@ -63,12 +63,12 @@ fun MoodFace(
     backgroundColor: Color,
     color: Color,
     resource: MoodResource,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     IconButton(
         modifier =
-        Modifier
-            .background(color = backgroundColor, shape = Dimens.Shape.Circle),
+            Modifier
+                .background(color = backgroundColor, shape = Dimens.Shape.Circle),
         onClick = onClick
     ) {
         Icon(
@@ -83,12 +83,12 @@ fun MoodFace(
 @Composable
 fun MoodFace(
     modifier: Modifier = Modifier,
-    average: MoodAverageResource
+    average: MoodAverageResource,
 ) {
     Box(
         modifier =
-        Modifier
-            .background(color = average.color, shape = Dimens.Shape.Circle)
+            Modifier
+                .background(color = average.color, shape = Dimens.Shape.Circle)
     ) {
         val image =
             when (average) {

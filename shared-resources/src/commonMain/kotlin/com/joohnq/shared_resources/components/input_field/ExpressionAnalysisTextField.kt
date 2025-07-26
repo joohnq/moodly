@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisTextField(
     modifier: Modifier = Modifier,
     text: String,
-    onValueChange: (String) -> Unit = {}
+    onValueChange: (String) -> Unit = {},
 ) {
     TextField(
         value = text,

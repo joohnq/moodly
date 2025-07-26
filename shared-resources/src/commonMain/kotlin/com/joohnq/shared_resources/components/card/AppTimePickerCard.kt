@@ -34,7 +34,7 @@ fun AppTimePickerCard(
     hour: String,
     minutes: String,
     isAfternoon: Boolean,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = modifier) {
         Text(

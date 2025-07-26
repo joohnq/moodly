@@ -21,7 +21,7 @@ fun StressHistory(
     modifier: Modifier = Modifier,
     records: List<StressLevelRecordResource>,
     onDelete: (Int) -> Unit = {},
-    onAddStressLevel: () -> Unit = {}
+    onAddStressLevel: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,

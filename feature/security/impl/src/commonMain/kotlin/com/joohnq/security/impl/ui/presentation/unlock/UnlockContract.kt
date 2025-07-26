@@ -5,7 +5,7 @@ sealed interface UnlockContract {
         data object OnContinue : Event
 
         data class OnUpdateShowBottomSheet(
-            val value: Boolean
+            val value: Boolean,
         ) : Event
     }
 }

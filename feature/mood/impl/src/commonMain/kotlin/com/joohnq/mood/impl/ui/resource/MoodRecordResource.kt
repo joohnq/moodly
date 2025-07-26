@@ -7,7 +7,7 @@ data class MoodRecordResource(
     val id: Int = -1,
     val mood: MoodResource = MoodResource.Neutral,
     val description: String = "",
-    val createdAt: LocalDateTime = getNow()
+    val createdAt: LocalDateTime = getNow(),
 ) {
     companion object {
         val moodRecordResourceDepressedPreview =

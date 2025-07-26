@@ -3,10 +3,10 @@ package com.joohnq.auth.impl.ui.presentation.avatar
 import com.joohnq.ui.BaseViewModel
 
 class AvatarViewModel(
-    initialState: AvatarContract.State = AvatarContract.State()
+    initialState: AvatarContract.State = AvatarContract.State(),
 ) : BaseViewModel<AvatarContract.State, AvatarContract.Intent, AvatarContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     AvatarContract.ViewModel {
     override fun onIntent(intent: AvatarContract.Intent) {
         when (intent) {

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class SecurityViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val updateSecurityUseCase: UpdateSecurityUseCase,
-    initialState: SecurityContract.State = SecurityContract.State()
+    initialState: SecurityContract.State = SecurityContract.State(),
 ) : BaseViewModel<SecurityContract.State, SecurityContract.Intent, SecurityContract.SideEffect>(
         initialState = initialState
     ),

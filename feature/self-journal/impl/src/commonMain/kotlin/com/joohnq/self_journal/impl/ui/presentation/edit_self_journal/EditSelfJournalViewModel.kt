@@ -3,7 +3,7 @@ package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
 import com.joohnq.ui.BaseViewModel
 
 class EditSelfJournalViewModel(
-    initialState: EditSelfJournalContract.State = EditSelfJournalContract.State()
+    initialState: EditSelfJournalContract.State = EditSelfJournalContract.State(),
 ) : BaseViewModel<EditSelfJournalContract.State, EditSelfJournalContract.Intent, EditSelfJournalContract.SideEffect>(
         initialState = initialState
     ),

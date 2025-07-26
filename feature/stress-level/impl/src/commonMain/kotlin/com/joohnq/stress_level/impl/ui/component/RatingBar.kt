@@ -18,7 +18,7 @@ import com.joohnq.shared_resources.theme.Dimens
 @Composable
 fun RatingBar(
     level: Int,
-    brushGradient: (Int) -> List<Color>
+    brushGradient: (Int) -> List<Color>,
 ) {
     BoxWithConstraints {
         val boxWidth = (maxWidth - 16.dp) / 5

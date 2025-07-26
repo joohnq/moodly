@@ -22,7 +22,7 @@ fun DecoratedConvexPanel(
     panelBackgroundColor: Color,
     backgroundColor: Color = Colors.Brown10,
     panelContent: @Composable () -> Unit,
-    content: @Composable (ColumnScope) -> Unit
+    content: @Composable (ColumnScope) -> Unit,
 ) {
     Scaffold(containerColor = backgroundColor) {
         Column(

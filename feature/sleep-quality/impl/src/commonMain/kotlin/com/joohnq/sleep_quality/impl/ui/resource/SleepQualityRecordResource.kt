@@ -14,44 +14,51 @@ data class SleepQualityRecordResource(
     val createdAt: LocalDate = getNow().date,
 ) {
     companion object {
-        val sleepQualityRecordWorstPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Worst.id,
-            sleepQuality = SleepQualityResource.Worst,
-        )
+        val sleepQualityRecordWorstPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Worst.id,
+                sleepQuality = SleepQualityResource.Worst
+            )
 
-        val sleepQualityRecordPoorPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Fair.id,
-            sleepQuality = SleepQualityResource.Poor,
-        )
+        val sleepQualityRecordPoorPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Fair.id,
+                sleepQuality = SleepQualityResource.Poor
+            )
 
-        val sleepQualityRecordFairPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Worst.id,
-            sleepQuality = SleepQualityResource.Fair,
-        )
+        val sleepQualityRecordFairPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Worst.id,
+                sleepQuality = SleepQualityResource.Fair
+            )
 
-        val sleepQualityRecordGoodPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Worst.id,
-            sleepQuality = SleepQualityResource.Good,
-        )
+        val sleepQualityRecordGoodPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Worst.id,
+                sleepQuality = SleepQualityResource.Good
+            )
 
-        val sleepQualityRecordExcellentPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Worst.id,
-            sleepQuality = SleepQualityResource.Excellent,
-        )
+        val sleepQualityRecordExcellentPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Worst.id,
+                sleepQuality = SleepQualityResource.Excellent
+            )
 
-        val sleepQualityRecordWithSleepInfluencesPreview = SleepQualityRecordResource(
-            id = SleepQualityResource.Worst.id,
-            sleepQuality = SleepQualityResource.Excellent,
-            sleepInfluences = allSleepInfluences
-        )
+        val sleepQualityRecordWithSleepInfluencesPreview =
+            SleepQualityRecordResource(
+                id = SleepQualityResource.Worst.id,
+                sleepQuality = SleepQualityResource.Excellent,
+                sleepInfluences = allSleepInfluences
+            )
 
-        val allSleepQualityRecordResource = listOf(
-            sleepQualityRecordWorstPreview,
-            sleepQualityRecordPoorPreview,
-            sleepQualityRecordFairPreview,
-            sleepQualityRecordGoodPreview,
-            sleepQualityRecordExcellentPreview,
-            sleepQualityRecordWithSleepInfluencesPreview,
-        )
+        val allSleepQualityRecordResource =
+            listOf(
+                sleepQualityRecordWorstPreview,
+                sleepQualityRecordPoorPreview,
+                sleepQualityRecordFairPreview,
+                sleepQualityRecordGoodPreview,
+                sleepQualityRecordExcellentPreview,
+                sleepQualityRecordWithSleepInfluencesPreview
+            )
     }
 }

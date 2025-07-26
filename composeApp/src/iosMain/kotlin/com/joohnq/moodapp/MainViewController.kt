@@ -6,13 +6,15 @@ import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.crashlytics.crashlytics
 import dev.gitlive.firebase.initialize
 
-fun MainViewController() = ComposeUIViewController(
-    configure = {
-        KoinInitializer().init()
+@Suppress("ktlint:standard:function-naming")
+fun MainViewController() =
+    ComposeUIViewController(
+        configure = {
+            KoinInitializer().init()
+        }
+    ) {
+        App()
     }
-) {
-    App()
-}
 
 fun initialize() {
     Firebase.initialize()

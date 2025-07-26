@@ -16,22 +16,26 @@ import platform.darwin.NSObject
 @Composable
 actual fun rememberCameraManager(onResult: (SharedImage?) -> Unit): CameraManager {
     val imagePicker = UIImagePickerController()
-    val cameraDelegate = remember {
-        object : NSObject(), UIImagePickerControllerDelegateProtocol,
-            UINavigationControllerDelegateProtocol {
-            override fun imagePickerController(
-                picker: UIImagePickerController, didFinishPickingMediaWithInfo: Map<Any?, *>,
-            ) {
-                val image =
-                    didFinishPickingMediaWithInfo.getValue(UIImagePickerControllerEditedImage) as? UIImage
-                        ?: didFinishPickingMediaWithInfo.getValue(
-                            UIImagePickerControllerOriginalImage
-                        ) as? UIImage
-                onResult.invoke(SharedImage(image))
-                picker.dismissViewControllerAnimated(true, null)
+    val cameraDelegate =
+        remember {
+            object :
+                NSObject(),
+                UIImagePickerControllerDelegateProtocol,
+                UINavigationControllerDelegateProtocol {
+                override fun imagePickerController(
+                    picker: UIImagePickerController,
+                    didFinishPickingMediaWithInfo: Map<Any?, *>,
+                ) {
+                    val image =
+                        didFinishPickingMediaWithInfo.getValue(UIImagePickerControllerEditedImage) as? UIImage
+                            ?: didFinishPickingMediaWithInfo.getValue(
+                                UIImagePickerControllerOriginalImage
+                            ) as? UIImage
+                    onResult.invoke(SharedImage(image))
+                    picker.dismissViewControllerAnimated(true, null)
+                }
             }
         }
-    }
     return remember {
         CameraManager {
             imagePicker.setSourceType(UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypeCamera)
@@ -39,7 +43,9 @@ actual fun rememberCameraManager(onResult: (SharedImage?) -> Unit): CameraManage
             imagePicker.setCameraCaptureMode(UIImagePickerControllerCameraCaptureMode.UIImagePickerControllerCameraCaptureModePhoto)
             imagePicker.setDelegate(cameraDelegate)
             UIApplication.sharedApplication.keyWindow?.rootViewController?.presentViewController(
-                imagePicker, true, null
+                imagePicker,
+                true,
+                null
             )
         }
     }

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 @Composable
 fun CalculateTextHeight(
     text: String = "11/12",
-    font: TextStyle
+    font: TextStyle,
 ): Dp {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()

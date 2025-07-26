@@ -42,7 +42,7 @@ fun StressStressorsContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
     onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressStressorsEvent) -> Unit = {}
+    onEvent: (StressStressorsEvent) -> Unit = {},
 ) {
     val stressors = remember { getAllStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }

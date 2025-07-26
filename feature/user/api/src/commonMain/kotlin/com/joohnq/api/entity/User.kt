@@ -11,5 +11,5 @@ data class User(
     val medicationsSupplements: MedicationsSupplements = MedicationsSupplements.ImNotTakingAny,
     val soughtHelp: ProfessionalHelp = ProfessionalHelp.No,
     val physicalSymptoms: PhysicalSymptoms = PhysicalSymptoms.No,
-    val dateCreated: LocalDate = getNow().date
+    val dateCreated: LocalDate = getNow().date,
 )

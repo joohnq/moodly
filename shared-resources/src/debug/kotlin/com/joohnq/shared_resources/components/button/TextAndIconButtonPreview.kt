@@ -20,7 +20,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun TextAndIconButtonPreview(
     @PreviewParameter(BooleanParameterProvider::class)
-    boolean: Boolean
+    boolean: Boolean,
 ) {
     TextAndIconButton(
         enabled = boolean,
@@ -40,7 +40,7 @@ fun TextAndIconButtonPreview(
 @Composable
 fun TextAndIconButtonPreview(
     @PreviewParameter(ButtonColorsParameterProvider::class)
-    colors: ButtonColors
+    colors: ButtonColors,
 ) {
     TextAndIconButton(
         enabled = true,
@@ -60,7 +60,7 @@ fun TextAndIconButtonPreview(
 @Composable
 fun TextAndIconButtonPreview(
     @PreviewParameter(ShapeParameterProvider::class)
-    shape: Shape
+    shape: Shape,
 ) {
     TextAndIconButton(
         enabled = true,

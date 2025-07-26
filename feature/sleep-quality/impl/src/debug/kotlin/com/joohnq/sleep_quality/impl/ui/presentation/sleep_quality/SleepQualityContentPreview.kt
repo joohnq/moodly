@@ -9,11 +9,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityContentPreview() {
     SleepQualityContent(
-        state = SleepQualityContract.State(
-            records = UiState.Success(
-                SleepQualityRecordResource.allSleepQualityRecordResource
+        state =
+            SleepQualityContract.State(
+                records =
+                    UiState.Success(
+                        SleepQualityRecordResource.allSleepQualityRecordResource
+                    )
             )
-        ),
     )
 }
 
@@ -21,11 +23,12 @@ fun SleepQualityContentPreview() {
 @Composable
 fun SleepQualityContentEmptyPreview() {
     SleepQualityContent(
-        state = SleepQualityContract.State(
-            records = UiState.Success(
-                listOf(
-                )
+        state =
+            SleepQualityContract.State(
+                records =
+                    UiState.Success(
+                        listOf()
+                    )
             )
-        ),
     )
 }

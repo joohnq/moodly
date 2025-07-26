@@ -13,7 +13,7 @@ fun TextEllipsis(
     style: TextStyle,
     color: Color,
     maxLines: Int = 1,
-    textAlign: TextAlign? = null
+    textAlign: TextAlign? = null,
 ) {
     Text(
         text = text,

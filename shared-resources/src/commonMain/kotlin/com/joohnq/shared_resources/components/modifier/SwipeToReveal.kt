@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 fun Modifier.swipeToReveal(
     width: Float,
     offset: Animatable<Float, AnimationVector1D>,
-    setIsExpanded: (Boolean) -> Unit
+    setIsExpanded: (Boolean) -> Unit,
 ): Modifier {
     val scope = rememberCoroutineScope()
 

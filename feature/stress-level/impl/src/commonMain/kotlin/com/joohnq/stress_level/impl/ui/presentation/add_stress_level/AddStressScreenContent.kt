@@ -42,7 +42,7 @@ fun AddStressLevelScreenContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
     onAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (AddStressLevelContract.Event) -> Unit = {}
+    onEvent: (AddStressLevelContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,

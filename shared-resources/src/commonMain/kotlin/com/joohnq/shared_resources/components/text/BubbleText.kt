@@ -21,7 +21,7 @@ fun BubbleText(
     selected: Boolean,
     fontSize: TextUnit = 18.sp,
     padding: Dp = 24.dp,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val size = CalculateTextWidth(text, fontSize)
     Box(modifier = Modifier.size(size + padding)) {

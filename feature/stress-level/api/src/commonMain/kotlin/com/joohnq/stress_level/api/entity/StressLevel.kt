@@ -4,7 +4,7 @@ import com.joohnq.stress_level.api.property.StressLevelProperties
 
 sealed class StressLevel(
     override val id: Int,
-    override val level: Int
+    override val level: Int,
 ) : StressLevelProperties {
     data object One :
         StressLevel(ONE.id, ONE.level)

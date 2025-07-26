@@ -13,7 +13,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class MedicationsSupplementsResource(
     override val id: Int,
     val text: StringResource,
-    val icon: IconResource
+    val icon: IconResource,
 ) : MedicationsSupplementsProperties {
     data object PrescribedMedications : MedicationsSupplementsResource(
         id = PRESCRIBED_MEDICATIONS.id,

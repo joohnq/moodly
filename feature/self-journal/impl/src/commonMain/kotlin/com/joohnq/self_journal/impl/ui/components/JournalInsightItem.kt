@@ -20,7 +20,7 @@ fun JournalInsightItem(
     count: Int,
     percentage: Float,
     color: Color,
-    face: DrawableResource
+    face: DrawableResource,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),

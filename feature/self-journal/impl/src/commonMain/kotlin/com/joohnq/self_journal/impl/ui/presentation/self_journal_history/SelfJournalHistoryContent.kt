@@ -37,7 +37,7 @@ fun SelfJournalHistoryContent(
     state: SelfJournalHistoryContract.State,
     records: UiState<List<SelfJournalRecordResource>>,
     onAction: (SelfJournalHistoryContract.Intent) -> Unit = {},
-    onEvent: (SelfJournalHistoryContract.Event) -> Unit = {}
+    onEvent: (SelfJournalHistoryContract.Event) -> Unit = {},
 ) {
     if (state.openDeleteDialog) {
         ImageDialogLayout(

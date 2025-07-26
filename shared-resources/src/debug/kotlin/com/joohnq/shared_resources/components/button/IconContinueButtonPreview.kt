@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun IconContinueButtonContinueButtonColorsPreview(
     @PreviewParameter(IconButtonColorsParameterProvider::class)
-    colors: IconButtonColors
+    colors: IconButtonColors,
 ) {
     IconContinueButton(
         colors = colors

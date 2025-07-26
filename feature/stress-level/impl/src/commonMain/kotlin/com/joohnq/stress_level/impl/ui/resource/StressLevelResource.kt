@@ -38,7 +38,7 @@ sealed class StressLevelResource(
     val subtitle: StringResource,
     val lifeImpact: StringResource,
     override val level: Int,
-    val palette: StressLevelPalette
+    val palette: StressLevelPalette,
 ) : StressLevelProperties {
     data object One :
         StressLevelResource(

@@ -11,10 +11,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun CentralButtonPreview() {
     CentralButton(
-        item = CentralAction(
-            title = "Title",
-            icon = Drawables.Icons.Outlined.Sleep,
-            destination = Destination.App.DashBoard.Home
-        )
+        item =
+            CentralAction(
+                title = "Title",
+                icon = Drawables.Icons.Outlined.Sleep,
+                destination = Destination.App.DashBoard.Home
+            )
     )
 }

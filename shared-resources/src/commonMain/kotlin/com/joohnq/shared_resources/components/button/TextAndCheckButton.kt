@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.StringResource
 fun TextAndCheckButton(
     modifier: Modifier = Modifier,
     text: StringResource,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     TextAndIconButton(
         modifier = modifier,

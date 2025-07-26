@@ -40,7 +40,7 @@ fun MetricSummaryCard(
     description: String,
     content: @Composable (Modifier) -> Unit,
     color: Color,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

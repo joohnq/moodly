@@ -38,12 +38,13 @@ fun SleepInsightCard(
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
         shape = Dimens.Shape.Large
     ) {
         Column(
@@ -53,27 +54,30 @@ fun SleepInsightCard(
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 maxItemsInEachRow = 13,
-                horizontalArrangement = Arrangement.Start,
+                horizontalArrangement = Arrangement.Start
             ) {
                 for (i in 0..38) {
                     val resource =
                         records.find { it.createdAt.dayOfMonth == i && it.createdAt.month == month }
-                    val backgroundColor = when {
-                        i + 1 > monthDays -> Colors.Gray5
-                        resource == null -> Colors.Gray20
-                        else -> resource.sleepQuality.palette.color
-                    }
+                    val backgroundColor =
+                        when {
+                            i + 1 > monthDays -> Colors.Gray5
+                            resource == null -> Colors.Gray20
+                            else -> resource.sleepQuality.palette.color
+                        }
 
                     Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .aspectRatio(1f),
+                        modifier =
+                            Modifier
+                                .weight(1f)
+                                .aspectRatio(1f),
                         contentAlignment = Alignment.Center
                     ) {
                         Box(
-                            modifier = Modifier
-                                .size(15.dp)
-                                .background(color = backgroundColor, shape = Dimens.Shape.Circle)
+                            modifier =
+                                Modifier
+                                    .size(15.dp)
+                                    .background(color = backgroundColor, shape = Dimens.Shape.Circle)
                         )
                     }
                 }

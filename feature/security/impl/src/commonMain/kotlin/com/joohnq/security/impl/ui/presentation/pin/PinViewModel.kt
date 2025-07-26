@@ -3,7 +3,7 @@ package com.joohnq.security.impl.ui.presentation.pin
 import com.joohnq.ui.BaseViewModel
 
 class PinViewModel(
-    initialState: PinContract.State = PinContract.State()
+    initialState: PinContract.State = PinContract.State(),
 ) : BaseViewModel<PinContract.State, PinContract.Intent, PinContract.SideEffect>(
         initialState = initialState
     ),
@@ -41,7 +41,7 @@ class PinViewModel(
 
     private fun enterNumber(
         index: Int,
-        number: Int?
+        number: Int?,
     ) {
         val newCode =
             state.value.code.mapIndexed { currentIndex, currentNumber ->
@@ -70,7 +70,7 @@ class PinViewModel(
 
     private fun getNextFocusedIndex(
         currentCode: List<Int?>,
-        currentFocusedIndex: Int?
+        currentFocusedIndex: Int?,
     ): Int? {
         if (currentFocusedIndex == null) return null
         if (currentFocusedIndex == 3) return currentFocusedIndex
@@ -79,7 +79,7 @@ class PinViewModel(
 
     private fun getFirstEmptyFieldIndexAfterFocusedIndex(
         code: List<Int?>,
-        currentFocusedIndex: Int
+        currentFocusedIndex: Int,
     ): Int {
         code.forEachIndexed { i, number ->
             if (i <= currentFocusedIndex) return@forEachIndexed

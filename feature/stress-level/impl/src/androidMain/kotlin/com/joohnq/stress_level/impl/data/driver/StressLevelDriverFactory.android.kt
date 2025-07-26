@@ -8,7 +8,7 @@ import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import com.joohnq.stress_level.impl.data.database.StressLevelDatabase
 
 actual class StressLevelDriverFactory(
-    private val context: Context
+    private val context: Context,
 ) {
     actual fun createDriver(): SqlDriver =
         AndroidSqliteDriver(

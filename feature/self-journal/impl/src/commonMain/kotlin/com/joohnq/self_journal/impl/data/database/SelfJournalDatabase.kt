@@ -5,7 +5,7 @@ import com.joohnq.database.Database
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 
 class SelfJournalDatabase(
-    private val driverFactory: SqlDriver
+    private val driverFactory: SqlDriver,
 ) : Database<SelfJournalDatabaseSql>() {
     override operator fun invoke(): SelfJournalDatabaseSql = SelfJournalDatabaseSql(driverFactory)
 

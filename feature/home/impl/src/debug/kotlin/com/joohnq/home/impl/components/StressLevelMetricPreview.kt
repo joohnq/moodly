@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun FreudScoreMetricPreview(
     @PreviewParameter(FreudScoreResourceParameterProvider::class)
-    item: FreudScoreResource
+    item: FreudScoreResource,
 ) {
     FreudScoreMetric(
         freudScore = item

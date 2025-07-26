@@ -24,16 +24,17 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodContentPanel(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource?
+    record: MoodRecordResource?,
 ) {
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .paddingHorizontalMedium(),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .paddingHorizontalMedium(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -71,10 +72,11 @@ fun MoodContentPanel(
             )
             VerticalSpacer(10.dp)
             Text(
-                text = stringResource(
-                    Res.string.logged_today_at,
-                    record.createdAt.toFormattedTimeString()
-                ),
+                text =
+                    stringResource(
+                        Res.string.logged_today_at,
+                        record.createdAt.toFormattedTimeString()
+                    ),
                 style = TextStyles.textXlMedium(),
                 color = Colors.White
             )

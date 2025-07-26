@@ -8,7 +8,7 @@ import com.joohnq.mood.api.repository.MoodRepository
 import com.joohnq.mood.database.MoodDatabaseSql
 
 class MoodRepositoryImpl(
-    private val database: MoodDatabaseSql
+    private val database: MoodDatabaseSql,
 ) : MoodRepository {
     private val query = database.moodRecordQueries
 

@@ -8,7 +8,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun AddMoodScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
     val addStatsViewModel: AddMoodViewModel = sharedViewModel()
     val state by addStatsViewModel.state.collectAsState()

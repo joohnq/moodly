@@ -1,16 +1,16 @@
 package com.joohnq.sleep_quality.impl.data.repository
 
+import com.joohnq.api.mapper.toFormattedTimeString
+import com.joohnq.api.mapper.toTime
 import com.joohnq.database.SqliteOperationResult
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.database.sqliteExceptionMapper
-import com.joohnq.api.mapper.toFormattedTimeString
-import com.joohnq.api.mapper.toTime
-import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import com.joohnq.sleep_quality.api.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.api.exception.SleepQualityException
 import com.joohnq.sleep_quality.api.repository.SleepQualityRepository
+import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
@@ -19,23 +19,23 @@ class SleepQualityRepositoryImpl(
     private val database: SleepQualityDatabaseSql,
 ) : SleepQualityRepository {
     private val query = database.sleepQualityRecordQueries
+
     override suspend fun getSleepQualities(): Result<List<SleepQualityRecord>> =
         executeTryCatchResult {
-            query.getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, createdAt ->
-                SleepQualityRecord(
-                    id = id.toInt(),
-                    sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
-                    startSleeping = startSleeping.toTime(),
-                    endSleeping = endSleeping.toTime(),
-                    sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
-                    createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
-                )
-            }.executeAsList()
+            query
+                .getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, createdAt ->
+                    SleepQualityRecord(
+                        id = id.toInt(),
+                        sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
+                        startSleeping = startSleeping.toTime(),
+                        endSleeping = endSleeping.toTime(),
+                        sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
+                        createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
+                    )
+                }.executeAsList()
         }
 
-    override suspend fun addSleepQuality(
-        record: SleepQualityRecord,
-    ): Result<Boolean> =
+    override suspend fun addSleepQuality(record: SleepQualityRecord): Result<Boolean> =
         withContext(Dispatchers.IO) {
             try {
                 query.addSleepQuality(

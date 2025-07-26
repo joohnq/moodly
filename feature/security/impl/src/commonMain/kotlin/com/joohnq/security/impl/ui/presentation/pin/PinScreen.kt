@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun PINScreen(
     onNavigateToDashboard: () -> Unit,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val pinViewModel: PinViewModel = sharedViewModel()

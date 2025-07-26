@@ -25,7 +25,7 @@ fun SelfJournalStatsCard(
     title: String,
     color: Color,
     backgroundColor: Color,
-    description: String
+    description: String,
 ) {
     Card(
         modifier = modifier,

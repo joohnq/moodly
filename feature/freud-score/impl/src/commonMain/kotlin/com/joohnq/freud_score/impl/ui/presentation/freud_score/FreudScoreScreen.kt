@@ -6,9 +6,7 @@ import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
 
 @Composable
-fun FreudScoreScreen(
-    onGoBack: () -> Unit
-) {
+fun FreudScoreScreen(onGoBack: () -> Unit) {
     val freudScoreViewModel: FreudScoreViewModel = sharedViewModel()
     val state by freudScoreViewModel.state.collectAsState()
 

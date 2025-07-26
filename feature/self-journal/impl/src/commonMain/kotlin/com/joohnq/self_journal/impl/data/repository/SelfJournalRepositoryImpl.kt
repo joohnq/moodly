@@ -8,7 +8,7 @@ import com.joohnq.self_journal.api.repository.SelfJournalRepository
 import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 
 class SelfJournalRepositoryImpl(
-    private val database: SelfJournalDatabaseSql
+    private val database: SelfJournalDatabaseSql,
 ) : SelfJournalRepository {
     private val query = database.selfJournalRecordQueries
 

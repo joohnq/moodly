@@ -5,7 +5,7 @@ import com.joohnq.database.Database
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
 
 class StressLevelDatabase(
-    private val driver: SqlDriver
+    private val driver: SqlDriver,
 ) : Database<StressLevelDatabaseSql>() {
     override operator fun invoke(): StressLevelDatabaseSql = StressLevelDatabaseSql(driver)
 

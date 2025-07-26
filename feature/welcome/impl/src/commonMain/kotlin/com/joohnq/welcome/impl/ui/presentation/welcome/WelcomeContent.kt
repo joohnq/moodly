@@ -37,7 +37,7 @@ fun WelcomeContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     pagerState: PagerState,
     onNext: () -> Unit = {},
-    onAction: (PreferencesContract.Intent) -> Unit = {}
+    onAction: (PreferencesContract.Intent) -> Unit = {},
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,

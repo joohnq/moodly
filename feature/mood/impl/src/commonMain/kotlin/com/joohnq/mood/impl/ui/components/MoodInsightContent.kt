@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodInsightContent(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>
+    records: List<MoodRecordResource>,
 ) {
     val weekRecords = records.getWeekRecords()
     val streakDays = weekRecords.getStreakDays()
@@ -40,12 +40,13 @@ fun MoodInsightContent(
         title = Res.string.mood_insight
     )
     Card(
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Colors.Brown80
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Colors.Brown80
+            ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth()
     ) {

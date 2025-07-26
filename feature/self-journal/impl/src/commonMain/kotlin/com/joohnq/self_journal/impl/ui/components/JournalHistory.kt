@@ -16,7 +16,7 @@ fun JournalHistory(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
-    onClick: (Int) -> Unit = {}
+    onClick: (Int) -> Unit = {},
 ) {
     if (records.isEmpty()) {
         NotFoundVerticalLayout(

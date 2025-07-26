@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalHistoryCard(
     record: SelfJournalRecordResource,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Card(
         modifier = Modifier.width(220.dp).height(250.dp),
@@ -101,7 +101,7 @@ fun SelfJournalHistoryCard(
     isNotLast: Boolean,
     record: SelfJournalRecordResource,
     onClick: (Int) -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
     SwipeableCardLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),

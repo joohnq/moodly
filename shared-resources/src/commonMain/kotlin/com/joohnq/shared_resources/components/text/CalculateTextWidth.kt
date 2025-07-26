@@ -12,7 +12,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun CalculateTextWidth(
     text: StringResource,
-    fontSize: TextUnit
+    fontSize: TextUnit,
 ): Dp {
     val textMeasurer = rememberTextMeasurer()
     val textLayoutResult =

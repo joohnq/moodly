@@ -19,7 +19,7 @@ class StressLevelViewModel(
     private val addStressLevelUseCase: AddStressLevelUseCase,
     private val getStressLevelsUseCase: GetStressLevelsUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
-    initialState: StressLevelContract.State = StressLevelContract.State()
+    initialState: StressLevelContract.State = StressLevelContract.State(),
 ) : BaseViewModel<StressLevelContract.State, StressLevelContract.Intent, StressLevelContract.SideEffect>(
         initialState = initialState
     ),

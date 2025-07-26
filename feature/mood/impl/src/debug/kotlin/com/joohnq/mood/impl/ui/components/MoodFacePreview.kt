@@ -1,17 +1,10 @@
 package com.joohnq.mood.impl.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import com.joohnq.mood.impl.ui.parameter.MoodAverageResourceParameterProvider
 import com.joohnq.mood.impl.ui.parameter.MoodResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodAverageResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
-import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.Drawables
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -19,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MoodFacePreview(
     @PreviewParameter(MoodResourceParameterProvider::class)
-    resource: MoodResource
+    resource: MoodResource,
 ) {
     MoodFace(
         resource = resource
@@ -30,7 +23,7 @@ fun MoodFacePreview(
 @Composable
 fun MoodFaceWithBackgroundAndColorPreview(
     @PreviewParameter(MoodResourceParameterProvider::class)
-    resource: MoodResource
+    resource: MoodResource,
 ) {
     MoodFace(
         backgroundColor = resource.palette.faceBackgroundColor,
@@ -43,7 +36,7 @@ fun MoodFaceWithBackgroundAndColorPreview(
 @Composable
 fun MoodFaceWithClickPreview(
     @PreviewParameter(MoodResourceParameterProvider::class)
-    resource: MoodResource
+    resource: MoodResource,
 ) {
     MoodFace(
         backgroundColor = resource.palette.faceBackgroundColor,
@@ -57,7 +50,7 @@ fun MoodFaceWithClickPreview(
 @Composable
 fun MoodFacePreview(
     @PreviewParameter(MoodAverageResourceParameterProvider::class)
-    average: MoodAverageResource
+    average: MoodAverageResource,
 ) {
     MoodFace(
         average = average

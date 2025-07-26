@@ -15,13 +15,14 @@ fun FreudScore.toResource(): FreudScoreResource =
         FreudScore.NotAvailable -> FreudScoreResource.NotAvailable
     }
 
-fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
-    FreudScoreResource.Healthy(score),
-    FreudScoreResource.MostlyHealthy(score),
-    FreudScoreResource.Stable(score),
-    FreudScoreResource.AtRisk(score),
-    FreudScoreResource.Unhealthy(score)
-)
+fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> =
+    listOf(
+        FreudScoreResource.Healthy(score),
+        FreudScoreResource.MostlyHealthy(score),
+        FreudScoreResource.Stable(score),
+        FreudScoreResource.AtRisk(score),
+        FreudScoreResource.Unhealthy(score)
+    )
 
 fun Index.toInitialFreudScore(): Int =
     when (this) {

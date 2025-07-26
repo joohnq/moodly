@@ -13,11 +13,12 @@ fun AddSleepQualityContentWorstPreview(
     item: SleepQualityRecordResource,
 ) {
     AddSleepQualityContent(
-        state = AddSleepQualityContract.State(
-            record = item,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = false
-        ),
+        state =
+            AddSleepQualityContract.State(
+                record = item,
+                showStartTimePickerDialog = false,
+                showEndTimePickerDialog = false
+            )
     )
 }
 
@@ -25,11 +26,12 @@ fun AddSleepQualityContentWorstPreview(
 @Composable
 fun AddSleepQualityContentShowStartTimePickerDialogPreview() {
     AddSleepQualityContent(
-        state = AddSleepQualityContract.State(
-            record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
-            showStartTimePickerDialog = true,
-            showEndTimePickerDialog = false
-        ),
+        state =
+            AddSleepQualityContract.State(
+                record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
+                showStartTimePickerDialog = true,
+                showEndTimePickerDialog = false
+            )
     )
 }
 
@@ -37,10 +39,11 @@ fun AddSleepQualityContentShowStartTimePickerDialogPreview() {
 @Composable
 fun AddSleepQualityContentShowEndTimePickerPreview() {
     AddSleepQualityContent(
-        state = AddSleepQualityContract.State(
-            record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
-            showStartTimePickerDialog = false,
-            showEndTimePickerDialog = true
-        ),
+        state =
+            AddSleepQualityContract.State(
+                record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
+                showStartTimePickerDialog = false,
+                showEndTimePickerDialog = true
+            )
     )
 }

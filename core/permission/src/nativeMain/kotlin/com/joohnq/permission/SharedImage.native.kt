@@ -11,12 +11,15 @@ import org.jetbrains.skia.Image
 import platform.UIKit.UIImage
 import platform.UIKit.UIImageJPEGRepresentation
 
-actual class SharedImage(private val image: UIImage?) {
+actual class SharedImage(
+    private val image: UIImage?,
+) {
     @OptIn(ExperimentalForeignApi::class)
-    actual fun toByteArray(): ByteArray? {
-        return if (image != null) {
-            val imageData = UIImageJPEGRepresentation(image, COMPRESSION_QUALITY)
-                ?: throw IllegalArgumentException("image data is null")
+    actual fun toByteArray(): ByteArray? =
+        if (image != null) {
+            val imageData =
+                UIImageJPEGRepresentation(image, COMPRESSION_QUALITY)
+                    ?: throw IllegalArgumentException("image data is null")
             val bytes = imageData.bytes ?: throw IllegalArgumentException("image bytes is null")
             val length = imageData.length
 
@@ -25,8 +28,6 @@ actual class SharedImage(private val image: UIImage?) {
         } else {
             null
         }
-
-    }
 
     actual fun toImageBitmap(): ImageBitmap? {
         val byteArray = toByteArray()

@@ -14,33 +14,35 @@ actual class FileStorageImpl : FileStorage {
         directory: String,
         fileName: String,
         data: ByteArray,
-    ): String = withContext(Dispatchers.IO) {
-        val basePath = "${systemTemporaryPath / directory}".toPath()
-        val path = "${basePath / fileName}".toPath()
+    ): String =
+        withContext(Dispatchers.IO) {
+            val basePath = "${systemTemporaryPath / directory}".toPath()
+            val path = "${basePath / fileName}".toPath()
 
-        if (!FileSystem.SYSTEM.exists(basePath)) {
-            FileSystem.SYSTEM.createDirectory(basePath)
+            if (!FileSystem.SYSTEM.exists(basePath)) {
+                FileSystem.SYSTEM.createDirectory(basePath)
+            }
+
+            FileSystem.SYSTEM.write(path) {
+                write(data)
+            }
+
+            path.toString()
         }
-
-        FileSystem.SYSTEM.write(path) {
-            write(data)
-        }
-
-        path.toString()
-    }
 
     actual override suspend fun readImage(
         directory: String,
         fileName: String,
-    ): ByteArray? = withContext(Dispatchers.IO) {
-        val basePath = "${systemTemporaryPath / directory}".toPath()
-        val path = "${basePath / fileName}".toPath()
+    ): ByteArray? =
+        withContext(Dispatchers.IO) {
+            val basePath = "${systemTemporaryPath / directory}".toPath()
+            val path = "${basePath / fileName}".toPath()
 
-        var imageByteArray = ByteArray(0)
-        FileSystem.SYSTEM.read(path) {
-            imageByteArray = readByteArray()
+            var imageByteArray = ByteArray(0)
+            FileSystem.SYSTEM.read(path) {
+                imageByteArray = readByteArray()
+            }
+
+            imageByteArray
         }
-
-        imageByteArray
-    }
 }

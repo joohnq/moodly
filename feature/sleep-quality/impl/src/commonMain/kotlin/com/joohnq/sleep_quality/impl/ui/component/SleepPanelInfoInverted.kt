@@ -22,15 +22,16 @@ fun SleepPanelInfoInverted(
     modifier: Modifier = Modifier,
     icon: DrawableResource,
     title: StringResource,
-    value: String
+    value: String,
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.End
-        ),
-        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement =
+            Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.End
+            ),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(
@@ -45,14 +46,15 @@ fun SleepPanelInfoInverted(
             )
         }
         Box(
-            modifier = Modifier
-                .size(48.dp)
-                .clip(Dimens.Shape.Circle)
-                .border(
-                    width = 2.dp,
-                    color = Colors.Brown80,
-                    shape = Dimens.Shape.Circle
-                ),
+            modifier =
+                Modifier
+                    .size(48.dp)
+                    .clip(Dimens.Shape.Circle)
+                    .border(
+                        width = 2.dp,
+                        color = Colors.Brown80,
+                        shape = Dimens.Shape.Circle
+                    ),
             contentAlignment = Alignment.Center
         ) {
             Icon(

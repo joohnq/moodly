@@ -18,7 +18,7 @@ fun MultiColorCircularProgress(
     modifier: Modifier = Modifier,
     segments: List<Pair<Color, Float>>,
     gapAngle: Float = 4f,
-    strokeWidth: Dp = 8.dp
+    strokeWidth: Dp = 8.dp,
 ) {
     val totalProgress = segments.sumOf { it.second.toDouble() }.toFloat()
     val totalGaps = gapAngle * segments.size

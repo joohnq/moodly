@@ -12,7 +12,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun OnboardingSleepQualityContentPreview(
     @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
-    item: SleepQualityRecordResource
+    item: SleepQualityRecordResource,
 ) {
     OnboardingSleepQualityContent(
         state = item,

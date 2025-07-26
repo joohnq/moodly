@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun OnboardingProfessionalHelpContentPreview(
-    @PreviewParameter(ProfessionalHelpResourceParameterProvider::class) item: ProfessionalHelpResource
+    @PreviewParameter(ProfessionalHelpResourceParameterProvider::class) item: ProfessionalHelpResource,
 ) {
     OnboardingProfessionalHelpContent(
         state = item

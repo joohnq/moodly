@@ -15,7 +15,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodCalendar(
     modifier: Modifier = Modifier,
     records: List<MoodRecordResource>,
-    onCreate: () -> Unit = {}
+    onCreate: () -> Unit = {},
 ) {
     val recordsInMonth = records.getMonthDaysRecordsString()
 

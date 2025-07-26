@@ -4,7 +4,7 @@ import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityPreference
 
 class UpdateSecurityUseCase(
-    private val securityPreference: SecurityPreference
+    private val securityPreference: SecurityPreference,
 ) {
     suspend operator fun invoke(security: Security): Result<Boolean> = securityPreference.update(security)
 }

@@ -33,9 +33,7 @@ import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun DashboardScreen(
-    onEvent: (DashboardContract.Event) -> Unit
-) {
+fun DashboardScreen(onEvent: (DashboardContract.Event) -> Unit) {
     val snackBarHostState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val navigator = rememberNavController()
@@ -79,12 +77,13 @@ fun DashboardScreen(
         floatingActionButtonPosition = FabPosition.Center
     ) { padding ->
         NavHost(
-            modifier = Modifier
-                .takeIf(centralIsExpanded) {
-                    Modifier.blur(
-                        radius = 15.dp
-                    )
-                },
+            modifier =
+                Modifier
+                    .takeIf(centralIsExpanded) {
+                        Modifier.blur(
+                            radius = 15.dp
+                        )
+                    },
             navController = navigator,
             startDestination = Destination.App.DashBoard.Home
         ) {

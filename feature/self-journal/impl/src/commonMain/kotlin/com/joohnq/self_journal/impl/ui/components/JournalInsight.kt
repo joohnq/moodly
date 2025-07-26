@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalInsight(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>
+    records: List<SelfJournalRecordResource>,
 ) {
     val groupedMoods =
         records

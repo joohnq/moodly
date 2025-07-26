@@ -29,17 +29,17 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource
+    record: MoodRecordResource,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors =
-        CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
         shape = Dimens.Shape.Large
     ) {
         Row(
@@ -75,7 +75,7 @@ fun MoodHistoryCard(
                 )
                 Icon(
                     painter =
-                    painterResource(Drawables.Icons.Outlined.ArrowOpen),
+                        painterResource(Drawables.Icons.Outlined.ArrowOpen),
                     contentDescription = null,
                     modifier = Modifier.size(24.dp).rotate(180f),
                     tint = Colors.Gray60

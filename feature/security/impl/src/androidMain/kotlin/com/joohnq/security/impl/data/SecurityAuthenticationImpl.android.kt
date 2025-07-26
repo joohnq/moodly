@@ -16,7 +16,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
 actual class SecurityAuthenticationImpl(
-    private val activity: AppCompatActivity
+    private val activity: AppCompatActivity,
 ) : SecurityAuthentication {
     private val _securityResult = Channel<SecurityResult>()
     val securityResult = _securityResult.receiveAsFlow()
@@ -93,7 +93,7 @@ actual class SecurityAuthenticationImpl(
                 object : BiometricPrompt.AuthenticationCallback() {
                     override fun onAuthenticationError(
                         errorCode: Int,
-                        errString: CharSequence
+                        errString: CharSequence,
                     ) {
                         super.onAuthenticationError(errorCode, errString)
                         callback(false)

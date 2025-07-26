@@ -13,7 +13,7 @@ val userUiModule: Module =
                 getUserUseCase = get(),
                 updateUserNameUseCase = get(),
                 updateUserImageBitmapUseCase = get(),
-                updateUserImageDrawableUseCase = get(),
+                updateUserImageDrawableUseCase = get()
             )
         }
     }

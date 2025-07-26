@@ -33,7 +33,7 @@ fun GiganticCreateCard(
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
         colors =

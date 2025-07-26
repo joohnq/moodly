@@ -114,6 +114,8 @@ sealed interface Destination {
         data object SelfJournalHistory : Destination
 
         @Serializable
-        data class EditSelfJournal(val id: Int) : Destination
+        data class EditSelfJournal(
+            val id: Int,
+        ) : Destination
     }
 }

@@ -11,12 +11,12 @@ import com.joohnq.api.entity.CurvedCanvasPosition
 
 class ConvexCanvas(
     private val offset: Dp,
-    private val position: CurvedCanvasPosition
+    private val position: CurvedCanvasPosition,
 ) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
-        density: Density
+        density: Density,
     ): Outline {
         val offsetPx = with(density) { offset.toPx() }
         val path =

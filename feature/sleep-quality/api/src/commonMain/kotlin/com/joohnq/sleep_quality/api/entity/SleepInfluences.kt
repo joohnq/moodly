@@ -2,7 +2,9 @@ package com.joohnq.sleep_quality.api.entity
 
 import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
 
-sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
+sealed class SleepInfluences(
+    override val id: Int,
+) : SleepInfluencesProperties {
     data object NaturalLight :
         SleepInfluences(NATURAL_LIGHT.id)
 
@@ -13,12 +15,16 @@ sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
         SleepInfluences(CHILL_SLEEP_ENVIRONMENT.id)
 
     data object Meditation : SleepInfluences(MEDITATION.id)
+
     data object Caffeine : SleepInfluences(CAFFEINE.id)
+
     data object ExcessiveScreenTime :
         SleepInfluences(EXCESSIVE_SCREEN_TIME.id)
 
     data object HighStress : SleepInfluences(HIGH_STRESS.id)
+
     data object Anxiety : SleepInfluences(ANXIETY.id)
+
     data object AlcoholConsumption :
         SleepInfluences(ALCOHOL_CONSUMPTION.id)
 
@@ -34,4 +40,3 @@ sealed class SleepInfluences(override val id: Int) : SleepInfluencesProperties {
         val ALCOHOL_CONSUMPTION = DSleepInfluencesProperties(8)
     }
 }
-

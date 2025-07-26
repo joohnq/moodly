@@ -6,8 +6,9 @@ import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val sleepQualityDomainModule = module {
-    factoryOf(::AddSleepQualityUseCase)
-    factoryOf(::GetSleepQualitiesUseCase)
-    factoryOf(::DeleteSleepQualityUseCase)
-}
+val sleepQualityDomainModule =
+    module {
+        factoryOf(::AddSleepQualityUseCase)
+        factoryOf(::GetSleepQualitiesUseCase)
+        factoryOf(::DeleteSleepQualityUseCase)
+    }

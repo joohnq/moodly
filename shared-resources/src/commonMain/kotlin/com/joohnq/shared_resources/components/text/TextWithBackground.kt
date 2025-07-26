@@ -17,7 +17,7 @@ fun TextWithBackground(
     text: String,
     borderColor: Color,
     backgroundColor: Color,
-    textColor: Color
+    textColor: Color,
 ) {
     Text(
         text = text.uppercase(),
@@ -35,7 +35,7 @@ fun TextWithBackground(
     modifier: Modifier = Modifier,
     text: String,
     backgroundColor: Color,
-    textColor: Color
+    textColor: Color,
 ) {
     Text(
         text = text,

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun <T> ObserverSideEffects(
     flow: Flow<T>,
-    onEvent: (T) -> Unit
+    onEvent: (T) -> Unit,
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     LaunchedEffect(flow, lifecycleOwner.lifecycle) {

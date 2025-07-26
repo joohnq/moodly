@@ -29,7 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressTriggersSection(
     modifier: Modifier = Modifier,
     records: List<StressLevelRecordResource>,
-    onAddStressLevel: () -> Unit = {}
+    onAddStressLevel: () -> Unit = {},
 ) {
     val stressors = records.flatMap { it.stressors }
     val stressorsMap = stressors.toMap()

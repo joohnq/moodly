@@ -13,16 +13,18 @@ import com.joohnq.ui.entity.BottomItem
 import com.joohnq.ui.entity.IconResource
 
 @Composable
-fun rememberBottomNavigationItems(): List<BottomItem<Destination>> = remember {
-    listOf(
-        BottomItem(
-            icon = IconResource(
-                icon = Drawables.Icons.Outlined.Home,
-                modifier = Modifier.size(Dimens.Icon),
-                contentDescription = Res.string.home
-            ),
-            title = Res.string.home,
-            route = Destination.App.DashBoard.Home
+fun rememberBottomNavigationItems(): List<BottomItem<Destination>> =
+    remember {
+        listOf(
+            BottomItem(
+                icon =
+                    IconResource(
+                        icon = Drawables.Icons.Outlined.Home,
+                        modifier = Modifier.size(Dimens.Icon),
+                        contentDescription = Res.string.home
+                    ),
+                title = Res.string.home,
+                route = Destination.App.DashBoard.Home
+            )
         )
-    )
-}
+    }

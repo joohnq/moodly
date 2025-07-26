@@ -11,27 +11,33 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.until
 
 fun LocalDateTime.toMonthNameString(): String =
-    format(LocalDateTime.Format {
-        monthName(MonthNames.ENGLISH_FULL)
-    })
+    format(
+        LocalDateTime.Format {
+            monthName(MonthNames.ENGLISH_FULL)
+        }
+    )
 
 fun LocalDateTime.toMonthAbbreviatedAndDayString(): String =
-    format(LocalDateTime.Format {
-        monthName(MonthNames.ENGLISH_ABBREVIATED)
-        chars(" ")
-        day(padding = Padding.ZERO)
-    })
+    format(
+        LocalDateTime.Format {
+            monthName(MonthNames.ENGLISH_ABBREVIATED)
+            chars(" ")
+            day(padding = Padding.ZERO)
+        }
+    )
 
 fun LocalDateTime.toMonthAbbreviatedDayAndHourFormatted(): String =
-    format(LocalDateTime.Format {
-        monthName(MonthNames.ENGLISH_ABBREVIATED)
-        chars(" ")
-        day(padding = Padding.ZERO)
-        chars("\nat ")
-        hour()
-        char(':')
-        minute()
-    })
+    format(
+        LocalDateTime.Format {
+            monthName(MonthNames.ENGLISH_ABBREVIATED)
+            chars(" ")
+            day(padding = Padding.ZERO)
+            chars("\nat ")
+            hour()
+            char(':')
+            minute()
+        }
+    )
 
 fun LocalDateTime.toMonthDays(): Int {
     val start = LocalDate(date.year, date.month, 1)
@@ -40,8 +46,10 @@ fun LocalDateTime.toMonthDays(): Int {
 }
 
 fun LocalDateTime.toFormattedTimeString(): String =
-    format(LocalDateTime.Format {
-        hour()
-        char(':')
-        minute()
-    })
+    format(
+        LocalDateTime.Format {
+            hour()
+            char(':')
+            minute()
+        }
+    )

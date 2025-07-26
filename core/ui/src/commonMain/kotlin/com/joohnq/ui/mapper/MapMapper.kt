@@ -26,7 +26,7 @@ inline fun <K, T> LazyGridScope.items(
     crossinline itemContent: @Composable LazyGridItemScope.(item: T) -> Unit,
 ) = items(
     count = items.size,
-    key = { items.keys.toList()[it].toString() },
+    key = { items.keys.toList()[it].toString() }
 ) {
     itemContent(items.entries.toList()[it].value)
 }
@@ -38,11 +38,11 @@ fun <K, T> LazyListScope.items(
     content: @Composable LazyItemScope.(item: T) -> Unit,
 ) {
     for ((key, value) in items) {
-        if (items.isEmpty())
+        if (items.isEmpty()) {
             item {
                 empty()
             }
-        else {
+        } else {
             item {
                 title(key)
             }
@@ -60,11 +60,11 @@ fun <K, T> LazyListScope.itemsIndexed(
     content: @Composable LazyItemScope.(index: Int, lastIndex: Int, item: T) -> Unit,
 ) {
     for ((key, value) in items) {
-        if (items.isEmpty())
+        if (items.isEmpty()) {
             item {
                 empty()
             }
-        else {
+        } else {
             item {
                 title(key)
             }

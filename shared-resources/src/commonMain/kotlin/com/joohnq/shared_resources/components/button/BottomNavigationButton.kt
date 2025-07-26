@@ -19,7 +19,7 @@ fun BottomNavigationButton(
     modifier: Modifier = Modifier,
     image: DrawableResource,
     description: StringResource? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Button(
         contentPadding = PaddingValues(0.dp),

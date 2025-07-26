@@ -8,6 +8,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepContentPreview() {
     SleepContent(
-        records = SleepQualityRecordResource.allSleepQualityRecordResource,
+        records = SleepQualityRecordResource.allSleepQualityRecordResource
     )
 }

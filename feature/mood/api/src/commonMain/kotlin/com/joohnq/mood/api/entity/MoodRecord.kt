@@ -7,5 +7,5 @@ data class MoodRecord(
     val id: Int = -1,
     val mood: Mood = Mood.Neutral,
     val description: String = "",
-    val createdAt: LocalDateTime = getNow()
+    val createdAt: LocalDateTime = getNow(),
 )

@@ -50,7 +50,7 @@ fun EditJournalingContent(
     canSave: Boolean,
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
     onAction: (EditSelfJournalContract.Intent) -> Unit = {},
-    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {}
+    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {},
 ) {
     val titleFocusRequest = rememberFocusRequester()
     val descriptionFocusRequest = rememberFocusRequester()

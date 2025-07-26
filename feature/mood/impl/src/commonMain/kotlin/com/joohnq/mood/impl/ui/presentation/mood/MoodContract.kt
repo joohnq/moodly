@@ -12,11 +12,11 @@ sealed interface MoodContract {
         data object GetAll : Intent
 
         data class Add(
-            val record: MoodRecord
+            val record: MoodRecord,
         ) : Intent
 
         data class Delete(
-            val id: Int
+            val id: Int,
         ) : Intent
     }
 
@@ -26,12 +26,12 @@ sealed interface MoodContract {
         data object StatsAdded : SideEffect
 
         data class ShowError(
-            val error: String
+            val error: String,
         ) : SideEffect
     }
 
     data class State(
-        val records: UiState<List<MoodRecordResource>> = UiState.Idle
+        val records: UiState<List<MoodRecordResource>> = UiState.Idle,
     )
 
     sealed interface Event {

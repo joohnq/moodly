@@ -42,7 +42,7 @@ fun EditFloatingActionButtons(
     canSave: Boolean,
     onEditingAction: (EditSelfJournalContract.Intent) -> Unit = {},
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
-    onRequestTitleFocus: () -> Unit = {}
+    onRequestTitleFocus: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier.imePadding().fillMaxWidth(),

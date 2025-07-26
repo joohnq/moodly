@@ -9,8 +9,8 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Preview
 @Composable
 fun SleepPanelWorstPreview(
-    @PreviewParameter(SleepQualityRecordResourceParameterProvider ::class)
-    item: SleepQualityRecordResource
+    @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
+    item: SleepQualityRecordResource,
 ) {
     SleepPanel(
         record = item

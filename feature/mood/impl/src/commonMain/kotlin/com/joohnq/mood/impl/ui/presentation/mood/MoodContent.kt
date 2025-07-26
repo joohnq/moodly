@@ -15,7 +15,7 @@ import com.joohnq.ui.mapper.foldComposable
 fun MoodContent(
     records: UiState<List<MoodRecordResource>>,
     onAction: (MoodContract.Intent) -> Unit = {},
-    onEvent: (MoodContract.Event) -> Unit = {}
+    onEvent: (MoodContract.Event) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->

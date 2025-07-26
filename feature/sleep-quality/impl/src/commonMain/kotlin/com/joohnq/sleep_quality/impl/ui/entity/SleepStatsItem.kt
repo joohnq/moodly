@@ -7,5 +7,5 @@ import org.jetbrains.compose.resources.StringResource
 data class SleepStatsItem(
     val icon: DrawableResource,
     val title: StringResource,
-    val content: @Composable () -> Unit
+    val content: @Composable () -> Unit,
 )

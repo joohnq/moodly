@@ -37,7 +37,7 @@ fun ConvexGroupLazyLayout(
     onAddButton: () -> Unit,
     onGoBack: () -> Unit,
     panel: @Composable ColumnScope.(Modifier) -> Unit,
-    body: @Composable ColumnScope.(Modifier) -> Unit
+    body: @Composable ColumnScope.(Modifier) -> Unit,
 ) {
     Scaffold(
         containerColor = containerColor

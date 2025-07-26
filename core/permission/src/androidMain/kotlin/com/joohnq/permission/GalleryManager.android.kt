@@ -29,7 +29,9 @@ actual fun rememberGalleryManager(onResult: (SharedImage?) -> Unit): GalleryMana
     }
 }
 
-actual class GalleryManager actual constructor(private val onLaunch: () -> Unit) {
+actual class GalleryManager actual constructor(
+    private val onLaunch: () -> Unit,
+) {
     actual fun launch() {
         onLaunch()
     }

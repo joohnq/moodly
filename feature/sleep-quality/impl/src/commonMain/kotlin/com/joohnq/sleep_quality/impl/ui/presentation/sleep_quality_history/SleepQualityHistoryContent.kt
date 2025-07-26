@@ -55,11 +55,11 @@ fun SleepQualityHistoryContent(
                         items(records) { record ->
                             SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
-                                onAction = { onAction(SleepQualityContract.Intent.Delete(record.id)) },
+                                onAction = { onAction(SleepQualityContract.Intent.Delete(record.id)) }
                             ) { modifier ->
                                 SleepQualityHistoryCard(
                                     modifier = modifier,
-                                    record = record,
+                                    record = record
                                 )
                             }
                         }

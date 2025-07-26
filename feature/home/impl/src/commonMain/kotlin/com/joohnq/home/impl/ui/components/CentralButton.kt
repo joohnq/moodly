@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.painterResource
 fun CentralButton(
     modifier: Modifier = Modifier,
     item: CentralAction<Destination>,
-    onClick: (Destination) -> Unit = {}
+    onClick: (Destination) -> Unit = {},
 ) {
     Column(
         modifier = modifier.clickable(onClick = { onClick(item.destination) }),
@@ -32,10 +32,11 @@ fun CentralButton(
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Box(
-            modifier = Modifier
-                .size(48.dp)
-                .background(color = Colors.Brown10, shape = Dimens.Shape.Circle)
-                .clip(Dimens.Shape.Circle),
+            modifier =
+                Modifier
+                    .size(48.dp)
+                    .background(color = Colors.Brown10, shape = Dimens.Shape.Circle)
+                    .clip(Dimens.Shape.Circle),
             contentAlignment = Alignment.Center
         ) {
             Icon(

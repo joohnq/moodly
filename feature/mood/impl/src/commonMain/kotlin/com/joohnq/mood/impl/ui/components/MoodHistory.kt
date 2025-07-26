@@ -18,7 +18,7 @@ fun MoodHistoryContent(
     records: List<MoodRecordResource>,
     onSeeMore: () -> Unit = {},
     onCreate: () -> Unit = {},
-    onDelete: (Int) -> Unit = {}
+    onDelete: (Int) -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,

@@ -18,7 +18,7 @@ fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: StringResource,
     enabled: Boolean = true,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     TextAndIconButton(
         modifier = modifier.height(56.dp),

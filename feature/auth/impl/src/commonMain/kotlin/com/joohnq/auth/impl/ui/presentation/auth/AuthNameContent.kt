@@ -44,23 +44,26 @@ fun AuthNameContent(
     state: AuthNameContract.State,
     onEvent: (AuthNameContract.Event) -> Unit,
     onClearFocus: () -> Unit,
-    onGetAction: (AuthNameContract.Intent) -> Unit
+    onGetAction: (AuthNameContract.Intent) -> Unit,
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
-        modifier = Modifier.fillMaxSize()
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    onClearFocus()
-                })
-            }
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        onClearFocus()
+                    })
+                }
     ) { _ ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier =
+                Modifier
+                    .fillMaxSize()
         ) {
             ConvexColumnLayout(
                 backgroundColor = Colors.Green50,
@@ -76,9 +79,10 @@ fun AuthNameContent(
             }
             VerticalSpacer(50.dp)
             Column(
-                modifier = Modifier
-                    .paddingHorizontalMedium()
-                    .fillMaxSize(),
+                modifier =
+                    Modifier
+                        .paddingHorizontalMedium()
+                        .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(

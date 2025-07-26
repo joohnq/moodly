@@ -43,7 +43,7 @@ fun OnboardingBaseComponent(
     isContinueButtonVisible: Boolean = true,
     onGoBack: () -> Unit,
     onContinue: () -> Unit = {},
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
@@ -51,8 +51,12 @@ fun OnboardingBaseComponent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).paddingHorizontalMedium().fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .paddingHorizontalMedium()
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AppTopBar(
@@ -71,8 +75,12 @@ fun OnboardingBaseComponent(
                 Image(
                     painter = painterResource(image),
                     contentDescription = null,
-                    modifier = Modifier.widthIn(max = 300.dp).fillMaxWidth().aspectRatio(1f)
-                        .align(alignment = Alignment.CenterHorizontally)
+                    modifier =
+                        Modifier
+                            .widthIn(max = 300.dp)
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .align(alignment = Alignment.CenterHorizontally)
                 )
                 VerticalSpacer(24.dp)
             }

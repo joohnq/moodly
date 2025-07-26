@@ -48,7 +48,7 @@ fun AddJournalingContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSelfJournalContract.State,
     onAction: (AddSelfJournalContract.Intent) -> Unit = {},
-    onEvent: (AddSelfJournalContract.Event) -> Unit = {}
+    onEvent: (AddSelfJournalContract.Event) -> Unit = {},
 ) {
     val focusRequester = FocusRequester()
     val moods = remember { getAllMoodResource() }

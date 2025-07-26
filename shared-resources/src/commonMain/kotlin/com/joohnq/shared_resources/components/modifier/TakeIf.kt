@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun Modifier.takeIf(
     condition: Boolean,
-    thenModifier: Modifier.() -> Modifier
+    thenModifier: Modifier.() -> Modifier,
 ): Modifier {
     val modifier = this
     return then(

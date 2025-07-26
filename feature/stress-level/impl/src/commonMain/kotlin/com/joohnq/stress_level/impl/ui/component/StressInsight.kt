@@ -17,7 +17,7 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 fun StressInsight(
     modifier: Modifier = Modifier,
     records: List<StressLevelRecordResource>,
-    onCreate: () -> Unit = {}
+    onCreate: () -> Unit = {},
 ) {
     val stressors = records.toPair()
 

@@ -3,10 +3,10 @@ package com.joohnq.auth.impl.ui.presentation.auth
 import com.joohnq.ui.BaseViewModel
 
 class AuthNameViewModel(
-    initialState: AuthNameContract.State = AuthNameContract.State()
+    initialState: AuthNameContract.State = AuthNameContract.State(),
 ) : BaseViewModel<AuthNameContract.State, AuthNameContract.Intent, AuthNameContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     AuthNameContract.ViewModel {
     override fun onIntent(intent: AuthNameContract.Intent) {
         when (intent) {

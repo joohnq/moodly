@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun SelfJournalingCalendarPreview(
     @PreviewParameter(ListSelfJournalRecordResourceParameterProvider::class)
-    items: List<SelfJournalRecordResource>
+    items: List<SelfJournalRecordResource>,
 ) {
     SelfJournalingCalendar(
         records = items

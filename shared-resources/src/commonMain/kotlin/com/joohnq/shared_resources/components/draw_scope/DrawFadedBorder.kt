@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 
 fun DrawScope.drawFadedBorder(
     color: Color,
-    borderWidth: Float
+    borderWidth: Float,
 ) {
     val gradientBrush =
         Brush.verticalGradient(

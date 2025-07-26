@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepQualityMetricPreview() {
     SleepQualityMetric(
-        records = SleepQualityRecordResource.allSleepQualityRecordResource,
+        records = SleepQualityRecordResource.allSleepQualityRecordResource
     )
 }
 
@@ -16,6 +16,6 @@ fun SleepQualityMetricPreview() {
 @Composable
 fun SleepQualityMetricEmptyPreview() {
     SleepQualityMetric(
-        records = listOf(),
+        records = listOf()
     )
 }

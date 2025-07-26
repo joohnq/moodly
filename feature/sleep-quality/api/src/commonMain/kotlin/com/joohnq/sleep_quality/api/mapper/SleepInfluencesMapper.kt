@@ -12,15 +12,16 @@ import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.MEDITATION
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.NATURAL_LIGHT
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
 
-fun Int.toSleepInfluences(): SleepInfluences = when (this) {
-    NATURAL_LIGHT.id -> NaturalLight
-    PHYSICAL_ACTIVITY.id -> PhysicalActivity
-    CHILL_SLEEP_ENVIRONMENT.id -> ChillSleepEnvironment
-    MEDITATION.id -> Meditation
-    CAFFEINE.id -> Caffeine
-    EXCESSIVE_SCREEN_TIME.id -> ExcessiveScreenTime
-    HIGH_STRESS.id -> HighStress
-    ANXIETY.id -> Anxiety
-    ALCOHOL_CONSUMPTION.id -> AlcoholConsumption
-    else -> throw IllegalArgumentException("Unknown sleep influence option: $this")
-}
+fun Int.toSleepInfluences(): SleepInfluences =
+    when (this) {
+        NATURAL_LIGHT.id -> NaturalLight
+        PHYSICAL_ACTIVITY.id -> PhysicalActivity
+        CHILL_SLEEP_ENVIRONMENT.id -> ChillSleepEnvironment
+        MEDITATION.id -> Meditation
+        CAFFEINE.id -> Caffeine
+        EXCESSIVE_SCREEN_TIME.id -> ExcessiveScreenTime
+        HIGH_STRESS.id -> HighStress
+        ANXIETY.id -> Anxiety
+        ALCOHOL_CONSUMPTION.id -> AlcoholConsumption
+        else -> throw IllegalArgumentException("Unknown sleep influence option: $this")
+    }

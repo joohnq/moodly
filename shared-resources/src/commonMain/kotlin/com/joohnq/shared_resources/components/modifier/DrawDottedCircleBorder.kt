@@ -11,7 +11,7 @@ fun DrawScope.drawDottedCircleBorder(
     color: Color,
     radius: Float,
     dotRadius: Float,
-    numberOfDots: Int
+    numberOfDots: Int,
 ) {
     val centerX = size.width / 2
     val centerY = size.height / 2

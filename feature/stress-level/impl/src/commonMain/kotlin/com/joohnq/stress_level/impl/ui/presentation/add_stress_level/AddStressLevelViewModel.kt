@@ -5,7 +5,7 @@ import com.joohnq.stress_level.impl.ui.mapper.fromSliderValueToStressLevelResour
 import com.joohnq.ui.BaseViewModel
 
 class AddStressLevelViewModel(
-    initialState: AddStressLevelContract.State = AddStressLevelContract.State()
+    initialState: AddStressLevelContract.State = AddStressLevelContract.State(),
 ) : BaseViewModel<AddStressLevelContract.State, AddStressLevelContract.Intent, AddStressLevelContract.SideEffect>(
         initialState = initialState
     ),

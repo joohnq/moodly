@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
     val moodViewModel: MoodViewModel = sharedViewModel()
     val addStatsViewModel: AddMoodViewModel = sharedViewModel()
@@ -26,8 +26,7 @@ fun ExpressionAnalysisScreen(
     val snackBarState = rememberSnackBarState()
     val addStatsState by addStatsViewModel.state.collectAsState()
 
-    fun onError(error: String) =
-        scope.launch { snackBarState.showSnackbar(error) }
+    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
     fun onEvent(event: ExpressionAnalysisContract.Event) =
         when (event) {

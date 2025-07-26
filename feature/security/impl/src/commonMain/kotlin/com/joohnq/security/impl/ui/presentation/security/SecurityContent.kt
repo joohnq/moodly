@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SecurityContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    onEvent: (SecurityContract.Event) -> Unit = {}
+    onEvent: (SecurityContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

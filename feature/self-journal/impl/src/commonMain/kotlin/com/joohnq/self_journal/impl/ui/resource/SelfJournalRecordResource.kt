@@ -9,7 +9,7 @@ data class SelfJournalRecordResource(
     val mood: MoodResource = MoodResource.Neutral,
     val title: String = "",
     val description: String = "",
-    val createdAt: LocalDateTime = getNow()
+    val createdAt: LocalDateTime = getNow(),
 ) {
     companion object {
         val selfJournalRecordResourceDepressedPreview =

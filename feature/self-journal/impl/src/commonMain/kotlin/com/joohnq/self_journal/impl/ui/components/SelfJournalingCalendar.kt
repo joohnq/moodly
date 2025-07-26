@@ -12,7 +12,7 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 @Composable
 fun SelfJournalingCalendar(
     calendarState: CalendarState = rememberCalendarState(),
-    records: List<SelfJournalRecordResource>
+    records: List<SelfJournalRecordResource>,
 ) {
     HorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),

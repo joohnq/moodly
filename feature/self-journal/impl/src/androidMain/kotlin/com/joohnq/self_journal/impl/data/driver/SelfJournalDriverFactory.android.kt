@@ -8,7 +8,7 @@ import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import com.joohnq.self_journal.impl.data.database.SelfJournalDatabase
 
 actual class SelfJournalDriverFactory(
-    private val context: Context
+    private val context: Context,
 ) {
     actual fun createDriver(): SqlDriver =
         AndroidSqliteDriver(

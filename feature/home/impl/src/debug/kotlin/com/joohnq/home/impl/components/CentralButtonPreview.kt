@@ -1,6 +1,7 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.home.impl.ui.components.CentralButton
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.CentralAction

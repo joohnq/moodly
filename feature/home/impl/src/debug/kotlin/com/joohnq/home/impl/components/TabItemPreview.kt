@@ -1,6 +1,7 @@
 package com.joohnq.home.impl.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.home.impl.ui.components.TabItem
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.home
 import com.joohnq.shared_resources.theme.Colors

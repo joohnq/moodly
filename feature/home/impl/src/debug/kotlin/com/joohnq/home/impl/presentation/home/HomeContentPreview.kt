@@ -3,8 +3,9 @@ package com.joohnq.home.impl.presentation.home
 import androidx.compose.runtime.Composable
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
-import com.joohnq.freud_score.impl.resource.FreudScoreResource
-import com.joohnq.home.impl.presentation.viewmodel.DashboardContract
+import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
+import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
+import com.joohnq.home.impl.ui.presentation.home.HomeContent
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource

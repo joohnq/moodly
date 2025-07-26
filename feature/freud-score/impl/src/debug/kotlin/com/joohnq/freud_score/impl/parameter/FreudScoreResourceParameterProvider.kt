@@ -1,7 +1,7 @@
 package com.joohnq.freud_score.impl.parameter
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.joohnq.freud_score.impl.resource.FreudScoreResource
+import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
 
 class FreudScoreResourceParameterProvider : PreviewParameterProvider<FreudScoreResource> {
     override val values = sequenceOf(

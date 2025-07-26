@@ -7,12 +7,14 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource.Yes
 
 fun getAllProfessionalHelpResource(): List<ProfessionalHelpResource> = listOf(Yes, No)
 
-fun ProfessionalHelp.toResource(): ProfessionalHelpResource = when (this) {
-    ProfessionalHelp.Yes -> Yes
-    ProfessionalHelp.No -> No
-}
+fun ProfessionalHelp.toResource(): ProfessionalHelpResource =
+    when (this) {
+        ProfessionalHelp.Yes -> Yes
+        ProfessionalHelp.No -> No
+    }
 
-fun ProfessionalHelpResource.toDomain(): ProfessionalHelp = when (this) {
-    Yes -> ProfessionalHelp.Yes
-    No -> ProfessionalHelp.No
-}
+fun ProfessionalHelpResource.toDomain(): ProfessionalHelp =
+    when (this) {
+        Yes -> ProfessionalHelp.Yes
+        No -> ProfessionalHelp.No
+    }

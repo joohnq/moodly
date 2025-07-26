@@ -1,34 +1,38 @@
 package com.joohnq.user.impl.data.repository
 
-import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.database.executeTryCatchResult
 import com.joohnq.api.converter.UserConverter
 import com.joohnq.api.entity.*
 import com.joohnq.api.mapper.toImageType
 import com.joohnq.api.mapper.toValue
 import com.joohnq.api.repository.UserRepository
+import com.joohnq.database.converters.LocalDateTimeConverter
+import com.joohnq.database.executeTryCatchResult
 import com.joohnq.user.database.UserDatabaseSql
 
 class UserRepositoryImpl(
-    private val database: UserDatabaseSql,
+    private val database: UserDatabaseSql
 ) : UserRepository {
     private val query = database.userQueries
+
     override suspend fun getUser(): Result<User> =
         executeTryCatchResult {
-            query.getUser(mapper = { id, name, image, imageType, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
-                User(
-                    id = id.toInt(),
-                    name = name,
-                    image = image,
-                    imageType = imageType.toImageType(),
-                    medicationsSupplements = UserConverter.toMedicationsSupplements(
-                        medicationsSupplements
-                    ),
-                    soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
-                    physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
-                    dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
-                )
-            }).executeAsOneOrNull() ?: throw Exception("User not found")
+            query
+                .getUser(mapper = { id, name, image, imageType, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
+                    User(
+                        id = id.toInt(),
+                        name = name,
+                        image = image,
+                        imageType = imageType.toImageType(),
+                        medicationsSupplements =
+                            UserConverter.toMedicationsSupplements(
+                                medicationsSupplements
+                            ),
+                        soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
+                        physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
+                        dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
+                    )
+                })
+                .executeAsOneOrNull() ?: throw Exception("User not found")
         }
 
     override suspend fun addUser(user: User): Result<Boolean> =
@@ -62,7 +66,10 @@ class UserRepositoryImpl(
             true
         }
 
-    override suspend fun updateUserImage(image: String, imageType: ImageType): Result<Boolean> =
+    override suspend fun updateUserImage(
+        image: String,
+        imageType: ImageType
+    ): Result<Boolean> =
         executeTryCatchResult {
             query.updateUserImage(image, imageType.toValue())
             true
@@ -83,7 +90,7 @@ class UserRepositoryImpl(
     override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean> =
         executeTryCatchResult {
             query.updateMedicationsSupplements(
-                UserConverter.fromMedicationsSupplements(medicationsSupplements),
+                UserConverter.fromMedicationsSupplements(medicationsSupplements)
             )
             true
         }

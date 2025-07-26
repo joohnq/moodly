@@ -25,11 +25,11 @@ class UserViewModel(
     private val updateUserNameUseCase: UpdateUserNameUseCase,
     private val updateUserImageBitmapUseCase: UpdateUserImageBitmapUseCase,
     private val updateUserImageDrawableUseCase: UpdateUserImageDrawableUseCase,
-    initialState: UserContract.State = UserContract.State(),
+    initialState: UserContract.State = UserContract.State()
 ) : BaseViewModel<UserContract.State, UserContract.Intent, UserContract.SideEffect>(
-    initialState = initialState
-), UserContract.ViewModel {
-
+        initialState = initialState
+    ),
+    UserContract.ViewModel {
     override fun onIntent(intent: UserContract.Intent) {
         when (intent) {
             is UserContract.Intent.Get -> get()
@@ -41,61 +41,72 @@ class UserViewModel(
         }
     }
 
-    private fun add() = viewModelScope.launch {
-        val res = addUserUseCase(User()).toUiState()
+    private fun add() =
+        viewModelScope.launch {
+            val res = addUserUseCase(User()).toUiState()
 
-        res.onSuccess {
-            emitEffect(UserContract.SideEffect.Added)
-        }.onFailure {
-            emitEffect(UserContract.SideEffect.ShowError(it))
+            res
+                .onSuccess {
+                    emitEffect(UserContract.SideEffect.Added)
+                }.onFailure {
+                    emitEffect(UserContract.SideEffect.ShowError(it))
+                }
         }
-    }
 
-    private fun update(user: User) = viewModelScope.launch {
-        val res = updateUserUseCase(user).toUiState()
+    private fun update(user: User) =
+        viewModelScope.launch {
+            val res = updateUserUseCase(user).toUiState()
 
-        res.onSuccess {
-            emitEffect(UserContract.SideEffect.Updated)
-        }.onFailure {
-            emitEffect(UserContract.SideEffect.ShowError(it))
+            res
+                .onSuccess {
+                    emitEffect(UserContract.SideEffect.Updated)
+                }.onFailure {
+                    emitEffect(UserContract.SideEffect.ShowError(it))
+                }
         }
-    }
 
-    private fun get() = viewModelScope.launch {
-        updateState { it.copy(UiState.Loading) }
+    private fun get() =
+        viewModelScope.launch {
+            updateState { it.copy(UiState.Loading) }
 
-        val res = getUserUseCase().toUiState()
+            val res = getUserUseCase().toUiState()
 
-        updateState { it.copy(res) }
-    }
-
-    private fun updateUserImageBitmap(image: ImageBitmap) = viewModelScope.launch(Dispatchers.IO) {
-        val res = updateUserImageBitmapUseCase(image).toUiState()
-
-        res.onSuccess {
-            emitEffect(UserContract.SideEffect.AvatarSavedSuccess)
-        }.onFailure {
-            emitEffect(UserContract.SideEffect.ShowError(it))
+            updateState { it.copy(res) }
         }
-    }
 
-    private fun updateUserImageDrawable(i: Int) = viewModelScope.launch {
-        val res = updateUserImageDrawableUseCase(i).toUiState()
+    private fun updateUserImageBitmap(image: ImageBitmap) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val res = updateUserImageBitmapUseCase(image).toUiState()
 
-        res.onSuccess {
-            emitEffect(UserContract.SideEffect.AvatarSavedSuccess)
-        }.onFailure {
-            emitEffect(UserContract.SideEffect.ShowError(it))
+            res
+                .onSuccess {
+                    emitEffect(UserContract.SideEffect.AvatarSavedSuccess)
+                }.onFailure {
+                    emitEffect(UserContract.SideEffect.ShowError(it))
+                }
         }
-    }
 
-    private fun updateUserName(name: String) = viewModelScope.launch {
-        val res = updateUserNameUseCase(name).toUiState()
+    private fun updateUserImageDrawable(i: Int) =
+        viewModelScope.launch {
+            val res = updateUserImageDrawableUseCase(i).toUiState()
 
-        res.onSuccess {
-            emitEffect(UserContract.SideEffect.UserNameUpdatedSuccess)
-        }.onFailure {
-            emitEffect(UserContract.SideEffect.ShowError(it))
+            res
+                .onSuccess {
+                    emitEffect(UserContract.SideEffect.AvatarSavedSuccess)
+                }.onFailure {
+                    emitEffect(UserContract.SideEffect.ShowError(it))
+                }
         }
-    }
+
+    private fun updateUserName(name: String) =
+        viewModelScope.launch {
+            val res = updateUserNameUseCase(name).toUiState()
+
+            res
+                .onSuccess {
+                    emitEffect(UserContract.SideEffect.UserNameUpdatedSuccess)
+                }.onFailure {
+                    emitEffect(UserContract.SideEffect.ShowError(it))
+                }
+        }
 }

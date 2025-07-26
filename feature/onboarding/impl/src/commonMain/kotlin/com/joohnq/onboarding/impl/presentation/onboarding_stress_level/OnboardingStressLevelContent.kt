@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingStressLevelContent(
     state: StressLevelRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     val options: List<StressLevelResource> = remember { getAllStressLevelResource() }
 

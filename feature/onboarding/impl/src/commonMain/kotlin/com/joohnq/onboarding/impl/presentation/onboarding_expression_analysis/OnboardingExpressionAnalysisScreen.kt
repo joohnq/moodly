@@ -32,13 +32,13 @@ data class Quad<out A, out B, out C, out D>(
     val first: A,
     val second: B,
     val third: C,
-    val fourth: D,
+    val fourth: D
 )
 
 @Composable
 fun OnboardingExpressionAnalysisScreen(
     onNavigateToUserName: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val onboardingViewModel: OnboardingViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
@@ -59,7 +59,7 @@ fun OnboardingExpressionAnalysisScreen(
     fun addSleepQualityRecord() {
         sleepQualityViewModel.onIntent(
             SleepQualityContract.Intent.Add(
-                onboardingState.sleepQuality.toDomain(),
+                onboardingState.sleepQuality.toDomain()
             )
         )
     }

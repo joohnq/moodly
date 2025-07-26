@@ -17,12 +17,12 @@ fun MedicationsSupplementsRadioButtonPreview(
         MedicationsSupplementsRadioButton(
             text = "Option",
             icon = item.icon,
-            selected = false,
+            selected = false
         )
         MedicationsSupplementsRadioButton(
             text = "Option",
             icon = item.icon,
-            selected = true,
+            selected = true
         )
     }
 }

@@ -42,7 +42,7 @@ fun OnboardingSleepQualityContent(
     state: SleepQualityRecordResource,
     sliderValue: Float,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     val moods = remember { getAllMoodResource().reversed() }
     val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
@@ -103,7 +103,7 @@ fun OnboardingSleepQualityContent(
                         Column {
                             MoodFace(
                                 modifier = Modifier.size(48.dp),
-                                resource = mood,
+                                resource = mood
                             )
                         }
                     }

@@ -28,10 +28,10 @@ class DashboardViewModel(
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
-    private val stressLevelViewModel: StressLevelViewModel
+    private val stressLevelViewModel: StressLevelViewModel,
 ) : BaseViewModel<DashboardContract.State, DashboardContract.Intent, DashboardContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     DashboardContract.ViewModel {
     override fun onIntent(intent: DashboardContract.Intent) {
         when (intent) {

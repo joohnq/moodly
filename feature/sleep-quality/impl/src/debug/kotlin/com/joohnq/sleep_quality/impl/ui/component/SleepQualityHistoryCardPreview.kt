@@ -10,9 +10,9 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun SleepQualityHistoryCardWorstPreview(
     @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
-    item: SleepQualityRecordResource
+    item: SleepQualityRecordResource,
 ) {
     SleepQualityHistoryCard(
-        record = item,
+        record = item
     )
 }

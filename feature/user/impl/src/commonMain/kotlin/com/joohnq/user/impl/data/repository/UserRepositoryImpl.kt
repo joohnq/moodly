@@ -10,7 +10,7 @@ import com.joohnq.database.executeTryCatchResult
 import com.joohnq.user.database.UserDatabaseSql
 
 class UserRepositoryImpl(
-    private val database: UserDatabaseSql
+    private val database: UserDatabaseSql,
 ) : UserRepository {
     private val query = database.userQueries
 
@@ -68,7 +68,7 @@ class UserRepositoryImpl(
 
     override suspend fun updateUserImage(
         image: String,
-        imageType: ImageType
+        imageType: ImageType,
     ): Result<Boolean> =
         executeTryCatchResult {
             query.updateUserImage(image, imageType.toValue())

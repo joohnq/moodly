@@ -29,14 +29,18 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun HomeTopBar(
     modifier: Modifier = Modifier,
-    user: User
+    user: User,
 ) {
     val avatars = rememberAvatars()
     Column(
-        modifier = Modifier.fillMaxSize().background(
-            color = Colors.Brown80,
-            shape = Dimens.Shape.BottomLarge
-        ).padding(20.dp).then(modifier)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(
+                    color = Colors.Brown80,
+                    shape = Dimens.Shape.BottomLarge
+                ).padding(20.dp)
+                .then(modifier)
     ) {
         Row {
             Row(

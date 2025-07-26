@@ -13,15 +13,39 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 sealed interface OnboardingContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
     sealed interface Intent {
-        data class UpdateSleepQuality(val sleepQuality: SleepQualityResource) : Intent
-        data class UpdateStressLevel(val stressLevel: StressLevelResource) : Intent
-        data class UpdateMood(val mood: MoodResource) : Intent
-        data class UpdateUserMedicationsSupplements(val medicationsSupplements: MedicationsSupplementsResource?) : Intent
-        data class UpdateUserPhysicalSymptoms(val physicalSymptoms: PhysicalSymptomsResource?) : Intent
-        data class UpdateUserSoughtHelp(val soughtHelp: ProfessionalHelpResource?) : Intent
-        data class UpdateMoodRecordDescription(val description: String) : Intent
-        data class UpdateSliderValue(val sliderValue: Float) : Intent
+        data class UpdateSleepQuality(
+            val sleepQuality: SleepQualityResource,
+        ) : Intent
+
+        data class UpdateStressLevel(
+            val stressLevel: StressLevelResource,
+        ) : Intent
+
+        data class UpdateMood(
+            val mood: MoodResource,
+        ) : Intent
+
+        data class UpdateUserMedicationsSupplements(
+            val medicationsSupplements: MedicationsSupplementsResource?,
+        ) : Intent
+
+        data class UpdateUserPhysicalSymptoms(
+            val physicalSymptoms: PhysicalSymptomsResource?,
+        ) : Intent
+
+        data class UpdateUserSoughtHelp(
+            val soughtHelp: ProfessionalHelpResource?,
+        ) : Intent
+
+        data class UpdateMoodRecordDescription(
+            val description: String,
+        ) : Intent
+
+        data class UpdateSliderValue(
+            val sliderValue: Float,
+        ) : Intent
     }
 
     sealed interface SideEffect
@@ -31,12 +55,14 @@ sealed interface OnboardingContract {
         val soughtHelp: ProfessionalHelpResource? = null,
         val medicationsSupplements: MedicationsSupplementsResource? = null,
         val moodRecord: MoodRecordResource = MoodRecordResource(),
-        val sleepQuality: SleepQualityRecordResource = SleepQualityRecordResource(
-            sleepQuality = SleepQualityResource.Worst
-        ),
-        val stressLevel: StressLevelRecordResource = StressLevelRecordResource(
-            stressLevel = StressLevelResource.Three
-        ),
-        val sliderValue: Float = 0f
+        val sleepQuality: SleepQualityRecordResource =
+            SleepQualityRecordResource(
+                sleepQuality = SleepQualityResource.Worst
+            ),
+        val stressLevel: StressLevelRecordResource =
+            StressLevelRecordResource(
+                stressLevel = StressLevelResource.Three
+            ),
+        val sliderValue: Float = 0f,
     )
 }

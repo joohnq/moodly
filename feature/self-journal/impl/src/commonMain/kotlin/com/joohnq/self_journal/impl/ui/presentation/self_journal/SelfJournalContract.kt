@@ -13,15 +13,15 @@ sealed interface SelfJournalContract {
         data object GetAll : Intent
 
         data class Add(
-            val record: SelfJournalRecord
+            val record: SelfJournalRecord,
         ) : Intent
 
         data class Update(
-            val record: SelfJournalRecord
+            val record: SelfJournalRecord,
         ) : Intent
 
         data class Delete(
-            val id: Int
+            val id: Int,
         ) : Intent
     }
 
@@ -33,12 +33,12 @@ sealed interface SelfJournalContract {
         data object SelfJournalDeleted : SideEffect
 
         data class ShowError(
-            val error: String
+            val error: String,
         ) : SideEffect
     }
 
     data class State(
-        val records: UiState<List<SelfJournalRecordResource>> = UiState.Idle
+        val records: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
     )
 
     sealed interface Event {
@@ -49,11 +49,11 @@ sealed interface SelfJournalContract {
         data object OnNavigateToSelfHistory : Event
 
         data class OnClick(
-            val localDate: LocalDate
+            val localDate: LocalDate,
         ) : Event
 
         data class OnEdit(
-            val id: Int
+            val id: Int,
         ) : Event
     }
 }

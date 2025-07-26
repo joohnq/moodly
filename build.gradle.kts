@@ -24,26 +24,12 @@ subprojects {
             targetExclude("build/**/*.kt")
             ktlint(libs.versions.ktlint.get())
                 .setEditorConfigPath("${rootDir}/spotless/.editorconfig")
-                .editorConfigOverride(
-                    mapOf(
-                        "ktlint_standard_no-wildcard-imports" to "disabled"
-                    )
-                )
-            trimTrailingWhitespace()
-            endWithNewline()
         }
 
         kotlinGradle {
             target("**/*.gradle.kts")
             ktlint(libs.versions.ktlint.get())
-                .editorConfigOverride(
-                    mapOf(
-                        "indent_size" to "4",
-                        "continuation_indent_size" to "4"
-                    )
-                )
-            trimTrailingWhitespace()
-            endWithNewline()
+                .setEditorConfigPath("${rootDir}/spotless/.editorconfig")
         }
 
         format("misc") {

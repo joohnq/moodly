@@ -18,11 +18,11 @@ sealed interface StressLevelContract {
         data object GetAll : Intent
 
         data class Add(
-            val record: StressLevelRecord
+            val record: StressLevelRecord,
         ) : Intent
 
         data class Delete(
-            val id: Int
+            val id: Int,
         ) : Intent
     }
 
@@ -32,11 +32,11 @@ sealed interface StressLevelContract {
         data object Deleted : SideEffect
 
         data class ShowError(
-            val error: String
+            val error: String,
         ) : SideEffect
     }
 
     data class State(
-        val records: UiState<List<StressLevelRecordResource>> = UiState.Idle
+        val records: UiState<List<StressLevelRecordResource>> = UiState.Idle,
     )
 }

@@ -34,7 +34,7 @@ fun ExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onAddAction: (AddMoodContract.Intent) -> Unit = {},
-    onEvent: (ExpressionAnalysisContract.Event) -> Unit = {}
+    onEvent: (ExpressionAnalysisContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -43,11 +43,11 @@ fun ExpressionAnalysisContent(
     ) { padding ->
         Column(
             modifier =
-            Modifier
-                .padding(padding)
-                .paddingHorizontalMedium()
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                Modifier
+                    .padding(padding)
+                    .paddingHorizontalMedium()
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AppTopBar(onGoBack = { onEvent(ExpressionAnalysisContract.Event.OnGoBack) })

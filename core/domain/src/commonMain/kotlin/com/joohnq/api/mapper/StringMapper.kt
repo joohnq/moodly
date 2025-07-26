@@ -2,9 +2,7 @@ package com.joohnq.api.mapper
 
 import com.joohnq.api.entity.Time
 
-fun String.isDigitsOnly(): Boolean {
-    return all { it.isDigit() }
-}
+fun String.isDigitsOnly(): Boolean = all { it.isDigit() }
 
 fun String.toTime(): Time {
     val parts = split(":")

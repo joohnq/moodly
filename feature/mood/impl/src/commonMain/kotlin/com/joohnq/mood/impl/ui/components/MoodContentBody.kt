@@ -19,7 +19,7 @@ fun MoodContentBody(
     record: MoodRecordResource? = null,
     records: List<MoodRecordResource>,
     onEvent: (MoodContract.Event) -> Unit = {},
-    onAction: (MoodContract.Intent) -> Unit = {}
+    onAction: (MoodContract.Intent) -> Unit = {},
 ) {
     if (record != null) {
         SectionHeader(

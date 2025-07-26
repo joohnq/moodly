@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MoodMetricPreview(
     @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
-    list: List<MoodRecordResource>
+    list: List<MoodRecordResource>,
 ) {
     MoodMetric(
         records = list

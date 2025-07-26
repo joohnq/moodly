@@ -31,7 +31,7 @@ import ir.ehsannarmani.compose_charts.models.PopupProperties
 @Composable
 fun LineChart(
     color: Color,
-    values: List<Double>
+    values: List<Double>,
 ) {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         val maxWidth = maxWidth

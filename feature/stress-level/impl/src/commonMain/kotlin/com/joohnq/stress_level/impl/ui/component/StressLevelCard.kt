@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
-    record: StressLevelRecordResource
+    record: StressLevelRecordResource,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

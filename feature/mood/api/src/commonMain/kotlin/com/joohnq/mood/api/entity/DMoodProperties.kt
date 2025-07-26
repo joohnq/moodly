@@ -4,5 +4,5 @@ import com.joohnq.mood.api.property.MoodProperties
 
 data class DMoodProperties(
     override val id: Int,
-    override val healthLevel: Int
+    override val healthLevel: Int,
 ) : MoodProperties

@@ -15,19 +15,19 @@ sealed interface AddSelfJournalContract {
 
     sealed interface Intent {
         data class UpdateMood(
-            val mood: MoodResource?
+            val mood: MoodResource?,
         ) : Intent
 
         data class UpdateTitle(
-            val title: String
+            val title: String,
         ) : Intent
 
         data class UpdateDescription(
-            val description: String
+            val description: String,
         ) : Intent
 
         data class UpdateTitleError(
-            val error: String?
+            val error: String?,
         ) : Intent
 
         data object ResetState : Intent
@@ -41,6 +41,6 @@ sealed interface AddSelfJournalContract {
         val titleError: String? = null,
         val description: String = "",
         val selectedStressStressors: List<StressorResource> = mutableListOf(),
-        val sliderValue: Float = 0f
+        val sliderValue: Float = 0f,
     )
 }

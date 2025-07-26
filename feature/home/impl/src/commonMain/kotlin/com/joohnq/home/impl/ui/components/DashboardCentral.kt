@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun DashboardCentral(
     padding: PaddingValues = PaddingValues(0.dp),
-    onEvent: (DashboardContract.Event) -> Unit = {}
+    onEvent: (DashboardContract.Event) -> Unit = {},
 ) {
     val items =
         listOf(
@@ -60,24 +60,27 @@ fun DashboardCentral(
         )
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Colors.Black48)
-            .padding(bottom = padding.calculateBottomPadding() + 10.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(color = Colors.Black48)
+                .padding(bottom = padding.calculateBottomPadding() + 10.dp),
         contentAlignment = Alignment.BottomCenter
     ) {
         FlowRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .paddingHorizontalMedium()
-                .background(color = Colors.White, shape = Dimens.Shape.Large)
-                .clip(Dimens.Shape.Large)
-                .paddingAllSmall(),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .paddingHorizontalMedium()
+                    .background(color = Colors.White, shape = Dimens.Shape.Large)
+                    .clip(Dimens.Shape.Large)
+                    .paddingAllSmall(),
             maxItemsInEachRow = 3,
-            horizontalArrangement = Arrangement.spacedBy(
-                space = 10.dp,
-                alignment = Alignment.CenterHorizontally
-            ),
+            horizontalArrangement =
+                Arrangement.spacedBy(
+                    space = 10.dp,
+                    alignment = Alignment.CenterHorizontally
+                ),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items.forEach { item ->

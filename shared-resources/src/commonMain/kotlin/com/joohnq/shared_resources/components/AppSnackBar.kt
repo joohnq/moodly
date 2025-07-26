@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AppSnackBar(
     padding: PaddingValues = PaddingValues(0.dp),
-    snackBarHostState: SnackbarHostState = rememberSnackBarState()
+    snackBarHostState: SnackbarHostState = rememberSnackBarState(),
 ) {
     val scope = rememberCoroutineScope()
 

@@ -21,9 +21,9 @@ class SleepQualityViewModel(
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
     initialState: SleepQualityContract.State = SleepQualityContract.State(),
 ) : BaseViewModel<SleepQualityContract.State, SleepQualityContract.Intent, SleepQualityContract.SideEffect>(
-    initialState = initialState
-), SleepQualityContract.ViewModel {
-
+        initialState = initialState
+    ),
+    SleepQualityContract.ViewModel {
     override fun onIntent(intent: SleepQualityContract.Intent) {
         when (intent) {
             SleepQualityContract.Intent.GetAll -> getAll()
@@ -37,37 +37,41 @@ class SleepQualityViewModel(
     private fun getAll() =
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
-            val res = getSleepQualitiesUseCase()
-                .toResultResource { it.toResource() }
-                .toUiState()
+            val res =
+                getSleepQualitiesUseCase()
+                    .toResultResource { it.toResource() }
+                    .toUiState()
             updateState { it.copy(res) }
         }
 
     private fun delete(id: Int) =
         viewModelScope.launch {
             val res = deleteSleepQualityUseCase(id).toUiState()
-            res.onSuccess {
-                emitEffect(SleepQualityContract.SideEffect.Deleted)
-                updateState {
-                    it.copy(
-                        UiState.Success(
-                            state.value.records.getValueOrEmpty()
-                                .filter { item -> item.id != id }
+            res
+                .onSuccess {
+                    emitEffect(SleepQualityContract.SideEffect.Deleted)
+                    updateState {
+                        it.copy(
+                            UiState.Success(
+                                state.value.records
+                                    .getValueOrEmpty()
+                                    .filter { item -> item.id != id }
+                            )
                         )
-                    )
+                    }
+                }.onFailure {
+                    emitEffect(SleepQualityContract.SideEffect.ShowError(it))
                 }
-            }.onFailure {
-                emitEffect(SleepQualityContract.SideEffect.ShowError(it))
-            }
         }
 
     private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
         viewModelScope.launch {
             val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
-            res.onSuccess {
-                emitEffect(SleepQualityContract.SideEffect.Added)
-            }.onFailure {
-                emitEffect(SleepQualityContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(SleepQualityContract.SideEffect.Added)
+                }.onFailure {
+                    emitEffect(SleepQualityContract.SideEffect.ShowError(it))
+                }
         }
 }

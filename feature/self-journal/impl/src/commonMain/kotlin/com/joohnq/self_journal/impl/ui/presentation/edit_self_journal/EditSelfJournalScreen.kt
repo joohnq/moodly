@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun EditJournalingScreen(
     id: Int,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()

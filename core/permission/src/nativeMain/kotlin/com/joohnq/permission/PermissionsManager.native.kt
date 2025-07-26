@@ -20,14 +20,14 @@ import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationOpenSettingsURLString
 
 @Composable
-actual fun createPermissionsManager(callback: PermissionCallback): PermissionsManager =
-    PermissionsManager(callback)
+actual fun createPermissionsManager(callback: PermissionCallback): PermissionsManager = PermissionsManager(callback)
 
 /*
 * Implement to handle specific permission in ios platform
 * */
-actual class PermissionsManager actual constructor(private val callback: PermissionCallback) :
-    PermissionHandler {
+actual class PermissionsManager actual constructor(
+    private val callback: PermissionCallback,
+) : PermissionHandler {
     @Composable
     override fun askPermission(permission: PermissionType) {
         when (permission) {
@@ -42,12 +42,13 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
                     remember { PHPhotoLibrary.authorizationStatus() }
                 askGalleryPermission(status, permission, callback)
             }
-
         }
     }
 
     private fun askCameraPermission(
-        status: AVAuthorizationStatus, permission: PermissionType, callback: PermissionCallback,
+        status: AVAuthorizationStatus,
+        permission: PermissionType,
+        callback: PermissionCallback,
     ) {
         when (status) {
             AVAuthorizationStatusAuthorized -> {
@@ -73,7 +74,9 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
     }
 
     private fun askGalleryPermission(
-        status: PHAuthorizationStatus, permission: PermissionType, callback: PermissionCallback,
+        status: PHAuthorizationStatus,
+        permission: PermissionType,
+        callback: PermissionCallback,
     ) {
         when (status) {
             PHAuthorizationStatusAuthorized -> {
@@ -88,7 +91,8 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
 
             PHAuthorizationStatusDenied -> {
                 callback.onPermissionStatus(
-                    permission, PermissionStatus.DENIED
+                    permission,
+                    PermissionStatus.DENIED
                 )
             }
 
@@ -97,8 +101,8 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
     }
 
     @Composable
-    override fun isPermissionGranted(permission: PermissionType): Boolean {
-        return when (permission) {
+    override fun isPermissionGranted(permission: PermissionType): Boolean =
+        when (permission) {
             PermissionType.CAMERA -> {
                 val status: AVAuthorizationStatus =
                     remember { AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) }
@@ -111,7 +115,6 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
                 status == PHAuthorizationStatusAuthorized
             }
         }
-    }
 
     @Composable
     override fun launchSettings() {

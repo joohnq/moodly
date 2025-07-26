@@ -6,7 +6,7 @@ sealed interface SecurityResult {
     data object FeatureUnavailable : SecurityResult
 
     data class AuthenticationError(
-        val error: String
+        val error: String,
     ) : SecurityResult
 
     data object AuthenticationFailed : SecurityResult

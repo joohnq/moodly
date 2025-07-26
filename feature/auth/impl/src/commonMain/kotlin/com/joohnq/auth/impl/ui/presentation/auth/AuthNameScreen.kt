@@ -17,9 +17,7 @@ import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AuthNameScreen(
-    onNavigateToSecurity: () -> Unit
-) {
+fun AuthNameScreen(onNavigateToSecurity: () -> Unit) {
     val authNameViewModel: AuthNameViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()
     val preferencesViewModel: PreferencesViewModel = sharedViewModel()
@@ -34,17 +32,18 @@ fun AuthNameScreen(
         }
     }
 
-    fun onEvent(event: AuthNameContract.Event) = when (event) {
-        AuthNameContract.Event.OnContinue -> {
-            focusManager.clearFocus()
-            try {
-                UserNameValidator(userNameState.name)
-                userViewModel.onIntent(UserContract.Intent.UpdateName(userNameState.name))
-            } catch (e: Exception) {
-                authNameViewModel.onIntent(AuthNameContract.Intent.UpdateError(e.message.toString()))
+    fun onEvent(event: AuthNameContract.Event) =
+        when (event) {
+            AuthNameContract.Event.OnContinue -> {
+                focusManager.clearFocus()
+                try {
+                    UserNameValidator(userNameState.name)
+                    userViewModel.onIntent(UserContract.Intent.UpdateName(userNameState.name))
+                } catch (e: Exception) {
+                    authNameViewModel.onIntent(AuthNameContract.Intent.UpdateError(e.message.toString()))
+                }
             }
         }
-    }
 
     LaunchedEffect(userViewModel) {
         userViewModel.sideEffect.collect { event ->

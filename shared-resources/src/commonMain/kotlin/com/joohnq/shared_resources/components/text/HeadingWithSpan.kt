@@ -17,7 +17,7 @@ fun HeadingWithSpan(
     firstTitle: StringResource? = null,
     secondTitle: StringResource? = null,
     span: String,
-    spanColor: Color
+    spanColor: Color,
 ) {
     Text(
         text =

@@ -11,7 +11,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun HomeScreen(
     padding: PaddingValues,
-    onEvent: (HomeEvent) -> Unit
+    onEvent: (HomeEvent) -> Unit,
 ) {
     val dashboardViewModel: DashboardViewModel = sharedViewModel()
     val state by dashboardViewModel.state.collectAsStateWithLifecycle()

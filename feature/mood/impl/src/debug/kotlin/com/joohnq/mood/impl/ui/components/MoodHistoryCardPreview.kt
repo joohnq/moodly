@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MoodHistoryCardPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
-    item: MoodRecordResource
+    item: MoodRecordResource,
 ) {
     MoodHistoryCard(
         record = item

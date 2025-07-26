@@ -31,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelHistoryContent(
     state: StressLevelContract.State,
     onAction: (StressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressLevelHistoryContract.Event) -> Unit = {}
+    onEvent: (StressLevelHistoryContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->

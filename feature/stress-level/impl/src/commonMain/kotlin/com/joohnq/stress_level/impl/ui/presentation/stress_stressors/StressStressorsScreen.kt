@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun StressStressorsScreen(
     onGoBack: () -> Unit,
-    onNavigateToStressLevel: () -> Unit
+    onNavigateToStressLevel: () -> Unit,
 ) {
     val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
     val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()

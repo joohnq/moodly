@@ -42,10 +42,11 @@ fun OnboardingMoodRateContent(
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
-            text = stringResource(
-                Res.string.mood_rate_desc,
-                stringResource(state.mood.text)
-            ),
+            text =
+                stringResource(
+                    Res.string.mood_rate_desc,
+                    stringResource(state.mood.text)
+                ),
             style = TextStyles.textXlSemiBold(),
             color = Colors.Brown100Alpha64
         )
@@ -71,15 +72,17 @@ fun OnboardingMoodRateContent(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        val carouselOffset = when {
-            maxWidth >= 400.dp -> maxHeight - 200.dp
-            else -> maxHeight - (maxWidth / 2) + 50.dp
-        }
+        val carouselOffset =
+            when {
+                maxWidth >= 400.dp -> maxHeight - 200.dp
+                else -> maxHeight - (maxWidth / 2) + 50.dp
+            }
 
         Box(
-            modifier = Modifier
-                .sizeIn(maxWidth = 400.dp, maxHeight = 400.dp)
-                .offset(y = carouselOffset),
+            modifier =
+                Modifier
+                    .sizeIn(maxWidth = 400.dp, maxHeight = 400.dp)
+                    .offset(y = carouselOffset),
             contentAlignment = Alignment.TopCenter
         ) {
             MoodRouletteWheel(

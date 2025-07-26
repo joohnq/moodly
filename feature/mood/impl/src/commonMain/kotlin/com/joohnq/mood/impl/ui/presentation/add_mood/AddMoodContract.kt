@@ -9,11 +9,11 @@ sealed interface AddMoodContract {
 
     sealed interface Intent {
         data class UpdateAddingMoodRecordMood(
-            val mood: MoodResource
+            val mood: MoodResource,
         ) : Intent
 
         data class UpdateAddingMoodRecordDescription(
-            val description: String
+            val description: String,
         ) : Intent
 
         data object ResetState : Intent
@@ -22,7 +22,7 @@ sealed interface AddMoodContract {
     sealed interface SideEffect
 
     data class State(
-        val record: MoodRecordResource = MoodRecordResource()
+        val record: MoodRecordResource = MoodRecordResource(),
     )
 
     sealed interface Event {

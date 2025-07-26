@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun SelfJournalHistoryContentPreview(
     @PreviewParameter(ListSelfJournalRecordResourceParameterProvider::class)
-    list: List<SelfJournalRecordResource>
+    list: List<SelfJournalRecordResource>,
 ) {
     SelfJournalHistoryContent(
         state =

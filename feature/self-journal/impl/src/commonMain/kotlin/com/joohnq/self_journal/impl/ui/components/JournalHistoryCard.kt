@@ -31,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalHistoryCard(
     record: SelfJournalRecordResource,
-    onClick: (Int) -> Unit = {}
+    onClick: (Int) -> Unit = {},
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),

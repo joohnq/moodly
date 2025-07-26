@@ -27,7 +27,7 @@ fun WeekMoodIndicator(
     modifier: Modifier = Modifier,
     records: List<MoodRecordResource>,
     resource: MoodResource,
-    height: Dp = 60.dp
+    height: Dp = 60.dp,
 ) {
     val weekState = rememberWeekCalendarState()
     val week = weekState.firstVisibleWeek
@@ -43,30 +43,34 @@ fun WeekMoodIndicator(
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 Box(
-                    modifier = Modifier
-                        .height(height)
-                        .width(12.dp)
-                        .background(color = resource.palette.backgroundColor, shape = shape)
-                        .clip(shape),
+                    modifier =
+                        Modifier
+                            .height(height)
+                            .width(12.dp)
+                            .background(color = resource.palette.backgroundColor, shape = shape)
+                            .clip(shape),
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     val item = records.find { it.createdAt.date == day.date }
                     item?.let {
                         val relHeight = height * (item.mood.healthLevel / 100f)
                         Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(relHeight)
-                                .background(
-                                    color = resource.palette.color,
-                                    shape = shape
-                                )
-                                .clip(shape)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(relHeight)
+                                    .background(
+                                        color = resource.palette.color,
+                                        shape = shape
+                                    ).clip(shape)
                         )
                     }
                 }
                 Text(
-                    text = day.date.dayOfWeek.name.first().toString(),
+                    text =
+                        day.date.dayOfWeek.name
+                            .first()
+                            .toString(),
                     style = TextStyles.text2XsRegular(),
                     color = Colors.Brown80
                 )

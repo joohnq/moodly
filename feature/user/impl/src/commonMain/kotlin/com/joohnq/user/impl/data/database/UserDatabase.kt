@@ -5,7 +5,7 @@ import com.joohnq.database.Database
 import com.joohnq.user.database.UserDatabaseSql
 
 class UserDatabase(
-    private val driver: SqlDriver
+    private val driver: SqlDriver,
 ) : Database<UserDatabaseSql>() {
     override operator fun invoke(): UserDatabaseSql = UserDatabaseSql(driver)
 

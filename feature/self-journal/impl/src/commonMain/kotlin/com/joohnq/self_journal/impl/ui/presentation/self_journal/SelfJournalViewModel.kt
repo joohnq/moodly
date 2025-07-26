@@ -21,7 +21,7 @@ class SelfJournalViewModel(
     private val deleteSelfJournalsUseCase: DeleteSelfJournalsUseCase,
     private val updateSelfJournalsUseCase: UpdateSelfJournalsUseCase,
     private val addSelfJournalsUseCase: AddSelfJournalsUseCase,
-    initialState: SelfJournalContract.State = SelfJournalContract.State()
+    initialState: SelfJournalContract.State = SelfJournalContract.State(),
 ) : BaseViewModel<SelfJournalContract.State, SelfJournalContract.Intent, SelfJournalContract.SideEffect>(
         initialState = initialState
     ),

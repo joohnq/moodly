@@ -23,7 +23,7 @@ import kotlin.math.roundToInt
 @Composable
 fun MoodRouletteWheel(
     modifier: Modifier = Modifier,
-    setSelectedMood: (MoodResource) -> Unit = {}
+    setSelectedMood: (MoodResource) -> Unit = {},
 ) {
     val moods =
         rememberSaveable {
@@ -40,22 +40,22 @@ fun MoodRouletteWheel(
 
     Canvas(
         modifier =
-        modifier
-            .pointerInput(Unit) {
-                detectDragGestures(onDragEnd = {
-                    val i = rotation % limitedAngle
-                    val middle = ((i / limitedAngleForSlice).roundToInt()) * limitedAngleForSlice
-                    rotation = middle.toFloat()
-                }) { change, dragAmount ->
-                    rotation += dragAmount.x * 0.005f
-                    val percent = (rotation - aQuarter) % limitedAngle
-                    val differenceAngle = percent.absoluteValue * 360 / limitedAngle
-                    val angle = if (percent < 0) differenceAngle else 360 - differenceAngle
-                    val index = ((angle / 360) * totalSlices).roundToInt() % totalSlices
-                    setSelectedMood(moods[index])
-                    change.consume()
+            modifier
+                .pointerInput(Unit) {
+                    detectDragGestures(onDragEnd = {
+                        val i = rotation % limitedAngle
+                        val middle = ((i / limitedAngleForSlice).roundToInt()) * limitedAngleForSlice
+                        rotation = middle.toFloat()
+                    }) { change, dragAmount ->
+                        rotation += dragAmount.x * 0.005f
+                        val percent = (rotation - aQuarter) % limitedAngle
+                        val differenceAngle = percent.absoluteValue * 360 / limitedAngle
+                        val angle = if (percent < 0) differenceAngle else 360 - differenceAngle
+                        val index = ((angle / 360) * totalSlices).roundToInt() % totalSlices
+                        setSelectedMood(moods[index])
+                        change.consume()
+                    }
                 }
-            }
     ) {
         drawRouletteWheel(
             limitedAngleForSlice.toFloat(),

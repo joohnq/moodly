@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 class SecurityPreferenceImpl(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) : SecurityPreference {
     companion object {
         private val SECURITY_KEY = stringPreferencesKey("SECURITY")

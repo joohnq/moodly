@@ -26,7 +26,7 @@ fun GiganticSecondaryCard(
     subtitle: String,
     onClick: () -> Unit,
     secondary: @Composable () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Card(
         colors =

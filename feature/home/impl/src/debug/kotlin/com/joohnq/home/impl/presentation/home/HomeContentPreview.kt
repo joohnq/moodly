@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
 import com.joohnq.home.impl.ui.presentation.home.HomeContent
+import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
@@ -25,30 +25,36 @@ fun HomeContentPreview(
     @PreviewParameter(ListStressLevelRecordResourceParameterProvider::class)
     stressLevelRecordResources: List<StressLevelRecordResource>,
     @PreviewParameter(ListSleepQualityRecordResourceParameterProvider::class)
-    sleepQualityRecordResources: List<SleepQualityRecordResource>
+    sleepQualityRecordResources: List<SleepQualityRecordResource>,
 ) {
     HomeContent(
-        state = DashboardContract.State(
-            freudScore = FreudScoreResource.Healthy(80),
-            moodRecords = UiState.Success(
-                moodRecordResources
-            ),
-            stressLevelRecords = UiState.Success(
-                stressLevelRecordResources
-            ),
-            selfJournalRecords = UiState.Success(
-                SelfJournalRecordResource.allSelfJournalRecordResourcePreview
-            ),
-            sleepQualityRecords = UiState.Success(
-                sleepQualityRecordResources
-            ),
-            user = UiState.Success(
-                User(
-                    name = "John Doe",
-                    image = "0",
-                    imageType = ImageType.DRAWABLE
-                )
+        state =
+            DashboardContract.State(
+                freudScore = FreudScoreResource.Healthy(80),
+                moodRecords =
+                    UiState.Success(
+                        moodRecordResources
+                    ),
+                stressLevelRecords =
+                    UiState.Success(
+                        stressLevelRecordResources
+                    ),
+                selfJournalRecords =
+                    UiState.Success(
+                        SelfJournalRecordResource.allSelfJournalRecordResourcePreview
+                    ),
+                sleepQualityRecords =
+                    UiState.Success(
+                        sleepQualityRecordResources
+                    ),
+                user =
+                    UiState.Success(
+                        User(
+                            name = "John Doe",
+                            image = "0",
+                            imageType = ImageType.DRAWABLE
+                        )
+                    )
             )
-        )
     )
 }

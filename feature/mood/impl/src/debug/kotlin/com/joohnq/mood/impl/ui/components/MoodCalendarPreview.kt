@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Preview
 fun MoodCalendarPreview(
     @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
-    list: List<MoodRecordResource>
+    list: List<MoodRecordResource>,
 ) {
     MoodCalendar(
         records = list

@@ -14,7 +14,7 @@ import com.joohnq.shared_resources.theme.Drawables
 fun MoodInsight(
     modifier: Modifier = Modifier,
     records: List<MoodRecordResource>,
-    onCreate: () -> Unit = {}
+    onCreate: () -> Unit = {},
 ) {
     if (records.isEmpty()) {
         NotFoundHorizontalLayout(

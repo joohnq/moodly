@@ -11,7 +11,7 @@ fun JournalCalendar(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
     subtitle: String,
-    onCreate: () -> Unit = {}
+    onCreate: () -> Unit = {},
 ) {
     val recordsInYear = records.getSelfJournalsInYear()
 

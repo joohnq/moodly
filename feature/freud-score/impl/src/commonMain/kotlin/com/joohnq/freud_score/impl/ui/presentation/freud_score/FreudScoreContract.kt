@@ -8,13 +8,15 @@ sealed interface FreudScoreContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class Get(val records: List<MoodRecordResource>) : Intent
+        data class Get(
+            val records: List<MoodRecordResource>,
+        ) : Intent
     }
 
     sealed interface SideEffect
 
     data class State(
-        val freudScore: FreudScoreResource? = null
+        val freudScore: FreudScoreResource? = null,
     )
 
     sealed interface Event {

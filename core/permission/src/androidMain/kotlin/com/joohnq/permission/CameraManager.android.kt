@@ -16,21 +16,22 @@ actual fun rememberCameraManager(onResult: (SharedImage?) -> Unit): CameraManage
     val context = LocalContext.current
     val contentResolver: ContentResolver = context.contentResolver
     var tempPhotoUri by remember { mutableStateOf(value = Uri.EMPTY) }
-    val cameraLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.TakePicture(),
-        onResult = { success ->
-            if (success) {
-                onResult.invoke(
-                    SharedImage(
-                        BitmapUtils.getBitmapFromUri(
-                            tempPhotoUri,
-                            contentResolver
+    val cameraLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.TakePicture(),
+            onResult = { success ->
+                if (success) {
+                    onResult.invoke(
+                        SharedImage(
+                            BitmapUtils.getBitmapFromUri(
+                                tempPhotoUri,
+                                contentResolver
+                            )
                         )
                     )
-                )
+                }
             }
-        }
-    )
+        )
     return remember {
         CameraManager(
             onLaunch = {

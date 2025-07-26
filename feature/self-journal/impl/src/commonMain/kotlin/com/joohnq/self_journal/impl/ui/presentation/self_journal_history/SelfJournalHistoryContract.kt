@@ -9,26 +9,26 @@ interface SelfJournalHistoryContract {
 
     sealed interface Intent {
         data class UpdateSelectedDateTime(
-            val selectedDateTime: LocalDate
+            val selectedDateTime: LocalDate,
         ) : Intent
 
         data class UpdateOpenDeleteDialog(
-            val openDeleteDialog: Boolean
+            val openDeleteDialog: Boolean,
         ) : Intent
 
         data class UpdateCurrentDeleteId(
-            val id: Int
+            val id: Int,
         ) : Intent
 
         data class ResetState(
-            val id: Int
+            val id: Int,
         ) : Intent
     }
 
     data class State(
         val selectedDateTime: LocalDate = getNow().date,
         val openDeleteDialog: Boolean = false,
-        val currentDeleteId: Int = -1
+        val currentDeleteId: Int = -1,
     )
 
     sealed interface SideEffect
@@ -37,7 +37,7 @@ interface SelfJournalHistoryContract {
         data object OnGoBack : Event
 
         data class OnSelectJournalHistory(
-            val id: Int
+            val id: Int,
         ) : Event
 
         data object OnDelete : Event

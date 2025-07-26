@@ -20,9 +20,10 @@ fun UserNameContentPreview() {
 @Composable
 fun UserNameContentWithNamePreview() {
     AuthNameContent(
-        state = AuthNameContract.State(
-            name = "John Doe"
-        ),
+        state =
+            AuthNameContract.State(
+                name = "John Doe"
+            ),
         onEvent = {},
         onClearFocus = {},
         onGetAction = {}
@@ -33,10 +34,11 @@ fun UserNameContentWithNamePreview() {
 @Composable
 fun UserNameContentWithErrorPreview() {
     AuthNameContent(
-        state = AuthNameContract.State(
-            name = "John Doe",
-            nameError = "Some error"
-        ),
+        state =
+            AuthNameContract.State(
+                name = "John Doe",
+                nameError = "Some error"
+            ),
         onEvent = {},
         onClearFocus = {},
         onGetAction = {}

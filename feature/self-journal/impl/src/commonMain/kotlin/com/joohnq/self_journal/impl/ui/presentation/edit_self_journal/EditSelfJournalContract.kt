@@ -18,23 +18,23 @@ sealed interface EditSelfJournalContract {
         data object ClearEditingState : Intent
 
         data class Set(
-            val record: SelfJournalRecord
+            val record: SelfJournalRecord,
         ) : Intent
 
         data class UpdateTitle(
-            val title: String
+            val title: String,
         ) : Intent
 
         data class UpdateDescription(
-            val description: String
+            val description: String,
         ) : Intent
 
         data class UpdateIsEditing(
-            val value: Boolean
+            val value: Boolean,
         ) : Intent
 
         data class UpdateOpenDeleteDialog(
-            val value: Boolean
+            val value: Boolean,
         ) : Intent
     }
 
@@ -44,6 +44,6 @@ sealed interface EditSelfJournalContract {
         val currentSelfJournalRecord: SelfJournalRecord = SelfJournalRecord(),
         val editingSelfJournalRecord: SelfJournalRecord = SelfJournalRecord(),
         val isEditing: Boolean = false,
-        val openDeleteDialog: Boolean = false
+        val openDeleteDialog: Boolean = false,
     )
 }

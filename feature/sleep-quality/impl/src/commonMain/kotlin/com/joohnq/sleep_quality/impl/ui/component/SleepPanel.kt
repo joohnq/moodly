@@ -32,10 +32,11 @@ fun SleepPanel(
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
-    val duration = calculateDuration(
-        start = record?.startSleeping ?: Time(0, 0),
-        end = record?.endSleeping ?: Time(0, 0)
-    )
+    val duration =
+        calculateDuration(
+            start = record?.startSleeping ?: Time(0, 0),
+            end = record?.endSleeping ?: Time(0, 0)
+        )
     val moodResource = record?.sleepQuality?.toMoodResource()
 
     Column(
@@ -49,15 +50,17 @@ fun SleepPanel(
             modifier = Modifier.size(48.dp),
             tint = iconTint
         )
-        if (!hasToday)
+        if (!hasToday) {
             VerticalSpacer(24.dp)
+        }
         Text(
             text = if (hasToday) record.sleepQuality.level.toString() else stringResource(Res.string.not_available),
             style = if (hasToday) TextStyles.displaySmExtraBold() else TextStyles.text2xlBold(),
             color = textColor
         )
-        if (!hasToday)
+        if (!hasToday) {
             VerticalSpacer(10.dp)
+        }
         Text(
             text = stringResource(Res.string.current_sleep_quality),
             style = TextStyles.textLgMedium(),
@@ -65,11 +68,12 @@ fun SleepPanel(
         )
         VerticalSpacer(24.dp)
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = Colors.White, shape = Dimens.Shape.Large)
-                .clip(Dimens.Shape.Large)
-                .paddingAllSmall(),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(color = Colors.White, shape = Dimens.Shape.Large)
+                    .clip(Dimens.Shape.Large)
+                    .paddingAllSmall(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             SleepPanelInfo(

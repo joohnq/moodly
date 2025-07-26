@@ -33,7 +33,7 @@ fun PinInputField(
     focusRequester: FocusRequester,
     onFocusChanged: (Boolean) -> Unit = {},
     onNumberChanged: (Int?) -> Unit = {},
-    onKeyboardBack: () -> Unit = {}
+    onKeyboardBack: () -> Unit = {},
 ) {
     val text by remember(number) {
         mutableStateOf(

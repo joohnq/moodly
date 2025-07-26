@@ -17,19 +17,20 @@ fun DashboardBottomNavigation(
     isCurrentRoute: (Destination) -> Boolean,
     onNavigate: (Destination) -> Unit = {},
     isCentralExpanded: Boolean,
-    toggleIsCentralExpanded: () -> Unit = {}
+    toggleIsCentralExpanded: () -> Unit = {},
 ) {
     val bottomItems = rememberBottomNavigationItems()
 
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(color = Colors.White)
-            .padding(horizontal = 20.dp)
-            .padding(vertical = 10.dp)
-            .padding(bottom = padding.calculateBottomPadding())
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(color = Colors.White)
+                .padding(horizontal = 20.dp)
+                .padding(vertical = 10.dp)
+                .padding(bottom = padding.calculateBottomPadding())
     ) {
         CreateTabItem(
             item = bottomItems[0],

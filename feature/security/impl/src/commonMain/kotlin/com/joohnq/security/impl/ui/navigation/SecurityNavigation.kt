@@ -13,7 +13,7 @@ import com.joohnq.security.impl.ui.presentation.unlock.UnLockScreen
 fun NavGraphBuilder.securityNavigation(
     onGoBack: () -> Unit,
     onNavigate: (Destination) -> Unit,
-    onNavigateGraph: (NavigationGraph, Boolean) -> Unit
+    onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
 ) {
     navigation<NavigationGraph.Security>(startDestination = Destination.Security.Security) {
         composable<Destination.Security.Security> {

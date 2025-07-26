@@ -47,7 +47,7 @@ fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AvatarContract.State,
     avatars: List<DrawableResource> = rememberAvatars(),
-    onEvent: (AvatarContract.Event) -> Unit = {}
+    onEvent: (AvatarContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -55,10 +55,11 @@ fun AvatarContent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(bottom = 20.dp)
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .padding(bottom = 20.dp)
+                    .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -116,11 +117,13 @@ fun AvatarContent(
                             )
                         } else {
                             Box(
-                                modifier = Modifier.size(64.dp)
-                                    .drawDottedBorder(
-                                        color = Colors.Gray40,
-                                        shape = Dimens.Shape.Circle
-                                    ),
+                                modifier =
+                                    Modifier
+                                        .size(64.dp)
+                                        .drawDottedBorder(
+                                            color = Colors.Gray40,
+                                            shape = Dimens.Shape.Circle
+                                        ),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(

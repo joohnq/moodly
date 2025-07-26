@@ -34,7 +34,7 @@ fun SwipeableCardLayout(
     onAction: () -> Unit,
     padding: PaddingValues = PaddingValues(0.dp),
     secondary: @Composable () -> Unit = {},
-    content: @Composable (Modifier) -> Unit
+    content: @Composable (Modifier) -> Unit,
 ) {
     var buttonsWidth by remember { mutableFloatStateOf(0f) }
     val offset = remember { Animatable(initialValue = 0f) }

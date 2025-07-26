@@ -31,32 +31,37 @@ fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
     record: SleepQualityRecordResource,
 ) {
-    val duration = calculateDuration(
-        start = record.startSleeping,
-        end = record.endSleeping
-    )
+    val duration =
+        calculateDuration(
+            start = record.startSleeping,
+            end = record.endSleeping
+        )
     val resource = record.sleepQuality.toMoodResource()
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
-        shape = Dimens.Shape.Medium,
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
+        shape = Dimens.Shape.Medium
     ) {
         Row(
-            modifier = Modifier.fillMaxSize()
-                .paddingAllSmall(),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
-                modifier = Modifier
-                    .background(color = Colors.Brown10, shape = Dimens.Shape.Medium)
-                    .padding(horizontal = 15.dp, vertical = 12.dp),
+                modifier =
+                    Modifier
+                        .background(color = Colors.Brown10, shape = Dimens.Shape.Medium)
+                        .padding(horizontal = 15.dp, vertical = 12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -85,9 +90,10 @@ fun SleepQualityHistoryCard(
                         color = Colors.Brown80
                     )
                     Row(
-                        modifier = Modifier
-                            .background(color = resource.palette.color, shape = Dimens.Shape.Circle)
-                            .padding(horizontal = 7.dp, vertical = 4.dp),
+                        modifier =
+                            Modifier
+                                .background(color = resource.palette.color, shape = Dimens.Shape.Circle)
+                                .padding(horizontal = 7.dp, vertical = 4.dp),
                         horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         MoodFace(
@@ -105,10 +111,11 @@ fun SleepQualityHistoryCard(
                 }
                 Text(
                     text =
-                        if (record.sleepInfluences.isNotEmpty())
+                        if (record.sleepInfluences.isNotEmpty()) {
                             record.sleepInfluences.joinToString(", ")
-                        else
-                            stringResource(Res.string.no_sleep_influences),
+                        } else {
+                            stringResource(Res.string.no_sleep_influences)
+                        },
                     style = TextStyles.textSmMedium(),
                     color = Colors.Brown80,
                     overflow = TextOverflow.Ellipsis

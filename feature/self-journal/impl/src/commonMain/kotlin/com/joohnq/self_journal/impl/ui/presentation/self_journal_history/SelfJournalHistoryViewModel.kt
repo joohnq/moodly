@@ -3,7 +3,7 @@ package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
 import com.joohnq.ui.BaseViewModel
 
 class SelfJournalHistoryViewModel(
-    initialState: SelfJournalHistoryContract.State = SelfJournalHistoryContract.State()
+    initialState: SelfJournalHistoryContract.State = SelfJournalHistoryContract.State(),
 ) : BaseViewModel<SelfJournalHistoryContract.State, SelfJournalHistoryContract.Intent, SelfJournalHistoryContract.SideEffect>(
         initialState = initialState
     ),

@@ -8,7 +8,7 @@ import com.joohnq.ui.mapper.toByteArray
 
 class UpdateUserImageBitmapUseCase(
     private val fileStorage: FileStorage,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 ) {
     suspend operator fun invoke(image: ImageBitmap): Result<Boolean> {
         val value =

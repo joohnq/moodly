@@ -6,8 +6,14 @@ sealed interface AuthNameContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class Update(val name: String) : Intent
-        data class UpdateError(val error: String?) : Intent
+        data class Update(
+            val name: String,
+        ) : Intent
+
+        data class UpdateError(
+            val error: String?,
+        ) : Intent
+
         data object ResetState : Intent
     }
 
@@ -15,7 +21,7 @@ sealed interface AuthNameContract {
 
     data class State(
         val name: String = "",
-        val nameError: String? = null
+        val nameError: String? = null,
     )
 
     sealed interface Event {

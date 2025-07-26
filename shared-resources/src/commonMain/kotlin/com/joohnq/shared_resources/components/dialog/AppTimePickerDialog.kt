@@ -25,7 +25,7 @@ fun AppTimePickerDialog(
     title: StringResource,
     onDismiss: () -> Unit = {},
     onConfirm: () -> Unit = {},
-    content: @Composable () -> Unit = {}
+    content: @Composable () -> Unit = {},
 ) {
     Dialog(
         onDismissRequest = onDismiss,

@@ -37,7 +37,7 @@ import com.joohnq.shared_resources.theme.TextStyles
 @Composable
 fun MoodBarStatistic(
     records: List<MoodRecordResource>,
-    height: Dp = 250.dp
+    height: Dp = 250.dp,
 ) {
     val current = records.last()
     val proportion = height / 100
@@ -71,9 +71,9 @@ fun MoodBarStatistic(
                     repeat(5) {
                         Box(
                             modifier =
-                            Modifier.fillMaxWidth().height(height / 5).dashedLine(
-                                color = Colors.Brown20
-                            )
+                                Modifier.fillMaxWidth().height(height / 5).dashedLine(
+                                    color = Colors.Brown20
+                                )
                         )
                     }
                 }
@@ -103,16 +103,16 @@ fun MoodBarStatistic(
                 ) {
                     Card(
                         modifier =
-                        Modifier
-                            .width(boxWidth)
-                            .height(boxHeight),
+                            Modifier
+                                .width(boxWidth)
+                                .height(boxHeight),
                         colors =
-                        CardColors(
-                            containerColor = barFaceColor,
-                            disabledContainerColor = barFaceColor,
-                            contentColor = barFaceColor,
-                            disabledContentColor = barFaceColor
-                        ),
+                            CardColors(
+                                containerColor = barFaceColor,
+                                disabledContainerColor = barFaceColor,
+                                contentColor = barFaceColor,
+                                disabledContentColor = barFaceColor
+                            ),
                         shape = RoundedCornerShape(topEnd = 100.dp, topStart = 100.dp)
                     ) {
                         Column(

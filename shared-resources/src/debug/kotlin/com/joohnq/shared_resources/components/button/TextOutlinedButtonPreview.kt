@@ -17,7 +17,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun TextOutlinedButtonPreview(
     @PreviewParameter(BooleanParameterProvider::class)
-    boolean: Boolean
+    boolean: Boolean,
 ) {
     TextOutlinedButton(
         enabled = boolean,
@@ -31,7 +31,7 @@ fun TextOutlinedButtonPreview(
 @Composable
 fun TextOutlinedButtonPreview(
     @PreviewParameter(ButtonColorsParameterProvider::class)
-    colors: ButtonColors
+    colors: ButtonColors,
 ) {
     TextOutlinedButton(
         text = Res.string.app_name,
@@ -44,7 +44,7 @@ fun TextOutlinedButtonPreview(
 @Composable
 fun TextOutlinedButtonPreview(
     @PreviewParameter(ShapeParameterProvider::class)
-    shape: Shape
+    shape: Shape,
 ) {
     TextOutlinedButton(
         text = Res.string.app_name,

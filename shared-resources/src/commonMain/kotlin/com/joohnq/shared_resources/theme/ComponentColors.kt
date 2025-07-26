@@ -128,7 +128,7 @@ object ComponentColors {
 
         fun textRadioButtonColors(
             selected: Boolean,
-            colors: TextRadioButtonColors
+            colors: TextRadioButtonColors,
         ): ButtonColors =
             ButtonColors(
                 containerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
@@ -174,7 +174,7 @@ object ComponentColors {
             placeholderColor: Color,
             supportingTextColor: Color = Color.Unspecified,
             prefixColor: Color = Color.Unspecified,
-            suffixColor: Color = Color.Unspecified
+            suffixColor: Color = Color.Unspecified,
         ): TextFieldColors =
             TextFieldColors(
                 focusedIndicatorColor = indicatorColor,
@@ -240,7 +240,7 @@ object ComponentColors {
             prefixColor: Color = Color.Unspecified,
             focusedBorderColor: Color = Color.Unspecified,
             unfocusedBorderColor: Color = Color.Unspecified,
-            errorBorderColor: Color = Color.Unspecified
+            errorBorderColor: Color = Color.Unspecified,
         ): TextFieldColors =
             OutlinedTextFieldDefaults.colors(
                 unfocusedTextColor = textColor,

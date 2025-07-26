@@ -17,11 +17,11 @@ sealed interface AddStressLevelContract {
 
     sealed interface Intent {
         data class UpdateAddingStressors(
-            val stressor: StressorResource
+            val stressor: StressorResource,
         ) : Intent
 
         data class UpdateAddingSliderValue(
-            val sliderValue: Float
+            val sliderValue: Float,
         ) : Intent
 
         data object ResetState : Intent
@@ -31,6 +31,6 @@ sealed interface AddStressLevelContract {
 
     data class State(
         val record: StressLevelRecordResource = StressLevelRecordResource(),
-        val sliderValue: Float = 0f
+        val sliderValue: Float = 0f,
     )
 }

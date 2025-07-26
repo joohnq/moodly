@@ -22,25 +22,27 @@ fun SleepPanelInfo(
     modifier: Modifier = Modifier,
     icon: DrawableResource,
     title: StringResource,
-    value: String
+    value: String,
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(
-            8.dp,
-            alignment = Alignment.Start
-        ),
+        horizontalArrangement =
+            Arrangement.spacedBy(
+                8.dp,
+                alignment = Alignment.Start
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier
-                .size(48.dp)
-                .clip(Dimens.Shape.Circle)
-                .border(
-                    width = 2.dp,
-                    color = Colors.Gray80,
-                    shape = Dimens.Shape.Circle
-                ),
+            modifier =
+                Modifier
+                    .size(48.dp)
+                    .clip(Dimens.Shape.Circle)
+                    .border(
+                        width = 2.dp,
+                        color = Colors.Gray80,
+                        shape = Dimens.Shape.Circle
+                    ),
             contentAlignment = Alignment.Center
         ) {
             Icon(

@@ -6,11 +6,12 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val authUiModule: Module = module {
-    viewModel<AvatarViewModel> {
-        AvatarViewModel()
+val authUiModule: Module =
+    module {
+        viewModel<AvatarViewModel> {
+            AvatarViewModel()
+        }
+        viewModel<AuthNameViewModel> {
+            AuthNameViewModel()
+        }
     }
-    viewModel<AuthNameViewModel> {
-        AuthNameViewModel()
-    }
-}

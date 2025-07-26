@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalPanel(
     modifier: Modifier = Modifier,
     count: Int,
-    records: List<SelfJournalRecordResource>
+    records: List<SelfJournalRecordResource>,
 ) {
     val totalWords = records.sumOf { it.description.toWordCount() }
     val positive = records.filter { it.mood == Mood.Happy || it.mood == Mood.Overjoyed }.size

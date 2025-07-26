@@ -24,7 +24,7 @@ fun SplashScreen(
     onNavigateToSecurity: () -> Unit,
     onNavigateToDashboard: () -> Unit,
     onNavigateToUnLock: () -> Unit,
-    onNavigateToCorruptedSecurity: () -> Unit
+    onNavigateToCorruptedSecurity: () -> Unit,
 ) {
     val securityViewModel: SecurityViewModel = sharedViewModel()
     val userViewModel: UserViewModel = sharedViewModel()

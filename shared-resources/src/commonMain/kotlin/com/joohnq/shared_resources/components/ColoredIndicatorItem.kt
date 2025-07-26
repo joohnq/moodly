@@ -19,7 +19,7 @@ fun ColoredIndicatorItem(
     title: String,
     description: String,
     color: Color,
-    isNotLast: Boolean
+    isNotLast: Boolean,
 ) {
     Column {
         Row(

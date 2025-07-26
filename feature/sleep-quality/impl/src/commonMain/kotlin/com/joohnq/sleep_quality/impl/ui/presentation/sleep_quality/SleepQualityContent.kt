@@ -29,7 +29,7 @@ fun SleepQualityContent(
                 panel = { modifier ->
                     SleepPanel(
                         modifier = modifier,
-                        record = record,
+                        record = record
                     )
                 },
                 onAddButton = { onEvent(SleepQualityContract.Event.OnNavigateToAddSleepQuality) },

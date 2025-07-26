@@ -23,7 +23,7 @@ fun AppTopBar(
     isDark: Boolean = true,
     text: StringResource? = null,
     onGoBack: () -> Unit = {},
-    content: (@Composable () -> Unit)? = null
+    content: (@Composable () -> Unit)? = null,
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,

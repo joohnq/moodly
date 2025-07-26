@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.StringResource
 sealed class PhysicalSymptomsResource(
     val id: Int,
     val text: StringResource,
-    val icon: IconResource
+    val icon: IconResource,
 ) {
     data object YesVeryPainful : PhysicalSymptomsResource(
         id = YES_VERY_PAINFUL.id,

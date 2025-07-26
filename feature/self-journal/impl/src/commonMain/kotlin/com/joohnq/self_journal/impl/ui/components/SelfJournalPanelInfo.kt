@@ -29,7 +29,7 @@ fun SelfJournalPanelInfo(
     value: String,
     title: StringResource,
     color: Color,
-    icon: DrawableResource
+    icon: DrawableResource,
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Box(

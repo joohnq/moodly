@@ -1,5 +1,6 @@
 [*.{kt, kts}]
 ktlint_code_style = ktlint_official
+ktlint_standard_no-wildcard-imports = disabled
 insert_final_newline = true
 ij_kotlin_keep_trailing_comma_on_call_site = true
 ij_kotlin_allow_trailing_comma = false
@@ -36,7 +37,6 @@ ktlint_standard_no-line-break-before-assignment = enabled
 ktlint_standard_no-multi-spaces = enabled
 ktlint_standard_no-unit-return = enabled
 ktlint_standard_no-unused-imports = enabled
-ktlint_standard_no-wildcard-imports = disabled
 ktlint_standard_spacing-around-angle-brackets = enabled
 ktlint_standard_annotation-spacing = enabled
 ktlint_standard_spacing-between-declarations-with-annotations = enabled
@@ -83,3 +83,14 @@ ktlint_compose_modifier-reorder-priority = size,layout,padding,appearance,behavi
 ktlint_compose_parameter-order-modifier = first
 ktlint_standard_parameter-order = enabled
 ktlint_compose_parameter-order-lambda-last = enabled
+insert_final_newline = true
+ij_kotlin_allow_trailing_comma = true
+
+[*.{gradle,gradle.kts}]
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.gradle.kts]
+ktlint_code_style = ktlint_official
+ktlint_standard_indent = enabled

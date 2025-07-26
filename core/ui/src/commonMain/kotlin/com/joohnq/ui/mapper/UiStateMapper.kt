@@ -27,9 +27,7 @@ fun List<UiState<*>>.foldComposable(
     }
 }
 
-fun List<UiState<*>>.allSuccess(
-    block: () -> Unit,
-): List<UiState<*>> {
+fun List<UiState<*>>.allSuccess(block: () -> Unit): List<UiState<*>> {
     if (all { it is UiState.Success }) {
         block()
     }
@@ -38,15 +36,12 @@ fun List<UiState<*>>.allSuccess(
 
 fun List<UiState<*>>.allSuccess(): Boolean = all { it is UiState.Success }
 
-fun List<UiState<*>>.anyError(
-    block: (String) -> Unit,
-): List<UiState<*>> {
+fun List<UiState<*>>.anyError(block: (String) -> Unit): List<UiState<*>> {
     filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
         block(errorState.error)
         return@let
     }
     return this
-
 }
 
 @Composable
@@ -74,27 +69,25 @@ fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =
         else -> emptyList()
     }
 
-inline fun <T> UiState<T>.onSuccess(
-    block: (T) -> Unit = {},
-): UiState<T> = when (this) {
-    is UiState.Success -> {
-        block(this.data)
-        this
+inline fun <T> UiState<T>.onSuccess(block: (T) -> Unit = {}): UiState<T> =
+    when (this) {
+        is UiState.Success -> {
+            block(this.data)
+            this
+        }
+
+        else -> this
     }
 
-    else -> this
-}
+inline fun <T> UiState<T>.onFailure(block: (String) -> Unit = {}): UiState<T> =
+    when (this) {
+        is UiState.Error -> {
+            block(this.error)
+            this
+        }
 
-inline fun <T> UiState<T>.onFailure(
-    block: (String) -> Unit = {},
-): UiState<T> = when (this) {
-    is UiState.Error -> {
-        block(this.error)
-        this
+        else -> this
     }
-
-    else -> this
-}
 
 fun <R1, R2> List<UiState<*>>.fold(
     onLoading: () -> Unit = {},
@@ -130,7 +123,6 @@ fun <R1, R2> List<UiState<*>>.foldComposable(
         onLoading()
     }
 }
-
 
 @Composable
 fun <R1, R2, R3, R4, R5> List<UiState<*>>.foldComposable(

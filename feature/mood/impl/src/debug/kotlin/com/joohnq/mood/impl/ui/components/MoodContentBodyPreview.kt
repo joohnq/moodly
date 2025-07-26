@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MoodContentBodyPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
-    item: MoodRecordResource
+    item: MoodRecordResource,
 ) {
     MoodContentBody(
         records = listOf(item)

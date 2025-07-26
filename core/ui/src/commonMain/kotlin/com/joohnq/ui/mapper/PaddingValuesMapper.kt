@@ -13,7 +13,7 @@ fun PaddingValues.copy(
     top: Dp? = null,
     start: Dp? = null,
     end: Dp? = null,
-    bottom: Dp? = null
+    bottom: Dp? = null,
 ): PaddingValues {
     val layoutDirection = LocalLayoutDirection.current
     return PaddingValues(
@@ -29,7 +29,7 @@ fun PaddingValues.plus(
     top: Dp = 0.dp,
     start: Dp = 0.dp,
     end: Dp = 0.dp,
-    bottom: Dp = 0.dp
+    bottom: Dp = 0.dp,
 ): PaddingValues {
     val layoutDirection = LocalLayoutDirection.current
     return PaddingValues(

@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 fun SecurityScreen(
     onNavigateToSecurityConfirmed: () -> Unit,
     onNavigateToDashboard: () -> Unit,
-    onNavigatePIN: () -> Unit
+    onNavigatePIN: () -> Unit,
 ) {
     val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()

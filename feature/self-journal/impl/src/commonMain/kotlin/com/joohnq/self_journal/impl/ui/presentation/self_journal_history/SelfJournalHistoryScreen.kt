@@ -10,7 +10,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun SelfJournalHistoryScreen(
     onNavigateEditJournaling: (Int) -> Unit,
-    onGoBack: () -> Unit
+    onGoBack: () -> Unit,
 ) {
     val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
     val selfJournalState by selfJournalViewModel.state.collectAsState()

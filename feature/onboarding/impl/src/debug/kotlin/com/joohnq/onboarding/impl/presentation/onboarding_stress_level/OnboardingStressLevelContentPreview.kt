@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun OnboardingSleepQualityContentPreview(
     @PreviewParameter(StressLevelRecordResourceParameterProvider::class)
-    item: StressLevelRecordResource
+    item: StressLevelRecordResource,
 ) {
     OnboardingStressLevelContent(
         state = item

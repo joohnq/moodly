@@ -17,7 +17,7 @@ interface UserRepository {
 
     suspend fun updateUserImage(
         image: String,
-        imageType: ImageType
+        imageType: ImageType,
     ): Result<Boolean>
 
     suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean>

@@ -4,29 +4,30 @@ import com.joohnq.api.mapper.toggle
 import com.joohnq.mood.impl.ui.mapper.toSleepQuality
 import com.joohnq.sleep_quality.impl.ui.mapper.toResource
 import com.joohnq.ui.BaseViewModel
-import kotlinx.coroutines.flow.update
 
 class AddSleepQualityViewModel(
     initialState: AddSleepQualityContract.State = AddSleepQualityContract.State(),
 ) : BaseViewModel<AddSleepQualityContract.State, AddSleepQualityContract.Intent, AddSleepQualityContract.SideEffect>(
-    initialState = initialState
-), AddSleepQualityContract.ViewModel {
-
+        initialState = initialState
+    ),
+    AddSleepQualityContract.ViewModel {
     override fun onIntent(intent: AddSleepQualityContract.Intent) {
         when (intent) {
             is AddSleepQualityContract.Intent.UpdateMood ->
                 updateState {
                     it.copy(
-                        record = it.record.copy(
-                            sleepQuality = intent.mood.toSleepQuality().toResource()
-                        ),
+                        record =
+                            it.record.copy(
+                                sleepQuality = intent.mood.toSleepQuality().toResource()
+                            )
                     )
                 }
 
             is AddSleepQualityContract.Intent.UpdateSelectedSleepInfluence ->
                 updateState {
                     val influences =
-                        state.value.record.sleepInfluences.toggle(intent.sleepInfluence)
+                        state.value.record.sleepInfluences
+                            .toggle(intent.sleepInfluence)
                     it.copy(
                         record = it.record.copy(sleepInfluences = influences)
                     )
@@ -41,24 +42,28 @@ class AddSleepQualityViewModel(
             is AddSleepQualityContract.Intent.UpdateStartTime ->
                 updateState {
                     it.copy(
-                        record = it.record.copy(
-                            startSleeping = it.record.startSleeping.copy(
-                                intent.hour,
-                                intent.minute
+                        record =
+                            it.record.copy(
+                                startSleeping =
+                                    it.record.startSleeping.copy(
+                                        intent.hour,
+                                        intent.minute
+                                    )
                             )
-                        ),
                     )
                 }
 
             is AddSleepQualityContract.Intent.UpdateEndTime ->
                 updateState {
                     it.copy(
-                        record = it.record.copy(
-                            endSleeping = it.record.endSleeping.copy(
-                                intent.hour,
-                                intent.minute
+                        record =
+                            it.record.copy(
+                                endSleeping =
+                                    it.record.endSleeping.copy(
+                                        intent.hour,
+                                        intent.minute
+                                    )
                             )
-                        ),
                     )
                 }
 

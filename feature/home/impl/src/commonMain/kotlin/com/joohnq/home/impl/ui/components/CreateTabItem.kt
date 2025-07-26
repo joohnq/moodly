@@ -8,7 +8,7 @@ import com.joohnq.ui.entity.BottomItem
 fun <T : Destination> CreateTabItem(
     item: BottomItem<T>,
     isCurrentRoute: (Destination) -> Boolean,
-    onNavigate: (Destination) -> Unit
+    onNavigate: (Destination) -> Unit,
 ) = TabItem(
     icon = item.icon,
     selected = isCurrentRoute(item.route),

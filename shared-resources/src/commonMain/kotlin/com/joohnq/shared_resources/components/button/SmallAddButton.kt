@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SmallAddButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     FilledIconButton(
         onClick = onClick,

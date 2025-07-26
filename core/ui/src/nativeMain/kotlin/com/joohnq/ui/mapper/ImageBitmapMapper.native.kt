@@ -7,12 +7,11 @@ import org.jetbrains.skia.Image
 
 actual typealias ImageFormat = EncodedImageFormat
 
-actual fun ImageBitmap.toByteArray(
-    format: ImageFormat,
-): ByteArray {
-    val data = Image
-        .makeFromBitmap(asSkiaBitmap())
-        .encodeToData(format) ?: error("This painter cannot be encoded to $format")
+actual fun ImageBitmap.toByteArray(format: ImageFormat): ByteArray {
+    val data =
+        Image
+            .makeFromBitmap(asSkiaBitmap())
+            .encodeToData(format) ?: error("This painter cannot be encoded to $format")
 
     return data.bytes
 }

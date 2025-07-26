@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun SleepHistoryPreview() {
     SleepHistory(
-        records = SleepQualityRecordResource.allSleepQualityRecordResource,
+        records = SleepQualityRecordResource.allSleepQualityRecordResource
     )
 }
 
@@ -16,6 +16,6 @@ fun SleepHistoryPreview() {
 @Composable
 fun SleepHistoryEmptyPreview() {
     SleepHistory(
-        records = listOf(),
+        records = listOf()
     )
 }

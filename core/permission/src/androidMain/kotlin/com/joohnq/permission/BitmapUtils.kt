@@ -7,7 +7,10 @@ import android.net.Uri
 import java.io.InputStream
 
 object BitmapUtils {
-    fun getBitmapFromUri(uri: Uri, contentResolver: ContentResolver): Bitmap? {
+    fun getBitmapFromUri(
+        uri: Uri,
+        contentResolver: ContentResolver,
+    ): Bitmap? {
         var inputStream: InputStream?
         try {
             inputStream = contentResolver.openInputStream(uri)

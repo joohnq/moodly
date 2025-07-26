@@ -13,14 +13,14 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MoodDayPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
-    item: MoodRecordResource
+    item: MoodRecordResource,
 ) {
     MoodDay(
         record = item,
         day =
-        CalendarDay(
-            date = LocalDate(2023, 1, 1),
-            position = DayPosition.MonthDate
-        )
+            CalendarDay(
+                date = LocalDate(2023, 1, 1),
+                position = DayPosition.MonthDate
+            )
     )
 }

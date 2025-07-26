@@ -60,16 +60,18 @@ fun AddSleepQualityContent(
 ) {
     val moods = remember { getAllMoodResource() }
     val sleepInfluences = remember { getAllSleepInfluencesResource() }
-    val startTimePickerState = rememberTimePickerState(
-        initialHour = state.record.startSleeping.hour,
-        initialMinute = state.record.startSleeping.minute,
-        is24Hour = true,
-    )
-    val endTimePickerState = rememberTimePickerState(
-        initialHour = state.record.endSleeping.hour,
-        initialMinute = state.record.endSleeping.minute,
-        is24Hour = true,
-    )
+    val startTimePickerState =
+        rememberTimePickerState(
+            initialHour = state.record.startSleeping.hour,
+            initialMinute = state.record.startSleeping.minute,
+            is24Hour = true
+        )
+    val endTimePickerState =
+        rememberTimePickerState(
+            initialHour = state.record.endSleeping.hour,
+            initialMinute = state.record.endSleeping.minute,
+            is24Hour = true
+        )
 
     if (state.showStartTimePickerDialog) {
         AppTimePickerDialog(
@@ -89,7 +91,7 @@ fun AddSleepQualityContent(
                         startTimePickerState.minute
                     )
                 )
-            },
+            }
         ) {
             AppTimePicker(startTimePickerState)
         }
@@ -109,7 +111,7 @@ fun AddSleepQualityContent(
                         endTimePickerState.minute
                     )
                 )
-            },
+            }
         ) {
             AppTimePicker(endTimePickerState)
         }
@@ -121,8 +123,9 @@ fun AddSleepQualityContent(
         snackBarHostState = snackBarState
     ) { padding ->
         Column(
-            Modifier.fillMaxSize()
-                .padding(padding),
+            Modifier
+                .fillMaxSize()
+                .padding(padding)
         ) {
             Box(modifier = Modifier.paddingHorizontalMedium()) {
                 AppTopBar(onGoBack = { onEvent(AddSleepQualityContract.Event.OnGoBack) })
@@ -202,9 +205,10 @@ fun AddSleepQualityContent(
                 items(sleepInfluences) { sleepInfluences ->
                     TextRadioButton(
                         text = sleepInfluences.title,
-                        selected = state.record.sleepInfluences.contains(
-                            sleepInfluences
-                        ),
+                        selected =
+                            state.record.sleepInfluences.contains(
+                                sleepInfluences
+                            ),
                         colors = ComponentColors.RadioButton.textRadioButtonColors(),
                         shape = Dimens.Shape.Circle,
                         onClick = {

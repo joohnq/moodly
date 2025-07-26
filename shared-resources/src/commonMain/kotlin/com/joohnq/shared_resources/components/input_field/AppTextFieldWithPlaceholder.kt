@@ -39,7 +39,7 @@ fun AppTextFieldWithPlaceholder(
     focusedBorderColor: Color,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    onValueChange: (String) -> Unit = {}
+    onValueChange: (String) -> Unit = {},
 ) {
     val isError = errorText != null
     val focusRequester = FocusRequester()

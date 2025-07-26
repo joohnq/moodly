@@ -13,11 +13,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun TabItemPreview() {
     TabItem(
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Home,
-            tint = Colors.Brown80,
-            contentDescription = Res.string.home
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Home,
+                tint = Colors.Brown80,
+                contentDescription = Res.string.home
+            ),
         selected = true
     )
 }

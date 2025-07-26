@@ -25,7 +25,7 @@ fun TextRadioButton(
     colors: TextRadioButtonColors,
     shape: Shape,
     paddingValues: PaddingValues = ButtonDefaults.ContentPadding,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Button(
         modifier = modifier.fillMaxWidth().height(56.dp),

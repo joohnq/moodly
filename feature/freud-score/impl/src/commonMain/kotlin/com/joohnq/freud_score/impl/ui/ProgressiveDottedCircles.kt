@@ -17,67 +17,67 @@ import com.joohnq.shared_resources.theme.Dimens
 fun ProgressiveDottedCircles(
     modifier: Modifier = Modifier,
     color: Color,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     val shape = Dimens.Shape.Circle
     Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f)
-            .padding(16.dp)
-            .drawBehind {
-                drawDottedCircleBorder(
-                    color = color.copy(alpha = 0.3f),
-                    radius = size.minDimension / 2 - 10,
-                    dotRadius = 13f,
-                    numberOfDots = 40
-                )
-            }
-            .clip(shape)
-    ) {
-        Box(
-            modifier = Modifier
+        modifier =
+            modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .padding(20.dp)
+                .padding(16.dp)
                 .drawBehind {
                     drawDottedCircleBorder(
-                        color = color.copy(alpha = 0.6f),
+                        color = color.copy(alpha = 0.3f),
                         radius = size.minDimension / 2 - 10,
-                        dotRadius = 10f,
+                        dotRadius = 13f,
                         numberOfDots = 40
                     )
-                }
-                .clip(shape)
-        ) {
-            Box(
-                modifier = Modifier
+                }.clip(shape)
+    ) {
+        Box(
+            modifier =
+                Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .padding(20.dp)
                     .drawBehind {
                         drawDottedCircleBorder(
-                            color = color,
+                            color = color.copy(alpha = 0.6f),
                             radius = size.minDimension / 2 - 10,
-                            dotRadius = 7f,
+                            dotRadius = 10f,
                             numberOfDots = 40
                         )
-                    }
-                    .clip(shape)
-            ) {
-                Box(
-                    modifier = Modifier
+                    }.clip(shape)
+        ) {
+            Box(
+                modifier =
+                    Modifier
                         .fillMaxWidth()
                         .aspectRatio(1f)
                         .padding(20.dp)
-                        .background(color = Color.White, shape = shape)
                         .drawBehind {
-                            drawFadedBorder(
+                            drawDottedCircleBorder(
                                 color = color,
-                                borderWidth = 10f
+                                radius = size.minDimension / 2 - 10,
+                                dotRadius = 7f,
+                                numberOfDots = 40
                             )
-                        }
-                        .clip(shape),
+                        }.clip(shape)
+            ) {
+                Box(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .padding(20.dp)
+                            .background(color = Color.White, shape = shape)
+                            .drawBehind {
+                                drawFadedBorder(
+                                    color = color,
+                                    borderWidth = 10f
+                                )
+                            }.clip(shape),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {

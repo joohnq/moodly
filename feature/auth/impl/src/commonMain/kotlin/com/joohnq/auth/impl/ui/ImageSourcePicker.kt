@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 fun ImageSourcePicker(
     onDismissRequest: () -> Unit = {},
     onGalleryRequest: () -> Unit = {},
-    onCameraRequest: () -> Unit = {}
+    onCameraRequest: () -> Unit = {},
 ) {
     val sheetState = rememberModalBottomSheetState()
 
@@ -44,8 +44,10 @@ fun ImageSourcePicker(
         sheetState = sheetState
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
-                .padding(20.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -62,12 +64,13 @@ fun ImageSourcePicker(
                 TextAndIconButton(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.camera,
-                    icon = IconResource(
-                        icon = Drawables.Icons.Outlined.Camera,
-                        tint = Colors.White,
-                        modifier = Modifier.size(32.dp),
-                        contentDescription = Res.string.camera
-                    ),
+                    icon =
+                        IconResource(
+                            icon = Drawables.Icons.Outlined.Camera,
+                            tint = Colors.White,
+                            modifier = Modifier.size(32.dp),
+                            contentDescription = Res.string.camera
+                        ),
                     colors = ComponentColors.Button.mainButtonColors(),
                     shape = Dimens.Shape.Circle,
                     onClick = { onCameraRequest() }
@@ -75,12 +78,13 @@ fun ImageSourcePicker(
                 TextAndIconButton(
                     modifier = Modifier.weight(1f).height(60.dp),
                     text = Res.string.gallery,
-                    icon = IconResource(
-                        icon = Drawables.Icons.Outlined.Gallery,
-                        tint = Colors.White,
-                        modifier = Modifier.size(32.dp),
-                        contentDescription = Res.string.gallery
-                    ),
+                    icon =
+                        IconResource(
+                            icon = Drawables.Icons.Outlined.Gallery,
+                            tint = Colors.White,
+                            modifier = Modifier.size(32.dp),
+                            contentDescription = Res.string.gallery
+                        ),
                     colors = ComponentColors.Button.mainButtonColors(),
                     shape = Dimens.Shape.Circle,
                     onClick = { onGalleryRequest() }

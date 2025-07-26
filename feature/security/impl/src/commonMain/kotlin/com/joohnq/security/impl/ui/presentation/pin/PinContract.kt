@@ -16,11 +16,11 @@ sealed interface PinContract {
     sealed interface Intent {
         data class OnEnterNumber(
             val number: Int?,
-            val index: Int
+            val index: Int,
         ) : Intent
 
         data class OnChangeFieldFocused(
-            val index: Int
+            val index: Int,
         ) : Intent
 
         data object OnKeyboardBack : Intent
@@ -30,6 +30,6 @@ sealed interface PinContract {
 
     data class State(
         val code: List<Int?> = (1..4).map { null },
-        val focusedIndex: Int? = null
+        val focusedIndex: Int? = null,
     )
 }

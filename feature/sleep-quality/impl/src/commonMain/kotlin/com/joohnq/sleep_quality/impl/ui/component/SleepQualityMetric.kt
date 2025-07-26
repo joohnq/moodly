@@ -30,7 +30,7 @@ fun SleepQualityMetric(
 ) {
     val record = records.getTodaySleepQualityRecord()
 
-    if (record == null)
+    if (record == null) {
         NotFoundVerticalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -39,11 +39,12 @@ fun SleepQualityMetric(
             subtitle = Res.string.set_up_sleep,
             onClick = onCreate
         )
-    else {
-        val duration = calculateDuration(
-            start = record.startSleeping,
-            end = record.endSleeping
-        )
+    } else {
+        val duration =
+            calculateDuration(
+                start = record.startSleeping,
+                end = record.endSleeping
+            )
         val durationString = duration.toHoursAndMinutesString()
 
         GiganticSecondaryCard(

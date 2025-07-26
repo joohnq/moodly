@@ -25,7 +25,7 @@ class UserViewModel(
     private val updateUserNameUseCase: UpdateUserNameUseCase,
     private val updateUserImageBitmapUseCase: UpdateUserImageBitmapUseCase,
     private val updateUserImageDrawableUseCase: UpdateUserImageDrawableUseCase,
-    initialState: UserContract.State = UserContract.State()
+    initialState: UserContract.State = UserContract.State(),
 ) : BaseViewModel<UserContract.State, UserContract.Intent, UserContract.SideEffect>(
         initialState = initialState
     ),

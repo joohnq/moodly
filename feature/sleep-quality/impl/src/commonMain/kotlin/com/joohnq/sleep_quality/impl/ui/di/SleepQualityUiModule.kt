@@ -5,15 +5,16 @@ import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityV
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val sleepQualityUiModule: Module = module {
-    single<SleepQualityViewModel> {
-        SleepQualityViewModel(
-            addSleepQualityUseCase = get(),
-            getSleepQualitiesUseCase = get(),
-            deleteSleepQualityUseCase = get(),
-        )
+val sleepQualityUiModule: Module =
+    module {
+        single<SleepQualityViewModel> {
+            SleepQualityViewModel(
+                addSleepQualityUseCase = get(),
+                getSleepQualitiesUseCase = get(),
+                deleteSleepQualityUseCase = get()
+            )
+        }
+        single<AddSleepQualityViewModel> {
+            AddSleepQualityViewModel()
+        }
     }
-    single<AddSleepQualityViewModel> {
-        AddSleepQualityViewModel()
-    }
-}

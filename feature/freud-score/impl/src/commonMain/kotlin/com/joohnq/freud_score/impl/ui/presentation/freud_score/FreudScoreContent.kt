@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FreudScoreContent(
     state: FreudScoreContract.State,
-    onEvent: (FreudScoreContract.Event) -> Unit = {}
+    onEvent: (FreudScoreContract.Event) -> Unit = {},
 ) {
     if (state.freudScore == null) return
     val resources = remember { getAllFreudScoreResources(state.freudScore.score) }
@@ -77,11 +77,12 @@ fun FreudScoreContent(
                 resources.forEachIndexed { i, resource ->
                     ColoredIndicatorItem(
                         color = resource.palette.backgroundColor,
-                        title = stringResource(
-                            Res.string.hyphen,
-                            i.toEndFreudScore(),
-                            i.toInitialFreudScore()
-                        ),
+                        title =
+                            stringResource(
+                                Res.string.hyphen,
+                                i.toEndFreudScore(),
+                                i.toInitialFreudScore()
+                            ),
                         description = stringResource(resource.title),
                         isNotLast = i < resources.lastIndex
                     )

@@ -9,7 +9,7 @@ import com.joohnq.stress_level.api.repository.StressLevelRepository
 import com.joohnq.stress_level.database.StressLevelDatabaseSql
 
 class StressLevelRepositoryImpl(
-    private val database: StressLevelDatabaseSql
+    private val database: StressLevelDatabaseSql,
 ) : StressLevelRepository {
     private val query = database.stressLevelRecordQueries
 

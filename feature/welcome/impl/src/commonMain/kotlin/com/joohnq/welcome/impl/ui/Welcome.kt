@@ -12,5 +12,5 @@ data class Welcome(
     val firstTitle: StringResource? = null,
     val span: StringResource,
     val secondTitle: StringResource? = null,
-    val spanColor: Color
+    val spanColor: Color,
 )

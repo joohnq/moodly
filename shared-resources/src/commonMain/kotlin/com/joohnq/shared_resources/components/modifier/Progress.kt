@@ -14,7 +14,7 @@ import com.joohnq.shared_resources.theme.Dimens
 fun Modifier.progress(
     sliderState: SliderState,
     height: Dp,
-    shape: Shape = Dimens.Shape.Circle
+    shape: Shape = Dimens.Shape.Circle,
 ) = this
     // Compute the fraction based on the slider's current value.
     // We do this by dividing the current value by the total value.

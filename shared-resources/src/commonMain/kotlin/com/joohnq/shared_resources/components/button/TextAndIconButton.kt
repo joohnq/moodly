@@ -26,7 +26,7 @@ fun TextAndIconButton(
     icon: IconResource,
     colors: ButtonColors,
     shape: Shape,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Button(
         modifier = modifier.height(56.dp),

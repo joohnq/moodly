@@ -19,7 +19,7 @@ fun AppVerticalSlider(
     thumb: @Composable () -> Unit,
     track: @Composable (SliderState) -> Unit,
     sliderColors: SliderColors,
-    setSliderValue: (Float) -> Unit
+    setSliderValue: (Float) -> Unit,
 ) {
     Slider(
         value = sliderValue,

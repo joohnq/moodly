@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class PreferencesRepositoryImpl(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) : PreferencesRepository {
     companion object {
         private val SKIP_WELCOME_KEY = stringPreferencesKey("SKIP_WELCOME")

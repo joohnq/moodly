@@ -67,13 +67,17 @@ fun OnboardingSleepQualityContent(
                         Column {
                             Text(
                                 stringResource(sleepQualityOption.firstText),
-                                style = TextStyles.textLgExtraBold()
-                                    .copy(color = color)
+                                style =
+                                    TextStyles
+                                        .textLgExtraBold()
+                                        .copy(color = color)
                             )
                             Text(
                                 stringResource(sleepQualityOption.secondText),
-                                style = TextStyles.labelSm()
-                                    .copy(color = color)
+                                style =
+                                    TextStyles
+                                        .labelSm()
+                                        .copy(color = color)
                             )
                         }
                     }

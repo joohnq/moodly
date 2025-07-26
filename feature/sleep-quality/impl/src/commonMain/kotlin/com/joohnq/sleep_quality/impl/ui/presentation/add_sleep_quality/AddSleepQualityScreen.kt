@@ -32,10 +32,11 @@ fun AddSleepQualityScreen(
 
     fun onError(error: String) {
         scope.launch {
-            val error = when (error) {
-                is SleepQualityException.AlreadyBeenAddedToday -> alreadyBeenAddedToday
-                else -> error
-            }
+            val error =
+                when (error) {
+                    is SleepQualityException.AlreadyBeenAddedToday -> alreadyBeenAddedToday
+                    else -> error
+                }
             snackBarState.showSnackbar(error)
         }
     }

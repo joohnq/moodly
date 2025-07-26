@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 fun WelcomeBase(
     welcome: Welcome,
     paddingTop: Dp,
-    onNext: () -> Unit
+    onNext: () -> Unit,
 ) {
     DecoratedConvexPanel(
         panelBackgroundColor = welcome.backgroundColor,

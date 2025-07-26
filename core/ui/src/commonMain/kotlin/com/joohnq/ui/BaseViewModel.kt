@@ -15,7 +15,6 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     initialState: STATE,
 ) : ViewModel(),
     UnidirectionalViewModel<STATE, INTENT, EFFECT> {
-
     private val _state = MutableStateFlow(initialState)
     override val state: StateFlow<STATE> = _state.asStateFlow()
 
@@ -53,7 +52,10 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
      *
      * Multiple one-time events are supported.
      */
-    protected fun handleOneTimeEvent(event: INTENT, block: () -> Unit) {
+    protected fun handleOneTimeEvent(
+        event: INTENT,
+        block: () -> Unit,
+    ) {
         if (event !in handledOneTimeEvents) {
             handledOneTimeEvents.add(event)
             block()

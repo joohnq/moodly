@@ -11,11 +11,15 @@ sealed class Security {
     data object Corrupted : Security()
 
     @Serializable
-    data class Biometric(val enabled: Boolean) : Security()
+    data class Biometric(
+        val enabled: Boolean,
+    ) : Security()
 
     @Serializable
-    data class Pin(val enabled: Boolean, val code: List<Int>) : Security()
+    data class Pin(
+        val enabled: Boolean,
+        val code: List<Int>,
+    ) : Security()
 }
 
-fun Security.getPinCode(): List<Int> =
-    (this as Security.Pin).code
+fun Security.getPinCode(): List<Int> = (this as Security.Pin).code

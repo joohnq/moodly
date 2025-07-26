@@ -17,7 +17,7 @@ import com.kizitonwose.calendar.core.DayPosition
 @Composable
 fun SelfJournalingDay(
     average: MoodAverageResource,
-    day: CalendarDay
+    day: CalendarDay,
 ) {
     val isSelected = average !is MoodAverageResource.Skipped
     val isInCurrentMonth = day.position == DayPosition.MonthDate

@@ -8,7 +8,7 @@ data class StressLevelRecordResource(
     val id: Int = -1,
     val stressLevel: StressLevelResource = StressLevelResource.One,
     val stressors: List<StressorResource> = emptyList(),
-    val createdAt: LocalDateTime = getNow()
+    val createdAt: LocalDateTime = getNow(),
 ) {
     companion object {
         val stressLevelRecordResourceOnePreview =

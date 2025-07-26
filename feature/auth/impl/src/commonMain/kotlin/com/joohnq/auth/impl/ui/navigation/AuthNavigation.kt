@@ -10,7 +10,7 @@ import com.joohnq.navigation.NavigationGraph
 
 fun NavGraphBuilder.authNavigation(
     onNavigate: (Destination) -> Unit,
-    onNavigateGraph: (NavigationGraph, Boolean) -> Unit
+    onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
 ) {
     navigation<NavigationGraph.Auth>(startDestination = Destination.Auth.Avatar) {
         composable<Destination.Auth.Avatar> {

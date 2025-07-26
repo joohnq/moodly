@@ -3,10 +3,10 @@ package com.joohnq.onboarding.impl.ui.viewmodel
 import com.joohnq.ui.BaseViewModel
 
 class OnboardingViewModel(
-    initialState: OnboardingContract.State = OnboardingContract.State()
+    initialState: OnboardingContract.State = OnboardingContract.State(),
 ) : BaseViewModel<OnboardingContract.State, OnboardingContract.Intent, OnboardingContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     OnboardingContract.ViewModel {
     override fun onIntent(intent: OnboardingContract.Intent) {
         when (intent) {

@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodMetric(
     records: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val record = records.getTodayMoodRecord()
 

@@ -10,7 +10,7 @@ fun StressLevelBody(
     modifier: Modifier = Modifier,
     records: List<StressLevelRecordResource>,
     onAction: (StressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressLevelContract.Event) -> Unit = {}
+    onEvent: (StressLevelContract.Event) -> Unit = {},
 ) {
     StressTriggersSection(
         modifier = modifier,

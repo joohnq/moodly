@@ -27,7 +27,7 @@ fun NotFoundVerticalLayout(
     title: StringResource,
     subtitle: StringResource,
     image: DrawableResource,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         colors =

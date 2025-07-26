@@ -19,7 +19,7 @@ fun TextOutlinedButton(
     text: StringResource,
     colors: ButtonColors,
     shape: Shape,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     OutlinedButton(
         modifier = modifier.height(56.dp),

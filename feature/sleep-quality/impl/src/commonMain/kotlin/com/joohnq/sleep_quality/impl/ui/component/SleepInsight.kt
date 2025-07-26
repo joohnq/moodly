@@ -21,7 +21,7 @@ fun SleepInsight(
         modifier = modifier,
         title = Res.string.sleep_insight
     )
-    if (records.isEmpty())
+    if (records.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -32,9 +32,10 @@ fun SleepInsight(
             image = Drawables.Images.SleepQualityInsight,
             onCreate = onCreate
         )
-    else
+    } else {
         SleepInsightCard(
             modifier = modifier,
             records = records
         )
+    }
 }

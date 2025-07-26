@@ -16,6 +16,6 @@ fun SleepInsightPreview() {
 @Composable
 fun SleepInsightPreviewEmpty() {
     SleepInsight(
-        records = listOf(),
+        records = listOf()
     )
 }

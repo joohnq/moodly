@@ -13,7 +13,10 @@ private suspend fun <T> TurbineTestContext<T>.assertUiState(expected: T) {
 /**
  * Helper function to assert the expected UI state
  */
-private suspend fun <T> TurbineTestContext<T>.assertState(field: (T) -> Any, expected: Any) {
+private suspend fun <T> TurbineTestContext<T>.assertState(
+    field: (T) -> Any,
+    expected: Any,
+) {
     assertThat(field(awaitItem())).isEqualTo(expected)
 }
 

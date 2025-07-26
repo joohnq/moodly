@@ -11,7 +11,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun OnboardingPhysicalSymptomsContentPreview(
     @PreviewParameter(MedicationsSupplementsResourceParameterProvider::class)
-    item: MedicationsSupplementsResource
+    item: MedicationsSupplementsResource,
 ) {
     OnboardingMedicationsSupplementsContent(
         state = item

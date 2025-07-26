@@ -26,7 +26,7 @@ import com.kizitonwose.calendar.core.DayPosition
 @Composable
 fun MoodDay(
     record: MoodRecordResource?,
-    day: CalendarDay
+    day: CalendarDay,
 ) {
     val isSelected = record != null
     val isInCurrentMonth = day.position == DayPosition.MonthDate
@@ -60,9 +60,9 @@ fun MoodDay(
 
     Column(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 11.dp, vertical = 3.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 11.dp, vertical = 3.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
@@ -76,13 +76,13 @@ fun MoodDay(
 
         Box(
             modifier =
-            Modifier
-                .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
-                .fillMaxSize()
-                .aspectRatio(1f)
-                .clip(Dimens.Shape.Circle)
-                .then(background)
-                .then(border),
+                Modifier
+                    .sizeIn(maxWidth = 40.dp, maxHeight = 40.dp)
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .clip(Dimens.Shape.Circle)
+                    .then(background)
+                    .then(border),
             contentAlignment = Alignment.Center
         ) {
             if (isInCurrentMonth && isSelected) {

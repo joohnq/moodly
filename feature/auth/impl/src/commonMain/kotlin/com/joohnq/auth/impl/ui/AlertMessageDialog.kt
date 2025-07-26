@@ -32,22 +32,25 @@ fun AlertMessageDialog(
     positiveButtonText: String? = null,
     negativeButtonText: String? = null,
     onPositiveClick: () -> Unit = {},
-    onNegativeClick: () -> Unit = {}
+    onNegativeClick: () -> Unit = {},
 ) {
     Dialog(
         onDismissRequest = {},
-        properties = DialogProperties(
-            dismissOnBackPress = false,
-            dismissOnClickOutside = false
-        )
+        properties =
+            DialogProperties(
+                dismissOnBackPress = false,
+                dismissOnClickOutside = false
+            )
     ) {
         Surface(
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
             shape = RoundedCornerShape(size = 12.dp)
         ) {
             Column(
-                modifier = Modifier.background(Colors.Brown10)
-                    .padding(all = 16.dp),
+                modifier =
+                    Modifier
+                        .background(Colors.Brown10)
+                        .padding(all = 16.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

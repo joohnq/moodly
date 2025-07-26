@@ -30,7 +30,7 @@ fun NotFoundHorizontalLayout(
     title: StringResource,
     subtitle: StringResource,
     image: DrawableResource,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         colors =
@@ -95,7 +95,7 @@ fun NotFoundHorizontalLayout(
     text: StringResource,
     icon: DrawableResource,
     image: DrawableResource,
-    onCreate: () -> Unit
+    onCreate: () -> Unit,
 ) {
     Card(
         colors =

@@ -10,11 +10,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeTopBarPreview() {
     HomeTopBar(
-        user = User(
-            id = 1,
-            name = "John Doe",
-            image = "0",
-            imageType = ImageType.DRAWABLE
-        )
+        user =
+            User(
+                id = 1,
+                name = "John Doe",
+                image = "0",
+                imageType = ImageType.DRAWABLE
+            )
     )
 }

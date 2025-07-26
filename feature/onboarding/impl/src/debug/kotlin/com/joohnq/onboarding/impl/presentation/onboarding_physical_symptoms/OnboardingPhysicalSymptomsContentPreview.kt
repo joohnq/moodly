@@ -12,6 +12,6 @@ fun OnboardingPhysicalSymptomsContentPreview(
     @PreviewParameter(PhysicalSymptomsResourceParameterProvider::class) item: PhysicalSymptomsResource
 ) {
     OnboardingPhysicalSymptomsContent(
-        state = item,
+        state = item
     )
 }

@@ -23,7 +23,7 @@ fun OnboardingExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     OnboardingBaseComponent(
         page = 7,
@@ -31,7 +31,7 @@ fun OnboardingExpressionAnalysisContent(
         title = Res.string.expression_analysis_title,
         isContinueButtonVisible = description.isNotEmpty(),
         onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
-        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),

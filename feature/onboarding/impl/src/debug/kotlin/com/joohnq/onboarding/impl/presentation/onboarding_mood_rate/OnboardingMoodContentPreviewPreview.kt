@@ -13,6 +13,6 @@ fun OnboardingMoodRateContentDepressedPreview(
     item: MoodRecordResource
 ) {
     OnboardingMoodRateContent(
-        state = item,
+        state = item
     )
 }

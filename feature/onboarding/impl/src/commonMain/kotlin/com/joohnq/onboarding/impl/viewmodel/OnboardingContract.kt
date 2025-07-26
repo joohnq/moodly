@@ -37,6 +37,6 @@ sealed interface OnboardingContract {
         val stressLevel: StressLevelRecordResource = StressLevelRecordResource(
             stressLevel = StressLevelResource.Three
         ),
-        val sliderValue: Float = 0f,
+        val sliderValue: Float = 0f
     )
 }

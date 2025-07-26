@@ -17,12 +17,12 @@ fun PhysicalSymptomsRadioButtonPreview(
         PhysicalSymptomsRadioButton(
             text = "Option",
             icon = item.icon,
-            selected = false,
+            selected = false
         )
         PhysicalSymptomsRadioButton(
             text = "Option",
             icon = item.icon,
-            selected = true,
+            selected = true
         )
     }
 }

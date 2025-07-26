@@ -23,7 +23,7 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 fun OnboardingProfessionalHelpContent(
     state: ProfessionalHelpResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     val options = rememberSaveable { getAllProfessionalHelpResource() }
 

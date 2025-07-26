@@ -18,11 +18,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.assessments
-import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
-import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.page_of
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -43,7 +43,7 @@ fun OnboardingBaseComponent(
     isContinueButtonVisible: Boolean = true,
     onGoBack: () -> Unit,
     onContinue: () -> Unit = {},
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,

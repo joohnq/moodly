@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingPhysicalSymptomsContent(
     state: PhysicalSymptomsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     val options = remember { getAllPhysicalSymptomsResource() }
 

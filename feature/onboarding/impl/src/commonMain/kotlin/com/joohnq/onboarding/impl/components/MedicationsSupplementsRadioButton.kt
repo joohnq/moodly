@@ -21,7 +21,7 @@ fun MedicationsSupplementsRadioButton(
     text: String,
     icon: IconResource,
     selected: Boolean,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     val colors = ComponentColors.RadioButton.textRadioButtonColors()
 
@@ -29,10 +29,14 @@ fun MedicationsSupplementsRadioButton(
         modifier = modifier.aspectRatio(1f),
         shape = Dimens.Shape.Medium,
         colors = ComponentColors.Button.textRadioButtonColors(selected = selected, colors = colors),
-        border = if (selected) BorderStroke(
-            color = colors.selectedBorderColor,
-            width = 4.dp
-        ) else null,
+        border = if (selected) {
+            BorderStroke(
+                color = colors.selectedBorderColor,
+                width = 4.dp
+            )
+        } else {
+            null
+        },
         contentPadding = PaddingValues(0.dp),
         onClick = onClick
     ) {

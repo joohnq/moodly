@@ -16,7 +16,7 @@ import com.joohnq.onboarding.impl.presentation.onboarding_stress_level.Onboardin
 fun NavGraphBuilder.onboardingNavigation(
     onNavigate: (Destination) -> Unit,
     onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     navigation<NavigationGraph.Onboarding>(startDestination = Destination.Onboarding.MoodRate) {
         composable<Destination.Onboarding.MoodRate> {

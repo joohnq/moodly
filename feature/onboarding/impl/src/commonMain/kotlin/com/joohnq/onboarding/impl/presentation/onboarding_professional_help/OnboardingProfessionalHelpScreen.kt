@@ -3,14 +3,14 @@ package com.joohnq.onboarding.impl.presentation.onboarding_professional_help
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingViewModel
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun OnboardingProfessionalHelpScreen(
     onNavigateToPhysicalSymptoms: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val onboardingViewModel: OnboardingViewModel = sharedViewModel()
     val onboardingState by onboardingViewModel.state.collectAsState()

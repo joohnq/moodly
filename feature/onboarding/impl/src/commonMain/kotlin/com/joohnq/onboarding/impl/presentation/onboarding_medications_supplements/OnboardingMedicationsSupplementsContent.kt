@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingMedicationsSupplementsContent(
     state: MedicationsSupplementsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     val options: List<MedicationsSupplementsResource> =
         remember { getAllMedicationsSupplementsResource() }
@@ -34,7 +34,7 @@ fun OnboardingMedicationsSupplementsContent(
         title = Res.string.medications_supplements_title,
         isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),

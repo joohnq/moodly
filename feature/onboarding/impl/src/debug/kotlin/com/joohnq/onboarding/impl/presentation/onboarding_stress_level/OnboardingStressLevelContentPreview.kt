@@ -13,6 +13,6 @@ fun OnboardingSleepQualityContentPreview(
     item: StressLevelRecordResource
 ) {
     OnboardingStressLevelContent(
-        state = item,
+        state = item
     )
 }

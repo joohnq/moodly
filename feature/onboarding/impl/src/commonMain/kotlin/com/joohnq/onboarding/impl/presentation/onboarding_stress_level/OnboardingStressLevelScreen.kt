@@ -3,14 +3,14 @@ package com.joohnq.onboarding.impl.presentation.onboarding_stress_level
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.ui.sharedViewModel
 import com.joohnq.onboarding.impl.event.OnboardingEvent
 import com.joohnq.onboarding.impl.viewmodel.OnboardingViewModel
+import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun OnboardingStressLevelScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val onboardingViewModel: OnboardingViewModel = sharedViewModel()
     val onboardingState by onboardingViewModel.state.collectAsState()

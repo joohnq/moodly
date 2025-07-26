@@ -34,13 +34,13 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingMoodRateContent(
     state: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {}
 ) {
     OnboardingBaseComponent(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,
-        onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
             text = stringResource(
@@ -48,12 +48,12 @@ fun OnboardingMoodRateContent(
                 stringResource(state.mood.text)
             ),
             style = TextStyles.textXlSemiBold(),
-            color = Colors.Brown100Alpha64,
+            color = Colors.Brown100Alpha64
         )
         VerticalSpacer(24.dp)
         MoodFace(
             modifier = Modifier.size(120.dp),
-            resource = state.mood,
+            resource = state.mood
         )
         VerticalSpacer(24.dp)
     }

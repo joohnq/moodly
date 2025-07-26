@@ -15,7 +15,7 @@ fun OnboardingSleepQualityContentPreview(
 ) {
     OnboardingSleepQualityContent(
         state = item,
-        sliderValue = 1f,
+        sliderValue = 1f
     )
 }
 
@@ -24,7 +24,7 @@ fun OnboardingSleepQualityContentPreview(
 fun OnboardingSleepQualityContentSlideHalfPreview() {
     OnboardingSleepQualityContent(
         state = sleepQualityRecordExcellentPreview,
-        sliderValue = 0.5f,
+        sliderValue = 0.5f
     )
 }
 
@@ -33,6 +33,6 @@ fun OnboardingSleepQualityContentSlideHalfPreview() {
 fun OnboardingSleepQualityContentSlideZeroPreview() {
     OnboardingSleepQualityContent(
         state = sleepQualityRecordExcellentPreview,
-        sliderValue = 0f,
+        sliderValue = 0f
     )
 }

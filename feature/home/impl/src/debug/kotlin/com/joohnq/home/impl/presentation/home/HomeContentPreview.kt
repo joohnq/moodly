@@ -24,7 +24,7 @@ fun HomeContentPreview(
     @PreviewParameter(ListStressLevelRecordResourceParameterProvider::class)
     stressLevelRecordResources: List<StressLevelRecordResource>,
     @PreviewParameter(ListSleepQualityRecordResourceParameterProvider::class)
-    sleepQualityRecordResources: List<SleepQualityRecordResource>,
+    sleepQualityRecordResources: List<SleepQualityRecordResource>
 ) {
     HomeContent(
         state = DashboardContract.State(
@@ -48,6 +48,6 @@ fun HomeContentPreview(
                     imageType = ImageType.DRAWABLE
                 )
             )
-        ),
+        )
     )
 }

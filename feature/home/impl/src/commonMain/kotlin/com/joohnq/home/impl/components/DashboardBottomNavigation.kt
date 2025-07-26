@@ -17,7 +17,7 @@ fun DashboardBottomNavigation(
     isCurrentRoute: (Destination) -> Boolean,
     onNavigate: (Destination) -> Unit = {},
     isCentralExpanded: Boolean,
-    toggleIsCentralExpanded: () -> Unit = {},
+    toggleIsCentralExpanded: () -> Unit = {}
 ) {
     val bottomItems = rememberBottomNavigationItems()
 
@@ -29,7 +29,7 @@ fun DashboardBottomNavigation(
             .background(color = Colors.White)
             .padding(horizontal = 20.dp)
             .padding(vertical = 10.dp)
-            .padding(bottom = padding.calculateBottomPadding()),
+            .padding(bottom = padding.calculateBottomPadding())
     ) {
         CreateTabItem(
             item = bottomItems[0],
@@ -39,7 +39,7 @@ fun DashboardBottomNavigation(
         BottomNavigationButton(
             modifier = Modifier.size(48.dp),
             onClick = toggleIsCentralExpanded,
-            image = if (isCentralExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo,
+            image = if (isCentralExpanded) Drawables.Icons.Outlined.Close else Drawables.Icons.Outlined.Logo
         )
         CreateTabItem(
             item = bottomItems[1],

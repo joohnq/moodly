@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun DashboardCentral(
     padding: PaddingValues = PaddingValues(0.dp),
-    onEvent: (DashboardContract.Event) -> Unit = {},
+    onEvent: (DashboardContract.Event) -> Unit = {}
 ) {
     val items =
         listOf(

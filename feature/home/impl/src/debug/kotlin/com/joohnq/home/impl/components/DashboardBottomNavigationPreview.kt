@@ -8,6 +8,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun DashboardBottomNavigationPreview() {
     DashboardBottomNavigation(
         isCurrentRoute = { true },
-        isCentralExpanded = false,
+        isCentralExpanded = false
     )
 }

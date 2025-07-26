@@ -38,7 +38,7 @@ import com.joohnq.ui.mapper.foldComposable
 fun HomeContent(
     state: DashboardContract.State,
     padding: PaddingValues = PaddingValues(0.dp),
-    onEvent: (HomeEvent) -> Unit = {},
+    onEvent: (HomeEvent) -> Unit = {}
 ) {
     listOf(
         state.moodRecords,
@@ -57,11 +57,11 @@ fun HomeContent(
                 HomeTopBar(
                     modifier = Modifier
                         .padding(top = padding.calculateTopPadding()),
-                    user = user,
+                    user = user
                 )
                 SectionHeader(
                     modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.freud_score,
+                    title = Res.string.freud_score
                 )
                 FreudScoreMetric(
                     freudScore = state.freudScore,
@@ -104,7 +104,7 @@ fun HomeContent(
                 )
                 SelfJournalingMetric(
                     records = selfJournals,
-                    onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
+                    onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) }
                 )
                 VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
             }

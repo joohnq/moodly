@@ -58,7 +58,8 @@ fun WeekMoodIndicator(
                                 .fillMaxWidth()
                                 .height(relHeight)
                                 .background(
-                                    color = resource.palette.color, shape = shape
+                                    color = resource.palette.color,
+                                    shape = shape
                                 )
                                 .clip(shape)
                         )

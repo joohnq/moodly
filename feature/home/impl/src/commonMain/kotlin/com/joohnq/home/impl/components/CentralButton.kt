@@ -13,11 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.ui.entity.CentralAction
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.ui.entity.CentralAction
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

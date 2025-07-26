@@ -32,18 +32,20 @@ import org.jetbrains.compose.resources.stringResource
 fun AddMoodContent(
     state: AddMoodContract.State,
     onAction: (AddMoodContract.Intent) -> Unit = {},
-    onEvent: (AddMoodContract.Event) -> Unit = {},
+    onEvent: (AddMoodContract.Event) -> Unit = {}
 ) {
     Scaffold(
         containerColor = Colors.Brown10,
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier =
+            Modifier
+                .fillMaxSize()
                 .background(color = state.record.mood.palette.moodScreenBackgroundColor)
                 .padding(padding)
                 .paddingHorizontalMedium(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AppTopBar(
                 isDark = false,

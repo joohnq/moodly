@@ -13,6 +13,6 @@ fun MoodHistoryCardPreview(
     item: MoodRecordResource
 ) {
     MoodHistoryCard(
-        record = item,
+        record = item
     )
 }

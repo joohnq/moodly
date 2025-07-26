@@ -10,11 +10,12 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun AddMoodContentPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
-    item: MoodRecordResource,
+    item: MoodRecordResource
 ) {
     AddMoodContent(
-        state = AddMoodContract.State(
+        state =
+        AddMoodContract.State(
             record = item
-        ),
+        )
     )
 }

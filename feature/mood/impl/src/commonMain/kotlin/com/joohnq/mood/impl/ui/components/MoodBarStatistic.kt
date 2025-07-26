@@ -37,13 +37,14 @@ import com.joohnq.shared_resources.theme.TextStyles
 @Composable
 fun MoodBarStatistic(
     records: List<MoodRecordResource>,
-    height: Dp = 250.dp,
+    height: Dp = 250.dp
 ) {
     val current = records.last()
     val proportion = height / 100
-    val pagerState = rememberPagerState(pageCount = {
-        records.size
-    })
+    val pagerState =
+        rememberPagerState(pageCount = {
+            records.size
+        })
 
     val selectedIndex = records.indexOf(current)
 
@@ -69,8 +70,9 @@ fun MoodBarStatistic(
                 Column {
                     repeat(5) {
                         Box(
-                            modifier = Modifier.fillMaxWidth().height(height / 5).dashedLine(
-                                color = Colors.Brown20,
+                            modifier =
+                            Modifier.fillMaxWidth().height(height / 5).dashedLine(
+                                color = Colors.Brown20
                             )
                         )
                     }
@@ -84,14 +86,15 @@ fun MoodBarStatistic(
                 verticalAlignment = Alignment.Bottom,
                 beyondViewportPageCount = 3,
                 userScrollEnabled = true,
-                snapPosition = SnapPosition.Center,
+                snapPosition = SnapPosition.Center
             ) { page ->
                 val record = records[page]
                 val boxHeight = record.mood.healthLevel.times(proportion)
-                val barFaceColor = when {
-                    current == record -> resource.palette.barFaceColor
-                    else -> Colors.Brown40
-                }
+                val barFaceColor =
+                    when {
+                        current == record -> resource.palette.barFaceColor
+                        else -> Colors.Brown40
+                    }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -99,16 +102,18 @@ fun MoodBarStatistic(
                     modifier = Modifier.width(boxWidth).fillMaxHeight()
                 ) {
                     Card(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .width(boxWidth)
                             .height(boxHeight),
-                        colors = CardColors(
+                        colors =
+                        CardColors(
                             containerColor = barFaceColor,
                             disabledContainerColor = barFaceColor,
                             contentColor = barFaceColor,
-                            disabledContentColor = barFaceColor,
+                            disabledContentColor = barFaceColor
                         ),
-                        shape = RoundedCornerShape(topEnd = 100.dp, topStart = 100.dp),
+                        shape = RoundedCornerShape(topEnd = 100.dp, topStart = 100.dp)
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize().padding(5.dp),

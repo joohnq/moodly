@@ -19,12 +19,12 @@ fun MoodContentBody(
     record: MoodRecordResource? = null,
     records: List<MoodRecordResource>,
     onEvent: (MoodContract.Event) -> Unit = {},
-    onAction: (MoodContract.Intent) -> Unit = {},
+    onAction: (MoodContract.Intent) -> Unit = {}
 ) {
     if (record != null) {
         SectionHeader(
             modifier = modifier,
-            title = Res.string.description,
+            title = Res.string.description
         )
         Text(
             text = record.description,

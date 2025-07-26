@@ -13,7 +13,7 @@ import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 fun MoodHistoryBody(
     modifier: Modifier = Modifier,
     records: List<MoodRecordResource>,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {}
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         records.forEach { record ->
@@ -23,10 +23,9 @@ fun MoodHistoryBody(
             ) { modifier ->
                 MoodHistoryCard(
                     modifier = modifier,
-                    record = record,
+                    record = record
                 )
             }
-
         }
     }
 }

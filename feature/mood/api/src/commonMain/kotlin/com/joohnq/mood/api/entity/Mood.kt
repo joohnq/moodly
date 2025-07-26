@@ -4,7 +4,7 @@ import com.joohnq.mood.api.property.MoodProperties
 
 sealed class Mood(
     override val id: Int,
-    override val healthLevel: Int,
+    override val healthLevel: Int
 ) : MoodProperties {
     data object Depressed : Mood(id = DEPRESSED.id, healthLevel = DEPRESSED.healthLevel)
     data object Sad : Mood(id = SAD.id, healthLevel = SAD.healthLevel)

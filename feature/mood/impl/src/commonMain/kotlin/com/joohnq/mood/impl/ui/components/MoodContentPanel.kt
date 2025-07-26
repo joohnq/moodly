@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodContentPanel(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource?,
+    record: MoodRecordResource?
 ) {
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
@@ -37,22 +37,25 @@ fun MoodContentPanel(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        if (!hasToday)
+        if (!hasToday) {
             Icon(
                 painter = painterResource(Drawables.Icons.Outlined.MoodNeutral),
                 contentDescription = stringResource(Res.string.mood),
                 modifier = Modifier.size(48.dp),
                 tint = iconTint
             )
-        if (!hasToday)
+        }
+        if (!hasToday) {
             VerticalSpacer(24.dp)
+        }
         Text(
             text = if (hasToday) stringResource(Res.string.your_mood_is) else stringResource(Res.string.not_available),
             style = TextStyles.textXlBold(),
             color = textColor
         )
-        if (!hasToday)
+        if (!hasToday) {
             VerticalSpacer(10.dp)
+        }
         if (hasToday) {
             Text(
                 text = stringResource(record.mood.text),

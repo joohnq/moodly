@@ -1,18 +1,18 @@
 package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.VectorPainter
 import com.joohnq.api.mapper.toDegrees
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.draw_scope.drawSlice
-import androidx.compose.ui.geometry.Size
 
 fun DrawScope.drawRouletteWheel(
     sliceAngle: Float,
     rotation: Float,
     painterResources: List<VectorPainter>,
-    moods: List<MoodResource>,
+    moods: List<MoodResource>
 ) {
     val iconSize = (size.width / 2 * 0.7f) * 0.5f
     for (i in moods.indices) {

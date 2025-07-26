@@ -25,9 +25,10 @@ fun MoodRouletteWheel(
     modifier: Modifier = Modifier,
     setSelectedMood: (MoodResource) -> Unit = {}
 ) {
-    val moods = rememberSaveable {
-        getAllMoodResource() + getAllMoodResource()
-    }
+    val moods =
+        rememberSaveable {
+            getAllMoodResource() + getAllMoodResource()
+        }
     val painterResources: List<VectorPainter> =
         moods.map { rememberVectorPainter(it.assets.imageVector) }
     val targetVectorPainter = rememberVectorPainter(Drawables.Icons.Filled.RouletteTarget)
@@ -37,9 +38,9 @@ fun MoodRouletteWheel(
     val aQuarter = (limitedAngle / 4 - limitedAngleForSlice / 2).toFloat()
     var rotation by rememberSaveable { mutableStateOf(0f) }
 
-
     Canvas(
-        modifier = modifier
+        modifier =
+        modifier
             .pointerInput(Unit) {
                 detectDragGestures(onDragEnd = {
                     val i = rotation % limitedAngle
@@ -64,7 +65,7 @@ fun MoodRouletteWheel(
         )
         drawCenterCircle(backgroundColor = Colors.Alpha15)
         drawCenterCircle(
-            vectorPainter = targetVectorPainter,
+            vectorPainter = targetVectorPainter
         )
     }
 }

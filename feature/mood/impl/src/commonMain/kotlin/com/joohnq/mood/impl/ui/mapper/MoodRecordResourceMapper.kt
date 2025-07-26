@@ -10,8 +10,7 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
-fun List<MoodRecordResource>.getTodayMoodRecord(): MoodRecordResource? =
-    find { it.createdAt.date == getNow().date }
+fun List<MoodRecordResource>.getTodayMoodRecord(): MoodRecordResource? = find { it.createdAt.date == getNow().date }
 
 fun List<MoodRecordResource>.getWeekRecords(): List<MoodRecordResource> {
     val now = getNow()
@@ -42,7 +41,8 @@ fun List<MoodRecordResource>.getMonthDaysRecordsString(): String {
     val now = getNow()
     val days =
         filter { it.createdAt.month == now.month }
-            .associateBy { it.createdAt.date }.keys.size
+            .associateBy { it.createdAt.date }
+            .keys.size
     return "$days/${now.toMonthDays()}"
 }
 
@@ -52,12 +52,13 @@ fun List<MoodRecordResource?>.calculateStatsFreudScore(): FreudScore {
     return score.toFreudScore()
 }
 
-fun MoodRecordResource.toDomain(): MoodRecord = MoodRecord(
-    id = id,
-    mood = mood.toDomain(),
-    description = description,
-    createdAt = createdAt,
-)
+fun MoodRecordResource.toDomain(): MoodRecord =
+    MoodRecord(
+        id = id,
+        mood = mood.toDomain(),
+        description = description,
+        createdAt = createdAt
+    )
 
 fun List<MoodRecordResource>.toDomain(): List<MoodRecord> = map { it.toDomain() }
 
@@ -66,9 +67,7 @@ fun MoodRecord.toResource(): MoodRecordResource =
         id = id,
         mood = mood.toResource(),
         description = description,
-        createdAt = createdAt,
+        createdAt = createdAt
     )
 
 fun List<MoodRecord>.toResource(): List<MoodRecordResource> = map { it.toResource() }
-
-

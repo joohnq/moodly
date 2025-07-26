@@ -10,13 +10,14 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Preview
 @Composable
 fun MoodHistoryContentPreview(
-    @PreviewParameter(ListMoodRecordResourceParameterProvider ::class)
+    @PreviewParameter(ListMoodRecordResourceParameterProvider::class)
     list: List<MoodRecordResource>
 ) {
     MoodHistoryContent(
-        records = UiState.Success(
+        records =
+        UiState.Success(
             list
-        ),
+        )
     )
 }
 

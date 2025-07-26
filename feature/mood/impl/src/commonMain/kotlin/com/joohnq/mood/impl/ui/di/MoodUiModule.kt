@@ -5,15 +5,16 @@ import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val moodUiModule: Module = module {
-    single<AddMoodViewModel>{
-        AddMoodViewModel()
+val moodUiModule: Module =
+    module {
+        single<AddMoodViewModel> {
+            AddMoodViewModel()
+        }
+        single<MoodViewModel> {
+            MoodViewModel(
+                getMoodsUseCase = get(),
+                addMoodUseCase = get(),
+                deleteMoodUseCase = get()
+            )
+        }
     }
-    single<MoodViewModel> {
-        MoodViewModel(
-            getMoodsUseCase = get(),
-            addMoodUseCase = get(),
-            deleteMoodUseCase = get(),
-        )
-    }
-}

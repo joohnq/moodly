@@ -15,5 +15,5 @@ data class MoodPalette(
     val moodScreenMoodFaceColor: Color,
     val barColor: Color,
     val barFaceColor: Color,
-    val imageColor: Color,
+    val imageColor: Color
 )

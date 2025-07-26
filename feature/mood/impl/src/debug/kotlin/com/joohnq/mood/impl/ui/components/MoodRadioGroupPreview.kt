@@ -13,6 +13,6 @@ fun MoodRadioGroupPreview(
     item: MoodRecordResource
 ) {
     MoodRadioGroup(
-        selectedMood = item,
+        selectedMood = item
     )
 }

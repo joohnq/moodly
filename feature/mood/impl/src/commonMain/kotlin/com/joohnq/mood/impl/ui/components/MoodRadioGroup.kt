@@ -1,7 +1,15 @@
 package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
@@ -24,7 +32,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizo
 fun MoodRadioGroup(
     modifier: Modifier = Modifier,
     selectedMood: MoodRecordResource,
-    setSelectedMood: (MoodResource) -> Unit = {},
+    setSelectedMood: (MoodResource) -> Unit = {}
 ) {
     val resources by remember { mutableStateOf(getAllMoodResource()) }
 
@@ -39,7 +47,8 @@ fun MoodRadioGroup(
                 val selected = i <= selectedMood.mood.id
                 Button(
                     modifier = Modifier.size(36.dp),
-                    colors = ButtonColors(
+                    colors =
+                    ButtonColors(
                         containerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
                         contentColor = selectedMood.mood.palette.moodScreenBackgroundColor,
                         disabledContainerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
@@ -52,7 +61,8 @@ fun MoodRadioGroup(
                     contentPadding = PaddingValues(0.dp)
                 ) {
                     Box(
-                        modifier = Modifier.size(8.dp).background(
+                        modifier =
+                        Modifier.size(8.dp).background(
                             color = selectedMood.mood.palette.moodScreenBackgroundColor,
                             shape = Dimens.Shape.Circle
                         )
@@ -61,9 +71,21 @@ fun MoodRadioGroup(
 
                 if (i < resources.size - 1) {
                     Box(
-                        modifier = Modifier.width(dividerWidth).height(10.dp)
+                        modifier =
+                        Modifier
+                            .width(dividerWidth)
+                            .height(10.dp)
                             .paddingHorizontalExtraExtraSmall()
-                            .background(color = if (selectedMood.mood.id - 1 >= i) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor)
+                            .background(
+                                color =
+                                if (selectedMood.mood.id - 1 >=
+                                    i
+                                ) {
+                                    Colors.White
+                                } else {
+                                    selectedMood.mood.palette.moodScreenInactiveColor
+                                }
+                            )
                     )
                 }
             }

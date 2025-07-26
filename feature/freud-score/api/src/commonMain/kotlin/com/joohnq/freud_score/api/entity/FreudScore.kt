@@ -3,7 +3,7 @@ package com.joohnq.freud_score.api.entity
 import com.joohnq.freud_score.api.property.FreudScoreProperties
 
 sealed class FreudScore(
-    override val score: Int,
+    override val score: Int
 ) : FreudScoreProperties {
     data class Healthy(override val score: Int) : FreudScore(score)
     data class MostlyHealthy(override val score: Int) : FreudScore(score)
@@ -12,5 +12,3 @@ sealed class FreudScore(
     data class Unhealthy(override val score: Int) : FreudScore(score)
     data object NotAvailable : FreudScore(0)
 }
-
-

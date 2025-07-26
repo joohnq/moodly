@@ -1,7 +1,7 @@
 package com.joohnq.freud_score.impl.resource
 
-import com.joohnq.freud_score.impl.entity.FreudScorePalette
 import com.joohnq.freud_score.api.property.FreudScoreProperties
+import com.joohnq.freud_score.impl.entity.FreudScorePalette
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.at_risk
 import com.joohnq.shared_resources.certain_habits_or_conditions_are_putting_your_health_at_risk
@@ -21,10 +21,10 @@ sealed class FreudScoreResource(
     override val score: Int,
     val title: StringResource,
     val subtitle: StringResource,
-    val palette: FreudScorePalette,
+    val palette: FreudScorePalette
 ) : FreudScoreProperties {
     data class Healthy(
-        override val score: Int,
+        override val score: Int
     ) : FreudScoreResource(
         score = score,
         title = Res.string.healthy,
@@ -38,7 +38,7 @@ sealed class FreudScoreResource(
     )
 
     data class MostlyHealthy(
-        override val score: Int,
+        override val score: Int
     ) : FreudScoreResource(
         score = score,
         title = Res.string.mostly_healthy,
@@ -52,7 +52,7 @@ sealed class FreudScoreResource(
     )
 
     data class Stable(
-        override val score: Int,
+        override val score: Int
     ) : FreudScoreResource(
         score = score,
         title = Res.string.stable,
@@ -66,7 +66,7 @@ sealed class FreudScoreResource(
     )
 
     data class AtRisk(
-        override val score: Int,
+        override val score: Int
     ) : FreudScoreResource(
         score = score,
         title = Res.string.at_risk,
@@ -75,12 +75,12 @@ sealed class FreudScoreResource(
             color = Colors.Orange10,
             subColor = Colors.Orange30,
             backgroundColor = Colors.Orange40,
-            imageColor = Colors.Orange50,
+            imageColor = Colors.Orange50
         )
     )
 
     data class Unhealthy(
-        override val score: Int,
+        override val score: Int
     ) : FreudScoreResource(
         score = score,
         title = Res.string.unhealthy,
@@ -105,4 +105,3 @@ sealed class FreudScoreResource(
         )
     )
 }
-

@@ -9,11 +9,11 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Preview
 @Composable
 fun FreudScoreContentPreview(
-    @PreviewParameter(FreudScoreResourceParameterProvider::class) item: FreudScoreResource,
+    @PreviewParameter(FreudScoreResourceParameterProvider::class) item: FreudScoreResource
 ) {
     FreudScoreContent(
         state = FreudScoreContract.State(
             freudScore = item
-        ),
+        )
     )
 }

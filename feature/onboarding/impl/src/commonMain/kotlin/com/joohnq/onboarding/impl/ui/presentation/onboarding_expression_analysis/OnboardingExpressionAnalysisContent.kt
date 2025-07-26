@@ -5,8 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.onboarding.impl.event.OnboardingEvent
-import com.joohnq.onboarding.impl.presentation.OnboardingBaseComponent
+import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
@@ -22,16 +21,16 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
-    onEvent: (com.joohnq.onboarding.impl.ui.event.OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {}
+    onEvent: (OnboardingEvent) -> Unit = {},
+    onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
         isContinueButtonVisible = description.isNotEmpty(),
-        onContinue = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnNavigateToNext) },
-        onGoBack = { onEvent(_root_ide_package_.com.joohnq.onboarding.impl.ui.event.OnboardingEvent.OnGoBack) }
+        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
+        onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
             text = stringResource(Res.string.expression_analysis_desc),

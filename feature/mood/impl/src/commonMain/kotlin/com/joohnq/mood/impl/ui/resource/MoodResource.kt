@@ -27,7 +27,6 @@ sealed class MoodResource(
                 imageVector = Drawables.Mood.DepressedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodDepressed,
                 secondaryIcon = Drawables.Mood.FaceDepressedNew,
-                iconOutlined = Drawables.Icons.Outlined.MoodDepressed
             ),
             text = Res.string.depressed,
             healthLevel = DEPRESSED.healthLevel,
@@ -54,7 +53,6 @@ sealed class MoodResource(
             imageVector = Drawables.Mood.SadVectorPainter,
             icon = Drawables.Icons.Filled.MoodSad,
             secondaryIcon = Drawables.Mood.FaceSadNew,
-            iconOutlined = Drawables.Icons.Outlined.MoodSad
         ),
         text = Res.string.sad,
         healthLevel = SAD.healthLevel,
@@ -82,7 +80,6 @@ sealed class MoodResource(
                 imageVector = Drawables.Mood.NeutralVectorPainter,
                 icon = Drawables.Icons.Filled.MoodNeutral,
                 secondaryIcon = Drawables.Mood.FaceNeutralNew,
-                iconOutlined = Drawables.Icons.Outlined.MoodNeutral
             ),
             text = Res.string.neutral,
             healthLevel = NEUTRAL.healthLevel,
@@ -109,7 +106,6 @@ sealed class MoodResource(
             imageVector = Drawables.Mood.HappyVectorPainter,
             icon = Drawables.Icons.Filled.MoodHappy,
             secondaryIcon = Drawables.Mood.FaceHappyNew,
-            iconOutlined = Drawables.Icons.Outlined.MoodHappy
         ),
         text = Res.string.happy,
         healthLevel = HAPPY.healthLevel,
@@ -137,7 +133,6 @@ sealed class MoodResource(
                 imageVector = Drawables.Mood.OverjoyedVectorPainter,
                 icon = Drawables.Icons.Filled.MoodOverjoyed,
                 secondaryIcon = Drawables.Mood.FaceOverjoyedNew,
-                iconOutlined = Drawables.Icons.Outlined.MoodOverjoyed
             ),
             text = Res.string.overjoyed,
             healthLevel = OVERJOYED.healthLevel,

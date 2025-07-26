@@ -7,5 +7,4 @@ data class Assets(
     val imageVector: ImageVector,
     val icon: DrawableResource,
     val secondaryIcon: DrawableResource,
-    val iconOutlined: DrawableResource
 )

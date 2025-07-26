@@ -1,4 +1,4 @@
-package com.joohnq.onboarding.impl.ui.components
+package com.joohnq.onboarding.impl.ui.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement

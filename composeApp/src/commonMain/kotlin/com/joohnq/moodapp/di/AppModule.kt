@@ -9,7 +9,7 @@ import com.joohnq.mood.impl.data.di.moodDataModule
 import com.joohnq.mood.impl.data.di.moodDriverFactoryModule
 import com.joohnq.mood.api.di.moodDomainModule
 import com.joohnq.mood.impl.ui.di.moodUiModule
-import com.joohnq.onboarding.impl.di.onboardingUiModule
+import com.joohnq.onboarding.impl.ui.di.onboardingUiModule
 import com.joohnq.preferences.api.di.preferencesDomainModule
 import com.joohnq.preferences.impl.data.di.preferencesDataModule
 import com.joohnq.preferences.impl.ui.di.preferencesUiModule

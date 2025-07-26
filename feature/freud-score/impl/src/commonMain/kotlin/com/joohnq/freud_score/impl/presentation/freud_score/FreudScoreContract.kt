@@ -14,7 +14,7 @@ sealed interface FreudScoreContract {
     sealed interface SideEffect
 
     data class State(
-        val freudScore: FreudScoreResource? = null,
+        val freudScore: FreudScoreResource? = null
     )
 
     sealed interface Event {

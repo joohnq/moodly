@@ -26,7 +26,7 @@ fun getAllFreudScoreResources(score: Int): List<FreudScoreResource> = listOf(
     MostlyHealthy(score),
     Stable(score),
     AtRisk(score),
-    Unhealthy(score),
+    Unhealthy(score)
 )
 
 fun Index.toInitialFreudScore(): Int =

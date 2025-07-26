@@ -19,11 +19,11 @@ class PreferencesViewModel(
     private val updateSkipWelcomeUseCase: UpdateSkipWelcomeUseCase,
     private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     private val updateSkipAuthUseCase: UpdateSkipAuthUseCase,
-    private val updateSkipSecurityUseCase: UpdateSkipSecurityUseCase,
+    private val updateSkipSecurityUseCase: UpdateSkipSecurityUseCase
 ) : BaseViewModel<PreferencesContract.State, PreferencesContract.Intent, PreferencesContract.SideEffect>(
-    initialState = initialState
-), PreferencesContract.ViewModel {
-
+        initialState = initialState
+    ),
+    PreferencesContract.ViewModel {
     override fun onIntent(intent: PreferencesContract.Intent) {
         when (intent) {
             is PreferencesContract.Intent.Get -> getPreferences()
@@ -50,40 +50,44 @@ class PreferencesViewModel(
     private fun updateSkipWelcome(value: Boolean) =
         viewModelScope.launch {
             val res = updateSkipWelcomeUseCase(value).toUiState()
-            res.onSuccess {
-                emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
-            }.onFailure {
-                emitEffect(PreferencesContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
+                }.onFailure {
+                    emitEffect(PreferencesContract.SideEffect.ShowError(it))
+                }
         }
 
     private fun updateSkipOnboarding(value: Boolean) =
         viewModelScope.launch {
             val res = updateSkipOnboardingUseCase(value).toUiState()
-            res.onSuccess {
-                emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
-            }.onFailure {
-                emitEffect(PreferencesContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
+                }.onFailure {
+                    emitEffect(PreferencesContract.SideEffect.ShowError(it))
+                }
         }
 
     private fun updateSkipAuth(value: Boolean) =
         viewModelScope.launch {
             val res = updateSkipAuthUseCase(value).toUiState()
-            res.onSuccess {
-                emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
-            }.onFailure {
-                emitEffect(PreferencesContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
+                }.onFailure {
+                    emitEffect(PreferencesContract.SideEffect.ShowError(it))
+                }
         }
 
     private fun updateSkipSecurity(value: Boolean) =
         viewModelScope.launch {
             val res = updateSkipSecurityUseCase(value).toUiState()
-            res.onSuccess {
-                emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
-            }.onFailure {
-                emitEffect(PreferencesContract.SideEffect.ShowError(it))
-            }
+            res
+                .onSuccess {
+                    emitEffect(PreferencesContract.SideEffect.UpdatedPreferences)
+                }.onFailure {
+                    emitEffect(PreferencesContract.SideEffect.ShowError(it))
+                }
         }
 }

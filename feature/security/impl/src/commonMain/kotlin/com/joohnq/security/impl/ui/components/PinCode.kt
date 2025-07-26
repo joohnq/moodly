@@ -22,7 +22,7 @@ fun PinCode(
     keyboardManager: SoftwareKeyboardController? = null,
     onNumberChanged: (i: Int, newNumber: Int?) -> Unit = { _, _ -> },
     onKeyboardBack: () -> Unit = {},
-    onFocusChanged: (i: Int) -> Unit = {},
+    onFocusChanged: (i: Int) -> Unit = {}
 ) {
     LaunchedEffect(code) {
         val allNumbersEntered = code.none { it == null }
@@ -42,10 +42,11 @@ fun PinCode(
     }
 
     Row(
-        horizontalArrangement = Arrangement.spacedBy(
-            10.dp,
-            alignment = Alignment.CenterHorizontally
-        )
+        horizontalArrangement =
+            Arrangement.spacedBy(
+                10.dp,
+                alignment = Alignment.CenterHorizontally
+            )
     ) {
         code.forEachIndexed { i, number ->
             PinInputField(

@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun MoodNeutralPreview() {
     Icon(
         imageVector = MoodNeutral,
-        contentDescription = null,
+        contentDescription = null
     )
 }

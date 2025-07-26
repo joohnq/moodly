@@ -16,19 +16,20 @@ import com.joohnq.shared_resources.theme.Dimens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppVerticalSliderTrack(
-    state: SliderState
-) {
+fun AppVerticalSliderTrack(state: SliderState) {
     Box(
-        modifier = Modifier
-            .background(color = Colors.Brown20, shape = Dimens.Shape.Circle)
-            .height(16.dp).fillMaxWidth(),
+        modifier =
+            Modifier
+                .background(color = Colors.Brown20, shape = Dimens.Shape.Circle)
+                .height(16.dp)
+                .fillMaxWidth(),
         contentAlignment = Alignment.CenterStart
     ) {
         Box(
-            modifier = Modifier.Companion
-                .progress(sliderState = state, height = 16.dp)
-                .background(color = Colors.Orange50)
+            modifier =
+                Modifier.Companion
+                    .progress(sliderState = state, height = 16.dp)
+                    .background(color = Colors.Orange50)
         )
     }
 }

@@ -31,7 +31,7 @@ import ir.ehsannarmani.compose_charts.models.PopupProperties
 @Composable
 fun LineChart(
     color: Color,
-    values: List<Double>,
+    values: List<Double>
 ) {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         val maxWidth = maxWidth
@@ -39,43 +39,47 @@ fun LineChart(
             modifier = Modifier.horizontalScroll(rememberScrollState()).fillMaxWidth()
         ) {
             LineChart(
-                indicatorProperties = HorizontalIndicatorProperties(
-                    false,
-                    padding = 0.dp
-                ),
+                indicatorProperties =
+                    HorizontalIndicatorProperties(
+                        false,
+                        padding = 0.dp
+                    ),
                 dividerProperties = DividerProperties(false),
                 labelHelperProperties = LabelHelperProperties(false),
                 dotsProperties = DotProperties(false),
                 maxValue = 100.00,
                 minValue = 0.0,
                 popupProperties = PopupProperties(false),
-                gridProperties = GridProperties(
-                    false,
-                    xAxisProperties = GridProperties.AxisProperties(false),
-                    yAxisProperties = GridProperties.AxisProperties(false)
-                ),
+                gridProperties =
+                    GridProperties(
+                        false,
+                        xAxisProperties = GridProperties.AxisProperties(false),
+                        yAxisProperties = GridProperties.AxisProperties(false)
+                    ),
                 labelProperties = LabelProperties(false),
                 modifier = Modifier.fillMaxWidth().width(maxWidth).height(120.dp),
-                data = remember {
-                    listOf(
-                        Line(
-                            label = "",
-                            curvedEdges = true,
-                            values = values,
-                            color = SolidColor(color),
-                            strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                            gradientAnimationDelay = 1000,
-                            drawStyle = DrawStyle.Stroke(width = 3.dp),
-                            firstGradientFillColor = color.copy(
-                                alpha = .3f
-                            ),
-                            secondGradientFillColor = Colors.Transparent,
+                data =
+                    remember {
+                        listOf(
+                            Line(
+                                label = "",
+                                curvedEdges = true,
+                                values = values,
+                                color = SolidColor(color),
+                                strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
+                                gradientAnimationDelay = 1000,
+                                drawStyle = DrawStyle.Stroke(width = 3.dp),
+                                firstGradientFillColor =
+                                    color.copy(
+                                        alpha = .3f
+                                    ),
+                                secondGradientFillColor = Colors.Transparent
+                            )
                         )
-                    )
-                },
+                    },
                 animationDelay = 0L,
-                animationMode = AnimationMode.Together(delayBuilder = { it * 500L }
-                ),
+                animationMode =
+                    AnimationMode.Together(delayBuilder = { it * 500L })
             )
         }
     }

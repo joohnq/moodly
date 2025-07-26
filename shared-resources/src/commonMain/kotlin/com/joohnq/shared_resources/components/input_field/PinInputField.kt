@@ -33,37 +33,45 @@ fun PinInputField(
     focusRequester: FocusRequester,
     onFocusChanged: (Boolean) -> Unit = {},
     onNumberChanged: (Int?) -> Unit = {},
-    onKeyboardBack: () -> Unit = {},
+    onKeyboardBack: () -> Unit = {}
 ) {
     val text by remember(number) {
         mutableStateOf(
             TextFieldValue(
-                text = number?.toString().orEmpty(), selection = TextRange(
-                    index = if (number != null) 1 else 0
-                )
+                text = number?.toString().orEmpty(),
+                selection =
+                    TextRange(
+                        index = if (number != null) 1 else 0
+                    )
             )
         )
     }
     var isFocused by remember {
         mutableStateOf(false)
     }
-    val textColor = when {
-        isFocused -> Colors.White
-        else -> Colors.Brown80
-    }
+    val textColor =
+        when {
+            isFocused -> Colors.White
+            else -> Colors.Brown80
+        }
     val backgroundColor = if (isFocused) Colors.Green50 else Colors.White
 
     Box(
-        modifier = modifier.background(color = backgroundColor, shape = Dimens.Shape.Circle)
-            .aspectRatio(2 / 3f).then(
-                if (isFocused) {
-                    Modifier.border(
-                        width = 4.dp,
-                        color = Colors.Green50Alpha25,
-                        shape = Dimens.Shape.Circle
-                    )
-                } else Modifier
-            ),
+        modifier =
+            modifier
+                .background(color = backgroundColor, shape = Dimens.Shape.Circle)
+                .aspectRatio(2 / 3f)
+                .then(
+                    if (isFocused) {
+                        Modifier.border(
+                            width = 4.dp,
+                            color = Colors.Green50Alpha25,
+                            shape = Dimens.Shape.Circle
+                        )
+                    } else {
+                        Modifier
+                    }
+                ),
         contentAlignment = Alignment.Center
     ) {
         BasicTextField(
@@ -77,36 +85,45 @@ fun PinInputField(
             },
             singleLine = true,
             cursorBrush = SolidColor(Colors.Transparent),
-            textStyle = TextStyles.headingLgExtraBold()
-                .copy(color = textColor, textAlign = TextAlign.Center),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.NumberPassword
-            ),
-            modifier = Modifier.padding(10.dp).focusRequester(focusRequester).onFocusChanged {
-                isFocused = it.isFocused
-                onFocusChanged(it.isFocused)
-            }.onPreviewKeyEvent { event ->
-                val wasPressed =
-                    event.key == Key.Backspace
+            textStyle =
+                TextStyles
+                    .headingLgExtraBold()
+                    .copy(color = textColor, textAlign = TextAlign.Center),
+            keyboardOptions =
+                KeyboardOptions(
+                    keyboardType = KeyboardType.NumberPassword
+                ),
+            modifier =
+                Modifier
+                    .padding(10.dp)
+                    .focusRequester(focusRequester)
+                    .onFocusChanged {
+                        isFocused = it.isFocused
+                        onFocusChanged(it.isFocused)
+                    }.onPreviewKeyEvent { event ->
+                        val wasPressed =
+                            event.key == Key.Backspace
 
-                if (wasPressed && number == null) {
-                    onKeyboardBack()
-                }
+                        if (wasPressed && number == null) {
+                            onKeyboardBack()
+                        }
 
-                false
-            },
+                        false
+                    },
             decorationBox = { innerBox ->
                 innerBox()
                 if (!isFocused && number == null) {
                     Text(
                         text = "0",
-                        style = TextStyles.headingLgExtraBold()
-                            .copy(color = Colors.Brown100Alpha64),
+                        style =
+                            TextStyles
+                                .headingLgExtraBold()
+                                .copy(color = Colors.Brown100Alpha64),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier.fillMaxSize().wrapContentSize()
                     )
                 }
-            },
+            }
         )
     }
 }

@@ -14,19 +14,20 @@ import org.jetbrains.compose.resources.StringResource
 fun TextAndCheckButton(
     modifier: Modifier = Modifier,
     text: StringResource,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     TextAndIconButton(
         modifier = modifier,
         text = text,
         colors = ComponentColors.Button.mainButtonColorsInverted(),
         shape = Dimens.Shape.Circle,
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Check,
-            tint = Colors.Brown80,
-            modifier = Modifier.size(Dimens.Icon),
-            contentDescription = text
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Check,
+                tint = Colors.Brown80,
+                modifier = Modifier.size(Dimens.Icon),
+                contentDescription = text
+            ),
         onClick = onClick
     )
 }

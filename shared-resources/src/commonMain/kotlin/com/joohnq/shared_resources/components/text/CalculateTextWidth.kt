@@ -10,12 +10,16 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun CalculateTextWidth(text: StringResource, fontSize: TextUnit): Dp {
+fun CalculateTextWidth(
+    text: StringResource,
+    fontSize: TextUnit
+): Dp {
     val textMeasurer = rememberTextMeasurer()
-    val textLayoutResult = textMeasurer.measure(
-        text = stringResource(text),
-        style = TextStyle(fontSize = fontSize)
-    )
+    val textLayoutResult =
+        textMeasurer.measure(
+            text = stringResource(text),
+            style = TextStyle(fontSize = fontSize)
+        )
     val textWidthPx = textLayoutResult.size.width
     val density = LocalDensity.current
     val textWidthDp = with(density) { textWidthPx.toDp() }

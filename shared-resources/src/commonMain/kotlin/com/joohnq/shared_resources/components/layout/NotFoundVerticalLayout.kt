@@ -27,15 +27,16 @@ fun NotFoundVerticalLayout(
     title: StringResource,
     subtitle: StringResource,
     image: DrawableResource,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
-        colors = CardColors(
-            containerColor = containerColor,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = containerColor,
-            disabledContentColor = Colors.Brown80
-        ),
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Colors.Brown80
+            ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
         onClick = onClick
@@ -63,10 +64,11 @@ fun NotFoundVerticalLayout(
             )
             Row(
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(
-                    10.dp,
-                    alignment = Alignment.CenterHorizontally
-                ),
+                horizontalArrangement =
+                    Arrangement.spacedBy(
+                        10.dp,
+                        alignment = Alignment.CenterHorizontally
+                    ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(

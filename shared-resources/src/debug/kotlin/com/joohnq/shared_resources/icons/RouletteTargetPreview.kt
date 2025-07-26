@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun RouletteTargetPreview() {
     Icon(
         imageVector = RouletteTarget,
-        contentDescription = null,
+        contentDescription = null
     )
 }

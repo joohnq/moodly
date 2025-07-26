@@ -30,15 +30,16 @@ fun NotFoundHorizontalLayout(
     title: StringResource,
     subtitle: StringResource,
     image: DrawableResource,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
-        colors = CardColors(
-            containerColor = containerColor,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = containerColor,
-            disabledContentColor = Colors.Brown80
-        ),
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Colors.Brown80
+            ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
         onClick = onClick
@@ -55,7 +56,7 @@ fun NotFoundHorizontalLayout(
                 Text(
                     text = stringResource(title),
                     style = TextStyles.paragraphSm(),
-                    color = Colors.Gray60,
+                    color = Colors.Gray60
                 )
                 VerticalSpacer(10.dp)
                 Row(
@@ -79,7 +80,7 @@ fun NotFoundHorizontalLayout(
             Image(
                 painter = painterResource(image),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.Fit
             )
         }
     }
@@ -94,15 +95,16 @@ fun NotFoundHorizontalLayout(
     text: StringResource,
     icon: DrawableResource,
     image: DrawableResource,
-    onCreate: () -> Unit,
+    onCreate: () -> Unit
 ) {
     Card(
-        colors = CardColors(
-            containerColor = containerColor,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = containerColor,
-            disabledContentColor = Color.Unspecified
-        ),
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Color.Unspecified
+            ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
         onClick = onCreate
@@ -144,7 +146,7 @@ fun NotFoundHorizontalLayout(
             Image(
                 painter = painterResource(image),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.Fit
             )
         }
     }

@@ -9,26 +9,25 @@ import com.joohnq.shared_resources.theme.Colors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTimePicker(
-    timePickerState: TimePickerState,
-) {
+fun AppTimePicker(timePickerState: TimePickerState) {
     TimePicker(
         state = timePickerState,
-        colors = TimePickerColors(
-            clockDialColor = Colors.White,
-            selectorColor = Colors.Brown80,
-            containerColor = Colors.White,
-            periodSelectorBorderColor = Colors.Brown80,
-            clockDialSelectedContentColor = Colors.White,
-            clockDialUnselectedContentColor = Colors.Brown80,
-            periodSelectorSelectedContainerColor = Colors.White,
-            periodSelectorUnselectedContainerColor = Colors.White,
-            periodSelectorSelectedContentColor = Colors.Brown80,
-            periodSelectorUnselectedContentColor = Colors.Brown80,
-            timeSelectorSelectedContainerColor = Colors.White,
-            timeSelectorUnselectedContainerColor = Colors.White,
-            timeSelectorSelectedContentColor = Colors.Brown80,
-            timeSelectorUnselectedContentColor = Colors.Brown80
-        ),
+        colors =
+            TimePickerColors(
+                clockDialColor = Colors.White,
+                selectorColor = Colors.Brown80,
+                containerColor = Colors.White,
+                periodSelectorBorderColor = Colors.Brown80,
+                clockDialSelectedContentColor = Colors.White,
+                clockDialUnselectedContentColor = Colors.Brown80,
+                periodSelectorSelectedContainerColor = Colors.White,
+                periodSelectorUnselectedContainerColor = Colors.White,
+                periodSelectorSelectedContentColor = Colors.Brown80,
+                periodSelectorUnselectedContentColor = Colors.Brown80,
+                timeSelectorSelectedContainerColor = Colors.White,
+                timeSelectorUnselectedContainerColor = Colors.White,
+                timeSelectorSelectedContentColor = Colors.Brown80,
+                timeSelectorUnselectedContentColor = Colors.Brown80
+            )
     )
 }

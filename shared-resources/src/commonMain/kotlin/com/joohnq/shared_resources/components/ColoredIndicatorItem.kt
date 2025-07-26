@@ -31,10 +31,11 @@ fun ColoredIndicatorItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .background(color = color, shape = Dimens.Shape.Circle)
-                        .clip(Dimens.Shape.Circle)
+                    modifier =
+                        Modifier
+                            .size(10.dp)
+                            .background(color = color, shape = Dimens.Shape.Circle)
+                            .clip(Dimens.Shape.Circle)
                 )
                 Text(
                     text = title,

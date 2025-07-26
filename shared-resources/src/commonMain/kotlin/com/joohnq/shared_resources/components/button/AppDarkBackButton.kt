@@ -15,19 +15,18 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.IconResource
 
 @Composable
-fun AppDarkBackButton(
-    onClick: () -> Unit = {},
-) {
+fun AppDarkBackButton(onClick: () -> Unit = {}) {
     FilledIconButton(
         modifier = Modifier.size(48.dp),
         shape = Dimens.Shape.Circle,
-        colors = IconButtonColors(
-            containerColor = Colors.Brown20,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Brown20,
-            disabledContentColor = Colors.Brown80
-        ),
-        onClick = onClick,
+        colors =
+            IconButtonColors(
+                containerColor = Colors.Brown20,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = Colors.Brown20,
+                disabledContentColor = Colors.Brown80
+            ),
+        onClick = onClick
     ) {
         IconResource(
             IconResource(

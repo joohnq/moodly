@@ -9,13 +9,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun LineChartPreview() {
     LineChart(
         color = Colors.Brown80,
-        values = listOf(
-            0.0,
-            1.0,
-            2.0,
-            3.0,
-            4.0,
-            5.0,
-        )
+        values =
+            listOf(
+                0.0,
+                1.0,
+                2.0,
+                3.0,
+                4.0,
+                5.0
+            )
     )
 }

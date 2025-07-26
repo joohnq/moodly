@@ -15,19 +15,18 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.IconResource
 
 @Composable
-fun AppLightBackButton(
-    onClick: () -> Unit = {},
-) {
+fun AppLightBackButton(onClick: () -> Unit = {}) {
     FilledIconButton(
         modifier = Modifier.size(48.dp),
         shape = Dimens.Shape.Circle,
-        colors = IconButtonColors(
-            containerColor = Colors.White32,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.White32,
-            disabledContentColor = Colors.White
-        ),
-        onClick = onClick,
+        colors =
+            IconButtonColors(
+                containerColor = Colors.White32,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.White32,
+                disabledContentColor = Colors.White
+            ),
+        onClick = onClick
     ) {
         IconResource(
             IconResource(

@@ -33,20 +33,21 @@ fun GiganticCreateCard(
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Card(
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Colors.Brown80
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Colors.Brown80
+            ),
         shape = Dimens.Shape.Large,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth()
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall()
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -68,10 +69,11 @@ fun GiganticCreateCard(
                     onClick = onCreate,
                     shape = Dimens.Shape.Circle,
                     modifier = Modifier.size(48.dp),
-                    border = BorderStroke(
-                        width = 1.dp,
-                        color = Colors.Gray30
-                    )
+                    border =
+                        BorderStroke(
+                            width = 1.dp,
+                            color = Colors.Gray30
+                        )
                 ) {
                     Icon(
                         painter = painterResource(Drawables.Icons.Outlined.Add),

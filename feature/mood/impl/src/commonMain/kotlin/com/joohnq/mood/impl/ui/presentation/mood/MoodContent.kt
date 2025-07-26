@@ -15,7 +15,7 @@ import com.joohnq.ui.mapper.foldComposable
 fun MoodContent(
     records: UiState<List<MoodRecordResource>>,
     onAction: (MoodContract.Intent) -> Unit = {},
-    onEvent: (MoodContract.Event) -> Unit = {},
+    onEvent: (MoodContract.Event) -> Unit = {}
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -33,7 +33,7 @@ fun MoodContent(
                 panel = { modifier ->
                     MoodContentPanel(
                         modifier = modifier,
-                        record = record,
+                        record = record
                     )
                 },
                 body = { modifier ->

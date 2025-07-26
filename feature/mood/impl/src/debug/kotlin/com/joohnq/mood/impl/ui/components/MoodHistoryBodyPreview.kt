@@ -13,6 +13,6 @@ fun MoodHistoryBodyPreview(
     list: List<MoodRecordResource>
 ) {
     MoodHistoryBody(
-        records = list,
+        records = list
     )
 }

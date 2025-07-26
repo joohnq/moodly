@@ -17,7 +17,8 @@ fun MoodDayPreview(
 ) {
     MoodDay(
         record = item,
-        day = CalendarDay(
+        day =
+        CalendarDay(
             date = LocalDate(2023, 1, 1),
             position = DayPosition.MonthDate
         )

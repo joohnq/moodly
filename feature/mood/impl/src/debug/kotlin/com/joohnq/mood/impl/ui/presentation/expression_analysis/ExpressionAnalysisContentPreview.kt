@@ -7,6 +7,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun ExpressionAnalysisContentPreview() {
     ExpressionAnalysisContent(
-        description = "Description",
+        description = "Description"
     )
 }

@@ -14,9 +14,9 @@ import com.joohnq.shared_resources.theme.Drawables
 fun MoodInsight(
     modifier: Modifier = Modifier,
     records: List<MoodRecordResource>,
-    onCreate: () -> Unit = {},
+    onCreate: () -> Unit = {}
 ) {
-    if (records.isEmpty())
+    if (records.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -25,9 +25,10 @@ fun MoodInsight(
             image = Drawables.Images.MoodInsight,
             onClick = onCreate
         )
-    else
+    } else {
         MoodInsightContent(
             modifier = modifier,
-            records = records,
+            records = records
         )
+    }
 }

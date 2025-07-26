@@ -22,7 +22,8 @@ fun MoodFace(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier
+        modifier =
+        modifier
             .background(color = resource.palette.faceBackgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
@@ -36,14 +37,15 @@ fun MoodFace(
 
 @Composable
 fun MoodFace(
-    resource: MoodResource,
     modifier: Modifier = Modifier,
+    resource: MoodResource,
     backgroundColor: Color,
-    color: Color,
+    color: Color
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier
+        modifier =
+        modifier
             .background(color = backgroundColor, shape = Dimens.Shape.Circle)
     ) {
         Icon(
@@ -61,10 +63,11 @@ fun MoodFace(
     backgroundColor: Color,
     color: Color,
     resource: MoodResource,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     IconButton(
-        modifier = Modifier
+        modifier =
+        Modifier
             .background(color = backgroundColor, shape = Dimens.Shape.Circle),
         onClick = onClick
     ) {
@@ -80,17 +83,19 @@ fun MoodFace(
 @Composable
 fun MoodFace(
     modifier: Modifier = Modifier,
-    average: MoodAverageResource,
+    average: MoodAverageResource
 ) {
     Box(
-        modifier = Modifier
-            .background(color = average.color, shape = Dimens.Shape.Circle),
+        modifier =
+        Modifier
+            .background(color = average.color, shape = Dimens.Shape.Circle)
     ) {
-        val image = when (average) {
-            MoodAverageResource.Negative -> Drawables.Icons.Filled.MoodDepressed
-            MoodAverageResource.Neutral -> Drawables.Icons.Filled.MoodNeutral
-            else -> Drawables.Icons.Filled.MoodOverjoyed
-        }
+        val image =
+            when (average) {
+                MoodAverageResource.Negative -> Drawables.Icons.Filled.MoodDepressed
+                MoodAverageResource.Neutral -> Drawables.Icons.Filled.MoodNeutral
+                else -> Drawables.Icons.Filled.MoodOverjoyed
+            }
         Icon(
             painter = painterResource(image),
             contentDescription = null,

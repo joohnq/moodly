@@ -1,6 +1,10 @@
 package com.joohnq.mood.impl.ui.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
@@ -25,11 +29,12 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource,
+    record: MoodRecordResource
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardColors(
+        colors =
+        CardColors(
             containerColor = Colors.Gray5,
             contentColor = Color.Unspecified,
             disabledContainerColor = Colors.Gray5,
@@ -44,7 +49,7 @@ fun MoodHistoryCard(
         ) {
             MoodFace(
                 modifier = Modifier.size(24.dp),
-                resource = record.mood,
+                resource = record.mood
             )
             Column(
                 modifier = Modifier.weight(1f),

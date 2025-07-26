@@ -1,6 +1,5 @@
 package com.joohnq.mood.impl.ui.resource
 
-import com.joohnq.ui.entity.Assets
 import com.joohnq.mood.api.entity.Mood.Companion.DEPRESSED
 import com.joohnq.mood.api.entity.Mood.Companion.HAPPY
 import com.joohnq.mood.api.entity.Mood.Companion.NEUTRAL
@@ -11,6 +10,7 @@ import com.joohnq.mood.api.property.MoodProperties
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.ui.entity.Assets
 import org.jetbrains.compose.resources.StringResource
 
 sealed class MoodResource(
@@ -18,7 +18,7 @@ sealed class MoodResource(
     val assets: Assets,
     val text: StringResource,
     override val healthLevel: Int,
-    val palette: MoodPalette,
+    val palette: MoodPalette
 ) : MoodProperties {
     data object Depressed :
         MoodResource(

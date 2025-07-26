@@ -8,4 +8,3 @@ object MoodRecordConverter {
     fun fromMood(value: Mood?): Long = value.toInt().toLong()
     fun toMood(value: Long): Mood = value.toInt().toMood()
 }
-

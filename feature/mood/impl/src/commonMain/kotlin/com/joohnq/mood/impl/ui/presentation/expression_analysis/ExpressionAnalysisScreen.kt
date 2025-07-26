@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
-    onGoBack: () -> Unit,
+    onGoBack: () -> Unit
 ) {
     val moodViewModel: MoodViewModel = sharedViewModel()
     val addStatsViewModel: AddMoodViewModel = sharedViewModel()

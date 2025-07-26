@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
-    onEvent: (MoodHistoryContract.Event) -> Unit = {},
+    onEvent: (MoodHistoryContract.Event) -> Unit = {}
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -36,8 +36,10 @@ fun MoodHistoryContent(
                 containerColor = Colors.Brown10
             ) { padding ->
                 Column(
-                    modifier = Modifier
-                        .padding(padding).paddingHorizontalMedium()
+                    modifier =
+                    Modifier
+                        .padding(padding)
+                        .paddingHorizontalMedium()
                 ) {
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
@@ -58,11 +60,11 @@ fun MoodHistoryContent(
                         items(records) { record ->
                             SwipeableCardLayout(
                                 modifier = Modifier.fillMaxWidth(),
-                                onAction = {},
+                                onAction = {}
                             ) { modifier ->
                                 MoodHistoryCard(
                                     modifier = modifier,
-                                    record = record,
+                                    record = record
                                 )
                             }
                         }

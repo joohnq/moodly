@@ -14,8 +14,9 @@ fun MoodContentPreview(
     item: MoodRecordResource
 ) {
     MoodContent(
-        records = UiState.Success(
+        records =
+        UiState.Success(
             listOf(item)
-        ),
+        )
     )
 }

@@ -3,10 +3,10 @@ package com.joohnq.mood.impl.ui.parameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 
-class ListMoodRecordResourceParameterProvider :
-    PreviewParameterProvider<List<MoodRecordResource>> {
-    override val values = sequenceOf(
-        MoodRecordResource.allMoodRecordResourcePreview,
-        emptyList()
-    )
+class ListMoodRecordResourceParameterProvider : PreviewParameterProvider<List<MoodRecordResource>> {
+    override val values =
+        sequenceOf(
+            MoodRecordResource.allMoodRecordResourcePreview,
+            emptyList()
+        )
 }

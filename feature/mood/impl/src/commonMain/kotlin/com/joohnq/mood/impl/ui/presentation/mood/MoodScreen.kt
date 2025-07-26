@@ -9,7 +9,7 @@ import com.joohnq.ui.sharedViewModel
 fun MoodScreen(
     onGoBack: () -> Unit,
     onNavigateToAddMood: () -> Unit,
-    onNavigateToMoodHistory: () -> Unit,
+    onNavigateToMoodHistory: () -> Unit
 ) {
     val viewModel: MoodViewModel = sharedViewModel()
     val state by viewModel.state.collectAsState()

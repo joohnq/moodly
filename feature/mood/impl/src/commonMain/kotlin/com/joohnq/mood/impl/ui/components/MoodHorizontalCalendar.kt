@@ -13,7 +13,7 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 @Composable
 fun MoodHorizontalCalendar(
     calendarState: CalendarState = rememberCalendarState(),
-    records: List<MoodRecordResource>,
+    records: List<MoodRecordResource>
 ) {
     HorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),
@@ -24,7 +24,7 @@ fun MoodHorizontalCalendar(
 
             MoodDay(
                 record = record,
-                day = day,
+                day = day
             )
         },
         monthHeader = {

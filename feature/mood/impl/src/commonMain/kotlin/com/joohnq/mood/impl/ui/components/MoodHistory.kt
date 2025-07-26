@@ -18,26 +18,27 @@ fun MoodHistoryContent(
     records: List<MoodRecordResource>,
     onSeeMore: () -> Unit = {},
     onCreate: () -> Unit = {},
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {}
 ) {
     SectionHeader(
         modifier = modifier,
         title = Res.string.mood_history,
         onSeeMore = onSeeMore
     )
-    if (records.isEmpty())
+    if (records.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.you_dont_have_enough_data_to_show_your_history_lets_log_your_first_mood_to_see_this,
             subtitle = Res.string.log_first_mood,
             image = Drawables.Images.MoodHistory,
-            onClick = onCreate,
+            onClick = onCreate
         )
-    else
+    } else {
         MoodHistoryBody(
             modifier = modifier,
             records = records,
             onDelete = onDelete
         )
+    }
 }

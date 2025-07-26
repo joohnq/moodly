@@ -4,13 +4,14 @@ import com.joohnq.mood.api.entity.Mood
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.api.entity.SleepQuality
 
-fun getAllMoodResource(): List<MoodResource> = listOf(
-    MoodResource.Depressed,
-    MoodResource.Sad,
-    MoodResource.Neutral,
-    MoodResource.Happy,
-    MoodResource.Overjoyed
-)
+fun getAllMoodResource(): List<MoodResource> =
+    listOf(
+        MoodResource.Depressed,
+        MoodResource.Sad,
+        MoodResource.Neutral,
+        MoodResource.Happy,
+        MoodResource.Overjoyed
+    )
 
 fun Mood.toResource(): MoodResource =
     when (this) {

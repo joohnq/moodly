@@ -13,6 +13,6 @@ fun MoodInsightPreview(
     list: List<MoodRecordResource>
 ) {
     MoodInsight(
-        records = list,
+        records = list
     )
 }

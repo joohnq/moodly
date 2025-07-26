@@ -16,13 +16,19 @@ plugins {
     alias(libs.plugins.android.lint) apply false
 }
 
-subprojects{
+subprojects {
     apply<SpotlessPlugin>()
     configure<SpotlessExtension> {
         kotlin {
-            target("**.kt")
+            target("**/*.kt")
             targetExclude("build/**/*.kt")
             ktlint(libs.versions.ktlint.get())
+                .setEditorConfigPath("${rootDir}/spotless/.editorconfig")
+                .editorConfigOverride(
+                    mapOf(
+                        "ktlint_standard_no-wildcard-imports" to "disabled"
+                    )
+                )
             trimTrailingWhitespace()
             endWithNewline()
         }

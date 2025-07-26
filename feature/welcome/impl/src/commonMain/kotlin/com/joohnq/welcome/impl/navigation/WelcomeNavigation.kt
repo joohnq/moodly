@@ -7,9 +7,7 @@ import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.welcome.impl.presentation.welcome.WelcomeScreen
 
-fun NavGraphBuilder.welcomeNavigation(
-    onNavigateGraph: (NavigationGraph, Boolean) -> Unit,
-) {
+fun NavGraphBuilder.welcomeNavigation(onNavigateGraph: (NavigationGraph, Boolean) -> Unit) {
     navigation<NavigationGraph.Welcome>(startDestination = Destination.Welcome) {
         composable<Destination.Welcome> {
             WelcomeScreen(

@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 fun WelcomeBase(
     welcome: Welcome,
     paddingTop: Dp,
-    onNext: () -> Unit,
+    onNext: () -> Unit
 ) {
     DecoratedConvexPanel(
         panelBackgroundColor = welcome.backgroundColor,
@@ -55,9 +55,10 @@ fun WelcomeBase(
         },
         content = {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(vertical = 32.dp, horizontal = 16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(vertical = 32.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 LinearProgressIndicator(
@@ -65,14 +66,14 @@ fun WelcomeBase(
                     modifier = Modifier.width(180.dp).height(8.dp),
                     color = Colors.Brown80,
                     trackColor = Colors.Brown20,
-                    strokeCap = StrokeCap.Round,
+                    strokeCap = StrokeCap.Round
                 )
                 VerticalSpacer(24.dp)
                 HeadingWithSpan(
                     firstTitle = welcome.firstTitle,
                     secondTitle = welcome.secondTitle,
                     span = stringResource(welcome.span),
-                    spanColor = welcome.spanColor,
+                    spanColor = welcome.spanColor
                 )
                 VerticalSpacer(24.dp)
                 IconContinueButton(

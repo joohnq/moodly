@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 fun Modifier.swipeToReveal(
     width: Float,
     offset: Animatable<Float, AnimationVector1D>,
-    setIsExpanded: (Boolean) -> Unit,
+    setIsExpanded: (Boolean) -> Unit
 ): Modifier {
     val scope = rememberCoroutineScope()
 
@@ -21,10 +21,11 @@ fun Modifier.swipeToReveal(
         detectHorizontalDragGestures(
             onHorizontalDrag = { _, dragAmount ->
                 scope.launch {
-                    val newOffset = (offset.value + dragAmount).coerceIn(
-                        -width,
-                        0f
-                    )
+                    val newOffset =
+                        (offset.value + dragAmount).coerceIn(
+                            -width,
+                            0f
+                        )
                     offset.snapTo(newOffset)
                 }
             },

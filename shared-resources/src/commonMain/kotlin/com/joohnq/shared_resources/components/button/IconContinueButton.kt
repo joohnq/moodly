@@ -17,13 +17,13 @@ import org.jetbrains.compose.resources.stringResource
 fun IconContinueButton(
     modifier: Modifier = Modifier,
     colors: IconButtonColors,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     FilledIconButton(
         modifier = modifier,
         shape = Dimens.Shape.Circle,
         colors = colors,
-        onClick = onClick,
+        onClick = onClick
     ) {
         Icon(
             painter = painterResource(Drawables.Icons.Outlined.Arrow),

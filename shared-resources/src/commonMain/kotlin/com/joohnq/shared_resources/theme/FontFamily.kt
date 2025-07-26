@@ -25,30 +25,25 @@ object FontFamily {
             )
 
         @Composable
-        fun extraBold() =
-            FontFamily(Font(Res.font.urbanist_extra_bold, FontWeight.ExtraBold, FontStyle.Normal))
+        fun extraBold() = FontFamily(Font(Res.font.urbanist_extra_bold, FontWeight.ExtraBold, FontStyle.Normal))
 
         @Composable
         fun bold() = FontFamily(Font(Res.font.urbanist_bold, FontWeight.Bold, FontStyle.Normal))
 
         @Composable
-        fun semiBold() =
-            FontFamily(Font(Res.font.urbanist_semi_bold, FontWeight.SemiBold, FontStyle.Normal))
+        fun semiBold() = FontFamily(Font(Res.font.urbanist_semi_bold, FontWeight.SemiBold, FontStyle.Normal))
 
         @Composable
-        fun medium() =
-            FontFamily(Font(Res.font.urbanist_medium, FontWeight.Medium, FontStyle.Normal))
+        fun medium() = FontFamily(Font(Res.font.urbanist_medium, FontWeight.Medium, FontStyle.Normal))
 
         @Composable
-        fun regular() =
-            FontFamily(Font(Res.font.urbanist_regular, FontWeight.Normal, FontStyle.Normal))
+        fun regular() = FontFamily(Font(Res.font.urbanist_regular, FontWeight.Normal, FontStyle.Normal))
 
         @Composable
         fun light() = FontFamily(Font(Res.font.urbanist_light, FontWeight.Light, FontStyle.Normal))
 
         @Composable
-        fun extraLight() =
-            FontFamily(Font(Res.font.urbanist_extra_light, FontWeight.ExtraLight, FontStyle.Normal))
+        fun extraLight() = FontFamily(Font(Res.font.urbanist_extra_light, FontWeight.ExtraLight, FontStyle.Normal))
 
         @Composable
         fun thin() = FontFamily(Font(Res.font.urbanist_thin, FontWeight.Thin, FontStyle.Normal))

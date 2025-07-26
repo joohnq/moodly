@@ -39,15 +39,16 @@ fun AppTextFieldWithPlaceholder(
     focusedBorderColor: Color,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    onValueChange: (String) -> Unit = {},
+    onValueChange: (String) -> Unit = {}
 ) {
     val isError = errorText != null
     val focusRequester = FocusRequester()
     var isFocused by remember { mutableStateOf(false) }
 
     LaunchedEffect(isError) {
-        if (isError)
+        if (isError) {
             focusRequester.requestFocus()
+        }
     }
 
     Column {
@@ -58,21 +59,23 @@ fun AppTextFieldWithPlaceholder(
         )
         VerticalSpacer(5.dp)
         Box(
-            modifier = Modifier
-                .border(
-                    width = when (true) {
-                        isError -> 4.dp
-                        isFocused -> 4.dp
-                        else -> 0.dp
-                    },
-                    color = when (true) {
-                        isError -> Colors.Orange40Alpha25
-                        isFocused -> focusedBorderColor
-                        else -> Colors.Transparent
-                    },
-                    shape = Dimens.Shape.Circle
-                )
-                .padding(4.dp)
+            modifier =
+                Modifier
+                    .border(
+                        width =
+                            when (true) {
+                                isError -> 4.dp
+                                isFocused -> 4.dp
+                                else -> 0.dp
+                            },
+                        color =
+                            when (true) {
+                                isError -> Colors.Orange40Alpha25
+                                isFocused -> focusedBorderColor
+                                else -> Colors.Transparent
+                            },
+                        shape = Dimens.Shape.Circle
+                    ).padding(4.dp)
         ) {
             AppOutlinedTextField(
                 text = text,
@@ -81,11 +84,14 @@ fun AppTextFieldWithPlaceholder(
                 colors = colors,
                 leadingIcon = leadingIcon,
                 trailingIcon = trailingIcon,
-                modifier = modifier.fillMaxWidth().height(56.dp)
-                    .onFocusChanged { focusState ->
-                        isFocused = focusState.isFocused
-                    }.focusRequester(focusRequester),
-                onValueChange = onValueChange,
+                modifier =
+                    modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .onFocusChanged { focusState ->
+                            isFocused = focusState.isFocused
+                        }.focusRequester(focusRequester),
+                onValueChange = onValueChange
             )
         }
         if (isError) {

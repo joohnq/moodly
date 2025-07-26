@@ -26,21 +26,22 @@ fun GiganticSecondaryCard(
     subtitle: String,
     onClick: () -> Unit,
     secondary: @Composable () -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     Card(
-        colors = CardColors(
-            containerColor = containerColor,
-            contentColor = Colors.Brown80,
-            disabledContainerColor = containerColor,
-            disabledContentColor = Colors.Brown80
-        ),
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Colors.Brown80
+            ),
         shape = Dimens.Shape.Large,
         modifier = modifier.fillMaxWidth(),
         onClick = onClick
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
+            modifier = Modifier.fillMaxWidth().paddingAllSmall()
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

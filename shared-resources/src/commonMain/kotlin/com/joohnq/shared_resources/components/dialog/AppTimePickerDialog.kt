@@ -25,11 +25,11 @@ fun AppTimePickerDialog(
     title: StringResource,
     onDismiss: () -> Unit = {},
     onConfirm: () -> Unit = {},
-    content: @Composable () -> Unit = {},
+    content: @Composable () -> Unit = {}
 ) {
     Dialog(
         onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false),
+        properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
             shape = MaterialTheme.shapes.extraLarge,
@@ -42,24 +42,26 @@ fun AppTimePickerDialog(
                     .background(
                         shape = MaterialTheme.shapes.extraLarge,
                         color = Colors.White
-                    ),
+                    )
         ) {
             Column(
                 modifier = Modifier.padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 20.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 20.dp),
                     text = stringResource(title),
                     style = TextStyles.textSmSemiBold().copy(color = Colors.Brown80)
                 )
                 content()
                 Row(
-                    modifier = Modifier
-                        .height(40.dp)
-                        .fillMaxWidth()
+                    modifier =
+                        Modifier
+                            .height(40.dp)
+                            .fillMaxWidth()
                 ) {
                     TextButton(onClick = onDismiss) {
                         Text(

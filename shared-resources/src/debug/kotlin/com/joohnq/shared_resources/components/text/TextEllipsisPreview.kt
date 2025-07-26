@@ -11,6 +11,6 @@ fun TextEllipsisPreview() {
     TextEllipsis(
         text = "Text",
         style = TextStyles.textSmMedium(),
-        color = Colors.Brown80,
+        color = Colors.Brown80
     )
 }

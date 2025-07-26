@@ -14,16 +14,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 
 @Composable
-fun ProfileImage(
-    painter: Painter
-) {
+fun ProfileImage(painter: Painter) {
     Image(
         painter = painter,
         contentDescription = null,
-        modifier = Modifier
-            .size(64.dp)
-            .background(color = Colors.White, shape = Dimens.Shape.Circle)
-            .clip(Dimens.Shape.Circle),
+        modifier =
+            Modifier
+                .size(64.dp)
+                .background(color = Colors.White, shape = Dimens.Shape.Circle)
+                .clip(Dimens.Shape.Circle),
         contentScale = ContentScale.Crop,
         alignment = Alignment.Center
     )

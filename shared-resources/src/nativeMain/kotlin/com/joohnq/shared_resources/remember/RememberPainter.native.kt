@@ -5,5 +5,4 @@ import androidx.compose.ui.graphics.painter.Painter
 import coil3.compose.rememberAsyncImagePainter
 
 @Composable
-actual fun rememberPainter(data: String?): Painter =
-    rememberAsyncImagePainter(data?.replace("file://", ""))
+actual fun rememberPainter(data: String?): Painter = rememberAsyncImagePainter(data?.replace("file://", ""))

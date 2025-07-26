@@ -8,7 +8,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Modifier.dpOffset(x: Dp = 0.dp, y: Dp = 0.dp): Modifier =
+fun Modifier.dpOffset(
+    x: Dp = 0.dp,
+    y: Dp = 0.dp
+): Modifier =
     offset {
         IntOffset(x = x.toPx().toInt(), y = y.toPx().toInt())
     }

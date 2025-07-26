@@ -6,5 +6,4 @@ import com.joohnq.api.getNow
 import kotlinx.datetime.LocalDateTime
 
 @Composable
-fun rememberGetNow(): LocalDateTime =
-    remember { getNow() }
+fun rememberGetNow(): LocalDateTime = remember { getNow() }

@@ -25,50 +25,53 @@ fun TextAndIconButtonPreview(
     TextAndIconButton(
         enabled = boolean,
         text = Res.string.app_name,
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Logo,
-            tint = Colors.Brown80,
-            contentDescription = Res.string.app_name
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Logo,
+                tint = Colors.Brown80,
+                contentDescription = Res.string.app_name
+            ),
         colors = ComponentColors.Button.mainButtonColors(),
-        shape = Dimens.Shape.Circle,
+        shape = Dimens.Shape.Circle
     )
 }
 
 @Preview
 @Composable
 fun TextAndIconButtonPreview(
-    @PreviewParameter(ButtonColorsParameterProvider ::class)
-    colors: ButtonColors,
+    @PreviewParameter(ButtonColorsParameterProvider::class)
+    colors: ButtonColors
 ) {
     TextAndIconButton(
         enabled = true,
         text = Res.string.app_name,
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Logo,
-            tint = Colors.Brown80,
-            contentDescription = Res.string.app_name
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Logo,
+                tint = Colors.Brown80,
+                contentDescription = Res.string.app_name
+            ),
         colors = colors,
-        shape = Dimens.Shape.Circle,
+        shape = Dimens.Shape.Circle
     )
 }
 
 @Preview
 @Composable
 fun TextAndIconButtonPreview(
-    @PreviewParameter(ShapeParameterProvider ::class)
+    @PreviewParameter(ShapeParameterProvider::class)
     shape: Shape
 ) {
     TextAndIconButton(
         enabled = true,
         text = Res.string.app_name,
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Logo,
-            tint = Colors.Brown80,
-            contentDescription = Res.string.app_name
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Logo,
+                tint = Colors.Brown80,
+                contentDescription = Res.string.app_name
+            ),
         colors = ComponentColors.Button.mainButtonColors(),
-        shape = shape,
+        shape = shape
     )
 }

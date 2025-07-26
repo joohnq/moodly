@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun TextAndCheckButtonPreview() {
     TextAndCheckButton(
-        text = Res.string.app_name,
+        text = Res.string.app_name
     )
 }

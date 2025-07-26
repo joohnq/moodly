@@ -20,8 +20,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LogoWithBackground() {
     Box(
-        modifier = Modifier.size(64.dp)
-            .background(color = Colors.Brown80, shape = Dimens.Shape.Circle),
+        modifier =
+            Modifier
+                .size(64.dp)
+                .background(color = Colors.Brown80, shape = Dimens.Shape.Circle),
         contentAlignment = Alignment.Center
     ) {
         Image(

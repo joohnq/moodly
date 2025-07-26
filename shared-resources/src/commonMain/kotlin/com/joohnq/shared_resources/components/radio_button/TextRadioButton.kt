@@ -25,7 +25,7 @@ fun TextRadioButton(
     colors: TextRadioButtonColors,
     shape: Shape,
     paddingValues: PaddingValues = ButtonDefaults.ContentPadding,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     Button(
         modifier = modifier.fillMaxWidth().height(56.dp),
@@ -33,14 +33,19 @@ fun TextRadioButton(
         colors = ComponentColors.Button.textRadioButtonColors(selected = selected, colors = colors),
         onClick = onClick,
         contentPadding = paddingValues,
-        border = if (selected) BorderStroke(
-            color = colors.selectedBorderColor,
-            width = 4.dp
-        ) else null,
+        border =
+            if (selected) {
+                BorderStroke(
+                    color = colors.selectedBorderColor,
+                    width = 4.dp
+                )
+            } else {
+                null
+            }
     ) {
         Text(
             text = stringResource(text),
-            style = TextStyles.textLgExtraBold(),
+            style = TextStyles.textLgExtraBold()
         )
     }
 }

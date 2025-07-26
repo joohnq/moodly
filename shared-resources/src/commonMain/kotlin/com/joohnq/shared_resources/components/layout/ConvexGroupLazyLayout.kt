@@ -19,9 +19,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.SmallAddButton
 import com.joohnq.shared_resources.components.modifier.dpOffset
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
 import org.jetbrains.compose.resources.DrawableResource
@@ -37,10 +37,10 @@ fun ConvexGroupLazyLayout(
     onAddButton: () -> Unit,
     onGoBack: () -> Unit,
     panel: @Composable ColumnScope.(Modifier) -> Unit,
-    body: @Composable ColumnScope.(Modifier) -> Unit,
+    body: @Composable ColumnScope.(Modifier) -> Unit
 ) {
     Scaffold(
-        containerColor = containerColor,
+        containerColor = containerColor
     ) { padding ->
         LazyColumn(
             modifier = Modifier.padding(bottom = padding.calculateBottomPadding()),
@@ -52,8 +52,10 @@ fun ConvexGroupLazyLayout(
                         .background(color = containerColor)
                 ) {
                     Box(
-                        modifier = Modifier.wrapContentSize()
-                            .background(color = panelBackgroundColor),
+                        modifier =
+                            Modifier
+                                .wrapContentSize()
+                                .background(color = panelBackgroundColor)
                     ) {
                         Image(
                             painter = painterResource(image),
@@ -64,15 +66,17 @@ fun ConvexGroupLazyLayout(
                             alignment = Alignment.TopCenter
                         )
                         Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
                         ) {
                             VerticalSpacer(padding.calculateTopPadding())
                             AppTopBar(
-                                modifier = Modifier
-                                    .paddingHorizontalMedium(),
+                                modifier =
+                                    Modifier
+                                        .paddingHorizontalMedium(),
                                 isDark = isDark,
-                                onGoBack = onGoBack,
+                                onGoBack = onGoBack
                             )
                             VerticalSpacer(20.dp)
                             panel(

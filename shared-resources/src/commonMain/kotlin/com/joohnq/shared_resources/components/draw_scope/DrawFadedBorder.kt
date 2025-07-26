@@ -9,11 +9,12 @@ fun DrawScope.drawFadedBorder(
     color: Color,
     borderWidth: Float
 ) {
-    val gradientBrush = Brush.verticalGradient(
-        colors = listOf(color, Color.Transparent),
-        startY = 0f,
-        endY = size.height
-    )
+    val gradientBrush =
+        Brush.verticalGradient(
+            colors = listOf(color, Color.Transparent),
+            startY = 0f,
+            endY = size.height
+        )
 
     drawCircle(
         brush = gradientBrush,

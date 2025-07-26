@@ -21,11 +21,12 @@ fun TextWithBackground(
 ) {
     Text(
         text = text.uppercase(),
-        modifier = modifier
-            .border(2.dp, color = borderColor, shape = Dimens.Shape.Circle)
-            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
-            .padding(vertical = 9.dp, horizontal = 16.dp),
-        style = TextStyles.labelSm().copy(color = textColor),
+        modifier =
+            modifier
+                .border(2.dp, color = borderColor, shape = Dimens.Shape.Circle)
+                .background(color = backgroundColor, shape = Dimens.Shape.Circle)
+                .padding(vertical = 9.dp, horizontal = 16.dp),
+        style = TextStyles.labelSm().copy(color = textColor)
     )
 }
 
@@ -34,13 +35,14 @@ fun TextWithBackground(
     modifier: Modifier = Modifier,
     text: String,
     backgroundColor: Color,
-    textColor: Color,
+    textColor: Color
 ) {
     Text(
         text = text,
-        modifier = modifier
-            .background(color = backgroundColor, shape = Dimens.Shape.Circle)
-            .padding(vertical = 9.dp, horizontal = 16.dp),
+        modifier =
+            modifier
+                .background(color = backgroundColor, shape = Dimens.Shape.Circle)
+                .padding(vertical = 9.dp, horizontal = 16.dp),
         style = TextStyles.labelSm().copy(color = textColor)
     )
 }

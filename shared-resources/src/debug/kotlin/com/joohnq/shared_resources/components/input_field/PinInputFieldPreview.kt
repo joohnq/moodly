@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PinInputFieldPreview() {
     PinInputField(
         number = 1,
-        focusRequester = FocusRequester(),
+        focusRequester = FocusRequester()
     )
 }

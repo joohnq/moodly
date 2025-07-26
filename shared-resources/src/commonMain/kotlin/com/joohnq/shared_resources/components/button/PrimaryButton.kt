@@ -18,7 +18,7 @@ fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: StringResource,
     enabled: Boolean = true,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     TextAndIconButton(
         modifier = modifier.height(56.dp),
@@ -26,11 +26,12 @@ fun PrimaryButton(
         enabled = enabled,
         colors = ComponentColors.Button.mainButtonColors(),
         shape = Dimens.Shape.Circle,
-        icon = IconResource(
-            icon = Drawables.Icons.Outlined.Arrow,
-            modifier = Modifier.size(Dimens.Icon),
-            contentDescription = Res.string.continue_word
-        ),
+        icon =
+            IconResource(
+                icon = Drawables.Icons.Outlined.Arrow,
+                modifier = Modifier.size(Dimens.Icon),
+                contentDescription = Res.string.continue_word
+            ),
         onClick = onClick
     )
 }

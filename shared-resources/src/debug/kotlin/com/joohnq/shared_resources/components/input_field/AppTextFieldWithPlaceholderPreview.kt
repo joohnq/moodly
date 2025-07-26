@@ -6,8 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.app_name
-import com.joohnq.shared_resources.enter_your_name
-import com.joohnq.shared_resources.name
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
@@ -31,6 +29,6 @@ fun AppTextFieldWithPlaceholderPreview() {
                 modifier = Modifier.size(Dimens.Icon)
             )
         },
-        colors = ComponentColors.TextField.mainTextFieldColors(),
+        colors = ComponentColors.TextField.mainTextFieldColors()
     )
 }

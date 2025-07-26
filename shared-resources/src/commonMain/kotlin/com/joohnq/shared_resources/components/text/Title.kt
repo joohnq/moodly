@@ -11,7 +11,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun Title(
     modifier: Modifier = Modifier,
-    text: StringResource,
+    text: StringResource
 ) {
     Text(
         text = stringResource(text),

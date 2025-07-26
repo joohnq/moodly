@@ -19,7 +19,7 @@ fun AppOutlinedTextField(
     colors: TextFieldColors,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    onValueChange: (String) -> Unit = {},
+    onValueChange: (String) -> Unit = {}
 ) {
     OutlinedTextField(
         value = text,

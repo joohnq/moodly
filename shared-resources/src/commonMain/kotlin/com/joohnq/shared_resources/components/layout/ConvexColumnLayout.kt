@@ -21,15 +21,16 @@ fun ConvexColumnLayout(
     position: CurvedCanvasPosition = CurvedCanvasPosition.TOP,
     offset: Dp = 60.dp,
     spacer: Dp = 30.dp,
-    content: @Composable ColumnScope.() -> Unit = {},
+    content: @Composable ColumnScope.() -> Unit = {}
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                shape = ConvexCanvas(offset = offset, position = position),
-                color = backgroundColor
-            ),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(
+                    shape = ConvexCanvas(offset = offset, position = position),
+                    color = backgroundColor
+                ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         VerticalSpacer(spacer)

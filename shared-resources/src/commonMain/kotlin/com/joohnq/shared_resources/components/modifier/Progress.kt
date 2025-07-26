@@ -14,12 +14,14 @@ import com.joohnq.shared_resources.theme.Dimens
 fun Modifier.progress(
     sliderState: SliderState,
     height: Dp,
-    shape: Shape = Dimens.Shape.Circle,
+    shape: Shape = Dimens.Shape.Circle
 ) = this
     // Compute the fraction based on the slider's current value.
     // We do this by dividing the current value by the total value.
     // However, the start value might not always be 0, so we need to
     // subtract the start value from both the current value and the total value.
-    .fillMaxWidth(fraction = (sliderState.value - sliderState.valueRange.start) / (sliderState.valueRange.endInclusive - sliderState.valueRange.start))
-    .heightIn(min = height)
+    .fillMaxWidth(
+        fraction =
+            (sliderState.value - sliderState.valueRange.start) / (sliderState.valueRange.endInclusive - sliderState.valueRange.start)
+    ).heightIn(min = height)
     .clip(shape)

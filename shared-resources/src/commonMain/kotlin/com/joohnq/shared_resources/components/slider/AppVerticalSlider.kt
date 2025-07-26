@@ -19,7 +19,7 @@ fun AppVerticalSlider(
     thumb: @Composable () -> Unit,
     track: @Composable (SliderState) -> Unit,
     sliderColors: SliderColors,
-    setSliderValue: (Float) -> Unit,
+    setSliderValue: (Float) -> Unit
 ) {
     Slider(
         value = sliderValue,
@@ -31,24 +31,24 @@ fun AppVerticalSlider(
             track(sliderState)
         },
         colors = sliderColors,
-        modifier = modifier
-            .graphicsLayer {
-                rotationZ = 270f
-                transformOrigin = TransformOrigin(0f, 0f)
-            }
-            .layout { measurable, constraints ->
-                val placeable = measurable.measure(
-                    Constraints(
-                        minWidth = constraints.minHeight,
-                        maxWidth = constraints.maxHeight,
-                        minHeight = constraints.minWidth,
-                        maxHeight = constraints.maxHeight,
-                    )
-                )
-                layout(placeable.height, placeable.width) {
-                    placeable.place(-placeable.width, 0)
+        modifier =
+            modifier
+                .graphicsLayer {
+                    rotationZ = 270f
+                    transformOrigin = TransformOrigin(0f, 0f)
+                }.layout { measurable, constraints ->
+                    val placeable =
+                        measurable.measure(
+                            Constraints(
+                                minWidth = constraints.minHeight,
+                                maxWidth = constraints.maxHeight,
+                                minHeight = constraints.minWidth,
+                                maxHeight = constraints.maxHeight
+                            )
+                        )
+                    layout(placeable.height, placeable.width) {
+                        placeable.place(-placeable.width, 0)
+                    }
                 }
-            }
-
     )
 }

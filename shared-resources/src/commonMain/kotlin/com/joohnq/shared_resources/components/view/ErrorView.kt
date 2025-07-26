@@ -23,14 +23,17 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ErrorView(errorText: String) {
     Box(
-        modifier = Modifier.border(
-            width = 1.dp,
-            color = Colors.Orange40,
-            shape = Dimens.Shape.Circle
-        ).background(
-            color = Colors.Orange20,
-            shape = Dimens.Shape.Circle
-        ).paddingVerticalSmall().fillMaxWidth(),
+        modifier =
+            Modifier
+                .border(
+                    width = 1.dp,
+                    color = Colors.Orange40,
+                    shape = Dimens.Shape.Circle
+                ).background(
+                    color = Colors.Orange20,
+                    shape = Dimens.Shape.Circle
+                ).paddingVerticalSmall()
+                .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

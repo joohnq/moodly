@@ -30,16 +30,17 @@ fun Modifier.drawDottedBorder(
     gapLength: Dp = 4.dp,
     cap: StrokeCap = StrokeCap.Round
 ) = this.drawWithContent {
-
     val outline = shape.createOutline(size, layoutDirection, density = this)
 
-    val dashedStroke = Stroke(
-        cap = cap,
-        width = strokeWidth.toPx(),
-        pathEffect = PathEffect.dashPathEffect(
-            intervals = floatArrayOf(dashLength.toPx(), gapLength.toPx())
+    val dashedStroke =
+        Stroke(
+            cap = cap,
+            width = strokeWidth.toPx(),
+            pathEffect =
+                PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(dashLength.toPx(), gapLength.toPx())
+                )
         )
-    )
 
     drawContent()
 

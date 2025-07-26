@@ -41,7 +41,7 @@ fun AvatarImagesHorizontalPager(avatars: List<DrawableResource>) {
                         width = 8.dp,
                         color = Colors.White,
                         shape = Dimens.Shape.Circle
-                    ),
+                    )
             )
         }
     }

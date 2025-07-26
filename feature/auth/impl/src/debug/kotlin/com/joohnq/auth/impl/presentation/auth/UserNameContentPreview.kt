@@ -10,7 +10,7 @@ fun UserNameContentPreview() {
         state = AuthNameContract.State(),
         onEvent = {},
         onClearFocus = {},
-        onGetAction = {},
+        onGetAction = {}
     )
 }
 
@@ -23,7 +23,7 @@ fun UserNameContentWithNamePreview() {
         ),
         onEvent = {},
         onClearFocus = {},
-        onGetAction = {},
+        onGetAction = {}
     )
 }
 
@@ -37,6 +37,6 @@ fun UserNameContentWithErrorPreview() {
         ),
         onEvent = {},
         onClearFocus = {},
-        onGetAction = {},
+        onGetAction = {}
     )
 }

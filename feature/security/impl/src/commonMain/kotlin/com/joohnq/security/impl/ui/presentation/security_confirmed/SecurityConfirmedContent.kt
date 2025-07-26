@@ -27,9 +27,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SecurityConfirmedContent(
-    onEvent: (SecurityConfirmedContract.Event) -> Unit = {},
-) {
+fun SecurityConfirmedContent(onEvent: (SecurityConfirmedContract.Event) -> Unit = {}) {
     DecoratedConvexPanel(
         panelBackgroundColor = Colors.Green20,
         backgroundColor = Colors.White,

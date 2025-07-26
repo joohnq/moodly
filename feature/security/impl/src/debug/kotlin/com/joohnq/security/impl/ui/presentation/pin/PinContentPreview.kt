@@ -8,16 +8,18 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun PinContentPreview() {
     PinContent(
-        state = PinContract.State(
-            code = listOf(1, 2, 3, 4),
-            focusedIndex = 0
-        ),
-        focusRequesters = listOf(
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-        ),
+        state =
+            PinContract.State(
+                code = listOf(1, 2, 3, 4),
+                focusedIndex = 0
+            ),
+        focusRequesters =
+            listOf(
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester()
+            )
     )
 }
 
@@ -25,33 +27,36 @@ fun PinContentPreview() {
 @Composable
 fun PinContentEmptyPreview() {
     PinContent(
-        state = PinContract.State(
-            code = listOf(1, 2, 3, 4),
-            focusedIndex = 0
-        ),
-        focusRequesters = listOf(
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-        ),
+        state =
+            PinContract.State(
+                code = listOf(1, 2, 3, 4),
+                focusedIndex = 0
+            ),
+        focusRequesters =
+            listOf(
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester()
+            )
     )
 }
-
 
 @Preview
 @Composable
 fun PinContentCanContinuePreview() {
     PinContent(
-        state = PinContract.State(
-            code = listOf(1, 2, 3, 4),
-            focusedIndex = 0
-        ),
-        focusRequesters = listOf(
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-        ),
+        state =
+            PinContract.State(
+                code = listOf(1, 2, 3, 4),
+                focusedIndex = 0
+            ),
+        focusRequesters =
+            listOf(
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester()
+            )
     )
 }

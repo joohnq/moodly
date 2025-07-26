@@ -41,20 +41,23 @@ fun PinContent(
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
     onAction: (PinContract.Intent) -> Unit = {},
-    onEvent: (PinContract.Event) -> Unit = {},
+    onEvent: (PinContract.Event) -> Unit = {}
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
         snackBarHostState = snackBarState,
-        modifier = Modifier.fillMaxSize()
-            .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PinContract.Event.OnClearFocus) }) }
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PinContract.Event.OnClearFocus) }) }
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(bottom = 20.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .padding(bottom = 20.dp)
+                    .fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
                 modifier = Modifier.paddingHorizontalMedium(),
@@ -63,7 +66,7 @@ fun PinContent(
                 AppTopBar(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.pin_setup,
-                    onGoBack = { onEvent(PinContract.Event.OnGoBack) },
+                    onGoBack = { onEvent(PinContract.Event.OnGoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -94,7 +97,7 @@ fun PinContent(
                     focusRequesters = focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) },
+                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) }
                 )
             }
             PrimaryButton(

@@ -13,10 +13,11 @@ import kotlinx.coroutines.launch
 class SecurityViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val updateSecurityUseCase: UpdateSecurityUseCase,
-    initialState: SecurityContract.State = SecurityContract.State(),
+    initialState: SecurityContract.State = SecurityContract.State()
 ) : BaseViewModel<SecurityContract.State, SecurityContract.Intent, SecurityContract.SideEffect>(
-    initialState = initialState
-), SecurityContract.ViewModel {
+        initialState = initialState
+    ),
+    SecurityContract.ViewModel {
     override fun onIntent(intent: SecurityContract.Intent) {
         when (intent) {
             is SecurityContract.Intent.Get -> getSecurity()
@@ -24,19 +25,22 @@ class SecurityViewModel(
         }
     }
 
-    private fun getSecurity() = viewModelScope.launch {
-        val res = getSecurityUseCase().toUiState()
+    private fun getSecurity() =
+        viewModelScope.launch {
+            val res = getSecurityUseCase().toUiState()
 
-        updateState { it.copy(item = res) }
-    }
-
-    private fun updateSecurity(security: Security) = viewModelScope.launch {
-        val res = updateSecurityUseCase(security).toUiState()
-
-        res.onSuccess {
-            emitEffect(SecurityContract.SideEffect.OnSecurityUpdated)
-        }.onFailure {
-            emitEffect(SecurityContract.SideEffect.ShowError(it))
+            updateState { it.copy(item = res) }
         }
-    }
+
+    private fun updateSecurity(security: Security) =
+        viewModelScope.launch {
+            val res = updateSecurityUseCase(security).toUiState()
+
+            res
+                .onSuccess {
+                    emitEffect(SecurityContract.SideEffect.OnSecurityUpdated)
+                }.onFailure {
+                    emitEffect(SecurityContract.SideEffect.ShowError(it))
+                }
+        }
 }

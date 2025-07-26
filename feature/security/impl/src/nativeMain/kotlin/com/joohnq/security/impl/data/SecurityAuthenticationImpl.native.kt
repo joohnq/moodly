@@ -35,5 +35,4 @@ actual class SecurityAuthenticationImpl : SecurityAuthentication {
         }
         callback(false)
     }
-
 }

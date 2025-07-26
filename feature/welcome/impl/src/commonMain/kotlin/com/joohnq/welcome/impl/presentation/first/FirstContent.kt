@@ -11,8 +11,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.*
 import com.joohnq.shared_resources.components.LogoWithBackground
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.button.PrimaryButton
+import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.HeadingWithSpan
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
@@ -23,9 +23,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun FirstContent(
-    onNext: () -> Unit = {}
-) {
+fun FirstContent(onNext: () -> Unit = {}) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -37,7 +35,7 @@ fun FirstContent(
             firstTitle = Res.string.first_screen_title,
             secondTitle = Res.string.first_screen_second_title,
             span = stringResource(Res.string.first_screen_title_word),
-            spanColor = Colors.Brown60,
+            spanColor = Colors.Brown60
         )
         VerticalSpacer(16.dp)
         Text(
@@ -49,13 +47,14 @@ fun FirstContent(
         VerticalSpacer(32.dp)
         Box(contentAlignment = Alignment.Center) {
             Box(
-                modifier = Modifier
-                    .size(300.dp)
-                    .background(color = Colors.White, shape = Dimens.Shape.Circle)
+                modifier =
+                    Modifier
+                        .size(300.dp)
+                        .background(color = Colors.White, shape = Dimens.Shape.Circle)
             )
             Image(
                 painter = painterResource(Drawables.Images.WelcomeFirstScreen),
-                contentDescription = stringResource(Res.string.first_screen_image),
+                contentDescription = stringResource(Res.string.first_screen_image)
             )
         }
         VerticalSpacer(32.dp)

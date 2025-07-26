@@ -12,15 +12,17 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun UnLockContentPreview() {
     UnLockContent(
         showBottomSheet = true,
-        state = PinContract.State(
-            code = listOf(1, 2, 3, 4),
-            focusedIndex = 0
-        ),
-        focusRequesters = listOf(
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-            FocusRequester(),
-        ),
+        state =
+            PinContract.State(
+                code = listOf(1, 2, 3, 4),
+                focusedIndex = 0
+            ),
+        focusRequesters =
+            listOf(
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester(),
+                FocusRequester()
+            )
     )
 }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 class SecurityPreferenceImpl(
-    private val dataStore: DataStore<Preferences>,
+    private val dataStore: DataStore<Preferences>
 ) : SecurityPreference {
     companion object {
         private val SECURITY_KEY = stringPreferencesKey("SECURITY")
@@ -34,16 +34,19 @@ class SecurityPreferenceImpl(
             }
         }
 
-    override suspend fun get(): Result<Security> = withContext(Dispatchers.IO) {
-        try {
-            val item = dataStore.data.map {
-                it.toMutablePreferences().getUserSecurityDecoded()
-            }.first()
-            Result.success(item)
-        } catch (e: Exception) {
-            Result.failure(e)
+    override suspend fun get(): Result<Security> =
+        withContext(Dispatchers.IO) {
+            try {
+                val item =
+                    dataStore.data
+                        .map {
+                            it.toMutablePreferences().getUserSecurityDecoded()
+                        }.first()
+                Result.success(item)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
-    }
 
     override suspend fun initUserSecurity(): Result<Boolean> =
         withContext(Dispatchers.IO) {

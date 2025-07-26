@@ -8,6 +8,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun PinCodePreview() {
     PinCode(
         code = listOf(1, 2, 3, 4),
-        focusedIndex = 1,
+        focusedIndex = 1
     )
 }

@@ -15,8 +15,9 @@ import com.joohnq.security.api.SecurityResult
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
-actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity) :
-    SecurityAuthentication {
+actual class SecurityAuthenticationImpl(
+    private val activity: AppCompatActivity
+) : SecurityAuthentication {
     private val _securityResult = Channel<SecurityResult>()
     val securityResult = _securityResult.receiveAsFlow()
 
@@ -39,12 +40,13 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
             }
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
-                    putExtra(
-                        Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
-                        BIOMETRIC_STRONG or BIOMETRIC_WEAK
-                    )
-                }
+                val enrollIntent =
+                    Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                        putExtra(
+                            Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                            BIOMETRIC_STRONG or BIOMETRIC_WEAK
+                        )
+                    }
 
                 startActivityForResult(activity, enrollIntent, 100, null)
             }
@@ -76,35 +78,38 @@ actual class SecurityAuthenticationImpl(private val activity: AppCompatActivity)
 
     @RequiresApi(Build.VERSION_CODES.P)
     actual override fun authenticateWithFace(callback: (Boolean) -> Unit) {
-        val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Authentication using biometric")
-            .setSubtitle("Authenticate using face/fingerprint")
-            .setAllowedAuthenticators(BIOMETRIC_STRONG or BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
-            .build()
+        val promptInfo =
+            BiometricPrompt.PromptInfo
+                .Builder()
+                .setTitle("Authentication using biometric")
+                .setSubtitle("Authenticate using face/fingerprint")
+                .setAllowedAuthenticators(BIOMETRIC_STRONG or BIOMETRIC_WEAK or DEVICE_CREDENTIAL)
+                .build()
 
-        val biometricPrompt = BiometricPrompt(
-            activity, activity.mainExecutor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(
-                    errorCode: Int,
-                    errString: CharSequence,
-                ) {
-                    super.onAuthenticationError(errorCode, errString)
-                    callback(false)
-                }
+        val biometricPrompt =
+            BiometricPrompt(
+                activity,
+                activity.mainExecutor,
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(
+                        errorCode: Int,
+                        errString: CharSequence
+                    ) {
+                        super.onAuthenticationError(errorCode, errString)
+                        callback(false)
+                    }
 
-                override fun onAuthenticationSucceeded(
-                    result: BiometricPrompt.AuthenticationResult,
-                ) {
-                    super.onAuthenticationSucceeded(result)
-                    callback(true)
-                }
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
+                        callback(true)
+                    }
 
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    callback(false)
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        callback(false)
+                    }
                 }
-            })
+            )
 
         biometricPrompt.authenticate(promptInfo)
     }

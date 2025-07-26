@@ -55,7 +55,7 @@ fun UnLockContent(
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
     onAction: (PinContract.Intent) -> Unit = {},
-    onEvent: (UnlockContract.Event) -> Unit = {},
+    onEvent: (UnlockContract.Event) -> Unit = {}
 ) {
     if (showBottomSheet) {
         ModalBottomSheet(
@@ -92,7 +92,7 @@ fun UnLockContent(
                     focusRequesters = focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) },
+                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) }
                 )
                 isError?.let {
                     VerticalSpacer(15.dp)
@@ -135,7 +135,7 @@ fun UnLockContent(
                     Text(
                         text = stringResource(Res.string.use_your_authentication_to_securely),
                         style = TextStyles.paragraphLg(),
-                        color = Colors.Brown100Alpha64,
+                        color = Colors.Brown100Alpha64
                     )
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {

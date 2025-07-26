@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SecurityContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
-    onEvent: (SecurityContract.Event) -> Unit = {},
+    onEvent: (SecurityContract.Event) -> Unit = {}
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -42,11 +42,12 @@ fun SecurityContent(
         modifier = Modifier.fillMaxSize()
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(bottom = 20.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .padding(bottom = 20.dp)
+                    .fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
                 modifier = Modifier.paddingHorizontalMedium(),
@@ -56,7 +57,7 @@ fun SecurityContent(
                 Text(
                     text = stringResource(Res.string.security_setup),
                     style = TextStyles.textXlExtraBold(),
-                    color = Colors.Brown80,
+                    color = Colors.Brown80
                 )
                 VerticalSpacer(60.dp)
                 Image(

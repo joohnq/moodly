@@ -30,20 +30,20 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun FreudScoreContent(
     state: FreudScoreContract.State,
-    onEvent: (FreudScoreContract.Event) -> Unit = {},
+    onEvent: (FreudScoreContract.Event) -> Unit = {}
 ) {
     if (state.freudScore == null) return
     val resources = remember { getAllFreudScoreResources(state.freudScore.score) }
 
     Scaffold(
-        containerColor = Colors.Brown10,
+        containerColor = Colors.Brown10
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
             AppTopBar(
                 modifier = Modifier.paddingHorizontalMedium(),
                 isDark = true,
                 text = Res.string.freud_score,
-                onGoBack = { onEvent(FreudScoreContract.Event.OnGoBack) },
+                onGoBack = { onEvent(FreudScoreContract.Event.OnGoBack) }
             )
             Column(
                 modifier = Modifier.paddingHorizontalMedium(),

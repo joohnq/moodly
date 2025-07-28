@@ -20,7 +20,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.impl.ui.mapper.getAllStressLevelResource
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.allStressLevelResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
 import org.jetbrains.compose.resources.stringResource
@@ -31,7 +31,7 @@ fun OnboardingStressLevelContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    val options: List<StressLevelResource> = remember { getAllStressLevelResource() }
+    val options: List<StressLevelResource> = remember { allStressLevelResource() }
 
     _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
         page = 6,

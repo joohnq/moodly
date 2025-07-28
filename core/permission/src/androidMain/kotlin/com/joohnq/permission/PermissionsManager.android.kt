@@ -17,7 +17,8 @@ import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.launch
 
 @Composable
-actual fun createPermissionsManager(callback: PermissionCallback): PermissionsManager = remember { PermissionsManager(callback) }
+actual fun createPermissionsManager(callback: PermissionCallback): PermissionsManager =
+    remember { PermissionsManager(callback) }
 
 /*
 * Implement to handle specific permission in android platform

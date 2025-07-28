@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.freud_score.impl.ui.ProgressiveDottedCircles
-import com.joohnq.freud_score.impl.ui.mapper.getAllFreudScoreResources
-import com.joohnq.freud_score.impl.ui.mapper.toEndFreudScore
-import com.joohnq.freud_score.impl.ui.mapper.toInitialFreudScore
+import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.allFreudScoreResources
+import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toEndFreudScore
+import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toInitialFreudScore
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
@@ -33,7 +33,7 @@ fun FreudScoreContent(
     onEvent: (FreudScoreContract.Event) -> Unit = {},
 ) {
     if (state.freudScore == null) return
-    val resources = remember { getAllFreudScoreResources(state.freudScore.score) }
+    val resources = remember { allFreudScoreResources(state.freudScore.score) }
 
     Scaffold(
         containerColor = Colors.Brown10

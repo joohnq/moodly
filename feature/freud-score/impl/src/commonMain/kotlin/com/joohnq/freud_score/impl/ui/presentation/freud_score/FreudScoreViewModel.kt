@@ -1,6 +1,6 @@
 package com.joohnq.freud_score.impl.ui.presentation.freud_score
 
-import com.joohnq.freud_score.impl.ui.mapper.toResource
+import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toResource
 import com.joohnq.mood.impl.ui.mapper.calculateStatsFreudScore
 import com.joohnq.ui.BaseViewModel
 

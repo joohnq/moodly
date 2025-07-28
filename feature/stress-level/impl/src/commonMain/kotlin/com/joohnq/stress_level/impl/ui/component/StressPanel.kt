@@ -17,7 +17,7 @@ import com.joohnq.shared_resources.not_available
 import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.resources.painterResource

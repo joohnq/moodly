@@ -30,7 +30,7 @@ import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.mapper.getAllStressorResource
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract

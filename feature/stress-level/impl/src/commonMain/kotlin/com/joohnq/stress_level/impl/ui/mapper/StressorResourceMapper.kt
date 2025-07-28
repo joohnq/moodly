@@ -12,7 +12,8 @@ import com.joohnq.stress_level.impl.ui.resource.StressorResource.Other
 import com.joohnq.stress_level.impl.ui.resource.StressorResource.Relationship
 import com.joohnq.stress_level.impl.ui.resource.StressorResource.Work
 
-fun getAllStressorResource(): List<StressorResource> = listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)
+fun getAllStressorResource(): List<StressorResource> =
+    listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)
 
 fun Stressor.toResource(): StressorResource =
     when (this) {

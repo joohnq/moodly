@@ -18,7 +18,7 @@ import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.view.EmptyView
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.impl.ui.mapper.toGroupedByDate

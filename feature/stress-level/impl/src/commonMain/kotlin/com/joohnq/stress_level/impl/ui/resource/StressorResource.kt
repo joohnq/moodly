@@ -1,9 +1,17 @@
 package com.joohnq.stress_level.impl.ui.resource
 
 import androidx.compose.ui.graphics.Color
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.finances
+import com.joohnq.shared_resources.in_peace
+import com.joohnq.shared_resources.kids
+import com.joohnq.shared_resources.life
+import com.joohnq.shared_resources.loneliness
+import com.joohnq.shared_resources.other
+import com.joohnq.shared_resources.relationship
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.work
 import com.joohnq.stress_level.api.entity.Stressor.Companion.FINANCES
 import com.joohnq.stress_level.api.entity.Stressor.Companion.IN_PEACE
 import com.joohnq.stress_level.api.entity.Stressor.Companion.KIDS

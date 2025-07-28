@@ -1,12 +1,28 @@
 package com.joohnq.database
 
-import android.database.sqlite.*
+import android.database.sqlite.SQLiteAbortException
+import android.database.sqlite.SQLiteAccessPermException
+import android.database.sqlite.SQLiteBindOrColumnIndexOutOfRangeException
+import android.database.sqlite.SQLiteBlobTooBigException
+import android.database.sqlite.SQLiteCantOpenDatabaseException
+import android.database.sqlite.SQLiteConstraintException
+import android.database.sqlite.SQLiteDatabaseCorruptException
+import android.database.sqlite.SQLiteDatabaseLockedException
+import android.database.sqlite.SQLiteDatatypeMismatchException
+import android.database.sqlite.SQLiteDiskIOException
+import android.database.sqlite.SQLiteDoneException
+import android.database.sqlite.SQLiteFullException
+import android.database.sqlite.SQLiteMisuseException
+import android.database.sqlite.SQLiteOutOfMemoryException
+import android.database.sqlite.SQLiteReadOnlyDatabaseException
+import android.database.sqlite.SQLiteTableLockedException
 
 actual val sqliteExceptionMapper: SqliteExceptionMapper = AndroidSqliteExceptionMapper()
 
 private class AndroidSqliteExceptionMapper : SqliteExceptionMapper {
+    @Suppress("CyclomaticComplexMethod")
     override fun map(t: Throwable): SqliteException {
-        val opResult =
+        val result =
             when (t) {
                 is SQLiteAbortException -> SqliteOperationResult.ABORT
                 is SQLiteAccessPermException -> SqliteOperationResult.PERM
@@ -26,6 +42,6 @@ private class AndroidSqliteExceptionMapper : SqliteExceptionMapper {
                 is SQLiteTableLockedException -> SqliteOperationResult.LOCKED
                 else -> SqliteOperationResult.UNKNOWN
             }
-        return SqliteException(opResult, t)
+        return SqliteException(result, t)
     }
 }

@@ -27,7 +27,7 @@ import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.self_journaling
 import com.joohnq.shared_resources.sleep
 import com.joohnq.shared_resources.stress
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.component.StressLevelMetric

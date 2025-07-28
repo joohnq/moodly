@@ -8,7 +8,7 @@ import com.joohnq.shared_resources.components.card.MetricSummaryCard
 import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

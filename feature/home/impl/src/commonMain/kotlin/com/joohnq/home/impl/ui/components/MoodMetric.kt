@@ -12,7 +12,7 @@ import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.set_up_mood
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.you_havent_set_up_any_mood_yet
 import org.jetbrains.compose.resources.stringResource
 

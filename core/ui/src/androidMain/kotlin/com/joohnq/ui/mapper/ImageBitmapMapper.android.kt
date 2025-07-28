@@ -1,11 +1,9 @@
 package com.joohnq.ui.mapper
 
-import android.graphics.Bitmap
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
+import com.joohnq.ui.entity.ImageFormat
 import java.io.ByteArrayOutputStream
-
-actual typealias ImageFormat = Bitmap.CompressFormat
 
 actual fun ImageBitmap.toByteArray(format: ImageFormat): ByteArray =
     ByteArrayOutputStream().use {

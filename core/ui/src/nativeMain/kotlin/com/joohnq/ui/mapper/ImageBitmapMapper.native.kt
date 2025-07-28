@@ -2,10 +2,8 @@ package com.joohnq.ui.mapper
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap
-import org.jetbrains.skia.EncodedImageFormat
+import com.joohnq.ui.entity.ImageFormat
 import org.jetbrains.skia.Image
-
-actual typealias ImageFormat = EncodedImageFormat
 
 actual fun ImageBitmap.toByteArray(format: ImageFormat): ByteArray {
     val data =

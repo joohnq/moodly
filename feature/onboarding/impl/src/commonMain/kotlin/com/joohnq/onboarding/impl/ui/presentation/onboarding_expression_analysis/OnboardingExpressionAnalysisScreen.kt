@@ -18,6 +18,7 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toDomain
 import com.joohnq.stress_level.impl.ui.mapper.toDomain
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel

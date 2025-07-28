@@ -13,8 +13,8 @@ import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.getBrushGradient
-import com.joohnq.stress_level.impl.ui.mapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.resources.stringResource
 

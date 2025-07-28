@@ -10,7 +10,7 @@ import com.joohnq.shared_resources.stress_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.you_dont_have_enough_data_to_show_insights
-import com.joohnq.stress_level.impl.ui.mapper.toPair
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toPair
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 
 @Composable

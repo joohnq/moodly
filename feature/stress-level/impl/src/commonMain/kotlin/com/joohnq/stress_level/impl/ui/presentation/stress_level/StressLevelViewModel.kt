@@ -5,6 +5,7 @@ import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.stress_level.impl.ui.mapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState

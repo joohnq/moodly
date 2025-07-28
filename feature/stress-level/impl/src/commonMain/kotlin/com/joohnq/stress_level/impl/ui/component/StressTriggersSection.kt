@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.mapper.toPercentage
+import com.joohnq.api.mapper.DoubleMapper.toPercentage
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout

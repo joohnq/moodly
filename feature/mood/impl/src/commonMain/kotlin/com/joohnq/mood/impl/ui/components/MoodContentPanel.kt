@@ -12,12 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.current_mood
+import com.joohnq.shared_resources.logged_today_at
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.not_available
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.your_mood_is
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

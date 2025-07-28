@@ -7,7 +7,12 @@ import com.joohnq.mood.api.entity.Mood.Companion.OVERJOYED
 import com.joohnq.mood.api.entity.Mood.Companion.SAD
 import com.joohnq.mood.api.entity.MoodPalette
 import com.joohnq.mood.api.property.MoodProperties
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.depressed
+import com.joohnq.shared_resources.happy
+import com.joohnq.shared_resources.neutral
+import com.joohnq.shared_resources.overjoyed
+import com.joohnq.shared_resources.sad
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.Assets

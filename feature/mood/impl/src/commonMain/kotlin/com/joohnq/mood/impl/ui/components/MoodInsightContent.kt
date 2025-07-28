@@ -16,14 +16,18 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getStreakDays
 import com.joohnq.mood.impl.ui.mapper.getWeekRecords
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.day_streak
+import com.joohnq.shared_resources.mood_insight
+import com.joohnq.shared_resources.mood_streak
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.you_ve_checked_in_your_mood_for_days_straight
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

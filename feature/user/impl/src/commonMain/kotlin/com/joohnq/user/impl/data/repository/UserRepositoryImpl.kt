@@ -1,7 +1,11 @@
 package com.joohnq.user.impl.data.repository
 
 import com.joohnq.api.converter.UserConverter
-import com.joohnq.api.entity.*
+import com.joohnq.api.entity.ImageType
+import com.joohnq.api.entity.MedicationsSupplements
+import com.joohnq.api.entity.PhysicalSymptoms
+import com.joohnq.api.entity.ProfessionalHelp
+import com.joohnq.api.entity.User
 import com.joohnq.api.mapper.toImageType
 import com.joohnq.api.mapper.toValue
 import com.joohnq.api.repository.UserRepository
@@ -17,7 +21,16 @@ class UserRepositoryImpl(
     override suspend fun getUser(): Result<User> =
         executeTryCatchResult {
             query
-                .getUser(mapper = { id, name, image, imageType, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
+                .getUser(mapper = {
+                    id,
+                    name,
+                    image,
+                    imageType,
+                    medicationsSupplements,
+                    soughtHelp,
+                    physicalSymptoms,
+                    dateCreated,
+                    ->
                     User(
                         id = id.toInt(),
                         name = name,
@@ -32,7 +45,7 @@ class UserRepositoryImpl(
                         dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
                     )
                 })
-                .executeAsOneOrNull() ?: throw Exception("User not found")
+                .executeAsOneOrNull() ?: error("User not found")
         }
 
     override suspend fun addUser(user: User): Result<Boolean> =

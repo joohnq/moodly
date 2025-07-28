@@ -3,9 +3,13 @@ package com.joohnq.sleep_quality.impl.ui.component
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.lets_log_your_first_sleep_to_see_your_insight
+import com.joohnq.shared_resources.log_sleep
+import com.joohnq.shared_resources.log_your_first_sleep
+import com.joohnq.shared_resources.sleep_insight
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource

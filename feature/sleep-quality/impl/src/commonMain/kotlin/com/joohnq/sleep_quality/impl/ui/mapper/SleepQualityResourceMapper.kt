@@ -57,9 +57,16 @@ fun Float.toSleepQualityResource(): SleepQualityResource =
         else -> Excellent
     }
 
-fun List<SleepQualityRecordResource>.getTodaySleepQualityRecord(): SleepQualityRecordResource? = find { it.createdAt == getNow().date }
+fun List<SleepQualityRecordResource>.getTodaySleepQualityRecord(): SleepQualityRecordResource? =
+    find {
+        it.createdAt ==
+            getNow().date
+    }
 
-fun List<SleepQualityRecordResource>.toMonthRecordsCount(): Int = filter { it.createdAt.month == getNow().date.month }.size
+fun List<SleepQualityRecordResource>.toMonthRecordsCount(): Int =
+    filter {
+        it.createdAt.month == getNow().date.month
+    }.size
 
 fun SleepQualityRecordResource.toDomain(): SleepQualityRecord =
     SleepQualityRecord(

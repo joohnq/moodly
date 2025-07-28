@@ -1,7 +1,11 @@
 package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,13 +16,18 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.Time
 import com.joohnq.api.mapper.calculateDuration
 import com.joohnq.api.mapper.toHoursAndMinutesString
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.current_sleep_quality
+import com.joohnq.shared_resources.mood
+import com.joohnq.shared_resources.not_available
+import com.joohnq.shared_resources.sleep_quality
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.time_asleep
 import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.painterResource

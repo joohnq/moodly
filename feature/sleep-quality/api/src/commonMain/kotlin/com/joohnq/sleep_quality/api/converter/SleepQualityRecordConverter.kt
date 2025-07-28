@@ -14,5 +14,8 @@ object SleepQualityRecordConverter {
 
     fun fromInfluences(value: List<SleepInfluences>): String = Json.encodeToString(value.map { it.id })
 
-    fun toInfluences(value: String): List<SleepInfluences> = Json.decodeFromString<List<Int>>(value).map { it.toSleepInfluences() }
+    fun toInfluences(value: String): List<SleepInfluences> =
+        Json.decodeFromString<List<Int>>(value).map {
+            it.toSleepInfluences()
+        }
 }

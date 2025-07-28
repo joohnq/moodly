@@ -1,7 +1,17 @@
 package com.joohnq.sleep_quality.impl.ui.resource
 
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.excellent
+import com.joohnq.shared_resources.fair
+import com.joohnq.shared_resources.five_hours
+import com.joohnq.shared_resources.good
+import com.joohnq.shared_resources.minus_three_hours
+import com.joohnq.shared_resources.poor
+import com.joohnq.shared_resources.seven_nine_hours
+import com.joohnq.shared_resources.six_seven_hours
 import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.three_four_hours
+import com.joohnq.shared_resources.worst
 import com.joohnq.sleep_quality.api.entity.SleepQuality
 import com.joohnq.sleep_quality.api.property.SleepQualityProperties
 import com.joohnq.sleep_quality.impl.ui.entity.SleepQualityPalette

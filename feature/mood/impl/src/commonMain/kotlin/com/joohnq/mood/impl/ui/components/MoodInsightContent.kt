@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.mapper.getStreakDays
-import com.joohnq.mood.impl.ui.mapper.getWeekRecords
+import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getStreakDays
+import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getWeekRecords
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer

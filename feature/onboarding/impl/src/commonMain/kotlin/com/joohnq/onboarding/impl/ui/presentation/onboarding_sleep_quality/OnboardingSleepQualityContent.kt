@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
@@ -43,7 +43,7 @@ fun OnboardingSleepQualityContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    val moods = remember { getAllMoodResource().reversed() }
+    val moods = remember { allMoodResource().reversed() }
     val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
 
     _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(

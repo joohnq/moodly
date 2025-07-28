@@ -7,14 +7,16 @@ import com.joohnq.mood.api.entity.Mood.Companion.NEUTRAL
 import com.joohnq.mood.api.entity.Mood.Companion.OVERJOYED
 import com.joohnq.mood.api.entity.Mood.Companion.SAD
 
-fun Int.toMood(): Mood =
-    when (this) {
-        DEPRESSED.id -> Mood.Depressed
-        SAD.id -> Mood.Sad
-        NEUTRAL.id -> Mood.Neutral
-        HAPPY.id -> Mood.Happy
-        OVERJOYED.id -> Mood.Overjoyed
-        else -> throw IllegalArgumentException("Unknown mood: $this")
-    }
+object MoodMapper {
+    fun Int.toMood(): Mood =
+        when (this) {
+            DEPRESSED.id -> Mood.Depressed
+            SAD.id -> Mood.Sad
+            NEUTRAL.id -> Mood.Neutral
+            HAPPY.id -> Mood.Happy
+            OVERJOYED.id -> Mood.Overjoyed
+            else -> throw IllegalArgumentException("Unknown mood: $this")
+        }
 
-fun Mood?.toInt(): Int = this?.id ?: -1
+    fun Mood?.toInt(): Int = this?.id ?: -1
+}

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
-import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.components.draw_scope.drawCenterCircle
 import com.joohnq.shared_resources.theme.Colors
@@ -27,7 +27,7 @@ fun MoodRouletteWheel(
 ) {
     val moods =
         rememberSaveable {
-            getAllMoodResource() + getAllMoodResource()
+            allMoodResource() + allMoodResource()
         }
     val painterResources: List<VectorPainter> =
         moods.map { rememberVectorPainter(it.assets.imageVector) }

@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.api.entity.Quad
 import com.joohnq.api.entity.User
-import com.joohnq.mood.impl.ui.mapper.toDomain
+import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
 import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent

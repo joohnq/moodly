@@ -21,7 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
@@ -34,7 +34,7 @@ fun MoodRadioGroup(
     selectedMood: MoodRecordResource,
     setSelectedMood: (MoodResource) -> Unit = {},
 ) {
-    val resources by remember { mutableStateOf(getAllMoodResource()) }
+    val resources by remember { mutableStateOf(allMoodResource()) }
 
     BoxWithConstraints(modifier = modifier) {
         val dividerWidth = (maxWidth - 180.dp - 40.dp) / 4

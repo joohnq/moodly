@@ -13,7 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
@@ -40,7 +40,7 @@ fun JournalInsight(
             .map { it.key to it.value.size }
             .sortedBy { it.first.id }
 
-    val moodResources = remember { getAllMoodResource() }
+    val moodResources = remember { allMoodResource() }
 
     if (groupedMoods.isEmpty()) {
         NotFoundHorizontalLayout(

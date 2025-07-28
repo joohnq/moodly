@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
 
 import com.joohnq.api.mapper.ListMapper.toggle
-import com.joohnq.mood.impl.ui.mapper.toSleepQuality
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toSleepQuality
 import com.joohnq.sleep_quality.impl.ui.mapper.toResource
 import com.joohnq.ui.BaseViewModel
 

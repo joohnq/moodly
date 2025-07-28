@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.impl.ui.mapper.toDomain
+import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodContract
 import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodViewModel
 import com.joohnq.mood.impl.ui.presentation.mood.MoodContract

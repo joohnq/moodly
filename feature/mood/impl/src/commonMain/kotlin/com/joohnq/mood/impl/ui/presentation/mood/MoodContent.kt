@@ -3,7 +3,7 @@ package com.joohnq.mood.impl.ui.presentation.mood
 import androidx.compose.runtime.Composable
 import com.joohnq.mood.impl.ui.components.MoodContentBody
 import com.joohnq.mood.impl.ui.components.MoodContentPanel
-import com.joohnq.mood.impl.ui.mapper.getTodayMoodRecord
+import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors

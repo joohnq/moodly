@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.impl.ui.mapper.toDomain
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toDomain
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel

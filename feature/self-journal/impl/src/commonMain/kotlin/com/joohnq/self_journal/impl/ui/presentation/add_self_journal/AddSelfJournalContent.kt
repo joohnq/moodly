@@ -20,7 +20,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton
@@ -51,7 +51,7 @@ fun AddJournalingContent(
     onEvent: (AddSelfJournalContract.Event) -> Unit = {},
 ) {
     val focusRequester = FocusRequester()
-    val moods = remember { getAllMoodResource() }
+    val moods = remember { allMoodResource() }
 
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

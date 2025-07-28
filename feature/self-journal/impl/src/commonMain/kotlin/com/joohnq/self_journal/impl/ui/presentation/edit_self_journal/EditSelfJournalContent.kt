@@ -20,7 +20,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
-import com.joohnq.mood.impl.ui.mapper.toResource
+import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toResource
 import com.joohnq.self_journal.impl.ui.components.EditFloatingActionButtons
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.shared_resources.Res

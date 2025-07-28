@@ -1,8 +1,8 @@
 package com.joohnq.mood.api.converter
 
 import com.joohnq.mood.api.entity.Mood
-import com.joohnq.mood.api.mapper.toInt
-import com.joohnq.mood.api.mapper.toMood
+import com.joohnq.mood.api.mapper.MoodMapper.toInt
+import com.joohnq.mood.api.mapper.MoodMapper.toMood
 
 object MoodRecordConverter {
     fun fromMood(value: Mood?): Long = value.toInt().toLong()

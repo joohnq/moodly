@@ -2,9 +2,9 @@ package com.joohnq.sleep_quality.api.converter
 
 import com.joohnq.sleep_quality.api.entity.SleepInfluences
 import com.joohnq.sleep_quality.api.entity.SleepQuality
-import com.joohnq.sleep_quality.api.mapper.toInt
-import com.joohnq.sleep_quality.api.mapper.toSleepInfluences
-import com.joohnq.sleep_quality.api.mapper.toSleepQuality
+import com.joohnq.sleep_quality.api.mapper.SleepInfluencesMapper.toSleepInfluences
+import com.joohnq.sleep_quality.api.mapper.SleepQualityMapper.toInt
+import com.joohnq.sleep_quality.api.mapper.SleepQualityMapper.toSleepQuality
 import kotlinx.serialization.json.Json
 
 object SleepQualityRecordConverter {

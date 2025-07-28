@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.input_field.ExpressionAnalysisTextField
@@ -24,7 +25,7 @@ fun OnboardingExpressionAnalysisContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,

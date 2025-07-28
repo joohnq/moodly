@@ -28,7 +28,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.time_asleep
-import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toMoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

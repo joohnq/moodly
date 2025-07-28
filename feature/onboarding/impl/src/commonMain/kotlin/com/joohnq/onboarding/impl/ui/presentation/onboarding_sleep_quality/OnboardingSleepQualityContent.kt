@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.allMoodResource
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.slider.AppVerticalSlider
@@ -29,8 +30,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingVerticalLarge
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.impl.ui.mapper.getAllSleepQualityResource
-import com.joohnq.sleep_quality.impl.ui.mapper.toSleepQualityResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.allSleepQualityResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toSleepQualityResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityResource
 import org.jetbrains.compose.resources.stringResource
@@ -44,9 +45,9 @@ fun OnboardingSleepQualityContent(
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val moods = remember { allMoodResource().reversed() }
-    val sleepQualityOptions: List<SleepQualityResource> = remember { getAllSleepQualityResource() }
+    val sleepQualityOptions: List<SleepQualityResource> = remember { allSleepQualityResource() }
 
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 4,
         title = Res.string.sleep_quality_title,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },

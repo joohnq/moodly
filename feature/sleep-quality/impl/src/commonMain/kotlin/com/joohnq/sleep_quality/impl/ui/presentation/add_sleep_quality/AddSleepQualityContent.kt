@@ -46,8 +46,8 @@ import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.sleep_quality.impl.ui.mapper.getAllSleepInfluencesResource
-import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepInfluencesResourceMapper.allSleepInfluencesResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toMoodResource
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +59,7 @@ fun AddSleepQualityContent(
     onAddAction: (AddSleepQualityContract.Intent) -> Unit = {},
 ) {
     val moods = remember { allMoodResource() }
-    val sleepInfluences = remember { getAllSleepInfluencesResource() }
+    val sleepInfluences = remember { allSleepInfluencesResource() }
     val startTimePickerState =
         rememberTimePickerState(
             initialHour = state.record.startSleeping.hour,

@@ -5,7 +5,7 @@ import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
-import com.joohnq.sleep_quality.impl.ui.mapper.toResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.ResultMapper.toResultResource

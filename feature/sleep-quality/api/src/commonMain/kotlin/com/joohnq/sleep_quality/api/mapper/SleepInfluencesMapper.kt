@@ -11,16 +11,18 @@ import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.MEDITATION
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.NATURAL_LIGHT
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
 
-fun Int.toSleepInfluences(): SleepInfluences =
-    when (this) {
-        NATURAL_LIGHT.id -> SleepInfluences.NaturalLight
-        PHYSICAL_ACTIVITY.id -> SleepInfluences.PhysicalActivity
-        CHILL_SLEEP_ENVIRONMENT.id -> SleepInfluences.ChillSleepEnvironment
-        MEDITATION.id -> SleepInfluences.Meditation
-        CAFFEINE.id -> SleepInfluences.Caffeine
-        EXCESSIVE_SCREEN_TIME.id -> SleepInfluences.ExcessiveScreenTime
-        HIGH_STRESS.id -> SleepInfluences.HighStress
-        ANXIETY.id -> SleepInfluences.Anxiety
-        ALCOHOL_CONSUMPTION.id -> SleepInfluences.AlcoholConsumption
-        else -> throw IllegalArgumentException("Unknown sleep influence option: $this")
-    }
+object SleepInfluencesMapper {
+    fun Int.toSleepInfluences(): SleepInfluences =
+        when (this) {
+            NATURAL_LIGHT.id -> SleepInfluences.NaturalLight
+            PHYSICAL_ACTIVITY.id -> SleepInfluences.PhysicalActivity
+            CHILL_SLEEP_ENVIRONMENT.id -> SleepInfluences.ChillSleepEnvironment
+            MEDITATION.id -> SleepInfluences.Meditation
+            CAFFEINE.id -> SleepInfluences.Caffeine
+            EXCESSIVE_SCREEN_TIME.id -> SleepInfluences.ExcessiveScreenTime
+            HIGH_STRESS.id -> SleepInfluences.HighStress
+            ANXIETY.id -> SleepInfluences.Anxiety
+            ALCOHOL_CONSUMPTION.id -> SleepInfluences.AlcoholConsumption
+            else -> throw IllegalArgumentException("Unknown sleep influence option: $this")
+        }
+}

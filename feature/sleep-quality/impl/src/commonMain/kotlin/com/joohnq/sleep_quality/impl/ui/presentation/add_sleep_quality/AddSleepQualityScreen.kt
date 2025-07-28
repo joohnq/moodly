@@ -10,7 +10,7 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.a_sleep_quality_record_has_already_been_added_for_today
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.sleep_quality.api.exception.SleepQualityException
-import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel

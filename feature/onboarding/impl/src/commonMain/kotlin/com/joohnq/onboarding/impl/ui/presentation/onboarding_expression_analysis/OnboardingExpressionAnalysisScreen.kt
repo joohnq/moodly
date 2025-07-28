@@ -15,7 +15,7 @@ import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.sleep_quality.impl.ui.mapper.toDomain
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toDomain

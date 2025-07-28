@@ -8,6 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.radio_button.TextRadioButton
@@ -26,7 +27,7 @@ fun OnboardingProfessionalHelpContent(
 ) {
     val options = rememberSaveable { getAllProfessionalHelpResource() }
 
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 2,
         image = Drawables.Images.OnboardingSoughtProfessionalHelp,
         title = Res.string.sought_professional_help_title,

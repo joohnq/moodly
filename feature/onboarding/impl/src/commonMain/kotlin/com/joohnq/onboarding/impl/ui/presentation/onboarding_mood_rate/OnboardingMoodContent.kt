@@ -18,6 +18,7 @@ import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.mood.impl.ui.components.MoodRouletteWheel
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.IconContinueButton
@@ -35,7 +36,7 @@ fun OnboardingMoodRateContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 1,
         title = Res.string.mood_rate_title,
         isContinueButtonVisible = false,

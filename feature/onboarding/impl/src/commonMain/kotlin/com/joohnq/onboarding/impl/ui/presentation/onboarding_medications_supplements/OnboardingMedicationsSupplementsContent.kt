@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.ui.component.MedicationsSupplementsRadioButton
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.medications_supplements_title
@@ -28,7 +29,7 @@ fun OnboardingMedicationsSupplementsContent(
     val options: List<MedicationsSupplementsResource> =
         remember { getAllMedicationsSupplementsResource() }
 
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 5,
         title = Res.string.medications_supplements_title,
         isContinueButtonVisible = state != null,

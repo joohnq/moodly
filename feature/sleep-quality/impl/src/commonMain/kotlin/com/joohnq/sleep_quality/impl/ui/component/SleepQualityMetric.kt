@@ -21,8 +21,8 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.wake_up
 import com.joohnq.shared_resources.you_havent_set_up_any_mental_sleep_yet
-import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
-import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.getTodaySleepQualityRecord
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toMoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.resources.stringResource
 

@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.onboarding.impl.ui.component.PhysicalSymptomsRadioButton
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
+import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -31,7 +32,7 @@ fun OnboardingPhysicalSymptomsContent(
 ) {
     val options = remember { getAllPhysicalSymptomsResource() }
 
-    _root_ide_package_.com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseComponent(
+    OnboardingBaseLayout(
         page = 3,
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = state != null,

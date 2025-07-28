@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun OnboardingBaseComponent(
+fun OnboardingBaseLayout(
     page: Int,
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     title: StringResource,

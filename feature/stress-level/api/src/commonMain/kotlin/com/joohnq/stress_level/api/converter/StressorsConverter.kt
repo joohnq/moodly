@@ -1,7 +1,7 @@
 package com.joohnq.stress_level.api.converter
 
 import com.joohnq.stress_level.api.entity.Stressor
-import com.joohnq.stress_level.api.mapper.toStressor
+import com.joohnq.stress_level.api.mapper.StressorMapper.toStressor
 import kotlinx.serialization.json.Json
 
 object StressorsConverter {

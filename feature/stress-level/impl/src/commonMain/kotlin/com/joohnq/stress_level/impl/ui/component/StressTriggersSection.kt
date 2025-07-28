@@ -30,8 +30,8 @@ import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.you_are_stressed_because_you_are_to_preoccupied_with
 import com.joohnq.shared_resources.you_dont_have_enough_sleep_records_yet
-import com.joohnq.stress_level.impl.ui.mapper.toMap
-import com.joohnq.stress_level.impl.ui.mapper.toSegments
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toMap
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.resources.stringResource
 

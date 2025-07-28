@@ -3,7 +3,7 @@ package com.joohnq.stress_level.impl.ui.component
 import androidx.compose.runtime.Composable
 import com.joohnq.api.mapper.DoubleMapper.organizeMoodRange
 import com.joohnq.shared_resources.components.chart.LineChart
-import com.joohnq.stress_level.api.mapper.toPercent
+import com.joohnq.stress_level.api.mapper.StressLevelMapper.toPercent
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 
 @Composable

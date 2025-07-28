@@ -32,7 +32,7 @@ import com.joohnq.shared_resources.select_stressors
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.stress_level.impl.ui.mapper.getAllStressorResource
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.allStressorResource
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import org.jetbrains.compose.resources.stringResource
@@ -44,7 +44,7 @@ fun StressStressorsContent(
     onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
     onEvent: (StressStressorsEvent) -> Unit = {},
 ) {
-    val stressors = remember { getAllStressorResource() }
+    val stressors = remember { allStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
 
     AppScaffoldLayout(

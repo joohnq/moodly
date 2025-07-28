@@ -5,13 +5,16 @@ import com.joohnq.api.getNow
 import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.toDomain
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.toResource
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toDomain
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toMap
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toResource
+import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import kotlinx.datetime.LocalDate
 
 object StressLevelRecordResourceMapper {
-    fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? =
-        find { record -> record.createdAt.date == getNow().date }
+    fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? = find { record -> record.createdAt.date == getNow().date }
 
     fun List<StressLevelRecordResource>.toGroupedByDate(): Map<LocalDate, List<StressLevelRecordResource>> =
         groupBy { it.createdAt }

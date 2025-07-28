@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.freud_score.impl.ui.components.ProgressiveDottedCircles
+import com.joohnq.freud_score.impl.ui.ProgressiveDottedCircles
 import com.joohnq.freud_score.impl.ui.mapper.getAllFreudScoreResources
 import com.joohnq.freud_score.impl.ui.mapper.toEndFreudScore
 import com.joohnq.freud_score.impl.ui.mapper.toInitialFreudScore
@@ -23,7 +23,7 @@ import com.joohnq.shared_resources.freud_score
 import com.joohnq.shared_resources.hyphen
 import com.joohnq.shared_resources.out_of_100
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 

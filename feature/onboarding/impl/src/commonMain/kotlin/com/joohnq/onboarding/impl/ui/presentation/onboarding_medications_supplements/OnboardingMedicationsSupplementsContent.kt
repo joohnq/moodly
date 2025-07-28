@@ -16,7 +16,7 @@ import com.joohnq.onboarding.impl.ui.presentation.OnboardingBaseLayout
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.medications_supplements_title
-import com.joohnq.user.impl.ui.mapper.getAllMedicationsSupplementsResource
+import com.joohnq.user.impl.ui.mapper.MedicationsSupplementsResourceMapper.allMedicationsSupplementsResource
 import com.joohnq.user.impl.ui.resource.MedicationsSupplementsResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -27,7 +27,7 @@ fun OnboardingMedicationsSupplementsContent(
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options: List<MedicationsSupplementsResource> =
-        remember { getAllMedicationsSupplementsResource() }
+        remember { allMedicationsSupplementsResource() }
 
     OnboardingBaseLayout(
         page = 5,

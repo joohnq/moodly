@@ -23,7 +23,9 @@ import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelCont
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.mapper.toDomain
+import com.joohnq.user.impl.ui.mapper.MedicationsSupplementsResourceMapper.toDomain
+import com.joohnq.user.impl.ui.mapper.PhysicalSymptomsResourceMapper.toDomain
+import com.joohnq.user.impl.ui.mapper.ProfessionalHelpResourceMapper.toDomain
 import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine

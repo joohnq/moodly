@@ -20,7 +20,7 @@ import com.joohnq.shared_resources.experiencing_physical_symptoms_title
 import com.joohnq.shared_resources.select_one_answer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.user.impl.ui.mapper.getAllPhysicalSymptomsResource
+import com.joohnq.user.impl.ui.mapper.PhysicalSymptomsResourceMapper.allPhysicalSymptomsResource
 import com.joohnq.user.impl.ui.resource.PhysicalSymptomsResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -30,7 +30,7 @@ fun OnboardingPhysicalSymptomsContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    val options = remember { getAllPhysicalSymptomsResource() }
+    val options = remember { allPhysicalSymptomsResource() }
 
     OnboardingBaseLayout(
         page = 3,

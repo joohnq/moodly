@@ -6,8 +6,8 @@ import com.joohnq.api.entity.MedicationsSupplements
 import com.joohnq.api.entity.PhysicalSymptoms
 import com.joohnq.api.entity.ProfessionalHelp
 import com.joohnq.api.entity.User
-import com.joohnq.api.mapper.toImageType
-import com.joohnq.api.mapper.toValue
+import com.joohnq.api.mapper.ImageTypeMapper.toImageType
+import com.joohnq.api.mapper.ImageTypeMapper.toValue
 import com.joohnq.api.repository.UserRepository
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult

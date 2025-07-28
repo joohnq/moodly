@@ -16,7 +16,7 @@ import com.joohnq.shared_resources.sought_professional_help_title
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.user.impl.ui.mapper.getAllProfessionalHelpResource
+import com.joohnq.user.impl.ui.mapper.ProfessionalHelpResourceMapper.allProfessionalHelpResource
 import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 
 @Composable
@@ -25,7 +25,7 @@ fun OnboardingProfessionalHelpContent(
     onEvent: (OnboardingEvent) -> Unit = {},
     onAction: (OnboardingContract.Intent) -> Unit = {},
 ) {
-    val options = rememberSaveable { getAllProfessionalHelpResource() }
+    val options = rememberSaveable { allProfessionalHelpResource() }
 
     OnboardingBaseLayout(
         page = 2,

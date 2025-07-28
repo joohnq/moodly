@@ -2,6 +2,8 @@ package com.joohnq.api.mapper
 
 import com.joohnq.api.entity.ImageType
 
-fun ImageType.toValue(): String = this.toString()
+object ImageTypeMapper {
+    fun ImageType.toValue(): String = this.toString()
 
-fun String.toImageType(): ImageType = ImageType.valueOf(this)
+    fun String.toImageType(): ImageType = ImageType.valueOf(this)
+}

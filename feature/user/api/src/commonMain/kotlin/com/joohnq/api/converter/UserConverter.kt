@@ -3,10 +3,12 @@ package com.joohnq.api.converter
 import com.joohnq.api.entity.MedicationsSupplements
 import com.joohnq.api.entity.PhysicalSymptoms
 import com.joohnq.api.entity.ProfessionalHelp
-import com.joohnq.api.mapper.toInt
-import com.joohnq.api.mapper.toMedicationsSupplements
-import com.joohnq.api.mapper.toPhysicalSymptoms
-import com.joohnq.api.mapper.toProfessionalHelp
+import com.joohnq.api.mapper.MedicationsSupplementsMapper.toInt
+import com.joohnq.api.mapper.MedicationsSupplementsMapper.toMedicationsSupplements
+import com.joohnq.api.mapper.PhysicalSymptomsMapper.toInt
+import com.joohnq.api.mapper.PhysicalSymptomsMapper.toPhysicalSymptoms
+import com.joohnq.api.mapper.ProfessionalHelpMapper.toInt
+import com.joohnq.api.mapper.ProfessionalHelpMapper.toProfessionalHelp
 
 object UserConverter {
     fun fromMedicationsSupplements(value: MedicationsSupplements): Long = value.toInt().toLong()

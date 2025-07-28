@@ -3,18 +3,6 @@ package com.joohnq.ui.mapper
 import androidx.compose.runtime.Composable
 import com.joohnq.ui.entity.UiState
 
-fun <T> UiState<T>.fold(
-    onLoading: () -> Unit = {},
-    onIdle: () -> Unit = {},
-    onSuccess: (T) -> Unit = {},
-    onError: (String) -> Unit = {},
-) = when (this) {
-    is UiState.Loading -> onLoading()
-    is UiState.Success -> onSuccess(this.data)
-    is UiState.Error -> onError(this.error)
-    is UiState.Idle -> onIdle()
-}
-
 @Composable
 fun List<UiState<*>>.foldComposable(
     onLoading: @Composable () -> Unit,
@@ -26,15 +14,6 @@ fun List<UiState<*>>.foldComposable(
         onLoading()
     }
 }
-
-fun List<UiState<*>>.allSuccess(block: () -> Unit): List<UiState<*>> {
-    if (all { it is UiState.Success }) {
-        block()
-    }
-    return this
-}
-
-fun List<UiState<*>>.allSuccess(): Boolean = all { it is UiState.Success }
 
 fun List<UiState<*>>.anyError(block: (String) -> Unit): List<UiState<*>> {
     filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
@@ -60,7 +39,7 @@ fun <T> UiState<T>.foldComposable(
 fun <T> UiState<T>.getValueOrNull(): T =
     when (this) {
         is UiState.Success -> this.data
-        else -> throw Throwable()
+        else -> error("Cannot get value from UiState: $this")
     }
 
 fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =

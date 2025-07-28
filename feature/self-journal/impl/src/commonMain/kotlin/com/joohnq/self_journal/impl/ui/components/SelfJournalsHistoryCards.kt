@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.components.view.EmptyView
-import com.joohnq.ui.mapper.itemsIndexed
+import com.joohnq.ui.mapper.MapMapper.itemsIndexed
 import kotlinx.datetime.LocalDate
 
 @Composable

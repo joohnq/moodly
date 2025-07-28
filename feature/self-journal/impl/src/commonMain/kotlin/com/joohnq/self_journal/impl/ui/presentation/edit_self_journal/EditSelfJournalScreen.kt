@@ -11,7 +11,7 @@ import com.joohnq.self_journal.impl.ui.mapper.toDomain
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
-import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 

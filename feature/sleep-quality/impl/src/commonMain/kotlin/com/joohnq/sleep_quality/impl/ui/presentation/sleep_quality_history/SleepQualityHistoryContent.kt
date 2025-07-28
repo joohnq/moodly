@@ -21,7 +21,7 @@ import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
-import com.joohnq.ui.mapper.foldComposable
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -11,7 +11,7 @@ import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.security.api.Security
 import com.joohnq.security.impl.ui.presentation.security.SecurityContract
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
-import com.joohnq.ui.mapper.fold
+import com.joohnq.ui.mapper.UiStateMapper.fold
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel

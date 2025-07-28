@@ -12,8 +12,8 @@ import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityV
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.anyError
-import com.joohnq.ui.mapper.onSuccess
+import com.joohnq.ui.mapper.UiStateMapper.anyError
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine

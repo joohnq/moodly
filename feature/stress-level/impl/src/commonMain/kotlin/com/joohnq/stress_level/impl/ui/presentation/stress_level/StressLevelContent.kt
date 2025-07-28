@@ -9,7 +9,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.component.StressLevelBody
 import com.joohnq.stress_level.impl.ui.component.StressPanel
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
-import com.joohnq.ui.mapper.foldComposable
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
 fun StressLevelContent(

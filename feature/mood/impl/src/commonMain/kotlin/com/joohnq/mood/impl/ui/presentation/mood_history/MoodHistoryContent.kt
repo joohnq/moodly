@@ -22,7 +22,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.foldComposable
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

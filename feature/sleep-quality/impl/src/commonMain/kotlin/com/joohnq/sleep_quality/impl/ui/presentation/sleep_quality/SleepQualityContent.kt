@@ -7,7 +7,7 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.impl.ui.component.SleepContent
 import com.joohnq.sleep_quality.impl.ui.component.SleepPanel
 import com.joohnq.sleep_quality.impl.ui.mapper.getTodaySleepQualityRecord
-import com.joohnq.ui.mapper.foldComposable
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
 fun SleepQualityContent(

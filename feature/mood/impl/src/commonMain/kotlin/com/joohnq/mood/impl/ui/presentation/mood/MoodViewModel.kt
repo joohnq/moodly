@@ -8,11 +8,11 @@ import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.mood.impl.ui.mapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.getValueOrEmpty
-import com.joohnq.ui.mapper.onFailure
-import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.ui.mapper.toResultResource
-import com.joohnq.ui.mapper.toUiState
+import com.joohnq.ui.mapper.ResultMapper.toResultResource
+import com.joohnq.ui.mapper.ResultMapper.toUiState
+import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
+import com.joohnq.ui.mapper.UiStateMapper.onFailure
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class MoodViewModel(

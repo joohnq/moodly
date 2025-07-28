@@ -11,9 +11,9 @@ import com.joohnq.api.use_case.UpdateUserNameUseCase
 import com.joohnq.api.use_case.UpdateUserUseCase
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.onFailure
-import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.ui.mapper.toUiState
+import com.joohnq.ui.mapper.ResultMapper.toUiState
+import com.joohnq.ui.mapper.UiStateMapper.onFailure
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch

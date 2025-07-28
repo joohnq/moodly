@@ -5,9 +5,9 @@ import com.joohnq.security.api.Security
 import com.joohnq.security.api.use_case.GetSecurityUseCase
 import com.joohnq.security.api.use_case.UpdateSecurityUseCase
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.onFailure
-import com.joohnq.ui.mapper.onSuccess
-import com.joohnq.ui.mapper.toUiState
+import com.joohnq.ui.mapper.ResultMapper.toUiState
+import com.joohnq.ui.mapper.UiStateMapper.onFailure
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class SecurityViewModel(

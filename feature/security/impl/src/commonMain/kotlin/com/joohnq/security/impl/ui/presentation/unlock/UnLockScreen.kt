@@ -23,7 +23,7 @@ import com.joohnq.security.impl.ui.securityAuthentication
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.invalid_pin
 import com.joohnq.shared_resources.remember.rememberFocusRequester
-import com.joohnq.ui.mapper.getValueOrNull
+import com.joohnq.ui.mapper.UiStateMapper.getValueOrNull
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource

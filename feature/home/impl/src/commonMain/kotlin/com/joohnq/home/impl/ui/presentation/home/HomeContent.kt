@@ -32,7 +32,7 @@ import com.joohnq.sleep_quality.impl.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.component.StressLevelMetric
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.ui.mapper.foldComposable
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
 fun HomeContent(

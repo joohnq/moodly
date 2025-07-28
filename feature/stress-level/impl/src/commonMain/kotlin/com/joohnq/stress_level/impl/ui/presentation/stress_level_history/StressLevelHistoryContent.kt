@@ -23,8 +23,8 @@ import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toGroupedByDate
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
-import com.joohnq.ui.mapper.foldComposable
-import com.joohnq.ui.mapper.items
+import com.joohnq.ui.mapper.MapMapper.items
+import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

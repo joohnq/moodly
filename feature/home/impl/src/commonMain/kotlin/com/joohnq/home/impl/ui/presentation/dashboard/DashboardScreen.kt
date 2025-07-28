@@ -28,7 +28,7 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.ObserverSideEffects
-import com.joohnq.ui.mapper.plus
+import com.joohnq.ui.mapper.PaddingValuesMapper.plus
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 

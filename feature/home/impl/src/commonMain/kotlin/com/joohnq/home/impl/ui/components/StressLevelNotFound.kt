@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthNameString
 import com.joohnq.self_journal.impl.ui.components.JournalCalendar
-import com.joohnq.self_journal.impl.ui.mapper.getTodaySelfJournalRecord
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal

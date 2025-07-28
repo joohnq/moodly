@@ -12,48 +12,50 @@ import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
-fun SelfJournalRecordResource.toDomain(): SelfJournalRecord =
-    SelfJournalRecord(
-        id = id,
-        mood = mood.toDomain(),
-        title = title,
-        description = description,
-        createdAt = createdAt
-    )
+object SelfJournalRecordResourceMapper {
+    fun SelfJournalRecordResource.toDomain(): SelfJournalRecord =
+        SelfJournalRecord(
+            id = id,
+            mood = mood.toDomain(),
+            title = title,
+            description = description,
+            createdAt = createdAt
+        )
 
-fun List<SelfJournalRecordResource>.getTodaySelfJournalRecord(): SelfJournalRecordResource? =
-    find {
-        it.createdAt.date ==
-            getNow().date
+    fun List<SelfJournalRecordResource>.getTodaySelfJournalRecord(): SelfJournalRecordResource? =
+        find {
+            it.createdAt.date ==
+                getNow().date
+        }
+
+    fun List<SelfJournalRecordResource>.calculateSelfJournalsAverage(): MoodAverageResource {
+        if (isEmpty()) return MoodAverageResource.Skipped
+        val score = sumOf { it.mood.healthLevel } / size
+        return score.toAverage().toResource()
     }
 
-fun List<SelfJournalRecordResource>.calculateSelfJournalsAverage(): MoodAverageResource {
-    if (isEmpty()) return MoodAverageResource.Skipped
-    val score = sumOf { it.mood.healthLevel } / size
-    return score.toAverage().toResource()
+    fun List<SelfJournalRecordResource?>.getSelfJournalsInYear(date: LocalDateTime = getNow()): String {
+        val days =
+            filter { it?.createdAt?.year == date.year }
+                .associateBy { it?.createdAt?.date }
+                .keys.size
+        return "$days/${date.year.getTotalDays()}"
+    }
+
+    fun SelfJournalRecord.toResource(): SelfJournalRecordResource =
+        SelfJournalRecordResource(
+            id = id,
+            mood = mood.toResource(),
+            title = title,
+            description = description,
+            createdAt = createdAt
+        )
+
+    fun List<SelfJournalRecord>.toResource(): List<SelfJournalRecordResource> = map { it.toResource() }
+
+    fun List<SelfJournalRecordResource>.toGroupedByDate(): Map<LocalDate, List<SelfJournalRecordResource>> =
+        groupBy { it.createdAt }
+            .map { (key, value) ->
+                key.date to value
+            }.toMap()
 }
-
-fun List<SelfJournalRecordResource?>.getSelfJournalsInYear(date: LocalDateTime = getNow()): String {
-    val days =
-        filter { it?.createdAt?.year == date.year }
-            .associateBy { it?.createdAt?.date }
-            .keys.size
-    return "$days/${date.year.getTotalDays()}"
-}
-
-fun SelfJournalRecord.toResource(): SelfJournalRecordResource =
-    SelfJournalRecordResource(
-        id = id,
-        mood = mood.toResource(),
-        title = title,
-        description = description,
-        createdAt = createdAt
-    )
-
-fun List<SelfJournalRecord>.toResource(): List<SelfJournalRecordResource> = map { it.toResource() }
-
-fun List<SelfJournalRecordResource>.toGroupedByDate(): Map<LocalDate, List<SelfJournalRecordResource>> =
-    groupBy { it.createdAt }
-        .map { (key, value) ->
-            key.date to value
-        }.toMap()

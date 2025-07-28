@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.self_journal.impl.ui.mapper.toDomain
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toDomain
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState

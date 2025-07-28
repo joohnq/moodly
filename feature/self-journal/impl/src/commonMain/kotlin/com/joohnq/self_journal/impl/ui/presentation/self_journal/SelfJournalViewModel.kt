@@ -6,7 +6,7 @@ import com.joohnq.self_journal.api.use_case.AddSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.UpdateSelfJournalsUseCase
-import com.joohnq.self_journal.impl.ui.mapper.toResource
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.ResultMapper.toResultResource

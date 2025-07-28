@@ -2,7 +2,7 @@ package com.joohnq.self_journal.impl.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.self_journal.impl.ui.mapper.getSelfJournalsInYear
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getSelfJournalsInYear
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.components.card.GiganticCreateCard
 

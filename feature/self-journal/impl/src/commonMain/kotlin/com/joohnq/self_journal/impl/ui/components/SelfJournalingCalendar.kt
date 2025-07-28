@@ -3,7 +3,7 @@ package com.joohnq.self_journal.impl.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.self_journal.impl.ui.mapper.calculateSelfJournalsAverage
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.calculateSelfJournalsAverage
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.HorizontalCalendar

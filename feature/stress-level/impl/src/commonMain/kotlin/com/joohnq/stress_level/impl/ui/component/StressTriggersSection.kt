@@ -1,6 +1,11 @@
 package com.joohnq.stress_level.impl.ui.component
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
@@ -11,15 +16,20 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.toPercentage
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.ColoredIndicatorItem
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.log_stress_level
+import com.joohnq.shared_resources.stress_trigger
+import com.joohnq.shared_resources.stress_trigger_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.you_are_stressed_because_you_are_to_preoccupied_with
+import com.joohnq.shared_resources.you_dont_have_enough_sleep_records_yet
 import com.joohnq.stress_level.impl.ui.mapper.toMap
 import com.joohnq.stress_level.impl.ui.mapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource

@@ -4,15 +4,14 @@ import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.stress_level.api.entity.StressLevel
 import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
-import com.joohnq.stress_level.impl.ui.resource.StressLevelResource.*
 
 fun getAllStressLevelResource(): List<StressLevelResource> =
     listOf(
-        One,
-        Two,
-        Three,
-        Four,
-        Five
+        StressLevelResource.One,
+        StressLevelResource.Two,
+        StressLevelResource.Three,
+        StressLevelResource.Four,
+        StressLevelResource.Five
     )
 
 fun getBrushGradient(i: Int): List<Color> =
@@ -26,27 +25,27 @@ fun getBrushGradient(i: Int): List<Color> =
 
 fun StressLevel.toResource(): StressLevelResource =
     when (this) {
-        StressLevel.One -> One
-        StressLevel.Two -> Two
-        StressLevel.Three -> Three
-        StressLevel.Four -> Four
-        StressLevel.Five -> Five
+        StressLevel.One -> StressLevelResource.One
+        StressLevel.Two -> StressLevelResource.Two
+        StressLevel.Three -> StressLevelResource.Three
+        StressLevel.Four -> StressLevelResource.Four
+        StressLevel.Five -> StressLevelResource.Five
     }
 
 fun StressLevelResource.toDomain(): StressLevel =
     when (this) {
-        One -> StressLevel.One
-        Two -> StressLevel.Two
-        Three -> StressLevel.Three
-        Four -> StressLevel.Four
-        Five -> StressLevel.Five
+        StressLevelResource.One -> StressLevel.One
+        StressLevelResource.Two -> StressLevel.Two
+        StressLevelResource.Three -> StressLevel.Three
+        StressLevelResource.Four -> StressLevel.Four
+        StressLevelResource.Five -> StressLevel.Five
     }
 
 fun Float.fromSliderValueToStressLevelResource(): StressLevelResource =
     when (this) {
-        0f -> One
-        25f -> Two
-        50f -> Three
-        75f -> Four
-        else -> Five
+        0f -> StressLevelResource.One
+        25f -> StressLevelResource.Two
+        50f -> StressLevelResource.Three
+        75f -> StressLevelResource.Four
+        else -> StressLevelResource.Five
     }

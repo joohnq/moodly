@@ -27,7 +27,7 @@ import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.sleep_quality_title
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalLarge
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingVerticalLarge
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.mapper.getAllSleepQualityResource
 import com.joohnq.sleep_quality.impl.ui.mapper.toSleepQualityResource

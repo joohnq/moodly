@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import com.joohnq.api.entity.Quad
 import com.joohnq.api.entity.User
 import com.joohnq.mood.impl.ui.mapper.toDomain
 import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
@@ -27,13 +28,6 @@ import com.joohnq.user.impl.ui.viewmodel.UserContract
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-
-data class Quad<out A, out B, out C, out D>(
-    val first: A,
-    val second: B,
-    val third: C,
-    val fourth: D,
-)
 
 @Composable
 fun OnboardingExpressionAnalysisScreen(

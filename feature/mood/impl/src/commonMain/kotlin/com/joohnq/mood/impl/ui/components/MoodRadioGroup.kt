@@ -26,7 +26,7 @@ import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalExtraExtraSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalExtraExtraSmall
 
 @Composable
 fun MoodRadioGroup(
@@ -49,9 +49,19 @@ fun MoodRadioGroup(
                     modifier = Modifier.size(36.dp),
                     colors =
                         ButtonColors(
-                            containerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                            containerColor =
+                                if (selected) {
+                                    Colors.White
+                                } else {
+                                    selectedMood.mood.palette.moodScreenInactiveColor
+                                },
                             contentColor = selectedMood.mood.palette.moodScreenBackgroundColor,
-                            disabledContainerColor = if (selected) Colors.White else selectedMood.mood.palette.moodScreenInactiveColor,
+                            disabledContainerColor =
+                                if (selected) {
+                                    Colors.White
+                                } else {
+                                    selectedMood.mood.palette.moodScreenInactiveColor
+                                },
                             disabledContentColor = selectedMood.mood.palette.moodScreenBackgroundColor
                         ),
                     shape = Dimens.Shape.Circle,

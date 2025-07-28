@@ -1,9 +1,12 @@
 [*.{kt, kts}]
+max_line_length = 120
+ktlint_standard_max-line-length = disabled
 ktlint_code_style = ktlint_official
 ktlint_standard_no-wildcard-imports = disabled
-insert_final_newline = true
+ktlint_function_signature = kotlin-style
+ktlint_parameter_list_wrapping = always
+ktlint_argument_list_wrapping = always
 ij_kotlin_keep_trailing_comma_on_call_site = true
-ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 ktlint_function_naming_ignore_when_annotated_with = Composable, Test
 ktlint_standard_package-name = disabled
@@ -26,6 +29,8 @@ ktlint_standard_no-blank-line-in-list = enabled
 ktlint_standard_no-empty-first-line-in-class-body = enabled
 ktlint_standard_modifier-order = enabled
 ktlint_standard_multiline-if-else = enabled
+ktlint_expression_wrapping = always
+ktlint_wrapping = enabled
 ktlint_standard_multiline-loop = enabled
 ktlint_standard_no-blank-line-before-rbrace = enabled
 ktlint_standard_no-blank-lines-in-chained-method-calls = enabled
@@ -85,6 +90,14 @@ ktlint_standard_parameter-order = enabled
 ktlint_compose_parameter-order-lambda-last = enabled
 insert_final_newline = true
 ij_kotlin_allow_trailing_comma = true
+
+ktlint_chain_wrapping = always          # Forces new lines for chained calls
+ktlint_wrapping = always                # General wrapping behavior
+ktlint_multiline_expression_wrapping = always  # For complex expressions
+
+# Modifier-specific rules (for Jetpack Compose)
+ktlint_compose_modifier_reorder = enabled
+ktlint_compose_multiline_expression_wrapping = enabled
 
 [*.{gradle,gradle.kts}]
 indent_size = 4

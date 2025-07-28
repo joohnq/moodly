@@ -24,6 +24,9 @@ subprojects {
             targetExclude("build/**/*.kt")
             ktlint(libs.versions.ktlint.get())
                 .setEditorConfigPath("${rootDir}/spotless/.editorconfig")
+                .editorConfigOverride(mapOf(
+                    "max_line_length" to "120"
+                ))
         }
 
         kotlinGradle {

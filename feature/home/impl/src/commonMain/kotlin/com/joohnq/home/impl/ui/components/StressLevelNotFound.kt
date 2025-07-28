@@ -13,7 +13,7 @@ import com.joohnq.shared_resources.journals_written_in
 import com.joohnq.shared_resources.lets_set_up_daily_journaling_and_self_reflection
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

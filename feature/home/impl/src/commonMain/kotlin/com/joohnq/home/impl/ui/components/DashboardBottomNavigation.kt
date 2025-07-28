@@ -1,7 +1,12 @@
 package com.joohnq.home.impl.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,8 +33,7 @@ fun DashboardBottomNavigation(
             Modifier
                 .fillMaxWidth()
                 .background(color = Colors.White)
-                .padding(horizontal = 20.dp)
-                .padding(vertical = 10.dp)
+                .padding(horizontal = 20.dp, vertical = 10.dp)
                 .padding(bottom = padding.calculateBottomPadding())
     ) {
         CreateTabItem(

@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.mapper.toFormattedDateString
+import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.self_journal.impl.ui.components.SelfJournalsHistoryCards
 import com.joohnq.self_journal.impl.ui.mapper.toGroupedByDate
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource

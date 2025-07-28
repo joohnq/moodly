@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import com.joohnq.api.mapper.itemsNotNull
+import com.joohnq.api.mapper.ListMapper.itemsNotNull
 import com.joohnq.security.api.Security
 import com.joohnq.security.impl.ui.presentation.security.SecurityContract
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel

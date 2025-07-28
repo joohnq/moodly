@@ -1,7 +1,7 @@
 package com.joohnq.sleep_quality.impl.data.repository
 
-import com.joohnq.api.mapper.toFormattedTimeString
-import com.joohnq.api.mapper.toTime
+import com.joohnq.api.mapper.StringMapper.toTime
+import com.joohnq.api.mapper.TimeMapper.toFormattedTimeString
 import com.joohnq.database.SqliteOperationResult
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult

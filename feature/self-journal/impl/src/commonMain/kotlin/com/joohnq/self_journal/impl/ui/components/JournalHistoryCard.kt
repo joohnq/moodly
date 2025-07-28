@@ -16,8 +16,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.mapper.toMonthAbbreviatedAndDayString
-import com.joohnq.api.mapper.toWordCount
+import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthAbbreviatedAndDayString
+import com.joohnq.api.mapper.StringMapper.toWordCount
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer

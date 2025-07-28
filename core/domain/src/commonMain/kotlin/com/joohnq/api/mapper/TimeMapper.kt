@@ -2,17 +2,20 @@ package com.joohnq.api.mapper
 
 import com.joohnq.api.entity.Time
 import com.joohnq.api.mapper.IntMapper.toPaddedString
+import com.joohnq.api.mapper.MinutesMapper.toTimeFromMinutes
 
-fun Time.toFormattedTimeString(): String = "${hour.toPaddedString()}:${minute.toPaddedString()}"
+object TimeMapper {
+    fun Time.toFormattedTimeString(): String = "${hour.toPaddedString()}:${minute.toPaddedString()}"
 
-fun Time.toMinutes(): Int = hour * 60 + minute
+    fun Time.toMinutes(): Int = hour * 60 + minute
 
-fun Time.toHoursAndMinutesString(): String = "${hour}h ${minute}min"
+    fun Time.toHoursAndMinutesString(): String = "${hour}h ${minute}min"
 
-fun calculateDuration(
-    start: Time,
-    end: Time,
-): Time {
-    val duration = end.toMinutes() - start.toMinutes()
-    return duration.toTimeFromMinutes()
+    fun calculateDuration(
+        start: Time,
+        end: Time,
+    ): Time {
+        val duration = end.toMinutes() - start.toMinutes()
+        return duration.toTimeFromMinutes()
+    }
 }

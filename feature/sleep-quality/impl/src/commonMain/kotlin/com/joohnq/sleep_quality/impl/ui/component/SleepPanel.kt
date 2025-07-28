@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.Time
-import com.joohnq.api.mapper.calculateDuration
-import com.joohnq.api.mapper.toHoursAndMinutesString
+import com.joohnq.api.mapper.TimeMapper.calculateDuration
+import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.current_sleep_quality

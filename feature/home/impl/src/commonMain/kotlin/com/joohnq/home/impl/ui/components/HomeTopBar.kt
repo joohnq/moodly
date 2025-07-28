@@ -17,7 +17,7 @@ import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
 import com.joohnq.api.getNow
-import com.joohnq.api.mapper.toFormattedDateString
+import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.image.CacheImage
 import com.joohnq.shared_resources.components.image.ProfileImage

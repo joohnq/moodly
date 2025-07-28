@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.getNow
-import com.joohnq.api.mapper.toMonthDays
+import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthDays
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.be_sure_to_log_your_sleep_metrics_everyday_to_get_accurate_heath_result
 import com.joohnq.shared_resources.logged_this_month

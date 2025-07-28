@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.impl.ui.presentation.add_stress_level
 
-import com.joohnq.api.mapper.toggle
+import com.joohnq.api.mapper.ListMapper.toggle
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.fromSliderValueToStressLevelResource
 import com.joohnq.ui.BaseViewModel
 

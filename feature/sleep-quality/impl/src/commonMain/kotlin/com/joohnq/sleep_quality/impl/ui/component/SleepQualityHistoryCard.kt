@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.mapper.calculateDuration
-import com.joohnq.api.mapper.toAbbreviatedMonthName
-import com.joohnq.api.mapper.toHoursAndMinutesString
+import com.joohnq.api.mapper.LocalDateMapper.toAbbreviatedMonthName
+import com.joohnq.api.mapper.TimeMapper.calculateDuration
+import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer

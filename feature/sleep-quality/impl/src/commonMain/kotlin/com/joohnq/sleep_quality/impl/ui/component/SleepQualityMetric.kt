@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.api.mapper.calculateDuration
-import com.joohnq.api.mapper.toFormattedTimeString
-import com.joohnq.api.mapper.toHoursAndMinutesString
+import com.joohnq.api.mapper.TimeMapper.calculateDuration
+import com.joohnq.api.mapper.TimeMapper.toFormattedTimeString
+import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.bedtime

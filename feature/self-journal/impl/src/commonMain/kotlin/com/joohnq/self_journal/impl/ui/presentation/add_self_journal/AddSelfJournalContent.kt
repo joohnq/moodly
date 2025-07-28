@@ -39,7 +39,7 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.write_your_entry
 import org.jetbrains.compose.resources.painterResource
 
@@ -113,7 +113,14 @@ fun AddJournalingContent(
                         MoodFace(
                             modifier = Modifier.size(32.dp),
                             resource = resource,
-                            backgroundColor = if (state.mood == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                            backgroundColor =
+                                if (state.mood ==
+                                    resource
+                                ) {
+                                    resource.palette.faceBackgroundColor
+                                } else {
+                                    Colors.Gray30
+                                },
                             color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {
                                 onAction(

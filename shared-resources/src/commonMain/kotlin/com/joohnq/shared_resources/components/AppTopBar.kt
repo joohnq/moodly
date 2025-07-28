@@ -12,7 +12,7 @@ import com.joohnq.shared_resources.components.button.AppDarkBackButton
 import com.joohnq.shared_resources.components.button.AppLightBackButton
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingVerticalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingVerticalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource

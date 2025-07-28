@@ -6,7 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import com.joohnq.shared_resources.theme.Dimens
 
@@ -22,6 +22,7 @@ fun Modifier.progress(
     // subtract the start value from both the current value and the total value.
     .fillMaxWidth(
         fraction =
-            (sliderState.value - sliderState.valueRange.start) / (sliderState.valueRange.endInclusive - sliderState.valueRange.start)
+            (sliderState.value - sliderState.valueRange.start) /
+                (sliderState.valueRange.endInclusive - sliderState.valueRange.start)
     ).heightIn(min = height)
     .clip(shape)

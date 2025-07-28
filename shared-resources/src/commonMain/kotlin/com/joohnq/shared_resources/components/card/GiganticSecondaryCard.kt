@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable

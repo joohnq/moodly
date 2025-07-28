@@ -5,7 +5,11 @@ import com.joohnq.api.entity.MedicationsSupplements.Companion.OVER_THE_COUNTER_S
 import com.joohnq.api.entity.MedicationsSupplements.Companion.PREFER_NOT_TO_SAY
 import com.joohnq.api.entity.MedicationsSupplements.Companion.PRESCRIBED_MEDICATIONS
 import com.joohnq.api.property.MedicationsSupplementsProperties
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.im_not_taking_any
+import com.joohnq.shared_resources.over_the_counter_supplements
+import com.joohnq.shared_resources.prefer_not_to_say
+import com.joohnq.shared_resources.prescribed_medications
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.StringResource

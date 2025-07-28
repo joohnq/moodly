@@ -131,10 +131,30 @@ object ComponentColors {
             colors: TextRadioButtonColors,
         ): ButtonColors =
             ButtonColors(
-                containerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
-                contentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor,
-                disabledContainerColor = if (selected) colors.selectedBackgroundColor else colors.unSelectedBackgroundColor,
-                disabledContentColor = if (selected) colors.selectedContentColor else colors.unSelectedContentColor
+                containerColor =
+                    if (selected) {
+                        colors.selectedBackgroundColor
+                    } else {
+                        colors.unSelectedBackgroundColor
+                    },
+                contentColor =
+                    if (selected) {
+                        colors.selectedContentColor
+                    } else {
+                        colors.unSelectedContentColor
+                    },
+                disabledContainerColor =
+                    if (selected) {
+                        colors.selectedBackgroundColor
+                    } else {
+                        colors.unSelectedBackgroundColor
+                    },
+                disabledContentColor =
+                    if (selected) {
+                        colors.selectedContentColor
+                    } else {
+                        colors.unSelectedContentColor
+                    }
             )
     }
 

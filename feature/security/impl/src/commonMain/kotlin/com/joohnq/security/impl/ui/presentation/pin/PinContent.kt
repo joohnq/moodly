@@ -29,7 +29,7 @@ import com.joohnq.shared_resources.enter_a_four_digit_pin
 import com.joohnq.shared_resources.pin_setup
 import com.joohnq.shared_resources.scan_with_your_device_security
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.stringResource
 

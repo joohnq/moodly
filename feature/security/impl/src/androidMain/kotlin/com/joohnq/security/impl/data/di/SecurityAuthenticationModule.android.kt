@@ -9,5 +9,6 @@ import org.koin.dsl.module
 
 actual val securityAuthenticationModule: Module =
     module {
-        factory { (activity: AppCompatActivity) -> SecurityAuthenticationImpl(activity) } bind SecurityAuthentication::class
+        factory { (activity: AppCompatActivity) -> SecurityAuthenticationImpl(activity) } bind
+            SecurityAuthentication::class
     }

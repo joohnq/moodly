@@ -44,7 +44,7 @@ import com.joohnq.shared_resources.start_sleeping_time
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
 import com.joohnq.shared_resources.theme.Dimens
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.mapper.getAllSleepInfluencesResource
 import com.joohnq.sleep_quality.impl.ui.mapper.toMoodResource
@@ -186,7 +186,14 @@ fun AddSleepQualityContent(
                     MoodFace(
                         modifier = Modifier.size(32.dp),
                         resource = resource,
-                        backgroundColor = if (moodResource == resource) resource.palette.faceBackgroundColor else Colors.Gray30,
+                        backgroundColor =
+                            if (moodResource ==
+                                resource
+                            ) {
+                                resource.palette.faceBackgroundColor
+                            } else {
+                                Colors.Gray30
+                            },
                         color = if (moodResource == resource) resource.palette.faceColor else Colors.Gray60,
                         onClick = { onAddAction(AddSleepQualityContract.Intent.UpdateMood(resource)) }
                     )

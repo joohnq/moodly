@@ -65,7 +65,7 @@ class SecurityPreferenceImpl(
         val security = this[SECURITY_KEY] ?: return Security.None
         return try {
             Json.decodeFromString<Security>(security)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Security.Corrupted
         }
     }

@@ -4,7 +4,11 @@ import com.joohnq.ui.BaseViewModel
 
 class SelfJournalHistoryViewModel(
     initialState: SelfJournalHistoryContract.State = SelfJournalHistoryContract.State(),
-) : BaseViewModel<SelfJournalHistoryContract.State, SelfJournalHistoryContract.Intent, SelfJournalHistoryContract.SideEffect>(
+) : BaseViewModel<
+        SelfJournalHistoryContract.State,
+        SelfJournalHistoryContract.Intent,
+        SelfJournalHistoryContract.SideEffect
+    >(
         initialState = initialState
     ),
     SelfJournalHistoryContract.ViewModel {

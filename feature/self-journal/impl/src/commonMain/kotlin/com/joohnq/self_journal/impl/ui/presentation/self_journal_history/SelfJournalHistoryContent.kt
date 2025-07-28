@@ -25,7 +25,7 @@ import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingHorizontalMedium
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.foldComposable

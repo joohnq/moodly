@@ -15,14 +15,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.mapper.getAllMoodResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.*
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.lets_log_your_first_journal_to_see_your_insight
+import com.joohnq.shared_resources.log_your_first_journal
+import com.joohnq.shared_resources.most_frequent_emotion
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.Companion.paddingAllSmall
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.write_journal
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

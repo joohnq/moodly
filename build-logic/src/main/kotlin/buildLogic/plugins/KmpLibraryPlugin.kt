@@ -64,6 +64,6 @@ class KmpLibraryPlugin : Plugin<Project> {
     }
 
     private fun Project.configureDetektPlugin() {
-       configureDetekt()
+        configureDetekt()
     }
 }

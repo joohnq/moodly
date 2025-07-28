@@ -74,6 +74,10 @@ turbine = "1.2.1"
 
 detekt = "1.23.8"
 
+spotless = "7.2.1"
+
+ktlint = "1.7.1"
+
 [libraries]
 
 # Accompanist
@@ -184,6 +188,8 @@ crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyti
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 [bundles]
 

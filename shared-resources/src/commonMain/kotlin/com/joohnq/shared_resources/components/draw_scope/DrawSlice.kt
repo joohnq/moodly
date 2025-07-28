@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.VectorPainter
-import com.joohnq.api.mapper.toRadians
+import com.joohnq.api.mapper.FloatMapper.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 

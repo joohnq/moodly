@@ -1,6 +1,7 @@
 package com.joohnq.api.mapper
 
 import com.joohnq.api.entity.Time
+import com.joohnq.api.mapper.IntMapper.toPaddedString
 
 fun Time.toFormattedTimeString(): String = "${hour.toPaddedString()}:${minute.toPaddedString()}"
 

@@ -20,7 +20,7 @@ fun EditJournalingScreen(
     id: Int,
     onGoBack: () -> Unit,
     selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
-    editSelfJournalViewModel: EditSelfJournalViewModel = sharedViewModel()
+    editSelfJournalViewModel: EditSelfJournalViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()

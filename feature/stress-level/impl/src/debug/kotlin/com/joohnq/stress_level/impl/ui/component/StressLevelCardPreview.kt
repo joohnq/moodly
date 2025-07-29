@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun StressLevelHistoryCardPreview(
     @PreviewParameter(StressLevelRecordResourceParameterProvider::class)
-    item: StressLevelRecordResource
+    item: StressLevelRecordResource,
 ) {
     StressLevelHistoryCard(
         record = item

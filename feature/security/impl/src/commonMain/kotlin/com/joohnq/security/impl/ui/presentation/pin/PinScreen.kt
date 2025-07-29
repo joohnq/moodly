@@ -21,7 +21,7 @@ fun PinScreen(
     onNavigateToDashboard: () -> Unit,
     onGoBack: () -> Unit,
     securityViewModel: SecurityViewModel = sharedViewModel(),
-    pinViewModel: PinViewModel = sharedViewModel()
+    pinViewModel: PinViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val state by pinViewModel.state.collectAsState()

@@ -10,7 +10,7 @@ fun SleepQualityScreen(
     onNavigateAddSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
     onNavigateToSleepHistory: () -> Unit,
-    viewModel: SleepQualityViewModel = sharedViewModel()
+    viewModel: SleepQualityViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

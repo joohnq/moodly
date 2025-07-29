@@ -8,7 +8,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun SecurityConfirmedScreen(
     onNavigateToDashboard: () -> Unit,
-    preferencesViewModel: PreferencesViewModel = sharedViewModel()
+    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
 ) {
     fun onEvent(event: SecurityConfirmedContract.Event) {
         when (event) {

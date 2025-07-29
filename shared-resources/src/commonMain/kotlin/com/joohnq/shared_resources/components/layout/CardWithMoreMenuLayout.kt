@@ -44,16 +44,18 @@ fun CardWithMoreMenuLayout(
     var isMenuExpanded by remember { mutableStateOf(false) }
 
     Card(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier =
+            modifier
+                .fillMaxWidth(),
         onClick = { onClick?.invoke() },
         enabled = enabled,
-        colors = CardColors(
-            containerColor = Colors.Gray5,
-            contentColor = Color.Unspecified,
-            disabledContainerColor = Colors.Gray5,
-            disabledContentColor = Color.Unspecified
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Gray5,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = Colors.Gray5,
+                disabledContentColor = Color.Unspecified
+            ),
         shape = Dimens.Shape.Large
     ) {
         Row(
@@ -82,14 +84,15 @@ fun CardWithMoreMenuLayout(
                 ) {
                     DropdownMenuItem(
                         modifier = Modifier.fillMaxWidth(),
-                        colors = MenuItemColors(
-                            textColor = Colors.Brown80,
-                            leadingIconColor = Color.Unspecified,
-                            trailingIconColor = Color.Unspecified,
-                            disabledTextColor = Color.Unspecified,
-                            disabledLeadingIconColor = Color.Unspecified,
-                            disabledTrailingIconColor = Color.Unspecified
-                        ),
+                        colors =
+                            MenuItemColors(
+                                textColor = Colors.Brown80,
+                                leadingIconColor = Color.Unspecified,
+                                trailingIconColor = Color.Unspecified,
+                                disabledTextColor = Color.Unspecified,
+                                disabledLeadingIconColor = Color.Unspecified,
+                                disabledTrailingIconColor = Color.Unspecified
+                            ),
                         text = {
                             Text(
                                 text = stringResource(Res.string.delete),

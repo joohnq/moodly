@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 fun AddSelfJournalScreen(
     onGoBack: () -> Unit,
     selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
-    addSelfJournalViewModel: AddSelfJournalViewModel = sharedViewModel()
+    addSelfJournalViewModel: AddSelfJournalViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()

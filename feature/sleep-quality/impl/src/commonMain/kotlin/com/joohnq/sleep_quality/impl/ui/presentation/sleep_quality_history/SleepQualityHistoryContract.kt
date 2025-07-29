@@ -4,6 +4,8 @@ sealed interface SleepQualityHistoryContract {
     sealed interface Event {
         data object OnGoBack : Event
 
-        data class OnDelete(val id: Int) : Event
+        data class OnDelete(
+            val id: Int,
+        ) : Event
     }
 }

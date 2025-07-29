@@ -17,7 +17,7 @@ fun MoodHistoryBody(
         records.forEach { record ->
             MoodHistoryCard(
                 onDelete = onDelete,
-                record = record,
+                record = record
             )
         }
     }

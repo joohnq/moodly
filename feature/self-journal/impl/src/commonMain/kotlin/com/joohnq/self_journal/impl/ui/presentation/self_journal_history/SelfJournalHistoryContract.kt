@@ -9,6 +9,7 @@ interface SelfJournalHistoryContract {
 
     sealed interface Intent {
         data object ResetState : Intent
+
         data class UpdateSelectedDateTime(
             val selectedDateTime: LocalDate,
         ) : Intent

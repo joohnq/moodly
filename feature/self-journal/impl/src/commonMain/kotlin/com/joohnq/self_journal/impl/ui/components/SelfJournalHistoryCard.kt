@@ -213,7 +213,7 @@ fun SelfJournalHistoryCard(
                             .background(color = if (isNotLast) Colors.Brown80 else Colors.Transparent)
                 )
             }
-        },
+        }
 //        padding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
     )
 }

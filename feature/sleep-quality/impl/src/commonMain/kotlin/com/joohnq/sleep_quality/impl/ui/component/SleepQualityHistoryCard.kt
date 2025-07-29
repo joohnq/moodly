@@ -45,7 +45,7 @@ fun SleepQualityHistoryCard(
     CardWithMoreMenuLayout(
         modifier = modifier,
         menuContainerColor = resource.palette.color,
-        onDelete = { onDelete(record.id) },
+        onDelete = { onDelete(record.id) }
     ) { modifier ->
         Row(
             modifier =
@@ -92,8 +92,7 @@ fun SleepQualityHistoryCard(
                                 .background(
                                     color = resource.palette.color,
                                     shape = Dimens.Shape.Circle
-                                )
-                                .padding(horizontal = 7.dp, vertical = 4.dp),
+                                ).padding(horizontal = 7.dp, vertical = 4.dp),
                         horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
                         MoodFace(

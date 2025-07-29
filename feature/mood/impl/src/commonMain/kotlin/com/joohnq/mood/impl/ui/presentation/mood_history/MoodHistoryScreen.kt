@@ -9,7 +9,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun MoodHistoryScreen(
     onGoBack: () -> Unit,
-    moodViewModel: MoodViewModel = sharedViewModel()
+    moodViewModel: MoodViewModel = sharedViewModel(),
 ) {
     val state by moodViewModel.state.collectAsState()
 

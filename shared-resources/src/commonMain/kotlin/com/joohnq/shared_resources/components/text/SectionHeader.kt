@@ -42,13 +42,14 @@ fun SectionHeader(
             onClick = onSeeMore,
             contentPadding = PaddingValues(horizontal = 5.dp, vertical = 2.dp),
             shape = Dimens.Shape.Circle,
-            elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = 0.dp,
-                pressedElevation = 0.dp,
-                focusedElevation = 0.dp,
-                hoveredElevation = 0.dp,
-                disabledElevation = 0.dp
-            ),
+            elevation =
+                ButtonDefaults.buttonElevation(
+                    defaultElevation = 0.dp,
+                    pressedElevation = 0.dp,
+                    focusedElevation = 0.dp,
+                    hoveredElevation = 0.dp,
+                    disabledElevation = 0.dp
+                ),
             colors =
                 ButtonColors(
                     containerColor = Colors.Transparent,

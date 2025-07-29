@@ -34,7 +34,7 @@ fun UnLockScreen(
     onNavigateToDashboard: () -> Unit,
     pinViewModel: PinViewModel = sharedViewModel(),
     securityViewModel: SecurityViewModel = sharedViewModel(),
-    securityAuthentication: SecurityAuthentication = securityAuthentication()
+    securityAuthentication: SecurityAuthentication = securityAuthentication(),
 ) {
     val securityState by securityViewModel.state.collectAsState()
     val scope = rememberCoroutineScope()

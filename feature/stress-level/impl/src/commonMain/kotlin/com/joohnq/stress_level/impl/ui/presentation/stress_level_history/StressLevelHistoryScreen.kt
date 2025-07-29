@@ -11,7 +11,7 @@ fun StressLevelHistoryScreen(
     onGoBack: () -> Unit,
     onAddStressLevel: () -> Unit,
     onNavigateStressLevel: () -> Unit,
-    viewModel: StressLevelViewModel = sharedViewModel()
+    viewModel: StressLevelViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

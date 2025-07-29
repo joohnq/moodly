@@ -12,7 +12,7 @@ fun OnboardingPhysicalSymptomsScreen(
     onNavigateToSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
     viewModel: OnboardingViewModel =
-        sharedViewModel()
+        sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

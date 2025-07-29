@@ -12,7 +12,7 @@ fun SelfJournalHistoryScreen(
     onNavigateEditJournaling: (Int) -> Unit,
     onGoBack: () -> Unit,
     selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
-    selfJournalHistoryViewModel: SelfJournalHistoryViewModel = sharedViewModel()
+    selfJournalHistoryViewModel: SelfJournalHistoryViewModel = sharedViewModel(),
 ) {
     val selfJournalState by selfJournalViewModel.state.collectAsState()
     val state by selfJournalHistoryViewModel.state.collectAsState()

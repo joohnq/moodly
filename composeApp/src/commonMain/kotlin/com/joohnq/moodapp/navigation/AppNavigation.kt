@@ -193,7 +193,7 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.SleepQualityHistory> {
             SleepQualityHistoryScreen(
-                onGoBack = onGoBack,
+                onGoBack = onGoBack
             )
         }
         composable<Destination.App.AddSleepQuality> {

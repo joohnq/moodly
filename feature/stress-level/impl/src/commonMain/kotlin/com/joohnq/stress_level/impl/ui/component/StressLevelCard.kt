@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
     record: StressLevelRecordResource,
-    onDelete: () -> Unit = {}
+    onDelete: () -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier,

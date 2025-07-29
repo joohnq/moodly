@@ -19,7 +19,7 @@ fun SecurityScreen(
     onNavigatePIN: () -> Unit,
     preferencesViewModel: PreferencesViewModel = sharedViewModel(),
     securityViewModel: SecurityViewModel = sharedViewModel(),
-    securityAuthentication: SecurityAuthentication = securityAuthentication()
+    securityAuthentication: SecurityAuthentication = securityAuthentication(),
 ) {
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()

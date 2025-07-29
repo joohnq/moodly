@@ -11,7 +11,7 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingStressLevelScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: OnboardingViewModel = sharedViewModel()
+    viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

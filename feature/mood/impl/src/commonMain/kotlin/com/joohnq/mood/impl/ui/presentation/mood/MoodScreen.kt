@@ -10,7 +10,7 @@ fun MoodScreen(
     onGoBack: () -> Unit,
     onNavigateToAddMood: () -> Unit,
     onNavigateToMoodHistory: () -> Unit,
-    viewModel: MoodViewModel = sharedViewModel()
+    viewModel: MoodViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

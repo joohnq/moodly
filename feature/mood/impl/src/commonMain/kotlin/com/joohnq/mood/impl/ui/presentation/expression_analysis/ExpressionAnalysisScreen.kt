@@ -20,7 +20,7 @@ fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
     onGoBack: () -> Unit,
     moodViewModel: MoodViewModel = sharedViewModel(),
-    addMoodViewModel: AddMoodViewModel = sharedViewModel()
+    addMoodViewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()

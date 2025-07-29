@@ -28,8 +28,8 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.three
 import com.joohnq.shared_resources.two
-import com.joohnq.welcome.impl.ui.Welcome
-import com.joohnq.welcome.impl.ui.WelcomeBase
+import com.joohnq.welcome.api.entity.Welcome
+import com.joohnq.welcome.impl.ui.WelcomeBaseLayout
 import com.joohnq.welcome.impl.ui.presentation.first.FirstScreen
 
 @Composable
@@ -50,7 +50,7 @@ fun WelcomeContent(
             when (page) {
                 0 -> FirstScreen(onNext = onNext)
                 1 ->
-                    WelcomeBase(
+                    WelcomeBaseLayout(
                         welcome =
                             Welcome(
                                 image = Drawables.Images.WelcomeHealthState,
@@ -67,7 +67,7 @@ fun WelcomeContent(
                     )
 
                 2 ->
-                    WelcomeBase(
+                    WelcomeBaseLayout(
                         welcome =
                             Welcome(
                                 image = Drawables.Images.WelcomeIntelligent,
@@ -83,7 +83,7 @@ fun WelcomeContent(
                     )
 
                 3 ->
-                    WelcomeBase(
+                    WelcomeBaseLayout(
                         welcome =
                             Welcome(
                                 image = Drawables.Images.WelcomeMental,
@@ -100,7 +100,7 @@ fun WelcomeContent(
                     )
 
                 4 ->
-                    WelcomeBase(
+                    WelcomeBaseLayout(
                         welcome =
                             Welcome(
                                 image = Drawables.Images.WelcomeResources,
@@ -117,7 +117,7 @@ fun WelcomeContent(
                     )
 
                 5 ->
-                    WelcomeBase(
+                    WelcomeBaseLayout(
                         welcome =
                             Welcome(
                                 image = Drawables.Images.WelcomeCommunity,

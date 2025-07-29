@@ -11,7 +11,7 @@ fun SelfJournalScreen(
     onNavigateToSelfJournalHistory: () -> Unit,
     onGoBack: () -> Unit,
     onEditSelfJournal: (Int) -> Unit,
-    viewModel: SelfJournalViewModel = sharedViewModel()
+    viewModel: SelfJournalViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AvatarScreen(
     onNavigateToUserName: () -> Unit,
     avatarViewModel: AvatarViewModel = sharedViewModel(),
-    userViewModel: UserViewModel = sharedViewModel()
+    userViewModel: UserViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
     val avatars = rememberAvatars()

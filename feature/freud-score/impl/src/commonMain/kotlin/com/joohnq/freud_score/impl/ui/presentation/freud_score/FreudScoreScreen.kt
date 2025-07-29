@@ -8,7 +8,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun FreudScoreScreen(
     onGoBack: () -> Unit,
-    viewModel: FreudScoreViewModel = sharedViewModel()
+    viewModel: FreudScoreViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

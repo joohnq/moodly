@@ -15,6 +15,8 @@ kotlin {
 
             implementation(projects.sharedResources)
 
+            implementation(projects.feature.welcome.api)
+
             implementation(projects.feature.preferences.impl)
 
             implementation(libs.navigation.compose)
@@ -22,8 +24,4 @@ kotlin {
             implementation(libs.bundles.koin)
         }
     }
-}
-
-dependencies {
-    debugImplementation(libs.androidx.ui.tooling)
 }

@@ -36,7 +36,7 @@ fun StressTriggersSection(
     } else {
         StressTriggersCard(
             modifier = modifier,
-            stressors = stressors,
+            stressors = stressors
         )
     }
 }

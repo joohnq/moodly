@@ -47,19 +47,17 @@ fun DashboardScreen(onEvent: (DashboardContract.Event) -> Unit) {
         }
     }
 
-    fun onSideEffect(effect: DashboardContract.SideEffect) {
-        when (effect) {
-            is DashboardContract.SideEffect.ShowError -> onError(effect.message)
-        }
-    }
-
     LaunchedEffect(Unit) {
         dashboardViewModel.onIntent(DashboardContract.Intent.Get)
     }
 
     ObserverSideEffects(
         flow = dashboardViewModel.sideEffect,
-        onEvent = ::onSideEffect
+        onEvent = { effect ->
+            when (effect) {
+                is DashboardContract.SideEffect.ShowError -> onError(effect.message)
+            }
+        }
     )
 
     AppScaffoldLayout(

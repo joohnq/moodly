@@ -18,7 +18,7 @@ fun AddSleepQualityScreen(
     onGoBack: () -> Unit,
     onNavigateToSleepQuality: () -> Unit,
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
-    addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel()
+    addSleepQualityViewModel: AddSleepQualityViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()

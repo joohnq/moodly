@@ -9,7 +9,7 @@ import com.joohnq.ui.sharedViewModel
 fun StressLevelScreen(
     onNavigateAddStressLevel: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: StressLevelViewModel = sharedViewModel()
+    viewModel: StressLevelViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

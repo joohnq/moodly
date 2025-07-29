@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun WelcomeScreen(
     onNavigateToOnboarding: () -> Unit,
-    preferencesViewModel: PreferencesViewModel = sharedViewModel()
+    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()

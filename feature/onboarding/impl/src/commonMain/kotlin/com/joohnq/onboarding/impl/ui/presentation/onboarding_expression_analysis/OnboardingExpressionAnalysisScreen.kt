@@ -40,7 +40,7 @@ fun OnboardingExpressionAnalysisScreen(
     moodViewModel: MoodViewModel = sharedViewModel(),
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
-    preferencesViewModel: PreferencesViewModel = sharedViewModel()
+    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()

@@ -20,7 +20,7 @@ fun StressStressorsScreen(
     onGoBack: () -> Unit,
     onNavigateToStressLevel: () -> Unit,
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
-    addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
+    addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()

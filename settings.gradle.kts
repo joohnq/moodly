@@ -63,6 +63,7 @@ include(
     ":feature:stress-level:impl",
     ":feature:user:api",
     ":feature:user:impl",
+    ":feature:welcome:api",
     ":feature:welcome:impl",
     ":shared-resources",
 )

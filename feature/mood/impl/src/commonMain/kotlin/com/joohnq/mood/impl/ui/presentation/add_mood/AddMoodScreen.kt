@@ -9,7 +9,7 @@ import com.joohnq.ui.sharedViewModel
 fun AddMoodScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: AddMoodViewModel = sharedViewModel()
+    viewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

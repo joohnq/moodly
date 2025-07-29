@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun UserNameContentPreview() {
     AuthNameContent(
-        state = AuthNameContract.State(),
+        state = AuthNameContract.State()
     )
 }
 
@@ -20,7 +20,7 @@ fun UserNameContentWithNamePreview() {
         state =
             AuthNameContract.State(
                 name = "John Doe"
-            ),
+            )
     )
 }
 
@@ -32,6 +32,6 @@ fun UserNameContentWithErrorPreview() {
             AuthNameContract.State(
                 name = "John Doe",
                 nameError = "Some error"
-            ),
+            )
     )
 }

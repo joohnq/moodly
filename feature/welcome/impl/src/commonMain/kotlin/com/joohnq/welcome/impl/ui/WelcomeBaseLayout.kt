@@ -26,11 +26,12 @@ import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.step
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
+import com.joohnq.welcome.api.entity.Welcome
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun WelcomeBase(
+fun WelcomeBaseLayout(
     welcome: Welcome,
     paddingTop: Dp,
     onNext: () -> Unit,

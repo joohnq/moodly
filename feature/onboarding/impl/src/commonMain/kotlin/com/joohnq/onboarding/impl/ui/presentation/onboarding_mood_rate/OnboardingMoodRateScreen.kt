@@ -12,7 +12,7 @@ fun OnboardingMoodRateScreen(
     onNavigateToProfessionalHelp: () -> Unit,
     onGoBack: () -> Unit,
     viewModel: OnboardingViewModel =
-        sharedViewModel()
+        sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

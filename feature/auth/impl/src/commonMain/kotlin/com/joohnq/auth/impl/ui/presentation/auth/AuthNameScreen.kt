@@ -8,19 +8,23 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.api.validator.UserNameValidator
+import com.joohnq.auth.impl.ui.presentation.auth.AuthNameContract.Intent.UpdateError
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
 import com.joohnq.user.impl.ui.viewmodel.UserContract
+import com.joohnq.user.impl.ui.viewmodel.UserContract.Intent.UpdateName
 import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AuthNameScreen(onNavigateToSecurity: () -> Unit) {
-    val authNameViewModel: AuthNameViewModel = sharedViewModel()
-    val userViewModel: UserViewModel = sharedViewModel()
-    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
+fun AuthNameScreen(
+    onNavigateToSecurity: () -> Unit,
+    authNameViewModel: AuthNameViewModel = sharedViewModel(),
+    userViewModel: UserViewModel = sharedViewModel(),
+    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
+) {
     val scope = rememberCoroutineScope()
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
@@ -34,13 +38,15 @@ fun AuthNameScreen(onNavigateToSecurity: () -> Unit) {
 
     fun onEvent(event: AuthNameContract.Event) =
         when (event) {
+            AuthNameContract.Event.OnClearFocus -> focusManager.clearFocus()
+
             AuthNameContract.Event.OnContinue -> {
                 focusManager.clearFocus()
                 try {
                     UserNameValidator(userNameState.name)
-                    userViewModel.onIntent(UserContract.Intent.UpdateName(userNameState.name))
+                    userViewModel.onIntent(UpdateName(userNameState.name))
                 } catch (e: Exception) {
-                    authNameViewModel.onIntent(AuthNameContract.Intent.UpdateError(e.message.toString()))
+                    authNameViewModel.onIntent(UpdateError(e.message.toString()))
                 }
             }
         }
@@ -64,8 +70,7 @@ fun AuthNameScreen(onNavigateToSecurity: () -> Unit) {
     AuthNameContent(
         state = userNameState,
         snackBarState = snackBarState,
-        onClearFocus = focusManager::clearFocus,
         onEvent = ::onEvent,
-        onGetAction = authNameViewModel::onIntent
+        onIntent = authNameViewModel::onIntent
     )
 }

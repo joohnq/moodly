@@ -30,7 +30,6 @@ fun NavGraphBuilder.splashNavigation(
                     onNavigateGraph(NavigationGraph.App, true)
                 },
                 onNavigateToCorruptedSecurity = {
-                    onNavigate(Destination.Security.CorruptedSecurity, true)
                 },
                 onNavigateToUnLock = {
                     onNavigate(Destination.Security.UnLock, true)

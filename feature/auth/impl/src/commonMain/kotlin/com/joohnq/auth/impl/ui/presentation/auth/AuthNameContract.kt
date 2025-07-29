@@ -1,5 +1,8 @@
 package com.joohnq.auth.impl.ui.presentation.auth
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AuthNameContract {
@@ -26,5 +29,6 @@ sealed interface AuthNameContract {
 
     sealed interface Event {
         data object OnContinue : Event
+        data object OnClearFocus : Event
     }
 }

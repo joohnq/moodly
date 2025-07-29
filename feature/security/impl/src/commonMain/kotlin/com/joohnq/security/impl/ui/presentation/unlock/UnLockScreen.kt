@@ -30,10 +30,12 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UnLockScreen(onNavigateToDashboard: () -> Unit) {
-    val pinViewModel: PinViewModel = sharedViewModel()
-    val securityViewModel: SecurityViewModel = sharedViewModel()
-    val securityAuthentication: SecurityAuthentication = securityAuthentication()
+fun UnLockScreen(
+    onNavigateToDashboard: () -> Unit,
+    pinViewModel: PinViewModel = sharedViewModel(),
+    securityViewModel: SecurityViewModel = sharedViewModel(),
+    securityAuthentication: SecurityAuthentication = securityAuthentication()
+) {
     val securityState by securityViewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()

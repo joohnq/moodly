@@ -11,8 +11,10 @@ import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun WelcomeScreen(onNavigateToOnboarding: () -> Unit) {
-    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
+fun WelcomeScreen(
+    onNavigateToOnboarding: () -> Unit,
+    preferencesViewModel: PreferencesViewModel = sharedViewModel()
+) {
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<STATE, INTENT, EFFECT>(
-    initialState: STATE,
+    private val initialState: STATE,
 ) : ViewModel(),
     UnidirectionalViewModel<STATE, INTENT, EFFECT> {
     private val _state = MutableStateFlow(initialState)
@@ -60,5 +60,9 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
             handledOneTimeEvents.add(event)
             block()
         }
+    }
+
+    protected fun resetState() {
+        updateState { initialState }
     }
 }

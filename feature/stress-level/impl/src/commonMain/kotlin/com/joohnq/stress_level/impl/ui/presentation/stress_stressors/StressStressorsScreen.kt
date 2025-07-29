@@ -12,7 +12,6 @@ import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLe
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelViewModel
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
-import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -20,9 +19,9 @@ import kotlinx.coroutines.launch
 fun StressStressorsScreen(
     onGoBack: () -> Unit,
     onNavigateToStressLevel: () -> Unit,
+    stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
+    addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
 ) {
-    val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-    val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()
@@ -31,10 +30,10 @@ fun StressStressorsScreen(
         scope.launch { snackBarState.showSnackbar(error) }
     }
 
-    fun onEvent(event: StressStressorsEvent) =
+    fun onEvent(event: StressStressorsContract.Event) =
         when (event) {
-            is StressStressorsEvent.GoBack -> onGoBack()
-            is StressStressorsEvent.Continue -> {
+            is StressStressorsContract.Event.OnGoBack -> onGoBack()
+            is StressStressorsContract.Event.OnContinue -> {
                 stressLevelViewModel.onIntent(
                     StressLevelContract.Intent.Add(
                         state.record.toDomain()

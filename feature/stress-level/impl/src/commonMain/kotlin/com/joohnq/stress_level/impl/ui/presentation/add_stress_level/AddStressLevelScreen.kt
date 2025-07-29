@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
 fun AddStressLevelScreen(
     onNavigateToStressStressors: () -> Unit,
     onGoBack: () -> Unit,
+    stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
+    addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
 ) {
-    val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-    val addStressLevelViewModel: AddStressLevelViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
     val state by addStressLevelViewModel.state.collectAsState()

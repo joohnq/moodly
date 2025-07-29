@@ -11,7 +11,7 @@ class AddSelfJournalViewModel(
     override fun onIntent(intent: AddSelfJournalContract.Intent) {
         when (intent) {
             AddSelfJournalContract.Intent.ResetState ->
-                updateState { AddSelfJournalContract.State() }
+                resetState()
 
             is AddSelfJournalContract.Intent.UpdateDescription ->
                 updateState { it.copy(description = intent.description) }

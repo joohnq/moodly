@@ -10,9 +10,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun UserNameContentPreview() {
     AuthNameContent(
         state = AuthNameContract.State(),
-        onEvent = {},
-        onClearFocus = {},
-        onGetAction = {}
     )
 }
 
@@ -24,9 +21,6 @@ fun UserNameContentWithNamePreview() {
             AuthNameContract.State(
                 name = "John Doe"
             ),
-        onEvent = {},
-        onClearFocus = {},
-        onGetAction = {}
     )
 }
 
@@ -39,8 +33,5 @@ fun UserNameContentWithErrorPreview() {
                 name = "John Doe",
                 nameError = "Some error"
             ),
-        onEvent = {},
-        onClearFocus = {},
-        onGetAction = {}
     )
 }

@@ -14,7 +14,6 @@ import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.view.EmptyView
 import com.joohnq.shared_resources.theme.Colors
@@ -71,17 +70,12 @@ fun StressLevelHistoryContent(
                                 )
                             }
                         ) { record ->
-                            SwipeableCardLayout(
-                                modifier = Modifier.fillMaxWidth(),
-                                onAction = {
+                            StressLevelHistoryCard(
+                                record = record,
+                                onDelete = {
                                     onAction(StressLevelContract.Intent.Delete(record.id))
                                 }
-                            ) { modifier ->
-                                StressLevelHistoryCard(
-                                    modifier = modifier,
-                                    record = record
-                                )
-                            }
+                            )
                         }
                     }
                 }

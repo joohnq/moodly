@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodHistoryCard
+import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
@@ -29,6 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
     onEvent: (MoodHistoryContract.Event) -> Unit = {},
+    onIntent: (MoodContract.Intent) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -58,15 +59,10 @@ fun MoodHistoryContent(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(records) { record ->
-                            SwipeableCardLayout(
-                                modifier = Modifier.fillMaxWidth(),
-                                onAction = {}
-                            ) { modifier ->
-                                MoodHistoryCard(
-                                    modifier = modifier,
-                                    record = record
-                                )
-                            }
+                            MoodHistoryCard(
+                                record = record,
+                                onDelete = { id -> onIntent(MoodContract.Intent.Delete(id)) }
+                            )
                         }
                     }
                 }

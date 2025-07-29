@@ -17,6 +17,7 @@ fun JournalHistory(
     records: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
     onClick: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {},
 ) {
     if (records.isEmpty()) {
         NotFoundVerticalLayout(
@@ -32,7 +33,8 @@ fun JournalHistory(
             records.forEach { record ->
                 JournalHistoryCard(
                     record = record,
-                    onClick = onClick
+                    onClick = onClick,
+                    onDelete = onDelete
                 )
             }
         }

@@ -5,21 +5,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthAbbreviatedAndDayString
+import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingAllSmall
 import com.joohnq.shared_resources.theme.TextStyles
@@ -32,20 +28,14 @@ import org.jetbrains.compose.resources.stringResource
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
     record: StressLevelRecordResource,
+    onDelete: () -> Unit = {}
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors =
-            CardColors(
-                containerColor = Colors.Gray5,
-                contentColor = Color.Unspecified,
-                disabledContainerColor = Colors.Gray5,
-                disabledContentColor = Color.Unspecified
-            ),
-        shape = Dimens.Shape.Large
-    ) {
+    CardWithMoreMenuLayout(
+        modifier = modifier,
+        onDelete = onDelete
+    ) { modifier ->
         Row(
-            modifier = Modifier.fillMaxWidth().paddingAllSmall(),
+            modifier = modifier.fillMaxWidth().paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -53,7 +43,7 @@ fun StressLevelHistoryCard(
                 painter = painterResource(Drawables.Icons.Filled.Warning),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
-                tint = Colors.Orange40
+                tint = record.stressLevel.palette.color
             )
             HorizontalSpacer(20.dp)
             Column(
@@ -84,22 +74,11 @@ fun StressLevelHistoryCard(
                 )
             }
             HorizontalSpacer(20.dp)
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = record.createdAt.toMonthAbbreviatedAndDayString(),
-                    style = TextStyles.textSmRegular(),
-                    color = Colors.Gray60
-                )
-                Icon(
-                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp).rotate(180f),
-                    tint = Colors.Gray60
-                )
-            }
+            Text(
+                text = record.createdAt.toMonthAbbreviatedAndDayString(),
+                style = TextStyles.textSmRegular(),
+                color = Colors.Gray60
+            )
         }
     }
 }

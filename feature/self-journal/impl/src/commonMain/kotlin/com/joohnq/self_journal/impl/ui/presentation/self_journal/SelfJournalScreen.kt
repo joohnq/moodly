@@ -11,9 +11,9 @@ fun SelfJournalScreen(
     onNavigateToSelfJournalHistory: () -> Unit,
     onGoBack: () -> Unit,
     onEditSelfJournal: (Int) -> Unit,
+    viewModel: SelfJournalViewModel = sharedViewModel()
 ) {
-    val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
-    val state by selfJournalViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: SelfJournalContract.Event) =
         when (event) {
@@ -22,6 +22,13 @@ fun SelfJournalScreen(
             is SelfJournalContract.Event.OnClick -> onNavigateToSelfJournalHistory()
             SelfJournalContract.Event.OnNavigateToSelfHistory -> onNavigateToSelfJournalHistory()
             is SelfJournalContract.Event.OnEdit -> onEditSelfJournal(event.id)
+            is SelfJournalContract.Event.OnDelete -> {
+                viewModel.onIntent(
+                    SelfJournalContract.Intent.Delete(
+                        event.id
+                    )
+                )
+            }
         }
 
     return SelfJournalContent(

@@ -34,7 +34,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.allStressorResource
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
-import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.event.StressStressorsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -42,7 +41,7 @@ fun StressStressorsContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
     onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressStressorsEvent) -> Unit = {},
+    onEvent: (StressStressorsContract.Event) -> Unit = {},
 ) {
     val stressors = remember { allStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
@@ -62,7 +61,7 @@ fun StressStressorsContent(
         ) {
             AppTopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { onEvent(StressStressorsEvent.GoBack) }
+                onGoBack = { onEvent(StressStressorsContract.Event.OnGoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -99,7 +98,7 @@ fun StressStressorsContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(StressStressorsEvent.Continue) }
+                    onClick = { onEvent(StressStressorsContract.Event.OnContinue) }
                 )
             }
         }

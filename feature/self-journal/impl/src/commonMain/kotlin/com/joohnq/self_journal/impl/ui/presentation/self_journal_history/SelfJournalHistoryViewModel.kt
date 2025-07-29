@@ -14,17 +14,11 @@ class SelfJournalHistoryViewModel(
     SelfJournalHistoryContract.ViewModel {
     override fun onIntent(intent: SelfJournalHistoryContract.Intent) {
         when (intent) {
-            is SelfJournalHistoryContract.Intent.UpdateCurrentDeleteId ->
-                updateState { it.copy(currentDeleteId = intent.id) }
-
-            is SelfJournalHistoryContract.Intent.UpdateOpenDeleteDialog ->
-                updateState { it.copy(openDeleteDialog = intent.openDeleteDialog) }
-
             is SelfJournalHistoryContract.Intent.UpdateSelectedDateTime ->
                 updateState { it.copy(selectedDateTime = intent.selectedDateTime) }
 
             is SelfJournalHistoryContract.Intent.ResetState ->
-                updateState { SelfJournalHistoryContract.State() }
+                resetState()
         }
     }
 }

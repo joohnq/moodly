@@ -57,6 +57,7 @@ import com.joohnq.shared_resources.ic_mood_sad
 import com.joohnq.shared_resources.ic_mood_sad_outlined
 import com.joohnq.shared_resources.ic_moon_outlined
 import com.joohnq.shared_resources.ic_more_horizontal
+import com.joohnq.shared_resources.ic_more_vertical
 import com.joohnq.shared_resources.ic_negative_outlined
 import com.joohnq.shared_resources.ic_nothing_outlined
 import com.joohnq.shared_resources.ic_positive_outlined
@@ -162,6 +163,7 @@ object Drawables {
             val RouletteTarget = com.joohnq.shared_resources.icons.RouletteTargetImageVector
             val Clock = Res.drawable.ic_clock
             val MoreHorizontal = Res.drawable.ic_more_horizontal
+            val MoreVertical = Res.drawable.ic_more_vertical
             val Trash = Res.drawable.ic_trash
             val Warning = Res.drawable.ic_warning
         }

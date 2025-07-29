@@ -11,7 +11,7 @@ class EditSelfJournalViewModel(
     override fun onIntent(intent: EditSelfJournalContract.Intent) {
         when (intent) {
             EditSelfJournalContract.Intent.ResetState ->
-                updateState { EditSelfJournalContract.State() }
+                resetState()
 
             is EditSelfJournalContract.Intent.UpdateDescription ->
                 updateState {

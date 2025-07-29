@@ -19,10 +19,10 @@ import kotlinx.coroutines.launch
 fun EditJournalingScreen(
     id: Int,
     onGoBack: () -> Unit,
+    selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
+    editSelfJournalViewModel: EditSelfJournalViewModel = sharedViewModel()
 ) {
     val scope = rememberCoroutineScope()
-    val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
-    val editSelfJournalViewModel: EditSelfJournalViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
     val selfJournalState by selfJournalViewModel.state.collectAsState()
     val state by editSelfJournalViewModel.state.collectAsState()

@@ -11,9 +11,9 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingStressLevelScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
     onGoBack: () -> Unit,
+    viewModel: OnboardingViewModel = sharedViewModel()
 ) {
-    val onboardingViewModel: OnboardingViewModel = sharedViewModel()
-    val onboardingState by onboardingViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
@@ -22,8 +22,8 @@ fun OnboardingStressLevelScreen(
         }
 
     OnboardingStressLevelContent(
-        state = onboardingState.stressLevel,
-        onAction = onboardingViewModel::onIntent,
+        state = state.stressLevel,
+        onAction = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

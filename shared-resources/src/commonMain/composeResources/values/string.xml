@@ -316,4 +316,6 @@
     <string name="current_mood">Current Mood</string>
     <string name="a_sleep_quality_record_has_already_been_added_for_today">A sleep quality record has already been added for today. Come back tomorrow!</string>
     <string name="invalid_pin">Invalid PIN</string>
+    <string name="more">More</string>
+    <string name="delete">Delete</string>
 </resources>

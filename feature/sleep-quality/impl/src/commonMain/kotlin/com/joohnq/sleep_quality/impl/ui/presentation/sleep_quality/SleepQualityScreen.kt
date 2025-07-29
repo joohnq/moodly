@@ -10,9 +10,9 @@ fun SleepQualityScreen(
     onNavigateAddSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
     onNavigateToSleepHistory: () -> Unit,
+    viewModel: SleepQualityViewModel = sharedViewModel()
 ) {
-    val sleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
-    val state by sleepQualityViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: SleepQualityContract.Event) =
         when (event) {
@@ -24,6 +24,6 @@ fun SleepQualityScreen(
     return SleepQualityContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = sleepQualityViewModel::onIntent
+        onAction = viewModel::onIntent
     )
 }

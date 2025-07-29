@@ -68,7 +68,7 @@ class AddSleepQualityViewModel(
                 }
 
             AddSleepQualityContract.Intent.ResetState ->
-                updateState { AddSleepQualityContract.State() }
+                resetState()
         }
     }
 }

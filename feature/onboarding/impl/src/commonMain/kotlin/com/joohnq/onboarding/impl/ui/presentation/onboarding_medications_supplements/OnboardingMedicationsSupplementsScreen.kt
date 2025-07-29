@@ -11,9 +11,9 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingMedicationsSupplementsScreen(
     onNavigateToStressLevel: () -> Unit,
     onGoBack: () -> Unit,
+    viewModel: OnboardingViewModel = sharedViewModel()
 ) {
-    val onboardingViewModel: OnboardingViewModel = sharedViewModel()
-    val state by onboardingViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
@@ -26,7 +26,7 @@ fun OnboardingMedicationsSupplementsScreen(
 
     OnboardingMedicationsSupplementsContent(
         state = state.medicationsSupplements,
-        onAction = onboardingViewModel::onIntent,
+        onAction = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

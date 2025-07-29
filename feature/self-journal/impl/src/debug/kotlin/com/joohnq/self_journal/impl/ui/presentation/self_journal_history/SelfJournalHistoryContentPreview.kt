@@ -15,27 +15,10 @@ fun SelfJournalHistoryContentPreview(
 ) {
     SelfJournalHistoryContent(
         state =
-            SelfJournalHistoryContract.State(
-                openDeleteDialog = false
-            ),
+            SelfJournalHistoryContract.State(),
         records =
             UiState.Success(
                 list
-            )
-    )
-}
-
-@Preview
-@Composable
-fun SelfJournalHistoryContentPreview() {
-    SelfJournalHistoryContent(
-        state =
-            SelfJournalHistoryContract.State(
-                openDeleteDialog = true
-            ),
-        records =
-            UiState.Success(
-                listOf()
             )
     )
 }

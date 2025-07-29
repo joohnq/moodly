@@ -9,9 +9,9 @@ import com.joohnq.ui.sharedViewModel
 fun AddMoodScreen(
     onNavigateToExpressionAnalysis: () -> Unit,
     onGoBack: () -> Unit,
+    viewModel: AddMoodViewModel = sharedViewModel()
 ) {
-    val addStatsViewModel: AddMoodViewModel = sharedViewModel()
-    val state by addStatsViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {
@@ -23,6 +23,6 @@ fun AddMoodScreen(
     AddMoodContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = addStatsViewModel::onIntent
+        onAction = viewModel::onIntent
     )
 }

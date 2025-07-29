@@ -11,24 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
-import com.joohnq.self_journal.impl.ui.components.SelfJournalsHistoryCards
+import com.joohnq.self_journal.impl.ui.components.SelfJournalHistoryCard
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toGroupedByDate
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.layout.ImageDialogLayout
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.view.EmptyView
-import com.joohnq.shared_resources.delete_journal
-import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.MapMapper.items
+import com.joohnq.ui.mapper.MapMapper.itemsIndexed
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
@@ -36,29 +32,8 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalHistoryContent(
     state: SelfJournalHistoryContract.State,
     records: UiState<List<SelfJournalRecordResource>>,
-    onAction: (SelfJournalHistoryContract.Intent) -> Unit = {},
     onEvent: (SelfJournalHistoryContract.Event) -> Unit = {},
 ) {
-    if (state.openDeleteDialog) {
-        ImageDialogLayout(
-            onDismissRequest = {
-                onAction(
-                    SelfJournalHistoryContract.Intent.UpdateOpenDeleteDialog(false)
-                )
-            },
-            onConfirmation = {
-                onAction(
-                    SelfJournalHistoryContract.Intent.UpdateOpenDeleteDialog(false)
-                )
-                onEvent(SelfJournalHistoryContract.Event.OnDelete)
-            },
-            dialogTitle = Res.string.delete_journal,
-            dialogText = Res.string.do_you_wish_to_remove_this_journal,
-            image = Drawables.Images.SelfJournalDeleting,
-            backgroundColor = Colors.White
-        )
-    }
-
     records.foldComposable(
         onSuccess = { records ->
             val recordsMap = records.toGroupedByDate()
@@ -96,16 +71,27 @@ fun SelfJournalHistoryContent(
                                 )
                             }
                         ) { record ->
-                            SwipeableCardLayout(
-                                modifier = Modifier.fillMaxWidth(),
-                                onAction = {}
-                            ) { modifier ->
-                                SelfJournalsHistoryCards(
-                                    modifier = modifier,
-                                    records = recordsMap,
-                                    onClick = {},
-                                    onDelete = {}
-                                )
+                            LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                                itemsIndexed(
+                                    items = recordsMap,
+                                    title = {
+                                    },
+                                    empty = {
+                                        EmptyView()
+                                    }
+                                ) { i, lastIndex, record ->
+                                    SelfJournalHistoryCard(
+                                        isNotFirst = i != 0,
+                                        isNotLast = i != lastIndex,
+                                        record = record,
+                                        onClick = {},
+                                        onDelete = { id ->
+                                            onEvent(
+                                                SelfJournalHistoryContract.Event.OnDelete(id)
+                                            )
+                                        }
+                                    )
+                                }
                             }
                         }
                     }

@@ -26,13 +26,13 @@ class MoodViewModel(
     MoodContract.ViewModel {
     override fun onIntent(intent: MoodContract.Intent) {
         when (intent) {
-            is MoodContract.Intent.GetAll -> get()
+            is MoodContract.Intent.GetAll -> getAll()
             is MoodContract.Intent.Add -> add(intent.record)
             is MoodContract.Intent.Delete -> delete(intent.id)
         }
     }
 
-    private fun get() =
+    private fun getAll() =
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
             val res =

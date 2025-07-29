@@ -32,13 +32,15 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AvatarScreen(onNavigateToUserName: () -> Unit) {
+fun AvatarScreen(
+    onNavigateToUserName: () -> Unit,
+    avatarViewModel: AvatarViewModel = sharedViewModel(),
+    userViewModel: UserViewModel = sharedViewModel()
+) {
     val snackBarState = rememberSnackBarState()
     val avatars = rememberAvatars()
     val pagerState = rememberPagerState(pageCount = { avatars.size })
-    val avatarViewModel: AvatarViewModel = sharedViewModel()
-    val avatarState by avatarViewModel.state.collectAsState()
-    val userViewModel: UserViewModel = sharedViewModel()
+    val state by avatarViewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
     var imageSourceOptionDialog by remember { mutableStateOf(value = false) }
     var launchCamera by remember { mutableStateOf(value = false) }
@@ -140,10 +142,10 @@ fun AvatarScreen(onNavigateToUserName: () -> Unit) {
 
             AvatarContract.Event.OnContinue -> {
                 val action =
-                    if (avatarState.imageBitmap == null) {
-                        UserContract.Intent.UpdateImageDrawable(avatarState.selectedDrawableIndex)
+                    if (state.imageBitmap == null) {
+                        UserContract.Intent.UpdateImageDrawable(state.selectedDrawableIndex)
                     } else {
-                        UserContract.Intent.UpdateImageBitmap(avatarState.imageBitmap!!)
+                        UserContract.Intent.UpdateImageBitmap(state.imageBitmap!!)
                     }
 
                 userViewModel.onIntent(action)
@@ -172,7 +174,7 @@ fun AvatarScreen(onNavigateToUserName: () -> Unit) {
 
     AvatarContent(
         snackBarState = snackBarState,
-        state = avatarState,
+        state = state,
         avatars = avatars,
         onEvent = ::onEvent
     )

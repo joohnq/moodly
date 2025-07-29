@@ -7,9 +7,11 @@ import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable
-fun MoodHistoryScreen(onGoBack: () -> Unit) {
-    val moodViewModel: MoodViewModel = sharedViewModel()
-    val statsState by moodViewModel.state.collectAsState()
+fun MoodHistoryScreen(
+    onGoBack: () -> Unit,
+    moodViewModel: MoodViewModel = sharedViewModel()
+) {
+    val state by moodViewModel.state.collectAsState()
 
     fun onEvent(event: MoodHistoryContract.Event) =
         when (event) {
@@ -17,7 +19,7 @@ fun MoodHistoryScreen(onGoBack: () -> Unit) {
         }
 
     MoodHistoryContent(
-        records = statsState.records,
+        records = state.records,
         onEvent = ::onEvent
     )
 }

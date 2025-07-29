@@ -19,12 +19,12 @@ import kotlinx.coroutines.launch
 fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
     onGoBack: () -> Unit,
+    moodViewModel: MoodViewModel = sharedViewModel(),
+    addMoodViewModel: AddMoodViewModel = sharedViewModel()
 ) {
-    val moodViewModel: MoodViewModel = sharedViewModel()
-    val addStatsViewModel: AddMoodViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
-    val addStatsState by addStatsViewModel.state.collectAsState()
+    val addStatsState by addMoodViewModel.state.collectAsState()
 
     fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
@@ -56,7 +56,7 @@ fun ExpressionAnalysisScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addStatsViewModel.onIntent(AddMoodContract.Intent.ResetState)
+            addMoodViewModel.onIntent(AddMoodContract.Intent.ResetState)
         }
     }
 
@@ -64,6 +64,6 @@ fun ExpressionAnalysisScreen(
         snackBarState = snackBarState,
         description = addStatsState.record.description,
         onEvent = ::onEvent,
-        onAddAction = addStatsViewModel::onIntent
+        onAddAction = addMoodViewModel::onIntent
     )
 }

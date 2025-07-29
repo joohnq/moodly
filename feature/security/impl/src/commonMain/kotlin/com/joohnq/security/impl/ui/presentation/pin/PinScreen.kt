@@ -17,12 +17,12 @@ import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun PINScreen(
+fun PinScreen(
     onNavigateToDashboard: () -> Unit,
     onGoBack: () -> Unit,
+    securityViewModel: SecurityViewModel = sharedViewModel(),
+    pinViewModel: PinViewModel = sharedViewModel()
 ) {
-    val securityViewModel: SecurityViewModel = sharedViewModel()
-    val pinViewModel: PinViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val state by pinViewModel.state.collectAsState()
     val snackBarState = rememberSnackBarState()

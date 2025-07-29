@@ -3,23 +3,27 @@ package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun SleepQualityHistoryScreen(
     onGoBack: () -> Unit,
-    onNavigateToSleepQuality: () -> Unit,
-    onNavigateToAddSleepQuality: () -> Unit,
+    viewModel: SleepQualityViewModel = sharedViewModel(),
 ) {
-    val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel<SleepQualityViewModel>()
-    val state by sleepQualityViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: SleepQualityHistoryContract.Event) {
         when (event) {
-            SleepQualityHistoryContract.Event.OnNavigateToSleepQualityQuality -> onNavigateToSleepQuality()
             SleepQualityHistoryContract.Event.OnGoBack -> onGoBack()
-            SleepQualityHistoryContract.Event.OnAddSleepQualityQuality -> onNavigateToAddSleepQuality()
+            is SleepQualityHistoryContract.Event.OnDelete -> {
+                viewModel.onIntent(
+                    SleepQualityContract.Intent.Delete(
+                        event.id
+                    )
+                )
+            }
         }
     }
 

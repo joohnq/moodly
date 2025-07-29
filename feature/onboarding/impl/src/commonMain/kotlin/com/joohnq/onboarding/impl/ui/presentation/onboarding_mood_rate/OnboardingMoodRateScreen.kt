@@ -11,10 +11,10 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingMoodRateScreen(
     onNavigateToProfessionalHelp: () -> Unit,
     onGoBack: () -> Unit,
-) {
-    val onboardingViewModel: OnboardingViewModel =
+    viewModel: OnboardingViewModel =
         sharedViewModel()
-    val state by onboardingViewModel.state.collectAsState()
+) {
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
@@ -24,7 +24,7 @@ fun OnboardingMoodRateScreen(
 
     OnboardingMoodRateContent(
         state = state.moodRecord,
-        onAction = onboardingViewModel::onIntent,
+        onAction = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

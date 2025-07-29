@@ -193,13 +193,7 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.SleepQualityHistory> {
             SleepQualityHistoryScreen(
-                onNavigateToSleepQuality = {
-                    onNavigate(Destination.App.SleepQuality)
-                },
                 onGoBack = onGoBack,
-                onNavigateToAddSleepQuality = {
-                    onNavigate(Destination.App.AddSleepQuality)
-                }
             )
         }
         composable<Destination.App.AddSleepQuality> {
@@ -218,6 +212,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.EditSelfJournal> { backStackEntry ->
             val editSelfJournal =
                 backStackEntry.toRoute<Destination.App.EditSelfJournal>()
+
             EditJournalingScreen(
                 id = editSelfJournal.id,
                 onGoBack = onGoBack

@@ -8,27 +8,14 @@ interface SelfJournalHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
+        data object ResetState : Intent
         data class UpdateSelectedDateTime(
             val selectedDateTime: LocalDate,
-        ) : Intent
-
-        data class UpdateOpenDeleteDialog(
-            val openDeleteDialog: Boolean,
-        ) : Intent
-
-        data class UpdateCurrentDeleteId(
-            val id: Int,
-        ) : Intent
-
-        data class ResetState(
-            val id: Int,
         ) : Intent
     }
 
     data class State(
         val selectedDateTime: LocalDate = getNow().date,
-        val openDeleteDialog: Boolean = false,
-        val currentDeleteId: Int = -1,
     )
 
     sealed interface SideEffect
@@ -40,6 +27,8 @@ interface SelfJournalHistoryContract {
             val id: Int,
         ) : Event
 
-        data object OnDelete : Event
+        data class OnDelete(
+            val id: Int,
+        ) : Event
     }
 }

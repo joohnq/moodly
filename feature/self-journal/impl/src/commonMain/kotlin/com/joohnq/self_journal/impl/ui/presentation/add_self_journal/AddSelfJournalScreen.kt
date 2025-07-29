@@ -15,9 +15,11 @@ import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddSelfJournalScreen(onGoBack: () -> Unit) {
-    val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
-    val addSelfJournalViewModel: AddSelfJournalViewModel = sharedViewModel()
+fun AddSelfJournalScreen(
+    onGoBack: () -> Unit,
+    selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
+    addSelfJournalViewModel: AddSelfJournalViewModel = sharedViewModel()
+) {
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val state by addSelfJournalViewModel.state.collectAsState()

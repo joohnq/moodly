@@ -4,17 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toAbbreviatedMonthName
@@ -22,6 +18,7 @@ import com.joohnq.api.mapper.TimeMapper.calculateDuration
 import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.no_sleep_influences
 import com.joohnq.shared_resources.theme.Colors
@@ -36,6 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
     record: SleepQualityRecordResource,
+    onDelete: (Int) -> Unit = {},
 ) {
     val duration =
         calculateDuration(
@@ -44,21 +42,14 @@ fun SleepQualityHistoryCard(
         )
     val resource = record.sleepQuality.toMoodResource()
 
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors =
-            CardColors(
-                containerColor = Colors.Gray5,
-                contentColor = Color.Unspecified,
-                disabledContainerColor = Colors.Gray5,
-                disabledContentColor = Color.Unspecified
-            ),
-        shape = Dimens.Shape.Medium
-    ) {
+    CardWithMoreMenuLayout(
+        modifier = modifier,
+        menuContainerColor = resource.palette.color,
+        onDelete = { onDelete(record.id) },
+    ) { modifier ->
         Row(
             modifier =
-                Modifier
-                    .fillMaxSize()
+                modifier
                     .paddingAllSmall(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -66,19 +57,19 @@ fun SleepQualityHistoryCard(
             Column(
                 modifier =
                     Modifier
-                        .background(color = Colors.Brown10, shape = Dimens.Shape.Medium)
+                        .background(color = resource.palette.color, shape = Dimens.Shape.Medium)
                         .padding(horizontal = 15.dp, vertical = 12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = record.createdAt.toAbbreviatedMonthName(),
                     style = TextStyles.labelSm(),
-                    color = Colors.Brown40
+                    color = Colors.Brown10
                 )
                 Text(
-                    text = record.createdAt.dayOfMonth.toString(),
+                    text = record.createdAt.day.toString(),
                     style = TextStyles.textXlExtraBold(),
-                    color = Colors.Brown80
+                    color = Colors.White
                 )
             }
             HorizontalSpacer(20.dp)
@@ -98,7 +89,10 @@ fun SleepQualityHistoryCard(
                     Row(
                         modifier =
                             Modifier
-                                .background(color = resource.palette.color, shape = Dimens.Shape.Circle)
+                                .background(
+                                    color = resource.palette.color,
+                                    shape = Dimens.Shape.Circle
+                                )
                                 .padding(horizontal = 7.dp, vertical = 4.dp),
                         horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {

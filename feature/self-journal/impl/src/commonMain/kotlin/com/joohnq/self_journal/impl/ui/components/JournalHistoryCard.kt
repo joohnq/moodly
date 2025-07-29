@@ -3,23 +3,19 @@ package com.joohnq.self_journal.impl.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthAbbreviatedAndDayString
 import com.joohnq.api.mapper.StringMapper.toWordCount
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.mood
@@ -34,31 +30,26 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun JournalHistoryCard(
+    modifier: Modifier = Modifier,
     record: SelfJournalRecordResource,
     onClick: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {},
 ) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors =
-            CardColors(
-                containerColor = Colors.Gray5,
-                contentColor = Color.Unspecified,
-                disabledContainerColor = Colors.Gray5,
-                disabledContentColor = Color.Unspecified
-            ),
-        onClick = {
-            onClick(record.id)
-        }
-    ) {
+    CardWithMoreMenuLayout(
+        modifier = modifier,
+        onClick = { onClick(record.id) },
+        menuContainerColor = record.mood.palette.color,
+        onDelete = { onDelete(record.id) }
+    ) { modifier ->
         Row(
-            modifier = Modifier.paddingAllSmall(),
+            modifier = modifier.paddingAllSmall(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(Drawables.Icons.Outlined.BookOpen),
                 contentDescription = null,
-                tint = Colors.Brown60,
+                tint = record.mood.palette.color,
                 modifier = Modifier.size(24.dp)
             )
             HorizontalSpacer(12.dp)
@@ -90,13 +81,13 @@ fun JournalHistoryCard(
                         Icon(
                             painter = painterResource(record.mood.assets.secondaryIcon),
                             contentDescription = stringResource(Res.string.mood),
-                            tint = Colors.Gray40,
+                            tint = record.mood.palette.color,
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
                             text = stringResource(record.mood.text),
                             style = TextStyles.textSmMedium(),
-                            color = Colors.Gray60
+                            color = record.mood.palette.color
                         )
                     }
                     Row(
@@ -122,19 +113,11 @@ fun JournalHistoryCard(
                 }
             }
             HorizontalSpacer(12.dp)
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = record.createdAt.toMonthAbbreviatedAndDayString(),
-                    style = TextStyles.textSmRegular(),
-                    color = Colors.Gray60
-                )
-                Icon(
-                    painter = painterResource(Drawables.Icons.Outlined.ArrowOpen),
-                    contentDescription = null,
-                    tint = Colors.Gray60,
-                    modifier = Modifier.size(24.dp).rotate(180f)
-                )
-            }
+            Text(
+                text = record.createdAt.toMonthAbbreviatedAndDayString(),
+                style = TextStyles.textSmRegular(),
+                color = Colors.Gray60
+            )
         }
     }
 }

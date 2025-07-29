@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
@@ -28,7 +27,6 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepQualityHistoryContent(
     state: SleepQualityContract.State,
     onEvent: (SleepQualityHistoryContract.Event) -> Unit = {},
-    onAction: (SleepQualityContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -53,15 +51,16 @@ fun SleepQualityHistoryContent(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(records) { record ->
-                            SwipeableCardLayout(
-                                modifier = Modifier.fillMaxWidth(),
-                                onAction = { onAction(SleepQualityContract.Intent.Delete(record.id)) }
-                            ) { modifier ->
-                                SleepQualityHistoryCard(
-                                    modifier = modifier,
-                                    record = record
-                                )
-                            }
+                            SleepQualityHistoryCard(
+                                record = record,
+                                onDelete = { id ->
+                                    onEvent(
+                                        SleepQualityHistoryContract.Event.OnDelete(
+                                            id
+                                        )
+                                    )
+                                }
+                            )
                         }
                     }
                 }

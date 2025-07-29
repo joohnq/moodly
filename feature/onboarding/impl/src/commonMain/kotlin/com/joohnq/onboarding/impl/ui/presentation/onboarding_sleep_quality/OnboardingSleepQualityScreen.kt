@@ -11,10 +11,10 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingSleepQualityScreen(
     onNavigateToMedicationsSupplements: () -> Unit,
     onGoBack: () -> Unit,
-) {
-    val onboardingViewModel: OnboardingViewModel =
+    viewModel: OnboardingViewModel =
         sharedViewModel()
-    val onboardingState by onboardingViewModel.state.collectAsState()
+) {
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
@@ -23,9 +23,9 @@ fun OnboardingSleepQualityScreen(
         }
 
     OnboardingSleepQualityContent(
-        state = onboardingState.sleepQuality,
-        sliderValue = onboardingState.sliderValue,
-        onAction = onboardingViewModel::onIntent,
+        state = state.sleepQuality,
+        sliderValue = state.sliderValue,
+        onAction = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

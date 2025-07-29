@@ -51,7 +51,8 @@ fun SelfJournalContent(
         modifier = modifier,
         records = records.take(7),
         onClick = { onEvent(SelfJournalContract.Event.OnEdit(it)) },
-        onCreate = { onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal) }
+        onCreate = { onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal) },
+        onDelete = { id -> onEvent(SelfJournalContract.Event.OnDelete(id)) }
     )
     VerticalSpacer(10.dp)
 }

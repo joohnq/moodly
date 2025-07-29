@@ -35,13 +35,13 @@ import kotlinx.coroutines.launch
 fun OnboardingExpressionAnalysisScreen(
     onNavigateToUserName: () -> Unit,
     onGoBack: () -> Unit,
+    onboardingViewModel: OnboardingViewModel = sharedViewModel(),
+    userViewModel: UserViewModel = sharedViewModel(),
+    moodViewModel: MoodViewModel = sharedViewModel(),
+    sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
+    stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
+    preferencesViewModel: PreferencesViewModel = sharedViewModel()
 ) {
-    val onboardingViewModel: OnboardingViewModel = sharedViewModel()
-    val userViewModel: UserViewModel = sharedViewModel()
-    val moodViewModel: MoodViewModel = sharedViewModel()
-    val sleepQualityViewModel: SleepQualityViewModel = sharedViewModel()
-    val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val onboardingState by onboardingViewModel.state.collectAsState()

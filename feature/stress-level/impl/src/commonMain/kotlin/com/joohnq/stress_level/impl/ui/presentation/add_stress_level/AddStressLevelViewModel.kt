@@ -36,7 +36,7 @@ class AddStressLevelViewModel(
                 }
 
             is AddStressLevelContract.Intent.ResetState ->
-                updateState { AddStressLevelContract.State() }
+                resetState()
         }
     }
 }

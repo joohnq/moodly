@@ -28,7 +28,7 @@ class SleepQualityViewModel(
         when (intent) {
             SleepQualityContract.Intent.GetAll -> getAll()
             is SleepQualityContract.Intent.Add ->
-                addSleepQualityRecord(intent.record)
+                add(intent.record)
 
             is SleepQualityContract.Intent.Delete -> delete(intent.id)
         }
@@ -64,7 +64,7 @@ class SleepQualityViewModel(
                 }
         }
 
-    private fun addSleepQualityRecord(sleepQualityRecord: SleepQualityRecord) =
+    private fun add(sleepQualityRecord: SleepQualityRecord) =
         viewModelScope.launch {
             val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
             res

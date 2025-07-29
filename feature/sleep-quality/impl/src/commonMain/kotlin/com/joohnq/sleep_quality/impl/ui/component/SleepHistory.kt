@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.set_up_sleep
 import com.joohnq.shared_resources.sleep_history
@@ -41,15 +40,11 @@ fun SleepHistory(
     } else {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             records.forEach { record ->
-                SwipeableCardLayout(
+                SleepQualityHistoryCard(
                     modifier = modifier,
-                    onAction = { onDelete(record.id) }
-                ) { modifier ->
-                    SleepQualityHistoryCard(
-                        modifier = modifier,
-                        record = record
-                    )
-                }
+                    record = record,
+                    onDelete = onDelete
+                )
             }
         }
     }

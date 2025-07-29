@@ -17,11 +17,11 @@ fun SecurityScreen(
     onNavigateToSecurityConfirmed: () -> Unit,
     onNavigateToDashboard: () -> Unit,
     onNavigatePIN: () -> Unit,
+    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
+    securityViewModel: SecurityViewModel = sharedViewModel(),
+    securityAuthentication: SecurityAuthentication = securityAuthentication()
 ) {
-    val preferencesViewModel: PreferencesViewModel = sharedViewModel()
     val snackBarState = rememberSnackBarState()
-    val securityAuthentication: SecurityAuthentication = securityAuthentication()
-    val securityViewModel: SecurityViewModel = sharedViewModel()
     val scope = rememberCoroutineScope()
 
     fun onError(error: String) {

@@ -25,7 +25,7 @@ coilNetwork = "3.0.0-alpha08"
 
 # Compose
 composeCharts = "0.1.7"
-composeMultiplatform = "2.7.0"
+calendar = "2.8.0"
 compose-plugin = "1.8.2"
 uiAndroid = "1.8.3"
 
@@ -96,7 +96,7 @@ androidx-startup-runtime = { module = "androidx.startup:startup-runtime", versio
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiAndroid" }
 
 # Calendar
-calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "composeMultiplatform" }
+calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "calendar" }
 
 # Charts
 charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }

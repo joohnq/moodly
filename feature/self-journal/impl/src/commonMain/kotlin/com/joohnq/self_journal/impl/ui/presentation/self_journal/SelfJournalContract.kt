@@ -52,6 +52,10 @@ sealed interface SelfJournalContract {
             val localDate: LocalDate,
         ) : Event
 
+        data class OnDelete(
+            val id: Int,
+        ) : Event
+
         data class OnEdit(
             val id: Int,
         ) : Event

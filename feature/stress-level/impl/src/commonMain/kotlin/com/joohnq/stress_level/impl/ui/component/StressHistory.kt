@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
 import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.stress_history
@@ -40,15 +39,10 @@ fun StressHistory(
     } else {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             records.forEach { record ->
-                SwipeableCardLayout(
-                    modifier = modifier,
-                    onAction = { onDelete(record.id) }
-                ) { modifier ->
-                    StressLevelHistoryCard(
-                        modifier = modifier,
-                        record = record
-                    )
-                }
+                StressLevelHistoryCard(
+                    record = record,
+                    onDelete = { onDelete(record.id) }
+                )
             }
         }
     }

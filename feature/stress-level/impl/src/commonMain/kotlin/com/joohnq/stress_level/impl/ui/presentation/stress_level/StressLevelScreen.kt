@@ -9,9 +9,9 @@ import com.joohnq.ui.sharedViewModel
 fun StressLevelScreen(
     onNavigateAddStressLevel: () -> Unit,
     onGoBack: () -> Unit,
+    viewModel: StressLevelViewModel = sharedViewModel()
 ) {
-    val stressLevelViewModel: StressLevelViewModel = sharedViewModel()
-    val state by stressLevelViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: StressLevelContract.Event) =
         when (event) {
@@ -19,9 +19,9 @@ fun StressLevelScreen(
             is StressLevelContract.Event.OnGoBack -> onGoBack()
         }
 
-    return StressLevelContent(
+    StressLevelContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = stressLevelViewModel::onIntent
+        onIntent = viewModel::onIntent
     )
 }

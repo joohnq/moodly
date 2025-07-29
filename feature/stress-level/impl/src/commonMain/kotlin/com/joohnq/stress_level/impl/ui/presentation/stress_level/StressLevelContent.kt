@@ -6,15 +6,17 @@ import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.stress_level.impl.ui.component.StressLevelBody
+import com.joohnq.stress_level.impl.ui.component.StressHistory
+import com.joohnq.stress_level.impl.ui.component.StressInsight
 import com.joohnq.stress_level.impl.ui.component.StressPanel
+import com.joohnq.stress_level.impl.ui.component.StressTriggersSection
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
 fun StressLevelContent(
     state: StressLevelContract.State,
-    onAction: (StressLevelContract.Intent) -> Unit = {},
+    onIntent: (StressLevelContract.Intent) -> Unit = {},
     onEvent: (StressLevelContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
@@ -37,11 +39,21 @@ fun StressLevelContent(
                 onAddButton = { onEvent(StressLevelContract.Event.OnAddStressLevel) },
                 onGoBack = { onEvent(StressLevelContract.Event.OnGoBack) },
                 body = { modifier ->
-                    StressLevelBody(
+                    StressTriggersSection(
                         modifier = modifier,
                         records = records,
-                        onAction = onAction,
-                        onEvent = onEvent
+                        onAddStressLevel = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
+                    )
+                    StressInsight(
+                        modifier = modifier,
+                        records = records,
+                        onCreate = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
+                    )
+                    StressHistory(
+                        modifier = modifier,
+                        records = records.take(7),
+                        onDelete = { id -> onIntent(StressLevelContract.Intent.Delete(id)) },
+                        onAddStressLevel = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
                     )
                 }
             )

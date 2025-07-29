@@ -55,9 +55,6 @@ sealed interface Destination {
 
         @Serializable
         data object UnLock : Destination
-
-        @Serializable
-        data object CorruptedSecurity : Destination
     }
 
     @Serializable

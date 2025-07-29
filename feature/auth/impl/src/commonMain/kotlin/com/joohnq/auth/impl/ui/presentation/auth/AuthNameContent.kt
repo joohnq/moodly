@@ -42,9 +42,8 @@ import org.jetbrains.compose.resources.stringResource
 fun AuthNameContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AuthNameContract.State,
-    onEvent: (AuthNameContract.Event) -> Unit,
-    onClearFocus: () -> Unit,
-    onGetAction: (AuthNameContract.Intent) -> Unit,
+    onEvent: (AuthNameContract.Event) -> Unit = {},
+    onIntent: (AuthNameContract.Intent) -> Unit = {},
 ) {
     val canContinue by derivedStateOf { state.name.isNotBlank() }
 
@@ -56,7 +55,7 @@ fun AuthNameContent(
                 .fillMaxSize()
                 .pointerInput(Unit) {
                     detectTapGestures(onTap = {
-                        onClearFocus()
+                        onEvent(AuthNameContract.Event.OnClearFocus)
                     })
                 }
     ) { _ ->
@@ -107,7 +106,7 @@ fun AuthNameContent(
                         )
                     },
                     colors = ComponentColors.TextField.mainTextFieldColors(),
-                    onValueChange = { onGetAction(AuthNameContract.Intent.Update(it)) }
+                    onValueChange = { onIntent(AuthNameContract.Intent.Update(it)) }
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue) {

@@ -11,11 +11,11 @@ import com.joohnq.ui.sharedViewModel
 fun SelfJournalHistoryScreen(
     onNavigateEditJournaling: (Int) -> Unit,
     onGoBack: () -> Unit,
+    selfJournalViewModel: SelfJournalViewModel = sharedViewModel(),
+    selfJournalHistoryViewModel: SelfJournalHistoryViewModel = sharedViewModel()
 ) {
-    val selfJournalViewModel: SelfJournalViewModel = sharedViewModel()
     val selfJournalState by selfJournalViewModel.state.collectAsState()
-    val historyViewModel: SelfJournalHistoryViewModel = sharedViewModel()
-    val historyState by historyViewModel.state.collectAsState()
+    val state by selfJournalHistoryViewModel.state.collectAsState()
 
     fun onEvent(event: SelfJournalHistoryContract.Event) =
         when (event) {
@@ -25,17 +25,16 @@ fun SelfJournalHistoryScreen(
                     event.id
                 )
 
-            SelfJournalHistoryContract.Event.OnDelete ->
+            is SelfJournalHistoryContract.Event.OnDelete ->
                 selfJournalViewModel.onIntent(
                     SelfJournalContract.Intent.Delete(
-                        historyState.currentDeleteId
+                        event.id
                     )
                 )
         }
 
     SelfJournalHistoryContent(
-        state = historyState,
-        onAction = historyViewModel::onIntent,
+        state = state,
         records = selfJournalState.records,
         onEvent = ::onEvent
     )

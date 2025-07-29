@@ -35,7 +35,7 @@ class UserViewModel(
             is UserContract.Intent.Get -> get()
             is UserContract.Intent.Update -> update(intent.user)
             is UserContract.Intent.UpdateImageBitmap -> updateUserImageBitmap(intent.image)
-            is UserContract.Intent.UpdateName -> updateUserName(intent.name)
+            is UserContract.Intent.UpdateName -> updateName(intent.name)
             is UserContract.Intent.UpdateImageDrawable -> updateUserImageDrawable(intent.i)
             UserContract.Intent.Init -> add()
         }
@@ -98,7 +98,7 @@ class UserViewModel(
                 }
         }
 
-    private fun updateUserName(name: String) =
+    private fun updateName(name: String) =
         viewModelScope.launch {
             val res = updateUserNameUseCase(name).toUiState()
 

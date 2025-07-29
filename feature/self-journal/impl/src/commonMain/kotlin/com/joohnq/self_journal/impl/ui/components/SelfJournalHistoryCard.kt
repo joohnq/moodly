@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,7 +24,7 @@ import com.joohnq.api.mapper.LocalDateTimeMapper.toFormattedTimeString
 import com.joohnq.mood.impl.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.layout.SwipeableCardLayout
+import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.TextEllipsis
 import com.joohnq.shared_resources.components.text.TextWithBackground
@@ -115,62 +114,55 @@ fun SelfJournalHistoryCard(
     isNotFirst: Boolean,
     isNotLast: Boolean,
     record: SelfJournalRecordResource,
-    onClick: (Int) -> Unit,
-    onDelete: () -> Unit,
+    onClick: (Int) -> Unit = {},
+    onDelete: (Int) -> Unit = {},
 ) {
-    SwipeableCardLayout(
+    CardWithMoreMenuLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),
+        onDelete = { onDelete(record.id) },
+        onClick = { onClick(record.id) },
         content = { modifier ->
-            Card(
-                shape = Dimens.Shape.Large,
-                modifier = modifier,
-                colors = ComponentColors.Card.mainCardColors(),
-                onClick = {
-                    onClick(record.id)
-                }
-            ) {
-                Column(modifier = Modifier.paddingAllSmall()) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+            Column(modifier = Modifier.paddingAllSmall()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Box(
+                        modifier =
+                            Modifier
+                                .background(
+                                    color = record.mood.palette.color,
+                                    shape = Dimens.Shape.Circle
+                                ).size(44.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Box(
-                            modifier =
-                                Modifier
-                                    .background(
-                                        color = record.mood.palette.color,
-                                        shape = Dimens.Shape.Circle
-                                    ).size(44.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            MoodFace(
-                                modifier = Modifier.size(20.dp),
-                                resource = record.mood,
-                                backgroundColor = Colors.White,
-                                color = record.mood.palette.barFaceColor
-                            )
-                        }
-                        TextWithBackground(
-                            text = stringResource(record.mood.text),
-                            backgroundColor = record.mood.palette.backgroundColor,
-                            textColor = record.mood.palette.color
+                        MoodFace(
+                            modifier = Modifier.size(20.dp),
+                            resource = record.mood,
+                            backgroundColor = Colors.White,
+                            color = record.mood.palette.barFaceColor
                         )
                     }
-                    VerticalSpacer(10.dp)
-                    TextEllipsis(
-                        text = record.title,
-                        style = TextStyles.textMdExtraBold(),
-                        color = Colors.Brown80,
-                        maxLines = 1
-                    )
-                    VerticalSpacer(10.dp)
-                    TextEllipsis(
-                        text = record.description,
-                        style = TextStyles.textMdSemiBold(),
-                        color = Colors.Brown100Alpha64,
-                        maxLines = 2
+                    TextWithBackground(
+                        text = stringResource(record.mood.text),
+                        backgroundColor = record.mood.palette.backgroundColor,
+                        textColor = record.mood.palette.color
                     )
                 }
+                VerticalSpacer(10.dp)
+                TextEllipsis(
+                    text = record.title,
+                    style = TextStyles.textMdExtraBold(),
+                    color = Colors.Brown80,
+                    maxLines = 1
+                )
+                VerticalSpacer(10.dp)
+                TextEllipsis(
+                    text = record.description,
+                    style = TextStyles.textMdSemiBold(),
+                    color = Colors.Brown100Alpha64,
+                    maxLines = 2
+                )
             }
         },
         secondary = {
@@ -222,7 +214,6 @@ fun SelfJournalHistoryCard(
                 )
             }
         },
-        padding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
-        onAction = onDelete
+//        padding = PaddingValues(end = 10.dp, top = 5.dp, bottom = 5.dp),
     )
 }

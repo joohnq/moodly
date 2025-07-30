@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.add_stress_level
+package com.joohnq.stress_level.impl.ui.presentation.add
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 fun AddStressLevelScreenContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
-    onAction: (AddStressLevelContract.Intent) -> Unit = {},
+    onIntent: (AddStressLevelContract.Intent) -> Unit = {},
     onEvent: (AddStressLevelContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
@@ -81,7 +81,7 @@ fun AddStressLevelScreenContent(
                         modifier = Modifier.height(height),
                         sliderValue = state.sliderValue,
                         setSliderValue = {
-                            onAction(AddStressLevelContract.Intent.UpdateAddingSliderValue(it))
+                            onIntent(AddStressLevelContract.Intent.UpdateStressLevel(it))
                         },
                         thumb = { AppVerticalSliderThump() },
                         track = { AppVerticalSliderTrack(it) },

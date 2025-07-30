@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.add_stress_level
+package com.joohnq.stress_level.impl.ui.presentation.add
 
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
@@ -12,7 +12,7 @@ sealed interface AddStressLevelContract {
 
         data object OnContinue : Event
 
-        data object OnPopUpToStressLevelLevel : Event
+        data object OnPopUpToStressLevelOverview : Event
     }
 
     sealed interface Intent {
@@ -20,14 +20,22 @@ sealed interface AddStressLevelContract {
             val stressor: StressorResource,
         ) : Intent
 
-        data class UpdateAddingSliderValue(
+        data class UpdateStressLevel(
             val sliderValue: Float,
         ) : Intent
+
+        data object Add : Intent
 
         data object ResetState : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object PopUpToStressLevelOverview : SideEffect
+
+        data class ShowError(
+            val error: String,
+        ) : SideEffect
+    }
 
     data class State(
         val record: StressLevelRecordResource = StressLevelRecordResource(),

@@ -1,9 +1,9 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_level_history
+package com.joohnq.stress_level.impl.ui.presentation.history
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable
@@ -11,7 +11,7 @@ fun StressLevelHistoryScreen(
     onGoBack: () -> Unit,
     onAddStressLevel: () -> Unit,
     onNavigateStressLevel: () -> Unit,
-    viewModel: StressLevelViewModel = sharedViewModel(),
+    viewModel: StressLevelOverviewViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

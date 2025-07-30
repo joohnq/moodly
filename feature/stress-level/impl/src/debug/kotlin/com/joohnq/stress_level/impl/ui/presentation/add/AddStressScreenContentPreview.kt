@@ -1,14 +1,13 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
+package com.joohnq.stress_level.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun StressStressorsContentOnePreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentOnePreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceOnePreview,
@@ -19,8 +18,8 @@ fun StressStressorsContentOnePreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentTwoPreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentTwoPreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceTwoPreview,
@@ -31,8 +30,8 @@ fun StressStressorsContentTwoPreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentThreePreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentThreePreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceThreePreview,
@@ -43,8 +42,8 @@ fun StressStressorsContentThreePreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentFourPreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentFourPreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceFourPreview,
@@ -55,8 +54,8 @@ fun StressStressorsContentFourPreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentFivePreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentFivePreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
@@ -67,8 +66,8 @@ fun StressStressorsContentFivePreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentWithStressorsPreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentWithStressorsPreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
                 record = StressLevelRecordResource.stressLevelRecordResourceWithStressorsPreview,
@@ -79,11 +78,11 @@ fun StressStressorsContentWithStressorsPreview() {
 
 @Preview
 @Composable
-fun StressStressorsContentHalfSliderValuePreview() {
-    StressStressorsContent(
+fun AddStressLevelScreenContentHalfSliderValuePreview() {
+    AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
-                record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
+                record = StressLevelRecordResource.stressLevelRecordResourceWithStressorsPreview,
                 sliderValue = 0.5f
             )
     )

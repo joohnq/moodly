@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_level
+package com.joohnq.stress_level.impl.ui.presentation.overview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
@@ -14,10 +14,10 @@ import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.ge
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
-fun StressLevelContent(
-    state: StressLevelContract.State,
-    onIntent: (StressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressLevelContract.Event) -> Unit = {},
+fun StressLevelOverviewContent(
+    state: StressLevelOverviewContract.State,
+    onIntent: (StressLevelOverviewContract.Intent) -> Unit = {},
+    onEvent: (StressLevelOverviewContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -36,24 +36,24 @@ fun StressLevelContent(
                         record = record
                     )
                 },
-                onAddButton = { onEvent(StressLevelContract.Event.OnAddStressLevel) },
-                onGoBack = { onEvent(StressLevelContract.Event.OnGoBack) },
+                onAddButton = { onEvent(StressLevelOverviewContract.Event.OnAddStressLevel) },
+                onGoBack = { onEvent(StressLevelOverviewContract.Event.OnGoBack) },
                 body = { modifier ->
                     StressTriggersSection(
                         modifier = modifier,
                         records = records,
-                        onAddStressLevel = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
+                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.OnAddStressLevel) }
                     )
                     StressInsight(
                         modifier = modifier,
                         records = records,
-                        onCreate = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
+                        onCreate = { onEvent(StressLevelOverviewContract.Event.OnAddStressLevel) }
                     )
                     StressHistory(
                         modifier = modifier,
                         records = records.take(7),
-                        onDelete = { id -> onIntent(StressLevelContract.Intent.Delete(id)) },
-                        onAddStressLevel = { onEvent(StressLevelContract.Event.OnAddStressLevel) }
+                        onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
+                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.OnAddStressLevel) }
                     )
                 }
             )

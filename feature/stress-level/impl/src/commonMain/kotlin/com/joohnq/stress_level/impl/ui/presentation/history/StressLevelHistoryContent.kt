@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_level_history
+package com.joohnq.stress_level.impl.ui.presentation.history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,15 +21,15 @@ import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toGroupedByDate
-import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
+import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewContract
 import com.joohnq.ui.mapper.MapMapper.items
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelHistoryContent(
-    state: StressLevelContract.State,
-    onAction: (StressLevelContract.Intent) -> Unit = {},
+    state: StressLevelOverviewContract.State,
+    onAction: (StressLevelOverviewContract.Intent) -> Unit = {},
     onEvent: (StressLevelHistoryContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
@@ -73,7 +73,7 @@ fun StressLevelHistoryContent(
                             StressLevelHistoryCard(
                                 record = record,
                                 onDelete = {
-                                    onAction(StressLevelContract.Intent.Delete(record.id))
+                                    onAction(StressLevelOverviewContract.Intent.Delete(record.id))
                                 }
                             )
                         }

@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_level
+package com.joohnq.stress_level.impl.ui.presentation.overview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -6,20 +6,20 @@ import androidx.compose.runtime.getValue
 import com.joohnq.ui.sharedViewModel
 
 @Composable
-fun StressLevelScreen(
+fun StressLevelOverviewScreen(
     onNavigateAddStressLevel: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: StressLevelViewModel = sharedViewModel(),
+    viewModel: StressLevelOverviewViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: StressLevelContract.Event) =
+    fun onEvent(event: StressLevelOverviewContract.Event) =
         when (event) {
-            is StressLevelContract.Event.OnAddStressLevel -> onNavigateAddStressLevel()
-            is StressLevelContract.Event.OnGoBack -> onGoBack()
+            is StressLevelOverviewContract.Event.OnAddStressLevel -> onNavigateAddStressLevel()
+            is StressLevelOverviewContract.Event.OnGoBack -> onGoBack()
         }
 
-    StressLevelContent(
+    StressLevelOverviewContent(
         state = state,
         onEvent = ::onEvent,
         onIntent = viewModel::onIntent

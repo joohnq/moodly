@@ -17,12 +17,12 @@ val sleepQualityUiModule: Module =
         }
         single<AddSleepQualityViewModel> {
             AddSleepQualityViewModel(
-                addSleepQualityUseCase = get(),
+                addSleepQualityUseCase = get()
             )
         }
         single<SleepQualityHistoryViewModel> {
             SleepQualityHistoryViewModel(
-                deleteSleepQualityUseCase = get(),
+                deleteSleepQualityUseCase = get()
             )
         }
     }

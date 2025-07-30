@@ -20,10 +20,10 @@ import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverview
 import com.joohnq.sleep_quality.impl.ui.presentation.add.AddSleepQualityScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.history.SleepQualityHistoryScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewScreen
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelScreen
-import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelScreen
-import com.joohnq.stress_level.impl.ui.presentation.stress_level_history.StressLevelHistoryScreen
-import com.joohnq.stress_level.impl.ui.presentation.stress_stressors.StressStressorsScreen
+import com.joohnq.stress_level.impl.ui.presentation.add.AddStressLevelScreen
+import com.joohnq.stress_level.impl.ui.presentation.history.StressLevelHistoryScreen
+import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewScreen
+import com.joohnq.stress_level.impl.ui.presentation.stressors.StressStressorsScreen
 
 fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination) -> Unit,
@@ -146,7 +146,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.StressLevel> {
-            StressLevelScreen(
+            StressLevelOverviewScreen(
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
                 },
@@ -177,7 +177,7 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
-                onNavigateToStressLevel = { onNavigate(Destination.App.StressLevel) }
+                onNavigateToStressLevelOverview = { onNavigate(Destination.App.StressLevel) }
             )
         }
         composable<Destination.App.SleepQuality> {

@@ -9,8 +9,8 @@ import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverview
 import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewViewModel
 import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewContract
 import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewViewModel
-import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelContract
-import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelViewModel
+import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewContract
+import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewViewModel
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.mapper.UiStateMapper.anyError
 import com.joohnq.ui.mapper.UiStateMapper.onSuccess
@@ -28,7 +28,7 @@ class DashboardViewModel(
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalOverviewViewModel: SelfJournalOverviewViewModel,
     private val sleepQualityOverviewViewModel: SleepQualityOverviewViewModel,
-    private val stressLevelViewModel: StressLevelViewModel,
+    private val stressLevelOverviewViewModel: StressLevelOverviewViewModel,
 ) : BaseViewModel<DashboardContract.State, DashboardContract.Intent, DashboardContract.SideEffect>(
         initialState = initialState
     ),
@@ -38,7 +38,7 @@ class DashboardViewModel(
             DashboardContract.Intent.Get -> {
                 moodOverviewViewModel.onIntent(MoodOverviewContract.Intent.GetAll)
                 userViewModel.onIntent(UserContract.Intent.Get)
-                stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
+                stressLevelOverviewViewModel.onIntent(StressLevelOverviewContract.Intent.GetAll)
                 sleepQualityOverviewViewModel.onIntent(SleepQualityOverviewContract.Intent.GetAll)
                 selfJournalOverviewViewModel.onIntent(SelfJournalOverviewContract.Intent.GetAll)
             }
@@ -52,14 +52,14 @@ class DashboardViewModel(
             freudScoreViewModel.state,
             selfJournalOverviewViewModel.state,
             sleepQualityOverviewViewModel.state,
-            stressLevelViewModel.state
+            stressLevelOverviewViewModel.state
         ) { states ->
             val state = states[0] as UserContract.State
             val statsState = states[1] as MoodOverviewContract.State
             val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalOverviewContract.State
             val sleepState = states[4] as SleepQualityOverviewContract.State
-            val stressState = states[5] as StressLevelContract.State
+            val stressState = states[5] as StressLevelOverviewContract.State
 
             statsState.records.onSuccess { records ->
                 freudScoreViewModel.onIntent(

@@ -1,10 +1,10 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_level
+package com.joohnq.stress_level.impl.ui.presentation.overview
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.stress_level.api.entity.StressLevelRecord
 import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
-import com.joohnq.stress_level.api.use_case.GetStressLevelsUseCase
+import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
@@ -15,20 +15,20 @@ import com.joohnq.ui.mapper.UiStateMapper.onFailure
 import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
-class StressLevelViewModel(
+class StressLevelOverviewViewModel(
     private val addStressLevelUseCase: AddStressLevelUseCase,
-    private val getStressLevelsUseCase: GetStressLevelsUseCase,
+    private val getAllStressLevelUseCase: GetAllStressLevelUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
-    initialState: StressLevelContract.State = StressLevelContract.State(),
-) : BaseViewModel<StressLevelContract.State, StressLevelContract.Intent, StressLevelContract.SideEffect>(
+    initialState: StressLevelOverviewContract.State = StressLevelOverviewContract.State(),
+) : BaseViewModel<StressLevelOverviewContract.State, StressLevelOverviewContract.Intent, StressLevelOverviewContract.SideEffect>(
         initialState = initialState
     ),
-    StressLevelContract.ViewModel {
-    override fun onIntent(intent: StressLevelContract.Intent) {
+    StressLevelOverviewContract.ViewModel {
+    override fun onIntent(intent: StressLevelOverviewContract.Intent) {
         when (intent) {
-            StressLevelContract.Intent.GetAll -> getAll()
-            is StressLevelContract.Intent.Add -> add(intent.record)
-            is StressLevelContract.Intent.Delete -> delete(intent.id)
+            StressLevelOverviewContract.Intent.GetAll -> getAll()
+            is StressLevelOverviewContract.Intent.Add -> add(intent.record)
+            is StressLevelOverviewContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -38,7 +38,7 @@ class StressLevelViewModel(
 
             res
                 .onSuccess {
-                    emitEffect(StressLevelContract.SideEffect.Deleted)
+                    emitEffect(StressLevelOverviewContract.SideEffect.Deleted)
                     updateState {
                         it.copy(
                             UiState.Success(
@@ -49,7 +49,7 @@ class StressLevelViewModel(
                         )
                     }
                 }.onFailure {
-                    emitEffect(StressLevelContract.SideEffect.ShowError(it))
+                    emitEffect(StressLevelOverviewContract.SideEffect.ShowError(it))
                 }
         }
     }
@@ -59,7 +59,7 @@ class StressLevelViewModel(
             updateState { it.copy(UiState.Loading) }
 
             val res =
-                getStressLevelsUseCase()
+                getAllStressLevelUseCase()
                     .toResultResource { it.toResource() }
                     .toUiState()
 
@@ -73,9 +73,9 @@ class StressLevelViewModel(
 
             res
                 .onSuccess {
-                    emitEffect(StressLevelContract.SideEffect.Added)
+                    emitEffect(StressLevelOverviewContract.SideEffect.Added)
                 }.onFailure {
-                    emitEffect(StressLevelContract.SideEffect.ShowError(it))
+                    emitEffect(StressLevelOverviewContract.SideEffect.ShowError(it))
                 }
         }
     }

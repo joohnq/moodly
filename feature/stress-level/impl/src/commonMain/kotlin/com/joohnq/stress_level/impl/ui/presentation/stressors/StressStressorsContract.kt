@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
+package com.joohnq.stress_level.impl.ui.presentation.stressors
 
 sealed interface StressStressorsContract {
     sealed interface Event {

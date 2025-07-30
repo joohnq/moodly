@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.presentation.stress_stressors
+package com.joohnq.stress_level.impl.ui.presentation.stressors
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,15 +33,15 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.allStressorResource
-import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelContract
+import com.joohnq.stress_level.impl.ui.presentation.add.AddStressLevelContract
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressStressorsContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddStressLevelContract.State,
-    onAddAction: (AddStressLevelContract.Intent) -> Unit = {},
-    onEvent: (StressStressorsContract.Event) -> Unit = {},
+    onIntent: (AddStressLevelContract.Intent) -> Unit = {},
+    onEvent: (AddStressLevelContract.Event) -> Unit = {},
 ) {
     val stressors = remember { allStressorResource() }
     val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
@@ -61,7 +61,7 @@ fun StressStressorsContent(
         ) {
             AppTopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { onEvent(StressStressorsContract.Event.OnGoBack) }
+                onGoBack = { onEvent(AddStressLevelContract.Event.OnGoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -81,7 +81,7 @@ fun StressStressorsContent(
                         BubbleText(
                             text = stressor.text,
                             onClick = {
-                                onAddAction(
+                                onIntent(
                                     AddStressLevelContract.Intent.UpdateAddingStressors(stressor)
                                 )
                             },
@@ -98,7 +98,7 @@ fun StressStressorsContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(StressStressorsContract.Event.OnContinue) }
+                    onClick = { onIntent(AddStressLevelContract.Intent.Add) }
                 )
             }
         }

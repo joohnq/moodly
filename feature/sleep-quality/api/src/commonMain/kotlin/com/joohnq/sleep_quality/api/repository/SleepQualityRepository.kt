@@ -1,11 +1,14 @@
 package com.joohnq.sleep_quality.api.repository
 
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
+import kotlinx.coroutines.flow.StateFlow
 
 interface SleepQualityRepository {
-    suspend fun getSleepQualities(): Result<List<SleepQualityRecord>>
+    val records: StateFlow<Result<List<SleepQualityRecord>>>
 
-    suspend fun addSleepQuality(record: SleepQualityRecord): Result<Boolean>
+    suspend fun getAll(): Result<List<SleepQualityRecord>>
 
-    suspend fun deleteSleepQuality(id: Int): Result<Boolean>
+    suspend fun add(record: SleepQualityRecord): Result<Boolean>
+
+    suspend fun delete(id: Int): Result<Boolean>
 }

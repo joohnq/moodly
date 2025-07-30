@@ -6,5 +6,5 @@ import com.joohnq.sleep_quality.api.repository.SleepQualityRepository
 class GetSleepQualitiesUseCase(
     private val sleepQualityRepository: SleepQualityRepository,
 ) {
-    suspend operator fun invoke(): Result<List<SleepQualityRecord>> = sleepQualityRepository.getSleepQualities()
+    suspend operator fun invoke(): Result<List<SleepQualityRecord>> = sleepQualityRepository.records.value
 }

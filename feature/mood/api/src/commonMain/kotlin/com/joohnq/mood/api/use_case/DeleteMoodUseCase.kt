@@ -5,5 +5,5 @@ import com.joohnq.mood.api.repository.MoodRepository
 class DeleteMoodUseCase(
     private val moodRepository: MoodRepository,
 ) {
-    suspend operator fun invoke(id: Int): Result<Boolean> = moodRepository.deleteMoodRecord(id)
+    suspend operator fun invoke(id: Int): Result<Boolean> = moodRepository.delete(id)
 }

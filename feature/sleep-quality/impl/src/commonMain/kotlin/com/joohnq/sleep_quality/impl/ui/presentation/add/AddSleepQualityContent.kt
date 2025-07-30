@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.add
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,7 +56,7 @@ fun AddSleepQualityContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSleepQualityContract.State,
     onEvent: (AddSleepQualityContract.Event) -> Unit = {},
-    onAddAction: (AddSleepQualityContract.Intent) -> Unit = {},
+    onIntent: (AddSleepQualityContract.Intent) -> Unit = {},
 ) {
     val moods = remember { allMoodResource() }
     val sleepInfluences = remember { allSleepInfluencesResource() }
@@ -77,15 +77,15 @@ fun AddSleepQualityContent(
         AppTimePickerDialog(
             title = Res.string.start_sleeping_time,
             onDismiss = {
-                onAddAction(
+                onIntent(
                     AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(
                         false
                     )
                 )
             },
             onConfirm = {
-                onAddAction(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
-                onAddAction(
+                onIntent(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
+                onIntent(
                     AddSleepQualityContract.Intent.UpdateStartTime(
                         startTimePickerState.hour,
                         startTimePickerState.minute
@@ -101,11 +101,11 @@ fun AddSleepQualityContent(
         AppTimePickerDialog(
             title = Res.string.end_sleeping_time,
             onDismiss = {
-                onAddAction(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
+                onIntent(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
             },
             onConfirm = {
-                onAddAction(AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog(false))
-                onAddAction(
+                onIntent(AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog(false))
+                onIntent(
                     AddSleepQualityContract.Intent.UpdateEndTime(
                         endTimePickerState.hour,
                         endTimePickerState.minute
@@ -150,7 +150,7 @@ fun AddSleepQualityContent(
                     minutes = startTimePickerState.minute.toPaddedString(),
                     isAfternoon = startTimePickerState.isAfternoon,
                     onClick = {
-                        onAddAction(
+                        onIntent(
                             AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(true)
                         )
                     }
@@ -163,7 +163,7 @@ fun AddSleepQualityContent(
                     minutes = endTimePickerState.minute.toPaddedString(),
                     isAfternoon = endTimePickerState.isAfternoon,
                     onClick = {
-                        onAddAction(
+                        onIntent(
                             AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog(
                                 true
                             )
@@ -195,7 +195,7 @@ fun AddSleepQualityContent(
                                 Colors.Gray30
                             },
                         color = if (moodResource == resource) resource.palette.faceColor else Colors.Gray60,
-                        onClick = { onAddAction(AddSleepQualityContract.Intent.UpdateMood(resource)) }
+                        onClick = { onIntent(AddSleepQualityContract.Intent.UpdateMood(resource)) }
                     )
                 }
             }
@@ -219,7 +219,7 @@ fun AddSleepQualityContent(
                         colors = ComponentColors.RadioButton.textRadioButtonColors(),
                         shape = Dimens.Shape.Circle,
                         onClick = {
-                            onAddAction(
+                            onIntent(
                                 AddSleepQualityContract.Intent.UpdateSelectedSleepInfluence(
                                     sleepInfluences
                                 )
@@ -232,7 +232,7 @@ fun AddSleepQualityContent(
             PrimaryButton(
                 modifier = Modifier.paddingHorizontalMedium().fillMaxWidth(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(AddSleepQualityContract.Event.OnAdd) }
+                onClick = { onIntent(AddSleepQualityContract.Intent.Add) }
             )
         }
     }

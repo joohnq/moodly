@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history
+package com.joohnq.sleep_quality.impl.ui.presentation.history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,14 +19,14 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SleepQualityHistoryContent(
-    state: SleepQualityContract.State,
+    state: SleepQualityHistoryContract.State,
     onEvent: (SleepQualityHistoryContract.Event) -> Unit = {},
+    onIntent: (SleepQualityHistoryContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -54,10 +54,8 @@ fun SleepQualityHistoryContent(
                             SleepQualityHistoryCard(
                                 record = record,
                                 onDelete = { id ->
-                                    onEvent(
-                                        SleepQualityHistoryContract.Event.OnDelete(
-                                            id
-                                        )
+                                    onIntent(
+                                        SleepQualityHistoryContract.Intent.Delete(id)
                                     )
                                 }
                             )

@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.overview
 
 import androidx.compose.runtime.Composable
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
@@ -10,10 +10,10 @@ import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.getTod
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
-fun SleepQualityContent(
-    state: SleepQualityContract.State,
-    onEvent: (SleepQualityContract.Event) -> Unit = {},
-    onAction: (SleepQualityContract.Intent) -> Unit = {},
+fun SleepQualityOverviewContent(
+    state: SleepQualityOverviewContract.State,
+    onEvent: (SleepQualityOverviewContract.Event) -> Unit = {},
+    onAction: (SleepQualityOverviewContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -32,8 +32,8 @@ fun SleepQualityContent(
                         record = record
                     )
                 },
-                onAddButton = { onEvent(SleepQualityContract.Event.OnNavigateToAddSleepQuality) },
-                onGoBack = { onEvent(SleepQualityContract.Event.OnGoBack) },
+                onAddButton = { onEvent(SleepQualityOverviewContract.Event.OnNavigateToAddSleepQuality) },
+                onGoBack = { onEvent(SleepQualityOverviewContract.Event.OnGoBack) },
                 body = { modifier ->
                     SleepContent(
                         modifier = modifier,

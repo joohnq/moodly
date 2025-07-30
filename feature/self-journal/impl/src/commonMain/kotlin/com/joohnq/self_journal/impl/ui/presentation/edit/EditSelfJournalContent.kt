@@ -91,7 +91,7 @@ fun EditJournalingContent(
                 onEdit = {
                     onIntent(EditSelfJournalContract.Intent.UpdateIsEditing(!state.isEditing))
                 },
-                onSave = { onIntent(EditSelfJournalContract.Intent.Update) },
+                onSave = { onIntent(EditSelfJournalContract.Intent.Update) }
             )
         },
         floatingActionButtonPosition = FabPosition.Center

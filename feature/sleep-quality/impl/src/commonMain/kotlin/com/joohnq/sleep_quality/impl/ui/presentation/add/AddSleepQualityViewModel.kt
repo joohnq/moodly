@@ -1,11 +1,19 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.add
 
+import androidx.lifecycle.viewModelScope
 import com.joohnq.api.mapper.ListMapper.toggle
 import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toSleepQuality
+import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
+import com.joohnq.ui.mapper.ResultMapper.toUiState
+import com.joohnq.ui.mapper.UiStateMapper.onFailure
+import com.joohnq.ui.mapper.UiStateMapper.onSuccess
+import kotlinx.coroutines.launch
 
 class AddSleepQualityViewModel(
+    private val addSleepQualityUseCase: AddSleepQualityUseCase,
     initialState: AddSleepQualityContract.State = AddSleepQualityContract.State(),
 ) : BaseViewModel<AddSleepQualityContract.State, AddSleepQualityContract.Intent, AddSleepQualityContract.SideEffect>(
         initialState = initialState
@@ -69,6 +77,19 @@ class AddSleepQualityViewModel(
 
             AddSleepQualityContract.Intent.ResetState ->
                 resetState()
+
+            AddSleepQualityContract.Intent.Add -> add()
         }
     }
+
+    private fun add() =
+        viewModelScope.launch {
+            val res = addSleepQualityUseCase(state.value.record.toDomain()).toUiState()
+            res
+                .onSuccess {
+                    emitEffect(AddSleepQualityContract.SideEffect.OnNavigateToNext)
+                }.onFailure {
+                    emitEffect(AddSleepQualityContract.SideEffect.ShowError(it))
+                }
+        }
 }

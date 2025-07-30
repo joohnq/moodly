@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
 import com.joohnq.sleep_quality.impl.ui.parameter.SleepQualityRecordResourceParameterProvider

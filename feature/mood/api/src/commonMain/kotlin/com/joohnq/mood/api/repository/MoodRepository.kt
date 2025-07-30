@@ -4,11 +4,11 @@ import com.joohnq.mood.api.entity.MoodRecord
 import kotlinx.coroutines.flow.StateFlow
 
 interface MoodRepository {
-    val moodRecords: StateFlow<Result<List<MoodRecord>>>
+    val records: StateFlow<Result<List<MoodRecord>>>
 
-    suspend fun getMoodRecords(): Result<List<MoodRecord>>
+    suspend fun getAll(): Result<List<MoodRecord>>
 
-    suspend fun addMoodRecord(record: MoodRecord): Result<Boolean>
+    suspend fun add(record: MoodRecord): Result<Boolean>
 
-    suspend fun deleteMoodRecord(id: Int): Result<Boolean>
+    suspend fun delete(id: Int): Result<Boolean>
 }

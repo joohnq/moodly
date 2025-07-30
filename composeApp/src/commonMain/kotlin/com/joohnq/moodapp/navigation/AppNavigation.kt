@@ -17,9 +17,9 @@ import com.joohnq.self_journal.impl.ui.presentation.add.AddSelfJournalScreen
 import com.joohnq.self_journal.impl.ui.presentation.edit.EditJournalingScreen
 import com.joohnq.self_journal.impl.ui.presentation.history.SelfJournalHistoryScreen
 import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQualityScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.add.AddSleepQualityScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.history.SleepQualityHistoryScreen
+import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewScreen
 import com.joohnq.stress_level.impl.ui.presentation.add_stress_level.AddStressLevelScreen
 import com.joohnq.stress_level.impl.ui.presentation.stress_level.StressLevelScreen
 import com.joohnq.stress_level.impl.ui.presentation.stress_level_history.StressLevelHistoryScreen
@@ -181,7 +181,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.SleepQuality> {
-            SleepQualityScreen(
+            SleepQualityOverviewScreen(
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
                 onGoBack = {
                     onNavigateBack(Destination.App.DashBoard)

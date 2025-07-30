@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.overview
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
@@ -15,22 +15,22 @@ import com.joohnq.ui.mapper.UiStateMapper.onFailure
 import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
-class SleepQualityViewModel(
+class SleepQualityOverviewViewModel(
     private val addSleepQualityUseCase: AddSleepQualityUseCase,
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
-    initialState: SleepQualityContract.State = SleepQualityContract.State(),
-) : BaseViewModel<SleepQualityContract.State, SleepQualityContract.Intent, SleepQualityContract.SideEffect>(
+    initialState: SleepQualityOverviewContract.State = SleepQualityOverviewContract.State(),
+) : BaseViewModel<SleepQualityOverviewContract.State, SleepQualityOverviewContract.Intent, SleepQualityOverviewContract.SideEffect>(
         initialState = initialState
     ),
-    SleepQualityContract.ViewModel {
-    override fun onIntent(intent: SleepQualityContract.Intent) {
+    SleepQualityOverviewContract.ViewModel {
+    override fun onIntent(intent: SleepQualityOverviewContract.Intent) {
         when (intent) {
-            SleepQualityContract.Intent.GetAll -> getAll()
-            is SleepQualityContract.Intent.Add ->
+            SleepQualityOverviewContract.Intent.GetAll -> getAll()
+            is SleepQualityOverviewContract.Intent.Add ->
                 add(intent.record)
 
-            is SleepQualityContract.Intent.Delete -> delete(intent.id)
+            is SleepQualityOverviewContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -49,7 +49,7 @@ class SleepQualityViewModel(
             val res = deleteSleepQualityUseCase(id).toUiState()
             res
                 .onSuccess {
-                    emitEffect(SleepQualityContract.SideEffect.Deleted)
+                    emitEffect(SleepQualityOverviewContract.SideEffect.Deleted)
                     updateState {
                         it.copy(
                             UiState.Success(
@@ -60,7 +60,7 @@ class SleepQualityViewModel(
                         )
                     }
                 }.onFailure {
-                    emitEffect(SleepQualityContract.SideEffect.ShowError(it))
+                    emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(it))
                 }
         }
 
@@ -69,9 +69,9 @@ class SleepQualityViewModel(
             val res = addSleepQualityUseCase(sleepQualityRecord).toUiState()
             res
                 .onSuccess {
-                    emitEffect(SleepQualityContract.SideEffect.Added)
+                    emitEffect(SleepQualityOverviewContract.SideEffect.Added)
                 }.onFailure {
-                    emitEffect(SleepQualityContract.SideEffect.ShowError(it))
+                    emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(it))
                 }
         }
 }

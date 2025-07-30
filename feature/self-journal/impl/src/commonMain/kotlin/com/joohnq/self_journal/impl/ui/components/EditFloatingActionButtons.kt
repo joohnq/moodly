@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.impl.ui.presentation.edit.EditSelfJournalContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.edit_journal
 import com.joohnq.shared_resources.editing

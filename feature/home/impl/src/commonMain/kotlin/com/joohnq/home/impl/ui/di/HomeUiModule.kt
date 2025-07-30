@@ -11,7 +11,7 @@ val homeUiModule =
                 moodOverviewViewModel = get(),
                 freudScoreViewModel = get(),
                 selfJournalOverviewViewModel = get(),
-                sleepQualityViewModel = get(),
+                sleepQualityOverviewViewModel = get(),
                 stressLevelViewModel = get()
             )
         }

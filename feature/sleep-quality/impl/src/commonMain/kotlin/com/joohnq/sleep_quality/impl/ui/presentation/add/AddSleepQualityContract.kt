@@ -1,4 +1,4 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality
+package com.joohnq.sleep_quality.impl.ui.presentation.add
 
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
@@ -10,8 +10,6 @@ interface AddSleepQualityContract {
 
     sealed interface Event {
         data object OnGoBack : Event
-
-        data object OnAdd : Event
 
         data object OnNavigateToSleepQuality : Event
     }
@@ -43,10 +41,18 @@ interface AddSleepQualityContract {
             val minute: Int,
         ) : Intent
 
+        data object Add : Intent
+
         data object ResetState : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object OnNavigateToNext : SideEffect
+
+        data class ShowError(
+            val error: String,
+        ) : SideEffect
+    }
 
     data class State(
         val record: SleepQualityRecordResource = SleepQualityRecordResource(),

@@ -1,17 +1,16 @@
-package com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history
+package com.joohnq.sleep_quality.impl.ui.presentation.overview
 
 import androidx.compose.runtime.Composable
-import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun SleepHistoryContentPreview() {
-    SleepQualityHistoryContent(
+fun SleepQualityContentPreview() {
+    SleepQualityOverviewContent(
         state =
-            SleepQualityContract.State(
+            SleepQualityOverviewContract.State(
                 records =
                     UiState.Success(
                         SleepQualityRecordResource.allSleepQualityRecordResource
@@ -22,10 +21,10 @@ fun SleepHistoryContentPreview() {
 
 @Preview
 @Composable
-fun SleepHistoryContentEmptyPreview() {
-    SleepQualityHistoryContent(
+fun SleepQualityContentEmptyPreview() {
+    SleepQualityOverviewContent(
         state =
-            SleepQualityContract.State(
+            SleepQualityOverviewContract.State(
                 records =
                     UiState.Success(
                         listOf()

@@ -20,9 +20,9 @@ class MoodRepositoryImpl(
 ) : MoodRepository {
     private val query = database.moodRecordQueries
 
-    private val _moodRecords = MutableStateFlow<Result<List<MoodRecord>>>(Result.success(listOf()))
+    private val _records = MutableStateFlow<Result<List<MoodRecord>>>(Result.success(listOf()))
 
-    override val moodRecords: StateFlow<Result<List<MoodRecord>>> = _moodRecords.asStateFlow()
+    override val records: StateFlow<Result<List<MoodRecord>>> = _records.asStateFlow()
 
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -32,11 +32,11 @@ class MoodRepositoryImpl(
 
     private fun loadInitialData() {
         repositoryScope.launch {
-            getMoodRecords()
+            getAll()
         }
     }
 
-    override suspend fun getMoodRecords(): Result<List<MoodRecord>> {
+    override suspend fun getAll(): Result<List<MoodRecord>> {
         val result =
             executeTryCatchResult {
                 query
@@ -50,11 +50,11 @@ class MoodRepositoryImpl(
                     }.executeAsList()
             }
 
-        _moodRecords.value = result
+        _records.value = result
         return result
     }
 
-    override suspend fun addMoodRecord(record: MoodRecord): Result<Boolean> =
+    override suspend fun add(record: MoodRecord): Result<Boolean> =
         executeTryCatchResult {
             query.addMoodRecord(
                 mood = MoodRecordConverter.fromMood(record.mood),
@@ -64,7 +64,7 @@ class MoodRepositoryImpl(
             true
         }
 
-    override suspend fun deleteMoodRecord(id: Int): Result<Boolean> =
+    override suspend fun delete(id: Int): Result<Boolean> =
         executeTryCatchResult {
             query.deleteMoodRecord(id.toLong())
             loadInitialData()

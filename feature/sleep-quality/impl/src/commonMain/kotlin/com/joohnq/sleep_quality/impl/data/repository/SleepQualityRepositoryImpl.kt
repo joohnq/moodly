@@ -11,8 +11,14 @@ import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.api.exception.SleepQualityException
 import com.joohnq.sleep_quality.api.repository.SleepQualityRepository
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SleepQualityRepositoryImpl(
@@ -20,22 +26,43 @@ class SleepQualityRepositoryImpl(
 ) : SleepQualityRepository {
     private val query = database.sleepQualityRecordQueries
 
-    override suspend fun getSleepQualities(): Result<List<SleepQualityRecord>> =
-        executeTryCatchResult {
-            query
-                .getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, createdAt ->
-                    SleepQualityRecord(
-                        id = id.toInt(),
-                        sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
-                        startSleeping = startSleeping.toTime(),
-                        endSleeping = endSleeping.toTime(),
-                        sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
-                        createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
-                    )
-                }.executeAsList()
-        }
+    private val _records =
+        MutableStateFlow<Result<List<SleepQualityRecord>>>(Result.success(listOf()))
 
-    override suspend fun addSleepQuality(record: SleepQualityRecord): Result<Boolean> =
+    override val records: StateFlow<Result<List<SleepQualityRecord>>> = _records.asStateFlow()
+
+    private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+    init {
+        loadInitialData()
+    }
+
+    private fun loadInitialData() {
+        repositoryScope.launch {
+            getAll()
+        }
+    }
+
+    override suspend fun getAll(): Result<List<SleepQualityRecord>> {
+        val result =
+            executeTryCatchResult {
+                query
+                    .getSleepQualities { id, sleepQuality, startSleeping, endSleeping, sleepInfluences, createdAt ->
+                        SleepQualityRecord(
+                            id = id.toInt(),
+                            sleepQuality = SleepQualityRecordConverter.toSleepQuality(sleepQuality),
+                            startSleeping = startSleeping.toTime(),
+                            endSleeping = endSleeping.toTime(),
+                            sleepInfluences = SleepQualityRecordConverter.toInfluences(sleepInfluences),
+                            createdAt = LocalDateTimeConverter.toLocalDate(createdAt)
+                        )
+                    }.executeAsList()
+            }
+        _records.value = result
+        return result
+    }
+
+    override suspend fun add(record: SleepQualityRecord): Result<Boolean> =
         withContext(Dispatchers.IO) {
             try {
                 query.addSleepQuality(
@@ -54,7 +81,7 @@ class SleepQualityRepositoryImpl(
             }
         }
 
-    override suspend fun deleteSleepQuality(id: Int): Result<Boolean> =
+    override suspend fun delete(id: Int): Result<Boolean> =
         executeTryCatchResult {
             query.deleteSleepQuality(id = id.toLong())
             true

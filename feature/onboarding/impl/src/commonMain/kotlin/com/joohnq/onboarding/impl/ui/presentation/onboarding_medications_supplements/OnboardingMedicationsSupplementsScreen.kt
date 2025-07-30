@@ -17,7 +17,7 @@ fun OnboardingMedicationsSupplementsScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.OnNavigateToNext ->
+            OnboardingEvent.AddItems ->
                 onNavigateToStressLevel()
 
             OnboardingEvent.OnGoBack ->

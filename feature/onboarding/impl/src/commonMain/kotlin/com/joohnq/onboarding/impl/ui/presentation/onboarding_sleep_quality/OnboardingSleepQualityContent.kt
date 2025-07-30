@@ -51,7 +51,7 @@ fun OnboardingSleepQualityContent(
         page = 4,
         title = Res.string.sleep_quality_title,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
+        onContinue = { onEvent(OnboardingEvent.AddItems) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             VerticalSpacer(20.dp)

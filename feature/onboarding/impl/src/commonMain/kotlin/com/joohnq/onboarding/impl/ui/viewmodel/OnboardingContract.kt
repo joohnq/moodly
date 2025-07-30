@@ -43,12 +43,17 @@ sealed interface OnboardingContract {
             val description: String,
         ) : Intent
 
+        data object AddItems : Intent
+
         data class UpdateSliderValue(
             val sliderValue: Float,
         ) : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect{
+        data object OnboardingCompleted: SideEffect
+        data class ShowError(val message: String): SideEffect
+    }
 
     data class State(
         val physicalSymptoms: PhysicalSymptomsResource? = null,

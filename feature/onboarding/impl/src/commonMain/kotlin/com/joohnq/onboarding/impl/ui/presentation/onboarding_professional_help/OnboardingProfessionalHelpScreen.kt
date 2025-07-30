@@ -18,7 +18,7 @@ fun OnboardingProfessionalHelpScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.OnNavigateToNext -> onNavigateToPhysicalSymptoms()
+            OnboardingEvent.AddItems -> onNavigateToPhysicalSymptoms()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 

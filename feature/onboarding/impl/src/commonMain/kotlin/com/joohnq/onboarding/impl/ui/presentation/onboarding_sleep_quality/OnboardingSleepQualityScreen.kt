@@ -18,7 +18,7 @@ fun OnboardingSleepQualityScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.OnNavigateToNext -> onNavigateToMedicationsSupplements()
+            OnboardingEvent.AddItems -> onNavigateToMedicationsSupplements()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 

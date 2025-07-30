@@ -18,7 +18,7 @@ fun OnboardingMoodRateScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.OnNavigateToNext -> onNavigateToProfessionalHelp()
+            OnboardingEvent.AddItems -> onNavigateToProfessionalHelp()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 

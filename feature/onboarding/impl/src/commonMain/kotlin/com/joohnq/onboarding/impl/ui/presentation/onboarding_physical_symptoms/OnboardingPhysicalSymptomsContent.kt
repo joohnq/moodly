@@ -37,7 +37,7 @@ fun OnboardingPhysicalSymptomsContent(
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
+        onContinue = { onEvent(OnboardingEvent.AddItems) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),

@@ -38,7 +38,7 @@ fun OnboardingStressLevelContent(
         page = 6,
         title = Res.string.stress_rate_title,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
+        onContinue = { onEvent(OnboardingEvent.AddItems) }
     ) {
         Text(
             text = stringResource(state.stressLevel.value),

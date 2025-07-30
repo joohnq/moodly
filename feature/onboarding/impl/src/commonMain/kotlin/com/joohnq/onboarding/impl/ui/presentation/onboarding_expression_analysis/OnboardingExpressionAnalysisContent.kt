@@ -30,7 +30,7 @@ fun OnboardingExpressionAnalysisContent(
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
         isContinueButtonVisible = description.isNotEmpty(),
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) },
+        onContinue = { onEvent(OnboardingEvent.AddItems) },
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(

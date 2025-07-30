@@ -33,7 +33,7 @@ fun OnboardingProfessionalHelpContent(
         title = Res.string.sought_professional_help_title,
         isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.OnNavigateToNext) }
+        onContinue = { onEvent(OnboardingEvent.AddItems) }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

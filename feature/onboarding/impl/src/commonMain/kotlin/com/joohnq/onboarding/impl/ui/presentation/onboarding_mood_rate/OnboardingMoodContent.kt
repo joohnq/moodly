@@ -65,7 +65,7 @@ fun OnboardingMoodRateContent(
         IconContinueButton(
             modifier = Modifier.size(60.dp),
             colors = ComponentColors.IconButton.mainButtonColors(),
-            onClick = { onEvent(OnboardingEvent.OnNavigateToNext) }
+            onClick = { onEvent(OnboardingEvent.AddItems) }
         )
     }
 

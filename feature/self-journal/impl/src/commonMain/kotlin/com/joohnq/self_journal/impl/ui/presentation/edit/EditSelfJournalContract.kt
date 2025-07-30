@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.edit
 
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.ui.UnidirectionalViewModel
@@ -8,14 +8,22 @@ sealed interface EditSelfJournalContract {
 
     sealed interface Event {
         data object OnGoBack : Event
-
-        data object OnSave : Event
     }
 
     sealed interface Intent {
         data object ResetState : Intent
 
         data object ClearEditingState : Intent
+
+        data object Update : Intent
+
+        data class GetById(
+            val id: Int,
+        ) : Intent
+
+        data class Delete(
+            val id: Int,
+        ) : Intent
 
         data class Set(
             val record: SelfJournalRecord,
@@ -38,7 +46,15 @@ sealed interface EditSelfJournalContract {
         ) : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object OnGoBack : SideEffect
+
+        data object Updated : SideEffect
+
+        data class ShowError(
+            val error: String,
+        ) : SideEffect
+    }
 
     data class State(
         val currentSelfJournalRecord: SelfJournalRecord = SelfJournalRecord(),

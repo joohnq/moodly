@@ -5,6 +5,8 @@ import com.joohnq.self_journal.api.entity.SelfJournalRecord
 interface SelfJournalRepository {
     suspend fun getSelfJournals(): Result<List<SelfJournalRecord>>
 
+    suspend fun getSelfJournalById(id: Int): Result<SelfJournalRecord>
+
     suspend fun addSelfJournal(record: SelfJournalRecord): Result<Boolean>
 
     suspend fun deleteSelfJournal(id: Int): Result<Boolean>

@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.edit
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.api.entity.SelfJournalRecord

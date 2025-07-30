@@ -1,29 +1,36 @@
 package com.joohnq.self_journal.impl.ui.di
 
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJournalViewModel
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditSelfJournalViewModel
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
-import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJournalHistoryViewModel
+import com.joohnq.self_journal.impl.ui.presentation.add.AddSelfJournalViewModel
+import com.joohnq.self_journal.impl.ui.presentation.edit.EditSelfJournalViewModel
+import com.joohnq.self_journal.impl.ui.presentation.history.SelfJournalHistoryViewModel
+import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val selfJournalUiModule: Module =
     module {
-        single<SelfJournalViewModel> {
-            SelfJournalViewModel(
+        single<SelfJournalOverviewViewModel> {
+            SelfJournalOverviewViewModel(
                 getSelfJournalsUseCase = get(),
-                deleteSelfJournalsUseCase = get(),
-                updateSelfJournalsUseCase = get(),
-                addSelfJournalsUseCase = get()
+                deleteSelfJournalsUseCase = get()
             )
         }
         single<AddSelfJournalViewModel> {
-            AddSelfJournalViewModel()
+            AddSelfJournalViewModel(
+                addSelfJournalsUseCase = get()
+            )
         }
         single<SelfJournalHistoryViewModel> {
-            SelfJournalHistoryViewModel()
+            SelfJournalHistoryViewModel(
+                getSelfJournalsUseCase = get(),
+                deleteSelfJournalsUseCase = get()
+            )
         }
         single<EditSelfJournalViewModel> {
-            EditSelfJournalViewModel()
+            EditSelfJournalViewModel(
+                getSelfJournalByIdUseCase = get(),
+                deleteSelfJournalsUseCase = get(),
+                updateSelfJournalsUseCase = get()
+            )
         }
     }

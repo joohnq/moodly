@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
+package com.joohnq.self_journal.impl.ui.presentation.history
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.impl.ui.parameter.ListSelfJournalRecordResourceParameterProvider

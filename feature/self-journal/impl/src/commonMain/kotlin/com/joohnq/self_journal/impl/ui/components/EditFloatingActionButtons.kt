@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditSelfJournalContract
+import com.joohnq.self_journal.impl.ui.presentation.edit.EditSelfJournalContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.edit_journal
 import com.joohnq.shared_resources.editing
@@ -40,9 +40,9 @@ import org.jetbrains.compose.resources.stringResource
 fun EditFloatingActionButtons(
     isEditing: Boolean,
     canSave: Boolean,
-    onEditingAction: (EditSelfJournalContract.Intent) -> Unit = {},
-    onEvent: (EditSelfJournalContract.Event) -> Unit = {},
-    onRequestTitleFocus: () -> Unit = {},
+    onDelete: () -> Unit = {},
+    onEdit: () -> Unit = {},
+    onSave: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier.imePadding().fillMaxWidth(),
@@ -60,11 +60,7 @@ fun EditFloatingActionButtons(
         ) {
             item {
                 FilledIconButton(
-                    onClick = {
-                        onEditingAction(
-                            EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(true)
-                        )
-                    },
+                    onClick = onDelete,
                     modifier = Modifier.size(56.dp),
                     shape = Dimens.Shape.Circle,
                     colors =
@@ -85,10 +81,7 @@ fun EditFloatingActionButtons(
             }
             item {
                 Button(
-                    onClick = {
-                        onEditingAction(EditSelfJournalContract.Intent.UpdateIsEditing(!isEditing))
-                        onRequestTitleFocus()
-                    },
+                    onClick = onEdit,
                     contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp),
                     shape = Dimens.Shape.Circle,
                     colors =
@@ -123,9 +116,7 @@ fun EditFloatingActionButtons(
             item {
                 Button(
                     enabled = canSave,
-                    onClick = {
-                        onEvent(EditSelfJournalContract.Event.OnSave)
-                    },
+                    onClick = onSave,
                     contentPadding =
                         if (canSave) {
                             PaddingValues(

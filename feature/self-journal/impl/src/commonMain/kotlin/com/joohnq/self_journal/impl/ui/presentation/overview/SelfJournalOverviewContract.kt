@@ -1,24 +1,16 @@
-package com.joohnq.self_journal.impl.ui.presentation.self_journal
+package com.joohnq.self_journal.impl.ui.presentation.overview
 
-import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 import kotlinx.datetime.LocalDate
 
-sealed interface SelfJournalContract {
+sealed interface SelfJournalOverviewContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data object GetAll : Intent
-
-        data class Add(
-            val record: SelfJournalRecord,
-        ) : Intent
-
-        data class Update(
-            val record: SelfJournalRecord,
-        ) : Intent
+        data object GetAll :
+            Intent
 
         data class Delete(
             val id: Int,
@@ -26,11 +18,14 @@ sealed interface SelfJournalContract {
     }
 
     sealed interface SideEffect {
-        data object SelfJournalAdded : SideEffect
+        data object SelfJournalAdded :
+            SideEffect
 
-        data object Updated : SideEffect
+        data object Updated :
+            SideEffect
 
-        data object SelfJournalDeleted : SideEffect
+        data object Deleted :
+            SideEffect
 
         data class ShowError(
             val error: String,
@@ -42,11 +37,14 @@ sealed interface SelfJournalContract {
     )
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object OnGoBack :
+            Event
 
-        data object OnNavigateToAddSelfJournal : Event
+        data object OnNavigateToAddSelfJournal :
+            Event
 
-        data object OnNavigateToSelfHistory : Event
+        data object OnNavigateToSelfHistory :
+            Event
 
         data class OnClick(
             val localDate: LocalDate,

@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.add
 
 import com.joohnq.mood.impl.ui.resource.MoodResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
@@ -9,8 +9,6 @@ sealed interface AddSelfJournalContract {
 
     sealed interface Event {
         data object OnGoBack : Event
-
-        data object OnAdd : Event
     }
 
     sealed interface Intent {
@@ -30,10 +28,18 @@ sealed interface AddSelfJournalContract {
             val error: String?,
         ) : Intent
 
+        data object Add : Intent
+
         data object ResetState : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object OnGoBack : SideEffect
+
+        data class ShowError(
+            val error: String,
+        ) : SideEffect
+    }
 
     data class State(
         val mood: MoodResource? = null,

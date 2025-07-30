@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.self_journal_history
+package com.joohnq.self_journal.impl.ui.presentation.history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.self_journal.impl.ui.components.SelfJournalHistoryCard
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toGroupedByDate
-import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar
@@ -22,7 +21,6 @@ import com.joohnq.shared_resources.components.view.EmptyView
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
-import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.MapMapper.items
 import com.joohnq.ui.mapper.MapMapper.itemsIndexed
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
@@ -31,10 +29,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalHistoryContent(
     state: SelfJournalHistoryContract.State,
-    records: UiState<List<SelfJournalRecordResource>>,
+    onIntent: (SelfJournalHistoryContract.Intent) -> Unit = {},
     onEvent: (SelfJournalHistoryContract.Event) -> Unit = {},
 ) {
-    records.foldComposable(
+    state.records.foldComposable(
         onSuccess = { records ->
             val recordsMap = records.toGroupedByDate()
 
@@ -86,8 +84,8 @@ fun SelfJournalHistoryContent(
                                         record = record,
                                         onClick = {},
                                         onDelete = { id ->
-                                            onEvent(
-                                                SelfJournalHistoryContract.Event.OnDelete(id)
+                                            onIntent(
+                                                SelfJournalHistoryContract.Intent.Delete(id)
                                             )
                                         }
                                     )

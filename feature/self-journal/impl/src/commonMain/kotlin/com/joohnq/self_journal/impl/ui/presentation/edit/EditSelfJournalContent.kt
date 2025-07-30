@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.edit_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.edit
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toResource
 import com.joohnq.self_journal.impl.ui.components.EditFloatingActionButtons
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.layout.AppScaffoldLayout
@@ -49,8 +48,7 @@ fun EditJournalingContent(
     state: EditSelfJournalContract.State,
     canSave: Boolean,
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
-    onAction: (EditSelfJournalContract.Intent) -> Unit = {},
-    onSelfJournalAction: (SelfJournalContract.Intent) -> Unit = {},
+    onIntent: (EditSelfJournalContract.Intent) -> Unit = {},
 ) {
     val titleFocusRequest = rememberFocusRequester()
     val descriptionFocusRequest = rememberFocusRequester()
@@ -60,15 +58,15 @@ fun EditJournalingContent(
     if (state.openDeleteDialog) {
         ImageDialogLayout(
             onDismissRequest = {
-                onAction(
+                onIntent(
                     EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(
                         false
                     )
                 )
             },
             onConfirmation = {
-                onAction(EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(false))
-                onSelfJournalAction(SelfJournalContract.Intent.Delete(state.editingSelfJournalRecord.id))
+                onIntent(EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(false))
+                onIntent(EditSelfJournalContract.Intent.Delete(state.editingSelfJournalRecord.id))
             },
             dialogTitle = Res.string.delete_journal,
             dialogText = Res.string.do_you_wish_to_remove_this_journal,
@@ -85,9 +83,15 @@ fun EditJournalingContent(
             EditFloatingActionButtons(
                 isEditing = state.isEditing,
                 canSave = canSave,
-                onEditingAction = onAction,
-                onEvent = onEvent,
-                onRequestTitleFocus = titleFocusRequest::requestFocus
+                onDelete = {
+                    onIntent(
+                        EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(true)
+                    )
+                },
+                onEdit = {
+                    onIntent(EditSelfJournalContract.Intent.UpdateIsEditing(!state.isEditing))
+                },
+                onSave = { onIntent(EditSelfJournalContract.Intent.Update) },
             )
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -133,7 +137,7 @@ fun EditJournalingContent(
                         color = Colors.Brown100Alpha64
                     )
                 },
-                onValueChange = { onAction(EditSelfJournalContract.Intent.UpdateTitle(it)) },
+                onValueChange = { onIntent(EditSelfJournalContract.Intent.UpdateTitle(it)) },
                 modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
                 colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
                 textStyle = TextStyles.headingMdExtraBold(),
@@ -155,7 +159,7 @@ fun EditJournalingContent(
                     )
                 },
                 onValueChange = {
-                    onAction(
+                    onIntent(
                         EditSelfJournalContract.Intent.UpdateDescription(it)
                     )
                 },

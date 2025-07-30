@@ -13,10 +13,10 @@ import com.joohnq.mood.impl.ui.presentation.history.MoodHistoryScreen
 import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJournalScreen
-import com.joohnq.self_journal.impl.ui.presentation.edit_self_journal.EditJournalingScreen
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalScreen
-import com.joohnq.self_journal.impl.ui.presentation.self_journal_history.SelfJournalHistoryScreen
+import com.joohnq.self_journal.impl.ui.presentation.add.AddSelfJournalScreen
+import com.joohnq.self_journal.impl.ui.presentation.edit.EditJournalingScreen
+import com.joohnq.self_journal.impl.ui.presentation.history.SelfJournalHistoryScreen
+import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.add_sleep_quality.AddSleepQualityScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality_history.SleepQualityHistoryScreen
@@ -96,7 +96,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.SelfJournal> {
-            SelfJournalScreen(
+            SelfJournalOverviewScreen(
                 onNavigateAddSelfJournal = {
                     onNavigate(Destination.App.AddSelfJournal)
                 },

@@ -26,6 +26,22 @@ class SelfJournalRepositoryImpl(
                 }.executeAsList()
         }
 
+    override suspend fun getSelfJournalById(id: Int): Result<SelfJournalRecord> =
+        executeTryCatchResult {
+            query
+                .getSelfJournalByIdRecord(
+                    id = id.toLong()
+                ) { id, mood, title, description, createdAt ->
+                    SelfJournalRecord(
+                        id = id.toInt(),
+                        mood = MoodRecordConverter.toMood(mood),
+                        title = title,
+                        description = description,
+                        createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
+                    )
+                }.executeAsOne()
+        }
+
     override suspend fun addSelfJournal(record: SelfJournalRecord): Result<Boolean> =
         executeTryCatchResult {
             query.addSelfJournalRecord(

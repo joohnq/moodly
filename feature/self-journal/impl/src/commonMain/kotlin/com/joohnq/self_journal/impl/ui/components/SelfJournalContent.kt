@@ -3,7 +3,7 @@ package com.joohnq.self_journal.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
+import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewContract
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalContent(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
-    onEvent: (SelfJournalContract.Event) -> Unit = {},
+    onEvent: (SelfJournalOverviewContract.Event) -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
@@ -37,22 +37,22 @@ fun SelfJournalContent(
         records = records,
         subtitle = stringResource(Res.string.journals_written_this_month),
         onCreate = {
-            onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal)
+            onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal)
         }
     )
     SectionHeader(
         modifier = modifier,
         title = Res.string.journal_history,
         onSeeMore = {
-            onEvent(SelfJournalContract.Event.OnNavigateToSelfHistory)
+            onEvent(SelfJournalOverviewContract.Event.OnNavigateToSelfHistory)
         }
     )
     JournalHistory(
         modifier = modifier,
         records = records.take(7),
-        onClick = { onEvent(SelfJournalContract.Event.OnEdit(it)) },
-        onCreate = { onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal) },
-        onDelete = { id -> onEvent(SelfJournalContract.Event.OnDelete(id)) }
+        onClick = { onEvent(SelfJournalOverviewContract.Event.OnEdit(it)) },
+        onCreate = { onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal) },
+        onDelete = { id -> onEvent(SelfJournalOverviewContract.Event.OnDelete(id)) }
     )
     VerticalSpacer(10.dp)
 }

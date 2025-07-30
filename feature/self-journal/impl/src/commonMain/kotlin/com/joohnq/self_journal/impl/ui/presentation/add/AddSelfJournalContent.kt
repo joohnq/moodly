@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.add
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,10 +44,10 @@ import com.joohnq.shared_resources.write_your_entry
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun AddJournalingContent(
+fun AddSelfJournalContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AddSelfJournalContract.State,
-    onAction: (AddSelfJournalContract.Intent) -> Unit = {},
+    onIntent: (AddSelfJournalContract.Intent) -> Unit = {},
     onEvent: (AddSelfJournalContract.Event) -> Unit = {},
 ) {
     val focusRequester = FocusRequester()
@@ -98,7 +98,7 @@ fun AddJournalingContent(
                             .height(56.dp)
                             .focusRequester(focusRequester),
                     onValueChange = {
-                        onAction(
+                        onIntent(
                             AddSelfJournalContract.Intent.UpdateTitle(
                                 it
                             )
@@ -123,7 +123,7 @@ fun AddJournalingContent(
                                 },
                             color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {
-                                onAction(
+                                onIntent(
                                     AddSelfJournalContract.Intent.UpdateMood(resource)
                                 )
                             }
@@ -134,7 +134,7 @@ fun AddJournalingContent(
                 ExpressionAnalysisTextField(
                     text = state.description,
                     onValueChange = {
-                        onAction(
+                        onIntent(
                             AddSelfJournalContract.Intent.UpdateDescription(it)
                         )
                     }
@@ -147,7 +147,7 @@ fun AddJournalingContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(AddSelfJournalContract.Event.OnAdd) }
+                    onClick = { onIntent(AddSelfJournalContract.Intent.Add) }
                 )
             }
         }

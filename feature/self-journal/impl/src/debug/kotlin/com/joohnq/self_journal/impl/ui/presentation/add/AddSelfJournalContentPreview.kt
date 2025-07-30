@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.add_self_journal
+package com.joohnq.self_journal.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
 import com.joohnq.mood.impl.ui.resource.MoodResource
@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 fun AddJournalingContentDepressedPreview() {
-    AddJournalingContent(
+    AddSelfJournalContent(
         state =
             AddSelfJournalContract.State(
                 mood = MoodResource.Depressed,
@@ -24,7 +24,7 @@ fun AddJournalingContentDepressedPreview() {
 @Preview
 @Composable
 fun AddJournalingContentSadPreview() {
-    AddJournalingContent(
+    AddSelfJournalContent(
         state =
             AddSelfJournalContract.State(
                 mood = MoodResource.Sad,
@@ -40,7 +40,7 @@ fun AddJournalingContentSadPreview() {
 @Preview
 @Composable
 fun AddJournalingContentNeutralPreview() {
-    AddJournalingContent(
+    AddSelfJournalContent(
         state =
             AddSelfJournalContract.State(
                 mood = MoodResource.Neutral,
@@ -56,7 +56,7 @@ fun AddJournalingContentNeutralPreview() {
 @Preview
 @Composable
 fun AddJournalingContentHappyPreview() {
-    AddJournalingContent(
+    AddSelfJournalContent(
         state =
             AddSelfJournalContract.State(
                 mood = MoodResource.Happy,
@@ -72,7 +72,7 @@ fun AddJournalingContentHappyPreview() {
 @Preview
 @Composable
 fun AddJournalingContentOverjoyedPreview() {
-    AddJournalingContent(
+    AddSelfJournalContent(
         state =
             AddSelfJournalContract.State(
                 mood = MoodResource.Overjoyed,

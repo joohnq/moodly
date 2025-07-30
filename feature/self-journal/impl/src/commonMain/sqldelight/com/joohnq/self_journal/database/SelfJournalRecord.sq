@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS SelfJournalRecord (
 getSelfJournalRecords:
 SELECT * FROM SelfJournalRecord ORDER BY createdAt DESC;
 
+getSelfJournalByIdRecord:
+SELECT * FROM SelfJournalRecord WHERE id = :id;
+
 addSelfJournalRecord:
 INSERT INTO SelfJournalRecord (mood, title, description) VALUES (:mood, :title, :description);
 

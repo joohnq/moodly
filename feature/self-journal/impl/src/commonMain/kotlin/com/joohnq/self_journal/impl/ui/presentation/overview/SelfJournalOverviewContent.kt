@@ -1,4 +1,4 @@
-package com.joohnq.self_journal.impl.ui.presentation.self_journal
+package com.joohnq.self_journal.impl.ui.presentation.overview
 
 import androidx.compose.runtime.Composable
 import com.joohnq.self_journal.impl.ui.components.SelfJournalContent
@@ -11,9 +11,9 @@ import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
-fun SelfJournalContent(
-    state: SelfJournalContract.State,
-    onEvent: (SelfJournalContract.Event) -> Unit = {},
+fun SelfJournalOverviewContent(
+    state: SelfJournalOverviewContract.State,
+    onEvent: (SelfJournalOverviewContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
         onLoading = { LoadingView() },
@@ -24,8 +24,8 @@ fun SelfJournalContent(
                 isDark = false,
                 image = Drawables.Images.SelfJournalBackground,
                 color = Colors.Brown70,
-                onAddButton = { onEvent(SelfJournalContract.Event.OnNavigateToAddSelfJournal) },
-                onGoBack = { onEvent(SelfJournalContract.Event.OnGoBack) },
+                onAddButton = { onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal) },
+                onGoBack = { onEvent(SelfJournalOverviewContract.Event.OnGoBack) },
                 panel = { modifier ->
                     SelfJournalPanel(
                         modifier = modifier,

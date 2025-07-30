@@ -8,8 +8,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.api.entity.Quad
 import com.joohnq.api.entity.User
 import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
-import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
-import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewContract
+import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewViewModel
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel
 import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
@@ -37,7 +37,7 @@ fun OnboardingExpressionAnalysisScreen(
     onGoBack: () -> Unit,
     onboardingViewModel: OnboardingViewModel = sharedViewModel(),
     userViewModel: UserViewModel = sharedViewModel(),
-    moodViewModel: MoodViewModel = sharedViewModel(),
+    moodOverviewViewModel: MoodOverviewViewModel = sharedViewModel(),
     sleepQualityViewModel: SleepQualityViewModel = sharedViewModel(),
     stressLevelViewModel: StressLevelViewModel = sharedViewModel(),
     preferencesViewModel: PreferencesViewModel = sharedViewModel(),
@@ -69,8 +69,8 @@ fun OnboardingExpressionAnalysisScreen(
     }
 
     fun addMoodRecord() {
-        moodViewModel.onIntent(
-            MoodContract.Intent.Add(
+        moodOverviewViewModel.onIntent(
+            MoodOverviewContract.Intent.Add(
                 onboardingState.moodRecord.toDomain()
             )
         )
@@ -103,13 +103,13 @@ fun OnboardingExpressionAnalysisScreen(
     LaunchedEffect(
         stressLevelViewModel.sideEffect,
         sleepQualityViewModel.sideEffect,
-        moodViewModel.sideEffect,
+        moodOverviewViewModel.sideEffect,
         userViewModel.sideEffect
     ) {
         combine(
             stressLevelViewModel.sideEffect,
             sleepQualityViewModel.sideEffect,
-            moodViewModel.sideEffect,
+            moodOverviewViewModel.sideEffect,
             userViewModel.sideEffect
         ) { stressSideEffect, sleepSideEffect, statsSideEffect, userSideEffect ->
             Quad(stressSideEffect, sleepSideEffect, statsSideEffect, userSideEffect)
@@ -120,7 +120,7 @@ fun OnboardingExpressionAnalysisScreen(
             if (sleepSideEffect is SleepQualityContract.SideEffect.ShowError) {
                 onError(sleepSideEffect.error)
             }
-            if (statsSideEffect is MoodContract.SideEffect.ShowError) {
+            if (statsSideEffect is MoodOverviewContract.SideEffect.ShowError) {
                 onError(statsSideEffect.error)
             }
             if (userSideEffect is UserContract.SideEffect.ShowError) {
@@ -130,7 +130,7 @@ fun OnboardingExpressionAnalysisScreen(
             if (
                 stressSideEffect is StressLevelContract.SideEffect.Added &&
                 sleepSideEffect is SleepQualityContract.SideEffect.Added &&
-                statsSideEffect is MoodContract.SideEffect.StatsAdded &&
+                statsSideEffect is MoodOverviewContract.SideEffect.Added &&
                 userSideEffect is UserContract.SideEffect.Updated
             ) {
                 preferencesViewModel.onIntent(PreferencesContract.Intent.UpdateSkipOnboarding())

@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.mood_history
+package com.joohnq.mood.impl.ui.presentation.history
 
 import androidx.compose.runtime.Composable
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider

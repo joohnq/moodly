@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodContract
+import com.joohnq.mood.impl.ui.presentation.add.AddMoodContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton
@@ -33,8 +33,8 @@ import org.jetbrains.compose.resources.stringResource
 fun ExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
-    onAddAction: (AddMoodContract.Intent) -> Unit = {},
-    onEvent: (ExpressionAnalysisContract.Event) -> Unit = {},
+    onIntent: (AddMoodContract.Intent) -> Unit = {},
+    onEvent: (AddMoodContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -50,7 +50,7 @@ fun ExpressionAnalysisContent(
                     .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppTopBar(onGoBack = { onEvent(ExpressionAnalysisContract.Event.OnGoBack) })
+            AppTopBar(onGoBack = { onEvent(AddMoodContract.Event.OnGoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -68,7 +68,7 @@ fun ExpressionAnalysisContent(
             ExpressionAnalysisTextField(
                 text = description,
                 onValueChange = {
-                    onAddAction(
+                    onIntent(
                         AddMoodContract.Intent.UpdateAddingMoodRecordDescription(it)
                     )
                 }
@@ -78,7 +78,7 @@ fun ExpressionAnalysisContent(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.continue_word,
                 enabled = description.isNotEmpty(),
-                onClick = { onEvent(ExpressionAnalysisContract.Event.OnAdd) }
+                onClick = { onIntent(AddMoodContract.Intent.Add) }
             )
         }
     }

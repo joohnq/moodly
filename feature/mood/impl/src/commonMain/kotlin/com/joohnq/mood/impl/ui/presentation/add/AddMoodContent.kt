@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add_mood
+package com.joohnq.mood.impl.ui.presentation.add
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -31,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun AddMoodContent(
     state: AddMoodContract.State,
-    onAction: (AddMoodContract.Intent) -> Unit = {},
+    onIntent: (AddMoodContract.Intent) -> Unit = {},
     onEvent: (AddMoodContract.Event) -> Unit = {},
 ) {
     Scaffold(
@@ -78,7 +78,7 @@ fun AddMoodContent(
                 modifier = Modifier.widthIn(max = 500.dp),
                 selectedMood = state.record,
                 setSelectedMood = { resource ->
-                    onAction(
+                    onIntent(
                         AddMoodContract.Intent.UpdateAddingMoodRecordMood(resource)
                     )
                 }

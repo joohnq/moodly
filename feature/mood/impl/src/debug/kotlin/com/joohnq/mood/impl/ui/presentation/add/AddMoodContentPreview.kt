@@ -1,22 +1,21 @@
-package com.joohnq.mood.impl.ui.presentation.mood
+package com.joohnq.mood.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
 import com.joohnq.mood.impl.ui.parameter.MoodRecordResourceParameterProvider
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun MoodContentPreview(
+fun AddMoodContentPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
     item: MoodRecordResource,
 ) {
-    MoodContent(
-        records =
-            UiState.Success(
-                listOf(item)
+    AddMoodContent(
+        state =
+            AddMoodContract.State(
+                record = item
             )
     )
 }

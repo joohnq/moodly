@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.mood
+package com.joohnq.mood.impl.ui.presentation.overview
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.mood.api.entity.MoodRecord
@@ -15,20 +15,20 @@ import com.joohnq.ui.mapper.UiStateMapper.onFailure
 import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
-class MoodViewModel(
-    private val initialState: MoodContract.State = MoodContract.State(),
+class MoodOverviewViewModel(
+    private val initialState: MoodOverviewContract.State = MoodOverviewContract.State(),
     private val getMoodsUseCase: GetMoodsUseCase,
     private val deleteMoodUseCase: DeleteMoodUseCase,
     private val addMoodUseCase: AddMoodUseCase,
-) : BaseViewModel<MoodContract.State, MoodContract.Intent, MoodContract.SideEffect>(
+) : BaseViewModel<MoodOverviewContract.State, MoodOverviewContract.Intent, MoodOverviewContract.SideEffect>(
         initialState = initialState
     ),
-    MoodContract.ViewModel {
-    override fun onIntent(intent: MoodContract.Intent) {
+    MoodOverviewContract.ViewModel {
+    override fun onIntent(intent: MoodOverviewContract.Intent) {
         when (intent) {
-            is MoodContract.Intent.GetAll -> getAll()
-            is MoodContract.Intent.Add -> add(intent.record)
-            is MoodContract.Intent.Delete -> delete(intent.id)
+            is MoodOverviewContract.Intent.GetAll -> getAll()
+            is MoodOverviewContract.Intent.Add -> add(intent.record)
+            is MoodOverviewContract.Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -47,9 +47,9 @@ class MoodViewModel(
             val res = addMoodUseCase(record).toUiState()
             res
                 .onSuccess {
-                    emitEffect(MoodContract.SideEffect.StatsAdded)
+                    emitEffect(MoodOverviewContract.SideEffect.Added)
                 }.onFailure {
-                    emitEffect(MoodContract.SideEffect.ShowError(it))
+                    emitEffect(MoodOverviewContract.SideEffect.ShowError(it))
                 }
         }
 
@@ -58,7 +58,7 @@ class MoodViewModel(
             val res = deleteMoodUseCase(id).toUiState()
             res
                 .onSuccess {
-                    emitEffect(MoodContract.SideEffect.StatsDeleted)
+                    emitEffect(MoodOverviewContract.SideEffect.StatsDeleted)
                     updateState {
                         it.copy(
                             UiState.Success(
@@ -69,7 +69,7 @@ class MoodViewModel(
                         )
                     }
                 }.onFailure {
-                    emitEffect(MoodContract.SideEffect.ShowError(it))
+                    emitEffect(MoodOverviewContract.SideEffect.ShowError(it))
                 }
         }
 }

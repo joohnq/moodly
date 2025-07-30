@@ -3,8 +3,8 @@ package com.joohnq.home.impl.ui.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.freud_score.impl.ui.presentation.freud_score.FreudScoreContract
 import com.joohnq.freud_score.impl.ui.presentation.freud_score.FreudScoreViewModel
-import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
-import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewContract
+import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewViewModel
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalContract
 import com.joohnq.self_journal.impl.ui.presentation.self_journal.SelfJournalViewModel
 import com.joohnq.sleep_quality.impl.ui.presentation.sleep_quality.SleepQualityContract
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class DashboardViewModel(
     initialState: DashboardContract.State = DashboardContract.State(),
     private val userViewModel: UserViewModel,
-    private val moodViewModel: MoodViewModel,
+    private val moodOverviewViewModel: MoodOverviewViewModel,
     private val freudScoreViewModel: FreudScoreViewModel,
     private val selfJournalViewModel: SelfJournalViewModel,
     private val sleepQualityViewModel: SleepQualityViewModel,
@@ -36,7 +36,7 @@ class DashboardViewModel(
     override fun onIntent(intent: DashboardContract.Intent) {
         when (intent) {
             DashboardContract.Intent.Get -> {
-                moodViewModel.onIntent(MoodContract.Intent.GetAll)
+                moodOverviewViewModel.onIntent(MoodOverviewContract.Intent.GetAll)
                 userViewModel.onIntent(UserContract.Intent.Get)
                 stressLevelViewModel.onIntent(StressLevelContract.Intent.GetAll)
                 sleepQualityViewModel.onIntent(SleepQualityContract.Intent.GetAll)
@@ -48,14 +48,14 @@ class DashboardViewModel(
     init {
         combine(
             userViewModel.state,
-            moodViewModel.state,
+            moodOverviewViewModel.state,
             freudScoreViewModel.state,
             selfJournalViewModel.state,
             sleepQualityViewModel.state,
             stressLevelViewModel.state
         ) { states ->
             val state = states[0] as UserContract.State
-            val statsState = states[1] as MoodContract.State
+            val statsState = states[1] as MoodOverviewContract.State
             val freudState = states[2] as FreudScoreContract.State
             val healthState = states[3] as SelfJournalContract.State
             val sleepState = states[4] as SleepQualityContract.State

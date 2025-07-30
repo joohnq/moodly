@@ -8,7 +8,7 @@ val homeUiModule =
         single<DashboardViewModel> {
             DashboardViewModel(
                 userViewModel = get(),
-                moodViewModel = get(),
+                moodOverviewViewModel = get(),
                 freudScoreViewModel = get(),
                 selfJournalViewModel = get(),
                 sleepQualityViewModel = get(),

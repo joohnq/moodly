@@ -6,11 +6,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
-import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodContract
-import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodViewModel
-import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
-import com.joohnq.mood.impl.ui.presentation.mood.MoodViewModel
+import com.joohnq.mood.impl.ui.presentation.add.AddMoodContract
+import com.joohnq.mood.impl.ui.presentation.add.AddMoodViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
@@ -19,7 +16,6 @@ import kotlinx.coroutines.launch
 fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
     onGoBack: () -> Unit,
-    moodViewModel: MoodViewModel = sharedViewModel(),
     addMoodViewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val scope = rememberCoroutineScope()
@@ -28,28 +24,17 @@ fun ExpressionAnalysisScreen(
 
     fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
 
-    fun onEvent(event: ExpressionAnalysisContract.Event) =
+    fun onEvent(event: AddMoodContract.Event) =
         when (event) {
-            ExpressionAnalysisContract.Event.OnAdd ->
-                moodViewModel.onIntent(
-                    MoodContract.Intent.Add(
-                        addStatsState.record.toDomain()
-                    )
-                )
-
-            ExpressionAnalysisContract.Event.OnGoBack -> onGoBack()
+            AddMoodContract.Event.OnGoBack -> onGoBack()
+            else -> {}
         }
 
-    LaunchedEffect(moodViewModel) {
-        moodViewModel.sideEffect.collect { event ->
+    LaunchedEffect(addMoodViewModel) {
+        addMoodViewModel.sideEffect.collect { event ->
             when (event) {
-                is MoodContract.SideEffect.StatsAdded -> {
-                    moodViewModel.onIntent(MoodContract.Intent.GetAll)
-                    onNavigateToMood()
-                }
-
-                is MoodContract.SideEffect.ShowError -> onError(event.error)
-                else -> {}
+                is AddMoodContract.SideEffect.ShowError -> onError(event.error)
+                AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
             }
         }
     }
@@ -64,6 +49,6 @@ fun ExpressionAnalysisScreen(
         snackBarState = snackBarState,
         description = addStatsState.record.description,
         onEvent = ::onEvent,
-        onAddAction = addMoodViewModel::onIntent
+        onIntent = addMoodViewModel::onIntent
     )
 }

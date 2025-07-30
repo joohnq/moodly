@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add_mood
+package com.joohnq.mood.impl.ui.presentation.add
 
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource
@@ -16,10 +16,18 @@ sealed interface AddMoodContract {
             val description: String,
         ) : Intent
 
+        data object Add : Intent
+
         data object ResetState : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object StatsAdded : SideEffect
+
+        data class ShowError(
+            val error: String,
+        ) : SideEffect
+    }
 
     data class State(
         val record: MoodRecordResource = MoodRecordResource(),

@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.mood_history
+package com.joohnq.mood.impl.ui.presentation.history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.impl.ui.components.MoodHistoryCard
-import com.joohnq.mood.impl.ui.presentation.mood.MoodContract
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
@@ -29,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodHistoryContent(
     records: UiState<List<MoodRecordResource>>,
     onEvent: (MoodHistoryContract.Event) -> Unit = {},
-    onIntent: (MoodContract.Intent) -> Unit = {},
+    onIntent: (MoodHistoryContract.Intent) -> Unit = {},
 ) {
     records.foldComposable(
         onSuccess = { records ->
@@ -61,7 +60,7 @@ fun MoodHistoryContent(
                         items(records) { record ->
                             MoodHistoryCard(
                                 record = record,
-                                onDelete = { id -> onIntent(MoodContract.Intent.Delete(id)) }
+                                onDelete = { id -> onIntent(MoodHistoryContract.Intent.Delete(id)) }
                             )
                         }
                     }

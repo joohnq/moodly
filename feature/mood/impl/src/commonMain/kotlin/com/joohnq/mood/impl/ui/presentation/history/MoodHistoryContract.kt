@@ -1,19 +1,18 @@
-package com.joohnq.mood.impl.ui.presentation.mood
+package com.joohnq.mood.impl.ui.presentation.history
 
-import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 
-sealed interface MoodContract {
+sealed interface MoodHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
+
+    sealed interface Event {
+        data object OnGoBack : Event
+    }
 
     sealed interface Intent {
         data object GetAll : Intent
-
-        data class Add(
-            val record: MoodRecord,
-        ) : Intent
 
         data class Delete(
             val id: Int,
@@ -23,8 +22,6 @@ sealed interface MoodContract {
     sealed interface SideEffect {
         data object StatsDeleted : SideEffect
 
-        data object StatsAdded : SideEffect
-
         data class ShowError(
             val error: String,
         ) : SideEffect
@@ -33,12 +30,4 @@ sealed interface MoodContract {
     data class State(
         val records: UiState<List<MoodRecordResource>> = UiState.Idle,
     )
-
-    sealed interface Event {
-        data object OnGoBack : Event
-
-        data object OnAddMood : Event
-
-        data object OnNavigateToMoodHistory : Event
-    }
 }

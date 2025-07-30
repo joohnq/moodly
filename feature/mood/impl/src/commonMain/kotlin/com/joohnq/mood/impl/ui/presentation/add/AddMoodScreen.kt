@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add_mood
+package com.joohnq.mood.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,6 +23,6 @@ fun AddMoodScreen(
     AddMoodContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = viewModel::onIntent
+        onIntent = viewModel::onIntent
     )
 }

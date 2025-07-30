@@ -7,10 +7,10 @@ import androidx.navigation.toRoute
 import com.joohnq.freud_score.impl.ui.presentation.freud_score.FreudScoreScreen
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
-import com.joohnq.mood.impl.ui.presentation.add_mood.AddMoodScreen
+import com.joohnq.mood.impl.ui.presentation.add.AddMoodScreen
 import com.joohnq.mood.impl.ui.presentation.expression_analysis.ExpressionAnalysisScreen
-import com.joohnq.mood.impl.ui.presentation.mood.MoodScreen
-import com.joohnq.mood.impl.ui.presentation.mood_history.MoodHistoryScreen
+import com.joohnq.mood.impl.ui.presentation.history.MoodHistoryScreen
+import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.self_journal.impl.ui.presentation.add_self_journal.AddSelfJournalScreen
@@ -112,7 +112,7 @@ fun NavGraphBuilder.appNavigation(
             )
         }
         composable<Destination.App.Mood> {
-            MoodScreen(
+            MoodOverviewScreen(
                 onGoBack = {
                     onNavigateBack(Destination.App.DashBoard)
                 },

@@ -12,7 +12,7 @@ fun MoodContentBodyPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
     item: MoodRecordResource,
 ) {
-    MoodContentBody(
+    MoodOverviewContentBody(
         records = listOf(item)
     )
 }

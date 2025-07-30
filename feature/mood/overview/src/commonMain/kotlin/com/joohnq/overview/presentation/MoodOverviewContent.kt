@@ -1,10 +1,10 @@
-package com.joohnq.mood.impl.ui.presentation.overview
+package com.joohnq.overview.presentation
 
 import androidx.compose.runtime.Composable
-import com.joohnq.mood.impl.ui.components.MoodContentPanel
-import com.joohnq.mood.impl.ui.components.MoodOverviewContentBody
 import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.overview.component.MoodOverviewContentBody
+import com.joohnq.overview.component.MoodOverviewContentPanel
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -31,7 +31,7 @@ fun MoodOverviewContent(
                 onAddButton = { onEvent(MoodOverviewContract.Event.OnAddMood) },
                 onGoBack = { onEvent(MoodOverviewContract.Event.OnGoBack) },
                 panel = { modifier ->
-                    MoodContentPanel(
+                    MoodOverviewContentPanel(
                         modifier = modifier,
                         record = record
                     )

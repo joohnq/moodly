@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.history
+package com.joohnq.history.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

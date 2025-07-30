@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.overview
+package com.joohnq.overview.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

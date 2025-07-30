@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add
+package com.joohnq.add.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

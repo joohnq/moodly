@@ -15,10 +15,11 @@ fun SelfJournalHistoryContentPreview(
 ) {
     SelfJournalHistoryContent(
         state =
-            SelfJournalHistoryContract.State(),
-        records =
-            UiState.Success(
-                list
+            SelfJournalHistoryContract.State(
+                records =
+                    UiState.Success(
+                        list
+                    )
             )
     )
 }

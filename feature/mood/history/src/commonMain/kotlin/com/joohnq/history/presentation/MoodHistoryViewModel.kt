@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.history
+package com.joohnq.history.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.mood.api.use_case.DeleteMoodUseCase

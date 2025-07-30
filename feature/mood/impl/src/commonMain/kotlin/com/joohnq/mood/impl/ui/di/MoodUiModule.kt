@@ -10,8 +10,7 @@ val moodUiModule: Module =
     module {
         single<AddMoodViewModel> {
             AddMoodViewModel(
-                addMoodUseCase = get(),
-                initialState = get()
+                addMoodUseCase = get()
             )
         }
         single<MoodOverviewViewModel> {

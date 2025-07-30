@@ -1,11 +1,14 @@
-package com.joohnq.mood.impl.ui.components
+package com.joohnq.overview.component
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewContract
+import com.joohnq.mood.impl.ui.components.MoodCalendar
+import com.joohnq.mood.impl.ui.components.MoodHistoryContent
+import com.joohnq.mood.impl.ui.components.MoodInsight
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.overview.presentation.MoodOverviewContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.SectionHeader

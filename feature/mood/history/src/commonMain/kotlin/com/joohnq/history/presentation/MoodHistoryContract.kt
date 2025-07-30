@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.history
+package com.joohnq.history.presentation
 
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.ui.UnidirectionalViewModel

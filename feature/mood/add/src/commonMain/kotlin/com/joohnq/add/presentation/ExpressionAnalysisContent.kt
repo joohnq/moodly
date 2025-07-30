@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.expression_analysis
+package com.joohnq.add.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.presentation.add.AddMoodContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.AppTopBar
 import com.joohnq.shared_resources.components.button.PrimaryButton

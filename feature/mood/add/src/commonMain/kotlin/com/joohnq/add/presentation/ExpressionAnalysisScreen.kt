@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.expression_analysis
+package com.joohnq.add.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -6,8 +6,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import com.joohnq.mood.impl.ui.presentation.add.AddMoodContract
-import com.joohnq.mood.impl.ui.presentation.add.AddMoodViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch

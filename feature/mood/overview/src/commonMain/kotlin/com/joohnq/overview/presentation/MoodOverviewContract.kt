@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.overview
+package com.joohnq.overview.presentation
 
 import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource

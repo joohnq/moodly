@@ -1,4 +1,4 @@
-package com.joohnq.mood.impl.ui.presentation.add
+package com.joohnq.add.presentation
 
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.resource.MoodResource

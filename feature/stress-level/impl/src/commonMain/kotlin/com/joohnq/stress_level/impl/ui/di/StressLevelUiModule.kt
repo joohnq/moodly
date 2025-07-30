@@ -15,6 +15,8 @@ val stressLevelUiModule: Module =
             )
         }
         single<AddStressLevelViewModel> {
-            AddStressLevelViewModel()
+            AddStressLevelViewModel(
+                addStressLevelUseCase = get()
+            )
         }
     }

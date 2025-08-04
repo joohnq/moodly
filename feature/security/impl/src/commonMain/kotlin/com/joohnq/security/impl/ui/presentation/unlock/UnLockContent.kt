@@ -19,14 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.CurvedCanvasPosition
 import com.joohnq.security.impl.ui.components.PinCode
-import com.joohnq.security.impl.ui.presentation.pin.PinContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.layout.ConvexColumnLayout
@@ -48,20 +46,21 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun UnLockContent(
     sheetState: SheetState = rememberModalBottomSheetState(),
-    isError: Exception? = null,
-    showBottomSheet: Boolean,
-    state: PinContract.State,
-    focusRequesters: List<FocusRequester> = emptyList(),
+    state: UnlockContract.State,
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
-    onAction: (PinContract.Intent) -> Unit = {},
+    onIntent: (UnlockContract.Intent) -> Unit = {},
     onEvent: (UnlockContract.Event) -> Unit = {},
 ) {
-    if (showBottomSheet) {
+    if (state.showBottomSheet) {
         ModalBottomSheet(
             containerColor = Colors.Brown10,
             onDismissRequest = {
-                onEvent(UnlockContract.Event.OnUpdateShowBottomSheet(false))
+                onIntent(
+                    UnlockContract.Intent.UpdateShowBottomSheet(
+                        false
+                    )
+                )
             },
             sheetState = sheetState
         ) {
@@ -81,20 +80,20 @@ fun UnLockContent(
                     code = state.code,
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
-                        onAction(
-                            PinContract.Intent.OnEnterNumber(
+                        onIntent(
+                            UnlockContract.Intent.OnEnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onAction(PinContract.Intent.OnKeyboardBack) },
-                    focusRequesters = focusRequesters,
+                    onKeyboardBack = { onIntent(UnlockContract.Intent.OnKeyboardBack) },
+                    focusRequesters = state.focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) }
+                    onFocusChanged = { i -> onIntent(UnlockContract.Intent.OnChangeFieldFocused(i)) }
                 )
-                isError?.let {
+                state.isError?.let {
                     VerticalSpacer(15.dp)
                     ErrorView(it.message.toString())
                 }

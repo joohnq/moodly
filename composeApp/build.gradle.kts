@@ -53,7 +53,10 @@ kotlin {
             implementation(projects.feature.user.impl)
 
             implementation(projects.feature.mood.api)
+            implementation(projects.feature.mood.add)
             implementation(projects.feature.mood.impl)
+            implementation(projects.feature.mood.history)
+            implementation(projects.feature.mood.overview)
 
             implementation(projects.feature.selfJournal.impl)
             implementation(projects.feature.selfJournal.api)

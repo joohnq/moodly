@@ -25,7 +25,7 @@ fun NavGraphBuilder.securityNavigation(
         }
         composable<Destination.Security.SecurityConfirmed> {
             SecurityConfirmedScreen(
-                onNavigateToDashboard = { onNavigateGraph(NavigationGraph.App, true) }
+                navigateNext = { onNavigateGraph(NavigationGraph.App, true) }
             )
         }
         composable<Destination.Security.UnLock> {
@@ -38,7 +38,7 @@ fun NavGraphBuilder.securityNavigation(
         composable<Destination.Security.PIN> {
             PinScreen(
                 onGoBack = onGoBack,
-                onNavigateToDashboard = { onNavigate(Destination.Security.SecurityConfirmed) }
+                navigateNext = { onNavigate(Destination.Security.SecurityConfirmed) }
             )
         }
     }

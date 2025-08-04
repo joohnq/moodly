@@ -21,6 +21,7 @@ kotlin {
             implementation(projects.core.ui)
 
             implementation(projects.feature.mood.api)
+
             implementation(projects.feature.user.impl)
 
             implementation(projects.feature.user.api)

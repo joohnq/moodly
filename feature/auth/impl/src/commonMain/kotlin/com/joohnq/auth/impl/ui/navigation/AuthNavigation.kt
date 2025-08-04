@@ -15,12 +15,12 @@ fun NavGraphBuilder.authNavigation(
     navigation<NavigationGraph.Auth>(startDestination = Destination.Auth.Avatar) {
         composable<Destination.Auth.Avatar> {
             AvatarScreen(
-                onNavigateToUserName = { onNavigate(Destination.Auth.UserName) }
+                navigateNext = { onNavigate(Destination.Auth.UserName) }
             )
         }
         composable<Destination.Auth.UserName> {
             AuthNameScreen(
-                onNavigateToSecurity = { onNavigateGraph(NavigationGraph.Security, true) }
+                navigateNext = { onNavigateGraph(NavigationGraph.Security, true) }
             )
         }
     }

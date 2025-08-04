@@ -16,7 +16,6 @@ kotlin {
             implementation(projects.sharedResources)
 
             implementation(projects.feature.preferences.api)
-            implementation(projects.feature.preferences.impl)
 
             implementation(projects.feature.user.api)
             implementation(projects.feature.user.impl)
@@ -27,6 +26,7 @@ kotlin {
             implementation(libs.navigation.compose)
 
             implementation(libs.bundles.viewmodel)
+            implementation(libs.bundles.koin)
         }
     }
 }

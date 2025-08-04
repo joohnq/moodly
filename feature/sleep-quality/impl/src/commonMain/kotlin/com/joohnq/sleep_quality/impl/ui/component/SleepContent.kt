@@ -10,7 +10,7 @@ fun SleepContent(
     modifier: Modifier = Modifier,
     records: List<SleepQualityRecordResource>,
     onEvent: (SleepQualityOverviewContract.Event) -> Unit = {},
-    onAction: (SleepQualityOverviewContract.Intent) -> Unit = {},
+    onIntent: (SleepQualityOverviewContract.Intent) -> Unit = {},
 ) {
     SleepInsight(
         modifier = modifier,
@@ -22,7 +22,7 @@ fun SleepContent(
     SleepHistory(
         modifier = modifier,
         records = records.take(7),
-        onDelete = { id -> onAction(SleepQualityOverviewContract.Intent.Delete(id)) },
+        onDelete = { id -> onIntent(SleepQualityOverviewContract.Intent.Delete(id)) },
         onSeeMore = {
             onEvent(SleepQualityOverviewContract.Event.OnNavigateToSleepHistory)
         }

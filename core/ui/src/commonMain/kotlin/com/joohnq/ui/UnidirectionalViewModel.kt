@@ -10,3 +10,9 @@ interface UnidirectionalViewModel<STATE, INTENT, EFFECT> {
 
     fun onIntent(intent: INTENT)
 }
+
+interface UnidirectionalViewModelWithoutState<INTENT, EFFECT> {
+    val sideEffect: SharedFlow<EFFECT>
+
+    fun onIntent(intent: INTENT)
+}

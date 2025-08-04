@@ -23,7 +23,7 @@ import com.joohnq.user.impl.ui.resource.ProfessionalHelpResource
 fun OnboardingProfessionalHelpContent(
     state: ProfessionalHelpResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options = rememberSaveable { allProfessionalHelpResource() }
 
@@ -33,7 +33,7 @@ fun OnboardingProfessionalHelpContent(
         title = Res.string.sought_professional_help_title,
         isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.AddItems) }
+        onContinue = { onEvent(OnboardingEvent.NavigateNext) }
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -46,7 +46,7 @@ fun OnboardingProfessionalHelpContent(
                     selected = state == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.textRadioButtonColors(),
-                    onClick = { onAction(OnboardingContract.Intent.UpdateUserSoughtHelp(option)) }
+                    onClick = { onIntent(OnboardingContract.Intent.UpdateUserSoughtHelp(option)) }
                 )
             }
         }

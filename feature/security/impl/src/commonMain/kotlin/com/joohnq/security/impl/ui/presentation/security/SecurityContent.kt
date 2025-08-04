@@ -34,6 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SecurityContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
+    onIntent: (SecurityContract.Intent) -> Unit = {},
     onEvent: (SecurityContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
@@ -93,7 +94,7 @@ fun SecurityContent(
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     text = Res.string.skip,
-                    onClick = { onEvent(SecurityContract.Event.OnSkip) }
+                    onClick = { onIntent(SecurityContract.Intent.Skip) }
                 )
             }
         }

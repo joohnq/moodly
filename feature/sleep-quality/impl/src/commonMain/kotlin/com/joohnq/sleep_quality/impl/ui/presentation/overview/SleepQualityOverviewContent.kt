@@ -13,7 +13,7 @@ import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 fun SleepQualityOverviewContent(
     state: SleepQualityOverviewContract.State,
     onEvent: (SleepQualityOverviewContract.Event) -> Unit = {},
-    onAction: (SleepQualityOverviewContract.Intent) -> Unit = {},
+    onIntent: (SleepQualityOverviewContract.Intent) -> Unit = {},
 ) {
     state.records.foldComposable(
         onSuccess = { records ->
@@ -39,7 +39,7 @@ fun SleepQualityOverviewContent(
                         modifier = modifier,
                         records = records,
                         onEvent = onEvent,
-                        onAction = onAction
+                        onIntent = onIntent
                     )
                 }
             )

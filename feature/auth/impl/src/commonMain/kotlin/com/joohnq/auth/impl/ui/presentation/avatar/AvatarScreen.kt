@@ -26,21 +26,18 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.settings
 import com.joohnq.shared_resources.to_set_your_profile_picture
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.viewmodel.UserContract
-import com.joohnq.user.impl.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AvatarScreen(
-    onNavigateToUserName: () -> Unit,
-    avatarViewModel: AvatarViewModel = sharedViewModel(),
-    userViewModel: UserViewModel = sharedViewModel(),
+    navigateNext: () -> Unit,
+    viewModel: AvatarViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
     val avatars = rememberAvatars()
     val pagerState = rememberPagerState(pageCount = { avatars.size })
-    val state by avatarViewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
     var imageSourceOptionDialog by remember { mutableStateOf(value = false) }
     var launchCamera by remember { mutableStateOf(value = false) }
@@ -72,13 +69,13 @@ fun AvatarScreen(
     val cameraManager =
         rememberCameraManager {
             scope.launch {
-                avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+                viewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
             }
         }
     val galleryManager =
         rememberGalleryManager {
             scope.launch {
-                avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+                viewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
             }
         }
     if (imageSourceOptionDialog) {
@@ -128,12 +125,6 @@ fun AvatarScreen(
         )
     }
 
-    fun onError(error: String) {
-        scope.launch {
-            snackBarState.showSnackbar(error)
-        }
-    }
-
     fun onEvent(event: AvatarContract.Event) {
         when (event) {
             AvatarContract.Event.OnPickAvatar -> {
@@ -141,34 +132,23 @@ fun AvatarScreen(
             }
 
             AvatarContract.Event.OnContinue -> {
-                val action =
-                    if (state.imageBitmap == null) {
-                        UserContract.Intent.UpdateImageDrawable(state.selectedDrawableIndex)
-                    } else {
-                        UserContract.Intent.UpdateImageBitmap(state.imageBitmap!!)
-                    }
-
-                userViewModel.onIntent(action)
+                viewModel.onIntent(AvatarContract.Intent.UpdateImage)
             }
         }
     }
 
-    LaunchedEffect(userViewModel) {
-        userViewModel.sideEffect.collect { event ->
+    LaunchedEffect(viewModel) {
+        viewModel.sideEffect.collect { event ->
             when (event) {
-                is UserContract.SideEffect.AvatarSavedSuccess -> {
-                    onNavigateToUserName()
-                }
-
-                is UserContract.SideEffect.ShowError -> onError(event.error)
-                else -> {}
+                AvatarContract.SideEffect.NavigateNext -> navigateNext()
+                is AvatarContract.SideEffect.ShowError -> snackBarState.showSnackbar(event.message)
             }
         }
     }
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            avatarViewModel.onIntent(AvatarContract.Intent.UpdateImageDrawableIndex(page))
+            viewModel.onIntent(AvatarContract.Intent.UpdateImageDrawableIndex(page))
         }
     }
 

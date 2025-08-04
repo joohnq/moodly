@@ -12,7 +12,4 @@ fun MoodPanelPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
     item: MoodRecordResource,
 ) {
-    MoodContentPanel(
-        record = item
-    )
 }

@@ -22,7 +22,7 @@ kotlin {
 
             implementation(projects.feature.security.api)
 
-            implementation(projects.feature.preferences.impl)
+            implementation(projects.feature.preferences.api)
 
             implementation(libs.coroutines.core)
             implementation(libs.serialization)

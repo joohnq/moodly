@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingStressLevelContent(
     state: StressLevelRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options: List<StressLevelResource> = remember { allStressLevelResource() }
 
@@ -38,7 +38,7 @@ fun OnboardingStressLevelContent(
         page = 6,
         title = Res.string.stress_rate_title,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.AddItems) }
+        onContinue = { onEvent(OnboardingEvent.NavigateNext) }
     ) {
         Text(
             text = stringResource(state.stressLevel.value),
@@ -57,7 +57,7 @@ fun OnboardingStressLevelContent(
                     selected = state.stressLevel == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.stressLevelRadioButtonColors(),
-                    onClick = { onAction(OnboardingContract.Intent.UpdateStressLevel(option)) }
+                    onClick = { onIntent(OnboardingContract.Intent.UpdateStressLevel(option)) }
                 )
             }
         }

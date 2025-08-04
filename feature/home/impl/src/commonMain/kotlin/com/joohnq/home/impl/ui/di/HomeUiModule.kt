@@ -7,12 +7,11 @@ val homeUiModule =
     module {
         single<DashboardViewModel> {
             DashboardViewModel(
-                userViewModel = get(),
-                moodOverviewViewModel = get(),
-                freudScoreViewModel = get(),
-                selfJournalOverviewViewModel = get(),
-                sleepQualityOverviewViewModel = get(),
-                stressLevelOverviewViewModel = get()
+                getUserUseCase = get(),
+                getMoodsUseCase = get(),
+                getSelfJournalsUseCase = get(),
+                getSleepQualitiesUseCase = get(),
+                getAllStressLevelUseCase = get()
             )
         }
     }

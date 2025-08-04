@@ -6,18 +6,26 @@ sealed interface AuthNameContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class Update(
+        data class UpdateName(
             val name: String,
         ) : Intent
 
-        data class UpdateError(
+        data class UpdateNameError(
             val error: String?,
         ) : Intent
+
+        data object Action : Intent
 
         data object ResetState : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data class ShowError(
+            val message: String,
+        ) : SideEffect
+
+        data object NavigateNext : SideEffect
+    }
 
     data class State(
         val name: String = "",

@@ -23,14 +23,14 @@ fun OnboardingExpressionAnalysisContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     description: String,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     OnboardingBaseLayout(
         page = 7,
         snackBarState = snackBarState,
         title = Res.string.expression_analysis_title,
         isContinueButtonVisible = description.isNotEmpty(),
-        onContinue = { onEvent(OnboardingEvent.AddItems) },
+        onContinue = { onEvent(OnboardingEvent.NavigateNext) },
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) }
     ) {
         Text(
@@ -43,7 +43,7 @@ fun OnboardingExpressionAnalysisContent(
         ExpressionAnalysisTextField(
             text = description,
             onValueChange = {
-                onAction(
+                onIntent(
                     OnboardingContract.Intent.UpdateMoodRecordDescription(it)
                 )
             }

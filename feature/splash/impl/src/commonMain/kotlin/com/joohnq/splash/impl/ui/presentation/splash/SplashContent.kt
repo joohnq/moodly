@@ -1,4 +1,4 @@
-package com.joohnq.splash.impl.ui.presentation.splash_screen
+package com.joohnq.splash.impl.ui.presentation.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SplashScreenContent() {
+fun SplashContent() {
     Scaffold(
         contentColor = Colors.Brown10
     ) {

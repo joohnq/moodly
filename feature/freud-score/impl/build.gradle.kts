@@ -18,6 +18,8 @@ kotlin {
 
             implementation(projects.feature.splash.impl)
 
+            implementation(projects.feature.preferences.api)
+
             implementation(libs.kotlin.datetime)
 
             implementation(libs.bundles.viewmodel)

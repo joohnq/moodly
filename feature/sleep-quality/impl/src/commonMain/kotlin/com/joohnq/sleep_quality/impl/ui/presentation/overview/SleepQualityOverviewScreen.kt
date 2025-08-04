@@ -24,6 +24,6 @@ fun SleepQualityOverviewScreen(
     return SleepQualityOverviewContent(
         state = state,
         onEvent = ::onEvent,
-        onAction = viewModel::onIntent
+        onIntent = viewModel::onIntent
     )
 }

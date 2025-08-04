@@ -9,9 +9,15 @@ import org.koin.dsl.module
 val authUiModule: Module =
     module {
         viewModel<AvatarViewModel> {
-            AvatarViewModel()
+            AvatarViewModel(
+                updateUserImageBitmapUseCase = get(),
+                updateUserImageDrawableUseCase = get()
+            )
         }
         viewModel<AuthNameViewModel> {
-            AuthNameViewModel()
+            AuthNameViewModel(
+                updateUserNameUseCase = get(),
+                updateSkipAuthUseCase = get()
+            )
         }
     }

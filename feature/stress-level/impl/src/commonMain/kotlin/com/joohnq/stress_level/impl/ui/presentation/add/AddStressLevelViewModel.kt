@@ -5,10 +5,8 @@ import com.joohnq.api.mapper.ListMapper.toggle
 import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toDomain
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelResourceMapper.fromSliderValueToStressLevelResource
+import com.joohnq.stress_level.impl.ui.resource.StressLevelResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class AddStressLevelViewModel(
@@ -52,14 +50,17 @@ class AddStressLevelViewModel(
 
     private fun add() {
         viewModelScope.launch {
-            val res = addStressLevelUseCase(state.value.record.toDomain()).toUiState()
+            if (state.value.record.stressLevel != StressLevelResource.One) {
+                emitEffect(AddStressLevelContract.SideEffect.NavigateToStressStressors)
+                return@launch
+            }
+            try {
+                addStressLevelUseCase(state.value.record.toDomain()).getOrThrow()
 
-            res
-                .onSuccess {
-                    emitEffect(AddStressLevelContract.SideEffect.PopUpToStressLevelOverview)
-                }.onFailure {
-                    emitEffect(AddStressLevelContract.SideEffect.ShowError(it))
-                }
+                emitEffect(AddStressLevelContract.SideEffect.OnGoBack)
+            } catch (e: Exception) {
+                emitEffect(AddStressLevelContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 }

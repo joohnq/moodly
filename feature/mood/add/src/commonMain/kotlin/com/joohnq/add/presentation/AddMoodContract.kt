@@ -25,7 +25,7 @@ sealed interface AddMoodContract {
         data object StatsAdded : SideEffect
 
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 
@@ -36,6 +36,6 @@ sealed interface AddMoodContract {
     sealed interface Event {
         data object OnGoBack : Event
 
-        data object OnNavigateToExpressionAnalysis : Event
+        data object NavigateNext : Event
     }
 }

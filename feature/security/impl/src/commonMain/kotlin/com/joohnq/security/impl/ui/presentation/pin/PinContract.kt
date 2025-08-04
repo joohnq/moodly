@@ -23,10 +23,18 @@ sealed interface PinContract {
             val index: Int,
         ) : Intent
 
+        data object Action : Intent
+
         data object OnKeyboardBack : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object NavigateNext : SideEffect
+
+        data class ShowError(
+            val message: String,
+        ) : SideEffect
+    }
 
     data class State(
         val code: List<Int?> = (1..4).map { null },

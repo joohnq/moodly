@@ -27,7 +27,7 @@ kotlin {
             implementation(projects.feature.user.api)
             implementation(projects.feature.user.impl)
 
-            implementation(projects.feature.preferences.impl)
+            implementation(projects.feature.preferences.api)
 
             implementation(libs.navigation.compose)
             implementation(libs.kotlin.datetime)

@@ -69,7 +69,7 @@ fun NavGraphBuilder.onboardingNavigation(
         }
         composable<Destination.Onboarding.ExpressionAnalysis> {
             OnboardingExpressionAnalysisScreen(
-                onNavigateToNext = {
+                navigateNext = {
                     onNavigateGraph(NavigationGraph.Auth, true)
                 },
                 onGoBack = onGoBack

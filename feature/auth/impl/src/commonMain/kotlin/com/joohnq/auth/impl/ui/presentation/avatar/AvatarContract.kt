@@ -11,12 +11,20 @@ sealed interface AvatarContract {
             val imageBitmap: ImageBitmap? = null,
         ) : Intent
 
+        data object UpdateImage : Intent
+
         data class UpdateImageDrawableIndex(
             val i: Int,
         ) : Intent
     }
 
-    sealed interface SideEffect
+    sealed interface SideEffect {
+        data object NavigateNext : SideEffect
+
+        data class ShowError(
+            val message: String,
+        ) : SideEffect
+    }
 
     data class State(
         val imageBitmap: ImageBitmap? = null,

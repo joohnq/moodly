@@ -106,7 +106,7 @@ fun AuthNameContent(
                         )
                     },
                     colors = ComponentColors.TextField.mainTextFieldColors(),
-                    onValueChange = { onIntent(AuthNameContract.Intent.Update(it)) }
+                    onValueChange = { onIntent(AuthNameContract.Intent.UpdateName(it)) }
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue) {

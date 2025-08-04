@@ -16,7 +16,7 @@ fun AddMoodScreen(
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {
             AddMoodContract.Event.OnGoBack -> onGoBack()
-            AddMoodContract.Event.OnNavigateToExpressionAnalysis ->
+            AddMoodContract.Event.NavigateNext ->
                 onNavigateToExpressionAnalysis()
         }
 

@@ -27,7 +27,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SecurityConfirmedContent(onEvent: (SecurityConfirmedContract.Event) -> Unit = {}) {
+fun SecurityConfirmedContent(
+    onIntent: (SecurityConfirmedContract.Intent) -> Unit = {},
+) {
     DecoratedConvexPanel(
         panelBackgroundColor = Colors.Green20,
         backgroundColor = Colors.White,
@@ -68,7 +70,7 @@ fun SecurityConfirmedContent(onEvent: (SecurityConfirmedContract.Event) -> Unit 
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(SecurityConfirmedContract.Event.OnContinue) }
+                onClick = { onIntent(SecurityConfirmedContract.Intent.Action) }
             )
         }
     )

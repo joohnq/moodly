@@ -69,10 +69,10 @@ sealed interface Destination {
         data object FreudScore : Destination
 
         @Serializable
-        data object StressLevel : Destination
+        data object StressLevelOverview : Destination
 
         @Serializable
-        data object StressHistory : Destination
+        data object StressLevelHistory : Destination
 
         @Serializable
         data object AddStressLevel : Destination
@@ -81,7 +81,7 @@ sealed interface Destination {
         data object StressStressors : Destination
 
         @Serializable
-        data object Mood : Destination
+        data object MoodOverview : Destination
 
         @Serializable
         data object MoodHistory : Destination
@@ -93,10 +93,10 @@ sealed interface Destination {
         data object AddMood : Destination
 
         @Serializable
-        data object SelfJournal : Destination
+        data object SelfJournalOverview : Destination
 
         @Serializable
-        data object SleepQuality : Destination
+        data object SleepQualityOverview : Destination
 
         @Serializable
         data object SleepQualityHistory : Destination

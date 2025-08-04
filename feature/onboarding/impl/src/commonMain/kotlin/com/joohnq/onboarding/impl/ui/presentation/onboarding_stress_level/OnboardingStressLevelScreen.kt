@@ -17,13 +17,13 @@ fun OnboardingStressLevelScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.AddItems -> onNavigateToExpressionAnalysis()
+            OnboardingEvent.NavigateNext -> onNavigateToExpressionAnalysis()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
     OnboardingStressLevelContent(
         state = state.stressLevel,
-        onAction = viewModel::onIntent,
+        onIntent = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

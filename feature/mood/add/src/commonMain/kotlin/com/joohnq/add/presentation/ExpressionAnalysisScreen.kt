@@ -5,22 +5,17 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun ExpressionAnalysisScreen(
     onNavigateToMood: () -> Unit,
     onGoBack: () -> Unit,
-    addMoodViewModel: AddMoodViewModel = sharedViewModel(),
+    viewModel: AddMoodViewModel = sharedViewModel(),
 ) {
-    val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
-    val addStatsState by addMoodViewModel.state.collectAsState()
-
-    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
+    val state by viewModel.state.collectAsState()
 
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {
@@ -28,10 +23,12 @@ fun ExpressionAnalysisScreen(
             else -> {}
         }
 
-    LaunchedEffect(addMoodViewModel) {
-        addMoodViewModel.sideEffect.collect { event ->
-            when (event) {
-                is AddMoodContract.SideEffect.ShowError -> onError(event.error)
+    LaunchedEffect(viewModel) {
+        viewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
+                is AddMoodContract.SideEffect.ShowError ->
+                    snackBarState.showSnackbar(sideEffect.message)
+
                 AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
             }
         }
@@ -39,14 +36,14 @@ fun ExpressionAnalysisScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            addMoodViewModel.onIntent(AddMoodContract.Intent.ResetState)
+            viewModel.onIntent(AddMoodContract.Intent.ResetState)
         }
     }
 
     ExpressionAnalysisContent(
         snackBarState = snackBarState,
-        description = addStatsState.record.description,
+        description = state.record.description,
         onEvent = ::onEvent,
-        onIntent = addMoodViewModel::onIntent
+        onIntent = viewModel::onIntent
     )
 }

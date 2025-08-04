@@ -4,7 +4,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.ai
 import com.joohnq.shared_resources.community_first_title
@@ -37,7 +36,7 @@ fun WelcomeContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     pagerState: PagerState,
     onNext: () -> Unit = {},
-    onAction: (PreferencesContract.Intent) -> Unit = {},
+    onIntent: (WelcomeContract.Intent) -> Unit = {},
 ) {
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
@@ -129,7 +128,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Purple40
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onAction(PreferencesContract.Intent.UpdateSkipWelcome()) }
+                        onNext = { onIntent(WelcomeContract.Intent.UpdateSkipWelcome) }
                     )
             }
         }

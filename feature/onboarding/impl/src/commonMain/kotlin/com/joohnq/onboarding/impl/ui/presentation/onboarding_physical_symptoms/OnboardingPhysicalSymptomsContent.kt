@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingPhysicalSymptomsContent(
     state: PhysicalSymptomsResource?,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val options = remember { allPhysicalSymptomsResource() }
 
@@ -37,7 +37,7 @@ fun OnboardingPhysicalSymptomsContent(
         title = Res.string.experiencing_physical_symptoms_title,
         isContinueButtonVisible = state != null,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.AddItems) }
+        onContinue = { onEvent(OnboardingEvent.NavigateNext) }
     ) {
         Text(
             text = stringResource(Res.string.select_one_answer),
@@ -57,7 +57,7 @@ fun OnboardingPhysicalSymptomsContent(
                     icon = option.icon,
                     selected = state == option,
                     onClick = {
-                        onAction(
+                        onIntent(
                             OnboardingContract.Intent.UpdateUserPhysicalSymptoms(option)
                         )
                     }

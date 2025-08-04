@@ -1,9 +1,15 @@
 package com.joohnq.auth.impl.ui.presentation.avatar
 
+import androidx.lifecycle.viewModelScope
+import com.joohnq.api.use_case.UpdateUserImageBitmapUseCase
+import com.joohnq.api.use_case.UpdateUserImageDrawableUseCase
 import com.joohnq.ui.BaseViewModel
+import kotlinx.coroutines.launch
 
 class AvatarViewModel(
     initialState: AvatarContract.State = AvatarContract.State(),
+    private val updateUserImageBitmapUseCase: UpdateUserImageBitmapUseCase,
+    private val updateUserImageDrawableUseCase: UpdateUserImageDrawableUseCase,
 ) : BaseViewModel<AvatarContract.State, AvatarContract.Intent, AvatarContract.SideEffect>(
         initialState = initialState
     ),
@@ -15,6 +21,24 @@ class AvatarViewModel(
 
             is AvatarContract.Intent.UpdateImageDrawableIndex ->
                 updateState { it.copy(selectedDrawableIndex = intent.i) }
+
+            AvatarContract.Intent.UpdateImage -> updateImage()
+        }
+    }
+
+    private fun updateImage() {
+        viewModelScope.launch {
+            try {
+                if (state.value.imageBitmap != null) {
+                    updateUserImageBitmapUseCase(state.value.imageBitmap!!)
+                } else {
+                    updateUserImageDrawableUseCase(state.value.selectedDrawableIndex)
+                }
+
+                emitEffect(AvatarContract.SideEffect.NavigateNext)
+            } catch (e: Exception) {
+                emitEffect(AvatarContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 }

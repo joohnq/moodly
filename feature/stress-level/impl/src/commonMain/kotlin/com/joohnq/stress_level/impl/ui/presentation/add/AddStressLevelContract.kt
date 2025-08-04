@@ -11,8 +11,6 @@ sealed interface AddStressLevelContract {
         data object OnGoBack : Event
 
         data object OnContinue : Event
-
-        data object OnPopUpToStressLevelOverview : Event
     }
 
     sealed interface Intent {
@@ -30,10 +28,12 @@ sealed interface AddStressLevelContract {
     }
 
     sealed interface SideEffect {
-        data object PopUpToStressLevelOverview : SideEffect
+        data object NavigateToStressStressors : SideEffect
+
+        data object OnGoBack : SideEffect
 
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 

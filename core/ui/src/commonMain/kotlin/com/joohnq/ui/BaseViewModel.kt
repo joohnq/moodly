@@ -21,48 +21,30 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     private val _sideEffect = MutableSharedFlow<EFFECT>()
     override val sideEffect: SharedFlow<EFFECT> = _sideEffect.asSharedFlow()
 
-    private val handledOneTimeEvents = mutableSetOf<INTENT>()
-
-    /**
-     * Updates the [STATE] of the ViewModel.
-     *
-     * @param update A function that takes the current [STATE] and produces a new [STATE].
-     */
     protected fun updateState(update: (STATE) -> STATE) {
         _state.update(update)
     }
 
-    /**
-     * Emits a side effect.
-     *
-     * @param effect The [EFFECT] to emit.
-     */
     protected fun emitEffect(effect: EFFECT) {
         viewModelScope.launch {
             _sideEffect.emit(effect)
         }
     }
 
-    /**
-     * Ensures that one-time events are only handled once.
-     *
-     * When you can't ensure that an event is only sent once, but you want the event to only be handled once, call this
-     * method. It will ensure [block] is only executed the first time this function is called. Subsequent calls with an
-     * [event] argument equal to that of a previous invocation will not execute [block].
-     *
-     * Multiple one-time events are supported.
-     */
-    protected fun handleOneTimeEvent(
-        event: INTENT,
-        block: () -> Unit,
-    ) {
-        if (event !in handledOneTimeEvents) {
-            handledOneTimeEvents.add(event)
-            block()
-        }
-    }
-
     protected fun resetState() {
         updateState { initialState }
+    }
+}
+
+abstract class BaseViewModelWithoutState<INTENT, EFFECT> :
+    ViewModel(),
+    UnidirectionalViewModelWithoutState<INTENT, EFFECT> {
+    private val _sideEffect = MutableSharedFlow<EFFECT>()
+    override val sideEffect: SharedFlow<EFFECT> = _sideEffect.asSharedFlow()
+
+    protected fun emitEffect(effect: EFFECT) {
+        viewModelScope.launch {
+            _sideEffect.emit(effect)
+        }
     }
 }

@@ -17,7 +17,7 @@ kotlin {
 
             implementation(projects.feature.welcome.api)
 
-            implementation(projects.feature.preferences.impl)
+            implementation(projects.feature.preferences.api)
 
             implementation(libs.navigation.compose)
 

@@ -42,7 +42,7 @@ fun MoodOverviewContent(
                         record = record,
                         records = records,
                         onEvent = onEvent,
-                        onAction = onIntent
+                        onIntent = onIntent
                     )
                 }
             )

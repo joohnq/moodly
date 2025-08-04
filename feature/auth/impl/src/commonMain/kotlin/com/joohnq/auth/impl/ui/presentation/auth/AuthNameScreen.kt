@@ -4,37 +4,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
-import com.joohnq.api.validator.UserNameValidator
-import com.joohnq.auth.impl.ui.presentation.auth.AuthNameContract.Intent.UpdateError
-import com.joohnq.preferences.impl.ui.viewmodel.PreferencesContract
-import com.joohnq.preferences.impl.ui.viewmodel.PreferencesViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
-import com.joohnq.user.impl.ui.viewmodel.UserContract
-import com.joohnq.user.impl.ui.viewmodel.UserContract.Intent.UpdateName
-import com.joohnq.user.impl.ui.viewmodel.UserViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun AuthNameScreen(
-    onNavigateToSecurity: () -> Unit,
-    authNameViewModel: AuthNameViewModel = sharedViewModel(),
-    userViewModel: UserViewModel = sharedViewModel(),
-    preferencesViewModel: PreferencesViewModel = sharedViewModel(),
+    navigateNext: () -> Unit,
+    viewModel: AuthNameViewModel = sharedViewModel(),
 ) {
-    val scope = rememberCoroutineScope()
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
-    val userNameState by authNameViewModel.state.collectAsState()
-
-    fun onError(error: String) {
-        scope.launch {
-            snackBarState.showSnackbar(error)
-        }
-    }
+    val userNameState by viewModel.state.collectAsState()
 
     fun onEvent(event: AuthNameContract.Event) =
         when (event) {
@@ -42,27 +24,18 @@ fun AuthNameScreen(
 
             AuthNameContract.Event.OnContinue -> {
                 focusManager.clearFocus()
-                try {
-                    UserNameValidator(userNameState.name)
-                    userViewModel.onIntent(UpdateName(userNameState.name))
-                } catch (e: Exception) {
-                    authNameViewModel.onIntent(UpdateError(e.message.toString()))
-                }
+
+                viewModel.onIntent(AuthNameContract.Intent.Action)
             }
         }
 
-    LaunchedEffect(userViewModel) {
-        userViewModel.sideEffect.collect { event ->
+    LaunchedEffect(viewModel) {
+        viewModel.sideEffect.collect { event ->
             when (event) {
-                is UserContract.SideEffect.UserNameUpdatedSuccess -> {
-                    preferencesViewModel.onIntent(
-                        PreferencesContract.Intent.UpdateSkipAuth()
-                    )
-                    onNavigateToSecurity()
+                AuthNameContract.SideEffect.NavigateNext -> navigateNext()
+                is AuthNameContract.SideEffect.ShowError -> {
+                    snackBarState.showSnackbar(event.message)
                 }
-
-                is UserContract.SideEffect.ShowError -> onError(event.error)
-                else -> {}
             }
         }
     }
@@ -71,6 +44,6 @@ fun AuthNameScreen(
         state = userNameState,
         snackBarState = snackBarState,
         onEvent = ::onEvent,
-        onIntent = authNameViewModel::onIntent
+        onIntent = viewModel::onIntent
     )
 }

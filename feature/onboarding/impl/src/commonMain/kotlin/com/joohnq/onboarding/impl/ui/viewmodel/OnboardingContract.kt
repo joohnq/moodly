@@ -50,9 +50,12 @@ sealed interface OnboardingContract {
         ) : Intent
     }
 
-    sealed interface SideEffect{
-        data object OnboardingCompleted: SideEffect
-        data class ShowError(val message: String): SideEffect
+    sealed interface SideEffect {
+        data object NavigateNext : SideEffect
+
+        data class ShowError(
+            val message: String,
+        ) : SideEffect
     }
 
     data class State(

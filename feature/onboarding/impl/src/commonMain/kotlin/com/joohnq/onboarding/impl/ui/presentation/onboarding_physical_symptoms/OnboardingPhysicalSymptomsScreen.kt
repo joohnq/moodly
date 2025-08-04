@@ -11,20 +11,19 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingPhysicalSymptomsScreen(
     onNavigateToSleepQuality: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: OnboardingViewModel =
-        sharedViewModel(),
+    viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.AddItems -> onNavigateToSleepQuality()
+            OnboardingEvent.NavigateNext -> onNavigateToSleepQuality()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
     OnboardingPhysicalSymptomsContent(
         state = state.physicalSymptoms,
-        onAction = viewModel::onIntent,
+        onIntent = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

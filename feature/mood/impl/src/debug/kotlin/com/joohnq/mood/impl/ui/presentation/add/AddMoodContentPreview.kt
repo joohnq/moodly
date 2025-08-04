@@ -12,10 +12,4 @@ fun AddMoodContentPreview(
     @PreviewParameter(MoodRecordResourceParameterProvider::class)
     item: MoodRecordResource,
 ) {
-    AddMoodContent(
-        state =
-            AddMoodContract.State(
-                record = item
-            )
-    )
 }

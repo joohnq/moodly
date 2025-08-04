@@ -30,6 +30,7 @@ kotlin {
 
             implementation(projects.feature.mood.api)
             implementation(projects.feature.mood.impl)
+            implementation(projects.feature.mood.overview)
 
             implementation(projects.sharedResources)
 

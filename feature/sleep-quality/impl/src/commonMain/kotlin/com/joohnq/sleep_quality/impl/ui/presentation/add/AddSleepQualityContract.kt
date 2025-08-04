@@ -10,8 +10,6 @@ interface AddSleepQualityContract {
 
     sealed interface Event {
         data object OnGoBack : Event
-
-        data object OnNavigateToSleepQuality : Event
     }
 
     sealed interface Intent {
@@ -50,7 +48,7 @@ interface AddSleepQualityContract {
         data object OnNavigateToNext : SideEffect
 
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 

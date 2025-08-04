@@ -5,7 +5,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
-import com.joohnq.splash.impl.ui.presentation.splash_screen.SplashScreen
+import com.joohnq.splash.impl.ui.presentation.splash.SplashScreen
 
 fun NavGraphBuilder.splashNavigation(
     onNavigate: (Destination, Boolean) -> Unit,
@@ -29,7 +29,7 @@ fun NavGraphBuilder.splashNavigation(
                 onNavigateToDashboard = {
                     onNavigateGraph(NavigationGraph.App, true)
                 },
-                onNavigateToCorruptedSecurity = {
+                onNavigateToSecurityCorrupted = {
                 },
                 onNavigateToUnLock = {
                     onNavigate(Destination.Security.UnLock, true)

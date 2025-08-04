@@ -1,18 +1,18 @@
 package com.joohnq.security.impl.ui.presentation.security
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.preferences.api.use_case.UpdateSkipOnboardingUseCase
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.use_case.GetSecurityUseCase
 import com.joohnq.security.api.use_case.UpdateSecurityUseCase
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class SecurityViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val updateSecurityUseCase: UpdateSecurityUseCase,
+    private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     initialState: SecurityContract.State = SecurityContract.State(),
 ) : BaseViewModel<SecurityContract.State, SecurityContract.Intent, SecurityContract.SideEffect>(
         initialState = initialState
@@ -22,6 +22,7 @@ class SecurityViewModel(
         when (intent) {
             is SecurityContract.Intent.Get -> getSecurity()
             is SecurityContract.Intent.Update -> updateSecurity(intent.security)
+            SecurityContract.Intent.Skip -> skip()
         }
     }
 
@@ -32,15 +33,25 @@ class SecurityViewModel(
             updateState { it.copy(item = res) }
         }
 
+    private fun skip() {
+        viewModelScope.launch {
+            try {
+                updateSkipOnboardingUseCase(true).getOrThrow()
+                emitEffect(SecurityContract.SideEffect.Skip)
+            } catch (e: Exception) {
+                emitEffect(SecurityContract.SideEffect.ShowError(e.message.toString()))
+            }
+        }
+    }
+
     private fun updateSecurity(security: Security) =
         viewModelScope.launch {
-            val res = updateSecurityUseCase(security).toUiState()
+            try {
+                updateSecurityUseCase(security).getOrThrow()
 
-            res
-                .onSuccess {
-                    emitEffect(SecurityContract.SideEffect.OnSecurityUpdated)
-                }.onFailure {
-                    emitEffect(SecurityContract.SideEffect.ShowError(it))
-                }
+                emitEffect(SecurityContract.SideEffect.OnSecurityUpdated)
+            } catch (e: Exception) {
+                emitEffect(SecurityContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
 }

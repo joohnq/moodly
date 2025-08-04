@@ -11,20 +11,19 @@ import com.joohnq.ui.sharedViewModel
 fun OnboardingProfessionalHelpScreen(
     onNavigateToPhysicalSymptoms: () -> Unit,
     onGoBack: () -> Unit,
-    viewModel: OnboardingViewModel =
-        sharedViewModel(),
+    viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.AddItems -> onNavigateToPhysicalSymptoms()
+            OnboardingEvent.NavigateNext -> onNavigateToPhysicalSymptoms()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
     OnboardingProfessionalHelpContent(
         state = state.soughtHelp,
-        onAction = viewModel::onIntent,
+        onIntent = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

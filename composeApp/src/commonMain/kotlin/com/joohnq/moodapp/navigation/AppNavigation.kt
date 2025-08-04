@@ -4,17 +4,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
+import com.joohnq.add.presentation.AddMoodScreen
+import com.joohnq.add.presentation.ExpressionAnalysisScreen
 import com.joohnq.freud_score.impl.ui.presentation.freud_score.FreudScoreScreen
+import com.joohnq.history.presentation.MoodHistoryScreen
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardScreen
 import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
-import com.joohnq.mood.impl.ui.presentation.add.AddMoodScreen
-import com.joohnq.mood.impl.ui.presentation.expression_analysis.ExpressionAnalysisScreen
-import com.joohnq.mood.impl.ui.presentation.history.MoodHistoryScreen
-import com.joohnq.mood.impl.ui.presentation.overview.MoodOverviewScreen
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
+import com.joohnq.overview.presentation.MoodOverviewScreen
 import com.joohnq.self_journal.impl.ui.presentation.add.AddSelfJournalScreen
-import com.joohnq.self_journal.impl.ui.presentation.edit.EditJournalingScreen
+import com.joohnq.self_journal.impl.ui.presentation.edit.EditSelfJournalScreen
 import com.joohnq.self_journal.impl.ui.presentation.history.SelfJournalHistoryScreen
 import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.add.AddSleepQualityScreen
@@ -64,19 +64,19 @@ fun NavGraphBuilder.appNavigation(
                         }
 
                         DashboardContract.Event.OnNavigateToSelfJournal -> {
-                            onNavigate(Destination.App.SelfJournal)
+                            onNavigate(Destination.App.SelfJournalOverview)
                         }
 
                         DashboardContract.Event.OnNavigateToMood -> {
-                            onNavigate(Destination.App.Mood)
+                            onNavigate(Destination.App.MoodOverview)
                         }
 
                         DashboardContract.Event.OnNavigateToSleepQuality -> {
-                            onNavigate(Destination.App.SleepQuality)
+                            onNavigate(Destination.App.SleepQualityOverview)
                         }
 
                         DashboardContract.Event.OnNavigateToStressLevel -> {
-                            onNavigate(Destination.App.StressLevel)
+                            onNavigate(Destination.App.StressLevelOverview)
                         }
 
                         is DashboardContract.Event.OnNavigateTo -> {
@@ -95,7 +95,7 @@ fun NavGraphBuilder.appNavigation(
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.SelfJournal> {
+        composable<Destination.App.SelfJournalOverview> {
             SelfJournalOverviewScreen(
                 onNavigateAddSelfJournal = {
                     onNavigate(Destination.App.AddSelfJournal)
@@ -111,7 +111,7 @@ fun NavGraphBuilder.appNavigation(
                 }
             )
         }
-        composable<Destination.App.Mood> {
+        composable<Destination.App.MoodOverview> {
             MoodOverviewScreen(
                 onGoBack = {
                     onNavigateBack(Destination.App.DashBoard)
@@ -140,12 +140,12 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.ExpressionAnalysis> {
             ExpressionAnalysisScreen(
                 onNavigateToMood = {
-                    onNavigate(Destination.App.Mood)
+                    onNavigate(Destination.App.MoodOverview)
                 },
                 onGoBack = onGoBack
             )
         }
-        composable<Destination.App.StressLevel> {
+        composable<Destination.App.StressLevelOverview> {
             StressLevelOverviewScreen(
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
@@ -155,10 +155,10 @@ fun NavGraphBuilder.appNavigation(
                 }
             )
         }
-        composable<Destination.App.StressHistory> {
+        composable<Destination.App.StressLevelHistory> {
             StressLevelHistoryScreen(
                 onNavigateStressLevel = {
-                    onNavigate(Destination.App.StressLevel)
+                    onNavigate(Destination.App.StressLevelOverview)
                 },
                 onAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
@@ -177,10 +177,10 @@ fun NavGraphBuilder.appNavigation(
         composable<Destination.App.StressStressors> {
             StressStressorsScreen(
                 onGoBack = onGoBack,
-                onNavigateToStressLevelOverview = { onNavigate(Destination.App.StressLevel) }
+                onNavigateToStressLevelOverview = { onNavigate(Destination.App.StressLevelOverview) }
             )
         }
-        composable<Destination.App.SleepQuality> {
+        composable<Destination.App.SleepQualityOverview> {
             SleepQualityOverviewScreen(
                 onNavigateAddSleepQuality = { onNavigate(Destination.App.AddSleepQuality) },
                 onGoBack = {
@@ -200,7 +200,7 @@ fun NavGraphBuilder.appNavigation(
             AddSleepQualityScreen(
                 onGoBack = onGoBack,
                 onNavigateToSleepQuality = {
-                    onNavigate(Destination.App.SleepQuality)
+                    onNavigate(Destination.App.SleepQualityOverview)
                 }
             )
         }
@@ -213,7 +213,7 @@ fun NavGraphBuilder.appNavigation(
             val editSelfJournal =
                 backStackEntry.toRoute<Destination.App.EditSelfJournal>()
 
-            EditJournalingScreen(
+            EditSelfJournalScreen(
                 id = editSelfJournal.id,
                 onGoBack = onGoBack
             )

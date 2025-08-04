@@ -42,7 +42,7 @@ fun OnboardingSleepQualityContent(
     state: SleepQualityRecordResource,
     sliderValue: Float,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     val moods = remember { allMoodResource().reversed() }
     val sleepQualityOptions: List<SleepQualityResource> = remember { allSleepQualityResource() }
@@ -51,7 +51,7 @@ fun OnboardingSleepQualityContent(
         page = 4,
         title = Res.string.sleep_quality_title,
         onGoBack = { onEvent(OnboardingEvent.OnGoBack) },
-        onContinue = { onEvent(OnboardingEvent.AddItems) }
+        onContinue = { onEvent(OnboardingEvent.NavigateNext) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             VerticalSpacer(20.dp)
@@ -87,8 +87,8 @@ fun OnboardingSleepQualityContent(
                     modifier = Modifier.weight(1f),
                     sliderValue = sliderValue,
                     setSliderValue = {
-                        onAction(OnboardingContract.Intent.UpdateSliderValue(it))
-                        onAction(
+                        onIntent(OnboardingContract.Intent.UpdateSliderValue(it))
+                        onIntent(
                             OnboardingContract.Intent.UpdateSleepQuality(
                                 it.toSleepQualityResource()
                             )

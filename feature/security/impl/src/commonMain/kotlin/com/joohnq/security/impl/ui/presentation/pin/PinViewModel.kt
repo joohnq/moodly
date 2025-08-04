@@ -1,8 +1,16 @@
 package com.joohnq.security.impl.ui.presentation.pin
 
+import androidx.lifecycle.viewModelScope
+import com.joohnq.api.mapper.ListMapper.itemsNotNull
+import com.joohnq.security.api.Security
+import com.joohnq.security.api.use_case.GetSecurityUseCase
+import com.joohnq.security.api.use_case.UpdateSecurityUseCase
 import com.joohnq.ui.BaseViewModel
+import kotlinx.coroutines.launch
 
 class PinViewModel(
+    private val getSecurityUseCase: GetSecurityUseCase,
+    private val updateSecurityUseCase: UpdateSecurityUseCase,
     initialState: PinContract.State = PinContract.State(),
 ) : BaseViewModel<PinContract.State, PinContract.Intent, PinContract.SideEffect>(
         initialState = initialState
@@ -22,6 +30,23 @@ class PinViewModel(
 
             PinContract.Intent.OnKeyboardBack ->
                 onKeyboardBack()
+
+            PinContract.Intent.Action -> action()
+        }
+    }
+
+    private fun action() {
+        viewModelScope.launch {
+            try {
+                updateSecurityUseCase(
+                    Security.Pin(
+                        enabled = true,
+                        code = state.value.code.itemsNotNull()
+                    )
+                )
+            } catch (e: Exception) {
+                emitEffect(PinContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 

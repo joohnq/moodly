@@ -37,7 +37,7 @@ sealed interface AddSelfJournalContract {
         data object OnGoBack : SideEffect
 
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 

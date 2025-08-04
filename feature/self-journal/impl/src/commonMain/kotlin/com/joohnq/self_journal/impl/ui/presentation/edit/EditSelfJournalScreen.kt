@@ -6,18 +6,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
-import kotlinx.coroutines.launch
 
 @Composable
-fun EditJournalingScreen(
+fun EditSelfJournalScreen(
     id: Int,
     onGoBack: () -> Unit,
     viewModel: EditSelfJournalViewModel = sharedViewModel(),
 ) {
-    val scope = rememberCoroutineScope()
     val snackBarState = rememberSnackBarState()
     val state by viewModel.state.collectAsState()
     val isDifferent by derivedStateOf {
@@ -29,22 +26,16 @@ fun EditJournalingScreen(
             state.editingSelfJournalRecord.description.isNotBlank()
     }
 
-    fun onError(error: String) = scope.launch { snackBarState.showSnackbar(error) }
-
     fun onEvent(event: EditSelfJournalContract.Event) =
         when (event) {
             EditSelfJournalContract.Event.OnGoBack -> onGoBack()
         }
 
     LaunchedEffect(Unit) {
-        viewModel.onIntent(
-            EditSelfJournalContract.Intent.GetById(id)
-        )
-    }
+        viewModel.onIntent(EditSelfJournalContract.Intent.GetById(id))
 
-    LaunchedEffect(viewModel) {
-        viewModel.sideEffect.collect { effect ->
-            when (effect) {
+        viewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
                 EditSelfJournalContract.SideEffect.OnGoBack -> {
                     onEvent(EditSelfJournalContract.Event.OnGoBack)
                 }
@@ -58,7 +49,8 @@ fun EditJournalingScreen(
                     )
                 }
 
-                is EditSelfJournalContract.SideEffect.ShowError -> onError(effect.error)
+                is EditSelfJournalContract.SideEffect.ShowError ->
+                    snackBarState.showSnackbar(sideEffect.message)
             }
         }
     }

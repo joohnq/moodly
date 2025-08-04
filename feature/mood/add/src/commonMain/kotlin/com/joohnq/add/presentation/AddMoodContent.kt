@@ -87,7 +87,7 @@ fun AddMoodContent(
             TextAndCheckButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = Res.string.set_mood,
-                onClick = { onEvent(AddMoodContract.Event.OnNavigateToExpressionAnalysis) }
+                onClick = { onEvent(AddMoodContract.Event.NavigateNext) }
             )
         }
     }

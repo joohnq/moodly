@@ -52,7 +52,7 @@ sealed interface EditSelfJournalContract {
         data object Updated : SideEffect
 
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 

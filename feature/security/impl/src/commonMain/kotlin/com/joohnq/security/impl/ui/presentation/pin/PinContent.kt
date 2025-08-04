@@ -40,7 +40,7 @@ fun PinContent(
     focusRequesters: List<FocusRequester> = emptyList(),
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
-    onAction: (PinContract.Intent) -> Unit = {},
+    onIntent: (PinContract.Intent) -> Unit = {},
     onEvent: (PinContract.Event) -> Unit = {},
 ) {
     AppScaffoldLayout(
@@ -86,18 +86,18 @@ fun PinContent(
                     code = state.code,
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
-                        onAction(
+                        onIntent(
                             PinContract.Intent.OnEnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onAction(PinContract.Intent.OnKeyboardBack) },
+                    onKeyboardBack = { onIntent(PinContract.Intent.OnKeyboardBack) },
                     focusRequesters = focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onAction(PinContract.Intent.OnChangeFieldFocused(i)) }
+                    onFocusChanged = { i -> onIntent(PinContract.Intent.OnChangeFieldFocused(i)) }
                 )
             }
             PrimaryButton(

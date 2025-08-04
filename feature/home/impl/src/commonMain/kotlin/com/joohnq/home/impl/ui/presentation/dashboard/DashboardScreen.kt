@@ -7,7 +7,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
@@ -27,38 +26,29 @@ import com.joohnq.shared_resources.components.modifier.takeIf
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.ui.ObserverSideEffects
 import com.joohnq.ui.mapper.PaddingValuesMapper.plus
 import com.joohnq.ui.sharedViewModel
-import kotlinx.coroutines.launch
 
 @Composable
-fun DashboardScreen(onEvent: (DashboardContract.Event) -> Unit) {
+fun DashboardScreen(
+    onEvent: (DashboardContract.Event) -> Unit,
+    viewModel: DashboardViewModel = sharedViewModel(),
+) {
     val snackBarHostState = rememberSnackBarState()
-    val scope = rememberCoroutineScope()
     val navigator = rememberNavController()
 
     var centralIsExpanded by remember { mutableStateOf(false) }
-    val dashboardViewModel: DashboardViewModel = sharedViewModel()
-
-    fun onError(error: String) {
-        scope.launch {
-            snackBarHostState.showSnackbar(error)
-        }
-    }
 
     LaunchedEffect(Unit) {
-        dashboardViewModel.onIntent(DashboardContract.Intent.Get)
-    }
+        viewModel.onIntent(DashboardContract.Intent.Get)
 
-    ObserverSideEffects(
-        flow = dashboardViewModel.sideEffect,
-        onEvent = { effect ->
-            when (effect) {
-                is DashboardContract.SideEffect.ShowError -> onError(effect.message)
+        viewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
+                is DashboardContract.SideEffect.ShowError ->
+                    snackBarHostState.showSnackbar(sideEffect.message)
             }
         }
-    )
+    }
 
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

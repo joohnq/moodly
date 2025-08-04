@@ -8,12 +8,16 @@ import org.koin.dsl.module
 val securityUiModule: Module =
     module {
         single<PinViewModel> {
-            PinViewModel()
+            PinViewModel(
+                getSecurityUseCase = get(),
+                updateSecurityUseCase = get()
+            )
         }
         single<SecurityViewModel> {
             SecurityViewModel(
                 getSecurityUseCase = get(),
-                updateSecurityUseCase = get()
+                updateSecurityUseCase = get(),
+                updateSkipOnboardingUseCase = get()
             )
         }
     }

@@ -22,7 +22,7 @@ fun MoodOverviewContentBody(
     record: MoodRecordResource? = null,
     records: List<MoodRecordResource>,
     onEvent: (MoodOverviewContract.Event) -> Unit = {},
-    onAction: (MoodOverviewContract.Intent) -> Unit = {},
+    onIntent: (MoodOverviewContract.Intent) -> Unit = {},
 ) {
     if (record != null) {
         SectionHeader(
@@ -57,7 +57,7 @@ fun MoodOverviewContentBody(
             onEvent(MoodOverviewContract.Event.OnAddMood)
         },
         onDelete = { id ->
-            onAction(MoodOverviewContract.Intent.Delete(id))
+            onIntent(MoodOverviewContract.Intent.Delete(id))
         }
     )
 }

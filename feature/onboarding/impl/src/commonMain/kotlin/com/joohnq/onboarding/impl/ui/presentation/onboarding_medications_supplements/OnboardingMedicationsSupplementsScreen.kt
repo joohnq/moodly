@@ -17,16 +17,13 @@ fun OnboardingMedicationsSupplementsScreen(
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
-            OnboardingEvent.AddItems ->
-                onNavigateToStressLevel()
-
-            OnboardingEvent.OnGoBack ->
-                onGoBack()
+            OnboardingEvent.NavigateNext -> onNavigateToStressLevel()
+            OnboardingEvent.OnGoBack -> onGoBack()
         }
 
     OnboardingMedicationsSupplementsContent(
         state = state.medicationsSupplements,
-        onAction = viewModel::onIntent,
+        onIntent = viewModel::onIntent,
         onEvent = ::onEvent
     )
 }

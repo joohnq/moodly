@@ -10,6 +10,8 @@ sealed interface SecurityContract {
     sealed interface Intent {
         data object Get : Intent
 
+        data object Skip : Intent
+
         data class Update(
             val security: Security,
         ) : Intent
@@ -18,8 +20,10 @@ sealed interface SecurityContract {
     sealed interface SideEffect {
         data object OnSecurityUpdated : SideEffect
 
+        data object Skip : SideEffect
+
         data class ShowError(
-            val error: String,
+            val message: String,
         ) : SideEffect
     }
 
@@ -31,7 +35,5 @@ sealed interface SecurityContract {
         data object OnContinue : Event
 
         data object OnSetPin : Event
-
-        data object OnSkip : Event
     }
 }

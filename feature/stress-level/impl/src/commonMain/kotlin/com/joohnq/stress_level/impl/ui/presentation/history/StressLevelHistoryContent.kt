@@ -29,7 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StressLevelHistoryContent(
     state: StressLevelOverviewContract.State,
-    onAction: (StressLevelOverviewContract.Intent) -> Unit = {},
+    onIntent: (StressLevelOverviewContract.Intent) -> Unit = {},
     onEvent: (StressLevelHistoryContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
@@ -73,7 +73,7 @@ fun StressLevelHistoryContent(
                             StressLevelHistoryCard(
                                 record = record,
                                 onDelete = {
-                                    onAction(StressLevelOverviewContract.Intent.Delete(record.id))
+                                    onIntent(StressLevelOverviewContract.Intent.Delete(record.id))
                                 }
                             )
                         }

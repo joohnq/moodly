@@ -14,7 +14,7 @@ val onboardingUiModule: Module =
                 updatePhysicalSymptomsUseCase = get(),
                 updateSoughtHelpUseCase = get(),
                 updateMedicationsSupplementsUseCase = get(),
-                updateSkipOnboardingUseCase = get(),
+                updateSkipOnboardingUseCase = get()
             )
         }
     }

@@ -12,8 +12,8 @@ import com.joohnq.ui.sharedViewModel
 fun HomeScreen(
     padding: PaddingValues,
     onEvent: (HomeEvent) -> Unit,
+    dashboardViewModel: DashboardViewModel = sharedViewModel(),
 ) {
-    val dashboardViewModel: DashboardViewModel = sharedViewModel()
     val state by dashboardViewModel.state.collectAsStateWithLifecycle()
 
     HomeContent(

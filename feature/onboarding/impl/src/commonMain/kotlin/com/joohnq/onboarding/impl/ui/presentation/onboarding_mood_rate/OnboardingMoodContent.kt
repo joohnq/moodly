@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 fun OnboardingMoodRateContent(
     state: MoodRecordResource,
     onEvent: (OnboardingEvent) -> Unit = {},
-    onAction: (OnboardingContract.Intent) -> Unit = {},
+    onIntent: (OnboardingContract.Intent) -> Unit = {},
 ) {
     OnboardingBaseLayout(
         page = 1,
@@ -65,7 +65,7 @@ fun OnboardingMoodRateContent(
         IconContinueButton(
             modifier = Modifier.size(60.dp),
             colors = ComponentColors.IconButton.mainButtonColors(),
-            onClick = { onEvent(OnboardingEvent.AddItems) }
+            onClick = { onEvent(OnboardingEvent.NavigateNext) }
         )
     }
 
@@ -88,7 +88,7 @@ fun OnboardingMoodRateContent(
         ) {
             MoodRouletteWheel(
                 modifier = Modifier.fillMaxSize().scale(1.4f),
-                setSelectedMood = { onAction(OnboardingContract.Intent.UpdateMood(it)) }
+                setSelectedMood = { onIntent(OnboardingContract.Intent.UpdateMood(it)) }
             )
         }
     }

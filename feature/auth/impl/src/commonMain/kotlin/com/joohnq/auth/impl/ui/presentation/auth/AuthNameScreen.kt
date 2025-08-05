@@ -7,7 +7,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AuthNameScreen(
@@ -16,7 +18,13 @@ fun AuthNameScreen(
 ) {
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
-    val userNameState by viewModel.state.collectAsState()
+    val (state, dispatch) = viewModel.observe { sideEffect ->
+        when (sideEffect) {
+            AuthNameContract.SideEffect.NavigateNext -> navigateNext()
+            is AuthNameContract.SideEffect.ShowError ->
+                launch { snackBarState.showSnackbar(sideEffect.message) }
+        }
+    }
 
     fun onEvent(event: AuthNameContract.Event) =
         when (event) {
@@ -29,21 +37,10 @@ fun AuthNameScreen(
             }
         }
 
-    LaunchedEffect(viewModel) {
-        viewModel.sideEffect.collect { event ->
-            when (event) {
-                AuthNameContract.SideEffect.NavigateNext -> navigateNext()
-                is AuthNameContract.SideEffect.ShowError -> {
-                    snackBarState.showSnackbar(event.message)
-                }
-            }
-        }
-    }
-
     AuthNameContent(
-        state = userNameState,
+        state = state,
         snackBarState = snackBarState,
         onEvent = ::onEvent,
-        onIntent = viewModel::onIntent
+        onIntent = dispatch
     )
 }

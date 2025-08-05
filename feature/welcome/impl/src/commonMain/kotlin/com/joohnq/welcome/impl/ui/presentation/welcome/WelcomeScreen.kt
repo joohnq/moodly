@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
 import kotlinx.coroutines.launch
 
@@ -28,14 +29,17 @@ fun WelcomeScreen(
         }
     }
 
-    fun onNext() {
-        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+    fun onEvent(event: WelcomeContract.Event){
+        when(event){
+            WelcomeContract.Event.OnNext ->
+                scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+        }
     }
 
     WelcomeContent(
         snackBarState = snackBarState,
         pagerState = pagerState,
-        onNext = ::onNext,
+        onEvent = ::onEvent,
         onIntent = viewModel::onIntent
     )
 }

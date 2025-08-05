@@ -2,10 +2,10 @@ package com.joohnq.stress_level.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddStressLevelScreen(
@@ -14,7 +14,18 @@ fun AddStressLevelScreen(
     viewModel: AddStressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val state by viewModel.state.collectAsState()
+    val (state, dispatch) = viewModel.observe { sideEffect ->
+        when (sideEffect) {
+            is AddStressLevelContract.SideEffect.OnGoBack ->
+                onGoBack()
+
+            is AddStressLevelContract.SideEffect.ShowError ->
+                launch { snackBarState.showSnackbar(sideEffect.message) }
+
+            AddStressLevelContract.SideEffect.NavigateToStressStressors ->
+                onNavigateToStressStressors()
+        }
+    }
 
     fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {
@@ -27,25 +38,10 @@ fun AddStressLevelScreen(
         }
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.sideEffect.collect { sideEffect ->
-            when (sideEffect) {
-                is AddStressLevelContract.SideEffect.OnGoBack ->
-                    onGoBack()
-
-                is AddStressLevelContract.SideEffect.ShowError ->
-                    snackBarState.showSnackbar(sideEffect.message)
-
-                AddStressLevelContract.SideEffect.NavigateToStressStressors ->
-                    onNavigateToStressStressors()
-            }
-        }
-    }
-
     AddStressLevelScreenContent(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onIntent = viewModel::onIntent
+        onIntent = dispatch
     )
 }

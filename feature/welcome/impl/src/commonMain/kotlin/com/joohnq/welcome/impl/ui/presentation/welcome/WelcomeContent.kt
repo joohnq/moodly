@@ -35,7 +35,7 @@ import com.joohnq.welcome.impl.ui.presentation.first.FirstScreen
 fun WelcomeContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     pagerState: PagerState,
-    onNext: () -> Unit = {},
+    onEvent: (WelcomeContract.Event) -> Unit = {},
     onIntent: (WelcomeContract.Intent) -> Unit = {},
 ) {
     AppScaffoldLayout(
@@ -47,7 +47,7 @@ fun WelcomeContent(
             key = { it }
         ) { page ->
             when (page) {
-                0 -> FirstScreen(onNext = onNext)
+                0 -> FirstScreen(onNext = { onEvent(WelcomeContract.Event.OnNext) })
                 1 ->
                     WelcomeBaseLayout(
                         welcome =
@@ -62,7 +62,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Green50
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = onNext
+                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
                     )
 
                 2 ->
@@ -78,7 +78,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Orange50
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = onNext
+                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
                     )
 
                 3 ->
@@ -95,7 +95,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Gray60
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = onNext
+                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
                     )
 
                 4 ->
@@ -112,7 +112,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Yellow60
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = onNext
+                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
                     )
 
                 5 ->

@@ -16,6 +16,26 @@ sealed interface AvatarContract {
         data class UpdateImageDrawableIndex(
             val i: Int,
         ) : Intent
+
+        data class UpdateImageSourceOptionDialog(
+            val value: Boolean,
+        ) : Intent
+
+        data class UpdatePermissionRationalDialog(
+            val value: Boolean,
+        ) : Intent
+
+        data class UpdateLaunchCamera(
+            val value: Boolean,
+        ) : Intent
+
+        data class UpdateLaunchGallery(
+            val value: Boolean,
+        ) : Intent
+
+        data class UpdateLaunchSetting(
+            val value: Boolean,
+        ) : Intent
     }
 
     sealed interface SideEffect {
@@ -29,6 +49,11 @@ sealed interface AvatarContract {
     data class State(
         val imageBitmap: ImageBitmap? = null,
         val selectedDrawableIndex: Int = 0,
+        val launchCamera: Boolean = false,
+        val launchGallery: Boolean = false,
+        val launchSetting: Boolean = false,
+        val imageSourceOptionDialog: Boolean = false,
+        val permissionRationalDialog: Boolean = false,
     )
 
     sealed interface Event {

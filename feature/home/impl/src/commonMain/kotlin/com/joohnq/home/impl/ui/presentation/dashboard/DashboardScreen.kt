@@ -27,7 +27,9 @@ import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.ui.mapper.PaddingValuesMapper.plus
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun DashboardScreen(
@@ -36,17 +38,11 @@ fun DashboardScreen(
 ) {
     val snackBarHostState = rememberSnackBarState()
     val navigator = rememberNavController()
-
     var centralIsExpanded by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        viewModel.onIntent(DashboardContract.Intent.Get)
-
-        viewModel.sideEffect.collect { sideEffect ->
-            when (sideEffect) {
-                is DashboardContract.SideEffect.ShowError ->
-                    snackBarHostState.showSnackbar(sideEffect.message)
-            }
+    val (state, dispatch) = viewModel.observe { sideEffect ->
+        when (sideEffect) {
+            is DashboardContract.SideEffect.ShowError ->
+                launch { snackBarHostState.showSnackbar(sideEffect.message) }
         }
     }
 

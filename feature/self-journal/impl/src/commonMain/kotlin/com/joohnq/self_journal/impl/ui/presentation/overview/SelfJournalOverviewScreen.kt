@@ -17,21 +17,28 @@ fun SelfJournalOverviewScreen(
 
     fun onEvent(event: SelfJournalOverviewContract.Event) =
         when (event) {
-            SelfJournalOverviewContract.Event.OnGoBack -> onGoBack()
+            SelfJournalOverviewContract.Event.OnGoBack ->
+                onGoBack()
+
             SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal -> onNavigateAddSelfJournal()
-            is SelfJournalOverviewContract.Event.OnClick -> onNavigateToSelfJournalHistory()
+
+            is SelfJournalOverviewContract.Event.OnClick ->
+                onNavigateToSelfJournalHistory()
+
             SelfJournalOverviewContract.Event.OnNavigateToSelfHistory -> onNavigateToSelfJournalHistory()
-            is SelfJournalOverviewContract.Event.OnEdit -> onEditSelfJournal(event.id)
-            is SelfJournalOverviewContract.Event.OnDelete -> {
+
+            is SelfJournalOverviewContract.Event.OnEdit ->
+                onEditSelfJournal(event.id)
+
+            is SelfJournalOverviewContract.Event.OnDelete ->
                 viewModel.onIntent(
                     SelfJournalOverviewContract.Intent.Delete(
                         event.id
                     )
                 )
-            }
         }
 
-    return SelfJournalOverviewContent(
+    SelfJournalOverviewContent(
         state = state,
         onEvent = ::onEvent
     )

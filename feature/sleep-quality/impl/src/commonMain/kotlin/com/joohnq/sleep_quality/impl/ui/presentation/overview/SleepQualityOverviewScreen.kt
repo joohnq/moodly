@@ -21,7 +21,7 @@ fun SleepQualityOverviewScreen(
             SleepQualityOverviewContract.Event.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
         }
 
-    return SleepQualityOverviewContent(
+    SleepQualityOverviewContent(
         state = state,
         onEvent = ::onEvent,
         onIntent = viewModel::onIntent

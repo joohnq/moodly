@@ -1,13 +1,12 @@
 package com.joohnq.security.impl.ui.presentation.pin
 
+import androidx.compose.ui.focus.FocusRequester
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface PinContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnContinue : Event
-
         data object OnClearFocus : Event
 
         data object OnGoBack : Event
@@ -39,5 +38,6 @@ sealed interface PinContract {
     data class State(
         val code: List<Int?> = (1..4).map { null },
         val focusedIndex: Int? = null,
+        val focusRequesters: List<FocusRequester> = (1..4).map { FocusRequester() },
     )
 }

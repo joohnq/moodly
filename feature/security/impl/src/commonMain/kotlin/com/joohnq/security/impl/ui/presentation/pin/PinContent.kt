@@ -37,7 +37,6 @@ import org.jetbrains.compose.resources.stringResource
 fun PinContent(
     snackBarState: SnackbarHostState = SnackbarHostState(),
     state: PinContract.State,
-    focusRequesters: List<FocusRequester> = emptyList(),
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
     onIntent: (PinContract.Intent) -> Unit = {},
@@ -94,7 +93,7 @@ fun PinContent(
                         )
                     },
                     onKeyboardBack = { onIntent(PinContract.Intent.OnKeyboardBack) },
-                    focusRequesters = focusRequesters,
+                    focusRequesters = state.focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
                     onFocusChanged = { i -> onIntent(PinContract.Intent.OnChangeFieldFocused(i)) }
@@ -103,7 +102,7 @@ fun PinContent(
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(PinContract.Event.OnContinue) }
+                onClick = { onIntent(PinContract.Intent.Action) }
             )
         }
     }

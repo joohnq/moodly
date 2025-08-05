@@ -1,12 +1,11 @@
 package com.joohnq.add.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.DisposableEffect
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun ExpressionAnalysisScreen(
@@ -15,7 +14,14 @@ fun ExpressionAnalysisScreen(
     viewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val state by viewModel.state.collectAsState()
+    val (state, dispatch) = viewModel.observe { sideEffect ->
+        when (sideEffect) {
+            is AddMoodContract.SideEffect.ShowError ->
+                launch { snackBarState.showSnackbar(sideEffect.message) }
+
+            AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
+        }
+    }
 
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {
@@ -23,27 +29,14 @@ fun ExpressionAnalysisScreen(
             else -> {}
         }
 
-    LaunchedEffect(viewModel) {
-        viewModel.sideEffect.collect { sideEffect ->
-            when (sideEffect) {
-                is AddMoodContract.SideEffect.ShowError ->
-                    snackBarState.showSnackbar(sideEffect.message)
-
-                AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
-            }
-        }
-    }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            viewModel.onIntent(AddMoodContract.Intent.ResetState)
-        }
+    DisposableEffect {
+        viewModel.onIntent(AddMoodContract.Intent.ResetState)
     }
 
     ExpressionAnalysisContent(
         snackBarState = snackBarState,
         description = state.record.description,
         onEvent = ::onEvent,
-        onIntent = viewModel::onIntent
+        onIntent = dispatch
     )
 }

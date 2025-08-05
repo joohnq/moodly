@@ -1,14 +1,15 @@
 package com.joohnq.onboarding.impl.ui.presentation.onboarding_expression_analysis
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel
 import com.joohnq.shared_resources.remember.rememberSnackBarState
+import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingExpressionAnalysisScreen(
@@ -17,7 +18,13 @@ fun OnboardingExpressionAnalysisScreen(
     viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val onboardingState by viewModel.state.collectAsState()
+    val (state, dispatch) = viewModel.observe { sideEffect ->
+        when (sideEffect) {
+            OnboardingContract.SideEffect.NavigateNext -> navigateNext()
+            is OnboardingContract.SideEffect.ShowError ->
+                launch { snackBarState.showSnackbar(sideEffect.message) }
+        }
+    }
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {
@@ -30,20 +37,10 @@ fun OnboardingExpressionAnalysisScreen(
             OnboardingEvent.OnGoBack -> onGoBack()
         }
 
-    LaunchedEffect(Unit) {
-        viewModel.sideEffect.collect { sideEffect ->
-            when (sideEffect) {
-                OnboardingContract.SideEffect.NavigateNext -> navigateNext()
-                is OnboardingContract.SideEffect.ShowError ->
-                    snackBarState.showSnackbar(sideEffect.message)
-            }
-        }
-    }
-
     OnboardingExpressionAnalysisContent(
-        description = onboardingState.moodRecord.description,
+        description = state.moodRecord.description,
         snackBarState = snackBarState,
-        onIntent = viewModel::onIntent,
+        onIntent = dispatch,
         onEvent = ::onEvent
     )
 }

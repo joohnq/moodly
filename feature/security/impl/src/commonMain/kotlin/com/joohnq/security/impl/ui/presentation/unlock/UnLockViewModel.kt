@@ -1,6 +1,7 @@
 package com.joohnq.security.impl.ui.presentation.unlock
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.security.api.getPinCode
 import com.joohnq.security.api.use_case.GetSecurityUseCase
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.launch
@@ -9,8 +10,8 @@ class UnLockViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val initialState: UnlockContract.State = UnlockContract.State(),
 ) : BaseViewModel<UnlockContract.State, UnlockContract.Intent, UnlockContract.SideEffect>(
-        initialState = initialState
-    ),
+    initialState = initialState
+),
     UnlockContract.ViewModel {
     override fun onIntent(intent: UnlockContract.Intent) {
         when (intent) {
@@ -32,6 +33,15 @@ class UnLockViewModel(
                 }
 
                 enterNumber(index = intent.index, number = intent.number)
+
+                updateState {
+                    it.copy(
+                        canContinue = state.value.code.none { digit -> digit == null }
+                    )
+                }
+
+                if (state.value.canContinue)
+                    canContinue()
             }
 
             UnlockContract.Intent.OnKeyboardBack ->
@@ -58,6 +68,15 @@ class UnLockViewModel(
                     if (i == intent.index) focusRequester.requestFocus() else null
                 }
             }
+        }
+    }
+
+    private fun canContinue() {
+        val pin = state.value.security.getPinCode()
+        if (pin != state.value.code) {
+            updateState { it.copy(isError = Exception("Incorrect PIN")) }
+        } else {
+            emitEffect(UnlockContract.SideEffect.NavigateNext)
         }
     }
 

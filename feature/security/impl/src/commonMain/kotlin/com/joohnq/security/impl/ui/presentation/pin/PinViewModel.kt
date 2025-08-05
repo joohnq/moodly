@@ -25,8 +25,14 @@ class PinViewModel(
                     )
                 }
 
-            is PinContract.Intent.OnEnterNumber ->
+            is PinContract.Intent.OnEnterNumber ->{
+                if (intent.number != null) {
+                    state.value.focusRequesters.mapIndexed { i, focusRequester ->
+                        if (i == intent.index) focusRequester.freeFocus() else null
+                    }
+                }
                 enterNumber(index = intent.index, number = intent.number)
+            }
 
             PinContract.Intent.OnKeyboardBack ->
                 onKeyboardBack()

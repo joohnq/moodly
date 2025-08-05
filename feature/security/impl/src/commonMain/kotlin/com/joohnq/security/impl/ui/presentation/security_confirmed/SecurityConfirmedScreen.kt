@@ -12,7 +12,7 @@ fun SecurityConfirmedScreen(
 ) {
     val snackBarState = rememberSnackBarState()
 
-    LaunchedEffect(viewModel.sideEffect) {
+    LaunchedEffect(Unit) {
         viewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
                 SecurityConfirmedContract.SideEffect.NavigateNext -> navigateNext()

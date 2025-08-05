@@ -4,7 +4,7 @@ import com.joohnq.api.entity.User
 import com.joohnq.api.repository.UserRepository
 
 class GetUserUseCase(
-    private val userRepository: UserRepository,
+    private val repository: UserRepository,
 ) {
-    suspend operator fun invoke(): Result<User> = userRepository.getUser()
+    suspend operator fun invoke(): Result<User> = repository.getUser()
 }

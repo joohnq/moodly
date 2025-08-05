@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun PhysicalSymptomsRadioButtonPreview(
+private fun Preview(
     @PreviewParameter(PhysicalSymptomsResourceParameterProvider::class)
     item: PhysicalSymptomsResource,
 ) {

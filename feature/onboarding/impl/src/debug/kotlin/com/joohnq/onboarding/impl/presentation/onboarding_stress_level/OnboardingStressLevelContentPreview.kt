@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingSleepQualityContentPreview(
+private fun Preview(
     @PreviewParameter(StressLevelRecordResourceParameterProvider::class)
     item: StressLevelRecordResource,
 ) {

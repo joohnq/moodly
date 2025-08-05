@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun DashboardBottomNavigationPreview() {
+private fun Preview() {
     DashboardBottomNavigation(
         isCurrentRoute = { true },
         isCentralExpanded = false

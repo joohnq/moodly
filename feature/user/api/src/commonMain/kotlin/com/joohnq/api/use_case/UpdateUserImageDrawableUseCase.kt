@@ -4,10 +4,10 @@ import com.joohnq.api.entity.ImageType
 import com.joohnq.api.repository.UserRepository
 
 class UpdateUserImageDrawableUseCase(
-    private val userRepository: UserRepository,
+    private val repository: UserRepository,
 ) {
     suspend operator fun invoke(i: Int): Result<Boolean> =
-        userRepository.updateUserImage(
+        repository.updateUserImage(
             image = i.toString(),
             imageType = ImageType.DRAWABLE
         )

@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun PinInputFieldPreview() {
+private fun Preview() {
     PinInputField(
         number = 1,
         focusRequester = FocusRequester()

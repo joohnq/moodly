@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingProfessionalHelpContentPreview(
+private fun Preview(
     @PreviewParameter(ProfessionalHelpResourceParameterProvider::class) item: ProfessionalHelpResource,
 ) {
     OnboardingProfessionalHelpContent(

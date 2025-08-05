@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun HeadingWithSpanPreview() {
+private fun Preview() {
     HeadingWithSpan(
         firstTitle = Res.string.app_name,
         secondTitle = Res.string.app_name,

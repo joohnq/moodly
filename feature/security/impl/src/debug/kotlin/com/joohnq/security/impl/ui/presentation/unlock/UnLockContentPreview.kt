@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun UnLockContentPreview() {
+private fun Preview() {
     UnLockContent(
         state =
             UnlockContract.State(

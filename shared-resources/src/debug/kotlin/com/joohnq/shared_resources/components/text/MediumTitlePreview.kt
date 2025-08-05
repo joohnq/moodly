@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun MediumTitlePreview() {
+private fun Preview() {
     MediumTitle(
         text = Res.string.app_name
     )

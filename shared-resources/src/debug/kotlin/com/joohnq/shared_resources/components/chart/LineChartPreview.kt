@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun LineChartPreview() {
+private fun Preview() {
     LineChart(
         color = Colors.Brown80,
         values =

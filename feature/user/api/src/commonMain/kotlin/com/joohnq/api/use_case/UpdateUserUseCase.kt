@@ -4,7 +4,7 @@ import com.joohnq.api.entity.User
 import com.joohnq.api.repository.UserRepository
 
 class UpdateUserUseCase(
-    private val userRepository: UserRepository,
+    private val repository: UserRepository,
 ) {
-    suspend operator fun invoke(user: User): Result<Boolean> = userRepository.updateUser(user)
+    suspend operator fun invoke(user: User): Result<Boolean> = repository.updateUser(user)
 }

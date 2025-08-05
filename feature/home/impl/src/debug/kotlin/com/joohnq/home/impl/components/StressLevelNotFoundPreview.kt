@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun SelfJournalingMetricPreview(
+private fun Preview(
     @PreviewParameter(ListSelfJournalRecordResourceParameterProvider::class)
     list: List<SelfJournalRecordResource>,
 ) {

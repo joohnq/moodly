@@ -6,6 +6,7 @@ import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.to
 import com.joohnq.stress_level.impl.ui.parameter.ListStressLevelRecordResourceParameterProvider
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
+import com.joohnq.stress_level.overview.component.StressLevelOverviewInsightCard
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview

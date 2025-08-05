@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun IconResourcePreview() {
+private fun Preview() {
     IconResource(
         icon = Drawables.Icons.Outlined.Logo,
         tint = Colors.Brown80,

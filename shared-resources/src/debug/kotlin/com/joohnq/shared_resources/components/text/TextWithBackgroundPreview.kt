@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun TextWithBackgroundWithoutBorderPreview() {
+private fun WithoutBorderPreview() {
     TextWithBackground(
         text = "Text",
         backgroundColor = Colors.White,
@@ -16,7 +16,7 @@ fun TextWithBackgroundWithoutBorderPreview() {
 
 @Preview
 @Composable
-fun TextWithBackgroundWithBorderPreview() {
+private fun WithBorderPreview() {
     TextWithBackground(
         text = "Text",
         borderColor = Colors.Brown80,

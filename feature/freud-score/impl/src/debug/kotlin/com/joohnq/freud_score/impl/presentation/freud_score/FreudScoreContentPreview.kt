@@ -10,8 +10,9 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun FreudScoreContentPreview(
-    @PreviewParameter(FreudScoreResourceParameterProvider::class) item: FreudScoreResource,
+private fun Preview(
+    @PreviewParameter(FreudScoreResourceParameterProvider::class)
+    item: FreudScoreResource,
 ) {
     FreudScoreContent(
         state =

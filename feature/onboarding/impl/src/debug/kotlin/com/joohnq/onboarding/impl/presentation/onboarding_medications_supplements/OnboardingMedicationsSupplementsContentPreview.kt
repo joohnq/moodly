@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingPhysicalSymptomsContentPreview(
+private fun Preview(
     @PreviewParameter(MedicationsSupplementsResourceParameterProvider::class)
     item: MedicationsSupplementsResource,
 ) {

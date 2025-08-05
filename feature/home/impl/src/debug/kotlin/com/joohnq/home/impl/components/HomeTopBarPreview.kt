@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun HomeTopBarPreview() {
+private fun Preview() {
     HomeTopBar(
         user =
             User(

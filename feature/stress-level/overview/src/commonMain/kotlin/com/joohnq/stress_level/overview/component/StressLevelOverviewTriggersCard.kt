@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.component
+package com.joohnq.stress_level.overview.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,8 +28,6 @@ import com.joohnq.shared_resources.you_are_stressed_because_you_are_to_preoccupi
 import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toMap
 import com.joohnq.stress_level.impl.ui.mapper.StressorResourceMapper.toSegments
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
-import com.joohnq.stress_level.overview.component.MultiColorCircularProgress
-import com.joohnq.stress_level.overview.component.TriggerIcon
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

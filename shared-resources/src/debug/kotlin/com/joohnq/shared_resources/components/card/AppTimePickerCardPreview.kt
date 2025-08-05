@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AppTimePickerCardNotAfternoonPreview() {
+private fun NotAfternoonPreview() {
     AppTimePickerCard(
         title = Res.string.app_name,
         hour = "12",
@@ -18,7 +18,7 @@ fun AppTimePickerCardNotAfternoonPreview() {
 
 @Preview
 @Composable
-fun AppTimePickerCardIsAfternoonPreview() {
+private fun IsAfternoonPreview() {
     AppTimePickerCard(
         title = Res.string.app_name,
         hour = "12",

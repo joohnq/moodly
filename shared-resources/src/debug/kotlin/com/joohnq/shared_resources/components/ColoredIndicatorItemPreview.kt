@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun ColoredIndicatorItemPreview() {
+private fun Preview() {
     ColoredIndicatorItem(
         title = "Title",
         description = "Description",
@@ -17,7 +17,7 @@ fun ColoredIndicatorItemPreview() {
 
 @Preview
 @Composable
-fun ColoredIndicatorItemLastPreview() {
+private fun LastPreview() {
     ColoredIndicatorItem(
         title = "Title",
         description = "Description",

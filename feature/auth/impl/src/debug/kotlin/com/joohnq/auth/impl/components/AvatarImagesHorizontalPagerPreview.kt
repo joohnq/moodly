@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AvatarImagesHorizontalPagerPreview() {
+private fun Preview() {
     AvatarImagesHorizontalPager(
         avatars = rememberAvatars()
     )

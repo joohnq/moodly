@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.component
+package com.joohnq.stress_level.overview.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

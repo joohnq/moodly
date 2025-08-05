@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AlertMessageDialogPreview() {
+private fun Preview() {
     AlertMessageDialog(
         title = "Title",
         message = "Message Here",
@@ -17,7 +17,7 @@ fun AlertMessageDialogPreview() {
 
 @Preview
 @Composable
-fun AlertMessageDialogOnlyTitlePreview() {
+private fun OnlyTitlePreview() {
     AlertMessageDialog(
         title = "Title"
     )
@@ -25,7 +25,7 @@ fun AlertMessageDialogOnlyTitlePreview() {
 
 @Preview
 @Composable
-fun AlertMessageDialogWithoutButtonsPreview() {
+private fun WithoutButtonsPreview() {
     AlertMessageDialog(
         title = "Title",
         message = "Message Here"

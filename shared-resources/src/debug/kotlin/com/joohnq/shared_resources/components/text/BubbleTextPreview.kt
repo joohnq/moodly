@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun BubbleTextNotSelectedPreview() {
+private fun Preview() {
     BubbleText(
         text = Res.string.app_name,
         selected = false
@@ -16,7 +16,7 @@ fun BubbleTextNotSelectedPreview() {
 
 @Preview
 @Composable
-fun BubbleTextSelectedPreview() {
+private fun SelectedPreview() {
     BubbleText(
         text = Res.string.app_name,
         selected = true

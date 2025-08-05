@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun UserNameContentPreview() {
+private fun Preview() {
     AuthNameContent(
         state = AuthNameContract.State()
     )
@@ -15,7 +15,7 @@ fun UserNameContentPreview() {
 
 @Preview
 @Composable
-fun UserNameContentWithNamePreview() {
+private fun WithNamePreview() {
     AuthNameContent(
         state =
             AuthNameContract.State(
@@ -26,7 +26,7 @@ fun UserNameContentWithNamePreview() {
 
 @Preview
 @Composable
-fun UserNameContentWithErrorPreview() {
+private fun WithErrorPreview() {
     AuthNameContent(
         state =
             AuthNameContract.State(

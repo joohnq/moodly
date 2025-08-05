@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun ProfileImagePreview() {
+private fun Preview() {
     ProfileImage(
         painter = painterResource(Drawables.Icons.Outlined.Logo)
     )

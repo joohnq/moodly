@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingSleepQualityContentPreview(
+private fun Preview(
     @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
     item: SleepQualityRecordResource,
 ) {
@@ -22,7 +22,7 @@ fun OnboardingSleepQualityContentPreview(
 
 @Preview
 @Composable
-fun OnboardingSleepQualityContentSlideHalfPreview() {
+private fun SlideHalfPreview() {
     OnboardingSleepQualityContent(
         state = sleepQualityRecordExcellentPreview,
         sliderValue = 0.5f
@@ -31,7 +31,7 @@ fun OnboardingSleepQualityContentSlideHalfPreview() {
 
 @Preview
 @Composable
-fun OnboardingSleepQualityContentSlideZeroPreview() {
+private fun SlideZeroPreview() {
     OnboardingSleepQualityContent(
         state = sleepQualityRecordExcellentPreview,
         sliderValue = 0f

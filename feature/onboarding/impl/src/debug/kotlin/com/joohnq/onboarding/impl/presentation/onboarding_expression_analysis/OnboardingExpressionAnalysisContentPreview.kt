@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun OnboardingExpressionAnalysisContentPreview() {
+private fun Preview() {
     OnboardingExpressionAnalysisContent(
         description = "Description"
     )
@@ -14,7 +14,7 @@ fun OnboardingExpressionAnalysisContentPreview() {
 
 @Preview
 @Composable
-fun OnboardingExpressionAnalysisContentEmptyPreview() {
+private fun EmptyPreview() {
     OnboardingExpressionAnalysisContent(
         description = ""
     )

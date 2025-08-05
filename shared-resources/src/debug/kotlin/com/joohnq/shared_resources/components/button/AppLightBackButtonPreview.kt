@@ -5,6 +5,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AppLightBackButtonPreview() {
+private fun Preview() {
     AppLightBackButton()
 }

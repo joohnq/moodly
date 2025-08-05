@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun BottomNavigationButtonPreview() {
+private fun Preview() {
     BottomNavigationButton(
         image = Drawables.Icons.Outlined.Logo,
         description = Res.string.app_name

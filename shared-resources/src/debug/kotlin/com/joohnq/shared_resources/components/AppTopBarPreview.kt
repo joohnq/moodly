@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AppTopBarLightPreview() {
+private fun LightPreview() {
     AppTopBar(
         isDark = false,
         text = Res.string.app_name
@@ -18,7 +18,7 @@ fun AppTopBarLightPreview() {
 
 @Preview
 @Composable
-fun AppTopBarDarkPreview() {
+private fun DarkPreview() {
     AppTopBar(
         isDark = true,
         text = Res.string.app_name
@@ -27,7 +27,7 @@ fun AppTopBarDarkPreview() {
 
 @Preview
 @Composable
-fun AppTopBarLightWithContentPreview() {
+private fun LightWithContentPreview() {
     AppTopBar(
         isDark = false,
         text = Res.string.app_name,
@@ -43,7 +43,7 @@ fun AppTopBarLightWithContentPreview() {
 
 @Preview
 @Composable
-fun AppTopBarDarkWithContentPreview() {
+private fun DarkWithContentPreview() {
     AppTopBar(
         isDark = true,
         text = Res.string.app_name,

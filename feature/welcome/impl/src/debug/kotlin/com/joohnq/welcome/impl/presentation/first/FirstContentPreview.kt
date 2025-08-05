@@ -6,6 +6,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun FirstContentPreview() {
+private fun Preview() {
     FirstContent()
 }

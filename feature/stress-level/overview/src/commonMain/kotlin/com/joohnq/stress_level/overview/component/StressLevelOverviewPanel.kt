@@ -1,4 +1,4 @@
-package com.joohnq.stress_level.impl.ui.component
+package com.joohnq.stress_level.overview.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,7 +24,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun StressLevelOverviewPanel(record: StressLevelRecordResource?) {
+fun StressLevelOverviewPanel(
+    record: StressLevelRecordResource?
+) {
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Orange40
     val textColor = if (hasToday) Colors.White else Colors.Brown80

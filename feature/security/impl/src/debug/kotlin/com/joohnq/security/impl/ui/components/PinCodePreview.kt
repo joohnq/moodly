@@ -5,7 +5,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun PinCodePreview() {
+private fun Preview() {
     PinCode(
         code = listOf(1, 2, 3, 4),
         focusedIndex = 1

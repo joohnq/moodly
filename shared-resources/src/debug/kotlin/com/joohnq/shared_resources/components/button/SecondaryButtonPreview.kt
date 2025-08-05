@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun SecondaryButtonPreview() {
+private fun Preview() {
     SecondaryButton(
         text = Res.string.app_name
     )

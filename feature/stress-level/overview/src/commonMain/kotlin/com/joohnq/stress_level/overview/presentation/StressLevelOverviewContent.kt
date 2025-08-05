@@ -7,8 +7,8 @@ import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistory
-import com.joohnq.stress_level.impl.ui.component.StressLevelOverviewPanel
-import com.joohnq.stress_level.impl.ui.component.StressLevelOverviewTriggers
+import com.joohnq.stress_level.overview.component.StressLevelOverviewPanel
+import com.joohnq.stress_level.overview.component.StressLevelOverviewTriggers
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.overview.component.StressLevelOverviewInsight
 import com.joohnq.ui.mapper.UiStateMapper.foldComposable

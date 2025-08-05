@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun AppTimePickerPreview() {
+private fun Preview() {
     AppTimePicker(
         timePickerState = rememberTimePickerState()
     )

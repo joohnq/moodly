@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AppTimePickerDialogPreview() {
+private fun Preview() {
     AppTimePickerDialog(
         title = Res.string.app_name
     )

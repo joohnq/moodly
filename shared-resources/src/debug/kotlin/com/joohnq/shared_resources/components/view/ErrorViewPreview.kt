@@ -5,7 +5,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun ErrorViewPreview() {
+private fun Preview() {
     ErrorView(
         errorText = "Something went wrong"
     )

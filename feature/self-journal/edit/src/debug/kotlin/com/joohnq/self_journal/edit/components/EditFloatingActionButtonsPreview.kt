@@ -6,7 +6,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun EditFloatingActionButtonsPreview() {
+private fun Preview() {
     EditFloatingActionButtons(
         isEditing = false,
         canSave = false
@@ -15,7 +15,7 @@ fun EditFloatingActionButtonsPreview() {
 
 @Preview
 @Composable
-fun EditFloatingActionButtonsIsEditingPreview() {
+private fun IsEditingPreview() {
     EditFloatingActionButtons(
         isEditing = true,
         canSave = false
@@ -24,7 +24,7 @@ fun EditFloatingActionButtonsIsEditingPreview() {
 
 @Preview
 @Composable
-fun EditFloatingActionButtonsCanSavePreview() {
+private fun CanSavePreview() {
     EditFloatingActionButtons(
         isEditing = false,
         canSave = true

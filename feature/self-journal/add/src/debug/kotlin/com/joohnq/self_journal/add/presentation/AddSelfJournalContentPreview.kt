@@ -1,8 +1,8 @@
 package com.joohnq.self_journal.add.presentation
 
 import androidx.compose.runtime.Composable
-import com.joohnq.mood.add.ui.parameter.MoodResourceParameterProvider
 import com.joohnq.mood.add.ui.resource.MoodResource
+import com.joohnq.mood.impl.ui.parameter.MoodResourceParameterProvider
 import com.joohnq.self_journal.presentation.AddSelfJournalContent
 import com.joohnq.self_journal.presentation.AddSelfJournalContract
 import com.joohnq.stress_level.impl.ui.resource.StressorResource

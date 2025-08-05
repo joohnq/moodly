@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun TextEllipsisPreview() {
+private fun Preview() {
     TextEllipsis(
         text = "Text",
         style = TextStyles.textSmMedium(),

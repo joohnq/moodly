@@ -15,7 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun AppTextFieldWithPlaceholderPreview() {
+private fun Preview() {
     AppTextFieldWithPlaceholder(
         label = Res.string.app_name,
         placeholder = Res.string.app_name,

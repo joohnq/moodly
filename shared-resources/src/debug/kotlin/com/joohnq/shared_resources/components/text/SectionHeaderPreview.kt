@@ -7,7 +7,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun SectionHeaderPreview() {
+private fun Preview() {
     SectionHeader(
         title = Res.string.app_name
     )

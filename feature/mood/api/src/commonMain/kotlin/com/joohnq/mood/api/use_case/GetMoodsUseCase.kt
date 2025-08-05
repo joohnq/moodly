@@ -4,7 +4,7 @@ import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.api.repository.MoodRepository
 
 class GetMoodsUseCase(
-    private val moodRepository: MoodRepository,
+    private val repository: MoodRepository,
 ) {
-    suspend operator fun invoke(): Result<List<MoodRecord>> = moodRepository.records.value
+    suspend operator fun invoke(): Result<List<MoodRecord>> = repository.records.value
 }

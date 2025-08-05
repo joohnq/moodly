@@ -2,9 +2,7 @@ package com.joohnq.splash.impl.ui.presentation.splash
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(

@@ -10,8 +10,8 @@ class UnLockViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
     private val initialState: UnlockContract.State = UnlockContract.State(),
 ) : BaseViewModel<UnlockContract.State, UnlockContract.Intent, UnlockContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     UnlockContract.ViewModel {
     override fun onIntent(intent: UnlockContract.Intent) {
         when (intent) {
@@ -40,8 +40,9 @@ class UnLockViewModel(
                     )
                 }
 
-                if (state.value.canContinue)
+                if (state.value.canContinue) {
                     canContinue()
+                }
             }
 
             UnlockContract.Intent.OnKeyboardBack ->

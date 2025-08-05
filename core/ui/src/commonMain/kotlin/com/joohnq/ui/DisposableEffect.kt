@@ -5,8 +5,8 @@ import androidx.compose.runtime.DisposableEffect
 
 @Composable
 fun DisposableEffect(
-    onDispose: () -> Unit
-){
+    onDispose: () -> Unit,
+) {
     DisposableEffect(Unit) {
         onDispose {
             onDispose()

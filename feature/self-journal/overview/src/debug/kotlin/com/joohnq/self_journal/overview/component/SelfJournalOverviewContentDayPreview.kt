@@ -13,13 +13,14 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Preview
 @Composable
 private fun Preview(
-    @PreviewParameter(MoodAverageResourceParameterProvider::class) average: MoodAverageResource
+    @PreviewParameter(MoodAverageResourceParameterProvider::class) average: MoodAverageResource,
 ) {
     SelfJournalOverviewContentDay(
         average = average,
-        day = CalendarDay(
-            date = getNow().date,
-            position = DayPosition.InDate
-        )
+        day =
+            CalendarDay(
+                date = getNow().date,
+                position = DayPosition.InDate
+            )
     )
 }

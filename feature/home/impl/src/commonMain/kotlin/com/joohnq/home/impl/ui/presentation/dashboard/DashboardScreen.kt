@@ -3,7 +3,6 @@ package com.joohnq.home.impl.ui.presentation.dashboard
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.FabPosition
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,12 +38,13 @@ fun DashboardScreen(
     val snackBarHostState = rememberSnackBarState()
     val navigator = rememberNavController()
     var centralIsExpanded by remember { mutableStateOf(false) }
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            is DashboardContract.SideEffect.ShowError ->
-                launch { snackBarHostState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                is DashboardContract.SideEffect.ShowError ->
+                    launch { snackBarHostState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     AppScaffoldLayout(
         containerColor = Colors.Brown10,

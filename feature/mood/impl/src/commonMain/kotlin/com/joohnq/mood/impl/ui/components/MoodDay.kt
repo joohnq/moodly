@@ -22,7 +22,6 @@ import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.TextStyles
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
-import kotlinx.datetime.LocalDate
 
 @Composable
 fun MoodDay(

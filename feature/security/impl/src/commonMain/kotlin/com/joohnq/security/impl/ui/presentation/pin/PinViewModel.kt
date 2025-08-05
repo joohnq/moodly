@@ -9,7 +9,6 @@ import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.launch
 
 class PinViewModel(
-    private val getSecurityUseCase: GetSecurityUseCase,
     private val updateSecurityUseCase: UpdateSecurityUseCase,
     initialState: PinContract.State = PinContract.State(),
 ) : BaseViewModel<PinContract.State, PinContract.Intent, PinContract.SideEffect>(
@@ -25,7 +24,7 @@ class PinViewModel(
                     )
                 }
 
-            is PinContract.Intent.OnEnterNumber ->{
+            is PinContract.Intent.OnEnterNumber -> {
                 if (intent.number != null) {
                     state.value.focusRequesters.mapIndexed { i, focusRequester ->
                         if (i == intent.index) focusRequester.freeFocus() else null

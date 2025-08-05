@@ -25,10 +25,12 @@ import com.joohnq.self_journal.di.selfJournalHistoryModule
 import com.joohnq.self_journal.di.selfJournalOverviewModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDataModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDriverFactory
+import com.joohnq.sleep_quality.add.di.sleepQualityAddModule
 import com.joohnq.sleep_quality.api.di.sleepQualityDomainModule
+import com.joohnq.sleep_quality.history.di.sleepQualityHistoryModule
 import com.joohnq.sleep_quality.impl.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.impl.data.di.sleepQualityDriverFactoryModule
-import com.joohnq.sleep_quality.impl.ui.di.sleepQualityUiModule
+import com.joohnq.sleep_quality.overview.di.sleepQualityOverviewModule
 import com.joohnq.splash.impl.di.splashImplModule
 import com.joohnq.storage.impl.di.coreStorageModule
 import com.joohnq.stress_level.api.di.stressLevelDomainModule
@@ -55,7 +57,9 @@ val appModule =
         moodOverviewModule,
         sleepQualityDataModule,
         sleepQualityDomainModule,
-        sleepQualityUiModule,
+        sleepQualityAddModule,
+        sleepQualityHistoryModule,
+        sleepQualityOverviewModule,
         stressLevelDataModule,
         stressLevelDomainModule,
         stressLevelUiModule,

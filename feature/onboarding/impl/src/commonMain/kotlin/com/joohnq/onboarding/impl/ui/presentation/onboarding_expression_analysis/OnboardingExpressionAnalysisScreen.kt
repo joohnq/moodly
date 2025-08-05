@@ -1,7 +1,6 @@
 package com.joohnq.onboarding.impl.ui.presentation.onboarding_expression_analysis
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingContract
@@ -18,13 +17,14 @@ fun OnboardingExpressionAnalysisScreen(
     viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            OnboardingContract.SideEffect.NavigateNext -> navigateNext()
-            is OnboardingContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                OnboardingContract.SideEffect.NavigateNext -> navigateNext()
+                is OnboardingContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     fun onEvent(event: OnboardingEvent) =
         when (event) {

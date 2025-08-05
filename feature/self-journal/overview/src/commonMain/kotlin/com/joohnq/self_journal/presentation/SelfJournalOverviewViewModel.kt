@@ -18,9 +18,8 @@ class SelfJournalOverviewViewModel(
     private val deleteSelfJournalsUseCase: DeleteSelfJournalsUseCase,
     initialState: SelfJournalOverviewContract.State = SelfJournalOverviewContract.State(),
 ) : BaseViewModel<SelfJournalOverviewContract.State, SelfJournalOverviewContract.Intent, SelfJournalOverviewContract.SideEffect>(
-        initialState = initialState
-    ),
-    SelfJournalOverviewContract.ViewModel {
+    initialState = initialState
+), SelfJournalOverviewContract.ViewModel {
     override fun onIntent(intent: SelfJournalOverviewContract.Intent) {
         when (intent) {
             is SelfJournalOverviewContract.Intent.GetAll -> getAll()

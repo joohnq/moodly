@@ -69,12 +69,12 @@ fun SleepQualityMetric(
                         modifier = Modifier.weight(1f),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        SleepInfo(
+                        SleepQualityInfo(
                             title = record.startSleeping.toFormattedTimeString(),
                             subtitle = Res.string.bedtime,
                             icon = Drawables.Icons.Outlined.Moon
                         )
-                        SleepInfo(
+                        SleepQualityInfo(
                             title = record.endSleeping.toFormattedTimeString(),
                             subtitle = Res.string.wake_up,
                             icon = Drawables.Icons.Outlined.Sun

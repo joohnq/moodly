@@ -13,7 +13,16 @@ import com.joohnq.stress_level.impl.ui.resource.StressorResource.Relationship
 import com.joohnq.stress_level.impl.ui.resource.StressorResource.Work
 
 object StressorResourceMapper {
-    fun allStressorResource(): List<StressorResource> = listOf(Work, Relationship, Kids, Life, Finances, Loneliness, Other)
+    fun allStressorResource(): List<StressorResource> =
+        listOf(
+            Work,
+            Relationship,
+            Kids,
+            Life,
+            Finances,
+            Loneliness,
+            Other
+        )
 
     fun Stressor.toResource(): StressorResource =
         when (this) {

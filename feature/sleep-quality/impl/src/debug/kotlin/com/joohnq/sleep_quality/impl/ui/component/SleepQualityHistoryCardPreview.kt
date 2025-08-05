@@ -8,7 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun SleepQualityHistoryCardWorstPreview(
+private fun Preview(
     @PreviewParameter(SleepQualityRecordResourceParameterProvider::class)
     item: SleepQualityRecordResource,
 ) {

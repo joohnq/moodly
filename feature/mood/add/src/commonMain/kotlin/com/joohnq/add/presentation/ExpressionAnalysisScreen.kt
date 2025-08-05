@@ -14,14 +14,15 @@ fun ExpressionAnalysisScreen(
     viewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            is AddMoodContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                is AddMoodContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
 
-            AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
+                AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
+            }
         }
-    }
 
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {

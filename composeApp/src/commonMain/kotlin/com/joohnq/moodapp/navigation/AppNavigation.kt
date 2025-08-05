@@ -17,9 +17,9 @@ import com.joohnq.self_journal.presentation.AddSelfJournalScreen
 import com.joohnq.self_journal.presentation.EditSelfJournalScreen
 import com.joohnq.self_journal.presentation.SelfJournalHistoryScreen
 import com.joohnq.self_journal.presentation.SelfJournalOverviewScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.add.AddSleepQualityScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.history.SleepQualityHistoryScreen
-import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewScreen
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryScreen
+import com.joohnq.sleep_quality.add.presentation.AddSleepQualityScreen
+import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewScreen
 import com.joohnq.stress_level.impl.ui.presentation.add.AddStressLevelScreen
 import com.joohnq.stress_level.impl.ui.presentation.history.StressLevelHistoryScreen
 import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewScreen

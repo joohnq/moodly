@@ -34,13 +34,14 @@ fun AvatarScreen(
     val avatars = rememberAvatars()
     val pagerState = rememberPagerState(pageCount = { avatars.size })
     val scope = rememberCoroutineScope()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            AvatarContract.SideEffect.NavigateNext -> navigateNext()
-            is AvatarContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                AvatarContract.SideEffect.NavigateNext -> navigateNext()
+                is AvatarContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     val permissionsManager =
         createPermissionsManager(

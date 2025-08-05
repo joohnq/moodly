@@ -25,11 +25,12 @@ fun UnLockScreen(
     val sheetState = rememberModalBottomSheetState()
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            UnlockContract.SideEffect.NavigateNext -> onNavigateToDashboard()
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                UnlockContract.SideEffect.NavigateNext -> onNavigateToDashboard()
+            }
         }
-    }
 
     fun executeBiometricSecurity() {
         if (securityAuthentication.isDeviceHasBiometric()) {

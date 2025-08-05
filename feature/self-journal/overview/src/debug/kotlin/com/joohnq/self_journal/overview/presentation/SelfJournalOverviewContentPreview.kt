@@ -16,8 +16,9 @@ private fun Preview(
     list: List<SelfJournalRecordResource>,
 ) {
     SelfJournalOverviewContent(
-        state = SelfJournalOverviewContract.State(
-            records = UiState.Success(list)
-        ),
+        state =
+            SelfJournalOverviewContract.State(
+                records = UiState.Success(list)
+            )
     )
 }

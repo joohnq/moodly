@@ -13,15 +13,16 @@ fun AddSelfJournalScreen(
     viewModel: AddSelfJournalViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            AddSelfJournalContract.SideEffect.OnGoBack ->
-                onGoBack()
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                AddSelfJournalContract.SideEffect.OnGoBack ->
+                    onGoBack()
 
-            is AddSelfJournalContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+                is AddSelfJournalContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     fun onEvent(event: AddSelfJournalContract.Event) =
         when (event) {

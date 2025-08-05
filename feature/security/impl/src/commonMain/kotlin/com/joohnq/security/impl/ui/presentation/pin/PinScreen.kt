@@ -18,13 +18,14 @@ fun PinScreen(
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
 
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            PinContract.SideEffect.NavigateNext -> navigateNext()
-            is PinContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                PinContract.SideEffect.NavigateNext -> navigateNext()
+                is PinContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     fun onEvent(event: PinContract.Event) {
         when (event) {

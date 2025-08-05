@@ -65,11 +65,14 @@ kotlin {
             implementation(projects.feature.selfJournal.impl)
             implementation(projects.feature.selfJournal.overview)
 
-            implementation(projects.feature.sleepQuality.impl)
+            implementation(projects.feature.sleepQuality.add)
             implementation(projects.feature.sleepQuality.api)
+            implementation(projects.feature.sleepQuality.history)
+            implementation(projects.feature.sleepQuality.impl)
+            implementation(projects.feature.sleepQuality.overview)
 
-            implementation(projects.feature.stressLevel.impl)
             implementation(projects.feature.stressLevel.api)
+            implementation(projects.feature.stressLevel.impl)
 
             implementation(projects.feature.splash.impl)
 

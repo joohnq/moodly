@@ -5,7 +5,7 @@ import com.joohnq.ui.UnidirectionalViewModelWithoutState
 sealed interface WelcomeContract {
     interface ViewModel : UnidirectionalViewModelWithoutState<Intent, SideEffect>
 
-    sealed interface Event{
+    sealed interface Event {
         data object OnNext : Event
     }
 

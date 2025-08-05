@@ -1,21 +1,18 @@
 package com.joohnq.sleep_quality.impl.ui.component
 
 import androidx.compose.runtime.Composable
+import com.joohnq.sleep_quality.impl.ui.parameter.ListSleepQualityRecordResourceParameterProvider
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable
-fun SleepQualityMetricPreview() {
+private fun Preview(
+    @PreviewParameter(ListSleepQualityRecordResourceParameterProvider::class)
+    list: List<SleepQualityRecordResource>,
+) {
     SleepQualityMetric(
-        records = SleepQualityRecordResource.allSleepQualityRecordResource
-    )
-}
-
-@Preview
-@Composable
-fun SleepQualityMetricEmptyPreview() {
-    SleepQualityMetric(
-        records = listOf()
+        records = list
     )
 }

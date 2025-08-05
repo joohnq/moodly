@@ -1,7 +1,6 @@
 package com.joohnq.stress_level.impl.ui.presentation.add
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.observe
 import com.joohnq.ui.sharedViewModel
@@ -14,18 +13,19 @@ fun AddStressLevelScreen(
     viewModel: AddStressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            is AddStressLevelContract.SideEffect.OnGoBack ->
-                onGoBack()
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                is AddStressLevelContract.SideEffect.OnGoBack ->
+                    onGoBack()
 
-            is AddStressLevelContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+                is AddStressLevelContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
 
-            AddStressLevelContract.SideEffect.NavigateToStressStressors ->
-                onNavigateToStressStressors()
+                AddStressLevelContract.SideEffect.NavigateToStressStressors ->
+                    onNavigateToStressStressors()
+            }
         }
-    }
 
     fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {

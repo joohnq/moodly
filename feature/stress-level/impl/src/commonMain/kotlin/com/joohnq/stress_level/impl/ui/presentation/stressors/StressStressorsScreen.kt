@@ -16,18 +16,19 @@ fun StressStressorsScreen(
     viewModel: AddStressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            is AddStressLevelContract.SideEffect.OnGoBack -> {
-                onNavigateToStressLevelOverview()
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                is AddStressLevelContract.SideEffect.OnGoBack -> {
+                    onNavigateToStressLevelOverview()
+                }
+
+                is AddStressLevelContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+
+                else -> Unit
             }
-
-            is AddStressLevelContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
-
-            else -> Unit
         }
-    }
 
     fun onEvent(event: AddStressLevelContract.Event) =
         when (event) {

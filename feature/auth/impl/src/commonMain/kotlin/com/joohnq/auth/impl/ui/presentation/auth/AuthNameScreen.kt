@@ -1,8 +1,6 @@
 package com.joohnq.auth.impl.ui.presentation.auth
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
@@ -18,13 +16,14 @@ fun AuthNameScreen(
 ) {
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) = viewModel.observe { sideEffect ->
-        when (sideEffect) {
-            AuthNameContract.SideEffect.NavigateNext -> navigateNext()
-            is AuthNameContract.SideEffect.ShowError ->
-                launch { snackBarState.showSnackbar(sideEffect.message) }
+    val (state, dispatch) =
+        viewModel.observe { sideEffect ->
+            when (sideEffect) {
+                AuthNameContract.SideEffect.NavigateNext -> navigateNext()
+                is AuthNameContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
+            }
         }
-    }
 
     fun onEvent(event: AuthNameContract.Event) =
         when (event) {

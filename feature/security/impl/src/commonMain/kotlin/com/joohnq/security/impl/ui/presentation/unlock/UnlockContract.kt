@@ -12,7 +12,7 @@ sealed interface UnlockContract {
     }
 
     sealed interface SideEffect {
-        data object NavigateNext: SideEffect
+        data object NavigateNext : SideEffect
     }
 
     sealed interface Intent {
@@ -51,6 +51,6 @@ sealed interface UnlockContract {
         val focusedIndex: Int? = null,
         val isError: Exception? = null,
         val focusRequesters: List<FocusRequester> = (1..4).map { FocusRequester() },
-        val canContinue: Boolean = false
+        val canContinue: Boolean = false,
     )
 }

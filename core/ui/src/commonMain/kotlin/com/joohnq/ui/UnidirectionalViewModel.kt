@@ -33,19 +33,18 @@ inline fun <reified STATE, INTENT, EFFECT> UnidirectionalViewModel<STATE, INTENT
 
     return StateDispatch(
         state = collectedState,
-        dispatch = dispatch,
+        dispatch = dispatch
     )
 }
 
 @Suppress("MaxLineLength")
 @Composable
-inline fun <reified STATE, INTENT, EFFECT> UnidirectionalViewModel<STATE, INTENT, EFFECT>.observeWithoutEffect(
-): StateDispatch<STATE, INTENT> {
+inline fun <reified STATE, INTENT, EFFECT> UnidirectionalViewModel<STATE, INTENT, EFFECT>.observeWithoutEffect(): StateDispatch<STATE, INTENT> {
     val collectedState by state.collectAsStateWithLifecycle()
     val dispatch: (INTENT) -> Unit = { onIntent(it) }
 
     return StateDispatch(
         state = collectedState,
-        dispatch = dispatch,
+        dispatch = dispatch
     )
 }

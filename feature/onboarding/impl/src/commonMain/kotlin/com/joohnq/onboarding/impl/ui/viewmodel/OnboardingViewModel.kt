@@ -30,8 +30,8 @@ class OnboardingViewModel(
     private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     initialState: OnboardingContract.State = OnboardingContract.State(),
 ) : BaseViewModel<OnboardingContract.State, OnboardingContract.Intent, OnboardingContract.SideEffect>(
-        initialState = initialState
-    ),
+    initialState = initialState
+),
     OnboardingContract.ViewModel {
     override fun onIntent(intent: OnboardingContract.Intent) {
         when (intent) {
@@ -65,7 +65,15 @@ class OnboardingViewModel(
 
     private fun addItems() {
         viewModelScope.launch {
-            val (physicalSymptoms, soughtHelp, medicationsSupplements, moodRecord, sleepQuality, stressLevel, _) = state.value
+            val (
+                physicalSymptoms,
+                soughtHelp,
+                medicationsSupplements,
+                moodRecord,
+                sleepQuality,
+                stressLevel,
+                _,
+            ) = state.value
 
             if (physicalSymptoms == null || soughtHelp == null || medicationsSupplements == null) {
                 emitEffect(OnboardingContract.SideEffect.ShowError("Missing fields"))

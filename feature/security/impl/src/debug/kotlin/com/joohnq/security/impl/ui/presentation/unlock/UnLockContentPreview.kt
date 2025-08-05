@@ -11,18 +11,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 fun UnLockContentPreview() {
     UnLockContent(
-        showBottomSheet = true,
         state =
-            PinContract.State(
+            UnlockContract.State(
+                showBottomSheet = true,
                 code = listOf(1, 2, 3, 4),
                 focusedIndex = 0
             ),
-        focusRequesters =
-            listOf(
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester()
-            )
     )
 }

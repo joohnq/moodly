@@ -13,7 +13,7 @@ import com.joohnq.api.entity.User
 import com.joohnq.home.impl.ui.components.FreudScoreMetric
 import com.joohnq.home.impl.ui.components.HomeTopBar
 import com.joohnq.home.impl.ui.components.MoodMetric
-import com.joohnq.home.impl.ui.components.SelfJournalingMetric
+import com.joohnq.home.impl.ui.components.SelfJournalMetric
 import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
 import com.joohnq.mood.impl.ui.resource.MoodRecordResource
@@ -110,7 +110,7 @@ fun HomeContent(
                     title = Res.string.self_journaling,
                     onSeeMore = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
                 )
-                SelfJournalingMetric(
+                SelfJournalMetric(
                     records = selfJournals,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) }
                 )

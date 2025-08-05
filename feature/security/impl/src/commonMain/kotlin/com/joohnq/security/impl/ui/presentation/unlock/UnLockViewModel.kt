@@ -104,7 +104,7 @@ class UnLockViewModel(
 
                 updateState { it.copy(security = security) }
             } catch (e: Exception) {
-                emitEffect(UnlockContract.SideEffect.ShowError(e.message.toString()))
+                updateState { it.copy(isError = e) }
             }
         }
     }

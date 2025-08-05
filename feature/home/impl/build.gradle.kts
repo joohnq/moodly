@@ -24,6 +24,7 @@ kotlin {
 
             implementation(projects.feature.selfJournal.api)
             implementation(projects.feature.selfJournal.impl)
+            implementation(projects.feature.selfJournal.overview)
 
             implementation(projects.feature.user.api)
             implementation(projects.feature.user.impl)

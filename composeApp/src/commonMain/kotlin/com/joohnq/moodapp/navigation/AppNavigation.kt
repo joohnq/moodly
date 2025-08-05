@@ -13,10 +13,10 @@ import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
 import com.joohnq.navigation.Destination
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.overview.presentation.MoodOverviewScreen
-import com.joohnq.self_journal.impl.ui.presentation.add.AddSelfJournalScreen
-import com.joohnq.self_journal.impl.ui.presentation.edit.EditSelfJournalScreen
-import com.joohnq.self_journal.impl.ui.presentation.history.SelfJournalHistoryScreen
-import com.joohnq.self_journal.impl.ui.presentation.overview.SelfJournalOverviewScreen
+import com.joohnq.self_journal.presentation.AddSelfJournalScreen
+import com.joohnq.self_journal.presentation.EditSelfJournalScreen
+import com.joohnq.self_journal.presentation.SelfJournalHistoryScreen
+import com.joohnq.self_journal.presentation.SelfJournalOverviewScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.add.AddSleepQualityScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.history.SleepQualityHistoryScreen
 import com.joohnq.sleep_quality.impl.ui.presentation.overview.SleepQualityOverviewScreen

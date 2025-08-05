@@ -19,9 +19,12 @@ import com.joohnq.security.impl.data.di.securityAuthenticationModule
 import com.joohnq.security.impl.data.di.securityDataModule
 import com.joohnq.security.impl.ui.di.securityUiModule
 import com.joohnq.self_journal.api.di.selfJournalDomainModule
+import com.joohnq.self_journal.di.selfJournalAddModule
+import com.joohnq.self_journal.di.selfJournalEditModule
+import com.joohnq.self_journal.di.selfJournalHistoryModule
+import com.joohnq.self_journal.di.selfJournalOverviewModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDataModule
 import com.joohnq.self_journal.impl.data.di.selfJournalDriverFactory
-import com.joohnq.self_journal.impl.ui.di.selfJournalUiModule
 import com.joohnq.sleep_quality.api.di.sleepQualityDomainModule
 import com.joohnq.sleep_quality.impl.data.di.sleepQualityDataModule
 import com.joohnq.sleep_quality.impl.data.di.sleepQualityDriverFactoryModule
@@ -41,7 +44,10 @@ val appModule =
         freudScoreUiModule,
         selfJournalDataModule,
         selfJournalDomainModule,
-        selfJournalUiModule,
+        selfJournalAddModule,
+        selfJournalEditModule,
+        selfJournalHistoryModule,
+        selfJournalOverviewModule,
         moodDataModule,
         moodDomainModule,
         moodAddModule,

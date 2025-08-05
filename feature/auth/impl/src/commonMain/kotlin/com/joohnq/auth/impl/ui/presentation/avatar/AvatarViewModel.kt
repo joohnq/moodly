@@ -23,6 +23,41 @@ class AvatarViewModel(
                 updateState { it.copy(selectedDrawableIndex = intent.i) }
 
             AvatarContract.Intent.UpdateImage -> updateImage()
+            is AvatarContract.Intent.UpdateImageSourceOptionDialog -> {
+                updateState {
+                    it.copy(
+                        imageSourceOptionDialog = intent.value
+                    )
+                }
+            }
+            is AvatarContract.Intent.UpdateLaunchCamera -> {
+                updateState {
+                    it.copy(
+                        launchCamera = intent.value
+                    )
+                }
+            }
+            is AvatarContract.Intent.UpdateLaunchGallery -> {
+                updateState {
+                    it.copy(
+                        launchGallery = intent.value
+                    )
+                }
+            }
+            is AvatarContract.Intent.UpdateLaunchSetting -> {
+                updateState {
+                    it.copy(
+                        launchSetting = intent.value
+                    )
+                }
+            }
+            is AvatarContract.Intent.UpdatePermissionRationalDialog -> {
+                updateState {
+                    it.copy(
+                        permissionRationalDialog = intent.value
+                    )
+                }
+            }
         }
     }
 

@@ -58,8 +58,12 @@ kotlin {
             implementation(projects.feature.mood.history)
             implementation(projects.feature.mood.overview)
 
-            implementation(projects.feature.selfJournal.impl)
             implementation(projects.feature.selfJournal.api)
+            implementation(projects.feature.selfJournal.add)
+            implementation(projects.feature.selfJournal.edit)
+            implementation(projects.feature.selfJournal.history)
+            implementation(projects.feature.selfJournal.impl)
+            implementation(projects.feature.selfJournal.overview)
 
             implementation(projects.feature.sleepQuality.impl)
             implementation(projects.feature.sleepQuality.api)

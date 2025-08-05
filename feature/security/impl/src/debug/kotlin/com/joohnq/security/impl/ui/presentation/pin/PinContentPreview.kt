@@ -11,15 +11,8 @@ fun PinContentPreview() {
         state =
             PinContract.State(
                 code = listOf(1, 2, 3, 4),
-                focusedIndex = 0
+                focusedIndex = 0,
             ),
-        focusRequesters =
-            listOf(
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester()
-            )
     )
 }
 
@@ -32,13 +25,6 @@ fun PinContentEmptyPreview() {
                 code = listOf(1, 2, 3, 4),
                 focusedIndex = 0
             ),
-        focusRequesters =
-            listOf(
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester()
-            )
     )
 }
 
@@ -51,12 +37,5 @@ fun PinContentCanContinuePreview() {
                 code = listOf(1, 2, 3, 4),
                 focusedIndex = 0
             ),
-        focusRequesters =
-            listOf(
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester(),
-                FocusRequester()
-            )
     )
 }

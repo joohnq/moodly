@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toAbbreviatedMonthName
 import com.joohnq.api.mapper.TimeMapper.calculateDuration
 import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
-import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.add.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer

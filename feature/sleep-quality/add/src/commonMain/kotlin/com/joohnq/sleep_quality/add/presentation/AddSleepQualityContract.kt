@@ -1,6 +1,6 @@
 package com.joohnq.sleep_quality.add.presentation
 
-import com.joohnq.mood.impl.ui.resource.MoodResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.UnidirectionalViewModel

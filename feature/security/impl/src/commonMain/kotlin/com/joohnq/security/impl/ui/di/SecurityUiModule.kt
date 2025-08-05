@@ -9,7 +9,6 @@ val securityUiModule: Module =
     module {
         single<PinViewModel> {
             PinViewModel(
-                getSecurityUseCase = get(),
                 updateSecurityUseCase = get()
             )
         }

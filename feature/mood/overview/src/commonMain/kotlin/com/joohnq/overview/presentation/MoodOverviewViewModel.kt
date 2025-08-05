@@ -1,11 +1,11 @@
 package com.joohnq.overview.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.api.use_case.AddMoodUseCase
 import com.joohnq.mood.api.use_case.DeleteMoodUseCase
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.ResultMapper.toResultResource

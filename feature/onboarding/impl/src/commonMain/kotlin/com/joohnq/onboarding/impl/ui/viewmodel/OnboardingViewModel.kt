@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.api.use_case.UpdateMedicationsSupplementsUseCase
 import com.joohnq.api.use_case.UpdatePhysicalSymptomsUseCase
 import com.joohnq.api.use_case.UpdateSoughtHelpUseCase
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.mood.api.use_case.AddMoodUseCase
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.preferences.api.use_case.UpdateSkipOnboardingUseCase
 import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
@@ -30,8 +30,8 @@ class OnboardingViewModel(
     private val updateSkipOnboardingUseCase: UpdateSkipOnboardingUseCase,
     initialState: OnboardingContract.State = OnboardingContract.State(),
 ) : BaseViewModel<OnboardingContract.State, OnboardingContract.Intent, OnboardingContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     OnboardingContract.ViewModel {
     override fun onIntent(intent: OnboardingContract.Intent) {
         when (intent) {

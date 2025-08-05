@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toDomain
+import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toDomain
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.use_case.AddSelfJournalsUseCase
 import com.joohnq.ui.BaseViewModel

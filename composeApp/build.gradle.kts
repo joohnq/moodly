@@ -71,8 +71,11 @@ kotlin {
             implementation(projects.feature.sleepQuality.impl)
             implementation(projects.feature.sleepQuality.overview)
 
+            implementation(projects.feature.stressLevel.add)
             implementation(projects.feature.stressLevel.api)
+            implementation(projects.feature.stressLevel.history)
             implementation(projects.feature.stressLevel.impl)
+            implementation(projects.feature.stressLevel.overview)
 
             implementation(projects.feature.splash.impl)
 

@@ -1,10 +1,11 @@
 package com.joohnq.mood.impl.ui.components
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.add.ui.components.MoodFace
+import com.joohnq.mood.add.ui.resource.MoodAverageResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.mood.impl.ui.parameter.MoodAverageResourceParameterProvider
 import com.joohnq.mood.impl.ui.parameter.MoodResourceParameterProvider
-import com.joohnq.mood.impl.ui.resource.MoodAverageResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -48,7 +49,7 @@ fun MoodFaceWithClickPreview(
 
 @Preview
 @Composable
-fun MoodFacePreview(
+fun MoodFaceAveragePreview(
     @PreviewParameter(MoodAverageResourceParameterProvider::class)
     average: MoodAverageResource,
 ) {

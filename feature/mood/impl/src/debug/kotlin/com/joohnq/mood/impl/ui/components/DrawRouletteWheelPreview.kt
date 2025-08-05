@@ -5,10 +5,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.joohnq.mood.add.ui.components.drawRouletteWheel
 
 @Preview
 @Composable
-fun DrawRouletteWheelPreview() {
+private fun Preview() {
     Canvas(modifier = Modifier.fillMaxSize()) {
         drawRouletteWheel(
             sliceAngle = 360f / 6,

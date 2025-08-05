@@ -1,7 +1,7 @@
 package com.joohnq.freud_score.impl.ui.presentation.freud_score
 
 import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface FreudScoreContract {

@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateTimeMapper.toFormattedTimeString
-import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.components.MoodFace
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.current_mood

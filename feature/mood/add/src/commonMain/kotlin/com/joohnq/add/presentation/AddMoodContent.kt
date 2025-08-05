@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.components.MoodFace
-import com.joohnq.mood.impl.ui.components.MoodRadioGroup
+import com.joohnq.mood.add.ui.components.MoodFace
+import com.joohnq.mood.add.ui.components.MoodRadioGroup
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_mood
 import com.joohnq.shared_resources.components.AppTopBar

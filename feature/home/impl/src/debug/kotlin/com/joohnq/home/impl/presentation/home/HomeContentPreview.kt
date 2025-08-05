@@ -6,8 +6,8 @@ import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
 import com.joohnq.home.impl.ui.presentation.home.HomeContent
 import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
-import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.parameter.ListMoodRecordResourceParameterProvider
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.impl.ui.parameter.ListSleepQualityRecordResourceParameterProvider
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource

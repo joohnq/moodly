@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.components.MoodHistoryCard
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.components.MoodHistoryCard
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
 import com.joohnq.shared_resources.components.AppTopBar

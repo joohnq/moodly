@@ -1,7 +1,7 @@
 package com.joohnq.overview.presentation
 
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.mood.api.entity.MoodRecord
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
 

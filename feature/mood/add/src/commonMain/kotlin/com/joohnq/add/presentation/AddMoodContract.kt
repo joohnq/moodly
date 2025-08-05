@@ -1,7 +1,7 @@
 package com.joohnq.add.presentation
 
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
-import com.joohnq.mood.impl.ui.resource.MoodResource
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface AddMoodContract {

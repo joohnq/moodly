@@ -1,7 +1,7 @@
 package com.joohnq.self_journal.impl.ui.resource
 
 import com.joohnq.api.getNow
-import com.joohnq.mood.impl.ui.resource.MoodResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import kotlinx.datetime.LocalDateTime
 
 data class SelfJournalRecordResource(

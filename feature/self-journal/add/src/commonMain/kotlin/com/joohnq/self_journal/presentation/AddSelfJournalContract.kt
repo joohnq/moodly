@@ -1,6 +1,6 @@
 package com.joohnq.self_journal.presentation
 
-import com.joohnq.mood.impl.ui.resource.MoodResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import com.joohnq.ui.UnidirectionalViewModel
 

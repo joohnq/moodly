@@ -17,13 +17,13 @@ import com.joohnq.self_journal.presentation.AddSelfJournalScreen
 import com.joohnq.self_journal.presentation.EditSelfJournalScreen
 import com.joohnq.self_journal.presentation.SelfJournalHistoryScreen
 import com.joohnq.self_journal.presentation.SelfJournalOverviewScreen
-import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryScreen
 import com.joohnq.sleep_quality.add.presentation.AddSleepQualityScreen
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryScreen
 import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewScreen
-import com.joohnq.stress_level.impl.ui.presentation.add.AddStressLevelScreen
-import com.joohnq.stress_level.impl.ui.presentation.history.StressLevelHistoryScreen
-import com.joohnq.stress_level.impl.ui.presentation.overview.StressLevelOverviewScreen
-import com.joohnq.stress_level.impl.ui.presentation.stressors.StressStressorsScreen
+import com.joohnq.stress_level.add.presentation.AddStressLevelScreen
+import com.joohnq.stress_level.add.presentation.StressStressorsScreen
+import com.joohnq.stress_level.history.presentation.StressLevelHistoryScreen
+import com.joohnq.stress_level.overview.presentation.StressLevelOverviewScreen
 
 fun NavGraphBuilder.appNavigation(
     onNavigate: (Destination) -> Unit,

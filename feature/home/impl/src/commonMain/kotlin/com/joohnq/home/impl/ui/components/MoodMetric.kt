@@ -2,8 +2,8 @@ package com.joohnq.home.impl.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.card.MetricSummaryCard
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout

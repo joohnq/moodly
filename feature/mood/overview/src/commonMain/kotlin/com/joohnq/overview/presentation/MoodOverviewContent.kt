@@ -1,8 +1,8 @@
 package com.joohnq.overview.presentation
 
 import androidx.compose.runtime.Composable
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.overview.component.MoodOverviewContentBody
 import com.joohnq.overview.component.MoodOverviewContentPanel
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout

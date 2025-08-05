@@ -1,7 +1,7 @@
 package com.joohnq.mood.impl.ui.parameter
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 
 class ListMoodRecordResourceParameterProvider : PreviewParameterProvider<List<MoodRecordResource>> {
     override val values =

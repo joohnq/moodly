@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toCompleteDateString
 import com.joohnq.api.mapper.LocalDateTimeMapper.toFormattedTimeString
-import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.add.ui.components.MoodFace
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout

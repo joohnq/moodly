@@ -2,11 +2,11 @@ package com.joohnq.self_journal.impl.ui.mapper
 
 import com.joohnq.api.getNow
 import com.joohnq.api.mapper.YearMapper.getTotalDays
+import com.joohnq.mood.add.ui.mapper.MoodAverageResourceMapper.toResource
+import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toDomain
+import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toResource
+import com.joohnq.mood.add.ui.resource.MoodAverageResource
 import com.joohnq.mood.api.mapper.MoodAverageMapper.toAverage
-import com.joohnq.mood.impl.ui.mapper.MoodAverageResourceMapper.toResource
-import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toDomain
-import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toResource
-import com.joohnq.mood.impl.ui.resource.MoodAverageResource
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import kotlinx.datetime.LocalDate

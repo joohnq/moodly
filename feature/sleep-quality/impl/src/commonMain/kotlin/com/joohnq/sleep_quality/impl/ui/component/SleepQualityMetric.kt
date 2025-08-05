@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.TimeMapper.calculateDuration
 import com.joohnq.api.mapper.TimeMapper.toFormattedTimeString
 import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
-import com.joohnq.mood.impl.ui.components.MoodFace
+import com.joohnq.mood.add.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.bedtime
 import com.joohnq.shared_resources.components.card.GiganticSecondaryCard

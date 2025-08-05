@@ -7,9 +7,9 @@ import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.freud_score.impl.ui.di.freudScoreUiModule
 import com.joohnq.history.di.moodHistoryModule
 import com.joohnq.home.impl.ui.di.homeUiModule
+import com.joohnq.mood.add.data.di.moodDataModule
+import com.joohnq.mood.add.data.di.moodDriverFactoryModule
 import com.joohnq.mood.api.di.moodDomainModule
-import com.joohnq.mood.impl.data.di.moodDataModule
-import com.joohnq.mood.impl.data.di.moodDriverFactoryModule
 import com.joohnq.onboarding.impl.ui.di.onboardingUiModule
 import com.joohnq.overview.di.moodOverviewModule
 import com.joohnq.preferences.api.di.preferencesDomainModule
@@ -33,10 +33,12 @@ import com.joohnq.sleep_quality.impl.data.di.sleepQualityDriverFactoryModule
 import com.joohnq.sleep_quality.overview.di.sleepQualityOverviewModule
 import com.joohnq.splash.impl.di.splashImplModule
 import com.joohnq.storage.impl.di.coreStorageModule
+import com.joohnq.stress_level.add.di.stressLevelAddModule
 import com.joohnq.stress_level.api.di.stressLevelDomainModule
+import com.joohnq.stress_level.history.di.stressLevelHistoryModule
 import com.joohnq.stress_level.impl.data.di.stressLevelDataModule
 import com.joohnq.stress_level.impl.data.di.stressLevelDriverFactoryModule
-import com.joohnq.stress_level.impl.ui.di.stressLevelUiModule
+import com.joohnq.stress_level.overview.di.stressLevelOverviewModule
 import com.joohnq.user.impl.data.di.userDataModule
 import com.joohnq.user.impl.data.di.userDriverFactoryModule
 import com.joohnq.user.impl.ui.di.userUiModule
@@ -62,7 +64,9 @@ val appModule =
         sleepQualityOverviewModule,
         stressLevelDataModule,
         stressLevelDomainModule,
-        stressLevelUiModule,
+        stressLevelAddModule,
+        stressLevelHistoryModule,
+        stressLevelOverviewModule,
         userDataModule,
         userDomainModule,
         userUiModule,

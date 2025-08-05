@@ -1,8 +1,8 @@
 package com.joohnq.add.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.mood.api.use_case.AddMoodUseCase
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.ui.BaseViewModel
 import com.joohnq.ui.mapper.ResultMapper.toUiState
 import com.joohnq.ui.mapper.UiStateMapper.onFailure

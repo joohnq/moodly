@@ -16,7 +16,7 @@ import com.joohnq.home.impl.ui.components.MoodMetric
 import com.joohnq.home.impl.ui.components.SelfJournalMetric
 import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer

@@ -2,7 +2,7 @@ package com.joohnq.sleep_quality.add.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.mapper.ListMapper.toggle
-import com.joohnq.mood.impl.ui.mapper.MoodResourceMapper.toSleepQuality
+import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toSleepQuality
 import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource

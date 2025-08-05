@@ -3,9 +3,9 @@ package com.joohnq.home.impl.ui.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.use_case.GetUserUseCase
 import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toResource
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.calculateStatsFreudScore
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.calculateStatsFreudScore
-import com.joohnq.mood.impl.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toResource
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase

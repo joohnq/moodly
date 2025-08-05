@@ -46,7 +46,7 @@ fun StressLevelMetric(
             suffix = stringResource(Res.string.level),
             description = stringResource(record.stressLevel.subtitle),
             content = {
-                RatingBar(record.stressLevel.level, ::getBrushGradient)
+                StressLevelRatingBar(record.stressLevel.level, ::getBrushGradient)
             },
             color = Colors.Orange40,
             onClick = onClick

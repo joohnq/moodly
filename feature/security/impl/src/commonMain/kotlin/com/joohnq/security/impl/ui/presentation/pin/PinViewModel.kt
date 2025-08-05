@@ -3,7 +3,6 @@ package com.joohnq.security.impl.ui.presentation.pin
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.mapper.ListMapper.itemsNotNull
 import com.joohnq.security.api.Security
-import com.joohnq.security.api.use_case.GetSecurityUseCase
 import com.joohnq.security.api.use_case.UpdateSecurityUseCase
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.launch

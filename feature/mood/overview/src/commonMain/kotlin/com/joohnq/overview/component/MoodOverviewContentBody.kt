@@ -4,10 +4,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.impl.ui.components.MoodCalendar
-import com.joohnq.mood.impl.ui.components.MoodHistoryContent
-import com.joohnq.mood.impl.ui.components.MoodInsight
-import com.joohnq.mood.impl.ui.resource.MoodRecordResource
+import com.joohnq.mood.add.ui.components.MoodHistoryContent
+import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.overview.presentation.MoodOverviewContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -37,12 +35,12 @@ fun MoodOverviewContentBody(
         )
         VerticalSpacer(20.dp)
     }
-    MoodInsight(
+    MoodOverviewInsight(
         modifier = modifier,
         records = records,
         onCreate = { onEvent(MoodOverviewContract.Event.OnAddMood) }
     )
-    MoodCalendar(
+    MoodOverviewCalendar(
         modifier = modifier,
         records = records,
         onCreate = { onEvent(MoodOverviewContract.Event.OnAddMood) }

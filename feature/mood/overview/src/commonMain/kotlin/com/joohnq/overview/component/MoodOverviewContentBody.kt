@@ -38,21 +38,21 @@ fun MoodOverviewContentBody(
     MoodOverviewInsight(
         modifier = modifier,
         records = records,
-        onCreate = { onEvent(MoodOverviewContract.Event.OnAddMood) }
+        onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodOverviewCalendar(
         modifier = modifier,
         records = records,
-        onCreate = { onEvent(MoodOverviewContract.Event.OnAddMood) }
+        onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodHistoryContent(
         modifier = modifier,
         records = records.take(7),
         onSeeMore = {
-            onEvent(MoodOverviewContract.Event.OnNavigateToMoodHistory)
+            onEvent(MoodOverviewContract.Event.NavigateToMoodHistory)
         },
         onCreate = {
-            onEvent(MoodOverviewContract.Event.OnAddMood)
+            onEvent(MoodOverviewContract.Event.NavigateToAddMood)
         },
         onDelete = { id ->
             onIntent(MoodOverviewContract.Intent.Delete(id))

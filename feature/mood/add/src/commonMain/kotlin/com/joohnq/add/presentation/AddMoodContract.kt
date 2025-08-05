@@ -8,11 +8,12 @@ sealed interface AddMoodContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class UpdateAddingMoodRecordMood(
+
+        data class ChangeMood(
             val mood: MoodResource,
         ) : Intent
 
-        data class UpdateAddingMoodRecordDescription(
+        data class ChangeDescription(
             val description: String,
         ) : Intent
 
@@ -22,7 +23,7 @@ sealed interface AddMoodContract {
     }
 
     sealed interface SideEffect {
-        data object StatsAdded : SideEffect
+        data object NavigateNext : SideEffect
 
         data class ShowError(
             val message: String,
@@ -34,7 +35,7 @@ sealed interface AddMoodContract {
     )
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object GoBack : Event
 
         data object NavigateNext : Event
     }

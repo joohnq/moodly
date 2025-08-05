@@ -43,7 +43,7 @@ fun SelfJournalHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(SelfJournalHistoryContract.Event.OnGoBack) }
+                        onGoBack = { onEvent(SelfJournalHistoryContract.Event.GoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(

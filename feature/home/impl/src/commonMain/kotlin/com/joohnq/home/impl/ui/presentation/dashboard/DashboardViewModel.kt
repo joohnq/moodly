@@ -29,10 +29,10 @@ class DashboardViewModel(
         initialState = initialState
     ),
     DashboardContract.ViewModel {
-    override fun onIntent(intent: DashboardContract.Intent) {
-        when (intent) {
-            DashboardContract.Intent.Get -> get()
-        }
+    override fun onIntent(intent: DashboardContract.Intent) {}
+
+    init {
+        get()
     }
 
     private fun get() {

@@ -49,6 +49,13 @@ object TextStyles {
         )
 
     @Composable
+    fun headingSmBold() =
+        TextStyle(
+            fontFamily = FontFamily.Urbanist.bold(),
+            fontSize = 30.sp
+        )
+
+    @Composable
     fun headingXsBold() =
         TextStyle(
             fontFamily = FontFamily.Urbanist.bold(),

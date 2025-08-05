@@ -8,7 +8,7 @@ sealed interface SleepQualityHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
@@ -18,9 +18,6 @@ sealed interface SleepQualityHistoryContract {
     }
 
     sealed interface SideEffect {
-        data object Deleted :
-            SideEffect
-
         data class ShowError(
             val error: String,
         ) : SideEffect

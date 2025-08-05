@@ -6,11 +6,11 @@ sealed interface WelcomeContract {
     interface ViewModel : UnidirectionalViewModelWithoutState<Intent, SideEffect>
 
     sealed interface Event {
-        data object OnNext : Event
+        data object Next : Event
     }
 
     sealed interface Intent {
-        data object UpdateSkipWelcome : Intent
+        data object Action : Intent
     }
 
     sealed interface SideEffect {

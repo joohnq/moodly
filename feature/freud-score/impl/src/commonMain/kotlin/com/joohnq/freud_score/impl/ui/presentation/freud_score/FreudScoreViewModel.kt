@@ -1,7 +1,5 @@
 package com.joohnq.freud_score.impl.ui.presentation.freud_score
 
-import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toResource
-import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.calculateStatsFreudScore
 import com.joohnq.ui.BaseViewModel
 
 class FreudScoreViewModel(
@@ -10,12 +8,5 @@ class FreudScoreViewModel(
         initialState = initialState
     ),
     FreudScoreContract.ViewModel {
-    override fun onIntent(intent: FreudScoreContract.Intent) {
-        when (intent) {
-            is FreudScoreContract.Intent.Get ->
-                updateState {
-                    it.copy(freudScore = intent.records.calculateStatsFreudScore().toResource())
-                }
-        }
-    }
+    override fun onIntent(intent: FreudScoreContract.Intent) {}
 }

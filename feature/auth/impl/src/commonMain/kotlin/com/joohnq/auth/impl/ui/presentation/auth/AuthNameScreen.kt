@@ -1,7 +1,6 @@
 package com.joohnq.auth.impl.ui.presentation.auth
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import com.joohnq.shared_resources.remember.rememberSnackBarState
@@ -28,12 +27,6 @@ fun AuthNameScreen(
     fun onEvent(event: AuthNameContract.Event) =
         when (event) {
             AuthNameContract.Event.OnClearFocus -> focusManager.clearFocus()
-
-            AuthNameContract.Event.OnContinue -> {
-                focusManager.clearFocus()
-
-                viewModel.onIntent(AuthNameContract.Intent.Action)
-            }
         }
 
     AuthNameContent(

@@ -49,7 +49,7 @@ fun ExpressionAnalysisContent(
                     .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppTopBar(onGoBack = { onEvent(AddMoodContract.Event.OnGoBack) })
+            AppTopBar(onGoBack = { onEvent(AddMoodContract.Event.GoBack) })
             VerticalSpacer(60.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_title),
@@ -68,7 +68,7 @@ fun ExpressionAnalysisContent(
                 text = description,
                 onValueChange = {
                     onIntent(
-                        AddMoodContract.Intent.UpdateAddingMoodRecordDescription(it)
+                        AddMoodContract.Intent.ChangeDescription(it)
                     )
                 }
             )

@@ -1,23 +1,24 @@
 package com.joohnq.security.impl.ui.presentation.unlock
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.security.api.Security
 import com.joohnq.security.api.getPinCode
 import com.joohnq.security.api.use_case.GetSecurityUseCase
+import com.joohnq.security.impl.PinHelper
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.launch
 
 class UnLockViewModel(
     private val getSecurityUseCase: GetSecurityUseCase,
-    private val initialState: UnlockContract.State = UnlockContract.State(),
+    private val pinHelper: PinHelper,
+    initialState: UnlockContract.State = UnlockContract.State(),
 ) : BaseViewModel<UnlockContract.State, UnlockContract.Intent, UnlockContract.SideEffect>(
         initialState = initialState
     ),
     UnlockContract.ViewModel {
     override fun onIntent(intent: UnlockContract.Intent) {
         when (intent) {
-            UnlockContract.Intent.Init -> init()
-            UnlockContract.Intent.Action -> action()
-            is UnlockContract.Intent.OnChangeFieldFocused -> {
+            is UnlockContract.Intent.ChangeFieldFocused -> {
                 updateState {
                     it.copy(
                         focusedIndex = intent.index
@@ -25,41 +26,19 @@ class UnLockViewModel(
                 }
             }
 
-            is UnlockContract.Intent.OnEnterNumber -> {
-                if (intent.number != null) {
-                    state.value.focusRequesters.mapIndexed { i, focusRequester ->
-                        if (i == intent.index) focusRequester.freeFocus() else null
-                    }
-                }
+            is UnlockContract.Intent.EnterNumber ->
+                enterNumber(
+                    index = intent.index,
+                    number = intent.number
+                )
 
-                enterNumber(index = intent.index, number = intent.number)
+            UnlockContract.Intent.KeyboardBack ->
+                keyboardBack()
 
-                updateState {
-                    it.copy(
-                        canContinue = state.value.code.none { digit -> digit == null }
-                    )
-                }
-
-                if (state.value.canContinue) {
-                    canContinue()
-                }
-            }
-
-            UnlockContract.Intent.OnKeyboardBack ->
-                onKeyboardBack()
-
-            is UnlockContract.Intent.UpdateShowBottomSheet -> {
+            is UnlockContract.Intent.ChangeShowBottomSheet -> {
                 updateState {
                     it.copy(
                         showBottomSheet = intent.value
-                    )
-                }
-            }
-
-            is UnlockContract.Intent.UpdateIsError -> {
-                updateState {
-                    it.copy(
-                        isError = intent.error
                     )
                 }
             }
@@ -69,36 +48,16 @@ class UnLockViewModel(
                     if (i == intent.index) focusRequester.requestFocus() else null
                 }
             }
+
+            UnlockContract.Intent.Action -> onAction()
         }
     }
 
-    private fun canContinue() {
-        val pin = state.value.security.getPinCode()
-        if (pin != state.value.code) {
-            updateState { it.copy(isError = Exception("Incorrect PIN")) }
-        } else {
-            emitEffect(UnlockContract.SideEffect.NavigateNext)
-        }
+    init {
+        getSecurity()
     }
 
-    private fun action() {
-    }
-
-    private fun onKeyboardBack() {
-        val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
-
-        updateState {
-            it.copy(
-                code =
-                    it.code.mapIndexed { i, number ->
-                        if (i == previousIndex) null else number
-                    },
-                focusedIndex = previousIndex
-            )
-        }
-    }
-
-    private fun init() {
+    private fun getSecurity() {
         viewModelScope.launch {
             try {
                 val security = getSecurityUseCase().getOrThrow()
@@ -110,53 +69,71 @@ class UnLockViewModel(
         }
     }
 
-    private fun enterNumber(
-        index: Int,
-        number: Int?,
-    ) {
-        val newCode =
-            state.value.code.mapIndexed { currentIndex, currentNumber ->
-                if (currentIndex == index) number else currentNumber
-            }
-        val wasNumberRemoved = number == null
-        val focusedIndex =
-            if (wasNumberRemoved || state.value.code.getOrNull(index) != null) {
-                state.value.focusedIndex
-            } else {
-                getNextFocusedIndex(
-                    currentCode = state.value.code,
-                    currentFocusedIndex = state.value.focusedIndex
+    private fun onAction() {
+        when (state.value.security) {
+            is Security.Pin ->
+                onIntent(
+                    UnlockContract.Intent.ChangeShowBottomSheet(
+                        true
+                    )
                 )
-            }
+
+            else -> emitEffect(UnlockContract.SideEffect.ExecuteBiometricSecurity)
+        }
+    }
+
+    private fun keyboardBack() {
+        val (code, focusedIndex) =
+            pinHelper.keyboardBack(
+                state.value.code,
+                state.value.focusedIndex
+            )
 
         updateState {
             it.copy(
-                code = newCode,
-                focusedIndex = focusedIndex,
-                isError = null
+                code = code,
+                focusedIndex = focusedIndex
             )
         }
     }
 
-    private fun getPreviousFocusedIndex(index: Int?): Int? = index?.minus(1)?.coerceAtLeast(0)
+    private fun enterNumber(
+        index: Int,
+        number: Int?,
+    ) {
+        if (number != null) {
+            state.value.focusRequesters.mapIndexed { i, focusRequester ->
+                if (i == index) focusRequester.freeFocus() else null
+            }
+        }
 
-    private fun getNextFocusedIndex(
-        currentCode: List<Int?>,
-        currentFocusedIndex: Int?,
-    ): Int? {
-        if (currentFocusedIndex == null) return null
-        if (currentFocusedIndex == 3) return currentFocusedIndex
-        return getFirstEmptyFieldIndexAfterFocusedIndex(currentCode, currentFocusedIndex)
+        val (code, focusedIndex) =
+            pinHelper.enterNumber(
+                index = index,
+                number = number,
+                code = state.value.code,
+                focusedIndex = state.value.focusedIndex
+            )
+
+        updateState {
+            it.copy(
+                code = code,
+                focusedIndex = focusedIndex,
+                isError = null
+            )
+        }
+
+        canContinue()
     }
 
-    private fun getFirstEmptyFieldIndexAfterFocusedIndex(
-        code: List<Int?>,
-        currentFocusedIndex: Int,
-    ): Int {
-        code.forEachIndexed { i, number ->
-            if (i <= currentFocusedIndex) return@forEachIndexed
-            if (number == null) return i
+    private fun canContinue() {
+        if (!state.value.code.none { digit -> digit == null }) return
+
+        val pin = state.value.security.getPinCode()
+        if (pin != state.value.code) {
+            updateState { it.copy(isError = Exception("Incorrect PIN")) }
+        } else {
+            emitEffect(UnlockContract.SideEffect.NavigateNext)
         }
-        return currentFocusedIndex
     }
 }

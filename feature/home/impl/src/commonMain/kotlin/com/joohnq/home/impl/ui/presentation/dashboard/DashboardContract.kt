@@ -1,4 +1,4 @@
-package com.joohnq.home.impl.ui.presentation.viewmodel
+package com.joohnq.home.impl.ui.presentation.dashboard
 
 import com.joohnq.api.entity.User
 import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
@@ -13,9 +13,7 @@ import com.joohnq.ui.entity.UiState
 sealed interface DashboardContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
-    sealed interface Intent {
-        data object Get : Intent
-    }
+    sealed interface Intent
 
     data class State(
         val user: UiState<User> = UiState.Idle,
@@ -33,33 +31,25 @@ sealed interface DashboardContract {
     }
 
     sealed interface Event {
-        data object OnNavigateToAddJournaling : Event
+        data object NavigateToAddSelfJournal : Event
 
-        data object OnNavigateToAddStress : Event
+        data object NavigateToAddMood : Event
 
-        data object OnNavigateToAddMood : Event
+        data object NavigateToFreudScore : Event
 
-        data object OnNavigateToFreudScore : Event
+        data object NavigateToMoodOverview : Event
 
-        data object OnNavigateToMood : Event
+        data object NavigateToSelfJournal : Event
 
-        data object OnNavigateToSelfJournal : Event
+        data object NavigateToSleepQuality : Event
 
-        data object OnNavigateToSleepQuality : Event
+        data object NavigateToStressLevelOverview : Event
 
-        data object OnNavigateToStressLevel : Event
+        data object NavigateToSelfJournalHistory : Event
 
-        data object OnNavigateToAddStressLevel : Event
+        data object NavigateToAddSleepQuality : Event
 
-        data class OnNavigateToEditJournaling(
-            val id: Int,
-        ) : Event
-
-        data object OnNavigateToSelfJournalHistory : Event
-
-        data object OnNavigateToAddSleep : Event
-
-        data class OnNavigateTo(
+        data class NavigateTo(
             val destination: Destination,
         ) : Event
     }

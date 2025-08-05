@@ -7,24 +7,24 @@ sealed interface PinContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnClearFocus : Event
+        data object ClearFocus : Event
 
-        data object OnGoBack : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
-        data class OnEnterNumber(
+        data class EnterNumber(
             val number: Int?,
             val index: Int,
         ) : Intent
 
-        data class OnChangeFieldFocused(
+        data class ChangeFieldFocused(
             val index: Int,
         ) : Intent
 
         data object Action : Intent
 
-        data object OnKeyboardBack : Intent
+        data object KeyboardBack : Intent
     }
 
     sealed interface SideEffect {

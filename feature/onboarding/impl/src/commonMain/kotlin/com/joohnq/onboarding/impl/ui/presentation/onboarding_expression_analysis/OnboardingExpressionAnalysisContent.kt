@@ -44,7 +44,7 @@ fun OnboardingExpressionAnalysisContent(
             text = description,
             onValueChange = {
                 onIntent(
-                    OnboardingContract.Intent.UpdateMoodRecordDescription(it)
+                    OnboardingContract.Intent.ChangeMoodDescription(it)
                 )
             }
         )

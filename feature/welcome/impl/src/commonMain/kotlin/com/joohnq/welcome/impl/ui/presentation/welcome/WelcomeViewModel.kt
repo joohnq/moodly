@@ -11,7 +11,7 @@ class WelcomeViewModel(
     WelcomeContract.ViewModel {
     override fun onIntent(intent: WelcomeContract.Intent) {
         when (intent) {
-            WelcomeContract.Intent.UpdateSkipWelcome -> updateSkipWelcome()
+            WelcomeContract.Intent.Action -> updateSkipWelcome()
         }
     }
 

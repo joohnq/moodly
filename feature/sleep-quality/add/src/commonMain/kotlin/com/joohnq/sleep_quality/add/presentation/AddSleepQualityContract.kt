@@ -9,32 +9,32 @@ interface AddSleepQualityContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
-        data class UpdateMood(
+        data class ChangeMood(
             val mood: MoodResource,
         ) : Intent
 
-        data class UpdateSelectedSleepInfluence(
+        data class ChangeSelectedSleepInfluence(
             val sleepInfluence: SleepInfluencesResource,
         ) : Intent
 
-        data class UpdateShowStartTimePickerDialog(
+        data class ChangeShowStartTimePickerDialog(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateShowEndTimePickerDialog(
+        data class ChangeShowEndTimePickerDialog(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateStartTime(
+        data class ChangeStartTime(
             val hour: Int,
             val minute: Int,
         ) : Intent
 
-        data class UpdateEndTime(
+        data class ChangeEndTime(
             val hour: Int,
             val minute: Int,
         ) : Intent
@@ -45,7 +45,7 @@ interface AddSleepQualityContract {
     }
 
     sealed interface SideEffect {
-        data object OnNavigateToNext : SideEffect
+        data object NavigateToNext : SideEffect
 
         data class ShowError(
             val message: String,

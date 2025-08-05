@@ -14,7 +14,7 @@ fun FreudScoreScreen(
 
     fun onEvent(event: FreudScoreContract.Event) =
         when (event) {
-            is FreudScoreContract.Event.OnGoBack -> onGoBack()
+            is FreudScoreContract.Event.GoBack -> onGoBack()
         }
 
     FreudScoreContent(

@@ -20,13 +20,13 @@ fun AddSleepQualityScreen(
                 is AddSleepQualityContract.SideEffect.ShowError ->
                     launch { snackBarState.showSnackbar(sideEffect.message) }
 
-                AddSleepQualityContract.SideEffect.OnNavigateToNext -> onNavigateToSleepQuality()
+                AddSleepQualityContract.SideEffect.NavigateToNext -> onNavigateToSleepQuality()
             }
         }
 
     fun onEvent(event: AddSleepQualityContract.Event) =
         when (event) {
-            AddSleepQualityContract.Event.OnGoBack -> onGoBack()
+            AddSleepQualityContract.Event.GoBack -> onGoBack()
         }
 
     DisposableEffect {

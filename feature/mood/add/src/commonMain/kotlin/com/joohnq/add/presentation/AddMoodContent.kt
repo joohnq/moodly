@@ -50,7 +50,7 @@ fun AddMoodContent(
             AppTopBar(
                 isDark = false,
                 text = Res.string.add_mood,
-                onGoBack = { onEvent(AddMoodContract.Event.OnGoBack) }
+                onGoBack = { onEvent(AddMoodContract.Event.GoBack) }
             )
             VerticalSpacer(50.dp)
             Text(
@@ -79,7 +79,7 @@ fun AddMoodContent(
                 selectedMood = state.record,
                 setSelectedMood = { resource ->
                     onIntent(
-                        AddMoodContract.Intent.UpdateAddingMoodRecordMood(resource)
+                        AddMoodContract.Intent.ChangeMood(resource)
                     )
                 }
             )

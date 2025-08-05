@@ -18,6 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalOverviewContentBody(
     modifier: Modifier = Modifier,
     records: List<SelfJournalRecordResource>,
+    onIntent: (SelfJournalOverviewContract.Intent) -> Unit = {},
     onEvent: (SelfJournalOverviewContract.Event) -> Unit = {},
 ) {
     SectionHeader(
@@ -37,22 +38,22 @@ fun SelfJournalOverviewContentBody(
         records = records,
         subtitle = stringResource(Res.string.journals_written_this_month),
         onCreate = {
-            onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal)
+            onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal)
         }
     )
     SectionHeader(
         modifier = modifier,
         title = Res.string.journal_history,
         onSeeMore = {
-            onEvent(SelfJournalOverviewContract.Event.OnNavigateToSelfHistory)
+            onEvent(SelfJournalOverviewContract.Event.NavigateToSelfJournalHistory)
         }
     )
     SelfJournalOverviewHistory(
         modifier = modifier,
         records = records.take(7),
-        onClick = { onEvent(SelfJournalOverviewContract.Event.OnEdit(it)) },
-        onCreate = { onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal) },
-        onDelete = { id -> onEvent(SelfJournalOverviewContract.Event.OnDelete(id)) }
+        onClick = { onEvent(SelfJournalOverviewContract.Event.NavigateToEditSelfJournal(it)) },
+        onCreate = { onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal) },
+        onDelete = { id -> onIntent(SelfJournalOverviewContract.Intent.Delete(id)) }
     )
     VerticalSpacer(10.dp)
 }

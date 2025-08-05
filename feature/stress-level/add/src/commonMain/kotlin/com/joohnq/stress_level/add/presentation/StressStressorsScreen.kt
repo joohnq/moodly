@@ -17,7 +17,7 @@ fun StressStressorsScreen(
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
-                is AddStressLevelContract.SideEffect.OnGoBack -> {
+                is AddStressLevelContract.SideEffect.GoBack -> {
                     onNavigateToStressLevelOverview()
                 }
 
@@ -30,8 +30,7 @@ fun StressStressorsScreen(
 
     fun onEvent(event: AddStressLevelContract.Event) =
         when (event) {
-            is AddStressLevelContract.Event.OnGoBack -> onGoBack()
-            else -> Unit
+            is AddStressLevelContract.Event.GoBack -> onGoBack()
         }
 
     DisposableEffect {

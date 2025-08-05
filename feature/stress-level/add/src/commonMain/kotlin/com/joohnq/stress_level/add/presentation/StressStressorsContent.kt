@@ -60,7 +60,7 @@ fun StressStressorsContent(
         ) {
             AppTopBar(
                 text = Res.string.add_stress_level,
-                onGoBack = { onEvent(AddStressLevelContract.Event.OnGoBack) }
+                onGoBack = { onEvent(AddStressLevelContract.Event.GoBack) }
             )
             VerticalSpacer(60.dp)
             Text(
@@ -81,7 +81,7 @@ fun StressStressorsContent(
                             text = stressor.text,
                             onClick = {
                                 onIntent(
-                                    AddStressLevelContract.Intent.UpdateAddingStressors(stressor)
+                                    AddStressLevelContract.Intent.ChangeAddingStressors(stressor)
                                 )
                             },
                             selected =

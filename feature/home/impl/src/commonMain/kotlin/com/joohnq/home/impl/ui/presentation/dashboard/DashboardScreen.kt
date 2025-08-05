@@ -15,8 +15,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.home.impl.ui.components.DashboardCentral
 import com.joohnq.home.impl.ui.presentation.home.HomeScreen
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardViewModel
 import com.joohnq.home.impl.ui.toDashboardEvent
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.components.button.BottomNavigationButton

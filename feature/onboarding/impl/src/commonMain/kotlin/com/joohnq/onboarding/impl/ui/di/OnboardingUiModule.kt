@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val onboardingUiModule: Module =
     module {
-        single<OnboardingViewModel> {
+        single {
             OnboardingViewModel(
                 addMoodUseCase = get(),
                 addStressLevelUseCase = get(),

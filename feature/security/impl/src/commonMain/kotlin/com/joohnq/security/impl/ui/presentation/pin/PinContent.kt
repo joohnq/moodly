@@ -47,7 +47,7 @@ fun PinContent(
         modifier =
             Modifier
                 .fillMaxSize()
-                .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PinContract.Event.OnClearFocus) }) }
+                .pointerInput(Unit) { detectTapGestures(onTap = { onEvent(PinContract.Event.ClearFocus) }) }
     ) { padding ->
         Column(
             modifier =
@@ -64,7 +64,7 @@ fun PinContent(
                 AppTopBar(
                     modifier = Modifier.fillMaxWidth(),
                     text = Res.string.pin_setup,
-                    onGoBack = { onEvent(PinContract.Event.OnGoBack) }
+                    onGoBack = { onEvent(PinContract.Event.GoBack) }
                 )
                 VerticalSpacer(60.dp)
                 Text(
@@ -85,17 +85,17 @@ fun PinContent(
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
                         onIntent(
-                            PinContract.Intent.OnEnterNumber(
+                            PinContract.Intent.EnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onIntent(PinContract.Intent.OnKeyboardBack) },
+                    onKeyboardBack = { onIntent(PinContract.Intent.KeyboardBack) },
                     focusRequesters = state.focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onIntent(PinContract.Intent.OnChangeFieldFocused(i)) }
+                    onFocusChanged = { i -> onIntent(PinContract.Intent.ChangeFieldFocused(i)) }
                 )
             }
             PrimaryButton(

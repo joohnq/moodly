@@ -106,14 +106,14 @@ fun AuthNameContent(
                         )
                     },
                     colors = ComponentColors.TextField.mainTextFieldColors(),
-                    onValueChange = { onIntent(AuthNameContract.Intent.UpdateName(it)) }
+                    onValueChange = { onIntent(AuthNameContract.Intent.ChangeName(it)) }
                 )
                 VerticalSpacer(24.dp)
                 if (canContinue) {
                     PrimaryButton(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                         text = Res.string.continue_word,
-                        onClick = { onEvent(AuthNameContract.Event.OnContinue) }
+                        onClick = { onIntent(AuthNameContract.Intent.Action) }
                     )
                 }
             }

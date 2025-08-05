@@ -54,15 +54,15 @@ fun AvatarScreen(
                         PermissionStatus.GRANTED -> {
                             when (permissionType) {
                                 PermissionType.CAMERA ->
-                                    dispatch(AvatarContract.Intent.UpdateLaunchCamera(true))
+                                    dispatch(AvatarContract.Intent.ChangeLaunchCamera(true))
 
                                 PermissionType.GALLERY ->
-                                    dispatch(AvatarContract.Intent.UpdateLaunchGallery(true))
+                                    dispatch(AvatarContract.Intent.ChangeLaunchGallery(true))
                             }
                         }
 
                         else -> {
-                            dispatch(AvatarContract.Intent.UpdatePermissionRationalDialog(true))
+                            dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(true))
                         }
                     }
                 }
@@ -72,29 +72,29 @@ fun AvatarScreen(
     val cameraManager =
         rememberCameraManager {
             scope.launch {
-                viewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+                viewModel.onIntent(AvatarContract.Intent.ChangeImageBitmap(it?.toImageBitmap()))
             }
         }
 
     val galleryManager =
         rememberGalleryManager {
             scope.launch {
-                viewModel.onIntent(AvatarContract.Intent.UpdateImageBitmap(it?.toImageBitmap()))
+                viewModel.onIntent(AvatarContract.Intent.ChangeImageBitmap(it?.toImageBitmap()))
             }
         }
 
     if (state.imageSourceOptionDialog) {
         ImageSourcePicker(
             onDismissRequest = {
-                dispatch(AvatarContract.Intent.UpdateImageSourceOptionDialog(false))
+                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
             },
             onGalleryRequest = {
-                dispatch(AvatarContract.Intent.UpdateImageSourceOptionDialog(false))
-                dispatch(AvatarContract.Intent.UpdateLaunchGallery(true))
+                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
+                dispatch(AvatarContract.Intent.ChangeLaunchGallery(true))
             },
             onCameraRequest = {
-                dispatch(AvatarContract.Intent.UpdateImageSourceOptionDialog(false))
-                dispatch(AvatarContract.Intent.UpdateLaunchCamera(true))
+                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
+                dispatch(AvatarContract.Intent.ChangeLaunchCamera(true))
             }
         )
     }
@@ -105,7 +105,7 @@ fun AvatarScreen(
         } else {
             permissionsManager.askPermission(PermissionType.GALLERY)
         }
-        dispatch(AvatarContract.Intent.UpdateLaunchGallery(false))
+        dispatch(AvatarContract.Intent.ChangeLaunchGallery(false))
     }
 
     if (state.launchCamera) {
@@ -114,12 +114,12 @@ fun AvatarScreen(
         } else {
             permissionsManager.askPermission(PermissionType.CAMERA)
         }
-        dispatch(AvatarContract.Intent.UpdateLaunchCamera(false))
+        dispatch(AvatarContract.Intent.ChangeLaunchCamera(false))
     }
 
     if (state.launchSetting) {
         permissionsManager.launchSettings()
-        dispatch(AvatarContract.Intent.UpdateLaunchSetting(false))
+        dispatch(AvatarContract.Intent.ChangeLaunchSetting(false))
     }
 
     if (state.permissionRationalDialog) {
@@ -129,30 +129,18 @@ fun AvatarScreen(
             positiveButtonText = stringResource(Res.string.settings),
             negativeButtonText = stringResource(Res.string.cancel),
             onPositiveClick = {
-                dispatch(AvatarContract.Intent.UpdatePermissionRationalDialog(false))
-                dispatch(AvatarContract.Intent.UpdateLaunchSetting(true))
+                dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(false))
+                dispatch(AvatarContract.Intent.ChangeLaunchSetting(true))
             },
             onNegativeClick = {
-                dispatch(AvatarContract.Intent.UpdatePermissionRationalDialog(false))
+                dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(false))
             }
         )
     }
 
-    fun onEvent(event: AvatarContract.Event) {
-        when (event) {
-            AvatarContract.Event.OnPickAvatar -> {
-                dispatch(AvatarContract.Intent.UpdateImageSourceOptionDialog(true))
-            }
-
-            AvatarContract.Event.OnContinue -> {
-                viewModel.onIntent(AvatarContract.Intent.UpdateImage)
-            }
-        }
-    }
-
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            viewModel.onIntent(AvatarContract.Intent.UpdateImageDrawableIndex(page))
+            viewModel.onIntent(AvatarContract.Intent.ChangeImageDrawableIndex(page))
         }
     }
 
@@ -160,6 +148,6 @@ fun AvatarScreen(
         snackBarState = snackBarState,
         state = state,
         avatars = avatars,
-        onEvent = ::onEvent
+        onIntent = dispatch
     )
 }

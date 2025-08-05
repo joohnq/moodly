@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val moodAddModule: Module =
     module {
-        viewModel<AddMoodViewModel> {
+        single<AddMoodViewModel> {
             AddMoodViewModel(
                 addMoodUseCase = get()
             )

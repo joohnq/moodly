@@ -57,7 +57,7 @@ fun OnboardingStressLevelContent(
                     selected = state.stressLevel == option,
                     shape = Dimens.Shape.Circle,
                     colors = ComponentColors.RadioButton.stressLevelRadioButtonColors(),
-                    onClick = { onIntent(OnboardingContract.Intent.UpdateStressLevel(option)) }
+                    onClick = { onIntent(OnboardingContract.Intent.ChangeStressLevel(option)) }
                 )
             }
         }

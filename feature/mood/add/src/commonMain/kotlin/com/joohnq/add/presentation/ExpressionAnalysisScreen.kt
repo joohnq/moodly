@@ -20,13 +20,13 @@ fun ExpressionAnalysisScreen(
                 is AddMoodContract.SideEffect.ShowError ->
                     launch { snackBarState.showSnackbar(sideEffect.message) }
 
-                AddMoodContract.SideEffect.StatsAdded -> onNavigateToMood()
+                AddMoodContract.SideEffect.NavigateNext -> onNavigateToMood()
             }
         }
 
     fun onEvent(event: AddMoodContract.Event) =
         when (event) {
-            AddMoodContract.Event.OnGoBack -> onGoBack()
+            AddMoodContract.Event.GoBack -> onGoBack()
             else -> {}
         }
 

@@ -28,8 +28,8 @@ fun MoodOverviewContent(
                 isDark = !hasToday,
                 image = Drawables.Images.MoodBackground,
                 color = if (hasToday) record.mood.palette.imageColor else Colors.Brown10,
-                onAddButton = { onEvent(MoodOverviewContract.Event.OnAddMood) },
-                onGoBack = { onEvent(MoodOverviewContract.Event.OnGoBack) },
+                onAddButton = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) },
+                onGoBack = { onEvent(MoodOverviewContract.Event.GoBack) },
                 panel = { modifier ->
                     MoodOverviewContentPanel(
                         modifier = modifier,

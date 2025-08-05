@@ -78,15 +78,15 @@ fun AddSleepQualityContent(
             title = Res.string.start_sleeping_time,
             onDismiss = {
                 onIntent(
-                    AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(
+                    AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog(
                         false
                     )
                 )
             },
             onConfirm = {
-                onIntent(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
+                onIntent(AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog(false))
                 onIntent(
-                    AddSleepQualityContract.Intent.UpdateStartTime(
+                    AddSleepQualityContract.Intent.ChangeStartTime(
                         startTimePickerState.hour,
                         startTimePickerState.minute
                     )
@@ -101,12 +101,12 @@ fun AddSleepQualityContent(
         AppTimePickerDialog(
             title = Res.string.end_sleeping_time,
             onDismiss = {
-                onIntent(AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(false))
+                onIntent(AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog(false))
             },
             onConfirm = {
-                onIntent(AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog(false))
+                onIntent(AddSleepQualityContract.Intent.ChangeShowEndTimePickerDialog(false))
                 onIntent(
-                    AddSleepQualityContract.Intent.UpdateEndTime(
+                    AddSleepQualityContract.Intent.ChangeEndTime(
                         endTimePickerState.hour,
                         endTimePickerState.minute
                     )
@@ -128,7 +128,7 @@ fun AddSleepQualityContent(
                 .padding(padding)
         ) {
             Box(modifier = Modifier.paddingHorizontalMedium()) {
-                AppTopBar(onGoBack = { onEvent(AddSleepQualityContract.Event.OnGoBack) })
+                AppTopBar(onGoBack = { onEvent(AddSleepQualityContract.Event.GoBack) })
             }
             VerticalSpacer(40.dp)
             Text(
@@ -151,7 +151,7 @@ fun AddSleepQualityContent(
                     isAfternoon = startTimePickerState.isAfternoon,
                     onClick = {
                         onIntent(
-                            AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog(true)
+                            AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog(true)
                         )
                     }
                 )
@@ -164,7 +164,7 @@ fun AddSleepQualityContent(
                     isAfternoon = endTimePickerState.isAfternoon,
                     onClick = {
                         onIntent(
-                            AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog(
+                            AddSleepQualityContract.Intent.ChangeShowEndTimePickerDialog(
                                 true
                             )
                         )
@@ -195,7 +195,7 @@ fun AddSleepQualityContent(
                                 Colors.Gray30
                             },
                         color = if (moodResource == resource) resource.palette.faceColor else Colors.Gray60,
-                        onClick = { onIntent(AddSleepQualityContract.Intent.UpdateMood(resource)) }
+                        onClick = { onIntent(AddSleepQualityContract.Intent.ChangeMood(resource)) }
                     )
                 }
             }
@@ -220,7 +220,7 @@ fun AddSleepQualityContent(
                         shape = Dimens.Shape.Circle,
                         onClick = {
                             onIntent(
-                                AddSleepQualityContract.Intent.UpdateSelectedSleepInfluence(
+                                AddSleepQualityContract.Intent.ChangeSelectedSleepInfluence(
                                     sleepInfluences
                                 )
                             )

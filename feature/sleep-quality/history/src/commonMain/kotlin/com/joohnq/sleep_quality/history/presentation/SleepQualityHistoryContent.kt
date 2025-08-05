@@ -37,7 +37,7 @@ fun SleepQualityHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(SleepQualityHistoryContract.Event.OnGoBack) }
+                        onGoBack = { onEvent(SleepQualityHistoryContract.Event.GoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(

@@ -87,9 +87,9 @@ fun OnboardingSleepQualityContent(
                     modifier = Modifier.weight(1f),
                     sliderValue = sliderValue,
                     setSliderValue = {
-                        onIntent(OnboardingContract.Intent.UpdateSliderValue(it))
+                        onIntent(OnboardingContract.Intent.ChangeSliderValue(it))
                         onIntent(
-                            OnboardingContract.Intent.UpdateSleepQuality(
+                            OnboardingContract.Intent.ChangeSleepQuality(
                                 it.toSleepQualityResource()
                             )
                         )

@@ -32,8 +32,8 @@ fun SleepQualityOverviewContent(
                         record = record
                     )
                 },
-                onAddButton = { onEvent(SleepQualityOverviewContract.Event.OnNavigateToAddSleepQuality) },
-                onGoBack = { onEvent(SleepQualityOverviewContract.Event.OnGoBack) },
+                onAddButton = { onEvent(SleepQualityOverviewContract.Event.NavigateToAddSleepQuality) },
+                onGoBack = { onEvent(SleepQualityOverviewContract.Event.GoBack) },
                 body = { modifier ->
                     SleepQualityOverviewBody(
                         modifier = modifier,

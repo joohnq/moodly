@@ -7,9 +7,6 @@ import com.joohnq.sleep_quality.api.use_case.AddSleepQualityUseCase
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toDomain
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class AddSleepQualityViewModel(
@@ -21,7 +18,7 @@ class AddSleepQualityViewModel(
     AddSleepQualityContract.ViewModel {
     override fun onIntent(intent: AddSleepQualityContract.Intent) {
         when (intent) {
-            is AddSleepQualityContract.Intent.UpdateMood ->
+            is AddSleepQualityContract.Intent.ChangeMood ->
                 updateState {
                     it.copy(
                         record =
@@ -31,7 +28,7 @@ class AddSleepQualityViewModel(
                     )
                 }
 
-            is AddSleepQualityContract.Intent.UpdateSelectedSleepInfluence ->
+            is AddSleepQualityContract.Intent.ChangeSelectedSleepInfluence ->
                 updateState {
                     val influences =
                         state.value.record.sleepInfluences
@@ -41,13 +38,13 @@ class AddSleepQualityViewModel(
                     )
                 }
 
-            is AddSleepQualityContract.Intent.UpdateShowStartTimePickerDialog ->
+            is AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog ->
                 updateState { it.copy(showStartTimePickerDialog = intent.value) }
 
-            is AddSleepQualityContract.Intent.UpdateShowEndTimePickerDialog ->
+            is AddSleepQualityContract.Intent.ChangeShowEndTimePickerDialog ->
                 updateState { it.copy(showEndTimePickerDialog = intent.value) }
 
-            is AddSleepQualityContract.Intent.UpdateStartTime ->
+            is AddSleepQualityContract.Intent.ChangeStartTime ->
                 updateState {
                     it.copy(
                         record =
@@ -61,7 +58,7 @@ class AddSleepQualityViewModel(
                     )
                 }
 
-            is AddSleepQualityContract.Intent.UpdateEndTime ->
+            is AddSleepQualityContract.Intent.ChangeEndTime ->
                 updateState {
                     it.copy(
                         record =
@@ -82,14 +79,13 @@ class AddSleepQualityViewModel(
         }
     }
 
-    private fun add() =
+    private fun add() {
         viewModelScope.launch {
-            val res = addSleepQualityUseCase(state.value.record.toDomain()).toUiState()
-            res
-                .onSuccess {
-                    emitEffect(AddSleepQualityContract.SideEffect.OnNavigateToNext)
-                }.onFailure {
-                    emitEffect(AddSleepQualityContract.SideEffect.ShowError(it))
-                }
+            try {
+                addSleepQualityUseCase(state.value.record.toDomain()).getOrThrow()
+            } catch (e: Exception) {
+                emitEffect(AddSleepQualityContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
+    }
 }

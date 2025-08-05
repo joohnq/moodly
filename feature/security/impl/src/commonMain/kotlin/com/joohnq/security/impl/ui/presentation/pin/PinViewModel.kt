@@ -4,11 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.api.mapper.ListMapper.itemsNotNull
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.use_case.UpdateSecurityUseCase
+import com.joohnq.security.impl.PinHelper
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.launch
 
 class PinViewModel(
     private val updateSecurityUseCase: UpdateSecurityUseCase,
+    private val pinHelper: PinHelper,
     initialState: PinContract.State = PinContract.State(),
 ) : BaseViewModel<PinContract.State, PinContract.Intent, PinContract.SideEffect>(
         initialState = initialState
@@ -16,24 +18,18 @@ class PinViewModel(
     PinContract.ViewModel {
     override fun onIntent(intent: PinContract.Intent) {
         when (intent) {
-            is PinContract.Intent.OnChangeFieldFocused ->
+            is PinContract.Intent.ChangeFieldFocused ->
                 updateState {
                     it.copy(
                         focusedIndex = intent.index
                     )
                 }
 
-            is PinContract.Intent.OnEnterNumber -> {
-                if (intent.number != null) {
-                    state.value.focusRequesters.mapIndexed { i, focusRequester ->
-                        if (i == intent.index) focusRequester.freeFocus() else null
-                    }
-                }
+            is PinContract.Intent.EnterNumber ->
                 enterNumber(index = intent.index, number = intent.number)
-            }
 
-            PinContract.Intent.OnKeyboardBack ->
-                onKeyboardBack()
+            PinContract.Intent.KeyboardBack ->
+                keyboardBack()
 
             PinContract.Intent.Action -> action()
         }
@@ -54,16 +50,17 @@ class PinViewModel(
         }
     }
 
-    private fun onKeyboardBack() {
-        val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
+    private fun keyboardBack() {
+        val (code, focusedIndex) =
+            pinHelper.keyboardBack(
+                state.value.code,
+                state.value.focusedIndex
+            )
 
         updateState {
             it.copy(
-                code =
-                    it.code.mapIndexed { i, number ->
-                        if (i == previousIndex) null else number
-                    },
-                focusedIndex = previousIndex
+                code = code,
+                focusedIndex = focusedIndex
             )
         }
     }
@@ -72,48 +69,25 @@ class PinViewModel(
         index: Int,
         number: Int?,
     ) {
-        val newCode =
-            state.value.code.mapIndexed { currentIndex, currentNumber ->
-                if (currentIndex == index) number else currentNumber
+        if (number != null) {
+            state.value.focusRequesters.mapIndexed { i, focusRequester ->
+                if (i == index) focusRequester.freeFocus() else null
             }
-        val wasNumberRemoved = number == null
-        val focusedIndex =
-            if (wasNumberRemoved || state.value.code.getOrNull(index) != null) {
-                state.value.focusedIndex
-            } else {
-                getNextFocusedIndex(
-                    currentCode = state.value.code,
-                    currentFocusedIndex = state.value.focusedIndex
-                )
-            }
+        }
+
+        val (code, focusedIndex) =
+            pinHelper.enterNumber(
+                index = index,
+                number = number,
+                code = state.value.code,
+                focusedIndex = state.value.focusedIndex
+            )
 
         updateState {
             it.copy(
-                code = newCode,
+                code = code,
                 focusedIndex = focusedIndex
             )
         }
-    }
-
-    private fun getPreviousFocusedIndex(index: Int?): Int? = index?.minus(1)?.coerceAtLeast(0)
-
-    private fun getNextFocusedIndex(
-        currentCode: List<Int?>,
-        currentFocusedIndex: Int?,
-    ): Int? {
-        if (currentFocusedIndex == null) return null
-        if (currentFocusedIndex == 3) return currentFocusedIndex
-        return getFirstEmptyFieldIndexAfterFocusedIndex(currentCode, currentFocusedIndex)
-    }
-
-    private fun getFirstEmptyFieldIndexAfterFocusedIndex(
-        code: List<Int?>,
-        currentFocusedIndex: Int,
-    ): Int {
-        code.forEachIndexed { i, number ->
-            if (i <= currentFocusedIndex) return@forEachIndexed
-            if (number == null) return i
-        }
-        return currentFocusedIndex
     }
 }

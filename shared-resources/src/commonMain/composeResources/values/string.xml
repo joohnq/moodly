@@ -188,7 +188,7 @@
     <string name="type_here_your_title">Type here your title</string>
     <string name="type_here_your_description">Type here your description</string>
     <string name="add_health_journal">Add Health Journal</string>
-    <string name="greeting">Hi, %1$s</string>
+    <string name="greeting">Hello, %1$s</string>
     <string name="profile">Profile</string>
     <string name="chat">Chat</string>
     <string name="profile_setup">Profile Setup</string>

@@ -1,22 +1,26 @@
 package com.joohnq.security.impl.ui.di
 
+import com.joohnq.security.impl.PinHelper
 import com.joohnq.security.impl.ui.presentation.pin.PinViewModel
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val securityUiModule: Module =
     module {
-        single<PinViewModel> {
+        singleOf(::PinHelper)
+        viewModel<PinViewModel> {
             PinViewModel(
-                updateSecurityUseCase = get()
+                updateSecurityUseCase = get(),
+                pinHelper = get(),
             )
         }
-        single<SecurityViewModel> {
+        viewModel<SecurityViewModel> {
             SecurityViewModel(
-                getSecurityUseCase = get(),
                 updateSecurityUseCase = get(),
-                updateSkipOnboardingUseCase = get()
+                updateSkipSecurityUseCase = get()
             )
         }
     }

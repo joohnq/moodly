@@ -16,6 +16,7 @@ private fun Preview() {
                 name = "John Doe",
                 image = "0",
                 imageType = ImageType.DRAWABLE
-            )
+            ),
+        freudScore = 88
     )
 }

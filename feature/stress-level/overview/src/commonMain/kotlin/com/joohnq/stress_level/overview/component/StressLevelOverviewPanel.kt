@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelOverviewPanel(
-    record: StressLevelRecordResource?
+    record: StressLevelRecordResource?,
 ) {
     val hasToday = record != null
     val iconTint = if (hasToday) Colors.White else Colors.Orange40

@@ -1,6 +1,5 @@
 package com.joohnq.sleep_quality.overview.presentation
 
-import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 import com.joohnq.ui.entity.UiState
@@ -9,36 +8,23 @@ sealed interface SleepQualityOverviewContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack :
+        data object GoBack :
             Event
 
-        data object OnNavigateToAddSleepQuality :
+        data object NavigateToAddSleepQuality :
             Event
 
-        data object OnNavigateToSleepHistory :
+        data object NavigateToSleepQualityHistory :
             Event
     }
 
     sealed interface Intent {
-        data object GetAll :
-            Intent
-
-        data class Add(
-            val record: SleepQualityRecord,
-        ) : Intent
-
         data class Delete(
             val id: Int,
         ) : Intent
     }
 
     sealed interface SideEffect {
-        data object Added :
-            SideEffect
-
-        data object Deleted :
-            SideEffect
-
         data class ShowError(
             val error: String,
         ) : SideEffect

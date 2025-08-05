@@ -22,17 +22,14 @@ class AddSelfJournalViewModel(
             AddSelfJournalContract.Intent.ResetState ->
                 resetState()
 
-            is AddSelfJournalContract.Intent.UpdateDescription ->
+            is AddSelfJournalContract.Intent.ChangeDescription ->
                 updateState { it.copy(description = intent.description) }
 
-            is AddSelfJournalContract.Intent.UpdateMood ->
+            is AddSelfJournalContract.Intent.ChangeMood ->
                 updateState { it.copy(mood = intent.mood) }
 
-            is AddSelfJournalContract.Intent.UpdateTitle ->
+            is AddSelfJournalContract.Intent.ChangeTitle ->
                 updateState { it.copy(title = intent.title) }
-
-            is AddSelfJournalContract.Intent.UpdateTitleError ->
-                updateState { it.copy(titleError = intent.error) }
 
             AddSelfJournalContract.Intent.Add -> add()
         }
@@ -53,7 +50,7 @@ class AddSelfJournalViewModel(
 
             res
                 .onSuccess {
-                    emitEffect(AddSelfJournalContract.SideEffect.OnGoBack)
+                    emitEffect(AddSelfJournalContract.SideEffect.GoBack)
                 }.onFailure {
                     emitEffect(AddSelfJournalContract.SideEffect.ShowError(it))
                 }

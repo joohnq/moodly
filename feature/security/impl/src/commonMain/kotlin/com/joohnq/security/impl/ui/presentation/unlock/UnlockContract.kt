@@ -7,23 +7,21 @@ import com.joohnq.ui.UnidirectionalViewModel
 sealed interface UnlockContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
-    sealed interface Event {
-        data object OnContinue : Event
-    }
+    sealed interface Event
 
     sealed interface SideEffect {
         data object NavigateNext : SideEffect
+
+        data object ExecuteBiometricSecurity : SideEffect
     }
 
     sealed interface Intent {
-        data object Init : Intent
-
-        data class OnEnterNumber(
+        data class EnterNumber(
             val number: Int?,
             val index: Int,
         ) : Intent
 
-        data class OnChangeFieldFocused(
+        data class ChangeFieldFocused(
             val index: Int,
         ) : Intent
 
@@ -31,17 +29,13 @@ sealed interface UnlockContract {
             val index: Int,
         ) : Intent
 
-        data class UpdateIsError(
-            val error: Exception?,
+        data object KeyboardBack : Intent
+
+        data class ChangeShowBottomSheet(
+            val value: Boolean,
         ) : Intent
 
         data object Action : Intent
-
-        data object OnKeyboardBack : Intent
-
-        data class UpdateShowBottomSheet(
-            val value: Boolean,
-        ) : Intent
     }
 
     data class State(
@@ -51,6 +45,5 @@ sealed interface UnlockContract {
         val focusedIndex: Int? = null,
         val isError: Exception? = null,
         val focusRequesters: List<FocusRequester> = (1..4).map { FocusRequester() },
-        val canContinue: Boolean = false,
     )
 }

@@ -1,8 +1,6 @@
 package com.joohnq.stress_level.overview.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.joohnq.stress_level.api.entity.StressLevelRecord
-import com.joohnq.stress_level.api.use_case.AddStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
@@ -11,12 +9,9 @@ import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.ResultMapper.toResultResource
 import com.joohnq.ui.mapper.ResultMapper.toUiState
 import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class StressLevelOverviewViewModel(
-    private val addStressLevelUseCase: AddStressLevelUseCase,
     private val getAllStressLevelUseCase: GetAllStressLevelUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
     initialState: StressLevelOverviewContract.State = StressLevelOverviewContract.State(),
@@ -26,57 +21,47 @@ class StressLevelOverviewViewModel(
     StressLevelOverviewContract.ViewModel {
     override fun onIntent(intent: StressLevelOverviewContract.Intent) {
         when (intent) {
-            StressLevelOverviewContract.Intent.GetAll -> getAll()
-            is StressLevelOverviewContract.Intent.Add -> add(intent.record)
             is StressLevelOverviewContract.Intent.Delete -> delete(intent.id)
         }
     }
 
-    private fun delete(id: Int) {
-        viewModelScope.launch {
-            val res = deleteStressLevelUseCase(id).toUiState()
-
-            res
-                .onSuccess {
-                    emitEffect(StressLevelOverviewContract.SideEffect.Deleted)
-                    updateState {
-                        it.copy(
-                            UiState.Success(
-                                state.value.records
-                                    .getValueOrEmpty()
-                                    .filter { item -> item.id != id }
-                            )
-                        )
-                    }
-                }.onFailure {
-                    emitEffect(StressLevelOverviewContract.SideEffect.ShowError(it))
-                }
-        }
+    init {
+        getAll()
     }
 
     private fun getAll() {
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
+            try {
+                val res =
+                    getAllStressLevelUseCase()
+                        .toResultResource { it.toResource() }
+                        .toUiState()
 
-            val res =
-                getAllStressLevelUseCase()
-                    .toResultResource { it.toResource() }
-                    .toUiState()
-
-            updateState { it.copy(res) }
+                updateState { it.copy(res) }
+            } catch (e: Exception) {
+                emitEffect(StressLevelOverviewContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 
-    private fun add(record: StressLevelRecord) {
+    private fun delete(id: Int) {
         viewModelScope.launch {
-            val res = addStressLevelUseCase(record).toUiState()
+            try {
+                deleteStressLevelUseCase(id).getOrThrow()
 
-            res
-                .onSuccess {
-                    emitEffect(StressLevelOverviewContract.SideEffect.Added)
-                }.onFailure {
-                    emitEffect(StressLevelOverviewContract.SideEffect.ShowError(it))
+                updateState {
+                    it.copy(
+                        UiState.Success(
+                            state.value.records
+                                .getValueOrEmpty()
+                                .filter { item -> item.id != id }
+                        )
+                    )
                 }
+            } catch (e: Exception) {
+                emitEffect(StressLevelOverviewContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 }

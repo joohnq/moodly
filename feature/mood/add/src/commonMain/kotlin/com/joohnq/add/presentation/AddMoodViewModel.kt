@@ -4,9 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toDomain
 import com.joohnq.mood.api.use_case.AddMoodUseCase
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class AddMoodViewModel(
@@ -18,10 +15,10 @@ class AddMoodViewModel(
     AddMoodContract.ViewModel {
     override fun onIntent(intent: AddMoodContract.Intent) {
         when (intent) {
-            is AddMoodContract.Intent.UpdateAddingMoodRecordMood ->
+            is AddMoodContract.Intent.ChangeMood ->
                 updateState { it.copy(record = it.record.copy(mood = intent.mood)) }
 
-            is AddMoodContract.Intent.UpdateAddingMoodRecordDescription ->
+            is AddMoodContract.Intent.ChangeDescription ->
                 updateState { it.copy(record = it.record.copy(description = intent.description)) }
 
             AddMoodContract.Intent.ResetState -> updateState { initialState }
@@ -31,12 +28,12 @@ class AddMoodViewModel(
 
     private fun add() =
         viewModelScope.launch {
-            val res = addMoodUseCase(state.value.record.toDomain()).toUiState()
-            res
-                .onSuccess {
-                    emitEffect(AddMoodContract.SideEffect.StatsAdded)
-                }.onFailure {
-                    emitEffect(AddMoodContract.SideEffect.ShowError(it))
-                }
+            try {
+                addMoodUseCase(state.value.record.toDomain()).getOrThrow()
+
+                emitEffect(AddMoodContract.SideEffect.NavigateNext)
+            } catch (e: Exception) {
+                emitEffect(AddMoodContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
 }

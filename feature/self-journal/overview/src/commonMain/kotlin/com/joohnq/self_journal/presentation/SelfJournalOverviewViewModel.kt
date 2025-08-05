@@ -9,8 +9,6 @@ import com.joohnq.ui.entity.UiState
 import com.joohnq.ui.mapper.ResultMapper.toResultResource
 import com.joohnq.ui.mapper.ResultMapper.toUiState
 import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class SelfJournalOverviewViewModel(
@@ -23,38 +21,47 @@ class SelfJournalOverviewViewModel(
     SelfJournalOverviewContract.ViewModel {
     override fun onIntent(intent: SelfJournalOverviewContract.Intent) {
         when (intent) {
-            is SelfJournalOverviewContract.Intent.GetAll -> getAll()
             is SelfJournalOverviewContract.Intent.Delete -> delete(intent.id)
         }
     }
 
-    private fun getAll() =
+    init {
+        getAll()
+    }
+
+    private fun getAll() {
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
-            val res =
-                getSelfJournalsUseCase()
-                    .toResultResource { it.toResource() }
-                    .toUiState()
-            updateState { it.copy(res) }
-        }
+            try {
+                val res =
+                    getSelfJournalsUseCase()
+                        .toResultResource { it.toResource() }
+                        .toUiState()
 
-    private fun delete(id: Int) =
-        viewModelScope.launch {
-            val res = deleteSelfJournalsUseCase(id).toUiState()
-            res
-                .onSuccess {
-                    updateState {
-                        it.copy(
-                            UiState.Success(
-                                state.value.records
-                                    .getValueOrEmpty()
-                                    .filter { item -> item.id != id }
-                            )
-                        )
-                    }
-                    emitEffect(SelfJournalOverviewContract.SideEffect.Deleted)
-                }.onFailure {
-                    emitEffect(SelfJournalOverviewContract.SideEffect.ShowError(it))
-                }
+                updateState { it.copy(res) }
+            } catch (e: Exception) {
+                emitEffect(SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
+    }
+
+    private fun delete(id: Int) {
+        viewModelScope.launch {
+            try {
+                deleteSelfJournalsUseCase(id).getOrThrow()
+
+                updateState {
+                    it.copy(
+                        UiState.Success(
+                            state.value.records
+                                .getValueOrEmpty()
+                                .filter { item -> item.id != id }
+                        )
+                    )
+                }
+            } catch (e: Exception) {
+                emitEffect(SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString()))
+            }
+        }
+    }
 }

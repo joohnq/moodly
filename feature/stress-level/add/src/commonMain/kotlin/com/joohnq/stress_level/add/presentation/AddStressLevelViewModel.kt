@@ -18,7 +18,7 @@ class AddStressLevelViewModel(
     AddStressLevelContract.ViewModel {
     override fun onIntent(intent: AddStressLevelContract.Intent) {
         when (intent) {
-            is AddStressLevelContract.Intent.UpdateAddingStressors ->
+            is AddStressLevelContract.Intent.ChangeAddingStressors ->
                 updateState {
                     it.copy(
                         record =
@@ -30,7 +30,7 @@ class AddStressLevelViewModel(
                     )
                 }
 
-            is AddStressLevelContract.Intent.UpdateStressLevel ->
+            is AddStressLevelContract.Intent.ChangeStressLevel ->
                 updateState {
                     it.copy(
                         sliderValue = intent.sliderValue,
@@ -54,10 +54,11 @@ class AddStressLevelViewModel(
                 emitEffect(AddStressLevelContract.SideEffect.NavigateToStressStressors)
                 return@launch
             }
+
             try {
                 addStressLevelUseCase(state.value.record.toDomain()).getOrThrow()
 
-                emitEffect(AddStressLevelContract.SideEffect.OnGoBack)
+                emitEffect(AddStressLevelContract.SideEffect.GoBack)
             } catch (e: Exception) {
                 emitEffect(AddStressLevelContract.SideEffect.ShowError(e.message.toString()))
             }

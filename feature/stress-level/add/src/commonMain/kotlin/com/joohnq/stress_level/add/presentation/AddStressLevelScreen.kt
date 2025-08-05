@@ -16,7 +16,7 @@ fun AddStressLevelScreen(
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
-                is AddStressLevelContract.SideEffect.OnGoBack ->
+                is AddStressLevelContract.SideEffect.GoBack ->
                     onGoBack()
 
                 is AddStressLevelContract.SideEffect.ShowError ->
@@ -29,12 +29,7 @@ fun AddStressLevelScreen(
 
     fun onEvent(event: AddStressLevelContract.Event) {
         when (event) {
-            AddStressLevelContract.Event.OnGoBack -> onGoBack()
-            AddStressLevelContract.Event.OnContinue -> {
-                viewModel.onIntent(
-                    AddStressLevelContract.Intent.Add
-                )
-            }
+            AddStressLevelContract.Event.GoBack -> onGoBack()
         }
     }
 

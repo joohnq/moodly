@@ -16,7 +16,7 @@ fun AddSelfJournalScreen(
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
-                AddSelfJournalContract.SideEffect.OnGoBack ->
+                AddSelfJournalContract.SideEffect.GoBack ->
                     onGoBack()
 
                 is AddSelfJournalContract.SideEffect.ShowError ->
@@ -26,7 +26,7 @@ fun AddSelfJournalScreen(
 
     fun onEvent(event: AddSelfJournalContract.Event) =
         when (event) {
-            AddSelfJournalContract.Event.OnGoBack -> onGoBack()
+            AddSelfJournalContract.Event.GoBack -> onGoBack()
         }
 
     DisposableEffect {

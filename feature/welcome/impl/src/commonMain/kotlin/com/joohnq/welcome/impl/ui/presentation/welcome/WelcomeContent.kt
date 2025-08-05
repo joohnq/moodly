@@ -47,7 +47,7 @@ fun WelcomeContent(
             key = { it }
         ) { page ->
             when (page) {
-                0 -> FirstScreen(onNext = { onEvent(WelcomeContract.Event.OnNext) })
+                0 -> FirstScreen(onNext = { onEvent(WelcomeContract.Event.Next) })
                 1 ->
                     WelcomeBaseLayout(
                         welcome =
@@ -62,7 +62,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Green50
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
+                        onNext = { onEvent(WelcomeContract.Event.Next) }
                     )
 
                 2 ->
@@ -78,7 +78,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Orange50
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
+                        onNext = { onEvent(WelcomeContract.Event.Next) }
                     )
 
                 3 ->
@@ -95,7 +95,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Gray60
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
+                        onNext = { onEvent(WelcomeContract.Event.Next) }
                     )
 
                 4 ->
@@ -112,7 +112,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Yellow60
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onEvent(WelcomeContract.Event.OnNext) }
+                        onNext = { onEvent(WelcomeContract.Event.Next) }
                     )
 
                 5 ->
@@ -128,7 +128,7 @@ fun WelcomeContent(
                                 spanColor = Colors.Purple40
                             ),
                         paddingTop = padding.calculateTopPadding(),
-                        onNext = { onIntent(WelcomeContract.Intent.UpdateSkipWelcome) }
+                        onNext = { onIntent(WelcomeContract.Intent.Action) }
                     )
             }
         }

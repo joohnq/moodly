@@ -29,8 +29,8 @@ fun PinScreen(
 
     fun onEvent(event: PinContract.Event) {
         when (event) {
-            PinContract.Event.OnGoBack -> onGoBack()
-            PinContract.Event.OnClearFocus -> {
+            PinContract.Event.GoBack -> onGoBack()
+            PinContract.Event.ClearFocus -> {
                 focusManager.clearFocus()
                 keyboardManager?.hide()
             }

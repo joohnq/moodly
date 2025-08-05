@@ -43,7 +43,7 @@ fun StressLevelHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(StressLevelHistoryContract.Event.OnGoBack) }
+                        onGoBack = { onEvent(StressLevelHistoryContract.Event.GoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(

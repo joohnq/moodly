@@ -17,7 +17,7 @@ fun SleepQualityOverviewBody(
         modifier = modifier,
         records = records,
         onCreate = {
-            onEvent(SleepQualityOverviewContract.Event.OnNavigateToAddSleepQuality)
+            onEvent(SleepQualityOverviewContract.Event.NavigateToAddSleepQuality)
         }
     )
     SleepQualityHistory(
@@ -25,7 +25,7 @@ fun SleepQualityOverviewBody(
         records = records.take(7),
         onDelete = { id -> onIntent(SleepQualityOverviewContract.Intent.Delete(id)) },
         onSeeMore = {
-            onEvent(SleepQualityOverviewContract.Event.OnNavigateToSleepHistory)
+            onEvent(SleepQualityOverviewContract.Event.NavigateToSleepQualityHistory)
         }
     )
 }

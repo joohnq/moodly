@@ -17,7 +17,6 @@ import com.joohnq.user.impl.ui.mapper.PhysicalSymptomsResourceMapper.toDomain
 import com.joohnq.user.impl.ui.mapper.ProfessionalHelpResourceMapper.toDomain
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class OnboardingViewModel(
@@ -35,28 +34,28 @@ class OnboardingViewModel(
     OnboardingContract.ViewModel {
     override fun onIntent(intent: OnboardingContract.Intent) {
         when (intent) {
-            is OnboardingContract.Intent.UpdateMood ->
+            is OnboardingContract.Intent.ChangeMood ->
                 updateState { it.copy(moodRecord = it.moodRecord.copy(mood = intent.mood)) }
 
-            is OnboardingContract.Intent.UpdateSleepQuality ->
+            is OnboardingContract.Intent.ChangeSleepQuality ->
                 updateState { it.copy(sleepQuality = it.sleepQuality.copy(sleepQuality = intent.sleepQuality)) }
 
-            is OnboardingContract.Intent.UpdateMoodRecordDescription ->
+            is OnboardingContract.Intent.ChangeMoodDescription ->
                 updateState { it.copy(moodRecord = it.moodRecord.copy(description = intent.description)) }
 
-            is OnboardingContract.Intent.UpdateStressLevel ->
+            is OnboardingContract.Intent.ChangeStressLevel ->
                 updateState { it.copy(stressLevel = it.stressLevel.copy(stressLevel = intent.stressLevel)) }
 
-            is OnboardingContract.Intent.UpdateUserMedicationsSupplements ->
+            is OnboardingContract.Intent.ChangeMedicationsSupplements ->
                 updateState { it.copy(medicationsSupplements = intent.medicationsSupplements) }
 
-            is OnboardingContract.Intent.UpdateUserPhysicalSymptoms ->
+            is OnboardingContract.Intent.ChangePhysicalSymptoms ->
                 updateState { it.copy(physicalSymptoms = intent.physicalSymptoms) }
 
-            is OnboardingContract.Intent.UpdateUserSoughtHelp ->
-                updateState { it.copy(soughtHelp = intent.soughtHelp) }
+            is OnboardingContract.Intent.ChangeProfessionalHelp ->
+                updateState { it.copy(soughtHelp = intent.professionalHelp) }
 
-            is OnboardingContract.Intent.UpdateSliderValue ->
+            is OnboardingContract.Intent.ChangeSliderValue ->
                 updateState { it.copy(sliderValue = intent.sliderValue) }
 
             OnboardingContract.Intent.AddItems -> addItems()
@@ -65,44 +64,27 @@ class OnboardingViewModel(
 
     private fun addItems() {
         viewModelScope.launch {
-            val (
-                physicalSymptoms,
-                soughtHelp,
-                medicationsSupplements,
-                moodRecord,
-                sleepQuality,
-                stressLevel,
-                _,
-            ) = state.value
+            val state = state.value
 
-            if (physicalSymptoms == null || soughtHelp == null || medicationsSupplements == null) {
-                emitEffect(OnboardingContract.SideEffect.ShowError("Missing fields"))
+            if (state.physicalSymptoms == null || state.soughtHelp == null || state.medicationsSupplements == null) {
+                throw Exception("Missing fields")
             }
 
             try {
-                coroutineScope {
-                    listOf(
-                        async { addMoodUseCase(moodRecord.toDomain()) },
-                        async { addSleepQualityUseCase(sleepQuality.toDomain()) },
-                        async { addStressLevelUseCase(stressLevel.toDomain()) },
-                        async { updatePhysicalSymptomsUseCase(physicalSymptoms!!.toDomain()) },
-                        async { updateSoughtHelpUseCase(soughtHelp!!.toDomain()) },
-                        async { updateMedicationsSupplementsUseCase(medicationsSupplements!!.toDomain()) }
-                    ).awaitAll()
-                }
-                updatePreferences()
+                listOf(
+                    async { addMoodUseCase(state.moodRecord.toDomain()).getOrThrow() },
+                    async { addSleepQualityUseCase(state.sleepQuality.toDomain()).getOrThrow() },
+                    async { addStressLevelUseCase(state.stressLevel.toDomain()).getOrThrow() },
+                    async { updatePhysicalSymptomsUseCase(state.physicalSymptoms.toDomain()).getOrThrow() },
+                    async { updateSoughtHelpUseCase(state.soughtHelp.toDomain()).getOrThrow() },
+                    async { updateMedicationsSupplementsUseCase(state.medicationsSupplements.toDomain()).getOrThrow() }
+                ).awaitAll()
+
+                updateSkipOnboardingUseCase(true).getOrThrow()
+                emitEffect(OnboardingContract.SideEffect.NavigateNext)
             } catch (e: Exception) {
                 emitEffect(OnboardingContract.SideEffect.ShowError(e.message.toString()))
             }
-        }
-    }
-
-    private fun updatePreferences() {
-        viewModelScope.launch {
-            coroutineScope {
-                async { updateSkipOnboardingUseCase(true) }.await()
-            }
-            emitEffect(OnboardingContract.SideEffect.NavigateNext)
         }
     }
 }

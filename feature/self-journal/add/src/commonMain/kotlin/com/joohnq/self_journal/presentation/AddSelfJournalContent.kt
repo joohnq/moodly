@@ -67,7 +67,7 @@ fun AddSelfJournalContent(
                     .paddingHorizontalMedium()
             ) {
                 AppTopBar(
-                    onGoBack = { onEvent(AddSelfJournalContract.Event.OnGoBack) },
+                    onGoBack = { onEvent(AddSelfJournalContract.Event.GoBack) },
                     text = Res.string.new_journal_entry
                 )
                 MediumTitle(Res.string.journal_title)
@@ -99,7 +99,7 @@ fun AddSelfJournalContent(
                             .focusRequester(focusRequester),
                     onValueChange = {
                         onIntent(
-                            AddSelfJournalContract.Intent.UpdateTitle(
+                            AddSelfJournalContract.Intent.ChangeTitle(
                                 it
                             )
                         )
@@ -124,7 +124,7 @@ fun AddSelfJournalContent(
                             color = if (state.mood == resource) resource.palette.faceColor else Colors.Gray60,
                             onClick = {
                                 onIntent(
-                                    AddSelfJournalContract.Intent.UpdateMood(resource)
+                                    AddSelfJournalContract.Intent.ChangeMood(resource)
                                 )
                             }
                         )
@@ -135,7 +135,7 @@ fun AddSelfJournalContent(
                     text = state.description,
                     onValueChange = {
                         onIntent(
-                            AddSelfJournalContract.Intent.UpdateDescription(it)
+                            AddSelfJournalContract.Intent.ChangeDescription(it)
                         )
                     }
                 )

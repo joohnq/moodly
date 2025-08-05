@@ -21,21 +21,27 @@ class StressLevelHistoryViewModel(
     StressLevelHistoryContract.ViewModel {
     override fun onIntent(intent: StressLevelHistoryContract.Intent) {
         when (intent) {
-            StressLevelHistoryContract.Intent.GetAll -> getAll()
             is StressLevelHistoryContract.Intent.Delete -> delete(intent.id)
         }
+    }
+
+    init {
+        getAll()
     }
 
     private fun getAll() {
         viewModelScope.launch {
             updateState { it.copy(UiState.Loading) }
+            try {
+                val res =
+                    getAllStressLevelUseCase()
+                        .toResultResource { it.toResource() }
+                        .toUiState()
 
-            val res =
-                getAllStressLevelUseCase()
-                    .toResultResource { it.toResource() }
-                    .toUiState()
-
-            updateState { it.copy(res) }
+                updateState { it.copy(res) }
+            } catch (e: Exception) {
+                emitEffect(StressLevelHistoryContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
     }
 

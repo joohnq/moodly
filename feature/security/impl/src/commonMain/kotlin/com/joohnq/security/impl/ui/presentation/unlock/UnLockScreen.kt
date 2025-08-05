@@ -7,7 +7,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import com.joohnq.security.api.Security
 import com.joohnq.security.api.SecurityAuthentication
 import com.joohnq.security.impl.ui.securityAuthentication
 import com.joohnq.ui.observe
@@ -25,41 +24,24 @@ fun UnLockScreen(
     val sheetState = rememberModalBottomSheetState()
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
+
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 UnlockContract.SideEffect.NavigateNext -> onNavigateToDashboard()
-            }
-        }
-
-    fun executeBiometricSecurity() {
-        if (securityAuthentication.isDeviceHasBiometric()) {
-            securityAuthentication.authenticateWithFace { isAuthorized ->
-                if (isAuthorized) {
-                    scope.launch {
-                        onNavigateToDashboard()
+                UnlockContract.SideEffect.ExecuteBiometricSecurity -> {
+                    if (securityAuthentication.isDeviceHasBiometric()) {
+                        securityAuthentication.authenticateWithFace { isAuthorized ->
+                            if (isAuthorized) {
+                                scope.launch {
+                                    onNavigateToDashboard()
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-
-    fun onEvent(event: UnlockContract.Event) {
-        when (event) {
-            UnlockContract.Event.OnContinue -> {
-                when (state.security) {
-                    is Security.Pin ->
-                        viewModel.onIntent(
-                            UnlockContract.Intent.UpdateShowBottomSheet(
-                                true
-                            )
-                        )
-
-                    else -> executeBiometricSecurity()
-                }
-            }
-        }
-    }
 
     LaunchedEffect(sheetState.isVisible) {
         if (!sheetState.isVisible) return@LaunchedEffect
@@ -72,7 +54,6 @@ fun UnLockScreen(
         state = state,
         focusManager = focusManager,
         keyboardManager = keyboardManager,
-        onEvent = ::onEvent,
         onIntent = dispatch
     )
 }

@@ -8,17 +8,15 @@ sealed interface SecurityContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data object Get : Intent
-
         data object Skip : Intent
 
-        data class Update(
+        data class Action(
             val security: Security,
         ) : Intent
     }
 
     sealed interface SideEffect {
-        data object OnSecurityUpdated : SideEffect
+        data object NavigateNext : SideEffect
 
         data object Skip : SideEffect
 
@@ -32,8 +30,8 @@ sealed interface SecurityContract {
     )
 
     sealed interface Event {
-        data object OnContinue : Event
+        data object Authenticate : Event
 
-        data object OnSetPin : Event
+        data object SetPin : Event
     }
 }

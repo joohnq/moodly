@@ -43,7 +43,6 @@ fun FirstContent(onNext: () -> Unit = {}) {
         VerticalSpacer(10.dp)
         HeadingWithSpan(
             firstTitle = Res.string.first_screen_title,
-            secondTitle = Res.string.first_screen_second_title,
             span = stringResource(Res.string.first_screen_title_word),
             spanColor = Colors.Brown60
         )

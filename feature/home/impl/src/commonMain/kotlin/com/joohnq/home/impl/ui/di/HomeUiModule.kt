@@ -1,6 +1,6 @@
 package com.joohnq.home.impl.ui.di
 
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardViewModel
+import com.joohnq.home.impl.ui.presentation.dashboard.DashboardViewModel
 import org.koin.dsl.module
 
 val homeUiModule =

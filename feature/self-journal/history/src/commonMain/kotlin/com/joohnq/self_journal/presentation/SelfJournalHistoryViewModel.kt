@@ -27,15 +27,12 @@ class SelfJournalHistoryViewModel(
     SelfJournalHistoryContract.ViewModel {
     override fun onIntent(intent: SelfJournalHistoryContract.Intent) {
         when (intent) {
-            is SelfJournalHistoryContract.Intent.UpdateSelectedDateTime ->
-                updateState { it.copy(selectedDateTime = intent.selectedDateTime) }
-
-            is SelfJournalHistoryContract.Intent.ResetState ->
-                resetState()
-
-            SelfJournalHistoryContract.Intent.GetAll -> getAll()
             is SelfJournalHistoryContract.Intent.Delete -> delete(intent.id)
         }
+    }
+
+    init {
+        getAll()
     }
 
     private fun getAll() =

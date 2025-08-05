@@ -8,17 +8,15 @@ sealed interface AddStressLevelContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack : Event
-
-        data object OnContinue : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
-        data class UpdateAddingStressors(
+        data class ChangeAddingStressors(
             val stressor: StressorResource,
         ) : Intent
 
-        data class UpdateStressLevel(
+        data class ChangeStressLevel(
             val sliderValue: Float,
         ) : Intent
 
@@ -30,7 +28,7 @@ sealed interface AddStressLevelContract {
     sealed interface SideEffect {
         data object NavigateToStressStressors : SideEffect
 
-        data object OnGoBack : SideEffect
+        data object GoBack : SideEffect
 
         data class ShowError(
             val message: String,

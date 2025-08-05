@@ -16,9 +16,9 @@ fun SleepQualityOverviewScreen(
 
     fun onEvent(event: SleepQualityOverviewContract.Event) =
         when (event) {
-            SleepQualityOverviewContract.Event.OnGoBack -> onGoBack()
-            SleepQualityOverviewContract.Event.OnNavigateToAddSleepQuality -> onNavigateAddSleepQuality()
-            SleepQualityOverviewContract.Event.OnNavigateToSleepHistory -> onNavigateToSleepHistory()
+            SleepQualityOverviewContract.Event.GoBack -> onGoBack()
+            SleepQualityOverviewContract.Event.NavigateToAddSleepQuality -> onNavigateAddSleepQuality()
+            SleepQualityOverviewContract.Event.NavigateToSleepQualityHistory -> onNavigateToSleepHistory()
         }
 
     SleepQualityOverviewContent(

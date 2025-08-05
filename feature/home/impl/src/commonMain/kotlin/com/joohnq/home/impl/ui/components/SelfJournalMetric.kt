@@ -3,14 +3,17 @@ package com.joohnq.home.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthNameString
+import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.self_journal.presentation.components.SelfJournalOverviewCalendar
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.journals_written_in
 import com.joohnq.shared_resources.lets_set_up_daily_journaling_and_self_reflection
+import com.joohnq.shared_resources.self_journaling
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
@@ -20,9 +23,15 @@ import org.jetbrains.compose.resources.stringResource
 fun SelfJournalMetric(
     records: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
+    onClick: () -> Unit = {},
 ) {
     val resource = records.getTodaySelfJournalRecord()
 
+    SectionHeader(
+        modifier = Modifier.paddingHorizontalMedium(),
+        title = Res.string.self_journaling,
+        onSeeMore = onClick
+    )
     if (resource == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),

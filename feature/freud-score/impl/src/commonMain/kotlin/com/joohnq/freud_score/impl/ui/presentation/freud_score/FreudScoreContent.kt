@@ -43,7 +43,7 @@ fun FreudScoreContent(
                 modifier = Modifier.paddingHorizontalMedium(),
                 isDark = true,
                 text = Res.string.freud_score,
-                onGoBack = { onEvent(FreudScoreContract.Event.OnGoBack) }
+                onGoBack = { onEvent(FreudScoreContract.Event.GoBack) }
             )
             Column(
                 modifier = Modifier.paddingHorizontalMedium(),

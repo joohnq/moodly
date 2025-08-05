@@ -42,6 +42,7 @@ import com.joohnq.stress_level.overview.di.stressLevelOverviewModule
 import com.joohnq.user.impl.data.di.userDataModule
 import com.joohnq.user.impl.data.di.userDriverFactoryModule
 import com.joohnq.user.impl.ui.di.userUiModule
+import com.joohnq.welcome.impl.di.welcomeImplModule
 
 val appModule =
     listOf(
@@ -86,5 +87,6 @@ val appModule =
         homeUiModule,
         preferencesDataModule,
         preferencesDomainModule,
-        splashImplModule
+        splashImplModule,
+        welcomeImplModule
     )

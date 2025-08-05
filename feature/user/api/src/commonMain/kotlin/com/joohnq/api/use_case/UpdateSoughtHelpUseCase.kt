@@ -6,6 +6,5 @@ import com.joohnq.api.repository.UserRepository
 class UpdateSoughtHelpUseCase(
     private val repository: UserRepository,
 ) {
-    suspend operator fun invoke(soughtHelp: ProfessionalHelp): Result<Boolean> =
-        repository.updateSoughtHelp(soughtHelp)
+    suspend operator fun invoke(soughtHelp: ProfessionalHelp): Result<Boolean> = repository.updateSoughtHelp(soughtHelp)
 }

@@ -20,18 +20,8 @@ fun EditSelfJournalScreen(
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
-                EditSelfJournalContract.SideEffect.OnGoBack ->
+                EditSelfJournalContract.SideEffect.GoBack ->
                     onGoBack()
-
-                EditSelfJournalContract.SideEffect.Updated -> {
-                    viewModel.onIntent(EditSelfJournalContract.Intent.ClearEditingState)
-
-                    viewModel.onIntent(
-                        EditSelfJournalContract.Intent.UpdateIsEditing(
-                            false
-                        )
-                    )
-                }
 
                 is EditSelfJournalContract.SideEffect.ShowError ->
                     launch { snackBarState.showSnackbar(sideEffect.message) }
@@ -48,7 +38,7 @@ fun EditSelfJournalScreen(
 
     fun onEvent(event: EditSelfJournalContract.Event) =
         when (event) {
-            EditSelfJournalContract.Event.OnGoBack -> onGoBack()
+            EditSelfJournalContract.Event.GoBack -> onGoBack()
         }
 
     LaunchedEffect(Unit) {

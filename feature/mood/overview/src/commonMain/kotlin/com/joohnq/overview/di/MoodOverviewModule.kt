@@ -11,7 +11,6 @@ val moodOverviewModule: Module =
             MoodOverviewViewModel(
                 getMoodsUseCase = get(),
                 deleteMoodUseCase = get(),
-                addMoodUseCase = get()
             )
         }
     }

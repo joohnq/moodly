@@ -16,9 +16,9 @@ fun MoodOverviewScreen(
 
     fun onEvent(event: MoodOverviewContract.Event) =
         when (event) {
-            is MoodOverviewContract.Event.OnGoBack -> onGoBack()
-            is MoodOverviewContract.Event.OnAddMood -> onNavigateToAddMood()
-            MoodOverviewContract.Event.OnNavigateToMoodHistory -> onNavigateToMoodHistory()
+            is MoodOverviewContract.Event.GoBack -> onGoBack()
+            is MoodOverviewContract.Event.NavigateToAddMood -> onNavigateToAddMood()
+            MoodOverviewContract.Event.NavigateToMoodHistory -> onNavigateToMoodHistory()
         }
 
     MoodOverviewContent(

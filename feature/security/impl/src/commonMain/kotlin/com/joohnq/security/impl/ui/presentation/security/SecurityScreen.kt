@@ -21,7 +21,7 @@ fun SecurityScreen(
     val (state, dispatch) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
-                is SecurityContract.SideEffect.OnSecurityUpdated ->
+                is SecurityContract.SideEffect.NavigateNext ->
                     onNavigateToSecurityConfirmed()
 
                 is SecurityContract.SideEffect.ShowError ->
@@ -34,12 +34,12 @@ fun SecurityScreen(
 
     fun onEvent(event: SecurityContract.Event) {
         when (event) {
-            SecurityContract.Event.OnContinue -> {
+            SecurityContract.Event.Authenticate -> {
                 if (securityAuthentication.isDeviceHasBiometric()) {
                     securityAuthentication.authenticateWithFace { isAuthorized ->
                         if (isAuthorized) {
                             viewModel.onIntent(
-                                SecurityContract.Intent.Update(
+                                SecurityContract.Intent.Action(
                                     Security.Biometric(true)
                                 )
                             )
@@ -48,12 +48,13 @@ fun SecurityScreen(
                 }
             }
 
-            SecurityContract.Event.OnSetPin -> onNavigatePIN()
+            SecurityContract.Event.SetPin -> onNavigatePIN()
         }
     }
 
     SecurityContent(
         snackBarState = snackBarState,
+        onIntent = dispatch,
         onEvent = ::onEvent
     )
 }

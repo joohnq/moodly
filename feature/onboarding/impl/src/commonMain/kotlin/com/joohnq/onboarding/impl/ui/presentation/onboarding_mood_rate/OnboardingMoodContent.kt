@@ -88,7 +88,7 @@ fun OnboardingMoodRateContent(
         ) {
             MoodRouletteWheel(
                 modifier = Modifier.fillMaxSize().scale(1.4f),
-                setSelectedMood = { onIntent(OnboardingContract.Intent.UpdateMood(it)) }
+                setSelectedMood = { onIntent(OnboardingContract.Intent.ChangeMood(it)) }
             )
         }
     }

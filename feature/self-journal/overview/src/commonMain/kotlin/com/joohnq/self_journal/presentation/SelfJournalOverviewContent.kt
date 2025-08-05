@@ -13,6 +13,7 @@ import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 @Composable
 fun SelfJournalOverviewContent(
     state: SelfJournalOverviewContract.State,
+    onIntent: (SelfJournalOverviewContract.Intent) -> Unit = {},
     onEvent: (SelfJournalOverviewContract.Event) -> Unit = {},
 ) {
     state.records.foldComposable(
@@ -24,8 +25,8 @@ fun SelfJournalOverviewContent(
                 isDark = false,
                 image = Drawables.Images.SelfJournalBackground,
                 color = Colors.Brown70,
-                onAddButton = { onEvent(SelfJournalOverviewContract.Event.OnNavigateToAddSelfJournal) },
-                onGoBack = { onEvent(SelfJournalOverviewContract.Event.OnGoBack) },
+                onAddButton = { onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal) },
+                onGoBack = { onEvent(SelfJournalOverviewContract.Event.GoBack) },
                 panel = { modifier ->
                     SelfJournalOverviewPanel(
                         modifier = modifier,
@@ -37,6 +38,7 @@ fun SelfJournalOverviewContent(
                     SelfJournalOverviewContentBody(
                         modifier = modifier,
                         records = records,
+                        onIntent = onIntent,
                         onEvent = onEvent
                     )
                 }

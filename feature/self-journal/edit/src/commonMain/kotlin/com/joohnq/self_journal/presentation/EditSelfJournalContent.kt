@@ -59,13 +59,13 @@ fun EditJournalingContent(
         ImageDialogLayout(
             onDismissRequest = {
                 onIntent(
-                    EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(
+                    EditSelfJournalContract.Intent.ChangeOpenDeleteDialog(
                         false
                     )
                 )
             },
             onConfirmation = {
-                onIntent(EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(false))
+                onIntent(EditSelfJournalContract.Intent.ChangeOpenDeleteDialog(false))
                 onIntent(EditSelfJournalContract.Intent.Delete(state.editingSelfJournalRecord.id))
             },
             dialogTitle = Res.string.delete_journal,
@@ -85,13 +85,13 @@ fun EditJournalingContent(
                 canSave = canSave,
                 onDelete = {
                     onIntent(
-                        EditSelfJournalContract.Intent.UpdateOpenDeleteDialog(true)
+                        EditSelfJournalContract.Intent.ChangeOpenDeleteDialog(true)
                     )
                 },
                 onEdit = {
-                    onIntent(EditSelfJournalContract.Intent.UpdateIsEditing(!state.isEditing))
+                    onIntent(EditSelfJournalContract.Intent.ChangeIsEditing(!state.isEditing))
                 },
-                onSave = { onIntent(EditSelfJournalContract.Intent.Update) }
+                onSave = { onIntent(EditSelfJournalContract.Intent.Action) }
             )
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -114,7 +114,7 @@ fun EditJournalingContent(
                         .paddingHorizontalMedium()
             ) {
                 AppTopBar(
-                    onGoBack = { onEvent(EditSelfJournalContract.Event.OnGoBack) },
+                    onGoBack = { onEvent(EditSelfJournalContract.Event.GoBack) },
                     text = Res.string.edit_journal
                 ) {
                     TextWithBackground(
@@ -137,7 +137,7 @@ fun EditJournalingContent(
                         color = Colors.Brown100Alpha64
                     )
                 },
-                onValueChange = { onIntent(EditSelfJournalContract.Intent.UpdateTitle(it)) },
+                onValueChange = { onIntent(EditSelfJournalContract.Intent.ChangeTitle(it)) },
                 modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
                 colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
                 textStyle = TextStyles.headingMdExtraBold(),
@@ -160,7 +160,7 @@ fun EditJournalingContent(
                 },
                 onValueChange = {
                     onIntent(
-                        EditSelfJournalContract.Intent.UpdateDescription(it)
+                        EditSelfJournalContract.Intent.ChangeDescription(it)
                     )
                 },
                 modifier = Modifier.fillMaxWidth().focusRequester(descriptionFocusRequest),

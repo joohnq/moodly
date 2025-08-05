@@ -14,7 +14,7 @@ fun MoodHistoryScreen(
 
     fun onEvent(event: MoodHistoryContract.Event) =
         when (event) {
-            is MoodHistoryContract.Event.OnGoBack -> onGoBack()
+            is MoodHistoryContract.Event.GoBack -> onGoBack()
         }
 
     MoodHistoryContent(

@@ -10,24 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.entity.User
-import com.joohnq.home.impl.ui.components.FreudScoreMetric
 import com.joohnq.home.impl.ui.components.HomeTopBar
 import com.joohnq.home.impl.ui.components.MoodMetric
 import com.joohnq.home.impl.ui.components.SelfJournalMetric
 import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
+import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
-import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
-import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.components.view.LoadingView
-import com.joohnq.shared_resources.freud_score
-import com.joohnq.shared_resources.mood
-import com.joohnq.shared_resources.self_journaling
-import com.joohnq.shared_resources.sleep
-import com.joohnq.shared_resources.stress
-import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityMetric
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.component.StressLevelMetric
@@ -65,54 +56,33 @@ fun HomeContent(
                     modifier =
                         Modifier
                             .padding(top = padding.calculateTopPadding()),
-                    user = user
+                    user = user,
+                    freudScore = state.freudScore?.score ?: 0,
+                    onNavigateToFreudScore = { onEvent(HomeEvent.OnNavigateToFreudScore) }
                 )
-                SectionHeader(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.freud_score
-                )
-                FreudScoreMetric(
-                    freudScore = state.freudScore,
-                    onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
-                )
-                SectionHeader(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.mood,
-                    onSeeMore = { onEvent(HomeEvent.OnNavigateToMood) }
-                )
+//                FreudScoreMetric(
+//                    freudScore = state.freudScore,
+//                    onClick = { onEvent(HomeEvent.OnNavigateToFreudScore) }
+//                )
                 MoodMetric(
                     records = moodRecords,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
-                    onClick = { onEvent(HomeEvent.OnNavigateToMood) }
-                )
-                SectionHeader(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.sleep,
-                    onSeeMore = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
+                    onClick = { onEvent(HomeEvent.OnNavigateToMood) },
                 )
                 SleepQualityMetric(
                     records = sleepQualities,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
                     onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
                 )
-                SectionHeader(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.stress,
-                    onSeeMore = { onEvent(HomeEvent.OnNavigateToStressLevel) }
-                )
                 StressLevelMetric(
                     records = stressLevels,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddStressLevel) },
                     onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
                 )
-                SectionHeader(
-                    modifier = Modifier.paddingHorizontalMedium(),
-                    title = Res.string.self_journaling,
-                    onSeeMore = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
-                )
                 SelfJournalMetric(
                     records = selfJournals,
-                    onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) }
+                    onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
+                    onClick = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
                 )
                 VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
             }

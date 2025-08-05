@@ -7,33 +7,33 @@ sealed interface AvatarContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class UpdateImageBitmap(
+        data class ChangeImageBitmap(
             val imageBitmap: ImageBitmap? = null,
         ) : Intent
 
-        data object UpdateImage : Intent
+        data object Action : Intent
 
-        data class UpdateImageDrawableIndex(
+        data class ChangeImageDrawableIndex(
             val i: Int,
         ) : Intent
 
-        data class UpdateImageSourceOptionDialog(
+        data class ChangeImageSourceOptionDialog(
             val value: Boolean,
         ) : Intent
 
-        data class UpdatePermissionRationalDialog(
+        data class ChangePermissionRationalDialog(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateLaunchCamera(
+        data class ChangeLaunchCamera(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateLaunchGallery(
+        data class ChangeLaunchGallery(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateLaunchSetting(
+        data class ChangeLaunchSetting(
             val value: Boolean,
         ) : Intent
     }
@@ -55,10 +55,4 @@ sealed interface AvatarContract {
         val imageSourceOptionDialog: Boolean = false,
         val permissionRationalDialog: Boolean = false,
     )
-
-    sealed interface Event {
-        data object OnPickAvatar : Event
-
-        data object OnContinue : Event
-    }
 }

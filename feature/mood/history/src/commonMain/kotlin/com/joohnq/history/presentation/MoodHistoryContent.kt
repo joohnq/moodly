@@ -44,7 +44,7 @@ fun MoodHistoryContent(
                     AppTopBar(
                         modifier = Modifier.fillMaxWidth(),
                         isDark = true,
-                        onGoBack = { onEvent(MoodHistoryContract.Event.OnGoBack) }
+                        onGoBack = { onEvent(MoodHistoryContract.Event.GoBack) }
                     )
                     VerticalSpacer(20.dp)
                     Text(

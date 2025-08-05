@@ -15,37 +15,37 @@ sealed interface OnboardingContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-        data class UpdateSleepQuality(
+        data class ChangeSleepQuality(
             val sleepQuality: SleepQualityResource,
         ) : Intent
 
-        data class UpdateStressLevel(
+        data class ChangeStressLevel(
             val stressLevel: StressLevelResource,
         ) : Intent
 
-        data class UpdateMood(
+        data class ChangeMood(
             val mood: MoodResource,
         ) : Intent
 
-        data class UpdateUserMedicationsSupplements(
+        data class ChangeMedicationsSupplements(
             val medicationsSupplements: MedicationsSupplementsResource?,
         ) : Intent
 
-        data class UpdateUserPhysicalSymptoms(
+        data class ChangePhysicalSymptoms(
             val physicalSymptoms: PhysicalSymptomsResource?,
         ) : Intent
 
-        data class UpdateUserSoughtHelp(
-            val soughtHelp: ProfessionalHelpResource?,
+        data class ChangeProfessionalHelp(
+            val professionalHelp: ProfessionalHelpResource?,
         ) : Intent
 
-        data class UpdateMoodRecordDescription(
+        data class ChangeMoodDescription(
             val description: String,
         ) : Intent
 
         data object AddItems : Intent
 
-        data class UpdateSliderValue(
+        data class ChangeSliderValue(
             val sliderValue: Float,
         ) : Intent
     }

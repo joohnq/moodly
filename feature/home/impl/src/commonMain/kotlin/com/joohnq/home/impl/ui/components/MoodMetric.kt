@@ -7,6 +7,7 @@ import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.card.MetricSummaryCard
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.level
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.set_up_mood
@@ -23,7 +24,11 @@ fun MoodMetric(
     onClick: () -> Unit = {},
 ) {
     val record = records.getTodayMoodRecord()
-
+    SectionHeader(
+        modifier = Modifier.paddingHorizontalMedium(),
+        title = Res.string.mood,
+        onSeeMore = onClick
+    )
     if (record == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),

@@ -51,7 +51,7 @@ fun OnboardingMedicationsSupplementsContent(
                     selected = state == option,
                     onClick = {
                         onIntent(
-                            OnboardingContract.Intent.UpdateUserMedicationsSupplements(option)
+                            OnboardingContract.Intent.ChangeMedicationsSupplements(option)
                         )
                     }
                 )

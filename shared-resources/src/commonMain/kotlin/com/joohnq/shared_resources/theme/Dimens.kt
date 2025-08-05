@@ -32,12 +32,12 @@ object Dimens {
 
         val Circle = CircleShape
 
-        val BottomMedium =
+        val BottomExtraLarge =
             RoundedCornerShape(
                 topStart = 0.dp,
                 topEnd = 0.dp,
-                bottomStart = 20.dp,
-                bottomEnd = 20.dp
+                bottomStart = 30.dp,
+                bottomEnd = 30.dp
             )
 
         val BottomLarge =
@@ -46,22 +46,6 @@ object Dimens {
                 topEnd = 0.dp,
                 bottomStart = 30.dp,
                 bottomEnd = 30.dp
-            )
-
-        val StartMedium =
-            RoundedCornerShape(
-                topStart = 20.dp,
-                topEnd = 0.dp,
-                bottomStart = 20.dp,
-                bottomEnd = 0.dp
-            )
-
-        val EndMedium =
-            RoundedCornerShape(
-                topStart = 0.dp,
-                topEnd = 20.dp,
-                bottomStart = 0.dp,
-                bottomEnd = 20.dp
             )
     }
 }

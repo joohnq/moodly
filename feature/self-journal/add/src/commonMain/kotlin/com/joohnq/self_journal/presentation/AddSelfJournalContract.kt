@@ -8,24 +8,20 @@ sealed interface AddSelfJournalContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
-        data class UpdateMood(
+        data class ChangeMood(
             val mood: MoodResource?,
         ) : Intent
 
-        data class UpdateTitle(
+        data class ChangeTitle(
             val title: String,
         ) : Intent
 
-        data class UpdateDescription(
+        data class ChangeDescription(
             val description: String,
-        ) : Intent
-
-        data class UpdateTitleError(
-            val error: String?,
         ) : Intent
 
         data object Add : Intent
@@ -34,7 +30,7 @@ sealed interface AddSelfJournalContract {
     }
 
     sealed interface SideEffect {
-        data object OnGoBack : SideEffect
+        data object GoBack : SideEffect
 
         data class ShowError(
             val message: String,

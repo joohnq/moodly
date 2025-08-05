@@ -84,12 +84,12 @@ fun SecurityContent(
                 PrimaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     text = Res.string.continue_word,
-                    onClick = { onEvent(SecurityContract.Event.OnContinue) }
+                    onClick = { onEvent(SecurityContract.Event.Authenticate) }
                 )
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                     text = Res.string.set_a_pin,
-                    onClick = { onEvent(SecurityContract.Event.OnSetPin) }
+                    onClick = { onEvent(SecurityContract.Event.SetPin) }
                 )
                 SecondaryButton(
                     modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),

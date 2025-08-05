@@ -15,7 +15,9 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.bedtime
 import com.joohnq.shared_resources.components.card.GiganticSecondaryCard
 import com.joohnq.shared_resources.components.layout.NotFoundVerticalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.set_up_sleep
+import com.joohnq.shared_resources.sleep
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
@@ -33,7 +35,11 @@ fun SleepQualityMetric(
     onClick: () -> Unit = {},
 ) {
     val record = records.getTodaySleepQualityRecord()
-
+    SectionHeader(
+        modifier = Modifier.paddingHorizontalMedium(),
+        title = Res.string.sleep,
+        onSeeMore = onClick
+    )
     if (record == null) {
         NotFoundVerticalLayout(
             modifier = Modifier.paddingHorizontalMedium(),

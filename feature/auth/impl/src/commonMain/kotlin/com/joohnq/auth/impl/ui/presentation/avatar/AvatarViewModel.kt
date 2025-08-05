@@ -16,42 +16,42 @@ class AvatarViewModel(
     AvatarContract.ViewModel {
     override fun onIntent(intent: AvatarContract.Intent) {
         when (intent) {
-            is AvatarContract.Intent.UpdateImageBitmap ->
+            is AvatarContract.Intent.ChangeImageBitmap ->
                 updateState { it.copy(imageBitmap = intent.imageBitmap) }
 
-            is AvatarContract.Intent.UpdateImageDrawableIndex ->
+            is AvatarContract.Intent.ChangeImageDrawableIndex ->
                 updateState { it.copy(selectedDrawableIndex = intent.i) }
 
-            AvatarContract.Intent.UpdateImage -> updateImage()
-            is AvatarContract.Intent.UpdateImageSourceOptionDialog -> {
+            AvatarContract.Intent.Action -> updateImage()
+            is AvatarContract.Intent.ChangeImageSourceOptionDialog -> {
                 updateState {
                     it.copy(
                         imageSourceOptionDialog = intent.value
                     )
                 }
             }
-            is AvatarContract.Intent.UpdateLaunchCamera -> {
+            is AvatarContract.Intent.ChangeLaunchCamera -> {
                 updateState {
                     it.copy(
                         launchCamera = intent.value
                     )
                 }
             }
-            is AvatarContract.Intent.UpdateLaunchGallery -> {
+            is AvatarContract.Intent.ChangeLaunchGallery -> {
                 updateState {
                     it.copy(
                         launchGallery = intent.value
                     )
                 }
             }
-            is AvatarContract.Intent.UpdateLaunchSetting -> {
+            is AvatarContract.Intent.ChangeLaunchSetting -> {
                 updateState {
                     it.copy(
                         launchSetting = intent.value
                     )
                 }
             }
-            is AvatarContract.Intent.UpdatePermissionRationalDialog -> {
+            is AvatarContract.Intent.ChangePermissionRationalDialog -> {
                 updateState {
                     it.copy(
                         permissionRationalDialog = intent.value

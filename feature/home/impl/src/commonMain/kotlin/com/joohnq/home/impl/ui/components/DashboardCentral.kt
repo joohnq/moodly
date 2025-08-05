@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardContract
+import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.mood
@@ -87,7 +87,7 @@ fun DashboardCentral(
                 CentralButton(
                     modifier = Modifier.weight(1f),
                     item = item,
-                    onClick = { onEvent(DashboardContract.Event.OnNavigateTo(item.destination)) }
+                    onClick = { onEvent(DashboardContract.Event.NavigateTo(item.destination)) }
                 )
             }
         }

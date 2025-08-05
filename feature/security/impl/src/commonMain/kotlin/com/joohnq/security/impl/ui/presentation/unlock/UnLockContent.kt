@@ -57,7 +57,7 @@ fun UnLockContent(
             containerColor = Colors.Brown10,
             onDismissRequest = {
                 onIntent(
-                    UnlockContract.Intent.UpdateShowBottomSheet(
+                    UnlockContract.Intent.ChangeShowBottomSheet(
                         false
                     )
                 )
@@ -81,17 +81,17 @@ fun UnLockContent(
                     focusedIndex = state.focusedIndex,
                     onNumberChanged = { i, newNumber ->
                         onIntent(
-                            UnlockContract.Intent.OnEnterNumber(
+                            UnlockContract.Intent.EnterNumber(
                                 index = i,
                                 number = newNumber
                             )
                         )
                     },
-                    onKeyboardBack = { onIntent(UnlockContract.Intent.OnKeyboardBack) },
+                    onKeyboardBack = { onIntent(UnlockContract.Intent.KeyboardBack) },
                     focusRequesters = state.focusRequesters,
                     focusManager = focusManager,
                     keyboardManager = keyboardManager,
-                    onFocusChanged = { i -> onIntent(UnlockContract.Intent.OnChangeFieldFocused(i)) }
+                    onFocusChanged = { i -> onIntent(UnlockContract.Intent.ChangeFieldFocused(i)) }
                 )
                 state.isError?.let {
                     VerticalSpacer(15.dp)
@@ -141,7 +141,7 @@ fun UnLockContent(
                     PrimaryButton(
                         text = Res.string.use_device_password,
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = { onEvent(UnlockContract.Event.OnContinue) }
+                        onClick = { onIntent(UnlockContract.Intent.Action) }
                     )
                     VerticalSpacer(16.dp)
                     Text(

@@ -16,9 +16,7 @@ fun StressLevelHistoryScreen(
 
     fun onEvent(event: StressLevelHistoryContract.Event) {
         when (event) {
-            StressLevelHistoryContract.Event.OnGoBack -> onGoBack()
-            is StressLevelHistoryContract.Event.OnNavigateToStressLevel -> onNavigateStressLevel()
-            StressLevelHistoryContract.Event.OnAddStressLevel -> onAddStressLevel()
+            StressLevelHistoryContract.Event.GoBack -> onGoBack()
         }
     }
 

@@ -58,7 +58,7 @@ fun OnboardingPhysicalSymptomsContent(
                     selected = state == option,
                     onClick = {
                         onIntent(
-                            OnboardingContract.Intent.UpdateUserPhysicalSymptoms(option)
+                            OnboardingContract.Intent.ChangePhysicalSymptoms(option)
                         )
                     }
                 )

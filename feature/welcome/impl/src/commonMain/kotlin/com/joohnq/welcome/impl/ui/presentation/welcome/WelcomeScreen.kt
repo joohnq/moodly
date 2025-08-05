@@ -30,7 +30,7 @@ fun WelcomeScreen(
 
     fun onEvent(event: WelcomeContract.Event) {
         when (event) {
-            WelcomeContract.Event.OnNext ->
+            WelcomeContract.Event.Next ->
                 scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
         }
     }

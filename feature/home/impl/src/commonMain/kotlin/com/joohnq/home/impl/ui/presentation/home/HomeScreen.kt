@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
-import com.joohnq.home.impl.ui.presentation.viewmodel.DashboardViewModel
+import com.joohnq.home.impl.ui.presentation.dashboard.DashboardViewModel
 import com.joohnq.ui.sharedViewModel
 
 @Composable

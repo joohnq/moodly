@@ -5,9 +5,6 @@ import com.joohnq.self_journal.api.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalByIdUseCase
 import com.joohnq.self_journal.api.use_case.UpdateSelfJournalsUseCase
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class EditSelfJournalViewModel(
@@ -24,7 +21,7 @@ class EditSelfJournalViewModel(
             EditSelfJournalContract.Intent.ResetState ->
                 resetState()
 
-            is EditSelfJournalContract.Intent.UpdateDescription ->
+            is EditSelfJournalContract.Intent.ChangeDescription ->
                 updateState {
                     it.copy(
                         editingSelfJournalRecord =
@@ -34,26 +31,18 @@ class EditSelfJournalViewModel(
                     )
                 }
 
-            is EditSelfJournalContract.Intent.UpdateOpenDeleteDialog ->
+            is EditSelfJournalContract.Intent.ChangeOpenDeleteDialog ->
                 updateState { it.copy(openDeleteDialog = intent.value) }
 
-            is EditSelfJournalContract.Intent.UpdateTitle ->
+            is EditSelfJournalContract.Intent.ChangeTitle ->
                 updateState {
                     it.copy(
                         editingSelfJournalRecord = it.editingSelfJournalRecord.copy(title = intent.title)
                     )
                 }
 
-            is EditSelfJournalContract.Intent.UpdateIsEditing ->
+            is EditSelfJournalContract.Intent.ChangeIsEditing ->
                 updateState { it.copy(isEditing = intent.value) }
-
-            is EditSelfJournalContract.Intent.Set ->
-                updateState {
-                    it.copy(
-                        currentSelfJournalRecord = intent.record,
-                        editingSelfJournalRecord = intent.record
-                    )
-                }
 
             EditSelfJournalContract.Intent.ClearEditingState ->
                 updateState {
@@ -65,38 +54,51 @@ class EditSelfJournalViewModel(
 
             is EditSelfJournalContract.Intent.Delete -> delete(intent.id)
             is EditSelfJournalContract.Intent.GetById -> getById(intent.id)
-            EditSelfJournalContract.Intent.Update -> update()
+            EditSelfJournalContract.Intent.Action -> update()
         }
     }
 
     private fun getById(id: Int) =
         viewModelScope.launch {
-            val res = getSelfJournalByIdUseCase(id).toUiState()
-            res
-                .onFailure {
-                    emitEffect(EditSelfJournalContract.SideEffect.ShowError(it))
+            try {
+                val res = getSelfJournalByIdUseCase(id).getOrThrow()
+
+                updateState {
+                    it.copy(
+                        currentSelfJournalRecord = res,
+                        editingSelfJournalRecord = res
+                    )
                 }
+            } catch (e: Exception) {
+                emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
 
     private fun delete(id: Int) =
         viewModelScope.launch {
-            val res = deleteSelfJournalsUseCase(id).toUiState()
-            res
-                .onSuccess {
-                    emitEffect(EditSelfJournalContract.SideEffect.OnGoBack)
-                }.onFailure {
-                    emitEffect(EditSelfJournalContract.SideEffect.ShowError(it))
-                }
+            try {
+                deleteSelfJournalsUseCase(id).getOrThrow()
+
+                emitEffect(EditSelfJournalContract.SideEffect.GoBack)
+            } catch (e: Exception) {
+                emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
 
     private fun update() =
         viewModelScope.launch {
-            val res = updateSelfJournalsUseCase(state.value.editingSelfJournalRecord).toUiState()
-            res
-                .onSuccess {
-                    emitEffect(EditSelfJournalContract.SideEffect.Updated)
-                }.onFailure {
-                    emitEffect(EditSelfJournalContract.SideEffect.ShowError(it))
-                }
+            try {
+                updateSelfJournalsUseCase(state.value.editingSelfJournalRecord).getOrThrow()
+
+                onIntent(EditSelfJournalContract.Intent.ClearEditingState)
+
+                onIntent(
+                    EditSelfJournalContract.Intent.ChangeIsEditing(
+                        false
+                    )
+                )
+            } catch (e: Exception) {
+                emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
 }

@@ -7,8 +7,10 @@ import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.card.MetricSummaryCard
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
+import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.lets_set_up_daily_stress_level
 import com.joohnq.shared_resources.level
+import com.joohnq.shared_resources.stress
 import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -27,6 +29,11 @@ fun StressLevelMetric(
 ) {
     val record = records.getTodayStressLevelRecord()
 
+    SectionHeader(
+        modifier = Modifier.paddingHorizontalMedium(),
+        title = Res.string.stress,
+        onSeeMore = onClick
+    )
     if (record == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),

@@ -14,7 +14,7 @@ fun SleepQualityHistoryScreen(
 
     fun onEvent(event: SleepQualityHistoryContract.Event) {
         when (event) {
-            SleepQualityHistoryContract.Event.OnGoBack -> onGoBack()
+            SleepQualityHistoryContract.Event.GoBack -> onGoBack()
         }
     }
 

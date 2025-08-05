@@ -17,9 +17,7 @@ class AuthNameViewModel(
     AuthNameContract.ViewModel {
     override fun onIntent(intent: AuthNameContract.Intent) {
         when (intent) {
-            AuthNameContract.Intent.ResetState -> resetState()
-            is AuthNameContract.Intent.UpdateName -> updateState { it.copy(name = intent.name) }
-            is AuthNameContract.Intent.UpdateNameError -> updateState { it.copy(nameError = intent.error) }
+            is AuthNameContract.Intent.ChangeName -> updateState { it.copy(name = intent.name) }
             AuthNameContract.Intent.Action -> action()
         }
     }

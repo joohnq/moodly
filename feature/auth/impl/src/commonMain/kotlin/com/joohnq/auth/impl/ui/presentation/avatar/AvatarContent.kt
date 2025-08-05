@@ -47,7 +47,7 @@ fun AvatarContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: AvatarContract.State,
     avatars: List<DrawableResource> = rememberAvatars(),
-    onEvent: (AvatarContract.Event) -> Unit = {},
+    onIntent: (AvatarContract.Intent) -> Unit = {},
 ) {
     AppScaffoldLayout(
         containerColor = Colors.Brown10,
@@ -105,7 +105,7 @@ fun AvatarContent(
                     )
                     VerticalSpacer(40.dp)
                     IconButton(
-                        onClick = { onEvent(AvatarContract.Event.OnPickAvatar) },
+                        onClick = { AvatarContract.Intent.ChangeImageSourceOptionDialog(true) },
                         modifier = Modifier.size(96.dp)
                     ) {
                         if (state.imageBitmap != null) {
@@ -146,7 +146,7 @@ fun AvatarContent(
             PrimaryButton(
                 modifier = Modifier.fillMaxWidth().paddingHorizontalMedium(),
                 text = Res.string.continue_word,
-                onClick = { onEvent(AvatarContract.Event.OnContinue) }
+                onClick = { onIntent(AvatarContract.Intent.Action) }
             )
         }
     }

@@ -7,7 +7,7 @@ sealed interface EditSelfJournalContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Event {
-        data object OnGoBack : Event
+        data object GoBack : Event
     }
 
     sealed interface Intent {
@@ -15,7 +15,7 @@ sealed interface EditSelfJournalContract {
 
         data object ClearEditingState : Intent
 
-        data object Update : Intent
+        data object Action : Intent
 
         data class GetById(
             val id: Int,
@@ -25,31 +25,25 @@ sealed interface EditSelfJournalContract {
             val id: Int,
         ) : Intent
 
-        data class Set(
-            val record: SelfJournalRecord,
-        ) : Intent
-
-        data class UpdateTitle(
+        data class ChangeTitle(
             val title: String,
         ) : Intent
 
-        data class UpdateDescription(
+        data class ChangeDescription(
             val description: String,
         ) : Intent
 
-        data class UpdateIsEditing(
+        data class ChangeIsEditing(
             val value: Boolean,
         ) : Intent
 
-        data class UpdateOpenDeleteDialog(
+        data class ChangeOpenDeleteDialog(
             val value: Boolean,
         ) : Intent
     }
 
     sealed interface SideEffect {
-        data object OnGoBack : SideEffect
-
-        data object Updated : SideEffect
+        data object GoBack : SideEffect
 
         data class ShowError(
             val message: String,

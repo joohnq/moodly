@@ -26,7 +26,7 @@ fun OnboardingExpressionAnalysisScreen(
             }
         }
 
-    fun onEvent(event: OnboardingEvent) =
+    fun onEvent(event: OnboardingEvent) {
         when (event) {
             OnboardingEvent.NavigateNext -> {
                 viewModel.onIntent(
@@ -36,6 +36,7 @@ fun OnboardingExpressionAnalysisScreen(
 
             OnboardingEvent.OnGoBack -> onGoBack()
         }
+    }
 
     OnboardingExpressionAnalysisContent(
         description = state.moodRecord.description,

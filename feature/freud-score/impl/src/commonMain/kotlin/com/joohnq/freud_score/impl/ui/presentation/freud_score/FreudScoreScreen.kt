@@ -12,10 +12,11 @@ fun FreudScoreScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: FreudScoreContract.Event) =
+    fun onEvent(event: FreudScoreContract.Event) {
         when (event) {
             is FreudScoreContract.Event.GoBack -> onGoBack()
         }
+    }
 
     FreudScoreContent(
         state = state,

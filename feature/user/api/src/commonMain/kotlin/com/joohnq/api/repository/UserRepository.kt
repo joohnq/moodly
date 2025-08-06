@@ -5,9 +5,10 @@ import com.joohnq.api.entity.MedicationsSupplements
 import com.joohnq.api.entity.PhysicalSymptoms
 import com.joohnq.api.entity.ProfessionalHelp
 import com.joohnq.api.entity.User
+import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
-    suspend fun getUser(): Result<User>
+    fun observe(): Flow<User?>
 
     suspend fun addUser(user: User): Result<Boolean>
 

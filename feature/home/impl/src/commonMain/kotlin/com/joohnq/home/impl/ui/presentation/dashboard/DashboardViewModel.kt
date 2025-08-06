@@ -2,8 +2,6 @@ package com.joohnq.home.impl.ui.presentation.dashboard
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.use_case.GetUserUseCase
-import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toResource
-import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.calculateStatsFreudScore
 import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
@@ -13,9 +11,9 @@ import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toReso
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
@@ -32,38 +30,71 @@ class DashboardViewModel(
     override fun onIntent(intent: DashboardContract.Intent) {}
 
     init {
-        get()
+        observe()
     }
 
-    private fun get() {
+    private fun observe() {
         viewModelScope.launch {
+            updateState { it.copy(isLoading = true) }
             try {
-                val userDeferred = async { getUserUseCase() }
-                val moodsDeferred = async { getMoodsUseCase() }
-                val selfJournalsDeferred = async { getSelfJournalsUseCase() }
-                val sleepQualitiesDeferred = async { getSleepQualitiesUseCase() }
-                val stressLevelsDeferred = async { getAllStressLevelUseCase() }
-
-                val user = userDeferred.await()
-                val moods = moodsDeferred.await().toResultResource { it.toResource() }
-                val freudScore = moods.getOrThrow().calculateStatsFreudScore().toResource()
-                val selfJournals = selfJournalsDeferred.await().toResultResource { it.toResource() }
-                val sleepQualities =
-                    sleepQualitiesDeferred.await().toResultResource { it.toResource() }
-                val stressLevels = stressLevelsDeferred.await().toResultResource { it.toResource() }
-
-                updateState {
-                    it.copy(
-                        user = user.toUiState(),
-                        freudScore = freudScore,
-                        moodRecords = moods.toUiState(),
-                        selfJournalRecords = selfJournals.toUiState(),
-                        sleepQualityRecords = sleepQualities.toUiState(),
-                        stressLevelRecords = stressLevels.toUiState()
-                    )
+                async {
+                    getUserUseCase()
+                        .onEach { user ->
+                            updateState {
+                                it.copy(
+                                    user = user
+                                )
+                            }
+                        }.launchIn(viewModelScope)
+                }
+                async {
+                    getMoodsUseCase()
+                        .onEach { items ->
+                            val resources = items.toResource()
+                            updateState {
+                                it.copy(
+                                    moodItems = resources
+                                )
+                            }
+                        }.launchIn(viewModelScope)
+                }
+                async {
+                    getSelfJournalsUseCase()
+                        .onEach { items ->
+                            val resources = items.toResource()
+                            updateState {
+                                it.copy(
+                                    selfJournalItems = resources
+                                )
+                            }
+                        }.launchIn(viewModelScope)
+                }
+                async {
+                    getSleepQualitiesUseCase()
+                        .onEach { items ->
+                            val resources = items.toResource()
+                            updateState {
+                                it.copy(
+                                    sleepQualityItems = resources
+                                )
+                            }
+                        }.launchIn(viewModelScope)
+                }
+                async {
+                    getAllStressLevelUseCase()
+                        .onEach { items ->
+                            val resources = items.toResource()
+                            updateState {
+                                it.copy(
+                                    stressLevelItems = resources
+                                )
+                            }
+                        }.launchIn(viewModelScope)
                 }
             } catch (e: Exception) {
                 emitEffect(DashboardContract.SideEffect.ShowError(e.message.toString()))
+            } finally {
+                updateState { it.copy(isLoading = false) }
             }
         }
     }

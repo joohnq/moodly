@@ -12,13 +12,14 @@ fun MoodHistoryScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: MoodHistoryContract.Event) =
+    fun onEvent(event: MoodHistoryContract.Event) {
         when (event) {
             is MoodHistoryContract.Event.GoBack -> onGoBack()
         }
+    }
 
     MoodHistoryContent(
-        records = state.records,
+        state = state,
         onEvent = ::onEvent
     )
 }

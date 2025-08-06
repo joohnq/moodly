@@ -5,10 +5,9 @@ import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.use_case.DeleteMoodUseCase
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.getValueOrNull
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MoodHistoryViewModel(
@@ -26,40 +25,40 @@ class MoodHistoryViewModel(
     }
 
     init {
-        getAll()
+        observe()
     }
 
-    private fun getAll() =
-        viewModelScope.launch {
-            updateState { it.copy(UiState.Loading) }
-            try {
-                val result =
-                    getMoodsUseCase()
-                        .toResultResource { it.toResource() }
-                        .toUiState()
-                updateState { it.copy(result) }
-            } catch (e: Exception) {
+    private fun observe() {
+        updateState { it.copy(isLoading = true) }
+        getMoodsUseCase()
+            .onEach { items ->
+                val resources = items.toResource()
+                updateState {
+                    it.copy(
+                        items = resources
+                    )
+                }
+            }.catch { e ->
                 emitEffect(MoodHistoryContract.SideEffect.ShowError(e.message.toString()))
-            }
-        }
+            }.launchIn(viewModelScope)
+    }
 
-    private fun delete(id: Int) =
+    private fun delete(id: Int) {
         viewModelScope.launch {
             try {
                 deleteMoodUseCase(id).getOrThrow()
 
                 updateState {
                     it.copy(
-                        records =
-                            UiState.Success(
-                                it.records.getValueOrNull().filter { mood ->
-                                    mood.id != id
-                                }
-                            )
+                        items =
+                            it.items.filter { mood ->
+                                mood.id != id
+                            }
                     )
                 }
             } catch (e: Exception) {
                 emitEffect(MoodHistoryContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 }

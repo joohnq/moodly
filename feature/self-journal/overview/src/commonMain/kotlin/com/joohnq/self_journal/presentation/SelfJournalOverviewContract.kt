@@ -2,7 +2,6 @@ package com.joohnq.self_journal.presentation
 
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface SelfJournalOverviewContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -20,7 +19,9 @@ sealed interface SelfJournalOverviewContract {
     }
 
     data class State(
-        val records: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
+        val items: List<SelfJournalRecordResource> = listOf(),
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 
     sealed interface Event {

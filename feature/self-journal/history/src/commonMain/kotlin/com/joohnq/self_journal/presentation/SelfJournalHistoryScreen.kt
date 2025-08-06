@@ -13,12 +13,13 @@ fun SelfJournalHistoryScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: SelfJournalHistoryContract.Event) =
+    fun onEvent(event: SelfJournalHistoryContract.Event) {
         when (event) {
             SelfJournalHistoryContract.Event.GoBack -> onGoBack()
             is SelfJournalHistoryContract.Event.NavigateToEditSelfJournal ->
                 onNavigateEditJournaling(event.id)
         }
+    }
 
     SelfJournalHistoryContent(
         state = state,

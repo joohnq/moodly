@@ -30,6 +30,8 @@ object StressLevelRecordResourceMapper {
             createdAt = createdAt
         )
 
+    fun List<StressLevelRecord>.toResource(): List<StressLevelRecordResource> = map { it.toResource() }
+
     fun StressLevelRecordResource.toDomain(): StressLevelRecord =
         StressLevelRecord(
             id = id,

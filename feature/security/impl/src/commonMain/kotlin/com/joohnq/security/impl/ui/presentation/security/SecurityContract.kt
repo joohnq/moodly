@@ -26,7 +26,9 @@ sealed interface SecurityContract {
     }
 
     data class State(
-        val item: UiState<Security> = UiState.Idle,
+        val item: Security? = null,
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 
     sealed interface Event {

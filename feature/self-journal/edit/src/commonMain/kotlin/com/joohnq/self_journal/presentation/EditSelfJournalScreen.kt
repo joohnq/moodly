@@ -36,10 +36,11 @@ fun EditSelfJournalScreen(
             state.editingSelfJournalRecord.description.isNotBlank()
     }
 
-    fun onEvent(event: EditSelfJournalContract.Event) =
+    fun onEvent(event: EditSelfJournalContract.Event) {
         when (event) {
             EditSelfJournalContract.Event.GoBack -> onGoBack()
         }
+    }
 
     LaunchedEffect(Unit) {
         viewModel.onIntent(

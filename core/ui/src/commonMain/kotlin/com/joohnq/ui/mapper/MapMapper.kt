@@ -43,8 +43,8 @@ object MapMapper {
 
     fun <K, T> LazyListScope.itemsIndexed(
         items: Map<K, List<T>>,
-        title: @Composable LazyItemScope.(key: K) -> Unit,
-        empty: @Composable LazyItemScope.() -> Unit,
+        title: @Composable LazyItemScope.(key: K) -> Unit = {},
+        empty: @Composable LazyItemScope.() -> Unit = {},
         content: @Composable LazyItemScope.(index: Int, lastIndex: Int, item: T) -> Unit,
     ) {
         for ((key, value) in items) {

@@ -15,11 +15,12 @@ fun OnboardingStressLevelScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: OnboardingEvent) =
+    fun onEvent(event: OnboardingEvent) {
         when (event) {
             OnboardingEvent.NavigateNext -> onNavigateToExpressionAnalysis()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
+    }
 
     OnboardingStressLevelContent(
         state = state.stressLevel,

@@ -1,15 +1,16 @@
 package com.joohnq.self_journal.api.repository
 
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
+import kotlinx.coroutines.flow.Flow
 
 interface SelfJournalRepository {
-    suspend fun getSelfJournals(): Result<List<SelfJournalRecord>>
+    fun observe(): Flow<List<SelfJournalRecord>>
 
-    suspend fun getSelfJournalById(id: Int): Result<SelfJournalRecord>
+    suspend fun getById(id: Int): Result<SelfJournalRecord>
 
-    suspend fun addSelfJournal(record: SelfJournalRecord): Result<Boolean>
+    suspend fun add(record: SelfJournalRecord): Result<Boolean>
 
-    suspend fun deleteSelfJournal(id: Int): Result<Boolean>
+    suspend fun delete(id: Int): Result<Boolean>
 
-    suspend fun updateSelfJournal(record: SelfJournalRecord): Result<Boolean>
+    suspend fun update(record: SelfJournalRecord): Result<Boolean>
 }

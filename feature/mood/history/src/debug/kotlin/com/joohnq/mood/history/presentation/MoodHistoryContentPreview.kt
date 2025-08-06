@@ -2,9 +2,9 @@ package com.joohnq.mood.history.presentation
 
 import androidx.compose.runtime.Composable
 import com.joohnq.history.presentation.MoodHistoryContent
+import com.joohnq.history.presentation.MoodHistoryContract
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
-import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -15,7 +15,10 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodHistoryContent(
-        records = UiState.Success(list)
+        state =
+            MoodHistoryContract.State(
+                items = list
+            )
     )
 }
 
@@ -23,7 +26,10 @@ private fun Preview(
 @Composable
 fun LoadingPreview() {
     MoodHistoryContent(
-        records = UiState.Loading
+        state =
+            MoodHistoryContract.State(
+                isLoading = true
+            )
     )
 }
 
@@ -31,6 +37,9 @@ fun LoadingPreview() {
 @Composable
 fun ErrorPreview() {
     MoodHistoryContent(
-        records = UiState.Error("Some error")
+        state =
+            MoodHistoryContract.State(
+                isError = "Some error"
+            )
     )
 }

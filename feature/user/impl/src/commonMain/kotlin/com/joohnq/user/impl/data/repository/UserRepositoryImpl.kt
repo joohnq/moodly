@@ -1,5 +1,7 @@
 package com.joohnq.user.impl.data.repository
 
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToOneOrNull
 import com.joohnq.api.converter.UserConverter
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.MedicationsSupplements
@@ -12,41 +14,42 @@ import com.joohnq.api.repository.UserRepository
 import com.joohnq.database.converters.LocalDateTimeConverter
 import com.joohnq.database.executeTryCatchResult
 import com.joohnq.user.database.UserDatabaseSql
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.Flow
 
 class UserRepositoryImpl(
     private val database: UserDatabaseSql,
 ) : UserRepository {
     private val query = database.userQueries
 
-    override suspend fun getUser(): Result<User> =
-        executeTryCatchResult {
-            query
-                .getUser(mapper = {
-                    id,
-                    name,
-                    image,
-                    imageType,
-                    medicationsSupplements,
-                    soughtHelp,
-                    physicalSymptoms,
-                    dateCreated,
-                    ->
-                    User(
-                        id = id.toInt(),
-                        name = name,
-                        image = image,
-                        imageType = imageType.toImageType(),
-                        medicationsSupplements =
-                            UserConverter.toMedicationsSupplements(
-                                medicationsSupplements
-                            ),
-                        soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
-                        physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
-                        dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
-                    )
-                })
-                .executeAsOneOrNull() ?: error("User not found")
-        }
+    override fun observe(): Flow<User?> =
+        query
+            .getUser {
+                id,
+                name,
+                image,
+                imageType,
+                medicationsSupplements,
+                soughtHelp,
+                physicalSymptoms,
+                dateCreated,
+                ->
+                User(
+                    id = id.toInt(),
+                    name = name,
+                    image = image,
+                    imageType = imageType.toImageType(),
+                    medicationsSupplements =
+                        UserConverter.toMedicationsSupplements(
+                            medicationsSupplements
+                        ),
+                    soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
+                    physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
+                    dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
+                )
+            }.asFlow()
+            .mapToOneOrNull(Dispatchers.IO)
 
     override suspend fun addUser(user: User): Result<Boolean> =
         executeTryCatchResult {

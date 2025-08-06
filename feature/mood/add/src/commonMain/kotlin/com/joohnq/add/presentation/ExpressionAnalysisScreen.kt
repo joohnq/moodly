@@ -24,11 +24,12 @@ fun ExpressionAnalysisScreen(
             }
         }
 
-    fun onEvent(event: AddMoodContract.Event) =
+    fun onEvent(event: AddMoodContract.Event) {
         when (event) {
             AddMoodContract.Event.GoBack -> onGoBack()
             else -> {}
         }
+    }
 
     DisposableEffect {
         viewModel.onIntent(AddMoodContract.Intent.ResetState)

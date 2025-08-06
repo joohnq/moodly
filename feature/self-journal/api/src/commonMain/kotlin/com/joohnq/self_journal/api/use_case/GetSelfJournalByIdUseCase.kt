@@ -6,5 +6,5 @@ import com.joohnq.self_journal.api.repository.SelfJournalRepository
 class GetSelfJournalByIdUseCase(
     private val repository: SelfJournalRepository,
 ) {
-    suspend operator fun invoke(id: Int): Result<SelfJournalRecord> = repository.getSelfJournalById(id)
+    suspend operator fun invoke(id: Int): Result<SelfJournalRecord> = repository.getById(id)
 }

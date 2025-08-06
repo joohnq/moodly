@@ -1,16 +1,15 @@
 package com.joohnq.self_journal.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.api.filterBy
 import com.joohnq.self_journal.api.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toGroupedByDate
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SelfJournalHistoryViewModel(
@@ -32,36 +31,40 @@ class SelfJournalHistoryViewModel(
     }
 
     init {
-        getAll()
+        observe()
     }
 
-    private fun getAll() =
-        viewModelScope.launch {
-            updateState { it.copy(UiState.Loading) }
-            val res =
-                getSelfJournalsUseCase()
-                    .toResultResource { it.toResource() }
-                    .toUiState()
-            updateState { it.copy(res) }
-        }
-
-    private fun delete(id: Int) =
-        viewModelScope.launch {
-            val res = deleteSelfJournalsUseCase(id).toUiState()
-            res
-                .onSuccess {
-                    updateState {
-                        it.copy(
-                            records =
-                                UiState.Success(
-                                    state.value.records
-                                        .getValueOrEmpty()
-                                        .filter { item -> item.id != id }
-                                )
-                        )
-                    }
-                }.onFailure {
-                    emitEffect(SelfJournalHistoryContract.SideEffect.ShowError(it))
+    private fun observe() {
+        updateState { it.copy(isLoading = true) }
+        getSelfJournalsUseCase()
+            .onEach { items ->
+                val resources = items.toResource()
+                updateState {
+                    it.copy(
+                        items = resources.toGroupedByDate(),
+                        isLoading = false
+                    )
                 }
+            }.catch { e ->
+                emitEffect(SelfJournalHistoryContract.SideEffect.ShowError(e.message.toString()))
+            }.launchIn(viewModelScope)
+    }
+
+    private fun delete(id: Int) {
+        viewModelScope.launch {
+            try {
+                deleteSelfJournalsUseCase(id).getOrThrow()
+
+                updateState {
+                    it.copy(
+                        items =
+                            state.value.items
+                                .filterBy { item -> item.id != id }
+                    )
+                }
+            } catch (e: Exception) {
+                emitEffect(SelfJournalHistoryContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
+    }
 }

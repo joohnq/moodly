@@ -14,12 +14,13 @@ fun SleepQualityOverviewScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: SleepQualityOverviewContract.Event) =
+    fun onEvent(event: SleepQualityOverviewContract.Event) {
         when (event) {
             SleepQualityOverviewContract.Event.GoBack -> onGoBack()
             SleepQualityOverviewContract.Event.NavigateToAddSleepQuality -> onNavigateAddSleepQuality()
             SleepQualityOverviewContract.Event.NavigateToSleepQualityHistory -> onNavigateToSleepHistory()
         }
+    }
 
     SleepQualityOverviewContent(
         state = state,

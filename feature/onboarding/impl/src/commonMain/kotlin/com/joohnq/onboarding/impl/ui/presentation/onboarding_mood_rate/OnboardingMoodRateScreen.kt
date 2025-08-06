@@ -15,11 +15,12 @@ fun OnboardingMoodRateScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: OnboardingEvent) =
+    fun onEvent(event: OnboardingEvent) {
         when (event) {
             OnboardingEvent.NavigateNext -> onNavigateToProfessionalHelp()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
+    }
 
     OnboardingMoodRateContent(
         state = state.moodRecord,

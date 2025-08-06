@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
-import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toGroupedByDate
 import com.joohnq.self_journal.presentation.components.SelfJournalHistoryCard
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.all_history
@@ -23,7 +22,6 @@ import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.mapper.MapMapper.items
 import com.joohnq.ui.mapper.MapMapper.itemsIndexed
-import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -32,69 +30,79 @@ fun SelfJournalHistoryContent(
     onIntent: (SelfJournalHistoryContract.Intent) -> Unit = {},
     onEvent: (SelfJournalHistoryContract.Event) -> Unit = {},
 ) {
-    state.records.foldComposable(
-        onSuccess = { records ->
-            val recordsMap = records.toGroupedByDate()
+    when {
+        state.isLoading -> Unit
+        state.isError != null -> Unit
+        else ->
+            SuccessView(
+                state = state,
+                onEvent = onEvent,
+                onIntent = onIntent
+            )
+    }
+}
 
-            Scaffold(
-                containerColor = Colors.Brown10
-            ) { padding ->
-                Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
-                    AppTopBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        isDark = true,
-                        onGoBack = { onEvent(SelfJournalHistoryContract.Event.GoBack) }
-                    )
-                    VerticalSpacer(20.dp)
-                    Text(
-                        text = stringResource(Res.string.all_history),
-                        style = TextStyles.textLgBold(),
-                        color = Colors.Gray80
-                    )
-                    VerticalSpacer(20.dp)
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(
-                            items = recordsMap,
+@Composable
+private fun SuccessView(
+    state: SelfJournalHistoryContract.State,
+    onEvent: (SelfJournalHistoryContract.Event) -> Unit,
+    onIntent: (SelfJournalHistoryContract.Intent) -> Unit,
+) {
+    Scaffold(
+        containerColor = Colors.Brown10
+    ) { padding ->
+        Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
+            AppTopBar(
+                modifier = Modifier.fillMaxWidth(),
+                isDark = true,
+                onGoBack = { onEvent(SelfJournalHistoryContract.Event.GoBack) }
+            )
+            VerticalSpacer(20.dp)
+            Text(
+                text = stringResource(Res.string.all_history),
+                style = TextStyles.textLgBold(),
+                color = Colors.Gray80
+            )
+            VerticalSpacer(20.dp)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(
+                    items = state.items,
+                    empty = {
+                        EmptyView()
+                    },
+                    title = { date ->
+                        Text(
+                            text = date.toFormattedDateString(),
+                            style = TextStyles.textMdBold(),
+                            color = Colors.Gray80
+                        )
+                    }
+                ) { record ->
+                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                        itemsIndexed(
+                            items = state.items,
                             empty = {
                                 EmptyView()
-                            },
-                            title = { date ->
-                                Text(
-                                    text = date.toFormattedDateString(),
-                                    style = TextStyles.textMdBold(),
-                                    color = Colors.Gray80
-                                )
                             }
-                        ) { record ->
-                            LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                                itemsIndexed(
-                                    items = recordsMap,
-                                    title = {
-                                    },
-                                    empty = {
-                                        EmptyView()
-                                    }
-                                ) { i, lastIndex, record ->
-                                    SelfJournalHistoryCard(
-                                        isNotFirst = i != 0,
-                                        isNotLast = i != lastIndex,
-                                        record = record,
-                                        onClick = {},
-                                        onDelete = { id ->
-                                            onIntent(
-                                                SelfJournalHistoryContract.Intent.Delete(id)
-                                            )
-                                        }
+                        ) { i, lastIndex, record ->
+                            SelfJournalHistoryCard(
+                                isNotFirst = i != 0,
+                                isNotLast = i != lastIndex,
+                                record = record,
+                                onClick = {},
+                                onDelete = { id ->
+                                    onIntent(
+                                        SelfJournalHistoryContract.Intent.Delete(id)
                                     )
                                 }
-                            }
+                            )
                         }
                     }
                 }
             }
         }
-    )
+    }
 }

@@ -2,7 +2,6 @@ package com.joohnq.stress_level.overview.presentation
 
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface StressLevelOverviewContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -28,6 +27,9 @@ sealed interface StressLevelOverviewContract {
     }
 
     data class State(
-        val records: UiState<List<StressLevelRecordResource>> = UiState.Idle,
+        val items: List<StressLevelRecordResource> = listOf(),
+        val todayStressLevel: StressLevelRecordResource? = null,
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 }

@@ -14,15 +14,16 @@ fun MoodOverviewScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: MoodOverviewContract.Event) =
+    fun onEvent(event: MoodOverviewContract.Event) {
         when (event) {
             is MoodOverviewContract.Event.GoBack -> onGoBack()
             is MoodOverviewContract.Event.NavigateToAddMood -> onNavigateToAddMood()
             MoodOverviewContract.Event.NavigateToMoodHistory -> onNavigateToMoodHistory()
         }
+    }
 
     MoodOverviewContent(
-        records = state.records,
+        state = state,
         onEvent = ::onEvent,
         onIntent = viewModel::onIntent
     )

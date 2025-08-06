@@ -3,12 +3,12 @@ package com.joohnq.stress_level.overview.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class StressLevelOverviewViewModel(
@@ -26,23 +26,24 @@ class StressLevelOverviewViewModel(
     }
 
     init {
-        getAll()
+        observe()
     }
 
-    private fun getAll() {
-        viewModelScope.launch {
-            updateState { it.copy(UiState.Loading) }
-            try {
-                val res =
-                    getAllStressLevelUseCase()
-                        .toResultResource { it.toResource() }
-                        .toUiState()
+    private fun observe() {
+        updateState { it.copy(isLoading = true) }
 
-                updateState { it.copy(res) }
-            } catch (e: Exception) {
+        getAllStressLevelUseCase()
+            .onEach { items ->
+                val resources = items.toResource()
+                updateState {
+                    it.copy(
+                        items = items.toResource(),
+                        todayStressLevel = resources.getTodayStressLevelRecord()
+                    )
+                }
+            }.catch { e ->
                 emitEffect(StressLevelOverviewContract.SideEffect.ShowError(e.message.toString()))
-            }
-        }
+            }.launchIn(viewModelScope)
     }
 
     private fun delete(id: Int) {
@@ -52,11 +53,8 @@ class StressLevelOverviewViewModel(
 
                 updateState {
                     it.copy(
-                        UiState.Success(
-                            state.value.records
-                                .getValueOrEmpty()
-                                .filter { item -> item.id != id }
-                        )
+                        state.value.items
+                            .filter { item -> item.id != id }
                     )
                 }
             } catch (e: Exception) {

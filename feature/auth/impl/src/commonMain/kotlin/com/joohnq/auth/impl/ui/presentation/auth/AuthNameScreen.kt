@@ -24,10 +24,11 @@ fun AuthNameScreen(
             }
         }
 
-    fun onEvent(event: AuthNameContract.Event) =
+    fun onEvent(event: AuthNameContract.Event) {
         when (event) {
             AuthNameContract.Event.OnClearFocus -> focusManager.clearFocus()
         }
+    }
 
     AuthNameContent(
         state = state,

@@ -28,41 +28,54 @@ fun SleepQualityHistoryContent(
     onEvent: (SleepQualityHistoryContract.Event) -> Unit = {},
     onIntent: (SleepQualityHistoryContract.Intent) -> Unit = {},
 ) {
-    state.records.foldComposable(
-        onSuccess = { records ->
-            Scaffold(
-                containerColor = Colors.Brown10
-            ) { padding ->
-                Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
-                    AppTopBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        isDark = true,
-                        onGoBack = { onEvent(SleepQualityHistoryContract.Event.GoBack) }
-                    )
-                    VerticalSpacer(20.dp)
-                    Text(
-                        text = stringResource(Res.string.all_history),
-                        style = TextStyles.textLgBold(),
-                        color = Colors.Gray80
-                    )
-                    VerticalSpacer(20.dp)
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(records) { record ->
-                            SleepQualityHistoryCard(
-                                record = record,
-                                onDelete = { id ->
-                                    onIntent(
-                                        SleepQualityHistoryContract.Intent.Delete(id)
-                                    )
-                                }
+    when{
+        state.isLoading -> Unit
+        state.isError != null -> Unit
+        else -> SuccessView(
+            state = state,
+            onEvent = onEvent,
+            onIntent = onIntent
+        )
+    }
+}
+
+@Composable
+private fun SuccessView(
+    state: SleepQualityHistoryContract.State,
+    onEvent: (SleepQualityHistoryContract.Event) -> Unit,
+    onIntent: (SleepQualityHistoryContract.Intent) -> Unit,
+){
+    Scaffold(
+        containerColor = Colors.Brown10
+    ) { padding ->
+        Column(modifier = Modifier.padding(padding).paddingHorizontalMedium()) {
+            AppTopBar(
+                modifier = Modifier.fillMaxWidth(),
+                isDark = true,
+                onGoBack = { onEvent(SleepQualityHistoryContract.Event.GoBack) }
+            )
+            VerticalSpacer(20.dp)
+            Text(
+                text = stringResource(Res.string.all_history),
+                style = TextStyles.textLgBold(),
+                color = Colors.Gray80
+            )
+            VerticalSpacer(20.dp)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(state.items) { item ->
+                    SleepQualityHistoryCard(
+                        record = item,
+                        onDelete = { id ->
+                            onIntent(
+                                SleepQualityHistoryContract.Intent.Delete(id)
                             )
                         }
-                    }
+                    )
                 }
             }
         }
-    )
+    }
 }

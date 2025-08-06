@@ -5,7 +5,6 @@ import com.joohnq.self_journal.impl.parameter.ListSelfJournalRecordResourceParam
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.self_journal.presentation.SelfJournalOverviewContent
 import com.joohnq.self_journal.presentation.SelfJournalOverviewContract
-import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -18,7 +17,7 @@ private fun Preview(
     SelfJournalOverviewContent(
         state =
             SelfJournalOverviewContract.State(
-                records = UiState.Success(list)
+                items = list
             )
     )
 }

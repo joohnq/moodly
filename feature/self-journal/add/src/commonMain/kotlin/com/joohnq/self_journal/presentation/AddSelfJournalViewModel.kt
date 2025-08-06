@@ -5,9 +5,6 @@ import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toDomain
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.use_case.AddSelfJournalsUseCase
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.onFailure
-import com.joohnq.ui.mapper.UiStateMapper.onSuccess
 import kotlinx.coroutines.launch
 
 class AddSelfJournalViewModel(
@@ -35,7 +32,7 @@ class AddSelfJournalViewModel(
         }
     }
 
-    private fun add() =
+    private fun add() {
         viewModelScope.launch {
             if (state.value.mood == null) return@launch
 
@@ -46,13 +43,13 @@ class AddSelfJournalViewModel(
                     mood = state.value.mood!!.toDomain()
                 )
 
-            val res = addSelfJournalsUseCase(record).toUiState()
+            try {
+                addSelfJournalsUseCase(record).getOrThrow()
 
-            res
-                .onSuccess {
-                    emitEffect(AddSelfJournalContract.SideEffect.GoBack)
-                }.onFailure {
-                    emitEffect(AddSelfJournalContract.SideEffect.ShowError(it))
-                }
+                emitEffect(AddSelfJournalContract.SideEffect.GoBack)
+            } catch (e: Exception) {
+                emitEffect(AddSelfJournalContract.SideEffect.ShowError(e.message.toString()))
+            }
         }
+    }
 }

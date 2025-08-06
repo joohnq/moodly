@@ -9,6 +9,7 @@ val sleepQualityHistoryModule: Module =
     module {
         viewModel {
             SleepQualityHistoryViewModel(
+                getSleepQualitiesUseCase = get(),
                 deleteSleepQualityUseCase = get()
             )
         }

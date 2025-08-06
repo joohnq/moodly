@@ -26,7 +26,7 @@ class AddMoodViewModel(
         }
     }
 
-    private fun add() =
+    private fun add() {
         viewModelScope.launch {
             try {
                 addMoodUseCase(state.value.record.toDomain()).getOrThrow()
@@ -36,4 +36,5 @@ class AddMoodViewModel(
                 emitEffect(AddMoodContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 }

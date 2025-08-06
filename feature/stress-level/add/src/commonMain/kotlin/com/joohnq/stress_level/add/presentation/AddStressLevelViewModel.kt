@@ -50,7 +50,10 @@ class AddStressLevelViewModel(
 
     private fun add() {
         viewModelScope.launch {
-            if (state.value.record.stressLevel != StressLevelResource.One) {
+            if (state.value.record.stressLevel != StressLevelResource.One &&
+                state.value.record.stressors
+                    .isEmpty()
+            ) {
                 emitEffect(AddStressLevelContract.SideEffect.NavigateToStressStressors)
                 return@launch
             }
@@ -59,6 +62,8 @@ class AddStressLevelViewModel(
                 addStressLevelUseCase(state.value.record.toDomain()).getOrThrow()
 
                 emitEffect(AddStressLevelContract.SideEffect.GoBack)
+
+                resetState()
             } catch (e: Exception) {
                 emitEffect(AddStressLevelContract.SideEffect.ShowError(e.message.toString()))
             }

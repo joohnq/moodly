@@ -1,12 +1,10 @@
 package com.joohnq.sleep_quality.api.repository
 
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 
 interface SleepQualityRepository {
-    val records: StateFlow<Result<List<SleepQualityRecord>>>
-
-    suspend fun getAll(): Result<List<SleepQualityRecord>>
+    fun observe(): Flow<List<SleepQualityRecord>>
 
     suspend fun add(record: SleepQualityRecord): Result<Boolean>
 

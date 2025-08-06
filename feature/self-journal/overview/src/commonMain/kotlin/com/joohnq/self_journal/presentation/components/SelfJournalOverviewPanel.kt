@@ -33,12 +33,11 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalOverviewPanel(
     modifier: Modifier = Modifier,
-    count: Int,
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
 ) {
-    val totalWords = records.sumOf { it.description.toWordCount() }
-    val positive = records.filter { it.mood == Mood.Happy || it.mood == Mood.Overjoyed }.size
-    val negative = records.filter { it.mood == Mood.Depressed || it.mood == Mood.Sad }.size
+    val totalWords = items.sumOf { it.description.toWordCount() }
+    val positive = items.filter { it.mood == Mood.Happy || it.mood == Mood.Overjoyed }.size
+    val negative = items.filter { it.mood == Mood.Depressed || it.mood == Mood.Sad }.size
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -52,7 +51,7 @@ fun SelfJournalOverviewPanel(
             tint = Colors.White
         )
         Text(
-            text = count.toString(),
+            text = items.size.toString(),
             style = TextStyles.heading2xlExtraBold(),
             color = Colors.White
         )

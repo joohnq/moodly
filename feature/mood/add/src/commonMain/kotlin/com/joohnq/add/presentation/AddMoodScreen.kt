@@ -13,12 +13,13 @@ fun AddMoodScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: AddMoodContract.Event) =
+    fun onEvent(event: AddMoodContract.Event) {
         when (event) {
             AddMoodContract.Event.GoBack -> onGoBack()
             AddMoodContract.Event.NavigateNext ->
                 onNavigateToExpressionAnalysis()
         }
+    }
 
     AddMoodContent(
         state = state,

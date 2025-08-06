@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.overview.presentation.MoodOverviewContent
-import com.joohnq.ui.entity.UiState
+import com.joohnq.overview.presentation.MoodOverviewContract
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -15,7 +15,10 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodOverviewContent(
-        records = UiState.Success(list)
+        state =
+            MoodOverviewContract.State(
+                items = list
+            )
     )
 }
 
@@ -23,7 +26,10 @@ private fun Preview(
 @Composable
 private fun LoadingPreview() {
     MoodOverviewContent(
-        records = UiState.Loading
+        state =
+            MoodOverviewContract.State(
+                isLoading = true
+            )
     )
 }
 
@@ -31,6 +37,9 @@ private fun LoadingPreview() {
 @Composable
 private fun ErrorPreview() {
     MoodOverviewContent(
-        records = UiState.Error("Some error")
+        state =
+            MoodOverviewContract.State(
+                isError = "Some error"
+            )
     )
 }

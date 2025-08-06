@@ -5,26 +5,6 @@ import com.joohnq.ui.entity.UiState
 
 object UiStateMapper {
     @Composable
-    fun List<UiState<*>>.foldComposable(
-        onLoading: @Composable () -> Unit,
-        block: @Composable () -> Unit,
-    ) {
-        if (all { it is UiState.Success }) {
-            block()
-        } else if (any { it is UiState.Loading }) {
-            onLoading()
-        }
-    }
-
-    fun List<UiState<*>>.anyError(block: (String) -> Unit): List<UiState<*>> {
-        filterIsInstance<UiState.Error>().firstOrNull()?.let { errorState ->
-            block(errorState.error)
-            return@let
-        }
-        return this
-    }
-
-    @Composable
     fun <T> UiState<T>.foldComposable(
         onLoading: @Composable () -> Unit = {},
         onIdle: @Composable () -> Unit = {},
@@ -36,12 +16,6 @@ object UiStateMapper {
         is UiState.Error -> onError(this.error)
         is UiState.Idle -> onIdle()
     }
-
-    fun <T> UiState<T>.getValueOrNull(): T =
-        when (this) {
-            is UiState.Success -> this.data
-            else -> error("Cannot get value from UiState: $this")
-        }
 
     fun <T> UiState<List<T>>.getValueOrEmpty(): List<T> =
         when (this) {

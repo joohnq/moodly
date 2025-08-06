@@ -15,7 +15,7 @@ fun SelfJournalOverviewScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: SelfJournalOverviewContract.Event) =
+    fun onEvent(event: SelfJournalOverviewContract.Event) {
         when (event) {
             SelfJournalOverviewContract.Event.GoBack ->
                 onGoBack()
@@ -27,6 +27,7 @@ fun SelfJournalOverviewScreen(
             is SelfJournalOverviewContract.Event.NavigateToEditSelfJournal ->
                 onEditSelfJournal(event.id)
         }
+    }
 
     SelfJournalOverviewContent(
         state = state,

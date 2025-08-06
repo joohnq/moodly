@@ -5,10 +5,9 @@ import com.joohnq.self_journal.api.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SelfJournalOverviewViewModel(
@@ -26,23 +25,26 @@ class SelfJournalOverviewViewModel(
     }
 
     init {
-        getAll()
+        observe()
     }
 
-    private fun getAll() {
-        viewModelScope.launch {
-            updateState { it.copy(UiState.Loading) }
-            try {
-                val res =
-                    getSelfJournalsUseCase()
-                        .toResultResource { it.toResource() }
-                        .toUiState()
+    private fun observe() {
+        updateState { it.copy(isLoading = true) }
 
-                updateState { it.copy(res) }
-            } catch (e: Exception) {
-                emitEffect(SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString()))
-            }
-        }
+        getSelfJournalsUseCase()
+            .onEach { items ->
+                val resources = items.toResource()
+                updateState {
+                    it.copy(
+                        items = resources,
+                        isLoading = false
+                    )
+                }
+            }.catch { e ->
+                emitEffect(
+                    SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString())
+                )
+            }.launchIn(viewModelScope)
     }
 
     private fun delete(id: Int) {
@@ -52,11 +54,9 @@ class SelfJournalOverviewViewModel(
 
                 updateState {
                     it.copy(
-                        UiState.Success(
-                            state.value.records
-                                .getValueOrEmpty()
+                        items =
+                            state.value.items
                                 .filter { item -> item.id != id }
-                        )
                     )
                 }
             } catch (e: Exception) {

@@ -58,7 +58,7 @@ class EditSelfJournalViewModel(
         }
     }
 
-    private fun getById(id: Int) =
+    private fun getById(id: Int) {
         viewModelScope.launch {
             try {
                 val res = getSelfJournalByIdUseCase(id).getOrThrow()
@@ -73,8 +73,9 @@ class EditSelfJournalViewModel(
                 emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 
-    private fun delete(id: Int) =
+    private fun delete(id: Int) {
         viewModelScope.launch {
             try {
                 deleteSelfJournalsUseCase(id).getOrThrow()
@@ -84,8 +85,9 @@ class EditSelfJournalViewModel(
                 emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 
-    private fun update() =
+    private fun update() {
         viewModelScope.launch {
             try {
                 updateSelfJournalsUseCase(state.value.editingSelfJournalRecord).getOrThrow()
@@ -101,4 +103,5 @@ class EditSelfJournalViewModel(
                 emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 }

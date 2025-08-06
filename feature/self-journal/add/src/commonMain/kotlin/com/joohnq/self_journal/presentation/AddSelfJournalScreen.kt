@@ -24,10 +24,11 @@ fun AddSelfJournalScreen(
             }
         }
 
-    fun onEvent(event: AddSelfJournalContract.Event) =
+    fun onEvent(event: AddSelfJournalContract.Event) {
         when (event) {
             AddSelfJournalContract.Event.GoBack -> onGoBack()
         }
+    }
 
     DisposableEffect {
         viewModel.onIntent(AddSelfJournalContract.Intent.ResetState)

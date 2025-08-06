@@ -2,7 +2,7 @@ package com.joohnq.self_journal.presentation
 
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
+import kotlinx.datetime.LocalDate
 
 interface SelfJournalHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -14,7 +14,9 @@ interface SelfJournalHistoryContract {
     }
 
     data class State(
-        val records: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
+        val items: Map<LocalDate, List<SelfJournalRecordResource>> = mapOf(),
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 
     sealed interface SideEffect {

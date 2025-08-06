@@ -13,11 +13,12 @@ fun StressLevelOverviewScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: StressLevelOverviewContract.Event) =
+    fun onEvent(event: StressLevelOverviewContract.Event) {
         when (event) {
             is StressLevelOverviewContract.Event.NavigateToAddStressLevel -> onNavigateAddStressLevel()
             is StressLevelOverviewContract.Event.GoBack -> onGoBack()
         }
+    }
 
     StressLevelOverviewContent(
         state = state,

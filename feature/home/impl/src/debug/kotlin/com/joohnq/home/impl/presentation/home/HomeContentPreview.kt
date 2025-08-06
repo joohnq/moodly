@@ -13,7 +13,6 @@ import com.joohnq.sleep_quality.impl.ui.parameter.ListSleepQualityRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.parameter.ListStressLevelRecordResourceParameterProvider
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
-import com.joohnq.ui.entity.UiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -31,29 +30,15 @@ private fun Preview(
         state =
             DashboardContract.State(
                 freudScore = FreudScoreResource.Healthy(80),
-                moodRecords =
-                    UiState.Success(
-                        moodRecordResources
-                    ),
-                stressLevelRecords =
-                    UiState.Success(
-                        stressLevelRecordResources
-                    ),
-                selfJournalRecords =
-                    UiState.Success(
-                        SelfJournalRecordResource.allSelfJournalRecordResourcePreview
-                    ),
-                sleepQualityRecords =
-                    UiState.Success(
-                        sleepQualityRecordResources
-                    ),
+                moodItems = moodRecordResources,
+                stressLevelItems = stressLevelRecordResources,
+                selfJournalItems = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,
+                sleepQualityItems = sleepQualityRecordResources,
                 user =
-                    UiState.Success(
-                        User(
-                            name = "John Doe",
-                            image = "0",
-                            imageType = ImageType.DRAWABLE
-                        )
+                    User(
+                        name = "John Doe",
+                        image = "0",
+                        imageType = ImageType.DRAWABLE
                     )
             )
     )

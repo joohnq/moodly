@@ -24,10 +24,11 @@ fun AddSleepQualityScreen(
             }
         }
 
-    fun onEvent(event: AddSleepQualityContract.Event) =
+    fun onEvent(event: AddSleepQualityContract.Event) {
         when (event) {
             AddSleepQualityContract.Event.GoBack -> onGoBack()
         }
+    }
 
     DisposableEffect {
         viewModel.onIntent(AddSleepQualityContract.Intent.ResetState)

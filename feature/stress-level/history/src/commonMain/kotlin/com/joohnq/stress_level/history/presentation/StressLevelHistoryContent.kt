@@ -20,9 +20,9 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistoryCard
-import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toGroupedByDate
+import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.ui.mapper.MapMapper.items
-import com.joohnq.ui.mapper.UiStateMapper.foldComposable
+import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -31,54 +31,67 @@ fun StressLevelHistoryContent(
     onIntent: (StressLevelHistoryContract.Intent) -> Unit = {},
     onEvent: (StressLevelHistoryContract.Event) -> Unit = {},
 ) {
-    state.records.foldComposable(
-        onSuccess = { records ->
-            val recordsMap = records.toGroupedByDate()
-            Scaffold(
-                containerColor = Colors.Brown10
-            ) { padding ->
-                Column(
-                    modifier = Modifier.padding(padding).paddingHorizontalMedium()
-                ) {
-                    AppTopBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        isDark = true,
-                        onGoBack = { onEvent(StressLevelHistoryContract.Event.GoBack) }
-                    )
-                    VerticalSpacer(20.dp)
-                    Text(
-                        text = stringResource(Res.string.all_history),
-                        style = TextStyles.textLgBold(),
-                        color = Colors.Gray80
-                    )
-                    VerticalSpacer(20.dp)
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(
-                            items = recordsMap,
-                            empty = {
-                                EmptyView()
-                            },
-                            title = { date ->
-                                Text(
-                                    text = date.toFormattedDateString(),
-                                    style = TextStyles.textMdBold(),
-                                    color = Colors.Gray80
-                                )
-                            }
-                        ) { record ->
-                            StressLevelHistoryCard(
-                                record = record,
-                                onDelete = {
-                                    onIntent(StressLevelHistoryContract.Intent.Delete(record.id))
-                                }
-                            )
-                        }
+    when {
+        state.isLoading -> Unit
+        state.isError != null -> Unit
+        else ->
+            SuccessView(
+                items = state.items,
+                onEvent = onEvent,
+                onIntent = onIntent
+            )
+    }
+}
+
+@Composable
+private fun SuccessView(
+    items: Map<LocalDate, List<StressLevelRecordResource>>,
+    onEvent: (StressLevelHistoryContract.Event) -> Unit,
+    onIntent: (StressLevelHistoryContract.Intent) -> Unit,
+) {
+    Scaffold(
+        containerColor = Colors.Brown10
+    ) { padding ->
+        Column(
+            modifier = Modifier.padding(padding).paddingHorizontalMedium()
+        ) {
+            AppTopBar(
+                modifier = Modifier.fillMaxWidth(),
+                isDark = true,
+                onGoBack = { onEvent(StressLevelHistoryContract.Event.GoBack) }
+            )
+            VerticalSpacer(20.dp)
+            Text(
+                text = stringResource(Res.string.all_history),
+                style = TextStyles.textLgBold(),
+                color = Colors.Gray80
+            )
+            VerticalSpacer(20.dp)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(
+                    items = items,
+                    empty = {
+                        EmptyView()
+                    },
+                    title = { date ->
+                        Text(
+                            text = date.toFormattedDateString(),
+                            style = TextStyles.textMdBold(),
+                            color = Colors.Gray80
+                        )
                     }
+                ) { record ->
+                    StressLevelHistoryCard(
+                        record = record,
+                        onDelete = {
+                            onIntent(StressLevelHistoryContract.Intent.Delete(record.id))
+                        }
+                    )
                 }
             }
         }
-    )
+    }
 }

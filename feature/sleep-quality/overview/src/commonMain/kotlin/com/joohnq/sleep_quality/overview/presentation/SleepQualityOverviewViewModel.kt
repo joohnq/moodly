@@ -3,12 +3,12 @@ package com.joohnq.sleep_quality.overview.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
-import com.joohnq.ui.entity.UiState
-import com.joohnq.ui.mapper.ResultMapper.toResultResource
-import com.joohnq.ui.mapper.ResultMapper.toUiState
-import com.joohnq.ui.mapper.UiStateMapper.getValueOrEmpty
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SleepQualityOverviewViewModel(
@@ -26,39 +26,40 @@ class SleepQualityOverviewViewModel(
     }
 
     init {
-        getAll()
+        observe()
     }
 
-    private fun getAll() =
-        viewModelScope.launch {
-            updateState { it.copy(UiState.Loading) }
-            try {
-                val res =
-                    getSleepQualitiesUseCase()
-                        .toResultResource { it.toResource() }
-                        .toUiState()
-                updateState { it.copy(res) }
-            } catch (e: Exception) {
+    private fun observe() {
+        updateState { it.copy(isLoading = true) }
+        getSleepQualitiesUseCase()
+            .onEach { items ->
+                val resources = items.toResource()
+                updateState {
+                    it.copy(
+                        items = resources,
+                        todaySleepQuality = resources.getTodaySleepQualityRecord(),
+                        isLoading = false
+                    )
+                }
+            }.catch { e ->
                 emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(e.message.toString()))
-            }
-        }
+            }.launchIn(viewModelScope)
+    }
 
-    private fun delete(id: Int) =
+    private fun delete(id: Int) {
         viewModelScope.launch {
             try {
                 deleteSleepQualityUseCase(id).getOrThrow()
 
                 updateState {
                     it.copy(
-                        UiState.Success(
-                            state.value.records
-                                .getValueOrEmpty()
-                                .filter { item -> item.id != id }
-                        )
+                        state.value.items
+                            .filter { item -> item.id != id }
                     )
                 }
             } catch (e: Exception) {
                 emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 }

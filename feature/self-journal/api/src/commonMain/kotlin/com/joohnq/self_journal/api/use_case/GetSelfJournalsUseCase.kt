@@ -2,9 +2,10 @@ package com.joohnq.self_journal.api.use_case
 
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.repository.SelfJournalRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetSelfJournalsUseCase(
     private val repository: SelfJournalRepository,
 ) {
-    suspend operator fun invoke(): Result<List<SelfJournalRecord>> = repository.getSelfJournals()
+    operator fun invoke(): Flow<List<SelfJournalRecord>> = repository.observe()
 }

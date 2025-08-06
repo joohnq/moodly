@@ -2,7 +2,6 @@ package com.joohnq.history.presentation
 
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface MoodHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -24,6 +23,8 @@ sealed interface MoodHistoryContract {
     }
 
     data class State(
-        val records: UiState<List<MoodRecordResource>> = UiState.Idle,
+        val items: List<MoodRecordResource> = listOf(),
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 }

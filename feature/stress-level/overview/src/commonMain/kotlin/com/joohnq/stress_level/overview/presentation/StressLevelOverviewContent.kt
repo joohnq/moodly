@@ -7,11 +7,9 @@ import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistory
-import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.overview.component.StressLevelOverviewInsight
 import com.joohnq.stress_level.overview.component.StressLevelOverviewPanel
 import com.joohnq.stress_level.overview.component.StressLevelOverviewTriggers
-import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 
 @Composable
 fun StressLevelOverviewContent(
@@ -19,43 +17,54 @@ fun StressLevelOverviewContent(
     onIntent: (StressLevelOverviewContract.Intent) -> Unit = {},
     onEvent: (StressLevelOverviewContract.Event) -> Unit = {},
 ) {
-    state.records.foldComposable(
-        onSuccess = { records ->
-            val record = records.getTodayStressLevelRecord()
-            val hasToday = record != null
+    when {
+        state.items.isNotEmpty() && !state.isLoading ->
+            SuccessView(
+                state = state,
+                onEvent = onEvent,
+                onIntent = onIntent
+            )
+    }
+}
 
-            ConvexGroupLazyLayout(
-                containerColor = Colors.White,
-                isDark = !hasToday,
-                image = Drawables.Images.StressLevelBackground,
-                color = if (hasToday) record.stressLevel.palette.imageColor else Colors.Brown10,
-                panelBackgroundColor = if (hasToday) record.stressLevel.palette.color else Colors.Brown10,
-                panel = { modifier ->
-                    VerticalSpacer(10.dp)
-                    StressLevelOverviewPanel(
-                        record = record
-                    )
-                },
-                onAddButton = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) },
-                onGoBack = { onEvent(StressLevelOverviewContract.Event.GoBack) },
-                body = { modifier ->
-                    StressLevelOverviewTriggers(
-                        modifier = modifier,
-                        records = records,
-                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
-                    )
-                    StressLevelOverviewInsight(
-                        modifier = modifier,
-                        records = records,
-                        onCreate = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
-                    )
-                    StressLevelHistory(
-                        modifier = modifier,
-                        records = records.take(7),
-                        onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
-                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
-                    )
-                }
+@Composable
+private fun SuccessView(
+    state: StressLevelOverviewContract.State,
+    onEvent: (StressLevelOverviewContract.Event) -> Unit,
+    onIntent: (StressLevelOverviewContract.Intent) -> Unit,
+) {
+    val hasToday = state.todayStressLevel != null
+
+    ConvexGroupLazyLayout(
+        containerColor = Colors.White,
+        isDark = !hasToday,
+        image = Drawables.Images.StressLevelBackground,
+        color = if (hasToday) state.todayStressLevel.stressLevel.palette.imageColor else Colors.Brown10,
+        panelBackgroundColor = if (hasToday) state.todayStressLevel.stressLevel.palette.color else Colors.Brown10,
+        panel = { modifier ->
+            VerticalSpacer(10.dp)
+            StressLevelOverviewPanel(
+                record = state.todayStressLevel
+            )
+        },
+        onAddButton = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) },
+        onGoBack = { onEvent(StressLevelOverviewContract.Event.GoBack) },
+        body = { modifier ->
+            StressLevelOverviewTriggers(
+                modifier = modifier,
+                records = state.items,
+                onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
+            )
+            StressLevelOverviewInsight(
+                modifier = modifier,
+                records = state.items,
+                onCreate = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
+            )
+            StressLevelHistory(
+                modifier = modifier,
+                records = state.items.take(7),
+                onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
+                onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )
         }
     )

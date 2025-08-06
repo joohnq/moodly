@@ -8,7 +8,6 @@ import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface DashboardContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -16,12 +15,14 @@ sealed interface DashboardContract {
     sealed interface Intent
 
     data class State(
-        val user: UiState<User> = UiState.Idle,
-        val moodRecords: UiState<List<MoodRecordResource>> = UiState.Idle,
+        val user: User? = null,
+        val moodItems: List<MoodRecordResource> = listOf(),
         val freudScore: FreudScoreResource? = null,
-        val selfJournalRecords: UiState<List<SelfJournalRecordResource>> = UiState.Idle,
-        val sleepQualityRecords: UiState<List<SleepQualityRecordResource>> = UiState.Idle,
-        val stressLevelRecords: UiState<List<StressLevelRecordResource>> = UiState.Idle,
+        val selfJournalItems: List<SelfJournalRecordResource> = listOf(),
+        val sleepQualityItems: List<SleepQualityRecordResource> = listOf(),
+        val stressLevelItems: List<StressLevelRecordResource> = listOf(),
+        val isLoading: Boolean = false,
+        val isError: String? = null,
     )
 
     sealed interface SideEffect {

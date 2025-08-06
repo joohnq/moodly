@@ -2,9 +2,10 @@ package com.joohnq.mood.api.use_case
 
 import com.joohnq.mood.api.entity.MoodRecord
 import com.joohnq.mood.api.repository.MoodRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetMoodsUseCase(
     private val repository: MoodRepository,
 ) {
-    suspend operator fun invoke(): Result<List<MoodRecord>> = repository.records.value
+    operator fun invoke(): Flow<List<MoodRecord>> = repository.observe()
 }

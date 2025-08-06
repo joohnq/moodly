@@ -24,6 +24,8 @@ sealed interface SleepQualityHistoryContract {
     }
 
     data class State(
-        val records: UiState<List<SleepQualityRecordResource>> = UiState.Idle,
+        val items: List<SleepQualityRecordResource> = listOf(),
+        val isLoading: Boolean = false,
+        val isError: String? = null
     )
 }

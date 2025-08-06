@@ -33,7 +33,7 @@ class SecurityViewModel(
         }
     }
 
-    private fun updateSecurity(security: Security) =
+    private fun updateSecurity(security: Security) {
         viewModelScope.launch {
             try {
                 updateSecurityUseCase(security).getOrThrow()
@@ -43,4 +43,5 @@ class SecurityViewModel(
                 emitEffect(SecurityContract.SideEffect.ShowError(e.message.toString()))
             }
         }
+    }
 }

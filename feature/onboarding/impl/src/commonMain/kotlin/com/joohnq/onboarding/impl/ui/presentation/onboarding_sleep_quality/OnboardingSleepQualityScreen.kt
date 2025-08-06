@@ -15,11 +15,12 @@ fun OnboardingSleepQualityScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    fun onEvent(event: OnboardingEvent) =
+    fun onEvent(event: OnboardingEvent) {
         when (event) {
             OnboardingEvent.NavigateNext -> onNavigateToMedicationsSupplements()
             OnboardingEvent.OnGoBack -> onGoBack()
         }
+    }
 
     OnboardingSleepQualityContent(
         state = state.sleepQuality,

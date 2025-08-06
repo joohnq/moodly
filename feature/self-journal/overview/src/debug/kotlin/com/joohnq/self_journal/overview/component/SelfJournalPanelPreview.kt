@@ -9,7 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 private fun Preview() {
     SelfJournalOverviewPanel(
-        count = 1,
-        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview
+        items = SelfJournalRecordResource.allSelfJournalRecordResourcePreview
     )
 }

@@ -22,13 +22,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource,
+    item: MoodRecordResource,
     onDelete: (Int) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier.fillMaxWidth(),
-        menuContainerColor = record.mood.palette.color,
-        onDelete = { onDelete(record.id) }
+        menuContainerColor = item.mood.palette.color,
+        onDelete = { onDelete(item.id) }
     ) { modifier ->
         Row(
             modifier = modifier.paddingAllSmall(),
@@ -37,26 +37,26 @@ fun MoodHistoryCard(
         ) {
             MoodFace(
                 modifier = Modifier.size(24.dp),
-                resource = record.mood
+                resource = item.mood
             )
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = stringResource(record.mood.text),
+                    text = stringResource(item.mood.text),
                     style = TextStyles.textMdBold(),
                     color = Colors.Gray80
                 )
                 Text(
-                    text = record.description,
+                    text = item.description,
                     style = TextStyles.textSmMedium(),
                     color = Colors.Gray60,
                     overflow = TextOverflow.Ellipsis
                 )
             }
             Text(
-                text = record.createdAt.toMonthAbbreviatedDayAndHourFormatted(),
+                text = item.createdAt.toMonthAbbreviatedDayAndHourFormatted(),
                 style = TextStyles.textSmMedium(),
                 color = Colors.Gray60
             )

@@ -18,7 +18,7 @@ import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 @Composable
 fun SleepQualityHistory(
     modifier: Modifier = Modifier,
-    records: List<SleepQualityRecordResource>,
+    items: List<SleepQualityRecordResource>,
     onDelete: (Int) -> Unit = {},
     onCreate: () -> Unit = {},
     onSeeMore: () -> Unit = {},
@@ -28,7 +28,7 @@ fun SleepQualityHistory(
         title = Res.string.sleep_history,
         onSeeMore = onSeeMore
     )
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -39,10 +39,10 @@ fun SleepQualityHistory(
         )
     } else {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            records.forEach { record ->
+            items.forEach { record ->
                 SleepQualityHistoryCard(
                     modifier = modifier,
-                    record = record,
+                    item = record,
                     onDelete = onDelete
                 )
             }

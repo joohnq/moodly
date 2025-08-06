@@ -10,12 +10,12 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 private fun Preview(
     @PreviewParameter(StressLevelRecordResourceParameterProvider::class)
-    record: StressLevelRecordResource,
+    item: StressLevelRecordResource,
 ) {
     AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
-                record = record,
+                item = item,
                 sliderValue = 1f
             )
     )
@@ -27,7 +27,7 @@ private fun Preview() {
     AddStressLevelScreenContent(
         state =
             AddStressLevelContract.State(
-                record = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
+                item = StressLevelRecordResource.stressLevelRecordResourceFivePreview,
                 sliderValue = 0.5f
             )
     )

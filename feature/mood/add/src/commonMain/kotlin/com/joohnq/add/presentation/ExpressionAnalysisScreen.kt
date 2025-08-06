@@ -37,7 +37,7 @@ fun ExpressionAnalysisScreen(
 
     ExpressionAnalysisContent(
         snackBarState = snackBarState,
-        description = state.record.description,
+        description = state.item.description,
         onEvent = ::onEvent,
         onIntent = dispatch
     )

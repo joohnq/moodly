@@ -36,17 +36,17 @@ import com.joohnq.shared_resources.theme.TextStyles
 
 @Composable
 fun MoodBarStatistic(
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     height: Dp = 250.dp,
 ) {
-    val current = records.last()
+    val current = items.last()
     val proportion = height / 100
     val pagerState =
         rememberPagerState(pageCount = {
-            records.size
+            items.size
         })
 
-    val selectedIndex = records.indexOf(current)
+    val selectedIndex = items.indexOf(current)
 
     LaunchedEffect(selectedIndex) {
         if (selectedIndex >= 0) {
@@ -88,11 +88,11 @@ fun MoodBarStatistic(
                 userScrollEnabled = true,
                 snapPosition = SnapPosition.Center
             ) { page ->
-                val record = records[page]
-                val boxHeight = record.mood.healthLevel.times(proportion)
+                val item = items[page]
+                val boxHeight = item.mood.healthLevel.times(proportion)
                 val barFaceColor =
                     when {
-                        current == record -> resource.palette.barFaceColor
+                        current == item -> resource.palette.barFaceColor
                         else -> Colors.Brown40
                     }
 
@@ -122,14 +122,14 @@ fun MoodBarStatistic(
                         ) {
                             MoodFace(
                                 modifier = Modifier.size(boxWidth - 10.dp),
-                                resource = record.mood,
+                                resource = item.mood,
                                 backgroundColor = Colors.White,
                                 color = barFaceColor
                             )
                         }
                     }
                     Text(
-                        text = record.createdAt.date.toShortDateString(),
+                        text = item.createdAt.date.toShortDateString(),
                         style = TextStyles.textSmSemiBold(),
                         color = Colors.Brown100Alpha64,
                         modifier = Modifier

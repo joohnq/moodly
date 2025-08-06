@@ -20,11 +20,11 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SelfJournalMetric(
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val resource = records.getTodaySelfJournalRecord()
+    val resource = items.getTodaySelfJournalRecord()
 
     SectionHeader(
         modifier = Modifier.paddingHorizontalMedium(),
@@ -43,7 +43,7 @@ fun SelfJournalMetric(
     } else {
         SelfJournalOverviewCalendar(
             modifier = Modifier.paddingHorizontalMedium(),
-            records = records,
+            items = items,
             subtitle =
                 stringResource(
                     Res.string.journals_written_in,

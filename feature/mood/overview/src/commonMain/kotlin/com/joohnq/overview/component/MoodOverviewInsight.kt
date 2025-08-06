@@ -13,10 +13,10 @@ import com.joohnq.shared_resources.theme.Drawables
 @Composable
 fun MoodOverviewInsight(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
 ) {
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -28,7 +28,7 @@ fun MoodOverviewInsight(
     } else {
         MoodOverviewInsightContent(
             modifier = modifier,
-            records = records
+            items = items
         )
     }
 }

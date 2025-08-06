@@ -32,10 +32,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalOverviewInsight(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
 ) {
     val groupedMoods =
-        records
+        items
             .groupBy { it.mood }
             .map { it.key to it.value.size }
             .sortedBy { it.first.id }
@@ -96,7 +96,7 @@ fun SelfJournalOverviewInsight(
 
                         SelfJournalInsightItem(
                             count = count,
-                            percentage = 100f * count.toFloat() / records.size,
+                            percentage = 100f * count.toFloat() / items.size,
                             color = mood.palette.color,
                             face = mood.assets.secondaryIcon
                         )

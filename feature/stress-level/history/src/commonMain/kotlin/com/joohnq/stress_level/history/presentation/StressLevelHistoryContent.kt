@@ -85,7 +85,7 @@ private fun SuccessView(
                     }
                 ) { record ->
                     StressLevelHistoryCard(
-                        record = record,
+                        item = record,
                         onDelete = {
                             onIntent(StressLevelHistoryContract.Intent.Delete(record.id))
                         }

@@ -34,9 +34,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodOverviewInsightContent(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
 ) {
-    val weekRecords = records.getWeekRecords()
+    val weekRecords = items.getWeekRecords()
     val streakDays = weekRecords.getStreakDays()
 
     SectionHeader(

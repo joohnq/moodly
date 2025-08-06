@@ -30,7 +30,7 @@ sealed interface AddMoodContract {
     }
 
     data class State(
-        val record: MoodRecordResource = MoodRecordResource(),
+        val item: MoodRecordResource = MoodRecordResource(),
     )
 
     sealed interface Event {

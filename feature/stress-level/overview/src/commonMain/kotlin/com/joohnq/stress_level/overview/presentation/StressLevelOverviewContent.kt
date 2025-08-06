@@ -44,7 +44,7 @@ private fun SuccessView(
         panel = { modifier ->
             VerticalSpacer(10.dp)
             StressLevelOverviewPanel(
-                record = state.todayStressLevel
+                item = state.todayStressLevel
             )
         },
         onAddButton = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) },
@@ -52,17 +52,17 @@ private fun SuccessView(
         body = { modifier ->
             StressLevelOverviewTriggers(
                 modifier = modifier,
-                records = state.items,
+                items = state.items,
                 onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )
             StressLevelOverviewInsight(
                 modifier = modifier,
-                records = state.items,
+                items = state.items,
                 onCreate = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )
             StressLevelHistory(
                 modifier = modifier,
-                records = state.items.take(7),
+                items = state.items.take(7),
                 onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
                 onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )

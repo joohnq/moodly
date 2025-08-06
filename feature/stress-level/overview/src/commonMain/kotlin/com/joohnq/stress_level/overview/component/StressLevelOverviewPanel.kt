@@ -25,9 +25,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelOverviewPanel(
-    record: StressLevelRecordResource?,
+    item: StressLevelRecordResource?,
 ) {
-    val hasToday = record != null
+    val hasToday = item != null
     val iconTint = if (hasToday) Colors.White else Colors.Orange40
     val textColor = if (hasToday) Colors.White else Colors.Brown80
 
@@ -46,7 +46,7 @@ fun StressLevelOverviewPanel(
             VerticalSpacer(24.dp)
         }
         Text(
-            text = if (hasToday) record.stressLevel.level.toString() else stringResource(Res.string.not_available),
+            text = if (hasToday) item.stressLevel.level.toString() else stringResource(Res.string.not_available),
             style = if (hasToday) TextStyles.displaySmExtraBold() else TextStyles.text2xlBold(),
             color = textColor
         )
@@ -60,9 +60,9 @@ fun StressLevelOverviewPanel(
         )
         if (hasToday) {
             Text(
-                text = stringResource(record.stressLevel.text),
+                text = stringResource(item.stressLevel.text),
                 style = TextStyles.textMdRegular(),
-                color = record.stressLevel.palette.backgroundColor
+                color = item.stressLevel.palette.backgroundColor
             )
         }
     }

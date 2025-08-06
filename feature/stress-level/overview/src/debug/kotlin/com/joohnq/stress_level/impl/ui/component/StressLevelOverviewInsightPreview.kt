@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 private fun Preview() {
     StressLevelOverviewInsight(
-        records = StressLevelRecordResource.allStressLevelRecordResourcePreview
+        items = StressLevelRecordResource.allStressLevelRecordResourcePreview
     )
 }

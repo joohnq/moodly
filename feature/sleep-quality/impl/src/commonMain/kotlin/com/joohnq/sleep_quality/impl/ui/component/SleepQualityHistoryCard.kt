@@ -32,20 +32,20 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
-    record: SleepQualityRecordResource,
+    item: SleepQualityRecordResource,
     onDelete: (Int) -> Unit = {},
 ) {
     val duration =
         calculateDuration(
-            start = record.startSleeping,
-            end = record.endSleeping
+            start = item.startSleeping,
+            end = item.endSleeping
         )
-    val resource = record.sleepQuality.toMoodResource()
+    val resource = item.sleepQuality.toMoodResource()
 
     CardWithMoreMenuLayout(
         modifier = modifier,
         menuContainerColor = resource.palette.color,
-        onDelete = { onDelete(record.id) }
+        onDelete = { onDelete(item.id) }
     ) { modifier ->
         Row(
             modifier =
@@ -62,12 +62,12 @@ fun SleepQualityHistoryCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = record.createdAt.toAbbreviatedMonthName(),
+                    text = item.createdAt.toAbbreviatedMonthName(),
                     style = TextStyles.labelSm(),
                     color = Colors.Brown10
                 )
                 Text(
-                    text = record.createdAt.day.toString(),
+                    text = item.createdAt.day.toString(),
                     style = TextStyles.textXlExtraBold(),
                     color = Colors.White
                 )
@@ -110,8 +110,8 @@ fun SleepQualityHistoryCard(
                 }
                 Text(
                     text =
-                        if (record.sleepInfluences.isNotEmpty()) {
-                            record.sleepInfluences.joinToString(", ")
+                        if (item.sleepInfluences.isNotEmpty()) {
+                            item.sleepInfluences.joinToString(", ")
                         } else {
                             stringResource(Res.string.no_sleep_influences)
                         },

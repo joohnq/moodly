@@ -13,6 +13,6 @@ private fun Preview(
     item: SleepQualityRecordResource,
 ) {
     SleepQualityOverviewPanel(
-        record = item
+        item = item
     )
 }

@@ -17,7 +17,7 @@ private fun Preview(
     AddSleepQualityContent(
         state =
             AddSleepQualityContract.State(
-                record = item,
+                item = item,
                 showStartTimePickerDialog = false,
                 showEndTimePickerDialog = false
             )
@@ -30,7 +30,7 @@ private fun ShowStartTimePickerDialogPreview() {
     AddSleepQualityContent(
         state =
             AddSleepQualityContract.State(
-                record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
+                item = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
                 showStartTimePickerDialog = true,
                 showEndTimePickerDialog = false
             )
@@ -43,7 +43,7 @@ private fun ShowEndTimePickerPreview() {
     AddSleepQualityContent(
         state =
             AddSleepQualityContract.State(
-                record = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
+                item = SleepQualityRecordResource.sleepQualityRecordExcellentPreview,
                 showStartTimePickerDialog = false,
                 showEndTimePickerDialog = true
             )

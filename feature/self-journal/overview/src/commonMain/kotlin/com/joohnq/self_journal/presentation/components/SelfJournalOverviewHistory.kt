@@ -14,12 +14,12 @@ import com.joohnq.shared_resources.write_your_first_journal_to_see_journal_histo
 @Composable
 fun SelfJournalOverviewHistory(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
     onClick: (Int) -> Unit = {},
     onDelete: (Int) -> Unit = {},
 ) {
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -30,9 +30,9 @@ fun SelfJournalOverviewHistory(
         )
     } else {
         Column(modifier = modifier) {
-            records.forEach { record ->
+            items.forEach { item ->
                 JournalHistoryCard(
-                    record = record,
+                    item = item,
                     onClick = onClick,
                     onDelete = onDelete
                 )

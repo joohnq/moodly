@@ -19,17 +19,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MoodMetric(
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val record = records.getTodayMoodRecord()
+    val item = items.getTodayMoodRecord()
     SectionHeader(
         modifier = Modifier.paddingHorizontalMedium(),
         title = Res.string.mood,
         onSeeMore = onClick
     )
-    if (record == null) {
+    if (item == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -42,19 +42,19 @@ fun MoodMetric(
         MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
-            icon = record.mood.assets.icon,
+            icon = item.mood.assets.icon,
             title = stringResource(Res.string.mood),
-            text = record.mood.healthLevel.toString(),
+            text = item.mood.healthLevel.toString(),
             suffix = stringResource(Res.string.level),
-            description = stringResource(record.mood.text),
+            description = stringResource(item.mood.text),
             content = { modifier ->
                 WeekMoodIndicator(
                     modifier = modifier,
-                    records = records,
-                    resource = record.mood
+                    items = items,
+                    resource = item.mood
                 )
             },
-            color = record.mood.palette.color,
+            color = item.mood.palette.color,
             onClick = onClick
         )
     }

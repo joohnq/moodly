@@ -62,14 +62,14 @@ fun AddSleepQualityContent(
     val sleepInfluences = remember { allSleepInfluencesResource() }
     val startTimePickerState =
         rememberTimePickerState(
-            initialHour = state.record.startSleeping.hour,
-            initialMinute = state.record.startSleeping.minute,
+            initialHour = state.item.startSleeping.hour,
+            initialMinute = state.item.startSleeping.minute,
             is24Hour = true
         )
     val endTimePickerState =
         rememberTimePickerState(
-            initialHour = state.record.endSleeping.hour,
-            initialMinute = state.record.endSleeping.minute,
+            initialHour = state.item.endSleeping.hour,
+            initialMinute = state.item.endSleeping.minute,
             is24Hour = true
         )
 
@@ -182,7 +182,7 @@ fun AddSleepQualityContent(
                 contentPadding = PaddingValues(horizontal = 20.dp)
             ) {
                 items(moods) { resource ->
-                    val moodResource = state.record.sleepQuality.toMoodResource()
+                    val moodResource = state.item.sleepQuality.toMoodResource()
                     MoodFace(
                         modifier = Modifier.size(32.dp),
                         resource = resource,
@@ -213,7 +213,7 @@ fun AddSleepQualityContent(
                     TextRadioButton(
                         text = sleepInfluences.title,
                         selected =
-                            state.record.sleepInfluences.contains(
+                            state.item.sleepInfluences.contains(
                                 sleepInfluences
                             ),
                         colors = ComponentColors.RadioButton.textRadioButtonColors(),

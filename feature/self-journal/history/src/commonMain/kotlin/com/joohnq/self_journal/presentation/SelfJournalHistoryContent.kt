@@ -87,11 +87,11 @@ private fun SuccessView(
                             empty = {
                                 EmptyView()
                             }
-                        ) { i, lastIndex, record ->
+                        ) { i, lastIndex, item ->
                             SelfJournalHistoryCard(
                                 isNotFirst = i != 0,
                                 isNotLast = i != lastIndex,
-                                record = record,
+                                item = item,
                                 onClick = {},
                                 onDelete = { id ->
                                     onIntent(

@@ -16,7 +16,7 @@ private fun Preview(
     item: MoodRecordResource,
 ) {
     WeekMoodIndicator(
-        records = listOf(item),
+        items = listOf(item),
         resource = item.mood
     )
 }
@@ -28,7 +28,7 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     WeekMoodIndicator(
-        records = list,
+        items = list,
         resource = MoodResource.Neutral
     )
 }

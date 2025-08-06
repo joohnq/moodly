@@ -90,13 +90,13 @@ fun AddStressLevelScreenContent(
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
                             text =
-                                state.record.stressLevel.level
+                                state.item.stressLevel.level
                                     .toString(),
                             style = TextStyles.displayLgExtraBold(),
                             color = Colors.Brown80
                         )
                         Text(
-                            text = stringResource(state.record.stressLevel.text),
+                            text = stringResource(state.item.stressLevel.text),
                             style = TextStyles.textXlBold(),
                             color = Colors.Brown100Alpha64,
                             textAlign = TextAlign.End

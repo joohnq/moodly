@@ -18,14 +18,14 @@ import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 @Composable
 fun SleepQualityOverviewInsight(
     modifier: Modifier = Modifier,
-    records: List<SleepQualityRecordResource>,
+    items: List<SleepQualityRecordResource>,
     onCreate: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
         title = Res.string.sleep_insight
     )
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -39,7 +39,7 @@ fun SleepQualityOverviewInsight(
     } else {
         SleepQualityOverviewInsightCard(
             modifier = modifier,
-            records = records
+            items = items
         )
     }
 }

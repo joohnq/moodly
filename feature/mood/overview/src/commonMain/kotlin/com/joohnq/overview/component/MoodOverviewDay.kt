@@ -26,10 +26,10 @@ import com.kizitonwose.calendar.core.DayPosition
 
 @Composable
 fun MoodOverviewDay(
-    record: MoodRecordResource?,
+    item: MoodRecordResource?,
     day: CalendarDay,
 ) {
-    val isSelected = record != null
+    val isSelected = item != null
     val isInCurrentMonth = day.position == DayPosition.MonthDate
 
     val border =
@@ -48,7 +48,7 @@ fun MoodOverviewDay(
         when {
             isInCurrentMonth && isSelected ->
                 Modifier.background(
-                    color = record.mood.palette.color,
+                    color = item.mood.palette.color,
                     shape = Dimens.Shape.Circle
                 )
 
@@ -89,7 +89,7 @@ fun MoodOverviewDay(
             if (isInCurrentMonth && isSelected) {
                 MoodFace(
                     modifier = Modifier.fillMaxSize(),
-                    resource = record.mood
+                    resource = item.mood
                 )
             }
         }

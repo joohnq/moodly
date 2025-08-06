@@ -14,6 +14,6 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodOverviewCalendar(
-        records = list
+        items = list
     )
 }

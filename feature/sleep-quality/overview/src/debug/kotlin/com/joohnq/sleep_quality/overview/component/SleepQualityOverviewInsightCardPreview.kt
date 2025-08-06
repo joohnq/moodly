@@ -13,6 +13,6 @@ private fun Preview(
     list: List<SleepQualityRecordResource>,
 ) {
     SleepQualityOverviewInsightCard(
-        records = list
+        items = list
     )
 }

@@ -14,6 +14,6 @@ private fun Preview(
     list: List<SelfJournalRecordResource>,
 ) {
     SelfJournalMetric(
-        records = list
+        items = list
     )
 }

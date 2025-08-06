@@ -11,17 +11,17 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 @Composable
 fun MoodOverviewHorizontalCalendar(
     calendarState: CalendarState = rememberCalendarState(),
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
 ) {
     HorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),
         state = calendarState,
         dayContent = { day ->
-            val recordsInDay = records.filter { it.createdAt.date == day.date }
-            val record = recordsInDay.firstOrNull()
+            val itemInDay = items.filter { it.createdAt.date == day.date }
+            val item = itemInDay.firstOrNull()
 
             MoodOverviewDay(
-                record = record,
+                item = item,
                 day = day
             )
         },

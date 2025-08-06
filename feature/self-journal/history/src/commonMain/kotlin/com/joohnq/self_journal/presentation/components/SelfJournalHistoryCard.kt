@@ -41,7 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SelfJournalHistoryCard(
-    record: SelfJournalRecordResource,
+    item: SelfJournalRecordResource,
     onClick: () -> Unit = {},
 ) {
     Card(
@@ -62,20 +62,20 @@ fun SelfJournalHistoryCard(
                 Box(
                     modifier =
                         Modifier.size(48.dp).background(
-                            color = record.mood.palette.color,
+                            color = item.mood.palette.color,
                             shape = Dimens.Shape.Small
                         ),
                     contentAlignment = Alignment.Center
                 ) {
                     MoodFace(
-                        resource = record.mood,
+                        resource = item.mood,
                         modifier = Modifier.size(24.dp),
                         backgroundColor = Colors.White,
-                        color = record.mood.palette.color
+                        color = item.mood.palette.color
                     )
                 }
                 Text(
-                    text = record.createdAt.date.toCompleteDateString(),
+                    text = item.createdAt.date.toCompleteDateString(),
                     style = TextStyles.textSmSemiBold(),
                     color = Colors.Brown80
                 )
@@ -88,18 +88,18 @@ fun SelfJournalHistoryCard(
                     text =
                         stringResource(
                             Res.string.mood_show,
-                            stringResource(record.mood.text)
+                            stringResource(item.mood.text)
                         ).uppercase(),
-                    backgroundColor = record.mood.palette.backgroundColor,
-                    textColor = record.mood.palette.color
+                    backgroundColor = item.mood.palette.backgroundColor,
+                    textColor = item.mood.palette.color
                 )
                 TextEllipsis(
-                    text = record.title,
+                    text = item.title,
                     style = TextStyles.textLgBold(),
                     color = Colors.Brown80
                 )
                 TextEllipsis(
-                    text = record.description,
+                    text = item.description,
                     style = TextStyles.textSmSemiBold(),
                     color = Colors.Brown100Alpha64
                 )
@@ -113,14 +113,14 @@ fun SelfJournalHistoryCard(
     modifier: Modifier = Modifier,
     isNotFirst: Boolean,
     isNotLast: Boolean,
-    record: SelfJournalRecordResource,
+    item: SelfJournalRecordResource,
     onClick: (Int) -> Unit = {},
     onDelete: (Int) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),
-        onDelete = { onDelete(record.id) },
-        onClick = { onClick(record.id) },
+        onDelete = { onDelete(item.id) },
+        onClick = { onClick(item.id) },
         content = { modifier ->
             Column(modifier = Modifier.paddingAllSmall()) {
                 Row(
@@ -131,34 +131,34 @@ fun SelfJournalHistoryCard(
                         modifier =
                             Modifier
                                 .background(
-                                    color = record.mood.palette.color,
+                                    color = item.mood.palette.color,
                                     shape = Dimens.Shape.Circle
                                 ).size(44.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         MoodFace(
                             modifier = Modifier.size(20.dp),
-                            resource = record.mood,
+                            resource = item.mood,
                             backgroundColor = Colors.White,
-                            color = record.mood.palette.barFaceColor
+                            color = item.mood.palette.barFaceColor
                         )
                     }
                     TextWithBackground(
-                        text = stringResource(record.mood.text),
-                        backgroundColor = record.mood.palette.backgroundColor,
-                        textColor = record.mood.palette.color
+                        text = stringResource(item.mood.text),
+                        backgroundColor = item.mood.palette.backgroundColor,
+                        textColor = item.mood.palette.color
                     )
                 }
                 VerticalSpacer(10.dp)
                 TextEllipsis(
-                    text = record.title,
+                    text = item.title,
                     style = TextStyles.textMdExtraBold(),
                     color = Colors.Brown80,
                     maxLines = 1
                 )
                 VerticalSpacer(10.dp)
                 TextEllipsis(
-                    text = record.description,
+                    text = item.description,
                     style = TextStyles.textMdSemiBold(),
                     color = Colors.Brown100Alpha64,
                     maxLines = 2
@@ -199,7 +199,7 @@ fun SelfJournalHistoryCard(
                         modifier = Modifier.size(18.dp)
                     )
                     Text(
-                        text = record.createdAt.toFormattedTimeString(),
+                        text = item.createdAt.toFormattedTimeString(),
                         style = TextStyles.textSmSemiBold(),
                         color = Colors.White
                     )

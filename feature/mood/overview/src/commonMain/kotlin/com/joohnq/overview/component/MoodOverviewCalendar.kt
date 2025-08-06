@@ -14,10 +14,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodOverviewCalendar(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     onCreate: () -> Unit = {},
 ) {
-    val recordsInMonth = records.getMonthDaysRecordsString()
+    val itemsInMonth = items.getMonthDaysRecordsString()
 
     SectionHeader(
         modifier = modifier,
@@ -25,12 +25,12 @@ fun MoodOverviewCalendar(
     )
     GiganticCreateCard(
         modifier = modifier,
-        title = recordsInMonth,
+        title = itemsInMonth,
         subtitle = stringResource(Res.string.moods_logged_this_month),
         onCreate = onCreate,
         content = {
             MoodOverviewHorizontalCalendar(
-                records = records
+                items = items
             )
         }
     )

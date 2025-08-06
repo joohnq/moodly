@@ -18,7 +18,7 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 @Composable
 fun StressLevelHistory(
     modifier: Modifier = Modifier,
-    records: List<StressLevelRecordResource>,
+    items: List<StressLevelRecordResource>,
     onDelete: (Int) -> Unit = {},
     onAddStressLevel: () -> Unit = {},
 ) {
@@ -27,7 +27,7 @@ fun StressLevelHistory(
         title = Res.string.stress_history,
         onSeeMore = {}
     )
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -38,9 +38,9 @@ fun StressLevelHistory(
         )
     } else {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            records.forEach { record ->
+            items.forEach { record ->
                 StressLevelHistoryCard(
-                    record = record,
+                    item = record,
                     onDelete = { onDelete(record.id) }
                 )
             }

@@ -15,7 +15,7 @@ import com.joohnq.shared_resources.you_dont_have_enough_data_to_show_your_histor
 @Composable
 fun MoodHistoryContent(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     onSeeMore: () -> Unit = {},
     onCreate: () -> Unit = {},
     onDelete: (Int) -> Unit = {},
@@ -25,7 +25,7 @@ fun MoodHistoryContent(
         title = Res.string.mood_history,
         onSeeMore = onSeeMore
     )
-    if (records.isEmpty()) {
+    if (items.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -37,7 +37,7 @@ fun MoodHistoryContent(
     } else {
         MoodHistoryBody(
             modifier = modifier,
-            records = records,
+            items = items,
             onDelete = onDelete
         )
     }

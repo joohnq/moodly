@@ -16,10 +16,10 @@ class AddMoodViewModel(
     override fun onIntent(intent: AddMoodContract.Intent) {
         when (intent) {
             is AddMoodContract.Intent.ChangeMood ->
-                updateState { it.copy(record = it.record.copy(mood = intent.mood)) }
+                updateState { it.copy(item = it.item.copy(mood = intent.mood)) }
 
             is AddMoodContract.Intent.ChangeDescription ->
-                updateState { it.copy(record = it.record.copy(description = intent.description)) }
+                updateState { it.copy(item = it.item.copy(description = intent.description)) }
 
             AddMoodContract.Intent.ResetState -> updateState { initialState }
             AddMoodContract.Intent.Add -> add()
@@ -29,7 +29,7 @@ class AddMoodViewModel(
     private fun add() {
         viewModelScope.launch {
             try {
-                addMoodUseCase(state.value.record.toDomain()).getOrThrow()
+                addMoodUseCase(state.value.item.toDomain()).getOrThrow()
 
                 emitEffect(AddMoodContract.SideEffect.NavigateNext)
             } catch (e: Exception) {

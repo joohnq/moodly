@@ -14,6 +14,6 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodMetric(
-        records = list
+        items = list
     )
 }

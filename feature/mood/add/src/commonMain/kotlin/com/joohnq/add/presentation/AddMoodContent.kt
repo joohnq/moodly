@@ -42,7 +42,7 @@ fun AddMoodContent(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .background(color = state.record.mood.palette.moodScreenBackgroundColor)
+                    .background(color = state.item.mood.palette.moodScreenBackgroundColor)
                     .padding(padding)
                     .paddingHorizontalMedium(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -62,13 +62,13 @@ fun AddMoodContent(
             VerticalSpacer(48.dp)
             MoodFace(
                 modifier = Modifier.size(160.dp),
-                resource = state.record.mood,
-                backgroundColor = state.record.mood.palette.moodScreenMoodFaceBackgroundColor,
-                color = state.record.mood.palette.moodScreenMoodFaceColor
+                resource = state.item.mood,
+                backgroundColor = state.item.mood.palette.moodScreenMoodFaceBackgroundColor,
+                color = state.item.mood.palette.moodScreenMoodFaceColor
             )
             VerticalSpacer(48.dp)
             Text(
-                text = stringResource(state.record.mood.text),
+                text = stringResource(state.item.mood.text),
                 style = TextStyles.text2xlSemiBold(),
                 color = Colors.White,
                 textAlign = TextAlign.Center
@@ -76,7 +76,7 @@ fun AddMoodContent(
             VerticalSpacer(80.dp)
             MoodRadioGroup(
                 modifier = Modifier.widthIn(max = 500.dp),
-                selectedMood = state.record,
+                selectedMood = state.item,
                 setSelectedMood = { resource ->
                     onIntent(
                         AddMoodContract.Intent.ChangeMood(resource)

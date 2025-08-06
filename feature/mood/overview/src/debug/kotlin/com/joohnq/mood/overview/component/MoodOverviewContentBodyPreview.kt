@@ -14,7 +14,7 @@ private fun Preview(
     item: MoodRecordResource,
 ) {
     MoodOverviewContentBody(
-        record = item,
-        records = listOf(item)
+        item = item,
+        items = listOf(item)
     )
 }

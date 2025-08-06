@@ -10,11 +10,11 @@ import com.joohnq.mood.add.ui.resource.MoodRecordResource
 @Composable
 fun MoodHistoryBody(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     onDelete: (Int) -> Unit = {},
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        records.forEach { record ->
+        items.forEach { record ->
             MoodHistoryCard(
                 onDelete = onDelete,
                 item = record

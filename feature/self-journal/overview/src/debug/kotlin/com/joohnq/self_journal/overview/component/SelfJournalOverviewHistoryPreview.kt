@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 private fun Preview() {
     SelfJournalOverviewHistory(
-        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview
+        items = SelfJournalRecordResource.allSelfJournalRecordResourcePreview
     )
 }

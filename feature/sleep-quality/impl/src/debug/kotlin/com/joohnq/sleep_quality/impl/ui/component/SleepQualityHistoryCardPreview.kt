@@ -13,6 +13,6 @@ private fun Preview(
     item: SleepQualityRecordResource,
 ) {
     SleepQualityHistoryCard(
-        record = item
+        item = item
     )
 }

@@ -16,10 +16,10 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 @Composable
 fun StressLevelOverviewInsight(
     modifier: Modifier = Modifier,
-    records: List<StressLevelRecordResource>,
+    items: List<StressLevelRecordResource>,
     onCreate: () -> Unit = {},
 ) {
-    val stressors = records.toPair()
+    val stressors = items.toPair()
 
     SectionHeader(
         modifier = modifier,

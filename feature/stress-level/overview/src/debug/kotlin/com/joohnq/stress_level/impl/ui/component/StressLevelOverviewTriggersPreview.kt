@@ -14,6 +14,6 @@ private fun Preview(
     list: List<StressLevelRecordResource>,
 ) {
     StressLevelOverviewTriggers(
-        records = list
+        items = list
     )
 }

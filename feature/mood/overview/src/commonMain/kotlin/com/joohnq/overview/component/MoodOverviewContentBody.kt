@@ -17,18 +17,18 @@ import com.joohnq.shared_resources.theme.TextStyles
 @Composable
 fun MoodOverviewContentBody(
     modifier: Modifier = Modifier,
-    record: MoodRecordResource? = null,
-    records: List<MoodRecordResource>,
+    item: MoodRecordResource? = null,
+    items: List<MoodRecordResource>,
     onEvent: (MoodOverviewContract.Event) -> Unit = {},
     onIntent: (MoodOverviewContract.Intent) -> Unit = {},
 ) {
-    if (record != null) {
+    if (item != null) {
         SectionHeader(
             modifier = modifier,
             title = Res.string.description
         )
         Text(
-            text = record.description,
+            text = item.description,
             style = TextStyles.textMdSemiBold(),
             color = Colors.Brown80,
             modifier = modifier
@@ -37,17 +37,17 @@ fun MoodOverviewContentBody(
     }
     MoodOverviewInsight(
         modifier = modifier,
-        records = records,
+        items = items,
         onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodOverviewCalendar(
         modifier = modifier,
-        records = records,
+        items = items,
         onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodHistoryContent(
         modifier = modifier,
-        records = records.take(7),
+        items = items.take(7),
         onSeeMore = {
             onEvent(MoodOverviewContract.Event.NavigateToMoodHistory)
         },

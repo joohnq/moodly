@@ -17,7 +17,7 @@ private fun Preview(
     AddMoodContent(
         state =
             AddMoodContract.State(
-                record = item
+                item = item
             )
     )
 }

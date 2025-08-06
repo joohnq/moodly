@@ -21,8 +21,8 @@ class AddSleepQualityViewModel(
             is AddSleepQualityContract.Intent.ChangeMood ->
                 updateState {
                     it.copy(
-                        record =
-                            it.record.copy(
+                        item =
+                            it.item.copy(
                                 sleepQuality = intent.mood.toSleepQuality().toResource()
                             )
                     )
@@ -31,10 +31,10 @@ class AddSleepQualityViewModel(
             is AddSleepQualityContract.Intent.ChangeSelectedSleepInfluence ->
                 updateState {
                     val influences =
-                        state.value.record.sleepInfluences
+                        state.value.item.sleepInfluences
                             .toggle(intent.sleepInfluence)
                     it.copy(
-                        record = it.record.copy(sleepInfluences = influences)
+                        item = it.item.copy(sleepInfluences = influences)
                     )
                 }
 
@@ -47,10 +47,10 @@ class AddSleepQualityViewModel(
             is AddSleepQualityContract.Intent.ChangeStartTime ->
                 updateState {
                     it.copy(
-                        record =
-                            it.record.copy(
+                        item =
+                            it.item.copy(
                                 startSleeping =
-                                    it.record.startSleeping.copy(
+                                    it.item.startSleeping.copy(
                                         intent.hour,
                                         intent.minute
                                     )
@@ -61,10 +61,10 @@ class AddSleepQualityViewModel(
             is AddSleepQualityContract.Intent.ChangeEndTime ->
                 updateState {
                     it.copy(
-                        record =
-                            it.record.copy(
+                        item =
+                            it.item.copy(
                                 endSleeping =
-                                    it.record.endSleeping.copy(
+                                    it.item.endSleeping.copy(
                                         intent.hour,
                                         intent.minute
                                     )
@@ -82,7 +82,7 @@ class AddSleepQualityViewModel(
     private fun add() {
         viewModelScope.launch {
             try {
-                addSleepQualityUseCase(state.value.record.toDomain()).getOrThrow()
+                addSleepQualityUseCase(state.value.item.toDomain()).getOrThrow()
             } catch (e: Exception) {
                 emitEffect(AddSleepQualityContract.SideEffect.ShowError(e.message.toString()))
             }

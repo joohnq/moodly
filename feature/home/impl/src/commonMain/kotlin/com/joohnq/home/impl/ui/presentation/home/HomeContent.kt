@@ -60,22 +60,22 @@ private fun SuccessView(
             )
         }
         MoodMetric(
-            records = state.moodItems,
+            items = state.moodItems,
             onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
             onClick = { onEvent(HomeEvent.OnNavigateToMood) }
         )
         SleepQualityMetric(
-            records = state.sleepQualityItems,
+            items = state.sleepQualityItems,
             onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
             onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
         )
         StressLevelMetric(
-            records = state.stressLevelItems,
+            items = state.stressLevelItems,
             onCreate = { onEvent(HomeEvent.OnNavigateToAddStressLevel) },
             onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
         )
         SelfJournalMetric(
-            records = state.selfJournalItems,
+            items = state.selfJournalItems,
             onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
             onClick = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
         )

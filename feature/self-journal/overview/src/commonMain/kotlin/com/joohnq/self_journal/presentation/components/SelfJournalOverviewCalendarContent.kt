@@ -12,14 +12,14 @@ import com.kizitonwose.calendar.compose.rememberCalendarState
 @Composable
 fun SelfJournalOverviewCalendarContent(
     calendarState: CalendarState = rememberCalendarState(),
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
 ) {
     HorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),
         state = calendarState,
         dayContent = { day ->
-            val recordsInDay = records.filter { it.createdAt.date == day.date }
-            val average = recordsInDay.calculateSelfJournalsAverage()
+            val itemsInDay = items.filter { it.createdAt.date == day.date }
+            val average = itemsInDay.calculateSelfJournalsAverage()
 
             SelfJournalOverviewContentDay(
                 average = average,

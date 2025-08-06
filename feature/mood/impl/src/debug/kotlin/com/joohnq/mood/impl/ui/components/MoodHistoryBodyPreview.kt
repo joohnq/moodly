@@ -14,6 +14,6 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodHistoryBody(
-        records = list
+        items = list
     )
 }

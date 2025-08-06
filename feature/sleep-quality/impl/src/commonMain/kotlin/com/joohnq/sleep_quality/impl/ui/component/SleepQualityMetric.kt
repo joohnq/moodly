@@ -30,17 +30,17 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SleepQualityMetric(
-    records: List<SleepQualityRecordResource>,
+    items: List<SleepQualityRecordResource>,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val record = records.getTodaySleepQualityRecord()
+    val item = items.getTodaySleepQualityRecord()
     SectionHeader(
         modifier = Modifier.paddingHorizontalMedium(),
         title = Res.string.sleep,
         onSeeMore = onClick
     )
-    if (record == null) {
+    if (item == null) {
         NotFoundVerticalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
@@ -52,8 +52,8 @@ fun SleepQualityMetric(
     } else {
         val duration =
             calculateDuration(
-                start = record.startSleeping,
-                end = record.endSleeping
+                start = item.startSleeping,
+                end = item.endSleeping
             )
         val durationString = duration.toHoursAndMinutesString()
 
@@ -61,12 +61,12 @@ fun SleepQualityMetric(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
             title = durationString,
-            subtitle = stringResource(record.sleepQuality.firstText),
+            subtitle = stringResource(item.sleepQuality.firstText),
             onClick = onClick,
             secondary = {
                 MoodFace(
                     modifier = Modifier.size(40.dp),
-                    resource = record.sleepQuality.toMoodResource()
+                    resource = item.sleepQuality.toMoodResource()
                 )
             },
             content = {
@@ -76,12 +76,12 @@ fun SleepQualityMetric(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SleepQualityInfo(
-                            title = record.startSleeping.toFormattedTimeString(),
+                            title = item.startSleeping.toFormattedTimeString(),
                             subtitle = Res.string.bedtime,
                             icon = Drawables.Icons.Outlined.Moon
                         )
                         SleepQualityInfo(
-                            title = record.endSleeping.toFormattedTimeString(),
+                            title = item.endSleeping.toFormattedTimeString(),
                             subtitle = Res.string.wake_up,
                             icon = Drawables.Icons.Outlined.Sun
                         )

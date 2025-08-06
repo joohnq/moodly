@@ -50,7 +50,7 @@ private fun SuccessView(
         panel = { modifier ->
             SleepQualityOverviewPanel(
                 modifier = modifier,
-                record = state.todaySleepQuality
+                item = state.todaySleepQuality
             )
         },
         onAddButton = { onEvent(SleepQualityOverviewContract.Event.NavigateToAddSleepQuality) },
@@ -58,7 +58,7 @@ private fun SuccessView(
         body = { modifier ->
             SleepQualityOverviewBody(
                 modifier = modifier,
-                records = state.items,
+                items = state.items,
                 onEvent = onEvent,
                 onIntent = onIntent
             )

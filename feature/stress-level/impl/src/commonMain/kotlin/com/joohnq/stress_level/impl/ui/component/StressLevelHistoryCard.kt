@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StressLevelHistoryCard(
     modifier: Modifier = Modifier,
-    record: StressLevelRecordResource,
+    item: StressLevelRecordResource,
     onDelete: () -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
@@ -43,7 +43,7 @@ fun StressLevelHistoryCard(
                 painter = painterResource(Drawables.Icons.Filled.Warning),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
-                tint = record.stressLevel.palette.color
+                tint = item.stressLevel.palette.color
             )
             HorizontalSpacer(20.dp)
             Column(
@@ -55,14 +55,14 @@ fun StressLevelHistoryCard(
                     )
             ) {
                 Text(
-                    text = stringResource(record.stressLevel.subtitle),
+                    text = stringResource(item.stressLevel.subtitle),
                     style = TextStyles.textMdBold(),
                     color = Colors.Brown80
                 )
                 Text(
                     text =
-                        if (record.stressors.isNotEmpty()) {
-                            record.stressors.joinToString(", ")
+                        if (item.stressors.isNotEmpty()) {
+                            item.stressors.joinToString(", ")
                         } else {
                             stringResource(
                                 StressorResource.InPeace.text
@@ -75,7 +75,7 @@ fun StressLevelHistoryCard(
             }
             HorizontalSpacer(20.dp)
             Text(
-                text = record.createdAt.toMonthAbbreviatedAndDayString(),
+                text = item.createdAt.toMonthAbbreviatedAndDayString(),
                 style = TextStyles.textSmRegular(),
                 color = Colors.Gray60
             )

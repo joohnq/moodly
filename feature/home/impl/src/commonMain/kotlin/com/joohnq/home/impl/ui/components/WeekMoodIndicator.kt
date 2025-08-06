@@ -25,7 +25,7 @@ import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 @Composable
 fun WeekMoodIndicator(
     modifier: Modifier = Modifier,
-    records: List<MoodRecordResource>,
+    items: List<MoodRecordResource>,
     resource: MoodResource,
     height: Dp = 60.dp,
 ) {
@@ -51,7 +51,7 @@ fun WeekMoodIndicator(
                             .clip(shape),
                     contentAlignment = Alignment.BottomCenter
                 ) {
-                    val item = records.find { it.createdAt.date == day.date }
+                    val item = items.find { it.createdAt.date == day.date }
                     item?.let {
                         val relHeight = height * (item.mood.healthLevel / 100f)
                         Box(

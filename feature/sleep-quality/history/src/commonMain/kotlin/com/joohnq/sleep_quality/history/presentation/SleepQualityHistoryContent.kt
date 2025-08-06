@@ -19,7 +19,6 @@ import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.sleep_quality.impl.ui.component.SleepQualityHistoryCard
-import com.joohnq.ui.mapper.UiStateMapper.foldComposable
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -67,7 +66,7 @@ private fun SuccessView(
             ) {
                 items(state.items) { item ->
                     SleepQualityHistoryCard(
-                        record = item,
+                        item = item,
                         onDelete = { id ->
                             onIntent(
                                 SleepQualityHistoryContract.Intent.Delete(id)

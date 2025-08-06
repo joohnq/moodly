@@ -44,14 +44,14 @@ private fun SuccessView(
         panel = { modifier ->
             MoodOverviewContentPanel(
                 modifier = modifier,
-                record = state.todayMood
+                item = state.todayMood
             )
         },
         body = { modifier ->
             MoodOverviewContentBody(
                 modifier = modifier,
-                record = state.todayMood,
-                records = state.items,
+                item = state.todayMood,
+                items = state.items,
                 onEvent = onEvent,
                 onIntent = onIntent
             )

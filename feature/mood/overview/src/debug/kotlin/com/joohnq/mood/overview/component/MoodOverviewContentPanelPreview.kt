@@ -14,6 +14,6 @@ private fun Preview(
     item: MoodRecordResource,
 ) {
     MoodOverviewContentPanel(
-        record = item
+        item = item
     )
 }

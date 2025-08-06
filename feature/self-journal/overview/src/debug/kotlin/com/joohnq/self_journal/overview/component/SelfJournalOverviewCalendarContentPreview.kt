@@ -14,6 +14,6 @@ private fun Preview(
     items: List<SelfJournalRecordResource>,
 ) {
     SelfJournalOverviewCalendarContent(
-        records = items
+        items = items
     )
 }

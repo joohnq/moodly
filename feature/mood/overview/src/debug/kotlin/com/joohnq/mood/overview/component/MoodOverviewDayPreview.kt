@@ -17,7 +17,7 @@ private fun Preview(
     item: MoodRecordResource,
 ) {
     MoodOverviewDay(
-        record = item,
+        item = item,
         day =
             CalendarDay(
                 date = LocalDate(2023, 1, 1),

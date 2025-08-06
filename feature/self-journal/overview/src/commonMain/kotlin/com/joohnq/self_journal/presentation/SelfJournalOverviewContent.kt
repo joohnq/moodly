@@ -49,7 +49,7 @@ private fun SuccessView(
         body = { modifier ->
             SelfJournalOverviewContentBody(
                 modifier = modifier,
-                records = state.items,
+                items = state.items,
                 onIntent = onIntent,
                 onEvent = onEvent
             )

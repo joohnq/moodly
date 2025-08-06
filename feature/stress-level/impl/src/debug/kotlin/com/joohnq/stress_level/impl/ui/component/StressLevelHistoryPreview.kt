@@ -13,6 +13,6 @@ private fun Preview(
     list: List<StressLevelRecordResource>,
 ) {
     StressLevelHistory(
-        records = list
+        items = list
     )
 }

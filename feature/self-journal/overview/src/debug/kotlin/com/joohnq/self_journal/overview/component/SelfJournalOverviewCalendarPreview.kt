@@ -9,7 +9,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 private fun Preview() {
     SelfJournalOverviewCalendar(
-        records = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,
+        items = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,
         subtitle = "Subtitle"
     )
 }

@@ -43,7 +43,7 @@ fun StressStressorsContent(
     onEvent: (AddStressLevelContract.Event) -> Unit = {},
 ) {
     val stressors = remember { allStressorResource() }
-    val canContinue by derivedStateOf { state.record.stressors.isNotEmpty() }
+    val canContinue by derivedStateOf { state.item.stressors.isNotEmpty() }
 
     AppScaffoldLayout(
         snackBarHostState = snackBarState,
@@ -85,7 +85,7 @@ fun StressStressorsContent(
                                 )
                             },
                             selected =
-                                state.record.stressors.contains(
+                                state.item.stressors.contains(
                                     stressor
                                 )
                         )

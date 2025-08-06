@@ -14,6 +14,6 @@ private fun Preview(
     item: SelfJournalRecordResource,
 ) {
     SelfJournalHistoryCard(
-        record = item
+        item = item
     )
 }

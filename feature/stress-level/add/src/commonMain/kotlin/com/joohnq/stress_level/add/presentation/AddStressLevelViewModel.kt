@@ -21,10 +21,10 @@ class AddStressLevelViewModel(
             is AddStressLevelContract.Intent.ChangeAddingStressors ->
                 updateState {
                     it.copy(
-                        record =
-                            it.record.copy(
+                        item =
+                            it.item.copy(
                                 stressors =
-                                    state.value.record.stressors
+                                    state.value.item.stressors
                                         .toggle(intent.stressor)
                             )
                     )
@@ -34,8 +34,8 @@ class AddStressLevelViewModel(
                 updateState {
                     it.copy(
                         sliderValue = intent.sliderValue,
-                        record =
-                            it.record.copy(
+                        item =
+                            it.item.copy(
                                 stressLevel = intent.sliderValue.fromSliderValueToStressLevelResource()
                             )
                     )
@@ -50,8 +50,8 @@ class AddStressLevelViewModel(
 
     private fun add() {
         viewModelScope.launch {
-            if (state.value.record.stressLevel != StressLevelResource.One &&
-                state.value.record.stressors
+            if (state.value.item.stressLevel != StressLevelResource.One &&
+                state.value.item.stressors
                     .isEmpty()
             ) {
                 emitEffect(AddStressLevelContract.SideEffect.NavigateToStressStressors)
@@ -59,7 +59,7 @@ class AddStressLevelViewModel(
             }
 
             try {
-                addStressLevelUseCase(state.value.record.toDomain()).getOrThrow()
+                addStressLevelUseCase(state.value.item.toDomain()).getOrThrow()
 
                 emitEffect(AddStressLevelContract.SideEffect.GoBack)
 

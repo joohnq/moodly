@@ -36,7 +36,7 @@ sealed interface AddStressLevelContract {
     }
 
     data class State(
-        val record: StressLevelRecordResource = StressLevelRecordResource(),
+        val item: StressLevelRecordResource = StressLevelRecordResource(),
         val sliderValue: Float = 0f,
     )
 }

@@ -14,6 +14,6 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodOverviewInsightContent(
-        records = list
+        items = list
     )
 }

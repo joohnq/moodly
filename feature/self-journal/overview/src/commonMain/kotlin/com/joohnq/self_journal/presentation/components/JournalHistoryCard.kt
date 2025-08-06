@@ -31,15 +31,15 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun JournalHistoryCard(
     modifier: Modifier = Modifier,
-    record: SelfJournalRecordResource,
+    item: SelfJournalRecordResource,
     onClick: (Int) -> Unit = {},
     onDelete: (Int) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier,
-        onClick = { onClick(record.id) },
-        menuContainerColor = record.mood.palette.color,
-        onDelete = { onDelete(record.id) }
+        onClick = { onClick(item.id) },
+        menuContainerColor = item.mood.palette.color,
+        onDelete = { onDelete(item.id) }
     ) { modifier ->
         Row(
             modifier = modifier.paddingAllSmall(),
@@ -49,7 +49,7 @@ fun JournalHistoryCard(
             Icon(
                 painter = painterResource(Drawables.Icons.Outlined.BookOpen),
                 contentDescription = null,
-                tint = record.mood.palette.color,
+                tint = item.mood.palette.color,
                 modifier = Modifier.size(24.dp)
             )
             HorizontalSpacer(12.dp)
@@ -57,13 +57,13 @@ fun JournalHistoryCard(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = record.title,
+                    text = item.title,
                     style = TextStyles.textMdBold(),
                     color = Colors.Gray80,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = record.description,
+                    text = item.description,
                     style = TextStyles.textSmMedium(),
                     color = Colors.Gray60,
                     overflow = TextOverflow.Ellipsis,
@@ -79,15 +79,15 @@ fun JournalHistoryCard(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(record.mood.assets.secondaryIcon),
+                            painter = painterResource(item.mood.assets.secondaryIcon),
                             contentDescription = stringResource(Res.string.mood),
-                            tint = record.mood.palette.color,
+                            tint = item.mood.palette.color,
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = stringResource(record.mood.text),
+                            text = stringResource(item.mood.text),
                             style = TextStyles.textSmMedium(),
-                            color = record.mood.palette.color
+                            color = item.mood.palette.color
                         )
                     }
                     Row(
@@ -104,7 +104,7 @@ fun JournalHistoryCard(
                             text =
                                 stringResource(
                                     Res.string.words,
-                                    record.description.toWordCount()
+                                    item.description.toWordCount()
                                 ),
                             style = TextStyles.textSmMedium(),
                             color = Colors.Gray60
@@ -114,7 +114,7 @@ fun JournalHistoryCard(
             }
             HorizontalSpacer(12.dp)
             Text(
-                text = record.createdAt.toMonthAbbreviatedAndDayString(),
+                text = item.createdAt.toMonthAbbreviatedAndDayString(),
                 style = TextStyles.textSmRegular(),
                 color = Colors.Gray60
             )

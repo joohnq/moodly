@@ -36,17 +36,17 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SleepQualityOverviewPanel(
     modifier: Modifier = Modifier,
-    record: SleepQualityRecordResource?,
+    item: SleepQualityRecordResource?,
 ) {
-    val hasToday = record != null
+    val hasToday = item != null
     val iconTint = if (hasToday) Colors.White else Colors.Brown80
     val textColor = if (hasToday) Colors.White else Colors.Brown80
     val duration =
         calculateDuration(
-            start = record?.startSleeping ?: Time(0, 0),
-            end = record?.endSleeping ?: Time(0, 0)
+            start = item?.startSleeping ?: Time(0, 0),
+            end = item?.endSleeping ?: Time(0, 0)
         )
-    val moodResource = record?.sleepQuality?.toMoodResource()
+    val moodResource = item?.sleepQuality?.toMoodResource()
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -63,7 +63,7 @@ fun SleepQualityOverviewPanel(
             VerticalSpacer(24.dp)
         }
         Text(
-            text = if (hasToday) record.sleepQuality.level.toString() else stringResource(Res.string.not_available),
+            text = if (hasToday) item.sleepQuality.level.toString() else stringResource(Res.string.not_available),
             style = if (hasToday) TextStyles.displaySmExtraBold() else TextStyles.text2xlBold(),
             color = textColor
         )

@@ -11,9 +11,9 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 private fun Preview(
     @PreviewParameter(StressLevelRecordResourceParameterProvider::class)
-    record: StressLevelRecordResource,
+    item: StressLevelRecordResource,
 ) {
     StressLevelOverviewPanel(
-        record = record
+        item = item
     )
 }

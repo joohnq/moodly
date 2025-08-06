@@ -22,19 +22,19 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun StressLevelMetric(
-    records: List<StressLevelRecordResource>,
+    items: List<StressLevelRecordResource>,
     containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
-    val record = records.getTodayStressLevelRecord()
+    val item = items.getTodayStressLevelRecord()
 
     SectionHeader(
         modifier = Modifier.paddingHorizontalMedium(),
         title = Res.string.stress,
         onSeeMore = onClick
     )
-    if (record == null) {
+    if (item == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = containerColor,
@@ -49,11 +49,11 @@ fun StressLevelMetric(
             containerColor = containerColor,
             icon = Drawables.Icons.Filled.Warning,
             title = stringResource(Res.string.stress_level),
-            text = stringResource(record.stressLevel.value),
+            text = stringResource(item.stressLevel.value),
             suffix = stringResource(Res.string.level),
-            description = stringResource(record.stressLevel.subtitle),
+            description = stringResource(item.stressLevel.subtitle),
             content = {
-                StressLevelRatingBar(record.stressLevel.level, ::getBrushGradient)
+                StressLevelRatingBar(item.stressLevel.level, ::getBrushGradient)
             },
             color = Colors.Orange40,
             onClick = onClick

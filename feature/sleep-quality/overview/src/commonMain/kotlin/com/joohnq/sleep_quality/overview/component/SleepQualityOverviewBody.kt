@@ -9,20 +9,20 @@ import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewContra
 @Composable
 fun SleepQualityOverviewBody(
     modifier: Modifier = Modifier,
-    records: List<SleepQualityRecordResource>,
+    items: List<SleepQualityRecordResource>,
     onEvent: (SleepQualityOverviewContract.Event) -> Unit = {},
     onIntent: (SleepQualityOverviewContract.Intent) -> Unit = {},
 ) {
     SleepQualityOverviewInsight(
         modifier = modifier,
-        records = records,
+        items = items,
         onCreate = {
             onEvent(SleepQualityOverviewContract.Event.NavigateToAddSleepQuality)
         }
     )
     SleepQualityHistory(
         modifier = modifier,
-        records = records.take(7),
+        items = items.take(7),
         onDelete = { id -> onIntent(SleepQualityOverviewContract.Intent.Delete(id)) },
         onSeeMore = {
             onEvent(SleepQualityOverviewContract.Event.NavigateToSleepQualityHistory)

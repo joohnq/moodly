@@ -9,20 +9,20 @@ import com.joohnq.shared_resources.components.card.GiganticCreateCard
 @Composable
 fun SelfJournalOverviewCalendar(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
     subtitle: String,
     onCreate: () -> Unit = {},
 ) {
-    val recordsInYear = records.getSelfJournalsInYear()
+    val itemsInYear = items.getSelfJournalsInYear()
 
     GiganticCreateCard(
         modifier = modifier,
-        title = recordsInYear,
+        title = itemsInYear,
         subtitle = subtitle,
         onCreate = onCreate,
         content = {
             SelfJournalOverviewCalendarContent(
-                records = records
+                items = items
             )
         }
     )

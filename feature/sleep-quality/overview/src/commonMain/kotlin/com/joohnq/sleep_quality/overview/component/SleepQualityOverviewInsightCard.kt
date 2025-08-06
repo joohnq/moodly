@@ -42,7 +42,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SleepQualityOverviewInsightCard(
     modifier: Modifier = Modifier,
-    records: List<SleepQualityRecordResource>,
+    items: List<SleepQualityRecordResource>,
 ) {
     val now = remember { getNow() }
     val month = now.month
@@ -70,7 +70,7 @@ fun SleepQualityOverviewInsightCard(
             ) {
                 for (i in 0..38) {
                     val resource =
-                        records.find { it.createdAt.day == i && it.createdAt.month == month }
+                        items.find { it.createdAt.day == i && it.createdAt.month == month }
                     val backgroundColor =
                         when {
                             i + 1 > monthDays -> Colors.Gray5
@@ -101,7 +101,7 @@ fun SleepQualityOverviewInsightCard(
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = stringResource(Res.string.nights, records.toMonthRecordsCount()),
+                        text = stringResource(Res.string.nights, items.toMonthRecordsCount()),
                         style = TextStyles.headingXsBold(),
                         color = Colors.Gray80
                     )

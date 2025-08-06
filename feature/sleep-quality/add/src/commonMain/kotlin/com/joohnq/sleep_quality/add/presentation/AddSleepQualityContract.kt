@@ -53,7 +53,7 @@ interface AddSleepQualityContract {
     }
 
     data class State(
-        val record: SleepQualityRecordResource = SleepQualityRecordResource(),
+        val item: SleepQualityRecordResource = SleepQualityRecordResource(),
         val showStartTimePickerDialog: Boolean = false,
         val showEndTimePickerDialog: Boolean = false,
     )

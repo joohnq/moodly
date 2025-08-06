@@ -15,10 +15,10 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 @Composable
 fun StressLevelOverviewTriggers(
     modifier: Modifier = Modifier,
-    records: List<StressLevelRecordResource>,
+    items: List<StressLevelRecordResource>,
     onAddStressLevel: () -> Unit = {},
 ) {
-    val stressors = records.flatMap { it.stressors }
+    val stressors = items.flatMap { it.stressors }
 
     SectionHeader(
         modifier = modifier,

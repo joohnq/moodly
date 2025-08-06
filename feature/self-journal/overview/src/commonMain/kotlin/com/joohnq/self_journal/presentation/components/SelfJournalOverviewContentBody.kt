@@ -17,7 +17,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalOverviewContentBody(
     modifier: Modifier = Modifier,
-    records: List<SelfJournalRecordResource>,
+    items: List<SelfJournalRecordResource>,
     onIntent: (SelfJournalOverviewContract.Intent) -> Unit = {},
     onEvent: (SelfJournalOverviewContract.Event) -> Unit = {},
 ) {
@@ -27,7 +27,7 @@ fun SelfJournalOverviewContentBody(
     )
     SelfJournalOverviewInsight(
         modifier = modifier,
-        records = records
+        items = items
     )
     SectionHeader(
         modifier = modifier,
@@ -35,7 +35,7 @@ fun SelfJournalOverviewContentBody(
     )
     SelfJournalOverviewCalendar(
         modifier = modifier,
-        records = records,
+        items = items,
         subtitle = stringResource(Res.string.journals_written_this_month),
         onCreate = {
             onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal)
@@ -50,7 +50,7 @@ fun SelfJournalOverviewContentBody(
     )
     SelfJournalOverviewHistory(
         modifier = modifier,
-        records = records.take(7),
+        items = items.take(7),
         onClick = { onEvent(SelfJournalOverviewContract.Event.NavigateToEditSelfJournal(it)) },
         onCreate = { onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal) },
         onDelete = { id -> onIntent(SelfJournalOverviewContract.Intent.Delete(id)) }

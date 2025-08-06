@@ -67,7 +67,7 @@ class OnboardingViewModel(
             val state = state.value
 
             if (state.physicalSymptoms == null || state.soughtHelp == null || state.medicationsSupplements == null) {
-                throw Exception("Missing fields")
+                error("Missing fields")
             }
 
             try {

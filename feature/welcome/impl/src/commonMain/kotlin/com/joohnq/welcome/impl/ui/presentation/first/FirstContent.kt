@@ -20,7 +20,6 @@ import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.HeadingWithSpan
 import com.joohnq.shared_resources.first_screen_desc
 import com.joohnq.shared_resources.first_screen_image
-import com.joohnq.shared_resources.first_screen_second_title
 import com.joohnq.shared_resources.first_screen_title
 import com.joohnq.shared_resources.first_screen_title_word
 import com.joohnq.shared_resources.get_started

@@ -1,4 +1,4 @@
-package com.joohnq.home.impl.ui.presentation.viewmodel
+package com.joohnq.home.impl.ui.presentation.dashboard
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.use_case.GetUserUseCase

@@ -21,7 +21,7 @@ fun DrawScope.drawSlice(
     topLeft: Offset,
     size: Size,
     vectorPainter: VectorPainter,
-    iconSize: Size = Size(180f, 180f),
+    iconSize: Size,
 ) {
     val centerX = topLeft.x + size.width / 2
     val centerY = topLeft.y + size.height / 2

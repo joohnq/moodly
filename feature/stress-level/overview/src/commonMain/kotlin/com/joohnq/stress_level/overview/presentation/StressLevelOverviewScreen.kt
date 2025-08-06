@@ -15,7 +15,7 @@ fun StressLevelOverviewScreen(
 
     fun onEvent(event: StressLevelOverviewContract.Event) =
         when (event) {
-            is StressLevelOverviewContract.Event.navigateToAddStressLevel -> onNavigateAddStressLevel()
+            is StressLevelOverviewContract.Event.NavigateToAddStressLevel -> onNavigateAddStressLevel()
             is StressLevelOverviewContract.Event.GoBack -> onGoBack()
         }
 

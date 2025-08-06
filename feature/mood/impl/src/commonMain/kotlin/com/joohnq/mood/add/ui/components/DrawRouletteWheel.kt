@@ -14,7 +14,7 @@ fun DrawScope.drawRouletteWheel(
     painterResources: List<VectorPainter>,
     moods: List<MoodResource>,
 ) {
-    val iconSize = (size.width / 2 * 0.7f) * 0.5f
+    val iconSize = (size.width / 2 * 0.6f) * 0.5f
     for (i in moods.indices) {
         val startAngle = rotation + sliceAngle * i
         val mood = moods[i]

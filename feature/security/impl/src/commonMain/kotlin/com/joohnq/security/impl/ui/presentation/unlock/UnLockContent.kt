@@ -50,7 +50,6 @@ fun UnLockContent(
     focusManager: FocusManager = LocalFocusManager.current,
     keyboardManager: SoftwareKeyboardController? = null,
     onIntent: (UnlockContract.Intent) -> Unit = {},
-    onEvent: (UnlockContract.Event) -> Unit = {},
 ) {
     if (state.showBottomSheet) {
         ModalBottomSheet(

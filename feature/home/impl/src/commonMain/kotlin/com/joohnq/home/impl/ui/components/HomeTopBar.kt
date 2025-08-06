@@ -46,12 +46,13 @@ fun HomeTopBar(
     val avatars = rememberAvatars()
     Card(
         onClick = { onNavigateToFreudScore() },
-        colors = CardColors(
-            containerColor = Colors.Brown60,
-            contentColor = Colors.White,
-            disabledContainerColor = Colors.Brown60,
-            disabledContentColor = Colors.White
-        ),
+        colors =
+            CardColors(
+                containerColor = Colors.Brown60,
+                contentColor = Colors.White,
+                disabledContainerColor = Colors.Brown60,
+                disabledContentColor = Colors.White
+            ),
         shape = Dimens.Shape.BottomLarge
     ) {
         Column(
@@ -59,7 +60,7 @@ fun HomeTopBar(
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp, end = 20.dp, bottom = 20.dp, start = 20.dp)
-                    .then(modifier),
+                    .then(modifier)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -97,10 +98,11 @@ fun HomeTopBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(Dimens.Shape.Circle)
-                        .background(color = Colors.Brown70),
+                    modifier =
+                        Modifier
+                            .size(64.dp)
+                            .clip(Dimens.Shape.Circle)
+                            .background(color = Colors.Brown70),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(

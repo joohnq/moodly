@@ -43,6 +43,12 @@ sealed interface DashboardContract {
 
         data object NavigateToSleepQuality : Event
 
+        data class NavigateToEditSelfJournal(
+            val id: Int,
+        ) : Event
+
+        data object NavigateToAddStressLevel : Event
+
         data object NavigateToStressLevelOverview : Event
 
         data object NavigateToSelfJournalHistory : Event

@@ -3,7 +3,6 @@ package com.joohnq.home.impl.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.joohnq.api.mapper.LocalDateTimeMapper.toMonthNameString
-import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getTodaySelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.self_journal.presentation.components.SelfJournalOverviewCalendar

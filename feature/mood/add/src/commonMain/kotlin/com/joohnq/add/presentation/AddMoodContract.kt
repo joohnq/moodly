@@ -8,7 +8,6 @@ sealed interface AddMoodContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
 
     sealed interface Intent {
-
         data class ChangeMood(
             val mood: MoodResource,
         ) : Intent

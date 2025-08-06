@@ -36,24 +36,24 @@ fun StressLevelOverviewContent(
                         record = record
                     )
                 },
-                onAddButton = { onEvent(StressLevelOverviewContract.Event.navigateToAddStressLevel) },
+                onAddButton = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) },
                 onGoBack = { onEvent(StressLevelOverviewContract.Event.GoBack) },
                 body = { modifier ->
                     StressLevelOverviewTriggers(
                         modifier = modifier,
                         records = records,
-                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.navigateToAddStressLevel) }
+                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
                     )
                     StressLevelOverviewInsight(
                         modifier = modifier,
                         records = records,
-                        onCreate = { onEvent(StressLevelOverviewContract.Event.navigateToAddStressLevel) }
+                        onCreate = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
                     )
                     StressLevelHistory(
                         modifier = modifier,
                         records = records.take(7),
                         onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
-                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.navigateToAddStressLevel) }
+                        onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
                     )
                 }
             )

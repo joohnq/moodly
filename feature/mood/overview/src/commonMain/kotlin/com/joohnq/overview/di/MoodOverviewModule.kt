@@ -10,7 +10,7 @@ val moodOverviewModule: Module =
         viewModel<MoodOverviewViewModel> {
             MoodOverviewViewModel(
                 getMoodsUseCase = get(),
-                deleteMoodUseCase = get(),
+                deleteMoodUseCase = get()
             )
         }
     }

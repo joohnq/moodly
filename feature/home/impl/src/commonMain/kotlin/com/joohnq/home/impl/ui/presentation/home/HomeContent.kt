@@ -13,8 +13,8 @@ import com.joohnq.api.entity.User
 import com.joohnq.home.impl.ui.components.HomeTopBar
 import com.joohnq.home.impl.ui.components.MoodMetric
 import com.joohnq.home.impl.ui.components.SelfJournalMetric
-import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
+import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -67,7 +67,7 @@ fun HomeContent(
                 MoodMetric(
                     records = moodRecords,
                     onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
-                    onClick = { onEvent(HomeEvent.OnNavigateToMood) },
+                    onClick = { onEvent(HomeEvent.OnNavigateToMood) }
                 )
                 SleepQualityMetric(
                     records = sleepQualities,

@@ -11,7 +11,7 @@ sealed interface StressLevelOverviewContract {
         data object GoBack :
             Event
 
-        data object navigateToAddStressLevel :
+        data object NavigateToAddStressLevel :
             Event
     }
 

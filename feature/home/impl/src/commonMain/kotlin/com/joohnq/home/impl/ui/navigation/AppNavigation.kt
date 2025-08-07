@@ -1,4 +1,4 @@
-package com.joohnq.moodapp.navigation
+package com.joohnq.home.impl.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -153,12 +153,6 @@ fun NavGraphBuilder.appNavigation(
         }
         composable<Destination.App.StressLevelHistory> {
             StressLevelHistoryScreen(
-                onNavigateStressLevel = {
-                    onNavigate(Destination.App.StressLevelOverview)
-                },
-                onAddStressLevel = {
-                    onNavigate(Destination.App.AddStressLevel)
-                },
                 onGoBack = onGoBack
             )
         }

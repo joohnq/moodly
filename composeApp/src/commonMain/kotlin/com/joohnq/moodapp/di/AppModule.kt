@@ -72,5 +72,5 @@ val appModule =
         preferencesImplModule,
         preferencesApiModule,
         splashImplModule,
-        welcomeImplModule,
+        welcomeImplModule
     )

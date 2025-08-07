@@ -27,14 +27,15 @@ fun SleepQualityHistoryContent(
     onEvent: (SleepQualityHistoryContract.Event) -> Unit = {},
     onIntent: (SleepQualityHistoryContract.Intent) -> Unit = {},
 ) {
-    when{
+    when {
         state.isLoading -> Unit
         state.isError != null -> Unit
-        else -> SuccessView(
-            state = state,
-            onEvent = onEvent,
-            onIntent = onIntent
-        )
+        else ->
+            SuccessView(
+                state = state,
+                onEvent = onEvent,
+                onIntent = onIntent
+            )
     }
 }
 
@@ -43,7 +44,7 @@ private fun SuccessView(
     state: SleepQualityHistoryContract.State,
     onEvent: (SleepQualityHistoryContract.Event) -> Unit,
     onIntent: (SleepQualityHistoryContract.Intent) -> Unit,
-){
+) {
     Scaffold(
         containerColor = Colors.Brown10
     ) { padding ->

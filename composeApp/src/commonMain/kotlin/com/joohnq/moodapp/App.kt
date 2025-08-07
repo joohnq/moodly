@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.joohnq.auth.impl.ui.navigation.authNavigation
-import com.joohnq.moodapp.navigation.appNavigation
+import com.joohnq.home.impl.ui.navigation.appNavigation
 import com.joohnq.navigation.NavigationGraph
 import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate

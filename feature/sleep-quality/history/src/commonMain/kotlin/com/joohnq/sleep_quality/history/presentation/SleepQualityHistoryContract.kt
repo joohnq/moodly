@@ -2,7 +2,6 @@ package com.joohnq.sleep_quality.history.presentation
 
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface SleepQualityHistoryContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>
@@ -26,6 +25,6 @@ sealed interface SleepQualityHistoryContract {
     data class State(
         val items: List<SleepQualityRecordResource> = listOf(),
         val isLoading: Boolean = false,
-        val isError: String? = null
+        val isError: String? = null,
     )
 }

@@ -2,7 +2,6 @@ package com.joohnq.security.impl.ui.presentation.security
 
 import com.joohnq.security.api.Security
 import com.joohnq.ui.UnidirectionalViewModel
-import com.joohnq.ui.entity.UiState
 
 sealed interface SecurityContract {
     interface ViewModel : UnidirectionalViewModel<State, Intent, SideEffect>

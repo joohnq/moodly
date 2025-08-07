@@ -6,5 +6,5 @@ import com.joohnq.stress_level.api.repository.StressLevelRepository
 class AddStressLevelUseCase(
     private val repository: StressLevelRepository,
 ) {
-    suspend operator fun invoke(stressLevelRecord: StressLevelRecord): Result<Boolean> = repository.add(stressLevelRecord)
+    suspend operator fun invoke(record: StressLevelRecord): Result<Boolean> = repository.add(record)
 }

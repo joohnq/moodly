@@ -15,8 +15,8 @@ class SleepQualityHistoryViewModel(
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
     initialState: SleepQualityHistoryContract.State = SleepQualityHistoryContract.State(),
 ) : BaseViewModel<SleepQualityHistoryContract.State, SleepQualityHistoryContract.Intent, SleepQualityHistoryContract.SideEffect>(
-    initialState = initialState
-),
+        initialState = initialState
+    ),
     SleepQualityHistoryContract.ViewModel {
     override fun onIntent(intent: SleepQualityHistoryContract.Intent) {
         when (intent) {

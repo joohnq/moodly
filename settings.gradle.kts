@@ -41,7 +41,6 @@ include(
     ":core:permission",
     ":core:storage:api",
     ":core:storage:impl",
-    ":core:test",
     ":core:ui",
     ":feature:auth:impl",
     ":feature:freud-score:api",

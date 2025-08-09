@@ -1,5 +1,8 @@
 package com.joohnq.self_journal.presentation
 
+import com.joohnq.mood.add.ui.resource.MoodResource
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getGrouped
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getSelfJournalsInYear
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 
@@ -22,7 +25,16 @@ sealed interface SelfJournalOverviewContract {
         val items: List<SelfJournalRecordResource> = listOf(),
         val isLoading: Boolean = false,
         val isError: String? = null,
-    )
+    ) {
+        val groupedInsightItems: List<Pair<MoodResource, Int>>
+            get() = items.getGrouped()
+
+        val itemsInYear: String
+            get() = items.getSelfJournalsInYear()
+
+        val historyItems: List<SelfJournalRecordResource>
+            get() = items.take(7)
+    }
 
     sealed interface Event {
         data object GoBack :

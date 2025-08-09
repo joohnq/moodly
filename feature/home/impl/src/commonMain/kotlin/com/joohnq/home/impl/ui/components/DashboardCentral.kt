@@ -18,7 +18,7 @@ import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.mood
-import com.joohnq.shared_resources.self_journaling
+import com.joohnq.shared_resources.self_journal
 import com.joohnq.shared_resources.sleep
 import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
@@ -48,7 +48,7 @@ fun DashboardCentral(
                 destination = Destination.App.AddStressLevel
             ),
             CentralAction<Destination>(
-                title = stringResource(Res.string.self_journaling),
+                title = stringResource(Res.string.self_journal),
                 icon = Drawables.Icons.Outlined.BookOpen,
                 destination = Destination.App.AddSelfJournal
             ),

@@ -3,7 +3,6 @@ package com.joohnq.sleep_quality.overview.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
-import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
@@ -33,11 +32,9 @@ class SleepQualityOverviewViewModel(
         updateState { it.copy(isLoading = true) }
         getSleepQualitiesUseCase()
             .onEach { items ->
-                val resources = items.toResource()
                 updateState {
                     it.copy(
-                        items = resources,
-                        todaySleepQuality = resources.getTodaySleepQualityRecord(),
+                        items = items.toResource(),
                         isLoading = false
                     )
                 }

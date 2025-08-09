@@ -23,73 +23,52 @@ class PreferencesRepositoryImpl(
         private val SKIP_SECURITY_KEY = stringPreferencesKey("SKIP_SECURITY")
     }
 
-    override suspend fun getUserPreferences(): Result<AppPreferences> =
+    override suspend fun getUserPreferences(): AppPreferences? =
         withContext(Dispatchers.IO) {
-            try {
-                val item =
-                    dataStore.data
-                        .map { preferences ->
-                            preferences.toMutablePreferences().toAppPreferences()
-                        }.first()
-                Result.success(item)
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
+            dataStore.data
+                .map { preferences ->
+                    preferences.toMutablePreferences().toAppPreferences()
+                }.first()
         }
 
-    override suspend fun updateSkipWelcome(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipWelcome(value: Boolean) {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    data[SKIP_WELCOME_KEY] = value.toString()
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                data[SKIP_WELCOME_KEY] = value.toString()
             }
         }
+    }
 
-    override suspend fun updateSkipOnboarding(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipOnboarding(value: Boolean) {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    data[SKIP_ONBOARDING_KEY] = value.toString()
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                data[SKIP_ONBOARDING_KEY] = value.toString()
             }
         }
+    }
 
-    override suspend fun updateSkipAuth(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipAuth(value: Boolean) {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    data[SKIP_AUTH_KEY] = value.toString()
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                data[SKIP_AUTH_KEY] = value.toString()
             }
         }
+    }
 
-    override suspend fun updateSkipSecurity(value: Boolean): Result<Boolean> =
+    override suspend fun updateSkipSecurity(value: Boolean) {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    data[SKIP_SECURITY_KEY] = value.toString()
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                data[SKIP_SECURITY_KEY] = value.toString()
             }
         }
+    }
 
     private fun MutablePreferences.toAppPreferences(): AppPreferences {
         val skipWelcome = this[SKIP_WELCOME_KEY]?.toBooleanStrictOrNull() ?: false
         val skipOnboarding = this[SKIP_ONBOARDING_KEY]?.toBooleanStrictOrNull() ?: false
         val skipAuth = this[SKIP_AUTH_KEY]?.toBooleanStrictOrNull() ?: false
         val skipSecurity = this[SKIP_SECURITY_KEY]?.toBooleanStrictOrNull() ?: false
+
         return AppPreferences(
             skipWelcome = skipWelcome,
             skipOnboarding = skipOnboarding,

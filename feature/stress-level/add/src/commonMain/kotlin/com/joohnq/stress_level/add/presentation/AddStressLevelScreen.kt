@@ -13,7 +13,7 @@ fun AddStressLevelScreen(
     viewModel: AddStressLevelViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 is AddStressLevelContract.SideEffect.GoBack ->
@@ -37,6 +37,6 @@ fun AddStressLevelScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

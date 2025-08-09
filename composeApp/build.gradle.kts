@@ -11,17 +11,14 @@ plugins {
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.firebase.android.bom)
-
-            implementation(libs.firebase.crashlytics)
-            implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
+            implementation(projects.core.database)
+
             implementation(projects.core.datastore)
 
             implementation(projects.core.navigation)
@@ -76,6 +73,12 @@ kotlin {
             implementation(projects.feature.stressLevel.history)
             implementation(projects.feature.stressLevel.impl)
             implementation(projects.feature.stressLevel.overview)
+
+            implementation(projects.feature.gratefulness.add)
+            implementation(projects.feature.gratefulness.api)
+            implementation(projects.feature.gratefulness.impl)
+            implementation(projects.feature.gratefulness.overview)
+            implementation(projects.feature.gratefulness.history)
 
             implementation(projects.feature.splash.impl)
 

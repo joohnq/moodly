@@ -21,11 +21,14 @@ object LocalDateMapper {
             }
         )
 
-    fun LocalDate.toMonthCompleteDayAndYear(): String =
+    // Tuesday, Jun 21, 2026
+    fun LocalDate.toDayOfWeekFullMonthAbbreviatedDayYear(): String =
         format(
             LocalDate.Format {
-                monthName(MonthNames.ENGLISH_FULL)
-                chars(" ")
+                dayOfWeek(DayOfWeekNames.ENGLISH_FULL)
+                chars(", ")
+                monthName(MonthNames.ENGLISH_ABBREVIATED)
+                char(' ')
                 day(padding = Padding.ZERO)
                 chars(", ")
                 year()
@@ -41,7 +44,7 @@ object LocalDateMapper {
             }
         )
 
-    fun LocalDate.toMonthAbbreviatedAndDayString(): String =
+    fun LocalDate.toMonthAbbreviatedAndDay(): String =
         format(
             LocalDate.Format {
                 monthName(MonthNames.ENGLISH_ABBREVIATED)
@@ -60,11 +63,6 @@ object LocalDateMapper {
                 year()
             }
         )
-
-    fun LocalDate.getMonthFirstLetter(): String =
-        this.month.name
-            .first()
-            .toString()
 
     fun LocalDate.toAbbreviatedMonthName(): String =
         format(

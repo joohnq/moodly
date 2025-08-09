@@ -4,7 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -45,7 +48,7 @@ fun NotFoundHorizontalLayout(
                 disabledContentColor = Colors.Brown80
             ),
         shape = Dimens.Shape.Large,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.height(112.dp).fillMaxSize(),
         onClick = onClick
     ) {
         Row(
@@ -54,7 +57,7 @@ fun NotFoundHorizontalLayout(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
-                modifier = Modifier.paddingAllSmall().weight(1f),
+                modifier = Modifier.weight(1f).paddingAllSmall(),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
@@ -82,6 +85,7 @@ fun NotFoundHorizontalLayout(
                 }
             }
             Image(
+                modifier = Modifier.fillMaxHeight(),
                 painter = painterResource(image),
                 contentDescription = null,
                 contentScale = ContentScale.Fit
@@ -133,6 +137,7 @@ fun NotFoundHorizontalLayout(
                     style = TextStyles.paragraphSm(),
                     color = Colors.Gray60
                 )
+                VerticalSpacer(10.dp)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         text = stringResource(text),

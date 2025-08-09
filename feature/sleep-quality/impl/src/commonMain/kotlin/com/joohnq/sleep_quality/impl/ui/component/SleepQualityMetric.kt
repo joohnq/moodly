@@ -46,7 +46,7 @@ fun SleepQualityMetric(
             containerColor = Colors.White,
             image = Drawables.Images.SleepQualityCreate,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
-            subtitle = Res.string.set_up_sleep,
+            actionText = Res.string.set_up_sleep,
             onClick = onCreate
         )
     } else {

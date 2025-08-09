@@ -1,53 +1,43 @@
 package com.joohnq.overview.component
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.mood.add.ui.components.MoodBarStatistic
 import com.joohnq.mood.add.ui.components.MoodHistoryContent
-import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.overview.presentation.MoodOverviewContract
 import com.joohnq.shared_resources.Res
-import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.SectionHeader
-import com.joohnq.shared_resources.description
-import com.joohnq.shared_resources.theme.Colors
-import com.joohnq.shared_resources.theme.TextStyles
+import com.joohnq.shared_resources.mood_history
+import com.joohnq.shared_resources.mood_statistics
 
 @Composable
 fun MoodOverviewContentBody(
     modifier: Modifier = Modifier,
-    item: MoodRecordResource? = null,
-    items: List<MoodRecordResource>,
+    state: MoodOverviewContract.State,
     onEvent: (MoodOverviewContract.Event) -> Unit = {},
     onIntent: (MoodOverviewContract.Intent) -> Unit = {},
 ) {
-    if (item != null) {
-        SectionHeader(
+    state.todayMood?.let {
+        MoodOverviewDescription(
             modifier = modifier,
-            title = Res.string.description
+            description = it.description
         )
-        Text(
-            text = item.description,
-            style = TextStyles.textMdSemiBold(),
-            color = Colors.Brown80,
-            modifier = modifier
-        )
-        VerticalSpacer(20.dp)
     }
     MoodOverviewInsight(
         modifier = modifier,
-        items = items,
+        isEmpty = state.items.isEmpty(),
+        streakDays = state.streakDays,
         onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodOverviewCalendar(
         modifier = modifier,
-        items = items,
+        items = state.items,
         onCreate = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) }
     )
     MoodHistoryContent(
         modifier = modifier,
-        items = items.take(7),
+        items = state.historyItems,
         onSeeMore = {
             onEvent(MoodOverviewContract.Event.NavigateToMoodHistory)
         },
@@ -57,5 +47,13 @@ fun MoodOverviewContentBody(
         onDelete = { id ->
             onIntent(MoodOverviewContract.Intent.Delete(id))
         }
+    )
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.mood_statistics,
+    )
+    MoodBarStatistic(
+        items = state.items,
+        height = 200.dp
     )
 }

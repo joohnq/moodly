@@ -148,7 +148,7 @@ fun AddSleepQualityContent(
                     title = Res.string.start_sleeping_time,
                     hour = startTimePickerState.hour.toPaddedString(),
                     minutes = startTimePickerState.minute.toPaddedString(),
-                    isAfternoon = startTimePickerState.isAfternoon,
+                    isAfternoon = startTimePickerState.is24hour,
                     onClick = {
                         onIntent(
                             AddSleepQualityContract.Intent.ChangeShowStartTimePickerDialog(true)
@@ -161,7 +161,7 @@ fun AddSleepQualityContent(
                     title = Res.string.end_sleeping_time,
                     hour = endTimePickerState.hour.toPaddedString(),
                     minutes = endTimePickerState.minute.toPaddedString(),
-                    isAfternoon = endTimePickerState.isAfternoon,
+                    isAfternoon = endTimePickerState.is24hour,
                     onClick = {
                         onIntent(
                             AddSleepQualityContract.Intent.ChangeShowEndTimePickerDialog(

@@ -16,6 +16,8 @@ import kotlinx.datetime.LocalDate
 object StressLevelRecordResourceMapper {
     fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? = find { item -> item.createdAt.date == getNow().date }
 
+    fun List<StressLevelRecordResource>.getStressors(): List<StressorResource> = flatMap { it.stressors }
+
     fun List<StressLevelRecordResource>.toGroupedByDate(): Map<LocalDate, List<StressLevelRecordResource>> =
         groupBy { it.createdAt }
             .map { (key, value) ->

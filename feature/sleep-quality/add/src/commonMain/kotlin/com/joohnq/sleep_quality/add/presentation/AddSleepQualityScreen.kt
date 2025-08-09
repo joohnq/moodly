@@ -1,5 +1,6 @@
 package com.joohnq.sleep_quality.add.presentation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.DisposableEffect
@@ -9,12 +10,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AddSleepQualityScreen(
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     onGoBack: () -> Unit,
     onNavigateToSleepQuality: () -> Unit,
     viewModel: AddSleepQualityViewModel = sharedViewModel(),
 ) {
-    val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 is AddSleepQualityContract.SideEffect.ShowError ->
@@ -38,6 +39,6 @@ fun AddSleepQualityScreen(
         snackBarState = snackBarState,
         state = state,
         onEvent = ::onEvent,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

@@ -32,7 +32,6 @@ dependencyResolutionManagement {
 }
 
 include(
-    "backend",
     ":composeApp",
     ":core:database",
     ":core:datastore",
@@ -45,6 +44,11 @@ include(
     ":feature:auth:impl",
     ":feature:freud-score:api",
     ":feature:freud-score:impl",
+    ":feature:gratefulness:add",
+    ":feature:gratefulness:api",
+    ":feature:gratefulness:impl",
+    ":feature:gratefulness:overview",
+    ":feature:gratefulness:history",
     ":feature:home:impl",
     ":feature:mood:add",
     ":feature:mood:api",

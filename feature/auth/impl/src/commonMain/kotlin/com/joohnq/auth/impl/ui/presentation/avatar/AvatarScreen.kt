@@ -34,7 +34,7 @@ fun AvatarScreen(
     val avatars = rememberAvatars()
     val pagerState = rememberPagerState(pageCount = { avatars.size })
     val scope = rememberCoroutineScope()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 AvatarContract.SideEffect.NavigateNext -> navigateNext()
@@ -54,15 +54,15 @@ fun AvatarScreen(
                         PermissionStatus.GRANTED -> {
                             when (permissionType) {
                                 PermissionType.CAMERA ->
-                                    dispatch(AvatarContract.Intent.ChangeLaunchCamera(true))
+                                    onIntent(AvatarContract.Intent.ChangeLaunchCamera(true))
 
                                 PermissionType.GALLERY ->
-                                    dispatch(AvatarContract.Intent.ChangeLaunchGallery(true))
+                                    onIntent(AvatarContract.Intent.ChangeLaunchGallery(true))
                             }
                         }
 
                         else -> {
-                            dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(true))
+                            onIntent(AvatarContract.Intent.ChangePermissionRationalDialog(true))
                         }
                     }
                 }
@@ -86,15 +86,15 @@ fun AvatarScreen(
     if (state.imageSourceOptionDialog) {
         ImageSourcePicker(
             onDismissRequest = {
-                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
+                onIntent(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
             },
             onGalleryRequest = {
-                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
-                dispatch(AvatarContract.Intent.ChangeLaunchGallery(true))
+                onIntent(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
+                onIntent(AvatarContract.Intent.ChangeLaunchGallery(true))
             },
             onCameraRequest = {
-                dispatch(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
-                dispatch(AvatarContract.Intent.ChangeLaunchCamera(true))
+                onIntent(AvatarContract.Intent.ChangeImageSourceOptionDialog(false))
+                onIntent(AvatarContract.Intent.ChangeLaunchCamera(true))
             }
         )
     }
@@ -105,7 +105,7 @@ fun AvatarScreen(
         } else {
             permissionsManager.askPermission(PermissionType.GALLERY)
         }
-        dispatch(AvatarContract.Intent.ChangeLaunchGallery(false))
+        onIntent(AvatarContract.Intent.ChangeLaunchGallery(false))
     }
 
     if (state.launchCamera) {
@@ -114,12 +114,12 @@ fun AvatarScreen(
         } else {
             permissionsManager.askPermission(PermissionType.CAMERA)
         }
-        dispatch(AvatarContract.Intent.ChangeLaunchCamera(false))
+        onIntent(AvatarContract.Intent.ChangeLaunchCamera(false))
     }
 
     if (state.launchSetting) {
         permissionsManager.launchSettings()
-        dispatch(AvatarContract.Intent.ChangeLaunchSetting(false))
+        onIntent(AvatarContract.Intent.ChangeLaunchSetting(false))
     }
 
     if (state.permissionRationalDialog) {
@@ -129,11 +129,11 @@ fun AvatarScreen(
             positiveButtonText = stringResource(Res.string.settings),
             negativeButtonText = stringResource(Res.string.cancel),
             onPositiveClick = {
-                dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(false))
-                dispatch(AvatarContract.Intent.ChangeLaunchSetting(true))
+                onIntent(AvatarContract.Intent.ChangePermissionRationalDialog(false))
+                onIntent(AvatarContract.Intent.ChangeLaunchSetting(true))
             },
             onNegativeClick = {
-                dispatch(AvatarContract.Intent.ChangePermissionRationalDialog(false))
+                onIntent(AvatarContract.Intent.ChangePermissionRationalDialog(false))
             }
         )
     }
@@ -148,6 +148,6 @@ fun AvatarScreen(
         snackBarState = snackBarState,
         state = state,
         avatars = avatars,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

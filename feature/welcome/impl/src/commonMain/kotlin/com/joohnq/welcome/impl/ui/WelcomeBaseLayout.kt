@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
@@ -15,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.button.IconContinueButton
@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun WelcomeBaseLayout(
     welcome: Welcome,
-    paddingTop: Dp,
+    pageCount: Int,
     onNext: () -> Unit,
 ) {
     DecoratedConvexPanel(
@@ -43,7 +43,7 @@ fun WelcomeBaseLayout(
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = paddingTop),
+                    .statusBarsPadding(),
                 contentAlignment = Alignment.Center
             ) {
                 TextWithBackground(
@@ -69,7 +69,7 @@ fun WelcomeBaseLayout(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 LinearProgressIndicator(
-                    progress = { 0.2f * welcome.index },
+                    progress = { (1f / pageCount) * welcome.index },
                     modifier = Modifier.width(180.dp).height(8.dp),
                     color = Colors.Brown80,
                     trackColor = Colors.Brown20,

@@ -38,10 +38,9 @@ class SelfJournalHistoryViewModel(
         updateState { it.copy(isLoading = true) }
         getSelfJournalsUseCase()
             .onEach { items ->
-                val resources = items.toResource()
                 updateState {
                     it.copy(
-                        items = resources.toGroupedByDate(),
+                        items = items.toResource().toGroupedByDate(),
                         isLoading = false
                     )
                 }

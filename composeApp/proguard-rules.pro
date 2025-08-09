@@ -26,3 +26,5 @@
 -keepclasseswithmembers class com.joohnq.navigation.** { # <-- change package name to your app's
     kotlinx.serialization.KSerializer serializer(...);
 }
+
+-keep class * extends androidx.room.RoomDatabase { <init>(); }

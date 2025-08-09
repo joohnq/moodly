@@ -5,5 +5,11 @@ import com.joohnq.preferences.api.repository.PreferencesRepository
 class UpdateSkipAuthUseCase(
     private val repository: PreferencesRepository,
 ) {
-    suspend operator fun invoke(value: Boolean): Result<Boolean> = repository.updateSkipAuth(value)
+    suspend operator fun invoke(value: Boolean): Result<Unit> =
+        try {
+            repository.updateSkipAuth(value)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

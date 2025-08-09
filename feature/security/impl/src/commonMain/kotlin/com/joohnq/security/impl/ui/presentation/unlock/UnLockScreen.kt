@@ -25,7 +25,7 @@ fun UnLockScreen(
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
 
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 UnlockContract.SideEffect.NavigateNext -> onNavigateToDashboard()
@@ -54,6 +54,6 @@ fun UnLockScreen(
         state = state,
         focusManager = focusManager,
         keyboardManager = keyboardManager,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

@@ -8,6 +8,8 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.database)
+
             implementation(projects.core.domain)
 
             implementation(projects.feature.mood.api)

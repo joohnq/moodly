@@ -13,6 +13,7 @@ object Colors {
     val Brown30 = Color(0xFFD6C2B8)
     val Brown20 = Color(0xFFE8DDD9)
     val Brown10 = Color(0xFFF7F4F2)
+    val Brown5 = Color(0xFFFAFAF9)
 
     val White = Color(0xFFFFFFFF)
 
@@ -51,6 +52,7 @@ object Colors {
     val Green30 = Color(0xFFcfd9b5)
     val Green20 = Color(0xFFe5ead7)
     val Green10 = Color(0xFFf2f5eb)
+    val Green5 = Color(0xFFF5F7EE)
 
     val Yellow100 = Color(0xFF2e2500)
     val Yellow90 = Color(0xFF4d3c00)

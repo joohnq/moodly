@@ -6,5 +6,12 @@ import com.joohnq.security.api.SecurityPreference
 class GetSecurityUseCase(
     private val securityPreference: SecurityPreference,
 ) {
-    suspend operator fun invoke(): Result<Security> = securityPreference.get()
+    suspend operator fun invoke(): Result<Security> =
+        try {
+            val security = securityPreference.get()
+
+            Result.success(security)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

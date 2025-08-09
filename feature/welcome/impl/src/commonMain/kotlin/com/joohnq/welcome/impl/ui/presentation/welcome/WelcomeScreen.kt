@@ -15,7 +15,7 @@ fun WelcomeScreen(
 ) {
     val snackBarState = rememberSnackBarState()
     val scope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 5 })
 
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect { sideEffect ->

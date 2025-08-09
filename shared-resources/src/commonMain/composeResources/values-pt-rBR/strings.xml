@@ -235,7 +235,7 @@
     <string name="set_up_sleep">Configurar Sono</string>
     <string name="level">nível</string>
     <string name="today">Hoje</string>
-    <string name="self_journaling">Diário</string>
+    <string name="self_journal">Diário</string>
     <string name="add_new_journal">Adicionar Novo Diário</string>
     <string name="stress">Estresse</string>
     <string name="journals_written_in">Diários escritos em %1$s</string>

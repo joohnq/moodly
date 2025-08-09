@@ -27,7 +27,6 @@ import com.joohnq.shared_resources.more
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
-import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -47,8 +46,7 @@ fun CardWithMoreMenuLayout(
     Card(
         modifier =
             modifier
-                .fillMaxWidth()
-                .paddingHorizontalMedium(),
+                .fillMaxWidth(),
         onClick = { onClick?.invoke() },
         enabled = enabled,
         colors =

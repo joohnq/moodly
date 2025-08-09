@@ -1,7 +1,9 @@
 package com.joohnq.sleep_quality.overview.presentation
 
 import androidx.compose.runtime.Composable
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.sleep_quality
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.sleep_quality.overview.component.SleepQualityOverviewBody
@@ -32,20 +34,16 @@ private fun SuccessView(
     onIntent: (SleepQualityOverviewContract.Intent) -> Unit,
 ) {
     val hasToday = state.todaySleepQuality != null
+    val palette = state.todaySleepQuality?.sleepQuality?.palette
 
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
-        isDark = !hasToday,
+        title = Res.string.sleep_quality,
         image = Drawables.Images.SleepQualityBackground,
-        color =
-            state.todaySleepQuality
-                ?.sleepQuality
-                ?.palette
-                ?.imageColor ?: Colors.Brown10,
+        color = palette
+            ?.imageColor ?: Colors.Brown10,
         panelBackgroundColor =
-            state.todaySleepQuality
-                ?.sleepQuality
-                ?.palette
+            palette
                 ?.color ?: Colors.Brown10,
         panel = { modifier ->
             SleepQualityOverviewPanel(

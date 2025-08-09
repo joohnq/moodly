@@ -13,9 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getStreakDays
-import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getWeekRecords
-import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.components.text.SectionHeader
@@ -34,11 +31,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun MoodOverviewInsightContent(
     modifier: Modifier = Modifier,
-    items: List<MoodRecordResource>,
+    streakDays: Int,
 ) {
-    val weekRecords = items.getWeekRecords()
-    val streakDays = weekRecords.getStreakDays()
-
     SectionHeader(
         modifier = modifier,
         title = Res.string.mood_insight

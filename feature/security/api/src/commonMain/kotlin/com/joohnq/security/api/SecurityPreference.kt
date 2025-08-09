@@ -1,9 +1,9 @@
 package com.joohnq.security.api
 
 interface SecurityPreference {
-    suspend fun update(security: Security): Result<Boolean>
+    suspend fun update(security: Security)
 
-    suspend fun get(): Result<Security>
+    suspend fun get(): Security
 
-    suspend fun initUserSecurity(): Result<Boolean>
+    suspend fun init()
 }

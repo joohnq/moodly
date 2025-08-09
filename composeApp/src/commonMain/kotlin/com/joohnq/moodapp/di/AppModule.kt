@@ -3,8 +3,14 @@ package com.joohnq.moodapp.di
 import com.joohnq.add.di.moodAddModule
 import com.joohnq.api.di.userApiModule
 import com.joohnq.auth.impl.di.authImplModule
+import com.joohnq.database.di.databaseModule
 import com.joohnq.datastore.di.dataStoreModule
 import com.joohnq.freud_score.impl.di.freudScoreImplModule
+import com.joohnq.gratefulness.add.di.gratefulnessAddModule
+import com.joohnq.gratefulness.api.di.gratefulnessApiModule
+import com.joohnq.gratefulness.history.di.gratefulnessHistoryModule
+import com.joohnq.gratefulness.impl.di.gratefulnessImplModule
+import com.joohnq.gratefulness.overview.di.gratefulnessOverviewModule
 import com.joohnq.history.di.moodHistoryModule
 import com.joohnq.home.impl.di.homeImplModule
 import com.joohnq.mood.add.di.moodImplModule
@@ -72,5 +78,11 @@ val appModule =
         preferencesImplModule,
         preferencesApiModule,
         splashImplModule,
-        welcomeImplModule
+        welcomeImplModule,
+        databaseModule,
+        gratefulnessApiModule,
+        gratefulnessImplModule,
+        gratefulnessOverviewModule,
+        gratefulnessAddModule,
+        gratefulnessHistoryModule
     )

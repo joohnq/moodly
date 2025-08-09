@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.allMoodResource
-import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.journal_insight
 import com.joohnq.shared_resources.lets_log_your_first_journal_to_see_your_insight
 import com.joohnq.shared_resources.log_your_first_journal
 import com.joohnq.shared_resources.most_frequent_emotion
@@ -32,17 +34,17 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SelfJournalOverviewInsight(
     modifier: Modifier = Modifier,
-    items: List<SelfJournalRecordResource>,
+    items: List<Pair<MoodResource, Int>>,
+    onCreate: () -> Unit = {},
 ) {
-    val groupedMoods =
-        items
-            .groupBy { it.mood }
-            .map { it.key to it.value.size }
-            .sortedBy { it.first.id }
-
     val moodResources = remember { allMoodResource() }
 
-    if (groupedMoods.isEmpty()) {
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.journal_insight
+    )
+
+    if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -51,7 +53,7 @@ fun SelfJournalOverviewInsight(
             description = Res.string.lets_log_your_first_journal_to_see_your_insight,
             text = Res.string.write_journal,
             icon = Drawables.Icons.Outlined.Edit,
-            onCreate = {}
+            onCreate = onCreate
         )
     } else {
         Card(
@@ -74,7 +76,7 @@ fun SelfJournalOverviewInsight(
                 ) {
                     Column {
                         Text(
-                            text = stringResource(groupedMoods.first().first.text),
+                            text = stringResource(items.first().first.text),
                             style = TextStyles.headingXsBold(),
                             color = Colors.Gray80
                         )
@@ -92,7 +94,7 @@ fun SelfJournalOverviewInsight(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     moodResources.reversed().forEach { mood ->
-                        val count = groupedMoods.find { it.first == mood }?.second ?: 0
+                        val count = items.find { it.first == mood }?.second ?: 0
 
                         SelfJournalInsightItem(
                             count = count,

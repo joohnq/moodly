@@ -29,7 +29,6 @@ private fun Preview(
     HomeContent(
         state =
             DashboardContract.State(
-                freudScore = FreudScoreResource.Healthy(80),
                 moodItems = moodRecordResources,
                 stressLevelItems = stressLevelRecordResources,
                 selfJournalItems = SelfJournalRecordResource.allSelfJournalRecordResourcePreview,

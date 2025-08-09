@@ -61,7 +61,7 @@ fun SecurityConfirmedContent(
                 VerticalSpacer(12.dp)
                 Text(
                     text = stringResource(Res.string.now_every_time_you_open_the_app),
-                    style = TextStyles.paragraphLg(),
+                    style = TextStyles.paragraphLgMedium(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.paddingHorizontalMedium()

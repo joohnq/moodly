@@ -1,6 +1,6 @@
 [versions]
 # Android SDK & Build tools
-agp = "8.11.1"
+agp = "8.12.0"
 android-compileSdk = "35"
 android-minSdk = "26"
 android-packageName = "com.joohnq.moodapp"
@@ -26,12 +26,12 @@ coilNetwork = "3.0.0-alpha08"
 # Compose
 composeCharts = "0.1.8"
 calendar = "2.8.0"
-compose-plugin = "1.8.2"
+compose-plugin = "1.9.0-beta01"
+compose-material = "1.9.0-alpha04"
 uiAndroid = "1.8.3"
 
 # Crashlytics & Firebase
-crashlytics = "3.0.5"
-firebase-android-bom = "34.0.0"
+crashlytics = "3.0.6"
 firebase-gitlive-sdk = "2.1.0"
 google-services = "4.4.3"
 
@@ -57,7 +57,7 @@ mokkery = "2.9.0"
 napier = "2.7.1"
 
 # Navigation
-navigation-compose = "2.8.0-alpha13"
+navigation-compose = "2.9.0-beta04"
 
 # Okio
 okioVersion = "3.16.0"
@@ -77,6 +77,10 @@ detekt = "1.23.8"
 spotless = "7.2.1"
 
 ktlint = "1.7.1"
+
+room = "2.8.0-beta01"
+ksp = "2.2.0-2.0.2"
+sqlite = "2.6.0-beta01"
 
 [libraries]
 
@@ -109,7 +113,7 @@ coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", ve
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", name = "components-resources", version.ref = "compose-plugin" }
 compose-components-ui-tooling-preview = { module = "org.jetbrains.compose.components:components-ui-tooling-preview", version.ref = "compose-plugin" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-plugin" }
-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-plugin" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-material" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-plugin" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-plugin" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
@@ -120,9 +124,6 @@ coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", 
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 # Firebase
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-android-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 gitlive-firebase-kotlin-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-gitlive-sdk" }
 
 # Koin
@@ -160,6 +161,10 @@ sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", versi
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
+room-runtime = {module = "androidx.room:room-runtime", version.ref = "room"}
+room-compiler = {module = "androidx.room:room-compiler", version.ref = "room"}
+sqlite-bundled = {module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite"}
+
 [plugins]
 
 # Android
@@ -190,6 +195,9 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+
+room = { id = "androidx.room", version.ref = "room" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 

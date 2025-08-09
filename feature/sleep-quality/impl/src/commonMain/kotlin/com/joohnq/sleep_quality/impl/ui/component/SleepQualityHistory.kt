@@ -41,7 +41,6 @@ fun SleepQualityHistory(
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             items.forEach { record ->
                 SleepQualityHistoryCard(
-                    modifier = modifier,
                     item = record,
                     onDelete = onDelete
                 )

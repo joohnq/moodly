@@ -47,8 +47,8 @@ class KmpLibraryPlugin : Plugin<Project> {
                 iosTarget.binaries.framework {
                     var deriveBaseName = geDeriveNamespace()
 
-                    if (deriveBaseName == "${AppConfig.APPLICATION_NAME}composeApp.AndroidApp") {
-                        deriveBaseName = "${AppConfig.APPLICATION_NAME}composeApp"
+                    if (deriveBaseName == "${AppConfig.APPLICATION_NAME}composeApp") {
+                        deriveBaseName = "ComposeApp"
                     }
 
                     baseName = deriveBaseName

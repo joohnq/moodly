@@ -14,7 +14,7 @@ fun ExpressionAnalysisScreen(
     viewModel: AddMoodViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 is AddMoodContract.SideEffect.ShowError ->
@@ -39,6 +39,6 @@ fun ExpressionAnalysisScreen(
         snackBarState = snackBarState,
         description = state.item.description,
         onEvent = ::onEvent,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

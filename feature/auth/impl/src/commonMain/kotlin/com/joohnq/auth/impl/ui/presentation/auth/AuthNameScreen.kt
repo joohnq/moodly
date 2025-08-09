@@ -15,7 +15,7 @@ fun AuthNameScreen(
 ) {
     val focusManager: FocusManager = LocalFocusManager.current
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 AuthNameContract.SideEffect.NavigateNext -> navigateNext()
@@ -34,6 +34,6 @@ fun AuthNameScreen(
         state = state,
         snackBarState = snackBarState,
         onEvent = ::onEvent,
-        onIntent = dispatch
+        onIntent = onIntent
     )
 }

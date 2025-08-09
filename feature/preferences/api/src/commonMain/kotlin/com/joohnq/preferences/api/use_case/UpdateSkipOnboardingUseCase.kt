@@ -5,5 +5,11 @@ import com.joohnq.preferences.api.repository.PreferencesRepository
 class UpdateSkipOnboardingUseCase(
     private val repository: PreferencesRepository,
 ) {
-    suspend operator fun invoke(value: Boolean): Result<Boolean> = repository.updateSkipOnboarding(value)
+    suspend operator fun invoke(value: Boolean): Result<Unit> =
+        try {
+            repository.updateSkipOnboarding(value)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

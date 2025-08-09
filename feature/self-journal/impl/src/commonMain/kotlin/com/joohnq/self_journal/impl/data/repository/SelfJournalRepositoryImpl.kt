@@ -3,7 +3,6 @@ package com.joohnq.self_journal.impl.data.repository
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.database.executeTryCatchResult
 import com.joohnq.mood.api.converter.MoodRecordConverter
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.api.repository.SelfJournalRepository
@@ -11,6 +10,7 @@ import com.joohnq.self_journal.database.SelfJournalDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class SelfJournalRepositoryImpl(
     private val database: SelfJournalDatabaseSql,
@@ -30,8 +30,8 @@ class SelfJournalRepositoryImpl(
             }.asFlow()
             .mapToList(Dispatchers.IO)
 
-    override suspend fun getById(id: Int): Result<SelfJournalRecord> =
-        executeTryCatchResult {
+    override suspend fun getById(id: Int): SelfJournalRecord =
+        withContext(Dispatchers.IO) {
             query
                 .getSelfJournalByIdRecord(
                     id = id.toLong()
@@ -46,32 +46,32 @@ class SelfJournalRepositoryImpl(
                 }.executeAsOne()
         }
 
-    override suspend fun add(record: SelfJournalRecord): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun add(record: SelfJournalRecord) {
+        withContext(Dispatchers.IO) {
             query.addSelfJournalRecord(
                 mood = MoodRecordConverter.fromMood(record.mood),
                 title = record.title,
                 description = record.description
             )
-            true
         }
+    }
 
-    override suspend fun delete(id: Int): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun delete(id: Int) {
+        withContext(Dispatchers.IO) {
             query.deleteSelfJournalRecord(
                 id = id.toLong()
             )
-            true
         }
+    }
 
-    override suspend fun update(record: SelfJournalRecord): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun update(record: SelfJournalRecord) {
+        withContext(Dispatchers.IO) {
             query.updateSelfJournalRecord(
                 mood = MoodRecordConverter.fromMood(record.mood),
                 title = record.title,
                 description = record.description,
                 id = record.id.toLong()
             )
-            true
         }
+    }
 }

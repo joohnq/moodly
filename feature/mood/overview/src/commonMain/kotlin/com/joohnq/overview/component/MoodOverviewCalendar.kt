@@ -9,6 +9,7 @@ import com.joohnq.shared_resources.components.card.GiganticCreateCard
 import com.joohnq.shared_resources.components.text.SectionHeader
 import com.joohnq.shared_resources.mood_calendar
 import com.joohnq.shared_resources.moods_logged_this_month
+import com.joohnq.shared_resources.theme.Colors
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -25,6 +26,7 @@ fun MoodOverviewCalendar(
     )
     GiganticCreateCard(
         modifier = modifier,
+        containerColor = Colors.White,
         title = itemsInMonth,
         subtitle = stringResource(Res.string.moods_logged_this_month),
         onCreate = onCreate,

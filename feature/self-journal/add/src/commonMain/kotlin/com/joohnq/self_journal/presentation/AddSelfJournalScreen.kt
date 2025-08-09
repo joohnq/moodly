@@ -13,7 +13,7 @@ fun AddSelfJournalScreen(
     viewModel: AddSelfJournalViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 AddSelfJournalContract.SideEffect.GoBack ->
@@ -37,7 +37,7 @@ fun AddSelfJournalScreen(
     AddSelfJournalContent(
         snackBarState = snackBarState,
         state = state,
-        onIntent = dispatch,
+        onIntent = onIntent,
         onEvent = ::onEvent
     )
 }

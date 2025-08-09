@@ -2,7 +2,6 @@ package com.joohnq.stress_level.impl.ui.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add_new_journal
 import com.joohnq.shared_resources.components.card.MetricSummaryCard
@@ -23,7 +22,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StressLevelMetric(
     items: List<StressLevelRecordResource>,
-    containerColor: Color = Colors.White,
     onCreate: () -> Unit = {},
     onClick: () -> Unit = {},
 ) {
@@ -37,7 +35,7 @@ fun StressLevelMetric(
     if (item == null) {
         NotFoundHorizontalLayout(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
+            containerColor = Colors.White,
             title = Res.string.lets_set_up_daily_stress_level,
             subtitle = Res.string.add_new_journal,
             image = Drawables.Images.StressLevelHistory,
@@ -46,7 +44,7 @@ fun StressLevelMetric(
     } else {
         MetricSummaryCard(
             modifier = Modifier.paddingHorizontalMedium(),
-            containerColor = containerColor,
+            containerColor = Colors.White,
             icon = Drawables.Icons.Filled.Warning,
             title = stringResource(Res.string.stress_level),
             text = stringResource(item.stressLevel.value),

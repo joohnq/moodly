@@ -92,7 +92,13 @@ private fun SuccessView(
                                 isNotFirst = i != 0,
                                 isNotLast = i != lastIndex,
                                 item = item,
-                                onClick = {},
+                                onClick = {
+                                    onEvent(
+                                        SelfJournalHistoryContract.Event.NavigateToEditSelfJournal(
+                                            item.id
+                                        )
+                                    )
+                                },
                                 onDelete = { id ->
                                     onIntent(
                                         SelfJournalHistoryContract.Intent.Delete(id)

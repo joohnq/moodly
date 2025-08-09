@@ -99,7 +99,7 @@ fun AvatarContent(
                     VerticalSpacer(12.dp)
                     Text(
                         text = stringResource(Res.string.we_have_a_set_of_customizable),
-                        style = TextStyles.paragraphMd(),
+                        style = TextStyles.paragraphMdMedium(),
                         color = Colors.Brown100Alpha64,
                         textAlign = TextAlign.Center
                     )

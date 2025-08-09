@@ -1,6 +1,10 @@
 package com.joohnq.stress_level.overview.presentation
 
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getStressors
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
+import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toPair
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import com.joohnq.ui.UnidirectionalViewModel
 
 sealed interface StressLevelOverviewContract {
@@ -10,8 +14,9 @@ sealed interface StressLevelOverviewContract {
         data object GoBack :
             Event
 
-        data object NavigateToAddStressLevel :
-            Event
+        data object NavigateToStressLevelHistory : Event
+
+        data object NavigateToAddStressLevel : Event
     }
 
     sealed interface Intent {
@@ -28,8 +33,19 @@ sealed interface StressLevelOverviewContract {
 
     data class State(
         val items: List<StressLevelRecordResource> = listOf(),
-        val todayStressLevel: StressLevelRecordResource? = null,
         val isLoading: Boolean = false,
         val isError: String? = null,
-    )
+    ) {
+        val stressorsTriggers: List<StressorResource>
+            get() = items.getStressors()
+
+        val stressorsInsight: List<Pair<StressorResource, Int>>
+            get() = items.toPair()
+
+        val historyItems: List<StressLevelRecordResource>
+            get() = items.take(7)
+
+        val todayStressLevel: StressLevelRecordResource?
+            get() = items.getTodayStressLevelRecord()
+    }
 }

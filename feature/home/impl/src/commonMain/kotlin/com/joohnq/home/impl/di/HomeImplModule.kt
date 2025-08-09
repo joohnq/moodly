@@ -11,7 +11,8 @@ val homeImplModule =
                 getMoodsUseCase = get(),
                 getSelfJournalsUseCase = get(),
                 getSleepQualitiesUseCase = get(),
-                getAllStressLevelUseCase = get()
+                getAllStressLevelUseCase = get(),
+                getGratefulnessUseCase = get()
             )
         }
     }

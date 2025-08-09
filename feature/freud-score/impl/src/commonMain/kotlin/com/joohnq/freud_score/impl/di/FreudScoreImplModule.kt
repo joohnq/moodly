@@ -7,6 +7,8 @@ import org.koin.dsl.module
 val freudScoreImplModule: Module =
     module {
         single<FreudScoreViewModel> {
-            FreudScoreViewModel()
+            FreudScoreViewModel(
+                getMoodsUseCase = get()
+            )
         }
     }

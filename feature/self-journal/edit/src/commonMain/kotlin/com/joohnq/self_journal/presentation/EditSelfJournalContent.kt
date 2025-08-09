@@ -31,7 +31,6 @@ import com.joohnq.shared_resources.components.text.TextWithBackground
 import com.joohnq.shared_resources.delete_journal
 import com.joohnq.shared_resources.do_you_wish_to_remove_this_journal
 import com.joohnq.shared_resources.edit_journal
-import com.joohnq.shared_resources.remember.rememberFocusRequester
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.ComponentColors
@@ -46,14 +45,10 @@ import org.jetbrains.compose.resources.stringResource
 fun EditJournalingContent(
     snackBarState: SnackbarHostState = rememberSnackBarState(),
     state: EditSelfJournalContract.State,
-    canSave: Boolean,
     onEvent: (EditSelfJournalContract.Event) -> Unit = {},
     onIntent: (EditSelfJournalContract.Intent) -> Unit = {},
 ) {
-    val titleFocusRequest = rememberFocusRequester()
-    val descriptionFocusRequest = rememberFocusRequester()
-    val mood = state.editingSelfJournalRecord.mood
-    val resource = mood.toResource()
+    val resource = state.editingSelfJournalRecord.mood.toResource()
 
     if (state.openDeleteDialog) {
         ImageDialogLayout(
@@ -82,7 +77,7 @@ fun EditJournalingContent(
         floatingActionButton = {
             EditFloatingActionButtons(
                 isEditing = state.isEditing,
-                canSave = canSave,
+                canSave = state.canSave,
                 onDelete = {
                     onIntent(
                         EditSelfJournalContract.Intent.ChangeOpenDeleteDialog(true)
@@ -138,13 +133,17 @@ fun EditJournalingContent(
                     )
                 },
                 onValueChange = { onIntent(EditSelfJournalContract.Intent.ChangeTitle(it)) },
-                modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequest),
+                modifier = Modifier.fillMaxWidth().focusRequester(state.titleFocusRequest),
                 colors = ComponentColors.TextField.textFieldTitleTransparentColors(),
                 textStyle = TextStyles.headingMdExtraBold(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions =
                     KeyboardActions(
-                        onDone = { titleFocusRequest.freeFocus() }
+                        onDone = {
+                            onIntent(
+                                EditSelfJournalContract.Intent.FreeTitleFocus
+                            )
+                        }
                     )
             )
             VerticalSpacer(10.dp)
@@ -154,7 +153,7 @@ fun EditJournalingContent(
                 placeholder = {
                     Text(
                         text = stringResource(Res.string.type_here_your_description),
-                        style = TextStyles.paragraphLg(),
+                        style = TextStyles.paragraphLgMedium(),
                         color = Colors.Brown100Alpha64
                     )
                 },
@@ -163,13 +162,17 @@ fun EditJournalingContent(
                         EditSelfJournalContract.Intent.ChangeDescription(it)
                     )
                 },
-                modifier = Modifier.fillMaxWidth().focusRequester(descriptionFocusRequest),
+                modifier = Modifier.fillMaxWidth().focusRequester(state.descriptionFocusRequest),
                 colors = ComponentColors.TextField.textFieldDescriptionTransparentColors(),
-                textStyle = TextStyles.paragraphLg(),
+                textStyle = TextStyles.paragraphLgMedium(),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions =
                     KeyboardActions(
-                        onDone = { descriptionFocusRequest.freeFocus() }
+                        onDone = {
+                            onIntent(
+                                EditSelfJournalContract.Intent.FreeDescriptionFocus
+                            )
+                        }
                     )
             )
         }

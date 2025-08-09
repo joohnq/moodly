@@ -12,11 +12,11 @@ import com.joohnq.api.mapper.ImageTypeMapper.toImageType
 import com.joohnq.api.mapper.ImageTypeMapper.toValue
 import com.joohnq.api.repository.UserRepository
 import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.database.executeTryCatchResult
 import com.joohnq.user.database.UserDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(
     private val database: UserDatabaseSql,
@@ -51,8 +51,8 @@ class UserRepositoryImpl(
             }.asFlow()
             .mapToOneOrNull(Dispatchers.IO)
 
-    override suspend fun addUser(user: User): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun add(user: User) {
+        withContext(Dispatchers.IO) {
             query.addUser(
                 id = user.id.toLong(),
                 name = user.name,
@@ -62,52 +62,52 @@ class UserRepositoryImpl(
                 physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),
                 soughtHelp = UserConverter.fromProfessionalHelp(user.soughtHelp)
             )
-            true
         }
+    }
 
-    override suspend fun updateUser(user: User): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun update(user: User) {
+        withContext(Dispatchers.IO) {
             query.updateUser(
                 name = user.name,
                 medicationsSupplements = UserConverter.fromMedicationsSupplements(user.medicationsSupplements),
                 physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),
                 soughtHelp = UserConverter.fromProfessionalHelp(user.soughtHelp)
             )
-            true
         }
+    }
 
-    override suspend fun updateUserName(name: String): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun updateUserName(name: String) {
+        withContext(Dispatchers.IO) {
             query.updateUserName(name)
-            true
         }
+    }
 
     override suspend fun updateUserImage(
         image: String,
         imageType: ImageType,
-    ): Result<Boolean> =
-        executeTryCatchResult {
+    ) {
+        withContext(Dispatchers.IO) {
             query.updateUserImage(image, imageType.toValue())
-            true
         }
+    }
 
-    override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp) {
+        withContext(Dispatchers.IO) {
             query.updateSoughtHelp(UserConverter.fromProfessionalHelp(soughtHelp))
-            true
         }
+    }
 
-    override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) {
+        withContext(Dispatchers.IO) {
             query.updatePhysicalSymptoms(UserConverter.fromPhysicalSymptoms(physicalSymptoms))
-            true
         }
+    }
 
-    override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements) {
+        withContext(Dispatchers.IO) {
             query.updateMedicationsSupplements(
                 UserConverter.fromMedicationsSupplements(medicationsSupplements)
             )
-            true
         }
+    }
 }

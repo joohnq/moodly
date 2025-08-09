@@ -32,10 +32,10 @@ class MoodHistoryViewModel(
         updateState { it.copy(isLoading = true) }
         getMoodsUseCase()
             .onEach { items ->
-                val resources = items.toResource()
                 updateState {
                     it.copy(
-                        items = resources
+                        items = items.toResource(),
+                        isLoading = false
                     )
                 }
             }.catch { e ->

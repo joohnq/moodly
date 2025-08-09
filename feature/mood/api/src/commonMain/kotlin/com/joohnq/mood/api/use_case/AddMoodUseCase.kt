@@ -6,5 +6,11 @@ import com.joohnq.mood.api.repository.MoodRepository
 class AddMoodUseCase(
     private val repository: MoodRepository,
 ) {
-    suspend operator fun invoke(record: MoodRecord): Result<Boolean> = repository.add(record)
+    suspend operator fun invoke(record: MoodRecord): Result<Unit> =
+        try {
+            repository.add(record)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

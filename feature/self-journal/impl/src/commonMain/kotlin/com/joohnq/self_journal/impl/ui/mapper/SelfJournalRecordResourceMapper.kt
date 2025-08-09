@@ -6,6 +6,7 @@ import com.joohnq.mood.add.ui.mapper.MoodAverageResourceMapper.toResource
 import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toDomain
 import com.joohnq.mood.add.ui.mapper.MoodResourceMapper.toResource
 import com.joohnq.mood.add.ui.resource.MoodAverageResource
+import com.joohnq.mood.add.ui.resource.MoodResource
 import com.joohnq.mood.api.mapper.MoodAverageMapper.toAverage
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
@@ -27,6 +28,11 @@ object SelfJournalRecordResourceMapper {
             it.createdAt.date ==
                 getNow().date
         }
+
+    fun List<SelfJournalRecordResource>.getGrouped(): List<Pair<MoodResource, Int>> =
+        groupBy { it.mood }
+            .map { it.key to it.value.size }
+            .sortedBy { it.first.id }
 
     fun List<SelfJournalRecordResource>.calculateSelfJournalsAverage(): MoodAverageResource {
         if (isEmpty()) return MoodAverageResource.Skipped

@@ -17,8 +17,8 @@ fun HomeScreen(
     val state by dashboardViewModel.state.collectAsStateWithLifecycle()
 
     HomeContent(
-        padding = padding,
         state = state,
+        padding = padding,
         onEvent = onEvent
     )
 }

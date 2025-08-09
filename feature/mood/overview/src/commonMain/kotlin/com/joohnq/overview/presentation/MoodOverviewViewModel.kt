@@ -1,7 +1,6 @@
 package com.joohnq.overview.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getTodayMoodRecord
 import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.use_case.DeleteMoodUseCase
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
@@ -31,18 +30,19 @@ class MoodOverviewViewModel(
 
     private fun observe() {
         updateState { it.copy(isLoading = true) }
-        getMoodsUseCase()
-            .onEach { items ->
-                val resources = items.toResource()
-                updateState {
-                    it.copy(
-                        items = resources,
-                        todayMood = resources.getTodayMoodRecord()
-                    )
-                }
-            }.catch { e ->
-                emitEffect(MoodOverviewContract.SideEffect.ShowError(e.message.toString()))
-            }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            getMoodsUseCase()
+                .onEach { items ->
+                    updateState {
+                        it.copy(
+                            items = items.toResource(),
+                            isLoading = false
+                        )
+                    }
+                }.catch { e ->
+                    emitEffect(MoodOverviewContract.SideEffect.ShowError(e.message.toString()))
+                }.launchIn(viewModelScope)
+        }
     }
 
     private fun delete(id: Int) {

@@ -23,6 +23,10 @@ import com.joohnq.shared_resources.face_overjoyed
 import com.joohnq.shared_resources.face_overjoyed_new
 import com.joohnq.shared_resources.face_sad
 import com.joohnq.shared_resources.face_sad_new
+import com.joohnq.shared_resources.gratefulness_get_started
+import com.joohnq.shared_resources.gratefulness_insight
+import com.joohnq.shared_resources.gratefulness_pot
+import com.joohnq.shared_resources.gratefulness_self_love
 import com.joohnq.shared_resources.ic_add_outlined
 import com.joohnq.shared_resources.ic_arrow_open_outlined
 import com.joohnq.shared_resources.ic_arrow_outlined
@@ -39,6 +43,8 @@ import com.joohnq.shared_resources.ic_edit_outlined
 import com.joohnq.shared_resources.ic_eye_outlined
 import com.joohnq.shared_resources.ic_flag_outlined
 import com.joohnq.shared_resources.ic_gallery_outlined
+import com.joohnq.shared_resources.ic_green_logo_and_shadow
+import com.joohnq.shared_resources.ic_hand_heart
 import com.joohnq.shared_resources.ic_head
 import com.joohnq.shared_resources.ic_heart_outlined
 import com.joohnq.shared_resources.ic_home_outlined
@@ -62,7 +68,10 @@ import com.joohnq.shared_resources.ic_negative_outlined
 import com.joohnq.shared_resources.ic_nothing_outlined
 import com.joohnq.shared_resources.ic_positive_outlined
 import com.joohnq.shared_resources.ic_question_outlined
+import com.joohnq.shared_resources.ic_quotes
 import com.joohnq.shared_resources.ic_resize_outlined
+import com.joohnq.shared_resources.ic_schedule_outlined
+import com.joohnq.shared_resources.ic_self_improvement_outlined
 import com.joohnq.shared_resources.ic_sleep_outlined
 import com.joohnq.shared_resources.ic_sun_outlined
 import com.joohnq.shared_resources.ic_target
@@ -147,6 +156,9 @@ object Drawables {
             val MoodNeutral = Res.drawable.ic_mood_neutral_outlined
             val MoodHappy = Res.drawable.ic_mood_happy_outlined
             val MoodOverjoyed = Res.drawable.ic_mood_overjoyed_outlined
+
+            val Schedule = Res.drawable.ic_schedule_outlined
+            val SelfImprovement = Res.drawable.ic_self_improvement_outlined
         }
 
         object Filled {
@@ -166,6 +178,11 @@ object Drawables {
             val MoreVertical = Res.drawable.ic_more_vertical
             val Trash = Res.drawable.ic_trash
             val Warning = Res.drawable.ic_warning
+
+            val HandHeart = Res.drawable.ic_hand_heart
+            val Quotes = Res.drawable.ic_quotes
+
+            val GreenShadowLogo = Res.drawable.ic_green_logo_and_shadow
         }
     }
 
@@ -207,6 +224,14 @@ object Drawables {
         val MoodHistory = Res.drawable.mood_history
         val MoodInsight = Res.drawable.mood_insight
         val MoodInsightStrike = Res.drawable.mood_insight_streak
+
+        val GratefulnessGetStarted = Res.drawable.gratefulness_get_started
+
+        val GratefulnessInsight = Res.drawable.gratefulness_insight
+
+        val GratefulnessSelfLove = Res.drawable.gratefulness_self_love
+
+        val GratefulnessPot = Res.drawable.gratefulness_pot
     }
 
     object Mood {

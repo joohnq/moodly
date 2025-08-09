@@ -8,6 +8,7 @@ import com.joohnq.ui.sharedViewModel
 @Composable
 fun StressLevelOverviewScreen(
     onNavigateAddStressLevel: () -> Unit,
+    navigateToStressLevelHistory: () -> Unit,
     onGoBack: () -> Unit,
     viewModel: StressLevelOverviewViewModel = sharedViewModel(),
 ) {
@@ -17,6 +18,7 @@ fun StressLevelOverviewScreen(
         when (event) {
             is StressLevelOverviewContract.Event.NavigateToAddStressLevel -> onNavigateAddStressLevel()
             is StressLevelOverviewContract.Event.GoBack -> onGoBack()
+            StressLevelOverviewContract.Event.NavigateToStressLevelHistory -> navigateToStressLevelHistory()
         }
     }
 

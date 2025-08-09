@@ -42,6 +42,13 @@ object TextStyles {
         )
 
     @Composable
+    fun headingMdRegular() =
+        TextStyle(
+            fontFamily = FontFamily.Urbanist.regular(),
+            fontSize = 36.sp
+        )
+
+    @Composable
     fun headingSmExtraBold() =
         TextStyle(
             fontFamily = FontFamily.Urbanist.extraBold(),
@@ -70,6 +77,20 @@ object TextStyles {
         )
 
     @Composable
+    fun headingXsMedium() =
+        TextStyle(
+            fontFamily = FontFamily.Urbanist.medium(),
+            fontSize = 24.sp
+        )
+
+    @Composable
+    fun headingXsRegular() =
+        TextStyle(
+            fontFamily = FontFamily.Urbanist.regular(),
+            fontSize = 24.sp
+        )
+
+    @Composable
     fun headingXlExtraBold() =
         TextStyle(
             fontFamily = FontFamily.Urbanist.extraBold(),
@@ -84,14 +105,14 @@ object TextStyles {
         )
 
     @Composable
-    fun paragraphLg() =
+    fun paragraphLgMedium() =
         TextStyle(
             fontFamily = FontFamily.Urbanist.medium(),
             fontSize = 18.sp
         )
 
     @Composable
-    fun paragraphMd() =
+    fun paragraphMdMedium() =
         TextStyle(
             fontFamily = FontFamily.Urbanist.medium(),
             fontSize = 16.sp

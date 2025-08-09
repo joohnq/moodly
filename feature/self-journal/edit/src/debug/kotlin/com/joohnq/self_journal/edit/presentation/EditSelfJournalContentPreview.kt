@@ -21,9 +21,9 @@ private fun Preview(
                 currentSelfJournalRecord = item,
                 editingSelfJournalRecord = item,
                 isEditing = false,
-                openDeleteDialog = false
-            ),
-        canSave = false
+                openDeleteDialog = false,
+                canSave = false
+            )
     )
 }
 
@@ -37,8 +37,8 @@ private fun Preview(
         state =
             EditSelfJournalContract.State(
                 isEditing = boolean,
-                openDeleteDialog = !boolean
-            ),
-        canSave = boolean
+                openDeleteDialog = !boolean,
+                canSave = boolean
+            )
     )
 }

@@ -10,20 +10,22 @@ class UpdateUserImageBitmapUseCase(
     private val fileStorage: FileStorage,
     private val repository: UserRepository,
 ) {
-    suspend operator fun invoke(image: ImageBitmap): Result<Boolean> {
-        val value =
-            try {
+    suspend operator fun invoke(image: ImageBitmap): Result<Unit> =
+        try {
+            val value =
                 fileStorage.saveImage(
                     directory = "avatar",
                     fileName = "avatar.png",
                     data = image.toByteArray()
                 )
-            } catch (e: Exception) {
-                return Result.failure(e)
-            }
-        return repository.updateUserImage(
-            image = value,
-            imageType = ImageType.DEVICE
-        )
-    }
+
+            repository.updateUserImage(
+                image = value,
+                imageType = ImageType.DEVICE
+            )
+
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

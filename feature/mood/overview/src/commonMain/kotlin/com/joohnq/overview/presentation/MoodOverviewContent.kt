@@ -3,7 +3,9 @@ package com.joohnq.overview.presentation
 import androidx.compose.runtime.Composable
 import com.joohnq.overview.component.MoodOverviewContentBody
 import com.joohnq.overview.component.MoodOverviewContentPanel
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
+import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 
@@ -31,14 +33,12 @@ private fun SuccessView(
     onEvent: (MoodOverviewContract.Event) -> Unit,
     onIntent: (MoodOverviewContract.Intent) -> Unit,
 ) {
-    val hasToday = state.todayMood != null
-
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
-        panelBackgroundColor = if (hasToday) state.todayMood.mood.palette.color else Colors.Brown10,
-        isDark = !hasToday,
+        panelBackgroundColor = state.todayMood?.mood?.palette?.color ?: Colors.Brown10,
+        title = Res.string.mood,
         image = Drawables.Images.MoodBackground,
-        color = if (hasToday) state.todayMood.mood.palette.imageColor else Colors.Brown10,
+        color = state.todayMood?.mood?.palette?.imageColor ?: Colors.Brown10,
         onAddButton = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) },
         onGoBack = { onEvent(MoodOverviewContract.Event.GoBack) },
         panel = { modifier ->
@@ -50,8 +50,7 @@ private fun SuccessView(
         body = { modifier ->
             MoodOverviewContentBody(
                 modifier = modifier,
-                item = state.todayMood,
-                items = state.items,
+                state = state,
                 onEvent = onEvent,
                 onIntent = onIntent
             )

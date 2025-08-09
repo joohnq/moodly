@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.parameter.MoodRecordResourceParameterProvider
 import com.joohnq.overview.component.MoodOverviewContentBody
+import com.joohnq.overview.presentation.MoodOverviewContract
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -14,7 +15,7 @@ private fun Preview(
     item: MoodRecordResource,
 ) {
     MoodOverviewContentBody(
-        item = item,
-        items = listOf(item)
+        state =
+            MoodOverviewContract.State()
     )
 }

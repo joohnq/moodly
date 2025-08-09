@@ -21,7 +21,7 @@ class EditSelfJournalViewModel(
             EditSelfJournalContract.Intent.ResetState ->
                 resetState()
 
-            is EditSelfJournalContract.Intent.ChangeDescription ->
+            is EditSelfJournalContract.Intent.ChangeDescription -> {
                 updateState {
                     it.copy(
                         editingSelfJournalRecord =
@@ -30,16 +30,20 @@ class EditSelfJournalViewModel(
                             )
                     )
                 }
+                canSave()
+            }
 
             is EditSelfJournalContract.Intent.ChangeOpenDeleteDialog ->
                 updateState { it.copy(openDeleteDialog = intent.value) }
 
-            is EditSelfJournalContract.Intent.ChangeTitle ->
+            is EditSelfJournalContract.Intent.ChangeTitle -> {
                 updateState {
                     it.copy(
                         editingSelfJournalRecord = it.editingSelfJournalRecord.copy(title = intent.title)
                     )
                 }
+                canSave()
+            }
 
             is EditSelfJournalContract.Intent.ChangeIsEditing ->
                 updateState { it.copy(isEditing = intent.value) }
@@ -52,8 +56,16 @@ class EditSelfJournalViewModel(
                     )
                 }
 
+            EditSelfJournalContract.Intent.FreeDescriptionFocus ->
+                state.value.titleFocusRequest.freeFocus()
+
+            EditSelfJournalContract.Intent.FreeTitleFocus ->
+                state.value.descriptionFocusRequest.freeFocus()
+
             is EditSelfJournalContract.Intent.Delete -> delete(intent.id)
+
             is EditSelfJournalContract.Intent.GetById -> getById(intent.id)
+
             EditSelfJournalContract.Intent.Action -> update()
         }
     }
@@ -102,6 +114,23 @@ class EditSelfJournalViewModel(
             } catch (e: Exception) {
                 emitEffect(EditSelfJournalContract.SideEffect.ShowError(e.message.toString()))
             }
+        }
+    }
+
+    private fun canSave() {
+        val isDifferent =
+            state.value.editingSelfJournalRecord.title != state.value.currentSelfJournalRecord.title ||
+                state.value.editingSelfJournalRecord.description != state.value.currentSelfJournalRecord.description
+
+        updateState {
+            it.copy(
+                canSave =
+                    isDifferent &&
+                        state.value.editingSelfJournalRecord.title
+                            .isNotBlank() &&
+                        state.value.editingSelfJournalRecord.description
+                            .isNotBlank()
+            )
         }
     }
 }

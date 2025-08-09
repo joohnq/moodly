@@ -14,6 +14,17 @@ fun NavHostController.onNavigate(
     }
 }
 
+fun NavHostController.onReplace(
+    destination: Destination,
+) {
+    navigate(destination) {
+        popUpTo(currentBackStackEntry?.destination?.route ?: return@navigate) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
+}
+
 fun NavHostController.onNavigateBack(destination: Destination) {
     popBackStack(destination, inclusive = false)
 }

@@ -1,11 +1,15 @@
 package com.joohnq.splash.impl.ui.presentation.splash
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.sharedViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     onNavigateToWelcome: () -> Unit,
     onNavigateToOnboarding: () -> Unit,
     onNavigateToAuth: () -> Unit,
@@ -27,10 +31,13 @@ fun SplashScreen(
                 SplashContract.SideEffect.NavigateToDashboard -> onNavigateToDashboard()
                 SplashContract.SideEffect.NavigateToUnlock -> onNavigateToUnLock()
                 SplashContract.SideEffect.NavigateToSecurityCorrupted -> onNavigateToSecurityCorrupted()
-                is SplashContract.SideEffect.ShowError -> {}
+                is SplashContract.SideEffect.ShowError ->
+                    launch { snackBarState.showSnackbar(sideEffect.message) }
             }
         }
     }
 
-    SplashContent()
+    SplashContent(
+        snackBarState = snackBarState
+    )
 }

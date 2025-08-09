@@ -1,23 +1,25 @@
 package com.joohnq.home.impl.ui.presentation.home.event
 
 sealed interface HomeEvent {
-    data object OnNavigateToFreudScore : HomeEvent
+    data object NavigateToFreudScore : HomeEvent
 
-    data object OnNavigateToMood : HomeEvent
+    data object NavigateToMoodOverview : HomeEvent
 
-    data object OnNavigateToSleepQuality : HomeEvent
+    data object NavigateToSleepQualityOverview : HomeEvent
 
-    data object OnNavigateToSelfJournal : HomeEvent
+    data object NavigateToSelfJournalOverview : HomeEvent
 
-    data object OnNavigateToStressLevel : HomeEvent
+    data object NavigateToStressLevelOverview : HomeEvent
 
-    data object OnNavigateToAddSleep : HomeEvent
+    data object NavigateToGratefulnessOverview : HomeEvent
 
-    data object OnNavigateToAddMood : HomeEvent
+    data object NavigateToAddSleepQuality : HomeEvent
 
-    data object OnNavigateToAddStressLevel : HomeEvent
+    data object NavigateToAddMood : HomeEvent
 
-    data object OnNavigateToSelfJournalHistory : HomeEvent
+    data object NavigateToAddStressLevel : HomeEvent
 
-    data object OnNavigateToAddJournaling : HomeEvent
+    data object NavigateToAddSelfJournal : HomeEvent
+
+    data object OnNavigateToAddGratefulness : HomeEvent
 }

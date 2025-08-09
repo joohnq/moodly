@@ -1,7 +1,5 @@
 package com.joohnq.moodapp
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -13,8 +11,10 @@ import com.joohnq.navigation.onGoBack
 import com.joohnq.navigation.onNavigate
 import com.joohnq.navigation.onNavigateBack
 import com.joohnq.navigation.onNavigateGraph
+import com.joohnq.navigation.onReplace
 import com.joohnq.onboarding.impl.ui.navigation.onboardingNavigation
 import com.joohnq.security.impl.ui.navigation.securityNavigation
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.splash.impl.ui.navigation.splashNavigation
 import com.joohnq.welcome.impl.ui.navigation.welcomeNavigation
 
@@ -22,14 +22,11 @@ import com.joohnq.welcome.impl.ui.navigation.welcomeNavigation
 fun App() {
     MaterialTheme {
         val navHostController = rememberNavController()
+        val snackBarState = rememberSnackBarState()
 
         NavHost(
             navController = navHostController,
-            startDestination = NavigationGraph.Loading,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None },
-            popExitTransition = { ExitTransition.None },
-            popEnterTransition = { EnterTransition.None }
+            startDestination = NavigationGraph.Loading
         ) {
             splashNavigation(
                 onNavigateGraph = navHostController::onNavigateGraph,
@@ -53,8 +50,10 @@ fun App() {
                 onGoBack = navHostController::onGoBack
             )
             appNavigation(
+                snackBarState = snackBarState,
                 onNavigate = navHostController::onNavigate,
                 onNavigateBack = navHostController::onNavigateBack,
+                onReplace = navHostController::onReplace,
                 onGoBack = navHostController::onGoBack
             )
         }

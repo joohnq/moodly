@@ -6,7 +6,8 @@ import androidx.compose.ui.Modifier
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundVerticalLayout
-import com.joohnq.shared_resources.theme.Colors
+import com.joohnq.shared_resources.components.text.SectionHeader
+import com.joohnq.shared_resources.journal_history
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.write_journal
 import com.joohnq.shared_resources.write_your_first_journal_to_see_journal_history_lets_do_it_now_for_better_mental_health
@@ -18,13 +19,19 @@ fun SelfJournalOverviewHistory(
     onCreate: () -> Unit = {},
     onClick: (Int) -> Unit = {},
     onDelete: (Int) -> Unit = {},
+    onSeeMore: () -> Unit = {},
 ) {
+    SectionHeader(
+        modifier = modifier,
+        title = Res.string.journal_history,
+        onSeeMore = onSeeMore
+    )
+
     if (items.isEmpty()) {
         NotFoundVerticalLayout(
             modifier = modifier,
-            containerColor = Colors.Gray5,
             title = Res.string.write_your_first_journal_to_see_journal_history_lets_do_it_now_for_better_mental_health,
-            subtitle = Res.string.write_journal,
+            actionText = Res.string.write_journal,
             image = Drawables.Images.SelfJournalHistory,
             onClick = onCreate
         )

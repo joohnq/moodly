@@ -1,5 +1,6 @@
 package com.joohnq.sleep_quality.overview.presentation
 
+import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.getTodaySleepQualityRecord
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.ui.UnidirectionalViewModel
 
@@ -31,8 +32,10 @@ sealed interface SleepQualityOverviewContract {
 
     data class State(
         val items: List<SleepQualityRecordResource> = listOf(),
-        val todaySleepQuality: SleepQualityRecordResource? = null,
         val isLoading: Boolean = false,
         val isError: String? = null,
-    )
+    ) {
+        val todaySleepQuality: SleepQualityRecordResource?
+            get() = items.getTodaySleepQualityRecord()
+    }
 }

@@ -18,7 +18,7 @@ fun SecurityScreen(
     securityAuthentication: SecurityAuthentication = securityAuthentication(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (_, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 is SecurityContract.SideEffect.NavigateNext ->
@@ -54,7 +54,7 @@ fun SecurityScreen(
 
     SecurityContent(
         snackBarState = snackBarState,
-        onIntent = dispatch,
+        onIntent = onIntent,
         onEvent = ::onEvent
     )
 }

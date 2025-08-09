@@ -37,7 +37,8 @@ class StressLevelHistoryViewModel(
             .onEach { items ->
                 updateState {
                     it.copy(
-                        items = items.toResource().toGroupedByDate()
+                        items = items.toResource().toGroupedByDate(),
+                        isLoading = false
                     )
                 }
             }.catch { e ->

@@ -1,10 +1,12 @@
 package com.joohnq.self_journal.presentation
 
 import androidx.compose.runtime.Composable
-import com.joohnq.self_journal.presentation.components.SelfJournalOverviewContentBody
+import com.joohnq.self_journal.presentation.components.SelfJournalOverviewBody
 import com.joohnq.self_journal.presentation.components.SelfJournalOverviewPanel
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.components.view.LoadingView
+import com.joohnq.shared_resources.self_journal
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 
@@ -35,7 +37,7 @@ private fun SuccessView(
     ConvexGroupLazyLayout(
         panelBackgroundColor = Colors.Brown60,
         containerColor = Colors.White,
-        isDark = false,
+        title = Res.string.self_journal,
         image = Drawables.Images.SelfJournalBackground,
         color = Colors.Brown70,
         onAddButton = { onEvent(SelfJournalOverviewContract.Event.NavigateToAddSelfJournal) },
@@ -47,9 +49,9 @@ private fun SuccessView(
             )
         },
         body = { modifier ->
-            SelfJournalOverviewContentBody(
+            SelfJournalOverviewBody(
                 modifier = modifier,
-                items = state.items,
+                state = state,
                 onIntent = onIntent,
                 onEvent = onEvent
             )

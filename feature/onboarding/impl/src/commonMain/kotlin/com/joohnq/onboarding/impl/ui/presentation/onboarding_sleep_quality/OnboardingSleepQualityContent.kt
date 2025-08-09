@@ -64,7 +64,8 @@ fun OnboardingSleepQualityContent(
                 ) {
                     sleepQualityOptions.forEach { sleepQualityOption: SleepQualityResource ->
                         val color =
-                            if (state == sleepQualityOption) Colors.Brown80 else Colors.Brown100Alpha64
+                            if (state.sleepQuality == sleepQualityOption) Colors.Brown80 else Colors.Brown100Alpha64
+
                         Column {
                             Text(
                                 stringResource(sleepQualityOption.firstText),

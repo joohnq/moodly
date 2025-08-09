@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface SleepQualityRepository {
     fun observe(): Flow<List<SleepQualityRecord>>
 
-    suspend fun add(record: SleepQualityRecord): Result<Boolean>
+    suspend fun add(record: SleepQualityRecord)
 
-    suspend fun delete(id: Int): Result<Boolean>
+    suspend fun delete(id: Int)
 }

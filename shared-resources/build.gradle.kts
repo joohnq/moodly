@@ -25,6 +25,7 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
             implementation(libs.calendar)
+            implementation("dev.chrisbanes.haze:haze:1.6.9")
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)

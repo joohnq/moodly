@@ -18,8 +18,10 @@ fun SelfJournalOverviewCalendarContent(
         modifier = Modifier.fillMaxWidth(),
         state = calendarState,
         dayContent = { day ->
-            val itemsInDay = items.filter { it.createdAt.date == day.date }
-            val average = itemsInDay.calculateSelfJournalsAverage()
+            val itemsInDay =
+                items.filter { it.createdAt.date == day.date }
+            val average =
+                itemsInDay.calculateSelfJournalsAverage()
 
             SelfJournalOverviewContentDay(
                 average = average,

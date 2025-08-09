@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface StressLevelRepository {
     fun observe(): Flow<List<StressLevelRecord>>
 
-    suspend fun add(stressLevelRecord: StressLevelRecord): Result<Boolean>
+    suspend fun add(stressLevelRecord: StressLevelRecord)
 
-    suspend fun delete(id: Int): Result<Boolean>
+    suspend fun delete(id: Int)
 }

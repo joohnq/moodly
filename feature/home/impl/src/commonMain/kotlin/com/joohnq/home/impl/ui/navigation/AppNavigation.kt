@@ -1,5 +1,6 @@
 package com.joohnq.home.impl.ui.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -7,6 +8,9 @@ import androidx.navigation.toRoute
 import com.joohnq.add.presentation.AddMoodScreen
 import com.joohnq.add.presentation.ExpressionAnalysisScreen
 import com.joohnq.freud_score.impl.ui.presentation.freud_score.FreudScoreScreen
+import com.joohnq.gratefulness.add.presentation.GratefulnessAddScreen
+import com.joohnq.gratefulness.history.presentation.GratefulnessHistoryScreen
+import com.joohnq.gratefulness.overview.presentation.GratefulnessOverviewScreen
 import com.joohnq.history.presentation.MoodHistoryScreen
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardScreen
@@ -26,7 +30,9 @@ import com.joohnq.stress_level.history.presentation.StressLevelHistoryScreen
 import com.joohnq.stress_level.overview.presentation.StressLevelOverviewScreen
 
 fun NavGraphBuilder.appNavigation(
+    snackBarState: SnackbarHostState,
     onNavigate: (Destination) -> Unit,
+    onReplace: (Destination) -> Unit,
     onNavigateBack: (Destination) -> Unit,
     onGoBack: () -> Unit,
 ) {
@@ -35,53 +41,41 @@ fun NavGraphBuilder.appNavigation(
             DashboardScreen(
                 onEvent = { event ->
                     when (event) {
-                        DashboardContract.Event.NavigateToAddSelfJournal -> {
+                        DashboardContract.Event.NavigateToAddSelfJournal ->
                             onNavigate(Destination.App.AddSelfJournal)
-                        }
 
-                        DashboardContract.Event.NavigateToAddSleepQuality -> {
+                        DashboardContract.Event.NavigateToAddSleepQuality ->
                             onNavigate(Destination.App.AddSleepQuality)
-                        }
 
-                        DashboardContract.Event.NavigateToAddMood -> {
+                        DashboardContract.Event.NavigateToAddMood ->
                             onNavigate(Destination.App.AddMood)
-                        }
 
-                        DashboardContract.Event.NavigateToAddStressLevel -> {
+                        DashboardContract.Event.NavigateToAddStressLevel ->
                             onNavigate(Destination.App.AddStressLevel)
-                        }
 
-                        DashboardContract.Event.NavigateToSelfJournalHistory -> {
-                            onNavigate(Destination.App.SelfJournalHistory)
-                        }
-
-                        is DashboardContract.Event.NavigateToEditSelfJournal -> {
-                            onNavigate(Destination.App.EditSelfJournal(event.id))
-                        }
-
-                        DashboardContract.Event.NavigateToFreudScore -> {
+                        DashboardContract.Event.NavigateToFreudScore ->
                             onNavigate(Destination.App.FreudScore)
-                        }
 
-                        DashboardContract.Event.NavigateToSelfJournal -> {
+                        DashboardContract.Event.NavigateToSelfJournalOverview ->
                             onNavigate(Destination.App.SelfJournalOverview)
-                        }
 
-                        DashboardContract.Event.NavigateToMoodOverview -> {
+                        DashboardContract.Event.NavigateToMoodOverview ->
                             onNavigate(Destination.App.MoodOverview)
-                        }
 
-                        DashboardContract.Event.NavigateToSleepQuality -> {
+                        DashboardContract.Event.NavigateToSleepQualityOverview ->
                             onNavigate(Destination.App.SleepQualityOverview)
-                        }
 
-                        DashboardContract.Event.NavigateToStressLevelOverview -> {
+                        DashboardContract.Event.NavigateToStressLevelOverview ->
                             onNavigate(Destination.App.StressLevelOverview)
-                        }
 
-                        is DashboardContract.Event.NavigateTo -> {
+                        is DashboardContract.Event.NavigateTo ->
                             onNavigate(event.destination)
-                        }
+
+                        DashboardContract.Event.NavigateToAddGratefulness ->
+                            onNavigate(Destination.App.AddGratefulness)
+
+                        DashboardContract.Event.NavigateToGratefulnessOverview ->
+                            onNavigate(Destination.App.GratefulnessOverview)
                     }
                 }
             )
@@ -145,6 +139,9 @@ fun NavGraphBuilder.appNavigation(
             StressLevelOverviewScreen(
                 onNavigateAddStressLevel = {
                     onNavigate(Destination.App.AddStressLevel)
+                },
+                navigateToStressLevelHistory = {
+                    onNavigate(Destination.App.StressLevelHistory)
                 },
                 onGoBack = {
                     onNavigateBack(Destination.App.DashBoard)
@@ -214,6 +211,32 @@ fun NavGraphBuilder.appNavigation(
                 onNavigateEditJournaling = { id ->
                     onNavigate(Destination.App.EditSelfJournal(id))
                 }
+            )
+        }
+        composable<Destination.App.GratefulnessOverview> {
+            GratefulnessOverviewScreen(
+                snackBarState = snackBarState,
+                goBack = onGoBack,
+                navigateToAddGratefulness = {
+                    onNavigate(Destination.App.AddGratefulness)
+                },
+                navigateToGratefulnessHistory = {
+                    onNavigate(Destination.App.GratefulnessHistory)
+                }
+            )
+        }
+        composable<Destination.App.AddGratefulness> {
+            GratefulnessAddScreen(
+                snackBarState = snackBarState,
+                goBack = onGoBack,
+                navigateToGratefulnessOverview = {
+                    onReplace(Destination.App.GratefulnessOverview)
+                }
+            )
+        }
+        composable<Destination.App.GratefulnessHistory> {
+            GratefulnessHistoryScreen(
+                onGoBack = onGoBack
             )
         }
     }

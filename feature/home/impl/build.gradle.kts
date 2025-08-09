@@ -30,6 +30,7 @@ kotlin {
 
             implementation(projects.feature.selfJournal.add)
             implementation(projects.feature.selfJournal.api)
+            implementation(projects.feature.selfJournal.edit)
             implementation(projects.feature.selfJournal.history)
             implementation(projects.feature.selfJournal.impl)
             implementation(projects.feature.selfJournal.overview)
@@ -42,6 +43,12 @@ kotlin {
             implementation(projects.feature.mood.history)
             implementation(projects.feature.mood.impl)
             implementation(projects.feature.mood.overview)
+
+            implementation(projects.feature.gratefulness.api)
+            implementation(projects.feature.gratefulness.add)
+            implementation(projects.feature.gratefulness.impl)
+            implementation(projects.feature.gratefulness.overview)
+            implementation(projects.feature.gratefulness.history)
 
             implementation(projects.sharedResources)
 

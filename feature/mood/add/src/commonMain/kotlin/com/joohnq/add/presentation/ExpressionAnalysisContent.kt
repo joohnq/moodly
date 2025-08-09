@@ -59,7 +59,7 @@ fun ExpressionAnalysisContent(
             VerticalSpacer(24.dp)
             Text(
                 text = stringResource(Res.string.expression_analysis_desc),
-                style = TextStyles.paragraphMd(),
+                style = TextStyles.paragraphMdMedium(),
                 color = Colors.Brown100Alpha64,
                 textAlign = TextAlign.Center
             )

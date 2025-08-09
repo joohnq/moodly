@@ -2,7 +2,6 @@ package com.joohnq.overview.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.NotFoundHorizontalLayout
 import com.joohnq.shared_resources.lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now
@@ -13,10 +12,11 @@ import com.joohnq.shared_resources.theme.Drawables
 @Composable
 fun MoodOverviewInsight(
     modifier: Modifier = Modifier,
-    items: List<MoodRecordResource>,
+    isEmpty: Boolean = false,
+    streakDays: Int,
     onCreate: () -> Unit = {},
 ) {
-    if (items.isEmpty()) {
+    if (isEmpty) {
         NotFoundHorizontalLayout(
             modifier = modifier,
             containerColor = Colors.Gray5,
@@ -28,7 +28,7 @@ fun MoodOverviewInsight(
     } else {
         MoodOverviewInsightContent(
             modifier = modifier,
-            items = items
+            streakDays = streakDays
         )
     }
 }

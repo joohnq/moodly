@@ -48,7 +48,7 @@ fun FirstContent(onNext: () -> Unit = {}) {
         VerticalSpacer(16.dp)
         Text(
             text = stringResource(Res.string.first_screen_desc),
-            style = TextStyles.paragraphLg(),
+            style = TextStyles.paragraphLgMedium(),
             color = Colors.Brown100Alpha64,
             textAlign = TextAlign.Center
         )

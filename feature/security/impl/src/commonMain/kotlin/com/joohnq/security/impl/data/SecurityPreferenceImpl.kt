@@ -21,52 +21,38 @@ class SecurityPreferenceImpl(
         private val SECURITY_KEY = stringPreferencesKey("SECURITY")
     }
 
-    override suspend fun update(security: Security): Result<Boolean> =
+    override suspend fun update(security: Security) {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    val string = Json.encodeToString(security)
-                    data[SECURITY_KEY] = string
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                val string = Json.encodeToString(security)
+                data[SECURITY_KEY] = string
             }
         }
+    }
 
-    override suspend fun get(): Result<Security> =
+    override suspend fun get(): Security =
         withContext(Dispatchers.IO) {
-            try {
-                val item =
-                    dataStore.data
-                        .map {
-                            it.toMutablePreferences().getUserSecurityDecoded()
-                        }.first()
-                Result.success(item)
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
+            dataStore.data
+                .map {
+                    it.toMutablePreferences().getUserSecurityDecoded()
+                }.first()
         }
 
-    override suspend fun initUserSecurity(): Result<Boolean> =
+    override suspend fun init() {
         withContext(Dispatchers.IO) {
-            try {
-                dataStore.edit { data ->
-                    val string = Json.encodeToString(Security.None)
-                    data[SECURITY_KEY] = string
-                }
-                Result.success(true)
-            } catch (e: Exception) {
-                Result.failure(e)
+            dataStore.edit { data ->
+                val string = Json.encodeToString(Security.None)
+                data[SECURITY_KEY] = string
             }
         }
+    }
 
-    private fun MutablePreferences.getUserSecurityDecoded(): Security {
-        val security = this[SECURITY_KEY] ?: return Security.None
-        return try {
+    private fun MutablePreferences.getUserSecurityDecoded(): Security =
+        try {
+            val security = this[SECURITY_KEY] ?: return Security.None
+
             Json.decodeFromString<Security>(security)
         } catch (_: Exception) {
             Security.Corrupted
         }
-    }
 }

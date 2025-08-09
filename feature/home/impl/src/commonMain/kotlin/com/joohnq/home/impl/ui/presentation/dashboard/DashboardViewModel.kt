@@ -2,6 +2,9 @@ package com.joohnq.home.impl.ui.presentation.dashboard
 
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.use_case.GetUserUseCase
+import com.joohnq.freud_score.impl.ui.mapper.FreudScoreResourceMapper.toResource
+import com.joohnq.gratefulness.api.mapper.GratefulnessMapper.getTodayItem
+import com.joohnq.gratefulness.api.use_case.GetGratefulnessUseCase
 import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.toResource
 import com.joohnq.mood.api.use_case.GetMoodsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
@@ -22,12 +25,23 @@ class DashboardViewModel(
     private val getSelfJournalsUseCase: GetSelfJournalsUseCase,
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
     private val getAllStressLevelUseCase: GetAllStressLevelUseCase,
+    private val getGratefulnessUseCase: GetGratefulnessUseCase,
     initialState: DashboardContract.State = DashboardContract.State(),
 ) : BaseViewModel<DashboardContract.State, DashboardContract.Intent, DashboardContract.SideEffect>(
         initialState = initialState
     ),
     DashboardContract.ViewModel {
-    override fun onIntent(intent: DashboardContract.Intent) {}
+    override fun onIntent(intent: DashboardContract.Intent) {
+        when (intent) {
+            DashboardContract.Intent.ToggleCentralExpanded -> {
+                updateState {
+                    it.copy(
+                        isCentralExpanded = !it.isCentralExpanded
+                    )
+                }
+            }
+        }
+    }
 
     init {
         observe()
@@ -50,10 +64,9 @@ class DashboardViewModel(
                 async {
                     getMoodsUseCase()
                         .onEach { items ->
-                            val resources = items.toResource()
                             updateState {
                                 it.copy(
-                                    moodItems = resources
+                                    moodItems = items.toResource()
                                 )
                             }
                         }.launchIn(viewModelScope)
@@ -61,10 +74,9 @@ class DashboardViewModel(
                 async {
                     getSelfJournalsUseCase()
                         .onEach { items ->
-                            val resources = items.toResource()
                             updateState {
                                 it.copy(
-                                    selfJournalItems = resources
+                                    selfJournalItems = items.toResource()
                                 )
                             }
                         }.launchIn(viewModelScope)
@@ -72,10 +84,9 @@ class DashboardViewModel(
                 async {
                     getSleepQualitiesUseCase()
                         .onEach { items ->
-                            val resources = items.toResource()
                             updateState {
                                 it.copy(
-                                    sleepQualityItems = resources
+                                    sleepQualityItems = items.toResource()
                                 )
                             }
                         }.launchIn(viewModelScope)
@@ -83,10 +94,20 @@ class DashboardViewModel(
                 async {
                     getAllStressLevelUseCase()
                         .onEach { items ->
-                            val resources = items.toResource()
                             updateState {
                                 it.copy(
-                                    stressLevelItems = resources
+                                    stressLevelItems = items.toResource()
+                                )
+                            }
+                        }
+                        .launchIn(viewModelScope)
+                }
+                async {
+                    getGratefulnessUseCase()
+                        .onEach { items ->
+                            updateState {
+                                it.copy(
+                                    gratefulnessToday = items.getTodayItem()
                                 )
                             }
                         }.launchIn(viewModelScope)

@@ -1,4 +1,4 @@
-package com.joohnq.user.impl.data.di
+package com.joohnq.user.impl.di
 
 import com.joohnq.user.impl.data.driver.UserDriverFactory
 import org.koin.core.module.Module

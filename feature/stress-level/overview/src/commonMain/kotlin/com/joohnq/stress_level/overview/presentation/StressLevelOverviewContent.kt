@@ -2,8 +2,10 @@ package com.joohnq.stress_level.overview.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.ConvexGroupLazyLayout
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
+import com.joohnq.shared_resources.stress_level
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.stress_level.impl.ui.component.StressLevelHistory
@@ -33,14 +35,14 @@ private fun SuccessView(
     onEvent: (StressLevelOverviewContract.Event) -> Unit,
     onIntent: (StressLevelOverviewContract.Intent) -> Unit,
 ) {
-    val hasToday = state.todayStressLevel != null
+    val palette = state.todayStressLevel?.stressLevel?.palette
 
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
-        isDark = !hasToday,
+        title = Res.string.stress_level,
         image = Drawables.Images.StressLevelBackground,
-        color = if (hasToday) state.todayStressLevel.stressLevel.palette.imageColor else Colors.Brown10,
-        panelBackgroundColor = if (hasToday) state.todayStressLevel.stressLevel.palette.color else Colors.Brown10,
+        color = palette?.imageColor ?: Colors.Brown5,
+        panelBackgroundColor = palette?.color ?: Colors.Brown5,
         panel = { modifier ->
             VerticalSpacer(10.dp)
             StressLevelOverviewPanel(
@@ -52,19 +54,20 @@ private fun SuccessView(
         body = { modifier ->
             StressLevelOverviewTriggers(
                 modifier = modifier,
-                items = state.items,
+                stressors = state.stressorsTriggers,
                 onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )
             StressLevelOverviewInsight(
                 modifier = modifier,
-                items = state.items,
+                stressors = state.stressorsInsight,
                 onCreate = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
             )
             StressLevelHistory(
                 modifier = modifier,
-                items = state.items.take(7),
+                items = state.historyItems,
                 onDelete = { id -> onIntent(StressLevelOverviewContract.Intent.Delete(id)) },
-                onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) }
+                onAddStressLevel = { onEvent(StressLevelOverviewContract.Event.NavigateToAddStressLevel) },
+                onSeeMore = { onEvent(StressLevelOverviewContract.Event.NavigateToStressLevelHistory) }
             )
         }
     )

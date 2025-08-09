@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface MoodRepository {
     fun observe(): Flow<List<MoodRecord>>
 
-    suspend fun add(record: MoodRecord): Result<Boolean>
+    suspend fun add(record: MoodRecord)
 
-    suspend fun delete(id: Int): Result<Boolean>
+    suspend fun delete(id: Int)
 }

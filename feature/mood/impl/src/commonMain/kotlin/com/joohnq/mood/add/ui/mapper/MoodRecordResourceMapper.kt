@@ -40,6 +40,11 @@ object MoodRecordResourceMapper {
         return streak
     }
 
+    fun List<MoodRecordResource>.getWeekStreak(): Int =
+        this
+            .getWeekRecords()
+            .getStreakDays()
+
     fun List<MoodRecordResource>.getMonthDaysRecordsString(): String {
         val now = getNow()
         val days =

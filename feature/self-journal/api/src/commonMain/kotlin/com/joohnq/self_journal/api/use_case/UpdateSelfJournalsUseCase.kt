@@ -6,5 +6,11 @@ import com.joohnq.self_journal.api.repository.SelfJournalRepository
 class UpdateSelfJournalsUseCase(
     private val repository: SelfJournalRepository,
 ) {
-    suspend operator fun invoke(selfJournal: SelfJournalRecord): Result<Boolean> = repository.update(selfJournal)
+    suspend operator fun invoke(selfJournal: SelfJournalRecord): Result<Unit> =
+        try {
+            repository.update(selfJournal)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

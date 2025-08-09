@@ -1,5 +1,6 @@
 package com.joohnq.self_journal.presentation
 
+import androidx.compose.ui.focus.FocusRequester
 import com.joohnq.self_journal.api.entity.SelfJournalRecord
 import com.joohnq.ui.UnidirectionalViewModel
 
@@ -16,6 +17,10 @@ sealed interface EditSelfJournalContract {
         data object ClearEditingState : Intent
 
         data object Action : Intent
+
+        data object FreeTitleFocus : Intent
+
+        data object FreeDescriptionFocus : Intent
 
         data class GetById(
             val id: Int,
@@ -55,5 +60,8 @@ sealed interface EditSelfJournalContract {
         val editingSelfJournalRecord: SelfJournalRecord = SelfJournalRecord(),
         val isEditing: Boolean = false,
         val openDeleteDialog: Boolean = false,
+        val canSave: Boolean = false,
+        val titleFocusRequest: FocusRequester = FocusRequester(),
+        val descriptionFocusRequest: FocusRequester = FocusRequester(),
     )
 }

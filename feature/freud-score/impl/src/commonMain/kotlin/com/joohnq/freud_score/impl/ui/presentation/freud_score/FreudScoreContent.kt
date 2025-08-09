@@ -38,9 +38,13 @@ fun FreudScoreContent(
     Scaffold(
         containerColor = Colors.Brown10
     ) { padding ->
-        Column(modifier = Modifier.padding(padding)) {
+        Column(
+            modifier =
+                Modifier
+                    .paddingHorizontalMedium()
+                    .padding(padding)
+        ) {
             AppTopBar(
-                modifier = Modifier.paddingHorizontalMedium(),
                 isDark = true,
                 text = Res.string.freud_score,
                 onGoBack = { onEvent(FreudScoreContract.Event.GoBack) }
@@ -69,7 +73,7 @@ fun FreudScoreContent(
                 VerticalSpacer(24.dp)
                 Text(
                     text = stringResource(state.freudScore.subtitle),
-                    style = TextStyles.paragraphLg(),
+                    style = TextStyles.paragraphLgMedium(),
                     color = Colors.Gray80,
                     textAlign = TextAlign.Center
                 )

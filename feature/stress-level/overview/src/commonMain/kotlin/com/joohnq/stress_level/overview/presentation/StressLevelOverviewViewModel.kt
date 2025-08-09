@@ -3,7 +3,6 @@ package com.joohnq.stress_level.overview.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
-import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.getTodayStressLevelRecord
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
@@ -34,11 +33,10 @@ class StressLevelOverviewViewModel(
 
         getAllStressLevelUseCase()
             .onEach { items ->
-                val resources = items.toResource()
                 updateState {
                     it.copy(
                         items = items.toResource(),
-                        todayStressLevel = resources.getTodayStressLevelRecord()
+                        isLoading = false
                     )
                 }
             }.catch { e ->

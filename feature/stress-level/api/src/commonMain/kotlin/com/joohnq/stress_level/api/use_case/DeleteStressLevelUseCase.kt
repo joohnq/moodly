@@ -5,5 +5,12 @@ import com.joohnq.stress_level.api.repository.StressLevelRepository
 class DeleteStressLevelUseCase(
     private val repository: StressLevelRepository,
 ) {
-    suspend operator fun invoke(id: Int): Result<Boolean> = repository.delete(id)
+    suspend operator fun invoke(id: Int): Result<Unit> =
+        try {
+            repository.delete(id)
+
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
 }

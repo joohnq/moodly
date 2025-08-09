@@ -2,7 +2,6 @@ package com.joohnq.self_journal.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.DisposableEffect
@@ -17,7 +16,8 @@ fun EditSelfJournalScreen(
     viewModel: EditSelfJournalViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 EditSelfJournalContract.SideEffect.GoBack ->
@@ -27,14 +27,6 @@ fun EditSelfJournalScreen(
                     launch { snackBarState.showSnackbar(sideEffect.message) }
             }
         }
-    val isDifferent by derivedStateOf {
-        state.editingSelfJournalRecord.title != state.currentSelfJournalRecord.title ||
-            state.editingSelfJournalRecord.description != state.currentSelfJournalRecord.description
-    }
-    val canSave by derivedStateOf {
-        isDifferent && state.editingSelfJournalRecord.title.isNotBlank() &&
-            state.editingSelfJournalRecord.description.isNotBlank()
-    }
 
     fun onEvent(event: EditSelfJournalContract.Event) {
         when (event) {
@@ -55,8 +47,7 @@ fun EditSelfJournalScreen(
     EditJournalingContent(
         snackBarState = snackBarState,
         state = state,
-        canSave = canSave,
-        onIntent = dispatch,
+        onIntent = onIntent,
         onEvent = ::onEvent
     )
 }

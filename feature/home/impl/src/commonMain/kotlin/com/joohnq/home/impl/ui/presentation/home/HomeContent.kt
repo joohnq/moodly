@@ -4,11 +4,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.joohnq.gratefulness.impl.ui.presentation.component.GratefulnessMetric
 import com.joohnq.home.impl.ui.components.HomeTopBar
 import com.joohnq.home.impl.ui.components.MoodMetric
 import com.joohnq.home.impl.ui.components.SelfJournalMetric
@@ -30,8 +32,8 @@ fun HomeContent(
         state.isError != null -> Unit
         else ->
             SuccessView(
-                padding = padding,
                 state = state,
+                padding = padding,
                 onEvent = onEvent
             )
     }
@@ -39,8 +41,8 @@ fun HomeContent(
 
 @Composable
 private fun SuccessView(
-    padding: PaddingValues = PaddingValues(0.dp),
     state: DashboardContract.State,
+    padding: PaddingValues,
     onEvent: (HomeEvent) -> Unit,
 ) {
     Column(
@@ -51,34 +53,37 @@ private fun SuccessView(
     ) {
         state.user?.let { user ->
             HomeTopBar(
-                modifier =
-                    Modifier
-                        .padding(top = padding.calculateTopPadding()),
+                modifier = Modifier.statusBarsPadding(),
                 user = user,
                 freudScore = state.freudScore?.score ?: 0,
-                onNavigateToFreudScore = { onEvent(HomeEvent.OnNavigateToFreudScore) }
+                onNavigateToFreudScore = { onEvent(HomeEvent.NavigateToFreudScore) }
             )
         }
         MoodMetric(
             items = state.moodItems,
-            onCreate = { onEvent(HomeEvent.OnNavigateToAddMood) },
-            onClick = { onEvent(HomeEvent.OnNavigateToMood) }
+            onCreate = { onEvent(HomeEvent.NavigateToAddMood) },
+            onClick = { onEvent(HomeEvent.NavigateToMoodOverview) }
         )
         SleepQualityMetric(
             items = state.sleepQualityItems,
-            onCreate = { onEvent(HomeEvent.OnNavigateToAddSleep) },
-            onClick = { onEvent(HomeEvent.OnNavigateToSleepQuality) }
+            onCreate = { onEvent(HomeEvent.NavigateToAddSleepQuality) },
+            onClick = { onEvent(HomeEvent.NavigateToSleepQualityOverview) }
         )
         StressLevelMetric(
             items = state.stressLevelItems,
-            onCreate = { onEvent(HomeEvent.OnNavigateToAddStressLevel) },
-            onClick = { onEvent(HomeEvent.OnNavigateToStressLevel) }
+            onCreate = { onEvent(HomeEvent.NavigateToAddStressLevel) },
+            onClick = { onEvent(HomeEvent.NavigateToStressLevelOverview) }
         )
         SelfJournalMetric(
             items = state.selfJournalItems,
-            onCreate = { onEvent(HomeEvent.OnNavigateToAddJournaling) },
-            onClick = { onEvent(HomeEvent.OnNavigateToSelfJournal) }
+            onCreate = { onEvent(HomeEvent.NavigateToAddSelfJournal) },
+            onClick = { onEvent(HomeEvent.NavigateToSelfJournalOverview) }
         )
-        VerticalSpacer(padding.calculateBottomPadding() + 10.dp)
+        GratefulnessMetric(
+            resource = state.gratefulnessToday,
+            onCreate = { onEvent(HomeEvent.OnNavigateToAddGratefulness) },
+            onClick = { onEvent(HomeEvent.NavigateToGratefulnessOverview) }
+        )
+        VerticalSpacer(padding.calculateBottomPadding())
     }
 }

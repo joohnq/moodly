@@ -1,6 +1,7 @@
 package com.joohnq.home.impl.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
@@ -24,6 +28,7 @@ import com.joohnq.api.entity.User
 import com.joohnq.api.getNow
 import com.joohnq.api.mapper.LocalDateMapper.toFormattedDateString
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.click_to_see_your_score
 import com.joohnq.shared_resources.components.image.CacheImage
 import com.joohnq.shared_resources.components.image.ProfileImage
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
@@ -44,8 +49,9 @@ fun HomeTopBar(
     onNavigateToFreudScore: () -> Unit = {},
 ) {
     val avatars = rememberAvatars()
+
     Card(
-        onClick = { onNavigateToFreudScore() },
+        onClick = onNavigateToFreudScore,
         colors =
             CardColors(
                 containerColor = Colors.Brown60,
@@ -102,7 +108,19 @@ fun HomeTopBar(
                         Modifier
                             .size(64.dp)
                             .clip(Dimens.Shape.Circle)
-                            .background(color = Colors.Brown70),
+                            .background(color = Colors.Brown70)
+                            .border(
+                                width = 1.dp,
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                       Colors.Brown80,
+                                        Colors.Brown60
+                                    ),
+                                    start = Offset(0f, 0f),
+                                    end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+                                ),
+                                shape = Dimens.Shape.Circle
+                            ),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -117,8 +135,14 @@ fun HomeTopBar(
                 ) {
                     Text(
                         text = stringResource(Res.string.greeting, user.name),
-                        style = TextStyles.textXlBold(),
+                        style = TextStyles.text2xlBold(),
                         color = Colors.White
+                    )
+                    VerticalSpacer(5.dp)
+                    Text(
+                        text = stringResource(Res.string.click_to_see_your_score),
+                        style = TextStyles.textXsBold(),
+                        color = Colors.Brown5
                     )
                 }
                 Icon(

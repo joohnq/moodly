@@ -32,9 +32,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun NotFoundVerticalLayout(
     modifier: Modifier = Modifier,
-    containerColor: Color,
     title: StringResource,
-    subtitle: StringResource,
+    containerColor: Color = Colors.Gray5,
+    actionText: StringResource,
     image: DrawableResource,
     onClick: () -> Unit,
 ) {
@@ -81,9 +81,86 @@ fun NotFoundVerticalLayout(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(subtitle),
+                    text = stringResource(actionText),
                     style = TextStyles.textMdSemiBold(),
-                    color = Colors.Brown60
+                    color = Colors.Brown60,
+                    textAlign = TextAlign.Center
+                )
+                Icon(
+                    painter = painterResource(Drawables.Icons.Outlined.Arrow),
+                    contentDescription = null,
+                    tint = Colors.Brown60,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun NotFoundVerticalLayout(
+    modifier: Modifier = Modifier,
+    title: StringResource,
+    containerColor: Color = Colors.Gray5,
+    subtitle: StringResource,
+    actionText: StringResource,
+    image: DrawableResource,
+    onClick: () -> Unit,
+) {
+    Card(
+        colors =
+            CardColors(
+                containerColor = containerColor,
+                contentColor = Colors.Brown80,
+                disabledContainerColor = containerColor,
+                disabledContentColor = Colors.Brown80
+            ),
+        shape = Dimens.Shape.Large,
+        modifier = modifier.fillMaxWidth(),
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier.paddingAllSmall(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(image),
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth()
+            )
+            VerticalSpacer(16.dp)
+            Text(
+                text = stringResource(title),
+                style = TextStyles.textMdBold(),
+                color = Colors.Gray60,
+                textAlign = TextAlign.Center
+            )
+            VerticalSpacer(16.dp)
+            Text(
+                text = stringResource(subtitle),
+                style = TextStyles.paragraphSm(),
+                color = Colors.Gray60,
+                textAlign = TextAlign.Center
+            )
+            VerticalSpacer(16.dp)
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                color = Colors.Gray20
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                horizontalArrangement =
+                    Arrangement.spacedBy(
+                        10.dp,
+                        alignment = Alignment.CenterHorizontally
+                    ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(actionText),
+                    style = TextStyles.textMdSemiBold(),
+                    color = Colors.Brown60,
+                    textAlign = TextAlign.Center
                 )
                 Icon(
                     painter = painterResource(Drawables.Icons.Outlined.Arrow),

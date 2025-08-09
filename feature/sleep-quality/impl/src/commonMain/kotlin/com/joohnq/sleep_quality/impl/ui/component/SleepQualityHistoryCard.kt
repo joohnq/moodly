@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.api.mapper.LocalDateMapper.toAbbreviatedMonthName
 import com.joohnq.api.mapper.TimeMapper.calculateDuration
 import com.joohnq.api.mapper.TimeMapper.toHoursAndMinutesString
-import com.joohnq.mood.add.ui.components.MoodFace
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.layout.CardWithMoreMenuLayout
 import com.joohnq.shared_resources.components.spacer.HorizontalSpacer
@@ -86,27 +84,27 @@ fun SleepQualityHistoryCard(
                         style = TextStyles.textMdBold(),
                         color = Colors.Brown80
                     )
-                    Row(
-                        modifier =
-                            Modifier
-                                .background(
-                                    color = resource.palette.color,
-                                    shape = Dimens.Shape.Circle
-                                ).padding(horizontal = 7.dp, vertical = 4.dp),
-                        horizontalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        MoodFace(
-                            modifier = Modifier.size(16.dp),
-                            resource = resource,
-                            backgroundColor = Colors.White,
-                            color = resource.palette.color
-                        )
-                        Text(
-                            text = stringResource(resource.text),
-                            style = TextStyles.textSmBold(),
-                            color = Colors.White
-                        )
-                    }
+//                    Row(
+//                        modifier =
+//                            Modifier
+//                                .background(
+//                                    color = resource.palette.color,
+//                                    shape = Dimens.Shape.Circle
+//                                ).padding(horizontal = 7.dp, vertical = 4.dp),
+//                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+//                    ) {
+//                        MoodFace(
+//                            modifier = Modifier.size(16.dp),
+//                            resource = resource,
+//                            backgroundColor = Colors.White,
+//                            color = resource.palette.color
+//                        )
+//                        Text(
+//                            text = stringResource(resource.text),
+//                            style = TextStyles.textSmBold(),
+//                            color = Colors.White
+//                        )
+//                    }
                 }
                 Text(
                     text =

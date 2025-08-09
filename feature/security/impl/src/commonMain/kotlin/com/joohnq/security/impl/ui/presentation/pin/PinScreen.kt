@@ -18,7 +18,7 @@ fun PinScreen(
     val focusManager = LocalFocusManager.current
     val keyboardManager = LocalSoftwareKeyboardController.current
 
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 PinContract.SideEffect.NavigateNext -> navigateNext()
@@ -41,7 +41,7 @@ fun PinScreen(
         snackBarState = snackBarState,
         onEvent = ::onEvent,
         state = state,
-        onIntent = dispatch,
+        onIntent = onIntent,
         focusManager = focusManager,
         keyboardManager = keyboardManager
     )

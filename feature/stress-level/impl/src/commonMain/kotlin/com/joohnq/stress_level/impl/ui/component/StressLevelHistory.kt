@@ -21,12 +21,14 @@ fun StressLevelHistory(
     items: List<StressLevelRecordResource>,
     onDelete: (Int) -> Unit = {},
     onAddStressLevel: () -> Unit = {},
+    onSeeMore: () -> Unit = {},
 ) {
     SectionHeader(
         modifier = modifier,
         title = Res.string.stress_history,
-        onSeeMore = {}
+        onSeeMore = onSeeMore
     )
+
     if (items.isEmpty()) {
         NotFoundHorizontalLayout(
             modifier = modifier,
@@ -37,7 +39,10 @@ fun StressLevelHistory(
             onClick = onAddStressLevel
         )
     } else {
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
             items.forEach { record ->
                 StressLevelHistoryCard(
                     item = record,

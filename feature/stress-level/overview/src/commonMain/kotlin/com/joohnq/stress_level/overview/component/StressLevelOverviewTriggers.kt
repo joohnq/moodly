@@ -10,16 +10,14 @@ import com.joohnq.shared_resources.stress_trigger
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.you_dont_have_enough_sleep_records_yet
-import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
+import com.joohnq.stress_level.impl.ui.resource.StressorResource
 
 @Composable
 fun StressLevelOverviewTriggers(
     modifier: Modifier = Modifier,
-    items: List<StressLevelRecordResource>,
+    stressors: List<StressorResource>,
     onAddStressLevel: () -> Unit = {},
 ) {
-    val stressors = items.flatMap { it.stressors }
-
     SectionHeader(
         modifier = modifier,
         title = Res.string.stress_trigger

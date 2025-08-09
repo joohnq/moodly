@@ -4,13 +4,9 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.joohnq.api.mapper.StringMapper.toTime
 import com.joohnq.api.mapper.TimeMapper.toFormattedTimeString
-import com.joohnq.database.SqliteOperationResult
 import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.database.executeTryCatchResult
-import com.joohnq.database.sqliteExceptionMapper
 import com.joohnq.sleep_quality.api.converter.SleepQualityRecordConverter
 import com.joohnq.sleep_quality.api.entity.SleepQualityRecord
-import com.joohnq.sleep_quality.api.exception.SleepQualityException
 import com.joohnq.sleep_quality.api.repository.SleepQualityRepository
 import com.joohnq.sleep_quality.database.SleepQualityDatabaseSql
 import kotlinx.coroutines.Dispatchers
@@ -37,28 +33,20 @@ class SleepQualityRepositoryImpl(
             }.asFlow()
             .mapToList(Dispatchers.IO)
 
-    override suspend fun add(record: SleepQualityRecord): Result<Boolean> =
+    override suspend fun add(record: SleepQualityRecord) {
         withContext(Dispatchers.IO) {
-            try {
-                query.addSleepQuality(
-                    sleepQuality = SleepQualityRecordConverter.fromSleepQuality(record.sleepQuality),
-                    startSleeping = record.startSleeping.toFormattedTimeString(),
-                    endSleeping = record.endSleeping.toFormattedTimeString(),
-                    sleepInfluencess = SleepQualityRecordConverter.fromInfluences(record.sleepInfluences)
-                )
-                Result.success(true)
-            } catch (e: Exception) {
-                val res = sqliteExceptionMapper.map(e)
-                when (res.opResult) {
-                    SqliteOperationResult.CONSTRAINT -> Result.failure(SleepQualityException.AlreadyBeenAddedToday)
-                    else -> Result.failure(Exception(res.cause))
-                }
-            }
+            query.addSleepQuality(
+                sleepQuality = SleepQualityRecordConverter.fromSleepQuality(record.sleepQuality),
+                startSleeping = record.startSleeping.toFormattedTimeString(),
+                endSleeping = record.endSleeping.toFormattedTimeString(),
+                sleepInfluencess = SleepQualityRecordConverter.fromInfluences(record.sleepInfluences)
+            )
         }
+    }
 
-    override suspend fun delete(id: Int): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun delete(id: Int) {
+        withContext(Dispatchers.IO) {
             query.deleteSleepQuality(id = id.toLong())
-            true
         }
+    }
 }

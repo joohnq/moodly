@@ -75,7 +75,7 @@ fun PinContent(
                 VerticalSpacer(12.dp)
                 Text(
                     text = stringResource(Res.string.scan_with_your_device_security),
-                    style = TextStyles.paragraphMd(),
+                    style = TextStyles.paragraphMdMedium(),
                     color = Colors.Brown100Alpha64,
                     textAlign = TextAlign.Center
                 )

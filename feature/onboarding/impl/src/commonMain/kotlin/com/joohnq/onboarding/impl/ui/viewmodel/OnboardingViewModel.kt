@@ -15,9 +15,12 @@ import com.joohnq.ui.BaseViewModel
 import com.joohnq.user.impl.ui.mapper.MedicationsSupplementsResourceMapper.toDomain
 import com.joohnq.user.impl.ui.mapper.PhysicalSymptomsResourceMapper.toDomain
 import com.joohnq.user.impl.ui.mapper.ProfessionalHelpResourceMapper.toDomain
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OnboardingViewModel(
     private val addMoodUseCase: AddMoodUseCase,
@@ -63,25 +66,42 @@ class OnboardingViewModel(
     }
 
     private fun addItems() {
-        viewModelScope.launch {
-            val state = state.value
+        updateState { it.copy(isLoading = true) }
 
-            if (state.physicalSymptoms == null || state.soughtHelp == null || state.medicationsSupplements == null) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val (
+                physicalSymptoms,
+                soughtHelp,
+                medicationsSupplements,
+                moodRecord,
+                sleepQuality,
+                stressLevel,
+                _,
+            ) = state.value
+
+            if (
+                physicalSymptoms == null ||
+                soughtHelp == null ||
+                medicationsSupplements == null
+            ) {
                 error("Missing fields")
             }
 
             try {
                 listOf(
-                    async { addMoodUseCase(state.moodRecord.toDomain()).getOrThrow() },
-                    async { addSleepQualityUseCase(state.sleepQuality.toDomain()).getOrThrow() },
-                    async { addStressLevelUseCase(state.stressLevel.toDomain()).getOrThrow() },
-                    async { updatePhysicalSymptomsUseCase(state.physicalSymptoms.toDomain()).getOrThrow() },
-                    async { updateSoughtHelpUseCase(state.soughtHelp.toDomain()).getOrThrow() },
-                    async { updateMedicationsSupplementsUseCase(state.medicationsSupplements.toDomain()).getOrThrow() }
+                    async { addMoodUseCase(moodRecord.toDomain()).getOrThrow() },
+                    async { addSleepQualityUseCase(sleepQuality.toDomain()).getOrThrow() },
+                    async { addStressLevelUseCase(stressLevel.toDomain()).getOrThrow() },
+                    async { updatePhysicalSymptomsUseCase(physicalSymptoms.toDomain()).getOrThrow() },
+                    async { updateSoughtHelpUseCase(soughtHelp.toDomain()).getOrThrow() },
+                    async { updateMedicationsSupplementsUseCase(medicationsSupplements.toDomain()).getOrThrow() }
                 ).awaitAll()
 
                 updateSkipOnboardingUseCase(true).getOrThrow()
-                emitEffect(OnboardingContract.SideEffect.NavigateNext)
+                withContext(Dispatchers.Main) {
+                    emitEffect(OnboardingContract.SideEffect.NavigateNext)
+                    updateState { it.copy(isLoading = false) }
+                }
             } catch (e: Exception) {
                 emitEffect(OnboardingContract.SideEffect.ShowError(e.message.toString()))
             }

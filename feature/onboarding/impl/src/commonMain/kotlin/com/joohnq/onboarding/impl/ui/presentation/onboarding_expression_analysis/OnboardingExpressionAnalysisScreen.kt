@@ -17,7 +17,7 @@ fun OnboardingExpressionAnalysisScreen(
     viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
     val snackBarState = rememberSnackBarState()
-    val (state, dispatch) =
+    val (state, onIntent) =
         viewModel.observe { sideEffect ->
             when (sideEffect) {
                 OnboardingContract.SideEffect.NavigateNext -> navigateNext()
@@ -41,7 +41,7 @@ fun OnboardingExpressionAnalysisScreen(
     OnboardingExpressionAnalysisContent(
         description = state.moodRecord.description,
         snackBarState = snackBarState,
-        onIntent = dispatch,
+        onIntent = onIntent,
         onEvent = ::onEvent
     )
 }

@@ -33,10 +33,9 @@ class SelfJournalOverviewViewModel(
 
         getSelfJournalsUseCase()
             .onEach { items ->
-                val resources = items.toResource()
                 updateState {
                     it.copy(
-                        items = resources,
+                        items = items.toResource(),
                         isLoading = false
                     )
                 }

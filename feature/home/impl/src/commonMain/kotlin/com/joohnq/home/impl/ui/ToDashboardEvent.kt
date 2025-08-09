@@ -5,14 +5,15 @@ import com.joohnq.home.impl.ui.presentation.home.event.HomeEvent
 
 fun HomeEvent.toDashboardEvent(): DashboardContract.Event =
     when (this) {
-        HomeEvent.OnNavigateToAddJournaling -> DashboardContract.Event.NavigateToAddSelfJournal
-        HomeEvent.OnNavigateToAddSleep -> DashboardContract.Event.NavigateToAddSleepQuality
-        HomeEvent.OnNavigateToAddMood -> DashboardContract.Event.NavigateToAddMood
-        HomeEvent.OnNavigateToAddStressLevel -> DashboardContract.Event.NavigateToAddStressLevel
-        HomeEvent.OnNavigateToSelfJournalHistory -> DashboardContract.Event.NavigateToSelfJournalHistory
-        HomeEvent.OnNavigateToFreudScore -> DashboardContract.Event.NavigateToFreudScore
-        HomeEvent.OnNavigateToSelfJournal -> DashboardContract.Event.NavigateToSelfJournal
-        HomeEvent.OnNavigateToMood -> DashboardContract.Event.NavigateToMoodOverview
-        HomeEvent.OnNavigateToSleepQuality -> DashboardContract.Event.NavigateToSleepQuality
-        HomeEvent.OnNavigateToStressLevel -> DashboardContract.Event.NavigateToStressLevelOverview
+        HomeEvent.NavigateToAddSelfJournal -> DashboardContract.Event.NavigateToAddSelfJournal
+        HomeEvent.NavigateToAddSleepQuality -> DashboardContract.Event.NavigateToAddSleepQuality
+        HomeEvent.NavigateToAddMood -> DashboardContract.Event.NavigateToAddMood
+        HomeEvent.NavigateToAddStressLevel -> DashboardContract.Event.NavigateToAddStressLevel
+        HomeEvent.NavigateToFreudScore -> DashboardContract.Event.NavigateToFreudScore
+        HomeEvent.NavigateToSelfJournalOverview -> DashboardContract.Event.NavigateToSelfJournalOverview
+        HomeEvent.NavigateToMoodOverview -> DashboardContract.Event.NavigateToMoodOverview
+        HomeEvent.NavigateToSleepQualityOverview -> DashboardContract.Event.NavigateToSleepQualityOverview
+        HomeEvent.NavigateToStressLevelOverview -> DashboardContract.Event.NavigateToStressLevelOverview
+        HomeEvent.OnNavigateToAddGratefulness -> DashboardContract.Event.NavigateToAddGratefulness
+        HomeEvent.NavigateToGratefulnessOverview -> DashboardContract.Event.NavigateToGratefulnessOverview
     }

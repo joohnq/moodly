@@ -111,6 +111,15 @@ sealed interface Destination {
         data object SelfJournalHistory : Destination
 
         @Serializable
+        data object GratefulnessOverview : Destination
+
+        @Serializable
+        data object AddGratefulness : Destination
+
+        @Serializable
+        data object GratefulnessHistory : Destination
+
+        @Serializable
         data class EditSelfJournal(
             val id: Int,
         ) : Destination

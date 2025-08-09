@@ -17,11 +17,10 @@ fun MoodOverviewHorizontalCalendar(
         modifier = Modifier.fillMaxWidth(),
         state = calendarState,
         dayContent = { day ->
-            val itemInDay = items.filter { it.createdAt.date == day.date }
-            val item = itemInDay.firstOrNull()
+            val itemInDay = items.firstOrNull { it.createdAt.date == day.date }
 
             MoodOverviewDay(
-                item = item,
+                item = itemInDay,
                 day = day
             )
         },

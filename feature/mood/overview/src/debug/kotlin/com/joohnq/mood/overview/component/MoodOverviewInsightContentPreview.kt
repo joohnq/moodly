@@ -1,6 +1,7 @@
 package com.joohnq.mood.overview.component
 
 import androidx.compose.runtime.Composable
+import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.getWeekStreak
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.mood.impl.ui.parameter.ListMoodRecordResourceParameterProvider
 import com.joohnq.overview.component.MoodOverviewInsightContent
@@ -14,6 +15,6 @@ private fun Preview(
     list: List<MoodRecordResource>,
 ) {
     MoodOverviewInsightContent(
-        items = list
+        streakDays = list.getWeekStreak()
     )
 }

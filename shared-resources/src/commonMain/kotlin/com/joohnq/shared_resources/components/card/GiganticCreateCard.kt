@@ -15,6 +15,7 @@ import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add
@@ -30,6 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun GiganticCreateCard(
     modifier: Modifier = Modifier,
+    containerColor: Color = Colors.Gray5,
     title: String,
     subtitle: String,
     onCreate: () -> Unit,
@@ -38,9 +40,9 @@ fun GiganticCreateCard(
     Card(
         colors =
             CardColors(
-                containerColor = Colors.Gray5,
+                containerColor = containerColor,
                 contentColor = Colors.Brown80,
-                disabledContainerColor = Colors.Gray5,
+                disabledContainerColor = containerColor,
                 disabledContentColor = Colors.Brown80
             ),
         shape = Dimens.Shape.Large,

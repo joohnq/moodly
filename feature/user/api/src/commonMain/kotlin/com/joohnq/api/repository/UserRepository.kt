@@ -10,20 +10,20 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
     fun observe(): Flow<User?>
 
-    suspend fun addUser(user: User): Result<Boolean>
+    suspend fun add(user: User)
 
-    suspend fun updateUser(user: User): Result<Boolean>
+    suspend fun update(user: User)
 
-    suspend fun updateUserName(name: String): Result<Boolean>
+    suspend fun updateUserName(name: String)
 
     suspend fun updateUserImage(
         image: String,
         imageType: ImageType,
-    ): Result<Boolean>
+    )
 
-    suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp): Result<Boolean>
+    suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp)
 
-    suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms): Result<Boolean>
+    suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms)
 
-    suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements): Result<Boolean>
+    suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements)
 }

@@ -3,7 +3,6 @@ package com.joohnq.stress_level.impl.data.repository
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.database.executeTryCatchResult
 import com.joohnq.stress_level.api.converter.StressLevelRecordConverter
 import com.joohnq.stress_level.api.converter.StressorsConverter
 import com.joohnq.stress_level.api.entity.StressLevelRecord
@@ -12,6 +11,7 @@ import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class StressLevelRepositoryImpl(
     private val database: StressLevelDatabaseSql,
@@ -30,18 +30,18 @@ class StressLevelRepositoryImpl(
             }.asFlow()
             .mapToList(Dispatchers.IO)
 
-    override suspend fun add(stressLevelRecord: StressLevelRecord): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun add(stressLevelRecord: StressLevelRecord) {
+        withContext(Dispatchers.IO) {
             query.addStressLevel(
                 stressLevel = StressLevelRecordConverter.fromStressLevel(stressLevelRecord.stressLevel),
                 stressors = StressorsConverter.fromStressorsList(stressLevelRecord.stressors)
             )
-            true
         }
+    }
 
-    override suspend fun delete(id: Int): Result<Boolean> =
-        executeTryCatchResult {
+    override suspend fun delete(id: Int) {
+        withContext(Dispatchers.IO) {
             query.deleteRecord(id = id.toLong())
-            true
         }
+    }
 }

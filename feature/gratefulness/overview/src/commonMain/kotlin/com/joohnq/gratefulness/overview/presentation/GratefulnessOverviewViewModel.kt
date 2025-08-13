@@ -45,7 +45,7 @@ class GratefulnessOverviewViewModel(
         updateState { it.copy(isLoading = true) }
         getGratefulnessUseCase()
             .onEach { items ->
-                updateState { it ->
+                updateState {
                     it.copy(
                         items = items,
                         isLoading = false
@@ -78,7 +78,11 @@ class GratefulnessOverviewViewModel(
     private fun getSelectedGratefulness() {
         updateState {
             it.copy(
-                selectedGratefulness = state.value.items.lastOrNull { item -> item.createdAt.date == state.value.selectedDate }
+                selectedGratefulness =
+                    state.value.items
+                        .lastOrNull { item ->
+                            item.createdAt.date == state.value.selectedDate
+                        }
             )
         }
     }

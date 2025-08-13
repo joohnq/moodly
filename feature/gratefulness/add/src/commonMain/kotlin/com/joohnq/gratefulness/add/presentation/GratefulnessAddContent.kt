@@ -3,20 +3,16 @@ package com.joohnq.gratefulness.add.presentation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.joohnq.gratefulness.add.presentation.component.GratefulnessTextField
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.add
 import com.joohnq.shared_resources.add_gratefulness
@@ -30,13 +26,9 @@ import com.joohnq.shared_resources.small_thing_i_appreciate
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
-import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.shared_resources.today_i_am_grateful_for
 import com.joohnq.shared_resources.today_i_am_thankful_for
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun GratefulnessAddContent(
@@ -119,60 +111,4 @@ private fun SuccessView(
             VerticalSpacer(40.dp)
         }
     }
-}
-
-@Composable
-fun GratefulnessTextField(
-    label: StringResource,
-    value: String,
-    placeholder: StringResource,
-    onValueChange: (String) -> Unit,
-) {
-    Text(
-        text = stringResource(label),
-        style = TextStyles.textMdMedium(),
-        color = Colors.Gray60,
-        textAlign = TextAlign.Center
-    )
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(placeholder),
-                style = TextStyles.headingXsMedium(),
-                textAlign = TextAlign.Center
-            )
-        },
-        singleLine = false,
-        textStyle =
-            TextStyles
-                .headingXsBold()
-                .copy(
-                    textAlign = TextAlign.Center
-                ),
-        colors =
-            TextFieldDefaults.colors(
-                focusedTextColor = Colors.Gray80,
-                unfocusedTextColor = Colors.Gray80,
-                focusedIndicatorColor = Colors.Transparent,
-                unfocusedIndicatorColor = Colors.Transparent,
-                focusedContainerColor = Colors.Transparent,
-                unfocusedContainerColor = Colors.Transparent,
-                cursorColor = Colors.Green40,
-                focusedPlaceholderColor = Colors.Gray60,
-                unfocusedPlaceholderColor = Colors.Gray60
-            )
-    )
-}
-
-@Composable
-@Preview
-private fun Preview() {
-    GratefulnessAddContent(
-        state =
-            GratefulnessAddContract.State()
-    )
 }

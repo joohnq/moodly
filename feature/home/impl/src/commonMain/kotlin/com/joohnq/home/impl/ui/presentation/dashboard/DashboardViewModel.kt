@@ -99,8 +99,7 @@ class DashboardViewModel(
                                     stressLevelItems = items.toResource()
                                 )
                             }
-                        }
-                        .launchIn(viewModelScope)
+                        }.launchIn(viewModelScope)
                 }
                 async {
                     getGratefulnessUseCase()

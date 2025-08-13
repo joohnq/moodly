@@ -33,15 +33,16 @@ private fun SuccessView(
     onEvent: (SleepQualityOverviewContract.Event) -> Unit,
     onIntent: (SleepQualityOverviewContract.Intent) -> Unit,
 ) {
-    val hasToday = state.todaySleepQuality != null
     val palette = state.todaySleepQuality?.sleepQuality?.palette
 
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
         title = Res.string.sleep_quality,
+        isDark = state.todaySleepQuality == null,
         image = Drawables.Images.SleepQualityBackground,
-        color = palette
-            ?.imageColor ?: Colors.Brown10,
+        color =
+            palette
+                ?.imageColor ?: Colors.Brown10,
         panelBackgroundColor =
             palette
                 ?.color ?: Colors.Brown10,

@@ -5,8 +5,8 @@ android-compileSdk = "35"
 android-minSdk = "26"
 android-packageName = "com.joohnq.moodapp"
 android-targetSdk = "35"
-android-versionCode = "5"
-android-versionName = "1.0.1"
+android-versionCode = "47"
+android-versionName = "1.2.0"
 
 # Accompanist
 accompanistPermissions = "0.37.3"

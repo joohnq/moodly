@@ -73,11 +73,17 @@ jobs:
       - name: Setup Authorization with Google Play Store
         run: echo '${{ secrets.PLAY_AUTH_JSON }}' > service_account.json
 
+      - name: Get Version Code from AppConfig
+        id: get_version
+        run: |
+          VERSION_CODE=$(./gradlew -q printVersionCode)
+          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
+
       - name: Deploy bundle to Google Play
         uses: r0adkll/upload-google-play@v1.1.3
         with:
           serviceAccountJson: service_account.json
           packageName: com.joohnq.moodapp
-          releaseFiles: composeApp/build/outputs/bundle/release/Moodly-v${{ github.run_number }}-release.aab
+          releaseFiles: composeApp/build/outputs/bundle/release/Moodly-v${{ env.VERSION_CODE }}-release.aab
           track: 'internal'
           status: 'completed'

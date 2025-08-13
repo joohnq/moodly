@@ -36,21 +36,11 @@ class AppAndroidSettings : AndroidSettings<BaseAppModuleExtension>() {
             release {
                 isMinifyEnabled = true
                 isShrinkResources = true
-                signingConfig = signingConfigs.getByName("debug")
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
                 )
                 ndk.debugSymbolLevel = "FULL"
-            }
-            debug {
-                isMinifyEnabled = false
-                isShrinkResources = false
-                signingConfig = signingConfigs.getByName("debug")
-                proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-                )
             }
         }
     }
@@ -60,6 +50,11 @@ class AppAndroidSettings : AndroidSettings<BaseAppModuleExtension>() {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
             res.srcDirs("src/androidMain/res")
             resources.srcDirs("src/commonMain/resources")
+        }
+        sourceSets.findByName("androidDebug")?.apply {
+            java.srcDir("src/androidDebug/java")
+            res.srcDir("src/androidDebug/res")
+            manifest.srcFile("src/androidDebug/AndroidManifest.xml")
         }
     }
 }

@@ -23,6 +23,7 @@ actual class SecurityAuthenticationImpl(
     private val _securityResult = Channel<SecurityResult>()
     val securityResult = _securityResult.receiveAsFlow()
 
+    @Suppress("MaxLineLength")
     @RequiresApi(Build.VERSION_CODES.R)
     actual override fun isDeviceHasBiometric(): Boolean {
         val manager = BiometricManager.from(activity)

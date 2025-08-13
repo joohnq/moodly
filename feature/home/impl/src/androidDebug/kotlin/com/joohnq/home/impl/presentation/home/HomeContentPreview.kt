@@ -3,7 +3,6 @@ package com.joohnq.home.impl.presentation.home
 import androidx.compose.runtime.Composable
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.User
-import com.joohnq.freud_score.impl.ui.resource.FreudScoreResource
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.home.impl.ui.presentation.home.HomeContent
 import com.joohnq.mood.add.ui.resource.MoodRecordResource

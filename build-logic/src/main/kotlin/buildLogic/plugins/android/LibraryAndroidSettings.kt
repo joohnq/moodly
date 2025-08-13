@@ -31,6 +31,11 @@ class LibraryAndroidSettings : AndroidSettings<LibraryExtension>() {
             release {
                 isMinifyEnabled = false
             }
+            sourceSets.findByName("androidDebug")?.apply {
+                java.srcDir("src/androidDebug/java")
+                res.srcDir("src/androidDebug/res")
+                manifest.srcFile("src/androidDebug/AndroidManifest.xml")
+            }
         }
     }
 }

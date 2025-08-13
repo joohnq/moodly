@@ -187,7 +187,7 @@ fun NavGraphBuilder.appNavigation(
             AddSleepQualityScreen(
                 onGoBack = onGoBack,
                 onNavigateToSleepQuality = {
-                    onNavigate(Destination.App.SleepQualityOverview)
+                    onReplace(Destination.App.SleepQualityOverview)
                 }
             )
         }

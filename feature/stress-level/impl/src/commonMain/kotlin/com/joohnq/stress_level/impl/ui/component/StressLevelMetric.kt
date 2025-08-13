@@ -37,7 +37,7 @@ fun StressLevelMetric(
             modifier = Modifier.paddingHorizontalMedium(),
             containerColor = Colors.White,
             title = Res.string.lets_set_up_daily_stress_level,
-            subtitle = Res.string.add_new_journal,
+            actionText = Res.string.add_new_journal,
             image = Drawables.Images.StressLevelHistory,
             onClick = onCreate
         )

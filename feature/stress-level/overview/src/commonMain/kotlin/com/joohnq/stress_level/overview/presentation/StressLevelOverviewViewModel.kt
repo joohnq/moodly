@@ -4,6 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
+import com.joohnq.stress_level.overview.presentation.StressLevelOverviewContract.Intent
+import com.joohnq.stress_level.overview.presentation.StressLevelOverviewContract.SideEffect
+import com.joohnq.stress_level.overview.presentation.StressLevelOverviewContract.State
+import com.joohnq.stress_level.overview.presentation.StressLevelOverviewContract.ViewModel
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -13,14 +17,14 @@ import kotlinx.coroutines.launch
 class StressLevelOverviewViewModel(
     private val getAllStressLevelUseCase: GetAllStressLevelUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
-    initialState: StressLevelOverviewContract.State = StressLevelOverviewContract.State(),
-) : BaseViewModel<StressLevelOverviewContract.State, StressLevelOverviewContract.Intent, StressLevelOverviewContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    StressLevelOverviewContract.ViewModel {
-    override fun onIntent(intent: StressLevelOverviewContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is StressLevelOverviewContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -40,7 +44,7 @@ class StressLevelOverviewViewModel(
                     )
                 }
             }.catch { e ->
-                emitEffect(StressLevelOverviewContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }.launchIn(viewModelScope)
     }
 
@@ -56,7 +60,7 @@ class StressLevelOverviewViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(StressLevelOverviewContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

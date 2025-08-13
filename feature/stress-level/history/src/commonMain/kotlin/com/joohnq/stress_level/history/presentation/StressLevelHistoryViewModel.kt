@@ -4,6 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.api.filterBy
 import com.joohnq.stress_level.api.use_case.DeleteStressLevelUseCase
 import com.joohnq.stress_level.api.use_case.GetAllStressLevelUseCase
+import com.joohnq.stress_level.history.presentation.StressLevelHistoryContract.Intent
+import com.joohnq.stress_level.history.presentation.StressLevelHistoryContract.SideEffect
+import com.joohnq.stress_level.history.presentation.StressLevelHistoryContract.State
+import com.joohnq.stress_level.history.presentation.StressLevelHistoryContract.ViewModel
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toGroupedByDate
 import com.joohnq.stress_level.impl.ui.mapper.StressLevelRecordResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
@@ -15,14 +19,14 @@ import kotlinx.coroutines.launch
 class StressLevelHistoryViewModel(
     private val getAllStressLevelUseCase: GetAllStressLevelUseCase,
     private val deleteStressLevelUseCase: DeleteStressLevelUseCase,
-    initialState: StressLevelHistoryContract.State = StressLevelHistoryContract.State(),
-) : BaseViewModel<StressLevelHistoryContract.State, StressLevelHistoryContract.Intent, StressLevelHistoryContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    StressLevelHistoryContract.ViewModel {
-    override fun onIntent(intent: StressLevelHistoryContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is StressLevelHistoryContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -42,7 +46,7 @@ class StressLevelHistoryViewModel(
                     )
                 }
             }.catch { e ->
-                emitEffect(StressLevelHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }.launchIn(viewModelScope)
     }
 
@@ -59,7 +63,7 @@ class StressLevelHistoryViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(StressLevelHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

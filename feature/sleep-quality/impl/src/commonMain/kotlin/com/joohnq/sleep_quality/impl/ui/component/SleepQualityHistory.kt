@@ -33,7 +33,7 @@ fun SleepQualityHistory(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.you_havent_set_up_any_mental_sleep_yet,
-            subtitle = Res.string.set_up_sleep,
+            actionText = Res.string.set_up_sleep,
             image = Drawables.Images.SleepQualityHistory,
             onClick = onCreate
         )

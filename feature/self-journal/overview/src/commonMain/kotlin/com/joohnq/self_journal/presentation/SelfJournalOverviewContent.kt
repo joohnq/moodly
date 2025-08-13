@@ -37,6 +37,7 @@ private fun SuccessView(
     ConvexGroupLazyLayout(
         panelBackgroundColor = Colors.Brown60,
         containerColor = Colors.White,
+        isDark = false,
         title = Res.string.self_journal,
         image = Drawables.Images.SelfJournalBackground,
         color = Colors.Brown70,

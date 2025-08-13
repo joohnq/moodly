@@ -18,7 +18,11 @@ class FreudScoreViewModel(
         initialState = initialState
     ),
     FreudScoreContract.ViewModel {
-    override fun onIntent(intent: FreudScoreContract.Intent) {}
+    override fun onIntent(intent: FreudScoreContract.Intent) {
+        when (intent) {
+            else -> Unit
+        }
+    }
 
     init {
         observe()

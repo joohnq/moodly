@@ -35,7 +35,7 @@ fun MoodMetric(
             containerColor = Colors.White,
             image = Drawables.Images.MoodInsight,
             title = Res.string.you_havent_set_up_any_mood_yet,
-            subtitle = Res.string.set_up_mood,
+            actionText = Res.string.set_up_mood,
             onClick = onCreate
         )
     } else {

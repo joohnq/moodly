@@ -21,7 +21,7 @@ fun MoodOverviewInsight(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.lets_log_your_first_mood_to_see_your_mood_insights_improve_your_mental_health_now,
-            subtitle = Res.string.log_first_mood,
+            actionText = Res.string.log_first_mood,
             image = Drawables.Images.MoodInsight,
             onClick = onCreate
         )

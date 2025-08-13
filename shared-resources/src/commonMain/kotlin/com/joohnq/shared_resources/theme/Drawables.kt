@@ -34,6 +34,7 @@ import com.joohnq.shared_resources.ic_book_open
 import com.joohnq.shared_resources.ic_calendar_outlined
 import com.joohnq.shared_resources.ic_camera_outlined
 import com.joohnq.shared_resources.ic_check_outlined
+import com.joohnq.shared_resources.ic_circle_outlined
 import com.joohnq.shared_resources.ic_clock
 import com.joohnq.shared_resources.ic_close_outlined
 import com.joohnq.shared_resources.ic_document
@@ -45,9 +46,11 @@ import com.joohnq.shared_resources.ic_flag_outlined
 import com.joohnq.shared_resources.ic_gallery_outlined
 import com.joohnq.shared_resources.ic_green_logo_and_shadow
 import com.joohnq.shared_resources.ic_hand_heart
+import com.joohnq.shared_resources.ic_hand_heart_outlined
 import com.joohnq.shared_resources.ic_head
 import com.joohnq.shared_resources.ic_heart_outlined
 import com.joohnq.shared_resources.ic_home_outlined
+import com.joohnq.shared_resources.ic_light_bulb_outlined
 import com.joohnq.shared_resources.ic_logo
 import com.joohnq.shared_resources.ic_logo_outlined
 import com.joohnq.shared_resources.ic_medicine_outlined
@@ -159,6 +162,10 @@ object Drawables {
 
             val Schedule = Res.drawable.ic_schedule_outlined
             val SelfImprovement = Res.drawable.ic_self_improvement_outlined
+            val LightBulb = Res.drawable.ic_light_bulb_outlined
+            val Circle = Res.drawable.ic_circle_outlined
+
+            val HandHeart = Res.drawable.ic_hand_heart_outlined
         }
 
         object Filled {

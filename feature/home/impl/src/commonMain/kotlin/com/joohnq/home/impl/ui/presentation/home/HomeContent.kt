@@ -76,6 +76,7 @@ private fun SuccessView(
         )
         SelfJournalMetric(
             items = state.selfJournalItems,
+            itemsInYear = state.selfJournalItemsInYear,
             onCreate = { onEvent(HomeEvent.NavigateToAddSelfJournal) },
             onClick = { onEvent(HomeEvent.NavigateToSelfJournalOverview) }
         )

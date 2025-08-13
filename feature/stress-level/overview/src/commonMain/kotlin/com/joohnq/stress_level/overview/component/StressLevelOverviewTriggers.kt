@@ -27,7 +27,7 @@ fun StressLevelOverviewTriggers(
             modifier = modifier,
             containerColor = Colors.Gray5,
             title = Res.string.you_dont_have_enough_sleep_records_yet,
-            subtitle = Res.string.log_stress_level,
+            actionText = Res.string.log_stress_level,
             image = Drawables.Images.StressLevelTrigger,
             onClick = onAddStressLevel
         )

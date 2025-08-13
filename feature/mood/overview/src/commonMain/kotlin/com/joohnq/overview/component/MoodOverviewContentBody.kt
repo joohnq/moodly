@@ -8,7 +8,6 @@ import com.joohnq.mood.add.ui.components.MoodHistoryContent
 import com.joohnq.overview.presentation.MoodOverviewContract
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.components.text.SectionHeader
-import com.joohnq.shared_resources.mood_history
 import com.joohnq.shared_resources.mood_statistics
 
 @Composable
@@ -50,7 +49,7 @@ fun MoodOverviewContentBody(
     )
     SectionHeader(
         modifier = modifier,
-        title = Res.string.mood_statistics,
+        title = Res.string.mood_statistics
     )
     MoodBarStatistic(
         items = state.items,

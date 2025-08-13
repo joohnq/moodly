@@ -40,7 +40,6 @@ fun AppTopBar(
         modifier =
             modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
                 .height(56.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

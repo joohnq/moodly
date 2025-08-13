@@ -7,6 +7,7 @@ import com.joohnq.gratefulness.api.entity.Gratefulness
 import com.joohnq.mood.add.ui.mapper.MoodRecordResourceMapper.calculateStatsFreudScore
 import com.joohnq.mood.add.ui.resource.MoodRecordResource
 import com.joohnq.navigation.Destination
+import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.getSelfJournalsInYear
 import com.joohnq.self_journal.impl.ui.resource.SelfJournalRecordResource
 import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
@@ -32,6 +33,9 @@ sealed interface DashboardContract {
     ) {
         val freudScore: FreudScoreResource?
             get() = moodItems.calculateStatsFreudScore().toResource()
+
+        val selfJournalItemsInYear: String
+            get() = selfJournalItems.getSelfJournalsInYear()
     }
 
     sealed interface SideEffect {

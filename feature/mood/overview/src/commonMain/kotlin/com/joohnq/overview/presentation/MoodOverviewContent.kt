@@ -35,10 +35,19 @@ private fun SuccessView(
 ) {
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
-        panelBackgroundColor = state.todayMood?.mood?.palette?.color ?: Colors.Brown10,
+        panelBackgroundColor =
+            state.todayMood
+                ?.mood
+                ?.palette
+                ?.color ?: Colors.Brown10,
+        isDark = state.todayMood == null,
         title = Res.string.mood,
         image = Drawables.Images.MoodBackground,
-        color = state.todayMood?.mood?.palette?.imageColor ?: Colors.Brown10,
+        color =
+            state.todayMood
+                ?.mood
+                ?.palette
+                ?.imageColor ?: Colors.Brown10,
         onAddButton = { onEvent(MoodOverviewContract.Event.NavigateToAddMood) },
         onGoBack = { onEvent(MoodOverviewContract.Event.GoBack) },
         panel = { modifier ->

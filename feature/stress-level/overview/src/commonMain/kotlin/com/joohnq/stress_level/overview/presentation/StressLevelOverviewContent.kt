@@ -40,6 +40,7 @@ private fun SuccessView(
     ConvexGroupLazyLayout(
         containerColor = Colors.White,
         title = Res.string.stress_level,
+        isDark = state.todayStressLevel == null,
         image = Drawables.Images.StressLevelBackground,
         color = palette?.imageColor ?: Colors.Brown5,
         panelBackgroundColor = palette?.color ?: Colors.Brown5,

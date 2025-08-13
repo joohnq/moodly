@@ -23,6 +23,7 @@ fun SecurityConfirmedScreen(
     }
 
     SecurityConfirmedContent(
+        snackBarState = snackBarState,
         onIntent = viewModel::onIntent
     )
 }

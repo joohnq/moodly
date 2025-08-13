@@ -33,9 +33,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun NotFoundHorizontalLayout(
     modifier: Modifier = Modifier,
-    containerColor: Color,
+    containerColor: Color = Colors.Gray5,
     title: StringResource,
-    subtitle: StringResource,
+    actionText: StringResource,
     image: DrawableResource,
     onClick: () -> Unit,
 ) {
@@ -72,7 +72,7 @@ fun NotFoundHorizontalLayout(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringResource(subtitle),
+                        text = stringResource(actionText),
                         style = TextStyles.textMdSemiBold(),
                         color = Colors.Brown60
                     )

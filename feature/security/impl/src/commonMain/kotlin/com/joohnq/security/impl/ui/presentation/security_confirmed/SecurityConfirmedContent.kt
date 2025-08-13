@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import com.joohnq.shared_resources.components.layout.DecoratedConvexPanel
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.continue_word
 import com.joohnq.shared_resources.now_every_time_you_open_the_app
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.security_setup_completed
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
@@ -28,9 +30,11 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SecurityConfirmedContent(
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     onIntent: (SecurityConfirmedContract.Intent) -> Unit = {},
 ) {
     DecoratedConvexPanel(
+        snackBarState = snackBarState,
         panelBackgroundColor = Colors.Green20,
         backgroundColor = Colors.White,
         panelContent = {

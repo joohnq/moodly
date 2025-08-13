@@ -2,8 +2,8 @@ package com.joohnq.gratefulness.overview.presentation
 
 import com.joohnq.api.getNow
 import com.joohnq.gratefulness.api.entity.Gratefulness
+import com.joohnq.gratefulness.api.entity.GratefulnessInsight
 import com.joohnq.gratefulness.api.entity.Quote
-import com.joohnq.gratefulness.api.mapper.GratefulnessMapper.getTodayItem
 import com.joohnq.ui.UnidirectionalViewModel
 import kotlinx.datetime.LocalDate
 
@@ -34,11 +34,28 @@ sealed interface GratefulnessOverviewContract {
         val selectedDate: LocalDate = getNow().date,
         val selectedGratefulness: Gratefulness? = null,
     ) {
-        val insights: List<String>
-            get() = items.map { item -> item.iAmGratefulFor }
+        val insight: GratefulnessInsight
+            get() {
+                val counts = items.groupingBy { it.iAmGratefulFor }.eachCount()
 
-        val todayItem: Gratefulness?
-            get() = items.getTodayItem()
+                val topItems =
+                    counts.entries
+                        .sortedByDescending { it.value }
+                        .take(7)
+                        .map { it.key }
+
+                val (principal, principalCount) =
+                    counts
+                        .maxByOrNull { it.value }
+                        ?.takeIf { it.value > 1 }
+                        ?.let { it.key to it.value } ?: (null to 0)
+
+                return GratefulnessInsight(
+                    items = topItems,
+                    principal = principal,
+                    principalCount = principalCount
+                )
+            }
     }
 
     sealed interface Event {

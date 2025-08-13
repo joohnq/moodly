@@ -1,3 +1,5 @@
+import buildLogic.configs.AppConfig
+
 plugins {
     id("moodly.application")
     id("moodly.multiplatform.library")
@@ -94,6 +96,12 @@ kotlin {
 
 android {
     base {
-        archivesName = "Moodly-v${defaultConfig.versionCode}"
+        archivesName = "Moodly-v${AppConfig.VERSION_CODE}"
+    }
+}
+
+tasks.register("printVersionCode") {
+    doLast {
+        println(AppConfig.VERSION_CODE)
     }
 }

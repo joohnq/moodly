@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.joohnq.home.impl.ui.presentation.dashboard.DashboardContract
 import com.joohnq.navigation.Destination
 import com.joohnq.shared_resources.Res
+import com.joohnq.shared_resources.gratefulness
 import com.joohnq.shared_resources.mood
 import com.joohnq.shared_resources.self_journal
 import com.joohnq.shared_resources.sleep
@@ -56,6 +57,11 @@ fun DashboardCentral(
                 title = stringResource(Res.string.mood),
                 icon = Drawables.Icons.Outlined.MoodNeutral,
                 destination = Destination.App.AddMood
+            ),
+            CentralAction<Destination>(
+                title = stringResource(Res.string.gratefulness),
+                icon = Drawables.Icons.Outlined.HandHeart,
+                destination = Destination.App.AddGratefulness
             )
         )
 
@@ -81,7 +87,7 @@ fun DashboardCentral(
                     space = 10.dp,
                     alignment = Alignment.CenterHorizontally
                 ),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             items.forEach { item ->
                 CentralButton(

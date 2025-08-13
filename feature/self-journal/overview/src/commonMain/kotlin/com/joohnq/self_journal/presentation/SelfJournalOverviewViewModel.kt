@@ -4,6 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.self_journal.api.use_case.DeleteSelfJournalsUseCase
 import com.joohnq.self_journal.api.use_case.GetSelfJournalsUseCase
 import com.joohnq.self_journal.impl.ui.mapper.SelfJournalRecordResourceMapper.toResource
+import com.joohnq.self_journal.presentation.SelfJournalOverviewContract.Intent
+import com.joohnq.self_journal.presentation.SelfJournalOverviewContract.SideEffect
+import com.joohnq.self_journal.presentation.SelfJournalOverviewContract.State
+import com.joohnq.self_journal.presentation.SelfJournalOverviewContract.ViewModel
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -13,14 +17,14 @@ import kotlinx.coroutines.launch
 class SelfJournalOverviewViewModel(
     private val getSelfJournalsUseCase: GetSelfJournalsUseCase,
     private val deleteSelfJournalsUseCase: DeleteSelfJournalsUseCase,
-    initialState: SelfJournalOverviewContract.State = SelfJournalOverviewContract.State(),
-) : BaseViewModel<SelfJournalOverviewContract.State, SelfJournalOverviewContract.Intent, SelfJournalOverviewContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    SelfJournalOverviewContract.ViewModel {
-    override fun onIntent(intent: SelfJournalOverviewContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is SelfJournalOverviewContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -41,7 +45,7 @@ class SelfJournalOverviewViewModel(
                 }
             }.catch { e ->
                 emitEffect(
-                    SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString())
+                    SideEffect.ShowError(e.message.toString())
                 )
             }.launchIn(viewModelScope)
     }
@@ -59,7 +63,7 @@ class SelfJournalOverviewViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(SelfJournalOverviewContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

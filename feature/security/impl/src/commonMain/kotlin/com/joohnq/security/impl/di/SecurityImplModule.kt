@@ -5,6 +5,8 @@ import com.joohnq.security.impl.PinHelper
 import com.joohnq.security.impl.data.SecurityPreferenceImpl
 import com.joohnq.security.impl.ui.presentation.pin.PinViewModel
 import com.joohnq.security.impl.ui.presentation.security.SecurityViewModel
+import com.joohnq.security.impl.ui.presentation.security_confirmed.SecurityConfirmedViewModel
+import com.joohnq.security.impl.ui.presentation.unlock.UnLockViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
@@ -25,6 +27,17 @@ val securityImplModule: Module =
             SecurityViewModel(
                 updateSecurityUseCase = get(),
                 updateSkipSecurityUseCase = get()
+            )
+        }
+        viewModel<SecurityConfirmedViewModel> {
+            SecurityConfirmedViewModel(
+                updateSkipSecurityUseCase = get()
+            )
+        }
+        viewModel<UnLockViewModel> {
+            UnLockViewModel(
+                getSecurityUseCase = get(),
+                pinHelper = get()
             )
         }
         includes(securityAuthenticationModule)

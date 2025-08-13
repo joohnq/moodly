@@ -39,6 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 fun ConvexGroupLazyLayout(
     containerColor: Color = Color.White,
     panelBackgroundColor: Color = Colors.Brown10,
+    isDark: Boolean,
     title: StringResource,
     image: DrawableResource,
     color: Color,
@@ -54,21 +55,21 @@ fun ConvexGroupLazyLayout(
         containerColor = containerColor,
         topBar = {
             AppTopBar(
-                modifier = Modifier
-                    .hazeSource(hazeState)
-                    .background(Colors.Brown5.copy(alpha = if (scrollState.value > 200) 0.8f else 0f))
-                    .paddingHorizontalMedium()
-                    .statusBarsPadding(),
+                modifier =
+                    Modifier
+                        .hazeSource(hazeState)
+                        .background(Colors.Brown5.copy(alpha = if (scrollState.value > 200) 0.8f else 0f))
+                        .paddingHorizontalMedium()
+                        .statusBarsPadding(),
                 text = title,
-                isDark = scrollState.value > 200,
+                isDark = if (isDark) true else scrollState.value > 200,
                 onGoBack = onGoBack
             )
         }
     ) { padding ->
         Column(
             Modifier
-                .padding(bottom = padding.calculateBottomPadding())
-//                .background(color = panelBackgroundColor)
+                .padding(bottom = padding.calculateBottomPadding().plus(50.dp))
                 .verticalScroll(scrollState)
                 .hazeSource(hazeState)
         ) {
@@ -129,12 +130,20 @@ fun ConvexGroupLazyLayout(
     panel: @Composable ColumnScope.(Modifier) -> Unit,
     body: @Composable ColumnScope.(Modifier) -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+    val hazeState = remember { HazeState() }
+
     Scaffold(
         contentWindowInsets = WindowInsets(top = 50.dp),
         containerColor = containerColor,
         topBar = {
             AppTopBar(
-                modifier = Modifier.paddingHorizontalMedium().statusBarsPadding(),
+                modifier =
+                    Modifier
+                        .hazeSource(hazeState)
+                        .background(Colors.Brown5.copy(alpha = if (scrollState.value > 200) 0.8f else 0f))
+                        .paddingHorizontalMedium()
+                        .statusBarsPadding(),
                 text = title,
                 isDark = isDark,
                 onGoBack = onGoBack
@@ -143,10 +152,11 @@ fun ConvexGroupLazyLayout(
     ) { padding ->
         Column(
             Modifier
-                .padding(bottom = padding.calculateBottomPadding())
+                .padding(bottom = padding.calculateBottomPadding().plus(50.dp))
                 .fillMaxWidth()
                 .background(color = panelBackgroundColor)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
+                .hazeSource(hazeState)
         ) {
             Box(modifier = Modifier.statusBarsPadding())
             VerticalSpacer(76.dp)

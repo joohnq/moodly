@@ -3,6 +3,10 @@ package com.joohnq.sleep_quality.history.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryContract.Intent
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryContract.SideEffect
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryContract.State
+import com.joohnq.sleep_quality.history.presentation.SleepQualityHistoryContract.ViewModel
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
@@ -13,14 +17,14 @@ import kotlinx.coroutines.launch
 class SleepQualityHistoryViewModel(
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
-    initialState: SleepQualityHistoryContract.State = SleepQualityHistoryContract.State(),
-) : BaseViewModel<SleepQualityHistoryContract.State, SleepQualityHistoryContract.Intent, SleepQualityHistoryContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    SleepQualityHistoryContract.ViewModel {
-    override fun onIntent(intent: SleepQualityHistoryContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is SleepQualityHistoryContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -39,7 +43,7 @@ class SleepQualityHistoryViewModel(
                     )
                 }
             }.catch { e ->
-                emitEffect(SleepQualityHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }.launchIn(viewModelScope)
     }
 
@@ -55,7 +59,7 @@ class SleepQualityHistoryViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(SleepQualityHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

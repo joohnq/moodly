@@ -19,6 +19,7 @@ class SecurityConfirmedViewModel(
         viewModelScope.launch {
             try {
                 updateSkipSecurityUseCase(true).getOrThrow()
+                emitEffect(SecurityConfirmedContract.SideEffect.NavigateNext)
             } catch (e: Exception) {
                 emitEffect(SecurityConfirmedContract.SideEffect.ShowError(e.message.toString()))
             }

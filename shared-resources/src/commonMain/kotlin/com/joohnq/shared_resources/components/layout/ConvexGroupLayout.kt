@@ -10,21 +10,28 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.shared_resources.theme.Colors
 
 @Composable
 fun DecoratedConvexPanel(
+    snackBarState: SnackbarHostState = rememberSnackBarState(),
     panelBackgroundColor: Color,
     backgroundColor: Color = Colors.Brown10,
     panelContent: @Composable () -> Unit,
     content: @Composable (ColumnScope) -> Unit,
 ) {
-    Scaffold(containerColor = backgroundColor) {
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackBarState) },
+        containerColor = backgroundColor
+    ) {
         Column(
             modifier =
                 Modifier

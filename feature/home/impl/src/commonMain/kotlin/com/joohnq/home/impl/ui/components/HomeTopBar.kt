@@ -20,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.joohnq.api.constant.UserFileStorageConstants
 import com.joohnq.api.entity.ImageType
@@ -111,14 +110,16 @@ fun HomeTopBar(
                             .background(color = Colors.Brown70)
                             .border(
                                 width = 1.dp,
-                                brush = Brush.linearGradient(
-                                    colors = listOf(
-                                       Colors.Brown80,
-                                        Colors.Brown60
+                                brush =
+                                    Brush.linearGradient(
+                                        colors =
+                                            listOf(
+                                                Colors.Brown80,
+                                                Colors.Brown60
+                                            ),
+                                        start = Offset(0f, 0f),
+                                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
                                     ),
-                                    start = Offset(0f, 0f),
-                                    end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
-                                ),
                                 shape = Dimens.Shape.Circle
                             ),
                     contentAlignment = Alignment.Center

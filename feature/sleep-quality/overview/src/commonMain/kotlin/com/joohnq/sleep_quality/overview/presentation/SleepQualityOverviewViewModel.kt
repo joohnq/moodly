@@ -4,6 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.joohnq.sleep_quality.api.use_case.DeleteSleepQualityUseCase
 import com.joohnq.sleep_quality.api.use_case.GetSleepQualitiesUseCase
 import com.joohnq.sleep_quality.impl.ui.mapper.SleepQualityResourceMapper.toResource
+import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewContract.Intent
+import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewContract.SideEffect
+import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewContract.State
+import com.joohnq.sleep_quality.overview.presentation.SleepQualityOverviewContract.ViewModel
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -13,14 +17,14 @@ import kotlinx.coroutines.launch
 class SleepQualityOverviewViewModel(
     private val getSleepQualitiesUseCase: GetSleepQualitiesUseCase,
     private val deleteSleepQualityUseCase: DeleteSleepQualityUseCase,
-    initialState: SleepQualityOverviewContract.State = SleepQualityOverviewContract.State(),
-) : BaseViewModel<SleepQualityOverviewContract.State, SleepQualityOverviewContract.Intent, SleepQualityOverviewContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    SleepQualityOverviewContract.ViewModel {
-    override fun onIntent(intent: SleepQualityOverviewContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is SleepQualityOverviewContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -39,7 +43,7 @@ class SleepQualityOverviewViewModel(
                     )
                 }
             }.catch { e ->
-                emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }.launchIn(viewModelScope)
     }
 
@@ -55,7 +59,7 @@ class SleepQualityOverviewViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(SleepQualityOverviewContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

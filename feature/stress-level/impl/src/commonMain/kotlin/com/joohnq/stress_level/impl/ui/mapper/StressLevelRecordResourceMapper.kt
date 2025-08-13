@@ -14,7 +14,10 @@ import com.joohnq.stress_level.impl.ui.resource.StressorResource
 import kotlinx.datetime.LocalDate
 
 object StressLevelRecordResourceMapper {
-    fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? = find { item -> item.createdAt.date == getNow().date }
+    fun List<StressLevelRecordResource>.getTodayStressLevelRecord(): StressLevelRecordResource? =
+        find { item ->
+            item.createdAt.date == getNow().date
+        }
 
     fun List<StressLevelRecordResource>.getStressors(): List<StressorResource> = flatMap { it.stressors }
 

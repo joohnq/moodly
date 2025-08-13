@@ -3,6 +3,10 @@ package com.joohnq.gratefulness.history.presentation
 import androidx.lifecycle.viewModelScope
 import com.joohnq.gratefulness.api.use_case.DeleteGratefulnessUseCase
 import com.joohnq.gratefulness.api.use_case.GetGratefulnessUseCase
+import com.joohnq.gratefulness.history.presentation.GratefulnessHistoryContract.Intent
+import com.joohnq.gratefulness.history.presentation.GratefulnessHistoryContract.SideEffect
+import com.joohnq.gratefulness.history.presentation.GratefulnessHistoryContract.State
+import com.joohnq.gratefulness.history.presentation.GratefulnessHistoryContract.ViewModel
 import com.joohnq.ui.BaseViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -12,14 +16,14 @@ import kotlinx.coroutines.launch
 class GratefulnessHistoryViewModel(
     private val getGratefulnessUseCase: GetGratefulnessUseCase,
     private val deleteGratefulnessUseCase: DeleteGratefulnessUseCase,
-    initialState: GratefulnessHistoryContract.State = GratefulnessHistoryContract.State(),
-) : BaseViewModel<GratefulnessHistoryContract.State, GratefulnessHistoryContract.Intent, GratefulnessHistoryContract.SideEffect>(
+    initialState: State = State(),
+) : BaseViewModel<State, Intent, SideEffect>(
         initialState = initialState
     ),
-    GratefulnessHistoryContract.ViewModel {
-    override fun onIntent(intent: GratefulnessHistoryContract.Intent) {
+    ViewModel {
+    override fun onIntent(intent: Intent) {
         when (intent) {
-            is GratefulnessHistoryContract.Intent.Delete -> delete(intent.id)
+            is Intent.Delete -> delete(intent.id)
         }
     }
 
@@ -38,7 +42,7 @@ class GratefulnessHistoryViewModel(
                     )
                 }
             }.catch { e ->
-                emitEffect(GratefulnessHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }.launchIn(viewModelScope)
     }
 
@@ -56,7 +60,7 @@ class GratefulnessHistoryViewModel(
                     )
                 }
             } catch (e: Exception) {
-                emitEffect(GratefulnessHistoryContract.SideEffect.ShowError(e.message.toString()))
+                emitEffect(SideEffect.ShowError(e.message.toString()))
             }
         }
     }

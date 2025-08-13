@@ -343,4 +343,9 @@
     <string name="today_i_am_thankful_for">Today, I am thankful for</string>
     <string name="enter_here_your_thankfulness">Enter here your thankfulness</string>
     <string name="click_to_see_your_score">Click to see your score</string>
+    <string name="gratitude_insights">Gratitude Insights</string>
+    <string name="gratefulness_insight_card_title">Most grateful for</string>
+    <string name="gratefulness_insight_card_description">You are most grateful for your %1$s for this month, with %2$d x logged.</string>
+    <string name="gratefulness_insight_not_enough_title">You don't have enough gratitude insight yet</string>
+    <string name="gratefulness_insight_not_enough_action">Log Gratitude</string>
 </resources>

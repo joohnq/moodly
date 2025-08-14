@@ -13,7 +13,6 @@ object GratefulnessMapper :
         Gratefulness(
             id = id,
             iAmGratefulFor = iAmGratefulFor,
-            iAmThankfulFor = iAmThankfulFor,
             smallThingIAppreciate = smallThingIAppreciate,
             description = description,
             createdAt = createdAt
@@ -23,7 +22,6 @@ object GratefulnessMapper :
         GratefulnessDTO(
             id = id,
             iAmGratefulFor = iAmGratefulFor,
-            iAmThankfulFor = iAmThankfulFor,
             smallThingIAppreciate = smallThingIAppreciate,
             description = description
         )

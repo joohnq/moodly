@@ -9,7 +9,6 @@ import kotlinx.datetime.LocalDateTime
 data class GratefulnessDTO(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val iAmGratefulFor: String,
-    val iAmThankfulFor: String,
     val smallThingIAppreciate: String,
     val description: String,
     val createdAt: LocalDateTime = getNow(),

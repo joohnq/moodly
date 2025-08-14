@@ -21,13 +21,11 @@ import com.joohnq.shared_resources.components.button.PrimaryButton
 import com.joohnq.shared_resources.components.spacer.VerticalSpacer
 import com.joohnq.shared_resources.enter_here_what_you_appreciate
 import com.joohnq.shared_resources.enter_here_your_gratefulness
-import com.joohnq.shared_resources.enter_here_your_thankfulness
 import com.joohnq.shared_resources.small_thing_i_appreciate
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Drawables
 import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.today_i_am_grateful_for
-import com.joohnq.shared_resources.today_i_am_thankful_for
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -97,15 +95,6 @@ private fun SuccessView(
                 placeholder = Res.string.enter_here_what_you_appreciate,
                 onValueChange = {
                     onIntent(GratefulnessAddContract.Intent.ChangeSmallThingIAppreciate(it))
-                }
-            )
-            VerticalSpacer(32.dp)
-            GratefulnessTextField(
-                label = Res.string.today_i_am_thankful_for,
-                value = state.item.iAmThankfulFor,
-                placeholder = Res.string.enter_here_your_thankfulness,
-                onValueChange = {
-                    onIntent(GratefulnessAddContract.Intent.ChangeIAmThankfulFor(it))
                 }
             )
             VerticalSpacer(40.dp)

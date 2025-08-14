@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "29476d819aa04d74aac4a13b2d90a8bf",
+    "identityHash": "81a6305b3a0c58bd60c29a5ae4372186",
     "entities": [
       {
         "tableName": "gratefulness",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `iAmGratefulFor` TEXT NOT NULL, `iAmThankfulFor` TEXT NOT NULL, `smallThingIAppreciate` TEXT NOT NULL, `description` TEXT NOT NULL, `createdAt` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `iAmGratefulFor` TEXT NOT NULL, `smallThingIAppreciate` TEXT NOT NULL, `description` TEXT NOT NULL, `createdAt` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -17,12 +17,6 @@
           {
             "fieldPath": "iAmGratefulFor",
             "columnName": "iAmGratefulFor",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "iAmThankfulFor",
-            "columnName": "iAmThankfulFor",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -55,7 +49,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '29476d819aa04d74aac4a13b2d90a8bf')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '81a6305b3a0c58bd60c29a5ae4372186')"
     ]
   }
 }

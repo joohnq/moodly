@@ -147,8 +147,8 @@
     <string name="anxiety">Anxiety</string>
     <string name="alcohol_consumption">Alcohol Consumption</string>
     <string name="new_sleep_quality">New Sleep Quality</string>
-    <string name="start_sleeping_time">Start Sleeping Time</string>
-    <string name="end_sleeping_time">End Sleeping Time</string>
+    <string name="start_sleeping_time">Start</string>
+    <string name="end_sleeping_time">End</string>
     <string name="to_word">to</string>
     <string name="your_entries">Your Entries</string>
     <string name="document_your_mental_journal">Document your Mental Journal</string>

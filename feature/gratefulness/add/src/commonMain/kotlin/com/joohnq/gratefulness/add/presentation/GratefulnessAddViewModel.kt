@@ -30,17 +30,6 @@ class GratefulnessAddViewModel(
                 }
             }
 
-            is Intent.ChangeIAmThankfulFor -> {
-                updateState {
-                    it.copy(
-                        item =
-                            it.item.copy(
-                                iAmThankfulFor = intent.value
-                            )
-                    )
-                }
-            }
-
             is Intent.ChangeSmallThingIAppreciate -> {
                 updateState {
                     it.copy(

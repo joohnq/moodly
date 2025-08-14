@@ -15,10 +15,6 @@ sealed interface GratefulnessAddContract {
             val value: String,
         ) : Intent
 
-        data class ChangeIAmThankfulFor(
-            val value: String,
-        ) : Intent
-
         data object Add : Intent
     }
 

@@ -258,7 +258,7 @@
     <string name="set_up_mood">Configurar Humor</string>
     <string name="ok">Ok</string>
     <string name="you_havent_set_up_the_stress_leves_necessary_for_this_feature_yet">Você ainda não configurou o nível de estresse necessário para essa funcionalidade, Vamos configurar agora!</string>
-    <string name="you_havent_set_up_any_mood_yet">Você ainda não configurou nenhum humor hoje.\n Vamos configurar agora.</string>
+    <string name="you_havent_set_up_any_mood_yet">Você ainda não configurou nenhum humor hoje. Vamos configurar agora.</string>
     <string name="you_are_stressed_because_you_are_to_preoccupied_with">Você está estressado porque está muito preocupado com:</string>
     <string name="week_view">Visualização Semanal</string>
     <string name="time_asleep">Tempo de Sono</string>

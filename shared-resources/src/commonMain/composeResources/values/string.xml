@@ -258,7 +258,7 @@
     <string name="set_up_mood">Set Up Mood</string>
     <string name="ok">Ok</string>
     <string name="you_havent_set_up_the_stress_leves_necessary_for_this_feature_yet">You haven’t set up your stress level yet, Let’s set it up now!</string>
-    <string name="you_havent_set_up_any_mood_yet">You haven't set up today any mood yet.\n Let's set it up now.</string>
+    <string name="you_havent_set_up_any_mood_yet">You haven't set up today any mood yet. Let's set it up now.</string>
     <string name="you_are_stressed_because_you_are_to_preoccupied_with">You are stressed because you're too preoccupied with:</string>
     <string name="week_view">Week View</string>
     <string name="time_asleep">Time Asleep</string>

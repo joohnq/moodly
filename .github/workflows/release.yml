@@ -87,3 +87,13 @@ jobs:
           releaseFiles: composeApp/build/outputs/bundle/release/Moodly-v${{ env.VERSION_CODE }}-release.aab
           track: 'internal'
           status: 'completed'
+          debugSymbols: composeApp/build/outputs/native-debug-symbols/release/native-debug-symbols.zip
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: moodly-build-artifacts
+          path: |
+            composeApp/build/outputs/bundle/release/*.aab
+            composeApp/build/outputs/apk/release/*.apk
+            composeApp/build/outputs/native-debug-symbols/release/*.zip

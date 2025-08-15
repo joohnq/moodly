@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -48,7 +47,7 @@ fun NotFoundHorizontalLayout(
                 disabledContentColor = Colors.Brown80
             ),
         shape = Dimens.Shape.Large,
-        modifier = modifier.height(112.dp).fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         onClick = onClick
     ) {
         Row(

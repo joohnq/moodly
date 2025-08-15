@@ -40,6 +40,7 @@ class AppAndroidSettings : AndroidSettings<BaseAppModuleExtension>() {
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
                 )
+                ndkVersion = "27.0.12077973"
                 ndk.debugSymbolLevel = "FULL"
             }
         }

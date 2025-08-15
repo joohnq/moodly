@@ -105,3 +105,9 @@ tasks.register("printVersionCode") {
         println(AppConfig.VERSION_CODE)
     }
 }
+
+tasks.register("zipNativeDebugSymbols", Zip::class) {
+    from("${layout.buildDirectory.get().asFile}/intermediates/merged_native_libs/release/out/lib")
+    archiveFileName.set("native-debug-symbols.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("outputs"))
+}

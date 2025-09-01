@@ -7,7 +7,8 @@ import com.joohnq.security.api.SecurityAuthentication
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
-@Composable actual fun securityAuthentication(): SecurityAuthentication {
+@Composable
+actual fun securityAuthentication(): SecurityAuthentication {
     val appCompat = LocalContext.current as AppCompatActivity
     return koinInject { parametersOf(appCompat) }
 }

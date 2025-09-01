@@ -54,12 +54,13 @@ kotlin {
 
             implementation(projects.feature.splash.impl)
 
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.kotlin.datetime)
             implementation(libs.calendar)
 
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.viewmodel)
         }
     }
 }

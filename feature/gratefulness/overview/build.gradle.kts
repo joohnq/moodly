@@ -2,8 +2,6 @@ plugins {
     id("moodly.android.library")
     id("moodly.multiplatform.library")
     id("moodly.compose")
-
-    alias(libs.plugins.serialization)
 }
 
 kotlin {

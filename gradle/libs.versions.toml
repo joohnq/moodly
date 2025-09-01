@@ -1,10 +1,10 @@
 [versions]
 # Android SDK & Build tools
-agp = "8.12.0"
-android-compileSdk = "35"
+agp = "8.12.1"
+android-compileSdk = "36"
 android-minSdk = "26"
 android-packageName = "com.joohnq.moodapp"
-android-targetSdk = "35"
+android-targetSdk = "36"
 android-versionCode = "47"
 android-versionName = "1.2.0"
 
@@ -14,7 +14,7 @@ accompanistPermissions = "0.37.3"
 # AndroidX
 androidx-activityCompose = "1.10.1"
 androidx-data-store = "1.1.7"
-androidx-lifecycle = "2.9.1"
+androidx-lifecycle = "2.9.2"
 
 # Biometric
 biometric = "1.1.0"
@@ -24,22 +24,22 @@ coil = "3.3.0"
 coilNetwork = "3.0.0-alpha08"
 
 # Compose
-composeCharts = "0.1.8"
+composeCharts = "0.1.10"
 calendar = "2.8.0"
-compose-plugin = "1.9.0-beta01"
-compose-material = "1.9.0-alpha04"
-uiAndroid = "1.8.3"
+compose = "1.9.0-beta03"
+uiAndroid = "1.10.0-alpha01"
+composeHotReload = "1.0.0-beta05"
 
 # Crashlytics & Firebase
 crashlytics = "3.0.6"
-firebase-gitlive-sdk = "2.1.0"
+firebase-gitlive-sdk = "2.3.0"
 google-services = "4.4.3"
 
 # Koin
 koinCore = "4.1.0"
 
 # Kotlin & KotlinX
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1"
 kotlinxSerializationJson = "1.9.0"
@@ -57,7 +57,7 @@ mokkery = "2.9.0"
 napier = "2.7.1"
 
 # Navigation
-navigation-compose = "2.9.0-beta04"
+navigation-compose = "2.9.0-beta05"
 
 # Okio
 okioVersion = "3.16.0"
@@ -78,9 +78,9 @@ spotless = "7.2.1"
 
 ktlint = "1.7.1"
 
-room = "2.8.0-beta01"
-ksp = "2.2.0-2.0.2"
-sqlite = "2.6.0-beta01"
+room = "2.8.0-rc01"
+ksp = "2.2.10-2.0.2"
+sqlite = "2.6.0-rc01"
 
 [libraries]
 
@@ -98,6 +98,7 @@ androidx-data-store-preferences = { module = "androidx.datastore:datastore-prefe
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiAndroid" }
+lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
 # Calendar
 calendar = { module = "com.kizitonwose.calendar:compose-multiplatform", version.ref = "calendar" }
@@ -110,18 +111,20 @@ coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref 
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", version.ref = "coilNetwork" }
 
 # Compose
-compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", name = "components-resources", version.ref = "compose-plugin" }
-compose-components-ui-tooling-preview = { module = "org.jetbrains.compose.components:components-ui-tooling-preview", version.ref = "compose-plugin" }
-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-plugin" }
-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-material" }
-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-plugin" }
-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-plugin" }
-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", name = "components-resources", version.ref = "compose" }
+compose-components-ui-tooling-preview = { module = "org.jetbrains.compose.components:components-ui-tooling-preview", version.ref = "compose" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose" }
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+compose-gradle-plugin = { module = "org.jetbrains.compose:org.jetbrains.compose.gradle.plugin", version.ref = "compose" }
 
 # Coroutines
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
 
 # Firebase
 gitlive-firebase-kotlin-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-gitlive-sdk" }
@@ -156,6 +159,7 @@ squareup-okio = { group = "com.squareup.okio", name = "okio", version.ref = "oki
 
 # SQLDelight
 sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 
 # Testing
 truthish = { module = "com.varabyte.truthish:truthish", version.ref = "truthish" }
@@ -175,7 +179,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 # Compose
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 
 # Kotlin/Kotlix
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -187,7 +191,7 @@ mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 # Firebase
-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+#crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 
 # Google Services
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
@@ -199,9 +203,11 @@ spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 room = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+
 [bundles]
 
 dataStore = ["androidx-datastore-core", "androidx-data-store-preferences"]
 koin = ["koin-core", "koin-compose", "koin-compose-viewmodel"]
 test = ["kotlin-test", "truthish", "kotlinx-coroutines-test"]
-viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel"]
+viewmodel = ["lifecycle-viewmodel", "androidx-lifecycle-viewmodel", "lifecycle-runtime-compose"]

@@ -39,9 +39,9 @@ room {
 }
 
 dependencies {
-    ksp(libs.room.compiler)
-    add("kspAndroid", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
+    kspAndroid(libs.room.compiler)
+    kspIosSimulatorArm64(libs.room.compiler)
+    kspIosX64(libs.room.compiler)
+    kspIosArm64(libs.room.compiler)
+    kspJvm(libs.room.compiler)
 }

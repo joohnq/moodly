@@ -24,7 +24,7 @@ kotlin {
 
             implementation(projects.core.navigation)
 
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)

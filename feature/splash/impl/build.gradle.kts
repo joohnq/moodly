@@ -23,7 +23,7 @@ kotlin {
             implementation(projects.feature.security.api)
             implementation(projects.feature.security.impl)
 
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.bundles.viewmodel)
             implementation(libs.bundles.koin)

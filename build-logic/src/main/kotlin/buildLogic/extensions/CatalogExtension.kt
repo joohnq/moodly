@@ -21,7 +21,7 @@ internal fun Project.getLibrary(alias: String): MinimalExternalModuleDependency 
     return versionCatalog.findLibrary(alias).get().get()
 }
 
-fun Project.geDeriveNamespace(): String {
+fun Project.getDeriveNamespace(): String {
     val basePackage = rootProject.findProperty("basePackage") as? String
         ?: AppConfig.APPLICATION_NAME
 
@@ -29,5 +29,5 @@ fun Project.geDeriveNamespace(): String {
         .replace(":", ".")
         .replace("-", "")
 
-    return "$basePackage$modulePath"
+    return "$basePackage.$modulePath"
 }

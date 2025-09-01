@@ -26,7 +26,7 @@ kotlin {
 
             implementation(libs.coroutines.core)
             implementation(libs.serialization)
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.bundles.koin)
             implementation(libs.bundles.dataStore)

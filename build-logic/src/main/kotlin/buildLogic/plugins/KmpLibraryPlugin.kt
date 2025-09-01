@@ -2,11 +2,15 @@ package buildLogic.plugins
 
 import buildLogic.configs.AppConfig
 import buildLogic.extensions.configureDetekt
-import buildLogic.extensions.geDeriveNamespace
+import buildLogic.extensions.getDeriveNamespace
+import buildLogic.extensions.getLibrary
 import buildLogic.extensions.getPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.invoke
+import org.jetbrains.compose.desktop.DesktopExtension
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KmpLibraryPlugin : Plugin<Project> {
@@ -39,13 +43,15 @@ class KmpLibraryPlugin : Plugin<Project> {
                 }
             }
 
+            jvm()
+
             listOf(
                 iosX64(),
                 iosArm64(),
                 iosSimulatorArm64()
             ).forEach { iosTarget ->
                 iosTarget.binaries.framework {
-                    var deriveBaseName = geDeriveNamespace()
+                    var deriveBaseName = getDeriveNamespace()
 
                     if (deriveBaseName == "${AppConfig.APPLICATION_NAME}composeApp") {
                         deriveBaseName = "ComposeApp"
@@ -59,6 +65,13 @@ class KmpLibraryPlugin : Plugin<Project> {
 
             compilerOptions {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
+
+            sourceSets {
+                jvmMain.dependencies {
+                    implementation(getLibrary("coroutines-swing"))
+//                    implementation(getLibrary("compose-desktop-macos"))
+                }
             }
         }
     }

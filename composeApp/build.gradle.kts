@@ -1,4 +1,6 @@
 import buildLogic.configs.AppConfig
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import kotlin.text.set
 
 plugins {
     id("moodly.application")
@@ -7,7 +9,8 @@ plugins {
 
     alias(libs.plugins.serialization)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.crashlytics)
+    alias(libs.plugins.composeHotReload)
+//    alias(libs.plugins.crashlytics)
 }
 
 kotlin {
@@ -17,6 +20,8 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+
+//            implementation(libs.gitlive.firebase.kotlin.crashlytics)
         }
         commonMain.dependencies {
             implementation(projects.core.database)
@@ -44,6 +49,7 @@ kotlin {
             implementation(projects.feature.welcome.impl)
 
             implementation(projects.feature.freudScore.impl)
+
             implementation(projects.feature.onboarding.impl)
 
             implementation(projects.feature.home.impl)
@@ -84,10 +90,8 @@ kotlin {
 
             implementation(projects.feature.splash.impl)
 
-            api(libs.gitlive.firebase.kotlin.crashlytics)
-
             implementation(libs.kotlin.datetime)
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.bundles.koin)
         }
@@ -100,14 +104,14 @@ android {
     }
 }
 
-tasks.register("printVersionCode") {
-    doLast {
-        println(AppConfig.VERSION_CODE)
-    }
-}
+compose.desktop {
+    application {
+        mainClass = "${AppConfig.APPLICATION_ID}.MainKt"
 
-tasks.register("zipNativeDebugSymbols", Zip::class) {
-    from("${layout.buildDirectory.get().asFile}/intermediates/merged_native_libs/release/out/lib")
-    archiveFileName.set("native-debug-symbols.zip")
-    destinationDirectory.set(layout.buildDirectory.dir("outputs"))
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = AppConfig.APPLICATION_ID
+            packageVersion = AppConfig.VERSION_NAME
+        }
+    }
 }

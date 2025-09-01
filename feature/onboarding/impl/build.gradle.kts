@@ -29,7 +29,7 @@ kotlin {
 
             implementation(projects.feature.preferences.api)
 
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
             implementation(libs.kotlin.datetime)
 
             implementation(libs.bundles.viewmodel)

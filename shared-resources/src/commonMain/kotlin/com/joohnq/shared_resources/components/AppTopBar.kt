@@ -21,6 +21,7 @@ import com.joohnq.shared_resources.go_back
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.theme.Dimens
 import com.joohnq.shared_resources.theme.Drawables
+import com.joohnq.shared_resources.theme.PaddingModifier.paddingHorizontalMedium
 import com.joohnq.shared_resources.theme.TextStyles
 import com.joohnq.ui.entity.IconResource
 import dev.chrisbanes.haze.ExperimentalHazeApi
@@ -78,7 +79,8 @@ fun BasicAppTopBar(
         modifier =
             modifier
                 .statusBarsPadding()
-                .height(56.dp),
+                .height(56.dp)
+                .paddingHorizontalMedium(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(

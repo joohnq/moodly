@@ -9,8 +9,8 @@ object AppConfig {
     const val TARGET_SDK = 35
     const val VERSION_CODE = 58
     const val VERSION_NAME = "1.2.0"
-    const val APPLICATION_NAME = "com.joohnq."
-    const val APPLICATION_ID = "${APPLICATION_NAME}moodapp"
+    const val APPLICATION_NAME = "com.joohnq"
+    const val APPLICATION_ID = "${APPLICATION_NAME}.moodapp"
 
     val javaVersion = JavaVersion.VERSION_11
     val jvmTargetVersion = JvmTarget.JVM_11

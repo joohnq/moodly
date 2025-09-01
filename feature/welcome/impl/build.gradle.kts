@@ -19,7 +19,7 @@ kotlin {
 
             implementation(projects.feature.preferences.api)
 
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.bundles.koin)
         }

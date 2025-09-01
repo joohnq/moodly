@@ -1,7 +1,7 @@
 package buildLogic.plugins.android
 
 import buildLogic.configs.AppConfig
-import buildLogic.extensions.geDeriveNamespace
+import buildLogic.extensions.getDeriveNamespace
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.Project
@@ -14,12 +14,12 @@ abstract class AndroidSettings<CONFIG> {
     protected fun CONFIG.setupCommon(target: Project) {
         when (this) {
             is BaseAppModuleExtension -> {
-                namespace = target.geDeriveNamespace()
+                namespace = target.getDeriveNamespace()
                 compileSdk = AppConfig.COMPILE_SDK
             }
 
             is LibraryExtension -> {
-                namespace = target.geDeriveNamespace()
+                namespace = target.getDeriveNamespace()
                 compileSdk = AppConfig.COMPILE_SDK
             }
 

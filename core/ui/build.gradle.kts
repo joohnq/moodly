@@ -12,7 +12,8 @@ kotlin {
             implementation(libs.calendar)
             implementation(libs.coroutines.core)
             implementation(libs.coroutines.extensions)
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
+            implementation(libs.bundles.viewmodel)
         }
     }
 }

@@ -43,6 +43,9 @@ kotlin {
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)
         }
+        jvmMain.dependencies {
+            implementation(libs.sqldelight.jvm)
+        }
     }
 }
 

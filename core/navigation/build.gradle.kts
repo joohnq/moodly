@@ -9,7 +9,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.serialization)
-            implementation(libs.navigation.compose)
+            implementation(libs.compose.navigation)
             implementation(libs.kotlin.datetime)
         }
     }

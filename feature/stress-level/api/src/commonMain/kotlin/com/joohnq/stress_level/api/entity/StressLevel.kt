@@ -3,7 +3,7 @@ package com.joohnq.stress_level.api.entity
 import com.joohnq.stress_level.api.property.StressLevelProperties
 
 sealed class StressLevel(
-    override val id: Int,
+    override val id: Long,
     override val level: Int,
 ) : StressLevelProperties {
     data object One :

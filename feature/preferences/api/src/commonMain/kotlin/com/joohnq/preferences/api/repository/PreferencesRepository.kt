@@ -3,7 +3,7 @@ package com.joohnq.preferences.api.repository
 import com.joohnq.preferences.api.entity.AppPreferences
 
 interface PreferencesRepository {
-    suspend fun getUserPreferences(): AppPreferences?
+    suspend fun get(): AppPreferences?
 
     suspend fun updateSkipWelcome(value: Boolean)
 
@@ -12,4 +12,6 @@ interface PreferencesRepository {
     suspend fun updateSkipAuth(value: Boolean)
 
     suspend fun updateSkipSecurity(value: Boolean)
+
+    suspend fun updateSkipSqlMigration(value: Boolean)
 }

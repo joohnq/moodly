@@ -1,17 +1,21 @@
 package com.joohnq.database
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
+fun getDatabaseBuilder(): AppDatabase {
     val dbFilePath = documentDirectory() + "/app.db"
-    return Room.databaseBuilder<AppDatabase>(
-        name = dbFilePath
-    )
+    return Room
+        .databaseBuilder<AppDatabase>(dbFilePath)
+        .setDriver(BundledSQLiteDriver())
+        .setQueryCoroutineContext(Dispatchers.IO)
+        .build()
 }
 
 @OptIn(ExperimentalForeignApi::class)

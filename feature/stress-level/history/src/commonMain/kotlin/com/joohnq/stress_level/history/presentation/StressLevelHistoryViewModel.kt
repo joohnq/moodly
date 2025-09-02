@@ -50,7 +50,7 @@ class StressLevelHistoryViewModel(
             }.launchIn(viewModelScope)
     }
 
-    private fun delete(id: Int) {
+    private fun delete(id: Long) {
         viewModelScope.launch {
             try {
                 deleteStressLevelUseCase(id).getOrThrow()

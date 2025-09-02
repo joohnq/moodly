@@ -18,7 +18,7 @@ import com.joohnq.sleep_quality.impl.ui.entity.SleepQualityPalette
 import org.jetbrains.compose.resources.StringResource
 
 sealed class SleepQualityResource(
-    override val id: Int,
+    override val id: Long,
     override val level: Int,
     val firstText: StringResource,
     val secondText: StringResource,

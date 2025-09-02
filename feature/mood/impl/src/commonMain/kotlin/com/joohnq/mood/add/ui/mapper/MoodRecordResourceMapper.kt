@@ -68,8 +68,6 @@ object MoodRecordResourceMapper {
             createdAt = createdAt
         )
 
-    fun List<MoodRecordResource>.toDomain(): List<MoodRecord> = map { it.toDomain() }
-
     fun MoodRecord.toResource(): MoodRecordResource =
         MoodRecordResource(
             id = id,

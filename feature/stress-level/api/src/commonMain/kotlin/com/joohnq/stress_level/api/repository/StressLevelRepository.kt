@@ -8,5 +8,5 @@ interface StressLevelRepository {
 
     suspend fun add(stressLevelRecord: StressLevelRecord)
 
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 }

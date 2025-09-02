@@ -52,8 +52,6 @@ kotlin {
 
             implementation(projects.sharedResources)
 
-            implementation(projects.feature.splash.impl)
-
             implementation(libs.compose.navigation)
 
             implementation(libs.kotlin.datetime)

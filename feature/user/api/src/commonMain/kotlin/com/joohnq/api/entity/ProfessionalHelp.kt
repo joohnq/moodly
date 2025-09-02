@@ -3,7 +3,7 @@ package com.joohnq.api.entity
 import com.joohnq.api.property.ProfessionalHelpProperties
 
 sealed class ProfessionalHelp(
-    override val id: Int,
+    override val id: Long,
     override val value: Boolean,
 ) : ProfessionalHelpProperties {
     data object Yes : ProfessionalHelp(YES.id, YES.value)

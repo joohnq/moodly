@@ -70,7 +70,7 @@ class EditSelfJournalViewModel(
         }
     }
 
-    private fun getById(id: Int) {
+    private fun getById(id: Long) {
         viewModelScope.launch {
             try {
                 val res = getSelfJournalByIdUseCase(id).getOrThrow()
@@ -87,7 +87,7 @@ class EditSelfJournalViewModel(
         }
     }
 
-    private fun delete(id: Int) {
+    private fun delete(id: Long) {
         viewModelScope.launch {
             try {
                 deleteSelfJournalsUseCase(id).getOrThrow()

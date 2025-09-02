@@ -11,9 +11,13 @@ import org.koin.dsl.module
 
 val selfJournalImplModule =
     module {
+        single<SelfJournalDatabase> {
+            val driver = get<SelfJournalDriverFactory>().createDriver()
+            SelfJournalDatabase(driver)
+        }
         single<SelfJournalDatabaseSql> {
-            val driver = get<SelfJournalDriverFactory>()
-            SelfJournalDatabase(driver.createDriver()).invoke()
+            val db = get<SelfJournalDatabase>()
+            db.invoke()
         }
         singleOf(::SelfJournalRepositoryImpl) bind SelfJournalRepository::class
         includes(selfJournalDriverFactory)

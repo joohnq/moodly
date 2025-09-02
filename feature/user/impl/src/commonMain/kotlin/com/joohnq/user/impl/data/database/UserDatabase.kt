@@ -9,6 +9,10 @@ class UserDatabase(
 ) : Database<UserDatabaseSql>() {
     override operator fun invoke(): UserDatabaseSql = UserDatabaseSql(driver)
 
+    override fun drop() {
+        driver.execute(null, "DROP TABLE IF EXISTS User;", 0)
+    }
+
     companion object {
         const val DATABASE_NAME = "user.db"
     }

@@ -1,0 +1,49 @@
+CREATE TABLE IF NOT EXISTS self_journals (
+    id INTEGER PRIMARY KEY NOT NULL,
+    mood INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
+);
+
+getAll:
+SELECT * FROM self_journals ORDER BY created_at DESC;
+
+getById:
+SELECT * FROM self_journals WHERE id = :id;
+
+add:
+INSERT OR REPLACE INTO self_journals (
+mood,
+title,
+description
+) VALUES (
+:mood,
+:title,
+:description
+);
+
+addWithIdAndCreatedAt:
+INSERT OR REPLACE INTO self_journals (
+id,
+mood,
+title,
+description,
+created_at
+) VALUES (
+:id,
+:mood,
+:title,
+:description,
+:createdAt
+);
+
+deleteById:
+DELETE FROM self_journals WHERE id = :id;
+
+update:
+UPDATE self_journals SET
+mood = :mood,
+title = :title,
+description = :description
+WHERE id = :id;

@@ -11,7 +11,7 @@ sealed interface SelfJournalOverviewContract {
 
     sealed interface Intent {
         data class Delete(
-            val id: Int,
+            val id: Long,
         ) : Intent
     }
 
@@ -47,7 +47,7 @@ sealed interface SelfJournalOverviewContract {
             Event
 
         data class NavigateToEditSelfJournal(
-            val id: Int,
+            val id: Long,
         ) : Event
     }
 }

@@ -4,7 +4,7 @@ import com.joohnq.api.getNow
 import kotlinx.datetime.LocalDateTime
 
 data class Gratefulness(
-    val id: Int = 0,
+    val id: Long = -1,
     val iAmGratefulFor: String = "",
     val smallThingIAppreciate: String = "",
     val description: String = "",

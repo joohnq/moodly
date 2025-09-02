@@ -1,12 +1,15 @@
 package com.joohnq.storage.impl
 
+import android.content.Context
 import com.joohnq.storage.api.FileStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okio.FileSystem
 import okio.Path.Companion.toPath
 
-actual class FileStorageImpl : FileStorage {
+actual class FileStorageImpl(
+    private val context: Context,
+) : FileStorage {
     private val systemTemporaryPath = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
 
     actual override suspend fun saveImage(
@@ -44,4 +47,13 @@ actual class FileStorageImpl : FileStorage {
 
             imageByteArray
         }
+
+    actual override suspend fun deleteDatabase(fileName: String) {
+        withContext(Dispatchers.IO) {
+            val dbFile = context.getDatabasePath(fileName)
+            if (dbFile.exists()) {
+                dbFile.delete()
+            }
+        }
+    }
 }

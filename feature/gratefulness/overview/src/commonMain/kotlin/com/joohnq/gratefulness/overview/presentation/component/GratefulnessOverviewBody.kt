@@ -12,7 +12,7 @@ fun GratefulnessOverviewBody(
     items: List<Gratefulness>,
     quote: Quote?,
     insight: GratefulnessInsight,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
     onCreate: () -> Unit = {},
     onSeeMore: () -> Unit = {},
 ) {

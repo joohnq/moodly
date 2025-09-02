@@ -12,7 +12,7 @@ import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.NATURAL_LIG
 import com.joohnq.sleep_quality.api.entity.SleepInfluences.Companion.PHYSICAL_ACTIVITY
 
 object SleepInfluencesMapper {
-    fun Int.toSleepInfluences(): SleepInfluences =
+    fun Long.toInfluence(): SleepInfluences =
         when (this) {
             NATURAL_LIGHT.id -> SleepInfluences.NaturalLight
             PHYSICAL_ACTIVITY.id -> SleepInfluences.PhysicalActivity
@@ -25,4 +25,8 @@ object SleepInfluencesMapper {
             ALCOHOL_CONSUMPTION.id -> SleepInfluences.AlcoholConsumption
             else -> throw IllegalArgumentException("Unknown sleep influence option: $this")
         }
+
+    fun List<SleepInfluences>.mapToIds(): List<String> = this.map { it.id.toString() }
+
+    fun List<String>.toInfluence(): List<SleepInfluences> = this.map { it.toLong().toInfluence() }
 }

@@ -3,7 +3,7 @@ package com.joohnq.sleep_quality.api.entity
 import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
 
 sealed class SleepInfluences(
-    override val id: Int,
+    override val id: Long,
 ) : SleepInfluencesProperties {
     data object NaturalLight :
         SleepInfluences(NATURAL_LIGHT.id)

@@ -3,16 +3,20 @@ package com.joohnq.splash.impl.ui.presentation.splash
 import androidx.lifecycle.viewModelScope
 import com.joohnq.api.entity.User
 import com.joohnq.api.use_case.AddUserUseCase
-import com.joohnq.preferences.api.use_case.GetUserPreferencesUseCase
+import com.joohnq.preferences.api.repository.PreferencesRepository
+import com.joohnq.preferences.api.use_case.GetPreferencesUseCase
 import com.joohnq.security.api.Security
 import com.joohnq.security.api.use_case.GetSecurityUseCase
+import com.joohnq.splash.impl.SqlMigration
 import com.joohnq.ui.BaseViewModelWithoutState
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
     private val addUserUseCase: AddUserUseCase,
     private val getSecurityUseCase: GetSecurityUseCase,
-    private val getUserPreferencesUseCase: GetUserPreferencesUseCase,
+    private val getPreferencesUseCase: GetPreferencesUseCase,
+    private val sqlMigration: SqlMigration,
+    private val preferencesRepository: PreferencesRepository,
 ) : BaseViewModelWithoutState<SplashContract.Intent, SplashContract.SideEffect>() {
     override fun onIntent(intent: SplashContract.Intent) {
         when (intent) {
@@ -23,9 +27,14 @@ class SplashViewModel(
     private fun init() {
         viewModelScope.launch {
             try {
+                preferencesRepository.updateSkipSqlMigration(false)
                 addUserUseCase(User()).getOrThrow()
                 val security = getSecurityUseCase().getOrThrow()
-                val preferences = getUserPreferencesUseCase().getOrThrow()
+                val preferences = getPreferencesUseCase().getOrThrow()
+
+                if (!preferences.skipSqlMigration) {
+                    sqlMigration.invoke()
+                }
 
                 val sideEffect =
                     when {

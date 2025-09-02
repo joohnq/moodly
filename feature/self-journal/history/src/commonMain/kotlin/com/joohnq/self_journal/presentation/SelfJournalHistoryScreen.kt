@@ -7,7 +7,7 @@ import com.joohnq.ui.sharedViewModel
 
 @Composable
 fun SelfJournalHistoryScreen(
-    onNavigateEditJournaling: (Int) -> Unit,
+    onNavigateEditJournaling: (Long) -> Unit,
     onGoBack: () -> Unit,
     viewModel: SelfJournalHistoryViewModel = sharedViewModel(),
 ) {

@@ -11,7 +11,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)
-            implementation(libs.android.driver)
+            implementation(libs.sqldelight.android.driver)
         }
         commonMain.dependencies {
             implementation(projects.core.database)
@@ -47,7 +47,7 @@ kotlin {
             implementation(libs.sqldelight.native.driver)
         }
         jvmMain.dependencies {
-            implementation(libs.sqldelight.jvm)
+            implementation(libs.sqldelight.jvm.driver)
         }
     }
 }

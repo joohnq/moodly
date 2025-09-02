@@ -11,7 +11,7 @@ import com.joohnq.api.entity.MedicationsSupplements.PreferNotToSay
 import com.joohnq.api.entity.MedicationsSupplements.PrescribedMedications
 
 object MedicationsSupplementsMapper {
-    fun Int.toMedicationsSupplements(): MedicationsSupplements =
+    fun Long.toMedicationsSupplements(): MedicationsSupplements =
         when (this) {
             PRESCRIBED_MEDICATIONS.id -> PrescribedMedications
             OVER_THE_COUNTER_SUPPLEMENTS.id -> OverTheCounterSupplements
@@ -19,6 +19,4 @@ object MedicationsSupplementsMapper {
             PREFER_NOT_TO_SAY.id -> PreferNotToSay
             else -> throw IllegalArgumentException("Unknown medications supplements option: $this")
         }
-
-    fun MedicationsSupplements?.toInt(): Int = this?.id ?: -1
 }

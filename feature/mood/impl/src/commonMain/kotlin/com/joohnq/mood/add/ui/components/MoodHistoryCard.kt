@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MoodHistoryCard(
     modifier: Modifier = Modifier,
     item: MoodRecordResource,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier.fillMaxWidth(),

@@ -7,9 +7,3 @@ CREATE TABLE IF NOT EXISTS MoodRecord (
 
 getMoodRecords:
 SELECT * FROM MoodRecord ORDER BY createdAt DESC;
-
-addMoodRecord:
-INSERT INTO MoodRecord (mood, description) VALUES (:mood, :description);
-
-deleteMoodRecord:
-DELETE FROM MoodRecord WHERE id = :id;

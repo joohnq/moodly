@@ -8,5 +8,5 @@ interface MoodRepository {
 
     suspend fun add(record: MoodRecord)
 
-    suspend fun delete(id: Int)
+    suspend fun deleteById(id: Long)
 }

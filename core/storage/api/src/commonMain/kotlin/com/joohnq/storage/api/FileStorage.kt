@@ -11,4 +11,8 @@ interface FileStorage {
         directory: String,
         fileName: String,
     ): ByteArray?
+
+    suspend fun deleteDatabase(
+        fileName: String,
+    )
 }

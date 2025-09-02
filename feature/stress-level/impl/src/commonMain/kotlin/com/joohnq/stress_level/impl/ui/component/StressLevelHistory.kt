@@ -19,7 +19,7 @@ import com.joohnq.stress_level.impl.ui.resource.StressLevelRecordResource
 fun StressLevelHistory(
     modifier: Modifier = Modifier,
     items: List<StressLevelRecordResource>,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
     onAddStressLevel: () -> Unit = {},
     onSeeMore: () -> Unit = {},
 ) {

@@ -21,7 +21,7 @@ fun GratefulnessOverviewHistory(
     modifier: Modifier = Modifier,
     items: List<Gratefulness>,
     onCreate: () -> Unit,
-    onDelete: (Int) -> Unit,
+    onDelete: (Long) -> Unit,
     onSeeMore: () -> Unit = {},
 ) {
     SectionHeader(

@@ -11,7 +11,7 @@ import com.joohnq.stress_level.api.entity.Stressor.Companion.RELATIONSHIP
 import com.joohnq.stress_level.api.entity.Stressor.Companion.WORK
 
 object StressorMapper {
-    fun Int.toStressor(): Stressor =
+    fun Long.toStressor(): Stressor =
         when (this) {
             WORK.id -> Stressor.Work
             RELATIONSHIP.id -> Stressor.Relationship
@@ -25,4 +25,8 @@ object StressorMapper {
         }
 
     fun Stressor?.toString(): String = this?.id.toString()
+
+    fun List<Stressor>.join(): List<String> = this.map { it.id.toString() }
+
+    fun List<String>.toStressors(): List<Stressor> = this.map { it.toLong().toStressor() }
 }

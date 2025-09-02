@@ -8,5 +8,5 @@ interface SleepQualityRepository {
 
     suspend fun add(record: SleepQualityRecord)
 
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 }

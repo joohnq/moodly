@@ -3,20 +3,15 @@ package com.joohnq.stress_level.impl.ui.resource
 import com.joohnq.shared_resources.Res
 import com.joohnq.shared_resources.five_number
 import com.joohnq.shared_resources.four_number
-import com.joohnq.shared_resources.high
 import com.joohnq.shared_resources.level_five_angry
 import com.joohnq.shared_resources.level_four_irritated
 import com.joohnq.shared_resources.level_one_zen
 import com.joohnq.shared_resources.level_three_normal
 import com.joohnq.shared_resources.level_two_calm
-import com.joohnq.shared_resources.mild
-import com.joohnq.shared_resources.moderate
-import com.joohnq.shared_resources.none
 import com.joohnq.shared_resources.one_number
 import com.joohnq.shared_resources.theme.Colors
 import com.joohnq.shared_resources.three_number
 import com.joohnq.shared_resources.two_number
-import com.joohnq.shared_resources.very_high
 import com.joohnq.shared_resources.you_are_a_little_stressed_out
 import com.joohnq.shared_resources.you_are_extremely_stressed_out
 import com.joohnq.shared_resources.you_are_neutral
@@ -32,11 +27,10 @@ import com.joohnq.stress_level.api.property.StressLevelProperties
 import org.jetbrains.compose.resources.StringResource
 
 sealed class StressLevelResource(
-    override val id: Int,
+    override val id: Long,
     val value: StringResource,
     val text: StringResource,
     val subtitle: StringResource,
-    val lifeImpact: StringResource,
     override val level: Int,
     val palette: StressLevelPalette,
 ) : StressLevelProperties {
@@ -47,7 +41,6 @@ sealed class StressLevelResource(
             text = Res.string.you_are_not_stressed_out,
             subtitle = Res.string.level_one_zen,
             level = ONE.level,
-            lifeImpact = Res.string.none,
             palette =
                 StressLevelPalette(
                     color = Colors.Green60,
@@ -63,7 +56,6 @@ sealed class StressLevelResource(
             text = Res.string.you_are_a_little_stressed_out,
             subtitle = Res.string.level_two_calm,
             level = TWO.level,
-            lifeImpact = Res.string.mild,
             palette =
                 StressLevelPalette(
                     color = Colors.Yellow50,
@@ -79,7 +71,6 @@ sealed class StressLevelResource(
             text = Res.string.you_are_neutral,
             subtitle = Res.string.level_three_normal,
             level = THREE.level,
-            lifeImpact = Res.string.moderate,
             palette =
                 StressLevelPalette(
                     color = Colors.Yellow50,
@@ -95,7 +86,6 @@ sealed class StressLevelResource(
             text = Res.string.you_are_very_stressed_out,
             subtitle = Res.string.level_four_irritated,
             level = FOUR.level,
-            lifeImpact = Res.string.high,
             palette =
                 StressLevelPalette(
                     color = Colors.Orange60,
@@ -111,7 +101,6 @@ sealed class StressLevelResource(
             text = Res.string.you_are_extremely_stressed_out,
             subtitle = Res.string.level_five_angry,
             level = FIVE.level,
-            lifeImpact = Res.string.very_high,
             palette =
                 StressLevelPalette(
                     color = Colors.Orange60,

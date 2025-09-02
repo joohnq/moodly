@@ -7,8 +7,6 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.database)
-
             implementation(projects.core.domain)
 
             implementation(projects.core.ui)
@@ -20,8 +18,6 @@ kotlin {
 
             implementation(projects.feature.mood.api)
             implementation(projects.feature.mood.impl)
-
-            implementation(projects.feature.splash.impl)
 
             implementation(libs.coroutines.extensions)
             implementation(libs.serialization)

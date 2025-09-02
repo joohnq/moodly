@@ -5,7 +5,7 @@ import com.joohnq.mood.add.ui.resource.MoodResource
 import kotlinx.datetime.LocalDateTime
 
 data class SelfJournalRecordResource(
-    val id: Int = -1,
+    val id: Long = -1,
     val mood: MoodResource = MoodResource.Neutral,
     val title: String = "",
     val description: String = "",

@@ -7,7 +7,7 @@ import kotlinx.datetime.LocalDateTime
 
 @Entity(tableName = "gratefulness")
 data class GratefulnessDTO(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val iAmGratefulFor: String,
     val smallThingIAppreciate: String,
     val description: String,

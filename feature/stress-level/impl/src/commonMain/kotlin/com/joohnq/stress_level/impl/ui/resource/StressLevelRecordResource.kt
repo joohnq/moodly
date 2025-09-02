@@ -5,7 +5,7 @@ import com.joohnq.stress_level.impl.ui.resource.StressorResource.Companion.allSt
 import kotlinx.datetime.LocalDateTime
 
 data class StressLevelRecordResource(
-    val id: Int = -1,
+    val id: Long = -1,
     val stressLevel: StressLevelResource = StressLevelResource.One,
     val stressors: List<StressorResource> = emptyList(),
     val createdAt: LocalDateTime = getNow(),

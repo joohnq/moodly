@@ -11,9 +11,13 @@ import org.koin.dsl.module
 
 val stressLevelImplModule =
     module {
+        single<StressLevelDatabase> {
+            val driver = get<StressLevelDriverFactory>().createDriver()
+            StressLevelDatabase(driver)
+        }
         single<StressLevelDatabaseSql> {
-            val driver = get<StressLevelDriverFactory>()
-            StressLevelDatabase(driver.createDriver()).invoke()
+            val db = get<StressLevelDatabase>()
+            db.invoke()
         }
         singleOf(::StressLevelRepositoryImpl) bind StressLevelRepository::class
         includes(stressLevelDriverFactoryModule)

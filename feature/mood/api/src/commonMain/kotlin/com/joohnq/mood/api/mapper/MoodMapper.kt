@@ -8,7 +8,7 @@ import com.joohnq.mood.api.entity.Mood.Companion.OVERJOYED
 import com.joohnq.mood.api.entity.Mood.Companion.SAD
 
 object MoodMapper {
-    fun Int.toMood(): Mood =
+    fun Long.toMood(): Mood =
         when (this) {
             DEPRESSED.id -> Mood.Depressed
             SAD.id -> Mood.Sad
@@ -17,6 +17,4 @@ object MoodMapper {
             OVERJOYED.id -> Mood.Overjoyed
             else -> throw IllegalArgumentException("Unknown mood: $this")
         }
-
-    fun Mood?.toInt(): Int = this?.id ?: -1
 }

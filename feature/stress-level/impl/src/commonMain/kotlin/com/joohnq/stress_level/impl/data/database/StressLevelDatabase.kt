@@ -9,6 +9,10 @@ class StressLevelDatabase(
 ) : Database<StressLevelDatabaseSql>() {
     override operator fun invoke(): StressLevelDatabaseSql = StressLevelDatabaseSql(driver)
 
+    override fun drop() {
+        driver.execute(null, "DROP TABLE IF EXISTS StressLevelRecord;", 0)
+    }
+
     companion object {
         const val DATABASE_NAME = "stress_level.db"
     }

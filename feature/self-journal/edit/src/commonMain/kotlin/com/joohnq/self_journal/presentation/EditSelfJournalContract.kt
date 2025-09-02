@@ -23,11 +23,11 @@ sealed interface EditSelfJournalContract {
         data object FreeDescriptionFocus : Intent
 
         data class GetById(
-            val id: Int,
+            val id: Long,
         ) : Intent
 
         data class Delete(
-            val id: Int,
+            val id: Long,
         ) : Intent
 
         data class ChangeTitle(

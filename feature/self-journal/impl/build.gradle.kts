@@ -19,8 +19,6 @@ kotlin {
 
             implementation(projects.sharedResources)
 
-            implementation(projects.feature.splash.impl)
-
             implementation(projects.feature.freudScore.api)
             implementation(projects.feature.freudScore.impl)
 
@@ -45,13 +43,13 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)
-            implementation(libs.android.driver)
+            implementation(libs.sqldelight.android.driver)
         }
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)
         }
         jvmMain.dependencies {
-            implementation(libs.sqldelight.jvm)
+            implementation(libs.sqldelight.jvm.driver)
         }
     }
 }

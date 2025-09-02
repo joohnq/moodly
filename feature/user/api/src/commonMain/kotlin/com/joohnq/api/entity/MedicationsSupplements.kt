@@ -3,7 +3,7 @@ package com.joohnq.api.entity
 import com.joohnq.api.property.MedicationsSupplementsProperties
 
 sealed class MedicationsSupplements(
-    override val id: Int,
+    override val id: Long,
 ) : MedicationsSupplementsProperties {
     data object PrescribedMedications : MedicationsSupplements(PRESCRIBED_MEDICATIONS.id)
 

@@ -1,6 +1,6 @@
 package com.joohnq.api.property
 
 interface ProfessionalHelpProperties {
-    val id: Int
+    val id: Long
     val value: Boolean
 }

@@ -1,6 +1,6 @@
 package com.joohnq.preferences.api.di
 
-import com.joohnq.preferences.api.use_case.GetUserPreferencesUseCase
+import com.joohnq.preferences.api.use_case.GetPreferencesUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipAuthUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipOnboardingUseCase
 import com.joohnq.preferences.api.use_case.UpdateSkipSecurityUseCase
@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val preferencesApiModule =
     module {
-        factoryOf(::GetUserPreferencesUseCase)
+        factoryOf(::GetPreferencesUseCase)
         factoryOf(::UpdateSkipAuthUseCase)
         factoryOf(::UpdateSkipOnboardingUseCase)
         factoryOf(::UpdateSkipWelcomeUseCase)

@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 interface SelfJournalRepository {
     fun observe(): Flow<List<SelfJournalRecord>>
 
-    suspend fun getById(id: Int): SelfJournalRecord
+    suspend fun getById(id: Long): SelfJournalRecord
 
     suspend fun add(record: SelfJournalRecord)
 
-    suspend fun delete(id: Int)
+    suspend fun deleteById(id: Long)
 
     suspend fun update(record: SelfJournalRecord)
 }

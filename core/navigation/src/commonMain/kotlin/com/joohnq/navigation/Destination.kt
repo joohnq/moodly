@@ -121,7 +121,7 @@ sealed interface Destination {
 
         @Serializable
         data class EditSelfJournal(
-            val id: Int,
+            val id: Long,
         ) : Destination
     }
 }

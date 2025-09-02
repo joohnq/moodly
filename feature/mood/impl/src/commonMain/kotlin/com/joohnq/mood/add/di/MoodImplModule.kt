@@ -11,9 +11,13 @@ import org.koin.dsl.module
 
 val moodImplModule =
     module {
+        single<MoodDatabase> {
+            val driver = get<MoodDriverFactory>().createDriver()
+            MoodDatabase(driver)
+        }
         single<MoodDatabaseSql> {
-            val driver = get<MoodDriverFactory>()
-            MoodDatabase(driver.createDriver()).invoke()
+            val db = get<MoodDatabase>()
+            db.invoke()
         }
         singleOf(::MoodRepositoryImpl) bind MoodRepository::class
         includes(moodDriverFactoryModule)

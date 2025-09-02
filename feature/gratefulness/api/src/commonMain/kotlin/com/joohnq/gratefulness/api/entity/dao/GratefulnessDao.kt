@@ -11,6 +11,9 @@ interface GratefulnessDao {
     @Query("SELECT * FROM gratefulness")
     fun observe(): Flow<List<GratefulnessDTO>>
 
+    @Query("SELECT * FROM gratefulness")
+    suspend fun getAll(): List<GratefulnessDTO>
+
     @Insert
     suspend fun add(item: GratefulnessDTO)
 

@@ -3,7 +3,7 @@ package com.joohnq.api.entity
 import com.joohnq.api.property.PhysicalSymptomsProperties
 
 sealed class PhysicalSymptoms(
-    override val id: Int,
+    override val id: Long,
 ) : PhysicalSymptomsProperties {
     data object YesVeryPainful : PhysicalSymptoms(YES_VERY_PAINFUL.id)
 

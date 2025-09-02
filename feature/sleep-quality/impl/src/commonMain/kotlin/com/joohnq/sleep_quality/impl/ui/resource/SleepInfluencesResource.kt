@@ -23,14 +23,20 @@ import com.joohnq.sleep_quality.api.property.SleepInfluencesProperties
 import org.jetbrains.compose.resources.StringResource
 
 sealed class SleepInfluencesResource(
-    override val id: Int,
+    override val id: Long,
     val title: StringResource,
 ) : SleepInfluencesProperties {
     data object NaturalLight :
-        SleepInfluencesResource(id = NATURAL_LIGHT.id, title = Res.string.exposure_to_natural_light)
+        SleepInfluencesResource(
+            id = NATURAL_LIGHT.id,
+            title = Res.string.exposure_to_natural_light
+        )
 
     data object PhysicalActivity :
-        SleepInfluencesResource(id = PHYSICAL_ACTIVITY.id, title = Res.string.physical_activity)
+        SleepInfluencesResource(
+            id = PHYSICAL_ACTIVITY.id,
+            title = Res.string.physical_activity
+        )
 
     data object ChillSleepEnvironment :
         SleepInfluencesResource(
@@ -39,9 +45,16 @@ sealed class SleepInfluencesResource(
         )
 
     data object Meditation :
-        SleepInfluencesResource(id = MEDITATION.id, title = Res.string.meditation)
+        SleepInfluencesResource(
+            id = MEDITATION.id,
+            title = Res.string.meditation
+        )
 
-    data object Caffeine : SleepInfluencesResource(id = CAFFEINE.id, title = Res.string.caffeine)
+    data object Caffeine :
+        SleepInfluencesResource(
+            id = CAFFEINE.id,
+            title = Res.string.caffeine
+        )
 
     data object ExcessiveScreenTime :
         SleepInfluencesResource(
@@ -50,12 +63,22 @@ sealed class SleepInfluencesResource(
         )
 
     data object HighStress :
-        SleepInfluencesResource(id = HIGH_STRESS.id, title = Res.string.high_stress)
+        SleepInfluencesResource(
+            id = HIGH_STRESS.id,
+            title = Res.string.high_stress
+        )
 
-    data object Anxiety : SleepInfluencesResource(id = ANXIETY.id, title = Res.string.anxiety)
+    data object Anxiety :
+        SleepInfluencesResource(
+            id = ANXIETY.id,
+            title = Res.string.anxiety
+        )
 
     data object AlcoholConsumption :
-        SleepInfluencesResource(id = ALCOHOL_CONSUMPTION.id, title = Res.string.alcohol_consumption)
+        SleepInfluencesResource(
+            id = ALCOHOL_CONSUMPTION.id,
+            title = Res.string.alcohol_consumption
+        )
 
     companion object {
         val allSleepInfluences =

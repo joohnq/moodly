@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.StringResource
 
 sealed class StressorResource(
     val text: StringResource,
-    override val id: Int,
+    override val id: Long,
     val color: Color,
     val icon: DrawableResource,
 ) : StressorProperties {

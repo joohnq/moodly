@@ -11,7 +11,7 @@ import com.joohnq.mood.add.ui.resource.MoodRecordResource
 fun MoodHistoryBody(
     modifier: Modifier = Modifier,
     items: List<MoodRecordResource>,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
         items.forEach { record ->

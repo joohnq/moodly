@@ -9,10 +9,3 @@ CREATE TABLE IF NOT EXISTS SleepQualityRecord (
 
 getSleepQualities:
 SELECT * FROM SleepQualityRecord ORDER BY createdAt DESC;
-
-addSleepQuality:
-INSERT INTO SleepQualityRecord (sleepQuality, startSleeping, endSleeping, sleepInfluences)
-VALUES (:sleepQuality, :startSleeping, :endSleeping, :sleepInfluencess);
-
-deleteSleepQuality:
-DELETE FROM SleepQualityRecord WHERE id = :id;

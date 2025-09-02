@@ -7,14 +7,10 @@ import com.joohnq.api.entity.ProfessionalHelp.No
 import com.joohnq.api.entity.ProfessionalHelp.Yes
 
 object ProfessionalHelpMapper {
-    fun Int.toProfessionalHelp(): ProfessionalHelp =
+    fun Long.toProfessionalHelp(): ProfessionalHelp =
         when (this) {
             YES.id -> Yes
             NO.id -> No
             else -> throw IllegalArgumentException("Unknown professional help option: $this")
         }
-
-    fun ProfessionalHelp?.toInt(): Int = this?.id ?: -1
-
-    fun getAllProfessionalHelp(): List<ProfessionalHelp> = listOf(Yes, No)
 }

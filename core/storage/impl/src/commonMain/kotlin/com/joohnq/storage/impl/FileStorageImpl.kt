@@ -13,4 +13,6 @@ expect class FileStorageImpl : FileStorage {
         directory: String,
         fileName: String,
     ): ByteArray?
+
+    override suspend fun deleteDatabase(fileName: String)
 }

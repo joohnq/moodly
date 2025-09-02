@@ -9,6 +9,10 @@ class SleepQualityDatabase(
 ) : Database<SleepQualityDatabaseSql>() {
     override operator fun invoke(): SleepQualityDatabaseSql = SleepQualityDatabaseSql(driver)
 
+    override fun drop() {
+        driver.execute(null, "DROP TABLE IF EXISTS SleepQualityRecord;", 0)
+    }
+
     companion object {
         const val DATABASE_NAME = "sleep_quality.db"
     }

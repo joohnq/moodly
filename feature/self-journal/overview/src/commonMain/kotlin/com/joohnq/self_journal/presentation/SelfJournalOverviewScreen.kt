@@ -10,7 +10,7 @@ fun SelfJournalOverviewScreen(
     onNavigateAddSelfJournal: () -> Unit,
     onNavigateToSelfJournalHistory: () -> Unit,
     onGoBack: () -> Unit,
-    onEditSelfJournal: (Int) -> Unit,
+    onEditSelfJournal: (Long) -> Unit,
     viewModel: SelfJournalOverviewViewModel = sharedViewModel(),
 ) {
     val state by viewModel.state.collectAsState()

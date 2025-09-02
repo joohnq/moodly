@@ -47,7 +47,7 @@ class SleepQualityHistoryViewModel(
             }.launchIn(viewModelScope)
     }
 
-    private fun delete(id: Int) {
+    private fun delete(id: Long) {
         viewModelScope.launch {
             try {
                 deleteSleepQualityUseCase(id).getOrThrow()

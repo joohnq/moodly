@@ -114,8 +114,8 @@ fun SelfJournalHistoryCard(
     isNotFirst: Boolean,
     isNotLast: Boolean,
     item: SelfJournalRecordResource,
-    onClick: (Int) -> Unit = {},
-    onDelete: (Int) -> Unit = {},
+    onClick: (Long) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier.background(color = Colors.White, shape = Dimens.Shape.Large),

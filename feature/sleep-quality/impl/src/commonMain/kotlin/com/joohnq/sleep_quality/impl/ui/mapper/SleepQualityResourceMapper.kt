@@ -74,20 +74,20 @@ object SleepQualityResourceMapper {
     fun SleepQualityRecordResource.toDomain(): SleepQualityRecord =
         SleepQualityRecord(
             id = id,
-            sleepQuality = sleepQuality.toDomain(),
-            startSleeping = startSleeping,
-            endSleeping = endSleeping,
-            sleepInfluences = sleepInfluences.toDomain(),
+            quality = sleepQuality.toDomain(),
+            start = startSleeping,
+            end = endSleeping,
+            influences = sleepInfluences.toDomain(),
             createdAt = createdAt
         )
 
     fun SleepQualityRecord.toResource(): SleepQualityRecordResource =
         SleepQualityRecordResource(
             id = id,
-            sleepQuality = sleepQuality.toResource(),
-            startSleeping = startSleeping,
-            endSleeping = endSleeping,
-            sleepInfluences = sleepInfluences.toResource(),
+            sleepQuality = quality.toResource(),
+            startSleeping = start,
+            endSleeping = end,
+            sleepInfluences = influences.toResource(),
             createdAt = createdAt
         )
 

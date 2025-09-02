@@ -7,15 +7,11 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.database)
-
             implementation(projects.core.ui)
 
             implementation(projects.core.domain)
 
             implementation(projects.sharedResources)
-
-            implementation(projects.feature.splash.impl)
 
             implementation(projects.feature.freudScore.api)
             implementation(projects.feature.freudScore.impl)

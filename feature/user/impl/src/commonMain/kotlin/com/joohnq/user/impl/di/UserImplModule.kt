@@ -11,9 +11,13 @@ import org.koin.dsl.module
 
 val userImplModule =
     module {
+        single<UserDatabase> {
+            val driver = get<UserDriverFactory>().createDriver()
+            UserDatabase(driver)
+        }
         single<UserDatabaseSql> {
-            val driver = get<UserDriverFactory>()
-            UserDatabase(driver.createDriver()).invoke()
+            val db = get<UserDatabase>()
+            db.invoke()
         }
         singleOf(::UserRepositoryImpl) bind UserRepository::class
         includes(userDriverFactoryModule)

@@ -5,9 +5,9 @@ import com.joohnq.mood.api.repository.MoodRepository
 class DeleteMoodUseCase(
     private val repository: MoodRepository,
 ) {
-    suspend operator fun invoke(id: Int): Result<Unit> =
+    suspend operator fun invoke(id: Long): Result<Unit> =
         try {
-            repository.delete(id)
+            repository.deleteById(id)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

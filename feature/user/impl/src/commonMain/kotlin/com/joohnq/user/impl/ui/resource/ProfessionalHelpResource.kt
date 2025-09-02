@@ -8,7 +8,7 @@ import com.joohnq.shared_resources.yes
 import org.jetbrains.compose.resources.StringResource
 
 sealed class ProfessionalHelpResource(
-    val id: Int,
+    val id: Long,
     val text: StringResource,
     val value: Boolean,
 ) {

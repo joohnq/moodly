@@ -5,7 +5,7 @@ import com.joohnq.sleep_quality.api.repository.SleepQualityRepository
 class DeleteSleepQualityUseCase(
     private val repository: SleepQualityRepository,
 ) {
-    suspend operator fun invoke(id: Int): Result<Unit> =
+    suspend operator fun invoke(id: Long): Result<Unit> =
         try {
             repository.delete(id)
             Result.success(Unit)

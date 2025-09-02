@@ -5,9 +5,9 @@ import com.joohnq.self_journal.api.repository.SelfJournalRepository
 class DeleteSelfJournalsUseCase(
     private val repository: SelfJournalRepository,
 ) {
-    suspend operator fun invoke(item: Int): Result<Unit> =
+    suspend operator fun invoke(item: Long): Result<Unit> =
         try {
-            repository.delete(item)
+            repository.deleteById(item)
 
             Result.success(Unit)
         } catch (e: Exception) {

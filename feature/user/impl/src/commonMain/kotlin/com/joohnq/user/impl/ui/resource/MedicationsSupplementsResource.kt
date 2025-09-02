@@ -15,7 +15,7 @@ import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.StringResource
 
 sealed class MedicationsSupplementsResource(
-    override val id: Int,
+    override val id: Long,
     val text: StringResource,
     val icon: IconResource,
 ) : MedicationsSupplementsProperties {

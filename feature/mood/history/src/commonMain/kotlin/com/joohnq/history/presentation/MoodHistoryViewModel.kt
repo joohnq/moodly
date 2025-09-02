@@ -43,7 +43,7 @@ class MoodHistoryViewModel(
             }.launchIn(viewModelScope)
     }
 
-    private fun delete(id: Int) {
+    private fun delete(id: Long) {
         viewModelScope.launch {
             try {
                 deleteMoodUseCase(id).getOrThrow()
@@ -51,9 +51,7 @@ class MoodHistoryViewModel(
                 updateState {
                     it.copy(
                         items =
-                            it.items.filter { mood ->
-                                mood.id != id
-                            }
+                            it.items.filter { mood -> mood.id != id }
                     )
                 }
             } catch (e: Exception) {

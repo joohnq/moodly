@@ -9,7 +9,7 @@ interface SelfJournalHistoryContract {
 
     sealed interface Intent {
         data class Delete(
-            val id: Int,
+            val id: Long,
         ) : Intent
     }
 
@@ -29,7 +29,7 @@ interface SelfJournalHistoryContract {
         data object GoBack : Event
 
         data class NavigateToEditSelfJournal(
-            val id: Int,
+            val id: Long,
         ) : Event
     }
 }

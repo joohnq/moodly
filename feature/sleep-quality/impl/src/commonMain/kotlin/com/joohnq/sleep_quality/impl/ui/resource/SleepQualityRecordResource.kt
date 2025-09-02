@@ -6,7 +6,7 @@ import com.joohnq.sleep_quality.impl.ui.resource.SleepInfluencesResource.Compani
 import kotlinx.datetime.LocalDate
 
 data class SleepQualityRecordResource(
-    val id: Int = -1,
+    val id: Long = -1,
     val sleepQuality: SleepQualityResource = SleepQualityResource.Fair,
     val startSleeping: Time = Time(0, 0),
     val endSleeping: Time = Time(0, 0),

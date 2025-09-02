@@ -1,0 +1,47 @@
+import kotlin.String;
+import kotlin.collections.List;
+
+CREATE TABLE IF NOT EXISTS sleep_qualities (
+    id INTEGER PRIMARY KEY NOT NULL,
+    quality INTEGER NOT NULL,
+    start TEXT NOT NULL,
+    end TEXT NOT NULL,
+    influences TEXT AS List<String> NOT NULL,
+    created_at TEXT DEFAULT CURRENT_DATE NOT NULL UNIQUE
+);
+
+getAll:
+SELECT * FROM sleep_qualities ORDER BY created_at DESC;
+
+add:
+INSERT OR REPLACE INTO sleep_qualities (
+quality,
+start,
+end,
+influences
+) VALUES (
+:quality,
+:start,
+:end,
+:influences
+);
+
+addWithIdAndCreatedAt:
+INSERT OR REPLACE INTO sleep_qualities (
+id,
+quality,
+start,
+end,
+influences,
+created_at
+) VALUES (
+:id,
+:quality,
+:start,
+:end,
+:influences,
+:createdAt
+);
+
+deleteById:
+DELETE FROM sleep_qualities WHERE id = :id;

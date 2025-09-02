@@ -5,4 +5,5 @@ data class AppPreferences(
     val skipOnboarding: Boolean = false,
     val skipAuth: Boolean = false,
     val skipSecurity: Boolean = false,
+    val skipSqlMigration: Boolean = false,
 )

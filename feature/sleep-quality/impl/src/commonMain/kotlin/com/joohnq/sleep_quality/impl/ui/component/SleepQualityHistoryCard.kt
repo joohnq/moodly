@@ -31,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SleepQualityHistoryCard(
     modifier: Modifier = Modifier,
     item: SleepQualityRecordResource,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
 ) {
     val duration =
         calculateDuration(

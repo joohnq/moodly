@@ -17,8 +17,8 @@ fun SelfJournalOverviewHistory(
     modifier: Modifier = Modifier,
     items: List<SelfJournalRecordResource>,
     onCreate: () -> Unit = {},
-    onClick: (Int) -> Unit = {},
-    onDelete: (Int) -> Unit = {},
+    onClick: (Long) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
     onSeeMore: () -> Unit = {},
 ) {
     SectionHeader(

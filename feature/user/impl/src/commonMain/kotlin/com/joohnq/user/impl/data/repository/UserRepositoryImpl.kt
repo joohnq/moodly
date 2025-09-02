@@ -2,83 +2,65 @@ package com.joohnq.user.impl.data.repository
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
-import com.joohnq.api.converter.UserConverter
 import com.joohnq.api.entity.ImageType
 import com.joohnq.api.entity.MedicationsSupplements
 import com.joohnq.api.entity.PhysicalSymptoms
 import com.joohnq.api.entity.ProfessionalHelp
 import com.joohnq.api.entity.User
 import com.joohnq.api.mapper.ImageTypeMapper.toImageType
-import com.joohnq.api.mapper.ImageTypeMapper.toValue
+import com.joohnq.api.mapper.MedicationsSupplementsMapper.toMedicationsSupplements
+import com.joohnq.api.mapper.PhysicalSymptomsMapper.toPhysicalSymptoms
+import com.joohnq.api.mapper.ProfessionalHelpMapper.toProfessionalHelp
 import com.joohnq.api.repository.UserRepository
-import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.user.database.UserDatabaseSql
+import com.joohnq.database.AppDatabaseSql
+import com.joohnq.database.mapper.LocalDateMapper.toLocalDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(
-    private val database: UserDatabaseSql,
+    private val database: AppDatabaseSql,
 ) : UserRepository {
-    private val query = database.userQueries
+    private val query = database.usersQueries
 
     override fun observe(): Flow<User?> =
         query
-            .getUser {
-                id,
-                name,
-                image,
-                imageType,
-                medicationsSupplements,
-                soughtHelp,
-                physicalSymptoms,
-                dateCreated,
-                ->
-                User(
-                    id = id.toInt(),
-                    name = name,
-                    image = image,
-                    imageType = imageType.toImageType(),
-                    medicationsSupplements =
-                        UserConverter.toMedicationsSupplements(
-                            medicationsSupplements
-                        ),
-                    soughtHelp = UserConverter.toProfessionalHelp(soughtHelp),
-                    physicalSymptoms = UserConverter.toPhysicalSymptoms(physicalSymptoms),
-                    dateCreated = LocalDateTimeConverter.toLocalDate(dateCreated)
-                )
-            }.asFlow()
+            .get(userMapper)
+            .asFlow()
             .mapToOneOrNull(Dispatchers.IO)
 
     override suspend fun add(user: User) {
         withContext(Dispatchers.IO) {
-            query.addUser(
-                id = user.id.toLong(),
+            query.add(
+                id = user.id,
                 name = user.name,
                 image = user.image,
                 imageType = user.imageType.name,
-                medicationsSupplements = UserConverter.fromMedicationsSupplements(user.medicationsSupplements),
-                physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),
-                soughtHelp = UserConverter.fromProfessionalHelp(user.soughtHelp)
+                medicationsSupplements = user.medicationsSupplements.id,
+                physicalSymptoms = user.physicalSymptoms.id,
+                soughtHelp = user.soughtHelp.id
             )
         }
     }
 
     override suspend fun update(user: User) {
         withContext(Dispatchers.IO) {
-            query.updateUser(
+            query.update(
                 name = user.name,
-                medicationsSupplements = UserConverter.fromMedicationsSupplements(user.medicationsSupplements),
-                physicalSymptoms = UserConverter.fromPhysicalSymptoms(user.physicalSymptoms),
-                soughtHelp = UserConverter.fromProfessionalHelp(user.soughtHelp)
+                image = user.image,
+                imageType = user.imageType.name,
+                medicationsSupplements = user.medicationsSupplements.id,
+                physicalSymptoms = user.physicalSymptoms.id,
+                soughtProfessionalHelp = user.soughtHelp.id,
+                createdAt = user.createdAt.toString()
             )
         }
     }
 
     override suspend fun updateUserName(name: String) {
         withContext(Dispatchers.IO) {
-            query.updateUserName(name)
+            query.updateName(name)
         }
     }
 
@@ -87,27 +69,41 @@ class UserRepositoryImpl(
         imageType: ImageType,
     ) {
         withContext(Dispatchers.IO) {
-            query.updateUserImage(image, imageType.toValue())
+            query.updateImage(image, imageType.toString())
         }
     }
 
     override suspend fun updateSoughtHelp(soughtHelp: ProfessionalHelp) {
         withContext(Dispatchers.IO) {
-            query.updateSoughtHelp(UserConverter.fromProfessionalHelp(soughtHelp))
+            query.updateSoughtProfessionalHelp(soughtHelp.id)
         }
     }
 
     override suspend fun updatePhysicalSymptoms(physicalSymptoms: PhysicalSymptoms) {
         withContext(Dispatchers.IO) {
-            query.updatePhysicalSymptoms(UserConverter.fromPhysicalSymptoms(physicalSymptoms))
+            query.updatePhysicalSymptoms(physicalSymptoms.id)
         }
     }
 
     override suspend fun updateMedicationsSupplements(medicationsSupplements: MedicationsSupplements) {
         withContext(Dispatchers.IO) {
             query.updateMedicationsSupplements(
-                UserConverter.fromMedicationsSupplements(medicationsSupplements)
+                medicationsSupplements.id
             )
         }
     }
 }
+
+val userMapper: (Long, String, String?, String, Long, Long, Long, String) -> User =
+    { id, name, image, imageType, medicationsSupplements, soughtHelp, physicalSymptoms, dateCreated ->
+        User(
+            id = id,
+            name = name,
+            image = image,
+            imageType = imageType.toImageType(),
+            medicationsSupplements = medicationsSupplements.toMedicationsSupplements(),
+            soughtHelp = soughtHelp.toProfessionalHelp(),
+            physicalSymptoms = physicalSymptoms.toPhysicalSymptoms(),
+            createdAt = dateCreated.toLocalDate()
+        )
+    }

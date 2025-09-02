@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS gratefulnesses (
+    id INTEGER PRIMARY KEY NOT NULL,
+    i_am_grateful_for TEXT NOT NULL,
+    small_thing_i_appreciate TEXT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
+);
+
+getAll:
+SELECT * FROM gratefulnesses ORDER BY created_at DESC;
+
+add:
+INSERT OR REPLACE INTO gratefulnesses (
+i_am_grateful_for,
+small_thing_i_appreciate,
+description
+) VALUES (
+:iAmGratefulFor,
+:smallThingIAppreciate,
+:description
+);
+
+addWithIdAndCreatedAt:
+INSERT OR REPLACE INTO gratefulnesses (
+id,
+i_am_grateful_for,
+small_thing_i_appreciate,
+description,
+created_at
+) VALUES (
+:id,
+:iAmGratefulFor,
+:smallThingIAppreciate,
+:description,
+:createdAt
+);
+
+deleteById:
+DELETE FROM gratefulnesses WHERE id = :id;

@@ -1,6 +1,6 @@
 package com.joohnq.stress_level.api.property
 
 interface StressLevelProperties {
-    val id: Int
+    val id: Long
     val level: Int
 }

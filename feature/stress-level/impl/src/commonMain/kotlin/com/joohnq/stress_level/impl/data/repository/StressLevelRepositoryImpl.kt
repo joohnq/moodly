@@ -2,46 +2,51 @@ package com.joohnq.stress_level.impl.data.repository
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
-import com.joohnq.database.converters.LocalDateTimeConverter
-import com.joohnq.stress_level.api.converter.StressLevelRecordConverter
-import com.joohnq.stress_level.api.converter.StressorsConverter
+import com.joohnq.database.AppDatabaseSql
+import com.joohnq.database.mapper.LocalDateTimeMapper.toLocalDateTime
 import com.joohnq.stress_level.api.entity.StressLevelRecord
+import com.joohnq.stress_level.api.mapper.StressLevelMapper.toStressLevel
+import com.joohnq.stress_level.api.mapper.StressorMapper.join
+import com.joohnq.stress_level.api.mapper.StressorMapper.toStressors
 import com.joohnq.stress_level.api.repository.StressLevelRepository
-import com.joohnq.stress_level.database.StressLevelDatabaseSql
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class StressLevelRepositoryImpl(
-    private val database: StressLevelDatabaseSql,
+    private val database: AppDatabaseSql,
 ) : StressLevelRepository {
-    private val query = database.stressLevelRecordQueries
+    private val query = database.stressLevelsQueries
 
     override fun observe(): Flow<List<StressLevelRecord>> =
         query
-            .getStressLevels { id, stressLevel, stressors, createdAt ->
-                StressLevelRecord(
-                    id = id.toInt(),
-                    stressLevel = StressLevelRecordConverter.toStressLevel(stressLevel),
-                    stressors = StressorsConverter.toStressorsList(stressors),
-                    createdAt = LocalDateTimeConverter.toLocalDateTime(createdAt)
-                )
-            }.asFlow()
+            .getAll(stressLevelMapper)
+            .asFlow()
             .mapToList(Dispatchers.IO)
 
     override suspend fun add(stressLevelRecord: StressLevelRecord) {
         withContext(Dispatchers.IO) {
-            query.addStressLevel(
-                stressLevel = StressLevelRecordConverter.fromStressLevel(stressLevelRecord.stressLevel),
-                stressors = StressorsConverter.fromStressorsList(stressLevelRecord.stressors)
+            query.add(
+                level = stressLevelRecord.level.id,
+                stressors = stressLevelRecord.stressors.join()
             )
         }
     }
 
-    override suspend fun delete(id: Int) {
+    override suspend fun delete(id: Long) {
         withContext(Dispatchers.IO) {
-            query.deleteRecord(id = id.toLong())
+            query.deleteById(id = id)
         }
     }
 }
+
+val stressLevelMapper: (Long, Long, List<String>, String) -> StressLevelRecord =
+    { id, level, stressors, createdAt ->
+        StressLevelRecord(
+            id = id,
+            level = level.toStressLevel(),
+            stressors = stressors.toStressors(),
+            createdAt = createdAt.toLocalDateTime()
+        )
+    }

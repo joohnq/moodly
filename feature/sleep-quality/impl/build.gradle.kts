@@ -11,7 +11,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)
-            implementation(libs.android.driver)
+            implementation(libs.sqldelight.android.driver)
         }
         commonMain.dependencies {
             implementation(projects.core.database)
@@ -26,8 +26,6 @@ kotlin {
 
             implementation(projects.feature.mood.api)
             implementation(projects.feature.mood.impl)
-
-            implementation(projects.feature.splash.impl)
 
             implementation(libs.coroutines.extensions)
             implementation(libs.serialization)
@@ -44,7 +42,7 @@ kotlin {
             implementation(libs.sqldelight.native.driver)
         }
         jvmMain.dependencies {
-            implementation(libs.sqldelight.jvm)
+            implementation(libs.sqldelight.jvm.driver)
         }
     }
 }

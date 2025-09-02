@@ -8,5 +8,5 @@ interface GratefulnessRepository {
 
     suspend fun add(item: Gratefulness)
 
-    suspend fun delete(id: Int)
+    suspend fun deleteById(id: Long)
 }

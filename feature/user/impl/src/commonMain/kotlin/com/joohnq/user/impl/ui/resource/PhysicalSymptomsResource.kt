@@ -12,7 +12,7 @@ import com.joohnq.ui.entity.IconResource
 import org.jetbrains.compose.resources.StringResource
 
 sealed class PhysicalSymptomsResource(
-    val id: Int,
+    val id: Long,
     val text: StringResource,
     val icon: IconResource,
 ) {

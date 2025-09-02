@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.stringResource
 fun GratefulnessHistoryCard(
     modifier: Modifier = Modifier,
     gratefulness: Gratefulness,
-    onDelete: (Int) -> Unit,
+    onDelete: (Long) -> Unit,
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier,

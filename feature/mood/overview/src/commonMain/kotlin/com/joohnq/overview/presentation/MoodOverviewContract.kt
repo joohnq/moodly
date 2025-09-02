@@ -10,7 +10,7 @@ sealed interface MoodOverviewContract {
 
     sealed interface Intent {
         data class Delete(
-            val id: Int,
+            val id: Long,
         ) : Intent
     }
 

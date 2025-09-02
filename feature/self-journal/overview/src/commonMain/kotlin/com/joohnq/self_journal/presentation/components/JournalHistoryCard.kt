@@ -32,8 +32,8 @@ import org.jetbrains.compose.resources.stringResource
 fun JournalHistoryCard(
     modifier: Modifier = Modifier,
     item: SelfJournalRecordResource,
-    onClick: (Int) -> Unit = {},
-    onDelete: (Int) -> Unit = {},
+    onClick: (Long) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
 ) {
     CardWithMoreMenuLayout(
         modifier = modifier,

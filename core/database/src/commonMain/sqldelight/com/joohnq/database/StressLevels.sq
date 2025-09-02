@@ -1,0 +1,37 @@
+import kotlin.String;
+import kotlin.collections.List;
+
+CREATE TABLE IF NOT EXISTS stress_levels (
+    id INTEGER PRIMARY KEY NOT NULL,
+    level INTEGER NOT NULL,
+    stressors TEXT AS List<String> NOT NULL,
+    created_at TEXT DEFAULT (datetime('now')) NOT NULL UNIQUE
+);
+
+getAll:
+SELECT * FROM stress_levels ORDER BY created_at DESC;
+
+add:
+INSERT OR REPLACE INTO stress_levels (
+level,
+stressors
+) VALUES (
+:level,
+:stressors
+);
+
+addWithIdAndCreatedAt:
+INSERT OR REPLACE INTO stress_levels (
+id,
+level,
+stressors,
+created_at
+) VALUES (
+:id,
+:level,
+:stressors,
+:createdAt
+);
+
+deleteById:
+DELETE FROM stress_levels WHERE id = :id;

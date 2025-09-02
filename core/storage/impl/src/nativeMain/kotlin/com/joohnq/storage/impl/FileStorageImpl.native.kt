@@ -1,11 +1,16 @@
 package com.joohnq.storage.impl
 
 import com.joohnq.storage.api.FileStorage
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 import okio.FileSystem
 import okio.Path.Companion.toPath
+import platform.Foundation.NSApplicationSupportDirectory
+import platform.Foundation.NSFileManager
+import platform.Foundation.NSURL
+import platform.Foundation.NSUserDomainMask
 
 actual class FileStorageImpl : FileStorage {
     private val systemTemporaryPath = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
@@ -45,4 +50,24 @@ actual class FileStorageImpl : FileStorage {
 
             imageByteArray
         }
+
+    @OptIn(ExperimentalForeignApi::class)
+    actual override suspend fun deleteDatabase(fileName: String) {
+        val fileManager = NSFileManager.defaultManager
+        val urls =
+            fileManager.URLsForDirectory(
+                directory = NSApplicationSupportDirectory,
+                inDomains = NSUserDomainMask
+            )
+        val appSupportDir = urls.first() as? NSURL
+        val dbUrl = appSupportDir?.URLByAppendingPathComponent(fileName)
+        if (dbUrl != null && fileManager.fileExistsAtPath(dbUrl.path!!)) {
+            try {
+                fileManager.removeItemAtURL(dbUrl, null)
+                true
+            } catch (e: Exception) {
+                false
+            }
+        }
+    }
 }

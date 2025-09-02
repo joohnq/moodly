@@ -19,7 +19,7 @@ import com.joohnq.ui.entity.Assets
 import org.jetbrains.compose.resources.StringResource
 
 sealed class MoodResource(
-    override val id: Int,
+    override val id: Long,
     val assets: Assets,
     val text: StringResource,
     override val healthLevel: Int,

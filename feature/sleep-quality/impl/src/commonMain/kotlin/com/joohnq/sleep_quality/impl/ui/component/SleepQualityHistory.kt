@@ -19,7 +19,7 @@ import com.joohnq.sleep_quality.impl.ui.resource.SleepQualityRecordResource
 fun SleepQualityHistory(
     modifier: Modifier = Modifier,
     items: List<SleepQualityRecordResource>,
-    onDelete: (Int) -> Unit = {},
+    onDelete: (Long) -> Unit = {},
     onCreate: () -> Unit = {},
     onSeeMore: () -> Unit = {},
 ) {

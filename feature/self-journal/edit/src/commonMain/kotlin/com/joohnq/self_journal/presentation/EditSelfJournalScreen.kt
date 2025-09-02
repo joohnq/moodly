@@ -2,7 +2,6 @@ package com.joohnq.self_journal.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import com.joohnq.shared_resources.remember.rememberSnackBarState
 import com.joohnq.ui.DisposableEffect
 import com.joohnq.ui.observe
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun EditSelfJournalScreen(
-    id: Int,
+    id: Long,
     onGoBack: () -> Unit,
     viewModel: EditSelfJournalViewModel = sharedViewModel(),
 ) {

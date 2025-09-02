@@ -16,14 +16,7 @@ import kotlinx.coroutines.withContext
 class PreferencesRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
 ) : PreferencesRepository {
-    companion object {
-        private val SKIP_WELCOME_KEY = stringPreferencesKey("SKIP_WELCOME")
-        private val SKIP_ONBOARDING_KEY = stringPreferencesKey("SKIP_ONBOARDING")
-        private val SKIP_AUTH_KEY = stringPreferencesKey("SKIP_AUTH")
-        private val SKIP_SECURITY_KEY = stringPreferencesKey("SKIP_SECURITY")
-    }
-
-    override suspend fun getUserPreferences(): AppPreferences? =
+    override suspend fun get(): AppPreferences? =
         withContext(Dispatchers.IO) {
             dataStore.data
                 .map { preferences ->
@@ -63,17 +56,35 @@ class PreferencesRepositoryImpl(
         }
     }
 
+    override suspend fun updateSkipSqlMigration(value: Boolean) {
+        withContext(Dispatchers.IO) {
+            dataStore.edit { data ->
+                data[SKIP_SQL_MIGRATION_KEY] = value.toString()
+            }
+        }
+    }
+
     private fun MutablePreferences.toAppPreferences(): AppPreferences {
         val skipWelcome = this[SKIP_WELCOME_KEY]?.toBooleanStrictOrNull() ?: false
         val skipOnboarding = this[SKIP_ONBOARDING_KEY]?.toBooleanStrictOrNull() ?: false
         val skipAuth = this[SKIP_AUTH_KEY]?.toBooleanStrictOrNull() ?: false
         val skipSecurity = this[SKIP_SECURITY_KEY]?.toBooleanStrictOrNull() ?: false
+        val skipSqlMigration = this[SKIP_SQL_MIGRATION_KEY]?.toBooleanStrictOrNull() ?: false
 
         return AppPreferences(
             skipWelcome = skipWelcome,
             skipOnboarding = skipOnboarding,
             skipAuth = skipAuth,
-            skipSecurity = skipSecurity
+            skipSecurity = skipSecurity,
+            skipSqlMigration = skipSqlMigration
         )
+    }
+
+    companion object {
+        private val SKIP_WELCOME_KEY = stringPreferencesKey("SKIP_WELCOME")
+        private val SKIP_ONBOARDING_KEY = stringPreferencesKey("SKIP_ONBOARDING")
+        private val SKIP_AUTH_KEY = stringPreferencesKey("SKIP_AUTH")
+        private val SKIP_SECURITY_KEY = stringPreferencesKey("SKIP_SECURITY")
+        private val SKIP_SQL_MIGRATION_KEY = stringPreferencesKey("SKIP_SQL_MIGRATION")
     }
 }

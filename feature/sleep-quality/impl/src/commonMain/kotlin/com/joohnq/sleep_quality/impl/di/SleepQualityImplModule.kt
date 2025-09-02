@@ -11,9 +11,13 @@ import org.koin.dsl.module
 
 val sleepQualityImplModule =
     module {
+        single<SleepQualityDatabase> {
+            val driver = get<SleepQualityDriverFactory>().createDriver()
+            SleepQualityDatabase(driver)
+        }
         single<SleepQualityDatabaseSql> {
-            val driver = get<SleepQualityDriverFactory>()
-            SleepQualityDatabase(driver.createDriver()).invoke()
+            val db = get<SleepQualityDatabase>()
+            db.invoke()
         }
         singleOf(::SleepQualityRepositoryImpl) bind SleepQualityRepository::class
         includes(sleepQualityDriverFactoryModule)

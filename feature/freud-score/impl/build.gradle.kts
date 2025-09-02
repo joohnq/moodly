@@ -16,8 +16,6 @@ kotlin {
 
             implementation(projects.feature.freudScore.api)
 
-            implementation(projects.feature.splash.impl)
-
             implementation(projects.feature.preferences.api)
 
             implementation(libs.kotlin.datetime)

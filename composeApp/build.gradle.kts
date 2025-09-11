@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.google.services)
     alias(libs.plugins.composeHotReload)
-//    alias(libs.plugins.crashlytics)
+    alias(libs.plugins.crashlytics)
 }
 
 kotlin {
@@ -20,8 +20,6 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-
-//            implementation(libs.gitlive.firebase.kotlin.crashlytics)
         }
         commonMain.dependencies {
             implementation(projects.core.database)

@@ -18,11 +18,8 @@ class FreudScoreViewModel(
         initialState = initialState
     ),
     FreudScoreContract.ViewModel {
-    override fun onIntent(intent: FreudScoreContract.Intent) {
-        when (intent) {
-            else -> Unit
-        }
-    }
+    @Suppress("EmptyFunctionBlock")
+    override fun onIntent(intent: FreudScoreContract.Intent) {}
 
     init {
         observe()

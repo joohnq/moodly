@@ -1,20 +1,14 @@
 [versions]
 # Android SDK & Build tools
-agp = "8.12.1"
-android-compileSdk = "36"
-android-minSdk = "26"
-android-packageName = "com.joohnq.moodapp"
-android-targetSdk = "36"
-android-versionCode = "47"
-android-versionName = "1.2.0"
+agp = "8.13.0"
 
 # Accompanist
 accompanistPermissions = "0.37.3"
 
 # AndroidX
-androidx-activityCompose = "1.10.1"
+androidx-activityCompose = "1.11.0"
 androidx-data-store = "1.1.7"
-androidx-lifecycle = "2.9.2"
+androidx-lifecycle = "2.9.3"
 
 # Biometric
 biometric = "1.1.0"
@@ -24,11 +18,11 @@ coil = "3.3.0"
 coilNetwork = "3.0.0-alpha08"
 
 # Compose
-composeCharts = "0.1.10"
+composeCharts = "0.1.11"
 calendar = "2.8.0"
-compose = "1.9.0-beta03"
-uiAndroid = "1.10.0-alpha01"
-composeHotReload = "1.0.0-beta05"
+compose = "1.10.0-alpha01"
+uiAndroid = "1.10.0-alpha03"
+composeHotReload = "1.0.0-beta06"
 
 # Crashlytics & Firebase
 crashlytics = "3.0.6"
@@ -36,28 +30,28 @@ firebase-gitlive-sdk = "2.3.0"
 google-services = "4.4.3"
 
 # Koin
-koinCore = "4.1.0"
+koinCore = "4.1.1"
 
 # Kotlin & KotlinX
-kotlin = "2.2.10"
+kotlin = "2.2.20"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1"
 kotlinxSerializationJson = "1.9.0"
 
 # Ktor
-ktor = "3.2.3"
+ktor = "3.3.0"
 
 # Lifecycle
-lifecycleViewModel = "2.9.2"
+lifecycleViewModel = "2.9.3"
 
 # Mokkery
-mokkery = "2.9.0"
+mokkery = "2.10.0"
 
 # Napier
 napier = "2.7.1"
 
 # Navigation
-navigation-compose = "2.9.0-beta05"
+navigation-compose = "2.9.0-rc01"
 
 # Okio
 okioVersion = "3.16.0"
@@ -78,9 +72,9 @@ spotless = "7.2.1"
 
 ktlint = "1.7.1"
 
-room = "2.8.0-rc01"
-ksp = "2.2.10-2.0.2"
-sqlite = "2.6.0-rc01"
+room = "2.8.0"
+ksp = "2.2.20-2.0.2"
+sqlite = "2.6.0"
 
 [libraries]
 
@@ -192,7 +186,7 @@ mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 # Firebase
-#crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 
 # Google Services
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }

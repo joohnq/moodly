@@ -1,8 +1,8 @@
 package com.joohnq.onboarding.impl.ui.presentation.onboarding_stress_level
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.joohnq.onboarding.impl.ui.event.OnboardingEvent
 import com.joohnq.onboarding.impl.ui.viewmodel.OnboardingViewModel
 import com.joohnq.ui.sharedViewModel
@@ -13,7 +13,7 @@ fun OnboardingStressLevelScreen(
     onGoBack: () -> Unit,
     viewModel: OnboardingViewModel = sharedViewModel(),
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     fun onEvent(event: OnboardingEvent) {
         when (event) {

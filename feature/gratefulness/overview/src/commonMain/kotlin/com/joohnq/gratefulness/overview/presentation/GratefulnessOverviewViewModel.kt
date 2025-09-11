@@ -1,6 +1,7 @@
 package com.joohnq.gratefulness.overview.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.joohnq.gratefulness.api.mapper.GratefulnessMapper.getTodayItem
 import com.joohnq.gratefulness.api.use_case.DeleteGratefulnessUseCase
 import com.joohnq.gratefulness.api.use_case.GetGratefulnessUseCase
 import com.joohnq.gratefulness.overview.presentation.GratefulnessOverviewContract.Intent
@@ -79,10 +80,7 @@ class GratefulnessOverviewViewModel(
         updateState {
             it.copy(
                 selectedGratefulness =
-                    state.value.items
-                        .lastOrNull { item ->
-                            item.createdAt.date == state.value.selectedDate
-                        }
+                    state.value.items.getTodayItem()
             )
         }
     }
